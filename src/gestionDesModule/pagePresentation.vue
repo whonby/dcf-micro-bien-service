@@ -339,6 +339,8 @@ this.getDossierLiquidation()
 this.getDossierMandat()
 this.getDossierFacture()
 this.getGestionOrdrePaiementAnnulat()
+this.getServiceRealiteFaitOp()
+this.getHistoriqueDecisionOp()
 this.getDossierAutreDepense()
 this.getGestionOrdrePaiement()
 this.getFormeJuridiques()
@@ -560,7 +562,7 @@ this.getTypeTextJuridique()
 this.getMotifDecision()
 this.getDocumentProcedure()
  this.getReserveCf()
-
+this.getUniteAdministrativeBailleur()
 // this.getDecisionMarche()
 this.getActeEffetFinancier()
  this.getFacture()
@@ -712,6 +714,7 @@ return objJson.id
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
  ...mapActions("uniteadministrative", [
+   "getUniteAdministrativeBailleur", 
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
@@ -794,7 +797,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

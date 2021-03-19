@@ -378,7 +378,7 @@ ajouterHistorisqueBudgetEclate
 
 
                             </div> -->
-                            <div id="printMe">
+                            <!-- <div id="printMe">
                              
                                   <table class="table table-bordered table-striped">
                 <thead>
@@ -425,7 +425,7 @@ ajouterHistorisqueBudgetEclate
               </table>
                               
                 
-                            </div>
+                            </div> -->
                     </div>
                   </div>
 <div align="right">
@@ -1460,9 +1460,11 @@ methods: {
         dotation:this.formData1.dotation_nouvelle,
           tresor:this.formData1.dotation_nouvelle,
           ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-          type_financement_id:this.formData1.type_financement_id,
+         // type_financement_id:this.formData1.type_financement_id,
           activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-          source_financement_id:this.formData.source_financement_id,
+         // source_financement_id:this.formData.source_financement_id,
+          	type_financement_don_id:this.formData1.type_financement_id,
+            source_financement_don_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           uniteadministrative_id:this.formData.uniteadministrative_id,
 
@@ -1492,9 +1494,9 @@ var nouvelObjet1520 = {
         dotation:this.formData1.dotation_nouvelle,
           don:this.formData1.dotation_nouvelle,
           ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-          type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_id:this.formData1.type_financement_id,
           activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-           source_financement_id:this.formData.source_financement_id,
+           source_financement_don_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1521,9 +1523,9 @@ report:"",
         dotation:this.formData1.dotation_nouvelle,
           	emprunt:this.formData1.dotation_nouvelle,
             ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
             activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-             source_financement_id:this.formData.source_financement_id,
+             source_financement_emprunt_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1573,9 +1575,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	emprunt:this.formData1.dotation_nouvelle,
             ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
             activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-             source_financement_id:this.formData.source_financement_id,
+             source_financement_emprunt_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1595,9 +1597,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	don:this.formData1.dotation_nouvelle,
             ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_id:this.formData1.type_financement_id,
             activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-             source_financement_id:this.formData.source_financement_id,
+             source_financement_don_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1642,9 +1644,9 @@ var nouvelObjet163 = {
         dotation:this.formData1.dotation_nouvelle,
           don:this.formData1.dotation_nouvelle,
           ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-          type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_id:this.formData1.type_financement_id,
           activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-           source_financement_id:this.formData.source_financement_id,
+           source_financement_don_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1663,9 +1665,9 @@ report:"",
         dotation:this.formData1.dotation_nouvelle,
           	emprunt:this.formData1.dotation_nouvelle,
             ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
             activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-             source_financement_id:this.formData.source_financement_id,
+             source_financement_emprunt_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1708,9 +1710,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	emprunt:this.formData1.dotation_nouvelle,
             ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
             activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-             source_financement_id:this.formData.source_financement_id,
+             source_financement_emprunt_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };
@@ -1730,9 +1732,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	don:this.formData1.dotation_nouvelle,
             ligne_budgetaire_parent_id:this.idLigneEconomique(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_id:this.formData1.type_financement_id,
             activite_id:this.idactivite(this.iddmandeEngagement(this.formData.numero_op_systeme)),
-             source_financement_id:this.formData.source_financement_id,
+             source_financement_don_id:this.formData.source_financement_id,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
           ligneeconomique_id:this.formData1.ligneeconomique_id
       };

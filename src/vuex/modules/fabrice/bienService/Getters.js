@@ -6,8 +6,8 @@ export const gettersDossierLiquidation = state => state.Liquidation
 export const gettersDossierMandat = state => state.MandatOp
 export const gettersDossierAutreDepense = state => state.AutreDepense
 export const gettersDossierFacturePiece = state => state.facturePiece
-
-
+export const gettersServiceRealiteFaitOp = state => state.ServiceRealiteFaitOp
+export const gettershistoriqueDecisionCfOP = state => state.historiqueDecisionCfOP
 
 export const gettersnomPieceJustificative = state => state.nomPieceJustificative.sort((a, b) => (a.numero_ordre > b.numero_ordre) ? 1 : -1)
 

@@ -136,63 +136,6 @@
                             </div>
                         </div>
 <hr>
-<!--                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>-->
-
-<!--                            <div class="span9" style="text-align:center"><h5>N° D'ORDRE-->
-<!--                            </h5></div>-->
-
-<!--                            <div class="span2"></div>-->
-<!--                        </div>-->
-<!--                        <table class="table table-bordered table-striped">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>Budget Total </th>-->
-<!--                                <th>Budget Execute</th>-->
-<!--                                <th>Budget Restant</th>-->
-<!--                                <th>Taux execution</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            <tbody>-->
-<!--                            <tr class="odd gradeX">-->
-<!--                                <td>NUMERO DU MARCHE </td>-->
-<!--                                <td>DATE D'APPROBATION</td>-->
-<!--                                <td>DUREE D'EXECUTION</td>-->
-<!--                                <td>DUREE D'EXECUTION</td>-->
-
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                        <div class="quick-actions_homepage">-->
-<!--                            <ul class="quick-actions" v-if="idzone=='' && iduniteadmin==''">-->
-<!--                                <li class="bg_lb"> <a href="#">-->
-<!--                                    {{formatageSomme(budgetGeneral)}}<br> Budget général</a> </li>-->
-<!--                                <li class="bg_lg "> <a href="#">-->
-<!--                                    {{formatageSomme(budgetGeneralExcecute)}}<br> Budget exécuté </a> </li>-->
-<!--                                <li class="bg_ly"> <a href="#">  {{formatageSomme(bugdetGeneralRestant)}}<br> Budget restant </a> </li>-->
-<!--                                <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetGeneral}} %<br> Taux d'exécution</a> </li>-->
-<!--                            </ul>-->
-
-<!--                            <ul class="quick-actions" v-if="zone_geographique!='' && iduniteadmin==''">-->
-<!--                                <li class="bg_ls"> <a href="#"><h6>{{zone_geographique}}</h6> </a> </li>-->
-<!--                                <li class="bg_lb"> <a href="#">-->
-<!--                                    {{formatageSomme(budgetByZone(idzone))}}<br> Budget total zone</a> </li>-->
-<!--                                <li class="bg_lg "> <a href="#">-->
-<!--                                    {{formatageSomme(budgetZoneExcecute)}}<br> budget execute zone </a> </li>-->
-<!--                                <li class="bg_ly"> <a href="#">  {{formatageSomme(bugdetZoneRestant)}}<br> Budget restant zone</a> </li>-->
-<!--                                <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetZone}} %<br> Taux d'exécution zone </a> </li>-->
-<!--                            </ul>-->
-
-<!--                            <ul class="quick-actions" v-if="iduniteadmin">-->
-<!--                                <li class="bg_ls"> <a href="#"><h6>{{libelle_unite_admin}}</h6> </a> </li>-->
-<!--                                <li class="bg_lb"> <a href="#">-->
-<!--                                    {{formatageSomme(budgetByUniteAdmin(iduniteadmin))}}<br> Budget total UA</a> </li>-->
-<!--                                <li class="bg_lg "> <a href="#">-->
-<!--                                    {{formatageSomme(budgetExecuteUniteAdmin)}}<br> Budget exécuté zone </a> </li>-->
-<!--                                <li class="bg_ly"> <a href="#">  {{formatageSomme(budgetRestUniteAdmin)}}<br> Budget restant UA</a> </li>-->
-<!--                                <li class="bg_lo"> <a href="#">{{tauxExecutionUniteAdmin}} %<br> Taux d'execution UA </a> </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-
 
 
                     </div>
@@ -430,7 +373,7 @@ import VGeosearch from 'vue2-leaflet-geosearch';
                         visible: true,
                         attribution:
                             '',
-                        url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+                        url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
                     },
                     {
                         name: 'Plan 2',

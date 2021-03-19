@@ -1779,6 +1779,7 @@ CreditAutorise
     // import facture from '../Facture/facture.vue'
     import { formatageSomme } from "@/Repositories/Repository";
     import 'vue-search-select/dist/VueSearchSelect.css'
+    
     export default {
 components: {
     
@@ -2837,6 +2838,7 @@ this.$("#ModifierexampleModal").modal('hide');
     AjoutePieceJustific() {
       if(this.formData.type_ordre_paiement==2){
  this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
+ 
       var nouvelObjetProforma = {
         
         	numero_ordre:this.numeroOrdre(this.formData.numero_ordre_paiement),

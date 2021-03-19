@@ -849,6 +849,32 @@ export const MODIFIER_BUDGET_ECLATE_REGIE = (state, objetModifie) => {
 
 
 
+// supprimer type_texte
+export const SUPPRIMER_UNITE_ADMINISTRATIVE_BAILLEUR = (state, id) => {
+  state.UniteAdministrativeBailleur = state.UniteAdministrativeBailleur.filter(type => type.id != id);
+};
+
+
+export const GET_ALL_UNITE_ADMINISTRATIVE_BAILLEUR = (state, tableauBudgetGeneral) => {
+  state.UniteAdministrativeBailleur = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_UNITE_ADMINISTRATIVE_BAILLEUR = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.UniteAdministrativeBailleur.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_UNITE_ADMINISTRATIVE_BAILLEUR = (state, objetModifie) => {
+  state.UniteAdministrativeBailleur = state.UniteAdministrativeBailleur.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
 
 export {
   GET_ALL_BANQUE_UA,

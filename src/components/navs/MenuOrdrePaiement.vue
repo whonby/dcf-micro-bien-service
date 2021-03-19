@@ -13,11 +13,11 @@
         </router-link>
       </li>
 
-      <li>
+      <!-- <li>
         <router-link :to="{name: 'TestTableaux'}" tag="a">
           TABLEAUX
         </router-link>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

@@ -13,8 +13,8 @@
                     <th style="font-size:14px;color:#000;">EXERCICE BUDGETAIRE</th>
                     <th style="font-size:14px;color:#000;">UNITE ADMINISTRATIVE</th>
                     
-                    <th style="font-size:14px;color:#000;">MONTANT BUDGETAIRE {{anneeAmort}}</th>
-                    <th style="font-size:14px;color:#000;">TOTAL REPORT {{recupererAnneePrecedant}}</th>
+                    <th style="font-size:14px;color:#000;">MONTANT BUDGETAIRE </th>
+                    <th style="font-size:14px;color:#000;">TOTAL REPORT </th>
                     <th style="font-size:14px;color:#000;">BUDGET TOTAL</th>
                      <th style="font-size:14px;color:#000;">DECISION CF</th>
                       <th style="font-size:14px;color:#000;">FAMILLE MOTIF</th>
@@ -88,47 +88,176 @@
                 <thead>
                    <tr>
                     <th></th>
-                    <th colspan="3" style="font-size:14px;color:#000;text-align:center">BUDGET</th>
-                    <th></th>
+                    <th colspan="11" style="font-size:14px;color:#000;text-align:center">BUDGET</th>
+                    <th colspan="5"></th>
                     
                   </tr>
                    <tr>
                     <th></th>
                     <th></th>
-                    <th colspan="2" style="font-size:14px;color:#000;text-align:center">BAILLEUR</th>
-                    <th></th>
+                    <th colspan="10" style="font-size:14px;color:#000;text-align:center">BAILLEUR</th>
+                    <th colspan="10"></th>
                     
                   </tr>
                   <tr>
                     <th style="font-size:14px;color:#000;">LIGNE BUDGETAIRE</th>
-                    <th style="font-size:14px;color:#000;">ETAT</th>
-                    <th style="font-size:14px;color:#000;">DON</th>
-                    <th style="font-size:14px;color:#000;">EMPRUNT</th>
-                    <th style="font-size:14px;color:#000;">BUDGET TOTAL</th>
+                    <th style="font-size:14px;color:#000;">TRESOR (F CFA)</th>
+                    <th style="font-size:14px;color:#000;" colspan="5">DON (F CFA)</th>
+                    
+                    <th style="font-size:14px;color:#000;" colspan="5">EMPRUNT (F CFA)</th>
+                    <th style="font-size:14px;color:#000;" colspan="">BUDGET TOTAL (F CFA)</th>
                     
                   </tr>
-                </thead>
-                <tbody>
+      
+                  <tr>
+                    <th style="font-size:14px;color:#000;"></th>
+                    <th style="font-size:14px;color:#000;" colspan="" v-if="tailleAfficheBailleurTrsor(detail_marche.uniteadministrative_id) == 1">{{libelleSousFinancement(AfficheEtatCoteIvoire(detail_marche.uniteadministrative_id))}}</th>
+                    <th style="font-size:14px;color:#000;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 0"></th>
+                    <th style="font-size:14px;color:#000;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 1">{{libelleSousFinancement(AfficheBailleurDon1(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="3" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{libelleSousFinancement(AfficheBailleurDon1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{libelleSousFinancement(AfficheBailleurDon2(detail_marche.uniteadministrative_id))}}</th>
+ <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{libelleSousFinancement(AfficheBailleurDon1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{libelleSousFinancement(AfficheBailleurDon2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{libelleSousFinancement(AfficheBailleurDon3(detail_marche.uniteadministrative_id))}}</th>
                   
+                    <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurDon1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurDon2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurDon3(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurDon4(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurDon1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurDon2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurDon3(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurDon4(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurDon5(detail_marche.uniteadministrative_id))}}</th>
+
+                  <th style="font-size:14px;color:#000;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 0"></th>
+                  <th style="font-size:14px;color:#000;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 1">{{libelleSousFinancement(AfficheBailleurEmprunt1(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="3" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{libelleSousFinancement(AfficheBailleurEmprunt1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{libelleSousFinancement(AfficheBailleurEmprunt2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{libelleSousFinancement(AfficheBailleurEmprunt1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{libelleSousFinancement(AfficheBailleurEmprunt2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{libelleSousFinancement(AfficheBailleurEmprunt3(detail_marche.uniteadministrative_id))}}</th>
+                  
+                    <th style="font-size:14px;color:#000;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurEmprunt1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurEmprunt2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurEmprunt3(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{libelleSousFinancement(AfficheBailleurEmprunt4(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurEmprunt1(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurEmprunt2(detail_marche.uniteadministrative_id))}}</th>
+                   <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurEmprunt3(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurEmprunt4(detail_marche.uniteadministrative_id))}}</th>
+                  <th style="font-size:14px;color:#000;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{libelleSousFinancement(AfficheBailleurEmprunt5(detail_marche.uniteadministrative_id))}}</th>
+                    <th style="font-size:14px;color:#000;" colspan="5"></th>
+                  </tr>
+                </thead>
+              <tbody>
+                 
                  
                   <tr class="odd gradeX" v-for="(type) in listeDesBudgetaireEclatePersonnel(detail_marche.uniteadministrative_id)" :key="type.id">
                    
                     <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
-                      <td style="font-size:14px;text-align:center;color:#000;">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center;color:#000;">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center;color:#000;;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
 
-                    <td style="font-size:14px;text-align:center;" >
-                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+
+                       <!-- <td style="font-size:14px;text-align:center;color:#000;" v-if="this.tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 0" colspan="5">{{formatageSommeSansFCFA(parseFloat(type.don)) || 'Non renseigné'}}</td>
+                     -->
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="3" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+ <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_4))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_4))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_5))}}</td>
+
+                   
+                   
+                   
+                   
+                   
+                   
+                   <!-- <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.emprunt)) || 'Non renseigné'}}</td> -->
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</td>
+<th style="font-size:14px;color:#000;text-align:center;" colspan="5" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="3" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+ <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  
+                    <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_4))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_4))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_5))}}</th>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" >
+                     {{formatageSommeSansFCFA(parseFloat(type.don)+parseFloat(type.montant_don_2)+parseFloat(type.montant_don_3)+parseFloat(type.montant_don_4)+parseFloat(type.montant_don_5)+parseFloat(type.emprunt)+parseFloat(type.montant_emprunt_2)+parseFloat(type.montant_emprunt_3)+parseFloat(type.montant_emprunt_4)+parseFloat(type.montant_emprunt_5)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                   </tr>
                     <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">PERSONNEL</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclatePersonnel(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id)))}}</td>
+
+ <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="3" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id)))}}</td>
+ <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id)))}}</td>
+
+
+
+
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="3" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+ <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))}}</td>
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))}}</td>
+                    
+
+
+
+
+
                     
                   </tr>
                    
@@ -136,22 +265,139 @@
                    
                     <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
+                      
+                      <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                      <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="3" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+ <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_4))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_4))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_5))}}</td>
 
-                   <td style="font-size:14px;text-align:center;">
-                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                      
+                      
+                      
+                      
+                      
+                      <th style="font-size:14px;color:#000;text-align:center;" colspan="5" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                      <th style="font-size:14px;color:#000;text-align:center;" colspan="5" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="3" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+ <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  
+                    <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_4))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_4))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_5))}}</th>
+                      
+                      
+                      <!-- <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.don)) || 'Non renseigné'}}</td> -->
+                   <!-- <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.emprunt)) || 'Non renseigné'}}</td> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" >
+                     {{formatageSommeSansFCFA(parseFloat(type.don)+parseFloat(type.montant_don_2)+parseFloat(type.montant_don_3)+parseFloat(type.montant_don_4)+parseFloat(type.montant_don_5)+parseFloat(type.emprunt)+parseFloat(type.montant_emprunt_2)+parseFloat(type.montant_emprunt_3)+parseFloat(type.montant_emprunt_4)+parseFloat(type.montant_emprunt_5)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                               
                   </tr>
                     <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">BIENS ET SERVICES</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateBienService(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="3" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id)))}}</td>
+ <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id)))}}</td>
+
+
+
+
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="3" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+ <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))}}</td>
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))}}</td>
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td> -->
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
+                    <!-- <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
                     
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateBienService(detail_marche.uniteadministrative_id)))}}</td>
+                     -->
                   </tr>
                  
                   
@@ -159,21 +405,109 @@
                    
                     <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
+                       <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="5" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="3" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+ <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="2" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_don_4))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.don))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_2))}}</td>
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_3))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_4))}}</td>
+                  <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;" colspan="1" v-if="tailleAfficheBailleurDon(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_don_5))}}</td>
 
-                   <td style="font-size:14px;text-align:center;" >
-                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                      
+                      
+
+                      <th style="font-size:14px;color:#000;text-align:center;" colspan="5" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                      <th style="font-size:14px;color:#000;text-align:center;" colspan="5" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="3" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+ <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  
+                    <th style="font-size:14px;color:#000;text-align:center;" colspan="2" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_4))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.emprunt))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_2))}}</th>
+                   <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_3))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_4))}}</th>
+                  <th style="font-size:14px;color:#000;text-align:center;" colspan="1" v-if="tailleAfficheBailleurEmprunt(type.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(type.montant_emprunt_5))}}</th>
+                      
+                      
+                      <!-- <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.don)) || 'Non renseigné'}}</td> -->
+                   <!-- <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.emprunt)) || 'Non renseigné'}}</td> -->
+
+                   <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">
+                     {{formatageSommeSansFCFA(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                               
                   </tr>
                    <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">INVESTISSEMENT</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateInvestissement(detail_marche.uniteadministrative_id)))}}</td>
+                     <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="3" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id)))}}</td>
+ <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurDon(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id)))}}</td>
+
+
+
+
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 0">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="5" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 1">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="3" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 2">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+ <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 3">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="2" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 4">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id)))}}</td>
+                   <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id)))}}</td>
+                  <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;" colspan="1" v-if="tailleAfficheBailleurEmprunt(detail_marche.uniteadministrative_id) == 5">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))}}</td>
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))}}</td>
+                   
+    <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td> -->
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
+                   
+                   
+                   
+                   
+                   
+                    <!-- <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td> -->
+<!--                     
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateInvestissement(detail_marche.uniteadministrative_id)))}}</td> -->
                     
                   </tr>
                   <tr>
@@ -182,31 +516,48 @@
                     <td></td>
                     <td ></td>
                     <td ></td>
+                     <td></td>
+                    <td></td>
+                    <td></td>
+                     <td></td>
+                    <td></td>
+                    <td></td>
+                     <td></td>
+                    <td></td>
                     
                   </tr>
                   <tr>
+                    
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                     <td></td>
+                    <td></td>
+                    <td></td>
+                     <td></td>
                     <td></td>
                     <td></td>
                     <td style="font-weight:bold;font-size:16px;border:2px solid red">TOTAL</td>
                     <td style="font-size:14px;color:#000;text-align:center;background:green;font-weight:bold;" v-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 8">
-                     {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
+                     {{formatageSomme(parseFloat(parseFloat(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))))}}
                      </td>
                               <td style="font-size:14px;color:#000;text-align:center;background:green;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 9">
-                     {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
+                     {{formatageSomme(parseFloat(parseFloat(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))))}}
                      </td>
                      <td style="font-size:14px;color:#000;text-align:center;background:#FFCC00;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 2">
-                     {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
+                     {{formatageSomme(parseFloat(parseFloat(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))))}}
                      </td>
                      <td style="font-size:14px;color:#000;text-align:center;background:red;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 3">
-                     {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
+                     {{formatageSomme(parseFloat(parseFloat(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))))}}
                      </td>
-                     <td style="font-size:14px;color:#000;text-align:center;background:#0033ff;font-weight:bold;" v-else>
-                     {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
+                     <td style="font-size:14px;color:#fff;text-align:center;background:#0033ff;font-weight:bold;" v-else>
+                     {{formatageSomme(parseFloat(parseFloat(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt5(detail_marche.uniteadministrative_id)))+parseFloat(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon5(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt2(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt3(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt4(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt5(detail_marche.uniteadministrative_id)))))}}
                      </td>
                    
                   </tr>
-                </tbody>
+              </tbody>
               </table>
               
             </div>
@@ -242,7 +593,7 @@
             </td>
               <td>
                     <div class="control-group">
-                            <label class="control-label">Famille de Motif </label>
+                            <label class="control-label">{{detail_marche.uniteadministrative_id}}Famille de Motif {{idDecisionBudgetaire(this.detail_marche.uniteadministrative_id)}}</label>
                             <div class="controls">
                                <select v-model="editMandat.famille_motif" class="span5">
                                  <option value=""></option>
@@ -330,7 +681,7 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex";
-import {formatageSomme} from "@/Repositories/Repository"
+import {formatageSomme,formatageSommeSansFCFA} from "@/Repositories/Repository"
 import moment from 'moment';
 export default {
   components:{
@@ -368,7 +719,7 @@ created() {
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["getSousBudget","getdecisionBudgetEclate","groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["getterUniteAdministrativeBailleur","getSousBudget","getdecisionBudgetEclate","groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -397,6 +748,186 @@ created() {
       ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
 
+
+AfficheEtatCoteIvoire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==14 && qtreel.numero_ordre==1);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+
+libelleSousFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    tailleAfficheBailleurTrsor() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterUniteAdministrativeBailleur.filter(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==14).length;
+
+      
+        }
+      };
+    },
+tailleAfficheBailleurDon() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterUniteAdministrativeBailleur.filter(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==13).length;
+
+      
+        }
+      };
+    },
+tailleAfficheBailleurEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterUniteAdministrativeBailleur.filter(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==15).length;
+
+      
+        }
+      };
+    },
+AfficheBailleurEmprunt1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==15 && qtreel.numero_ordre==1);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+AfficheBailleurEmprunt2() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==15 && qtreel.numero_ordre==2);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheBailleurEmprunt3() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==15 && qtreel.numero_ordre==3);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheBailleurEmprunt4() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==15 && qtreel.numero_ordre==4);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheBailleurEmprunt5() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==15 && qtreel.numero_ordre==5);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+AfficheBailleurDon1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==13 && qtreel.numero_ordre==1);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+AfficheBailleurDon2() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==13 && qtreel.numero_ordre==2);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheBailleurDon3() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==13 && qtreel.numero_ordre==3);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheBailleurDon4() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==13 && qtreel.numero_ordre==4);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheBailleurDon5() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUniteAdministrativeBailleur.find(qtreel => qtreel.ua_id == id && qtreel.type_financement_id==13 && qtreel.numero_ordre==5);
+
+      if (qtereel) {
+        return qtereel.sous_financement_id;
+      }
+      return 0
+        }
+      };
+    },
 
 NiveauSousBudget2() {
       return (id) => {
@@ -450,11 +981,6 @@ recupererIdUser() {
         }
       };
     },
-
-
-
-
-
 
    griserAutreMotif(){
   return this.editMandat.motif != 237 
@@ -601,14 +1127,202 @@ decisionCfBudgetEclate() {
         }
       };
     },
-    SommeDesBudgetaireEclateBienService() {
+    SommeDesBudgetaireEclatePersonnelTresor() {
       return (id) => {
         if (id != null && id != "" ) {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
         }
       };
     },
+     SommeDesBudgetaireEclatePersonnelDon() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelDon2() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_2), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelDon3() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_3), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelDon4() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_4), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelDon5() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_5), 0).toFixed(0);
+
+        }
+      };
+    },
+     SommeDesBudgetaireEclatePersonnelEmprunt() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+
+        }
+      };
+    },
+
+      SommeDesBudgetaireEclatePersonnelEmprunt2() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_2), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelEmprunt3() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_3), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelEmprunt4() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_4), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclatePersonnelEmprunt5() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_5), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceDon() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+
+        }
+      };
+    },
+
+
+
+  SommeDesBudgetaireEclateBienServiceDon2() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_2), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceDon3() {
+      return (id) => {
+        if (id != null && id != "" ) {
+          return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_3), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceDon4() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_4), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceDon5() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_5), 0).toFixed(0);
+
+        }
+      };
+    },
+
+
+
+SommeDesBudgetaireEclateBienServiceEmprunt5() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_5), 0).toFixed(0);
+
+        }
+      };
+    },
+
+
+
+SommeDesBudgetaireEclateBienServiceEmprunt2() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_2), 0).toFixed(0);
+
+        }
+      };
+    },
+    
+SommeDesBudgetaireEclateBienServiceEmprunt4() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_4), 0).toFixed(0);
+
+        }
+      };
+    },
+SommeDesBudgetaireEclateBienServiceEmprunt3() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_3), 0).toFixed(0);
+
+        }
+      };
+    },
+
+     SommeDesBudgetaireEclateBienServiceEmprunt() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceTresor() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+
+        }
+      };
+    },
+    // SommeDesBudgetaireEclateBienServiceDon() {
+    //   return (id) => {
+    //     if (id != null && id != "" ) {
+    //        return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+
+    //     }
+    //   };
+    // },
     SommeDesBudgetaireEclateTransfert() {
       return (id) => {
         if (id != null && id != "" ) {
@@ -621,6 +1335,96 @@ decisionCfBudgetEclate() {
       return (id) => {
         if (id != null && id != "" ) {
            return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+
+        }
+      };
+    },
+
+     SommeDesBudgetaireEclateInvestissementDon5() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_5), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementDon2() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_2), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementDon3() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_3), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementDon4() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don_4), 0).toFixed(0);
+
+        }
+      };
+    },
+      SommeDesBudgetaireEclateInvestissementDon() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementEmprunt() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+
+        }
+      };
+    },
+
+    SommeDesBudgetaireEclateInvestissementEmprunt4() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_4), 0).toFixed(0);
+
+        }
+      };
+    },
+SommeDesBudgetaireEclateInvestissementEmprunt3() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_3), 0).toFixed(0);
+
+        }
+      };
+    },
+SommeDesBudgetaireEclateInvestissementEmprunt2() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_2), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementEmprunt5() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt_5), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementTresor() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
         }
       };
@@ -950,6 +1754,7 @@ return parseFloat(this.DotationRestantAnneePrecedant(id))-parseFloat(this.CumulM
   this.$htmlToPaper('printMe');
 },
             formatageSomme:formatageSomme,
+            formatageSommeSansFCFA:formatageSommeSansFCFA,
              montantPasEquipment(id){
      
           let montant=parseFloat(this.recupereMontantDon(id))+parseFloat(this.recupereMontantEmprunt(id))

@@ -2,12 +2,13 @@ import { groupBy } from "../../../../Repositories/Repository";
 export const budgetEclate = state => state.budgetEclate.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const getvehicules =state =>state.vehicules;
 export const BudgetEclateRegie = state => state.BudgetEclateRegie.sort((a, b) => (a.id > b.id ? 1 : -1));
-export const getSousBudget =state =>state.SousBudget;
+export const getSousBudget =state =>state.SousBudget.sort((a, b) => (a.nombre_sous_budget > b.nombre_sous_budget ? 1 : -1));
 export const getdecisionBudgetEclate =state =>state.decisionBudgetEclate;
 export const getHistoriquedecisionBudgetEclate =state =>state.HistoriquedecisionBudgetEclate;
 export const gethistoriqueBudgetEclate =state =>state.historiqueBudgetEclate;
 export const ReparationVehicules =state =>state.ReparationVehicules;
 export const GestionStockageArticles = state => state.stockageArticles;
+export const getterUniteAdministrativeBailleur = state => state.UniteAdministrativeBailleur.sort((a, b) => (a.numero_ordre > b.numero_ordre ? 1 : -1));
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const StructureOrganigrammeUa = state => state.StructureOrganigrammeUa;
@@ -666,6 +667,10 @@ export const montantTransfererGlobalRejeter = (state, getters) =>
     0
   );
 
+  export const GrandeNaturePersonelCp = state =>state.budgetGeneral.filter(item =>
+    item.gdenature_id ==2 && item.actived == 1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0).toFixed(0);
+
+
 
 export const getPersonnaliseHistoriqueTransfert = (
   state,
@@ -722,6 +727,7 @@ export const afficheBudgetActive = state =>
   state.budgetGeneral.filter(
     affichenaturedep => affichenaturedep.actived == 1
   );
+  
 
 
 
@@ -816,6 +822,11 @@ export const groupeUniteAdministrativeBudgetEclate = (state, getters) => {
 };
 
 
+export const groupeActiviteBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "activite_id");
+};
+
 
 export const groupeParBAILLER = (state, getters) => {
   //delete getters.trieUaImmobilisation.
@@ -841,4 +852,10 @@ export const groupeActiviteBudgetRegie = (state, getters) => {
 export const groupeUaSousBudget = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.getSousBudget, "unite_administrative_id");
+};
+
+
+export const groupeUniteAdministrativeBailleur = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.getterUniteAdministrativeBailleur, "ua_id");
 };

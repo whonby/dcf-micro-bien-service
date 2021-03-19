@@ -1371,7 +1371,7 @@ export function modifierBudgetEclate({ commit }, nouveau) {
 
           this.$app.$notify({
               title: 'Success',
-              text: 'Modification Effectué avec Succès!',
+              text: 'Enregistrement Effectué avec Succès!',
               type: "success"
           })
       });
@@ -1855,7 +1855,7 @@ export function modifierBudgetEclateRegie({ commit}, nouveau) {
 
           this.$app.$notify({
               title: 'Success',
-              text: 'Modification Effectué avec Succès!',
+              text: 'Enregistrement Effectué avec Succès!',
               type: "success"
           })
       });
@@ -1869,5 +1869,69 @@ export function supprimerBudgetEclateRegie({ commit}, id) {
           
           // // dialog.loading(false) // stops the proceed button's loader
           axios.delete("/BudgetEclateRegie/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+
+
+
+export function getUniteAdministrativeBailleur({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/UniteAdministrativeBailleur")
+          .then(response => {
+              commit("GET_ALL_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterUniteAdministrativeBailleur({ commit}, nouveau) {
+  asyncLoading(axios
+      .post("/UniteAdministrativeBailleur", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
+            
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+
+
+export function modifierUniteAdministrativeBailleur({ commit}, nouveau) {
+  asyncLoading(axios
+      .put("/UniteAdministrativeBailleur/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
+         
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Enregistrement Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerUniteAdministrativeBailleur({ commit}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_UNITE_ADMINISTRATIVE_BAILLEUR", id);
+          
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/UniteAdministrativeBailleur/" + id).then(() => dialog.close());
       });
 }

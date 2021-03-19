@@ -18,11 +18,11 @@
 //     })
 // }
 
- // get all document
- 
+// get all document
 
 
-export const GET_ALL_RECEPTION= (state, tableau_document) =>{
+
+export const GET_ALL_RECEPTION = (state, tableau_document) => {
     state.receptionMarche = tableau_document
 }
 
@@ -33,10 +33,11 @@ export const AJOUTER_RECEPTION = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_RECEPTION = (state, elementModif)=>{
+export const MODIFIER_RECEPTION = (state, elementModif) => {
     state.receptionMarche = state.receptionMarche.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -44,15 +45,15 @@ export const MODIFIER_RECEPTION = (state, elementModif)=>{
 
 
 
-export const SUPPRIMER_RECEPTION = (state, id)=> {
-    state.receptionMarche = state.receptionMarche.filter(prest => prest.id !=id)
+export const SUPPRIMER_RECEPTION = (state, id) => {
+    state.receptionMarche = state.receptionMarche.filter(prest => prest.id != id)
 }
 
 
 
 
 
-export const GET_ALL_DEMANDE_ENGAGEMENT= (state, tableau_document) =>{
+export const GET_ALL_DEMANDE_ENGAGEMENT = (state, tableau_document) => {
     state.DemandeEngagement = tableau_document
 }
 
@@ -63,21 +64,21 @@ export const AJOUTER_DEMANDE_ENGAGEMENT = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_DEMANDE_ENGAGEMENT = (state, elementModif)=>{
+export const MODIFIER_DEMANDE_ENGAGEMENT = (state, elementModif) => {
     state.DemandeEngagement = state.DemandeEngagement.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_DEMANDE_ENGAGEMENT = (state, id)=> {
-    state.DemandeEngagement = state.DemandeEngagement.filter(prest => prest.id !=id)
+export const SUPPRIMER_DEMANDE_ENGAGEMENT = (state, id) => {
+    state.DemandeEngagement = state.DemandeEngagement.filter(prest => prest.id != id)
 }
 
 
-export const GET_ALL_NOM_PIECE_JUSTIFICATIVE= (state, tableau_document) =>{
+export const GET_ALL_NOM_PIECE_JUSTIFICATIVE = (state, tableau_document) => {
     state.nomPieceJustificative = tableau_document
 }
 
@@ -88,17 +89,17 @@ export const AJOUTER_NOM_PIECE_JUSTIFICATIVE = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_NOM_PIECE_JUSTIFICATIVE = (state, elementModif)=>{
+export const MODIFIER_NOM_PIECE_JUSTIFICATIVE = (state, elementModif) => {
     state.nomPieceJustificative = state.nomPieceJustificative.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_NOM_PIECE_JUSTIFICATIVE = (state, id)=> {
-    state.nomPieceJustificative = state.nomPieceJustificative.filter(prest => prest.id !=id)
+export const SUPPRIMER_NOM_PIECE_JUSTIFICATIVE = (state, id) => {
+    state.nomPieceJustificative = state.nomPieceJustificative.filter(prest => prest.id != id)
 }
 // export const SUPPRIMER_DECOMPTE = (state ,id) => {
 //     state.decomptes = state.decomptes.filter(select => 
@@ -109,7 +110,7 @@ export const SUPPRIMER_NOM_PIECE_JUSTIFICATIVE = (state, id)=> {
 //     state.imageMarche = tableau_candidat_selectionner
 // }
 
-export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
+export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) => {
     state.selectionner_candidats = tableau_candidat_selectionner
 }
 
@@ -121,19 +122,19 @@ export const AJOUTER_CANDIDAT_SELECTIONNER = (state, elementAjouter) => {
 }
 
 
-export const MODIFIER_CANDIDAT_SELECTIONNER = (state,elementModif) => {
-    state.selectionner_candidats = state.selectionner_candidats.map(response =>{
-        if(response.id == elementModif.id){
-           response = {...elementModif} 
+export const MODIFIER_CANDIDAT_SELECTIONNER = (state, elementModif) => {
+    state.selectionner_candidats = state.selectionner_candidats.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
 
-export const SUPPRIMER_CANDIDAT_SELECTION = (state ,id) => {
-    state.selectionner_candidats = state.selectionner_candidats.filter(select => 
-        select.id !=id)
+export const SUPPRIMER_CANDIDAT_SELECTION = (state, id) => {
+    state.selectionner_candidats = state.selectionner_candidats.filter(select =>
+        select.id != id)
 }
 
 
@@ -143,23 +144,23 @@ export const GET_ROLE_MEMBRECOJO = (state, tableau_role_membrecojo) => {
 }
 
 // ajouter source de financement
-export const AJOUTER_ROLE_MEMBRECOJO = (state , nouvel_objet) => {
+export const AJOUTER_ROLE_MEMBRECOJO = (state, nouvel_objet) => {
     state.role_membrecojo.unshift(nouvel_objet)
 }
 
 // suppression de source de financement
-export const SUPPRIMER_ROLE_MEMBRECOJO = (state ,id) => {
-    state.role_membrecojo = state.role_membrecojo.filter(role => 
-        role.id !=id)
+export const SUPPRIMER_ROLE_MEMBRECOJO = (state, id) => {
+    state.role_membrecojo = state.role_membrecojo.filter(role =>
+        role.id != id)
 }
 
 //modifier siource de financement
 export const MODIFIER_ROLE_MEMBRECOJO = (state, objetModifie) => {
-   
+
     state.role_membrecojo = state.role_membrecojo.map(role => {
 
-        if(role.id == objetModifie.id){
-            role = {...objetModifie}
+        if (role.id == objetModifie.id) {
+            role = { ...objetModifie }
 
         }
         return role
@@ -170,7 +171,7 @@ export const MODIFIER_ROLE_MEMBRECOJO = (state, objetModifie) => {
 // get all document
 
 
-export const GET_ALL_DOCUMENT = (state, tableau_document) =>{
+export const GET_ALL_DOCUMENT = (state, tableau_document) => {
     state.documentMedias = tableau_document
 }
 
@@ -181,10 +182,10 @@ export const AJOUTER_DOCUMENT = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_DOCUMENT = (state, elementModif)=>{
+export const MODIFIER_DOCUMENT = (state, elementModif) => {
     state.documentMedias = state.documentMedias.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -192,15 +193,15 @@ export const MODIFIER_DOCUMENT = (state, elementModif)=>{
 
 
 
-export const SUPPRIMER_DOCUMENT = (state, id)=> {
-    state.documentMedias = state.documentMedias.filter(prest => prest.id !=id)
+export const SUPPRIMER_DOCUMENT = (state, id) => {
+    state.documentMedias = state.documentMedias.filter(prest => prest.id != id)
 }
 
 
 
 
 
-export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) =>{
+export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) => {
     state.rapportDocuments = tableau_rapport_ouverture
 }
 
@@ -209,16 +210,16 @@ export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) =>{
 export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
     state.rapportDocuments.unshift(elementAjouter)
     //state.selectionner_candidats=[]
-    state.selectionner_candidats=[]
+    state.selectionner_candidats = []
     //state.analyseDossiers=[]
-    
+
 }
 
 // update all document
-export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
+export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif) => {
     state.rapportDocuments = state.rapportDocuments.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -226,9 +227,9 @@ export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
 
 
 
-export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
-    state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id !=id)
-    state.selectionner_candidats=[]
+export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id) => {
+    state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id != id)
+    state.selectionner_candidats = []
     //state.analyseDossiers=[]
 }
 
@@ -242,7 +243,7 @@ export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
 
 
 
-export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
+export const GET_ALL_PRESTATION = (state, tableau_prestation) => {
     state.prestations = tableau_prestation
 }
 
@@ -253,10 +254,10 @@ export const AJOUTER_PRESTATION = (state, elementAjouter) => {
 }
 
 // update all prestation
-export const MODIFIER_PRESTATION = (state, elementModif)=>{
+export const MODIFIER_PRESTATION = (state, elementModif) => {
     state.prestations = state.prestations.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -267,8 +268,8 @@ SUPPRIMER_MEMBRE_COJO
 
 // delete all prestation
 
-export const DELETE_PRESTATION = (state, id)=> {
-    state.prestations = state.prestations.filter(prest => prest.id !=id)
+export const DELETE_PRESTATION = (state, id) => {
+    state.prestations = state.prestations.filter(prest => prest.id != id)
 }
 
 
@@ -278,7 +279,7 @@ export const DELETE_PRESTATION = (state, id)=> {
 
 
 // get all execution marche
-export const GET_EXECUTION_MARCHE = (state, tableau_execution_marche) =>{
+export const GET_EXECUTION_MARCHE = (state, tableau_execution_marche) => {
     state.executionMarches = tableau_execution_marche
 }
 
@@ -296,10 +297,10 @@ export const AJOUTER_EXECUTION_MARCHE = (state, elementAjouter) => {
 }
 
 // update all execution marche
-export const MODIFIER_EXECUTION_MARCHE = (state, elementModif)=>{
+export const MODIFIER_EXECUTION_MARCHE = (state, elementModif) => {
     state.executionMarches = state.executionMarches.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -310,8 +311,8 @@ export const MODIFIER_EXECUTION_MARCHE = (state, elementModif)=>{
 
 // delete all execution de marche 
 
-export const DELETE_EXECUTION_MARCHE = (state, id)=> {
-    state.executionMarches = state.executionMarches.filter(marche => marche.id !=id)
+export const DELETE_EXECUTION_MARCHE = (state, id) => {
+    state.executionMarches = state.executionMarches.filter(marche => marche.id != id)
 }
 
 
@@ -323,7 +324,7 @@ export const DELETE_EXECUTION_MARCHE = (state, id)=> {
 
 
 // get all cotation
-export const GET_ALL_COTATION = (state, tableau_cotation) =>{
+export const GET_ALL_COTATION = (state, tableau_cotation) => {
     state.stateCotations = tableau_cotation
 }
 
@@ -335,10 +336,10 @@ export const AJOUTER_COTATION = (state, elementAjouter) => {
 }
 
 // update all cotation
-export const MODIFIER_COTATION = (state, elementModif)=>{
+export const MODIFIER_COTATION = (state, elementModif) => {
     state.stateCotations = state.stateCotations.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -349,8 +350,8 @@ export const MODIFIER_COTATION = (state, elementModif)=>{
 
 // delete all cotation
 
-export const SUPPRIMER_COTATION = (state, id)=> {
-    state.stateCotations = state.stateCotations.filter(marche => marche.id !=id)
+export const SUPPRIMER_COTATION = (state, id) => {
+    state.stateCotations = state.stateCotations.filter(marche => marche.id != id)
 }
 
 
@@ -359,7 +360,7 @@ export const SUPPRIMER_COTATION = (state, id)=> {
 
 
 // get all ouverture
-export const GET_ALL_OUVERTURE = (state, tableau_ouverture) =>{
+export const GET_ALL_OUVERTURE = (state, tableau_ouverture) => {
     state.cojo_personnel = tableau_ouverture
 }
 
@@ -371,10 +372,10 @@ export const AJOUTER_OUVERTURE = (state, elementAjouter) => {
 }
 
 // update all ouverture
-export const MODIFIER_OUVERTURE = (state, elementModif)=>{
+export const MODIFIER_OUVERTURE = (state, elementModif) => {
     state.cojo_personnels = state.cojo_personnels.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -385,8 +386,8 @@ export const MODIFIER_OUVERTURE = (state, elementModif)=>{
 
 // delete all ouverture
 
-export const SUPPRIMER_OUVERTURE = (state, id)=> {
-    state.cojo_personnels = state.cojo_personnels.filter(marche => marche.id !=id)
+export const SUPPRIMER_OUVERTURE = (state, id) => {
+    state.cojo_personnels = state.cojo_personnels.filter(marche => marche.id != id)
 }
 
 
@@ -407,10 +408,10 @@ export const AJOUTER_ETAT_PROCEDURE = (state, elementAjouter) => {
 }
 
 // update all etat procedure
-export const MODIFIER_ETAT_PROCEDURE = (state, elementModif)=>{
+export const MODIFIER_ETAT_PROCEDURE = (state, elementModif) => {
     state.gettersEtatProcedure = state.gettersEtatProcedure.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -428,7 +429,7 @@ export const MODIFIER_ETAT_PROCEDURE = (state, elementModif)=>{
 
 
 //get all  motif de decision
-export const GET_ALL_TRANSMISSION = (state, tableau_psc) =>{
+export const GET_ALL_TRANSMISSION = (state, tableau_psc) => {
     state.stateTransmissions = tableau_psc
 }
 
@@ -439,10 +440,10 @@ export const AJOUTER_TRANSMISSION = (state, elementAjouter) => {
 }
 
 //update all motif de decision
-export const MODIFIER_TRANSMISSION = (state, elementModif)=>{
+export const MODIFIER_TRANSMISSION = (state, elementModif) => {
     state.stateTransmissions = state.stateTransmissions.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -452,8 +453,8 @@ export const MODIFIER_TRANSMISSION = (state, elementModif)=>{
 
 //delete all motif de decision
 
-export const SUPPRI_TRANSMISSION = (state, id)=> {
-    state.stateTransmissions = state.stateTransmissions.filter(motif => motif.id !=id)
+export const SUPPRI_TRANSMISSION = (state, id) => {
+    state.stateTransmissions = state.stateTransmissions.filter(motif => motif.id != id)
 }
 
 
@@ -467,7 +468,7 @@ export const SUPPRI_TRANSMISSION = (state, id)=> {
 
 
 // get all  motif de decision
-export const GET_MOTIF_DECISION = (state, tableau_motif_decision) =>{
+export const GET_MOTIF_DECISION = (state, tableau_motif_decision) => {
     state.motifDecisions = tableau_motif_decision
 }
 
@@ -478,10 +479,10 @@ export const AJOUTER_MOTIF_DECISION = (state, elementAjouter) => {
 }
 
 // update all motif de decision
-export const MODIFIER_MOTIF_DECISION = (state, elementModif)=>{
+export const MODIFIER_MOTIF_DECISION = (state, elementModif) => {
     state.motifDecisions = state.motifDecisions.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -491,8 +492,8 @@ export const MODIFIER_MOTIF_DECISION = (state, elementModif)=>{
 
 // delete all motif de decision
 
-export const DELETE_MOTIF_DECISION = (state, id)=> {
-    state.motifDecisions = state.motifDecisions.filter(motif => motif.id !=id)
+export const DELETE_MOTIF_DECISION = (state, id) => {
+    state.motifDecisions = state.motifDecisions.filter(motif => motif.id != id)
 }
 
 
@@ -501,7 +502,7 @@ export const DELETE_MOTIF_DECISION = (state, id)=> {
 
 
 // get all  motif de decision
-export const GET_DOCUMENT_PROCEDURE = (state, tableau_document_procedure) =>{
+export const GET_DOCUMENT_PROCEDURE = (state, tableau_document_procedure) => {
     state.documentProcedures = tableau_document_procedure
 }
 
@@ -512,10 +513,10 @@ export const AJOUTER_DOCUMENT_PROCEDURE = (state, elementAjouter) => {
 }
 
 // update all document procedure
-export const MODIFIER_DOCUMENT_PROCEDURE = (state, elementModif)=>{
+export const MODIFIER_DOCUMENT_PROCEDURE = (state, elementModif) => {
     state.documentProcedures = state.documentProcedures.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -525,8 +526,8 @@ export const MODIFIER_DOCUMENT_PROCEDURE = (state, elementModif)=>{
 
 // delete all document procedure
 
-export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
-    state.documentProcedures = state.documentProcedures.filter(motif => motif.id !=id)
+export const DELETE_DOCUMENT_PROCEDURE = (state, id) => {
+    state.documentProcedures = state.documentProcedures.filter(motif => motif.id != id)
 }
 
 
@@ -539,7 +540,7 @@ export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
 
 // get all  acte effet financier
 
-export const GET_ALL_ACTE_EFFET_FINANCIER = (state, tableau_acte_financier) =>{
+export const GET_ALL_ACTE_EFFET_FINANCIER = (state, tableau_acte_financier) => {
     state.acteEffetFinanciers = tableau_acte_financier
 }
 
@@ -550,10 +551,10 @@ export const AJOUTER_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
 }
 
 // update all acte effet financier
-export const MODIFIER_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
+export const MODIFIER_ACTE_EFFET_FINANCIER = (state, elementModif) => {
     state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -563,8 +564,8 @@ export const MODIFIER_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
 
 // delete acte effet financier
 
-export const DELET_ACTE_EFFET_FINANCIER = (state, id)=> {
-    state.acteEffetFinanciers = state.acteEffetFinanciers.filter(effet => effet.id !=id)
+export const DELET_ACTE_EFFET_FINANCIER = (state, id) => {
+    state.acteEffetFinanciers = state.acteEffetFinanciers.filter(effet => effet.id != id)
 }
 
 
@@ -582,7 +583,7 @@ export const AJOUTER_NOUVEAU_FOURNISSEUR = (state, elementAjouter) => {
 
 // get all  obseravtion bailleur
 
-export const GET_OBSERVATION_BAILLEUR = (state, tableau_obseravtion_bailleur) =>{
+export const GET_OBSERVATION_BAILLEUR = (state, tableau_obseravtion_bailleur) => {
     state.obseravtionBailleurs = tableau_obseravtion_bailleur
 }
 
@@ -593,10 +594,10 @@ export const AJOUTER_OBSERAVTION_BAILLEUR = (state, elementAjouter) => {
 }
 
 // update all observation bailleur
-export const MODIFIER_OBSERAVTION_BAILLEUR = (state, elementModif)=>{
+export const MODIFIER_OBSERAVTION_BAILLEUR = (state, elementModif) => {
     state.obseravtionBailleurs = state.obseravtionBailleurs.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -606,8 +607,8 @@ export const MODIFIER_OBSERAVTION_BAILLEUR = (state, elementModif)=>{
 
 // delete all observation bailleur
 
-export const DELETE_OBSERVATION_BAILLEUR = (state, id)=> {
-    state.obseravtionBailleurs = state.obseravtionBailleurs.filter(observation => observation.id !=id)
+export const DELETE_OBSERVATION_BAILLEUR = (state, id) => {
+    state.obseravtionBailleurs = state.obseravtionBailleurs.filter(observation => observation.id != id)
 }
 
 
@@ -616,7 +617,7 @@ export const DELETE_OBSERVATION_BAILLEUR = (state, id)=> {
 // mutation offre technique
 
 // get all prestation
-export const GET_ALL_OFFRE_TECHNIQUE = (state, tableau_prestation) =>{
+export const GET_ALL_OFFRE_TECHNIQUE = (state, tableau_prestation) => {
     state.offreTechniques = tableau_prestation
 }
 
@@ -627,10 +628,10 @@ export const AJOUTER_OFFRE_TECHNIQUE = (state, elementAjouter) => {
 }
 
 // update all prestation
-export const MODIFIER_OFFRE_TECHNIQUE = (state, elementModif)=>{
+export const MODIFIER_OFFRE_TECHNIQUE = (state, elementModif) => {
     state.offreTechniques = state.offreTechniques.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -640,15 +641,15 @@ export const MODIFIER_OFFRE_TECHNIQUE = (state, elementModif)=>{
 
 // delete all prestation
 
-export const DELETE_OFFRE_TECHNIQUE = (state, id)=> {
-    state.offreTechniques = state.offreTechniques.filter(prest => prest.id !=id)
+export const DELETE_OFFRE_TECHNIQUE = (state, id) => {
+    state.offreTechniques = state.offreTechniques.filter(prest => prest.id != id)
 }
 
 // mutation pour offre financier
 
 
 // get all prestation
-export const GET_ALL_OFFRE_FINANCIER = (state, tableau_prestation) =>{
+export const GET_ALL_OFFRE_FINANCIER = (state, tableau_prestation) => {
     state.offreFinanciers = tableau_prestation
 }
 
@@ -659,10 +660,10 @@ export const AJOUTER_OFFRE_FINANCIER = (state, elementAjouter) => {
 }
 
 // update all prestation
-export const MODIFIER_OFFRE_FINANCIER = (state, elementModif)=>{
+export const MODIFIER_OFFRE_FINANCIER = (state, elementModif) => {
     state.offreFinanciers = state.offreFinanciers.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -672,8 +673,8 @@ export const MODIFIER_OFFRE_FINANCIER = (state, elementModif)=>{
 
 // delete all prestation
 
-export const DELETE_OFFRE_FINANCIER = (state, id)=> {
-    state.offreFinanciers = state.offreFinanciers.filter(prest => prest.id !=id)
+export const DELETE_OFFRE_FINANCIER = (state, id) => {
+    state.offreFinanciers = state.offreFinanciers.filter(prest => prest.id != id)
 }
 
 
@@ -681,7 +682,7 @@ export const DELETE_OFFRE_FINANCIER = (state, id)=> {
 
 
 // get all actedepense
-export const GET_ALL_ACTE_DEPENSE = (state, tableau_acte_depense) =>{
+export const GET_ALL_ACTE_DEPENSE = (state, tableau_acte_depense) => {
     state.acteDepense = tableau_acte_depense
 }
 
@@ -693,10 +694,10 @@ export const AJOUTER_ACTE_DEPENSE = (state, elementAjouter) => {
 
 
 // update all acte depense
-export const MODIFIER_ACTE_DEPENSE = (state, elementModif)=>{
+export const MODIFIER_ACTE_DEPENSE = (state, elementModif) => {
     state.acteDepense = state.acteDepense.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -705,12 +706,12 @@ export const MODIFIER_ACTE_DEPENSE = (state, elementModif)=>{
 
 // delete all prestation
 
-export const SUPPRIMER_ACTE_DEPENSE = (state, id)=> {
-    state.acteDepense = state.acteDepense.filter(prest => prest.id !=id)
+export const SUPPRIMER_ACTE_DEPENSE = (state, id) => {
+    state.acteDepense = state.acteDepense.filter(prest => prest.id != id)
 }
 
 // get all bailleur
-export const GET_ALL_BAILLEUR = (state, tableau_bailleur) =>{
+export const GET_ALL_BAILLEUR = (state, tableau_bailleur) => {
     state.bailleurs = tableau_bailleur
 }
 
@@ -721,10 +722,10 @@ export const AJOUTER_BAILLEUR = (state, elementAjouter) => {
 }
 
 // update all bailleur
-export const MODIFIER_BAILLEUR = (state, elementModif)=>{
+export const MODIFIER_BAILLEUR = (state, elementModif) => {
     state.bailleurs = state.bailleurs.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -735,13 +736,13 @@ export const MODIFIER_BAILLEUR = (state, elementModif)=>{
 
 export const SUPPRIMER_BAILLEUR = (state, id) => {
 
- state.bailleurs = state.bailleurs.filter(bailleur => bailleur.id !=id)
+    state.bailleurs = state.bailleurs.filter(bailleur => bailleur.id != id)
 }
 
 
 
 // get all code fonction
-export const GET_CODE_FONCTION = (state, tableau_code_foction) =>{
+export const GET_CODE_FONCTION = (state, tableau_code_foction) => {
     state.codesFonctions = tableau_code_foction
 }
 
@@ -752,10 +753,10 @@ export const AJOUTER_CODE_FONCTION = (state, elementAjouter) => {
 }
 
 // update all code fonction
-export const MODIFIER_CODE_FONCTION = (state, elementModif)=>{
+export const MODIFIER_CODE_FONCTION = (state, elementModif) => {
     state.codesFonctions = state.codesFonctions.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -764,13 +765,13 @@ export const MODIFIER_CODE_FONCTION = (state, elementModif)=>{
 
 // delete all code fonction
 
-export const SUPPRIMER_CODE_FONCTION = (state, id)=> {
-    state.codesFonctions = state.codesFonctions.filter(prest => prest.id !=id)
+export const SUPPRIMER_CODE_FONCTION = (state, id) => {
+    state.codesFonctions = state.codesFonctions.filter(prest => prest.id != id)
 }
 
 
 // get all compte
-export const GET_ALL_COMPTE = (state, tableau_compte) =>{
+export const GET_ALL_COMPTE = (state, tableau_compte) => {
     state.comptes = tableau_compte
 }
 
@@ -782,10 +783,10 @@ export const AJOUTER_COMPTE = (state, elementAjouter) => {
 
 
 // update all compte
-export const MODIFIER_COMPTE = (state, elementModif)=>{
+export const MODIFIER_COMPTE = (state, elementModif) => {
     state.comptes = state.comptes.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -794,8 +795,8 @@ export const MODIFIER_COMPTE = (state, elementModif)=>{
 
 // delete all compte
 
-export const SUPPRIMER_COMPTE = (state, id)=> {
-    state.comptes = state.comptes.filter(prest => prest.id !=id)
+export const SUPPRIMER_COMPTE = (state, id) => {
+    state.comptes = state.comptes.filter(prest => prest.id != id)
 }
 
 
@@ -832,7 +833,7 @@ export const SUPPRIMER_FACTURE = (state, id) => {
 
 
 // get all lot
-export const GET_ALL_LOT = (state, tableau_lots) =>{
+export const GET_ALL_LOT = (state, tableau_lots) => {
     state.lots = tableau_lots
 }
 
@@ -844,10 +845,10 @@ export const AJOUTER_LOT = (state, elementAjouter) => {
 
 
 // update all lot
-export const MODIFIER_LOT = (state, elementModif)=>{
+export const MODIFIER_LOT = (state, elementModif) => {
     state.lots = state.lots.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -856,14 +857,14 @@ export const MODIFIER_LOT = (state, elementModif)=>{
 
 // delete all lots
 
-export const SUPPRIMER_LOT = (state, id)=> {
-    state.lots = state.lots.filter(prest => prest.id !=id)
+export const SUPPRIMER_LOT = (state, id) => {
+    state.lots = state.lots.filter(prest => prest.id != id)
 }
 
 
 
 // get all type_prestation
-export const GET_ALL_TYPE_PRESTATION = (state, tableau_type_prestation) =>{
+export const GET_ALL_TYPE_PRESTATION = (state, tableau_type_prestation) => {
     state.typePrestations = tableau_type_prestation
 }
 
@@ -874,10 +875,10 @@ export const AJOUTER_TYPE_PRESTATION = (state, elementAjouter) => {
 }
 
 // update all type_prestation
-export const MODIFIER_TYPE_PRESTATION = (state, elementModif)=>{
+export const MODIFIER_TYPE_PRESTATION = (state, elementModif) => {
     state.typePrestations = state.typePrestations.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -886,13 +887,13 @@ export const MODIFIER_TYPE_PRESTATION = (state, elementModif)=>{
 
 // delete all type_prestation
 
-export const SUPPRIMER_TYPE_PRESTATION = (state, id)=> {
-    state.typePrestations = state.typePrestations.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_PRESTATION = (state, id) => {
+    state.typePrestations = state.typePrestations.filter(prest => prest.id != id)
 }
 
 
 // get all type facture
-export const GET_TYPE_FACTURE = (state, tableau_type_facture) =>{
+export const GET_TYPE_FACTURE = (state, tableau_type_facture) => {
     state.typeFactures = tableau_type_facture
 }
 
@@ -904,10 +905,10 @@ export const AJOUTER_TYPE_FACTURE = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_TYPE_FACTURE = (state, elementModif)=>{
+export const MODIFIER_TYPE_FACTURE = (state, elementModif) => {
     state.typeFactures = state.typeFactures.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -916,8 +917,8 @@ export const MODIFIER_TYPE_FACTURE = (state, elementModif)=>{
 
 // delete all type facture
 
-export const SUPPRIMER_TYPE_FACTURE = (state, id)=> {
-    state.typeFactures = state.typeFactures.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_FACTURE = (state, id) => {
+    state.typeFactures = state.typeFactures.filter(prest => prest.id != id)
 }
 
 
@@ -925,7 +926,7 @@ export const SUPPRIMER_TYPE_FACTURE = (state, id)=> {
 
 
 // get all type facture
-export const GET_TYPE_PROCEDURE = (state, tableau_type_procedure) =>{
+export const GET_TYPE_PROCEDURE = (state, tableau_type_procedure) => {
     state.typeTypeProcedures = tableau_type_procedure
 }
 
@@ -937,10 +938,10 @@ export const AJOUTER_TYPE_PROCEDURE = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_TYPE_PROCEDURE = (state, elementModif)=>{
+export const MODIFIER_TYPE_PROCEDURE = (state, elementModif) => {
     state.typeTypeProcedures = state.typeTypeProcedures.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -949,8 +950,8 @@ export const MODIFIER_TYPE_PROCEDURE = (state, elementModif)=>{
 
 // delete all type facture
 
-export const SUPPRIMER_TYPE_PROCEDURE = (state, id)=> {
-    state.typeTypeProcedures = state.typeTypeProcedures.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_PROCEDURE = (state, id) => {
+    state.typeTypeProcedures = state.typeTypeProcedures.filter(prest => prest.id != id)
 }
 
 
@@ -960,7 +961,7 @@ export const SUPPRIMER_TYPE_PROCEDURE = (state, id)=> {
 /// mutation procedure passation
 
 // get all type facture
-export const GET_PROCEDURE_PASSATION = (state, tableau_procedure_passation) =>{
+export const GET_PROCEDURE_PASSATION = (state, tableau_procedure_passation) => {
     state.procedurePassations = tableau_procedure_passation
 }
 
@@ -972,10 +973,10 @@ export const AJOUTER_PROCEDURE_PASSATION = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_PROCEDURE_PASSATION = (state, elementModif)=>{
+export const MODIFIER_PROCEDURE_PASSATION = (state, elementModif) => {
     state.procedurePassations = state.procedurePassations.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -984,8 +985,8 @@ export const MODIFIER_PROCEDURE_PASSATION = (state, elementModif)=>{
 
 // delete all type facture
 
-export const SUPPRIMER_PROCEDURE_PASSATION = (state, id)=> {
-    state.procedurePassations = state.procedurePassations.filter(prest => prest.id !=id)
+export const SUPPRIMER_PROCEDURE_PASSATION = (state, id) => {
+    state.procedurePassations = state.procedurePassations.filter(prest => prest.id != id)
 }
 
 
@@ -999,7 +1000,7 @@ export const SUPPRIMER_PROCEDURE_PASSATION = (state, id)=> {
 
 
 // get all type facture
-export const GET_APPEL_OFFRE = (state, tableau_appel_offre) =>{
+export const GET_APPEL_OFFRE = (state, tableau_appel_offre) => {
     state.appelOffres = tableau_appel_offre
 }
 
@@ -1011,10 +1012,10 @@ export const AJOUTER_APPEL_OFFRE = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_APPEL_OFFRE = (state, elementModif)=>{
+export const MODIFIER_APPEL_OFFRE = (state, elementModif) => {
     state.appelOffres = state.appelOffres.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1023,8 +1024,8 @@ export const MODIFIER_APPEL_OFFRE = (state, elementModif)=>{
 
 // delete all type facture
 
-export const SUPPRIMER_APPEL_OFFRE = (state, id)=> {
-    state.appelOffres = state.appelOffres.filter(prest => prest.id !=id)
+export const SUPPRIMER_APPEL_OFFRE = (state, id) => {
+    state.appelOffres = state.appelOffres.filter(prest => prest.id != id)
 }
 
 
@@ -1033,7 +1034,7 @@ export const SUPPRIMER_APPEL_OFFRE = (state, id)=> {
 
 
 // get all type facture
-export const GET_TYPE_MARCHE = (state, tableau_type_marche) =>{
+export const GET_TYPE_MARCHE = (state, tableau_type_marche) => {
     state.typeMarches = tableau_type_marche
 }
 
@@ -1045,10 +1046,10 @@ export const AJOUTER_TYPE_MARCHE = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_TYPE_MARCHE = (state, elementModif)=>{
+export const MODIFIER_TYPE_MARCHE = (state, elementModif) => {
     state.typeMarches = state.typeMarches.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1057,8 +1058,8 @@ export const MODIFIER_TYPE_MARCHE = (state, elementModif)=>{
 
 // delete all marche
 
-export const SUPPRIMER_TYPE_MARCHE = (state, id)=> {
-    state.typeMarches = state.typeMarches.filter(marche => marche.id !=id)
+export const SUPPRIMER_TYPE_MARCHE = (state, id) => {
+    state.typeMarches = state.typeMarches.filter(marche => marche.id != id)
 }
 
 
@@ -1067,7 +1068,7 @@ export const SUPPRIMER_TYPE_MARCHE = (state, id)=> {
 
 
 
-export const GET_MARCHE = (state, tableau_marche) =>{
+export const GET_MARCHE = (state, tableau_marche) => {
     state.marches = tableau_marche
 }
 
@@ -1079,10 +1080,10 @@ export const AJOUTER_MARCHE = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_MARCHE = (state, elementModif)=>{
+export const MODIFIER_MARCHE = (state, elementModif) => {
     state.marches = state.marches.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1091,8 +1092,8 @@ export const MODIFIER_MARCHE = (state, elementModif)=>{
 
 // delete all marche
 
-export const SUPPRIMER_MARCHE = (state, id)=> {
-    state.marches = state.marches.filter(marche => marche.id !=id)
+export const SUPPRIMER_MARCHE = (state, id) => {
+    state.marches = state.marches.filter(marche => marche.id != id)
 }
 
 
@@ -1101,7 +1102,7 @@ export const SUPPRIMER_MARCHE = (state, id)=> {
 // la mutation de mode bde passation
 
 // get all type facture
-export const GET_MODE_PASSATION = (state, tableau_mode_passation) =>{
+export const GET_MODE_PASSATION = (state, tableau_mode_passation) => {
     state.modePassations = tableau_mode_passation
 }
 
@@ -1113,10 +1114,10 @@ export const AJOUTER_MODE_PASSATION = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_MODE_PASSATION = (state, elementModif)=>{
+export const MODIFIER_MODE_PASSATION = (state, elementModif) => {
     state.modePassations = state.modePassations.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1125,8 +1126,8 @@ export const MODIFIER_MODE_PASSATION = (state, elementModif)=>{
 
 // delete all marche
 
-export const SUPPRIMER_MODE_PASSATION = (state, id)=> {
-    state.modePassations = state.modePassations.filter(passation => passation.id !=id)
+export const SUPPRIMER_MODE_PASSATION = (state, id) => {
+    state.modePassations = state.modePassations.filter(passation => passation.id != id)
 }
 
 
@@ -1141,7 +1142,7 @@ export const SUPPRIMER_MODE_PASSATION = (state, id)=> {
 
 
 // get all type acte depense
-export const GET_ALL_TYPE_ACTE_DEPENSE = (state, tableau_type_acte_depense) =>{
+export const GET_ALL_TYPE_ACTE_DEPENSE = (state, tableau_type_acte_depense) => {
     state.typeActeDepenses = tableau_type_acte_depense
 }
 
@@ -1152,10 +1153,10 @@ export const AJOUTER_TYPE_ACTE_DEPENSE = (state, elementAjouter) => {
 }
 
 // update all type_prestation
-export const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif)=>{
+export const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif) => {
     state.typeActeDepenses = state.typeActeDepenses.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1164,8 +1165,8 @@ export const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif)=>{
 
 // delete all type_acte depense
 
-export const SUPPRIMER_TYPE_ACTE_DEPENSE = (state, id)=> {
-    state.typeActeDepenses = state.typeActeDepenses.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_ACTE_DEPENSE = (state, id) => {
+    state.typeActeDepenses = state.typeActeDepenses.filter(prest => prest.id != id)
 }
 
 
@@ -1173,7 +1174,7 @@ export const SUPPRIMER_TYPE_ACTE_DEPENSE = (state, id)=> {
 
 
 // get all acteur depense
-export const GET_ALL_ACTEUR_DEPENSE = (state, tableau_acteur_depense) =>{
+export const GET_ALL_ACTEUR_DEPENSE = (state, tableau_acteur_depense) => {
     state.acteurDepense = tableau_acteur_depense
 }
 
@@ -1185,10 +1186,10 @@ export const AJOUTER_ACTEUR_DEPENSE = (state, elementAjouter) => {
 
 
 // update all type facture
-export const MODIFIER_ACTEUR_DEPENSE = (state, elementModif)=>{
+export const MODIFIER_ACTEUR_DEPENSE = (state, elementModif) => {
     state.acteurDepense = state.acteurDepense.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1197,8 +1198,8 @@ export const MODIFIER_ACTEUR_DEPENSE = (state, elementModif)=>{
 
 // delete all type facture
 
-export const SUPPRIMER_ACTEUR_DEPENSE = (state, id)=> {
-    state.acteurDepense = state.acteurDepense.filter(prest => prest.id !=id)
+export const SUPPRIMER_ACTEUR_DEPENSE = (state, id) => {
+    state.acteurDepense = state.acteurDepense.filter(prest => prest.id != id)
 }
 
 
@@ -1206,7 +1207,7 @@ export const SUPPRIMER_ACTEUR_DEPENSE = (state, id)=> {
 
 
 // get all type acte depense
-export const GET_ALL_ANALYSE_DOSSIER = (state, tableau_analyse_dossier) =>{
+export const GET_ALL_ANALYSE_DOSSIER = (state, tableau_analyse_dossier) => {
     state.analyseDossiers = tableau_analyse_dossier
 }
 
@@ -1217,10 +1218,10 @@ export const AJOUTER_ANALYSE_DOSSIER = (state, elementAjouter) => {
 }
 
 // update all analyse dossier
-export const MODIFIER_ANALYSE_DOSSIER = (state, elementModif)=>{
+export const MODIFIER_ANALYSE_DOSSIER = (state, elementModif) => {
     state.analyseDossiers = state.analyseDossiers.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1229,13 +1230,13 @@ export const MODIFIER_ANALYSE_DOSSIER = (state, elementModif)=>{
 
 // delete all analyse de dosssier
 
-export const SUPPRIMER_ANALYSE_DOSSIER = (state, id)=> {
-    state.analyseDossiers = state.analyseDossiers.filter(prest => prest.id !=id)
+export const SUPPRIMER_ANALYSE_DOSSIER = (state, id) => {
+    state.analyseDossiers = state.analyseDossiers.filter(prest => prest.id != id)
 }
 
 
 // get all la cojo
-export const GET_ALL_COJO = (state, tableau_cojo) =>{
+export const GET_ALL_COJO = (state, tableau_cojo) => {
     state.cojos = tableau_cojo
 }
 
@@ -1247,10 +1248,10 @@ export const AJOUTER_COJO = (state, elementAjouter) => {
 
 
 // update cojo
-export const MODIFIER_COJO = (state, elementModif)=>{
+export const MODIFIER_COJO = (state, elementModif) => {
     state.cojos = state.cojos.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1259,13 +1260,13 @@ export const MODIFIER_COJO = (state, elementModif)=>{
 
 // delete cojo
 
-export const SUPRIMER_COJO = (state, id)=> {
-    state.cojos = state.cojos.filter(prest => prest.id !=id);
-    state.membre_cojo=state.membre_cojo.filter(item=>item.cojo_id!=id)
+export const SUPRIMER_COJO = (state, id) => {
+    state.cojos = state.cojos.filter(prest => prest.id != id);
+    state.membre_cojo = state.membre_cojo.filter(item => item.cojo_id != id)
 }
 
 // mutation pour condition && fonction occupper
-export const GET_ALL_RAPPORT = (state, tableau_cojo) =>{
+export const GET_ALL_RAPPORT = (state, tableau_cojo) => {
     state.rapportOuverture = tableau_cojo
 }
 
@@ -1276,24 +1277,24 @@ export const AJOUTER_RAPPORT = (state, nouvelElement) => {
 }
 
 
-export const MODIFIER_RAPPORT = (state, elementModif)=>{
+export const MODIFIER_RAPPORT = (state, elementModif) => {
     state.rapportOuverture = state.rapportOuverture.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
 
-export const SUPPRIMER_RAPPORT = (state, id)=> {
-    state.rapportOuverture = state.rapportOuverture.filter(prest => prest.id !=id);
-    state.membre_cojo=state.membre_cojo.filter(item=>item.cojo_id!=id)
+export const SUPPRIMER_RAPPORT = (state, id) => {
+    state.rapportOuverture = state.rapportOuverture.filter(prest => prest.id != id);
+    state.membre_cojo = state.membre_cojo.filter(item => item.cojo_id != id)
 }
 
 
 // get all condition
-export const GET_ALL_CONDITION = (state, tableau_condition) =>{
+export const GET_ALL_CONDITION = (state, tableau_condition) => {
     state.conditions = tableau_condition
 }
 
@@ -1304,10 +1305,10 @@ export const AJOUTER_CONDITION = (state, elementAjouter) => {
 }
 
 // update condition
-export const MODIFIER_CONDITION = (state, elementModif)=>{
+export const MODIFIER_CONDITION = (state, elementModif) => {
     state.conditions = state.conditions.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1316,13 +1317,13 @@ export const MODIFIER_CONDITION = (state, elementModif)=>{
 
 // delete condition
 
-export const SUPPRIMER_CONDITION = (state, id)=> {
-    state.conditions = state.conditions.filter(prest => prest.id !=id)
+export const SUPPRIMER_CONDITION = (state, id) => {
+    state.conditions = state.conditions.filter(prest => prest.id != id)
 }
 
 
 // get all fonction ocupper
-export const GET_ALL_FONCTION_OCCUPPE = (state, tableau_fonction_occuppe) =>{
+export const GET_ALL_FONCTION_OCCUPPE = (state, tableau_fonction_occuppe) => {
     state.fonctionOccupes = tableau_fonction_occuppe
 }
 
@@ -1334,10 +1335,10 @@ export const AJOUTER_FONCTION_OCCUPPE = (state, elementAjouter) => {
 
 
 // update fonction occuppe
-export const MODIFIER_FONCTION_OCCUPPE = (state, elementModif)=>{
+export const MODIFIER_FONCTION_OCCUPPE = (state, elementModif) => {
     state.fonctionOccupes = state.fonctionOccupes.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1346,14 +1347,14 @@ export const MODIFIER_FONCTION_OCCUPPE = (state, elementModif)=>{
 
 // delete fonction occuppe
 
-export const SUPPRIMER_FONCTION_OCCUPPE = (state, id)=> {
-    state.fonctionOccupes = state.fonctionOccupes.filter(prest => prest.id !=id)
+export const SUPPRIMER_FONCTION_OCCUPPE = (state, id) => {
+    state.fonctionOccupes = state.fonctionOccupes.filter(prest => prest.id != id)
 }
 
 
 
 // get all nature fonction
-export const GET_ALL_NATURE_FONCTION = (state, tableau_nature_fonction) =>{
+export const GET_ALL_NATURE_FONCTION = (state, tableau_nature_fonction) => {
     state.natureFonctions = tableau_nature_fonction
 }
 
@@ -1365,10 +1366,10 @@ export const AJOUTER_NATURE_FONCTION = (state, elementAjouter) => {
 
 // update all nature fonction
 
-export const MODIFIER_NATURE_FONCTION = (state, elementModif)=>{
+export const MODIFIER_NATURE_FONCTION = (state, elementModif) => {
     state.natureFonctions = state.natureFonctions.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1377,13 +1378,13 @@ export const MODIFIER_NATURE_FONCTION = (state, elementModif)=>{
 
 // delete all nature fonction
 
-export const SUPPRIMER_NATURE_FONCTION = (state, id)=> {
-    state.natureFonctions = state.natureFonctions.filter(prest => prest.id !=id)
+export const SUPPRIMER_NATURE_FONCTION = (state, id) => {
+    state.natureFonctions = state.natureFonctions.filter(prest => prest.id != id)
 }
 
 
 // get all signature
-export const GET_ALL_SIGNATURE = (state, tableau_signature) =>{
+export const GET_ALL_SIGNATURE = (state, tableau_signature) => {
     state.signatures = tableau_signature
 }
 
@@ -1395,10 +1396,10 @@ export const AJOUTER_SIGNATURE = (state, elementAjouter) => {
 
 
 // update all signature
-export const MODIFIER_SIGNATURE = (state, elementModif)=>{
+export const MODIFIER_SIGNATURE = (state, elementModif) => {
     state.signatures = state.signatures.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1407,8 +1408,8 @@ export const MODIFIER_SIGNATURE = (state, elementModif)=>{
 
 // delete signature
 
-export const SUPPRIMER_SIGNATURE = (state, id)=> {
-    state.signatures = state.signatures.filter(prest => prest.id !=id)
+export const SUPPRIMER_SIGNATURE = (state, id) => {
+    state.signatures = state.signatures.filter(prest => prest.id != id)
 }
 
 
@@ -1417,7 +1418,7 @@ export const SUPPRIMER_SIGNATURE = (state, id)=> {
 
 // get all type acte effet financier
 
-export const GET_ALL_TYPE_ACTE_EFFET_FINANCIER = (state, tableau_type_acte_effet_financier) =>{
+export const GET_ALL_TYPE_ACTE_EFFET_FINANCIER = (state, tableau_type_acte_effet_financier) => {
     state.typeActeEffetFinanciers = tableau_type_acte_effet_financier
 }
 
@@ -1428,10 +1429,10 @@ export const AJOUTER_TYPE_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
 }
 
 // update type acte effet financier
-export const MODIFIER_TYPE_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
+export const MODIFIER_TYPE_ACTE_EFFET_FINANCIER = (state, elementModif) => {
     state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1440,13 +1441,13 @@ export const MODIFIER_TYPE_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
 
 // delete type acte efffet financier
 
-export const SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER = (state, id)=> {
-    state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER = (state, id) => {
+    state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.filter(prest => prest.id != id)
 }
 
 
 // get type analyse
-export const GET_TYPE_ANALYSE = (state, tableau_type_analyse) =>{
+export const GET_TYPE_ANALYSE = (state, tableau_type_analyse) => {
     state.typeAnalyses = tableau_type_analyse
 }
 
@@ -1458,10 +1459,10 @@ export const AJOUTER_TYPE_ANALYSE = (state, elementAjouter) => {
 
 
 // update type analyse
-export const MODIFIER_TYPE_ANALYSE = (state, elementModif)=>{
+export const MODIFIER_TYPE_ANALYSE = (state, elementModif) => {
     state.typeAnalyses = state.typeAnalyses.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1470,15 +1471,15 @@ export const MODIFIER_TYPE_ANALYSE = (state, elementModif)=>{
 
 // delete type analyse 
 
-export const SUPPRIMER_TYPE_ANALYSE = (state, id)=> {
-    state.typeAnalyses = state.typeAnalyses.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_ANALYSE = (state, id) => {
+    state.typeAnalyses = state.typeAnalyses.filter(prest => prest.id != id)
 }
 
 
 
 
 // get all type unite administrative
-export const GET_TYPE_UA = (state, tableau_type_ua) =>{
+export const GET_TYPE_UA = (state, tableau_type_ua) => {
     state.typeUa = tableau_type_ua
 }
 
@@ -1489,10 +1490,10 @@ export const AJOUTER_TYPE_UA = (state, elementAjouter) => {
 }
 
 // update type unite administrative
-export const MODIFIER_TYPE_UA = (state, elementModif)=>{
+export const MODIFIER_TYPE_UA = (state, elementModif) => {
     state.typeUa = state.typeUa.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1500,12 +1501,12 @@ export const MODIFIER_TYPE_UA = (state, elementModif)=>{
 
 // delete type unite administrative
 
-export const SUPPRIMER_TYPE_UA = (state, id)=> {
-    state.typeUa = state.typeUa.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_UA = (state, id) => {
+    state.typeUa = state.typeUa.filter(prest => prest.id != id)
 }
 
 // get all unite administrative
-export const GET_ALL_UNITE_ADMINISTRATIVE = (state, tableau_unite_administrative) =>{
+export const GET_ALL_UNITE_ADMINISTRATIVE = (state, tableau_unite_administrative) => {
     state.uniteAdministratives = tableau_unite_administrative
 }
 
@@ -1517,10 +1518,10 @@ export const AJOUTER_UNITE_ADMINISTRATIVE = (state, elementAjouter) => {
 
 
 // update unite administrative
-export const MODIFIER_UNITE_ADMINISTRATIVE = (state, elementModif)=>{
+export const MODIFIER_UNITE_ADMINISTRATIVE = (state, elementModif) => {
     state.uniteAdministratives = state.uniteAdministratives.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1529,8 +1530,8 @@ export const MODIFIER_UNITE_ADMINISTRATIVE = (state, elementModif)=>{
 
 // delete unite administrative
 
-export const SUPPRIMER_UNITE_ADMINISTRATIVE = (state, id)=> {
-    state.uniteAdministratives = state.uniteAdministratives.filter(prest => prest.id !=id)
+export const SUPPRIMER_UNITE_ADMINISTRATIVE = (state, id) => {
+    state.uniteAdministratives = state.uniteAdministratives.filter(prest => prest.id != id)
 }
 
 
@@ -1541,7 +1542,7 @@ export const SUPPRIMER_UNITE_ADMINISTRATIVE = (state, id)=> {
 
 // get all unite de zone 
 
-export const GET_ALL_UNITE_ZONE = (state, tableau_unite_zone) =>{
+export const GET_ALL_UNITE_ZONE = (state, tableau_unite_zone) => {
     state.uniteZones = tableau_unite_zone
 }
 
@@ -1553,10 +1554,10 @@ export const AJOUTER_UNITE_ZONE = (state, elementAjouter) => {
 
 
 // update unite zone
-export const MODIFIER_UNITE_ZONE = (state, elementModif)=>{
+export const MODIFIER_UNITE_ZONE = (state, elementModif) => {
     state.uniteZones = state.uniteZones.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1565,15 +1566,15 @@ export const MODIFIER_UNITE_ZONE = (state, elementModif)=>{
 
 // delete unite zone
 
-export const SUPPRIMER_UNITE_ZONE = (state, id)=> {
-    state.uniteZones = state.uniteZones.filter(prest => prest.id !=id)
+export const SUPPRIMER_UNITE_ZONE = (state, id) => {
+    state.uniteZones = state.uniteZones.filter(prest => prest.id != id)
 }
 
 
 /// la mutation pour la ligne budgetaire && dossier de candidat
 
 // get all for ligne budgetaire
-export const GET_ALL_LIGNE_BUDGETAIRE = (state, tableau_ligne_budgetaire) =>{
+export const GET_ALL_LIGNE_BUDGETAIRE = (state, tableau_ligne_budgetaire) => {
     state.ligneBudgetaires = tableau_ligne_budgetaire
 }
 
@@ -1585,10 +1586,10 @@ export const AJOUTER_LIGNE_BUDGETAIRE = (state, elementAjouter) => {
 
 // update all for ligne budgetaire
 
-export const MODIFIER_LIGNE_BUDGETAIRE = (state, elementModif)=>{
+export const MODIFIER_LIGNE_BUDGETAIRE = (state, elementModif) => {
     state.ligneBudgetaires = state.ligneBudgetaires.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1597,13 +1598,13 @@ export const MODIFIER_LIGNE_BUDGETAIRE = (state, elementModif)=>{
 
 // delete all for ligne budgetaire
 
-export const SUPPRIMER_LIGNE_BUDGETAIRE = (state, id)=> {
-    state.ligneBudgetaires = state.ligneBudgetaires.filter(prest => prest.id !=id)
+export const SUPPRIMER_LIGNE_BUDGETAIRE = (state, id) => {
+    state.ligneBudgetaires = state.ligneBudgetaires.filter(prest => prest.id != id)
 }
 
 
 // get all for liste dossier candidat
-export const GET_DOSSIER_CANDIDAT = (state, tableau_liste_dossier_candidat) =>{
+export const GET_DOSSIER_CANDIDAT = (state, tableau_liste_dossier_candidat) => {
     state.DossierCandidats = tableau_liste_dossier_candidat
 }
 
@@ -1615,10 +1616,10 @@ export const AJOUTER_DOSSIER_CANDIDAT = (state, elementAjouter) => {
 
 
 // update all for liste dossier candidat
-export const MODIFIER_DOSSIER_CANDIDAT = (state, elementModif)=>{
+export const MODIFIER_DOSSIER_CANDIDAT = (state, elementModif) => {
     state.DossierCandidats = state.DossierCandidats.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1627,15 +1628,15 @@ export const MODIFIER_DOSSIER_CANDIDAT = (state, elementModif)=>{
 
 // delete fopr liste dossier candidat
 
-export const SUPPRIMER_DOSSIER_CANDIDAT = (state, id)=> {
-    state.DossierCandidats = state.DossierCandidats.filter(prest => prest.id !=id)
+export const SUPPRIMER_DOSSIER_CANDIDAT = (state, id) => {
+    state.DossierCandidats = state.DossierCandidats.filter(prest => prest.id != id)
 }
 
 
 
 // get all for livrable
 
-export const GET_ALL_LIVRABLE = (state, tableau_livrable) =>{
+export const GET_ALL_LIVRABLE = (state, tableau_livrable) => {
     state.livrables = tableau_livrable
 }
 
@@ -1646,10 +1647,10 @@ export const AJOUTER_LIVRABLE = (state, elementAjouter) => {
 }
 
 // update for livrable
-export const MODIFIER_LIVRABLE = (state, elementModif)=>{
+export const MODIFIER_LIVRABLE = (state, elementModif) => {
     state.livrables = state.livrables.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1658,8 +1659,8 @@ export const MODIFIER_LIVRABLE = (state, elementModif)=>{
 
 // delete the livrable
 
-export const SUPPRIMER_LIVRABLE = (state, id)=> {
-    state.livrables = state.livrables.filter(prest => prest.id !=id)
+export const SUPPRIMER_LIVRABLE = (state, id) => {
+    state.livrables = state.livrables.filter(prest => prest.id != id)
 }
 
 
@@ -1693,7 +1694,7 @@ export const SUPPRIMER_LIVRABLE = (state, id)=> {
 // }
 
 // get all zone geographique
-export const GET_ALL_ZONE_GEOGRAPHIQUE = (state, tableau_zone_geographique) =>{
+export const GET_ALL_ZONE_GEOGRAPHIQUE = (state, tableau_zone_geographique) => {
     state.zoneGeographiques = tableau_zone_geographique
 }
 
@@ -1704,10 +1705,10 @@ export const AJOUTER_ZONE_GEOGRAPHIQUE = (state, elementAjouter) => {
 }
 
 // update zone geographique
-export const MODIFIER_ZONE_GEOGRAPHIQUE = (state, elementModif)=>{
+export const MODIFIER_ZONE_GEOGRAPHIQUE = (state, elementModif) => {
     state.zoneGeographiques = state.zoneGeographiques.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1715,12 +1716,12 @@ export const MODIFIER_ZONE_GEOGRAPHIQUE = (state, elementModif)=>{
 
 // delete zone geographique
 
-export const SUPPRIMER_ZONE_GEOGRAPHIQUE = (state, id)=> {
-    state.zoneGeographiques = state.zoneGeographiques.filter(prest => prest.id !=id)
+export const SUPPRIMER_ZONE_GEOGRAPHIQUE = (state, id) => {
+    state.zoneGeographiques = state.zoneGeographiques.filter(prest => prest.id != id)
 }
 
 // get all type text juridique
-export const GET_ALL_TYPE_TEXT_JURIDIQUE = (state, tableau_type_text_juridique) =>{
+export const GET_ALL_TYPE_TEXT_JURIDIQUE = (state, tableau_type_text_juridique) => {
     state.typeTextJuridiques = tableau_type_text_juridique
 }
 
@@ -1733,10 +1734,10 @@ export const AJOUTER_TYPE_TEXT_JURIDIQUE = (state, elementAjouter) => {
 
 
 // update type text juridique
-export const MODIFIER_TYPE_TEXT_JURIDIQUE = (state, elementModif)=>{
+export const MODIFIER_TYPE_TEXT_JURIDIQUE = (state, elementModif) => {
     state.typeTextJuridiques = state.typeTextJuridiques.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1745,15 +1746,15 @@ export const MODIFIER_TYPE_TEXT_JURIDIQUE = (state, elementModif)=>{
 
 // delete type text juridique
 
-export const SUPPRIMER_TYPE_TEXT_JURIDIQUE = (state, id)=> {
-    state.typeTextJuridiques = state.typeTextJuridiques.filter(prest => prest.id !=id)
+export const SUPPRIMER_TYPE_TEXT_JURIDIQUE = (state, id) => {
+    state.typeTextJuridiques = state.typeTextJuridiques.filter(prest => prest.id != id)
 }
 
 
 
 // get all realite service faire
 
-export const GET_REALITE_SERVICE_FAIT = (state, tableau_realite_service_fait) =>{
+export const GET_REALITE_SERVICE_FAIT = (state, tableau_realite_service_fait) => {
     state.realiteServiceFaits = tableau_realite_service_fait
 }
 
@@ -1765,10 +1766,10 @@ export const AJOUTER_REALITE_SERVICE_FAIT = (state, elementAjouter) => {
 
 
 // update of realite service fait
-export const MODIFIER_REALITE_SERVICE_FAIT = (state, elementModif)=>{
+export const MODIFIER_REALITE_SERVICE_FAIT = (state, elementModif) => {
     state.realiteServiceFaits = state.realiteServiceFaits.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1777,8 +1778,8 @@ export const MODIFIER_REALITE_SERVICE_FAIT = (state, elementModif)=>{
 
 // delete the realite service fait
 
-export const SUPPRIMER_REALITE_SERVICE_FAIT = (state, id)=> {
-    state.realiteServiceFaits = state.realiteServiceFaits.filter(prest => prest.id !=id)
+export const SUPPRIMER_REALITE_SERVICE_FAIT = (state, id) => {
+    state.realiteServiceFaits = state.realiteServiceFaits.filter(prest => prest.id != id)
 }
 
 
@@ -1788,7 +1789,7 @@ export const SUPPRIMER_REALITE_SERVICE_FAIT = (state, id)=> {
 
 
 
-export const GET_TEXTJURIDIQUE = (state, tableau_text_juridique) =>{
+export const GET_TEXTJURIDIQUE = (state, tableau_text_juridique) => {
     state.text_juridiques = tableau_text_juridique
 }
 
@@ -1800,10 +1801,10 @@ export const AJOUTER_TEXT_JURIDIQUE = (state, elementAjouter) => {
 
 
 // update of realite service fait
-export const MODIFIER_TEXT_JURIDIQUE = (state, elementModif)=>{
+export const MODIFIER_TEXT_JURIDIQUE = (state, elementModif) => {
     state.text_juridiques = state.text_juridiques.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1812,15 +1813,15 @@ export const MODIFIER_TEXT_JURIDIQUE = (state, elementModif)=>{
 
 // delete the realite service fait
 
-export const SUPPRIMER_TEXT_JURIDIQUE = (state, id)=> {
-    state.text_juridiques = state.text_juridiques.filter(text => text.id !=id)
+export const SUPPRIMER_TEXT_JURIDIQUE = (state, id) => {
+    state.text_juridiques = state.text_juridiques.filter(text => text.id != id)
 }
 
 
 
 // autre text juridique
 
-export const GET_AUTRE_TEXT_JURIDIQUE = (state, tableau_autre_text_juridique) =>{
+export const GET_AUTRE_TEXT_JURIDIQUE = (state, tableau_autre_text_juridique) => {
     state.autresTexteJuridiques = tableau_autre_text_juridique
 }
 
@@ -1832,17 +1833,17 @@ export const AJOUTER_AUTRE_TEXT_JURIDIQUE = (state, elementAjouter) => {
 
 
 // update of realite service fait
-export const MODIFIER_AUTRE_TEXT_JURIDIQUE = (state, elementModif)=>{
+export const MODIFIER_AUTRE_TEXT_JURIDIQUE = (state, elementModif) => {
     state.autresTexteJuridiques = state.autresTexteJuridiques.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
-    state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id) => {
+    state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id != id)
 }
 
 
@@ -1853,7 +1854,7 @@ export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
 SUPPRIMER_TYPE_TEXT_JURIDIQUE
 /*Mutation lettre d'invitation*/
 
-export const GET_LETTRE_INVITATION = (state, tableau_autre_text_juridique) =>{
+export const GET_LETTRE_INVITATION = (state, tableau_autre_text_juridique) => {
     state.lettreInvitation = tableau_autre_text_juridique
 }
 
@@ -1863,22 +1864,22 @@ export const AJOUTER_LETTRE_INVITATION = (state, elementAjouter) => {
 
 
 
-export const MODIFIER_LETTRE_INVITATION = (state, elementModif)=>{
+export const MODIFIER_LETTRE_INVITATION = (state, elementModif) => {
     state.lettreInvitation = state.lettreInvitation.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_LETTRE_INVITATION = (state, id)=> {
-    state.mandate = state.mandate.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_LETTRE_INVITATION = (state, id) => {
+    state.mandate = state.mandate.filter(autreText => autreText.id != id)
 }
 /*fin Mutation lettre d'invitation*/
 
 /*Mandate mutation*/
-export const GET_MANDATER = (state, tableau_autre_text_juridique) =>{
+export const GET_MANDATER = (state, tableau_autre_text_juridique) => {
     state.mandate = tableau_autre_text_juridique
 }
 
@@ -1888,23 +1889,23 @@ export const AJOUTER_MANDATER = (state, elementAjouter) => {
 
 
 
-export const MODIFIER_MANDATER = (state, elementModif)=>{
+export const MODIFIER_MANDATER = (state, elementModif) => {
     state.mandate = state.mandate.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_MANDATER= (state, id)=> {
-    state.mandate = state.mandate.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_MANDATER = (state, id) => {
+    state.mandate = state.mandate.filter(autreText => autreText.id != id)
 }
 /*Fin mandate mutation*/
 
 
 /*Mandate demande ano*/
-export const GET_DEMANDE_ANO = (state, tableau_autre_text_juridique) =>{
+export const GET_DEMANDE_ANO = (state, tableau_autre_text_juridique) => {
     state.stateDemandeAno = tableau_autre_text_juridique
 }
 
@@ -1914,23 +1915,23 @@ export const AJOUTER_DEMANDE_ANO = (state, elementAjouter) => {
 
 
 
-export const MODIFIER_DEMANDE_ANO= (state, elementModif)=>{
+export const MODIFIER_DEMANDE_ANO = (state, elementModif) => {
     state.stateDemandeAno = state.stateDemandeAno.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_DEMANDE_ANO= (state, id)=> {
-    state.stateDemandeAno = state.stateDemandeAno.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_DEMANDE_ANO = (state, id) => {
+    state.stateDemandeAno = state.stateDemandeAno.filter(autreText => autreText.id != id)
 }
 /*Fin ano mutation*/
 
 
 /*Mandate demande ano*/
-export const GET_ANALYSE_DMP = (state, tableau_autre_text_juridique) =>{
+export const GET_ANALYSE_DMP = (state, tableau_autre_text_juridique) => {
     state.analyseDMP = tableau_autre_text_juridique
 }
 
@@ -1941,25 +1942,25 @@ export const AJOUTER_ANALYSE_DMP = (state, elementAjouter) => {
 
 
 
-export const MODIFIER_ANALYSE_DMP= (state, elementModif)=>{
+export const MODIFIER_ANALYSE_DMP = (state, elementModif) => {
 
     state.analyseDMP = state.analyseDMP.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_ANALYSE_DMP= (state, id)=> {
-    state.analyseDMP = state.analyseDMP.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_ANALYSE_DMP = (state, id) => {
+    state.analyseDMP = state.analyseDMP.filter(autreText => autreText.id != id)
 }
 /*Fin ano mutation*/
 
 
 
 /*Muttation ano DMP Bailleur*/
-export const GET_ANO_DMP_BAILLEUR = (state, tableau_autre_text_juridique) =>{
+export const GET_ANO_DMP_BAILLEUR = (state, tableau_autre_text_juridique) => {
     state.stateAnoDmpBailleur = tableau_autre_text_juridique
 }
 
@@ -1969,17 +1970,17 @@ export const AJOUTER_ANO_DMP_BAILLEUR = (state, elementAjouter) => {
 
 
 
-export const MODIFIER_ANO_DMP_BAILLEUR= (state, elementModif)=>{
+export const MODIFIER_ANO_DMP_BAILLEUR = (state, elementModif) => {
     state.stateAnoDmpBailleur = state.stateAnoDmpBailleur.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_ANO_DMP_BAILLEUR= (state, id)=> {
-    state.stateAnoDmpBailleur = state.stateAnoDmpBailleur.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_ANO_DMP_BAILLEUR = (state, id) => {
+    state.stateAnoDmpBailleur = state.stateAnoDmpBailleur.filter(autreText => autreText.id != id)
 }
 /*Fin ano dmpBailleur mutation*/
 
@@ -2045,7 +2046,7 @@ export const MODIFIER_MONTANT_BUDGET = (state, objet) => {
     state.budgetGeneral = state.budgetGeneral.map(besoinRealise => {
         if (besoinRealise.id == objet.id) {
             besoinRealise.Dotation_Initiale = objet.montant_actuel;
-           
+
         }
 
         return besoinRealise;
@@ -2127,7 +2128,7 @@ export const SUPPRIMER_TYPE_CANDADIT = (state, id) => {
 
 
 // get all type text juridique
-export const GET_ALL_PAYS = (state, tableau_type_text_juridique) =>{
+export const GET_ALL_PAYS = (state, tableau_type_text_juridique) => {
     state.pays = tableau_type_text_juridique
 }
 
@@ -2140,34 +2141,34 @@ export const AJOUTER_PAYS = (state, elementAjouter) => {
 
 
 // update pays
-export const MODIFIER_PAYS = (state, elementModif)=>{
-   
-state.pays = state.pays.map(pay =>{
-    if(pay.id == elementModif.id){
-        pay = {...elementModif}
-    }
-    return pay
-})
+export const MODIFIER_PAYS = (state, elementModif) => {
+
+    state.pays = state.pays.map(pay => {
+        if (pay.id == elementModif.id) {
+            pay = { ...elementModif }
+        }
+        return pay
+    })
 
 
 }
 
 
 
-export const GET_ALL_BAILLEUR_MARCHE = (state, tableau_prestation) =>{
+export const GET_ALL_BAILLEUR_MARCHE = (state, tableau_prestation) => {
     state.bailleurMarche = tableau_prestation
 }
 
 
-export const AJOUTER_BAILLEUR_MARCHE= (state, elementAjouter) => {
+export const AJOUTER_BAILLEUR_MARCHE = (state, elementAjouter) => {
     state.bailleurMarche.unshift(elementAjouter)
 }
 
-export const MODIFIER_BAILLEUR_MARCHE = (state, elementModif)=>{
+export const MODIFIER_BAILLEUR_MARCHE = (state, elementModif) => {
     state.bailleurMarche = state.bailleurMarche.map(response => {
 
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -2176,8 +2177,8 @@ export const MODIFIER_BAILLEUR_MARCHE = (state, elementModif)=>{
 
 // delete type text juridique
 
-export const SUPPRIMER_PAYS = (state, id)=> {
-    state.pays = state.pays.filter(prest => prest.id !=id)
+export const SUPPRIMER_PAYS = (state, id) => {
+    state.pays = state.pays.filter(prest => prest.id != id)
 }
 
 
@@ -2244,8 +2245,8 @@ export const SUPPRIMER_COMMUNES = (state, id) => {
     state.communes = state.communes.filter(prest => prest.id != id)
 }
 
-export const DELETE_BAILLEUR_MARCHE = (state, id)=> {
-    state.bailleurMarche = state.bailleurMarche.filter(prest => prest.id !=id)
+export const DELETE_BAILLEUR_MARCHE = (state, id) => {
+    state.bailleurMarche = state.bailleurMarche.filter(prest => prest.id != id)
 }
 
 
@@ -2261,7 +2262,7 @@ export const GET_ALL_CHOIX_PROCEDURE = (state, tableau_type_text_juridique) => {
 
 
 /* Mutation membre cojo**/
-export const GET_MEMBRE_COJO = (state, tableau_autre_text_juridique) =>{
+export const GET_MEMBRE_COJO = (state, tableau_autre_text_juridique) => {
     state.membre_cojo = tableau_autre_text_juridique
 }
 
@@ -2271,49 +2272,49 @@ export const AJOUTER_MEMBRE_COJO = (state, elementAjouter) => {
 
 
 
-export const MODIFIER_MEMBRE_COJO= (state, elementModif)=>{
+export const MODIFIER_MEMBRE_COJO = (state, elementModif) => {
     state.membre_cojo = state.membre_cojo.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_MEMBRE_COJO= (state, id)=> {
-    state.membre_cojo = state.membre_cojo.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_MEMBRE_COJO = (state, id) => {
+    state.membre_cojo = state.membre_cojo.filter(autreText => autreText.id != id)
 }
 /**Fin mutation membre cojo**/
 
 
-export const GET_PV= (state, tableau_pv) =>{
+export const GET_PV = (state, tableau_pv) => {
     state.proce_verballe = tableau_pv
 }
 
 export const AJOUTER_PV = (state, elementAjouter) => {
     state.proce_verballe.unshift(elementAjouter)
     //state.analyseDossiers=[]
-    state.analyseDossiers=[]
+    state.analyseDossiers = []
 
 }
 
 
 
 
-export const MODIFIER_PV= (state, elementModif)=>{
+export const MODIFIER_PV = (state, elementModif) => {
     state.proce_verballe = state.proce_verballe.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 
 }
 
-export const SUPPRIMER_PV= (state, id)=> {
-    state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
+export const SUPPRIMER_PV = (state, id) => {
+    state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id != id)
     //state.analyseDossiers=[]
-    state.analyseDossiers=[]
+    state.analyseDossiers = []
 }
 
 
@@ -2383,21 +2384,21 @@ export const DELETE_MODE_PAIEMNT = (state, id) => {
     state.modepaiements = state.modepaiements.filter(prest => prest.id != id)
 }
 
-export const GET_ALL_PLAN_PASSATION_MARCHE = (state, tableau_prestation) =>{
+export const GET_ALL_PLAN_PASSATION_MARCHE = (state, tableau_prestation) => {
     state.plan_passation_marche = tableau_prestation
 }
 
 // add * presttation
 
-export const AJOUTER_PLAN_PASSATION_MARCHE= (state, elementAjouter) => {
+export const AJOUTER_PLAN_PASSATION_MARCHE = (state, elementAjouter) => {
     state.plan_passation_marche.unshift(elementAjouter)
 }
 
 // update all prestation
-export const MODIFIER_PLAN_PASSATION_MARCHE= (state, elementModif)=>{
+export const MODIFIER_PLAN_PASSATION_MARCHE = (state, elementModif) => {
     state.plan_passation_marche = state.plan_passation_marche.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -2408,14 +2409,14 @@ export const MODIFIER_PLAN_PASSATION_MARCHE= (state, elementModif)=>{
 
 // delete all prestation
 
-export const DELETE_PLAN_PASSATION_MARCHE = (state, id)=> {
-    state.plan_passation_marche = state.plan_passation_marche.filter(prest => prest.id !=id)
+export const DELETE_PLAN_PASSATION_MARCHE = (state, id) => {
+    state.plan_passation_marche = state.plan_passation_marche.filter(prest => prest.id != id)
 }
 
 
 
 
-export const GET_ECHEANCES = (state, tableau_prestation) =>{
+export const GET_ECHEANCES = (state, tableau_prestation) => {
     state.echeances = tableau_prestation
 }
 
@@ -2426,10 +2427,10 @@ export const AJOUTER_ECHEANCES = (state, elementAjouter) => {
 }
 
 // update all prestation
-export const MODIFIER_ECHEANCES = (state, elementModif)=>{
+export const MODIFIER_ECHEANCES = (state, elementModif) => {
     state.echeances = state.echeances.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -2439,14 +2440,14 @@ export const MODIFIER_ECHEANCES = (state, elementModif)=>{
 
 // delete all prestation
 
-export const DELETE_ECHEANCES = (state, id)=> {
-    state.echeances = state.echeances.filter(prest => prest.id !=id)
+export const DELETE_ECHEANCES = (state, id) => {
+    state.echeances = state.echeances.filter(prest => prest.id != id)
 }
 
 
 
 /**Loading marche**/
-export const LOADING_MARCHE = (state, value)=> {
+export const LOADING_MARCHE = (state, value) => {
     state.loading_marche = value
 }
 
@@ -2460,20 +2461,20 @@ export const PUSHER_IMAGE_MARCHE = (state, elementAjouter) => {
     state.image_marche.unshift(elementAjouter)
 }
 
-export const GET_IMAGE_MARCHE = (state, tableau_prestation) =>{
+export const GET_IMAGE_MARCHE = (state, tableau_prestation) => {
     state.image_marche = tableau_prestation
 }
 
 
-export const AJOUTER_IMAGE_MARCHE  = (state, elementAjouter) => {
+export const AJOUTER_IMAGE_MARCHE = (state, elementAjouter) => {
     state.image_marche.unshift(elementAjouter)
 }
 
 // update all prestation
-export const MODIFIER_IMAGE_MARCHE  = (state, elementModif)=>{
+export const MODIFIER_IMAGE_MARCHE = (state, elementModif) => {
     state.image_marche = state.image_marche.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -2483,159 +2484,159 @@ export const MODIFIER_IMAGE_MARCHE  = (state, elementModif)=>{
 
 // delete all prestation
 
-export const DELETE_IMAGE_MARCHE  = (state, id)=> {
-    state.image_marche = state.image_marche.filter(prest => prest.id !=id)
+export const DELETE_IMAGE_MARCHE = (state, id) => {
+    state.image_marche = state.image_marche.filter(prest => prest.id != id)
 }
 
 
-export const GET_ALL_TYPE_ORDRE_PAIEMENT = (state, tableau_typeordre) =>{
+export const GET_ALL_TYPE_ORDRE_PAIEMENT = (state, tableau_typeordre) => {
     state.typeOrdrePaiement = tableau_typeordre
-   }
-   
-   export const AJOUTER_TYPE_ORDRE_PAIEMENT = (state, elementAjout) =>{
-       state.typeOrdrePaiement.unshift(elementAjout)
-   }
-   
-   export const MODIFIER_TYPE_ORDRE_PAIEMENT = (state, elementModifie) =>{
-       state.typeOrdrePaiement = state.typeOrdrePaiement.map(item =>{
-           if(item.id == elementModifie.id){
-               item = {...elementModifie}
-           }
-           return item
-       })
-   }
-   
-   export const SUPPRIMER_TYPE_ORDRE_PAIEMENT = (state, id) =>{
-       state.typeOrdrePaiement = state.typeOrdrePaiement.filter(response => response.id!=id)
-   }
+}
+
+export const AJOUTER_TYPE_ORDRE_PAIEMENT = (state, elementAjout) => {
+    state.typeOrdrePaiement.unshift(elementAjout)
+}
+
+export const MODIFIER_TYPE_ORDRE_PAIEMENT = (state, elementModifie) => {
+    state.typeOrdrePaiement = state.typeOrdrePaiement.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_TYPE_ORDRE_PAIEMENT = (state, id) => {
+    state.typeOrdrePaiement = state.typeOrdrePaiement.filter(response => response.id != id)
+}
 
 
-   // mutation pour le reserve du cf
+// mutation pour le reserve du cf
 
-   
-export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
+
+export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) => {
     state.reserve_cf = tableau_reserve_cf
-   }
-   
-   export const AJOUTER_RESERVE_CF = (state, elementAjout) =>{
-       state.reserve_cf.unshift(elementAjout)
-   }
-   
-   export const MODIFIER_RESERVE_CF = (state, elementModifie) =>{
-       state.reserve_cf = state.reserve_cf.map(item =>{
-           if(item.id == elementModifie.id){
-               item = {...elementModifie}
-           }
-           return item
-       })
-   }
-   
-   export const SUPRIMER_RESERVE_CF = (state, id) =>{
-       state.reserve_cf = state.reserve_cf.filter(response => response.id!=id)
-   }
+}
+
+export const AJOUTER_RESERVE_CF = (state, elementAjout) => {
+    state.reserve_cf.unshift(elementAjout)
+}
+
+export const MODIFIER_RESERVE_CF = (state, elementModifie) => {
+    state.reserve_cf = state.reserve_cf.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
+        }
+        return item
+    })
+}
+
+export const SUPRIMER_RESERVE_CF = (state, id) => {
+    state.reserve_cf = state.reserve_cf.filter(response => response.id != id)
+}
 
 
-   // mutation pour arnmp 
+// mutation pour arnmp 
 
-   export const GET_ALL_ARNP = (state, tableau_arnmp) =>{
+export const GET_ALL_ARNP = (state, tableau_arnmp) => {
     state.arnmps = tableau_arnmp
-   }
-   
-   export const AJOUTER_ARNMP = (state, elementAjout) =>{
-       state.arnmps.unshift(elementAjout)
-   }
-   
-   export const MODIFIER_ARNMP = (state, elementModifie) =>{
-       state.arnmps = state.arnmps.map(item =>{
-           if(item.id == elementModifie.id){
-               item = {...elementModifie}
-           }
-           return item
-       })
-   }
-   
-   export const SUPPRIMER_ARNMP = (state, id) =>{
-       state.arnmps = state.arnmps.filter(response => response.id!=id)
-   }
+}
+
+export const AJOUTER_ARNMP = (state, elementAjout) => {
+    state.arnmps.unshift(elementAjout)
+}
+
+export const MODIFIER_ARNMP = (state, elementModifie) => {
+    state.arnmps = state.arnmps.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_ARNMP = (state, id) => {
+    state.arnmps = state.arnmps.filter(response => response.id != id)
+}
 
 
-   ///
+///
 
 
-   
-   export const GET_ALL_ORGANE_DECISION = (state, tableau_organe_decision) =>{
+
+export const GET_ALL_ORGANE_DECISION = (state, tableau_organe_decision) => {
     state.organes_decision = tableau_organe_decision
-   }
-   
-   export const AJOUTER_ORGANE_DECISION = (state, elementAjout) =>{
-       state.organes_decision.unshift(elementAjout)
-   }
-   
-   export const MODIFIER_ORGANE_DECISION = (state, elementModifie) =>{
-       state.organes_decision = state.organes_decision.map(item =>{
-           if(item.id == elementModifie.id){
-               item = {...elementModifie}
-           }
-           return item
-       })
-   }
-   
-   export const SUPPRIMER_ORGANE_DECISION = (state, id) =>{
-       state.organes_decision = state.organes_decision.filter(response => response.id!=id)
-   }
+}
+
+export const AJOUTER_ORGANE_DECISION = (state, elementAjout) => {
+    state.organes_decision.unshift(elementAjout)
+}
+
+export const MODIFIER_ORGANE_DECISION = (state, elementModifie) => {
+    state.organes_decision = state.organes_decision.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_ORGANE_DECISION = (state, id) => {
+    state.organes_decision = state.organes_decision.filter(response => response.id != id)
+}
 
 
 
-   
-   
-   export const GET_ALL_NATURE_PRIX = (state, tableau_nature_prix) =>{
+
+
+export const GET_ALL_NATURE_PRIX = (state, tableau_nature_prix) => {
     state.nature_prix = tableau_nature_prix
-   }
-   
-   export const AJOUTER_NATURE_PRIX = (state, elementAjout) =>{
-       state.nature_prix.unshift(elementAjout)
-   }
-   
-   export const MODIFIER_NATURE_PRIX = (state, elementModifie) =>{
-       state.nature_prix = state.nature_prix.map(item =>{
-           if(item.id == elementModifie.id){
-               item = {...elementModifie}
-           }
-           return item
-       })
-   }
-   
-   export const SUPPRIMER_NATURE_PRIX = (state, id) =>{
-       state.nature_prix = state.nature_prix.filter(response => response.id!=id)
-   }
+}
+
+export const AJOUTER_NATURE_PRIX = (state, elementAjout) => {
+    state.nature_prix.unshift(elementAjout)
+}
+
+export const MODIFIER_NATURE_PRIX = (state, elementModifie) => {
+    state.nature_prix = state.nature_prix.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_NATURE_PRIX = (state, id) => {
+    state.nature_prix = state.nature_prix.filter(response => response.id != id)
+}
 
 
-   
-   
-   export const GET_ALL_MOTIF_PASSATION = (state, tableau_motif_passation) =>{
+
+
+export const GET_ALL_MOTIF_PASSATION = (state, tableau_motif_passation) => {
     state.motif_passations = tableau_motif_passation
-   }
-   
-   export const AJOUTER_MOTIF_PASSATION = (state, elementAjout) =>{
-       state.motif_passations.unshift(elementAjout)
-   }
-   
-   export const MODIFIER_MOTIF_PASSATION = (state, elementModifie) =>{
-       state.motif_passations = state.motif_passations.map(item =>{
-           if(item.id == elementModifie.id){
-               item = {...elementModifie}
-           }
-           return item
-       })
-   }
-   
-   export const SUPPRIMER_MOTIF_PASSATION = (state, id) =>{
-       state.motif_passations = state.motif_passations.filter(response => response.id!=id)
-   }
+}
+
+export const AJOUTER_MOTIF_PASSATION = (state, elementAjout) => {
+    state.motif_passations.unshift(elementAjout)
+}
+
+export const MODIFIER_MOTIF_PASSATION = (state, elementModifie) => {
+    state.motif_passations = state.motif_passations.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_MOTIF_PASSATION = (state, id) => {
+    state.motif_passations = state.motif_passations.filter(response => response.id != id)
+}
 
 
 
-   export const MODIFIER_ACTE = (state, elementModif) => {
+export const MODIFIER_ACTE = (state, elementModif) => {
     state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
         if (response.id == elementModif.id) {
             response = { ...elementModif }
@@ -2644,12 +2645,12 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
     })
 }
 
-export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
+export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state, objet) => {
     state.marcheFiltreCarteInfrastructure = objet
 }
 
 
-export const GET_INFORMATION_FILTRE_CARTE = (state, objet) =>{
+export const GET_INFORMATION_FILTRE_CARTE = (state, objet) => {
     state.informationFiltreCarteInfrastructure = objet
 }
 /**
@@ -2661,11 +2662,11 @@ export const GET_INFORMATION_FILTRE_CARTE = (state, objet) =>{
  */
 
 
-export const GET_TABLEAU_BORD_FILTRE = (state, objet) =>{
+export const GET_TABLEAU_BORD_FILTRE = (state, objet) => {
     state.tableauBordFilter = objet
 }
 
-export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
+export const GET_INFO_TABLEAU_BORD = (state, objet) => {
     state.infoFiltreTableauBord = objet
 }
 
@@ -2674,25 +2675,25 @@ export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
  * Structure DAO
  */
 
-export const GET_STRUCTURE_DAO= (state, tableau_motif_passation) =>{
+export const GET_STRUCTURE_DAO = (state, tableau_motif_passation) => {
     state.structure_daos = tableau_motif_passation
 }
 
-export const AJOUTER_STRUCTURE_DAO = (state, elementAjout) =>{
+export const AJOUTER_STRUCTURE_DAO = (state, elementAjout) => {
     state.structure_daos.unshift(elementAjout)
 }
 
-export const MODIFIER_STRUCTURE_DAO = (state, elementModifie) =>{
-    state.structure_daos = state.structure_daos.map(item =>{
-        if(item.id == elementModifie.id){
-            item = {...elementModifie}
+export const MODIFIER_STRUCTURE_DAO = (state, elementModifie) => {
+    state.structure_daos = state.structure_daos.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
 }
 
-export const SUPPRIMER_STRUCTURE_DAO = (state, id) =>{
-    state.structure_daos = state.structure_daos.filter(response => response.id!=id)
+export const SUPPRIMER_STRUCTURE_DAO = (state, id) => {
+    state.structure_daos = state.structure_daos.filter(response => response.id != id)
 }
 
 
@@ -2700,25 +2701,25 @@ export const SUPPRIMER_STRUCTURE_DAO = (state, id) =>{
  * Membre comite d'evaluation
  */
 
-export const GET_MEMBRE_COMITE_EVALUATION= (state, tableau_motif_passation) =>{
+export const GET_MEMBRE_COMITE_EVALUATION = (state, tableau_motif_passation) => {
     state.membre_comite_evaluations = tableau_motif_passation
 }
 
-export const AJOUTER_MEMBRE_COMITE_EVALUATION = (state, elementAjout) =>{
+export const AJOUTER_MEMBRE_COMITE_EVALUATION = (state, elementAjout) => {
     state.membre_comite_evaluations.unshift(elementAjout)
 }
 
-export const MODIFIER_MEMBRE_COMITE_EVALUATION = (state, elementModifie) =>{
-    state.membre_comite_evaluations = state.membre_comite_evaluations.map(item =>{
-        if(item.id == elementModifie.id){
-            item = {...elementModifie}
+export const MODIFIER_MEMBRE_COMITE_EVALUATION = (state, elementModifie) => {
+    state.membre_comite_evaluations = state.membre_comite_evaluations.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
 }
 
-export const SUPPRIMER_MEMBRE_COMITE_EVALUATION = (state, id) =>{
-    state.membre_comite_evaluations = state.membre_comite_evaluations.filter(response => response.id!=id)
+export const SUPPRIMER_MEMBRE_COMITE_EVALUATION = (state, id) => {
+    state.membre_comite_evaluations = state.membre_comite_evaluations.filter(response => response.id != id)
 }
 
 
@@ -2728,47 +2729,47 @@ export const SUPPRIMER_MEMBRE_COMITE_EVALUATION = (state, id) =>{
 //
 
 
-export const GET_TACHE_MARCHE= (state, tableau_motif_passation) =>{
+export const GET_TACHE_MARCHE = (state, tableau_motif_passation) => {
     state.TacheMarche = tableau_motif_passation
 }
 
-export const AJOUTER_TACHE_MARCHE = (state, elementAjout) =>{
+export const AJOUTER_TACHE_MARCHE = (state, elementAjout) => {
     state.TacheMarche.unshift(elementAjout)
 }
 
-export const MODIFIER_TACHE_MARCHE = (state, elementModifie) =>{
-    state.TacheMarche = state.TacheMarche.map(item =>{
-        if(item.id == elementModifie.id){
-            item = {...elementModifie}
+export const MODIFIER_TACHE_MARCHE = (state, elementModifie) => {
+    state.TacheMarche = state.TacheMarche.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
 }
 
-export const SUPPRIMER_TACHE_MARCHE = (state, id) =>{
-    state.TacheMarche = state.TacheMarche.filter(response => response.id!=id)
+export const SUPPRIMER_TACHE_MARCHE = (state, id) => {
+    state.TacheMarche = state.TacheMarche.filter(response => response.id != id)
 }
 
 
-export const GET_ENTREPRISE_SOUS_TRAITANCE= (state, tableau_motif_passation) =>{
+export const GET_ENTREPRISE_SOUS_TRAITANCE = (state, tableau_motif_passation) => {
     state.entreprise_soustraitant = tableau_motif_passation
 }
 
-export const AJOUTER_ENTREPRISE_SOUS_TRAITANCE = (state, elementAjout) =>{
+export const AJOUTER_ENTREPRISE_SOUS_TRAITANCE = (state, elementAjout) => {
     state.entreprise_soustraitant.unshift(elementAjout)
 }
 
-export const MODIFIER_ENTREPRISE_SOUS_TRAITANCE = (state, elementModifie) =>{
-    state.entreprise_soustraitant = state.entreprise_soustraitant.map(item =>{
-        if(item.id == elementModifie.id){
-            item = {...elementModifie}
+export const MODIFIER_ENTREPRISE_SOUS_TRAITANCE = (state, elementModifie) => {
+    state.entreprise_soustraitant = state.entreprise_soustraitant.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
 }
 
-export const SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE = (state, id) =>{
-    state.entreprise_soustraitant = state.entreprise_soustraitant.filter(response => response.id!=id)
+export const SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE = (state, id) => {
+    state.entreprise_soustraitant = state.entreprise_soustraitant.filter(response => response.id != id)
 }
 
 
@@ -2778,25 +2779,25 @@ export const SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE = (state, id) =>{
  * @param tableau_motif_passation
  * @constructor
  */
-export const GET_MARCHE_PLURIE_ANNUEL= (state, tableau_motif_passation) =>{
+export const GET_MARCHE_PLURIE_ANNUEL = (state, tableau_motif_passation) => {
     state.programmationMarchePlurieAnnuel = tableau_motif_passation
 }
 
-export const AJOUTER_MARCHE_PLURIE_ANNUEL = (state, elementAjout) =>{
+export const AJOUTER_MARCHE_PLURIE_ANNUEL = (state, elementAjout) => {
     state.programmationMarchePlurieAnnuel.unshift(elementAjout)
 }
 
-export const MODIFIER_MARCHE_PLURIE_ANNUEL = (state, elementModifie) =>{
-    state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.map(item =>{
-        if(item.id == elementModifie.id){
-            item = {...elementModifie}
+export const MODIFIER_MARCHE_PLURIE_ANNUEL = (state, elementModifie) => {
+    state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
 }
 
-export const SUPPRIMER_MARCHE_PLURIE_ANNUEL = (state, id) =>{
-    state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.filter(response => response.id!=id)
+export const SUPPRIMER_MARCHE_PLURIE_ANNUEL = (state, id) => {
+    state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.filter(response => response.id != id)
 }
 
 
@@ -2804,7 +2805,7 @@ export const SUPPRIMER_MARCHE_PLURIE_ANNUEL = (state, id) =>{
 
 
 
-export const GET_ALL_LIQUIDATION= (state, tableau_document) =>{
+export const GET_ALL_LIQUIDATION = (state, tableau_document) => {
     state.Liquidation = tableau_document
 }
 
@@ -2815,24 +2816,24 @@ export const AJOUTER_LIQUIDATION = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_LIQUIDATION = (state, elementModif)=>{
+export const MODIFIER_LIQUIDATION = (state, elementModif) => {
     state.Liquidation = state.Liquidation.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_LIQUIDATION = (state, id)=> {
-    state.Liquidation = state.Liquidation.filter(prest => prest.id !=id)
+export const SUPPRIMER_LIQUIDATION = (state, id) => {
+    state.Liquidation = state.Liquidation.filter(prest => prest.id != id)
 }
 
 
 
 
 
-export const GET_ALL_MANDAT_OP= (state, tableau_document) =>{
+export const GET_ALL_MANDAT_OP = (state, tableau_document) => {
     state.MandatOp = tableau_document
 }
 
@@ -2843,17 +2844,17 @@ export const AJOUTER_MANDAT_OP = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_MANDAT_OP = (state, elementModif)=>{
+export const MODIFIER_MANDAT_OP = (state, elementModif) => {
     state.MandatOp = state.MandatOp.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_MANDAT_OP = (state, id)=> {
-    state.MandatOp = state.MandatOp.filter(prest => prest.id !=id)
+export const SUPPRIMER_MANDAT_OP = (state, id) => {
+    state.MandatOp = state.MandatOp.filter(prest => prest.id != id)
 }
 
 
@@ -2864,7 +2865,7 @@ export const SUPPRIMER_MANDAT_OP = (state, id)=> {
 
 
 
-export const GET_ALL_FACTURE_PIECE= (state, tableau_document) =>{
+export const GET_ALL_FACTURE_PIECE = (state, tableau_document) => {
     state.facturePiece = tableau_document
 }
 
@@ -2875,17 +2876,17 @@ export const AJOUTER_FACTURE_PIECE = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_FACTURE_PIECE = (state, elementModif)=>{
+export const MODIFIER_FACTURE_PIECE = (state, elementModif) => {
     state.facturePiece = state.facturePiece.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_FACTURE_PIECE = (state, id)=> {
-    state.facturePiece = state.facturePiece.filter(prest => prest.id !=id)
+export const SUPPRIMER_FACTURE_PIECE = (state, id) => {
+    state.facturePiece = state.facturePiece.filter(prest => prest.id != id)
 }
 
 
@@ -2893,7 +2894,7 @@ export const SUPPRIMER_FACTURE_PIECE = (state, id)=> {
 
 
 
-export const GET_ALL_AUTRE_DEPENSE= (state, tableau_document) =>{
+export const GET_ALL_AUTRE_DEPENSE = (state, tableau_document) => {
     state.AutreDepense = tableau_document
 }
 
@@ -2904,23 +2905,23 @@ export const AJOUTER_AUTRE_DEPENSE = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_AUTRE_DEPENSE = (state, elementModif)=>{
+export const MODIFIER_AUTRE_DEPENSE = (state, elementModif) => {
     state.AutreDepense = state.AutreDepense.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_AUTRE_DEPENSE = (state, id)=> {
-    state.AutreDepense = state.AutreDepense.filter(prest => prest.id !=id)
+export const SUPPRIMER_AUTRE_DEPENSE = (state, id) => {
+    state.AutreDepense = state.AutreDepense.filter(prest => prest.id != id)
 }
 
 
 
 
-export const GET_ALL_GESTION_ORDRE_PAIEMENT= (state, tableau_document) =>{
+export const GET_ALL_GESTION_ORDRE_PAIEMENT = (state, tableau_document) => {
     state.gestionOrdrePaiement = tableau_document
 }
 
@@ -2931,17 +2932,17 @@ export const AJOUTER_GESTION_ORDRE_PAIEMENT = (state, elementAjouter) => {
 }
 
 // update all document
-export const MODIFIER_GESTION_ORDRE_PAIEMENT = (state, elementModif)=>{
+export const MODIFIER_GESTION_ORDRE_PAIEMENT = (state, elementModif) => {
     state.gestionOrdrePaiement = state.gestionOrdrePaiement.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
 }
 
-export const SUPPRIMER_GESTION_ORDRE_PAIEMENT = (state, id)=> {
-    state.gestionOrdrePaiement = state.gestionOrdrePaiement.filter(prest => prest.id !=id)
+export const SUPPRIMER_GESTION_ORDRE_PAIEMENT = (state, id) => {
+    state.gestionOrdrePaiement = state.gestionOrdrePaiement.filter(prest => prest.id != id)
 }
 
 
@@ -2949,7 +2950,7 @@ export const SUPPRIMER_GESTION_ORDRE_PAIEMENT = (state, id)=> {
 
 
 
-export const GET_ALL_GESTION_ORDRE_PAIEMENT_ANNULATION= (state, tableau_document) =>{
+export const GET_ALL_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, tableau_document) => {
     state.gestionOrdrePaiementAnnulation = tableau_document
 }
 
@@ -2960,8 +2961,38 @@ export const AJOUTER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementAjouter)
 }
 
 // update all document
-export const MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementModif)=>{
+export const MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementModif) => {
     state.gestionOrdrePaiementAnnulation = state.gestionOrdrePaiementAnnulation.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, id) => {
+    state.gestionOrdrePaiementAnnulation = state.gestionOrdrePaiementAnnulation.filter(prest => prest.id != id)
+}
+
+
+//****************************  gestion des OrdrePaiementRegie*********************** */
+
+
+
+
+export const GET_ALL_SERVICE_REALITE_FAIT_OP= (state, tableau_document) =>{
+    state.ServiceRealiteFaitOp = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_SERVICE_REALITE_FAIT_OP = (state, elementAjouter) => {
+    state.ServiceRealiteFaitOp.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_SERVICE_REALITE_FAIT_OP = (state, elementModif)=>{
+    state.ServiceRealiteFaitOp = state.ServiceRealiteFaitOp.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -2969,11 +3000,34 @@ export const MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementModif)=
     })
 }
 
-export const SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, id)=> {
-    state.gestionOrdrePaiementAnnulation = state.gestionOrdrePaiementAnnulation.filter(prest => prest.id !=id)
+export const SUPPRIMER_SERVICE_REALITE_FAIT_OP = (state, id)=> {
+    state.ServiceRealiteFaitOp = state.ServiceRealiteFaitOp.filter(prest => prest.id !=id)
 }
 
 
-//****************************  gestion des OrdrePaiementRegie*********************** */
 
 
+
+export const GET_ALL_HISTORIQUE_DECISION_CF_OP= (state, tableau_document) =>{
+    state.historiqueDecisionCfOP = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_HISTORIQUE_DECISION_CF_OP = (state, elementAjouter) => {
+    state.historiqueDecisionCfOP.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_HISTORIQUE_DECISION_CF_OP = (state, elementModif)=>{
+    state.historiqueDecisionCfOP = state.historiqueDecisionCfOP.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_HISTORIQUE_DECISION_CF_OP = (state, id)=> {
+    state.historiqueDecisionCfOP = state.historiqueDecisionCfOP.filter(prest => prest.id !=id)
+}
