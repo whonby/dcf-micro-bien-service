@@ -33,127 +33,131 @@
           >
           </model-list-select>
         </div>
-        
-         <div class="span5">
+
+        <div class="span5">
           <label for=""><b>Date Debut</b></label>
-         <input type="Date" name="datedebut" id="datedebut" class="form-control">
+          <input
+            type="Date"
+            name="datedebut"
+            id="datedebut"
+            class="form-control"
+          />
         </div>
 
         <div class="span5">
           <label for=""><b>Date Fin</b></label>
-         <input type="Date" name="datefin" id="datefin" class="form-control">
+          <input type="Date" name="datefin" id="datefin" class="form-control" />
         </div>
       </div>
 
       <br />
       <br />
-      <br />
 
-      <table class="table table-bordered table-striped">
-        <tr style="border: 2px solid #000">
-          <td>
-            <!-- debut pour les Personnels -->
-            <h4 style="text-align: center">Personnels</h4>
-
-            <div class="span4 " style="border: 2px dotted #ffffff">
-              <div class="" style="height: 180px">
-                <apexchart
-                  type="donut"
-                  :options="chartOptions1"
-                  :series="dataPourcentage"
-                ></apexchart>
-              </div>
+      <div class="row">
+        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
+          <h3 style="text-align: center">Personnels</h3>
+          <div class="row">
+            <div class="span4" style="height: 180px">
+              <apexchart
+                type="donut"
+                :options="chartOptions1"
+                :series="dataPourcentage"
+              ></apexchart>
             </div>
 
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card" style="heigth: 50px">
-                <apexchart
-                  type="donut"
-                  :options="chartOptions21"
-                  :series="dataPourcentage21"
-                ></apexchart>
-              </div>
+            <div class="span4" style="height: 180px">
+              <apexchart
+                type="donut"
+                :options="chartOptions21"
+                :series="dataPourcentage21"
+              ></apexchart>
             </div>
-          </td>
-          <!-- fin pour les Personnels -->
-          <td>
-            <!-- debut pour les Biens et Services -->
-            <h4 style="text-align: center">Biens et Services</h4>
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
-                <apexchart
-                  type="donut"
-                  :options="chartOptionsBienService1"
-                  :series="dataPourcentageBienService1"
-                ></apexchart>
-              </div>
-            </div>
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
-                <apexchart
-                  type="donut"
-                  :options="chartOptionsBienService2"
-                  :series="dataPourcentageBienService2"
-                ></apexchart>
-              </div>
-            </div>
-          </td>
-          <!-- debut pour les Biens et Services -->
-        </tr>
-      </table>
+          </div>
+        </div>
 
-      <!-- debut pour les Transferts -->
-      <table class="table table-bordered table-striped">
-        <tr style="border: 2px solid #000">
-          <td>
-            <h4 style="text-align: center">Transferts</h4>
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
-                <apexchart
-                  type="donut"
-                  :options="chartOptionsTransferts1"
-                  :series="dataPourcentageTransferts1"
-                ></apexchart>
-              </div>
-            </div>
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
-                <apexchart
-                  type="donut"
-                  :options="chartOptionsTransferts2"
-                  :series="dataPourcentageTransferts2"
-                ></apexchart>
-              </div>
-            </div>
-          </td>
-          <!-- fin pour les Transferts -->
-          <td>
-            <!-- debut pour les Investissements -->
-            <h4 style="text-align: center">Investissements</h4>
+        <!-- bien et service -->
 
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
-                <apexchart
+        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
+          <h3 style="text-align: center">Biens et Services</h3>
+          <div class="row">
+            <div class="span4" style="">
+              <apexchart
+                type="donut"
+                :options="chartOptionsBienService1"
+                :series="dataPourcentageBienService1"
+              ></apexchart>
+            </div>
+
+            <div class="span4" style="">
+              <apexchart
+                type="donut"
+                :options="chartOptionsBienService2"
+                :series="dataPourcentageBienService2"
+              ></apexchart>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<br/>
+     
+
+      <div class="row">
+        <!-- transferts -->
+
+        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
+        <h3 style="text-align: center">Transferts</h3>
+        <div class="row">
+          <div class="span4" style="">
+            <apexchart
+              type="donut"
+              :options="chartOptionsTransferts1"
+              :series="dataPourcentageTransferts1"
+            ></apexchart>
+          </div>
+
+          <div class="span4" style="">
+            <apexchart
+              type="donut"
+              :options="chartOptionsTransferts2"
+              :series="dataPourcentageTransferts2"
+            ></apexchart>
+          </div>
+        </div>
+      </div>
+
+        <!-- Investissement -->
+
+        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
+        <h3 style="text-align: center">Investissements</h3>
+        <div class="row">
+          <div class="span4" style="">
+            <apexchart
                   type="donut"
                   :options="chartOptionsInvestissements1"
                   :series="dataPourcentageInvestissements1"
                 ></apexchart>
-              </div>
-            </div>
+          </div>
 
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
-                <apexchart
+          <div class="span4" style="">
+            <apexchart
                   type="donut"
                   :options="chartOptionsInvestissements2"
                   :series="dataPourcentageInvestissements2"
                 ></apexchart>
-              </div>
-            </div>
-          </td>
-          <!-- fin pour les Investissements -->
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
     </div>
     <!-- pour les personnels -->
     {{ dataArrayPourcentage }}
@@ -248,7 +252,7 @@ export default {
       // debut de la nature bien et services
       chartOptionsBienService1: {
         chart: {
-          width: 450,
+          width: 400,
           type: "donut",
         },
         labels: ["Budget prévisionnel AE", "Budget exécuté AE"],
@@ -258,7 +262,7 @@ export default {
             breakpoint: 480,
             options: {
               chart: {
-                width: 480,
+                width: 400,
               },
               legend: {
                 position: "bottom",
@@ -270,7 +274,7 @@ export default {
 
       chartOptionsBienService2: {
         chart: {
-          width: 450,
+          width: 400,
           type: "donut",
         },
         labels: ["Budget prévisionnel CP", "Budget exécuté CP"],
@@ -280,7 +284,7 @@ export default {
             breakpoint: 480,
             options: {
               chart: {
-                width: 480,
+                width: 400,
               },
               legend: {
                 position: "bottom",
@@ -295,7 +299,7 @@ export default {
       // debut de la nature Transferts
       chartOptionsTransferts1: {
         chart: {
-          width: 450,
+          width: 400,
           type: "donut",
         },
         labels: ["Budget prévisionnel AE", "Budget exécuté AE"],
@@ -305,7 +309,7 @@ export default {
             breakpoint: 480,
             options: {
               chart: {
-                width: 480,
+                width: 400,
               },
               legend: {
                 position: "bottom",
@@ -364,7 +368,7 @@ export default {
 
       chartOptionsInvestissements2: {
         chart: {
-          width: 450,
+          width: 400,
           type: "donut",
         },
         labels: ["Budget prévisionnel CP", "Budget exécuté CP"],
@@ -374,7 +378,7 @@ export default {
             breakpoint: 480,
             options: {
               chart: {
-                width: 480,
+                width: 400,
               },
               legend: {
                 position: "bottom",
@@ -1098,7 +1102,12 @@ export default {
       if (vm.dataPourcentage.length > 0) {
         vm.dataPourcentage = [];
       }
-      vm.dataPourcentage.push(parseFloat(this.GrandeNaturePersonelAePrevisionel - this.GrandeNaturePersonelAeExecute));
+      vm.dataPourcentage.push(
+        parseFloat(
+          this.GrandeNaturePersonelAePrevisionel -
+            this.GrandeNaturePersonelAeExecute
+        )
+      );
       vm.dataPourcentage.push(parseFloat(this.GrandeNaturePersonelAeExecute));
 
       return "";
@@ -1112,7 +1121,11 @@ export default {
         vm.dataPourcentage21 = [];
       }
       vm.dataPourcentage21.push(
-        parseFloat(this.GrandeNaturePersonelCpPrevisionel - this.GrandeNaturePersonelCpExecute));
+        parseFloat(
+          this.GrandeNaturePersonelCpPrevisionel -
+            this.GrandeNaturePersonelCpExecute
+        )
+      );
       vm.dataPourcentage21.push(parseFloat(this.GrandeNaturePersonelCpExecute));
 
       return "";
@@ -1125,8 +1138,15 @@ export default {
       if (vm.dataPourcentageBienService1.length > 0) {
         vm.dataPourcentageBienService1 = [];
       }
-      vm.dataPourcentageBienService1.push( parseFloat(this.GrandeNatureBienServiceAePrevisionel - this.GrandeNatureBienServiceAeExecute));
-      vm.dataPourcentageBienService1.push( parseFloat(this.GrandeNatureBienServiceAeExecute));
+      vm.dataPourcentageBienService1.push(
+        parseFloat(
+          this.GrandeNatureBienServiceAePrevisionel -
+            this.GrandeNatureBienServiceAeExecute
+        )
+      );
+      vm.dataPourcentageBienService1.push(
+        parseFloat(this.GrandeNatureBienServiceAeExecute)
+      );
 
       return "";
     },
@@ -1137,8 +1157,15 @@ export default {
       if (vm.dataPourcentageBienService2.length > 0) {
         vm.dataPourcentageBienService2 = [];
       }
-      vm.dataPourcentageBienService2.push(parseFloat(this.GrandeNatureBienServiceCpPrevisionel - this.GrandeNatureBienServiceCpExecute));
-      vm.dataPourcentageBienService2.push( parseFloat(this.GrandeNatureBienServiceCpExecute));
+      vm.dataPourcentageBienService2.push(
+        parseFloat(
+          this.GrandeNatureBienServiceCpPrevisionel -
+            this.GrandeNatureBienServiceCpExecute
+        )
+      );
+      vm.dataPourcentageBienService2.push(
+        parseFloat(this.GrandeNatureBienServiceCpExecute)
+      );
 
       return "";
     },
@@ -1152,8 +1179,15 @@ export default {
       if (vm.dataPourcentageTransferts1.length > 0) {
         vm.dataPourcentageTransferts1 = [];
       }
-      vm.dataPourcentageTransferts1.push(parseFloat(this.GrandeNatureTransfertsAePrevisionel - this.GrandeNatureTransfertsAeExecute));
-      vm.dataPourcentageTransferts1.push(parseFloat(this.GrandeNatureTransfertsAeExecute));
+      vm.dataPourcentageTransferts1.push(
+        parseFloat(
+          this.GrandeNatureTransfertsAePrevisionel -
+            this.GrandeNatureTransfertsAeExecute
+        )
+      );
+      vm.dataPourcentageTransferts1.push(
+        parseFloat(this.GrandeNatureTransfertsAeExecute)
+      );
 
       return "";
     },
@@ -1164,8 +1198,15 @@ export default {
       if (vm.dataPourcentageTransferts2.length > 0) {
         vm.dataPourcentageTransferts2 = [];
       }
-      vm.dataPourcentageTransferts2.push(parseFloat(this.GrandeNatureTransfertsCpPrevisionel - this.GrandeNatureTransfertsCpExecute));
-      vm.dataPourcentageTransferts2.push( parseFloat(this.GrandeNatureTransfertsCpExecute));
+      vm.dataPourcentageTransferts2.push(
+        parseFloat(
+          this.GrandeNatureTransfertsCpPrevisionel -
+            this.GrandeNatureTransfertsCpExecute
+        )
+      );
+      vm.dataPourcentageTransferts2.push(
+        parseFloat(this.GrandeNatureTransfertsCpExecute)
+      );
 
       return "";
     },
@@ -1179,8 +1220,15 @@ export default {
       if (vm.dataPourcentageInvestissements1.length > 0) {
         vm.dataPourcentageInvestissements1 = [];
       }
-      vm.dataPourcentageInvestissements1.push( parseFloat(this.GrandeNatureInvestissementsAePrevisionel - this.GrandeNatureInvestissementsAeExecute));
-      vm.dataPourcentageInvestissements1.push( parseFloat(this.GrandeNatureInvestissementsAeExecute) );
+      vm.dataPourcentageInvestissements1.push(
+        parseFloat(
+          this.GrandeNatureInvestissementsAePrevisionel -
+            this.GrandeNatureInvestissementsAeExecute
+        )
+      );
+      vm.dataPourcentageInvestissements1.push(
+        parseFloat(this.GrandeNatureInvestissementsAeExecute)
+      );
 
       return "";
     },
@@ -1191,8 +1239,15 @@ export default {
       if (vm.dataPourcentageInvestissements2.length > 0) {
         vm.dataPourcentageInvestissements2 = [];
       }
-      vm.dataPourcentageInvestissements2.push( parseFloat(this.GrandeNatureInvestissementsCpPrevisionel - this.GrandeNatureInvestissementsCpExecute));
-      vm.dataPourcentageInvestissements2.push(parseFloat(this.GrandeNatureInvestissementsCpExecute));
+      vm.dataPourcentageInvestissements2.push(
+        parseFloat(
+          this.GrandeNatureInvestissementsCpPrevisionel -
+            this.GrandeNatureInvestissementsCpExecute
+        )
+      );
+      vm.dataPourcentageInvestissements2.push(
+        parseFloat(this.GrandeNatureInvestissementsCpExecute)
+      );
 
       return "";
     },
