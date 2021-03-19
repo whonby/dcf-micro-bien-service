@@ -1,1498 +1,1302 @@
 
-
-
-
-        <template>
+<template>
   <div >
+    
 
 
-            <!-- <div align="right" style="cursor:pointer;">
-           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-          </div> -->
+    <div class="container-fluid">
+      <hr />
+      <div class="row-fluid">
+        <div class="span12">
+         
+          <div class="widget-box">
+            <!-- <div class="widget-title"> -->
+              <!-- <div align="right">
+                Recherche:
+                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
 
+               
+              </div> -->
+              <!-- <span class="icon">
+                <i class="icon-th"></i>
+              </span> -->
+              <!-- <h5>AUTORISATION D'engagement AE</h5>
+            </div> -->
 
- <div ref="document">
-     <table class="table table-striped"  style="background: #f0c71d !important;">
-         <tbody>
-         <tr>
-             <td style="background: #00499c !important;color: #fff;height: 10px !important;">
-
-                 <label>Ministère
-                     <a href="#" @click.prevent="videTypeCF()" v-if="section_id" style="color: red">
-                         <i class="fa fa-trash-o"></i></a></label>
-                 <model-list-select style="background-color: #fff;"
-                                    class="wide"
-                                    :list="sections"
-                                    v-model="section_id"
-                                    option-value="id"
-                                    option-text="nom_section"
-                                    placeholder="Ministère"
-                 >
-
-                 </model-list-select>
-             </td>
-             <td style="background: #00499c !important;color: #fff">
-                 <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
-                 </label>
-                 <model-list-select style="background-color: #fff;"
-                                    class="wide"
-                                    :list="filtre_unite_admin"
-                                    v-model="unite_administrative_id"
-                                    option-value="id"
-                                    option-text="libelle"
-                                    placeholder="Unité administrative"
-                 >
-
-                 </model-list-select>
-             </td>
-             <td style="background: #00499c !important;color: #fff">
-                 <label>Regions <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
-                 </label>
-                 <model-list-select style="background-color: #fff;"
-                                    class="wide"
-                                    :list="regions"
-                                    v-model="region"
-                                    option-value="id"
-                                    option-text="libelle"
-                                    placeholder="Regions"
-                 >
-
-                 </model-list-select>
-             </td>
-             <td style="background: #00499c !important;color: #fff">
-                 <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
-                 </label>
-                 <model-list-select style="background-color: #fff;"
-                                    class="wide"
-                                    :list="getterInfrastrucure"
-                                    v-model="infrastructure"
-                                    option-value="id"
-                                    option-text="libelle"
-                                    placeholder="Infrastructure"
-                 >
-
-
-                 </model-list-select>
-             </td>
-             <td style="background: #00499c !important;color: #fff">
-                 <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
-                 </label>
-                 <model-list-select style="background-color: #fff;"
-                                    class="wide"
-                                    :list="typeMarches"
-                                    v-model="type_marche"
-                                    option-value="id"
-                                    option-text="libelle"
-                                    placeholder="Type Marche"
-                 >
-
-                 </model-list-select>
-             </td>
-
-         </tr>
-
-         </tbody>
-     </table>
- <div class="span6" align="left">
-                        <button class="btn btn-default" @click="tableToExcel('table', 'SITUATION EXECCUTION')">
+           
+            <div class="span6" align="left">
+                        <button class="btn btn-default" @click="tableToExcel('table', 'TABLEAU DE MARCHE PLURIANNUEL')">
                             <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
                         </button>
                     </div>
-          <!--<table class="table table-bordered table-striped" id="Exo">
+           
+           
+              <table class="table table-bordered table-striped">
+                
+                <!-- <thead>
+                  <tr>
+                    <th style="width:10%"></th> 
+                    <td> </td>
+                  </tr>
+                  <tr>
+                    <th style="width:10%"></th>
+                    <td> </td>
+                  </tr>
+                  <tr>
+                    <th style="width:10%"></th>
+                      <td> </td>
+                   </tr>
+                  <tr>
+                    <th style="width:10%"></th>
+                      <td>  </td>
+                   </tr>
+                  <tr>
+                    <th style="width:10%"></th>
+                      <td> </td>
+                  </tr>
+                  <tr>
+                    <th style="width:10%"></th>
+                    <td> </td>
+                  </tr>
+                </thead>
+                 -->
+               <th style="width:10%"></th>
+         <th style="width:15%" colspan="3">{{affichageAnneeConditionnel}} </th> 
+         <th style="width:15%" colspan="3">{{incrementAnnee}} </th>
+         <th style="width:15%" colspan="3">{{incrementAnnee1}} </th>
+
+              
             <tr>
-              <td>
+                     <th style="width:10%">(1)AUTORISATION D'ENGAGEMENT AE  </th>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3" > {{formatageSomme(parseFloat(afficherMontantTtcDeActe(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3">{{formatageSomme(parseFloat(afficherMontantTtcDeActeAnneSuivante(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3"> {{formatageSomme(parseFloat(afficherMontantTtcDeActeAnneSuivante1(macheid)))}} </td>
+        </tr>
+       
+           <tr>
+          <th  style="width:10%"> </th>
+          <th style="width:15%" colspan="3">SOURCE DE FINANCEMENT </th> 
+         <th style="width:15%" colspan="3">SOURCE DE FINANCEMENT </th>
+         <th style="width:15%" colspan="3">SOURCE DE FINANCEMENT </th>
 
-              </td>
-            </tr>
-          </table>-->
-     <h3 style="margin-left:-200px;">TABLE DE SUIVI DES MARCHES PLURIANNUEL <span style="color: red;"></span></h3>
+           
+       </tr>
+           <tr>
+          <th  style="width:10%"> </th>
+          <th style="width:10%" colspan="1">ETAT  </th> 
+         <th style="width:10%" colspan="2">BAILLEURS </th>
+         <th style="width:5%" colspan="1">ETAT </th>
+          <th style="width:10%" colspan="2">BAILLEURS </th> 
+         <th style="width:5%" colspan="1">ETAT</th>
+         <th style="width:10%" colspan="2"> BAILLEURS</th>
+         
 
-              <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+           
+       </tr>
+           <tr>
+          <th  style="width:10%"> </th>
+          <th style="width:5%" colspan="1">TRESOR (FCFA)</th> 
+         <th style="width:5%" colspan="1">DON (FCFA) </th>
+         <th style="width:5%" colspan="1">EMPRUNT (FCFA) </th>
+          <th style="width:5%" colspan="1">TRESOR (FCFA) </th> 
+         <th style="width:5%" colspan="1">DON  (FCFA)</th>
+         <th style="width:5%" colspan="1">EMPRUNT (FCFA) </th>
+          <th style="width:5%" colspan="1">TRESOR (FCFA) </th> 
+         <th style="width:5%" colspan="1">DON (FCFA)</th>
+         <th style="width:5%" colspan="1">EMPRUNT (FCFA)</th>
 
-                <thead>
+           
+       </tr>  
+           <tr>
+          <th  style="width:10%">(1)REPORT A L'ANNEE N+1 / (R)=(T)-(D) </th>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportTresor(macheid))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportDons(macheid))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{parseFloat(calculDuMontantReportEmprunt(macheid))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportTresorAnneSuivante(macheid))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportDonsAnneeSuivante(macheid))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportEmpruntAnneeSuivante(macheid))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportTresorAnneUlterieure(macheid))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportDonsAnneeUlterieure(macheid))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportEmpruntAnneeUlterieure(macheid))}} </td>
 
+           
+       </tr>
+             <tr>
+          <th  style="width:10%">(2) PREVISIONNEL ANNUEL DES CP (A) </th>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPTresor(macheid))) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPDons(macheid))) }}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPEmprunt(macheid))) }}  </td>
+
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPTresorAnneeSuivante(macheid))) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPDonsAnneeSuivante(macheid))) }} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPEmpruntAnneeSuivante(macheid))) }} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPTresorAnneeUlterieure(macheid))) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPDonsAnneeUlterieure(macheid))) }} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPEmpruntAnneeUlterieure(macheid))) }} </td>
+           
+       </tr>
+               <tr>
+          <th  style="width:10%">(3)TOTAL PREVISION ANNUEL (T)=(R)+(A) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelTresor)) }}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelDons))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(calculeTotalPrevisionnelAnnuelEmprunt))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeSuivante))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeSuivante))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure)) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur)) }}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur)) }} </td>
+
+           
+       </tr>
+                <tr>
+          <th  style="width:10%">(4) CP NOTIFIE (B) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieTresor(macheid) ))}}  </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDons(macheid) ))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieEmprunt(macheid) ))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieTresorAnneeSuivante(macheid) ))}}  </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDonsAnneeSuivante(macheid) ))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieEmpruntAnneeSuivante(macheid) ))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieTresorAnneeUlterieure(macheid) ))}}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDonsAnneeUlterieure(macheid) ))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieEmpruntAnneeUlterieure(macheid) ))}} </td>
+
+           
+
+       </tr>
+                <tr>
+          <th  style="width:10%">(5)ECART P/R PREVISION (C)= (B)-(T) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieTresor(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresor)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDons(macheid)) - (parseFloat(calculeTotalPrevisionnelAnnuelDons)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieEmprunt(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmprunt)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieTresorAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeSuivante)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieDonsAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeSuivante)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieEmpruntAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieTresorAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDonsAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieEmpruntAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur)))}} </td>
+ 
+           
+       </tr>
+                 <tr>
+          <th  style="width:10%">CUMUL DES LIQUIDATIONS (L) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantTresorLiquidation))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantDonsLiquidation))}}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantEmpruntLiquidation))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantTresorLiquidationAnneeSuivante))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantDonsLiquidationAnneeSuivante))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantEmpruntLiquidationAnneeSuivante))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantTresorLiquidationAnneeUlterieure))}}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantDonsLiquidationAnneeUlterieure))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantEmpruntLiquidationAnneeUlterieure))}} </td>
+
+           
+       </tr>
+                 <tr>
+          <th  style="width:10%">(4) CUMUL DES MANDATEMENTS /OP PAR BAILLEUR (D) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurTresor(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurDons(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurEmprunt(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurTresorAnneeSuivante(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurDonsAnneeSuivante(macheid)))}}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurEmpruntAnneeSuivante(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurTresorAnneeUlterieure(macheid)))}}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurDonsAnneeUlterieure(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurEmpruntAnneeUlterieure(macheid)))}}</td>
+
+           
+       </tr>
+            <tr>
+                <th style="width:10%">(5)TOTAUX DES MANDATEMENTS /OP (M)</th>
+         <td style="width:15%" colspan="3">{{(parseFloat(totauxMadatement))}} </td> 
+         <td style="width:15%" colspan="3">{{(parseFloat(totauxMadatementAnneeSuivante))}} </td>
+         <td style="width:15%" colspan="3">{{(parseFloat(totauxMadatementAnneeUlterieure))}}  </td>
+        </tr>
+                     <tr>
+          <th  style="width:10%">(6)ECART D'EXECUTION (E) = (D)-(B) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionTresor))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionDons))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionEmprunt))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionTresorAnneeSuivante))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionDonsAnneeSuivante))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionEmpruntAnneeSuivante))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionTresorAnneeUlterieure))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionDonsAnneeUlterieure))}}  </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionEmpruntAnneeUlterieure))}} </td>
+
+           
+       </tr>
                     <tr>
-                        <!-- <td style="background-color: #fbcbcb;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td> -->
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                         <td colspan="2" style="background-color: #ffbd3d;color: #000;text-align:center">SOURCE DE FINANCEMENT</td>
-                        <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Date réception définitive</td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
-                         <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution financière</td>
-                        <!-- <td colspan="6" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution physique</td> -->
-                    </tr>
-                    <tr>
-                        <!-- <td style="color: #000;width:2%;text-align:center;background-color: #fbcbcb !important;font-size:10px">N° </td> -->
-                       
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                             <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                                             <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                                               <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
+          <th  style="width:10%">(7)DEPENSE OBLIGATOIRE (O)=(L)-(D) </th>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantTresorLiquidation) - parseFloat(afficherMontantOPParBailleurTresor(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(MontantDonsLiquidation)- parseFloat(afficherMontantOPParBailleurDons(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantEmpruntLiquidation) -parseFloat(afficherMontantOPParBailleurEmprunt(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantTresorLiquidationAnneeSuivante) - parseFloat(afficherMontantOPParBailleurTresorAnneeSuivante(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantDonsLiquidationAnneeSuivante)- parseFloat(afficherMontantOPParBailleurDonsAnneeSuivante(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantEmpruntLiquidationAnneeSuivante) -parseFloat(afficherMontantOPParBailleurEmpruntAnneeSuivante(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantTresorLiquidationAnneeUlterieure) - parseFloat(afficherMontantOPParBailleurTresorAnneeUlterieure(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantDonsLiquidationAnneeUlterieure)- parseFloat(afficherMontantOPParBailleurDonsAnneeUlterieure(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantEmpruntLiquidationAnneeUlterieure) -parseFloat(afficherMontantOPParBailleurEmpruntAnneeUlterieure(macheid)))}} </td>
 
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"> ETAT
-                           </td>
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"> BAILLEURS </td>
+           
+       </tr>
+          <tr>
+                <th style="width:10%">(8)RESTE A EXECUTER SUR CP TOTAL </th>
+         <td style="width:15%" colspan="3">{{(parseFloat(calculTotauxCP))}} </td> 
+         <td style="width:15%" colspan="3">{{(parseFloat(calculTotauxCPAnneeSuivante))}} </td>
+         <td style="width:15%" colspan="3">{{(parseFloat(calculTotauxCPAnneeUlterieure))}} </td>
+        </tr>
+    
+       
+      </table>
+            
+              
+  
+   
 
-          <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
+    
+ 
+            <!-- <div v-else> -->
+              <!-- <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p> -->
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
 
-                   <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
-
-                    </tr>
-
- </thead>
- <tbody>
-<!-- <loading :active.sync="isLoading"-->
-<!--          :can-cancel="true"-->
-<!--          :on-cancel="onCancel"-->
-<!--          :is-full-page="fullPage"></loading>-->
- <tr  class="odd gradeX" v-for="(activites) in afficherListeMarcheHorsSib" :key="activites.id" >
-     
- </tr>
-
-
-    </tbody>
-  </table>
-
-
-
-
-
- </div>
-
-
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterpaiementPersonnel" main-icon="apps" bg-color="green"></fab>
+        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterpaiementPersonnel()">Open</button>
+  <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+  <notifications  /> -->
   </div>
 </template>
-
-
+  
 <script>
-    import { mapGetters, mapActions } from "vuex";
-    import { formatageSomme } from "../../../../../Repositories/Repository";
-     import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
-    import moment from "moment";
-    //import UploadExcelComponent from '@/components/UploadExcel/index.vue'
-    //import ProgressBar from "../component/ProgressBar"
-     //import {formatageSomme} from '../../Repositories/Repository'
-
-    import {  ModelListSelect } from 'vue-search-select'
-    import 'vue-search-select/dist/VueSearchSelect.css'
-   // import Loading from 'vue-loading-overlay';
-    export default {
-        name: 'BudgetPasProgramme',
-        components:{
-          //  UploadExcelComponent
-            ModelListSelect,
-           // Loading
-        },
-        data() {
-            return {
-                fabActions: [
-                    {
-                        name: "cache",
-                        icon: "add"
-                    }
-
-                ],
-                isLoading: true,
-                fullPage: false,
-                tableData: [],
-                tableHeader: [],
-                progress:0,
-                bgWidth: '0%',
-                bgHeight: '30px',
-                exercice_budget:"",
-                message_mandater:'',
-                section_id:'',
-                i:0,
-                controlleur_fin:"",
-                status_marches:"",
-                unite_administrative_id:"",
-                infrastructure:"",
-                type_marche:"",
-                region:"",
-                info_status_marche:"",
-                tableMarcheStatue:"",
-                isOffreTechniqueFinancier:false,
-                namePDF: "",
-                uploadPercentage:0,
-                fichierPDF: "",
-                imagePDF:"",
-                selectedFile:"",
-                resultaAnalysePv:[],
-                resultaFinalCandidat:[],
-                entreprise_vainqueur:"",
-                registrecc_vainqueur:"",
-                identreprise_vainqueur:"",
-                message_setion_vainqueur:"",
-                info_avis_bailleur:"",
-                namePDFDemandeAno: "",
-                fichierPDFDemandeAno: "",
-                imagePDFDemandeAno:"",
-                source_financement_detecter:[],
-                unite_admin_dettecte:[],
-                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
-                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
-                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) },
-                 formData:{
-                     programme_id:""
-                 }
-
-            };
-        },
-        created() {
-            console.log("........MLMLMLM")
-console.log(this.mandats)
-            console.log(".....LMLMLM")
-        },
-        computed: {
-            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-            ...mapGetters("uniteadministrative", [
-                "acteCreations",
-                "typeTextes",
-                "uniteAdministratives",
-                "getterBudgeCharge"
-            ]),
-            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser",
-                "avenants","getMandatPersonnaliserVise","TacheMarche","typeMarches","mandats"]),
-            ...mapGetters("parametreGenerauxAdministratif", [
-                "sections",
-                "type_Unite_admins",
-                "plans_programmes",
-                "natures_sections",
-                "grandes_natures",
-                "afficheNiveauPlanProg",
-                "exercices_budgetaires",
-                "localisations_geographiques",
-                "getterInfrastrucure"
-            ]),
-
-    ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
-            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
-            ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
-            // ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
-            //     'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure","exercices_budgetaires","sections",
-            //     "type_Unite_admins",
-            //     "plans_programmes",
-            //     "natures_sections",
-            //     "grandes_natures"]),
-            listeCF(){
-                return this.getterUtilisateur.filter(item=>{
-                    if(item.user_role){
-                        if (item.user_role.role.code_role=="DCF" || item.user_role.role.code_role=="CF"){
-                            return item
-                        }
-                    }
-                })
-            },
-            filtre_unite_admin() {
-                if(this.noDCfNoAdmin){
-                    let colect=[];
-                    let vM=this
-                    this.uniteAdministratives.filter(item=>{
-                        if(vM.getterUniteAdministrativeByUser.length>0){
-                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                            if (val!=undefined){
-                                colect.push(item)
-                                return item
-                            }
-                        }
-
-                    })
-                    if(this.section_id!=""){
-                        return colect.filter(item=>item.section_id==this.section_id)
-                    }
-                    return colect
-                }
-                if(this.section_id!=""){
-                    return this.uniteAdministratives.filter(item=>item.section_id==this.section_id)
-                }
-                return this.uniteAdministratives
-               // return this.uniteAdministratives
-            },
-            listeMarcheUniteAdmin(){
-                let colect=[]
-                let vM=this;
-                this.filtre_unite_admin.forEach(function (value) {
-                    let objet=vM.gettersMarcheHorsib.filter(item=>{
-                            if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
-                                //  console.log(item.parent_id)
-                                return item
-                            }
-                        }
-                    )
-                    if(objet!=undefined){
-                        objet.forEach(function (val) {
-                            let objet=   colect.find(item=>item.id==val.id)
-                            if(objet==undefined){
-                                colect.push(val)
-                            }
-                        })
-                    }
-
-
-                })
-                return colect
-            },
-            regions(){
-                // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
-                return this.localisations_geographiques.filter(item=>{
-                    if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
-                        return item
-                    }
-                });
-            },
-
-            tachePasMarche(){
-              return marche_id=>{
-                  let objet=this.TacheMarche.filter(item=>item.marche_id==marche_id)
-
-                  if(objet.length>0){
-                       return objet
-                  }
-                  return []
-              }
-            },
-            liseSousTacheMarche(){
-                return marche_id=>{
-                    let _objet=this.tachePasMarche(marche_id).filter(item=>item.parent_id!=null)
-                    if(_objet.length>0){
-                        return _objet
-                    }
-                    return _objet
-
-                }
-            },
-            tachePrevuePasMarche(){
-                return marche_id=>{
-                    let _objet=this.tachePasMarche(marche_id).filter(item=>item.parent_id==null)
-                    if(_objet.length>0){
-                        return _objet
-                    }
-                    return _objet
-
-                }
-            },
-            tacheRealisePasMarche(){
-              return marche_id=>{
-                  let _objet=this.tachePasMarche(marche_id)
-                  if(_objet.length>0){
-                      let arraymarche=[]
-                      let vm=this
-                      _objet.forEach(function (val) {
-                           let taux=(parseFloat(vm.totaleSommeRealiseTache(val.id,marche_id)) * 100)/parseFloat(vm.totaleBaseARealiseTache(val.id,marche_id))
-                        //  console.log(taux)
-                          if(taux==100){
-                              arraymarche.push(val)
-                          }
-                      })
-                      return arraymarche
-                  }
-                  return []
-              }
-            },
-            tacheRestantRealisePasMarche(){
-                return marche_id=>{
-                    let _objet=this.tachePasMarche(marche_id)
-                    if(_objet.length>0){
-                        let arraymarche=[]
-                        let vm=this
-                        _objet.forEach(function (val) {
-                            let taux=(vm.totaleSommeRealiseTache(val.id,marche_id) * 100)/vm.totaleBaseARealiseTache(val.id,marche_id)
-                            console.log(val)
-                            if(taux<100){
-                              //  console.log(taux)
-                                arraymarche.push(val)
-                            }
-                        })
-                        return arraymarche
-                    }
-                    return []
-                }
-            },
-            tauxTacheRealise(){
-              return marche_id=>{
-                  let totalTache=this.tachePrevuePasMarche(marche_id)
-                  if(totalTache.length>0){
-                      let totalTacheRealise=this.tacheRealisePasMarche(marche_id).length
-                      let taux=(totalTacheRealise * 100)/totalTache
-                       return taux.toFixed(2)
-                  }
-                 return 0
-              }
-            },
-            totaleBaseARealiseTache(){
-              return (id_tache,marche_id)=>{
-                  let soustache=this.liseSousTacheMarche(marche_id).filter(item=>item.parent_id==id_tache)
-                  console.log("....MARCHE..58865765575..")
-                  console.log(marche_id)
-                  if(soustache.length>0){
-
-                      let base=soustache.length * 100
-                      // console.log(base)
-                      // console.log("....MARCHE....5555555................")
-                      return base
-                  }
-                  return 0
-
-              }
-            },
-            totaleSommeRealiseTache(){
-                return (id_tache,marche_id)=>{
-                    let soustache=this.liseSousTacheMarche(marche_id).filter(item=>item.parent_id==id_tache)
-                    if(soustache.length>0){
-                       let initeVal=0
-                      let obj= soustache.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.taux_realiser) ;
-                        }, initeVal);
-                       console.log(obj)
-                        return  obj
-                    }
-                    return 0
-
-                }
-            },
-            MandatMarche(){
-              return marche_id=>{
-                  let objet =this.mandats.filter(item=>item.marche_id==marche_id)
-                  if(objet.length>0){
-                      return objet
-                  }
-                  return []
-              }
-            },
-            montantMandatMarcheVise(){
-              return marche_id=>{
-                  let objet=this.MandatMarche(marche_id)
-                  console.log(this.mandats)
-
-                  if(objet.length>0){
-                      let initeVal = 0;
-                      let montant=this.mandats.filter(item=>{
-                          if(item.marche_id==marche_id && (item.decision_cf==8 || item.decision_cf==8)){
-                              return item
-                          }
-                      }).reduce(function (total, currentValue) {
-                          return total + parseFloat(currentValue.total_general) ;
-                      }, initeVal);
-                      return montant
-                  }
-                  return 0
-              }
-            },
-            montantMandatMacherRestantVise(){
-                return marche_id=>{
-                    let objet=this.MandatMarche(marche_id)
-                    if(objet.length>0){
-                        let initeVal = 0;
-                        let montant=this.mandats.filter(item=>{
-                            if(item.marche_id==marche_id && item.decision_cf==0){
-                                return item
-                            }
-                        }).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.total_general) ;
-                        }, initeVal);
-                        return montant
-                    }
-                    return 0
-                }
-            },
-             totalMandatMarche(){
-                 return marche_id=>{
-                     let objet=this.MandatMarche(marche_id)
-                     if(objet.length>0){
-                         return objet.length
-                     }
-                     return 0
-                 }
-             },
-            totalMandatViseMarche(){
-                return marche_id=>{
-                    let objet=this.MandatMarche(marche_id)
-                    if(objet.length>0){
-
-                        return this.mandats.filter(item=>{
-                            if(item.marche_id==marche_id && (item.decision_cf==8 || item.decision_cf==8)){
-                                return item
-                            }
-                        }).length
-
-                    }
-                    return 0
-                };
-            },
-            tauxMandatVise(){
-              return marche_id=>{
-                  let taux=(this.totalMandatViseMarche(marche_id) * 100)/this.totalMandatMarche(marche_id)
-                  if(isNaN(taux)) return 0
-                  return taux.toFixed(2)
-              }
-            },
-            nombreDejourCalcule(){
-                return (date1,date2)=>{
-                     if(!date2){
-                         let date_day=new Date()
-                         date2= this.formatDate(date_day)
-                        console.log(date2)
-                     }
-                      if(date1==null) return null;
-
-                          let date_debut=new Date(date1)
-                          let date_fin = new Date(date2)
-                   // let diffDays = date_fin.getDate() - date_debut.getDate();
-                    var timeDiff = date_fin.getTime() - date_debut.getTime();
-                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-                    if (isNaN(diffDays)) return null;
-                         if (parseFloat(diffDays) <0 ) return diffDays
-
-                     return diffDays
-                }
-
-            },
-
-            nombreDejourCalculeSansDateDuJOUR(){
-
-                return (date1,date2)=>{
-                    if(date1==null) return null;
-
-                    let date_debut=new Date(date1)
-                    let date_fin = new Date(date2)
-                    // let diffDays = date_fin.getDate() - date_debut.getDate();
-                    var timeDiff = date_fin.getTime() - date_debut.getTime();
-                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-                    if (isNaN(diffDays)) return null;
-                    if (parseFloat(diffDays) <0 ) return diffDays
-
-                    return diffDays
-                }
-
-
-            },
-
-            formatDate() {
-                return date=>{
-                    var d = new Date(date),
-                        month = '' + (d.getMonth() + 1),
-                        day = '' + d.getDate(),
-                        year = d.getFullYear();
-
-                    if (month.length < 2)
-                        month = '0' + month;
-                    if (day.length < 2)
-                        day = '0' + day;
-
-                    return [year, month, day].join('-');
-                }
-            },
-            ecartDateProvisoireEffective(){
-                return marche_id=>{
-                    if(marche_id){
-                        console.log(marche_id)
-                     let objet=this.listeActeEffectFinnancier(marche_id)
-                        if(objet){
-                            console.log(objet.date_reception)
-                            let jour=this.nombreDejourCalcule(objet.date_reception,objet.date_reception_provisoire_definitif)
-                            return jour;
-                        }
-                    return ""
-                    }
-                }
-            },
-            ecartDateDefinitiveEffective(){
-                return marche_id=>{
-                    if(marche_id){
-                        console.log(marche_id)
-                        let objet=this.listeActeEffectFinnancier(marche_id)
-                        if(objet){
-                            console.log(objet.date_reception)
-                            let jour=this.nombreDejourCalcule(objet.date_fin_exe,objet.date_reception_definitive)
-                            return jour;
-                        }
-                        return ""
-                    }
-                }
-            },
-            ecartDemarage(){
-                return marche_id=>{
-                    if(marche_id){
-                        console.log(marche_id)
-                        let objet=this.listeActeEffectFinnancier(marche_id)
-                        if(objet){
-                           // console.log(objet.date_reception)
-                            let jour=this.nombreDejourCalcule(objet.date_odre_service,objet.date_debut_exectuion_definitif)
-                            return jour;
-                        }
-                        return ""
-                    }
-                }
-            },
-            durreReelExe(){
-              return marche_id=>{
-                  if(marche_id){
-                      console.log(marche_id)
-                      let objet=this.listeActeEffectFinnancier(marche_id)
-                      if(objet){
-                          // console.log(objet.date_reception)
-                          if(this.dateDebutExectionEffective(marche_id)==null){
-                              return "Non démarré"
-                          }
-
-                          if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
-                              let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
-                              return " En cours d'execution ("+jour1+")";
-                          }
-
-                          if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
-                              let jour=this.nombreDejourCalculeSansDateDuJOUR(this.dateDebutExectionEffective(marche_id),objet.date_reception_definitive)
-                              return jour;
-                          }
-                          let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
-                          return jour;
-                      }
-                      return ""
-                  }
-              }
-            },
-            durreStatusMarche(){
-                return marche_id=>{
-                    if(marche_id){
-                        console.log(marche_id)
-                        let objet=this.listeActeEffectFinnancier(marche_id)
-                        if(objet){
-                            // console.log(objet.date_reception)
-                            if(objet.date_debut_exectuion_definitif==null){
-                                return "Non démarré"
-                            }
-
-                            if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
-                                let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
-                                console.log(jour1)
-                                return " En cours d'execution";
-                            }
-
-                            if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
-                                let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_definitive)
-                                if(jour<1){
-                                    return "Acheve dans le delais"
-                                }
-                                return "Acheve Hors Délai"
-                            }
-                            //let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
-                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
-                            //return jour;
-                            if(jour<1){
-                                return "Acheve Dans le Délai"
-                            }
-                            return "Acheve Hors Délai"
-
-                        }
-                        return ""
-                    }
-                }
-            },
-            EcartDurreExecution(){
-                return marche_id=>{
-                    if(marche_id){
-                        console.log(marche_id)
-                        let objet=this.listeActeEffectFinnancier(marche_id)
-                        if(objet){
-                            // console.log(objet.date_reception)
-                            if(objet.date_debut_exectuion_definitif==null){
-                                return ""
-                            }
-
-                            if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
-                                let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
-                                console.log(jour1)
-                                return "";
-                            }
-
-                            if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
-                                let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_definitive)
-                                return jour;
-                            }
-                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
-
-                            let durre=parseInt(jour) - parseInt(objet.duree)
-                            return durre
-
-                        }
-                        return ""
-                    }
-                }
-            },
- admin:admin,
-      dcf:dcf,
-      noDCfNoAdmin:noDCfNoAdmin,
-
-      listeActeEffectFinnancier: function () {
-      return macheid => {
-        if (macheid != "") {
-          return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+import { mapGetters, mapActions } from "vuex";
+// import moment from "moment";
+import {formatageSomme} from "../../../../../Repositories/Repository"
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
+export default {
+    props:["macheid"],
+  // components: {
+  //   ModelListSelect
+  // },
+  data() {
+    return {
+      fabActions: [
+        {
+          name: "cache",
+          icon: "add"
         }
+      ],
+       uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+        template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+        base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+         format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) },
+          innerHTML:"",
+     
+     
+      search: ""
+    };
+  },
+
+  computed: {
+  ...mapGetters("bienService", ["acteEffetFinanciers","getterProgrammationMarchePlurieAnnuel",
+  "getMarchePersonnaliser","marches","gettersDossierMandat","gettersgestionOrdrePaiement",
+  "gettersDossierLiquidation","gettersDemandeEngagement"]),
+
+...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures"]),
+
+  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
+  'types_financements']) ,
+
+
+  // recuperID du marche dans acte Effet financier
+
+  // afficher exercice du budgetaire
+
+  afficherExoBudgetaire(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id=id)
+         if(answer){
+           return answer.anneeBudgetaire
+         }
+         return null
+     }
+   }
+  },
+
+   afficherIdTypefinancement(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id)
+         if(answer){
+           return answer.type_financement_id
+         }
+         return 0
+     }
+   }
+  },
+
+   afficherMontantOPParBailleurDons(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id &&
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement
+        && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaire)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+   afficherMontantOPParBailleurDonsAnneeSuivante(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id &&
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement
+        && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+   afficherMontantOPParBailleurDonsAnneeUlterieure(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id &&
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement
+        && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+   afficherMontantOPParBailleurEmprunt(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id && 
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+         && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaire)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+  afficherMontantOPParBailleurEmpruntAnneeSuivante(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id && 
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+         && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+  
+  afficherMontantOPParBailleurEmpruntAnneeUlterieure(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id && 
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+         && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+   afficherMontantOPParBailleurTresor(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id && 
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1
+        && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaire)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+   afficherMontantOPParBailleurTresorAnneeSuivante(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id && 
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1
+        && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+  afficherMontantOPParBailleurTresorAnneeUlterieure(){
+   return id=>{
+     if(id!="" && id!=null){
+        const answer = this.gettersgestionOrdrePaiement.find(item =>item.marche_id==id && 
+        this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1
+        && this.recperExoBudgetaireDansTableOrdeDepaiement(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+         if(answer){
+           return answer.montant_ordre_paiement
+         }
+         return 0
+     }
+   }
+  },
+
+  // recuperation de lexo dans ordre de paiement
+  recperExoBudgetaireDansTableOrdeDepaiement(){
+    return id =>{
+         if(id!="" && id!=null){
+            let resultat =this.gettersgestionOrdrePaiement.find(item => item.marche_id==id)
+             if(resultat) {
+              return resultat.exercice
+             }
+             return null
+         }
+         
+    }
+  },
+
+// afficherIDdu type de finacement Dans la table de Ordre de paiment
+recupereIDTypeFinacementDansOdreDePaiement(){
+   return id =>{
+         if(id!="" && id!=null){
+            let resultat =this.gettersgestionOrdrePaiement.find(item => item.marche_id==id)
+             if(resultat) {
+              return resultat.type_financement_id
+             }
+             return null
+         }
+         
+    }
+},
+  // calculons les totaux des mandatements
+  totauxMadatement(){
+    let Total = parseFloat(this.afficherMontantOPParBailleurTresor(this.macheid) + 
+    parseFloat(this.afficherMontantOPParBailleurDons(this.macheid)) + parseFloat(this.afficherMontantOPParBailleurEmprunt(this.macheid)))
+  
+     return Total
+  },
+
+    totauxMadatementAnneeSuivante(){
+    let Total = parseFloat(this.afficherMontantOPParBailleurTresorAnneeSuivante(this.macheid) + 
+    parseFloat(this.afficherMontantOPParBailleurDonsAnneeSuivante(this.macheid)) + parseFloat(this.afficherMontantOPParBailleurEmpruntAnneeSuivante(this.macheid)))
+  
+     return Total
+  },
+
+   totauxMadatementAnneeUlterieure(){
+    let Total = parseFloat(this.afficherMontantOPParBailleurTresorAnneeUlterieure(this.macheid) + 
+    parseFloat(this.afficherMontantOPParBailleurDonsAnneeUlterieure(this.macheid)) + parseFloat(this.afficherMontantOPParBailleurEmpruntAnneeUlterieure(this.macheid)))
+  
+     return Total
+  },
+
+  // calcule les totaux des CP
+  calculTotauxCP(){
+    const e = parseFloat((this.totauxMadatement) + parseFloat(this.afficherMontantTtcDeActe(this.macheid)))
+      return e
+  },
+
+  calculTotauxCPAnneeSuivante(){
+    const e = parseFloat((this.totauxMadatementAnneeSuivante) + parseFloat(this.afficherMontantTtcDeActeAnneSuivante(this.macheid)))
+      return e
+  },
+
+   calculTotauxCPAnneeUlterieure(){
+    const e = parseFloat((this.totauxMadatementAnneeUlterieure) + parseFloat(this.afficherMontantTtcDeActeAnneSuivante1(this.macheid)))
+      return e
+  },
+
+
+  // calcule Ecart d'execution
+   calculEcartExecutionTresor(){
+     const objet= parseFloat(this.afficherMontantOPParBailleurTresor(this.macheid))- parseFloat(this.afficherMontantCPNotifieTresor(this.macheid))
+      return objet
+   },
+
+   calculEcartExecutionTresorAnneeSuivante(){
+     const objet= parseFloat(this.afficherMontantOPParBailleurTresorAnneeSuivante(this.macheid))- parseFloat(this.afficherMontantCPNotifieTresorAnneeSuivante(this.macheid))
+      return objet
+   },
+
+ calculEcartExecutionTresorAnneeUlterieure(){
+     const objet= parseFloat(this.afficherMontantOPParBailleurTresorAnneeUlterieure(this.macheid))- parseFloat(this.afficherMontantCPNotifieTresorAnneeUlterieure(this.macheid))
+      return objet
+   },
+   calculEcartExecutionDons(){
+     const objet= (parseFloat(this.afficherMontantOPParBailleurDons(this.macheid)) - parseFloat(this.afficherMontantCPNotifieDons(this.macheid)))
+      return objet
+   },
+   calculEcartExecutionDonsAnneeSuivante(){
+     const objet= (parseFloat(this.afficherMontantOPParBailleurDonsAnneeSuivante(this.macheid)) - parseFloat(this.afficherMontantCPNotifieDonsAnneeSuivante(this.macheid)))
+      return objet
+   },
+
+   calculEcartExecutionDonsAnneeUlterieure(){
+     const objet= (parseFloat(this.afficherMontantOPParBailleurDonsAnneeUlterieure(this.macheid)) - parseFloat(this.afficherMontantCPNotifieDonsAnneeUlterieure(this.macheid)))
+      return objet
+   },
+
+   calculEcartExecutionEmprunt(){
+     const objet= (parseFloat(this.afficherMontantOPParBailleurEmprunt(this.macheid)) - parseFloat(this.afficherMontantCPNotifieEmprunt(this.macheid)))
+      return objet
+   },
+    calculEcartExecutionEmpruntAnneeSuivante(){
+     const objet= (parseFloat(this.afficherMontantOPParBailleurEmpruntAnneeSuivante(this.macheid)) - parseFloat(this.afficherMontantCPNotifieEmpruntAnneeSuivante(this.macheid)))
+      return objet
+   },
+
+    calculEcartExecutionEmpruntAnneeUlterieure(){
+     const objet= (parseFloat(this.afficherMontantOPParBailleurEmpruntAnneeUlterieure(this.macheid)) - parseFloat(this.afficherMontantCPNotifieEmpruntAnneeUlterieure(this.macheid)))
+      return objet
+   },
+
+  // calcul le cummule des madetement
+
+
+
+afficherMontantTtcDeActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterProgrammationMarchePlurieAnnuel.find(qtreel => qtreel.marche_id == id && this.afficherIdExo(this.macheid)==this.anneeBugetaire) ;
+          // console.log(this.getterProgrammationMarchePlurieAnnuel)
+            //console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.montantBase;
       }
+      return 0
+        }
+      };
     },
-    attritaireMarche(){
-           return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-                   if(objet.varObjetEntreprise){
-                       let entre=this.entreprises.find(item=>item.id==objet.entreprise_id)
-                        return entre.raison_sociale
-                   }
-                   return null
-               }
 
-               return null
-           }
+    afficherMontantTtcDeActeAnneSuivante() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterProgrammationMarchePlurieAnnuel.find(qtreel => qtreel.marche_id == id && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour) ;
+          // console.log(this.getterProgrammationMarchePlurieAnnuel)
+            //console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.montantBase;
+      }
+      return 0
+        }
+      };
     },
-     montantBaseMarche(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
 
-                   return objet.montant_act
-               }
+     afficherMontantTtcDeActeAnneSuivante1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterProgrammationMarchePlurieAnnuel.find(qtreel => qtreel.marche_id == id && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12) ;
+          // console.log(this.getterProgrammationMarchePlurieAnnuel)
+            //console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.montantBase;
+      }
+      return 0
+        }
+      };
+    },
 
-               return 0
-           }
-     },
-      durreExecutionContuelle(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
 
-                   return objet.duree
-               }
+    afficherIdExo() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterProgrammationMarchePlurieAnnuel.find(qtreel => qtreel.marche_id==id );
+            //console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.anneeBudgetaire;
+      }
+      return 0
+        }
+      };
+    },
 
-               return 0
-           }
-     },
-      dureeGarantie(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-                   if(objet.durre_garantie==null) return 0
 
-                   return objet.durre_garantie
-               }
-
-               return 0
-           }
-     },
-    dateOs(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-
-                   return objet.date_odre_service
-               }
-
-               return 0
-           }
-     },
-      dateProvisoirePrevisionnel(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-
-                   return objet.date_reception
-               }
-
-               return ""
-           }
-     },
-       dateProvisoireEffective(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-
-                   return objet.date_reception_provisoire_definitif
-               }
-
-               return ""
-           }
-     },
-
-     dateDefinitivePrevisionnel(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-
-                   return objet.date_fin_exe
-               }
-
-               return ""
-           }
-     },
-     dateDebutExectionEffective(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-
-                   return objet.date_debut_exectuion_definitif
-               }
-
-               return ""
-           }
-     },
-     dateReceptionEffective(){
-         return marche_id=>{
-               let objet=this.listeActeEffectFinnancier(marche_id)
-              console.log(objet)
-               if(objet!=undefined){
-
-                   return objet.date_reception_definitive
-               }
-
-               return ""
-           }
-     },
-     montantTotaMarche(){
-       return marche_id=>{
-          return  parseFloat(this.montantBaseMarche(marche_id)) + parseFloat(this.montantAvenantMarche(marche_id))
+     afficherLibelleExo() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.exercices_budgetaires.find(qtreel => qtreel.id==id);
+            //console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.annee;
+      }
+      return 0
+        }
+      };
+    },
+// afficher lannée conditionnel
+affichageAnneeConditionnel(){
+  let anneeBudgetaire;
+  const objetp=this.getterProgrammationMarchePlurieAnnuel.find(item => item.anneeBudgetaire== this.anneeBugetaire)
+       if(anneeBudgetaire=="") {
+          return null
        }
-     },
-     montantAvenantMarche(){
-      return marche_id=>{
-           let objetAvenant=this.avenants.filter(item=>item.marche_id==marche_id)
-                        if(objetAvenant!=undefined){
-                            let initeVal = 0;
-                            return objetAvenant.reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montant_avenant) ;
-                            }, initeVal);
-                        }
-                        return 0
-      }
-     },
-     afficherEntrepriseID(){
-         return id=>{
-             if(id!=null && id!=""){
-                 let objet=this.getActeEffetFinancierPersonnaliser.filter(item => item.marche_id==id)
-                 if(objet){
-                     return objet.entreprise_id
-                 }
-                 return 0
-             }
-         }
-     },
-      afficherEntrepriseID1(){
-         return id=>{
-             if(id!=null && id!=""){
-                 let objet=this.getActeEffetFinancierPersonnaliser.filter(item => item.id==id)
-                 if(objet){
-                     return objet.marche_id
-                 }
-                 return 0
-             }
-         }
-     },
+      
+      return objetp.anneeBudgetaire
+},
+
+     anneeBugetaire(){
+     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
+      if(anneBudget){
+        return anneBudget.annee;
+     }
+     return 0
+   },
+
+   anneeBugetaireQuiNestPasEncour(){
+     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.annee==2022 );
+      if(anneBudget){
+        return anneBudget.annee;
+     }
+     return 0
+   },
+
+ anneeBugetaireQuiNestPasEncour12(){
+     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.annee==2023 );
+      if(anneBudget){
+        return anneBudget.annee;
+     }
+     return 0
+   },
+//incrementer l'année  affichageAnneeConditionnel
+incrementAnnee(){
+   const item=parseInt(this.affichageAnneeConditionnel) + parseInt(1)
+    if(this.affichageAnneeConditionnel==""){
+      return null
+    }
+    return item;
+},
 
 
-                afficherListeMarcheHorsSib() {
+incrementAnnee1(){
+   let respose= parseInt(this.incrementAnnee) + parseInt(1)
+    if(this.incrementAnnee==""){
+      return null
+    }
+    return respose
+},
+   // afficher le montant de report en fonction de l'année
+ //affiherLibelleTypefinancement1(afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(macheid))
+   calculDuMontantReportTresor(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+              this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1 
+               &&
+               this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
 
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.objetMarchePlanierPasUiteOuRegion.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
+    calculDuMontantReportTresorAnneSuivante(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+              this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1 
+               &&
+               this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+    calculDuMontantReportTresorAnneUlterieure(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+              this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1 
+               &&
+               this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+
+   calculDuMontantReportDons(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement 
+               &&
+                this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+
+    calculDuMontantReportDonsAnneeSuivante(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement 
+               &&
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+    calculDuMontantReportDonsAnneeUlterieure(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement 
+               &&
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+    calculDuMontantReportEmprunt(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+                this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+               &&
+                this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+   calculDuMontantReportEmpruntAnneeSuivante(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+                this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+               &&
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+
+
+ calculDuMontantReportEmpruntAnneeUlterieure(){
+       return idReport =>{
+           if(idReport!="" && idReport!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+                this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+               &&
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+                if(resulta) return resulta.report_nouveau
+           }
+           return 0
+       }
+   },
+   // recuperer le code de type de financement et la source de financement anneeBugetaireQuiNestPasEncour12
+
+   afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(){
+       return id=>{
+           if(id!=""){
+               const Objet= this.getterProgrammationMarchePlurieAnnuel.find(Idm => Idm.marche_id==id)
+                if(Objet){
+                    return Objet.type_financement
                 }
-            })
-            return colect.filter(element =>   element.parent_id != null && element.sib==1 && element.attribue==2)
+                return null
+           }
+       }
+   },
 
-        }
+   // afficher libelle type_financement
 
-        return this.objetMarchePlanierPasUiteOuRegion.filter(element =>   element.parent_id != null && element.sib==1 && element.attribue==2)
-
-      },
-            objetMarchePlanierPasUiteOuRegion(){
-
-                let vM=this;
-                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!=null)
-
-                //retourne les marches d'une region selectionner
-                if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-
+  affiherLibelle(){
+                return id =>{
+                    if(id!=null){
+                        let objet = this.sources_financements.find(item =>item.id==id )
+                        if(objet) return objet.libelle
+                    }
+                    return null
                 }
-
-                //retourne les marches d'une unite administrative selectionner
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourne les marches d'une une infrastucture selectionner
-                if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type de marché selectionner
-                if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches de region et unite adminstrative selectionner
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'une infrastructure et unite adminstrative selectionner
-
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type marche et unite adminstrative selectionner
-
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'une region et infrastructure selectionner
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourne les marches d'une infrasture et type marche selectionner
-                if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type marche et regions selectionner
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marches d'une UA, REGION et INFRASTRUCTURE
-
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourn les marches d'une UA, REGION et TYPE MARCHE
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marches d'une UA, INFRA et TYPE MARCHE
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marche INFRA, REGIONS,TYPE MARCHE
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                return objet
+            },
+            // afficher le type de financement Dons
+             affiherLibelleTypefinancement(){
+               const objet= this.types_financements.find(item => item.code==2)
+                           return objet.id 
             },
 
-    //          affichierIdActeFinancierDansActePlan() {
-    //   const qtereel = this.plans_programmes.find(
-    //       qtreel => qtreel.code == "2",
-    //   );
-
-    //   if (qtereel) {
-    //     return qtereel.id;
-    //   }
-    //   return 0
-    // },
-
-    // AffichierElementParent() {
-
-    //   return id => {
-    //     if (id != null && id != "") {
-    //       return this.plans_programmes.filter(element => element.parent == id);
-    //     }
-    //   };
-    // },
-    //         anneeAmort() {
-    //             const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
-
-    //             if (norme) {
-    //                 let vM=this;
-    //                 vM.exercice_budget=norme.annee;
-    //                 return norme.annee;
-    //             }
-    //             return 0
-    //         },
-    //         varition_bugetaire(){
-    //             return id=>{
-    //                 if(id!=""){
-    //                     let objet =this.getterBudgeCharge.find(item=>item.id==id)
-
-    //                     if(objet!="undefined"){
-    //                         if(objet.status=="init"){
-    //                             return 0;
-    //                         }
-    //                         if(objet.status=="actu"){
-    //                             let ancien_version=objet.version - 1;
-    //                             let encien_budjet=this.getterBudgeCharge.find(item=>item.version==ancien_version)
-    //                             let montant_ancien_budget=this.montantGlobale(encien_budjet.id)
-    //                             let montant_budget_actuel=this.montantGlobale(objet.id)
-
-    //                             let variation=montant_budget_actuel-montant_ancien_budget;
-    //                             // console.log(variation)
-    //                             return variation;
-    //                         }
-
-    //                     }
-
-    //                 }
-    //             }
-    //         },
-    //         montantGlobale(){
-    //             return id =>{
-    //                 if (id!="") {
-    //                     let objet =this.getterBudgeCharge.find(item=>item.id==id)
-
-    //                     let initialValue = 0;
-
-    //                     if (objet!="undefined") {
-    //                         return objet.budget_general.reduce(function (total, currentValue) {
-    //                             return total + parseFloat(currentValue.Dotation_Initiale) ;
-    //                         }, initialValue);
-    //                     }
-    //                 }
-
-
-    //             }
-    //         },
-    //         etatSFNonEnregistre(){
-    //             return code=>{
-    //                 let objet=this.sources_financements.find(item=>item.code==code)
-    //                 if(objet==undefined){
-    //                     return false
-    //                 }
-
-    //                 return true
-    //             }
-    //         },
-    //         etatNonEnregistre(){
-    //             return code=>{
-    //                 let objet=this.uniteAdministratives.find(item=>item.code==code)
-
-    //                 if(objet==undefined){
-    //                     return false
-    //                 }
-
-    //                 return true
-    //             }
-    //         }
-        },
-        methods: {
-
-            ...mapActions("uniteadministrative", [
-                "getAllActeCreation",
-                "ajouterActeCreation",
-                "modifierActeCreation",
-                "supprimerActeCreation",
-                "importBudget",
-                "getAllTypeTextes",
-                "getAllUniteAdministrative",
-                "getAllArchivageDocument",
-                "ajouterBudgetCharge",
-                "getAllBudgetGeneral",
-                "getAllHistoriqueBudgetGeneral",
-                "modifierLigneExempter",
-            ]),
-            ...mapActions('parametreGenerauxSourceDeFinancement', ['getSourceFinancement', 'ajouterSourceFinancement',
-                'modifierFinancement',
-                'supprimerSourceFinancement']),
-            formatageSomme:formatageSomme,
-            videUniteAdmin(){
-                this.unite_administrative_id=""
+// afficher le type de financement Emprunt
+                     affiherLibelleTypefinancement0(){
+               const objet= this.types_financements.find(item => item.code==3)
+                           return objet.id 
             },
-            videRegions(){
-                this.region=""
 
+// afficher le type de financemnet Tresor
+             affiherLibelleTypefinancement1(){
+                        const objet= this.types_financements.find(item => item.code==1)
+                           return objet.id         
             },
-            videInfrastructure(){
-                this.infrastructure=""
-            },
-            videTypeMarche(){
-                this.type_marche=""
-            },
-            videTypeCF(){
-                this.section_id=""
-            },
- tableToExcel(table, name){
+
+            // afficher ID Type de fiancement
+            // afficherIDtypefinancementTableParametre(){
+            //   let objet =this.types_financements.find(item => item.code==1)
+            //    return objet.id
+            // },
+  //  afficherLibelleTypeFinancement(){
+  //    return id=>{
+  //      if(id!="" && id!=null){
+  //        let objet= this.types_financements.find(item => item.id==id)
+  //        if(objet) return objet.libelle
+  //      }
+  //      return 0
+  //    }
+  //  } afficherIdMarche,
+
+
+afficherMontantCPDons(){
+
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+     this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+    && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+afficherMontantCPDonsAnneeSuivante(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+     this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+    && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherMontantCPDonsAnneeUlterieure(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+     this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+    && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherMontantCPEmprunt(){
+  
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherMontantCPEmpruntAnneeSuivante(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherMontantCPEmpruntAnneeUlterieure(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+
+afficherMontantCPTresor(){
+  
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherMontantCPTresorAnneeSuivante(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherMontantCPTresorAnneeUlterieure(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+      if(respo) return respo.montantCP
+    }
+    return 0
+  }
+},
+
+afficherIdMarche(){
+  return id =>{
+                    if(id!=null){
+                        let objet = this.marches.find(item =>item.id==id)
+                        if(objet) return objet.exo_id
+                    }
+                    return null
+                }
+},
+// calcul le montant de CP notifié
+
+
+afficherMontantCPNotifieDons(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+
+afficherMontantCPNotifieDonsAnneeSuivante(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+afficherMontantCPNotifieDonsAnneeUlterieure(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+
+afficherMontantCPNotifieEmprunt(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+afficherMontantCPNotifieEmpruntAnneeSuivante(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+afficherMontantCPNotifieEmpruntAnneeUlterieure(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+
+afficherMontantCPNotifieTresor(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+       this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+afficherMontantCPNotifieTresorAnneeSuivante(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+       this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+afficherMontantCPNotifieTresorAnneeUlterieure(){
+  return id=>{
+    if(id!=""){
+      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+       this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
+      if(respo) return respo.montantCP_notifie
+    }
+    return 0
+  }
+},
+
+// calculons le total previsionnel annuel
+
+calculeTotalPrevisionnelAnnuelTresor(){
+
+  const result= parseFloat(this.calculDuMontantReportTresor(this.macheid))+ parseFloat(this.afficherMontantCPTresor(this.macheid))
+   return result;
+},
+
+calculeTotalPrevisionnelAnnuelTresorAnneeSuivante(){
+
+  const result= parseFloat(this.calculDuMontantReportTresorAnneSuivante(this.macheid))+ parseFloat(this.afficherMontantCPTresorAnneeSuivante(this.macheid))
+   return result;
+},
+
+calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure(){
+
+  const result= parseFloat(this.calculDuMontantReportTresorAnneUlterieure(this.macheid))+ parseFloat(this.afficherMontantCPTresorAnneeUlterieure(this.macheid))
+   return result;
+},
+calculeTotalPrevisionnelAnnuelDons(){
+
+  const resulta= parseFloat(this.calculDuMontantReportDons(this.macheid))+ parseFloat(this.afficherMontantCPDons(this.macheid))
+   return resulta;
+},
+
+
+calculeTotalPrevisionnelAnnuelDonsAnneeSuivante(){
+
+  const resulta= parseFloat(this.calculDuMontantReportDonsAnneeSuivante(this.macheid))+ parseFloat(this.afficherMontantCPDonsAnneeSuivante(this.macheid))
+   return resulta;
+},
+calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur(){
+
+  const resulta= parseFloat(this.calculDuMontantReportDonsAnneeUlterieure(this.macheid))+ parseFloat(this.afficherMontantCPDonsAnneeUlterieure(this.macheid))
+   return resulta;
+},
+calculeTotalPrevisionnelAnnuelEmprunt(){
+
+  const resultat= parseFloat(this.calculDuMontantReportEmprunt(this.macheid))+ parseFloat(this.afficherMontantCPEmprunt(this.macheid))
+   return resultat;
+},
+
+calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante(){
+
+  const resultat= parseFloat(this.calculDuMontantReportEmpruntAnneeSuivante(this.macheid))+ parseFloat(this.afficherMontantCPEmpruntAnneeSuivante(this.macheid))
+   return resultat;
+},
+
+calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur(){
+
+  const resultat= parseFloat(this.calculDuMontantReportEmpruntAnneeUlterieure(this.macheid))+ parseFloat(this.afficherMontantCPEmpruntAnneeUlterieure(this.macheid))
+   return resultat;
+},
+
+// recuperation d'ID de demande dengagement dans la table de liquidation
+
+recupereIdDmdeEngagement(){
+       let response =this.gettersDossierLiquidation.find(item=> item.decision_cf==8)
+          return response.dmd_engagement_id
+},
+
+// recuperationExoDans Liquidation 
+afficherExoDansLiquidation(){
+  const objet = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement)
+   return objet.exercice
+},
+// afficher le montant Tresor de liquidation  && this.afficherExoDansLiquidation===this.anneeBugetaire)
+MontantTresorLiquidation(){
+        // let montant_tresor;
+       const answer = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaire)
+           if(answer){
+            return  answer.montant_tresor
+           }
+    return 0
+},
+
+MontantTresorLiquidationAnneeSuivante(){
+        // let montant_tresor;
+       const answer = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaireQuiNestPasEncour)
+           if(answer){
+            return  answer.montant_tresor
+           }
+    return 0
+},
+
+MontantTresorLiquidationAnneeUlterieure(){
+        // let montant_tresor;
+       const answer = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaireQuiNestPasEncour12)
+           if(answer){
+            return  answer.montant_tresor
+           }
+    return 0
+},
+
+MontantDonsLiquidation(){
+        // let montant_tresor;
+       const respons = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaire)
+           if(respons){
+            return  respons.montant_don
+           }
+    return 0
+},
+
+MontantDonsLiquidationAnneeSuivante(){
+        // let montant_tresor;
+       const respons = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaireQuiNestPasEncour)
+           if(respons){
+            return  respons.montant_don
+           }
+    return 0
+},
+
+MontantDonsLiquidationAnneeUlterieure(){
+        // let montant_tresor;
+       const respons = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaireQuiNestPasEncour12)
+           if(respons){
+            return  respons.montant_don
+           }
+    return 0
+},
+MontantEmpruntLiquidation(){
+        // let montant_tresor;
+       const resultat = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaire)
+           if(resultat){
+            return  resultat.montant_emprunt
+           }
+    return 0
+},
+
+MontantEmpruntLiquidationAnneeSuivante(){
+        // let montant_tresor;
+       const resultat = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaireQuiNestPasEncour)
+           if(resultat){
+            return  resultat.montant_emprunt
+           }
+    return 0
+},
+MontantEmpruntLiquidationAnneeUlterieure(){
+        // let montant_tresor;
+       const resultat = this.gettersDemandeEngagement.find(item => item.id==this.recupereIdDmdeEngagement
+       && this.afficherExoDansLiquidation==this.anneeBugetaireQuiNestPasEncour12)
+           if(resultat){
+            return  resultat.montant_emprunt
+           }
+    return 0
+}
+
+
+
+
+
+                                    
+  },
+  methods: {
+    ...mapActions("personnelUA", [
+      
+    ]),
+
+    tableToExcel(table, name){
                 if (!table.nodeType) table = this.$refs.table
                 var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
                 window.location.href = this.uri + this.base64(this.format(this.template, ctx))
             },
-            formaterDate(date){
-                if(date==null)
-                    return ""
-                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-            },
-
-            onCancel() {
-                console.log('User cancelled the loader.')
-            },
-            // OnchangeFichier(e) {
-            //     const files = e.target.files;
-            //     this.selectedFile = event.target.files[0];
-            //     console.log(this.selectedFile)
-            //     Array.from(files).forEach(file => this.addFichier(file));
-            // },
-            // beforeUpload(file) {
-            //     const isLt1M = file.size / 1024 / 1024 < 1
-
-            //     if (isLt1M) {
-            //         return true
-            //     }
-
-            //     this.$message({
-            //         message: 'Please do not upload files larger than 1m in size.',
-            //         type: 'warning'
-            //     })
-            //     return false
-            // },
-            // handleSuccess({ results, header }) {
-            //     // console.log(results[0]["GRANDE NATURE DE DEPENSE"])
-            //     this.tableData = results
-            //     this.tableHeader = header
-
-            //     if(this.tableData.length>0){
-            //         let vm=this;
-
-            //         this.tableData.forEach(function (value) {
-            //             console.log(value)
-            //             //recherche de nouvelle source de financement
-            //             let section=value['SECTION'].split(" ")
-            //             let localisation=value['ZONE'].split(" ")
-            //             let array_source=value['SOURCE FINANCEMENT'].split(" ")
-            //             let array_unite_ua=value['UA'].split(" ")
-            //             console.log(array_unite_ua[0])
-            //             let code_ua=section[0]+'-'+array_unite_ua[0]+'-'+localisation[0]
-            //             console.log(code_ua)
-            //             let sourceFinancement=vm.sources_financements.find(item=>item.code==array_source[0])
-            //             let sourceUA=vm.uniteAdministratives.find(item=>item.code==code_ua)
-            //             if(sourceFinancement==undefined){
-            //                 let libelle="";
-            //                 let j=0;
-            //                 array_source.forEach(function (val) {
-            //                     if(j>0){
-            //                         libelle=libelle+" "+val
-            //                     }
-            //                     j++
-            //                 })
-
-            //                 let objet={
-            //                     code:array_source[0],
-            //                     libelle:libelle,
-            //                     sigle:array_source[0]
-            //                 }
-            //                 let isExiste=vm.source_financement_detecter.find(item=>item.code==array_source[0])
-            //                 if(isExiste==undefined){
-            //                     vm.source_financement_detecter.push(objet)
-            //                     vm.ajouterSourceFinancement(objet)
-            //                 }
-
-            //             }
-
-
-            //             //Recherche de nouvelle UA
-            //             if(sourceUA==undefined){
-            //                 let libelle_ua="";
-            //                 let i=0;
-            //                 array_unite_ua.forEach(function (val) {
-            //                     if(i>0){
-            //                         libelle_ua=libelle_ua+" "+val
-            //                     }
-            //                     i++
-            //                 })
-
-            //                 let objet={
-            //                     section:value['SECTION'],
-            //                     zone:value['ZONE'],
-            //                     code_g:array_unite_ua[0],
-            //                     code:code_ua,
-            //                     libelle:libelle_ua,
-            //                 }
-
-            //                 let isExisteUA=vm.unite_admin_dettecte.find(item=>item.code==code_ua)
-            //                 if(isExisteUA==undefined){
-            //                     vm.unite_admin_dettecte.push(objet)
-            //                 }
-            //             }
-            //             // console.log(value['SOURCE FINANCEMENT'])
-            //             // console.log(value['UA'])
-            //         })
-            //     }
-            // },
-            // addFichier(file) {
-            //     let reader = new FileReader();
-            //     let vm = this;
-            //     reader.onload = e => {
-            //         vm.imagePDFDemandeAno = "pdf.png";
-            //         vm.namePDFDemandeAno = file.name;
-            //         vm.fichierPDFDemandeAno = e.target.result;
-            //     };
-            //     reader.readAsDataURL(file);
-            // }
-            // ,
-            // afficherModalAjouterStock() {
-            //     this.$("#exampleModal").modal({
-            //         backdrop: "static",
-            //         keyboard: false
-            //     });
-            // },
-            // ajouterFichier(){
-            //     /* const formData = new FormData();
-            //      formData.append('fichier', this.selectedFile, this.selectedFile.name);
-            //      formData.append('exercicebudget_id', this.exercice_budget);
-            //      let config = {
-            //          header : {
-            //              'Content-Type' : 'multipart/form-data'
-            //          }
-            //      }*/
-            //     let config = {
-            //         header : {
-            //             'Content-Type' : 'multipart/form-data'
-            //         }
-            //     }
-            //     let formData={
-            //         exercicebudget_id:this.exercice_budget,
-            //         dataExcel:this.tableData
-            //     }
-
-            //     this.i= this.i+10;
-            //     this.bgWidth=this.i+"%"
-            //     this.$("#exampleModal").modal('hide');
-            //     this.ajouterBudgetCharge(formData,config).then(data=>{
-            //         console.log(data)
-            //         this.tableData=[]
-            //     }).catch(erro=>{
-            //         console.log(erro)
-            //         this.getAllBudgetGeneral()
-            //         this.getAllUniteAdministrative()
-            //         // router.push({ path: 'budgetGenerals' })
-            //     })
-
-            // },
-
-        },
-        watch: {
-            type_marche:function (value) {
-                console.log(value);
-
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                    this.isLoading = false
-                },1000)
-
-
-
-            },
-
-            infrastructure: function (value) {
-                console.log(value);
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                    this.isLoading = false
-                },1000)
-
-            },
-            region: function (value) {
-                console.log(value);
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                    this.isLoading = false
-                },1000)
-
-            },
-            unite_administrative_id: function (value) {
-                console.log(value);
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                    this.isLoading = false
-                },1000)
-
-            },
-
-        },
-    };
+formatageSomme:formatageSomme
+  }
+};
 </script>
 <style scoped>
 
-    .taillemodal {
-        width: 800px;
-        margin: 0 -380px;
-    }
-    .gdmodelfour
-    {
-        width: 1000px;
-        margin: 0 -580px;
-        height: 500px;
-    }
-    .grdirModalActeEffet
-    {
+.tailgrand{
+      width: 95%;
+margin: 0 -48%;
 
-        width: 1200px;
-        margin: 0 -530px;
-        height: 550px;
+  
+}
 
-    }
-    .grdirModalAnalyse{
-        width: 1000px;
-        margin: 0 -530px;
-        height: 350px;
-    }
-    .tlAviBailleur{
-        width: 1000px;
-        margin: 0 -530px;
-        height: 450px;
-
-    }
-    .tlDossierCandidat{
-        width: 1000px;
-        margin: 0 -530px;
-        height: 500px;
-
-    }
-
-    .tlg{
-        width: 900px;
-        margin: 0 -450px;
-        height: 500px;
-    }
-    .sommecolor{
-        background-color: red;
-        color:red;
-        font-size: 120%;
-        text-align: center;
-        font-weight:bold;
-    }
-    .modaloffreFin{
-        width: 850px;
-        margin: 0 -480px;
-    }
-    .tailDMP{
-        width: 850px;
-        margin: 0 -490px;
-    }
-    .tailleModalOffre{
-        width: 1200px;
-        margin: 0 -490px;
-    }
-    .tailleModalOffre2{
-        width: 1300px;
-        margin: 0 -690px;
-    }
-    .tableEntete{
-        color: #000;width:2%;text-align:center;background-color: #fbcbcb !important;font-size:10px
-    }
 </style>
-
-
-
+ 

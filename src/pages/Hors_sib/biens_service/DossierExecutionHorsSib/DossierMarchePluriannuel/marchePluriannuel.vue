@@ -6,8 +6,11 @@
                                       
                                         <th>Année Budgetaire</th>
                                           <th>Montant de Base </th>
-                                        <th> Montant de crédit de paiement</th>
-                                        <th>Montant engement reçu </th>
+                                        <th> Montant  CP annuel prevu</th> 
+                                        <th> Montant CP sur tresor</th>
+                                        <th> Montant CP sur dons</th>
+                                        <th> Montant CP sur emprunt</th>
+                                        <th>Montant de crédit de paiement notifié </th>
                                         <th>Source de financement</th>
                                         <th>Type de financement</th>
                                         <th>Report à nouveau</th>
@@ -20,11 +23,17 @@
                                         :key="appelOffre.id">
                                        
                                             <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
-                                            {{afficherLibelleAnneBudgetaire(appelOffre.anneeBudgetaire) || 'Non renseigné'}}</td>
+                                            {{appelOffre.anneeBudgetaire || 'Non renseigné'}}</td>
                                              <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSomme(parseFloat(appelOffre.montantBase)) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSomme(parseFloat(appelOffre.montantCP)) || 'Non renseigné'}}</td>
+                                              <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
+                                            {{formatageSomme(parseFloat(appelOffre.cp_tresor)) || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
+                                            {{formatageSomme(parseFloat(appelOffre.cp_dons)) || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
+                                            {{formatageSomme(parseFloat(appelOffre.cp_emprunt)) || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSomme(parseFloat(appelOffre.montantCP_notifie)) || 'Non renseigné'}}</td>
                                               <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
@@ -64,7 +73,7 @@
              <select v-model="formData.anneeBudgetaire" class="span" >
                  <!-- <option>veuillez selectionner l'année</option> -->
                <option v-for="plans in exercices_budgetaires" :key="plans.id" 
-               :value="plans.id"> {{plans.annee}}</option>
+               :value="plans.annee"> {{plans.annee}}</option>
                <!-- <code v-if="message_offre">{{message_offre}}</code> -->
            </select>
                             
@@ -109,7 +118,7 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Montant Crédit de Paiement annuel prevu <code>*</code></label>
-                                <money class="span" placeholder="" v-model="formData.montantCP" > </money>
+                                <input type="text" class="span" placeholder="" :value="calculCPAnnuelPourLesTypeFinancement" readonly /> 
                             </div>
                         </div>
                             </td>
@@ -135,7 +144,7 @@
                             
                         </tr>
                         <tr>
-                                <td>
+                                  <td>
                       <div class="control-group">
             <label class="control-label">Source de financement</label>
             <div class="controls">
@@ -148,7 +157,7 @@
             </div>
           </div>
                         </td>
-                           <td colspan="2">
+                             <td colspan="">
                       <div class="control-group">
             <label class="control-label">Type de financement</label>
             <div class="controls">
@@ -161,6 +170,93 @@
             </div>
           </div>
                         </td>
+
+                           <td>
+                      <div class="control-group">
+            
+            <div class="controls">
+            <label>CP sur tresor <code>*</code></label>
+            <money  class="span" placeholder="" v-model="formData.cp_tresor"></money>
+                                
+            </div>
+          </div>
+                        </td>
+                            </tr>
+
+                            <tr>
+
+                                  <td>
+                      <div class="control-group">
+            <label class="control-label">Source de financement</label>
+            <div class="controls">
+            
+               <select v-model="formData.source_financement_cp" class="span" >
+               <option v-for="plans in sources_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+                             <td colspan="">
+                      <div class="control-group">
+            <label class="control-label">Type de financement</label>
+            <div class="controls">
+            
+               <select v-model="formData.type_financement_cp" class="span" >
+               <option v-for="plans in types_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+                             
+                           <td colspan="">
+                    <div class="controls">
+                    <label>Cp sur Dons <code>*</code></label>
+                      <money  class="span" placeholder="" v-model="formData.cp_dons"></money>
+                                
+                    </div>
+                    </td>
+                     
+                            </tr>
+                            <tr>
+
+                                  <td>
+                      <div class="control-group">
+            <label class="control-label">Source de financement</label>
+            <div class="controls">
+            
+               <select v-model="formData.source_financement_id_cp" class="span" >
+               <option v-for="plans in sources_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+                             <td colspan="">
+                      <div class="control-group">
+            <label class="control-label">Type de financement</label>
+            <div class="controls">
+            
+               <select v-model="formData.type_financement_id_cp" class="span" >
+               <option v-for="plans in types_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+
+                         <td colspan="">
+                    <div class="controls">
+                    <label>CP sur Emprunt <code>*</code></label>
+                      <money  class="span" placeholder="" v-model="formData.cp_emprunt"></money>
+                                
+                    </div>
+                    </td>
                             </tr>
                                 
                       
@@ -196,7 +292,7 @@
                             <div class="controls">
                                  <select v-model="editMarchePl.anneeBudgetaire" class="span" >
                <option v-for="plans in exercices_budgetaires" :key="plans.id" 
-               :value="plans.id"> {{plans.annee}}</option>
+               :value="plans.annee"> {{plans.annee}}</option>
                <!-- <code v-if="message_offre">{{message_offre}}</code> -->
            </select>
                                 <!-- <input type="text" class="span5" placeholder="Type appel" :value="anneeBudgetairemodifier" readonly> -->
@@ -272,7 +368,7 @@
             </div>
           </div>
                         </td>
-                             <td colspan="2">
+                             <td colspan="">
                       <div class="control-group">
             <label class="control-label">Type de financement</label>
             <div class="controls">
@@ -285,6 +381,93 @@
             </div>
           </div>
                         </td>
+
+                           <td>
+                      <div class="control-group">
+            
+            <div class="controls">
+            <label>CP sur tresor <code>*</code></label>
+            <money  class="span" placeholder="" v-model="editMarchePl.cp_tresor"></money>
+                                
+            </div>
+          </div>
+                        </td>
+                            </tr>
+
+                            <tr>
+
+                                  <td>
+                      <div class="control-group">
+            <label class="control-label">Source de financement</label>
+            <div class="controls">
+            
+               <select v-model="editMarchePl.source_financement_cp" class="span" >
+               <option v-for="plans in sources_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+                             <td colspan="">
+                      <div class="control-group">
+            <label class="control-label">Type de financement</label>
+            <div class="controls">
+            
+               <select v-model="editMarchePl.type_financement_cp" class="span" >
+               <option v-for="plans in types_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+                             
+                           <td colspan="">
+                    <div class="controls">
+                    <label>Cp sur Dons <code>*</code></label>
+                      <money  class="span" placeholder="" v-model="editMarchePl.cp_dons"></money>
+                                
+                    </div>
+                    </td>
+                     
+                            </tr>
+                            <tr>
+
+                                  <td>
+                      <div class="control-group">
+            <label class="control-label">Source de financement</label>
+            <div class="controls">
+            
+               <select v-model="editMarchePl.source_financement_id_cp" class="span" >
+               <option v-for="plans in sources_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+                             <td colspan="">
+                      <div class="control-group">
+            <label class="control-label">Type de financement</label>
+            <div class="controls">
+            
+               <select v-model="editMarchePl.type_financement_id_cp" class="span" >
+               <option v-for="plans in types_financements" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+
+                         <td colspan="">
+                    <div class="controls">
+                    <label>CP sur Emprunt <code>*</code></label>
+                      <money  class="span" placeholder="" v-model="editMarchePl.cp_emprunt"></money>
+                                
+                    </div>
+                    </td>
                             </tr>
                                 
                       
@@ -320,7 +503,14 @@ export default {
                 duree_contratuel:"",
                 source_financement_id:"",
                 report_nouveau:"",
-                montantBase:""
+                montantBase:"",
+                cp_dons:"",
+                cp_tresor:"",
+                cp_emprunt:"",
+                type_financement_id_cp:"",
+                source_financement_id_cp:"",
+                type_financement_cp:"",
+                source_financement_cp:"",
             },
             editMarchePl:{}
 
@@ -346,6 +536,43 @@ export default {
                     }
                 }
             },
+            // calcul du CP annuel prevu pour les type de financement  
+
+            calculCPAnnuelPourLesTypeFinancement(){
+                 const sommeCPAnnuel =parseFloat(this.formData.cp_tresor)+parseFloat(this.formData.cp_dons)+parseFloat(this.formData.cp_emprunt)
+                  if(isNaN(sommeCPAnnuel)) return null
+                  return  parseFloat(sommeCPAnnuel).toFixed(2)
+           },
+
+            // calculCPAnnuelCPsurDons(){
+            //       return id =>{
+            //           if(id!="" && id!=null){
+            //               let Objet = this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id==id)
+            //                if(Objet) {
+            //                    return Objet.cp_dons
+            //                }
+            //           }
+            //       }
+            // },
+
+
+            //  calculCPAnnuelCPsurEmprunt(){
+            //       return id =>{
+            //           if(id!="" && id!=null){
+            //               let Objet = this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id==id)
+            //                if(Objet) {
+            //                    return Objet.cp_emprunt
+            //                }
+            //           }
+            //       }
+            // },
+
+        //     calculCPAnnuelPourLesTypeFinancement(){
+        //         const item = parseFloat(this.calculCPAnnuelCPsurTresor(this.macheid)) +
+        //          parseFloat(this.calculCPAnnuelCPsurDons(this.macheid)) + parseFloat(this.calculCPAnnuelCPsurEmprunt(this.macheid))
+
+        //         return item .toFixed(0);
+        //    },
 
             //afficher libelle source financement
 
@@ -378,13 +605,23 @@ export default {
                 }
             },
 
-//       anneeBugetaire(){
-//      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
-//      if(anneBudget){
-//        return anneBudget.annee;
-//      }
-//      return 0
-//    },
+             afficherAnneBudgetaire(){
+                return id =>{
+                    if(id!=null){
+                        let objet = this.getterProgrammationMarchePlurieAnnuel.find(item =>item.marche_id==id)
+                        if(objet) return objet.anneeBudgetaire
+                    }
+                    return null
+                }
+            },
+
+      anneeBugetaire(){
+     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
+     if(anneBudget){
+       return anneBudget.annee;
+     }
+     return 0
+   },
 //     anneeBudgetairemodifier(){
 //      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
 //      if(anneBudget){
@@ -395,7 +632,7 @@ export default {
      afficherMontantTtcDeActe() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id );
             console.log(this.acteEffetFinanciers)
       if (qtereel) {
         return qtereel.montant_act;
@@ -442,7 +679,7 @@ formatageSomme:formatageSomme,
             //    })
               var nouvelObjet = {
                 ...this.formData,
-              // anneeBudgetaire:this.anneeBugetaire,
+               montantCP:this.calculCPAnnuelPourLesTypeFinancement,
                marche_id:this.macheid,
                montantBase:this.afficherMontantTtcDeActe(this.macheid),
                duree_contratuel:this.afficherDureeContratuel(this.macheid)
@@ -450,7 +687,7 @@ formatageSomme:formatageSomme,
              this.ajouterProgrammationMarchePlurieAnnuel(nouvelObjet) 
               this.formData ={
      	type_financement:"",
-                montantCP:"",
+                //montantCP:"",
                 montantCP_notifie:"",
                 source_financement_id:"",
                 report_nouveau:"",
@@ -474,9 +711,9 @@ formatageSomme:formatageSomme,
 
 <style scoped>
 .grdirModalActeEffet{
-     width: 1000px;
+     width: 1100px;
  margin: 0 -530px;
- height: 500px;
+ height: 600px;
 
 }
 </style>
