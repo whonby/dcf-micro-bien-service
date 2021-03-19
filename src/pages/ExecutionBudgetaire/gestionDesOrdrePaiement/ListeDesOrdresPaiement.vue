@@ -289,10 +289,11 @@ listeUniteAdminPasSection
                      <th   style="font-size:14px;font-weight:bold">Exercice</th>
                       <th   style="font-size:14px;font-weight:bold">Type d'ordre de paiement</th>
                      <th   style="font-size:14px;font-weight:bold;color:#000">N°Ordre paiement</th>
+                     <!--   
                      <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Provisoire</th>
                      <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Annulation</th>
                      <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Definitif</th>
-                   
+                   -->
                     <th   style="font-size:14px;font-weight:bold">Objet OP</th>
                     <th   style="font-size:14px;font-weight:bold">UA</th>
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
@@ -320,6 +321,8 @@ listeUniteAdminPasSection
                     <td v-else-if="type.type_ordre_paiement==2"
                       style="font-size:14px;font-weight:bold;text-align:center"                
                     > <span>OP Provisoire</span></td>
+
+                  
                     <td v-else-if="type.type_ordre_paiement==3"
                       style="font-size:14px;font-weight:bold;text-align:center"                
                     > <span>OP Annulation</span></td>
@@ -330,6 +333,8 @@ listeUniteAdminPasSection
                      <td 
                       style="font-size:14px;font-weight:bold;text-align:center;color:green"
                     >{{type.numero_ordre_paiement || 'Non renseigné'}}</td>
+
+  <!--   
                    <td v-if="type.id_op_provisoire != null"
                       style="font-size:14px;font-weight:bold;text-align:center;color:red"
                     >{{afficheNumeroOpDefinitive(type.id_op_provisoire) }}</td>
@@ -343,7 +348,7 @@ listeUniteAdminPasSection
                     >{{afficheNumeroOpDefinitive(type.id_op_definitif) }}</td>
  <td v-else style="background-color:lightblue"></td>
 
-         
+          -->
                      <!-- <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
                     >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td> -->
@@ -356,13 +361,13 @@ listeUniteAdminPasSection
                      <td
                        style="font-size:14px;font-weight:bold;text-align:center"
                     >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
-                     <td v-if="type.type_ordre_paiement==1 || type.type_ordre_paiement==4">
+                     <td >
                                               <router-link :to="{ name: 'VoirDetailAutreFiche', params: { id: type.id }}"
                 class="btn btn " title="Editer Fiche" style="width:80%">
-                  <span class="" style="font-size:25px;font-weight:bold;color:#000" ><i class="icon-eye-open"></i>  Voir</span>
+                  <span class="" style="font-size:20px;font-weight:bold;color:#000" ><i class="icon-eye-open"></i>  Voir</span>
                    </router-link>
                     </td>
-                    <td v-else style="background-color:lightblue"></td>
+                   
                     <!-- <td v-if="type.type_ordre_paiement==1 || type.type_ordre_paiement==4">
                                               <router-link :to="{ name: 'FicheAnnexe', params: { id: type.id }}"
                 class="btn btn-danger" title="Editer Fiche de controle">

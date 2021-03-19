@@ -33,6 +33,16 @@
           >
           </model-list-select>
         </div>
+        
+         <div class="span5">
+          <label for=""><b>Date Debut</b></label>
+         <input type="Date" name="datedebut" id="datedebut" class="form-control">
+        </div>
+
+        <div class="span5">
+          <label for=""><b>Date Fin</b></label>
+         <input type="Date" name="datefin" id="datefin" class="form-control">
+        </div>
       </div>
 
       <br />
@@ -45,8 +55,8 @@
             <!-- debut pour les Personnels -->
             <h4 style="text-align: center">Personnels</h4>
 
-            <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card" style="height: 180px">
+            <div class="span4 " style="border: 2px dotted #ffffff">
+              <div class="" style="height: 180px">
                 <apexchart
                   type="donut"
                   :options="chartOptions1"
@@ -1088,9 +1098,7 @@ export default {
       if (vm.dataPourcentage.length > 0) {
         vm.dataPourcentage = [];
       }
-      vm.dataPourcentage.push(
-        parseFloat(this.GrandeNaturePersonelAePrevisionel)
-      );
+      vm.dataPourcentage.push(parseFloat(this.GrandeNaturePersonelAePrevisionel - this.GrandeNaturePersonelAeExecute));
       vm.dataPourcentage.push(parseFloat(this.GrandeNaturePersonelAeExecute));
 
       return "";
@@ -1104,8 +1112,7 @@ export default {
         vm.dataPourcentage21 = [];
       }
       vm.dataPourcentage21.push(
-        parseFloat(this.GrandeNaturePersonelCpPrevisionel)
-      );
+        parseFloat(this.GrandeNaturePersonelCpPrevisionel - this.GrandeNaturePersonelCpExecute));
       vm.dataPourcentage21.push(parseFloat(this.GrandeNaturePersonelCpExecute));
 
       return "";
@@ -1118,12 +1125,8 @@ export default {
       if (vm.dataPourcentageBienService1.length > 0) {
         vm.dataPourcentageBienService1 = [];
       }
-      vm.dataPourcentageBienService1.push(
-        parseFloat(this.GrandeNatureBienServiceAePrevisionel)
-      );
-      vm.dataPourcentageBienService1.push(
-        parseFloat(this.GrandeNatureBienServiceAeExecute)
-      );
+      vm.dataPourcentageBienService1.push( parseFloat(this.GrandeNatureBienServiceAePrevisionel - this.GrandeNatureBienServiceAeExecute));
+      vm.dataPourcentageBienService1.push( parseFloat(this.GrandeNatureBienServiceAeExecute));
 
       return "";
     },
@@ -1134,12 +1137,8 @@ export default {
       if (vm.dataPourcentageBienService2.length > 0) {
         vm.dataPourcentageBienService2 = [];
       }
-      vm.dataPourcentageBienService2.push(
-        parseFloat(this.GrandeNatureBienServiceCpPrevisionel)
-      );
-      vm.dataPourcentageBienService2.push(
-        parseFloat(this.GrandeNatureBienServiceCpExecute)
-      );
+      vm.dataPourcentageBienService2.push(parseFloat(this.GrandeNatureBienServiceCpPrevisionel - this.GrandeNatureBienServiceCpExecute));
+      vm.dataPourcentageBienService2.push( parseFloat(this.GrandeNatureBienServiceCpExecute));
 
       return "";
     },
@@ -1153,12 +1152,8 @@ export default {
       if (vm.dataPourcentageTransferts1.length > 0) {
         vm.dataPourcentageTransferts1 = [];
       }
-      vm.dataPourcentageTransferts1.push(
-        parseFloat(this.GrandeNatureTransfertsAePrevisionel)
-      );
-      vm.dataPourcentageTransferts1.push(
-        parseFloat(this.GrandeNatureTransfertsAeExecute)
-      );
+      vm.dataPourcentageTransferts1.push(parseFloat(this.GrandeNatureTransfertsAePrevisionel - this.GrandeNatureTransfertsAeExecute));
+      vm.dataPourcentageTransferts1.push(parseFloat(this.GrandeNatureTransfertsAeExecute));
 
       return "";
     },
@@ -1169,12 +1164,8 @@ export default {
       if (vm.dataPourcentageTransferts2.length > 0) {
         vm.dataPourcentageTransferts2 = [];
       }
-      vm.dataPourcentageTransferts2.push(
-        parseFloat(this.GrandeNatureTransfertsCpPrevisionel)
-      );
-      vm.dataPourcentageTransferts2.push(
-        parseFloat(this.GrandeNatureTransfertsCpExecute)
-      );
+      vm.dataPourcentageTransferts2.push(parseFloat(this.GrandeNatureTransfertsCpPrevisionel - this.GrandeNatureTransfertsCpExecute));
+      vm.dataPourcentageTransferts2.push( parseFloat(this.GrandeNatureTransfertsCpExecute));
 
       return "";
     },
@@ -1188,12 +1179,8 @@ export default {
       if (vm.dataPourcentageInvestissements1.length > 0) {
         vm.dataPourcentageInvestissements1 = [];
       }
-      vm.dataPourcentageInvestissements1.push(
-        parseFloat(this.GrandeNatureInvestissementsAePrevisionel)
-      );
-      vm.dataPourcentageInvestissements1.push(
-        parseFloat(this.GrandeNatureInvestissementsAeExecute)
-      );
+      vm.dataPourcentageInvestissements1.push( parseFloat(this.GrandeNatureInvestissementsAePrevisionel - this.GrandeNatureInvestissementsAeExecute));
+      vm.dataPourcentageInvestissements1.push( parseFloat(this.GrandeNatureInvestissementsAeExecute) );
 
       return "";
     },
@@ -1204,12 +1191,8 @@ export default {
       if (vm.dataPourcentageInvestissements2.length > 0) {
         vm.dataPourcentageInvestissements2 = [];
       }
-      vm.dataPourcentageInvestissements2.push(
-        parseFloat(this.GrandeNatureInvestissementsCpPrevisionel)
-      );
-      vm.dataPourcentageInvestissements2.push(
-        parseFloat(this.GrandeNatureInvestissementsCpExecute)
-      );
+      vm.dataPourcentageInvestissements2.push( parseFloat(this.GrandeNatureInvestissementsCpPrevisionel - this.GrandeNatureInvestissementsCpExecute));
+      vm.dataPourcentageInvestissements2.push(parseFloat(this.GrandeNatureInvestissementsCpExecute));
 
       return "";
     },
