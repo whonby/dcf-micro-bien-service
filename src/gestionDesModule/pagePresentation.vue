@@ -562,7 +562,7 @@ this.getTypeTextJuridique()
 this.getMotifDecision()
 this.getDocumentProcedure()
  this.getReserveCf()
-
+this.getUniteAdministrativeBailleur()
 // this.getDecisionMarche()
 this.getActeEffetFinancier()
  this.getFacture()
@@ -714,6 +714,7 @@ return objJson.id
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
  ...mapActions("uniteadministrative", [
+   "getUniteAdministrativeBailleur", 
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",

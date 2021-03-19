@@ -30,6 +30,14 @@
               <td>
                 <div align="right">
 
+      <button class="btn btn"  @click.prevent="BAILLEURUA" style="color:#000;font-size:12px;font-weight: bold;">AJOUTER BAILLEUR DES UA </button>
+
+
+                            </div>
+              </td>
+              <td style="width:12%;">
+                <div align="right">
+
       <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
 
 
@@ -259,6 +267,9 @@ export default {
     ]),
     ModificationBudgetaire(){
                 this.$router.push({ name: 'ModificationBudgetaire' })
+            },
+             BAILLEURUA(){
+                this.$router.push({ name: 'ListeUniteAdministrative' })
             },
             SOUSbUDGET(){
                 this.$router.push({ name: 'listeSousBudgetParUa' })

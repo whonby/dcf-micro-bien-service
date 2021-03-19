@@ -10,7 +10,7 @@
               <td>
                 <div align="right">
 
-      <button class="btn btn-info"  @click.prevent="SOUSbUDGET">AJOUTER SOUS BUDGET </button>
+      <button class="btn btn-info"  @click.prevent="afficherModalAjouterTitre">AJOUTER BAILLEUR </button>
 
 
                             </div>
@@ -56,32 +56,32 @@
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
                      <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Unité Administrative</th>
+                    <th style="width:70%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
-                    <th style="width:10%;" colspan="" >Action</th>
+                    <th style="width:10%;" colspan="2" >Action</th>
                    
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in groupeUaSousBudget" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBailleur" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].ua_id)) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].ua_id) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'VoirSousBudget', params: { id: type[0].id }}"
+                      <router-link :to="{ name: 'ListeBailleurUniteAdministrative', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Sous Budgets</i></span>
+                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Bailleur</i></span>
                    </router-link> 
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
-                    <!-- <td>
-                      <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerUniteAdministrativeBailleur(type[0].id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
-                    </td> -->
+                    </td>
                   </tr>
                   
                 </tbody>
@@ -98,6 +98,110 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <notifications  />
     <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
+
+
+
+    <div id="exampleModal" class="modal hide tailleModal">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Bailleur</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+        <tr>
+           <td colspan="">
+                       <div class="control-group">
+                <label class="control-label">Nombre de Bailleur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                  :value="nombreBailleur(this.formData.ua_id,this.formData.type_financement_id)"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+                  </td>
+        </tr>
+         <tr>
+           <td>
+                       <div class="control-group">
+                <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="formData.ua_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              <code style="color:red;font-size:12px" v-if="formData.ua_id==''">Veuillez renseigner ce champ</code>
+                  </td>
+         </tr>
+         <tr>
+           <td>
+                       <div class="control-group">
+                <label class="control-label">Type de Financement  <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="types_financements"
+                                                   v-model="formData.type_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+               <code style="color:red;font-size:12px" v-if="formData.type_financement_id==''">Veuillez renseigner ce champ</code>
+                  </td>   
+                  
+                 
+                  
+                 
+         </tr>
+        <tr>
+           <td colspan="">
+                       <div class="control-group">
+                <label class="control-label">Bailleur</label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="sources_financements"
+                                                   v-model="formData.sous_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+                  </td>
+        </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal()"
+          class="btn btn-primary"
+          href="#"
+          
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
   </div>
 </template>
   
@@ -106,11 +210,15 @@
 import { mapGetters, mapActions } from "vuex";
 
 // import {admin,dcf,cf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
-  // import {  ModelListSelect } from 'vue-search-select'
-  //   import 'vue-search-select/dist/VueSearchSelect.css'
+  import {  ModelListSelect } from 'vue-search-select'
+   import 'vue-search-select/dist/VueSearchSelect.css'
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
- 
+ components: {
+    
+    ModelListSelect,
+     
+  },
   name:'typetext',
   data() {
     return {
@@ -130,7 +238,8 @@ export default {
         LIBELLE: "libelle"
       },
       formData: {
-        
+        ua_id:"",
+        type_financement_id:""
       },
       editBudgetEclate: {
         
@@ -154,7 +263,8 @@ export default {
       "GroupeUaReceptrice",
       "transferts",
       "groupeUniteAdministrativeBudgetEclate",
-      "groupeUaSousBudget"
+      "groupeUniteAdministrativeBailleur",
+      "getterUniteAdministrativeBailleur"
       // "chapitres",
       // "sections"
     ]),
@@ -190,8 +300,18 @@ export default {
  ...mapGetters('personnelUA', ['all_acteur_depense']),
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-   
+       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
 
+
+
+nombreBailleur() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.getterUniteAdministrativeBailleur.filter(qtreel => qtreel.ua_id == id && qtreel.type_financement_id == id1).length + 1;
+
+        }
+      };
+    },
     idUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -232,12 +352,31 @@ export default {
   methods: {
      ...mapActions("uniteadministrative", [
      
-      "ajouterBudgetEclate",
+      "ajouterUniteAdministrativeBailleur",
       "modifierBudgetEclate",
-      "supprimerBudgetEclate",
+      "supprimerUniteAdministrativeBailleur",
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
+    afficherModalAjouterTitre() {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+    ajouterTypeTexteLocal() {
+      var objet={
+        ...this.formData,
+        numero_ordre:this.nombreBailleur(this.formData.ua_id,this.formData.type_financement_id)
+      }
+      this.ajouterUniteAdministrativeBailleur(objet);
+
+      this.formData = {
+        ua_id: "",
+        	type_financement_id: "",
+          sous_financement_id: ""
+      };
+    },
     pagePrecedent(){
                 window.history.back()
             },
@@ -248,16 +387,16 @@ export default {
                 this.$router.push({ name: 'sousBudget' })
             },
   ajouterBudgetEclarter(){
-                this.$router.push({ name: 'AjouterBudgetEclater' })
+                this.$router.push({ name: 'ajouterUniteAdministrativeBailleurr' })
             },
   }
 };
 </script>
 <style scoped>
 
-.tailgrand12{
-  width: 90%;
-  margin: 0 -45%;
+.tailleModal{
+  width: 50%;
+  margin: 0 -30%;
  
 }
 
