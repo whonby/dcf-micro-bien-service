@@ -265,6 +265,7 @@ listeUniteAdminPasSection
           </td> 
              <td style="width:10%">
 
+
        
           </td>
            
@@ -281,7 +282,17 @@ listeUniteAdminPasSection
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
               </div> -->
             </div>
-
+<div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
                 <thead>
@@ -311,7 +322,7 @@ listeUniteAdminPasSection
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in ListeDEsEntreprise" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in partition(ListeDEsEntreprise,size)[page]" :key="type.id">
                               <td
                       style="font-size:14px;font-weight:bold;text-align:center"
                     >{{type.exercice || 'Non renseigné'}}</td>
@@ -422,6 +433,15 @@ listeUniteAdminPasSection
               
             </div>
           </div>
+          <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(ListeDEsEntreprise,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(ListeDEsEntreprise,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
         </div>
       </div>
     </div>
@@ -892,6 +912,7 @@ listeUniteAdminPasSection
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
+import {partition} from '@/Repositories/Repository'
 import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
@@ -903,6 +924,9 @@ export default {
   name:'typetext',
   data() {
     return {
+       page:0,
+       size:10,
+      active_el:0,
       fabActions: [
        {
                   name: 'searchMe',
@@ -1563,6 +1587,25 @@ recupererIdUser() {
      "ajouterHistoriqueDecisionOp",
      "modifierHistoriqueDecisionOp"
     ]),
+
+
+
+partition:partition,
+
+getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+
     DetacheMotif(id) {
      
        this.EditDetache = this.gettershistoriqueDecisionCfOP.find(item=>item.id==id);

@@ -239,13 +239,7 @@ numero_ordre_paiement_combine
                
                      </tr>
                     
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
-                    <br>
+                   
           </table>
                     </div>
                   </div>
@@ -970,13 +964,7 @@ numero_ordre_paiement_combine
            
                      </tr>
                    
-                         <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
-                    <br>
+                         
                     
                    </table>
                    
