@@ -183,7 +183,7 @@ recupereMontantEmpruntTotal
                      </td>
                       <td>
                        <div class="control-group">
-                <label class="control-label">Unite administrative{{numeroOrdreSousFinancement(formData.uniteadministrative_id)}} <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">{{formData.uniteadministrative_id}}Unite administrative{{numeroOrdreSousFinancement(formData.uniteadministrative_id)}} <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -583,7 +583,7 @@ recupereMontantEmpruntTotal
                         
                           class="btn btn-primary"
                           @click.prevent="EnregistrerTout()"
-                        >Valider</a>
+                        >{{numeroOrdreSousFinancement(this.formData.uniteadministrative_id)}}Valider{{formData.activite_id}}</a>
                         <a
                           @click.prevent="pagePrecedent()"
                           class="btn"
@@ -2469,10 +2469,10 @@ report:"",
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
-          montant_don_2:this.dotationTotal,
+          montant_don_4:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          		type_financement_don_2_id:this.formData1.type_financement_id,
-          		source_financement_don_2_id:this.formData.source_financement_id,
+          		type_financement_don_4_id:this.formData1.type_financement_id,
+          		source_financement_don_4_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
            report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2938,13 +2938,7 @@ report:"",
      }
      }
    
-}
-
-    },
-
-
-
-
+},
 AjouterBudgetEclateUniteAdministrative() {
   
    if(this.doublonDecisionBudgetEclate(this.formData.uniteadministrative_id)!=this.anneeAmort){
@@ -2980,9 +2974,8 @@ report:"",
       }
    
    }
-     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id ){
+    else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
 
-if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
 var nouvelObjet1520 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
@@ -3012,8 +3005,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+
+     }   
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
 var nouvelObjet152003 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
@@ -3043,9 +3037,10 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
 
-else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+     } 
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+
 var objetDon5 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
@@ -3075,8 +3070,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+     } 
+     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+
 var obDon1 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
@@ -3106,8 +3102,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+     } 
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5 ){
+
 var nouvelObjet152003120 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
@@ -3138,14 +3135,10 @@ report:"",
 
       }
      }
-
-     }   
-     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id ){
-       
-       
-       
-       if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
-var nouvelObjet2102 = {
+     
+    
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
+       var nouvelObjet2102 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
@@ -3174,9 +3167,10 @@ dotation_nouvelle:"",
 report:"",
 
       }
+       
      }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
-var ob12 = {
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+       var ob12 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
@@ -3205,9 +3199,11 @@ dotation_nouvelle:"",
 report:"",
 
       }
+       
      }
-      else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
-var B1 = {
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+       
+       var B1 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
@@ -3237,8 +3233,9 @@ report:"",
 
       }
      }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
-var P1 = {
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+       
+       var P1 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
@@ -3268,8 +3265,8 @@ report:"",
 
       }
      }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
-var w1 = {
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+       var w1 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
@@ -3299,7 +3296,8 @@ report:"",
 
       }
      }
-     }
+       
+     
      else if(this.formData1.type_financement_id==14 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id ){
        var nouvelObjet28452 = {
         ...this.formData,
@@ -3324,12 +3322,8 @@ report:"",
 
       }
      }
-     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id ){
-       
-       
-        if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
-
-       var nouvelObjet27 = {
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
+        var nouvelObjet27 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3352,9 +3346,7 @@ report:"",
 
       }
      }
-       
-      else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
-
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
        var nouvelObjet2714 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
@@ -3378,9 +3370,7 @@ report:"",
 
       }
      }
-       
-      else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
-
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
        var nouvelObjet27141212 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
@@ -3404,10 +3394,8 @@ report:"",
 
       }
      }
-       
-      else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
-
-       var nouvelObjet271412121 = {
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+        var nouvelObjet271412121 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3429,10 +3417,8 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }  
-     
-    else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
-
+     }
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
        var objet45 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
@@ -3457,14 +3443,8 @@ report:"",
       }
      }      
        
-       
-     }
-     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id ){
-       
-       
-       
-       if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
- var nouvelObjet25 = {
+     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
+      var nouvelObjet25 = {
         ...this.formData,
          id:this.idBudgetEclater(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3486,9 +3466,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-      else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
- var nouvelObjet251 = {
+   }
+    else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+      var nouvelObjet251 = {
         ...this.formData,
          id:this.idBudgetEclater(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3510,9 +3490,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
- var bien1 = {
+   }
+    else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+      var bien1 = {
         ...this.formData,
          id:this.idBudgetEclater(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3534,9 +3514,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
- var bien2 = {
+   }
+    else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+      var bien2 = {
         ...this.formData,
          id:this.idBudgetEclater(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3558,10 +3538,9 @@ dotation_nouvelle:"",
 report:"",
 
       }
-     }
-
-     else if(this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
- var bien3 = {
+   }
+    else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+      var bien3 = {
         ...this.formData,
          id:this.idBudgetEclater(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3584,8 +3563,7 @@ report:"",
 
       }
      }
-     }      
-       
+    
        
        
        
@@ -3620,7 +3598,8 @@ report:"",
       }
    
    }
-     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id ){
+     
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
 var nouvelObjet163 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
@@ -3642,9 +3621,101 @@ ligneeconomique_id:"",
 dotation_nouvelle:"",
 report:"",
       }
-     }   
-     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id ){
-       var nouvelObjet221 = {
+     }  
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+var nouvelObjet16310 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          montant_don_2:this.dotationTotal,
+          ligneeconomique_id:this.formData1.ligneeconomique_id,
+          //type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_2_id:this.formData1.type_financement_id,
+            		source_financement_don_2_id:this.formData.source_financement_id,
+          activite_id:this.formData.activite_id,
+           report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet16310);
+       this.ajouterHistorisqueBudgetEclate(nouvelObjet16310)
+this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+      }
+     }  
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+var nouvelObjet163101 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          montant_don_3:this.dotationTotal,
+          ligneeconomique_id:this.formData1.ligneeconomique_id,
+          //type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_3_id:this.formData1.type_financement_id,
+            		source_financement_don_3_id:this.formData.source_financement_id,
+          activite_id:this.formData.activite_id,
+           report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet163101);
+       this.ajouterHistorisqueBudgetEclate(nouvelObjet163101)
+this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+      }
+     }  
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+var nouvelObjet163100 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          montant_don_4:this.dotationTotal,
+          ligneeconomique_id:this.formData1.ligneeconomique_id,
+          //type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_4_id:this.formData1.type_financement_id,
+            		source_financement_don_4_id:this.formData.source_financement_id,
+          activite_id:this.formData.activite_id,
+           report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet163100);
+       this.ajouterHistorisqueBudgetEclate(nouvelObjet163100)
+this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+      }
+     }  
+      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+var nouvelObjet1631012 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          montant_don_5:this.dotationTotal,
+          ligneeconomique_id:this.formData1.ligneeconomique_id,
+          //type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_5_id:this.formData1.type_financement_id,
+            		source_financement_don_5_id:this.formData.source_financement_id,
+          activite_id:this.formData.activite_id,
+           report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet1631012);
+       this.ajouterHistorisqueBudgetEclate(nouvelObjet1631012)
+this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+      }
+     } 
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
+ var nouvelObjet221 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
         dotation:this.dotationTotal,
@@ -3660,6 +3731,102 @@ report:"",
       };
       this.ajouterBudgetEclate(nouvelObjet221);
       this.ajouterHistorisqueBudgetEclate(nouvelObjet221)
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+  var nouvelObjet22112 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          	montant_emprunt_2:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_emprunt_2_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_2_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet22112);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet22112)
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+ var nouvelObjet221121 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          	montant_emprunt_3:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_emprunt_3_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_3_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet221121);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet221121)
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+  var nouvelObjet22112145 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          	montant_emprunt_4:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_emprunt_4_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_4_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet22112145);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet22112145)
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+  var nouvelObjet2211221 = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.dotationTotal,
+          	montant_emprunt_5:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_emprunt_5_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_5_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.ajouterBudgetEclate(nouvelObjet2211221);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet2211221)
        this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
@@ -3691,8 +3858,8 @@ report:"",
 
       }
      }
-     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id ){
-       var nouvelObjet271 = {
+       else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
+     var nouvelObjet271 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3715,8 +3882,106 @@ report:"",
 
       }
      }
-     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id ){
-       var nouvelObjet25112 = {
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+     var nouvelObjet2710 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_emprunt_2:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_2_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_2_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet2710);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+     var nouvelObjet27101 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_emprunt_3:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_3_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_3_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet27101);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+     var nouvelObjet27100 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_emprunt_4:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_4_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_4_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet27100);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+     var nouvelObjet27104 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_emprunt_5:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_5_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_5_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet27104);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+     }
+     
+     
+     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==1){
+      var nouvelObjet25112 = {
         ...this.formData,
          id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
@@ -3738,20 +4003,115 @@ dotation_nouvelle:"",
 report:"",
 
       }
+   
+}
+   
+else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==2){
+      
+   var nouvelObjet251121 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_don_2:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_2_id:this.formData1.type_financement_id,
+            		source_financement_don_2_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet251121);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+}
+
+else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==3){
+      
+   var nouvelObjet2511211 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_don_3:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_3_id:this.formData1.type_financement_id,
+            		source_financement_don_3_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet2511211);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+}
+else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==4){
+      var nouvelObjet25112115 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_don_4:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_4_id:this.formData1.type_financement_id,
+            		source_financement_don_4_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet25112115);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
+   
+}
+
+else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id && this.numeroOrdreSousFinancement(this.formData.uniteadministrative_id)==5){
+      
+   var nouvelObjet25112112 = {
+        ...this.formData,
+         id:this.idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id),
+        	annebudgetaire: this.anneeAmort,
+        dotation:this.SommeCumulAjouter,
+          	montant_don_5:this.dotationTotal,
+            ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_5_id:this.formData1.type_financement_id,
+            		source_financement_don_5_id:this.formData.source_financement_id,
+            activite_id:this.formData.activite_id,
+             report:this.formData1.report,
+          dotation_nouvelle:this.formData1.dotation_nouvelle,
+          sous_budget_id:this.formData10.sous_budget_id
+      };
+      this.modifierBudgetEclate(nouvelObjet25112112);
+       this.formData1 = {
+ligneeconomique_id:"",
+dotation_nouvelle:"",
+report:"",
+
+      }
      }
    
 }
 
     },
-EnregistrerTout(){
-if(this.comparaison(this.formData.activite_id)!=this.formData.activite_id){
-   return this.AjouterBudgetEclateUniteAdministrative()
-}
-else{
- 
-  return this.AjouterBudgetEclateSousBudget()
-}
-},
 pagePrecedent(){
                 window.history.back()
             },
@@ -3765,6 +4125,24 @@ pagePrecedent(){
              genererEnPdf(){
   this.$htmlToPaper('printMe');
 },
+EnregistrerTout(){
+if(this.comparaison(this.formData.activite_id)==this.formData.activite_id){
+   
+   return this.AjouterBudgetEclateSousBudget()
+}
+else{
+ 
+  return this.AjouterBudgetEclateUniteAdministrative()
+}
+},
+    },
+
+
+
+
+
+
+
        
 }
 

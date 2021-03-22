@@ -833,12 +833,14 @@ export default {
       this.$router.push({
         name: "marcheHorsib",
       });
+
       var nouvelObjet = {
         ...this.formData,
         exo_id: this.anneeBugetaire,
         sib: 1,
         imputation: this.ImputationBudget(this.formData.economique_id),
       };
+      
       this.ajouterMarcheHorSib(nouvelObjet);
       this.formData = {
         //latitude:"",
