@@ -5,7 +5,7 @@
     </h1>
     <br />
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" style="margin-left: 70px;">
         <div class="span4">
           <label for=""><b>SECTION</b></label>
           <model-list-select
@@ -34,7 +34,7 @@
           </model-list-select>
         </div>
 
-        <div class="span5">
+        <div class="span4">
           <label for=""><b>Date Debut</b></label>
           <input
             type="Date"
@@ -44,7 +44,7 @@
           />
         </div>
 
-        <div class="span5">
+        <div class="span4">
           <label for=""><b>Date Fin</b></label>
           <input type="Date" name="datefin" id="datefin" class="form-control" />
         </div>
@@ -53,8 +53,8 @@
       <br />
       <br />
 
-      <div class="row">
-        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
+      <div class="row" style="margin-left: 70px;">
+        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
           <h3 style="text-align: center">Personnels</h3>
           <div class="row">
             <div class="span4" style="height: 180px">
@@ -77,7 +77,7 @@
 
         <!-- bien et service -->
 
-        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
+        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
           <h3 style="text-align: center">Biens et Services</h3>
           <div class="row">
             <div class="span4" style="">
@@ -99,65 +99,60 @@
         </div>
       </div>
 
+      <br />
+      <br />
 
-<br/>
-     
-
-      <div class="row">
+      <div class="row" style="margin-left: 70px;">
         <!-- transferts -->
 
-        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
-        <h3 style="text-align: center">Transferts</h3>
-        <div class="row">
-          <div class="span4" style="">
-            <apexchart
-              type="donut"
-              :options="chartOptionsTransferts1"
-              :series="dataPourcentageTransferts1"
-            ></apexchart>
-          </div>
+        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
+          <h3 style="text-align: center">Transferts</h3>
+          <div class="row">
+            <div class="span4" style="">
+              <apexchart
+                type="donut"
+                :options="chartOptionsTransferts1"
+                :series="dataPourcentageTransferts1"
+              ></apexchart>
+            </div>
 
-          <div class="span4" style="">
-            <apexchart
-              type="donut"
-              :options="chartOptionsTransferts2"
-              :series="dataPourcentageTransferts2"
-            ></apexchart>
+            <div class="span4" style="">
+              <apexchart
+                type="donut"
+                :options="chartOptionsTransferts2"
+                :series="dataPourcentageTransferts2"
+              ></apexchart>
+            </div>
           </div>
         </div>
-      </div>
 
         <!-- Investissement -->
 
-        <div class="span8 card" style="box-shadow: 10px 10px 10px 10px">
-        <h3 style="text-align: center">Investissements</h3>
-        <div class="row">
-          <div class="span4" style="">
-            <apexchart
-                  type="donut"
-                  :options="chartOptionsInvestissements1"
-                  :series="dataPourcentageInvestissements1"
-                ></apexchart>
-          </div>
+        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
+          <h3 style="text-align: center">Investissements</h3>
+          <div class="row">
+            <div class="span4" style="">
+              <apexchart
+                type="donut"
+                :options="chartOptionsInvestissements1"
+                :series="dataPourcentageInvestissements1"
+              ></apexchart>
+            </div>
 
-          <div class="span4" style="">
-            <apexchart
-                  type="donut"
-                  :options="chartOptionsInvestissements2"
-                  :series="dataPourcentageInvestissements2"
-                ></apexchart>
+            <div class="span4" style="">
+              <apexchart
+                type="donut"
+                :options="chartOptionsInvestissements2"
+                :series="dataPourcentageInvestissements2"
+              ></apexchart>
+            </div>
           </div>
         </div>
       </div>
 
-      </div>
-
       <br />
       <br />
-      <br />
-      <br />
-      <br />
-
+     
     </div>
     <!-- pour les personnels -->
     {{ dataArrayPourcentage }}
@@ -396,9 +391,6 @@ export default {
     console.log(this.budgetGeneral);
     console.log(this.grandes_natures);
     console.log(this.sections);
-    //console.log(this.GrandeNaturePersonelCp);
-    //this.series = [this.grande_nature_id, this.grande_nature_id];
-    // this.series = [this.GrandeNaturePersonelCp, this.GrandeNaturePersonelCp];
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -445,8 +437,6 @@ export default {
     // ************** debut grande nature Personnels qui a pour id 2 ***********//
     GrandeNaturePersonelAePrevisionel() {
       if (this.sections_id != 0 && this.ua_id == 0) {
-        console.log(this.sections_id + "*******");
-        // console.log(this.ua_id + "*******");
         return this.budgetGeneral
           .filter(
             (item) =>
@@ -1138,15 +1128,8 @@ export default {
       if (vm.dataPourcentageBienService1.length > 0) {
         vm.dataPourcentageBienService1 = [];
       }
-      vm.dataPourcentageBienService1.push(
-        parseFloat(
-          this.GrandeNatureBienServiceAePrevisionel -
-            this.GrandeNatureBienServiceAeExecute
-        )
-      );
-      vm.dataPourcentageBienService1.push(
-        parseFloat(this.GrandeNatureBienServiceAeExecute)
-      );
+      vm.dataPourcentageBienService1.push(parseFloat(this.GrandeNatureBienServiceAePrevisionel - this.GrandeNatureBienServiceAeExecute));
+      vm.dataPourcentageBienService1.push(parseFloat(this.GrandeNatureBienServiceAeExecute));
 
       return "";
     },
