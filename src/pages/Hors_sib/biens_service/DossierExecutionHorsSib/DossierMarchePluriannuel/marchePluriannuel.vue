@@ -91,12 +91,12 @@
                             <div class="control-group">
                             <label class="control-label">Montant de base  <code>*</code> :</label>
                             <div class="controls">
-                                 <input
+                                 <money
                                     type="text"
                                     :value="afficherMontantTtcDeActe(macheid)"
                                     class="span"
                                    readonly
-                            />
+                            ></money>
                                 <!-- <money  class="span" placeholder="saisir le montant de base" > </money> -->
                             </div>
                         </div>

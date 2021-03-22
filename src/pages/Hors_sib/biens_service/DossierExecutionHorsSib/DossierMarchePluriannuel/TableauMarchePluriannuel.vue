@@ -31,7 +31,7 @@
                     </div>
            
            
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                 
                 <!-- <thead>
                   <tr>
@@ -60,6 +60,7 @@
                   </tr>
                 </thead>
                  -->
+                 
                <th style="width:10%"></th>
          <th style="width:15%" colspan="3">{{affichageAnneeConditionnel}} </th> 
          <th style="width:15%" colspan="3">{{incrementAnnee}} </th>
@@ -68,9 +69,9 @@
               
             <tr>
                      <th style="width:10%">(1)AUTORISATION D'ENGAGEMENT AE  </th>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3" > {{formatageSomme(parseFloat(afficherMontantTtcDeActe(macheid)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3">{{formatageSomme(parseFloat(afficherMontantTtcDeActeAnneSuivante(macheid)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3"> {{formatageSomme(parseFloat(afficherMontantTtcDeActeAnneSuivante1(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3" > {{formatageSommeSansFCFA(parseFloat(afficherMontantTtcDeActe(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(afficherMontantTtcDeActeAnneSuivante(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3"> {{formatageSommeSansFCFA(parseFloat(afficherMontantTtcDeActeAnneSuivante1(macheid)))}} </td>
         </tr>
        
            <tr>
@@ -89,7 +90,7 @@
           <th style="width:10%" colspan="2">BAILLEURS </th> 
          <th style="width:5%" colspan="1">ETAT</th>
          <th style="width:10%" colspan="2"> BAILLEURS</th>
-         
+          
 
            
        </tr>
@@ -109,142 +110,142 @@
        </tr>  
            <tr>
           <th  style="width:10%">(1)REPORT A L'ANNEE N+1 / (R)=(T)-(D) </th>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportTresor(macheid))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportDons(macheid))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{parseFloat(calculDuMontantReportEmprunt(macheid))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportTresorAnneSuivante(macheid))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportDonsAnneeSuivante(macheid))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportEmpruntAnneeSuivante(macheid))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportTresorAnneUlterieure(macheid))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportDonsAnneeUlterieure(macheid))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{parseFloat(calculDuMontantReportEmpruntAnneeUlterieure(macheid))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportTresor(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportDons(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(calculDuMontantReportEmprunt(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportTresorAnneSuivante(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportDonsAnneeSuivante(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportEmpruntAnneeSuivante(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportTresorAnneUlterieure(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportDonsAnneeUlterieure(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculDuMontantReportEmpruntAnneeUlterieure(macheid)))}} </td>
 
            
        </tr>
              <tr>
           <th  style="width:10%">(2) PREVISIONNEL ANNUEL DES CP (A) </th>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPTresor(macheid))) }} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPDons(macheid))) }}</td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPEmprunt(macheid))) }}  </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPTresor(macheid))) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPDons(macheid))) }}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPEmprunt(macheid))) }}  </td>
 
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPTresorAnneeSuivante(macheid))) }} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPDonsAnneeSuivante(macheid))) }} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPEmpruntAnneeSuivante(macheid))) }} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPTresorAnneeUlterieure(macheid))) }} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPDonsAnneeUlterieure(macheid))) }} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPEmpruntAnneeUlterieure(macheid))) }} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPTresorAnneeSuivante(macheid))) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPDonsAnneeSuivante(macheid))) }} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPEmpruntAnneeSuivante(macheid))) }} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPTresorAnneeUlterieure(macheid))) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPDonsAnneeUlterieure(macheid))) }} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPEmpruntAnneeUlterieure(macheid))) }} </td>
            
        </tr>
                <tr>
           <th  style="width:10%">(3)TOTAL PREVISION ANNUEL (T)=(R)+(A) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelTresor)) }}</td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelDons))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(calculeTotalPrevisionnelAnnuelEmprunt))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeSuivante))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeSuivante))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure)) }} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur)) }}</td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur)) }} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelDons))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelEmprunt))}} </td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelTresor)) }}</td> 
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeSuivante))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeSuivante))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure)) }} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur)) }}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur)) }} </td>
 
            
        </tr>
                 <tr>
           <th  style="width:10%">(4) CP NOTIFIE (B) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieTresor(macheid) ))}}  </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDons(macheid) ))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieEmprunt(macheid) ))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieTresorAnneeSuivante(macheid) ))}}  </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDonsAnneeSuivante(macheid) ))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieEmpruntAnneeSuivante(macheid) ))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieTresorAnneeUlterieure(macheid) ))}}</td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDonsAnneeUlterieure(macheid) ))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieEmpruntAnneeUlterieure(macheid) ))}} </td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieTresor(macheid) ))}}  </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieDons(macheid) ))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieEmprunt(macheid) ))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieTresorAnneeSuivante(macheid) ))}}  </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieDonsAnneeSuivante(macheid) ))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieEmpruntAnneeSuivante(macheid) ))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieTresorAnneeUlterieure(macheid) ))}}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieDonsAnneeUlterieure(macheid) ))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieEmpruntAnneeUlterieure(macheid) ))}} </td>
 
            
 
        </tr>
                 <tr>
           <th  style="width:10%">(5)ECART P/R PREVISION (C)= (B)-(T) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieTresor(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresor)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDons(macheid)) - (parseFloat(calculeTotalPrevisionnelAnnuelDons)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieEmprunt(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmprunt)))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieTresorAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeSuivante)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieDonsAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeSuivante)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieEmpruntAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante)))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantCPNotifieTresorAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieDonsAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantCPNotifieEmpruntAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur)))}} </td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieTresor(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresor)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieDons(macheid)) - (parseFloat(calculeTotalPrevisionnelAnnuelDons)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieEmprunt(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmprunt)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieTresorAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeSuivante)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieDonsAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeSuivante)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieEmpruntAnneeSuivante(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeSuivante)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieTresorAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelTresorAnneeUlterieure)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieDonsAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelDonsAnneeUlterieur)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantCPNotifieEmpruntAnneeUlterieure(macheid))-(parseFloat(calculeTotalPrevisionnelAnnuelEmpruntAnneeUlterieur)))}} </td>
  
            
        </tr>
                  <tr>
           <th  style="width:10%">CUMUL DES LIQUIDATIONS (L) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantTresorLiquidation))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantDonsLiquidation))}}</td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantEmpruntLiquidation))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantTresorLiquidationAnneeSuivante))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantDonsLiquidationAnneeSuivante))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantEmpruntLiquidationAnneeSuivante))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantTresorLiquidationAnneeUlterieure))}}</td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ (parseFloat(MontantDonsLiquidationAnneeUlterieure))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ (parseFloat(MontantEmpruntLiquidationAnneeUlterieure))}} </td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA (parseFloat(MontantTresorLiquidation))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA (parseFloat(MontantDonsLiquidation))}}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA (parseFloat(MontantEmpruntLiquidation))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ formatageSommeSansFCFA(parseFloat(MontantTresorLiquidationAnneeSuivante))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA (parseFloat(MontantDonsLiquidationAnneeSuivante))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA (parseFloat(MontantEmpruntLiquidationAnneeSuivante))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA (parseFloat(MontantTresorLiquidationAnneeUlterieure))}}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{ formatageSommeSansFCFA(parseFloat(MontantDonsLiquidationAnneeUlterieure))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{ formatageSommeSansFCFA(parseFloat(MontantEmpruntLiquidationAnneeUlterieure))}} </td>
 
            
        </tr>
                  <tr>
           <th  style="width:10%">(4) CUMUL DES MANDATEMENTS /OP PAR BAILLEUR (D) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurTresor(macheid)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurDons(macheid)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurEmprunt(macheid)))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurTresorAnneeSuivante(macheid)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurDonsAnneeSuivante(macheid)))}}</td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurEmpruntAnneeSuivante(macheid)))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurTresorAnneeUlterieure(macheid)))}}</td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(afficherMontantOPParBailleurDonsAnneeUlterieure(macheid)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(afficherMontantOPParBailleurEmpruntAnneeUlterieure(macheid)))}}</td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurTresor(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurDons(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurEmprunt(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurTresorAnneeSuivante(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurDonsAnneeSuivante(macheid)))}}</td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurEmpruntAnneeSuivante(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurTresorAnneeUlterieure(macheid)))}}</td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurDonsAnneeUlterieure(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(afficherMontantOPParBailleurEmpruntAnneeUlterieure(macheid)))}}</td>
 
            
        </tr>
             <tr>
                 <th style="width:10%">(5)TOTAUX DES MANDATEMENTS /OP (M)</th>
-         <td style="width:15%" colspan="3">{{(parseFloat(totauxMadatement))}} </td> 
-         <td style="width:15%" colspan="3">{{(parseFloat(totauxMadatementAnneeSuivante))}} </td>
-         <td style="width:15%" colspan="3">{{(parseFloat(totauxMadatementAnneeUlterieure))}}  </td>
+         <td style="width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(totauxMadatement))}} </td> 
+         <td style="width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(totauxMadatementAnneeSuivante))}} </td>
+         <td style="width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(totauxMadatementAnneeUlterieure))}}  </td>
         </tr>
                      <tr>
           <th  style="width:10%">(6)ECART D'EXECUTION (E) = (D)-(B) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionTresor))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionDons))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionEmprunt))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionTresorAnneeSuivante))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionDonsAnneeSuivante))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionEmpruntAnneeSuivante))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionTresorAnneeUlterieure))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionDonsAnneeUlterieure))}}  </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(calculEcartExecutionEmpruntAnneeUlterieure))}} </td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionTresor))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionDons))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionEmprunt))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionTresorAnneeSuivante))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionDonsAnneeSuivante))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionEmpruntAnneeSuivante))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionTresorAnneeUlterieure))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionDonsAnneeUlterieure))}}  </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(calculEcartExecutionEmpruntAnneeUlterieure))}} </td>
 
            
        </tr>
                     <tr>
           <th  style="width:10%">(7)DEPENSE OBLIGATOIRE (O)=(L)-(D) </th>
-        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantTresorLiquidation) - parseFloat(afficherMontantOPParBailleurTresor(macheid)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{(parseFloat(MontantDonsLiquidation)- parseFloat(afficherMontantOPParBailleurDons(macheid)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantEmpruntLiquidation) -parseFloat(afficherMontantOPParBailleurEmprunt(macheid)))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantTresorLiquidationAnneeSuivante) - parseFloat(afficherMontantOPParBailleurTresorAnneeSuivante(macheid)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantDonsLiquidationAnneeSuivante)- parseFloat(afficherMontantOPParBailleurDonsAnneeSuivante(macheid)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantEmpruntLiquidationAnneeSuivante) -parseFloat(afficherMontantOPParBailleurEmpruntAnneeSuivante(macheid)))}} </td>
-          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantTresorLiquidationAnneeUlterieure) - parseFloat(afficherMontantOPParBailleurTresorAnneeUlterieure(macheid)))}} </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantDonsLiquidationAnneeUlterieure)- parseFloat(afficherMontantOPParBailleurDonsAnneeUlterieure(macheid)))}} </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{(parseFloat(MontantEmpruntLiquidationAnneeUlterieure) -parseFloat(afficherMontantOPParBailleurEmpruntAnneeUlterieure(macheid)))}} </td>
+        <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantTresorLiquidation) - parseFloat(afficherMontantOPParBailleurTresor(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1"> {{formatageSommeSansFCFA(parseFloat(MontantDonsLiquidation)- parseFloat(afficherMontantOPParBailleurDons(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantEmpruntLiquidation) -parseFloat(afficherMontantOPParBailleurEmprunt(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantTresorLiquidationAnneeSuivante) - parseFloat(afficherMontantOPParBailleurTresorAnneeSuivante(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantDonsLiquidationAnneeSuivante)- parseFloat(afficherMontantOPParBailleurDonsAnneeSuivante(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantEmpruntLiquidationAnneeSuivante) -parseFloat(afficherMontantOPParBailleurEmpruntAnneeSuivante(macheid)))}} </td>
+          <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantTresorLiquidationAnneeUlterieure) - parseFloat(afficherMontantOPParBailleurTresorAnneeUlterieure(macheid)))}} </td> 
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantDonsLiquidationAnneeUlterieure)- parseFloat(afficherMontantOPParBailleurDonsAnneeUlterieure(macheid)))}} </td>
+         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:5%" colspan="1">{{formatageSommeSansFCFA(parseFloat(MontantEmpruntLiquidationAnneeUlterieure) -parseFloat(afficherMontantOPParBailleurEmpruntAnneeUlterieure(macheid)))}} </td>
 
            
        </tr>
           <tr>
                 <th style="width:10%">(8)RESTE A EXECUTER SUR CP TOTAL </th>
-         <td style="width:15%" colspan="3">{{(parseFloat(calculTotauxCP))}} </td> 
-         <td style="width:15%" colspan="3">{{(parseFloat(calculTotauxCPAnneeSuivante))}} </td>
-         <td style="width:15%" colspan="3">{{(parseFloat(calculTotauxCPAnneeUlterieure))}} </td>
+         <td style="width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(calculTotauxCP))}} </td> 
+         <td style="width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(calculTotauxCPAnneeSuivante))}} </td>
+         <td style="width:15%" colspan="3">{{formatageSommeSansFCFA(parseFloat(calculTotauxCPAnneeUlterieure))}} </td>
         </tr>
     
        
@@ -274,7 +275,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 // import moment from "moment";
-import {formatageSomme} from "../../../../../Repositories/Repository"
+import {formatageSommeSansFCFA} from "../../../../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -494,7 +495,48 @@ recupereIDTypeFinacementDansOdreDePaiement(){
          
     }
 },
-  // calculons les totaux des mandatements
+
+
+recupereIDTypeFinacementDansMarchePluriannuel(){
+   return id =>{
+         if(id!="" && id!=null){
+            let resultat =this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id==id)
+             if(resultat) {
+              return resultat.type_financement
+             }
+             return null
+         }
+         
+    }
+},
+
+
+recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(){
+   return id =>{
+         if(id!="" && id!=null){
+            let resultat =this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id==id)
+             if(resultat) {
+              return resultat.type_financement_cp
+             }
+             return null
+         }
+         
+    }
+},
+
+recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(){
+   return id =>{
+         if(id!="" && id!=null){
+            let resultat =this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id==id)
+             if(resultat) {
+              return resultat.type_financement_id_cp
+             }
+             return null
+         }
+         
+    }
+},
+  // calculons les totaux des mandatements type_financement_id_cp
   totauxMadatement(){
     let Total = parseFloat(this.afficherMontantOPParBailleurTresor(this.macheid) + 
     parseFloat(this.afficherMontantOPParBailleurDons(this.macheid)) + parseFloat(this.afficherMontantOPParBailleurEmprunt(this.macheid)))
@@ -636,6 +678,16 @@ afficherMontantTtcDeActe() {
       };
     },
 
+     afficherIdExoE() {
+      return id => {
+           const qtereel = this.getterProgrammationMarchePlurieAnnuel.filter(qtreel => qtreel.id==id );
+            //console.log(this.acteEffetFinanciers)
+        return qtereel.marche_id;
+    
+     
+      };
+    },
+
 
      afficherLibelleExo() {
       return id => {
@@ -706,7 +758,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-              this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1 
+              this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1 
                &&
                this.afficherIdExo(this.macheid)==this.anneeBugetaire)
                 if(resulta) return resulta.report_nouveau
@@ -719,7 +771,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-              this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1 
+              this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1 
                &&
                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
                 if(resulta) return resulta.report_nouveau
@@ -732,7 +784,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-              this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement1 
+              this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1 
                &&
                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
                 if(resulta) return resulta.report_nouveau
@@ -746,7 +798,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-               this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement 
+               this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement 
                &&
                 this.afficherIdExo(this.macheid)==this.anneeBugetaire)
                 if(resulta) return resulta.report_nouveau
@@ -760,7 +812,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-               this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement 
+               this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement 
                &&
                 this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
                 if(resulta) return resulta.report_nouveau
@@ -773,7 +825,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-               this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement 
+               this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement 
                &&
                 this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
                 if(resulta) return resulta.report_nouveau
@@ -786,7 +838,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-                this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+                this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
                &&
                 this.afficherIdExo(this.macheid)==this.anneeBugetaire)
                 if(resulta) return resulta.report_nouveau
@@ -799,7 +851,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-                this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+                this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
                &&
                 this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
                 if(resulta) return resulta.report_nouveau
@@ -813,7 +865,7 @@ incrementAnnee1(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
                let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
-                this.recupereIDTypeFinacementDansOdreDePaiement(this.macheid)==this.affiherLibelleTypefinancement0
+                this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
                &&
                 this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
                 if(resulta) return resulta.report_nouveau
@@ -882,12 +934,13 @@ incrementAnnee1(){
 
 afficherMontantCPDons(){
 
+
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-     this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+     this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
     && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_dons
     }
     return 0
   }
@@ -896,9 +949,9 @@ afficherMontantCPDonsAnneeSuivante(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-     this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+     this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
     && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_dons
     }
     return 0
   }
@@ -908,9 +961,9 @@ afficherMontantCPDonsAnneeUlterieure(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-     this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+     this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
     && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_dons
     }
     return 0
   }
@@ -921,9 +974,9 @@ afficherMontantCPEmprunt(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
        && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_emprunt
     }
     return 0
   }
@@ -933,9 +986,9 @@ afficherMontantCPEmpruntAnneeSuivante(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_emprunt
     }
     return 0
   }
@@ -945,9 +998,9 @@ afficherMontantCPEmpruntAnneeUlterieure(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_emprunt
     }
     return 0
   }
@@ -959,9 +1012,9 @@ afficherMontantCPTresor(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
        && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_tresor
     }
     return 0
   }
@@ -971,9 +1024,9 @@ afficherMontantCPTresorAnneeSuivante(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_tresor
     }
     return 0
   }
@@ -983,9 +1036,9 @@ afficherMontantCPTresorAnneeUlterieure(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.montantCP
+      if(respo) return respo.cp_tresor
     }
     return 0
   }
@@ -1007,7 +1060,7 @@ afficherMontantCPNotifieDons(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
        && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
       if(respo) return respo.montantCP_notifie
     }
@@ -1020,7 +1073,7 @@ afficherMontantCPNotifieDonsAnneeSuivante(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
       if(respo) return respo.montantCP_notifie
     }
@@ -1032,7 +1085,7 @@ afficherMontantCPNotifieDonsAnneeUlterieure(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
       if(respo) return respo.montantCP_notifie
     }
@@ -1045,7 +1098,7 @@ afficherMontantCPNotifieEmprunt(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
        && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
       if(respo) return respo.montantCP_notifie
     }
@@ -1057,7 +1110,7 @@ afficherMontantCPNotifieEmpruntAnneeSuivante(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
       if(respo) return respo.montantCP_notifie
     }
@@ -1069,7 +1122,7 @@ afficherMontantCPNotifieEmpruntAnneeUlterieure(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement0
+      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
       if(respo) return respo.montantCP_notifie
     }
@@ -1082,7 +1135,7 @@ afficherMontantCPNotifieTresor(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-       this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
        && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
       if(respo) return respo.montantCP_notifie
     }
@@ -1094,7 +1147,7 @@ afficherMontantCPNotifieTresorAnneeSuivante(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-       this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
       if(respo) return respo.montantCP_notifie
     }
@@ -1106,7 +1159,7 @@ afficherMontantCPNotifieTresorAnneeUlterieure(){
   return id=>{
     if(id!=""){
       let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-       this.afficherLeCodeTypeFinancementEnFonctionDeLaSourceDefinancement(this.macheid)==this.affiherLibelleTypefinancement1
+       this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
        && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
       if(respo) return respo.montantCP_notifie
     }
@@ -1285,7 +1338,7 @@ MontantEmpruntLiquidationAnneeUlterieure(){
                 var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
                 window.location.href = this.uri + this.base64(this.format(this.template, ctx))
             },
-formatageSomme:formatageSomme
+formatageSommeSansFCFA:formatageSommeSansFCFA
   }
 };
 </script>
