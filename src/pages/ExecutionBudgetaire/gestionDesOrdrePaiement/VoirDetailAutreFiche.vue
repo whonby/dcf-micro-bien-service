@@ -205,7 +205,7 @@
 
             <td v-if="detailOp.type_ordre_paiement == 1">OP Direct</td>
 
-            <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+            <td style="color:red">{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
 
             <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
 
@@ -336,7 +336,23 @@
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 2 || detailOp.type_ordre_paiement == 3 ||
               detailOp.type_ordre_paiement == 4">OP Provisoire</td>
-              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+               
+               
+
+<template v-if="detailOp.id_op_provisoire==0">
+ <td  style="color:red">
+{{ detailOp.numero_ordre_paiement || "Non renseigné" }}
+               </td>
+              
+             </template>
+              <template v-else>
+               
+              <td style="color:red">
+{{ afficheNumeroOP(afficheNumeroOPAnnulation(detailOp.numero_ordre_paiement)) || "Non renseigné" }}
+              </td>
+             </template>
+
+
 
             <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
 
@@ -456,7 +472,20 @@
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 3 || detailOp.type_ordre_paiement == 4">OP Annulation</td>
-              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+             <template v-if="detailOp.id_op_Annulation==0">
+ <td  style="color:red">
+{{ detailOp.numero_ordre_paiement || "Non renseigné" }}
+               </td>
+              
+             </template>
+              <template v-else>
+               
+              <td style="color:red">
+{{ afficheNumeroOP(detailOp.id_op_Annulation) || "Non renseigné" }}
+              </td>
+             </template>
+            
+              
  <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
            <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
@@ -505,7 +534,7 @@
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 4">OP Definitf</td>
-              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+              <td style="color:red">{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
  <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
            <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
@@ -866,6 +895,7 @@ export default {
       "structuresDecision",
       "plans_Decision",
     ]),
+   
     //fonction Lega le 18/03/2021
 recupererNomDuControleurF() {
       return id => {
@@ -1166,6 +1196,22 @@ AfficheSousBudgetLibelle() {
         }
       };
     },
+    afficheNumeroOPAnnulation() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.numero_ordre_paiement == id
+          );
+
+          if (qtereel) {
+            return qtereel.id_op_provisoire;
+          }
+          return 0;
+        }
+      };
+    },
+  
+
     afficheNumeroOP() {
       return (id) => {
         if (id != null && id != "") {
