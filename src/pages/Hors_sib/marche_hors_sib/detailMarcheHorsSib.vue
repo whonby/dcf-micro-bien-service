@@ -1391,6 +1391,7 @@
 
                 </div>
 
+
                            <div id="tab10" class="tab-pane">
                     <ActeEffetFinancier1 :macheid="detail_marche.id"></ActeEffetFinancier1>
 <!--                <component-acte :macheid="detail_marche.id"></componentActe>-->

@@ -281,13 +281,13 @@ marche_id
 
     </div>
 
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
       <a  @click.prevent="ajouterBailleur"
           class="btn btn-primary"
           href="#"
       >Valider</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-    </div>
+    </div> -->
   </div>
 
   <div id="ajouterAnoBailleur" class="modal hide">

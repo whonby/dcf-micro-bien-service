@@ -3,7 +3,7 @@
 
   <div align="right">
     <div class="widget-content">
-      <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Joindre Document 555</a>
+      <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Joindre Document</a>
     </div>
   </div>
   <table class="table table-bordered table-striped"  v-if="macheid">
