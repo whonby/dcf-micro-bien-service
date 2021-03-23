@@ -5,7 +5,7 @@
     </h1>
     <br />
     <div class="container-fluid">
-      <div class="row" style="margin-left: 70px;">
+      <div class="row" style="margin-left: 70px">
         <div class="span4">
           <label for=""><b>SECTION</b></label>
           <model-list-select
@@ -53,8 +53,8 @@
       <br />
       <br />
 
-      <div class="row" style="margin-left: 70px;">
-        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
+      <div class="row" style="margin-left: 70px">
+        <div class="span8 card" id="tableau1" style="">
           <h3 style="text-align: center">Personnels</h3>
           <div class="row">
             <div class="span4" style="height: 180px">
@@ -77,7 +77,7 @@
 
         <!-- bien et service -->
 
-        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
+        <div class="span8 card" id="tableau1">
           <h3 style="text-align: center">Biens et Services</h3>
           <div class="row">
             <div class="span4" style="">
@@ -100,12 +100,13 @@
       </div>
 
       <br />
+
       <br />
 
-      <div class="row" style="margin-left: 70px;">
+      <div class="row" style="margin-left: 70px">
         <!-- transferts -->
 
-        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
+        <div class="span8 card" id="tableau1">
           <h3 style="text-align: center">Transferts</h3>
           <div class="row">
             <div class="span4" style="">
@@ -128,7 +129,7 @@
 
         <!-- Investissement -->
 
-        <div class="span8 card" style="box-shadow: 5px 5px 5px 5px">
+        <div class="span8 card" id="tableau1">
           <h3 style="text-align: center">Investissements</h3>
           <div class="row">
             <div class="span4" style="">
@@ -149,10 +150,24 @@
           </div>
         </div>
       </div>
+      <br />
+      <br />
+
+      <br />
+
+      <div class="row" style="margin-left: 85px">
+        <div class="span14 card" id="" style="width: 1550px">
+          <apexchart
+            type="line"
+            height="600"
+            :options="chartOptions"
+            :series="series"
+          ></apexchart>
+        </div>
+      </div>
 
       <br />
       <br />
-     
     </div>
     <!-- pour les personnels -->
     {{ dataArrayPourcentage }}
@@ -167,6 +182,8 @@
     <!-- pour les Investissements -->
     {{ dataArrayPourcentageInvestissements1 }}
     {{ dataArrayPourcentageInvestissements2 }}
+
+    {{ datamois }}
   </div>
 </template>
 
@@ -384,6 +401,67 @@ export default {
       },
 
       // fin Investissements
+
+      //pour le deuxieme tableau de bord en fonction des budgets exécutés
+
+      series: [
+        {
+          name: "Budget Exécuté en AE",
+          type: "column",
+          data: [],
+        },
+        {
+          name: "Budget Exécuté en CP",
+          type: "line",
+          data: [],
+        },
+      ],
+      chartOptions: {
+        chart: {
+          height: 500,
+          type: "line",
+        },
+        stroke: {
+          width: 2,
+        },
+        title: {
+          text: "Budget Executé par Mois",
+        },
+        dataLabels: {
+          enabled: true,
+          enabledOnSeries: [4],
+        },
+        labels: [
+          "Janvier",
+          "Fevrier",
+          "Mars",
+          "Avril",
+          "Mai",
+          "Juin",
+          "Juillet",
+          "Août ",
+          "Septembre",
+          "Octobre",
+          "Novembre",
+          "Decembre",
+        ],
+        xaxis: {
+          type: "date",
+        },
+        yaxis: [
+          {
+            title: {
+              text: "Budget Exécuté en AE",
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: "Budget Exécuté en CP",
+            },
+          },
+        ],
+      },
     };
   },
 
@@ -391,6 +469,21 @@ export default {
     console.log(this.budgetGeneral);
     console.log(this.grandes_natures);
     console.log(this.sections);
+    console.log(".............................");
+    console.log(this.getMoisLiquidation("2021-01-23"));
+    // this.series = [
+    //   {
+    //     name: "Budget Exécuté en AE",
+    //     type: "column",
+    //     data: [this.DataJanv1, this.DataFev1, this.DataMars1, this.DataAvril1, this.DataMai1, this.DataJuin1,
+    //     this.DataJuillet, this.DataAout1, this.DataSeptembre1, this.DataOctobre1, this.DataNovembre1, this.DataDecembre1],
+    //   },
+    //   {
+    //     name: "Budget Exécuté en CP",
+    //     type: "line",
+    //     data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
+    //   },
+    // ];
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -415,6 +508,432 @@ export default {
       "gettersDossierLiquidation",
     ]),
 
+    //le computed pour le deuxieme tableau de bord
+    // ****** pour les AE executé  en fonction des mois
+    DataJanv1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "01" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataFev1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "02" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataMars1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "03" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataAvril1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "04" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataMai1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "05" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataJuin1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "06" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataJuillet1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "07" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataAout1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "08" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataSeptembre1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "09" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataOctobre1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "10" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataNovembre1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "11" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataDecembre1() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationid(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationdate(item.id)) == "12" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    // ****** pour les CP executé  en fonction des mois
+    DataJanv2() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationidmandat(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+              "01" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataFev2() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationidmandat(item.id) == 8 &&
+            this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+              "02" &&
+            item.exercice == this.anneeAmort
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    DataMars2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "03" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataAvril2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "04" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataMai2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "05" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataJuin2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "06" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataJuillet2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "07" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataAout2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "08" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataSeptembre2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "09" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataOctobre2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "10" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataNovembre2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "11" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+
+    DataDecembre2() {
+      if (this.liquidationidmandatdate) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              this.getMoisLiquidation(this.liquidationidmandatdate(item.id)) ==
+                "12" &&
+              item.exercice == this.anneeAmort
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return 0;
+      }
+    },
+    // fonction de recuperation de du mois dans l'année
+    getMoisLiquidation() {
+      return (date) => {
+        if (!date) return null;
+        let array_date = date.split("-");
+        if (array_date.length == 3) {
+          return array_date[1];
+        }
+        return null;
+      };
+    },
+    //fin
     anneeAmort() {
       const norme = this.exercices_budgetaires.find(
         (normeEquipe) => normeEquipe.encours == 1
@@ -592,11 +1111,26 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.gettersDossierMandat.find(
-            (qtreel) => qtreel.dmd_engagement_id == id
+            (qtreel) => qtreel.demande_engagement_id == id
           );
 
           if (qtereel) {
             return qtereel.decision_cf;
+          }
+          return 0;
+        }
+      };
+    },
+
+    liquidationidmandatdate() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierMandat.find(
+            (qtreel) => qtreel.demande_engagement_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.date_motif;
           }
           return 0;
         }
@@ -612,6 +1146,21 @@ export default {
 
           if (qtereel) {
             return qtereel.decision_cf;
+          }
+          return 0;
+        }
+      };
+    },
+
+    liquidationdate() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierLiquidation.find(
+            (qtreel) => qtreel.dmd_engagement_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.date_motif;
           }
           return 0;
         }
@@ -1087,8 +1636,6 @@ export default {
 
     dataArrayPourcentage() {
       let vm = this;
-      //console.log(parseFloat(this.pourcentageMarchePasStatus("planifie")))
-
       if (vm.dataPourcentage.length > 0) {
         vm.dataPourcentage = [];
       }
@@ -1128,9 +1675,59 @@ export default {
       if (vm.dataPourcentageBienService1.length > 0) {
         vm.dataPourcentageBienService1 = [];
       }
-      vm.dataPourcentageBienService1.push(parseFloat(this.GrandeNatureBienServiceAePrevisionel - this.GrandeNatureBienServiceAeExecute));
-      vm.dataPourcentageBienService1.push(parseFloat(this.GrandeNatureBienServiceAeExecute));
+      vm.dataPourcentageBienService1.push(
+        parseFloat(
+          this.GrandeNatureBienServiceAePrevisionel -
+            this.GrandeNatureBienServiceAeExecute
+        )
+      );
+      vm.dataPourcentageBienService1.push(
+        parseFloat(this.GrandeNatureBienServiceAeExecute)
+      );
 
+      return "";
+    },
+
+    datamois() {
+      let vm = this;
+      vm.series = [
+        {
+          // name: "Budget Exécuté en AE",
+          // type: "column",
+          data: [
+            this.DataJanv1,
+            this.DataFev1,
+            this.DataMars1,
+            this.DataAvril1,
+            this.DataMai1,
+            this.DataJuin1,
+            this.DataJuillet1,
+            this.DataAout1,
+            this.DataSeptembre1,
+            this.DataOctobre1,
+            this.DataNovembre1,
+            this.DataDecembre1,
+          ],
+        },
+        {
+          // name: "Budget Exécuté en CP",
+          //type: "line",
+          data: [
+            this.DataJanv2,
+            this.DataFev2,
+            this.DataMars2,
+            this.DataAvril2,
+            this.DataMai2,
+            this.DataJuin2,
+            this.DataJuillet2,
+            this.DataAout2,
+            this.DataSeptembre2,
+            this.DataOctobre2,
+            this.DataNovembre2,
+            this.DataDecembre2,
+          ],
+        },
+      ];
       return "";
     },
 
@@ -1245,4 +1842,8 @@ export default {
 </script>
 
 <style scoped>
+#tableau1 {
+  box-shadow: 2px 3px 5px 2px;
+  border: 3px dotted #ddd;
+}
 </style>
