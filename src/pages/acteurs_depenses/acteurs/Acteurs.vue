@@ -130,7 +130,7 @@ formData
                                             <thead>
                                             <tr>
                                                 <!-- <th>Situation matrimoniale </th> -->
-                                                <th>Matricule </th>
+                                                <th>Matricule</th>
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
                                                 <th>Date de naissance</th>
@@ -144,13 +144,13 @@ formData
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in afficheListePersonnel(formData.unite_administrative_id)" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in filtre_service" :key="item.id">
   
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheEmail(item.id) || 'Non renseigné'}}</td>
+                                               <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheMatriculePersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNomPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{affichePrenomsPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(afficheDateNaissancePersonnel(item.acteur_depense_id)) }}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheEmail(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                 
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(item.service_id)|| 'Non renseigné'}}</td>
@@ -178,7 +178,7 @@ formData
                    </td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
+                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.acteur_depense_id }}" class="btn btn-default ">
                                                             <span class=""><i class="icon-folder-open"></i></span>
                                                         </router-link>
 
@@ -946,10 +946,11 @@ recrutement:""
             this.getListeSalaireActuelAll()
             //    this.getActeur()
             //  console.log(this.fonctions)
-            // console.log(this.getFonction)
-            this.formData = this.personnaliseActeurDepense.find(
+            console.log(this.formData.unite_administrative_id)
+            this.formData = this.acte_personnels.find(
       item => item.id == this.$route.params.id
     );
+    console.log(this.fabrice)
         },
         computed: {
            admin:admin,
@@ -1330,10 +1331,21 @@ AffichierElementParent() {
             //     )
 
             // },
+            filtre_service() {
+      const st = this.search.toLowerCase();
+      return this.afficheListePersonnel(this.formData.unite_administrative_id).filter(type => {
+        return (
+         
+          this.afficheMatriculePersonnel(type.acteur_depense_id).toLowerCase().includes(st)
+           || this.afficheNomPersonnel(type.acteur_depense_id).toLowerCase().includes(st)
+                        
+        );
+      })
+    },
            afficheListePersonnel() {
-      return id => {
-        if (id != null && id != "") {
-           return this.acteurActivite.filter(qtreel => qtreel.unite_administrative_id == id);
+      return id1 => {
+        if (id1 != null && id1 != "") {
+           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id1 && qtreel.sib == 0);
 
       
         }
@@ -1355,7 +1367,7 @@ AffichierElementParent() {
             return colect.filter(items => {
                 return (
                     items.matricule.toLowerCase().includes(searchTerm)
-                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
                 ) && items.sib==0;
@@ -1366,7 +1378,7 @@ AffichierElementParent() {
         return this.personnaliseActeurDepense.filter(items => {
             return (
                 items.matricule.toLowerCase().includes(searchTerm)
-                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
             ) && items.sib==0;
@@ -1483,6 +1495,18 @@ acteurNonActivite() {
 
       if (qtereel) {
         return qtereel.acteur_depense.prenom;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDateNaissancePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.date_naissance;
       }
       return 0
         }

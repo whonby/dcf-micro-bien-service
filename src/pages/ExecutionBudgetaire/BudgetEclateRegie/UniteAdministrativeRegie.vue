@@ -27,19 +27,20 @@
           </download-excel> -->
           <table class="table table-bordered table-striped">
             <tr>
-              <td>
-                <!-- <div align="right">
+            <td>
+                <div align="right">
 
-      <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
+      <button class="btn btn-warning"  @click.prevent="BAILLEURUA" style="color:#fff;font-weight: bold;">AJOUTER BAILLEUR DES UA </button>
 
 
-                            </div> -->
+                            </div>
               </td>
               <td style="width:12%;" >
                 
                 <div align="right">
 
       <button class="btn btn-success"  @click.prevent="ajouterBudgetEclarter">ECLATER LE BUDGET REGIE </button>
+
 
 
                             </div>
@@ -265,6 +266,9 @@ export default {
             },
   ajouterBudgetEclarter(){
                 this.$router.push({ name: 'BudgetEclateRegie' })
+            },
+             BAILLEURUA(){
+                this.$router.push({ name: 'listeDesUaRegie' })
             },
   }
 };

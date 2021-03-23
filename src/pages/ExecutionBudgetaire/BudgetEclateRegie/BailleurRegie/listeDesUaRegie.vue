@@ -71,7 +71,7 @@
                    <td>
                       <router-link :to="{ name: 'ListeBailleurUniteAdministrative', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class=" icon-eye-close" style="font-weight: bold;"> Voir Bailleur</i></span>
+                  <span class=""><i class="icon-eye-close" style="font-weight: bold;"> Voir Bailleur</i></span>
                    </router-link> 
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
@@ -315,8 +315,10 @@ export default {
 
 
 afficheListeDesUaRegie(){
-    return this.groupeUniteAdministrativeBailleur.filter(item=>item[0].diff_id==1)
+    return this.groupeUniteAdministrativeBailleur.filter(item=>item[0].diff_id==2)
 },
+
+
 
 nombreBailleur() {
       return (id,id1) => {

@@ -310,7 +310,7 @@ listeUniteAdminPasSection
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
-                             <th   style="font-size:14px;font-weight:bold">Voir Réalite Service Fait</th> 
+                             <th   style="font-size:14px;font-weight:bold">Voir Détail</th> 
                              <!-- <th   style="font-size:14px;font-weight:bold">Fiche Annexe</th>  -->
                     <th   style="font-size:14px;font-weight:bold">Décision CF</th>
                      <th   style="font-size:14px;font-weight:bold">Supprimer</th>

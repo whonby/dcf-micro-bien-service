@@ -183,7 +183,7 @@ recupereMontantEmpruntTotal
                      </td>
                       <td>
                        <div class="control-group">
-                <label class="control-label">{{formData.uniteadministrative_id}}Unite administrative{{numeroOrdreSousFinancement(formData.uniteadministrative_id)}} <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -459,6 +459,7 @@ recupereMontantEmpruntTotal
               </div> -->
                   </td>
                   
+
                    <td colspan="">
                        <div class="control-group">
                 <label class="control-label">Grande nature</label>
@@ -583,7 +584,7 @@ recupereMontantEmpruntTotal
                         
                           class="btn btn-primary"
                           @click.prevent="EnregistrerTout()"
-                        >{{numeroOrdreSousFinancement(this.formData.uniteadministrative_id)}}Valider{{formData.activite_id}}</a>
+                        >Valider</a>
                         <a
                           @click.prevent="pagePrecedent()"
                           class="btn"
