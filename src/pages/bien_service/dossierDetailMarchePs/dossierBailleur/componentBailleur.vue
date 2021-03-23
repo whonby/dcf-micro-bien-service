@@ -35,7 +35,7 @@
                                            <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                                <span class=""><i class="icon-trash"></i>  Supprimer</span></button>
                                         </div>
                                            </td>
                                     </tr>

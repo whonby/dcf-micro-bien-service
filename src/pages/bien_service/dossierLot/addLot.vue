@@ -36,7 +36,7 @@
 
                          <div class="control-group">
             
-                            <label class="control-label">Numero lot <code>*</code> :</label>
+                            <label class="control-label">Numéro lot <code>*</code> :</label>
                            <div class="control-group">
                        <input type="text" class="span" placeholder="Numero lo" v-model="formLot.numero_lot">
                             </div>
@@ -214,7 +214,7 @@
 
                                                 <div class="btn-group">
                                                     <button @click.prevent="supprimerLot(lot_marche.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                                        <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                                                 </div>
 

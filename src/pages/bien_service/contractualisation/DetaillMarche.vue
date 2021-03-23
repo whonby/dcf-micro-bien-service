@@ -1,5 +1,4 @@
 
-isButtunAddDossierCandidat
 
 
 <template>
@@ -827,7 +826,7 @@ isButtunAddDossierCandidat
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ht || "Non renseigne"}}</td>
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ttc || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreFinancier(detail_offre_finnancier.id)"  class="btn btn-danger " title="Supprimer">
-                                        <span class=""><i class="icon-trash">Supprimer</i></span></button></td>
+                                        <span class=""><i class="icon-trash"></i></span></button></td>
                                 </tr>
 
 
@@ -1626,7 +1625,7 @@ isButtunAddDossierCandidat
 
                             <a href="#infoPV" @click.prevent="infoPVAffiche(pv.reference)" data-toggle="modal" class="btn"><span class=""><i class="icon-folder-open" ></i></span></a>
                             <button @click.prevent="supprimerProceVerbal(pv.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                <span class=""><i class="icon-trash"></i>  Supprimer</span></button>
 
                         </div>
                         </td>
@@ -1900,7 +1899,7 @@ isButtunAddDossierCandidat
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i>Supprimer</span>
+                                <span class=""><i class="icon-trash"></i>  Supprimer</span>
                             </button>
                         </div>
 </td>

@@ -14,14 +14,14 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Exercice Budgetaire</th>
-                                <th>Procedure de passation</th>
+                                <th>Exercice Budgétaire</th>
+                                <th>Procédure de passation</th>
                                 <th>Objet marché</th>
-                                <th>Reference marché</th>
+                                <th>Réference marché</th>
                                 <th>Montant prévu marché</th>
                                 <!-- <th>Montant Budgetaire</th> -->
                                 <th>Type de marché</th>
-                                <th>Unite administrative</th>
+                                <th>Unité administrative</th>
                                 <th>Statut</th>
                             </tr>
                             </thead>

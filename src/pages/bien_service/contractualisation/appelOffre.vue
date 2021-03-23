@@ -161,7 +161,7 @@
                     
               <button @click.prevent="supprimerAppelOffre(appel.id)"  class="btn btn-danger " 
               title="supprimer">
-                <span class=""><i class="icon-trash">  </i> Supprimer</span></button>
+                <span class=""><i class="icon-trash"> </i>  Supprimer</span></button>
              
             </div>
                   </td>

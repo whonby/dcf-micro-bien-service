@@ -63,7 +63,7 @@
                                  <span class=""><i class=" icon-money"></i></span></a>
 
                              <button @click.prevent="supprimerDossierCandidat(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                 <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                 <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                          </div>
 
@@ -234,7 +234,7 @@
                     <td>
 
                         <div class="control-group">
-                            <label class="control-label">Quantite :</label>
+                            <label class="control-label">Quantité :</label>
                             <div class="controls">
                                 <input type="number" class="span" placeholder="quantite" v-model="modification_offre_finnancier_recupere.quantite">
                             </div>
