@@ -21,6 +21,7 @@
           <!-- <th>Ref</th> -->
           <th>N°Lot</th>
           <th>Montant HT </th>
+          <th>Montant TVA</th>
           <th>Montant TTC </th>
           <th>Rabais % </th>
           <th>Action </th>
@@ -32,7 +33,9 @@
           <td @click="afficheEdite(offre.id)">
             {{formatageSomme(parseFloat(offre.montant_total_ht)) || 'Non renseigné'}}
           </td>
-
+             <td @click="afficheEdite(offre.id)">
+            {{formatageSomme(parseFloat(offre.tva)) || 'Non renseigné'}}
+          </td>
           <td @click="afficheEdite(offre.id)">
             {{formatageSomme(parseFloat(offre.hist_montant_ttc)) || 'Non renseigné'}}
           </td>
@@ -291,7 +294,16 @@
             <div class="control-group">
               <label class="control-label">Montant total HT :</label>
               <div class="controls">
-                <input type="text"   class="span" placeholder="Montant total HT" v-model="editer.montant_total_ht">
+                <money   class="span" placeholder="Montant total HT" v-model="editer.montant_total_ht"> </money>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="control-group">
+              <label class="control-label">Montant total TVA :</label>
+              <div class="controls">
+                <money   class="span" placeholder="Montant total HT" :value="montantTvaModifier" readonly></money>
               </div>
             </div>
           </td>
@@ -302,7 +314,7 @@
             <div class="control-group">
               <label class="control-label">Montant TTC:</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
+                <money  class="span" placeholder="Montant TTC" :value="montantTTCtModifier" readonly></money>
               </div>
             </div>
 
@@ -316,7 +328,7 @@
             <div class="control-group">
               <label class="control-label">Rabais (%) :</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="prix unitaire" v-model="editer.Rabais">
+                <input type="number" class="span" placeholder="" v-model="editer.Rabais">
               </div>
             </div>
 
@@ -325,7 +337,7 @@
             <div class="control-group">
               <label>TVA</label>
               <div class="controls">
-                <input type="text" class="span" placeholder="TVA" :value="affcherTauxEnCours" disabled>
+                <input type="text" class="span" placeholder="TVA" :value="affcherTauxEnCoursModifier" disabled>
               </div>
             </div>
           </td>
@@ -360,6 +372,9 @@ name: "OffreFinanciere",
       ],
       editer:"",
       montant_htax:"",
+     // montant_total_ht:"",
+     // montant_total_ttc:"",
+      //montantTVAModifier:"",
       montant_tva:"",
       montant_ttc:"",
       rabais:"",
@@ -392,6 +407,32 @@ name: "OffreFinanciere",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
       "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+
+
+montantTvaModifier() {
+      const val = parseFloat((this.editer.montant_total_ht) * parseFloat(this.affcherTauxEnCoursModifier)/100);
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
+
+ montantTTCtModifier() {
+      
+      const val = parseFloat(this.editer.montant_total_ht) + parseFloat(this.montantTvaModifier);
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
+    
+
+  
+
     listeAppelOffre(){
       return  marche_id=>{
         if (marche_id!="") {
@@ -401,6 +442,16 @@ name: "OffreFinanciere",
       }
     },
     affcherTauxEnCours() {
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+
+
+    affcherTauxEnCoursModifier() {
       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
       if (norme) {
@@ -502,6 +553,8 @@ name: "OffreFinanciere",
       this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
       this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
         this.formOffreFinanciere.hist_montant_ttc=this.formOffreFinanciere.montant_total_ttc
+        this.formOffreFinanciere.tva=this.montant_tva
+        this.formOffreFinanciere.Rabais=this.rabais
 
       this.ajouterOffreFinancier(this.formOffreFinanciere)
       this.$('#addd10').modal('hide');
@@ -518,6 +571,8 @@ name: "OffreFinanciere",
       this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
       this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
         this.formOffreFinanciere.hist_montant_ttc=this.formOffreFinanciere.montant_total_ttc
+        this.formOffreFinanciere.tva=this.montant_tva
+        this.formOffreFinanciere.Rabais=this.rabais
 
       this.ajouterOffreFinancier(this.formOffreFinanciere)
       this.$('#addd10').modal('hide');
@@ -525,6 +580,7 @@ name: "OffreFinanciere",
                  numero_lot:"",
                 montant_total_ttc:"",
                 montant_total_ht:"",
+                tva:"",
                 dossier_candidat_id:"",
                 Rabais:"",
                 marche_id:""
@@ -544,21 +600,24 @@ name: "OffreFinanciere",
 
     editeOffreF(){
       let objet={
+        
         id:this.editer.id,
         // numero_lot:this.editer.numero_lot,
-        Rabais:this.editer.Rabais,
+        Rabais:this.Rabais,
          numero_lot:this.afficherNumeroDuLot(this.editer.marche_id),
-        montant_total_ttc:this.editer.montant_total_ttc,
+        montant_total_ttc:this.montantTTCtModifier,
         dossier_candidat_id:this.editer.dossier_candidat_id,
         marche_id:this.editer.marche_id,
-        hist_montant_ttc:this.editer.montant_total_ttc,
-        montant_total_ht:this.editer.montant_total_ht
+       hist_montant_ttc:this.montantTTCtModifier,
+        montant_total_ht:this.editer.montant_total_ht,
+        tva:this.montantTvaModifier
       }
       this.modifierOffreFinancier(objet)
       this.$('#edit_offre_technique').modal('hide');
     }
   },
   watch: {
+
 
    montant_htax:function (value) {
       //console.log(value)
@@ -584,6 +643,7 @@ name: "OffreFinanciere",
         this.montant_tva=(parseFloat(value)) - montant
      }
    },
+   
     rabais:function (value) {
        console.log("...............")
      console.log(value)
@@ -599,7 +659,8 @@ name: "OffreFinanciere",
         this.formOffreFinanciere.montant_total_ht=parseFloat(montantHT) - parseFloat(montantRabais)
         console.log(this.formOffreFinanciere.montant_total_ht)
         this.montant_htax=this.formOffreFinanciere.montant_total_ht
-       // this.montant_tva=this.formOffreFinanciere.tva
+        this.montant_tva=this.formOffreFinanciere.tva
+        console.log(this.formOffreFinanciere.tva)
         let montant=(parseFloat(this.formOffreFinanciere.montant_total_ht) * this.affcherTauxEnCours)/100
         this.montant_tva=montant
         this.formOffreFinanciere.montant_total_ttc=(parseFloat(this.formOffreFinanciere.montant_total_ht)) + montant

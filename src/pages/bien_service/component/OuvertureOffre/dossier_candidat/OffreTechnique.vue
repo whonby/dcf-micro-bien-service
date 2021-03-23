@@ -215,17 +215,17 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label>Lot</label>
                 <div class="controls">
-                  <select v-model="formchnique.marche_id" class="span" >
+                  <select v-model="editer.marche_id" class="span" >
                     <option v-for="varText in listeLot(dossier_candidature.marche_id,dossier_candidature.id)" :key="varText.id"
                             :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
                   </select>
                 </div>
               </div>
-            </td>
+            </td> -->
             <td>
               <div class="control-group">
                 <label>Nom du soumissionnaire</label>
@@ -235,6 +235,31 @@
                 </div>
               </div>
             </td>
+          </tr>
+
+                   <tr>
+                     <td colspan="2">
+            <div class="control-group">
+              <label>Lot</label>
+              <div class="controls">
+                <select v-model="editer.marche_id" class="span" >
+                  <option v-for="varText in lotTechniqueFOffre(dossier_candidature.id)" :key="varText.id"
+                          :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
+<!-- <td colspan="2">
+              <div class="control-group">
+                <label>Lot</label>
+                <div class="controls">
+                  <select v-model="editer.marche_id" class="span">
+                    <option v-for="varText in listeLot(dossier_candidature.marche_id,dossier_candidature.id)" :key="varText.id"
+                            :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
+                  </select>
+                </div>
+              </div>
+            </td> -->
           </tr>
         </table>
 
@@ -275,7 +300,12 @@
                 </div>
               </div>
             </td>
-            <td>
+           
+
+          </tr>
+          <tr>
+
+             <td>
               <div class="control-group">
                 <label class="control-label">
                   Délai de livraison ou Exécution Proposée (Jours)</label>
@@ -285,9 +315,6 @@
                 </div>
               </div>
             </td>
-
-          </tr>
-          <tr>
 
             <td>
               <div class="control-group">
@@ -783,6 +810,28 @@ listeOffreTechniqueLotCandidat(){
     listeLotMarche(){
       return marche_id=>{
         return this.getMarchePersonnaliser.filter(item=>item.parent_id==marche_id)
+      }
+    },
+
+     lotTechniqueFOffre(){
+      return dossier_candidat=>{
+        let offre_technique=this.gettersOffreTechniques.filter(item=>item.dossier_candidat_id==dossier_candidat)
+        let seft=this;
+
+        if (offre_technique.length>0){
+          let collection_marche=[];
+          offre_technique.forEach(function (value) {
+
+            let lot_marche=seft.getMarchePersonnaliser.find(item=>item.id==value.marche_id)
+
+            collection_marche.push(lot_marche)
+
+          })
+
+          return collection_marche
+
+        }
+        return null
       }
     },
     listeLot(){

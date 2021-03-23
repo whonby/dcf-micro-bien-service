@@ -1,20 +1,76 @@
-marche_id
+avance_demarrage_ht
 <template>
 <div>
+  <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Date de Réception du marché
+
+          
+        </h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+       <tr>
+        <td>
+           <div class="control-group">
+                            <label class="control-label">Date debut exectuion définitif</label>
+                            <div class="controls">
+                              <input type="date" class="span" v-model="editActeEffetFinancier.date_debut_exectuion_definitif"/>
+                               
+                            </div>
+                          </div>
+         </td>
+      </tr>
+      <tr>
+        <td>
+           <div class="control-group">
+                            <label class="control-label">Date réception provisoire définitif</label>
+                            <div class="controls">
+                              <input type="date" class="span" v-model="editActeEffetFinancier.date_reception_provisoire_definitif"/>
+                               
+                            </div>
+                          </div>
+         </td>
+      </tr>
+      <tr>
+        <td>
+           <div class="control-group">
+                            <label class="control-label">Date réception définitive</label>
+                            <div class="controls">
+                              <input type="date" class="span" v-model="editActeEffetFinancier.date_reception_definitive"/>
+                               
+                            </div>
+                          </div>
+         </td>
+      </tr>
+        </table>
+     
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierModalActeEffetFinancierLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <notifications/>
   <div v-for="item in lot" :key="item.id" class="widget-content">
     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
       <div class="span8" style="text-align:center"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
       </h5></div>
-          <div class="span3"><button @click.prevent="afficheModaleActe(item.id)" v-if="listeAvisDemandeAno(item.id)==0"
+          <div class="span3"><button @click.prevent="afficheModaleActe(item.id)"
                                      class="btn btn-primary" title="Act">
            <span class=""><i class="icon-edit"></i></span> Ajouter acte</button></div>
 <!--      <div class="span2"><button @click.prevent="supprimerAnalyseDossierMultiple(item.id)"  class="btn btn-danger " title="Supprimer">-->
 <!--        <span class=""><i class="icon-trash"></i></span></button></div>-->
     </div>
-
-    <!-- <table class="table table-bordered table-striped">
+<!-- 
+    <table class="table table-bordered table-striped">
       <thead>
       <tr>
         <th>Ref offre</th>
@@ -69,7 +125,7 @@ marche_id
                    </td>
                   <td>
                       <button @click.prevent="supprimerEntrepriseSousTraitance(sous.id)"  class="btn btn-danger " title="Supprimer">
-                          <span class=""><i class="icon-trash"></i>Supprimer</span>
+                          <span class=""><i class="icon-trash"></i></span>
                       </button>
                   </td>
               </tr>
@@ -80,7 +136,7 @@ marche_id
      <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
-        <th>Numero Marché</th>
+        <th>Numéro Marché</th>
         <th>Objet marché</th>
          <th>Imputation</th>
         <th>Montant de l'offre(en FCFA TTC)</th>
@@ -91,17 +147,16 @@ marche_id
 
        
         <th>Durée du marché</th>
-        <th>Action</th>
+        <th colspan="2">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr class="odd gradeX" v-for="effetFinancier in listeActeEffectFinnancier(item.id)"
           :key="effetFinancier.id">
 
-
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.numero_marche || 'Non renseigné'}}</td>
-         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{affichierObjetMarche(effetFinancier.marche_id) || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{affichierImputationMarche(effetFinancier.marche_id) || 'Non renseigné'}}</td>
@@ -123,13 +178,27 @@ marche_id
         
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.duree || 'Non renseigné'}} jrs</td>
-        <td>
+        <!-- <td>
+          <div class="btn-group">
+           
+             <button 
+                         @click.prevent="afficherModalModifierService(effetFinancier.id)"
+                       class="btn  btn-success">
+                <span >  <i class="icon icon-calenda"> Ajouter date Réception</i></span>
+       
+                </button>
+          </div>
+          
+        </td> -->
+         <td>
           <div class="btn-group">
             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
               <span class=""><i class="icon-trash">
-                </i>Supprimer</span>
+                SUPPRIMER</i></span>
             </button>
+            
           </div>
+          
         </td>
       </tr>
       </tbody>
@@ -146,7 +215,7 @@ marche_id
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#Identif">Identification de L'acte</a></li>
         <li class=""><a data-toggle="tab" href="#financ">Informations financières</a></li>
-          <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprises sous_traitances </a></li>
+          <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprise sous_traitance </a></li>
       </ul>
     </div>
     <div class="widget-content tab-content">
@@ -167,7 +236,7 @@ marche_id
                 </div>
               </div>
             </td>
-            <td>
+           <td>
 
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
@@ -188,7 +257,7 @@ marche_id
 
             </td>
 
-           <td>
+          <td>
               <div class="control-group">
                 <label class="control-label">Banque</label>
                 <div class="controls" >
@@ -214,7 +283,6 @@ marche_id
               </div>
 
             </td>
-
             <!-- <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
@@ -273,7 +341,7 @@ marche_id
         <td>
 
               <div class="control-group">
-                <label class="control-label" title="Date de signature attributaire de lettre d'engagement" >Date lettre d'engagement</label>
+                <label class="control-label" >Date de signature attributaire</label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_attributaire"
                          class="span"
@@ -426,6 +494,7 @@ marche_id
         <li class="active"><a data-toggle="tab" href="#MARCHE2">MARCHE</a></li>
         <li class=""><a data-toggle="tab" href="#DEMARRAGE2">AVANCE DE DEMARRAGE</a></li>
         <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT2">CAUTIONNEMENT</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIEBONEXCUTION2">GARANTIE DE BONNE EXECUTION</a></li>
         <li class=""><a data-toggle="tab" href="#GARANTIE2" v-if="garantie=='oui'">RETENU DE GARANTIE</a></li>
       </ul>
       <div class="widget-content tab-content">
@@ -461,7 +530,6 @@ marche_id
                 </div>
               </div>
             </td>
-
             <td>
 
               <div class="control-group">
@@ -475,7 +543,7 @@ marche_id
                 </div>
               </div>
             </td>
-         
+            
            </tr>
            <tr v-if="formEffetFinancier.httcc_id==0">
              <td>
@@ -522,7 +590,7 @@ marche_id
               </div>
             </td>
            </tr>
-             <tr v-if="formEffetFinancier.httcc_id==1">
+            <tr v-if="formEffetFinancier.httcc_id==1">
              <td>
 
               <div class="control-group">
@@ -567,18 +635,33 @@ marche_id
               </div>
             </td>
            </tr>
-            
          </table>
         
       </div>
       <div id="DEMARRAGE2" class="tab-pane">
          <table class="table table-bordered table-striped">
            <tr>
+
               <td>
               <div class="control-group">
-                <label class="control-label">Avance Demarrage Ht</label>
+                <label class="control-label">Taux Avance Demarrage</label>
                 <div class="controls">
-                    <money v-model="formEffetFinancier.avance_demarrage_ht" ></money>
+                   
+
+                 <input type="number" v-model="formEffetFinancier.taux_avance_demarrage"
+                        class="span"
+                        placeholder=" Saisir le taux d'avance de demarrage"
+                 />
+
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Avance Demarrage Hors Taxe (HT)</label>
+                <div class="controls">
+                   <money :value="avanceDemarageHorsTaxe" style="text-align:left;color:red" readonly class="span"></money>
+                    
 
 <!--                  <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"-->
 <!--                         class="span"-->
@@ -588,6 +671,7 @@ marche_id
                 </div>
               </div>
             </td>
+            
              <td>
                <div class="control-group">
                 <label class="control-label" >TVA (Avance Démarrage)</label>
@@ -599,7 +683,7 @@ marche_id
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money :value="avanceDemarrageMontantTva" style="text-align:left;color:red"  readonly></money>
+                    <money :value="avanceDemarrageMontantTva" style="text-align:left;color:red" class="span" readonly></money>
 
                 </div>
               </div>
@@ -614,7 +698,7 @@ marche_id
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money :value="avanceDemarrage" style="text-align:left;color:red" readonly ></money>
+                    <money :value="avanceDemarrageTTC" style="text-align:left;color:red" readonly class="span"></money>
                 </div>
               </div>
             </td>
@@ -647,7 +731,7 @@ marche_id
 <!--                         class="span"-->
 <!--                         readOnly-->
 <!--                  />-->
-                    <money style="text-align:left;color:red" readOnly :value="afficheMontantHorsTaxeDuCautionnement" ></money>
+                    <money style="text-align:left;color:red" readOnly :value="afficheMontantHorsTaxeDuCautionnement" class="span"></money>
                 </div>
               </div>
             </td>
@@ -660,7 +744,7 @@ marche_id
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDuCautionnement" ></money>
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDuCautionnement" class="span"></money>
                 </div>
               </div>
             </td>
@@ -675,13 +759,78 @@ marche_id
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCDuCautionnement" ></money>
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCDuCautionnement" class="span"></money>
                 </div>
               </div>
             </td>
            </tr>
         </table>
       </div>
+
+
+
+  <div id="GARANTIEBONEXCUTION2" class="tab-pane">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux % de garantie de bonne exécution</label>
+                <div class="controls">
+                  <input
+                      type="number"  v-model="formEffetFinancier.taux_bon_execution"
+
+                      placeholder="saisir le taux de garantie de bonne execution"
+                      class="span"
+
+                  />
+
+                </div>
+              </div>
+            </td>
+            <td >
+              <div class="control-group">
+                <label class="control-label" > Montant Hors taxe de garantie de bonne execution</label>
+                <div class="controls">
+<!--                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"-->
+<!--                         class="span"-->
+<!--                         readOnly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantHorsTaxeDeGarantiebonneExecution" class="span"></money>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA de garantie de bonne execution</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"  :value="afficherMontantTvaDuCautionnement" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDeGarantieDeBonneExecution" class="span"></money>
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC de garantie de bonne execution </label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+
+<!--                      :value="afficherMontantTTCDuCautionnement" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCDeGarantieDeBonneExecution" class="span"></money>
+                </div>
+              </div>
+            </td>
+           </tr>
+        </table>
+      </div>
+
        <div id="GARANTIE2" class="tab-pane">
       <table class="table table-bordered table-striped">
         <tr>
@@ -810,21 +959,26 @@ marche_id
 
  <!-- afficherEnorere -->
 
- <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
+
+  <!---->
+
+
+
+<div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information sur l'attribution de l'acte : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
     </div>
-
     <div class="widget-title">
-
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Identif1">Identification de l'acte</a></li>
-        <li class=""><a data-toggle="tab" href="#financ2">Informations financières</a></li>
+        <li class="active"><a data-toggle="tab" href="#IdentifModifier">Identification de L'acte</a></li>
+        <li class=""><a data-toggle="tab" href="#financModifier">Informations financières</a></li>
+          <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitanceModifier">Les entreprise sous_traitance </a></li>
       </ul>
     </div>
     <div class="widget-content tab-content">
-      <div id="Identif1" class="tab-pane active">
+
+      <div id="IdentifModifier" class="tab-pane active">
 
         <table class="table table-bordered table-striped">
           <tr>
@@ -836,21 +990,44 @@ marche_id
                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                             :value="varText.id">{{varText.libelle}}</option>
                   </select>
+
                 </div>
               </div>
             </td>
+            <!-- <td>
+
+              <div class="control-group">
+                <label class="control-label">Entreprise</label>
+                <div class="controls" style="font-size:20px">
+                 
+                 <model-list-select style="background-color: #fff;"
+                                               class="wide"
+                                               :list="entreprises"
+                                               v-model="editActeEffetFinancier.entreprise_id"
+                                               option-value="id"
+                                               option-text="raison_sociale"
+                                               placeholder="Entreprise"
+                            >
+
+                            </model-list-select>
+                </div>
+
+
+              </div>
+
+
+            </td> -->
+
             <td>
 
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
                 <div class="controls" style="font-size:20px">
-                  <input
-                      type="text"
-                      :value="nom_candidata"
-                      class="span"
-                      readonly
-                  />
-
+                
+                   <select v-model="editActeEffetFinancier.entreprise_id" class="span">
+                    <option v-for="varText in entreprises" :key="varText.id"
+                            :value="varText.id">{{varText.raison_sociale}}</option>
+                  </select>
                 </div>
 
 
@@ -859,33 +1036,49 @@ marche_id
 
             </td>
 
-            <td>
+           <td>
               <div class="control-group">
                 <label class="control-label">Banque</label>
                 <div class="controls" >
                   <select v-model="editActeEffetFinancier.banq_id" class="span" >
-                    <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
-                            :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                    <option v-for="varText in afficherBanqueDynamiqueId(editActeEffetFinancier.entreprise_id)" :key="varText.id"
+                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
                 </div>
               </div>
             </td>
-
-              <td>
+             <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
-                 <!-- <select v-model="editActeEffetFinancier.compte_id" class="span" >
-                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
-                  </select> -->
-               <select v-model="editActeEffetFinancier.compte_id" class="span" >
-                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id,affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
+                 <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                   <option v-for="varText in afficherCompteDynamique(recuperIdModePassation(macheid),recupererIdBanque(editActeEffetFinancier.banq_id))" :key="varText.id"
                             :value="varText.id">{{varText.rib}}</option>
                   </select>
+                 <!-- <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
+                            :value="varText.id">{{afficherLibelleCompteRib(varText.banq_id)}}</option>
+                  </select> -->
+                <!-- <div class="controls " >
+                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+
+                </div> -->
               </div>
 
             </td>
+
+
+            <!-- <td>
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                <div class="controls " >
+                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(editActeEffetFinancier.banq_id)" readonly >
+
+                </div>
+              </div>
+
+            </td> -->
+
           </tr>
           <tr>
              <td colspan="2" width="550">
@@ -914,7 +1107,7 @@ marche_id
 
             <td colspan="">
               <div class="control-group">
-                <label class="control-label">Numéro du marché/contrat {{editActeEffetFinancier.marche_id}}</label>
+                <label class="control-label">Numéro du marché/contrat</label>
                 <div class="controls">
                   <input
                       type="text"
@@ -923,15 +1116,14 @@ marche_id
                       placeholder="Saisir le numero "
                   />
                 </div>
-
               </div>
 
             </td>
-
+           
 
           </tr>
           <tr>
-  <td>
+        <td>
 
               <div class="control-group">
                 <label class="control-label" >Date de signature attributaire</label>
@@ -941,7 +1133,6 @@ marche_id
                          placeholder=""
                   />
                 </div>
-
               </div>
             </td>
               <td>
@@ -953,15 +1144,12 @@ marche_id
                          placeholder="refence acte"
                   />
                 </div>
-
               </div>
             </td>
 
-
-
             <td>
               <div class="control-group">
-                <label class="control-label"> Date d'approbation</label>
+                <label class="control-label"> date d'approbation</label>
                 <div class="controls">
                   <input
                       type="date"
@@ -970,16 +1158,15 @@ marche_id
                       placeholder=""
                   />
                 </div>
-
               </div>
 
             </td>
-
-
+           
+          
           <td>
               <div class="control-group">
                 <label class="control-label">Autorité approbatrice</label>
-                 <div class="controls">
+                <div class="controls">
                   <input
                       type="text"
                       v-model="editActeEffetFinancier.autorite_approbation"
@@ -988,77 +1175,67 @@ marche_id
                   />
                   <input type="hidden" v-model="editActeEffetFinancier.ua_id" />
                 </div>
-
               </div>
 
             </td>
 
-
+           
           </tr>
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Date de début d'execution prévisionnelle</label>
-                 <div class="controls">
-                  <input type="date" v-model="editActeEffetFinancier.date_odre_service"
+                <label class="control-label">Date de début d'exécution prévisionnelle</label>
+                <div class="controls">
+                  <input type="date" v-model="date_debut_previsionnelModifier"
                          class="span"
                          placeholder=""
                   />
                 </div>
-
               </div>
             </td>
 
+
+              <td>
+                  <div class="control-group">
+                      <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
+                      <div class="controls">
+                          <input type="number"  v-model="editActeEffetFinancier.duree"
+                                 class="span"
+
+                          />
+                      </div>
+                  </div>
+              </td>
             <td>
               <div class="control-group">
                 <label class="control-label" title=" ">Date de reception provisoire prévisionnelle </label>
-                 <div class="controls">
+                <div class="controls">
                   <input type="date" v-model="editActeEffetFinancier.date_reception"
                          class="span"
-                         placeholder=""
+                         placeholder="" disabled
                   />
                 </div>
-
               </div>
             </td>
 
-
-
             <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date fin d'exécution prévisionnelle</label>
-                 <div class="controls">
-                  <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueModifier" v-model="editActeEffetFinancier.date_fin_exe"
+                <label class="control-label" title=" ">Date définitive reception prévisionnelle</label>
+                <div class="controls">
+                  <input type="date" :min="editActeEffetFinancier.date_odre_service" disabled v-model="editActeEffetFinancier.date_fin_exe"
                          class="span"
                          placeholder=""
                   />
                 </div>
-
               </div>
             </td>
-
-
-
-            <td>
-              <div class="control-group">
-                <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
-                 <div class="controls">
-                  <input type="text"  readonly :value="nombreDejourCalculeModifier"
-                         class="span"
-
-                  />
-                </div>
-
-              </div>
-            </td>
-
           </tr>
-                   <tr>
+          <tr>
              <td>
               <div class="control-group">
-                <label class="control-label" title=" ">garantie</label>
+                <label class="control-label" title="">garantie</label>
                 <div class="controls">
-                    <select  v-model="editActeEffetFinancier.garantie" class="span">
+                    <select  v-model="garantie" class="span">
                         <option value="oui">Oui</option>
                         <option value="non">Non</option>
                     </select>
@@ -1066,31 +1243,48 @@ marche_id
               </div>
 
             </td>
-              <div>
-                  <div class="control-group" v-if="garantie=='oui'">
-                      <label class="control-label" title=" ">Durée de garantie(JOUR) </label>
+              <td>
+                  <div class="control-group">
+                      <label class="control-label" title=" ">Sous traitance</label>
                       <div class="controls">
-                          <input type="number" v-model="editActeEffetFinancier.durre_garantie"
-                                 class="span"
-                                 placeholder=""
-                          />
+                          <select  v-model="sous_traitance" class="span">
+                              <option value="oui">Oui</option>
+                              <option value="non">Non</option>
+                          </select>
                       </div>
                   </div>
-              </div>
+
+              </td>
+
+              <td>
+                  <div>
+                      <div class="control-group" v-if="garantie=='oui'">
+                          <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+                          <div class="controls">
+                              <input type="number" v-model="durre_garantieModifier"
+                                     class="span"
+                                     placeholder=""
+                              />
+                          </div>
+                      </div>
+                  </div>
+              </td>
+
           </tr>
         </table>
       </div>
 
-      <div id="financ2" class="tab-pane">
+      <div id="financModifier" class="tab-pane">
   <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#MARCHE1">MARCHE</a></li>
-        <li class=""><a data-toggle="tab" href="#DEMARRAGE1">AVANCE DE DEMARRAGE</a></li>
-        <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT1">CAUTIONNEMENT</a></li>
-        <li class=""><a data-toggle="tab" href="#GARANTIE1">RETENU DE GARANTIE</a></li>
+        <li class="active"><a data-toggle="tab" href="#MARCHE3">MARCHE</a></li>
+        <li class=""><a data-toggle="tab" href="#DEMARRAGE3">AVANCE DE DEMARRAGE</a></li>
+        <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT3">CAUTIONNEMENT</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIEBONEXECUTION3">GARANTIE DE BONNE EXECUTION</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIE3" v-if="garantie=='oui'">RETENU DE GARANTIE</a></li>
       </ul>
       <div class="widget-content tab-content">
 
-      <div id="MARCHE1" class="tab-pane active">
+      <div id="MARCHE3" class="tab-pane active">
          <table class="table table-bordered table-striped">
            <tr>
               <td>
@@ -1098,7 +1292,7 @@ marche_id
               <div class="control-group">
                 <label class="control-label">exonéré</label>
                 <div class="controls">
-                   <select v-model="editActeEffetFinancier.exonere" class="span">
+                  <select v-model="editActeEffetFinancier.exonere" class="span">
 
                     <option value="0">Oui</option>
                     <option value="1">Non</option>
@@ -1106,15 +1300,15 @@ marche_id
                 </div>
               </div>
             </td>
-
+           
              <td >
               <div class="control-group">
                 <label class="control-label" >Taux</label>
-                 <div class="controls">
+                <div class="controls">
                   <input
                       type="number"
 
-                      :value="afficherEnorereModifier"
+                      :value="afficherEnorereModifier" style="text-align:left;color:red"
                       class="span"
                       readonly
                   />
@@ -1125,98 +1319,97 @@ marche_id
 
               <div class="control-group">
                 <label class="control-label">Montant acte/réel du marché (HT)</label>
-                 <div class="controls">
-                  <!-- <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
-                         class="span"
-                         placeholder="Saisir le montant "
-                  /> -->
-                  <money v-model="editActeEffetFinancier.montant_act_ht" ></money>
+                <div class="controls">
+                    <money v-model="editActeEffetFinancier.montant_act_ht" class="span"></money>
+<!--                  <input type="text" v-model="editActeEffetFinancier.montant_act_ht"-->
+<!--                         class="span"-->
+<!--                         placeholder="Saisir le montant "-->
+<!--                  />-->
                 </div>
-
               </div>
             </td>
            </tr>
             <tr>
-
+             
              <td >
               <div class="control-group">
                 <label class="control-label" > Montant TVA du marché</label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"
-                      :value="montantTva"
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantTva" style="text-align:left;color:red"-->
 
-                      class="span"
-                      readonly
-                  /> -->
-              <money :value="montantTvaModifier" style="text-align:left;color:red" readonly ></money>
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money :value="montantTvaModifier" style="text-align:left;color:red" readonly class="span"></money>
                 </div>
               </div>
             </td>
              <td colspan="2">
               <div class="control-group">
                 <label class="control-label" >Montant TTC du marché</label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"
-                      :value="montantHTt"
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantHTt" style="text-align:left;color:red"-->
 
-                      class="span"
-                      readonly
-                  /> -->
-           <money :value="montantHTtModifier" style="text-align:left;color:red" readonly ></money>
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money :value="montantHTtModifier" style="text-align:left;color:red" readonly class="span"></money>
                 </div>
               </div>
             </td>
            </tr>
          </table>
-
+        
       </div>
-      <div id="DEMARRAGE1" class="tab-pane">
+      <div id="DEMARRAGE3" class="tab-pane">
          <table class="table table-bordered table-striped">
            <tr>
-             <td >
+
+              <td>
               <div class="control-group">
-                <label class="control-label" >Taux Avance Démarrage</label>
+                <label class="control-label">Taux Avance Demarrage</label>
                 <div class="controls">
-                  <!-- <input
-                      type="number"  v-model="editActeEffetFinancier.taux_avance_demarrage"
+                   
 
-                      placeholder="saisir le taux Avance Demarrage"
-                      class="span"
+                 <input type="text" v-model="editActeEffetFinancier.taux_avance_demarrage"
+                        class="span"
+                        placeholder=" "
+                 />
 
-                  /> -->
-       <money v-model="editActeEffetFinancier.taux_avance_demarrage" ></money>
                 </div>
               </div>
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Avance Démarrage Ht</label>
-                 <div class="controls">
+                <label class="control-label">Avance Demarrage Hore Taxe (HT)</label>
+                <div class="controls">
+                    <money :value="avanceDemarageHorsTaxeModifier" style="text-align:left;color:red" class="span"  readonly  ></money>
 
+<!--                  <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"-->
+<!--                         class="span"-->
+<!--                         placeholder="Saisir le montant "-->
+<!--                  />-->
 
-                  <!-- <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"
-                         class="span"
-                         placeholder="Saisir le montant "
-                  /> -->
-             <money v-model="editActeEffetFinancier.avance_demarrage_ht" ></money>
                 </div>
-
               </div>
             </td>
+           
              <td>
                <div class="control-group">
-                <label class="control-label" >TVA (Avance Demarrage)</label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"
-                      :value="avanceDemarrageMontantTva"
+                <label class="control-label" >TVA (Avance Démarrage)</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="avanceDemarrageMontantTva" style="text-align:left;color:red"-->
 
-                      class="span"
-                      readonly
-                  /> -->
-               <money :value="avanceDemarrageMontantTvaModifier" style="text-align:left;color:red"  readonly></money>
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money :value="avanceDemarrageMontantTvaModifier" style="text-align:left;color:red" class="span"  readonly></money>
 
                 </div>
               </div>
@@ -1224,28 +1417,27 @@ marche_id
              <td >
               <div class="control-group">
                 <label class="control-label" >Montant Avance Démarrage TTC</label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"
-                      :value="avanceDemarrage"
-
-                      class="span"
-                      readonly
-                  /> -->
-                   <money :value="avanceDemarrageModifier" style="text-align:left;color:red" readonly ></money>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="avanceDemarrage" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money :value="editAvanceDemarrageMontantTTC" style="text-align:left;color:red" readonly class="span"></money>
                 </div>
               </div>
             </td>
            </tr>
          </table>
       </div>
-       <div id="CAUTIONNEMENT1" class="tab-pane">
+       <div id="CAUTIONNEMENT3" class="tab-pane">
         <table class="table table-bordered table-striped">
            <tr>
              <td >
               <div class="control-group">
                 <label class="control-label" >Taux % du cautionnement</label>
-                 <div class="controls">
+                <div class="controls">
                   <input
                       type="number"  v-model="editActeEffetFinancier.taux_cautionnemt"
 
@@ -1255,67 +1447,125 @@ marche_id
                   />
 
                 </div>
-
               </div>
             </td>
             <td >
               <div class="control-group">
                 <label class="control-label" > Montant HT du cautionnement</label>
                 <div class="controls">
-                  <!-- <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement"
-
-
-                         class="span"
-                         readOnly
-                  /> -->
-                   <money style="text-align:left;color:red" readOnly :value="afficheMontantHorsTaxeDuCautionnementModifier" ></money>
+<!--                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"-->
+<!--                         class="span"-->
+<!--                         readOnly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficheMontantHorsTaxeDuCautionnementModifier" class="span"></money>
                 </div>
-
               </div>
             </td>
             <td>
               <div class="control-group">
                 <label class="control-label" >Montant TVA du cautionnement</label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"  :value="afficherMontantTvaDuCautionnement"
-
-
-                      class="span"
-                      readonly
-                  /> -->
-                 <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDuCautionnementModifier" ></money>
-
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"  :value="afficherMontantTvaDuCautionnement" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDuCautionnementModifier" class="span"></money>
                 </div>
-
               </div>
             </td>
              <td >
               <div class="control-group">
                 <label class="control-label" >Montant TTC du cautionnement </label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
 
-                      :value="afficherMontantTTCDuCautionnement"
-                      class="span"
-                      readonly
-                  /> -->
-                <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCDuCautionnementModifier" ></money>
+<!--                      :value="afficherMontantTTCDuCautionnement" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCDuCautionnementModifier" class="span"></money>
                 </div>
-
               </div>
             </td>
            </tr>
         </table>
       </div>
-       <div id="GARANTIE1" class="tab-pane">
+
+
+
+<div id="GARANTIEBONEXECUTION3" class="tab-pane">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux % de garantie de bonne exécution</label>
+                <div class="controls">
+                  <input
+                      type="number"  v-model="editActeEffetFinancier.taux_bon_execution"
+
+                      placeholder="saisir le taux de garantie de bonne execution"
+                      class="span"
+
+                  />
+
+                </div>
+              </div>
+            </td>
+            <td >
+              <div class="control-group">
+                <label class="control-label" > Montant Hors Taxe De garantie d'exécution</label>
+                <div class="controls">
+<!--                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"-->
+<!--                         class="span"-->
+<!--                         readOnly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficheMontantHorsTaxeGarantieBonneExecutionModifier" class="span"></money>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA de garantie de bonne exécution</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"  :value="afficherMontantTvaDuCautionnement" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDeGarantieDeBonneExecutionModifier" class="span"></money>
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC de garantie de bonne exécution </label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+
+<!--                      :value="afficherMontantTTCDuCautionnement" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCGarantieDeBonneExcutionModifier" class="span"></money>
+                </div>
+              </div>
+            </td>
+           </tr>
+        </table>
+      </div>
+
+
+
+       <div id="GARANTIE3" class="tab-pane">
       <table class="table table-bordered table-striped">
         <tr>
-          <td >
+          <td>
               <div class="control-group">
                 <label class="control-label">Taux % de retenue de garantie</label>
-                 <div class="controls">
+                <div class="controls">
                   <input
                       type="number"  v-model="editActeEffetFinancier.taux_retenue_garantie"
                       placeholder="saisir le taux de retenue de garantie"
@@ -1325,60 +1575,103 @@ marche_id
                   />
 
                 </div>
-
               </div>
             </td>
             <td >
               <div class="control-group">
                 <label class="control-label" > Montant HT de retenue de garantie</label>
-                 <div class="controls">
-                  <!-- <input
-                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie"
-                      placeholder="saisir le montant hors taxe du dispositif retenu"
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"-->
+<!--                      placeholder="saisir le montant hors taxe du dispositif retenu"-->
 
-                      class="span"
-                      readonly
-                  /> -->
-                 <money style="text-align:left;color:red" readOnly :value="afficherMontantHorsTaxeRetenuGarantieModifier" ></money>
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantHorsTaxeRetenuGarantieModifier" ></money>
                 </div>
-
               </div>
             </td>
              <td>
               <div class="control-group">
                 <label class="control-label" >Montant TVA de retenue de garantie</label>
                 <div class="controls">
-                  <!-- <input
-                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantieModifier"
-                      class="span"
-                      readonly
-                  /> -->
-                 <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaTaxeRetenuGarantieModifier" ></money>
+<!--                  <input-->
+<!--                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaTaxeRetenuGarantieModifier" ></money>
                 </div>
-
               </div>
             </td>
              <td >
               <div class="control-group">
                 <label class="control-label" >Montant TTC retenue de garantie </label>
-                 <div class="controls">
-                  <!-- <input
-                      type="number"  :value="afficherMontantRetenueGarantieModifier"
-                      class="span"
-                      readonly
-                  /> -->
-               <money style="text-align:left;color:red" readOnly :value="afficherMontantRetenueGarantieModifier" ></money>
-                </div>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"  :value="afficherMontantRetenueGarantie" style="text-align:left;color:red"-->
 
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money style="text-align:left;color:red" readOnly :value="afficherMontantRetenueGarantieModifier" ></money>
+                </div>
               </div>
             </td>
         </tr>
       </table>
       </div>
-
+      
       </div>
       </div>
+        <div id="sous_traitanceModifier"  class="tab-pane">
+            <div class="span12">
+                <h6>ENREPRISE SOUS TRAITANCE</h6>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>ENTREPRSE </label>
+                            <model-list-select style="background-color: #fff;"
+                                               class="wide"
+                                               :list="entreprises"
+                                               v-model="nom_structure"
+                                               option-value="id"
+                                               option-text="raison_sociale"
+                                               placeholder="Entreprise"
+                            >
 
+                            </model-list-select>
+
+                        </td>
+
+                        <td>
+                            <hr>
+                            <button class="btn btn-danger" @click.prevent="addStructure()">
+                                Ajouter
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="odd gradeX" v-for="appelOffre in structure"
+                        :key="'APM'+appelOffre">
+                        <td>
+                            {{appelOffre.raison_sociale || 'Non renseigné'}}
+                        </td>
+                        <div class="btn-group">
+                            <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+<!--                <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"-->
+<!--                   href="#">Enregistrer dossier du soumissionnaire</a>-->
+            </div>
+        </div>
 
     </div>
 
@@ -1390,11 +1683,6 @@ marche_id
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
-  <!---->
-
-
-
-
 
   
 </div>
@@ -1412,21 +1700,13 @@ name: "ActEffeFinanciere",
   data(){
     return{
       lot:"",
-      editActeEffetFinancier:{},
-      // editEffetFinancier:{},
-        sous_traitance:"non",
-        garantie:"non",
-        nom_structure:"",
-        structure:[],
-        structure_id:[],
-        date_debut_previsionnel:"",
-        taux_avance_demarrage:"",
-        durre_prevue:"",
-        durre_garantie:"",
-       formEffetFinancier:{
+      editActeEffetFinancier:{
         tva_cautionnement:"",
+        taux_avance_demarrage:"",
+        taux_bon_execution:"",
         montant_ttc_cautionnement:"",
-        montant_ht_cautionnement:"",    
+        montant_ht_cautionnement:"", 
+        avance_demarrage_ht:"",   
         exonere:"",
         montant_act_ht:"",
         taux_cautionnemt:"",
@@ -1434,7 +1714,59 @@ name: "ActEffeFinanciere",
         tva:"",
         taux:"",
         ua_id:"",
-        avance_demarrage_ht:0,
+        // avance_demarrage_ht:0,
+        avance_demarrage_ttc:0,
+        tva_avance_demarage:"",
+        libelle_act:"",
+        reference_act:"",
+        objet_act:"",
+        incidence_financiere:"",
+        montant_act:"",
+        date_attributaire:"",
+        date_reception:"",
+        duree:"",
+        date_fin_exe:"",
+        date_odre_service:"",
+        livrable_id:"",
+        autorite_approbation:"",
+        date_approbation:"",
+        // text_juridique_id:"",
+        type_act_effet_id:"",
+        analyse_dossier_id:"",
+        entreprise_id:"",
+        marche_id:"",
+        banq_id:"",
+        compte_id:"",
+        numero_marche:""
+      },
+      // editEffetFinancier:{},
+        sous_traitance:"non",
+        garantie:"non",
+        nom_structure:"",
+        structure:[],
+        structure_id:[],
+        date_debut_previsionnel:"",
+        date_debut_previsionnelModifier:"",
+        durre_prevueModifier:"",
+         durre_garantieModifier:"",
+        durre_prevue:"",
+        durre_garantie:"",
+
+       formEffetFinancier:{
+        tva_cautionnement:"",
+        taux_bon_execution:"",
+        taux_avance_demarrage:"",
+        montant_ttc_cautionnement:"",
+        montant_ht_cautionnement:"", 
+        avance_demarrage_ht:"",   
+        exonere:"",
+        montant_act_ht:"",
+        taux_cautionnemt:"",
+        taux_retenue_garantie:"",
+        tva:"",
+        taux:"",
+        ua_id:"",
+        // avance_demarrage_ht:0,
         avance_demarrage_ttc:0,
         tva_avance_demarage:"",
         libelle_act:"",
@@ -1490,6 +1822,27 @@ console.log(this.dateDefinitivePrevisionnel("2021-01-23",30))
       'planActe']),
       ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
 
+
+
+CaculerMontantHtParTTC() {
+      const val = parseFloat((this.formEffetFinancier.montant_act) / (parseFloat(this.afficherEnorere)+1));
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
+
+CaculermontantTva() {
+      const val = parseFloat((this.CaculerMontantHtParTTC) * parseFloat(this.afficherEnorere));
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
 
 libelleCompte() {
       return id => {
@@ -1584,18 +1937,6 @@ afficherEntrepriseNom(){
         }
       }
     },
-    recuperIdModePassation(){
-     return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id ==id && qtreel.ref_sigva!=null);
-
-      if (qtereel) {
-        return qtereel.entreprise_id;
-      }
-      return 0
-        }
-      };
-},
 affichieridMarcheGlobal() {
       return id => {
         if (id != null && id != "") {
@@ -1808,6 +2149,7 @@ afficheNomEntreprise() {
         }
       }
     },
+
 affichierImputationMarche(){
       return id =>{
         if(id!=null && id!=""){
@@ -1819,7 +2161,6 @@ affichierImputationMarche(){
         }
       }
     },
-
     enregistrerIdEntreprise(){
       return id =>{
         if(id!=null && id!=""){
@@ -1855,38 +2196,36 @@ affichierImputationMarche(){
     },
 
 
+//  afficherMontantTTCDuCautionnement(){
+//       // const result = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_cautionnemt)/100)
+//       // if (result) {
+//       //   return parseFloat(result).toFixed(0);
+//       // }
+//    let montant=parseFloat(this.afficheMontantHorsTaxeDuCautionnement) + parseFloat(this.afficherMontantTvaDuCautionnement)
+//       return parseFloat(montant).toFixed(0);
+
+//     },
     // calcul du montant ttc de retenu
     afficherMontantRetenueGarantie(){
-      const montantttcRetenueGarantie = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_retenue_garantie)/100)
-      if (montantttcRetenueGarantie) {
+      const montantttcRetenueGarantie =parseFloat(this.afficherMontantHorsTaxeRetenuGarantie) + parseFloat(this.afficherMontantTvaTaxeRetenuGarantie)
         return parseFloat(montantttcRetenueGarantie).toFixed(0);
-      }
-      return 0
+    
     },
+
+
+    
       afficherMontantRetenueGarantieModifier(){
-      const montantttcRetenueGarantie = (parseFloat(this.montantHTtModifier) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
-      if (montantttcRetenueGarantie) {
+      const montantttcRetenueGarantie =parseFloat(this.afficherMontantHorsTaxeRetenuGarantieModifier) + parseFloat(this.afficherMontantTvaTaxeRetenuGarantieModifier)
+     
         return parseFloat(montantttcRetenueGarantie).toFixed(0);
-      }
-      return 0
+    
     },
 
 // calcul du montant tva de retenue de garantie
 
-// afficherMontantTvaTaxeRetenuGarantie(){
-
-//   const resultat = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
-
-//   if(resultat){
-//     return parseFloat( Math.round(resultat))
-//   }
-//   return 0
-// },
-
-
     afficherMontantTvaTaxeRetenuGarantie(){
 
-      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.Modifier)/100);
+      const val =(this.afficherMontantHorsTaxeRetenuGarantie * this.afficherEnorere);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1897,13 +2236,8 @@ affichierImputationMarche(){
     },
       afficherMontantTvaTaxeRetenuGarantieModifier(){
 
-      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantieModifier) * parseFloat(this.Modifier)/100);
-
-      if (val) {
+      const val = parseFloat(this.afficherMontantHorsTaxeRetenuGarantieModifier * this.afficherEnorereModifier);
         return parseFloat(val).toFixed(0);
-      }
-
-      return 0
 
     },
 
@@ -1911,24 +2245,93 @@ affichierImputationMarche(){
 // calcul du montant hors taxe de retenu de garantie  afficherMontantHorsTaxeRetenuGarantie
 
 
-    afficherMontantHorsTaxeRetenuGarantie(){
+    // afficherMontantHorsTaxeRetenuGarantie(){
 
-      const anwser = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+    //   const anwser = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
-      if(anwser){
-        return parseFloat( Math.round(anwser))
+    //   if(anwser){
+    //     return parseFloat( Math.round(anwser))
+    //   }
+    //   return 0
+    // },
+
+      afficherMontantHorsTaxeRetenuGarantie(){
+      if(this.formEffetFinancier.httcc_id==0){
+ if(this.formEffetFinancier.taux_retenue_garantie!="" && this.formEffetFinancier.montant_act_ht!=""){
+                  let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_retenue_garantie)
+                  let montant_act_ht=parseFloat(this.formEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
       }
-      return 0
-    },
-      afficherMontantHorsTaxeRetenuGarantieModifier(){
+      else{
+         if(this.formEffetFinancier.taux_retenue_garantie!="" && this.CaculerMontantHtParTTC!=""){
+                  let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_retenue_garantie)
+                  let montant_act_ht=parseFloat(this.CaculerMontantHtParTTC)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
 
-      const anwser = parseFloat (this.afficherMontantRetenueGarantieModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
-
-      if(anwser){
-        return parseFloat( Math.round(anwser))
+              }
+              return 0
       }
-      return 0
+         //let montantH=this.formEffetFinancier.montant_act_ht afficherEnorere
+             
+      // const anwser = parseFloat(this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+      //
+      // if(anwser){
+      //   return parseFloat( Math.round(anwser))
+      //}
+     // return 0
     },
+
+    afficherMontantHorsTaxeDeGarantiebonneExecution(){
+         if(this.formEffetFinancier.httcc_id==0){
+ if(this.formEffetFinancier.taux_bon_execution!="" && this.formEffetFinancier.montant_act_ht!=""){
+                  let taux_garantie_bon_execution=parseFloat(this.formEffetFinancier.taux_bon_execution)
+                  let montant_act_ht=parseFloat(this.formEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_garantie_bon_execution)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+      }
+      else{
+         if(this.formEffetFinancier.taux_bon_execution!="" && this.CaculerMontantHtParTTC!=""){
+                  let taux_garantie_bon_execution=parseFloat(this.formEffetFinancier.taux_bon_execution)
+                  let montant_act_ht=parseFloat(this.CaculerMontantHtParTTC)
+                 let mont=(montant_act_ht * taux_garantie_bon_execution)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+      }
+
+    },
+
+    afficherMontantTvaDeGarantieDeBonneExecution(){
+
+       let montantTV=(this.afficherMontantHorsTaxeDeGarantiebonneExecution * this.afficherEnorere)
+
+      return parseFloat(montantTV).toFixed(0);
+
+    },
+
+    afficherMontantTTCDeGarantieDeBonneExecution(){
+     let montant=parseFloat(this.afficherMontantHorsTaxeDeGarantiebonneExecution) + parseFloat(this.afficherMontantTvaDeGarantieDeBonneExecution)
+      return parseFloat(montant).toFixed(0);
+    },
+
+    //   afficherMontantHorsTaxeRetenuGarantieModifier(){
+  
+    //   const anwser = parseFloat (this.afficherMontantRetenueGarantieModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+    //   if(anwser){
+    //     return parseFloat( Math.round(anwser))
+    //   }
+    //   return 0
+    // },
 
 //  calcul montant ttc de retenu de garantie pour la modification
 
@@ -1997,14 +2400,15 @@ affichierImputationMarche(){
       // if (val) {
       //   return parseFloat(val).toFixed(0);
       // }
-        let montantTV=(this.afficheMontantHorsTaxeDuCautionnement * this.afficherEnorere)/100
+        let montantTV=(this.afficheMontantHorsTaxeDuCautionnement * this.afficherEnorere)
 
       return parseFloat(montantTV).toFixed(0);
 
     },
+    
      afficherMontantTvaDuCautionnementModifier(){
 
-      let montantTV = (this.afficheMontantHorsTaxeDuCautionnementModifier * this.afficherEnorereModifier)/100
+      let montantTV = (this.afficheMontantHorsTaxeDuCautionnementModifier * this.afficherEnorereModifier)
 
       // if (val) {
       //   return parseFloat(val).toFixed(0);
@@ -2015,11 +2419,109 @@ affichierImputationMarche(){
     },
 
 
+
+// calcul montant d'avance de demarage hors taxe
+  // afficherMontantTvaDuCautionnementModifier(){
+
+  //     let montantTV = (this.afficheMontantHorsTaxeDuCautionnementModifier * this.afficherEnorereModifier)
+
+  //     // if (val) {
+  //     //   return parseFloat(val).toFixed(0);
+  //     // }
+
+  //     // return 0
+  //     return parseFloat(montantTV).toFixed(0);
+  //   },
+  avanceDemarageHorsTaxe(){
+      if(this.formEffetFinancier.httcc_id==0){
+ if(this.formEffetFinancier.taux_avance_demarrage!="" && this.formEffetFinancier.montant_act_ht!=""){
+                  let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_avance_demarrage)
+                  let montant_act_ht=parseFloat(this.formEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+      }
+      else{
+         if(this.formEffetFinancier.taux_avance_demarrage!="" && this.CaculerMontantHtParTTC!=""){
+                  let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_avance_demarrage)
+                  let montant_act_ht=parseFloat(this.CaculerMontantHtParTTC)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+      }
+         //let montantH=this.formEffetFinancier.montant_act_ht afficherEnorere
+             
+      // const anwser = parseFloat(this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+      //
+      // if(anwser){
+      //   return parseFloat( Math.round(anwser))
+      //}
+     // return 0
+    },
+
+
+ avanceDemarageHorsTaxeModifier(){
+      if(this.editActeEffetFinancier.taux_avance_demarrage!="" && this.editActeEffetFinancier.montant_act_ht!=""){
+                  let taux_avance_demage=parseFloat(this.editActeEffetFinancier.taux_avance_demarrage)
+                  let montant_act_ht=parseFloat(this.editActeEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_avance_demage)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+  
+    },
+
+    afficheMontantHorsTaxeGarantieBonneExecutionModifier(){
+        if(this.editActeEffetFinancier.taux_bon_execution!="" && this.editActeEffetFinancier.montant_act_ht!=""){
+                  let taux_bonne=parseFloat(this.editActeEffetFinancier.taux_bon_execution)
+                  let montant_act_ht=parseFloat(this.editActeEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_bonne)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+    },
+
+    afficherMontantTvaDeGarantieDeBonneExecutionModifier(){
+     let montantTV = (this.afficheMontantHorsTaxeGarantieBonneExecutionModifier * this.afficherEnorereModifier)
+      return parseFloat(montantTV).toFixed(0);
+    },
+// calcul
+    afficherMontantTTCGarantieDeBonneExcutionModifier(){
+    let resultat=parseFloat(this.afficheMontantHorsTaxeGarantieBonneExecutionModifier)+ parseFloat(this.afficherMontantTvaDeGarantieDeBonneExecutionModifier)
+     return parseFloat(resultat).toFixed(0)
+ },
+
+// afficher le montant de la TVA d'avance de demarrage
+  avanceDemarrageMontantTvaModifier(){
+
+      let montantTV = (this.avanceDemarageHorsTaxeModifier * this.afficherEnorereModifier)
+
+      // if (val) {
+      //   return parseFloat(val).toFixed(0);
+      // }
+
+      // return 0
+      return parseFloat(montantTV).toFixed(0);
+    },
+
+editAvanceDemarrageMontantTTC(){
+  let answerMontant=parseFloat(this.avanceDemarageHorsTaxeModifier) + parseFloat(this.avanceDemarrageMontantTvaModifier)
+   return parseFloat(answerMontant).toFixed(0);
+},
+
+
+
 // calcul du montant hors taxe du cautionnement
 
     afficheMontantHorsTaxeDuCautionnement(){
-         //let montantH=this.formEffetFinancier.montant_act_ht afficherEnorere
-              if(this.formEffetFinancier.taux_cautionnemt!="" && this.formEffetFinancier.montant_act_ht!=""){
+      if(this.formEffetFinancier.httcc_id==0){
+ if(this.formEffetFinancier.taux_cautionnemt!="" && this.formEffetFinancier.montant_act_ht!=""){
                   let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_cautionnemt)
                   let montant_act_ht=parseFloat(this.formEffetFinancier.montant_act_ht)
                  let mont=(montant_act_ht * taux_cautionnement)/100
@@ -2027,6 +2529,19 @@ affichierImputationMarche(){
 
               }
               return 0
+      }
+      else{
+         if(this.formEffetFinancier.taux_cautionnemt!="" && this.CaculerMontantHtParTTC!=""){
+                  let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_cautionnemt)
+                  let montant_act_ht=parseFloat(this.CaculerMontantHtParTTC)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+      }
+         //let montantH=this.formEffetFinancier.montant_act_ht afficherEnorere
+             
       // const anwser = parseFloat(this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
       //
       // if(anwser){
@@ -2040,6 +2555,25 @@ affichierImputationMarche(){
                   let taux_cautionnement=parseFloat(this.editActeEffetFinancier.taux_cautionnemt)
                   let montant_act_ht=parseFloat(this.editActeEffetFinancier.montant_act_ht)
                  let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
+
+              }
+              return 0
+      // const anwser = parseFloat (this.afficherMontantTTCDuCautionnementModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+      // if(anwser){
+      //   return parseFloat( Math.round(anwser))
+      // }
+      // return 0
+    },
+
+
+     afficherMontantHorsTaxeRetenuGarantieModifier(){
+    
+     if(this.editActeEffetFinancier.taux_retenue_garantie!="" && this.editActeEffetFinancier.montant_act_ht!=""){
+                  let taux_retenu_g=parseFloat(this.editActeEffetFinancier.taux_retenue_garantie)
+                  let montant_act_ht=parseFloat(this.editActeEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_retenu_g)/100
                   return parseFloat(mont).toFixed(0);
 
               }
@@ -2131,7 +2665,7 @@ affichierImputationMarche(){
       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
       if (norme) {
-        return norme.libelle;
+        return norme.arrondit;
       }
       return 0
     },
@@ -2151,7 +2685,7 @@ affichierImputationMarche(){
 
 
     montantTva() {
-      const val = parseFloat((this.formEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.formEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorere));
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -2159,8 +2693,9 @@ affichierImputationMarche(){
 
       return 0
     },
+
      montantTvaModifier() {
-      const val = parseFloat((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorereModifier));
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -2169,17 +2704,11 @@ affichierImputationMarche(){
       return 0
     },
 
-    editMontantTva(){
-      const resulta = parseFloat ((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.editAfficherEnorere)/100)
-      if(resulta){
-        return parseFloat(resulta).toFixed(0)
-      }
-      return 0
-    },
+    
 
 
     editMontantHTt(){
-      let anwser = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.editMontantTva)
+      let anwser = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.montantTvaModifier)
       if(anwser){
         return parseFloat(anwser).toFixed(0);
       }
@@ -2201,7 +2730,7 @@ affichierImputationMarche(){
     },
       montantHTtModifier() {
       
-      const val = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
+      const val = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.montantTvaModifier);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -2210,34 +2739,45 @@ affichierImputationMarche(){
       return 0
     },
 
-    avanceDemarrage(){
-      const val = parseFloat(this.formEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
+    // avanceDemarrage(){
+    //   const val = parseFloat(this.formEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
 
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
+    //   if (val) {
+    //     return parseFloat(val).toFixed(0);
+    //   }
 
-      return 0
+    //   return 0
+    // },
+    //   avanceDemarrageModifier(){
+    //   const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTvaModifier);
+
+    //   if (val) {
+    //     return parseFloat(val).toFixed(0);
+    //   }
+
+    //   return 0
+    // },
+
+  
+
+// calcul du montant hors taxe de l'avance de demarage
+     avanceDemarrageMontantTva(){
+        let montantTV=(this.avanceDemarageHorsTaxe * this.afficherEnorere)
+
+      return parseFloat(montantTV).toFixed(0);
+
     },
-      avanceDemarrageModifier(){
-      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTvaModifier);
 
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
+      avanceDemarrageTTC(){
+      // const result = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_cautionnemt)/100)
+      // if (result) {
+      //   return parseFloat(result).toFixed(0);
+      // }
+   let montant=parseFloat(this.avanceDemarageHorsTaxe) + parseFloat(this.avanceDemarrageMontantTva)
+      return parseFloat(montant).toFixed(0);
 
-      return 0
     },
 
-    avanceDemarrageMontantTva() {
-      const val = parseFloat((this.formEffetFinancier.avance_demarrage_ht) * parseFloat(this.formEffetFinancier.taux_avance_demarrage)/100);
-
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
-
-      return 0
-    },
     //  avanceDemarrageMontantTvaModifier() {
     //   const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
 
@@ -2247,18 +2787,18 @@ affichierImputationMarche(){
 
     //   return 0
     // },
-  avanceDemarrageMontantTvaModifier() {
-      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editActeEffetFinancier.taux_avance_demarrage)/100);
+  // avanceDemarrageMontantTvaModifier() {
+  //     const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editActeEffetFinancier.taux_avance_demarrage)/100);
 
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
+  //     if (val) {
+  //       return parseFloat(val).toFixed(0);
+  //     }
 
-      return 0
-    },
+  //     return 0
+  //   },
 
     editAvanceDemarrageMontantTva(){
-      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editAfficherEnorere)/100);
+      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editAfficherEnorere));
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -2269,7 +2809,7 @@ affichierImputationMarche(){
 
 
     editAvanceDemarrage(){
-      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.editAvanceDemarrageMontantTva);
+      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTvaModifier);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -2388,12 +2928,26 @@ affichierIdEntrepriseSelectionner() {
     afficherBanqueDynamiqueId(){
       return id =>{
         if(id != null && id !=""){
+          // console.log(this.afficherBanqueDynamiqueId)
           return this.comptes.filter(element => element.entrepse_id== id)
-
+         
 
         }
       }
     },
+
+      recuperIdModePassation(){
+     return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id ==id && qtreel.ref_sigva!=null);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+},
     afficherCompteDynamique(){
       return (id,id1) =>{
         if(id != null && id !="" && id1 != null && id1 !=""){
@@ -2430,7 +2984,17 @@ recupererIdBanque() {
       }
     },
 
-
+ afficherLibelleCompteRib(){
+      return id =>{
+        if(id != null && id !=""){
+          var  resultat = this.comptes.find(element => element.banq_id==id);
+          if(resultat){
+            return resultat.rib
+          }
+          return 0
+        }
+      }
+    },
     // afficherLeCompteEnFonctionDeLaBanque(){       return resultat.varObjetBanque.libelle
     //     return banq_id =>{
     //         if(banq_id !=null && banq_id!=""){
@@ -2445,7 +3009,7 @@ recupererIdBanque() {
       return id => {
         if( id !== undefined) {
           var acteur = this.comptes.find(acteur => acteur.banq_id == id  )
-
+           console.log(acteur)
           return  (acteur) ? acteur.rib :null
         }
         return null
@@ -2573,18 +3137,7 @@ nombreDejourCalculeModifier(){
           }
       },
 
-listeAvisDemandeAno() {
-      return id => {
-        if (id != null && id != "") {
-          const qtereel = this.getterDemandeAno.find(qtreel => qtreel.marche_id == id);
 
-          if (qtereel) {
-            return qtereel.avis;
-          }
-          return 10
-        }
-      };
-    },
 
 
   }, 
@@ -2592,8 +3145,31 @@ listeAvisDemandeAno() {
 
   methods:{
     ...mapActions('bienService',['supprimerActeEffetFinancier',
-      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',"supprimerEntrepriseSousTraitance"]),
+      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche2',"supprimerEntrepriseSousTraitance","modifierActeEffet"]),
 ...mapActions("horSib", ['modifierMarcheHorSib']),
+
+
+
+afficherModalModifierService(id) {
+      this.$("#exampleModalValidationdirecteur").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editActeEffetFinancier = this.acteEffetFinanciers.find(item=>item.id==id)
+      
+        this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==this.editActeEffetFinancier.marche_id)
+        this.marche_lot=this.editActeEffetFinancier.marche_id
+    },
+// afficherModalModifierActeEffetFinancier(id) {
+
+//       this.$router.push({
+//         path: "/ModificationActeFinancier/" + id
+//       });
+//     },
+
+
+
 
     afficheModaleActe(index){
       this.$('#ajouterAct').modal({
@@ -2619,13 +3195,13 @@ listeAvisDemandeAno() {
        // console.log(this.editActeEffetFinancier)
         this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==this.editActeEffetFinancier.marche_id)
         this.marche_lot=this.editActeEffetFinancier.marche_id
-        if ( this.analyseByLot(this.editActeEffetFinancier.marche_id).length>0){
-            this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id)),
-                this.dossier_candidat_id=this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id
-        }
+        // if ( this.analyseByLot(this.editActeEffetFinancier.marche_id).length>0){
+        //     this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id)),
+        //         this.dossier_candidat_id=this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id
+        // }
     },
 
-  modifierModalActeEffetFinancierLocal(){
+    modifierModalActeEffetFinancierLocal(){
 
       // this.editActeEffetFinancier.entreprise_id=entreprise_id
 
@@ -2638,13 +3214,18 @@ var nouvelObjet1 = {
         montant_ttc_cautionnement:this.afficherMontantTTCDuCautionnementModifier,
         montant_ht_cautionnement:this.afficheMontantHorsTaxeDuCautionnementModifier,
         montant_ht_retenu_garantie:this.afficherMontantHorsTaxeRetenuGarantieModifier,
-        montant_tva_retenu_garanti:this.afficherMontantHorsTaxeRetenuGarantieModifier,
+        montant_tva_retenu_garanti:this.afficherMontantTvaTaxeRetenuGarantieModifier,
         montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantieModifier,
         tva:this.montantTvaModifier,
           sous_traitance:this.sous_traitance,
           garantie:this.garantieModifier,
+          duree:this.durre_prevueModifier,
         montant_act:this.montantHTtModifier,
-        avance_demarrage_ttc:this.avanceDemarrageModifier,
+          avance_demarrage_ht:this.avanceDemarageHorsTaxeModifier,
+          montant_ht_bon_execution:this.afficheMontantHorsTaxeGarantieBonneExecutionModifier,
+         montant_tva_bon_execution:this.afficherMontantTvaDeGarantieDeBonneExecutionModifier,
+         montant_ttc_bon_execution:this.afficherMontantTTCGarantieDeBonneExcutionModifier,
+        avance_demarrage_ttc:this.editAvanceDemarrageMontantTTC,
         tva_avance_demarage:this.avanceDemarrageMontantTvaModifier,
         entreprise_id:this.editActeEffetFinancier.entreprise_id,
         difference_personnel_bienService:this.afficheMarcheType,
@@ -2661,47 +3242,13 @@ var nouvelObjet1 = {
       marcheObjet5.attribue = 2
       marcheObjet.numero_marche=this.editActeEffetFinancier.numero_marche
       this.modifierActeEffetFinancier(nouvelObjet1)
-       this.modifierMarche(marcheObjet)
-    this.modifierMarche(marcheObjet5)
+       this.modifierMarche2(marcheObjet)
+    this.modifierMarche2(marcheObjet5)
       this.$('#modifierActeEF').modal('hide');
       this.editActeEffetFinancier = {
 
       };
     },
-
-
-//     modifierModalActeEffetFinancierLocal(){
-// var nouvelObjet1 = {
-//         ...this.editActeEffetFinancier,
-//         duree: this.nombreDejourCalculeModifier,
-//         ua_id:this.afficherIDUA(this.macheid),
-//         taux:this.editafficherEnorere,
-//         tva_cautionnement:this.editafficherMontantTvaDuCautionnement,
-//         montant_ttc_cautionnement:this.editafficherMontantTTCDuCautionnement,
-//         montant_ht_cautionnement:this.editafficheMontantHorsTaxeDuCautionnement,
-//         montant_ht_retenu_garantie:this.editafficherMontantHorsTaxeRetenuGarantie,
-//         montant_tva_retenu_garanti:this.editafficherMontantTvaTaxeRetenuGarantie,
-//         montant_ttc_retenue_garantie:this.editafficherMontantRetenueGarantie,
-//         tva:this.editmontantTva,
-//         montant_act:this.editmontantHTt,
-//         avance_demarrage_ttc:this.editavanceDemarrage,
-//         tva_avance_demarage:this.editavanceDemarrageMontantTva,
-//         entreprise_id:this.affichierIdEntrepriseSelectionner(this.afficherEntrepriseNom(this.editActeEffetFinancier.entreprise_id)),
-//         difference_personnel_bienService:this.afficheMarcheType,
-//         marche_id:this.marche_lot,
-//         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
-    
-//       }
-
-//       this.modifierActeEffetFinancier(nouvelObjet1)
-//       this.$('#modifierActeEF').modal('hide');
-//       this.editActeEffetFinancier = {
-
-//       };
-//     },
-
-
-
 
     formatageSomme:formatageSomme,
       
@@ -2715,15 +3262,19 @@ var nouvelObjet = {
         montant_ttc_cautionnement:this.afficherMontantTTCDuCautionnement,
         montant_ht_cautionnement:this.afficheMontantHorsTaxeDuCautionnement,
         montant_ht_retenu_garantie:this.afficherMontantHorsTaxeRetenuGarantie,
+        montant_ht_bon_execution:this.afficherMontantHorsTaxeDeGarantiebonneExecution,
+        montant_tva_bon_execution:this.afficherMontantTvaDeGarantieDeBonneExecution,
+         montant_ttc_bon_execution:this.afficherMontantTTCDeGarantieDeBonneExecution,
         montant_tva_retenu_garanti:this.afficherMontantTvaTaxeRetenuGarantie,
         montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantie,
         tva:this.montantTva,
           sous_traitance:this.sous_traitance,
           garantie:this.garantie,
         montant_act:this.montantHTt,
-        avance_demarrage_ttc:this.avanceDemarrage,
+        avance_demarrage_ttc:this.avanceDemarrageTTC,
+        avance_demarrage_ht:this.avanceDemarageHorsTaxe,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
-        entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
+       // entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
@@ -2745,8 +3296,8 @@ var nouvelObjet = {
       marcheObjet1.attribue = 2
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
-      this.modifierMarche(marcheObjet)
-    this.modifierMarche(marcheObjet1)
+      this.modifierMarche2(marcheObjet)
+    this.modifierMarche2(marcheObjet1)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
@@ -2769,7 +3320,7 @@ var nouvelObjet = {
         marche_id:"",
         numero_marche:"",
 avance_demarrage_ttc:0,
-avance_demarrage_ht:0,
+// avance_demarrage_ht:0,
           sous_traitance:"",
       }
         this.structure_id=[]
@@ -2790,9 +3341,10 @@ avance_demarrage_ht:0,
           garantie:this.garantie,
         montant_act:this.formEffetFinancier.montant_act,
         montant_act_ht:this.CaculerMontantHtParTTC,
-        avance_demarrage_ttc:this.avanceDemarrage,
+        avance_demarrage_ttc:this.avanceDemarrageTTC,
+        avance_demarrage_ht:this.avanceDemarageHorsTaxe,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
-        entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
+       // entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
@@ -2814,8 +3366,8 @@ avance_demarrage_ht:0,
       marcheObjet78.attribue = 2
       marcheObjet2.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
-      this.modifierMarche(marcheObjet2)
-    this.modifierMarche(marcheObjet78)
+      this.modifierMarche2(marcheObjet2)
+    this.modifierMarche2(marcheObjet78)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
@@ -2838,7 +3390,7 @@ avance_demarrage_ht:0,
         marche_id:"",
         numero_marche:"",
 avance_demarrage_ttc:0,
-avance_demarrage_ht:0,
+avance_demarrage_ht:"",
           sous_traitance:"",
       }
         this.structure_id=[]
@@ -2919,6 +3471,62 @@ avance_demarrage_ht:0,
             }
         },
 
+
+
+
+
+
+
+
+
+
+date_debut_previsionnelModifier:function (value) {
+          // this.formEffetFinancier.date_odre_service=value
+           // console.log(this.formEffetFinancier.date_odre_service)
+            if(this.durre_prevueModifier){
+               
+                this.editActeEffetFinancier.date_odre_service=this.date_debut_previsionnel
+                this.editActeEffetFinancier.date_reception=this.dateDefinitivePrevisionnel(value,this.durre_prevueModifier)
+                this.editActeEffetFinancier.date_fin_exe=this.dateDefinitivePrevisionnel(value,this.durre_prevueModifier)
+                console.log(this.editActeEffetFinancier)
+                this.editActeEffetFinancier.duree=this.durre_prevueModifier
+            }
+        },
+        durre_prevueModifier: function (value) {
+           // this.editActeEffetFinancier.duree=value
+             //console.log(value)
+            if(this.date_debut_previsionnelModifier){
+                this.editActeEffetFinancier.duree=value
+            //    console.log(this.dateDefinitivePrevisionnel(this.date_debut_previsionnel,value))
+                this.editActeEffetFinancier.date_reception=this.dateDefinitivePrevisionnel(this.date_debut_previsionnelModifier,value)
+                this.editActeEffetFinancier.date_fin_exe=this.dateDefinitivePrevisionnel(this.date_debut_previsionnelModifier,value)
+                this.editActeEffetFinancier.date_odre_service=this.date_debut_previsionnelModifier
+                console.log(this.editActeEffetFinancier)
+            }
+            if(value==""){
+                this.editActeEffetFinancier.date_reception=""
+                this.editActeEffetFinancier.date_fin_exe=""
+            }
+        },
+        durre_garantieModifier: function (value) {
+            if(value){
+                this.editActeEffetFinancier.durre_garantie=value
+                if(this.date_debut_previsionnelModifier!="" && this.durre_prevueModifier!=""){
+                    let date=this.dateDefinitivePrevisionnel(this.date_debut_previsionnelModifier,this.durre_prevueModifier)
+                    // console.log(date)
+                    this.editActeEffetFinancier.date_fin_exe=this.dateDefinitivePrevisionnel(date,value)
+                }
+            }
+        },
+        garantieModifier:function(value){
+          if(value=="non"){
+              if(this.date_debut_previsionnelModifier!="" && this.durre_prevue!=""){
+                  let date=this.dateDefinitivePrevisionnel(this.editActeEffetFinancier.date_debut_previsionnelModifier,this.durre_prevueModifier)
+                  this.editActeEffetFinancier.date_fin_exe=date
+                  this.durre_garantie=""
+              }
+          }
+        },
     },
 }
 </script>
