@@ -121,8 +121,9 @@ Signature et Cachet
                  <td style="text-align:center">
 <p>MINISTERE  DU BUDGET</p>
 <p>-------------------------</p>
-<img  :src="AfficheLogODCF">
  <p>DIRECTION DU CONTRÔLE FINANCIER</p>
+ <p>-------------------------</p>
+ <img  :src="AfficheLogODCF">
                  </td>
                   <td style="text-align:center">
                    <img  :src="AfficheAmoirie">

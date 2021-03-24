@@ -28,6 +28,7 @@
    <MenuTableauBordGeneral v-if="active_el ==123"></MenuTableauBordGeneral>
    <MenuBudgetEclate v-if="active_el ==780"></MenuBudgetEclate>
    <MenuOrdrePaiement v-if="active_el ==1200"></MenuOrdrePaiement>
+    <MenuBudgetExecuteHorsSib v-if="active_el ==1033"></MenuBudgetExecuteHorsSib>
     <!-- <Search></Search> -->
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -38,6 +39,7 @@
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import MenuBudgetExecuteHorsSib from "../components/navs/MenuBudgetExecuteHorsSib.vue"
 import MenuOrdrePaiement from "../components/navs/MenuOrdrePaiement.vue"
 import MenuBudgetEclate from "../components/navs/MenuBudgetEclate.vue"
 import MenuTableauBordGestionSibMarche from "../components/navs/MenuTableauBordGestionSibMarche.vue"
@@ -68,6 +70,7 @@ import MenuTableauBordGeneral from "../components/navs/MenuTableauBordGeneral"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuBudgetExecuteHorsSib,
     MenuOrdrePaiement,
     MenuBudgetEclate,
     MenuTableauBordGeneral,
