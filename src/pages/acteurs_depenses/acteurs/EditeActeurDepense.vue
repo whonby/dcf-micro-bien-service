@@ -112,7 +112,7 @@
  
                                                     <label class="control-label">Matricule:</label>
                                                      <div class="controls">
-                                                        <input type="text"  v-model="detail.matricule"  placeholder="Saisir le matricule" class="span12"/>
+                                                        <input type="text"  :value="afficheMatricule(detail.acteur_depense_id)"  placeholder="Saisir le matricule" class="span12"/>
                                                     </div>
                                                 
                 </td>
@@ -120,7 +120,7 @@
                     <div class="control-group">
                                                     <label class="control-label">Nom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="detail.nom"  placeholder="Saisir le nom" class="span12" />
+                                                        <input type="text" :value="afficheNom(detail.acteur_depense_id)"  placeholder="Saisir le nom" class="span12" />
                                                     </div>
                                                 </div>
                 </td>
@@ -128,7 +128,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Prenom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="detail.prenom" class="span12"  placeholder="Saisir le prenom" />
+                                                        <input type="text" :value="affichePrenom(detail.acteur_depense_id)" class="span12"  placeholder="Saisir le prenom" />
                                                     </div>
                                                 </div>
                 </td>
@@ -140,7 +140,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Sexe:</label>
                                                     <div class="controls">
-                                                         <select v-model="detail.sexe" class="span12">
+                                                         <select :value="afficheSexe(detail.acteur_depense_id)" class="span12">
                                                             <option></option>
                                                             <option value="H">Homme</option>
                                                             <option value="F">Femme</option>
@@ -152,7 +152,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Date de naissance:</label>
                                                       <div class="controls">
-                                                        <input type="date" v-model="detail.date_naissance" class="span12" placeholder="Saisir la date de naissance" />
+                                                        <input type="date" :value="afficheDateNaissance(detail.acteur_depense_id)" class="span12" placeholder="Saisir la date de naissance" />
                                                     </div>
                                                 </div>
                 </td>
@@ -160,7 +160,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Numero passeport:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="detail.numero_passeport" class="span12" placeholder="Saisir le numero passeport" />
+                                                        <input type="text" :value="affichePassePort(detail.acteur_depense_id)" class="span12" placeholder="Saisir le numero passeport" />
                                                     </div>
                                                 </div>
                 </td>
@@ -168,7 +168,7 @@
                     <div class="control-group">
                                                     <label class="control-label">Numero CNI:</label>
                                                    <div class="controls">
-                                                        <input type="text" v-model="detail.numero_cni" class="span12" placeholder="Saisir le numero cni" />
+                                                        <input type="text" :value="afficheNumeroCni(detail.acteur_depense_id)" class="span12" placeholder="Saisir le numero cni" />
                                                     </div>
                                                 </div>
                 </td>
@@ -181,7 +181,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Email</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="detail.email"  placeholder="" class="span12"/>
+                                                        <input type="text" :value="afficheEmail(detail.acteur_depense_id)"  placeholder="" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -189,7 +189,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                      <div class="controls">
-                                                        <input type="text" v-model="detail.nom_pere" class="span12" placeholder="Saisir le nom du pere" />
+                                                        <input type="text" :value="afficheNomPere(detail.acteur_depense_id)" class="span12" placeholder="Saisir le nom du pere" />
                                                     </div>
                                                 </div>
                 </td>
@@ -197,7 +197,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Nom de la mere:</label>
                                                      <div class="controls">
-                                                        <input type="text" v-model="detail.nom_mere" class="span12" placeholder="Saisir le nom de la mere" />
+                                                        <input type="text" :value="afficheNomMere(detail.nom_mere)" class="span12" placeholder="Saisir le nom de la mere" />
                                                     </div>
                                                 </div>
                 </td>
@@ -205,7 +205,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
-                                                        <select v-model="detail.situation_matrimonial" class="span12" >
+                                                        <select :value="affichesituation_matrimonia(detail.acteur_depense_id)" class="span12" >
                                                            
                                                            
                                                             <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option>
@@ -240,7 +240,7 @@
                                                 </div>
                 </td> -->
                
-                <td>
+                <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
                                                     <div class="controls">
@@ -277,7 +277,7 @@
                                                         </select> -->
                                                         <model-list-select style="background-color: #fff;"
                                                    class="wide"
-                                                   :list="services"
+                                                   :list="fonctions"
                                                    v-model="detail.fonction_id"
                                                    option-value="id"
                                                    option-text="libelle"
@@ -394,7 +394,8 @@
                      <div class="control-group">
                                                     <label class="control-label">Salaire</label>
                                                    <div class="controls">
-                                                        <input type="number" class="span12" :value="detail.salaireActeur.montant"  placeholder="Saisir le salaire" />
+                                                        <!-- <input type="number" class="span12" :value="afficheSalaire(detail.id)"  placeholder="Saisir le salaire" /> -->
+                                                    <money :value="afficheSalaire(detail.id)" class="span5"></money>
                                                     </div>
                                                 </div>
                 </td>
@@ -536,7 +537,7 @@ components: {
 
         created() {
           // this.getDetail();
-            this.detail=this.personnaliseActeurDepense.find(item=>item.id==this.$route.params.id)
+            this.detail=this.acte_personnels.find(item=>item.id==this.$route.params.id)
             console.log( this.detail)
             //    this.getActeur()
             //  console.log(this.fonctions)
@@ -549,7 +550,7 @@ components: {
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["personnaFonction","fonctionProfessionnel","salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["salaire_actuel_acteur","acte_personnels","personnaFonction","fonctionProfessionnel","salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction","personnaliseActeurDepense","affichePersonnelRecuActeNormination",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
@@ -569,6 +570,129 @@ components: {
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
 
+
+
+affichesituation_matrimonia() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.situation_matrimonial;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheNomPere() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom_pere;
+      }
+      return 0
+        }
+      };
+    },
+afficheNomMere() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom_mere;
+      }
+      return 0
+        }
+      };
+    },
+afficheNumeroCni() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.numero_cni;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDateNaissance() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.date_naissance;
+      }
+      return 0
+        }
+      };
+    },
+affichePassePort() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.numero_passeport;
+      }
+      return 0
+        }
+      };
+    },
+afficheSexe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.sexe;
+      }
+      return 0
+        }
+      };
+    },
+affichePrenom() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.prenom;
+      }
+      return 0
+        }
+      };
+    },
+afficheNom() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom;
+      }
+      return 0
+        }
+      };
+    },
+afficheMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.matricule;
+      }
+      return 0
+        }
+      };
+    },
 afficheEmail() {
       return id => {
         if (id != null && id != "") {
@@ -823,13 +947,13 @@ afficherModalListeExecution(){
             ajouterTitreLocal () {
               var nouveauObjet = {
                  ...this.detail,
-                 id:this.detail.id,
+                 id:this.detail.acteur_depense_id,
                  grade_id:this.afficheGrade(this.detail.fonction_id),
-                 email:this.detail.email,
+                 email:this.afficheEmail(this.detail.acteur_depense_id),
                 
               }
-            let modSalaire=this.salairesActeur.find(marche=>marche.acte_personnel_id == this.detail.acte_personnel_id)
-    modSalaire.montant=this.detail.salaireActeur.montant
+            let modSalaire=this.salairesActeur.find(marche=>marche.acte_personnel_id == this.detail.id)
+    modSalaire.montant=this.afficheSalaire(this.detail.id)
     modSalaire.date=this.detail.date_debut_contrat
    
     this.modifierSalaire(modSalaire)

@@ -289,6 +289,7 @@ export function modifierNumeroContrat({ commit }, formData) {
     })
 
 }
+ajouterActeur
 export async function  getTypeActPersonnel({commit}) {
 
     queue.push(() =>  axios.get('/liste_type_acte_personnel').then(response => {

@@ -1,4 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
+
 export const fonctionProfessionnel  = state => state.fonctionProfessionnel;
 export const ComptableAssignataire  = state => state.ComptableAssignataire;
 const type_acte_personnels = state => state.type_acte_personnels;
@@ -13,7 +14,7 @@ const type_contrats =state => state.type_contrats;
 const type_salaries =state => state.type_salaries;
 const grades =state => state.grades;
 const echellons =state => state.echellons;
-const acteur_depenses =state =>state.acteur_depenses;
+const acteur_depenses =state =>state.acteur_depenses.sort((a, b) => (a.nom > b.nom) ? 1 : -1);
 const nbr_acteur_actredite_taux=state =>state.nbr_acteur_actredite_taux;
 const detail_acteurs=state =>state.detail_acteurs;
 const salaire_actuel_acteur=state =>state.salaire_actuel_acteur;
