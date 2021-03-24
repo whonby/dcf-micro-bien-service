@@ -328,7 +328,7 @@
             <div class="control-group">
               <label class="control-label">Rabais (%) :</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="" v-model="editer.Rabais">
+                <input type="number" class="span" placeholder="Rabais" v-model="editer.rabais">
               </div>
             </div>
 

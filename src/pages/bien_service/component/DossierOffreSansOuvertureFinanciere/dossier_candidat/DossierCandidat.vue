@@ -14,7 +14,7 @@
 
           <th>Numéro dossier</th>
           <th>Type candidat</th>
-          <th>Raison sociale </th>
+          <th>Raison sociale </th>  
           <th>Téléphone</th>
           <th>Adresse</th>
           <th>Email</th>
@@ -236,7 +236,7 @@
         </tr>
       </table>
       <div class="span12"  v-if="formDossierCadidature.accord_group=='oui'">
-        <h6>VEILLEZ RENSEIGNE LES ENTREPRISES</h6>
+        <h6>VEILLEZ RENSEIGNER LES ENTREPRISES</h6>
         <table class="table">
           <tbody>
           <tr>
@@ -507,13 +507,13 @@
       </div>
 
 
-
+ 
     </div>
 
     <div id="modificationDossierCandidatModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification dossier candidat</h3>
+        <h3>Modification dossier candidatnnnn</h3> 
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -613,14 +613,17 @@
                 </select>
               </div>
             </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Accord groupe</label>
-                <div class="controls">
-                  <input type="text" class="" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
-                </div>
+              <td>
+            <div class="control-group">
+              <label class="control-label">Accord de groupement</label>
+              <div class="controls">
+                <select v-model="editDossierCadidature.accord_group" class="span">
+                    <option value="oui">OUI</option>
+                    <option  value="non">NON</option>
+                </select>
               </div>
-            </td>
+            </div>
+          </td>
             <td>
               <div class="control-group">
                 <label class="control-label">Cautionnement provisoire</label>
@@ -630,7 +633,7 @@
               </div>
             </td>
 
-            <td>
+            <td> 
               <div class="control-group">
                 <label class="control-label">Pouvoir de signature</label>
                 <div class="controls">
@@ -792,12 +795,57 @@
               </div>
             </td>
           </tr>
-
-
-
+       
           </tbody>
+      
         </table>
       </div>
+         <div class="span12"  v-if="editDossierCadidature.accord_group=='oui'">
+
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>
+              <label>ENTREPRISE </label>
+              <model-list-select style="background-color: #fff;"
+                                 class="wide"
+                                 :list="entreprises"
+                                 v-model="editDossierCadidature.nom_structure"
+                                 option-value="id"
+                                 option-text="raison_sociale"
+                                 placeholder="Entreprise"
+              >
+
+              </model-list-select>
+
+            </td>
+
+            <td>
+              <hr>
+              <button class="btn btn-danger" @click.prevent="addStructure1()">
+                Ajouter
+              </button>
+            </td>
+          </tr>
+          <tr class="odd gradeX" v-for="appelOffre in structure"
+              :key="'APM'+appelOffre">
+
+            <td>
+              {{appelOffre.raison_sociale || 'Non renseigné'}}
+            </td>
+            <div class="btn-group">
+              <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                <span class=""><i class="icon-trash"></i></span>
+              </button>
+         
+            </div>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      
 
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
@@ -872,7 +920,7 @@ name: "DossierCandidat",
         libelle_lot:"",
         montant_lot:"",
         marche_id:"",
-        appel_offre_id:"",
+        appel_offre_id:"", 
         // mode_passation_id:""
       }
       ,
@@ -970,10 +1018,11 @@ name: "DossierCandidat",
         capacite_financement:"",
       },
       editDossierCadidature:{
+        nom_structure:"",
         secteur_activite_id:"",
         type_candidat_id:"",
         numero_cc:"",
-        type_candidat:"",
+        type_candidat:"", 
         nom_cand:"",
         prenom_cand:"",
         date_nais_cand:"",
@@ -2819,7 +2868,7 @@ name: "DossierCandidat",
       this.getAnalyseDMP()
       this.getAnoDMPBailleur()
       this.$('#modifDemandeAno').modal('hide');
-    },
+    }, 
     ajouterAnoDMPBailleurLocal(){
       const formData = new FormData();
       formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -2845,6 +2894,20 @@ name: "DossierCandidat",
         appel_offre_id:"",
         analyse_dmp_id:""
       }
+    },
+     addStructure1(){
+      if(this.editDossierCadidature.nom_structure=="")
+        return ""
+      let isStructureExist=this.structure.find(item=>item.id==this.editDossierCadidature.nom_structure)
+      if (isStructureExist!=undefined)
+        return ""
+      let objet=this.entreprises.find(item=>item.id==this.editDossierCadidature.nom_structure)
+      this.structure_id.unshift(objet.id)
+      this.structure.unshift(objet)
+      console.log(this.structure)
+      this.nom_structure=""
+
+      //this.formDossierCadidature.nom_cand
     },
     addStructure(){
       if(this.nom_structure=="")

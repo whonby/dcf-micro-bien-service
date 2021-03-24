@@ -95,7 +95,7 @@
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                                         </div>
                                         </td>
@@ -405,7 +405,7 @@
                            
                                 <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Reference de DAO  :</label>
+                            <label class="control-label">Réference de DAO  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>

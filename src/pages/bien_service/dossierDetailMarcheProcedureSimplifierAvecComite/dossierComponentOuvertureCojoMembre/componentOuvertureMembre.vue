@@ -31,7 +31,7 @@
                                   {{afficherLaListemembreCojo(appelOffre.role_membre_cojo_id )|| 'Non renseigné'}}</td>
                               <div class="btn-group">
                                   <button @click.prevent="supprimerMembreCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                      <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                      <span class=""><i class="icon-trash"></i> Supprimer</span></button>
                               </div>
 
                           </tr>
@@ -105,7 +105,7 @@
 
                                 <div class="control-group">
 
-                                    <label class="control-label span5">Conctacts <code>*</code> :</label>
+                                    <label class="control-label span5">Contacts <code>*</code> :</label>
 
                                    <div class="control-group">
                                         <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">

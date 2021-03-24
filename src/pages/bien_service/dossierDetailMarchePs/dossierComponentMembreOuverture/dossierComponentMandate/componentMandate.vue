@@ -28,7 +28,7 @@
                             {{appelOffre.prenom_nom || 'Non renseigné'}}</td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerMandater(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                         </div>
 

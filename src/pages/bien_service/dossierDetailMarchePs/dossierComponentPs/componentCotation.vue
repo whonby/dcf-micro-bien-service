@@ -16,7 +16,7 @@
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
-                                                 <th>Heur limite</th>
+                                                 <th>Heure limite</th>
                                                   <th>Email</th>
                                                 <!-- <th>Fichier</th> -->
                                                
@@ -51,7 +51,7 @@
                         </td> -->
                         <div class="btn-group">
                             <button @click.prevent="supprimerCotation(cotation.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                         </div>
 
