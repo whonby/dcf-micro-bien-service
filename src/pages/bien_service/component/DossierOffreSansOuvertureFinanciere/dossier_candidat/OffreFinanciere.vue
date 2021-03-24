@@ -245,7 +245,7 @@
     <div class="control-group">
       <label class="control-label">Rabais (%) :</label>
       <div class="controls">
-        <input type="number" class="span" placeholder="Rabais" v-model="rabais">
+        <input type="number" class="span" placeholder="Rabais" v-model="formOffreFinanciere.Rabais">
       </div>
     </div>
 
@@ -368,7 +368,7 @@ name: "OffreFinanciere",
       editer:"",
       montant_htax:"",
       montant_tva:"",
-      rabais:"",
+      Rabais:"",
       montant_debut_ht:"",
       formOffreFinanciere:{
         numero_lot:"",

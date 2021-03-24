@@ -27,7 +27,7 @@ gettersReserveCf
           <td @click="afficherModificationReserveCf(index)">{{item.objet_reserve}}</td>
          <div class="btn-group">
           <button @click.prevent="supprimerReserveCf(item.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+            <span class=""><i class="icon-trash"></i>  Supprimer</span></button>
             </div>
          
         </tr>

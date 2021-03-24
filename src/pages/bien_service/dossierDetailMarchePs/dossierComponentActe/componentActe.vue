@@ -48,7 +48,7 @@
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i>Supprimer</span>
+                                <span class=""><i class="icon-trash"></i> Supprimer</span>
                             </button>
                         </div>
 </td>

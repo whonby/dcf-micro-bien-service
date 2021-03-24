@@ -70,7 +70,7 @@
 
 
                          <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Réference offre</label>
                         <div class="controls">
                             <!-- <select v-model="formBailleur.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"

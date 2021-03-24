@@ -131,7 +131,7 @@ afficherIDUA(
                         </td>
                         <div class="btn-group">
                             <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
-                                <span class=""><i class="icon-trash"></i>Supprimer</span>
+                                <span class=""><i class="icon-trash"></i> Supprimer</span>
                             </button>
                         </div>
 
