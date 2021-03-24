@@ -469,21 +469,6 @@ export default {
     console.log(this.budgetGeneral);
     console.log(this.grandes_natures);
     console.log(this.sections);
-    console.log(".............................");
-    console.log(this.getMoisLiquidation("2021-01-23"));
-    // this.series = [
-    //   {
-    //     name: "Budget Exécuté en AE",
-    //     type: "column",
-    //     data: [this.DataJanv1, this.DataFev1, this.DataMars1, this.DataAvril1, this.DataMai1, this.DataJuin1,
-    //     this.DataJuillet, this.DataAout1, this.DataSeptembre1, this.DataOctobre1, this.DataNovembre1, this.DataDecembre1],
-    //   },
-    //   {
-    //     name: "Budget Exécuté en CP",
-    //     type: "line",
-    //     data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
-    //   },
-    // ];
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -962,6 +947,7 @@ export default {
               item.gdenature_id == 2 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+               && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -976,6 +962,7 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -984,7 +971,7 @@ export default {
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 2 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 2 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
             0
@@ -1001,6 +988,7 @@ export default {
               item.gdenature_id == 2 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
@@ -1012,12 +1000,13 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 2 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 2 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       }
@@ -1031,6 +1020,7 @@ export default {
               this.liquidationid(item.id) == 8 &&
               item.grd_nature_id == 2 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1045,6 +1035,7 @@ export default {
               item.grd_nature_id == 2 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1055,7 +1046,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationid(item.id) == 8 && item.grd_nature_id == 2
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 2 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1073,6 +1064,7 @@ export default {
               this.liquidationidmandat(item.id) == 8 &&
               item.grd_nature_id == 2 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1087,6 +1079,7 @@ export default {
               item.grd_nature_id == 2 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1097,7 +1090,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 2
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 2 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1177,6 +1170,7 @@ export default {
               item.gdenature_id == 5 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -1191,6 +1185,7 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -1199,7 +1194,7 @@ export default {
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 5 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 5 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
             0
@@ -1216,6 +1211,7 @@ export default {
               item.gdenature_id == 5 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
@@ -1227,12 +1223,13 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 5 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 5 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       }
@@ -1246,6 +1243,7 @@ export default {
               this.liquidationid(item.id) == 8 &&
               item.grd_nature_id == 5 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1260,6 +1258,7 @@ export default {
               item.grd_nature_id == 5 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1270,7 +1269,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationid(item.id) == 8 && item.grd_nature_id == 5
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 5 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1288,6 +1287,7 @@ export default {
               this.liquidationidmandat(item.id) == 8 &&
               item.grd_nature_id == 5 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1302,6 +1302,7 @@ export default {
               item.grd_nature_id == 5 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1312,7 +1313,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 5
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 5 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1332,6 +1333,7 @@ export default {
               item.gdenature_id == 6 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -1346,6 +1348,7 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -1354,7 +1357,7 @@ export default {
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 6 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 6 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
             0
@@ -1371,6 +1374,7 @@ export default {
               item.gdenature_id == 6 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
@@ -1382,12 +1386,13 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 6 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 6 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       }
@@ -1401,6 +1406,7 @@ export default {
               this.liquidationid(item.id) == 8 &&
               item.grd_nature_id == 6 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1415,6 +1421,7 @@ export default {
               item.grd_nature_id == 6 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1425,7 +1432,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationid(item.id) == 8 && item.grd_nature_id == 6
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 6 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1443,6 +1450,7 @@ export default {
               this.liquidationidmandat(item.id) == 8 &&
               item.grd_nature_id == 6 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1457,6 +1465,7 @@ export default {
               item.grd_nature_id == 6 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1467,7 +1476,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 6
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 6 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1488,6 +1497,7 @@ export default {
               item.gdenature_id == 7 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -1502,6 +1512,7 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
@@ -1510,7 +1521,7 @@ export default {
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 7 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 7 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
             0
@@ -1527,6 +1538,7 @@ export default {
               item.gdenature_id == 7 &&
               item.actived == 1 &&
               item.section_id == this.sections_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
@@ -1538,12 +1550,13 @@ export default {
               item.actived == 1 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercicebudget_id ==this.anneeAmort
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       } else {
         return this.budgetGeneral
-          .filter((item) => item.gdenature_id == 7 && item.actived == 1)
+          .filter((item) => item.gdenature_id == 7 && item.actived == 1 && item.exercicebudget_id ==this.anneeAmort)
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
           .toFixed(0);
       }
@@ -1557,6 +1570,7 @@ export default {
               this.liquidationid(item.id) == 8 &&
               item.grd_nature_id == 7 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1571,6 +1585,7 @@ export default {
               item.grd_nature_id == 7 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1581,7 +1596,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationid(item.id) == 8 && item.grd_nature_id == 7
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 7 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1598,6 +1613,7 @@ export default {
               this.liquidationidmandat(item.id) == 8 &&
               item.grd_nature_id == 7 &&
               item.section_id == this.sections_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1612,6 +1628,7 @@ export default {
               item.grd_nature_id == 7 &&
               item.section_id == this.sections_id &&
               item.ua_id == this.ua_id
+              && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1622,7 +1639,7 @@ export default {
         return this.gettersDemandeEngagement
           .filter(
             (item) =>
-              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 7
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 7 && item.exercice == this.anneeAmort
           )
           .reduce(
             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -1688,12 +1705,12 @@ export default {
       return "";
     },
 
+
+//pour le deuxieme tableau de bord
     datamois() {
       let vm = this;
       vm.series = [
         {
-          // name: "Budget Exécuté en AE",
-          // type: "column",
           data: [
             this.DataJanv1,
             this.DataFev1,
@@ -1710,8 +1727,6 @@ export default {
           ],
         },
         {
-          // name: "Budget Exécuté en CP",
-          //type: "line",
           data: [
             this.DataJanv2,
             this.DataFev2,
@@ -1730,6 +1745,8 @@ export default {
       ];
       return "";
     },
+
+
 
     dataArrayPourcentageBienService2() {
       let vm = this;
@@ -1760,14 +1777,8 @@ export default {
         vm.dataPourcentageTransferts1 = [];
       }
       vm.dataPourcentageTransferts1.push(
-        parseFloat(
-          this.GrandeNatureTransfertsAePrevisionel -
-            this.GrandeNatureTransfertsAeExecute
-        )
-      );
-      vm.dataPourcentageTransferts1.push(
-        parseFloat(this.GrandeNatureTransfertsAeExecute)
-      );
+        parseFloat(this.GrandeNatureTransfertsAePrevisionel - this.GrandeNatureTransfertsAeExecute));
+      vm.dataPourcentageTransferts1.push(parseFloat(this.GrandeNatureTransfertsAeExecute));
 
       return "";
     },
