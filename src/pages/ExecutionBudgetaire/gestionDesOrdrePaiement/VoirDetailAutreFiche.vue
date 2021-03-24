@@ -12,7 +12,7 @@
     <div id="modificationObservation" class="modal hide tailleModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification Observation de Agent Cf{{ editObservation.id }}</h3>
+        <h3>Modification Observation de Agent Cf</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -205,7 +205,7 @@
 
             <td v-if="detailOp.type_ordre_paiement == 1">OP Direct</td>
 
-            <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+            <td style="color:red">{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
 
             <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
 
@@ -250,9 +250,9 @@
           
           <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
           <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
-          <td> {{ detailOp.montant_ordre_paiement }} </td>
+          <td> {{ formatageSomme(parseFloat(detailOp.montant_ordre_paiement)) }} </td>
           <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
-          <td></td>
+          <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
            <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
 
@@ -262,7 +262,7 @@
            <td v-if="detailOp.decision_cf==3"> Rejété </td>
            <td v-if="detailOp.decision_cf==0"> Attente </td>
 
-           <td> {{ detailOp.date_decision_cf }} </td>
+           <td> {{formaterDate(detailOp.date_decision_cf) }} </td>
         </tbody>
       </table>
       <table class="table table-bordered table-striped" id="Nature_section">
@@ -336,7 +336,23 @@
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 2 || detailOp.type_ordre_paiement == 3 ||
               detailOp.type_ordre_paiement == 4">OP Provisoire</td>
-              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+               
+               
+
+<template v-if="detailOp.id_op_provisoire==0">
+ <td  style="color:red">
+{{ detailOp.numero_ordre_paiement || "Non renseigné" }}
+               </td>
+              
+             </template>
+              <template v-else>
+               
+              <td style="color:red">
+{{ afficheNumeroOP(afficheNumeroOPAnnulation(detailOp.numero_ordre_paiement)) || "Non renseigné" }}
+              </td>
+             </template>
+
+
 
             <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
 
@@ -381,9 +397,9 @@
         
           <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
           <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
-          <td> {{ detailOp.montant_ordre_paiement }} </td>
+          <td> {{ formatageSomme(parseFloat(detailOp.montant_ordre_paiement)) }} </td>
           <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
-          <td></td>
+           <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
            <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
            <td v-if="detailOp.decision_cf==8"> Visé </td>
@@ -391,7 +407,7 @@
            <td v-if="detailOp.decision_cf==2"> Différé</td>
            <td v-if="detailOp.decision_cf==3"> Rejété </td>
            <td v-if="detailOp.decision_cf==0"> Attente </td>
-           <td> {{ detailOp.date_decision_cf }} </td>
+           <td> {{formaterDate(detailOp.date_decision_cf) }} </td>
       </tbody>
     </table>
     <table class="table table-bordered table-striped" id="Nature_section">
@@ -442,15 +458,12 @@
           <th>Exercice</th>
           <th>Type op</th>
           <th>Numéro op</th>
-          <th>Section</th>
-          <th>Programme</th>
-          <th>Ua</th>
-          <th>Activite</th>
-          <th>ligne Economique</th>
-          <th>Entreprise</th>
-           <th>Compte Fournisseur</th>
-            <th>Banque</th>
-          <th>Numero du Marche</th>
+         <th>Nom et prenoms cf</th>
+          <th>famille motif</th>
+          <th>Motif</th>
+<th>Autres Motif</th>
+          <th>Decision cf</th>
+          <th>Date decision</th>
         </tr>
       </thead>
 
@@ -459,94 +472,34 @@
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 3 || detailOp.type_ordre_paiement == 4">OP Annulation</td>
-              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
-
-            <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
-
-            <td>{{ AfficheProgrammeLibelle(detailOp.programme_id) }}</td>
-
-            <td>{{ AfficheUaLibelle(detailOp.unite_administrative_id) }}</td>
-
-            <td>{{ AfficheActiviteLibelle(detailOp.activite_id) }}</td>
-
-            <td>
-              {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
-            </td>
-
-            <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
-
-            <td>{{ recupCompte2(recupCompte1)}}</td>
-
-            <td>{{ recupBanquee2(recupBanque1)}}</td>
-
-            <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
-         </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-striped" id="Nature_section">
-      <thead>
-        <tr>
-          
-          <th>type financement</th>
-          <th>Source Financement</th>
-          <th>Montant Op</th>
-          <th>Mode Paiement</th>
-          <th>Nom et prenoms cf</th>
-          <th>famille motif</th>
-          <th>Motif</th>
-
-          <th>Decision cf</th>
-          <th>Date decision</th>
-        </tr>
-      </thead>
-
-      <tbody>
-         <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
-          <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
-          <td> {{ detailOp.montant_ordre_paiement }} </td>
-          <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
-          <td></td>
+             <template v-if="detailOp.id_op_Annulation==0">
+ <td  style="color:red">
+{{ detailOp.numero_ordre_paiement || "Non renseigné" }}
+               </td>
+              
+             </template>
+              <template v-else>
+               
+              <td style="color:red">
+{{ afficheNumeroOP(detailOp.id_op_Annulation) || "Non renseigné" }}
+              </td>
+             </template>
+            
+              
+ <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
            <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
+           <td>{{ detailOp.autre_motif}}</td>
            <td v-if="detailOp.decision_cf==8"> Visé </td>
            <td v-if="detailOp.decision_cf==9"> Visé avec Observation </td>
            <td v-if="detailOp.decision_cf==2"> Différé</td>
            <td v-if="detailOp.decision_cf==3"> Rejété </td>
            <td v-if="detailOp.decision_cf==0"> Attente </td>
-           <td> {{ detailOp.date_decision_cf }} </td>
+           <td> {{ formaterDate(detailOp.date_decision_cf) }} </td>
+         </tr>
       </tbody>
     </table>
-    <table class="table table-bordered table-striped" id="Nature_section">
-      <thead>
-        <tr>
-          <th>Action</th>
-          <th>Sous Budget</th>
-          <th>Autres Motif</th>
-          <th>Observation</th>
-          <th>Autres Depense</th>
-          <th>Compte fournisseur</th>
-
-          <th>Adresse</th>
-          <!-- <th style="width:60%">Date decision</th>
-                   <th style="width:10%">Action</th>
-                    <th style="width:5%">Sous Budget</th>
-                     <th style="width:10%">Autres Motif</th>
-                   <th style="width:60%">Observation</th>
-                   <th style="width:10%">Autres Depense</th>
-                    <th style="width:5%">Compte fournisseur</th> -->
-        </tr>
-      </thead>
-
-      <tbody>
-         <td>{{ AfficheActionLibelle(detailOp.action_id) }}</td>
-          <td>{{ AfficheSousBudgetLibelle(detailOp.sous_budget_id) }}</td>
-          <td>{{ detailOp.autre_motif}}</td>
-          <td>{{ detailOp.observation}}</td>
-          <td>{{ detailOp.odjet_autre_depense}}</td>
-          <td>{{ detailOp.compte_autre_depense}}</td>
-          <td>{{ detailOp.adresse}}</td>
-      </tbody>
-    </table>
+   
     </div>
    
 
@@ -566,16 +519,12 @@
           <th>Type op</th>
 
           <th>Numéro op</th>
-          <th>Section</th>
-
-          <th>Programme</th>
-
-          <th>Ua</th>
-          <th>Activite</th>
-          <th>ligne Economique</th>
-          <th>Entreprise</th>
-
-          <th>Numero du Marche</th>
+           <th>Nom et prenoms cf</th>
+          <th>famille motif</th>
+          <th>Motif</th>
+          <th>Autres Motif</th>
+          <th>Decision cf</th>
+          <th>Date decision</th>
         </tr>
       </thead>
 
@@ -585,93 +534,22 @@
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 4">OP Definitf</td>
-              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
-
-            <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
-
-            <td>{{ AfficheProgrammeLibelle(detailOp.programme_id) }}</td>
-
-            <td>{{ AfficheUaLibelle(detailOp.unite_administrative_id) }}</td>
-
-            <td>{{ AfficheActiviteLibelle(detailOp.activite_id) }}</td>
-
-            <td>
-              {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
-            </td>
-
-            <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
-
-            <td>{{ recupCompte2(recupCompte1)}}</td>
-
-            <td>{{ recupBanquee2(recupBanque1)}}</td>
-
-            <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
-         </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-striped" id="Nature_section">
-      <thead>
-        <tr>
-         
-          <th>type financement</th>
-          <th>Source Financement</th>
-          <th>Montant Op</th>
-          <th>Mode Paiement</th>
-          <th>Nom et prenoms cf</th>
-          <th>famille motif</th>
-          <th>Motif</th>
-          <th>Decision cf</th>
-          <th>Date decision</th>
-        </tr>
-      </thead>
-
-      <tbody>
-         <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
-          <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
-          <td> {{ detailOp.montant_ordre_paiement }} </td>
-          <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
-          <td></td>
+              <td style="color:red">{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+ <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
            <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
+           <td>{{ detailOp.autre_motif}}</td>
            <td v-if="detailOp.decision_cf==8"> Visé </td>
            <td v-if="detailOp.decision_cf==9"> Visé avec Observation </td>
            <td v-if="detailOp.decision_cf==2"> Différé</td>
            <td v-if="detailOp.decision_cf==3"> Rejété </td>
            <td v-if="detailOp.decision_cf==0"> Attente </td>
-           <td> {{ detailOp.date_decision_cf }} </td>
+           <td> {{ formaterDate(detailOp.date_decision_cf) }} </td>
+           
+         </tr>
       </tbody>
     </table>
-    <table class="table table-bordered table-striped" id="Nature_section">
-      <thead>
-        <tr>
-          <th>Action</th>
-          <th>Sous Budget</th>
-          <th>Autres Motif</th>
-          <th>Observation</th>
-          <th>Autres Depense</th>
-          <th>Compte fournisseur</th>
-
-          <th>Adresse</th>
-          <!-- <th style="width:60%">Date decision</th>
-                   <th style="width:10%">Action</th>
-                    <th style="width:5%">Sous Budget</th>
-                     <th style="width:10%">Autres Motif</th>
-                   <th style="width:60%">Observation</th>
-                   <th style="width:10%">Autres Depense</th>
-                    <th style="width:5%">Compte fournisseur</th> -->
-        </tr>
-      </thead>
-
-      <tbody>
-         <td>{{ AfficheActionLibelle(detailOp.action_id) }}</td>
-          <td>{{ AfficheSousBudgetLibelle(detailOp.sous_budget_id) }}</td>
-          <td>{{ detailOp.autre_motif}}</td>
-          <td>{{ detailOp.observation}}</td>
-          <td>{{ detailOp.odjet_autre_depense}}</td>
-          <td>{{ detailOp.compte_autre_depense}}</td>
-          <td>{{ detailOp.adresse}}</td>
-      </tbody>
-    </table>
+   
 </div>
 
 
@@ -690,7 +568,7 @@
           <button
             class="btn btn-success"
             @click.prevent="afficherModalAjouterTitre"
-            style="font-weight: bolder; color: #fff; font-size: 20px"
+            style="font-weight: bolder; color: #fff"
           >
             <i class="icon icon-plus"> AJOUTER SERVICE REALITE FAIT</i>
           </button>
@@ -711,12 +589,12 @@
         >
           <span
             class=""
-            style="font-weight: bolder; color: #fff; font-size: 12px"
-            ><i class="icon-print"></i> VOIR FICHE SERVICE REALITE FAIT</span
+            style="font-weight: bolder; color: #fff"
+            ><i class="icon-print"></i> IMPRIMER FICHE RSF && FICHE ANNEXE RSF</span
           >
         </router-link>
       </td>
-      <td>
+      <!-- <td>
         <router-link
           :to="{ name: 'FicheAnnexe', params: { id: detailOp.id } }"
           class="btn btn-info"
@@ -724,11 +602,11 @@
         >
           <span
             class=""
-            style="font-weight: bolder; color: #fff; font-size: 20px"
+            style="font-weight: bolder; color: #fff"
             ><i class="icon-print"></i> VOIR FICHE ANNEXE</span
           >
         </router-link>
-      </td>
+      </td> -->
     </table>
     <table class="table table-bordered table-striped" id="Nature_section">
       <thead>
@@ -777,6 +655,58 @@
     </div>
 
     <notifications />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
   </div>
 </template>
   
@@ -785,7 +715,7 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-// import {partition} from "../../Repositories/Repository"
+ import {formatageSomme} from "@/Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 // import {admin,dcf,cf,noDCfNoAdmin} from "../../Repositories/Auth"
@@ -965,8 +895,44 @@ export default {
       "structuresDecision",
       "plans_Decision",
     ]),
+   
     //fonction Lega le 18/03/2021
+recupererNomDuControleurF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUtilisateur.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.name;
+      }
+      return 0
+        }
+      };
+    },
+recupererIdUser() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectionServiceCF.find(qtreel => qtreel.servicecf_id == id && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.user_id;
+      }
+      return 0
+        }
+      };
+    },
+ recupererIdServiceCF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectation.find(qtreel => qtreel.unite_administrative_id == id   && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.servicecf_id;
+      }
+      return 0
+        }
+      };
+    },
     AfficheSectionLibelle() {
       return (id) => {
         if (id != null && id != "") {
@@ -1230,6 +1196,22 @@ AfficheSousBudgetLibelle() {
         }
       };
     },
+    afficheNumeroOPAnnulation() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.numero_ordre_paiement == id
+          );
+
+          if (qtereel) {
+            return qtereel.id_op_provisoire;
+          }
+          return 0;
+        }
+      };
+    },
+  
+
     afficheNumeroOP() {
       return (id) => {
         if (id != null && id != "") {
@@ -1334,6 +1316,7 @@ AfficheSousBudgetLibelle() {
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
+    formatageSomme:formatageSomme,
     ExporterEnExel() {
       this.$refs.excel.click();
     },
@@ -1344,5 +1327,11 @@ AfficheSousBudgetLibelle() {
 .tailleModal {
   width: 53%;
   margin: 0 -28%;
+}
+td{
+  font-size:14px;
+}
+th{
+  font-size:14px;
 }
 </style>

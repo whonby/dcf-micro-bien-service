@@ -23,6 +23,7 @@ const defaultstate = {
     MenuTableauBordGeneral:123,
     MenuBudgetEclater:780,
     MenuOrdrePaiement:1200,
+    MenuRapportBudgetExecuteHorsSib:1033,
     active_el: 11
 };
 

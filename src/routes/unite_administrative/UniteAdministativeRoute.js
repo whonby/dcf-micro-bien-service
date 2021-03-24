@@ -58,12 +58,17 @@ import listeSousBudgetParUa from "../../pages/ExecutionBudgetaire/BudgetEclateHo
 import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/voirDetailBudget.vue"
 import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
 import BudgetEclateRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BudgetEclateRegie.vue"
+import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
 
 
 import ListeBailleurUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeBailleurUniteAdministrative.vue"
 import ListeUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeUniteAdministrative.vue"
 const UniteAdministativeRoutes = [
-  
+  {
+    path: "/listeDesUaRegie",
+    name: "listeDesUaRegie",
+    component: listeDesUaRegie
+},
   {
     path: "/ListeBailleurUniteAdministrative/:id",
     name: "ListeBailleurUniteAdministrative",

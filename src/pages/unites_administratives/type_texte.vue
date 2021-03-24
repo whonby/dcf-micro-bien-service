@@ -123,7 +123,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in filtre_type_teste" :key="type.id">
+                  <!-- <tr class="odd gradeX" v-for="(type, index) in filtre_type_teste" :key="type.id">
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.code || 'Non renseigné'}}</td>
@@ -138,13 +138,10 @@
                         </span>
                       </button>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
-              <div v-if="filtre_type_teste.length"></div>
-              <div v-else>
-                <p style="text-align:center;font-size:20px;color:red;">Aucune Type de texte</p>
-              </div>
+              
             </div>
           </div>
         </div>
