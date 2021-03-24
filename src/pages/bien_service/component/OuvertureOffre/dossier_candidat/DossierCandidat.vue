@@ -635,14 +635,17 @@
                 </select>
               </div>
             </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Accord de groupement</label>
-                <div class="controls">
-                  <input type="text" class="" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
-                </div>
+              <td>
+            <div class="control-group">
+              <label class="control-label">Accord de groupement</label>
+              <div class="controls">
+                <select v-model="editDossierCadidature.accord_group" class="span">
+                    <option value="oui">OUI</option>
+                    <option  value="non">NON</option>
+                </select>
               </div>
-            </td>
+            </div>
+          </td>
             <td>
               <div class="control-group">
                 <label class="control-label">Cautionnement provisoire</label>
@@ -663,6 +666,51 @@
 
 
           </tr>
+              <div class="span18"  v-if="editDossierCadidature.accord_group=='oui'">
+        <h6>VEILLEZ MODIFIER LES ENTREPRISES</h6>
+        <table class="table">
+          <tbody>
+          <tr>
+            <td colspan="2">
+              <label>ENTREPRISE </label>
+              <model-list-select style="background-color: #fff;"
+                                 class="wide"
+                                 :list="entreprises"
+                                 v-model="editDossierCadidature.nom_structure"
+                                 option-value="id"
+                                 option-text="raison_sociale"
+                                 placeholder="Entreprise"
+              >
+
+              </model-list-select>
+
+            </td>
+
+            <td>
+              <hr>
+              <button class="btn btn-danger" @click.prevent="addStructure()">
+                Ajouter
+              </button>
+            </td>
+          </tr>
+          <tr class="odd gradeX" v-for="appelOffre in structure"
+              :key="'APM'+appelOffre">
+
+            <td>
+              {{appelOffre.raison_sociale || 'Non renseigné'}}
+            </td>
+            <div class="btn-group">
+              <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                <span class=""><i class="icon-trash"></i></span>
+              </button>
+
+            </div>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
 
 
           <!-- <tr class="odd gradeX">
@@ -992,6 +1040,7 @@ name: "DossierCandidat",
         capacite_financement:"",
       },
       editDossierCadidature:{
+        nom_structure:"",
         secteur_activite_id:"",
         type_candidat_id:"",
         numero_cc:"",
@@ -2867,6 +2916,20 @@ name: "DossierCandidat",
         appel_offre_id:"",
         analyse_dmp_id:""
       }
+    },
+    addStructure1(){
+      if(this.editDossierCadidature.nom_structure=="")
+        return ""
+      let isStructureExist=this.structure.find(item=>item.id==this.editDossierCadidature.nom_structure)
+      if (isStructureExist!=undefined)
+        return ""
+      let objet=this.entreprises.find(item=>item.id==this.editDossierCadidature.nom_structure)
+      this.structure_id.unshift(objet.id)
+      this.structure.unshift(objet)
+      console.log(this.structure)
+      this.editDossierCadidature.nom_structure="" 
+
+      //this.formDossierCadidature.nom_cand
     },
     addStructure(){
       if(this.nom_structure=="")
