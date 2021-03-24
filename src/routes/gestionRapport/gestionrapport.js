@@ -14,7 +14,13 @@ import etatRecapitulative from "../../pages/Gestion_des_Rapports/marcheHorsSib/e
 import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeDeControle";
 import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/ficheSuiviGlobalMarche";
 import suiviEvaluationEntreprise from "../../pages/Gestion_des_Rapports/suiviEvaluationEntreprise.vue";
+import OrdrePaiementParPeriode from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/OrdrePaiementParPeriode.vue";
 const gestionrapport =[
+    {
+        path:"/OrdrePaiementParPeriode",
+        name:"OrdrePaiementParPeriode",
+        component:OrdrePaiementParPeriode
+    },
     {
         path:"/tableauPluriannuel",
         name:"tableauPluriannuel",

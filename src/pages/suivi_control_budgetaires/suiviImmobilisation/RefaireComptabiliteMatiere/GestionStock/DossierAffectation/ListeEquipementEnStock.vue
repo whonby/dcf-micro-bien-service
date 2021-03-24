@@ -3730,7 +3730,7 @@ fenetreAjouterTansfert(id) {
 formatageSomme:formatageSomme,
 
  formaterDate(date) {
-              return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+              return moment(date, "YYYY-MM-DD").format("MM");
             },
       }
 }

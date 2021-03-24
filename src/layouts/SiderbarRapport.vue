@@ -37,12 +37,12 @@
             <span>TABLEAU PLURI-ANNUEL</span>
           </a>
         </li>
-        <!-- <li :class="{active: active_el == 90 }" @click.prevent="navigateToRapportVehicule" >
+        <li :class="{active: active_el == 1033 }" @click.prevent="navigateTorapportExecution" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>RAPPORT VEHICULE</span>
+            <span>BUDGET EXECUTE H/SIB</span>
           </a>
-        </li> -->
+        </li>
        
         <!-- <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
@@ -225,6 +225,12 @@ navigateToSuiviMarcheProjetpARtYPEmArche(){
       },
       navigateToActeurDepense(){
         this.activate(89)
+        this.$router.push({
+          name: ''
+        })
+      },
+      navigateTorapportExecution(){
+        this.activate(1033)
         this.$router.push({
           name: ''
         })

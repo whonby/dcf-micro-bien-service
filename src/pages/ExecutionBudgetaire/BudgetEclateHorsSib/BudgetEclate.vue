@@ -30,7 +30,7 @@
               <td>
                 <div align="right">
 
-      <button class="btn btn"  @click.prevent="BAILLEURUA" style="color:#000;font-size:12px;font-weight: bold;">AJOUTER BAILLEUR DES UA </button>
+      <button class="btn btn-warning"  @click.prevent="BAILLEURUA" style="color:#fff;font-weight: bold;">AJOUTER BAILLEUR DES UA </button>
 
 
                             </div>
