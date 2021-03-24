@@ -79,20 +79,23 @@
       >
         <tr>
           <td style="text-align: center">
-            <p>MINISTERE DU BUDGET  <br/>
-            ------------------------- <br/>
-            DIRECTION DU CONTRÔLE FINANCIER <br/>
-            -------------------------</p>
+            <p>
+              MINISTERE DU BUDGET <br />
+              ------------------------- <br />
+              DIRECTION DU CONTRÔLE FINANCIER <br />
+              -------------------------
+            </p>
             <img :src="AfficheLogODCF" />
           </td>
           <td style="text-align: center">
             <img :src="AfficheAmoirie" />
           </td>
           <td style="text-align: center">
-            <p>REPUBLIQUE DE CÔTE D'IVOIRE <br/>
-              Union-Discipline-Travail <br/>
-               ------------------------- </p>
-            
+            <p>
+              REPUBLIQUE DE CÔTE D'IVOIRE <br />
+              Union-Discipline-Travail <br />
+              -------------------------
+            </p>
           </td>
         </tr>
       </table>
@@ -145,7 +148,7 @@
 
         <table
           class="table table-bordered table-striped"
-          style="margin-left:5px; margin-right:5px"
+          style="margin-left: 5px; margin-right: 5px"
         >
           <thead style="background-color: #87ceeb">
             <tr>
@@ -547,7 +550,7 @@ export default {
           );
 
           if (qtereel) {
-            return qtereel.code.concat("    ", qtereel.libelle);
+            return qtereel.code.concat(" ", qtereel.libelle);
           }
           return 0;
         }
@@ -576,12 +579,12 @@ export default {
             return this.gettersgestionOrdrePaiement.filter(
               (qtreel) =>
                 (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
+                  qtreel.diff_op == 1 &&
                   qtreel.decision_cf == 8 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin) ||
                 (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
+                  qtreel.diff_op == 1 &&
                   qtreel.decision_cf == 8 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin)
@@ -594,10 +597,10 @@ export default {
             return this.gettersgestionOrdrePaiement.filter(
               (qtreel) =>
                 (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
+                  qtreel.diff_op == 1 &&
                   qtreel.decision_cf == 8) ||
                 (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
+                  qtreel.diff_op == 1 &&
                   qtreel.decision_cf == 9)
             );
           }

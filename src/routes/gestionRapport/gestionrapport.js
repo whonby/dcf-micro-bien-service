@@ -15,73 +15,80 @@ import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeD
 import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/ficheSuiviGlobalMarche";
 import suiviEvaluationEntreprise from "../../pages/Gestion_des_Rapports/suiviEvaluationEntreprise.vue";
 import OrdrePaiementParPeriode from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/OrdrePaiementParPeriode.vue";
-const gestionrapport =[
+import OrdrePaiementParRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/OrdrePaiementParRegie.vue";
+const gestionrapport = [
+
     {
-        path:"/OrdrePaiementParPeriode",
-        name:"OrdrePaiementParPeriode",
-        component:OrdrePaiementParPeriode
+        path: "/OrdrePaiementParPeriode",
+        name: "OrdrePaiementParPeriode",
+        component: OrdrePaiementParPeriode
     },
     {
-        path:"/tableauPluriannuel",
-        name:"tableauPluriannuel",
-        component:tableauPluriannuel
+        path: "/OrdrePaiementParRegie",
+        name: "OrdrePaiementParRegie",
+        component: OrdrePaiementParRegie
     },
     {
-        path:"/tableaudebordbudg",
-        name:"tableaudebordbudg",
-        component:tableaudebordbudg
+        path: "/tableauPluriannuel",
+        name: "tableauPluriannuel",
+        component: tableauPluriannuel
     },
     {
-        path:"/tableaubordmarch",
-        name:"tableaubordmarch",
-        component:tableaubordmarch
+        path: "/tableaudebordbudg",
+        name: "tableaudebordbudg",
+        component: tableaudebordbudg
     },
     {
-        path:"/suiviEvaluationEntreprise",
-        name:"suiviEvaluationEntreprise",
-        component:suiviEvaluationEntreprise
+        path: "/tableaubordmarch",
+        name: "tableaubordmarch",
+        component: tableaubordmarch
     },
     {
-        path:"/ficheSuiviGlobalMarche",
-        name:"ficheSuiviGlobalMarche",
-        component:ficheSuiviGlobalMarche
+        path: "/suiviEvaluationEntreprise",
+        name: "suiviEvaluationEntreprise",
+        component: suiviEvaluationEntreprise
     },
     {
-        path:"/etat-Recapitulative",
-        name:"etatRecapitulative",
-        component:etatRecapitulative
+        path: "/ficheSuiviGlobalMarche",
+        name: "ficheSuiviGlobalMarche",
+        component: ficheSuiviGlobalMarche
     },
     {
-        path:"/Suivi-Marche",
-        name:"suiviMarcheDesProjetParTypeMarche",
-        component:suiviMarcheDesProjetParTypeMarche
+        path: "/etat-Recapitulative",
+        name: "etatRecapitulative",
+        component: etatRecapitulative
     },
     {
-        path:"/FicheAnnexeDeControle/:id",
-        name:"FicheAnnexeDeControle",
-        component:FicheAnnexeDeControle
+        path: "/Suivi-Marche",
+        name: "suiviMarcheDesProjetParTypeMarche",
+        component: suiviMarcheDesProjetParTypeMarche
     },
     {
-        path:"/editerFicheRealiteServiceFait/:id",
-        name:"editerFicheRealiteServiceFait",
-        component:editerFicheRealiteServiceFait
+        path: "/FicheAnnexeDeControle/:id",
+        name: "FicheAnnexeDeControle",
+        component: FicheAnnexeDeControle
     },
     {
-        path:"/Suivi-Marche-Projet",
-        name:"suiviMarcheDesProjets",
-        component:suiviMarcheDesProjets
+        path: "/editerFicheRealiteServiceFait/:id",
+        name: "editerFicheRealiteServiceFait",
+        component: editerFicheRealiteServiceFait
     },
     {
-        path:"/Suivi-De-l-Entreprise",
-        name:"suiviDesEntreprise",
-        component:suiviDesEntreprise
+        path: "/Suivi-Marche-Projet",
+        name: "suiviMarcheDesProjets",
+        component: suiviMarcheDesProjets
+    },
+    {
+        path: "/Suivi-De-l-Entreprise",
+        name: "suiviDesEntreprise",
+        component: suiviDesEntreprise
     },
 
     {
         path: "/FicheSuivi/:id",
         name: "ficheSuivi",
         component: ficheSuivi
-      }
-      
+    }
+
 ]
 export default gestionrapport;

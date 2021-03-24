@@ -3,13 +3,18 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!-- administratifs-->
-       <li>
-         <router-link :to="{name:'OrdrePaiementParPeriode'}" tag="a">
-          ORDRE PAIEMENT PAR PERIODE
-         </router-link>
+      <li>
+        <router-link :to="{ name: 'OrdrePaiementParPeriode' }" tag="a">
+          ORDRE PAIEMENT PROJET
+        </router-link>
+      </li>
 
-       </li>
-        <!-- <li>
+      <li>
+        <router-link :to="{ name: 'OrdrePaiementParRegie' }" tag="a">
+          ORDRE PAIEMENT PAR REGIE
+        </router-link>
+      </li>
+      <!-- <li>
          <router-link :to="{name:''}" tag="a">
            PERSONNEL
          </router-link>
@@ -38,13 +43,10 @@
 </template>
 
 <script>
-import { mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 export default {
-  
   computed: {
-    ...mapGetters("SuiviImmobilisation", [ "nombreDemandeEquipement"]),
-    
- 
-}
-}
+    ...mapGetters("SuiviImmobilisation", ["nombreDemandeEquipement"]),
+  },
+};
 </script>
