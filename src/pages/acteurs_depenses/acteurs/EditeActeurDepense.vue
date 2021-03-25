@@ -110,7 +110,7 @@
                 </td>
                 <td>
  
-                                                    <label class="control-label">Matricule:</label>
+                                                    <label class="control-label">Matricule:{{afficheMatricule(detail.acteur_depense_id)}}</label>
                                                      <div class="controls">
                                                         <input type="text"  :value="afficheMatricule(detail.acteur_depense_id)"  placeholder="Saisir le matricule" class="span12"/>
                                                     </div>
@@ -537,7 +537,7 @@ components: {
 
         created() {
           // this.getDetail();
-            this.detail=this.acte_personnels.find(item=>item.id==this.$route.params.id)
+            this.detail=this.personnaFonction.find(item=>item.id==this.$route.params.id)
             console.log( this.detail)
             //    this.getActeur()
             //  console.log(this.fonctions)
@@ -898,7 +898,7 @@ exoEnCours() {
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux",
-            "allActeurDepense", "modifierPersonnel","modifierSalaire","modificationActeur"]),
+            "allActeurDepense", "modifierActeurDp","modifierSalaire","modificationActeur"]),
 afficherModalListeExecution(){
                 window.history.back();
             },
@@ -946,18 +946,29 @@ afficherModalListeExecution(){
             // fonction pour vider l'input
             ajouterTitreLocal () {
               var nouveauObjet = {
-                 ...this.detail,
+                 
                  id:this.detail.acteur_depense_id,
-                 grade_id:this.afficheGrade(this.detail.fonction_id),
+                 //grade_id:this.afficheGrade(this.detail.fonction_id),
                  email:this.afficheEmail(this.detail.acteur_depense_id),
-                
+                matricule:this.afficheMatricule(this.detail.acteur_depense_id),
+                nom:this.afficheNom(this.detail.acteur_depense_id),
+                prenom:this.affichePrenom(this.detail.acteur_depense_id),
+                sexe:this.afficheSexe(this.detail.acteur_depense_id),
+                //email:this.afficheEmail(this.detail.acteur_depense_id),
+                numero_cni:this.afficheNumeroCni(this.detail.acteur_depense_id),
+                numero_passeport:this.affichePassePort(this.detail.acteur_depense_id),
+                date_naissance:this.afficheDateNaissance(this.detail.acteur_depense_id),
+                nom_pere:this.afficheNomPere(this.detail.acteur_depense_id),
+                nom_mere:this.afficheNomMere(this.detail.nom_mere),
+                situation_matrimonial:this.affichesituation_matrimonia(this.detail.acteur_depense_id)
+
               }
             let modSalaire=this.salairesActeur.find(marche=>marche.acte_personnel_id == this.detail.id)
     modSalaire.montant=this.afficheSalaire(this.detail.id)
     modSalaire.date=this.detail.date_debut_contrat
    
     this.modifierSalaire(modSalaire)
-                 this.modificationActeur(nouveauObjet)
+                 this.modifierActeurDp(nouveauObjet)
                 this.getActeur()
                this.afficherModalListeExecution()
             },
