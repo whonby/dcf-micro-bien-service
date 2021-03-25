@@ -1372,6 +1372,7 @@ export function modifierActeurDepense({ commit, dispatch}, objetModifie,config){
         });
     })
 }
+
 export function modifierActeurDp({ commit }, nouveau) {
     asyncLoading(axios
         .put("/updateActeurD/" + nouveau.id,nouveau))

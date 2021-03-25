@@ -92,7 +92,7 @@ recupereMontantEmpruntTotal
                   
                   <td>
                        <div class="control-group">
-                <label class="control-label">Section</label>
+                <label class="control-label">Section{{idSection(formData.ligne_budgetaire_parent_id)}}</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -106,7 +106,7 @@ recupereMontantEmpruntTotal
                   </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Programme</label>
+                <label class="control-label">Programme{{idProgramme(formData.ligne_budgetaire_parent_id)}}</label>
                 <div class="controls">
                    <input
                     type="text"
@@ -121,7 +121,7 @@ recupereMontantEmpruntTotal
                      </td>
                      <td colspan="">
               <div class="control-group">
-                <label class="control-label">Action</label>
+                <label class="control-label">Action{{formData.ligne_budgetaire_parent_id}}</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -183,7 +183,7 @@ recupereMontantEmpruntTotal
                      </td>
                       <td>
                        <div class="control-group">
-                <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Unite administrative{{formData.uniteadministrative_id}} <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -200,19 +200,45 @@ recupereMontantEmpruntTotal
               </div>
               <code style="color:red;font-size:12px" v-if="formData.uniteadministrative_id==''">Veuillez renseigner ce champ</code>
                   </td>
-                  
-                   <td colspan="3">
-              <div class="control-group">
-                <label class="control-label">Activité</label>
+                   <td>
+                       <div class="control-group">
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
-                  <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="recuppererLeDernierNiveauActivite"
+                                                   v-model="formData.activite_id"
+                                                   option-value="id"
+                                                   option-text="code"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                  
+                   <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Libelle Activité</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="NomActivite(formData.activite_id)"
+                    class="span"
+                    readonly
+                  />
+                  <!-- <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
                     <option></option>
                      <option
                         v-for="typeFact in LibelleActivite(formData.uniteadministrative_id,formData78.exo_id)"
                         :key="typeFact[0].id"
                         :value="typeFact[0].activite_id"
                       >{{NomActivite(typeFact[0].activite_id)}}</option>
-                  </select>
+                  </select> -->
                 </div>
               </div>
               
@@ -1273,7 +1299,25 @@ recuppererLeDernierNiveau() {
       
        
     },
+recuppererLeDernierNiveauActivite() {
+      
+           return this.plans_activites.filter(qtreel => this.recupererStructureActivite_id(qtreel.structure_activites_id) == 2 );
 
+      
+       
+    },
+    recupererStructureActivite_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau
+      }
+      return 0
+        }
+      };
+    },
 recupererStructure() {
       return id => {
         if (id != null && id != "") {
@@ -1499,6 +1543,7 @@ return this.RecuppererLaDotation(this.formData10.sous_budget_id,this.formData.li
         }
       };
     },
+
     libelleLigneEconomique() {
       return id => {
         if (id != null && id != "") {

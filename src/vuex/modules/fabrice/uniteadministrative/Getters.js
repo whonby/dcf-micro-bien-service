@@ -9,6 +9,7 @@ export const gethistoriqueBudgetEclate =state =>state.historiqueBudgetEclate;
 export const ReparationVehicules =state =>state.ReparationVehicules;
 export const GestionStockageArticles = state => state.stockageArticles;
 export const getterUniteAdministrativeBailleur = state => state.UniteAdministrativeBailleur.sort((a, b) => (a.numero_ordre > b.numero_ordre ? 1 : -1));
+groupeUaPourMarheHorSib
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const StructureOrganigrammeUa = state => state.StructureOrganigrammeUa;
@@ -754,7 +755,7 @@ export const groupBudgetGeneral = (state, getters) => {
 };
 export const groupeUaPourMarheHorSib = (state, getters) => {
   //delete getters.trieUaImmobilisation.
-  return groupBy(getters.budgetEclate, "unite_administrative_id");
+  return groupBy(getters.budgetEclate, "uniteadministrative_id");
 };
 export {
   // typeTextes,

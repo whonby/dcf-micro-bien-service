@@ -131,7 +131,7 @@
             </div>
           </td>
         </tr>
-        <tr></tr>
+        
 
         <tr>
           <td>
@@ -581,6 +581,22 @@ export default {
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
+
+AfficheGrandeDepense() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat("  ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+
 
     ListChapitre() {
       return this.plans_Infrastructures.filter((item) => item.parent == null);
