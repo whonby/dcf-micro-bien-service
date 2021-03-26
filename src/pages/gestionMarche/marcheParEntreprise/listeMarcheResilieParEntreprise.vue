@@ -36,7 +36,7 @@ reference_marche
                    <td>{{afficheLibelleUa(afficheIdUA(entrep.marche_id)) || 'Non renseigné'}}</td>
                    <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
                    <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
-                   <td>{{afficheObjetMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{conversionMajiscule(afficheObjetMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
                    <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
                           
                          
@@ -129,6 +129,13 @@ props:["idEntreprise"],
         return norme.annee;
       }
       return 0
+    },
+
+           conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
     },
     afficheAnneeDuMarche() {
       return id => {

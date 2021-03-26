@@ -624,7 +624,7 @@ reference_marche
                     <!-- <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="ModalModifierMarcheHorsPPM(index)">
-                   {{marche.objet || 'Non renseigné'}}</td>
+                   {{ conversionMajiscule(marche.objet) || 'Non renseigné'}}</td>
                      <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td @dblclick="ModalModifierMarcheHorsPPM(index)">
@@ -892,6 +892,13 @@ ImputationBudget() {
         return norme.codebudget;
       }
       return 0
+    },
+
+    conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
     },
 
 

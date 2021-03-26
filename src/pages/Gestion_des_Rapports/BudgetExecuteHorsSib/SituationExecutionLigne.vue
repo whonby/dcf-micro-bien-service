@@ -11,16 +11,16 @@
                 <br />
 
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                  >ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
-                  :list="uniteAdministratives"
-                  v-model="uniteAdministrative_id"
+                  :list="plans_activites"
+                  v-model="activite_id"
                   option-value="id"
                   option-text="libelle"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                  placeholder="TOUTES LES ACTIVITES"
                 >
                 </model-list-select>
               </td>
@@ -79,20 +79,23 @@
       >
         <tr>
           <td style="text-align: center">
-            <p>MINISTERE DU BUDGET  <br/>
-            ------------------------- <br/>
-            DIRECTION DU CONTRÔLE FINANCIER <br/>
-            -------------------------</p>
+            <p>
+              MINISTERE DU BUDGET <br />
+              ------------------------- <br />
+              DIRECTION DU CONTRÔLE FINANCIER <br />
+              -------------------------
+            </p>
             <img :src="AfficheLogODCF" />
           </td>
           <td style="text-align: center">
             <img :src="AfficheAmoirie" />
           </td>
           <td style="text-align: center">
-            <p>REPUBLIQUE DE CÔTE D'IVOIRE <br/>
-              Union-Discipline-Travail <br/>
-               ------------------------- </p>
-            
+            <p>
+              REPUBLIQUE DE CÔTE D'IVOIRE <br />
+              Union-Discipline-Travail <br />
+              -------------------------
+            </p>
           </td>
         </tr>
       </table>
@@ -105,7 +108,8 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        Listes des ordres de paiement {{ formData.date_debut }}
+        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE
+        {{ formData.date_debut }}
         {{ formData.date_fin }}
       </h2>
 
@@ -118,8 +122,8 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        Listes des ordres de paiement du
-        {{ formaterDate(formData.date_debut) }} au
+        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
+        {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
       </h2>
       <p
@@ -137,15 +141,17 @@
         v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite"
         :key="GroupeOrdrePaiementByActivit.id"
       >
+      <div >
         <br />
         <p style="margin-left: 30px; font-size: 14px; font-weight: bold">
           ACTIVITE:
-          {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
+          {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }} 
+          
         </p>
 
         <table
           class="table table-bordered table-striped"
-          style="margin-left:5px; margin-right:5px"
+          style="margin-left: 5px; margin-right: 5px"
         >
           <thead style="background-color: #87ceeb">
             <tr>
@@ -167,7 +173,7 @@
                   background-color: #87ceeb;
                 "
               >
-                TYPE ORDRE PAIEMENT
+                Budget Actuel
               </th>
               <th
                 style="
@@ -178,7 +184,7 @@
                   background-color: #87ceeb;
                 "
               >
-                N°ORDRE PAIEMENT
+                Montant Exécuté 
               </th>
               <th
                 style="
@@ -188,7 +194,7 @@
                   background-color: #87ceeb;
                 "
               >
-                BAILLEUR
+                Montant Prov
               </th>
               <th
                 style="
@@ -198,18 +204,7 @@
                   background-color: #87ceeb;
                 "
               >
-                OBJET
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                MONTANT (FCFA)
+                Taux(%)
               </th>
               <th
                 style="
@@ -220,17 +215,23 @@
                   background-color: #87ceeb;
                 "
               >
-                VISA CF
+                Disponible
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              class="odd gradeX"
-              v-for="listeordrepaiement in listeordrepaiements(
-                GroupeOrdrePaiementByActivit[0].activite_id
-              )"
-              :key="listeordrepaiement.id"
+            <tr >
+              
+              <td style="background-color:#87ceeb;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
+              
+            </tr>
+           <tr >
+              
+              <td style="background-color:#87ceeb;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
+              
+            </tr>
+            <tr 
+              class="odd gradeX" v-for="listeordrepaiement in listeordrepaiements(GroupeOrdrePaiementByActivit[0].activite_id)" :key="listeordrepaiement.id"
             >
               <td style="font-size: 14px">
                 {{
@@ -283,15 +284,16 @@
                 }}
               </td>
 
-              <td style="font-size: 14px">
+              <!-- <td style="font-size: 14px">
                 {{
                   formaterDate(listeordrepaiement.date_decision_cf) ||
                   "Non renseigné"
                 }}
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
+      </div>
       </div>
     </div>
     <!-- <fab
@@ -349,7 +351,7 @@ export default {
       EditDetache: {},
       typeop_id: 0,
       NumeroOp: 0,
-      uniteAdministrative_id: 0,
+      activite_id: 0,
 
       editMandat: {},
       EditAnulation: {},
@@ -447,6 +449,7 @@ export default {
       "getterMembreCojo",
       "getterProceVerballe",
       "GroupeOrdrePaiementByActivite",
+      "GroupeOrdrePaiementByGrandeNature"
     ]),
     ...mapGetters("gestionMarche", [
       "groupeVille",
@@ -495,13 +498,13 @@ export default {
     ]),
 
     ListeGroupByActivite() {
-      if (this.uniteAdministrative_id != 0) {
+      if (this.activite_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            qtreel[0].activite_id == this.activite_id
         );
       } else if (
-        this.uniteAdministrative_id != 0 &&
+        this.activite_id != 0 &&
         this.formData.date_debut != "" &&
         this.formData.date_fin != ""
       ) {
@@ -511,18 +514,52 @@ export default {
             qtreel[0].date_decision_cf <= this.formData.date_fin
         );
       }
-
-      // else if (this.uniteAdministrative_id != 0 && this.formData.date_debut != "" && this.formData.date_fin != "") {
-      //   return  this.GroupeOrdrePaiementByActivite.filter(
-      //     (qtreel) =>( qtreel[0].date_decision_cf >= this.formData.date_debut &&
-      //      qtreel[0].date_decision_cf <= this.formData.date_fin)
-      //   );
-
-      // }
       else {
         return this.GroupeOrdrePaiementByActivite;
       }
     },
+
+    // ListeGroupByNature() {
+    //   if (this.activite_id != 0) {
+    //     return this.GroupeOrdrePaiementByGrandeNature.filter(
+    //       (qtreel) =>
+    //         qtreel[0].activite_id == this.activite_id
+    //     );
+    //   } else if (
+    //     this.activite_id != 0 &&
+    //     this.formData.date_debut != "" &&
+    //     this.formData.date_fin != ""
+    //   ) {
+    //     return this.GroupeOrdrePaiementByGrandeNature.filter(
+    //       (qtreel) =>
+    //         qtreel[0].date_decision_cf >= this.formData.date_debut &&
+    //         qtreel[0].date_decision_cf <= this.formData.date_fin
+    //     );
+    //   }
+
+      
+    //   else {
+    //      return this.GroupeOrdrePaiementByGrandeNature;
+    //   }
+    // },
+
+
+
+     ListeGroupByNature() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.GroupeOrdrePaiementByGrandeNature.filter(
+            (qtreel) => qtreel.grand_nature_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.grand_nature_id;
+          }
+          return 0;
+        }
+      };
+    },
+
 
     libelleBailleur() {
       return (id) => {
@@ -569,6 +606,22 @@ export default {
       };
     },
 
+    LibelleGrandeNature() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.grandes_natures.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+
     listeordrepaiements() {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return (id) => {
@@ -597,7 +650,7 @@ export default {
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8) ||
-                   
+                  
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 9)

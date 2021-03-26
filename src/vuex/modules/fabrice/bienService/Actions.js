@@ -1,8 +1,8 @@
 import axios from '../../../../request/bienService'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
-var housecall= require('housecall')
-var queue = housecall({concurrency: 2, cooldown: 1000})
+var housecall = require('housecall')
+var queue = housecall({ concurrency: 2, cooldown: 1000 })
 
 // export function getDecompte({ commit }) {
 //   queue.push(() => axios.get('/Listedecompte').then((response) => {
@@ -18,7 +18,7 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 //       if(response.status == 201){
 //         console.log(response.data)
 //         commit('MODIFIER_DECOMPTE', response.data)
-          
+
 //           this.$app.$notify({
 //             title: '',
 //             text: 'Enregistrement effectué !',
@@ -72,293 +72,350 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 // export  function  getImageMarche({commit}) {
 //   queue.push(() => axios.get('/image_marche').then((response) => {
 //     commit('GET_ALL_IMAGE_MARCHE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
 
 
 
-export  function  getCandidatSelectionner({commit}) {
+export function getCandidatSelectionner({ commit }) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
     commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour modifier candidat selectionner
-export function modifierCandidatSelectionner({commit}, formData){
-  asyncLoading(axios.post('/update_candidat_select',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
-          commit('MODIFIER_CANDIDAT_SELECTIONNER', response.data)
-          
-          this.$app.$notify({
-            title: '',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function modifierCandidatSelectionner({ commit }, formData) {
+  asyncLoading(axios.post('/update_candidat_select', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('MODIFIER_CANDIDAT_SELECTIONNER', response.data)
+
+      this.$app.$notify({
+        title: '',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
 
 // supprimer candidat selectionner
-export function supprimerCandidatSelectionner({commit}, id) {
+export function supprimerCandidatSelectionner({ commit }, id) {
   return this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_CANDIDAT_SELECTION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-   return  axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close() )   
- })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_CANDIDAT_SELECTION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      return axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close())
+    })
 
 }
 
 
 
 // retourn de selection du candiadt 
-export function supprimerCandidatSelectionnerDeselection({commit}, id) {
-   return this.$app.$dialog
-  .confirm("Voulez vouz déselectionner le candidat ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_CANDIDAT_SELECTION', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-    return  axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close() )   
-  })
- 
- }
+export function supprimerCandidatSelectionnerDeselection({ commit }, id) {
+  return this.$app.$dialog
+    .confirm("Voulez vouz déselectionner le candidat ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_CANDIDAT_SELECTION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      return axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close())
+    })
+
+}
 
 
 
 
-export function ajouterCandidatSelectionner({commit}, formData){
+export function ajouterCandidatSelectionner({ commit }, formData) {
 
-   return this.$app.$dialog
-  .confirm("Voulez-vous selectionner ce candidat ?.")
-  .then(dialog => {
-    
-    return asyncLoading(axios.post('/add_candidat_select',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
+  return this.$app.$dialog
+    .confirm("Voulez-vous selectionner ce candidat ?.")
+    .then(dialog => {
+
+      return asyncLoading(axios.post('/add_candidat_select', formData)).then(response => {
+        if (response.status == 201) {
+          console.log(response.data)
           commit('AJOUTER_CANDIDAT_SELECTIONNER', response.data)
           dialog.close()
           this.$app.$notify({
             title: '',
             text: 'Enregistrement effectué !',
-            type:"success"
+            type: "success"
           })
-      }
-
-  }).catch(error => console.log(error))
-    // // dialog.loading(false) // stops the proceed button's loader
-     
-  })
-
-  
-}
-
-
-export  function getReception({commit}){
-  queue.push(() => axios.get('/ReceptionMarche').then(tony => {
-      commit('GET_ALL_RECEPTION', tony.data)
-  }).catch(error => console.log(error)))
-}
-
-
-
-
-export function ajouterReception({commit}, formData){
-  asyncLoading(axios.post('/ReceptionMarche',formData)).then(response =>{
-      if(response.status == 201){
-       
-          commit('AJOUTER_RECEPTION', response.data)
-          
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
-
-  }).catch(error => console.log(error))
-}
-
-// ajouter role membrecojo
-// export function ajouterRolemembreCojo({commit}, objetAjout){
-// asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo' ,{
-  // code:objetAjout.code,
-  // libelle:objetAjout.libelle,
-//  
-// })).then(tony => {
-  //  if(tony.status == 201){
-      //  commit('AJOUTER_ROLE_MEMBRECOJO', tony.data)
-// 
-      //  this.$app.$notify({
-          // title: 'success ',
-          // text: 'Enregistrement effectué avec success !',
-          // type:"success"
-        // })
-  //  }
-// }).catch(error => console.log(error))
-// }
-// supprimer role membrecojo
-export function supprimerReception({commit}, id){
-
-  this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_RECEPTION', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/ReceptionMarche/' + id).then(() => dialog.close() )   
-  })
-}
-//modifier role membrecojo
-export function modifierReception({commit}, elementModifie){
-
- asyncLoading( axios.put('/modifier_ReceptionMarche/' + elementModifie.id ,{
-  code:elementModifie.code,
-  libelle:elementModifie.libelle,
-
-})).then(response => {
-      commit('MODIFIER_RECEPTION', response.data)
-
-      this.$app.$notify({
-          title: 'success ',
-          text: 'Modification effectué avec success !',
-          type:"success"
-        })
-  }).catch(error => console.log(error))
- 
-}
-
-
-
-
-
- // liste role membrecojo
- export  function getRolemembreCojo({commit}){
-  queue.push(() => axios.get('/ListeRoleMembreCojo').then(tony => {
-      commit('GET_ROLE_MEMBRECOJO', tony.data)
-  }).catch(error => console.log(error)))
-}
-
-
-
-
-export function ajouterRolemembreCojo({commit}, formData){
-  asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
-          commit('AJOUTER_ROLE_MEMBRECOJO', response.data)
-          
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
-
-  }).catch(error => console.log(error))
-}
-
-// ajouter role membrecojo
-// export function ajouterRolemembreCojo({commit}, objetAjout){
-// asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo' ,{
-  // code:objetAjout.code,
-  // libelle:objetAjout.libelle,
-//  
-// })).then(tony => {
-  //  if(tony.status == 201){
-      //  commit('AJOUTER_ROLE_MEMBRECOJO', tony.data)
-// 
-      //  this.$app.$notify({
-          // title: 'success ',
-          // text: 'Enregistrement effectué avec success !',
-          // type:"success"
-        // })
-  //  }
-// }).catch(error => console.log(error))
-// }
-// supprimer role membrecojo
-export function supprimerRolemembreCojo({commit}, id){
-
-  this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_ROLE_MEMBRECOJO', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/supprimer_ListeRoleMembreCojo/' + id).then(() => dialog.close() )   
-  })
-}
-//modifier role membrecojo
-export function modifierRolemembreCojo({commit}, elementModifie){
-
- asyncLoading( axios.put('/modifier_ListeRoleMembreCojo/' + elementModifie.id ,{
-  code:elementModifie.code,
-  libelle:elementModifie.libelle,
-
-})).then(response => {
-      commit('MODIFIER_ROLE_MEMBRECOJO', response.data)
-
-      this.$app.$notify({
-          title: 'success ',
-          text: 'Modification effectué avec success !',
-          type:"success"
-        })
-  }).catch(error => console.log(error))
- 
-}
-
-
-
-export  function  getBailleur({commit}) {
-    queue.push(() => axios.get('/bailleurs').then((response) => {
-      commit('GET_ALL_BAILLEUR', response.data)
-      
-  }).catch(error => console.log(error)))
-  }
-
-  // action pour ajouter bailleur
-  export function ajouterBailleur({commit}, formData){
-    asyncLoading(axios.post('/bailleurs',formData)).then(response =>{
-        if(response.status == 201){
-          console.log(response.data)
-            commit('AJOUTER_BAILLEUR', response.data)
-            
-            this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-            })
         }
 
-    }).catch(error => console.log(error))
+      }).catch(error => console.log(error))
+      // // dialog.loading(false) // stops the proceed button's loader
+
+    })
+
+
+}
+
+//probleme marche
+
+export function getProblemeMarche({ commit }) {
+  queue.push(() => axios.get('/ReceptionMarche').then(tony => {
+    commit('GET_ALL_PROBLEME_MARCHE', tony.data)
+  }).catch(error => console.log(error)))
+}
+
+export function AjouterProblemeMarche({ commit }, formData) {
+  asyncLoading(axios.post('/ReceptionMarche', formData)).then(response => {
+    if (response.status == 201) {
+
+      commit('AJOUTER_PROBLEME_MARCHE', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+//Suppression
+export function SupprimerProblemeMarche({ commit }, id) {
+
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_PROBLEME_MARCHE', id)
+      axios.delete('/ReceptionMarche/' + id).then(() => dialog.close())
+    })
+}
+//MODIFICATION
+
+export function ModifierProblemeMarche({ commit }, elementModifie) {
+
+  asyncLoading(axios.put('/modifier_ReceptionMarche/' + elementModifie.id, {
+    code: elementModifie.code,
+    libelle: elementModifie.libelle,
+
+  })).then(response => {
+    commit('MODIFIER_PROBLEME_MARCHE', response.data)
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+
+}
+
+
+//fin
+
+
+export function getReception({ commit }) {
+  queue.push(() => axios.get('/ReceptionMarche').then(tony => {
+    commit('GET_ALL_RECEPTION', tony.data)
+  }).catch(error => console.log(error)))
+}
+
+
+
+
+export function ajouterReception({ commit }, formData) {
+  asyncLoading(axios.post('/ReceptionMarche', formData)).then(response => {
+    if (response.status == 201) {
+
+      commit('AJOUTER_RECEPTION', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// ajouter role membrecojo
+// export function ajouterRolemembreCojo({commit}, objetAjout){
+// asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo' ,{
+// code:objetAjout.code,
+// libelle:objetAjout.libelle,
+//  
+// })).then(tony => {
+//  if(tony.status == 201){
+//  commit('AJOUTER_ROLE_MEMBRECOJO', tony.data)
+// 
+//  this.$app.$notify({
+// title: 'success ',
+// text: 'Enregistrement effectué avec success !',
+// type:"success"
+// })
+//  }
+// }).catch(error => console.log(error))
+// }
+// supprimer role membrecojo
+export function supprimerReception({ commit }, id) {
+
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_RECEPTION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/ReceptionMarche/' + id).then(() => dialog.close())
+    })
+}
+//modifier role membrecojo
+export function modifierReception({ commit }, elementModifie) {
+
+  asyncLoading(axios.put('/modifier_ReceptionMarche/' + elementModifie.id, {
+    code: elementModifie.code,
+    libelle: elementModifie.libelle,
+
+  })).then(response => {
+    commit('MODIFIER_RECEPTION', response.data)
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+
+}
+
+
+
+
+
+// liste role membrecojo
+export function getRolemembreCojo({ commit }) {
+  queue.push(() => axios.get('/ListeRoleMembreCojo').then(tony => {
+    commit('GET_ROLE_MEMBRECOJO', tony.data)
+  }).catch(error => console.log(error)))
+}
+
+
+
+
+export function ajouterRolemembreCojo({ commit }, formData) {
+  asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_ROLE_MEMBRECOJO', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// ajouter role membrecojo
+// export function ajouterRolemembreCojo({commit}, objetAjout){
+// asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo' ,{
+// code:objetAjout.code,
+// libelle:objetAjout.libelle,
+//  
+// })).then(tony => {
+//  if(tony.status == 201){
+//  commit('AJOUTER_ROLE_MEMBRECOJO', tony.data)
+// 
+//  this.$app.$notify({
+// title: 'success ',
+// text: 'Enregistrement effectué avec success !',
+// type:"success"
+// })
+//  }
+// }).catch(error => console.log(error))
+// }
+// supprimer role membrecojo
+export function supprimerRolemembreCojo({ commit }, id) {
+
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ROLE_MEMBRECOJO', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/supprimer_ListeRoleMembreCojo/' + id).then(() => dialog.close())
+    })
+}
+//modifier role membrecojo
+export function modifierRolemembreCojo({ commit }, elementModifie) {
+
+  asyncLoading(axios.put('/modifier_ListeRoleMembreCojo/' + elementModifie.id, {
+    code: elementModifie.code,
+    libelle: elementModifie.libelle,
+
+  })).then(response => {
+    commit('MODIFIER_ROLE_MEMBRECOJO', response.data)
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+
+}
+
+
+
+export function getBailleur({ commit }) {
+  queue.push(() => axios.get('/bailleurs').then((response) => {
+    commit('GET_ALL_BAILLEUR', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterBailleur({ commit }, formData) {
+  asyncLoading(axios.post('/bailleurs', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_BAILLEUR', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
 }
 
 // action pour modifier bailleur
 
 
- export function modifierBailleur({commit}, element_modifie) {
-    asyncLoading( axios.put('/bailleurs' ,element_modifie)).then(response => {
-         commit('MODIFIER_BAILLEUR', response.data)
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué !',
-           type:"success"
-         })
-     }).catch(error => console.log(error))
- }
-  // supprimer categorie mision
-export function supprimerBailleur({commit}, id) {
-   this.$app.$dialog
-   .confirm("Voulez vouz vraiment supprimer ?.")
-   .then(dialog => {
+export function modifierBailleur({ commit }, element_modifie) {
+  asyncLoading(axios.put('/bailleurs', element_modifie)).then(response => {
+    commit('MODIFIER_BAILLEUR', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerBailleur({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
       commit('SUPPRIMER_BAILLEUR', id)
-     // // dialog.loading(false) // stops the proceed button's loader
-       axios.delete('/bailleurs/' + id).then(() => dialog.close() )   
-   })
- 
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/bailleurs/' + id).then(() => dialog.close())
+    })
+
 }
 
 
@@ -370,26 +427,26 @@ export function supprimerBailleur({commit}, id) {
 
 
 
-export  function  getExecutionMarche({commit}) {
+export function getExecutionMarche({ commit }) {
   queue.push(() => axios.get('/bailleurs').then((response) => {
     commit('GET_EXECUTION_MARCHE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action 
-export function ajouterExecutionMarche({commit}, formData){
-  asyncLoading(axios.post('/bailleurs',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
-          commit('AJOUTER_EXECUTION_MARCHE', response.data)
-          
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterExecutionMarche({ commit }, formData) {
+  asyncLoading(axios.post('/bailleurs', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_EXECUTION_MARCHE', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -397,25 +454,25 @@ export function ajouterExecutionMarche({commit}, formData){
 // action 
 
 
-export function modifierExecutionMarche({commit}, element_modifie) {
-  asyncLoading( axios.put('/bailleurs' ,element_modifie)).then(response => {
-       commit('MODIFIER_EXECUTION_MARCHE', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierExecutionMarche({ commit }, element_modifie) {
+  asyncLoading(axios.put('/bailleurs', element_modifie)).then(response => {
+    commit('MODIFIER_EXECUTION_MARCHE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer categorie mision
-export function supprimerExecutionMarche({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('DELETE_EXECUTION_MARCHE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/bailleurs/' + id).then(() => dialog.close() )   
- })
+export function supprimerExecutionMarche({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_EXECUTION_MARCHE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/bailleurs/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -428,26 +485,26 @@ export function supprimerExecutionMarche({commit}, id) {
 
 // action pour le motif de decision
 
-export  function  getMotifDecision({commit}) {
+export function getMotifDecision({ commit }) {
   queue.push(() => axios.get('/motif_dessions').then((response) => {
     commit('GET_MOTIF_DECISION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter bailleur
-export function ajouterMotifDecision({commit}, formData){
-  asyncLoading(axios.post('/motif_dessions',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
-          commit('AJOUTER_MOTIF_DECISION', response.data)
-          
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterMotifDecision({ commit }, formData) {
+  asyncLoading(axios.post('/motif_dessions', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_MOTIF_DECISION', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -455,25 +512,25 @@ export function ajouterMotifDecision({commit}, formData){
 // action pour modifier motif de decision
 
 
-export function modifierMotifDecision({commit}, element_modifie) {
-  asyncLoading( axios.put('/motif_dessions' ,element_modifie)).then(response => {
-       commit('MODIFIER_MOTIF_DECISION', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierMotifDecision({ commit }, element_modifie) {
+  asyncLoading(axios.put('/motif_dessions', element_modifie)).then(response => {
+    commit('MODIFIER_MOTIF_DECISION', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer categorie mision
-export function supprimerMotifDecision({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('DELETE_MOTIF_DECISION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/motif_dessions/' + id).then(() => dialog.close() )   
- })
+export function supprimerMotifDecision({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_MOTIF_DECISION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/motif_dessions/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -482,26 +539,26 @@ export function supprimerMotifDecision({commit}, id) {
 // action pour le document procedure
 
 
-export  function  getDocumentProcedure({commit}) {
+export function getDocumentProcedure({ commit }) {
   queue.push(() => axios.get('/document_procedures').then((response) => {
     commit('GET_DOCUMENT_PROCEDURE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter bailleur
-export function ajouterDocumentProcedure({commit}, formData){
-  asyncLoading(axios.post('/document_procedures',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
-          commit('AJOUTER_DOCUMENT_PROCEDURE', response.data)
-          
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterDocumentProcedure({ commit }, formData) {
+  asyncLoading(axios.post('/document_procedures', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_DOCUMENT_PROCEDURE', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -509,25 +566,25 @@ export function ajouterDocumentProcedure({commit}, formData){
 // action pour modifier motif de decision
 
 
-export function modifierDocumentProcedure({commit}, element_modifie) {
-  asyncLoading( axios.put('/document_procedures' ,element_modifie)).then(response => {
-       commit('MODIFIER_DOCUMENT_PROCEDURE', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierDocumentProcedure({ commit }, element_modifie) {
+  asyncLoading(axios.put('/document_procedures', element_modifie)).then(response => {
+    commit('MODIFIER_DOCUMENT_PROCEDURE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer categorie mision
-export function supprimerDocumentProcedure({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('DELETE_DOCUMENT_PROCEDURE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/document_procedures/' + id).then(() => dialog.close() )   
- })
+export function supprimerDocumentProcedure({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_DOCUMENT_PROCEDURE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/document_procedures/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -542,26 +599,26 @@ export function supprimerDocumentProcedure({commit}, id) {
 
 
 
-export  function  getActeEffetFinancier({commit}) {
+export function getActeEffetFinancier({ commit }) {
   queue.push(() => axios.get('/acte_effet_finnanciers').then((response) => {
     commit('GET_ALL_ACTE_EFFET_FINANCIER', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter bailleur
-export function ajouterActeEffetFinancier({commit,dispatch}, formData){
-  asyncLoading(axios.post('/acte_effet_finnanciers',formData)).then(response =>{
-      if(response.status == 201){
-        console.log(response.data)
-          commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
-          dispatch("getActeEffetFinancier")
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterActeEffetFinancier({ commit, dispatch }, formData) {
+  asyncLoading(axios.post('/acte_effet_finnanciers', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
+      dispatch("getActeEffetFinancier")
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -569,25 +626,25 @@ export function ajouterActeEffetFinancier({commit,dispatch}, formData){
 // action pour modifier motif de decision
 
 
-export function modifierActeEffetFinancier({commit}, element_modifie) {
-  asyncLoading( axios.put('/acte_effet_finnanciers' ,element_modifie)).then(response => {
-       commit('MODIFIER_ACTE_EFFET_FINANCIER', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierActeEffetFinancier({ commit }, element_modifie) {
+  asyncLoading(axios.put('/acte_effet_finnanciers', element_modifie)).then(response => {
+    commit('MODIFIER_ACTE_EFFET_FINANCIER', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer categorie mision
-export function supprimerActeEffetFinancier({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('DELET_ACTE_EFFET_FINANCIER', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/acte_effet_finnanciers/' + id).then(() => dialog.close() )   
- })
+export function supprimerActeEffetFinancier({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELET_ACTE_EFFET_FINANCIER', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/acte_effet_finnanciers/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -612,26 +669,26 @@ export function supprimerActeEffetFinancier({commit}, id) {
 
 
 
-export  function getTypeActeDepense({commit}) {
+export function getTypeActeDepense({ commit }) {
   queue.push(() => axios.get('/type_acte_depenses').then((response) => {
-   // console.log(response.data)
+    // console.log(response.data)
     commit('GET_ALL_TYPE_ACTE_DEPENSE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type  acte depense
-export function ajouterTypeActeDepense({commit},formData){
-  asyncLoading(axios.post('/type_acte_depenses',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_ACTE_DEPENSE', response.data)
+export function ajouterTypeActeDepense({ commit }, formData) {
+  asyncLoading(axios.post('/type_acte_depenses', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_ACTE_DEPENSE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -639,51 +696,51 @@ export function ajouterTypeActeDepense({commit},formData){
 // action pour modifier type acte depense
 
 
-export function modifierTypeActeDepense({commit}, element_modifie) {
-  asyncLoading( axios.put('/type_acte_depenses' ,element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_ACTE_DEPENSE', response.data)
-       
+export function modifierTypeActeDepense({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_acte_depenses', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_ACTE_DEPENSE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer type acte acte depense
-export function supprimerTypeActeDepense({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_ACTE_DEPENSE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_acte_depenses/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypeActeDepense({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_ACTE_DEPENSE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_acte_depenses/' + id).then(() => dialog.close())
+    })
 
 }
 
 
-export  function  getTypeFacture({commit}) {
+export function getTypeFacture({ commit }) {
   queue.push(() => axios.get('/type_factures').then((response) => {
     commit('GET_TYPE_FACTURE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type facture
-export function ajouterTypeFacture({commit}, formData){
-  asyncLoading(axios.post('/type_factures',formData)).then(response =>{
-      if(response.status == 201){
+export function ajouterTypeFacture({ commit }, formData) {
+  asyncLoading(axios.post('/type_factures', formData)).then(response => {
+    if (response.status == 201) {
       console.log(response.data)
-          commit('AJOUTER_TYPE_FACTURE', response.data)
+      commit('AJOUTER_TYPE_FACTURE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -691,49 +748,49 @@ export function ajouterTypeFacture({commit}, formData){
 // action pour modifier type facture
 
 
-export function modifierTypeFacture({commit}, element_modifie) {
-  asyncLoading( axios.put('/type_factures' ,element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_FACTURE', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierTypeFacture({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_factures', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_FACTURE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer type facture
-export function supprimerTypeFacture({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_FACTURE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_factures/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypeFacture({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_FACTURE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_factures/' + id).then(() => dialog.close())
+    })
 
 }
 
 // action pour lot && type de prestation
 
-export  function  getTypePrestation({commit}) {
+export function getTypePrestation({ commit }) {
   queue.push(() => axios.get('/type_prestations').then((response) => {
     commit('GET_ALL_TYPE_PRESTATION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type prestation
-export function ajouterTypePrestation({commit}, formData){
-  asyncLoading(axios.post('/type_prestations',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_PRESTATION', response.data)
+export function ajouterTypePrestation({ commit }, formData) {
+  asyncLoading(axios.post('/type_prestations', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_PRESTATION', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -741,27 +798,27 @@ export function ajouterTypePrestation({commit}, formData){
 // action pour modifier type prestation
 
 
-export function modifierTypePrestation({commit}, element_modifie) {
-  asyncLoading( axios.put('/type_prestations',element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_PRESTATION', response.data)
-       
+export function modifierTypePrestation({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_prestations', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_PRESTATION', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer type facture
-export function supprimerTypePrestation({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_PRESTATION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_prestations/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypePrestation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_PRESTATION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_prestations/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -772,25 +829,25 @@ export function supprimerTypePrestation({commit}, id) {
 
 // action pour lot
 
-export  function  getLot({commit}) {
+export function getLot({ commit }) {
   queue.push(() => axios.get('/lots').then((response) => {
     commit('GET_ALL_LOT', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter lot
-export function ajouterLot({commit}, elementAjout){
-  asyncLoading(axios.post('/lots',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_LOT', response.data)
+export function ajouterLot({ commit }, elementAjout) {
+  asyncLoading(axios.post('/lots', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_LOT', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -798,28 +855,28 @@ export function ajouterLot({commit}, elementAjout){
 // action pour modifier lot
 
 
-export function modifierLot({commit}, element_modifie) {
-  asyncLoading( axios.put('/lots',element_modifie)).then(response => {
-       commit('MODIFIER_LOT', response.data)
-       
+export function modifierLot({ commit }, element_modifie) {
+  asyncLoading(axios.put('/lots', element_modifie)).then(response => {
+    commit('MODIFIER_LOT', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer compte
 
-export function supprimerLot({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_LOT', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/lots/' + id).then(() => dialog.close() )
- })
+export function supprimerLot({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_LOT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/lots/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -827,41 +884,41 @@ export function supprimerLot({commit}, id) {
 
 // action pour analyse dossier
 
-export  function  getAnalyseDossier({commit}) {
+export function getAnalyseDossier({ commit }) {
   queue.push(() => axios.get('/analyse_dossier').then((response) => {
     commit('GET_ALL_ANALYSE_DOSSIER', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter analyse dossier
-export function ajouterAnalyseDossierMultiple({commit,dispatch}, elementAjout){
-  asyncLoading(axios.post('/analyse_dossier_multiple',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_ANALYSE_DOSSIER', response.data)
-          dispatch("getAnalyseDossier")
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterAnalyseDossierMultiple({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/analyse_dossier_multiple', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_ANALYSE_DOSSIER', response.data)
+      dispatch("getAnalyseDossier")
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
 
-export function supprimerAnalyseDossierMultiple({dispatch}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
+export function supprimerAnalyseDossierMultiple({ dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
 
-            axios.delete('/delete_mutipleAnalyse/' + id).then(() =>{
-                dispatch("getAnalyseDossier")
-                dialog.close()
+      axios.delete('/delete_mutipleAnalyse/' + id).then(() => {
+        dispatch("getAnalyseDossier")
+        dialog.close()
 
-            }  )
+      })
 
-        })
+    })
 
 }
 
@@ -874,27 +931,27 @@ export function supprimerAnalyseDossierMultiple({dispatch}, id) {
 // action pour modifier analyse dossier
 
 
-export function modifierAnalyseDossier({commit}, element_modifie) {
-  asyncLoading( axios.put('/analyse_dossier' ,element_modifie)).then(response => {
-       commit('MODIFIER_ANALYSE_DOSSIER', response.data)
+export function modifierAnalyseDossier({ commit }, element_modifie) {
+  asyncLoading(axios.put('/analyse_dossier', element_modifie)).then(response => {
+    commit('MODIFIER_ANALYSE_DOSSIER', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer analyse dossier
 
-export function supprimerAnalyseDossier({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_ANALYSE_DOSSIER', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/analyse_dossier/' + id).then(() => dialog.close() )
- })
+export function supprimerAnalyseDossier({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ANALYSE_DOSSIER', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/analyse_dossier/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -902,31 +959,31 @@ export function supprimerAnalyseDossier({commit}, id) {
 
 // action pour cojo
 
-export  function  getCojo({commit}) {
+export function getCojo({ commit }) {
   queue.push(() => axios.get('/cojo').then((response) => {
     commit('GET_ALL_COJO', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la cojo
 
-export function ajouterCojo({commit,dispatch}, elementAjout){
-  asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_COJO', response.data.cojo)
-          dispatch("getStructureDAO");
-          response.data.marche.forEach(function (value) {
-              commit('MODIFIER_MARCHE', value)
-          })
+export function ajouterCojo({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/cojo', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_COJO', response.data.cojo)
+      dispatch("getStructureDAO");
+      response.data.marche.forEach(function (value) {
+        commit('MODIFIER_MARCHE', value)
+      })
 
-        //  commit('AJOUTER_MEMBRE_COJO', response.data.membre)
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      //  commit('AJOUTER_MEMBRE_COJO', response.data.membre)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -937,100 +994,100 @@ export function ajouterCojo({commit,dispatch}, elementAjout){
 // action pour modifier la cojo
 
 
-export function modifierCojo({commit}, element_modifie) {
-  asyncLoading( axios.put('/cojo',element_modifie)).then(response => {
-       commit('MODIFIER_COJO', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierCojo({ commit }, element_modifie) {
+  asyncLoading(axios.put('/cojo', element_modifie)).then(response => {
+    commit('MODIFIER_COJO', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer cojo
 
-export function supprimerCojo({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPRIMER_COJO', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/cojo/' + id).then(() => dialog.close() )
- })
+export function supprimerCojo({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPRIMER_COJO', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/cojo/' + id).then(() => dialog.close())
+    })
 
 }
 // rapport d'ouverture
 
-export  function  getRapport({commit}) {
+export function getRapport({ commit }) {
   queue.push(() => axios.get('/liste_rapport').then((response) => {
     commit('GET_ALL_RAPPORT', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterRapport({commit}, elementAjout, config){
-  asyncLoading(axios.post('/add_rapport',elementAjout, config)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_RAPPORT', response.data.cojo)
-          commit('AJOUTER_MEMBRE_COJO', response.data.membre)
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterRapport({ commit }, elementAjout, config) {
+  asyncLoading(axios.post('/add_rapport', elementAjout, config)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_RAPPORT', response.data.cojo)
+      commit('AJOUTER_MEMBRE_COJO', response.data.membre)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
 
-export function modifierRapport({commit}, element_modifie,config) {
-  asyncLoading( axios.post('/update_rapport',element_modifie, config)).then(response => {
-       commit('MODIFIER_RAPPORT', response.data)
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierRapport({ commit }, element_modifie, config) {
+  asyncLoading(axios.post('/update_rapport', element_modifie, config)).then(response => {
+    commit('MODIFIER_RAPPORT', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
 
-export function supprimerRapport({commit}, id) {
+export function supprimerRapport({ commit }, id) {
   this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_RAPPORT', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/delete_rapport/' + id).then(() => dialog.close() )
-  })
- 
- }
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_RAPPORT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/delete_rapport/' + id).then(() => dialog.close())
+    })
+
+}
 
 
 // acttion de l'obseravtion de bailleur
 
 
 
-export  function  getObservationBailleur({commit}) {
+export function getObservationBailleur({ commit }) {
   queue.push(() => axios.get('/observation_bailleurs').then((response) => {
     commit('GET_OBSERVATION_BAILLEUR', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter observation bailleur
 
-export function ajouterObseravtionBailleur({commit}, elementAjout){
-  asyncLoading(axios.post('/observation_bailleurs',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_OBSERAVTION_BAILLEUR', response.data)
+export function ajouterObseravtionBailleur({ commit }, elementAjout) {
+  asyncLoading(axios.post('/observation_bailleurs', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_OBSERAVTION_BAILLEUR', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -1038,27 +1095,27 @@ export function ajouterObseravtionBailleur({commit}, elementAjout){
 // action pour modifier obseravtion bailleur
 
 
-export function modifierObservationBaileur({ commit, dispatch}, element_modifie) {
-  asyncLoading( axios.put('/observation_bailleurs',element_modifie)).then(response => {
-       commit('MODIFIER_OBSERAVTION_BAILLEUR', response.data)
+export function modifierObservationBaileur({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/observation_bailleurs', element_modifie)).then(response => {
+    commit('MODIFIER_OBSERAVTION_BAILLEUR', response.data)
     dispatch("getObservationBailleur");
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer obseravtion bailleur
 
-export function supprimerObseravtionBailleur({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('DELETE_OBSERVATION_BAILLEUR', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/observation_bailleurs/' + id).then(() => dialog.close() )
- })
+export function supprimerObseravtionBailleur({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_OBSERVATION_BAILLEUR', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/observation_bailleurs/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1072,25 +1129,25 @@ export function supprimerObseravtionBailleur({commit}, id) {
 
 // action pour la condition
 
-export  function  getCondition({commit}) {
+export function getCondition({ commit }) {
   queue.push(() => axios.get('/conditions').then((response) => {
     commit('GET_ALL_CONDITION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la condition
-export function ajouterCondition({commit}, formData){
-  asyncLoading(axios.post('/conditions',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_CONDITION', response.data)
+export function ajouterCondition({ commit }, formData) {
+  asyncLoading(axios.post('/conditions', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_CONDITION', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -1098,27 +1155,27 @@ export function ajouterCondition({commit}, formData){
 // action pour modifier condition
 
 
-export function modifierCondition({commit}, element_modifie) {
-  asyncLoading( axios.put('/conditions',element_modifie)).then(response => {
-       commit('MODIFIER_CONDITION', response.data)
-       
+export function modifierCondition({ commit }, element_modifie) {
+  asyncLoading(axios.put('/conditions', element_modifie)).then(response => {
+    commit('MODIFIER_CONDITION', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer la condition
-export function supprimerCondition({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_CONDITION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/conditions/' + id).then(() => dialog.close() )   
- })
+export function supprimerCondition({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_CONDITION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/conditions/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1130,25 +1187,25 @@ export function supprimerCondition({commit}, id) {
 
 // action pour de text juridique
 
-export  function  getTextJuridique({commit}) {
+export function getTextJuridique({ commit }) {
   queue.push(() => axios.get('/text_juridicuques').then((response) => {
     commit('GET_TEXTJURIDIQUE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la condition
-export function ajouterTextJuridique({commit}, formData){
-  asyncLoading(axios.post('/text_juridicuques',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TEXT_JURIDIQUE', response.data)
+export function ajouterTextJuridique({ commit }, formData) {
+  asyncLoading(axios.post('/text_juridicuques', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TEXT_JURIDIQUE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -1156,27 +1213,27 @@ export function ajouterTextJuridique({commit}, formData){
 // action pour modifier condition
 
 
-export function modifierTextJuridique({commit}, element_modifie) {
-  asyncLoading( axios.put('/text_juridicuques',element_modifie)).then(response => {
-       commit('MODIFIER_TEXT_JURIDIQUE', response.data)
-       
+export function modifierTextJuridique({ commit }, element_modifie) {
+  asyncLoading(axios.put('/text_juridicuques', element_modifie)).then(response => {
+    commit('MODIFIER_TEXT_JURIDIQUE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer la condition
-export function supprimerTextJuridique({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TEXT_JURIDIQUE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/text_juridicuques/' + id).then(() => dialog.close() )   
- })
+export function supprimerTextJuridique({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TEXT_JURIDIQUE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/text_juridicuques/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1188,7 +1245,7 @@ export function supprimerTextJuridique({commit}, id) {
 // export  function  getFonctionOccuppe({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_FONCTION_OCCUPPE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1199,7 +1256,7 @@ export function supprimerTextJuridique({commit}, id) {
 //     libelle_fonction:elementAjout.libelle_fonction,
 //     date_debut_fonction:elementAjout.date_debut_fonction,
 //     date_fin_fonction:elementAjout.date_fin_fonction
-    
+
 // })).then(response =>{
 //       if(response.status == 201){
 //           commit('AJOUTER_FONCTION_OCCUPPE', response.data)
@@ -1223,10 +1280,10 @@ export function supprimerTextJuridique({commit}, id) {
 //     libelle_fonction:element_modifie.libelle_fonction,
 //     date_debut_fonction:element_modifie.date_debut_fonction,
 //     date_fin_fonction:element_modifie.date_fin_fonction
-    
+
 //  })).then(response => {
 //        commit('MODIFIER_FONCTION_OCCUPPE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1242,7 +1299,7 @@ export function supprimerTextJuridique({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_FONCTION_OCCUPPE', id)
-  
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -1255,7 +1312,7 @@ export function supprimerTextJuridique({commit}, id) {
 // export  function  getNatureFonction({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_NATURE_FONCTION', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1265,7 +1322,7 @@ export function supprimerTextJuridique({commit}, id) {
 //     id_type:elementAjout.id_type,
 //     libelle_fonction:elementAjout.libelle_fonction,
 //     type_fonction:elementAjout.type_fonction
-    
+
 // })).then(response =>{
 //       if(response.status == 201){
 //           commit('AJOUTER_NATURE_FONCTION', response.data)
@@ -1288,11 +1345,11 @@ export function supprimerTextJuridique({commit}, id) {
 //     id_type:element_modifie.id_type,
 //     libelle_fonction:element_modifie.libelle_fonction,
 //     type_fonction:element_modifie.type_fonction
-    
-    
+
+
 //  })).then(response => {
 //        commit('MODIFIER_NATURE_FONCTION', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1308,7 +1365,7 @@ export function supprimerTextJuridique({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_NATURE_FONCTION', id)
- 
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -1321,7 +1378,7 @@ export function supprimerTextJuridique({commit}, id) {
 // export  function  getSignature({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_SIGNATURE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1334,7 +1391,7 @@ export function supprimerTextJuridique({commit}, id) {
 //     fin_validite:elementAjout.fin_validite,
 //     version:elementAjout.version,
 //     id_signature_modifie:elementAjout.id_signature_modifie
-    
+
 // })).then(response =>{
 //       if(response.status == 201){
 //           commit('AJOUTER_SIGNATURE', response.data)
@@ -1359,10 +1416,10 @@ export function supprimerTextJuridique({commit}, id) {
 //     fin_validite:element_modifie.fin_validite,
 //     version:element_modifie.version,
 //     id_signature_modifie:element_modifie.id_signature_modifie
-    
+
 //  })).then(response => {
 //        commit('MODIFIER_SIGNATURE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1387,26 +1444,26 @@ export function supprimerTextJuridique({commit}, id) {
 
 // action pour type acte effet financier
 
-export  function  getTypeActeEffetFinancier({commit}) {
+export function getTypeActeEffetFinancier({ commit }) {
   queue.push(() => axios.get('/type_act_effets').then((response) => {
     commit('GET_ALL_TYPE_ACTE_EFFET_FINANCIER', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type acte effet financier
 
-export function ajouterTypeActeEffetFinancier({commit}, formData){
-  asyncLoading(axios.post('/type_act_effets',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_ACTE_EFFET_FINANCIER', response.data)
+export function ajouterTypeActeEffetFinancier({ commit }, formData) {
+  asyncLoading(axios.post('/type_act_effets', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_ACTE_EFFET_FINANCIER', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -1414,28 +1471,28 @@ export function ajouterTypeActeEffetFinancier({commit}, formData){
 // action pour modifier type acte effet financier
 
 
-export function modifierTypeActeEffetFinancier({commit}, element_modifie) {
-  asyncLoading( axios.put('/type_act_effets' ,element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_ACTE_EFFET_FINANCIER', response.data)
-       
+export function modifierTypeActeEffetFinancier({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_act_effets', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_ACTE_EFFET_FINANCIER', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer type acte effet financier
 
-export function supprimerTypeActeEffetFinancier({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_act_effets/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypeActeEffetFinancier({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_act_effets/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1443,26 +1500,26 @@ export function supprimerTypeActeEffetFinancier({commit}, id) {
 
 // action pour type analyse
 
-export  function  getTypeAnalyse({commit}) {
+export function getTypeAnalyse({ commit }) {
   queue.push(() => axios.get('/type_analyses').then((response) => {
     commit('GET_TYPE_ANALYSE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type analyse
 
-export function ajouterTypeAnalyse({commit}, formData){
-  asyncLoading(axios.post('/type_analyses',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_ANALYSE', response.data)
+export function ajouterTypeAnalyse({ commit }, formData) {
+  asyncLoading(axios.post('/type_analyses', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_ANALYSE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -1470,28 +1527,28 @@ export function ajouterTypeAnalyse({commit}, formData){
 // action pour modifier type analyse
 
 
-export function modifierTypeAnalyse({commit}, element_modifie) {
-  asyncLoading( axios.put('/type_analyses',element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_ANALYSE', response.data)
-       
+export function modifierTypeAnalyse({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_analyses', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_ANALYSE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer type analyse
 
-export function supprimertypeAnalyse({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_ANALYSE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_analyses/' + id).then(() => dialog.close() )   
- })
+export function supprimertypeAnalyse({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_ANALYSE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_analyses/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1501,7 +1558,7 @@ export function supprimertypeAnalyse({commit}, id) {
 // export  function  getTypeUA({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_TYPE_UA', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1530,10 +1587,10 @@ export function supprimertypeAnalyse({commit}, id) {
 // export function modifierTypeUA({commit}, element_modifie) {
 //   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
 //     libelle:element_modifie.libelle
-    
+
 //  })).then(response => {
 //        commit('MODIFIER_TYPE_UA', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1549,7 +1606,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_TYPE_UA', id)
- 
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -1562,7 +1619,7 @@ export function supprimertypeAnalyse({commit}, id) {
 // export  function  getUniteAdministrative({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_UNITE_ADMINISTRATIVE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1599,7 +1656,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //     numero_ordre:element_modifie.numero_ordre
 //  })).then(response => {
 //        commit('MODIFIER_UNITE_ADMINISTRATIVE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1615,7 +1672,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_UNITE_ADMINISTRATIVE', id)
- 
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -1628,7 +1685,7 @@ export function supprimertypeAnalyse({commit}, id) {
 // export  function  getUniteZone({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_UNITE_ZONE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1646,7 +1703,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //     telephone_fixe:elementAjout.telephone_fixe,
 //     description_localisation:elementAjout.description_localisation,
 //     quartier:elementAjout.quartier
-    
+
 // })).then(response =>{
 //       if(response.status == 201){
 //           commit('AJOUTER_UNITE_ZONE', response.data)
@@ -1678,7 +1735,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //     quartier:element_modifie.quartier
 //  })).then(response => {
 //        commit('MODIFIER_UNITE_ZONE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1694,7 +1751,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_UNITE_ZONE', id)
-   
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -1709,7 +1766,7 @@ export function supprimertypeAnalyse({commit}, id) {
 // export  function  getLigneBudgetaire({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_LIGNE_BUDGETAIRE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1766,7 +1823,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //     version:element_modifie.version
 //  })).then(response => {
 //        commit('MODIFIER_LIGNE_BUDGETAIRE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -1781,7 +1838,7 @@ export function supprimertypeAnalyse({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_LIGNE_BUDGETAIRE', id)
- 
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -1791,26 +1848,26 @@ export function supprimertypeAnalyse({commit}, id) {
 
 // action pour  la liste de dossier de candidat
 
-export  function  getDossierCandidat({commit}) {
+export function getDossierCandidat({ commit }) {
   queue.push(() => axios.get('/dossier_candidats').then((response) => {
     commit('GET_DOSSIER_CANDIDAT', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la liste de dosseier candidat
 
-export function ajouterDossierCandidat({commit}, elementAjout){
-  asyncLoading(axios.post('/dossier_candidats',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_DOSSIER_CANDIDAT', response.data)
+export function ajouterDossierCandidat({ commit }, elementAjout) {
+  asyncLoading(axios.post('/dossier_candidats', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_DOSSIER_CANDIDAT', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -1818,28 +1875,28 @@ export function ajouterDossierCandidat({commit}, elementAjout){
 // action pour modifier la liste de dossier de candidat
 
 
-export function modifierDossierCandidat({commit}, element_modifie) {
-  asyncLoading( axios.put('/dossier_candidats',element_modifie)).then(response => {
-       commit('MODIFIER_DOSSIER_CANDIDAT', response.data)
-       
+export function modifierDossierCandidat({ commit }, element_modifie) {
+  asyncLoading(axios.put('/dossier_candidats', element_modifie)).then(response => {
+    commit('MODIFIER_DOSSIER_CANDIDAT', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer la liste de dossier de candidat
 
-export function supprimerDossierCandidat({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_DOSSIER_CANDIDAT', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/dossier_candidats/' + id).then(() => dialog.close() )
- })
+export function supprimerDossierCandidat({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_DOSSIER_CANDIDAT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/dossier_candidats/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1850,55 +1907,55 @@ export function supprimerDossierCandidat({commit}, id) {
 
 // action pour  la liste de dossier de candidat
 
-export  function  getOffreTechnique({commit}) {
-    queue.push(() => axios.get('/offre_techniques').then((response) => {
-        commit('GET_ALL_OFFRE_TECHNIQUE', response.data)
+export function getOffreTechnique({ commit }) {
+  queue.push(() => axios.get('/offre_techniques').then((response) => {
+    commit('GET_ALL_OFFRE_TECHNIQUE', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la liste de dosseier candidat
 
-export function ajouterOffreTechnique({commit}, elementAjout){
-    asyncLoading(axios.post('/offre_techniques',elementAjout)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_OFFRE_TECHNIQUE', response.data)
+export function ajouterOffreTechnique({ commit }, elementAjout) {
+  asyncLoading(axios.post('/offre_techniques', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_OFFRE_TECHNIQUE', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 // action pour modifier la liste de dossier de candidat
 
 
-export function modifierOffreTechnique({commit}, element_modifie) {
-    asyncLoading( axios.put('/offre_techniques',element_modifie)).then(response => {
-        commit('MODIFIER_OFFRE_TECHNIQUE', response.data)
+export function modifierOffreTechnique({ commit }, element_modifie) {
+  asyncLoading(axios.put('/offre_techniques', element_modifie)).then(response => {
+    commit('MODIFIER_OFFRE_TECHNIQUE', response.data)
 
 
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer la liste de dossier de candidat
 
-export function supprimerOffreTechnique({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('DELETE_OFFRE_TECHNIQUE', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/offre_techniques/' + id).then(() => dialog.close() )
-        })
+export function supprimerOffreTechnique({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_OFFRE_TECHNIQUE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/offre_techniques/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1909,55 +1966,55 @@ export function supprimerOffreTechnique({commit}, id) {
 
 // action pour  la liste de dossier de candidat
 
-export  function  getOffreFinancier({commit}) {
-    queue.push(() => axios.get('/offre_financieres').then((response) => {
-        commit('GET_ALL_OFFRE_FINANCIER', response.data)
+export function getOffreFinancier({ commit }) {
+  queue.push(() => axios.get('/offre_financieres').then((response) => {
+    commit('GET_ALL_OFFRE_FINANCIER', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la liste de dosseier candidat
 
-export function ajouterOffreFinancier({commit}, elementAjout){
-    asyncLoading(axios.post('/offre_financieres',elementAjout)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_OFFRE_FINANCIER', response.data)
+export function ajouterOffreFinancier({ commit }, elementAjout) {
+  asyncLoading(axios.post('/offre_financieres', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_OFFRE_FINANCIER', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 // action pour modifier la liste de dossier de candidat
 
 
-export function modifierOffreFinancier({commit}, element_modifie) {
-    asyncLoading( axios.put('/offre_financieres',element_modifie)).then(response => {
-        commit('MODIFIER_OFFRE_FINANCIER', response.data)
+export function modifierOffreFinancier({ commit }, element_modifie) {
+  asyncLoading(axios.put('/offre_financieres', element_modifie)).then(response => {
+    commit('MODIFIER_OFFRE_FINANCIER', response.data)
 
 
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer la liste de dossier de candidat
 
-export function supprimerOffreFinancier({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('DELETE_OFFRE_FINANCIER', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/offre_financieres/' + id).then(() => dialog.close() )
-        })
+export function supprimerOffreFinancier({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_OFFRE_FINANCIER', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/offre_financieres/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -1968,7 +2025,7 @@ export function supprimerOffreFinancier({commit}, id) {
 // export  function  getLivrable({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_LIVRABLE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -1990,7 +2047,7 @@ export function supprimerOffreFinancier({commit}, id) {
 //     beneficiaire:elementAjout.beneficiaire,
 //     quantite:elementAjout.quantite,
 //     montant:elementAjout.montant
-    
+
 // })).then(response =>{
 //       if(response.status == 201){
 //           commit('AJOUTER_LIVRABLE', response.data)
@@ -2024,11 +2081,11 @@ export function supprimerOffreFinancier({commit}, id) {
 //     beneficiaire:element_modifie.beneficiaire,
 //     quantite:element_modifie.quantite,
 //     montant:element_modifie.montant
-    
-    
+
+
 //  })).then(response => {
 //        commit('MODIFIER_LIVRABLE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -2044,7 +2101,7 @@ export function supprimerOffreFinancier({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_LIVRABLE', id)
- 
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -2054,55 +2111,55 @@ export function supprimerOffreFinancier({commit}, id) {
 
 // action pour obtenir les données de modifier le dossier du candidat
 
-export  function  getAutreTextJuridique({commit}) {
+export function getAutreTextJuridique({ commit }) {
   queue.push(() => axios.get('/autre_textes_juridiques').then((response) => {
     commit('GET_AUTRE_TEXT_JURIDIQUE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la modification du dossier du candidat
 
-export function ajouterAutreTextJuridique({commit}, formData){
-  asyncLoading(axios.post('/autre_textes_juridiques',formData)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_AUTRE_TEXT_JURIDIQUE', response.data)
+export function ajouterAutreTextJuridique({ commit }, formData) {
+  asyncLoading(axios.post('/autre_textes_juridiques', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_AUTRE_TEXT_JURIDIQUE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
-      
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
   }).catch(error => console.log(error))
 }
 
 // action pour modifier la signature
 
 
-export function modifierAutreTextJuridique({commit}, element_modifie) {
-  asyncLoading( axios.put('/autre_textes_juridiques',element_modifie)).then(response => {
-       commit('MODIFIER_AUTRE_TEXT_JURIDIQUE', response.data)
-       
+export function modifierAutreTextJuridique({ commit }, element_modifie) {
+  asyncLoading(axios.put('/autre_textes_juridiques', element_modifie)).then(response => {
+    commit('MODIFIER_AUTRE_TEXT_JURIDIQUE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer la signature
 
-export function supprimerAutreTextjuridique({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_AUTRE_TEXT_JURIDIQUE', id)
-   
-     axios.delete('/autre_textes_juridiques/' + id).then(() => dialog.close() )   
- })
+export function supprimerAutreTextjuridique({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_AUTRE_TEXT_JURIDIQUE', id)
+
+      axios.delete('/autre_textes_juridiques/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2112,7 +2169,7 @@ export function supprimerAutreTextjuridique({commit}, id) {
 // export  function  getZoneGeographique({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_ALL_ZONE_GEOGRAPHIQUE', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -2159,10 +2216,10 @@ export function supprimerAutreTextjuridique({commit}, id) {
 //     latitude_ville:element_modifie.latitude_ville,
 //     version:element_modifie.version,
 //     id_zone_modif:element_modifie.id_zone_modif
-    
+
 //  })).then(response => {
 //        commit('MODIFIER_ZONE_GEOGRAPHIQUE', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -2178,7 +2235,7 @@ export function supprimerAutreTextjuridique({commit}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_ZONE_GEOGRAPHIQUE', id)
-  
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -2187,30 +2244,30 @@ export function supprimerAutreTextjuridique({commit}, id) {
 
 // action pour obtenir les infos du type text juridique
 
-export function getTypeTextJuridique({commit}) {
+export function getTypeTextJuridique({ commit }) {
   queue.push(() => axios.get('/type_text_juridiques').then((response) => {
     commit('GET_ALL_TYPE_TEXT_JURIDIQUE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterTypeTextJuridique({commit}, elementAjout){
-  asyncLoading(axios.post('/type_text_juridiques',{
-    
-    libelle:elementAjout.libelle
-    
-})).then(response =>{
-      if(response.status == 201){
-        commit('AJOUTER_TYPE_TEXT_JURIDIQUE', response.data)
+export function ajouterTypeTextJuridique({ commit }, elementAjout) {
+  asyncLoading(axios.post('/type_text_juridiques', {
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+    libelle: elementAjout.libelle
+
+  })).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_TEXT_JURIDIQUE', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2235,14 +2292,14 @@ export function modifierTypeTextJuridique({ commit }, element_modifie) {
 
 // supprimer le type text juridique
 
-export function supprimerTypeTextJuridique({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vous vraiment supprimer ?.")
- .then(dialog => {
-   commit('SUPPRIMER_TYPE_TEXT_JURIDIQUE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-   axios.delete('/type_text_juridiques/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypeTextJuridique({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_TEXT_JURIDIQUE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_text_juridiques/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2252,27 +2309,27 @@ export function supprimerTypeTextJuridique({commit}, id) {
 
 
 
-export function getCotation({commit}) {
+export function getCotation({ commit }) {
   queue.push(() => axios.get('/liste_cotation').then((response) => {
     commit('GET_ALL_COTATION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterCotation({commit,dispatch}, elementAjout){
-  asyncLoading(axios.post('/add_cotation', elementAjout)).then(response =>{
-      if(response.status == 201){
-        commit('AJOUTER_COTATION', response.data)
-          dispatch('getCotation')
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-        
-      }
+export function ajouterCotation({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/add_cotation', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_COTATION', response.data)
+      dispatch('getCotation')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2297,14 +2354,14 @@ export function modifierCotation({ commit }, element_modifie) {
 
 // supprimer le type text juridique
 
-export function supprimerCotation({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vous vraiment supprimer ?.")
- .then(dialog => {
-   commit('SUPPRIMER_COTATION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-   axios.delete('/suppri_cotation/' + id).then(() => dialog.close() )   
- })
+export function supprimerCotation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_COTATION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/suppri_cotation/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2314,82 +2371,82 @@ export function supprimerCotation({commit}, id) {
 
 
 
-export function getTransmission({commit}) {
+export function getTransmission({ commit }) {
   queue.push(() => axios.get('/list_transmission').then((response) => {
     commit('GET_ALL_TRANSMISSION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
 
 
-export function ajouterTransmission({commit,dispatch}, elementAjout,config){
-  asyncLoading(axios.post('/add_transmission',elementAjout,config)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TRANSMISSION', response.data)
-          dispatch('getTransmission')
-          this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-          })
-      }
-
-  }).catch(error => console.log(error))
-}
-
-export function modifiertransmission({commit,dispatch},element_modifie,config) {
-  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
-      commit('MODIFIER_TRANSMISSION', response.data)
+export function ajouterTransmission({ commit, dispatch }, elementAjout, config) {
+  asyncLoading(axios.post('/add_transmission', elementAjout, config)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TRANSMISSION', response.data)
       dispatch('getTransmission')
       this.$app.$notify({
-          title: 'success ',
-          text: 'Modification effectué !',
-          type:"success"
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
       })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+export function modifiertransmission({ commit, dispatch }, element_modifie, config) {
+  asyncLoading(axios.post('/update_transmission', element_modifie, config)).then(response => {
+    commit('MODIFIER_TRANSMISSION', response.data)
+    dispatch('getTransmission')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
   }).catch(error => console.log(error))
 }
 
 
-export function modifierDecisionAnoDmp({commit,dispatch}, element_modifie,config) {
-  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
-      commit('MODIFIER_TRANSMISSION', response.data)
-      dispatch('getTransmission')
-        return this.$app.$notify({
-          title: 'success ',
-          text: 'Avis ANO sur le DAO effectué !',
-          type:"success"
-      }) 
+export function modifierDecisionAnoDmp({ commit, dispatch }, element_modifie, config) {
+  asyncLoading(axios.post('/update_transmission', element_modifie, config)).then(response => {
+    commit('MODIFIER_TRANSMISSION', response.data)
+    dispatch('getTransmission')
+    return this.$app.$notify({
+      title: 'success ',
+      text: 'Avis ANO sur le DAO effectué !',
+      type: "success"
+    })
   }).catch(error => console.log(error))
 }
 
 
 
-export function modificationAvisBailleurDmp({commit,dispatch}, element_modifie,config) {
-  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
-      commit('MODIFIER_TRANSMISSION', response.data)
-      dispatch('getTransmission')
-        return this.$app.$notify({
-          title: 'success ',
-          text: 'Avis bailleur effectué !',
-          type:"success"
-      }) 
+export function modificationAvisBailleurDmp({ commit, dispatch }, element_modifie, config) {
+  asyncLoading(axios.post('/update_transmission', element_modifie, config)).then(response => {
+    commit('MODIFIER_TRANSMISSION', response.data)
+    dispatch('getTransmission')
+    return this.$app.$notify({
+      title: 'success ',
+      text: 'Avis bailleur effectué !',
+      type: "success"
+    })
   }).catch(error => console.log(error))
 }
 
 
 // supprimer le type text juridique
 
-export function supprimerTransmission({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vous vraiment supprimer ?.")
- .then(dialog => {
-   commit('SUPPRI_TRANSMISSION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-   axios.delete('/suppri_transmission/' + id).then(() => dialog.close() )   
- })
+export function supprimerTransmission({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRI_TRANSMISSION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/suppri_transmission/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2408,22 +2465,22 @@ export function supprimerTransmission({commit}, id) {
 // export function getCotation({commit}) {
 //   queue.push(() => axios.get('/liste_cotation').then((response) => {
 //     commit('GET_ALL_COTATION', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
 // action pour ajouter les infos d'etat de procedure
 
-export function ajouterEtatProcedure({commit}, elementAjout){
-  asyncLoading(axios.post('/add_etat', elementAjout)).then(response =>{
-      if(response.status == 201){
-        commit('AJOUTER_ETAT_PROCEDURE', response.data)
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterEtatProcedure({ commit }, elementAjout) {
+  asyncLoading(axios.post('/add_etat', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_ETAT_PROCEDURE', response.data)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2433,7 +2490,7 @@ export function ajouterEtatProcedure({commit}, elementAjout){
 
 
 export function modifierEtatProcedure({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_etat/'+ element_modifie.id, element_modifie)).then(response => {
+  asyncLoading(axios.put('/update_etat/' + element_modifie.id, element_modifie)).then(response => {
     commit('MODIFIER_ETAT_PROCEDURE', response.data)
     this.$app.$notify({
       title: 'success ',
@@ -2451,7 +2508,7 @@ export function modifierEtatProcedure({ commit }, element_modifie) {
 //  .confirm("Voulez vous vraiment supprimer ?.")
 //  .then(dialog => {
 //    commit('SUPPRIMER_ETAT_PROCEDURE', id)
-   
+
 //    axios.delete('/suppri_etat/' + id).then(() => dialog.close() )   
 //  })
 
@@ -2462,26 +2519,26 @@ export function modifierEtatProcedure({ commit }, element_modifie) {
 
 
 
-export function getOuverture({commit}) {
+export function getOuverture({ commit }) {
   queue.push(() => axios.get('/liste_ouverture').then((response) => {
     commit('GET_ALL_OUVERTURE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterOuverture({commit,dispatch}, elementAjout){
-  asyncLoading(axios.post('/add_ouverture', elementAjout)).then(response =>{
-      if(response.status == 201){
-        commit('AJOUTER_OUVERTURE', response.data)
-          dispatch('getOuverture')
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterOuverture({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/add_ouverture', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_OUVERTURE', response.data)
+      dispatch('getOuverture')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2506,14 +2563,14 @@ export function modifierOuverture({ commit }, element_modifie) {
 
 // supprimer le type text juridique
 
-export function supprimerOuverture({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vous vraiment supprimer ?.")
- .then(dialog => {
-   commit('SUPPRIMER_OUVERTURE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-   axios.delete('/suppri_ouverture/' + id).then(() => dialog.close() )   
- })
+export function supprimerOuverture({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_OUVERTURE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/suppri_ouverture/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2529,7 +2586,7 @@ export function supprimerOuverture({commit}, id) {
 // export function getOuverturePsc({commit}) {
 //   queue.push(() => axios.get('/list_psc').then((response) => {
 //     commit('GET_ALL_PSC', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -2587,27 +2644,27 @@ export function supprimerOuverture({commit}, id) {
 
 ////////////////////
 
-export  function  getTypeProcedures({commit}) {
+export function getTypeProcedures({ commit }) {
   queue.push(() => axios.get('/type_procedures').then((response) => {
     commit('GET_TYPE_PROCEDURE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterTypeProcedure({ commit, dispatch}, elementAjout){
-  asyncLoading(axios.post('/type_procedures',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_PROCEDURE', response.data)
-        dispatch('getProcedurePassation')
-       
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterTypeProcedure({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/type_procedures', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_PROCEDURE', response.data)
+      dispatch('getProcedurePassation')
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2615,118 +2672,118 @@ export function ajouterTypeProcedure({ commit, dispatch}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierTypeProcedure({ commit, dispatch}, element_modifie) {
-  asyncLoading( axios.put('/type_procedures',element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_PROCEDURE', response.data)
+export function modifierTypeProcedure({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/type_procedures', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_PROCEDURE', response.data)
     dispatch('getProcedurePassation')
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer le type text juridique
 
-export function supprimerTypeProcedure({ commit, dispatch}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-   commit('SUPPRIMER_TYPE_PROCEDURE', id)
-   dispatch('getProcedurePassation')
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_procedures/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypeProcedure({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_PROCEDURE', id)
+      dispatch('getProcedurePassation')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_procedures/' + id).then(() => dialog.close())
+    })
 
 }
 
 // action  marche
 
 
-export  function  getMarche({commit}) {
+export function getMarche({ commit }) {
   queue.push(() => axios.get('/marches').then((response) => {
     commit('GET_MARCHE', response.data)
-      commit("LOADING_MARCHE",false)
-    
-}).catch(error => console.log(error)))
+    commit("LOADING_MARCHE", false)
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterMarche({commit}, elementAjout){
-  asyncLoading(axios.post('/marches',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_MARCHE', response.data)
+export function ajouterMarche({ commit }, elementAjout) {
+  asyncLoading(axios.post('/marches', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_MARCHE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
 
 
 
-export function ajouterSousMarcheLot({commit}, elementAjout){
-    asyncLoading(axios.post('/sous_marche',elementAjout)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_MARCHE', response.data)
+export function ajouterSousMarcheLot({ commit }, elementAjout) {
+  asyncLoading(axios.post('/sous_marche', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_MARCHE', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 // action pour modifier le type text juridique
 
 
-export function modifierMarche({ commit, dispatch}, element_modifie) {
-  asyncLoading( axios.put('/marches',element_modifie)).then(response => {
-       commit('MODIFIER_MARCHE', response.data)
+export function modifierMarche({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/marches', element_modifie)).then(response => {
+    commit('MODIFIER_MARCHE', response.data)
     dispatch('getMarche')
     dispatch('getActeEffetFinancier')
-    
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
 
-export function modifierSousMarche({ commit, dispatch}, element_modifie) {
-    asyncLoading( axios.put('/sous_marche',element_modifie)).then(response => {
-        commit('MODIFIER_MARCHE', response.data)
-        dispatch('getMarche')
-        dispatch('getActeEffetFinancier')
+export function modifierSousMarche({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/sous_marche', element_modifie)).then(response => {
+    commit('MODIFIER_MARCHE', response.data)
+    dispatch('getMarche')
+    dispatch('getActeEffetFinancier')
 
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 //supprimer le type text juridique
 
-export function supprimerMarche({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_MARCHE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/marches/' + id).then(() => dialog.close() )   
- })
+export function supprimerMarche({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MARCHE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/marches/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2737,26 +2794,26 @@ export function supprimerMarche({commit}, id) {
 
 
 
-export  function  getTypeMarches({commit}) {
+export function getTypeMarches({ commit }) {
   queue.push(() => axios.get('/type_marches').then((response) => {
     commit('GET_TYPE_MARCHE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterTypeMarche({commit}, elementAjout){
-  asyncLoading(axios.post('/type_marches',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_MARCHE', response.data)
+export function ajouterTypeMarche({ commit }, elementAjout) {
+  asyncLoading(axios.post('/type_marches', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_MARCHE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2764,28 +2821,28 @@ export function ajouterTypeMarche({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierTypeMarche({commit}, element_modifie) {
-  asyncLoading( axios.put('/type_marches',element_modifie)).then(response => {
-       commit('MODIFIER_TYPE_MARCHE', response.data)
-       
+export function modifierTypeMarche({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_marches', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_MARCHE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer appel d'offre
 
-export function supprimerTypeMarche({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_MARCHE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/type_marches/' + id).then(() => dialog.close() )   
- })
+export function supprimerTypeMarche({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_MARCHE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/type_marches/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2794,26 +2851,26 @@ export function supprimerTypeMarche({commit}, id) {
 
 
 
-export  function  getModePassations({commit}) {
+export function getModePassations({ commit }) {
   queue.push(() => axios.get('/mode_passations').then((response) => {
     commit('GET_MODE_PASSATION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterModePassation({commit}, elementAjout){
-  asyncLoading(axios.post('/mode_passations',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_MODE_PASSATION', response.data)
+export function ajouterModePassation({ commit }, elementAjout) {
+  asyncLoading(axios.post('/mode_passations', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_MODE_PASSATION', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2821,28 +2878,28 @@ export function ajouterModePassation({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierModePassation({commit}, element_modifie) {
-  asyncLoading( axios.put('/mode_passations',element_modifie)).then(response => {
-       commit('MODIFIER_MODE_PASSATION', response.data)
-       
+export function modifierModePassation({ commit }, element_modifie) {
+  asyncLoading(axios.put('/mode_passations', element_modifie)).then(response => {
+    commit('MODIFIER_MODE_PASSATION', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer appel d'offre
 
-export function supprimerModePassation({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_MODE_PASSATION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/mode_passations/' + id).then(() => dialog.close() )   
- })
+export function supprimerModePassation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MODE_PASSATION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/mode_passations/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2852,26 +2909,26 @@ export function supprimerModePassation({commit}, id) {
 
 
 
-export  function  getAppelOffre({commit}) {
+export function getAppelOffre({ commit }) {
   queue.push(() => axios.get('/appel_offres').then((response) => {
     commit('GET_APPEL_OFFRE', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterAppelOffre({commit}, elementAjout){
-  asyncLoading(axios.post('/appel_offres',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_APPEL_OFFRE', response.data)
+export function ajouterAppelOffre({ commit }, elementAjout) {
+  asyncLoading(axios.post('/appel_offres', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_APPEL_OFFRE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2879,28 +2936,28 @@ export function ajouterAppelOffre({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierAppelOffre({commit}, element_modifie) {
-  asyncLoading( axios.put('/appel_offres',element_modifie)).then(response => {
-       commit('MODIFIER_APPEL_OFFRE', response.data)
-       
+export function modifierAppelOffre({ commit }, element_modifie) {
+  asyncLoading(axios.put('/appel_offres', element_modifie)).then(response => {
+    commit('MODIFIER_APPEL_OFFRE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer appel d'offre
 
-export function supprimerAppelOffre({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_APPEL_OFFRE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/appel_offres/' + id).then(() => dialog.close() )   
- })
+export function supprimerAppelOffre({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_APPEL_OFFRE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/appel_offres/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2908,27 +2965,27 @@ export function supprimerAppelOffre({commit}, id) {
 
 
 
-export  function  getProcedurePassation({commit}) {
+export function getProcedurePassation({ commit }) {
   queue.push(() => axios.get('/procedure_passations').then((response) => {
     commit('GET_PROCEDURE_PASSATION', response.data)
-    
-}).catch(error => console.log(error)))
+
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos 
 
-export function ajouterProcedurePassation({ commit, dispatch}, elementAjout){
-  asyncLoading(axios.post('/procedure_passations',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_PROCEDURE_PASSATION', response.data)
-        dispatch('getTypeProcedures')
-        dispatch('getProcedurePassation')
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+export function ajouterProcedurePassation({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/procedure_passations', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_PROCEDURE_PASSATION', response.data)
+      dispatch('getTypeProcedures')
+      dispatch('getProcedurePassation')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -2936,31 +2993,31 @@ export function ajouterProcedurePassation({ commit, dispatch}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierProcedurePassation({ commit, dispatch}, element_modifie) {
-  asyncLoading( axios.put('/procedure_passations',element_modifie)).then(response => {
-       commit('MODIFIER_PROCEDURE_PASSATION', response.data)
+export function modifierProcedurePassation({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/procedure_passations', element_modifie)).then(response => {
+    commit('MODIFIER_PROCEDURE_PASSATION', response.data)
     dispatch('getTypeProcedures')
     dispatch('getProcedurePassation')
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer le type text juridique
 
-export function supprimerProcedurePassation({ commit, dispatch}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-   commit('SUPPRIMER_PROCEDURE_PASSATION', id)
-   dispatch('getTypeProcedures')
-   dispatch('getProcedurePassation')
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/procedure_passations/' + id).then(() => dialog.close() )   
- })
+export function supprimerProcedurePassation({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_PROCEDURE_PASSATION', id)
+      dispatch('getTypeProcedures')
+      dispatch('getProcedurePassation')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/procedure_passations/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -2971,7 +3028,7 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 // export  function  getRealiteServiceFait({commit}) {
 //   queue.push(() => axios.get('/url').then((response) => {
 //     commit('GET_REALITE_SERVICE_FAIT', response.data)
-    
+
 // }).catch(error => console.log(error)))
 // }
 
@@ -3010,10 +3067,10 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 //     DATE:element_modifie.DATE,
 //     DECISION_AGENT_DCF:element_modifie.DECISION_AGENT_DCF,
 //     ID_MOTIF:element_modifie.ID_MOTIF
-    
+
 //  })).then(response => {
 //        commit('MODIFIER_REALITE_SERVICE_FAIT', response.data)
-       
+
 
 //        this.$app.$notify({
 //          title: 'success ',
@@ -3029,7 +3086,7 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 //  .confirm("Voulez vouz vraiment supprimer ?.")
 //  .then(dialog => {
 //     commit('SUPPRIMER_REALITE_SERVICE_FAIT', id)
-  
+
 //      axios.delete('/urls/' + id).then(() => dialog.close() )   
 //  })
 
@@ -3038,55 +3095,55 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 
 /*Action lettre d'invitation*/
 
-export  function  getLettreInvitation({commit}) {
-    queue.push(() => axios.get('/lettre_invitations').then((response) => {
-        commit('GET_LETTRE_INVITATION', response.data)
+export function getLettreInvitation({ commit }) {
+  queue.push(() => axios.get('/lettre_invitations').then((response) => {
+    commit('GET_LETTRE_INVITATION', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos
 
-export function ajouterLettreInvitation({commit}, elementAjout,config){
-    asyncLoading(axios.post('/lettre_invitations',elementAjout,config)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_LETTRE_INVITATION', response.data)
+export function ajouterLettreInvitation({ commit }, elementAjout, config) {
+  asyncLoading(axios.post('/lettre_invitations', elementAjout, config)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_LETTRE_INVITATION', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 // action pour modifier le type text juridique
 
 
-export function modifierLettreInvitation({commit,dispatch}, element_modifie,config) {
-    asyncLoading( axios.post('/update_lettre_invitations',element_modifie,config)).then(response => {
-        commit('MODIFIER_LETTRE_INVITATION', response.data)
-        dispatch('getLettreInvitation')
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modifierLettreInvitation({ commit, dispatch }, element_modifie, config) {
+  asyncLoading(axios.post('/update_lettre_invitations', element_modifie, config)).then(response => {
+    commit('MODIFIER_LETTRE_INVITATION', response.data)
+    dispatch('getLettreInvitation')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer le type text juridique
 
-export function supprimerLettreInvitation({ commit, dispatch}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-          commit('SUPPRIMER_LETTRE_INVITATION', id)
-          dispatch('getLettreInvitation')
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/lettre_invitations/' + id).then(() => dialog.close() )
-        })
+export function supprimerLettreInvitation({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_LETTRE_INVITATION', id)
+      dispatch('getLettreInvitation')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/lettre_invitations/' + id).then(() => dialog.close())
+    })
 
 }
 /*Action lettre d'invitation*/
@@ -3095,54 +3152,54 @@ export function supprimerLettreInvitation({ commit, dispatch}, id) {
 
 /*Action mandater*/
 
-export  function  getMandater({commit}) {
-    queue.push(() => axios.get('/mondates').then((response) => {
-        commit('GET_MANDATER', response.data)
+export function getMandater({ commit }) {
+  queue.push(() => axios.get('/mondates').then((response) => {
+    commit('GET_MANDATER', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos
 
-export function ajouterMandater({commit}, elementAjout,config){
-    asyncLoading(axios.post('/mondates',elementAjout,config)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_MANDATER', response.data)
+export function ajouterMandater({ commit }, elementAjout, config) {
+  asyncLoading(axios.post('/mondates', elementAjout, config)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_MANDATER', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
 // action pour modifier le type text juridique
 
 
-export function modifierMandater({commit}, element_modifie) {
-  asyncLoading(axios.put('/update_mondates',element_modifie)).then(response => {
-        commit('MODIFIER_MANDATER', response.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modifierMandater({ commit }, element_modifie) {
+  asyncLoading(axios.put('/update_mondates', element_modifie)).then(response => {
+    commit('MODIFIER_MANDATER', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer le type text juridique
 
-export function supprimerMandater({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_MANDATER', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/mondates/' + id).then(() => dialog.close() )
-        })
+export function supprimerMandater({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MANDATER', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/mondates/' + id).then(() => dialog.close())
+    })
 
 }
 /**Fin madate*/
@@ -3160,26 +3217,26 @@ export function supprimerMandater({commit}, id) {
 
 /*Action mandater*/
 
-export  function  getDocument({commit}) {
+export function getDocument({ commit }) {
   queue.push(() => axios.get('/list_document').then((response) => {
-      commit('GET_ALL_DOCUMENT', response.data)
+    commit('GET_ALL_DOCUMENT', response.data)
 
   }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos
 
-export function ajouterDocument({commit}, elementAjout,config){
-  asyncLoading(axios.post('/add_document',elementAjout,config)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_DOCUMENT', response.data)
+export function ajouterDocument({ commit }, elementAjout, config) {
+  asyncLoading(axios.post('/add_document', elementAjout, config)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_DOCUMENT', response.data)
 
-          this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-          })
-      }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -3188,26 +3245,26 @@ export function ajouterDocument({commit}, elementAjout,config){
 // action pour modifier le type text juridique
 
 
-export function modifierDocument({commit}, element_modifie) {
-asyncLoading(axios.post('/update_document',element_modifie)).then(response => {
-      commit('MODIFIER_DOCUMENT', response.data)
-      this.$app.$notify({
-          title: 'success ',
-          text: 'Modification effectué !',
-          type:"success"
-      })
+export function modifierDocument({ commit }, element_modifie) {
+  asyncLoading(axios.post('/update_document', element_modifie)).then(response => {
+    commit('MODIFIER_DOCUMENT', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
   }).catch(error => console.log(error))
 }
 // supprimer le type text juridique
 
-export function supprimerDocument({commit}, id) {
+export function supprimerDocument({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit('SUPPRIMER_DOCUMENT', id)
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete('/delete_document/' + id).then(() => dialog.close() )
-      })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_DOCUMENT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/delete_document/' + id).then(() => dialog.close())
+    })
 
 }
 /**Fin madate*/
@@ -3218,30 +3275,30 @@ export function supprimerDocument({commit}, id) {
 
 /*Action mandater*/
 
-export  function  getRapportJugement({commit}) {
+export function getRapportJugement({ commit }) {
   queue.push(() => axios.get('/liste_rapport_iugement').then((response) => {
-      commit('GET_ALL_RAPPORTJUGEMENT', response.data)
+    commit('GET_ALL_RAPPORTJUGEMENT', response.data)
 
   }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos
 
-export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
+export function ajouterRapportJugement({ commit, dispatch }, elementAjout, config) {
 
-  asyncLoading(axios.post('/add_rapport_jugement',elementAjout,config)).then(response =>{
+  asyncLoading(axios.post('/add_rapport_jugement', elementAjout, config)).then(response => {
 
-      if(response.status == 201){
-          commit('AJOUTER_RAPPORT_OUVERTURE', response.data.jugement)
-          commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.annalyse.data)
-          //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
-          dispatch('getRapportJugement')
-          this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-          })
-      }
+    if (response.status == 201) {
+      commit('AJOUTER_RAPPORT_OUVERTURE', response.data.jugement)
+      commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.annalyse.data)
+      //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+      dispatch('getRapportJugement')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
   }).catch(error => console.log(error))
 }
@@ -3250,33 +3307,33 @@ export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
 // action pour modifier le type text juridique
 
 
-export function modifierRapportJugement({commit}, element_modifie,config) {
-asyncLoading(axios.post('/update_rapport_jugement',element_modifie,config)).then(response => {
-      commit('MODIFIER_RAPPORT_OUVERTURE', response.data)
-      this.$app.$notify({
-          title: 'success ',
-          text: 'Modification effectué !',
-          type:"success"
-      })
+export function modifierRapportJugement({ commit }, element_modifie, config) {
+  asyncLoading(axios.post('/update_rapport_jugement', element_modifie, config)).then(response => {
+    commit('MODIFIER_RAPPORT_OUVERTURE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
   }).catch(error => console.log(error))
 }
 // supprimer le type text juridique
 
-export function supprimerRapportJugement({commit}, id) {
+export function supprimerRapportJugement({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit('SUPPRIMER_RAPPORT_OUVERTURE', id)
-         
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete('/delete_rapport_jugement/' + id).then(response =>{
-            commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data)
-            commit('GET_ALL_ANALYSE_DOSSIER', response.data)
-            dialog.close()
-        }  )
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_RAPPORT_OUVERTURE', id)
 
-          //axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/delete_rapport_jugement/' + id).then(response => {
+        commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data)
+        commit('GET_ALL_ANALYSE_DOSSIER', response.data)
+        dialog.close()
       })
+
+      //axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
+    })
 
 }
 /**Fin madate*/
@@ -3298,43 +3355,43 @@ export function supprimerRapportJugement({commit}, id) {
 
 /*Action demande ANO*/
 
-export  function  getDemandeAno({commit}) {
-    queue.push(() => axios.get('/rdemande_ano').then((response) => {
-        // console.log(response.data)
-        commit('GET_DEMANDE_ANO', response.data)
+export function getDemandeAno({ commit }) {
+  queue.push(() => axios.get('/rdemande_ano').then((response) => {
+    // console.log(response.data)
+    commit('GET_DEMANDE_ANO', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 
 
-export function ajouterDemandeAno({commit}, elementAjout,config){
-    asyncLoading(axios.post('/rdemande_ano',elementAjout,config)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_DEMANDE_ANO', response.data)
+export function ajouterDemandeAno({ commit }, elementAjout, config) {
+  asyncLoading(axios.post('/rdemande_ano', elementAjout, config)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_DEMANDE_ANO', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
 
-export function modifierDemandeAno({commit,dispatch}, element_modifie,config) {
-    asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
-        commit('MODIFIER_DEMANDE_ANO', response.data)
-        dispatch('getDemandeAno')
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modifierDemandeAno({ commit, dispatch }, element_modifie, config) {
+  asyncLoading(axios.post('/rdemande_ano_update', element_modifie, config)).then(response => {
+    commit('MODIFIER_DEMANDE_ANO', response.data)
+    dispatch('getDemandeAno')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
 // export function modifierAvisAnoCf({commit,dispatch}, element_modifie,config) {
@@ -3349,14 +3406,14 @@ export function modifierDemandeAno({commit,dispatch}, element_modifie,config) {
 //   }).catch(error => console.log(error))
 // }
 
-export function supprimerDemandeAno({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_DEMANDE_ANO', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/rdemande_ano/' + id).then(() => dialog.close() )
-        })
+export function supprimerDemandeAno({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_DEMANDE_ANO', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/rdemande_ano/' + id).then(() => dialog.close())
+    })
 
 }
 /**Fin madate*/
@@ -3365,54 +3422,54 @@ export function supprimerDemandeAno({commit}, id) {
 
 /*Analyse DPM*/
 
-export  function  getAnalyseDMP({commit}) {
-    queue.push(() => axios.get('/analyse_dmp').then((response) => {
-        commit('GET_ANALYSE_DMP', response.data)
+export function getAnalyseDMP({ commit }) {
+  queue.push(() => axios.get('/analyse_dmp').then((response) => {
+    commit('GET_ANALYSE_DMP', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 
 
-export function ajouterAnalyseDMP({commit}, elementAjout){
-    asyncLoading(axios.post('/analyse_dmp',elementAjout)).then(response =>{
-        if(response.status == 201){
-            /*console.log(response.data.jugement)
-            console.log(response.data.analyse);*/
-            commit('AJOUTER_ANALYSE_DMP', response.data.analyse)
-             commit('MODIFIER_PV', response.data.jugement)
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+export function ajouterAnalyseDMP({ commit }, elementAjout) {
+  asyncLoading(axios.post('/analyse_dmp', elementAjout)).then(response => {
+    if (response.status == 201) {
+      /*console.log(response.data.jugement)
+      console.log(response.data.analyse);*/
+      commit('AJOUTER_ANALYSE_DMP', response.data.analyse)
+      commit('MODIFIER_PV', response.data.jugement)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
 
-export function modifierAnalyseDMP({commit}, element_modifie) {
-    asyncLoading( axios.put('/analyse_dmp',element_modifie)).then(response => {
-        commit('MODIFIER_ANALYSE_DMP', response)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modifierAnalyseDMP({ commit }, element_modifie) {
+  asyncLoading(axios.put('/analyse_dmp', element_modifie)).then(response => {
+    commit('MODIFIER_ANALYSE_DMP', response)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
 
-export function supprimerAnalyseDMP({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_ANALYSE_DMP', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/analyse_dmp/' + id).then(() => dialog.close() )
-        })
+export function supprimerAnalyseDMP({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ANALYSE_DMP', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/analyse_dmp/' + id).then(() => dialog.close())
+    })
 
 }
 /*FIN Analyse DPM*/
@@ -3429,7 +3486,7 @@ export function getEngagement({ commit }) {
 
 
 
-export function ajouterEngagement({ commit, dispatch}, elementAjout) {
+export function ajouterEngagement({ commit, dispatch }, elementAjout) {
   asyncLoading(axios.post('/engagement', elementAjout)).then(response => {
     if (response.status == 201) {
       commit('AJOUTER_ENGAGEMENT', response.data)
@@ -3447,20 +3504,20 @@ export function ajouterEngagement({ commit, dispatch}, elementAjout) {
 
 
 
-export function modifierEngagement({ commit,dispatch }, element_modifie) {
+export function modifierEngagement({ commit, dispatch }, element_modifie) {
   asyncLoading(axios.put('/engagement', element_modifie)).then(response => {
     commit('MODIFIER_ENGAGEMENT', response.data)
     dispatch('getEngagement')
     this.$app.$notify({
       title: 'success ',
-       text: 'Modification effectué !',
+      text: 'Modification effectué !',
       type: "success"
     })
   }).catch(error => console.log(error))
 }
 
 
-export function supprimerEngagement({ commit ,dispatch}, id) {
+export function supprimerEngagement({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -3510,19 +3567,19 @@ export function ajouterMandat({ commit, dispatch }, elementAjout) {
 
 
 
-export function modifierMandat({commit,dispatch}, element_modifie){
-  asyncLoading( axios.put('/mandat/'+ element_modifie.id, element_modifie))
-   .then(response => {
-    commit('MODIFIER_MANDAT', response.data)
-        dispatch('getMandat')
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué avec succès!',
-           type:"success"
-         })
-   }).catch(error => console.log(error))
+export function modifierMandat({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/mandat/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_MANDAT', response.data)
+      dispatch('getMandat')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué avec succès!',
+        type: "success"
+      })
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
 
@@ -3608,52 +3665,52 @@ export function modifierEngagement_val({ commit, dispatch }, objet) {
 
 /*Analyse ano DMP bailleur*/
 
-export  function  getAnoDMPBailleur({commit}) {
-    queue.push(() => axios.get('/ano_dmp_bailleurs').then((response) => {
-        commit('GET_ANO_DMP_BAILLEUR', response.data)
+export function getAnoDMPBailleur({ commit }) {
+  queue.push(() => axios.get('/ano_dmp_bailleurs').then((response) => {
+    commit('GET_ANO_DMP_BAILLEUR', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout,config){
-    asyncLoading(axios.post('/ano_dmp_bailleurs',elementAjout,config)).then(response =>{
-        if(response.status == 201){
+export function ajouterAnoDMPBailleur({ commit, dispatch }, elementAjout, config) {
+  asyncLoading(axios.post('/ano_dmp_bailleurs', elementAjout, config)).then(response => {
+    if (response.status == 201) {
 
-            commit('AJOUTER_ANO_DMP_BAILLEUR', response.data.analyse)
-           // commit('MODIFIER_PV', response.data.jugement)
-            dispatch('getAnoDMPBailleur')
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      commit('AJOUTER_ANO_DMP_BAILLEUR', response.data.analyse)
+      // commit('MODIFIER_PV', response.data.jugement)
+      dispatch('getAnoDMPBailleur')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
-export function modifierAnoDMPBailleur({commit,dispatch}, element_modifie,config) {
-    asyncLoading( axios.post('/update_ano_dmp_bailleurs',element_modifie,config)).then(response => {
-        commit('MODIFIER_ANO_DMP_BAILLEUR', response)
-        dispatch('getAnoDMPBailleur')
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modifierAnoDMPBailleur({ commit, dispatch }, element_modifie, config) {
+  asyncLoading(axios.post('/update_ano_dmp_bailleurs', element_modifie, config)).then(response => {
+    commit('MODIFIER_ANO_DMP_BAILLEUR', response)
+    dispatch('getAnoDMPBailleur')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
 
 
-export function supprimerAnoDMPBailleur({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_ANO_DMP_BAILLEUR', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/ano_dmp_bailleurs/' + id).then(() => dialog.close() )
-        })
+export function supprimerAnoDMPBailleur({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ANO_DMP_BAILLEUR', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/ano_dmp_bailleurs/' + id).then(() => dialog.close())
+    })
 
 }
 /*FIN Analyse DPM*/
@@ -3663,9 +3720,9 @@ export function supprimerAnoDMPBailleur({commit}, id) {
 export function modifierMontantBudgetaire({ commit, dispatch }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifierBudgetGeneral/" + objet.id, {
-    
-    
-    Dotation_Initiale : objet.montant_actuel
+
+
+    Dotation_Initiale: objet.montant_actuel
 
     // ,
     // montant_total = objet.montant_actu
@@ -3810,7 +3867,7 @@ export function ajouterPays({ commit, dispatch }, formData) {
       console.log(response.data)
       commit('AJOUTER_PAYS', response.data)
       dispatch('getVille')
-      
+
       this.$app.$notify({
         title: 'success ',
         text: 'Enregistrement effectué !',
@@ -3824,7 +3881,7 @@ export function ajouterPays({ commit, dispatch }, formData) {
 // action pour modifier bailleur
 
 
-export function modifierPays({ commit, dispatch}, element_modifie) {
+export function modifierPays({ commit, dispatch }, element_modifie) {
   asyncLoading(axios.put('/pays', element_modifie)).then(response => {
     commit('MODIFIER_PAYS', response.data)
     dispatch('getVille')
@@ -3857,14 +3914,14 @@ export function getVille({ commit }) {
 
 
 // action pour ajouter bailleur
-export function ajouterVille({ commit, dispatch}, formData) {
+export function ajouterVille({ commit, dispatch }, formData) {
   asyncLoading(axios.post('/ville', formData)).then(response => {
     if (response.status == 201) {
       console.log(response.data)
       commit('AJOUTER_VILLE', response.data)
-       dispatch('getVille')
+      dispatch('getVille')
       dispatch('getPays')
-     
+
       this.$app.$notify({
         title: 'success ',
         text: 'Enregistrement effectué !',
@@ -3878,12 +3935,12 @@ export function ajouterVille({ commit, dispatch}, formData) {
 // action pour modifier bailleur
 
 
-export function modifierVille({ commit, dispatch}, element_modifie) {
+export function modifierVille({ commit, dispatch }, element_modifie) {
   asyncLoading(axios.put('/ville', element_modifie)).then(response => {
     commit('MODIFIER_VILLE', response.data)
     dispatch('getVille')
     dispatch('getCommune')
-    
+
     this.$app.$notify({
       title: 'success ',
       text: 'Modification effectué !',
@@ -3899,7 +3956,7 @@ export function supprimerVille({ commit, dispatch }, id) {
       commit('SUPPRIMER_VILLE', id)
       dispatch('getVille')
       dispatch('getCommune')
-     
+
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/ville/' + id).then(() => dialog.close())
     })
@@ -3915,7 +3972,7 @@ export function getCommune({ commit }) {
 }
 
 // action pour ajouter bailleur
-export function ajouterCommune({ commit, dispatch}, formData) {
+export function ajouterCommune({ commit, dispatch }, formData) {
   asyncLoading(axios.post('/commune', formData)).then(response => {
     if (response.status == 201) {
       console.log(response.data)
@@ -3948,7 +4005,7 @@ export function modifierCommune({ commit, dispatch }, element_modifie) {
   }).catch(error => console.log(error))
 }
 // supprimer categorie mision
-export function supprimerCommune({ commit, dispatch}, id) {
+export function supprimerCommune({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -3961,49 +4018,49 @@ export function supprimerCommune({ commit, dispatch}, id) {
 
 }
 
-export  function  getMarcheBailleur({commit}) {
-    queue.push(() => axios.get('/marcheBailleurs').then((response) => {
-        commit('GET_ALL_BAILLEUR_MARCHE', response.data)
+export function getMarcheBailleur({ commit }) {
+  queue.push(() => axios.get('/marcheBailleurs').then((response) => {
+    commit('GET_ALL_BAILLEUR_MARCHE', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterMarcherBailleur({commit}, formData){
-    asyncLoading(axios.post('/marcheBailleurs',formData)).then(response =>{
-        if(response.status == 201){
-            console.log(response.data)
-            commit('AJOUTER_BAILLEUR_MARCHE', response.data)
+export function ajouterMarcherBailleur({ commit }, formData) {
+  asyncLoading(axios.post('/marcheBailleurs', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_BAILLEUR_MARCHE', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
-export function modificationMarcheBailleur({commit}, element_modifie) {
-    asyncLoading( axios.put('/marcheBailleurs' ,element_modifie)).then(response => {
-        commit('MODIFIER_BAILLEUR_MARCHE', response.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modificationMarcheBailleur({ commit }, element_modifie) {
+  asyncLoading(axios.put('/marcheBailleurs', element_modifie)).then(response => {
+    commit('MODIFIER_BAILLEUR_MARCHE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
-export function supprimerMarcheBailleur({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('DELETE_BAILLEUR_MARCHE', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/marcheBailleurs/' + id).then(() => dialog.close() )
-        })
+export function supprimerMarcheBailleur({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_BAILLEUR_MARCHE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/marcheBailleurs/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -4036,7 +4093,7 @@ export function ajouterFacture({ commit, dispatch }, elementAjout) {
 // action pour modifier facture
 
 
-export function modifierFacture({ commit, dispatch}, element_modifie) {
+export function modifierFacture({ commit, dispatch }, element_modifie) {
   asyncLoading(axios.put('/factures', element_modifie)).then(response => {
     commit('MODIFIER_FACTURE', response.data)
     dispatch("getFacture");
@@ -4049,7 +4106,7 @@ export function modifierFacture({ commit, dispatch}, element_modifie) {
   }).catch(error => console.log(error))
 }
 // supprimer facture
-export function supprimerFacture({ commit, dispatch}, id) {
+export function supprimerFacture({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -4087,120 +4144,120 @@ export function getChoixProcedure({ commit }) {
 
 
 
-export  function  getMembreCojo({commit}) {
-    queue.push(() => axios.get('/membre_cojo').then((response) => {
-        commit('GET_MEMBRE_COJO', response.data)
+export function getMembreCojo({ commit }) {
+  queue.push(() => axios.get('/membre_cojo').then((response) => {
+    commit('GET_MEMBRE_COJO', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterMembreCojo({commit, dispatch}, formData){
-    asyncLoading(axios.post('/membre_cojo',formData)).then(response =>{
-        if(response.status == 201){
-            console.log(response.data)
-            commit('AJOUTER_MEMBRE_COJO', response.data)
-            dispatch('getMembreCojo')
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+export function ajouterMembreCojo({ commit, dispatch }, formData) {
+  asyncLoading(axios.post('/membre_cojo', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_MEMBRE_COJO', response.data)
+      dispatch('getMembreCojo')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
-}
-
-
-export function modificationMembreCojo({commit}, element_modifie) {
-    asyncLoading( axios.put('/membre_cojo' ,element_modifie)).then(response => {
-        commit('MODIFIER_MEMBRE_COJO', response.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
-}
-
-export function supprimerMembreCojo({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_MEMBRE_COJO', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/membre_cojo/' + id).then(() => dialog.close() )
-        })
-
+  }).catch(error => console.log(error))
 }
 
 
+export function modificationMembreCojo({ commit }, element_modifie) {
+  asyncLoading(axios.put('/membre_cojo', element_modifie)).then(response => {
+    commit('MODIFIER_MEMBRE_COJO', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
 
+export function supprimerMembreCojo({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MEMBRE_COJO', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/membre_cojo/' + id).then(() => dialog.close())
+    })
 
-export  function  getProceVerbal({commit}) {
-    queue.push(() => axios.get('/proceVerbalJugementOffres').then((response) => {
-        commit('GET_PV', response.data)
-
-    }).catch(error => console.log(error)))
 }
 
 
 
-export function ajouterProceVerbal({commit}, objetAjoute,config){
-    asyncLoading(axios.post('/proceVerbalJugementOffres',objetAjoute,config)).then(response =>{
-        if(response.status == 201){
-            console.log(response.data)
-            commit('AJOUTER_PV', response.data.jugement)
-            commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-                
-            })
-            console.log(objetAjoute)
-        }
 
-    }).catch(error => console.log(error))
-}
+export function getProceVerbal({ commit }) {
+  queue.push(() => axios.get('/proceVerbalJugementOffres').then((response) => {
+    commit('GET_PV', response.data)
 
-export function supprimerProceVerbal({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_PV', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/suppri_proceVerbalJugementOffres/' + id).then(response =>{
-                commit('GET_ALL_ANALYSE_DOSSIER', response.data)
-                dialog.close()
-            }  )
-        })
-
-}  
-export function modificationProceVerbalOffre({commit}, element_modifie,config) {
-    asyncLoading( axios.post('/update_proceVerbalJugementOffres' ,element_modifie,config)).then(response => {
-        console.log(response)
-        commit('MODIFIER_PV', response)
-        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error)))
 }
 
 
-export function modificationProceVerbalOffre2({commit}, element_modifie,config) {
-    asyncLoading( axios.post('/update_pv' ,element_modifie,config)).then(response => {
-        console.log(response)
-        commit('MODIFIER_PV', response)
-        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+
+export function ajouterProceVerbal({ commit }, objetAjoute, config) {
+  asyncLoading(axios.post('/proceVerbalJugementOffres', objetAjoute, config)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_PV', response.data.jugement)
+      commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+
+      })
+      console.log(objetAjoute)
+    }
+
+  }).catch(error => console.log(error))
+}
+
+export function supprimerProceVerbal({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_PV', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/suppri_proceVerbalJugementOffres/' + id).then(response => {
+        commit('GET_ALL_ANALYSE_DOSSIER', response.data)
+        dialog.close()
+      })
+    })
+
+}
+export function modificationProceVerbalOffre({ commit }, element_modifie, config) {
+  asyncLoading(axios.post('/update_proceVerbalJugementOffres', element_modifie, config)).then(response => {
+    console.log(response)
+    commit('MODIFIER_PV', response)
+    //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+export function modificationProceVerbalOffre2({ commit }, element_modifie, config) {
+  asyncLoading(axios.post('/update_pv', element_modifie, config)).then(response => {
+    console.log(response)
+    commit('MODIFIER_PV', response)
+    //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 
 
@@ -4326,39 +4383,39 @@ export function supprimerModePaiement({ commit }, id) {
 
 
 
-export  function  getPlanPassationMarche({commit}) {
-    queue.push(() => axios.get('/plan_passation_marche').then((response) => {
-        commit('GET_ALL_PLAN_PASSATION_MARCHE', response.data)
+export function getPlanPassationMarche({ commit }) {
+  queue.push(() => axios.get('/plan_passation_marche').then((response) => {
+    commit('GET_ALL_PLAN_PASSATION_MARCHE', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterPlanPassationMarche({commit}, objetAjoute,config){
-    return  asyncLoading(axios.post('/plan_passation_marche',objetAjoute,config)).then(response =>{
-        if(response.status == 201){
-            console.log(response.data)
-            commit('AJOUTER_PLAN_PASSATION_MARCHE', response.data)
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+export function ajouterPlanPassationMarche({ commit }, objetAjoute, config) {
+  return asyncLoading(axios.post('/plan_passation_marche', objetAjoute, config)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_PLAN_PASSATION_MARCHE', response.data)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
-export function supprimerPlanPassationMarche({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('DELETE_PLAN_PASSATION_MARCHE', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/plan_passation_marche/' + id).then(response =>{
-                commit('GET_ALL_ANALYSE_DOSSIER', response.data)
-                dialog.close()
-            }  )
-        })
+export function supprimerPlanPassationMarche({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_PLAN_PASSATION_MARCHE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/plan_passation_marche/' + id).then(response => {
+        commit('GET_ALL_ANALYSE_DOSSIER', response.data)
+        dialog.close()
+      })
+    })
 
 }
 /*export function modificationPlanPassationMarche({commit}, element_modifie,config) {
@@ -4399,51 +4456,51 @@ export function modifierMarcheBascule({ commit, dispatch }, element_modifie) {
 
 
 export function getEcheances({ commit }) {
-    queue.push(() => axios.get('/echeances').then((response) => {
-        commit('GET_ECHEANCES', response.data)
+  queue.push(() => axios.get('/echeances').then((response) => {
+    commit('GET_ECHEANCES', response.data)
 
-}).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 // action pour ajouter bailleur
 export function ajouterEcheances({ commit }, formData) {
-    asyncLoading(axios.post('/echeances', formData)).then(response => {
-        if (response.status == 201) {
-        // console.log(response.data)
-        commit('AJOUTER_ECHEANCES', response.data)
+  asyncLoading(axios.post('/echeances', formData)).then(response => {
+    if (response.status == 201) {
+      // console.log(response.data)
+      commit('AJOUTER_ECHEANCES', response.data)
 
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type: "success"
-        })
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
     }
 
-}).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 // action pour modifier bailleur
 
 
 export function modifierEcheances({ commit }, element_modifie) {
-    asyncLoading(axios.put('/echeances', element_modifie)).then(response => {
-        commit('MODIFIER_ECHEANCES', response.data)
+  asyncLoading(axios.put('/echeances', element_modifie)).then(response => {
+    commit('MODIFIER_ECHEANCES', response.data)
     this.$app.$notify({
-        title: 'success ',
-        text: 'Modification effectué !',
-        type: "success"
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
     })
-}).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 // supprimer categorie mision
 export function supprimerEcheances({ commit }, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-        commit('DELETE_ECHEANCES', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-    axios.delete('/echeances/' + id).then(() => dialog.close())
-})
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_ECHEANCES', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/echeances/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -4451,9 +4508,9 @@ export function supprimerEcheances({ commit }, id) {
 
 export function getGestionModules({ commit }) {
   queue.push(() => axios.get('/gestionModule').then((response) => {
-      commit('GET_GESTION_MODULE', response.data)
+    commit('GET_GESTION_MODULE', response.data)
 
-}).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 
@@ -4461,25 +4518,25 @@ export function getGestionModules({ commit }) {
 
 export function getImageMarche({ commit }) {
   queue.push(() => axios.get('/liste_image_marche').then((response) => {
-      commit('GET_IMAGE_MARCHE', response.data)
+    commit('GET_IMAGE_MARCHE', response.data)
 
-}).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 export function ajouterImageMarche({ commit }, formData) {
   asyncLoading(axios.post('/image_marche', formData)).then(response => {
-      if (response.status == 201) {
+    if (response.status == 201) {
       // console.log(response.data)
       commit('AJOUTER_IMAGE_MARCHE', response.data)
 
       this.$app.$notify({
-          title: 'success ',
-          text: 'Enregistrement effectué !',
-          type: "success"
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
       })
-  }
+    }
 
-}).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 export function pusherImageMarche({ commit }, formData) {
@@ -4488,293 +4545,293 @@ export function pusherImageMarche({ commit }, formData) {
 
 export function supprimerImageMarche({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
       commit('DELETE_IMAGE_MARCHE', id)
-  // // dialog.loading(false) // stops the proceed button's loader
-  axios.delete('/image_marche/' + id).then(() => dialog.close())
-})
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/image_marche/' + id).then(() => dialog.close())
+    })
 
 }
 
 
-export  function  getTypeOrdrePaiement({commit}) {
+export function getTypeOrdrePaiement({ commit }) {
   queue.push(() => axios.get('/typeOrdrePaiement').then((response) => {
-    
-    commit('GET_ALL_TYPE_ORDRE_PAIEMENT', response.data) 
-    
-}).catch(error => console.log(error)))
+
+    commit('GET_ALL_TYPE_ORDRE_PAIEMENT', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
 
- // 
- export function ajouterTypeOrdrePaiement({commit},formData){
-  asyncLoading( axios.post('/typeOrdrePaiement',formData)).then(response => {
-       commit('AJOUTER_TYPE_ORDRE_PAIEMENT', response.data)
-       
-   }).catch(error => console.log(error))
-//  console.log(formData)
+// 
+export function ajouterTypeOrdrePaiement({ commit }, formData) {
+  asyncLoading(axios.post('/typeOrdrePaiement', formData)).then(response => {
+    commit('AJOUTER_TYPE_ORDRE_PAIEMENT', response.data)
+
+  }).catch(error => console.log(error))
+  //  console.log(formData)
 }
 
-export function modifierTypeOrdrePaiement({commit}, element_modifie){
-  asyncLoading( axios.put('/typeOrdrePaiement/'+ element_modifie.id, element_modifie))
-   .then(response => {
-        commit('MODIFIER_TYPE_ORDRE_PAIEMENT',response.data)
+export function modifierTypeOrdrePaiement({ commit }, element_modifie) {
+  asyncLoading(axios.put('/typeOrdrePaiement/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_TYPE_ORDRE_PAIEMENT', response.data)
 
-   }).catch(error => console.log(error))
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
-export function supprimerTypeOrdrePaiement({commit},id){
-  
+export function supprimerTypeOrdrePaiement({ commit }, id) {
+
   this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_TYPE_ORDRE_PAIEMENT', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/typeOrdrePaiement/' + id).then(() => dialog.close() )   
-  })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_ORDRE_PAIEMENT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/typeOrdrePaiement/' + id).then(() => dialog.close())
+    })
 }
 
 
 // action pour le reserve cf
 
-export  function  getReserveCf({commit}) {
+export function getReserveCf({ commit }) {
   queue.push(() => axios.get('/reserve').then((response) => {
-    
-    commit('GET_ALL_RESERVE_CF', response.data) 
-    
-}).catch(error => console.log(error)))
+
+    commit('GET_ALL_RESERVE_CF', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
 
- // 
- export function ajouterReserveCf({commit},formData){
-  asyncLoading( axios.post('/reserve',formData)).then(response => {
-       commit('AJOUTER_RESERVE_CF', response.data)
-       
-   }).catch(error => console.log(error))
-//  console.log(formData)
+// 
+export function ajouterReserveCf({ commit }, formData) {
+  asyncLoading(axios.post('/reserve', formData)).then(response => {
+    commit('AJOUTER_RESERVE_CF', response.data)
+
+  }).catch(error => console.log(error))
+  //  console.log(formData)
 }
 
-export function modifierReserveCf({commit}, element_modifie){
-  asyncLoading( axios.put('/reserve/'+ element_modifie.id, element_modifie))
-   .then(response => {
-        commit('MODIFIER_RESERVE_CF',response.data)
+export function modifierReserveCf({ commit }, element_modifie) {
+  asyncLoading(axios.put('/reserve/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_RESERVE_CF', response.data)
 
-   }).catch(error => console.log(error))
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
-export function supprimerReserveCf({commit},id){
-  
+export function supprimerReserveCf({ commit }, id) {
+
   this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPRIMER_RESERVE_CF', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/reserve/' + id).then(() => dialog.close() )   
-  })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPRIMER_RESERVE_CF', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/reserve/' + id).then(() => dialog.close())
+    })
 }
 
 
 // action pour le ARNMP
 
-export  function  getArnmp({commit}) {
+export function getArnmp({ commit }) {
   queue.push(() => axios.get('/arnmp').then((response) => {
-    
-    commit('GET_ALL_ARNP', response.data) 
-    
-}).catch(error => console.log(error)))
+
+    commit('GET_ALL_ARNP', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
 
- // 
- export function ajouterArnmp({commit},formData){
-  asyncLoading( axios.post('/arnmp',formData)).then(response => {
-       commit('AJOUTER_ARNMP', response.data)
-       
-   }).catch(error => console.log(error))
-//  console.log(formData)
+// 
+export function ajouterArnmp({ commit }, formData) {
+  asyncLoading(axios.post('/arnmp', formData)).then(response => {
+    commit('AJOUTER_ARNMP', response.data)
+
+  }).catch(error => console.log(error))
+  //  console.log(formData)
 }
 
-export function modifierArnmp({commit}, element_modifie){
-  asyncLoading( axios.put('/arnmp/'+ element_modifie.id, element_modifie))
-   .then(response => {
-        commit('MODIFIER_ARNMP',response.data)
+export function modifierArnmp({ commit }, element_modifie) {
+  asyncLoading(axios.put('/arnmp/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_ARNMP', response.data)
 
-   }).catch(error => console.log(error))
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
-export function supprimerArnmp({commit},id){
-  
+export function supprimerArnmp({ commit }, id) {
+
   this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_ARNMP', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/arnmp/' + id).then(() => dialog.close() )   
-  })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ARNMP', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/arnmp/' + id).then(() => dialog.close())
+    })
 }
 
 /// action pour l'organe de decision
 
 
-export  function  getOrganeDecision({commit}) {
+export function getOrganeDecision({ commit }) {
   queue.push(() => axios.get('/organe').then((response) => {
-    
-    commit('GET_ALL_ORGANE_DECISION', response.data) 
-    
-}).catch(error => console.log(error)))
+
+    commit('GET_ALL_ORGANE_DECISION', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
 
- // 
- export function ajouterOrganeDecision({commit},formData){
-  asyncLoading( axios.post('/organe',formData)).then(response => {
-       commit('AJOUTER_ORGANE_DECISION', response.data)
-       
-   }).catch(error => console.log(error))
-//  console.log(formData)
+// 
+export function ajouterOrganeDecision({ commit }, formData) {
+  asyncLoading(axios.post('/organe', formData)).then(response => {
+    commit('AJOUTER_ORGANE_DECISION', response.data)
+
+  }).catch(error => console.log(error))
+  //  console.log(formData)
 }
 
-export function modifierOrganeDecision({commit}, element_modifie){
-  asyncLoading( axios.put('/organe/'+ element_modifie.id, element_modifie))
-   .then(response => {
-        commit('MODIFIER_ORGANE_DECISION',response.data)
+export function modifierOrganeDecision({ commit }, element_modifie) {
+  asyncLoading(axios.put('/organe/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_ORGANE_DECISION', response.data)
 
-   }).catch(error => console.log(error))
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
-export function supprimerOrganeDecision({commit},id){
-  
+export function supprimerOrganeDecision({ commit }, id) {
+
   this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_ORGANE_DECISION', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/organe/' + id).then(() => dialog.close() )   
-  })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ORGANE_DECISION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/organe/' + id).then(() => dialog.close())
+    })
 }
 ///
 
-export  function  getNaturePrix({commit}) {
+export function getNaturePrix({ commit }) {
   queue.push(() => axios.get('/nature').then((response) => {
-    
-    commit('GET_ALL_NATURE_PRIX', response.data) 
-    
-}).catch(error => console.log(error)))
+
+    commit('GET_ALL_NATURE_PRIX', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
 
- // 
- export function ajouterNaturePrix({commit},formData){
-  asyncLoading( axios.post('/nature',formData)).then(response => {
-       commit('AJOUTER_NATURE_PRIX', response.data)
-       
-   }).catch(error => console.log(error))
-//  console.log(formData)
+// 
+export function ajouterNaturePrix({ commit }, formData) {
+  asyncLoading(axios.post('/nature', formData)).then(response => {
+    commit('AJOUTER_NATURE_PRIX', response.data)
+
+  }).catch(error => console.log(error))
+  //  console.log(formData)
 }
 
-export function modifierNaturePrix({commit}, element_modifie){
-  asyncLoading( axios.put('/nature/'+ element_modifie.id, element_modifie))
-   .then(response => {
-        commit('MODIFIER_NATURE_PRIX',response.data)
+export function modifierNaturePrix({ commit }, element_modifie) {
+  asyncLoading(axios.put('/nature/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_NATURE_PRIX', response.data)
 
-   }).catch(error => console.log(error))
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
-
-
-export function supprimerNaturePrix({commit},id){
-  
-  this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_NATURE_PRIX', id)
-    // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/nature/' + id).then(() => dialog.close() )   
-  })
 }
 
 
-export  function  getMotifPassation({commit}) {
+export function supprimerNaturePrix({ commit }, id) {
+
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_NATURE_PRIX', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/nature/' + id).then(() => dialog.close())
+    })
+}
+
+
+export function getMotifPassation({ commit }) {
   queue.push(() => axios.get('/motif_passation').then((response) => {
-    
-    commit('GET_ALL_MOTIF_PASSATION', response.data) 
-    
-}).catch(error => console.log(error)))
+
+    commit('GET_ALL_MOTIF_PASSATION', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
 
- // 
- export function ajouterMotifPassation({commit},formData){
-  asyncLoading( axios.post('/motif_passation',formData)).then(response => {
-       commit('AJOUTER_MOTIF_PASSATION', response.data)
-       
-   }).catch(error => console.log(error))
-//  console.log(formData)
+// 
+export function ajouterMotifPassation({ commit }, formData) {
+  asyncLoading(axios.post('/motif_passation', formData)).then(response => {
+    commit('AJOUTER_MOTIF_PASSATION', response.data)
+
+  }).catch(error => console.log(error))
+  //  console.log(formData)
 }
 
-export function modifierMotifPassation({commit}, element_modifie){
-  asyncLoading( axios.put('/motif_passation/'+ element_modifie.id, element_modifie))
-   .then(response => {
-        commit('MODIFIER_MOTIF_PASSATION',response.data)
+export function modifierMotifPassation({ commit }, element_modifie) {
+  asyncLoading(axios.put('/motif_passation/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_MOTIF_PASSATION', response.data)
 
-   }).catch(error => console.log(error))
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
-export function supprimerMotifPassation({commit},id){
+export function supprimerMotifPassation({ commit }, id) {
   this.$app.$dialog
-  .confirm("Voulez vouz vraiment supprimer ?.")
-  .then(dialog => {
-     commit('SUPPRIMER_MOTIF_PASSATION', id)
-      axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
-  })
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MOTIF_PASSATION', id)
+      axios.delete('/motif_passation/' + id).then(() => dialog.close())
+    })
 }
 
 
 
 
-export function modifierActeEffet({commit}, element_modifie){
-  asyncLoading( axios.put('/acte_finnanciers/'+ element_modifie.id, element_modifie))
-   .then(response => {
-    commit('MODIFIER_ACTE', response.data)
-        // dispatch('getMandat')
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué avec succès!',
-           type:"success"
-         })
-   }).catch(error => console.log(error))
+export function modifierActeEffet({ commit }, element_modifie) {
+  asyncLoading(axios.put('/acte_finnanciers/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_ACTE', response.data)
+      // dispatch('getMandat')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué avec succès!',
+        type: "success"
+      })
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 /**
  * Information carte
  */
 
-export function ajouterListeMarcheFiltreCarteInfrastructure({commit},formData){
-    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE', formData)
+export function ajouterListeMarcheFiltreCarteInfrastructure({ commit }, formData) {
+  commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE', formData)
 }
 
-export function ajouterInfoFiltreCarteInfrastructure({commit},formData){
-    commit('GET_INFORMATION_FILTRE_CARTE', formData)
+export function ajouterInfoFiltreCarteInfrastructure({ commit }, formData) {
+  commit('GET_INFORMATION_FILTRE_CARTE', formData)
 }
 
-export function supprmieMarcheFiltreCarteInfrastructure({commit},formData){
-    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE',formData)
+export function supprmieMarcheFiltreCarteInfrastructure({ commit }, formData) {
+  commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE', formData)
 }
 
-export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
-    commit('GET_INFORMATION_FILTRE_CARTE',formData)
+export function supprmiInfoFiltreCarteInfrastructure({ commit }, formData) {
+  commit('GET_INFORMATION_FILTRE_CARTE', formData)
 }
 
 
@@ -4789,12 +4846,12 @@ export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
 }
  */
 
-export function ajouterTableauBordFiltre({commit},formData){
-    commit('GET_TABLEAU_BORD_FILTRE', formData)
+export function ajouterTableauBordFiltre({ commit }, formData) {
+  commit('GET_TABLEAU_BORD_FILTRE', formData)
 }
 
-export function ajouterInfoTableauBordFiltre({commit},formData){
-    commit('GET_INFO_TABLEAU_BORD', formData)
+export function ajouterInfoTableauBordFiltre({ commit }, formData) {
+  commit('GET_INFO_TABLEAU_BORD', formData)
 }
 
 
@@ -4805,51 +4862,51 @@ export function ajouterInfoTableauBordFiltre({commit},formData){
 
 
 
-export  function  getStructureDAO({commit}) {
-    queue.push(() => axios.get('/structure_dao').then((response) => {
-        commit('GET_STRUCTURE_DAO', response.data)
+export function getStructureDAO({ commit }) {
+  queue.push(() => axios.get('/structure_dao').then((response) => {
+    commit('GET_STRUCTURE_DAO', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterStructureDAO({commit}, formData){
-    asyncLoading(axios.post('/structure_dao',formData)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_STRUCTURE_DAO', response.data)
+export function ajouterStructureDAO({ commit }, formData) {
+  asyncLoading(axios.post('/structure_dao', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_STRUCTURE_DAO', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
-}
-
-
-export function modifierStructureDAO({commit}, element_modifie) {
-    asyncLoading( axios.put('/structure_dao/'+ element_modifie.id, element_modifie)).then(response => {
-        commit('MODIFIER_STRUCTURE_DAO', response.data)
-
-
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
-export function supprimerStructureDAO({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_STRUCTURE_DAO', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/structure_dao/' + id).then(() => dialog.close() )
-        })
+export function modifierStructureDAO({ commit }, element_modifie) {
+  asyncLoading(axios.put('/structure_dao/' + element_modifie.id, element_modifie)).then(response => {
+    commit('MODIFIER_STRUCTURE_DAO', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+export function supprimerStructureDAO({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_STRUCTURE_DAO', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/structure_dao/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -4860,51 +4917,51 @@ export function supprimerStructureDAO({commit}, id) {
 
 
 
-export  function  getMembreComiteEvaluation({commit}) {
-    queue.push(() => axios.get('/membre_comite_evaluation').then((response) => {
-        commit('GET_MEMBRE_COMITE_EVALUATION', response.data)
+export function getMembreComiteEvaluation({ commit }) {
+  queue.push(() => axios.get('/membre_comite_evaluation').then((response) => {
+    commit('GET_MEMBRE_COMITE_EVALUATION', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
-export function ajouterMembreComiteEvaluation({commit}, formData){
-    asyncLoading(axios.post('/membre_comite_evaluation',formData)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_MEMBRE_COMITE_EVALUATION', response.data)
+export function ajouterMembreComiteEvaluation({ commit }, formData) {
+  asyncLoading(axios.post('/membre_comite_evaluation', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_MEMBRE_COMITE_EVALUATION', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
-}
-
-
-export function modifierMembreComiteEvaluation({commit}, element_modifie) {
-    asyncLoading( axios.put('/membre_comite_evaluation',element_modifie)).then(response => {
-        commit('MODIFIER_MEMBRE_COMITE_EVALUATION', response.data)
-
-
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
-export function supprimerMembreComiteEvaluation({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_MEMBRE_COMITE_EVALUATION', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/membre_comite_evaluation/' + id).then(() => dialog.close() )
-        })
+export function modifierMembreComiteEvaluation({ commit }, element_modifie) {
+  asyncLoading(axios.put('/membre_comite_evaluation', element_modifie)).then(response => {
+    commit('MODIFIER_MEMBRE_COMITE_EVALUATION', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+export function supprimerMembreComiteEvaluation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MEMBRE_COMITE_EVALUATION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/membre_comite_evaluation/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -4941,19 +4998,19 @@ export function ajouterTacheMarche({ commit, dispatch }, elementAjout) {
 
 
 
-export function modifierTacheMarche({commit,dispatch}, element_modifie){
-  asyncLoading( axios.put('/TacheMarche/'+ element_modifie.id, element_modifie))
-   .then(response => {
-    commit('MODIFIER_TACHE_MARCHE', response.data)
-        dispatch('getTacheMarche')
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué avec succès!',
-           type:"success"
-         })
-   }).catch(error => console.log(error))
+export function modifierTacheMarche({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/TacheMarche/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_TACHE_MARCHE', response.data)
+      dispatch('getTacheMarche')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué avec succès!',
+        type: "success"
+      })
+    }).catch(error => console.log(error))
   // console.log(element_modifie)
-} 
+}
 
 
 
@@ -4977,28 +5034,28 @@ export function supprimerTacheMarche({ commit, dispatch }, id) {
 
 
 export function getEntrepriseSousTraitance({ commit }) {
-    queue.push(() => axios.get('/sous_traitance').then((response) => {
-        commit('GET_ENTREPRISE_SOUS_TRAITANCE', response.data)
+  queue.push(() => axios.get('/sous_traitance').then((response) => {
+    commit('GET_ENTREPRISE_SOUS_TRAITANCE', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 
 
 
 export function ajouterEntrepriseSousTraitance({ commit }, elementAjout) {
-    asyncLoading(axios.post('/sous_traitance', elementAjout)).then(response => {
-        if (response.status == 201) {
-            commit('AJOUTER_ENTREPRISE_SOUS_TRAITANCE', response.data)
+  asyncLoading(axios.post('/sous_traitance', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_ENTREPRISE_SOUS_TRAITANCE', response.data)
 
-            //dispatch('getTacheMarche')
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type: "success"
-            })
-        }
+      //dispatch('getTacheMarche')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 
@@ -5007,32 +5064,32 @@ export function ajouterEntrepriseSousTraitance({ commit }, elementAjout) {
 
 
 
-export function modifierEntrepriseSousTraitance({commit}, element_modifie){
-    asyncLoading( axios.put('/sous_traitance/'+ element_modifie.id, element_modifie))
-        .then(response => {
-            commit('MODIFIER_ENTREPRISE_SOUS_TRAITANCE', response.data)
-           // dispatch('getTacheMarche')
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Modification effectué avec succès!',
-                type:"success"
-            })
-        }).catch(error => console.log(error))
-    // console.log(element_modifie)
+export function modifierEntrepriseSousTraitance({ commit }, element_modifie) {
+  asyncLoading(axios.put('/sous_traitance/' + element_modifie.id, element_modifie))
+    .then(response => {
+      commit('MODIFIER_ENTREPRISE_SOUS_TRAITANCE', response.data)
+      // dispatch('getTacheMarche')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué avec succès!',
+        type: "success"
+      })
+    }).catch(error => console.log(error))
+  // console.log(element_modifie)
 }
 
 
 
 
 export function supprimerEntrepriseSousTraitance({ commit }, id) {
-    this.$app.$dialog
-        .confirm("Voulez vous vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE', id)
-          //  dispatch('getTacheMarche')
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/sous_traitance/' + id).then(() => dialog.close())
-        })
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE', id)
+      //  dispatch('getTacheMarche')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/sous_traitance/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -5045,28 +5102,28 @@ export function supprimerEntrepriseSousTraitance({ commit }, id) {
 
 
 
-export  function  getProgrammationMarchePlurieAnnuel({commit}) {
-    queue.push(() => axios.get('/programmation_marche_plurie_annuel').then((response) => {
-        commit('GET_MARCHE_PLURIE_ANNUEL', response.data)
+export function getProgrammationMarchePlurieAnnuel({ commit }) {
+  queue.push(() => axios.get('/programmation_marche_plurie_annuel').then((response) => {
+    commit('GET_MARCHE_PLURIE_ANNUEL', response.data)
 
-    }).catch(error => console.log(error)))
+  }).catch(error => console.log(error)))
 }
 ajouterReception
 // action
-export function ajouterProgrammationMarchePlurieAnnuel({commit}, formData){
-    asyncLoading(axios.post('/programmation_marche_plurie_annuel',formData)).then(response =>{
-        if(response.status == 201){
-            console.log(response.data)
-            commit('AJOUTER_MARCHE_PLURIE_ANNUEL', response.data)
+export function ajouterProgrammationMarchePlurieAnnuel({ commit }, formData) {
+  asyncLoading(axios.post('/programmation_marche_plurie_annuel', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_MARCHE_PLURIE_ANNUEL', response.data)
 
-            this.$app.$notify({
-                title: 'success ',
-                text: 'Enregistrement effectué !',
-                type:"success"
-            })
-        }
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
-    }).catch(error => console.log(error))
+  }).catch(error => console.log(error))
 }
 
 // action
@@ -5082,35 +5139,35 @@ export function modificationMarche({ commit }, element_modifie) {
   }).catch(error => console.log(error))
 }
 
-export function modifierMarche2({ commit, dispatch}, element_modifie) {
-  asyncLoading( axios.put('/marches',element_modifie)).then(response => {
-       commit('MODIFIER_MARCHE', response.data)
+export function modifierMarche2({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/marches', element_modifie)).then(response => {
+    commit('MODIFIER_MARCHE', response.data)
     dispatch('getMarche')
     dispatch('getActeEffetFinancier')
-    
-   }).catch(error => console.log(error))
+
+  }).catch(error => console.log(error))
 }
 
 
-export function modifierProgrammationMarchePlurieAnnuel({commit}, element_modifie) {
-    asyncLoading( axios.put('/programmation_marche_plurie_annuel/'+ element_modifie.id, element_modifie)).then(response => {
-        commit('MODIFIER_MARCHE_PLURIE_ANNUEL', response.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
+export function modifierProgrammationMarchePlurieAnnuel({ commit }, element_modifie) {
+  asyncLoading(axios.put('/programmation_marche_plurie_annuel/' + element_modifie.id, element_modifie)).then(response => {
+    commit('MODIFIER_MARCHE_PLURIE_ANNUEL', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
 // supprimer categorie mision
-export function supprimerProgrammationMarchePlurieAnnuel({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_MARCHE_PLURIE_ANNUEL', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/programmation_marche_plurie_annuel/' + id).then(() => dialog.close() )
-        })
+export function supprimerProgrammationMarchePlurieAnnuel({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MARCHE_PLURIE_ANNUEL', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/programmation_marche_plurie_annuel/' + id).then(() => dialog.close())
+    })
 
 }
 
@@ -5124,65 +5181,65 @@ export function supprimerProgrammationMarchePlurieAnnuel({commit}, id) {
 
 export function getDemandeEngagement({ commit }) {
   queue.push(() => {
-      axios
-          .get("/DemandeEngagement")
-          .then(response => {
-              commit("GET_ALL_DEMANDE_ENGAGEMENT", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/DemandeEngagement")
+      .then(response => {
+        commit("GET_ALL_DEMANDE_ENGAGEMENT", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterDemandeEngagement({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/DemandeEngagement", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_DEMANDE_ENGAGEMENT", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/DemandeEngagement", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DEMANDE_ENGAGEMENT", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierDemandeEngagement({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/DemandeEngagement/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_DEMANDE_ENGAGEMENT", response.data);
-          
+    .put("/DemandeEngagement/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_DEMANDE_ENGAGEMENT", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerDemandeEngagement({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_DEMANDE_ENGAGEMENT", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/DemandeEngagement/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_DEMANDE_ENGAGEMENT", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/DemandeEngagement/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5193,56 +5250,56 @@ export function supprimerDemandeEngagement({ commit }, id) {
 
 export function getPieceJustificative({ commit }) {
   queue.push(() => {
-      axios
-          .get("/NomPieceJustificative")
-          .then(response => {
-              commit("GET_ALL_NOM_PIECE_JUSTIFICATIVE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/NomPieceJustificative")
+      .then(response => {
+        commit("GET_ALL_NOM_PIECE_JUSTIFICATIVE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterPieceJustificative({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/NomPieceJustificative", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_NOM_PIECE_JUSTIFICATIVE", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/NomPieceJustificative", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_NOM_PIECE_JUSTIFICATIVE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 export function modifierPieceJustificative({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/NomPieceJustificative/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_NOM_PIECE_JUSTIFICATIVE", response.data);
-          
+    .put("/NomPieceJustificative/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_NOM_PIECE_JUSTIFICATIVE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerPieceJustificative({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_NOM_PIECE_JUSTIFICATIVE", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/NomPieceJustificative/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_NOM_PIECE_JUSTIFICATIVE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/NomPieceJustificative/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5252,68 +5309,68 @@ export function supprimerPieceJustificative({ commit }, id) {
 
 export function getDossierLiquidation({ commit }) {
   queue.push(() => {
-      axios
-          .get("/liquidation")
-          .then(response => {
-              commit("GET_ALL_LIQUIDATION", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/liquidation")
+      .then(response => {
+        commit("GET_ALL_LIQUIDATION", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterDossierLiquidation({ commit,dispatch }, nouveau) {
+export function ajouterDossierLiquidation({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .post("/liquidation", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_LIQUIDATION", response.data);
-              dispatch('getDemandeEngagement')
-              dispatch('getDossierLiquidation')
-              dispatch('getDossierLiquidation')
-              
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/liquidation", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_LIQUIDATION", response.data);
+        dispatch('getDemandeEngagement')
+        dispatch('getDossierLiquidation')
+        dispatch('getDossierLiquidation')
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierDossierLiquidation({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/liquidation/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_LIQUIDATION", response.data);
-          
+    .put("/liquidation/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_LIQUIDATION", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerDossierLiquidation({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_LIQUIDATION", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/liquidation/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_LIQUIDATION", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/liquidation/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5324,67 +5381,67 @@ export function supprimerDossierLiquidation({ commit }, id) {
 
 export function getDossierMandat({ commit }) {
   queue.push(() => {
-      axios
-          .get("/MandatOp")
-          .then(response => {
-              commit("GET_ALL_MANDAT_OP", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/MandatOp")
+      .then(response => {
+        commit("GET_ALL_MANDAT_OP", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterDossierMandat({ commit,dispatch }, nouveau) {
+export function ajouterDossierMandat({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .post("/MandatOp", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_MANDAT_OP", response.data);
-              dispatch('getDemandeEngagement')
-              dispatch('getDossierMandat')
-              dispatch('getDossierMandat')
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/MandatOp", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_MANDAT_OP", response.data);
+        dispatch('getDemandeEngagement')
+        dispatch('getDossierMandat')
+        dispatch('getDossierMandat')
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierDossierMandat({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/MandatOp/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_MANDAT_OP", response.data);
-          
+    .put("/MandatOp/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_MANDAT_OP", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerDossierMandat({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_MANDAT_OP", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/MandatOp/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_MANDAT_OP", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/MandatOp/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5399,65 +5456,65 @@ export function supprimerDossierMandat({ commit }, id) {
 
 export function getDossierFacture({ commit }) {
   queue.push(() => {
-      axios
-          .get("/FacturePiece")
-          .then(response => {
-              commit("GET_ALL_FACTURE_PIECE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/FacturePiece")
+      .then(response => {
+        commit("GET_ALL_FACTURE_PIECE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterDossierFacture({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/FacturePiece", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_FACTURE_PIECE", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/FacturePiece", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_FACTURE_PIECE", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierDossierFacture({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/FacturePiece/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_FACTURE_PIECE", response.data);
-          
+    .put("/FacturePiece/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_FACTURE_PIECE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerDossierFacture({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_FACTURE_PIECE", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/FacturePiece/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_FACTURE_PIECE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/FacturePiece/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5468,65 +5525,65 @@ export function supprimerDossierFacture({ commit }, id) {
 
 export function getDossierAutreDepense({ commit }) {
   queue.push(() => {
-      axios
-          .get("/AutreDepense")
-          .then(response => {
-              commit("GET_ALL_AUTRE_DEPENSE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/AutreDepense")
+      .then(response => {
+        commit("GET_ALL_AUTRE_DEPENSE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterDossierAutreDepense({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/AutreDepense", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_AUTRE_DEPENSE", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/AutreDepense", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_AUTRE_DEPENSE", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierDossierAutreDepense({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/AutreDepense/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_AUTRE_DEPENSE", response.data);
-          
+    .put("/AutreDepense/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_AUTRE_DEPENSE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerDossierAutreDepense({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_AUTRE_DEPENSE", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/AutreDepense/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_AUTRE_DEPENSE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/AutreDepense/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5541,65 +5598,65 @@ export function supprimerDossierAutreDepense({ commit }, id) {
 
 export function getGestionOrdrePaiement({ commit }) {
   queue.push(() => {
-      axios
-          .get("/GestionOrdrePaiement")
-          .then(response => {
-              commit("GET_ALL_GESTION_ORDRE_PAIEMENT", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/GestionOrdrePaiement")
+      .then(response => {
+        commit("GET_ALL_GESTION_ORDRE_PAIEMENT", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterGestionOrdrePaiement({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/GestionOrdrePaiement", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_GESTION_ORDRE_PAIEMENT", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/GestionOrdrePaiement", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_GESTION_ORDRE_PAIEMENT", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierGestionOrdrePaiement({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/GestionOrdrePaiement/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_GESTION_ORDRE_PAIEMENT", response.data);
-          
+    .put("/GestionOrdrePaiement/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_GESTION_ORDRE_PAIEMENT", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerGestionOrdrePaiement({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_GESTION_ORDRE_PAIEMENT", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/GestionOrdrePaiement/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_GESTION_ORDRE_PAIEMENT", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/GestionOrdrePaiement/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5613,65 +5670,65 @@ export function supprimerGestionOrdrePaiement({ commit }, id) {
 
 export function getGestionOrdrePaiementAnnulat({ commit }) {
   queue.push(() => {
-      axios
-          .get("/GestionOrdrePaiementAnnulation")
-          .then(response => {
-              commit("GET_ALL_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/GestionOrdrePaiementAnnulation")
+      .then(response => {
+        commit("GET_ALL_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterGestionOrdrePaiementAnnulat({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/GestionOrdrePaiementAnnulation", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/GestionOrdrePaiementAnnulation", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierGestionOrdrePaiementAnnulat({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/GestionOrdrePaiementAnnulation/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
-          
+    .put("/GestionOrdrePaiementAnnulation/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerGestionOrdrePaiementAnnulat({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/GestionOrdrePaiementAnnulation/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/GestionOrdrePaiementAnnulation/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5684,65 +5741,65 @@ export function supprimerGestionOrdrePaiementAnnulat({ commit }, id) {
 
 export function getServiceRealiteFaitOp({ commit }) {
   queue.push(() => {
-      axios
-          .get("/ServiceRealiteFaitOp")
-          .then(response => {
-              commit("GET_ALL_SERVICE_REALITE_FAIT_OP", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/ServiceRealiteFaitOp")
+      .then(response => {
+        commit("GET_ALL_SERVICE_REALITE_FAIT_OP", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterServiceRealiteFaitOp({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/ServiceRealiteFaitOp", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_SERVICE_REALITE_FAIT_OP", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/ServiceRealiteFaitOp", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_SERVICE_REALITE_FAIT_OP", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierServiceRealiteFaitOp({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/ServiceRealiteFaitOp/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_SERVICE_REALITE_FAIT_OP", response.data);
-          
+    .put("/ServiceRealiteFaitOp/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_SERVICE_REALITE_FAIT_OP", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerServiceRealiteFaitOp({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_SERVICE_REALITE_FAIT_OP", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/ServiceRealiteFaitOp/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_SERVICE_REALITE_FAIT_OP", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ServiceRealiteFaitOp/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -5754,63 +5811,63 @@ export function supprimerServiceRealiteFaitOp({ commit }, id) {
 
 export function getHistoriqueDecisionOp({ commit }) {
   queue.push(() => {
-      axios
-          .get("/HistoriqueDecisionOp")
-          .then(response => {
-              commit("GET_ALL_HISTORIQUE_DECISION_CF_OP", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/HistoriqueDecisionOp")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_DECISION_CF_OP", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
 export function ajouterHistoriqueDecisionOp({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/HistoriqueDecisionOp", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_HISTORIQUE_DECISION_CF_OP", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
+    .post("/HistoriqueDecisionOp", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_DECISION_CF_OP", response.data);
+
         this.$app.$notify({
-            title: 'Erreur',
-            text: "ce Numero existe déja",
-            type:"error"
-        });
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
 }
 
 
 export function modifierHistoriqueDecisionOp({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/HistoriqueDecisionOp/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_HISTORIQUE_DECISION_CF_OP", response.data);
-          
+    .put("/HistoriqueDecisionOp/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_DECISION_CF_OP", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerHistoriqueDecisionOp({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_HISTORIQUE_DECISION_CF_OP", id);
-        
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/HistoriqueDecisionOp/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTORIQUE_DECISION_CF_OP", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/HistoriqueDecisionOp/" + id).then(() => dialog.close());
+    });
 }

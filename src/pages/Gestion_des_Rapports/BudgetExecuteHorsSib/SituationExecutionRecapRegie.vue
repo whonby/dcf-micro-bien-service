@@ -6,7 +6,9 @@
       <div class="span10" style="background-color: transparent; !important;">
         <table class="table table-striped">
           <tbody>
-            <tr>
+            <br />
+            <br />
+            <!-- <tr>
               <td colspan="2">
                 <br />
 
@@ -24,7 +26,7 @@
                 >
                 </model-list-select>
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <td>
                 <div class="control-group">
@@ -79,20 +81,23 @@
       >
         <tr>
           <td style="text-align: center">
-            <p>MINISTERE DU BUDGET  <br/>
-            ------------------------- <br/>
-            DIRECTION DU CONTRÔLE FINANCIER <br/>
-            -------------------------</p>
+            <p>
+              MINISTERE DU BUDGET <br />
+              ------------------------- <br />
+              DIRECTION DU CONTRÔLE FINANCIER <br />
+              -------------------------
+            </p>
             <img :src="AfficheLogODCF" />
           </td>
           <td style="text-align: center">
             <img :src="AfficheAmoirie" />
           </td>
           <td style="text-align: center">
-            <p>REPUBLIQUE DE CÔTE D'IVOIRE <br/>
-              Union-Discipline-Travail <br/>
-               ------------------------- </p>
-            
+            <p>
+              REPUBLIQUE DE CÔTE D'IVOIRE <br />
+              Union-Discipline-Travail <br />
+              -------------------------
+            </p>
           </td>
         </tr>
       </table>
@@ -105,7 +110,8 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        Listes des ordres de paiement {{ formData.date_debut }}
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR ACTIVITE
+        {{ formData.date_debut }}
         {{ formData.date_fin }}
       </h2>
 
@@ -118,8 +124,8 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        Listes des ordres de paiement du
-        {{ formaterDate(formData.date_debut) }} au
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR ACTIVITE DU
+        {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
       </h2>
       <p
@@ -133,173 +139,117 @@
         EXERCICE: {{ anneeAmort }}
       </p>
 
-      <div
-        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite"
-        :key="GroupeOrdrePaiementByActivit.id"
+      <table
+        class="table table-bordered table-striped"
+        style="margin-left: 5px; margin-right: 5px"
       >
-        <br />
-        <p style="margin-left: 30px; font-size: 14px; font-weight: bold">
-          ACTIVITE:
-          {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
-        </p>
-
-        <table
-          class="table table-bordered table-striped"
-          style="margin-left:5px; margin-right:5px"
-        >
-          <thead style="background-color: #87ceeb">
-            <tr>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                LIGNE BUDGETAIRE
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                TYPE ORDRE PAIEMENT
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                N°ORDRE PAIEMENT
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                BAILLEUR
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                OBJET
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                MONTANT (FCFA)
-              </th>
-              <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                VISA CF
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              class="odd gradeX"
-              v-for="listeordrepaiement in listeordrepaiements(
-                GroupeOrdrePaiementByActivit[0].activite_id
-              )"
-              :key="listeordrepaiement.id"
+        <thead style="background-color: #87ceeb">
+          <tr>
+            <th
+              style="
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                background-color: #87ceeb;
+              "
             >
-              <td style="font-size: 14px">
-                {{
-                  libelleLigneEconomique(
-                    listeordrepaiement.ligne_economique_id
-                  ) || "Non renseigné"
-                }}
-              </td>
+              Activités
+            </th>
+            <th
+              style="
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                background-color: #87ceeb;
+              "
+            >
+              Budget Actuel
+            </th>
+            <th
+              style="
+                font-size: 14px;
+                font-weight: bold;
+                color: #000;
+                text-align: center;
+                background-color: #87ceeb;
+              "
+            >
+              Montant Exécuté
+            </th>
+            <th
+              style="
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                background-color: #87ceeb;
+              "
+            >
+              Taux(%)
+            </th>
+            <th
+              style="
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                background-color: #87ceeb;
+              "
+            >
+              Disponible
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="odd gradeX"
+            v-for="listeordrepaiement in ListeGroupByActivite"
+            :key="listeordrepaiement.id"
+          >
+            <td style="font-size: 14px">
+              {{
+                LibelleActivite(listeordrepaiement[0].activite_id) ||
+                "Non renseigné"
+              }}
+            </td>
+            <td>
+              {{
+                formatageSommeSansFCFA(
+                  parseFloat(
+                    MontantBudgetActuel(listeordrepaiement[0].activite_id)
+                  )
+                )
+              }}
+            </td>
 
-              <td
-                v-if="listeordrepaiement.type_ordre_paiement == 1"
-                style="font-size: 14px"
-              >
-                <span>OP Direct</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 2"
-                style="font-size: 14px"
-              >
-                <span>OP Provisoire</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 3"
-                style="font-size: 14px"
-              >
-                <span>OP Annulation</span>
-              </td>
-              <td v-else style="font-size: 14px">
-                <span>OP Définitif</span>
-              </td>
-              <td style="font-size: 14px">
-                {{
-                  listeordrepaiement.numero_ordre_paiement || "Non renseigné"
-                }}
-              </td>
-              <td style="font-size: 14px">
-                {{
-                  libelleBailleur(listeordrepaiement.source_financement_id) ||
-                  "Non renseigné"
-                }}
-              </td>
-              <td style="font-size: 14px">
-                {{ listeordrepaiement.odjet_autre_depense || "Non renseigné" }}
-              </td>
-              <td style="font-size: 14px">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(listeordrepaiement.montant_ordre_paiement)
-                  ) || "Non renseigné"
-                }}
-              </td>
-
-              <td style="font-size: 14px">
-                {{
-                  formaterDate(listeordrepaiement.date_decision_cf) ||
-                  "Non renseigné"
-                }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <td style="font-size: 14px">
+              {{
+                formatageSommeSansFCFA(
+                  parseFloat(
+                    MontantBudgetExecuté(listeordrepaiement[0].activite_id)
+                  )
+                ) || "Non renseigné"
+              }}
+            </td>
+            <td style="font-size: 14px">
+              {{
+                (
+                  ((MontantBudgetActuel(listeordrepaiement[0].activite_id) -
+                    MontantBudgetExecuté(listeordrepaiement[0].activite_id)) /
+                    MontantBudgetActuel(listeordrepaiement[0].activite_id)) *
+                  100
+                ).toFixed(2) || "Non renseigné"
+              }}
+            </td>
+            <td style="font-size: 14px">
+              {{
+                MontantBudgetActuel(listeordrepaiement[0].activite_id) -
+                  MontantBudgetExecuté(listeordrepaiement[0].activite_id) ||
+                "Non renseigné"
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <!-- <fab
-      :actions="fabActions"
-      @searchMe="filter"
-      main-icon="apps"
-      bg-color="green"
-    ></fab> -->
   </div>
 </template>
   
@@ -307,12 +257,13 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+//import { formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-import { ModelListSelect } from "vue-search-select";
+//import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    ModelListSelect,
+    // ModelListSelect,
   },
   name: "typetext",
   data() {
@@ -495,32 +446,19 @@ export default {
     ]),
 
     ListeGroupByActivite() {
-      if (this.uniteAdministrative_id != 0) {
-        return this.GroupeOrdrePaiementByActivite.filter(
-          (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
-        );
-      } else if (
-        this.uniteAdministrative_id != 0 &&
-        this.formData.date_debut != "" &&
-        this.formData.date_fin != ""
-      ) {
+      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             qtreel[0].date_decision_cf >= this.formData.date_debut &&
             qtreel[0].date_decision_cf <= this.formData.date_fin
         );
-      }
-
-      // else if (this.uniteAdministrative_id != 0 && this.formData.date_debut != "" && this.formData.date_fin != "") {
-      //   return  this.GroupeOrdrePaiementByActivite.filter(
-      //     (qtreel) =>( qtreel[0].date_decision_cf >= this.formData.date_debut &&
-      //      qtreel[0].date_decision_cf <= this.formData.date_fin)
-      //   );
-
-      // }
-      else {
+      } else {
         return this.GroupeOrdrePaiementByActivite;
+        // .filter(
+        //   (qtreel) =>(qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null) ||
+
+        //   (qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
+        // );
       }
     },
 
@@ -569,41 +507,65 @@ export default {
       };
     },
 
+    MontantBudgetActuel() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+    MontantBudgetExecuté() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) => qtreel.activite_id == id
+              // && qtreel.annebudgetaire ==this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
     listeordrepaiements() {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
-        return (id) => {
-          if (id != null && id != "") {
-            return this.gettersgestionOrdrePaiement.filter(
-              (qtreel) =>
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8 &&
-                  qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin) ||
-
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 9 &&
-                  qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin)
-            );
-          }
-        };
+        return this.gettersgestionOrdrePaiement.filter(
+          (qtreel) =>
+            (qtreel.diff_op == null &&
+              qtreel.decision_cf == 8 &&
+              qtreel.date_decision_cf >= this.formData.date_debut &&
+              qtreel.date_decision_cf <= this.formData.date_fin) ||
+            (qtreel.diff_op == null &&
+              qtreel.decision_cf == 9 &&
+              qtreel.date_decision_cf >= this.formData.date_debut &&
+              qtreel.date_decision_cf <= this.formData.date_fin)
+        );
       } else {
-        return (id) => {
-          if (id != null && id != "") {
-            return this.gettersgestionOrdrePaiement.filter(
-              (qtreel) =>
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8) ||
-                   
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 9)
-            );
-          }
-        };
+        return this.gettersgestionOrdrePaiement.filter(
+          (qtreel) =>
+            (qtreel.diff_op == null && qtreel.decision_cf == 8) ||
+            (qtreel.diff_op == null && qtreel.decision_cf == 9)
+        );
       }
     },
 

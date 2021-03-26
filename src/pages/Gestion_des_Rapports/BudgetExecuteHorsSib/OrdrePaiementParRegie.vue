@@ -583,9 +583,10 @@ export default {
                   qtreel.decision_cf == 8 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin) ||
+
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == 1 &&
-                  qtreel.decision_cf == 8 &&
+                  qtreel.decision_cf == 9 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin)
             );
@@ -599,6 +600,7 @@ export default {
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == 1 &&
                   qtreel.decision_cf == 8) ||
+                  
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == 1 &&
                   qtreel.decision_cf == 9)

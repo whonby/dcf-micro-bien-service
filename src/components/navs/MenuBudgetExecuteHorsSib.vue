@@ -11,7 +11,25 @@
 
       <li>
         <router-link :to="{ name: 'OrdrePaiementParRegie' }" tag="a">
-          ORDRE PAIEMENT PAR REGIE
+          ORDRE PAIEMENT REGIE
+        </router-link>
+      </li>
+
+       <li>
+        <router-link :to="{ name: 'SituationExecutionLigne' }" tag="a">
+          SITUATION D'EXECUTION PROJET
+        </router-link>
+      </li>
+
+       <li>
+        <router-link :to="{ name: 'SituationExecutionRecapProjet' }" tag="a">
+          SITUATION D'EXECUTION RECAP PROJET
+        </router-link>
+      </li>
+
+       <li>
+        <router-link :to="{ name: 'SituationExecutionRecapRegie' }" tag="a">
+          SITUATION D'EXECUTION RECAP REGIE
         </router-link>
       </li>
       <!-- <li>

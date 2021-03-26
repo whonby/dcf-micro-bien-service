@@ -16,6 +16,9 @@ import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsS
 import suiviEvaluationEntreprise from "../../pages/Gestion_des_Rapports/suiviEvaluationEntreprise.vue";
 import OrdrePaiementParPeriode from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/OrdrePaiementParPeriode.vue";
 import OrdrePaiementParRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/OrdrePaiementParRegie.vue";
+import SituationExecutionLigne from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionLigne.vue";
+import SituationExecutionRecapProjet from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapProjet.vue";
+import SituationExecutionRecapRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapRegie.vue";
 const gestionrapport = [
 
     {
@@ -27,6 +30,24 @@ const gestionrapport = [
         path: "/OrdrePaiementParRegie",
         name: "OrdrePaiementParRegie",
         component: OrdrePaiementParRegie
+    },
+
+    {
+        path: "/SituationExecutionLigne",
+        name: "SituationExecutionLigne",
+        component: SituationExecutionLigne
+    },
+
+    {
+        path: "/SituationExecutionRecapProjet",
+        name: "SituationExecutionRecapProjet",
+        component: SituationExecutionRecapProjet
+    },
+
+    {
+        path: "/SituationExecutionRecapRegie",
+        name: "SituationExecutionRecapRegie",
+        component: SituationExecutionRecapRegie
     },
     {
         path: "/tableauPluriannuel",

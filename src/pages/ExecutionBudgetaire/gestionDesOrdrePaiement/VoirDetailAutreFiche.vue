@@ -654,6 +654,75 @@
 
     </div>
 
+
+<!-- lega -->
+  
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a data-toggle="tab" href="#tab2078"
+                  >Tous les marchés
+                  <span class="badge badge"></span></a
+                >
+              </li>
+
+             <li>
+                <a data-toggle="tab" href="#tab100">
+                  Planification
+                  <span class="badge badge-important">
+                    </span
+                  ></a
+                >
+              </li>
+            </ul>
+
+
+          </div>
+          
+
+            <div id="tab2078" class="tab-pane active">
+              <div class="widget-title">
+                <span class="icon">
+                  <i class="icon-th"></i>
+                </span>
+                <h5>Liste des March&eacute;s</h5>
+                
+              </div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Année</th>
+                    <th>UA</th>
+                    <th>Type marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet marché</th>
+                    <th>Référence marché</th>
+                    <th>Statut</th>
+                    <th>Montant prévu</th>
+                    <th>Montant réel</th>
+                    <th title="mouvement du marché">Mouvement marché</th>
+                    <th>Etat en cours</th>
+                    <th>Cycle de vie</th>
+                    <th colspan="3">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+              </table>
+            </div>
+
+        
+
+  </div>
+  </div>
+  </div>
     <notifications />
 
 

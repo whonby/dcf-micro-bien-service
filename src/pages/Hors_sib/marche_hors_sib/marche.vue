@@ -71,7 +71,7 @@ CodeExempte
                 {{ activites.reference_marche || "Non renseigné" }}
               </td>
               <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                {{ activites.objet || "Non renseigné" }}
+                {{ conversionMajiscule(activites.objet) || "Non renseigné" }}
               </td>
               <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                 {{
@@ -443,6 +443,12 @@ export default {
       });
     },
 
+    conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
+    },
     montantMarche() {
       return this.marcheHorSibFiltre.reduce(
         (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),

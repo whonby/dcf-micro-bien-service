@@ -20,6 +20,31 @@
 
 // get all document
 
+//Probleme Marche
+export const GET_ALL_PROBLEME_MARCHE = (state, tableau_document) => {
+    state.ProblemeMarche = tableau_document
+}
+
+export const AJOUTER_PROBLEME_MARCHE = (state, elementAjouter) => {
+    state.ProblemeMarche.unshift(elementAjouter)
+}
+
+export const SUPPRIMER_PROBLEME_MARCHE = (state, id) => {
+    state.ProblemeMarche = state.ProblemeMarche.filter(prest => prest.id != id)
+}
+
+export const MODIFIER_PROBLEME_MARCHE = (state, elementModif) => {
+    state.ProblemeMarche = state.ProblemeMarche.map(response => {
+
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+//fin Probleme
+
 
 
 export const GET_ALL_RECEPTION = (state, tableau_document) => {

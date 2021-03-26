@@ -1876,7 +1876,20 @@ components: {
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
 
 
+  GrandeNatureId() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.ligneeconomique_id == id
+          );
 
+          if (qtereel) {
+            return qtereel.grandenature_id;
+          }
+          return 0;
+        }
+      };
+    },
 
       idbanque() {
       return id => {
@@ -3070,6 +3083,10 @@ if(this.formData.typedepense=='Marche'){
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
           diff_op:1,
+
+          grand_nature_id: this.GrandeNatureId(
+              this.formData.ligne_economique_id
+            ),
         
           
           gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
@@ -3120,6 +3137,9 @@ if(this.formData.typedepense=='Marche'){
         	// entreprise_id:this.formData2.nom_entreprise_id,
           // marche_id:this.formData2.marche_id,
           diff_op:1,
+          grand_nature_id: this.GrandeNatureId(
+              this.formData.ligne_economique_id
+            ),
           
          
           type_financement_id:this.formData.type_financement_id,
@@ -3203,6 +3223,9 @@ if(this.formData.typedepense=='Marche'){
           mode_paiement_id:this.formData.mode_paiement_id,
 odjet_autre_depense:this.intitule2,
           diff_op:1,
+          grand_nature_id: this.GrandeNatureId(
+              this.formData.ligne_economique_id
+            ),
           
           
           gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
@@ -3254,6 +3277,9 @@ odjet_autre_depense:this.intitule2,
           marche_id:this.formData2.marche_id,
 
           diff_op:1,
+          grand_nature_id: this.GrandeNatureId(
+              this.formData.ligne_economique_id
+            ),
           
           
           type_financement_id:this.formData.type_financement_id,

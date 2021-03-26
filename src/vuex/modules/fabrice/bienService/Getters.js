@@ -1149,3 +1149,8 @@ export const GroupeUaDemandeEngagement = (state, getters) => {
     //delete getters.trieUaImmobilisation.
       return groupBy(getters.gettersgestionOrdrePaiement,"activite_id");
   };
+
+  export const GroupeOrdrePaiementByGrandeNature = (state, getters) => {
+    
+      return groupBy(getters.gettersgestionOrdrePaiement,"grand_nature_id");
+  };
