@@ -289,6 +289,7 @@ export function modifierNumeroContrat({ commit }, formData) {
     })
 
 }
+ajouterActeur
 export async function  getTypeActPersonnel({commit}) {
 
     queue.push(() =>  axios.get('/liste_type_acte_personnel').then(response => {
@@ -1346,7 +1347,7 @@ export  function  getActPersonnel({commit}) {
         commit('GET_ACT_PERSONNEL', response.data)
     }).catch(error => console.log(error)));
 }
-
+modifierActeurDepenses
 // ajouter type acte personnel
 export function modifierActeurDepense({ commit, dispatch}, objetModifie,config){
     this.$app.$loading(true)
@@ -1372,6 +1373,20 @@ export function modifierActeurDepense({ commit, dispatch}, objetModifie,config){
     })
 }
 
+export function modifierActeurDp({ commit }, nouveau) {
+    asyncLoading(axios
+        .put("/updateActeurD/" + nouveau.id,nouveau))
+        .then(response => {
+            commit("MODIFIER_ACTEUR_DP", response.data);
+            
+  
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectué avec Succès!',
+                type: "success"
+            })
+        });
+  }
 // Modififie acter depense modification_acteur
 export function modifierActeurDepenses({ commit, dispatch}, objetModifie){
     this.$app.$loading(true)

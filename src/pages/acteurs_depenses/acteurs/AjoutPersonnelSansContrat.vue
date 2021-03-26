@@ -210,15 +210,25 @@
             <tr>
                            <td>
                      <div class="control-group">
-                                                    <label class="control-label">L'unite administrative</label>
+                                                    <label class="control-label">Unite administrative</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id" class="span10">
+                                                        <!-- <select v-model="formData.unite_administrative_id" class="span10">
                                                             <option></option>
                                                             <option v-for="item in uniteAdmin" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                        <model-list-select style="background-color: #fff;"
+                                                   class="wide span10"
+                                                   :list="uniteAdministratives"
+                                                   v-model="formData.unite_administrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                     </div>
                                                 </div>
                 </td>
@@ -383,7 +393,8 @@
                      <div class="control-group">
                                                     <label class="control-label">Salaire:</label>
                                                     <div class="controls">
-                                                        <input type="number"  v-model="formData.salaires"  placeholder="Saisir le salaire" class="span5"/>
+                                                        <!-- <input type="number"    placeholder="Saisir le salaire" class="span5"/> -->
+                                                   <money v-model="formData.salaires" class="span5"></money>
                                                     </div>
                                                 </div>
                 </td>

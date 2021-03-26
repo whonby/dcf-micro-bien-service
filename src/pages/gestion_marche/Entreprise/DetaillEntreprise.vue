@@ -192,7 +192,7 @@ varObjetBanque
                           </td>
                            <td>
                               <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
+                                                    <label class="control-label">Ville{{formData.pays_id}}</label>
                                                     <div class="controls">
                                                         <select v-model="formData.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
@@ -863,7 +863,7 @@ return element;
         return "Pas de donnee"
       }
       else{
-           const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+           const dureVie1 = this.agenceBanques.find(dureEquipe =>dureEquipe.banque_id== this.formData.banq_id && dureEquipe.code_agence == this.formData.numero_agence);
 
       if (dureVie1) {
         return dureVie1.nom_agence;
@@ -875,7 +875,7 @@ return element;
     },
     AffichierNumeroAgence() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe =>dureEquipe.banque_id== this.formData.banq_id && dureEquipe.code_agence == this.formData.numero_agence);
 
       if (dureVie1) {
         return dureVie1.tel_agence;
@@ -885,7 +885,7 @@ return element;
     },
 AffichierSituationGeoAgence() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe =>dureEquipe.banque_id== this.formData.banq_id && dureEquipe.code_agence == this.formData.numero_agence);
 
       if (dureVie1) {
         return dureVie1.situation_geo;
@@ -896,7 +896,7 @@ AffichierSituationGeoAgence() {
 
 AffichierIdAgence() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe =>dureEquipe.banque_id== this.formData.banq_id && dureEquipe.code_agence == this.formData.numero_agence);
 
       if (dureVie1) {
         return dureVie1.id;
@@ -918,7 +918,7 @@ AffichierIdAgenceModifier() {
 
 AffichierNomAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.banque_id== this.editCompte.banq_id && dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
 
       if (dureVie1) {
         return dureVie1.nom_agence;
@@ -928,7 +928,7 @@ AffichierNomAgenceModifier() {
     },
     AffichierNumeroAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.banque_id== this.editCompte.banq_id && dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
 
       if (dureVie1) {
         return dureVie1.tel_agence;
@@ -938,7 +938,7 @@ AffichierNomAgenceModifier() {
     },
 AffichierSituationGeoAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.banque_id== this.editCompte.banq_id && dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
 
       if (dureVie1) {
         return dureVie1.situation_geo;

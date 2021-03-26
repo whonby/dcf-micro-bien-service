@@ -1,4 +1,3 @@
-
 <template>
 
 <div class="container-fluid">
@@ -101,7 +100,6 @@
                                                             <option v-for="item in recupererReferenceActe(formData.marche_id)" :key="item.id" :value="item.reference_act">
                                                                 {{item.reference_act}}
                                                             </option>
-
                                                         </select> -->
                                                          <input type="text"    placeholder="Saisir le matricule" class="span12"/>
                                                     </div>
@@ -234,7 +232,6 @@
                                                             <option v-for="item in afficheUniteZone(detail.unite_administrative_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -249,7 +246,6 @@
                                                             <option v-for="item in afficheService(detail.unite_administrative_id)" :key="item.id" :value="item.serviceua_id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
-
                                                         </select> -->
                                                          <model-list-select style="background-color: #fff;"
                                                    class="wide"
@@ -273,7 +269,6 @@
                                                             <option v-for="item in afficheFonction(detail.service_id)" :key="item.id" :value="item.fonction_id">
                                                                 {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
-
                                                         </select> -->
                                                         <model-list-select style="background-color: #fff;"
                                                    class="wide"
@@ -405,7 +400,6 @@
                     </div>
                      <!-- <div id="tab3" class="tab-pane">
                       
-
                     </div> -->
                     <!--ongle 3 -->
                     <!-- <div id="tab3" class="tab-pane">
@@ -473,7 +467,6 @@
 
 </template>
 <script>
-
     import {mapGetters, mapActions} from 'vuex'
     import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
         import {  ModelListSelect } from 'vue-search-select'
@@ -482,7 +475,6 @@
 components: {
     
     ModelListSelect,
-
   },
         data() {
             return {
@@ -491,7 +483,6 @@ components: {
                         name: 'cache',
                         icon: 'add'
                     },
-
                 ],
                 liste:[],
                 
@@ -522,7 +513,6 @@ components: {
                     
                     service_id:""
                 },
-
                 editTitre: {
                     code: "",
                     libelle: ""
@@ -530,10 +520,8 @@ components: {
                 formData:{
                   marche_id:""
                 }
-
             };
         },
-
         created() {
           // this.getDetail();
             this.detail=this.personnaliseActeurDepense.find(item=>item.id==this.$route.params.id)
@@ -547,7 +535,6 @@ components: {
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-
 // methode pour maper notre guetter
             ...mapGetters('personnelUA', ["personnaFonction","fonctionProfessionnel","salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction","personnaliseActeurDepense","affichePersonnelRecuActeNormination",
@@ -568,12 +555,10 @@ components: {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-
 afficheEmail() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
-
       if (qtereel) {
         return qtereel.acteur_depense.email;
       }
@@ -583,8 +568,6 @@ afficheEmail() {
     },
     uniteAdmin() {
       
-
-
         if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
@@ -597,20 +580,15 @@ afficheEmail() {
             })
             return colect
         }
-
        return this.uniteAdministratives
-
     },
-
 recupererMarcheUA() {
       return id => {
         if (id != null && id != "") {
            return this.marches.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_marche_id == 4);
-
      
         }
       };
-
       
     },
     recupererReferenceActe() {
@@ -619,14 +597,12 @@ recupererMarcheUA() {
            return this.getActeEffetFinancierPersonnaliser.filter(qtreel => qtreel.marche_id == id && qtreel.activationD != 1);
         }
       };
-
       
     },
   afficheSalaire() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.salairesActeur.find(qtreel => qtreel.acte_personnel_id == id);
-
       if (qtereel) {
         return qtereel.montant;
       }
@@ -634,10 +610,6 @@ recupererMarcheUA() {
         }
       };
     },
-
-
-
-
  verrouilleUniteZone() {
       return this.detail.unite_administrative_id == "";
     },
@@ -647,7 +619,6 @@ recupererMarcheUA() {
     verrouilleFonction() {
       return this.detail.service_id == "";
     },
-
 nombreDeFonction() {
       return id => {
         if (id != null && id != "") {
@@ -681,7 +652,6 @@ nombreDeFonction() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.services.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
         return qtereel.libelle;
       }
@@ -696,11 +666,9 @@ afficheFonction() {
         }
       };
     },
-
 exoEnCours() {
       
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
-
       if (norme) {
         return norme.annee;
       }
@@ -709,7 +677,6 @@ exoEnCours() {
     afficheIdExerciceEnCours() {
       
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.annee == this.exoEnCours);
-
       if (norme) {
         return norme.id;
       }
@@ -724,12 +691,10 @@ exoEnCours() {
     },
     
         
-
         afficheGrade() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.classificationGradeFonction.find(qtreel => qtreel.fonction_id == id);
-
       if (qtereel) {
         return qtereel.grade_id;
       }
@@ -741,7 +706,6 @@ exoEnCours() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
         return qtereel.libelle;
       }
@@ -753,7 +717,6 @@ exoEnCours() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.grades.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
         return qtereel.libelle;
       }
@@ -761,11 +724,8 @@ exoEnCours() {
         }
       };
     },
-
      
-
     
-
      
         },
              watch: {
@@ -784,7 +744,6 @@ afficherModalListeExecution(){
                     keyboard: false
                 });
             },
-
                      getDetail(){
       var objetPersonnel = this.personnaliseActeurDepense.find(
         varPerso => varPerso.id == this.$route.params.id
@@ -845,17 +804,12 @@ afficherModalListeExecution(){
                 this.getNbrActeurAcrediteTaux();
             },
             afficherModalModifierTitre(index){
-
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
                 this.editTitre = this.titres[index];
-
             },
-
-
         }
     };
 </script>
-

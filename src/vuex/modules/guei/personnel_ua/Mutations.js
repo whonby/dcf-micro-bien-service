@@ -629,7 +629,7 @@ const SUPPRIMER_ACTEURS= (state, id) => {
 }
 
 
-const MODIFIER_ACTEURS = (state,  objetModifie) => {
+const _DPS = (state,  objetModifie) => {
     state.acteur_depenses = state.acteur_depenses.map(acteur_depense => {
         if(acteur_depense.id == objetModifie.id){
             acteur_depense = {...objetModifie}
@@ -1076,6 +1076,16 @@ export const MODIFIER_COMPTABLE_ASSIGNATAIRE = (state, objetModifie) => {
         return fonction
     })
 }
+
+
+export const MODIFIER_ACTEUR_DP = (state, elementModif)=>{
+    state.acteur_depenses = state.acteur_depenses.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 export {
 
     GET_ORDRE_DE_PAIEMENT,
@@ -1153,7 +1163,7 @@ GET_FAMILLE_FONCTIONS,
     GET_ACTEURS,
     AJOUTER_ACTEURS,
     SUPPRIMER_ACTEURS,
-    MODIFIER_ACTEURS,
+    _DPS,
     NOMBRE_TAUX_ACTEURS,
     DETAIL_ACTEURS,
     SALAIRE_ACTUEL_ACTEURS,
