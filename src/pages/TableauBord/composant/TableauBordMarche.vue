@@ -215,8 +215,8 @@
                   font-size: 15px;
                 "
               >
-                <b v-if="nombreMarcheHPPM==0">{{ nombreMarcheHPPM }} Marché </b>
-                  <b v-else>{{ nombreMarcheHPPM }} {{ nombreMarcheHPPM }} Marchés </b>
+                <b v-if="nombreMarcheHPPM==0">{{ nombreMarcheHPPM }}  Marché </b>
+                  <b v-else>{{ nombreMarcheHPPM }} Marchés </b>
               </td>
               <td
                 style="
@@ -326,7 +326,7 @@
           class="main-breadcrumb"
           style="background: #806000"
         >
-          <ol class="breadcrumb" style="background: #806000 !important">
+          <ol class="breadcrumb" style="background: #111111 !important">
             <li class="breadcrumb-item" style="color: #fff !important">
               INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp;
               /
@@ -722,7 +722,7 @@
                       :options="chartOptions"
                       :series="dataPourcentage"
               ></apexchart>
-              <h3>Projet de marche</h3>
+              <h3>Projet de marchés {{nomUniteAdmiSelection(unite_administrative_id)}} {{nomTypeMarche(type_marche)}} {{nomInfrastructure(infrastructure)}} {{nomRegions(region)}}</h3>
             </div>
 
             <div class="span6" style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
@@ -732,7 +732,7 @@
                       :options="chartOptions2"
                       :series="dataPourcentage2"
               ></apexchart>
-              <h3>Marche Execution</h3>
+              <h3>Marchés approuvés {{nomUniteAdmiSelection(unite_administrative_id)}} {{nomTypeMarche(type_marche)}} {{nomInfrastructure(infrastructure)}} {{nomRegions(region)}}</h3>
             </div>
 
             <div class="span11" id="table_resultat">
@@ -752,6 +752,7 @@
                   </li>
                 </ol>
               </nav>
+              <transition  name="slide-fade" >
               <table
                 class="table table-bordered table-striped"
                 v-if="info_status_marche"
@@ -905,7 +906,7 @@
                   </tr>
                 </tbody>
               </table>
-
+              </transition>
               <table
                 class="table table-bordered table-striped"
                 v-if="!info_status_marche"
@@ -2435,7 +2436,7 @@ export default {
       return (id) => {
         if (id != "") {
           let objet = this.typeMarches.find((item) => item.id == id);
-          return objet.libelle;
+          return "/"+objet.libelle;
         }
         return "";
       };
@@ -2444,7 +2445,7 @@ export default {
       return (id) => {
         if (id != "") {
           let objet = this.getterInfrastrucure.find((item) => item.id == id);
-          return objet.libelle;
+          return "/"+objet.libelle;
         }
         return "";
       };
@@ -2455,7 +2456,7 @@ export default {
           let objet = this.localisations_geographiques.find(
             (item) => item.id == id
           );
-          return objet.libelle;
+          return "/"+objet.libelle;
         }
         return "";
       };
@@ -2671,9 +2672,7 @@ export default {
         console.log(obje)
           collect.push(obje)
       })
-        console.log(".......Collect Marché...........")
-        console.log(collect)
-        console.log("..................")
+
       return objet4;
     },
 
@@ -2763,6 +2762,16 @@ export default {
 
 
       },
+
+    nomUniteAdmiSelection(){
+      return unite_id=>{
+        if(!unite_id) return "";
+         let objet=this.uniteAdministratives.find(item=>item.id==unite_id)
+        if(objet==undefined) return ""
+        return objet.libelle
+      }
+    },
+
   },
   methods: {
     ...mapActions("bienService", [
@@ -2853,6 +2862,7 @@ export default {
       this.videTypeMarche();
     },
     formatageSomme: formatageSomme,
+
     listeMarcheStatus(status) {
       if (status == "planifie") {
         status = 0;
@@ -3982,5 +3992,17 @@ export default {
 
 body {
   background: #f9f9f9 !important;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

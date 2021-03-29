@@ -1670,19 +1670,19 @@ sid.easyPrint({
             name: 'Legende',
             elements: [{
                 label: '<div id="sanitaire">Sanitaires</div>',
-                html: "<div class='sante'></div>"
+                html: "<div class='sante1'></div>"
             },
             {
                 label: '<div id="scolaires">Scolaires</div>',
-                html: "<div class='scolaire'></div>"
+                html: "<div class='scolaire1'></div>"
             },
             {
                 label: '<div id="communautaires">Communautaires</div>',
-                html: "<div class='communautaire'></div>"
+                html: "<div class='communautaire1'></div>"
             },
             {
                 label: '<div id="routiere">Routière</div>',
-                html: "<div class='routier'></div>"
+                html: "<div class='routier1'></div>"
             }]
         }],
         collapseSimple: false,
@@ -1732,22 +1732,22 @@ sid.easyPrint({
     };
 </script>
 <style>
-.sante{
+.sante1{
    width: 20px;
    height: 20px;
-   background: #6C0277;
+   background: #6C0277 !important;
 }
-.scolaire{
+.scolaire1{
    width: 20px;
    height: 20px;
-   background: #F0C300;
+   background: #F0C300 !important;
 }
-.communautaire{
+.communautaire1{
    width: 20px;
    height: 20px;
    background: #E73E01;
 }
-.routier{
+.routier1{
    width: 20px;
    height: 20px;
    background: #22780F;
