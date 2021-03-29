@@ -153,7 +153,8 @@
                   font-size: 15px;
                 "
               >
-                <b>{{ nombreTotalMarche }} Marchés</b>
+                <b v-if="nombreTotalMarche==0">{{ nombreTotalMarche }} Marché</b>
+                  <b v-else>{{ nombreTotalMarche }} Marchés</b>
               </td>
               <td
                 style="
@@ -214,7 +215,8 @@
                   font-size: 15px;
                 "
               >
-                <b>{{ nombreMarcheHPPM }} Marché </b>
+                <b v-if="nombreMarcheHPPM==0">{{ nombreMarcheHPPM }} Marché </b>
+                  <b v-else>{{ nombreMarcheHPPM }} {{ nombreMarcheHPPM }} Marchés </b>
               </td>
               <td
                 style="
@@ -276,7 +278,8 @@
                   font-size: 15px;
                 "
               >
-                <b>{{ nbrTotalMarcheGeneral }} Marchés</b>
+                <b v-if="nbrTotalMarcheGeneral==0">{{ nbrTotalMarcheGeneral }} Marché</b>
+                  <b v-else>{{ nbrTotalMarcheGeneral }} Marchés</b>
               </td>
               <td
                 style="
@@ -389,6 +392,7 @@
               <div
                 class="card-box bg-attente-contratualisation-hors-alert"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
                 @click="listePlanifierMarcheStatus('planifie')"
               >
                 <div class="inner">
@@ -423,6 +427,7 @@
                 :is-full-page="fullPage"
               ></loading>
               <div
+                      v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
                 @click="listePlanifierMarcheStatus(8)"
                 class="card-box bg-attente-contratualisation-avec-alert"
                 style="height: 90px !important; cursor: grab !important"
@@ -459,6 +464,7 @@
                 @click="listePlanifierMarcheStatus(1)"
                 class="card-box bg-en-contratualisation"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p>
@@ -494,6 +500,7 @@
                 @click="listePlanifierMarcheStatus(9)"
                 class="card-box bg-en-contratualisation-hort-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>En contractualisation Hors délai</b></p>
@@ -526,6 +533,7 @@
                 @click="listeMarcheStatus(2)"
                 class="card-box bg-en-execution"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>En exécution</b></p>
@@ -558,6 +566,7 @@
                 @click="listeMarcheStatus(10)"
                 class="card-box bg-en-execution-horts-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>En Exécution Hors délai</b></p>
@@ -590,6 +599,7 @@
                 @click="listeMarcheStatus(11)"
                 class="card-box bg-acheve-hors-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>Achevés dans le délais</b></p>
@@ -623,6 +633,7 @@
                 @click="listeMarcheStatus(12)"
                 class="card-box bg-acheve-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p>Achevés Hors délai</p>
@@ -655,6 +666,7 @@
                 @click="listeMarcheStatus(7)"
                 class="card-box bg-en-souffrance"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p>En souffrance</p>
@@ -723,7 +735,7 @@
               <h3>Marche Execution</h3>
             </div>
 
-            <div class="span11">
+            <div class="span11" id="table_resultat">
               <br>
               <nav
                 aria-label="breadcrumb"
@@ -743,6 +755,7 @@
               <table
                 class="table table-bordered table-striped"
                 v-if="info_status_marche"
+
               >
                 <thead>
                   <tr>
@@ -2158,11 +2171,11 @@ export default {
         vm.dataPourcentage = [];
       }
       vm.dataPourcentage.push(
-        parseFloat(this.pourcentageMarchePasStatusPlanifier("planifie"))
+        parseFloat(this.nombreMarchePasStaturePlanifier("planifie"))
       );
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatusPlanifier(8)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatusPlanifier(1)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatusPlanifier(9)));
+      vm.dataPourcentage.push(parseFloat(this.nombreMarchePasStaturePlanifier(8)));
+      vm.dataPourcentage.push(parseFloat(this.nombreMarchePasStaturePlanifier(1)));
+      vm.dataPourcentage.push(parseFloat(this.nombreMarchePasStaturePlanifier(9)));
       return "";
     },
 
@@ -2173,12 +2186,12 @@ export default {
               vm.dataPourcentage2 = [];
           }
           vm.dataPourcentage2.push(
-              parseFloat(this.pourcentageMarcheExecuteAcheve(2))
+              parseFloat(this.nombreMarcheParStatue(2))
           );
-          vm.dataPourcentage2.push(parseFloat(this.pourcentageMarcheExecuteAcheve(10)));
-          vm.dataPourcentage2.push(parseFloat(this.pourcentageMarcheExecuteAcheve(11)));
-          vm.dataPourcentage2.push(parseFloat(this.pourcentageMarcheExecuteAcheve(12)));
-          vm.dataPourcentage2.push(parseFloat(this.pourcentageMarcheExecuteAcheve(7)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(10)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(11)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(12)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(7)));
 
           return "";
       },
@@ -2631,17 +2644,36 @@ export default {
         }
       });
       let vm=this;
-
-      let objet2=objet4.map(function (value) {
+   let collect=[]
+    objet4.forEach(function (value) {
             let obj=vm.listeActeEffectFinnancier(value.id)
-             let ob={
+        let date_debut_exectuion_definitif=""
+        let date_fin_exe=""
+        let date_reception_provisoire_definitif=""
+        let garantie=""
+        let date_reception_definitive=""
+        if(obj){
+             date_debut_exectuion_definitif=obj.date_debut_exectuion_definitif
+             date_fin_exe=obj.date_fin_exe
+             date_reception_provisoire_definitif=obj.date_reception_provisoire_definitif
+             garantie=obj.garantie
+             date_reception_definitive=obj.date_reception_definitive
+        }
+        value.attribue=vm.durreStatusMarche(value.id)
+             let obje={
                 ...value,
-                ...obj
+                 date_debut_exectuion_definitif:date_debut_exectuion_definitif,
+                 date_fin_exe:date_fin_exe,
+                 date_reception_provisoire_definitif:date_reception_provisoire_definitif,
+                 garantie:garantie,
+                 date_reception_definitive:date_reception_definitive,
              }
-             return ob
+        console.log(obje)
+          collect.push(obje)
       })
-
-        console.log(objet2)
+        console.log(".......Collect Marché...........")
+        console.log(collect)
+        console.log("..................")
       return objet4;
     },
 
@@ -2656,7 +2688,7 @@ export default {
       durreStatusMarche(){
           return marche_id=>{
               if(marche_id){
-                  console.log(marche_id)
+
                   let objet=this.listeActeEffectFinnancier(marche_id)
                   if(objet){
                       // console.log(objet.date_reception)
@@ -2686,7 +2718,7 @@ export default {
                       return 12
 
                   }
-                  return ""
+                  return 2
               }
           }
       },
@@ -3403,6 +3435,10 @@ export default {
         ...new Set(objet.map((item) => item.unite_administrative_id)),
       ];
       this.tableMarcheStatue = distinct;
+
+        // document.getElementById("#table_resultat").scrollIntoView({
+        //     behavior: "smooth"
+        // });
     },
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

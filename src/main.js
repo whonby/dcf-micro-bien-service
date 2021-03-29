@@ -34,10 +34,22 @@ import "fullcalendar/dist/fullcalendar.min.css";
 import "fullcalendar-scheduler/dist/scheduler.min.css";
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import PrettyCheckbox from 'pretty-checkbox-vue'
-//import jspartiondata from 'jspartiondata'
-// import PrettyInput from 'pretty-checkbox-vue/input';
-// import PrettyCheck from 'pretty-checkbox-vue/check';
-// import PrettyRadio from 'pretty-checkbox-vue/radio';
+
+import vueScrollto from 'vue-scrollto'
+
+Vue.use(vueScrollto, {
+    container: "body",
+    duration: 500,
+    easing: "ease",
+    offset: 0,
+    force: true,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+})
 import VueTelInput from 'vue-tel-input'
 import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
 import VueUploadComponent from 'vue-upload-component'
@@ -135,7 +147,7 @@ Vue.use(VuejsDialog, {
   animation: 'bounce'
 });
 
-Vue.use(require('vue-shortkey')) 
+Vue.use(require('vue-shortkey'))
 //jfj
 
 import Notifications from 'vue-notification'
