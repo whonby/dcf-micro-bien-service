@@ -758,7 +758,7 @@ console.log(this.mandats)
                             if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
                                 let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
                                 console.log(jour1)
-                                return " En cours d'execution";
+                                return "En cours d'execution";
                             }
 
                             if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
