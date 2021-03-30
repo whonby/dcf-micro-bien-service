@@ -1154,3 +1154,8 @@ export const GroupeUaDemandeEngagement = (state, getters) => {
     
       return groupBy(getters.gettersgestionOrdrePaiement,"grand_nature_id");
   };
+  
+export const GroupeUniteAdministrativeMarche = (state, getters) => {
+
+    return groupBy(getters.marches, "unite_administrative_id");
+};

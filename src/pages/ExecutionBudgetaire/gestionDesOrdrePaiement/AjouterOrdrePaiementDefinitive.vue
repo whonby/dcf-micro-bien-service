@@ -1,5 +1,4 @@
-listePieceJustificativeOpDefinitive
-numero_Op_Definitive
+
 <template>
 
 <div class="container-fluid">
@@ -376,12 +375,109 @@ numero_Op_Definitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="ENGAGEMENT" class="tab-pane active">
+                       <table
+                      class="table table-bordered table-striped"
+                      v-if="recupererTypeDepense(this.detailOpProvisoire.recupererId)=='Personnel'"
+                      
+                    >
+                   <tr>
+                        
+                        <td>
+                      <div class="control-group">
+                        <label class="control-label">Béneficiaire</label>
+                        <div class="controls">
+                          <select
+                            v-model="detailOpProvisoire.auteur_perso_id"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="0"></option>
+                            <option v-for="depense in PersonnelParUA(this.formData.unite_administrative_id)" :key="depense.id" 
+               :value="depense.id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">Banque</label>
+
+                            <div class="controls">
+                              <input
+                                :value="libelleBanque(Recup_Banque(detailOpProvisoire.auteur_perso_id))"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">Compte Bancaires</label>
+
+                            <div class="controls">
+                              <input
+                              :value="Recup_Numero_cOMPTE(detailOpProvisoire.auteur_perso_id)"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <label
+                            >Mois Paiement
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                           <select
+                            v-model="detailOpProvisoire.Mois_paiement"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                          <option value="0"></option>
+                            <option value="Janvier">Janvier</option>
+                           <option value="Février">Février</option>
+                           <option value="Mars">Mars</option>
+                           <option value="Avril">Avril</option>
+                           <option value="Mai">Mai</option>
+                           <option value="Juin">Juin</option>
+                           <option value="Juillet">Juillet</option>
+                           <option value="Août">Août</option>
+                           <option value="Septembre">Septembre</option>
+                           <option value="Octobre">Octobre</option>
+                           <option value="Novembre">Novembre</option>
+                           <option value="Dcembre">Dcembre</option>
+                          </select>
+                         
+                        </td>
+                   </tr>
+                   <tr>
+                     <td colspan="4">
+                          <div class="control-group">
+                            <label class="control-label">Objet </label>
+
+                            <div class="controls">
+                              <input
+                                v-model="detailOpProvisoire.odjet_autre_depense"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                   </tr>
+                    </table>
                       <table class="table table-bordered table-striped" v-if="recupererTypeDepense(this.detailOpProvisoire.recupererId)=='Autres'">
           <tr>
              
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" >NOM2</label>
+                  <label class="control-label" >NOM</label>
                  
                   <div class="controls">
                    
@@ -472,7 +568,7 @@ numero_Op_Definitive
              
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" >NOM1{{detailOpProvisoire.entreprise_id}}</label>
+                  <label class="control-label" >NOM</label>
                  
                   <div class="controls">
                    
@@ -2047,7 +2143,60 @@ components: {
 // return this.
 // }
 //     },
+PersonnelParUA() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.personnaliseActeurDepense.filter(
+            (qtreel) =>
+              qtreel.unite_administrative_id == id 
+          );
+        }
+      };
+    },
 
+
+Recup_Banque() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.acteur_depense_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.banq_id;
+          }
+          return 0;
+        }
+      };
+    },
+    idCompte() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.rib == id
+          );
+
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0;
+        }
+      };
+    },
+Recup_Numero_cOMPTE() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.acteur_depense_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.rib;
+          }
+          return 0;
+        }
+      };
+    },
 tailleOpEnregistrer(){
   return this.gettersgestionOrdrePaiement.length + 1
 },
@@ -2421,7 +2570,7 @@ recupererIdMarche	() {
     return "Marche"
   }
   else{
-return ""
+return "Personnel"
   }
 },
 recupererTypeDepense() {

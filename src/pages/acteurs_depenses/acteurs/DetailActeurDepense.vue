@@ -66,11 +66,11 @@ Salaires actuel
                                       
                                     </td>
                                     <td>
-                                  <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé</a>
+                                  <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé455</a>
                                     </td>
 
                                     <td>
-                                    <a href="#addComptePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  compte</a>
+                                    <a href="#addComptePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  compte4444</a>
                                       </td>
                                   </div>
                                              </tr>
@@ -1100,7 +1100,7 @@ Salaires actuel
                       <tr>
                            <td>
                         <div class="control-group">
-                          <label>Matricule</label> 
+                          <label>Matricule{{enregistreIdPersonnel(this.acteurDetail.id)}}</label> 
 
                             <div class="controls">
                                 <!-- <select v-model="formData1.acteur_depense_id" class="span4">
@@ -1124,6 +1124,7 @@ Salaires actuel
                                                     <label class="control-label">Pays</label>
                                                     <div class="controls">
                                                         <select v-model="formData1.pays_id" class="span4" >
+                                                            
                                                              <option></option>
                                                             <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -1135,7 +1136,7 @@ Salaires actuel
                           </td>
                            <td>
                               <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
+                                                    <label class="control-label">Ville</label>
                                                     <div class="controls">
                                                         <select v-model="formData1.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
@@ -1155,12 +1156,12 @@ Salaires actuel
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
                                                         <select v-model="formData1.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(formData1.ville_id)" 
+                                                            <option v-for="item in communeDynamiques(formData1.ville_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
+
 
                                                         </select>
                                                     </div>
@@ -1177,8 +1178,8 @@ Salaires actuel
                             <div class="controls">
                               
                             <select v-model="formData1.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(formData1.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                                <option v-for="varText in banqueDynamiques(formData1.commune_id)" :key="varText.id"
+                              :value="varText.banque_id">{{getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -1186,7 +1187,7 @@ Salaires actuel
                           </td>
                             <td>
                         <div class="control-group">
-                            <label>Code  agence</label>
+                            <label>Code de la  agence</label>
                             <div class="controls">
                                 <select v-model="formData1.numero_agence" class="span4" :readOnly="verroCodeAgence">
                                                             <option></option>
@@ -1202,7 +1203,7 @@ Salaires actuel
 
                         <div class="control-group">
                             <div class="controls">
-                                <label>Nom  Agence</label>
+                                <label>Nom de la Agence</label>
                                 <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgence" readonly>
                             </div>
                         </div>
@@ -1234,7 +1235,7 @@ Salaires actuel
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
-                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte"> -->
+                               
                            <select v-model="formData1.nature_compte" class="span4">
                                                             <option></option>
                                                             <option value="0">Compte courant</option>
@@ -1250,14 +1251,10 @@ Salaires actuel
                              <label>Numero compte/cléRib</label>
                             <div class="controls">
                               
-                            <!-- <select v-model="formData.entrepse_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                              :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select> -->
+                            
                                   <div class="controls">
                                 <input type="text" class="span3" placeholder="" v-model="formData1.numero_compte"> <input type="text" class="span1" placeholder="" v-model="formData1.clerib">
                             </div>
-                            <input type="hidden" v-model="formData1.attribue">
                             </div>
                         </div>
                           </td>
@@ -2021,7 +2018,7 @@ afficherCodeRib(){
 
    AffichierSituationGeoAgence() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData1.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.commune_id == this.formData1.commune_id && dureEquipe.banque_id == this.formData1.banq_id && dureEquipe.code_agence == this.formData1.numero_agence);
 
       if (dureVie1) {
         return dureVie1.situation_geo;
@@ -2035,7 +2032,7 @@ afficherCodeRib(){
     
   AffichierNumeroAgence() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData1.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.commune_id == this.formData1.commune_id && dureEquipe.banque_id == this.formData1.banq_id && dureEquipe.code_agence == this.formData1.numero_agence);
 
       if (dureVie1) {
         return dureVie1.tel_agence;
@@ -2049,7 +2046,7 @@ afficherCodeRib(){
 
      AffichierNomAgence() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData1.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.commune_id == this.formData1.commune_id && dureEquipe.banque_id == this.formData1.banq_id && dureEquipe.code_agence == this.formData1.numero_agence);
 
       if (dureVie1) {
         return dureVie1.nom_agence;
@@ -2151,20 +2148,49 @@ afficherListeContratResilie(){
 //     }
 // },
 
-
-
-   
-
-
-        banqueDynamiques() {
+communeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseAgence.filter(
-            element => element.afficheCommune.id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
+
+                 banqueDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.agenceBanques.filter(
+            element => element.commune_id == id
+          );
+        }
+      };
+    },
+getLibelleBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return null
+        }
+      };
+    },
+   
+
+
+    //     banqueDynamiques() {
+    //  return id => {
+    //     if (id != null && id != "") {
+    //       return this.getPersonnaliseAgence.filter(
+    //         element => element.afficheCommune.id == id
+    //       );
+    //     }
+    //   };
+    // },
 
 
 

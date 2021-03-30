@@ -1,4 +1,5 @@
 import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
+import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
 import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
 import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarcheHorsSib.vue";
@@ -46,6 +47,11 @@ listeMarcheInvestissementHS
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
+    {
+        path:"/groupeMarcheParUa",
+        name:"groupeMarcheParUa",
+        component:groupeMarcheParUa
+    },
     {
         path: "/AjoutPersonnelAvecContrat",
         name: "AjoutPersonnelAvecContrat",

@@ -12,7 +12,11 @@
           ORDRE PAIEMENT DES REGIES
         </router-link>
       </li>
-
+<li>
+        <router-link :to="{name: 'AjouterDecomptePrecedant'}" tag="a">
+          DECOMPTE ANTERIEUR
+        </router-link>
+      </li>
       <!-- <li>
         <router-link :to="{name: 'TestTableaux'}" tag="a">
           TABLEAUX

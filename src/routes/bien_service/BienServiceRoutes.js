@@ -146,7 +146,20 @@ import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/Ordr
 import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
 import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
 import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/VoirDetailAutreFiche.vue"
+import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
+import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
+
 const BienServiceRoutes = [
+    {
+        path: "/AjouterDecompteActuelle",
+        name: "AjouterDecompteActuelle",
+        component: AjouterDecompteActuelle
+    },
+    {
+        path: "/AjouterDecomptePrecedant",
+        name: "AjouterDecomptePrecedant",
+        component: AjouterDecomptePrecedant
+    },
     {
         path: "/VoirDetailAutreFiche/:id",
         name: "VoirDetailAutreFiche",
