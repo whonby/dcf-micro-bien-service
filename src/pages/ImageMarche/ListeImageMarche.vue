@@ -23,19 +23,13 @@
             </div>
             <div class="widget-content tab-content">
                 <div id="tab1" class="tab-pane active">
-                    <lightGallery
-                            :images="modalGallerys"
-                            ref="lightGallery"
-                            :show-caption="true"
-                            :show-thumbs="true"
-                            :show-light-box="false"
-                    ></lightGallery>
+
                     <div class="row-fluid gutters-sm">
-                        <div class="span3 " v-for="marche_image in getterImageParMarche(detail.id)" :key="marche_image.id">
+                        <div class="span3 " v-for="(marche_image,i) in getterImageParMarche(detail.id)" :key="marche_image.id">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img class="center_image" :src="AffichePhoto(marche_image.fichier)">
+                                        <img style="cursor: grab;" class="center_image" :src="AffichePhoto(marche_image.fichier)" @click="onClickShowImage(i)" >
                                         <div class="mt-3">
                                             <h4>{{marche_image.libelle}}</h4>
                                             <router-link class="btn btn-outline-primary" :to="{ name: 'DetailImageMarche', params: { id:marche_image.id }}" title="Detail Marche CF">
@@ -58,7 +52,7 @@
                             </div>
 
                         </div>
-
+                        <vue-gallery-slideshow :images="arrayImageMarche(detail.id)" :index="index"  @close="index==null"></vue-gallery-slideshow>
 
                     </div>
                 </div>
@@ -120,18 +114,17 @@
 import {mapGetters, mapActions} from 'vuex';
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-import lightGallery from 'lightgallery-vue';
-import "lg-zoom.js";
-import "lg-fullscreen.js";
-import "lg-thumbnail.js";
-import "lg-autoplay.js";
+
+
+import VueGallerySlideshow from 'vue-gallery-slideshow'
 export default {
     components:{
-        lightGallery,
+        VueGallerySlideshow,
         vueDropzone: vue2Dropzone
     },
     data(){
         return{
+            index: 0,
            fabActions: [
         {
           name: "cache",
@@ -143,27 +136,6 @@ export default {
                 maxFiles: 1
             },
             fileName: '',
-
-            imgs: [
-                {
-                    src: "https://sachinchoolur.github.io/lightgallery.js/static/img/1.jpg",
-                    thumb: "https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-1.jpg",
-                    info: [600, 800],
-                    realname: "admin"
-                },
-                {
-                    src: "https://sachinchoolur.github.io/lightgallery.js/static/img/2.jpg",
-                    thumb: "https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-2.jpg",
-                    info: [600, 800],
-                    realname: "admin"
-                },
-                {
-                    src: "https://sachinchoolur.github.io/lightgallery.js/static/img/13.jpg",
-                    thumb: "https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-13.jpg",
-                    info: [600, 800],
-                    realname: "admin"
-                }
-            ],
 
        editLiquidation: {},
 search:"",
@@ -276,12 +248,23 @@ getterImageParMarche() {
         }
       };
     },
+     arrayImageMarche(){
+                return id=>{
+                    let colection=[]
+                    let vm=this;
+                    let objte=vm.getterImageParMarche(id)
+
+                    objte.forEach(function (val) {
+                        colection.push(vm.AffichePhoto(val.fichier))
+                    })
+                    return colection;
+                }
+
+     },
       },
 
       methods:{
-          openGallery (index) {
-              this.$refs.lightGallery.showImage(index);
-          },
+
           ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
       "supprimerAvenant",]),
@@ -303,6 +286,13 @@ getterImageParMarche() {
 
 
     ]),
+          onClickShowImage(i) {
+              this.index = i;
+              console.log(i)
+          },
+          closeModelImage(){
+              this.index = null;
+          },
           uploadSuccess(file, response) {
               console.log('File Successfully Uploaded with file name: ' + response.file);
               this.fileName = response.file;

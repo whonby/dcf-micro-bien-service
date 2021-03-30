@@ -19,12 +19,18 @@ import OrdrePaiementParRegie from "../../pages/Gestion_des_Rapports/BudgetExecut
 import SituationExecutionLigne from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionLigne.vue";
 import SituationExecutionRecapProjet from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapProjet.vue";
 import SituationExecutionRecapRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapRegie.vue";
+import SituationExecution from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecution.vue";
 const gestionrapport = [
 
     {
         path: "/OrdrePaiementParPeriode",
         name: "OrdrePaiementParPeriode",
         component: OrdrePaiementParPeriode
+    },
+    {
+        path: "/SituationExecution",
+        name: "SituationExecution",
+        component: SituationExecution
     },
     {
         path: "/OrdrePaiementParRegie",
