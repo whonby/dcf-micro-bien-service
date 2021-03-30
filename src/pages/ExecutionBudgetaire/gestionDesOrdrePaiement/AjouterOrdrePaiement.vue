@@ -105,7 +105,11 @@
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Section</label>
+                            <label class="control-label">Section{{idSection(libelleLigneEconomiqueParent(formData.activite_id))}}
+                                      
+                                       
+                                     
+                                    </label>
                             <div class="controls">
                               <input
                                 type="text"
@@ -114,7 +118,7 @@
                                   libelleSection(
                                     idSection(
                                       libelleLigneEconomiqueParent(
-                                        formData.ligne_economique_id
+                                        formData.activite_id
                                       )
                                     )
                                   )
@@ -138,7 +142,7 @@
                                   libelleProgramme(
                                     idProgramme(
                                       libelleLigneEconomiqueParent(
-                                        formData.ligne_economique_id
+                                        formData.activite_id
                                       )
                                     )
                                   )
@@ -160,7 +164,7 @@
                                   libelleAction(
                                     idAction(
                                       libelleLigneEconomiqueParent(
-                                        formData.ligne_economique_id
+                                        formData.activite_id
                                       )
                                     )
                                   )
@@ -422,7 +426,7 @@
                             <code style="color: red; font-size: 16px">*</code>
                           </label>
                            <select
-                            v-model="formData.Mois_paiement"
+                            v-model="formData.mois_paiement"
                             class="span"
                             style="border: 1px solid #000"
                           >
@@ -455,6 +459,72 @@
                                 style="border: 1px solid #000"
                                 class="span"
                               />
+                            </div>
+                          </div>
+                        </td>
+                        
+                   </tr>
+                   <tr>
+                      <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">MONTANT ENGAGE</label>
+                            <div class="controls">
+                              <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                              <money
+                                v-model="formData2.montant_engage"
+                                style="text-align: left; color: red"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                         <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Type d'objet</label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.diff_op_personnel"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option> </option>
+                                   <option value="mission">Mission</option>
+                                    <option value="salaire">Salaire </option>
+                                
+                                 
+                               
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MODE DE REGLEMENT</label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.mode_paiement_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option
+                                  v-for="typeFact in modepaiements"
+                                  :key="typeFact.id"
+                                  :value="typeFact.id"
+                                >
+                                  {{ typeFact.libelle }}
+                                </option>
+                              </select>
                             </div>
                           </div>
                         </td>
@@ -1224,7 +1294,7 @@
 <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >MODE DE REGLEMENT</label
+                              >Bailleur</label
                             >
                             <div class="controls">
                               <select
@@ -2466,6 +2536,7 @@ export default {
       "uniteZones",
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
+      "getterUniteAdministrativeBailleur"
     ]),
     // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
     ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
@@ -2787,12 +2858,12 @@ affichePersoUA() {
         if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.uniteadministrative_id == id &&
+              qtreel.uniteadministrative_id == id &&  qtreel.type_financement_id==this.formData.type_financement_id && qtreel.source_financement_id==this.formData.sous_financement_id && 
               qtreel.ligneeconomique_id == id1
           );
 
           if (qtereel) {
-            return qtereel.dotation;
+            return qtereel.dotation_nouvelle;
           }
           return 0;
         }
@@ -2815,11 +2886,11 @@ affichePersoUA() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.ligneeconomique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
-            return qtereel.ligne_budgetaire_parent_id;
+            return qtereel.activite_id;
           }
           return 0;
         }
@@ -3388,7 +3459,7 @@ SousFinancement() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3402,7 +3473,7 @@ SousFinancement() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3416,7 +3487,7 @@ SousFinancement() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3515,7 +3586,7 @@ SousFinancement() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3985,18 +4056,18 @@ SousFinancement() {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4058,24 +4129,27 @@ SousFinancement() {
             this.tailleOpEnregistrer +
             "-" +
             this.formData.numero_ordre_paiement;
+           
           var nouvelObjetOrdrePaiement78 = {
             exercice: this.anneeAmort,
+            diff_op_personnel:this.formData.diff_op_personnel,
+             mois_paiement: this.formData.mois_paiement,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4163,18 +4237,18 @@ SousFinancement() {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4265,18 +4339,18 @@ SousFinancement() {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4340,22 +4414,23 @@ SousFinancement() {
             this.formData.numero_ordre_paiement;
           var nouvelObjetOrdrePaiement784 = {
             exercice: this.anneeAmort,
+              diff_op_personnel:this.formData.diff_op_personnel,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4375,6 +4450,7 @@ SousFinancement() {
             mode_paiement_id: this.formData.mode_paiement_id,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+             	mois_paiement: this.formData.mois_paiement,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
             controleur_financier_id: this.recupererIdUser(
@@ -4442,18 +4518,18 @@ SousFinancement() {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,

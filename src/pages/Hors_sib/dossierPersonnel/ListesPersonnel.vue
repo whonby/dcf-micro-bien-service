@@ -944,13 +944,11 @@ recrutement:""
             this.allActeurDepense();
             this.getActeurFinContratAndActivite()
             this.getListeSalaireActuelAll()
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            console.log(this.formData.unite_administrative_id)
+            
             this.formData = this.acte_personnels.find(
       item => item.id == this.$route.params.id
     );
-    console.log(this.fabrice)
+   
         },
         computed: {
            admin:admin,

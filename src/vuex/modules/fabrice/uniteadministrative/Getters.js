@@ -860,3 +860,10 @@ export const groupeUniteAdministrativeBailleur = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.getterUniteAdministrativeBailleur, "ua_id");
 };
+
+
+
+export const groupeUniteAdministrativeDecompte = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.decomptefactures, "uniteadministrative_id");
+};

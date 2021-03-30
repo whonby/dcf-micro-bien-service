@@ -13,7 +13,7 @@
         </router-link>
       </li>
 <li>
-        <router-link :to="{name: 'AjouterDecomptePrecedant'}" tag="a">
+        <router-link :to="{name: 'groupeUaDecompte'}" tag="a">
           DECOMPTE ANTERIEUR
         </router-link>
       </li>
