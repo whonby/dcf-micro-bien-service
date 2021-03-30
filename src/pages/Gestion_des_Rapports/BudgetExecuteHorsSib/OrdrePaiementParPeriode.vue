@@ -59,6 +59,7 @@
                     />
                   </div>
                 </div>
+                
               </td>
             </tr>
           </tbody>
@@ -79,20 +80,23 @@
       >
         <tr>
           <td style="text-align: center">
-            <p>MINISTERE DU BUDGET  <br/>
-            ------------------------- <br/>
-            DIRECTION DU CONTRÔLE FINANCIER <br/>
-            -------------------------</p>
+            <p>
+              MINISTERE DU BUDGET <br />
+              ------------------------- <br />
+              DIRECTION DU CONTRÔLE FINANCIER <br />
+              -------------------------
+            </p>
             <img :src="AfficheLogODCF" />
           </td>
           <td style="text-align: center">
             <img :src="AfficheAmoirie" />
           </td>
           <td style="text-align: center">
-            <p>REPUBLIQUE DE CÔTE D'IVOIRE <br/>
-              Union-Discipline-Travail <br/>
-               ------------------------- </p>
-            
+            <p>
+              REPUBLIQUE DE CÔTE D'IVOIRE <br />
+              Union-Discipline-Travail <br />
+              -------------------------
+            </p>
           </td>
         </tr>
       </table>
@@ -134,7 +138,7 @@
       </p>
 
       <div
-        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite"
+        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite1"
         :key="GroupeOrdrePaiementByActivit.id"
       >
         <br />
@@ -145,7 +149,7 @@
 
         <table
           class="table table-bordered table-striped"
-          style="margin-left:5px; margin-right:5px"
+          style="margin-left: 5px; margin-right: 5px"
         >
           <thead style="background-color: #87ceeb">
             <tr>
@@ -494,11 +498,17 @@ export default {
       "sources_financements",
     ]),
 
-    ListeGroupByActivite() {
+    ListeGroupByActivite1() {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+           (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+           // qtreel[0].exercice == this.anneeAmort &&
+            qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null) ||
+
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
         );
       } else if (
         this.uniteAdministrative_id != 0 &&
@@ -507,20 +517,47 @@ export default {
       ) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+            && qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null) ||
+
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+            && qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
+
         );
-      }
+      } else if (
+        this.uniteAdministrative_id == 0 &&
+        this.formData.date_debut != "" &&
+        this.formData.date_fin != ""
+      ) {
+        return this.GroupeOrdrePaiementByActivite.filter(
+          (qtreel) =>
+            (qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+             && qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null)  ||
 
-      // else if (this.uniteAdministrative_id != 0 && this.formData.date_debut != "" && this.formData.date_fin != "") {
-      //   return  this.GroupeOrdrePaiementByActivite.filter(
-      //     (qtreel) =>( qtreel[0].date_decision_cf >= this.formData.date_debut &&
-      //      qtreel[0].date_decision_cf <= this.formData.date_fin)
-      //   );
-
-      // }
-      else {
+             (qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+             && qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
+        );
+      } else {
         return this.GroupeOrdrePaiementByActivite;
+        // .filter(
+        //   (qtreel) => (
+        //    // qtreel[0].exercice == this.anneeAmort
+        //    qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null)  ||
+
+        //   (
+        //     //qtreel[0].exercice == this.anneeAmort
+        //    qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
+        // );
       }
     },
 
@@ -575,11 +612,13 @@ export default {
           if (id != null && id != "") {
             return this.gettersgestionOrdrePaiement.filter(
               (qtreel) =>
-                (qtreel.activite_id == id &&
+                (qtreel.activite_id == id
+                 &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin) ||
+                  qtreel.date_decision_cf <= this.formData.date_fin) 
+                  ||
 
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
@@ -597,7 +636,6 @@ export default {
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8) ||
-                   
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 9)

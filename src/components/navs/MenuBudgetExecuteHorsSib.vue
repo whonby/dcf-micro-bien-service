@@ -32,6 +32,12 @@
           SITUATION D'EXECUTION RECAP REGIE
         </router-link>
       </li>
+
+       <li>
+        <router-link :to="{ name: 'SituationExecution' }" tag="a">
+          SITUATION D'EXECUTION
+        </router-link>
+      </li>
       <!-- <li>
          <router-link :to="{name:''}" tag="a">
            PERSONNEL

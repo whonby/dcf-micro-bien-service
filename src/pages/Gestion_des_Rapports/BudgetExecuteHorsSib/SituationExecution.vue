@@ -139,6 +139,16 @@
         EXERCICE: {{ anneeAmort }}
       </p>
 
+      <div
+        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite3"
+        :key="GroupeOrdrePaiementByActivit.id"
+      >
+        <br />
+        <p style="margin-left: 30px; font-size: 14px; font-weight: bold">
+          ACTIVITE:
+          {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
+        </p>
+
       <table
         class="table table-bordered table-striped"
         style="margin-left: 5px; margin-right: 5px"
@@ -153,7 +163,7 @@
                 background-color: #87ceeb;
               "
             >
-              Activités
+              Bailleurs
             </th>
             <th
               style="
@@ -201,54 +211,77 @@
         <tbody>
           <tr
             class="odd gradeX"
-            v-for="listeordrepaiement in ListeGroupByActivite"
-            :key="listeordrepaiement.id"
+            
           >
             <td style="font-size: 14px">
+                
               {{
-                LibelleActivite(listeordrepaiement[0].activite_id) ||
+    libelleLigneEconomique(GroupeOrdrePaiementByActivit[0].source_financement_id) ||
                 "Non renseigné"
               }}
             </td>
             <td>
-              {{
+              <!-- {{
                 formatageSommeSansFCFA(
                   parseFloat(
                     MontantBudgetActuel(listeordrepaiement[0].activite_id)
                   )
                 )
-              }}
+              }} -->
             </td>
 
             <td style="font-size: 14px">
-              {{
+            
+              <!-- {{
                 formatageSommeSansFCFA(
                   parseFloat(
                     MontantBudgetExecuté(listeordrepaiement[0].activite_id)
                   )
                 ) || "Non renseigné"
-              }}
+              }} -->
             </td>
             <td style="font-size: 14px">
-              {{
+              <!-- {{
                 (
                   ((MontantBudgetActuel(listeordrepaiement[0].activite_id) -
                     MontantBudgetExecuté(listeordrepaiement[0].activite_id)) /
                     MontantBudgetActuel(listeordrepaiement[0].activite_id)) *
                   100
                 ).toFixed(2) || "Non renseigné"
-              }}
+              }} -->
             </td>
             <td style="font-size: 14px">
-              {{
+              <!-- {{
                 MontantBudgetActuel(listeordrepaiement[0].activite_id) -
                   MontantBudgetExecuté(listeordrepaiement[0].activite_id) ||
                 "Non renseigné"
-              }}
+              }} -->
             </td>
           </tr>
         </tbody>
+
+        <tfoot>
+          <tr>
+            <td style="font-weight: bold; font-size:20px;"> TOTAL:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</td>
+            <td style="font-weight: bold; font-size:20px;"> {{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
+            <td style="font-weight: bold; font-size:20px;">{{ MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
+            <td style="font-weight: bold; font-size:20px;">
+              {{
+                (
+                  ((MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
+                    MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)) /
+                    MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)) *
+                  100).toFixed(2) || "Non renseigné"
+              }}
+            </td>
+           
+            <td style="font-weight: bold; font-size:20px;">{{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
+              MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}
+              </td>
+          </tr>
+        </tfoot>
       </table>
+    </div>
     </div>
   </div>
 </template>
@@ -398,6 +431,7 @@ export default {
       "getterMembreCojo",
       "getterProceVerballe",
       "GroupeOrdrePaiementByActivite",
+      "GroupeOrdrePaiementByLigneEconomique"
     ]),
     ...mapGetters("gestionMarche", [
       "groupeVille",
@@ -445,19 +479,19 @@ export default {
       "sources_financements",
     ]),
 
-    ListeGroupByActivite() {
+    ListeGroupByActivite3() {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].decision_cf == 8 &&
-              qtreel[0].diff_op == 1 &&
-              qtreel[0].exercice == this.anneeAmort &&
+              qtreel[0].diff_op == null &&
+            //  qtreel[0].exercice == this.anneeAmort &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
               qtreel[0].date_decision_cf <= this.formData.date_fin) ||
-              
+
             (qtreel[0].decision_cf == 9 &&
-              qtreel[0].diff_op == 1 &&
-              qtreel[0].exercice == this.anneeAmort &&
+              qtreel[0].diff_op == null &&
+             // qtreel[0].exercice == this.anneeAmort &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
               qtreel[0].date_decision_cf <= this.formData.date_fin)
         );
@@ -465,13 +499,10 @@ export default {
         return this.GroupeOrdrePaiementByActivite;
         // .filter(
         //   (qtreel) =>
-        //     (qtreel[0].decision_cf == 8 &&
-        //       qtreel[0].diff_op == 1 &&
-        //       qtreel[0].exercice == this.anneeAmort) ||
-
-        //     (qtreel[0].decision_cf == 9 &&
-        //       qtreel[0].diff_op == 1 &&
-        //       qtreel[0].exercice == this.anneeAmort)
+        //     (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null 
+        //      // && qtreel[0].exercice == this.anneeAmort
+        //      )
+             
         // );
       }
     },
@@ -491,10 +522,22 @@ export default {
       };
     },
 
+
+     libelleGroupeBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.GroupeOrdrePaiementByLigneEconomique.filter(
+            (qtreel) => qtreel.activite_id == id
+          );
+        }
+      };
+    },
+
+
     libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.plans_budgetaires.find(
+          const qtereel = this.sources_financements.find(
             (qtreel) => qtreel.id == id
           );
 
@@ -541,14 +584,36 @@ export default {
       };
     },
 
+     MontantBudgetActuelBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id == id &&
+                qtreel.annebudgetaire == this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+    
+
     MontantBudgetExecuté() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
-              (qtreel) =>
-                qtreel.activite_id == id &&
-                qtreel.annebudgetaire == this.anneeAmort
+              (qtreel) => qtreel.activite_id == id
+              // && qtreel.annebudgetaire ==this.anneeAmort
             )
             .reduce(
               (prec, cur) =>
@@ -602,7 +667,7 @@ export default {
       return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
     },
 
-    // s() {
+    // listeordrepaiements() {
     //   if (this.uniteAdministrative_id != 0) {
     //     return this.gettersgestionOrdrePaiement.filter(
     //       (qtreel) =>
@@ -682,6 +747,9 @@ export default {
       "modifierHistoriqueDecisionOp",
     ]),
 
+Disponible(){
+  return this.MontantBudgetActuel-this.MontantBudgetExecuté;
+},
     genererEnPdf() {
       this.$htmlToPaper("printpdf");
     },

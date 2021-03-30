@@ -206,31 +206,49 @@
           >
             <td style="font-size: 14px">
               {{
-                LibelleActivite(
-                  listeordrepaiement[0].activite_id
-                ) || "Non renseigné"
-              }}
-            </td>
-            <td> 
-              {{ formatageSommeSansFCFA(parseFloat(MontantBudgetActuel(listeordrepaiement[0].activite_id))) }}
-            </td>
-
-            <td style="font-size: 14px">
-              {{ formatageSommeSansFCFA(parseFloat(MontantBudgetExecuté(listeordrepaiement[0].activite_id))) || "Non renseigné" }}
-            </td>
-            <td style="font-size: 14px">
-              {{
-                (((MontantBudgetActuel(listeordrepaiement[0].activite_id)
-                 -MontantBudgetExecuté(listeordrepaiement[0].activite_id))
-                /MontantBudgetActuel(listeordrepaiement[0].activite_id)) * 100).toFixed(2) ||
+                LibelleActivite(listeordrepaiement[0].activite_id) ||
                 "Non renseigné"
               }}
             </td>
+            <td>
+              {{
+                formatageSommeSansFCFA(
+                  parseFloat(
+                    MontantBudgetActuel(listeordrepaiement[0].activite_id)
+                  )
+                )
+              }}
+            </td>
+
             <td style="font-size: 14px">
-              {{ (MontantBudgetActuel(listeordrepaiement[0].activite_id) - MontantBudgetExecuté(listeordrepaiement[0].activite_id)) || "Non renseigné" }}
+              {{
+                formatageSommeSansFCFA(
+                  parseFloat(
+                    MontantBudgetExecuté(listeordrepaiement[0].activite_id)
+                  )
+                ) || "Non renseigné"
+              }}
+            </td>
+            <td style="font-size: 14px">
+              {{
+                (
+                  ((MontantBudgetActuel(listeordrepaiement[0].activite_id) -
+                    MontantBudgetExecuté(listeordrepaiement[0].activite_id)) /
+                    MontantBudgetActuel(listeordrepaiement[0].activite_id)) *
+                  100
+                ).toFixed(2) || "Non renseigné"
+              }}
+            </td>
+            <td style="font-size: 14px">
+              {{
+                MontantBudgetActuel(listeordrepaiement[0].activite_id) -
+                  MontantBudgetExecuté(listeordrepaiement[0].activite_id) ||
+                "Non renseigné"
+              }}
             </td>
           </tr>
         </tbody>
+        
       </table>
     </div>
   </div>
@@ -428,23 +446,26 @@ export default {
       "sources_financements",
     ]),
 
-
     ListeGroupByActivite() {
-       if (
-        this.formData.date_debut != "" &&
-        this.formData.date_fin != ""
-      ) {
+      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return this.GroupeOrdrePaiementByActivite.filter(
-          (qtreel) =>(qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin)  
+          (qtreel) =>
+            (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null && 
+               qtreel[0].exercice == this.anneeAmort &&
+               (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+                qtreel[0].date_decision_cf <= this.formData.date_fin)) ||
+
+            (qtreel[0].decision_cf == 9 &&
+              qtreel[0].diff_op == null && qtreel[0].exercice == this.anneeAmort && 
+               (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin))
         );
-      }
-      else {
+      } else {
         return this.GroupeOrdrePaiementByActivite;
         // .filter(
-        //   (qtreel) =>(qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null) ||
-
-        //   (qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null) 
+        //   (qtreel) =>
+        //     (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null && qtreel[0].exercice == this.anneeAmort) ||
+        //     (qtreel[0].decision_cf == 9 && qtreel[0].diff_op == null && qtreel[0].exercice == this.anneeAmort)
         // );
       }
     },
@@ -498,8 +519,11 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate
-            .filter((qtreel) => qtreel.activite_id == id
-            && qtreel.annebudgetaire ==this.anneeAmort)
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.anneeAmort
+            )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
               0
@@ -515,11 +539,13 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
-            .filter((qtreel) => qtreel.activite_id == id
-           // && qtreel.annebudgetaire ==this.anneeAmort
+            .filter(
+              (qtreel) => qtreel.activite_id == id
+              // && qtreel.annebudgetaire ==this.anneeAmort
             )
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
               0
             )
             .toFixed(0);
@@ -537,7 +563,6 @@ export default {
               qtreel.decision_cf == 8 &&
               qtreel.date_decision_cf >= this.formData.date_debut &&
               qtreel.date_decision_cf <= this.formData.date_fin) ||
-
             (qtreel.diff_op == null &&
               qtreel.decision_cf == 9 &&
               qtreel.date_decision_cf >= this.formData.date_debut &&

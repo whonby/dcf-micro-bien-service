@@ -652,6 +652,30 @@ export function supprimerActeEffetFinancier({ commit }, id) {
 
 
 
+//modifier date Acte effet Finnancier 
+
+
+
+export function ModifierDateEffetFinancier({ commit }, elementModifie) {
+
+  asyncLoading(axios.put('/acte_finnancier_date/' + elementModifie.id, {
+    date_debut_exectuion_definitif: elementModifie.date_debut_exectuion_definitif,
+  })).then(response => {
+    commit('MODIFIER_DATE_ACTE_EFFET_FINANCIER', response.data)
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+
+}
+
+
+
+
+
 
 
 

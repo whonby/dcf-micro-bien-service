@@ -170,9 +170,7 @@ controlleur_fin
                     </li>
 
                      <li>
-                      <a data-toggle="tab" href="#tab0pm"
-                        >PROBLEME MARCHE
-                      </a>
+                      <a data-toggle="tab" href="#tab001">DIFFICULTE RENCONTRE </a>
                     </li>
                     <!-- <li>
                         <a data-toggle="tab" href="#tab040">EVOLUTION DES MARCHES</a>
@@ -366,6 +364,29 @@ controlleur_fin
                     ></marchePluriannuel>
                   </div>
 
+                  
+                  <!-- probleme marche -->
+                  <div id="tab001" class="tab-pane">
+                    <div class="span4"></div>
+                    <div class="span4"></div>
+
+                    <div class="span4" align="right">
+                      <a
+                        href="#ajouterProblemeMarchemodal"
+                        data-toggle="modal"
+                        class="btn btn-success"
+                        align="rigth"
+                        >Ajouter</a
+                      >
+                    </div>
+
+                    <problemeMarche
+                      :macheid="detail_marche.id"
+                    ></problemeMarche>
+                  </div>
+                  <!-- fin probleme marche -->
+
+
                   <div id="tab03" class="tab-pane">
                     <imageMarche :macheid="detail_marche.id"></imageMarche>
                   </div>
@@ -402,6 +423,7 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "./../../../../../Repositories/Repository";
 import marchePluriannuel from "../DossierMarchePluriannuel/marchePluriannuel";
+import problemeMarche from "../DossierMarchePluriannuel/problemeMarche";
 import avenant from "../dossierAvenant/avenantHs";
 import facture from "../dossierFacture/factureHs";
 import decompte from "../dossierDecompte/decomptePro";
@@ -422,6 +444,7 @@ export default {
     avenant,
     facture,
     decompte,
+    problemeMarche,
     HistoriqueDecompteFacture,
     graphiqueExecutionMarche,
     graphiqueSituationMarche,

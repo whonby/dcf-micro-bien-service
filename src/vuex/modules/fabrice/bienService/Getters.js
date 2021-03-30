@@ -27,23 +27,23 @@ export const communes = state => state.communes
 export const typeCandidat = state => state.typeCandidat
 export const typeAppelOffre = state => state.typeAppelOffre
 export const prestations = state => state.prestations.sort((a, b) => (a.code > b.code) ? 1 : -1)
-export const acteDepenses = state => state.acteDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
+export const acteDepenses = state => state.acteDepenses.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const bailleurs = state => state.bailleurs
-export const banques = state => state.banques.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const codesFonctions = state => state.codesFonctions.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const comptes = state => state.comptes.sort((a,b)=>(a.code>b.code)? 1:-1)
+export const banques = state => state.banques.sort((a, b) => (a.code > b.code) ? 1 : -1)
+export const codesFonctions = state => state.codesFonctions.sort((a, b) => (a.code > b.code) ? 1 : -1)
+export const comptes = state => state.comptes.sort((a, b) => (a.code > b.code) ? 1 : -1)
 
 export const lots = state => state.lots
-export const typePrestations = state => state.typePrestations.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.code)? 1:-1)
+export const typePrestations = state => state.typePrestations.sort((a, b) => (a.code > b.code) ? 1 : -1)
+export const typeFactures = state => state.typeFactures.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const typeActeDepenses = state => state.typeActeDepenses
-export const acteurDepenses = state => state.acteurDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
+export const acteurDepenses = state => state.acteurDepenses.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const getterCojos = state => state.cojos
 
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
 export const getterAnalyseDossiers = state => state.analyseDossiers
-export const getterPlanPassationMarche=state=>state.plan_passation_marche
+export const getterPlanPassationMarche = state => state.plan_passation_marche
 export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
 export const typeActeEffetFinanciers = state => state.typeActeEffetFinanciers
@@ -63,25 +63,25 @@ export const typeTypeProcedures = state => state.typeTypeProcedures
 export const procedurePassations = state => state.procedurePassations
 export const typeMarches = state => state.typeMarches
 export const modePassations = state => state.modePassations
-export const marches = state => state.marches.sort((a,b)=>(a.numero_lot>b.numero_lot)? 1:-1)
+export const marches = state => state.marches.sort((a, b) => (a.numero_lot > b.numero_lot) ? 1 : -1)
 export const engagements = state => state.engagements
 export const motifDecisions = state => state.motifDecisions
 export const documentProcedures = state => state.documentProcedures
- export const nouveauFournisseur = state => state.nouveauFournisseur
- export const acteEffetFinanciers = state => state.acteEffetFinanciers
- export const executionMarches = state => state.executionMarches
+export const nouveauFournisseur = state => state.nouveauFournisseur
+export const acteEffetFinanciers = state => state.acteEffetFinanciers
+export const executionMarches = state => state.executionMarches
 export const mandats = state => state.mandats
- export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
-  export const gettersEtatProcedure = state =>state.gettersEtatProcedure
- // export const gettersDocuments = state => state.documents
-   export const documentMedias = state => state.documentMedias
- export const rapportDocuments = state => state.rapportDocuments
- export const selectionner_candidats = state => state.selectionner_candidats
+export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
+export const gettersEtatProcedure = state => state.gettersEtatProcedure
+// export const gettersDocuments = state => state.documents
+export const documentMedias = state => state.documentMedias
+export const rapportDocuments = state => state.rapportDocuments
+export const selectionner_candidats = state => state.selectionner_candidats
 //  export const documentMedias = state =>state.mediaStock
 //  export const gettersStockDocuments = state =>state.stockDocuments
 // export const rapportOuverture1 = state => state.rapportOuverture1
 // export const rapportOuverture2 = state => state.rapportOuverture2
-  export const rapportOuverture = state => state.rapportOuverture
+export const rapportOuverture = state => state.rapportOuverture
 // exemple de getters
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
@@ -92,26 +92,26 @@ export const getterDemandeAno = state => state.stateDemandeAno
 export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
- export const gettersArnmp = state => state.arnmps
- export const gettersOrganeDecision = state =>state.organes_decision
- export const gettesrNaturePrix = state =>state.nature_prix
- export const gettersMotifPassations = state =>state.motif_passations
-export const gettersReserveCf = state =>state.reserve_cf
-export const gettersCotations = state =>state.stateCotations 
- export const gettersTransmissions = state => state.stateTransmissions
-export const getterMarcheBailleur= state => state.bailleurMarche;
-export const getterMembreCojo=state=>state.membre_cojo;
+export const gettersArnmp = state => state.arnmps
+export const gettersOrganeDecision = state => state.organes_decision
+export const gettesrNaturePrix = state => state.nature_prix
+export const gettersMotifPassations = state => state.motif_passations
+export const gettersReserveCf = state => state.reserve_cf
+export const gettersCotations = state => state.stateCotations
+export const gettersTransmissions = state => state.stateTransmissions
+export const getterMarcheBailleur = state => state.bailleurMarche;
+export const getterMembreCojo = state => state.membre_cojo;
 export const nombreTotalMarche = state => state.marches.length;
-export const getterProceVerballe=state=>state.proce_verballe;
+export const getterProceVerballe = state => state.proce_verballe;
 
-export const getterStructureDao=state=>state.structure_daos
-export const getterMembreComiteEvaluation=state=>state.membre_comite_evaluations
+export const getterStructureDao = state => state.structure_daos
+export const getterMembreComiteEvaluation = state => state.membre_comite_evaluations
 
-export const getterProgrammationMarchePlurieAnnuel=state=>state.programmationMarchePlurieAnnuel
+export const getterProgrammationMarchePlurieAnnuel = state => state.programmationMarchePlurieAnnuel
 
-export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGetters) =>
+export const personnaliseGetterMarcheBailleur = (state, getters, rootState, rootGetters) =>
     state.bailleurMarche.map(element => {
-        if (element.bailleur_id !== null && element.type_finnancement_id!==null ) {
+        if (element.bailleur_id !== null && element.type_finnancement_id !== null) {
             element = {
                 ...element,
                 bailleur: rootGetters['parametreGenerauxSourceDeFinancement/sources_financements'].find(
@@ -133,45 +133,45 @@ export const nombremarchesExecute = getters =>
         marcheNonAttribue => marcheNonAttribue.attribue == 1
     ).length;
 
-    // affichage la liste de cojo pour le personnel
+// affichage la liste de cojo pour le personnel
 
 export const listeOuverturePersonnel = state =>
-state.cojos.filter(
-    varObjet => varObjet.difference_personnel_bienService =="pers"
-)
+    state.cojos.filter(
+        varObjet => varObjet.difference_personnel_bienService == "pers"
+    )
 
 
 // afficher lettre invitation personnel
 export const listeLettreInvitationPersonnel = state =>
-state.lettreInvitation.filter(
-    varObjetLettre => varObjetLettre.difference_personnel_bienService =="personnel"
-);
+    state.lettreInvitation.filter(
+        varObjetLettre => varObjetLettre.difference_personnel_bienService == "personnel"
+    );
 
 
 // afficher mandater du personnel
 
 export const listeMandatePersonnel = state =>
-state.mandate.filter(
-    varObjetMandat => varObjetMandat.difference_personnel_bienService ==="personnel"
-);
+    state.mandate.filter(
+        varObjetMandat => varObjetMandat.difference_personnel_bienService === "personnel"
+    );
 
 // afficher jugement personnel
 export const listeJugementPersonnel = state =>
-state.analyseDossiers.filter(
-    objetJugement => objetJugement.difference_personnel_bienService ==="personnel"
-)
+    state.analyseDossiers.filter(
+        objetJugement => objetJugement.difference_personnel_bienService === "personnel"
+    )
 
 // afficher ano dmp bailleur du personnel
 
 export const listeAnoDmpBailleur = state =>
-state.stateAnoDmpBailleur.filter(
-    objetBailleur => objetBailleur.difference_personnel_bienService ==="personnel"
-)
+    state.stateAnoDmpBailleur.filter(
+        objetBailleur => objetBailleur.difference_personnel_bienService === "personnel"
+    )
 
 
 
-    // afficher nombre de contrat dans personnel
-    
+// afficher nombre de contrat dans personnel
+
 
 export const afficheNonMarche = getters =>
     getters.marches.filter(
@@ -199,9 +199,9 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 
-    export const gettersCotationPersonnaliser = (state, getters, rootState, rootGetters) =>
+export const gettersCotationPersonnaliser = (state, getters, rootState, rootGetters) =>
     state.stateCotations.map(element => {
-        if (element.entreprise_id !== null ) {
+        if (element.entreprise_id !== null) {
             element = {
                 ...element,
 
@@ -214,7 +214,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
                 //     candidat => candidat.id == element.candidat_id
                 // ),
 
-               
+
 
 
             }
@@ -232,7 +232,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 
-    export const gettersPersonnaliserTransmissions = (state, getters, rootState, rootGetters) =>
+export const gettersPersonnaliserTransmissions = (state, getters, rootState, rootGetters) =>
     state.stateTransmissions.map(element => {
         if (element.plan_motif_decision_id !== null) {
             element = {
@@ -243,7 +243,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
                     plans => plans.id == element.plan_motif_decision_id
                 ),
 
-               
+
 
 
             }
@@ -252,12 +252,12 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         return element;
     })
 
-    //stateTransmissions
-    // getters d'etat de procedure
+//stateTransmissions
+// getters d'etat de procedure
 
 
 
-    export const gettersEtatProcedurePersonnaliser = (state, getters, rootState, rootGetters) =>
+export const gettersEtatProcedurePersonnaliser = (state, getters, rootState, rootGetters) =>
     state.gettersEtatProcedure.map(element => {
         if (element.marche_id !== null) {
             element = {
@@ -275,9 +275,9 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
     })
 
 
-     export const gettersOuverturePersonnaliser = (state, getters, rootState, rootGetters) =>
+export const gettersOuverturePersonnaliser = (state, getters, rootState, rootGetters) =>
     state.cojos.map(element => {
-        if (element.entreprise_id !== null && element.cotation_id !==null) {
+        if (element.entreprise_id !== null && element.cotation_id !== null) {
             element = {
                 ...element,
 
@@ -291,7 +291,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
                     plans => plans.id == element.cotation_id
                 ),
 
-               
+
 
 
             }
@@ -336,22 +336,22 @@ export const getFacturePersonnaliser = (state, getters, rootState, rootGetters) 
 
 
 
-export  const getAppelOffresPersonnaliser = (state, getters,rootState, rootGetters) =>
-state.appelOffres.map(element => {
-    if(element.unite_administrative_id !== null ){
-        element = {
-            ...element,
-           
-           
-           objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
-               plans => plans.id == element.unite_administrative_id
-            )
-            
+export const getAppelOffresPersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.appelOffres.map(element => {
+        if (element.unite_administrative_id !== null) {
+            element = {
+                ...element,
+
+
+                objetUniteAdministrative: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.unite_administrative_id
+                )
+
+            }
+
         }
-        
-    }
-    return element;
-})
+        return element;
+    })
 
 export const getTypeTextJuridique = (state, getters) =>
     state.text_juridiques.map(element => {
@@ -370,26 +370,26 @@ export const getTypeTextJuridique = (state, getters) =>
     });
 
 
-export  const getMarchePersonnaliser = (state, getters,rootState, rootGetters) =>
-state.marches.map(element => {
-    if (element.unite_administrative_id !== null && element.activite_id !== null && element.economique_id !== null ){
-        element = {
-            ...element,
-            objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
-               plans => plans.id == element.unite_administrative_id
-            ),
-            afficheActivite: rootGetters[
-          "parametreGenerauxActivite/plans_activites"
-        ].find(planactivite => planactivite.id == element.activite_id),
-            afficheEconomique: rootGetters[
-                "parametreGenerauxBudgetaire/plans_budgetaires"
-            ].find(planactivite => planactivite.id == element.economique_id)
-            
+export const getMarchePersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.marches.map(element => {
+        if (element.unite_administrative_id !== null && element.activite_id !== null && element.economique_id !== null) {
+            element = {
+                ...element,
+                objetUniteAdministrative: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.unite_administrative_id
+                ),
+                afficheActivite: rootGetters[
+                    "parametreGenerauxActivite/plans_activites"
+                ].find(planactivite => planactivite.id == element.activite_id),
+                afficheEconomique: rootGetters[
+                    "parametreGenerauxBudgetaire/plans_budgetaires"
+                ].find(planactivite => planactivite.id == element.economique_id)
+
+            }
+
         }
-        
-    }
-    return element;
-})
+        return element;
+    })
 
 
 export const montantMarche = (state, getters) =>
@@ -401,14 +401,14 @@ export const montantMarche = (state, getters) =>
 
 
 
-    
-    // export const executionContrat = state => 
-    // state.acteEffetFinanciers.filter(
-    //     varObjetContrat => varObjetContrat.marche_id == marche_id
-    // )
+
+// export const executionContrat = state => 
+// state.acteEffetFinanciers.filter(
+//     varObjetContrat => varObjetContrat.marche_id == marche_id
+// )
 
 export const getActeEffetFinancierPersonnaliserContrat = (state, getters, rootState, rootGetters) =>
-getters.acteEffetFinanciers.map(element => {
+    getters.acteEffetFinanciers.map(element => {
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
@@ -421,7 +421,7 @@ getters.acteEffetFinanciers.map(element => {
                     plans => plans.id == element.marche_id
                 ),
 
-               
+
 
 
             }
@@ -430,21 +430,21 @@ getters.acteEffetFinanciers.map(element => {
         return element;
     })
 
-    // afficher infos acte effet financier du personnnel
+// afficher infos acte effet financier du personnnel
 
-    // export const actePersonnel = state =>
-    // state.acteEffetFinanciers.filter(
-    //     objetActe => objetActe.difference_personnel_bienService ==="personnel"
-    // )
+// export const actePersonnel = state =>
+// state.acteEffetFinanciers.filter(
+//     objetActe => objetActe.difference_personnel_bienService ==="personnel"
+// )
 
 
-    // export const executionDuMarche = state => 
-    // state.acteEffetFinanciers.filter(
-    //     varObjet => varObjet.difference_personnel_bienService =="bienService"
-    // )
+// export const executionDuMarche = state => 
+// state.acteEffetFinanciers.filter(
+//     varObjet => varObjet.difference_personnel_bienService =="bienService"
+// )
 
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-getters.acteEffetFinanciers.map(element => {
+    getters.acteEffetFinanciers.map(element => {
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
@@ -457,7 +457,7 @@ getters.acteEffetFinanciers.map(element => {
                     plans => plans.id == element.marche_id
                 ),
 
-               
+
 
 
             }
@@ -475,78 +475,78 @@ export const montantMarcheReel = (state, getters) =>
 
 
 
-    export const montantMarcheAttribue = (state, getters) =>
+export const montantMarcheAttribue = (state, getters) =>
 
-    getters.marcherAttribue.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
-      0    
-      
+    getters.marcherAttribue.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
+        0
+
     );
-    
 
 
 
 
-    
-    export const marcherAttribue = getters =>
+
+
+export const marcherAttribue = getters =>
     getters.marches.filter(
-      marcheNonAttribue => marcheNonAttribue.attribue !== 0
+        marcheNonAttribue => marcheNonAttribue.attribue !== 0
     );
 
 // marche non attribué 
 
-   
- // methode pour le mache en cour de contratualisation
+
+// methode pour le mache en cour de contratualisation
 
 //  export const marcheEnConstratualisation = getters =>
 //  getters.marches.filter(
 //      varResultat => varResultat.contratualisation == 1
 //  );
- 
-
-
-
-    // export const marcheNonattribue = getters =>
-    // getters.marches.filter(
-    //   marcheNonAttribue => marcheNonAttribue.attribue == 0
-    // );
 
 
 
 
-    export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
-        getters.marches.map(element => {
+// export const marcheNonattribue = getters =>
+// getters.marches.filter(
+//   marcheNonAttribue => marcheNonAttribue.attribue == 0
+// );
+
+
+
+
+export const printMarcheNonAttribue = (state, getters, rootState, rootGetters) =>
+    getters.marches.map(element => {
         if (element.unite_administrative_id !== null
             && element.activite_id !== null
             && element.economique_id !== null && element.type_marche_id !== null) {
-        element = {
-            ...element,
-           
-           
-            objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
-               plans => plans.id == element.unite_administrative_id
-            ),
-            afficheActivite: rootGetters[
-          "parametreGenerauxActivite/plans_activites"
-            ].find(planactivite => planactivite.id == element.activite_id),
-            afficheEconomique: rootGetters[
-                "parametreGenerauxBudgetaire/plans_budgetaires"
-            ].find(planactivite => planactivite.id == element.economique_id),
-            type_marche: rootGetters[
-                "bienService/typeMarches"
-            ].find(planactivite => planactivite.id == element.type_marche_id)
+            element = {
+                ...element,
 
 
-            
+                objetUniteAdministrative: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.unite_administrative_id
+                ),
+                afficheActivite: rootGetters[
+                    "parametreGenerauxActivite/plans_activites"
+                ].find(planactivite => planactivite.id == element.activite_id),
+                afficheEconomique: rootGetters[
+                    "parametreGenerauxBudgetaire/plans_budgetaires"
+                ].find(planactivite => planactivite.id == element.economique_id),
+                type_marche: rootGetters[
+                    "bienService/typeMarches"
+                ].find(planactivite => planactivite.id == element.type_marche_id)
+
+
+
+            }
+
         }
-        
-    }
-    return element;
-})
+        return element;
+    })
 
 export const EngagementNonValider = state =>
-  state.engagements.filter(
-    Immrealise => Immrealise.motif !== 1
-  );
+    state.engagements.filter(
+        Immrealise => Immrealise.motif !== 1
+    );
 
 
 export const getEngagementPersonnaliser = (state, getters, rootState, rootGetters) =>
@@ -559,13 +559,13 @@ export const getEngagementPersonnaliser = (state, getters, rootState, rootGetter
             && element.grd_nature_id !== null
             && element.ligne_budgetaire_id !== null
             && element.facture_id !== null
-           ) {
+        ) {
             element = {
                 ...element,
-                
+
                 afficheFacture: rootGetters['bienService/factures'].find(
                     plans => plans.id == element.facture_id
- ),
+                ),
                 afficheProgramme: rootGetters['parametreGenerauxAdministratif/plans_programmes'].find(
                     plans => plans.id == element.programme_id
                 ),
@@ -599,7 +599,7 @@ export const engagementValider = state =>
         Immrealise => Immrealise.val == 1
     );
 
-    
+
 
 export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGetters) =>
     getters.engagementValider.map(element => {
@@ -648,29 +648,29 @@ export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGette
     })
 
 
-    export const getPersonnaliserFacture = (state, getters, rootState, rootGetters) =>
+export const getPersonnaliserFacture = (state, getters, rootState, rootGetters) =>
     getters.engagementValider.map(element => {
         if (
-    
-             element.activite_id !== null
-          
+
+            element.activite_id !== null
+
             && element.ligne_budgetaire_id !== null
-            
+
         ) {
             element = {
                 ...element,
 
 
-               
-              
-              
+
+
+
 
                 afficheActivite: rootGetters['parametreGenerauxActivite/afficheNiveauActivite'].find(
                     plans => plans.id == element.activite_id
                 ),
-               
 
-               
+
+
                 afficheLigneBudget: rootGetters['parametreGenerauxBudgetaire/plans_budgetaires'].find(
                     plans => plans.id == element.ligne_budgetaire_id
                 ),
@@ -689,8 +689,8 @@ export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGette
 //         (prec, cur) => parseInt(prec) + parseInt(cur.qte_actuel),
 //         0
 //     );
-    
-    // exemple de teset
+
+// exemple de teset
 export const mandatVise = state =>
     state.mandats.filter(
         Immrealise => Immrealise.decision_cf == 8
@@ -763,8 +763,8 @@ export const getMandatPersonnaliser = (state, getters, rootState, rootGetters) =
             && element.activite_id !== null
             && element.ua_id !== null
             && element.grd_nature_id !== null
-            && element.ligne_budgetaire_id !== null 
-            && element.marche_id !== null 
+            && element.ligne_budgetaire_id !== null
+            && element.marche_id !== null
             && element.section_id !== null
         ) {
             element = {
@@ -881,52 +881,52 @@ export const nombremarches = getters =>
         marcheNonAttribue => marcheNonAttribue.attribue !== 1
     ).length;
 
-    export const AfficheMarcheNonAttribue = state =>
-             state.marches.filter(
-               affichenaturedep => affichenaturedep.attribue == 0
+export const AfficheMarcheNonAttribue = state =>
+    state.marches.filter(
+        affichenaturedep => affichenaturedep.attribue == 0
     ).length;
-    
 
-   export const affichePlanifier = state =>
-            state.marches.filter(
-              affichenaturedep => affichenaturedep.attribue !== 1
+
+export const affichePlanifier = state =>
+    state.marches.filter(
+        affichenaturedep => affichenaturedep.attribue !== 1
     );
 
 
-   export const afficheContratualisation = state =>
-   state.marches.filter(
-     affichenaturedep => affichenaturedep.attribue == 1
-);
+export const afficheContratualisation = state =>
+    state.marches.filter(
+        affichenaturedep => affichenaturedep.attribue == 1
+    );
 
 //  export const affichePlanifier = (state) =>
 //     state.marches.filter((affichenaturedep) => affichenaturedep.attribue !== 1);
-   
-            
 
-     export const montantContratualisation = (state, getters) =>
-              getters.afficheContratualisation.reduce(
-                (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
-                0
-              );
-              
-     export const montantPlanifier = (state, getters) =>
-              getters.affichePlanifier.reduce(
-                (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
-                0
+
+
+export const montantContratualisation = (state, getters) =>
+    getters.afficheContratualisation.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
     );
-              
 
- export const montantPlanification = (state, getters) =>
-   getters.marches.filter(elment => elment.attribue == 0).reduce(
-     (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
-     0
-   );
+export const montantPlanifier = (state, getters) =>
+    getters.affichePlanifier.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
+    );
+
+
+export const montantPlanification = (state, getters) =>
+    getters.marches.filter(elment => elment.attribue == 0).reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
+    );
 
 
 export const montantComtratualisation = (state, getters) =>
-  getters.marches
-    .filter((elment) => elment.attribue == 1)
-    .reduce((prec, cur) => parseInt(prec) + parseInt(cur.montant_marche), 0);
+    getters.marches
+        .filter((elment) => elment.attribue == 1)
+        .reduce((prec, cur) => parseInt(prec) + parseInt(cur.montant_marche), 0);
 
 
 
@@ -934,7 +934,7 @@ export const montantComtratualisation = (state, getters) =>
 
 export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, rootGetters) =>
     state.acteEffetFinanciers.map(element => {
-        if (element.entreprise_id !== null && element.marche_id !== null && element.ua_id!==null) {
+        if (element.entreprise_id !== null && element.marche_id !== null && element.ua_id !== null) {
             element = {
                 ...element,
 
@@ -947,7 +947,7 @@ export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, 
 
                 afficheObjetUa: rootGetters['uniteadministrative/uniteAdministratives'].find(
                     plans => plans.id == element.ua_id
-                ),               
+                ),
 
 
             }
@@ -968,7 +968,7 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
                 ...element,
 
 
-              
+
                 AfficheMarche: rootGetters['bienService/acteEffetFinanciers'].find(
                     plans => plans.marche_id == element.id
                 ),
@@ -983,64 +983,64 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
     })
 
 
-    /// afficher les informations  du tableau de bord  d'investissement///
+/// afficher les informations  du tableau de bord  d'investissement///
 
-    // afficher le nombre de marche
+// afficher le nombre de marche
 
-    export const nombreMarcheinvestissement = state =>
+export const nombreMarcheinvestissement = state =>
     state.marches.filter(
         varObjet => varObjet.type_marche.code_type_marche == 3
     ).length;
-         
-   export const MontantMarcheInvestissement = state =>
-   state.marches.filter(
-       objetMontant => objetMontant.type_marche.code_type_marche == 3
-   ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
 
-   // afficher les marche en planiofications pour investissement
-    export const nombreMarchePlanifier = state =>
+export const MontantMarcheInvestissement = state =>
+    state.marches.filter(
+        objetMontant => objetMontant.type_marche.code_type_marche == 3
+    ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+
+// afficher les marche en planiofications pour investissement
+export const nombreMarchePlanifier = state =>
     state.marches.filter(
         response => response.type_marche.code_type_marche == 3 && response.attribue == 0
     ).length;
 
-    // afficher le nombre de marche en contratualisation d'investissement
+// afficher le nombre de marche en contratualisation d'investissement
 
-    export const nombreMarcheContratualisation = state =>
+export const nombreMarcheContratualisation = state =>
     state.marches.filter(
         objetNombreContratualisation => objetNombreContratualisation.type_marche.code_type_marche == 3
-         && objetNombreContratualisation.attribue == 1
+            && objetNombreContratualisation.attribue == 1
     ).length;
 
 
-    // export const montantMarcheContratualisationInvestissement = (state, getters) =>
-    // state.nombreMarcheContratualisation.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche),0)
-   
-    export const montantMarcheContratualisationInvestissement = state =>
+// export const montantMarcheContratualisationInvestissement = (state, getters) =>
+// state.nombreMarcheContratualisation.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche),0)
+
+export const montantMarcheContratualisationInvestissement = state =>
     state.marches.filter(
         varObjet => varObjet.type_marche.code_type_marche == 3
-         && varObjet.attribue == 1
+            && varObjet.attribue == 1
     ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
-    
-
-    /// afficher le nombre de marche en execution d'investissement
 
 
-    // export const nombreMarcheExecuteInvestissement = (state, getters) =>
-    // state.acteEffetFinanciers.filter(
-    //     objetExecution => objetExecution.indicateur_resilie != 1 && objetExecution.marche_id == marche_id
-        
-    // ).length;
+/// afficher le nombre de marche en execution d'investissement
+
+
+// export const nombreMarcheExecuteInvestissement = (state, getters) =>
+// state.acteEffetFinanciers.filter(
+//     objetExecution => objetExecution.indicateur_resilie != 1 && objetExecution.marche_id == marche_id
+
+// ).length;
 
 // echo le montant des marches executé d'investissement
 
-    // export const montantMarcheExecutionInvestissement = (state, getters) =>
-    // state.marches.filter(
-    //     varObjet => varObjet.type_marche.code_type_marche == 3
-    //      && varObjet.attribue == 2
-    // ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+// export const montantMarcheExecutionInvestissement = (state, getters) =>
+// state.marches.filter(
+//     varObjet => varObjet.type_marche.code_type_marche == 3
+//      && varObjet.attribue == 2
+// ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 
 // 
-    export const gettersPersonnaliserRapportJugement = (state, getters, rootState, rootGetters) =>
+export const gettersPersonnaliserRapportJugement = (state, getters, rootState, rootGetters) =>
     state.analyseDossiers.map(element => {
         if (element.candidat_personnel_id !== null) {
             element = {
@@ -1055,7 +1055,7 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         return element;
     })
 
- export const getterEcheances = state => state.echeances;
+export const getterEcheances = state => state.echeances;
 
 export const mandatVisePersonnel = state =>
     state.mandats.filter(
@@ -1068,14 +1068,14 @@ export const getMandatPersonnaliserPersonnel = (state, getters, rootState, rootG
             && element.action_id !== null
             && element.activite_id !== null
             && element.ua_id !== null
-           
+
             && element.ligne_budgetaire_id !== null
-           
+
         ) {
             element = {
                 ...element,
-               
-               
+
+
                 afficheProgramme: rootGetters['parametreGenerauxAdministratif/plans_programmes'].find(
                     plans => plans.id == element.programme_id
                 ),
@@ -1101,22 +1101,22 @@ export const getMandatPersonnaliserPersonnel = (state, getters, rootState, rootG
         return element;
     })
 export const groupeEntreprise = (state) => {
-  
+
     return groupBy(state.acteEffetFinanciers, "entreprise_id");
 };
 
 
 
 /**GetterLoadinMarche**/
-export const getterLoadinMarche=state => state.loading_marche
+export const getterLoadinMarche = state => state.loading_marche
 
 
-export const getterImageMarche=state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
+export const getterImageMarche = state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
 
 
 
-export const getterFiltreCarteInfrastructure=state => state.marcheFiltreCarteInfrastructure
-export const getterInformationCarteInfrastructure=state => state.informationFiltreCarteInfrastructure
+export const getterFiltreCarteInfrastructure = state => state.marcheFiltreCarteInfrastructure
+export const getterInformationCarteInfrastructure = state => state.informationFiltreCarteInfrastructure
 
 /****
  *  tableauBordFilter:"",
@@ -1124,33 +1124,38 @@ export const getterInformationCarteInfrastructure=state => state.informationFilt
  */
 
 
-export const getterListeMarcheTableauBordFiltre=state => state.tableauBordFilter
-export const getterInfoTableauBordFiltre=state => state.infoFiltreTableauBord
+export const getterListeMarcheTableauBordFiltre = state => state.tableauBordFilter
+export const getterInfoTableauBordFiltre = state => state.infoFiltreTableauBord
 
-export const getterEntrepriseSousTraitance=state => state.entreprise_soustraitant
+export const getterEntrepriseSousTraitance = state => state.entreprise_soustraitant
 
 
 
 
 export const GroupeEntreprise = (state, getters) => {
     //delete getters.trieUaImmobilisation.
-      return groupBy(getters.acteEffetFinanciers,"entreprise_id");
-  };
+    return groupBy(getters.acteEffetFinanciers, "entreprise_id");
+};
 
 
 
-  
+
 export const GroupeUaDemandeEngagement = (state, getters) => {
     //delete getters.trieUaImmobilisation.
-      return groupBy(getters.gettersDemandeEngagement,"ua_id");
-  };
+    return groupBy(getters.gettersDemandeEngagement, "ua_id");
+};
 
-  export const GroupeOrdrePaiementByActivite = (state, getters) => {
+export const GroupeOrdrePaiementByActivite = (state, getters) => {
     //delete getters.trieUaImmobilisation.
-      return groupBy(getters.gettersgestionOrdrePaiement,"activite_id");
-  };
+    return groupBy(getters.gettersgestionOrdrePaiement, "activite_id");
+};
 
-  export const GroupeOrdrePaiementByGrandeNature = (state, getters) => {
-    
-      return groupBy(getters.gettersgestionOrdrePaiement,"grand_nature_id");
-  };
+export const GroupeOrdrePaiementByLigneEconomique = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+    return groupBy(getters.gettersgestionOrdrePaiement, "source_financement_id");
+};
+
+export const GroupeOrdrePaiementByGrandeNature = (state, getters) => {
+
+    return groupBy(getters.gettersgestionOrdrePaiement, "grand_nature_id");
+};
