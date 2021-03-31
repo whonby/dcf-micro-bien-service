@@ -88,7 +88,65 @@ export function supprimerPermissionConge({ commit }, id) {
         })
 }
 
+//Personnel Rattacher
 
+export function getPersonnelRattacher({ commit }) {
+    queue.push(() => axios.get('/PersonnelRattacher').then(tony => {
+      commit('GET_ALL_PERSONNEL_RATTACHER', tony.data)
+    }).catch(error => console.log(error)))
+  }
+  
+  export function AjouterPersonnelRattacher({ commit }, formData) {
+    asyncLoading(axios.post('/PersonnelRattacher', formData)).then(response => {
+      if (response.status == 201) {
+  
+        commit('AJOUTER_PERSONNEL_RATTACHER', response.data)
+  
+        this.$app.$notify({
+          title: 'success ',
+          text: 'Enregistrement effectué !',
+          type: "success"
+        })
+      }
+  
+    }).catch(error => console.log(error))
+  }
+  
+  //Suppression
+  export function SupprimerPersonnelRattacher({ commit }, id) {
+  
+    this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+        commit('SUPPRIMER_PERSONNEL_RATTACHER', id)
+        axios.delete('/PersonnelRattacher/' + id).then(() => dialog.close())
+      })
+  }
+  //MODIFICATION
+  
+  
+  export function ModifierPersonnelRattacher({ commit }, elementModifie) {
+  
+    asyncLoading(axios.put('/PersonnelRattacher/' + elementModifie.id, {
+      probleme: elementModifie.probleme,
+      traitement: elementModifie.traitement,
+      decision: elementModifie.decision,
+      date: elementModifie.date,
+  
+    })).then(response => {
+      commit('MODIFIER_PERSONNEL_RATTACHER', response.data)
+  
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué avec success !',
+        type: "success"
+      })
+    }).catch(error => console.log(error))
+  
+  }
+  
+  
+  //fin
 
 /**
  * acteur_depenses

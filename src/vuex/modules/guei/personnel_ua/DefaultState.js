@@ -38,7 +38,8 @@ const defaultstate = {
     sauvegardePhoto:[],
     fonctionProfessionnel:[],
     FichierJoinDmdEngagement:[],
-    ComptableAssignataire:[]
+    ComptableAssignataire:[],
+    PersonnelRattacher:[]
 
 };
 

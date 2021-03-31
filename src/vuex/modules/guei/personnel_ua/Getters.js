@@ -41,6 +41,7 @@ export const categorieGrade = state =>
 export const familleFonction = state =>
   state.familleFonction.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const getterpermissionConge = state => state.permissionConge;
+export const getterPersonneRattacher = state => state.PersonnelRattacher;
 // export const categorieGrade = state => state.categorieGrade;
 //export const familleFonction = state => state.familleFonction;
 export const classificationGradeFonction = state => state.classificationGradeFonction;
@@ -168,6 +169,11 @@ export const afficheNombrePersonnelRecuActeNormination = state =>
     export const groupePersonnel = (state, getters) => {
         //delete getters.trieUaImmobilisation.
         return groupBy(getters.acte_personnels, "unite_administrative_id");
+      };
+
+      export const groupeUaPersonneRattacher = (state, getters) => {
+        //delete getters.trieUaImmobilisation.
+        return groupBy(getters.getterPersonneRattacher, "ua_rattacheur");
       };
 
 export {

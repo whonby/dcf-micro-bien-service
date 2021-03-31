@@ -97,9 +97,9 @@ import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
-import  marcheParEntreprise from "../../pages/gestionMarche/marcheParEntreprise.vue"
+import marcheParEntreprise from "../../pages/gestionMarche/marcheParEntreprise.vue"
 import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTableBordUniteAd"
-import  marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
+import marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
 import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
 import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
 import listeMarchePPM from "../../pages/gestionMarche/listeMarchePPM.vue"
@@ -132,6 +132,7 @@ import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureE
 import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
 import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListeDesOrdresPaiement.vue"
+import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/PersonnelRattacher.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
@@ -154,6 +155,11 @@ const BienServiceRoutes = [
         path: "/AjouterDecompteActuelle",
         name: "AjouterDecompteActuelle",
         component: AjouterDecompteActuelle
+    },
+    {
+        path: "/PersonneRattacher",
+        name: "PersonneRattacher",
+        component: PersonneRattacher
     },
     {
         path: "/AjouterDecomptePrecedant",
@@ -180,7 +186,7 @@ const BienServiceRoutes = [
         name: "listeDesBudgetVentilleRegie",
         component: listeDesBudgetVentilleRegie
     },
-  //test tableaux
+    //test tableaux
     {
         path: "/TestTableaux",
         name: "TestTableaux",
@@ -193,19 +199,19 @@ const BienServiceRoutes = [
         name: "OrdrePaiementRegie",
         component: OrdrePaiementRegie
     },
- //ajout ordre de paiement 
+    //ajout ordre de paiement 
     {
         path: "/AjoutOrdrePaiementRegie",
         name: "AjoutOrdrePaiementRegie",
         component: AjoutOrdrePaiementRegie
     },
-//ajout ordre de paiement annulation
+    //ajout ordre de paiement annulation
     {
         path: "/AjoutOrdrePaiementRegieAnnulation",
         name: "AjoutOrdrePaiementRegieAnnulation",
         component: AjoutOrdrePaiementRegieAnnulation
     },
-//ajout ordre de paiement definitive
+    //ajout ordre de paiement definitive
 
     {
         path: "/AjoutOrdrePaiementRegieDefinitive",
@@ -319,102 +325,102 @@ const BienServiceRoutes = [
     },
     {
 
-        
-        path:"/AjouterTacheRealise/:id",
-        name:"AjouterTacheRealise",
-        component:AjouterTacheRealise
+
+        path: "/AjouterTacheRealise/:id",
+        name: "AjouterTacheRealise",
+        component: AjouterTacheRealise
     },
     {
-        path:"/suivi-delai",
-        name:"suiviDelai",
-        component:SuiviDelai
+        path: "/suivi-delai",
+        name: "suiviDelai",
+        component: SuiviDelai
     },
 
     {
-        path:"/liste-marche-ppm",
-        name:"listeMarcheppm",
-        component:listeMarchePPM
+        path: "/liste-marche-ppm",
+        name: "listeMarcheppm",
+        component: listeMarchePPM
     },
     {
 
-        path:"/AjouterTacheParMarche/:id",
-        name:"AjouterTacheParMarche",
-        component:AjouterTacheParMarche
+        path: "/AjouterTacheParMarche/:id",
+        name: "AjouterTacheParMarche",
+        component: AjouterTacheParMarche
     },
     {
 
-        path:"/fiche-contratualisation/:id",
-        name:"FicheContratualisation",
-        component:FicheContratualisation
+        path: "/fiche-contratualisation/:id",
+        name: "FicheContratualisation",
+        component: FicheContratualisation
     },
     {
-     
-        path:"/tableau-bord-financier",
-        name:"TableauBordFinancier",
-        component:TableauBordFinancier
+
+        path: "/tableau-bord-financier",
+        name: "TableauBordFinancier",
+        component: TableauBordFinancier
     },
     {
-        path:"/marche-sib",
-        name:"listeMarche",
-        component:listeMarcheSib
+        path: "/marche-sib",
+        name: "listeMarche",
+        component: listeMarcheSib
     },
     {
-        path:"/ajouter-marche-sib",
-        name:"ajouterMarche",
-        component:ajouterMarcheSib
+        path: "/ajouter-marche-sib",
+        name: "ajouterMarche",
+        component: ajouterMarcheSib
     },
     {
-        path:"/bailleur",
-        name:"baille1",
-        component:AnoBailleur1
+        path: "/bailleur",
+        name: "baille1",
+        component: AnoBailleur1
     },
     {
-        path:"/marche-hors-ppm",
-        name:"marcheHorsppm",
-        component:marcheHorsppm
+        path: "/marche-hors-ppm",
+        name: "marcheHorsppm",
+        component: marcheHorsppm
     },
     {
-        path:"/marche-hors-ppm-hors-sib",
-        name:"marcheHorsib",
-        component:marcheHorsppmHorsSib
+        path: "/marche-hors-ppm-hors-sib",
+        name: "marcheHorsib",
+        component: marcheHorsppmHorsSib
     },
     {
-        path:"/marche-par-entreprise",
-        name:"marcheEntreprise",
-        component:marcheParEntreprise
+        path: "/marche-par-entreprise",
+        name: "marcheEntreprise",
+        component: marcheParEntreprise
     },
     {
-        path:"/table_bord_gestion_marche_hors_sib/:id",
-        name:"DetailInforTableBordUniteAd",
-        component:DetailInforTableBordUniteAd
+        path: "/table_bord_gestion_marche_hors_sib/:id",
+        name: "DetailInforTableBordUniteAd",
+        component: DetailInforTableBordUniteAd
     },
     {
-        path:"/tableau-bord-gestion-sib-marche",
-        name:"tableau_gestion_sib_marche",
-        component:TableauBordGestionSibMarche
+        path: "/tableau-bord-gestion-sib-marche",
+        name: "tableau_gestion_sib_marche",
+        component: TableauBordGestionSibMarche
     },
     {
-        path:"/table_bord_gestion_marche_hors_sib",
-        name:"TableauBordGestionMarche",
-        component:TableauBordGestionMarche
+        path: "/table_bord_gestion_marche_hors_sib",
+        name: "TableauBordGestionMarche",
+        component: TableauBordGestionMarche
     },
     {
-        path:"/detail_image_marche/:id",
-        name:"DetailImageMarche",
-        component:DetailImageMarche
+        path: "/detail_image_marche/:id",
+        name: "DetailImageMarche",
+        component: DetailImageMarche
     },
     {
-        path:"/liste_image_marche/:id",
-        name:"ListeImageMarche",
-        component:ListeImageMarche
+        path: "/liste_image_marche/:id",
+        name: "ListeImageMarche",
+        component: ListeImageMarche
     },
     {
-        path:"/image-marche",
-        name:"image_marche",
-        component:imageMarche
+        path: "/image-marche",
+        name: "image_marche",
+        component: imageMarche
     },
-   
-   
+
+
     {
         path: "/AjouteFacture",
         name: "AjouteFacture",
@@ -455,13 +461,13 @@ const BienServiceRoutes = [
         name: "listeTotalMarcheBienService",
         component: listeTotalMarcheBienService
     },
-   /* {
-
-        path: "/creation-execution-marche-investissement",
-        name: "executionMarcheInvestissement",
-        component: executionMarcheInvestissement
-detailExecution
-    },*/
+    /* {
+ 
+         path: "/creation-execution-marche-investissement",
+         name: "executionMarcheInvestissement",
+         component: executionMarcheInvestissement
+ detailExecution
+     },*/
     {
         path: '/historiqueContualisation/:id',
         name: "historiqueContualisation",
@@ -477,11 +483,11 @@ detailExecution
         name: "modifierMandat",
         component: modifierMandat
     },
-    
+
     {
-        path:"/graphique-excution-marche",
-        name:"graphique_excution_marche",
-        component:graphiqueExecutionMarche
+        path: "/graphique-excution-marche",
+        name: "graphique_excution_marche",
+        component: graphiqueExecutionMarche
     },
     {
         path: "/Modifier_Engagement/:id",
@@ -523,7 +529,7 @@ detailExecution
         name: "motifPassation",
         component: motifPassation
     },
-   
+
     {
         path: "/role-membrecojo",
         name: "rolemembrecojo",
@@ -547,36 +553,36 @@ detailExecution
     // la route pour le chemin de procedure simplifier de limite
 
     {
-        path:"/detail-marche-psl/:id",
-        name:"detailMarchePsLimite",
-        component:detailMarchePsLimite
+        path: "/detail-marche-psl/:id",
+        name: "detailMarchePsLimite",
+        component: detailMarchePsLimite
     },
 
     {
-        path:"/detail-marche-fsqc/:id",
-        name:"detailMarcheFsqc",
-        component:detailMarcheFsqc
+        path: "/detail-marche-fsqc/:id",
+        name: "detailMarcheFsqc",
+        component: detailMarcheFsqc
     },
 
     {
-        path:"/detail-marche-R3cv/:id",
-        name:"detailMarcheR3cv",
-        component:detailMarcheR3cv
+        path: "/detail-marche-R3cv/:id",
+        name: "detailMarcheR3cv",
+        component: detailMarcheR3cv
     },
     // chemin de procedure d'appel offre iternational et national
 
     {
-        path:"/detail-marche-AOI-AON/:id",
-        name:"detailMarcheAoi_Aon",
-        component:detailMarcheAoi_Aon
+        path: "/detail-marche-AOI-AON/:id",
+        name: "detailMarcheAoi_Aon",
+        component: detailMarcheAoi_Aon
     },
 
 
-    
+
     {
-        path:"/detail-marche-psc/:id",
-        name:"detailMarcheProcedureSimplifierComite",
-        component:detailMarcheProcedureSimplifierComite
+        path: "/detail-marche-psc/:id",
+        name: "detailMarcheProcedureSimplifierComite",
+        component: detailMarcheProcedureSimplifierComite
     },
     {
         path: "Avenant",
@@ -588,7 +594,7 @@ detailExecution
         name: "DetailMandat",
         component: DetailMandat
     },
-    
+
     {
         path: '/detail-Engagement/:id_detail_engagement',
         name: "DetailEngagement",
@@ -644,45 +650,45 @@ detailExecution
     },
     // route excution marche
     {
-        path:"/creation-execution-marche",
-        name:"executionMarche",
-        component:executionMarche
-    }, 
+        path: "/creation-execution-marche",
+        name: "executionMarche",
+        component: executionMarche
+    },
 
     // acte effe route
 
     {
-        path:"/liste-acte-effet-financier",
-        name:"actesEffet",
-        component:actesEffet
+        path: "/liste-acte-effet-financier",
+        name: "actesEffet",
+        component: actesEffet
     },
     // la route pour acte de depense
     {
-        path:"/creation-acte-depense",
+        path: "/creation-acte-depense",
         name: "acteDepense",
-        component:acteDepense
+        component: acteDepense
     },
-// la route pour le livrable
+    // la route pour le livrable
     {
-        path:"/creation-livrable",
-        name:"livrable",
-        component:livrable
-    },
-
-// la route du document de procedure
-    {
-        path:"/creation-document-procedure",
-        name:'documentProcedure',
-        component:documentProcedure
+        path: "/creation-livrable",
+        name: "livrable",
+        component: livrable
     },
 
-
-
-// la route du motif de decision
+    // la route du document de procedure
     {
-        path:"/creation-motif-decision",
-        name:"motifDecision",
-        component:motifDecision
+        path: "/creation-document-procedure",
+        name: 'documentProcedure',
+        component: documentProcedure
+    },
+
+
+
+    // la route du motif de decision
+    {
+        path: "/creation-motif-decision",
+        name: "motifDecision",
+        component: motifDecision
     },
 
     // detail marche
@@ -691,154 +697,154 @@ detailExecution
         name: "detailExecution",
         component: detailExecution
     },
-    
+
     {
         path: '/Engagement/:id',
         name: "Engagement",
         component: Engagement
     },
 
-// detail marche
+    // detail marche
     {
         path: '/detail-marche/:id',
-        name:"DetaillMarche",
-        component:DetaillMarche
+        name: "DetaillMarche",
+        component: DetaillMarche
     },
 
-// detail marche du procedure simplifier
+    // detail marche du procedure simplifier
     {
-        path:'/detail-marche-ps/:id',
-        name:"DetailMarchePs",
-        component:DetailMarchePs
+        path: '/detail-marche-ps/:id',
+        name: "DetailMarchePs",
+        component: DetailMarchePs
     },
 
     {
         path: '/detail-livrable/:id',
-        name:"DetailLivrable",
-        component:DetailLivrable
+        name: "DetailLivrable",
+        component: DetailLivrable
     },
 
     {
-        path:"/creation-marche",
-        name:"marche",
-        component:marche
+        path: "/creation-marche",
+        name: "marche",
+        component: marche
     },
-// la route de mode de passation
+    // la route de mode de passation
     {
-        path:"/creation-mode-passation",
-        name:"modePassation",
-        component:modePassation
+        path: "/creation-mode-passation",
+        name: "modePassation",
+        component: modePassation
     },
-// la route pour acteur de depense
+    // la route pour acteur de depense
     {
-        path:"/creation-acteur-depense",
-        name:"acteurDepense",
-        component:acteurDepense
-    },
-
-// la route pour l'appel offre
-    {
-        path:"/appel-offre",
-        name:"appelOffre",
-        component:appelOffre
-    },
-// la route ajouter appel d'offre
-    {
-        path:"/creation-appel-offre",
-        name:"ajouterAppelOffre",
-        component:ajouterAppelOffre
-    },
-// la route du type marche
-    {
-        path:"/creation-type-marche",
-        name:"typeMarche",
-        component:typeMarche
-    },
-// la route modification appel d'offre
-    {
-        path:"/modification-appel-offre",
-        name:"modificationAppelOffre",
-        component:modificationAppelOffre
+        path: "/creation-acteur-depense",
+        name: "acteurDepense",
+        component: acteurDepense
     },
 
-// la route pour analyse de dossier
+    // la route pour l'appel offre
     {
-        path:"/creation-analyse-de-dossier",
-        name:"analyseDossier",
-        component:analyseDossier
+        path: "/appel-offre",
+        name: "appelOffre",
+        component: appelOffre
     },
-// la route pour le baileur
+    // la route ajouter appel d'offre
     {
-        path:"/creation-bailleur",
-        name:"bailleur",
-        component:bailleur
+        path: "/creation-appel-offre",
+        name: "ajouterAppelOffre",
+        component: ajouterAppelOffre
+    },
+    // la route du type marche
+    {
+        path: "/creation-type-marche",
+        name: "typeMarche",
+        component: typeMarche
+    },
+    // la route modification appel d'offre
+    {
+        path: "/modification-appel-offre",
+        name: "modificationAppelOffre",
+        component: modificationAppelOffre
     },
 
-// la route de type procedure
+    // la route pour analyse de dossier
     {
-        path:"/creation-type-procedure",
-        name:"typeProcedure",
-        component:typeProcedure
+        path: "/creation-analyse-de-dossier",
+        name: "analyseDossier",
+        component: analyseDossier
     },
-// la route autre text juridique
+    // la route pour le baileur
     {
-        path:"/cretaion-autre-text-juridique",
-        name:"autreTextJuridique",
-        component:autreTextJuridique
+        path: "/creation-bailleur",
+        name: "bailleur",
+        component: bailleur
     },
-// la route de procedure de passation
+
+    // la route de type procedure
     {
-        path:"/creation-procedure-passation",
-        name:"procedurePassation",
-        component:procedurePassation
+        path: "/creation-type-procedure",
+        name: "typeProcedure",
+        component: typeProcedure
+    },
+    // la route autre text juridique
+    {
+        path: "/cretaion-autre-text-juridique",
+        name: "autreTextJuridique",
+        component: autreTextJuridique
+    },
+    // la route de procedure de passation
+    {
+        path: "/creation-procedure-passation",
+        name: "procedurePassation",
+        component: procedurePassation
     },
     {
 
-        path:"/creation-text-juridique",
-        name:"textJuridique",
-        component:textJuridique
+        path: "/creation-text-juridique",
+        name: "textJuridique",
+        component: textJuridique
     },
-// la route pour la banque
+    // la route pour la banque
     {
-        path:"/creation-banque",
-        name:"banque",
-        component:banque
+        path: "/creation-banque",
+        name: "banque",
+        component: banque
     },
-// la route pour le code fonction
+    // la route pour le code fonction
     {
-        path:"/creation-code-fonction",
-        name:"codeFonction",
-        component:codeFonction
+        path: "/creation-code-fonction",
+        name: "codeFonction",
+        component: codeFonction
     },
-// la route pour la cojo
+    // la route pour la cojo
     {
-        path:"/creation-cojo",
-        name:"cojo",
-        component:cojo
+        path: "/creation-cojo",
+        name: "cojo",
+        component: cojo
     },
     // la route pour le compte
     {
-        path:"/creation-compte",
+        path: "/creation-compte",
         name: "compte",
-        component:compte
+        component: compte
     },
     // la route pour la condition
     {
-        path:"/creation-condition",
-        name:"condition",
-        component:condition
+        path: "/creation-condition",
+        name: "condition",
+        component: condition
     },
     // la route pour la facture
     {
-        path:"/creation-facture",
-        name:"facture",
-        component:facture
+        path: "/creation-facture",
+        name: "facture",
+        component: facture
     },
     // la route pour la fonction occupee
     {
-        path:"/creation-fonction-occuppee",
-        name:"fonctionOccupee",
-        component:fonctionOccupee
+        path: "/creation-fonction-occuppee",
+        name: "fonctionOccupee",
+        component: fonctionOccupee
     },
     // la route pour le lot
     //    {
@@ -848,80 +854,80 @@ detailExecution
     //    },
     // la route pour la nature fonction
     {
-        path:"/creation-nature-fonction",
-        name:"natureFonction",
-        component:natureFonction
+        path: "/creation-nature-fonction",
+        name: "natureFonction",
+        component: natureFonction
     },
     // la route pour la prestation
     {
-        path:"/creation-prestation",
-        name:"prestation",
-        component:prestation
+        path: "/creation-prestation",
+        name: "prestation",
+        component: prestation
     },
 
     // la route pour la signature
     {
-        path:"/creation-signature",
-        name:"signature",
-        component:signature
+        path: "/creation-signature",
+        name: "signature",
+        component: signature
     },
-// la route pour le type de prestation
+    // la route pour le type de prestation
     {
-        path:"/creation-type-prestation",
-        name:"type_prestation",
-        component:type_prestation
+        path: "/creation-type-prestation",
+        name: "type_prestation",
+        component: type_prestation
     },
-// la route pour le type acte depense
+    // la route pour le type acte depense
     {
-        path:"/creation-type-acte-depense",
-        name:"typeActeDepense",
-        component:typeActeDepense
+        path: "/creation-type-acte-depense",
+        name: "typeActeDepense",
+        component: typeActeDepense
     },
-// la route pour le type acte effet financier
+    // la route pour le type acte effet financier
     {
-        path:"/creation-type-effet-financier",
-        name:"typeActeEffetFinancier",
-        component:typeActeEffetFinancier
+        path: "/creation-type-effet-financier",
+        name: "typeActeEffetFinancier",
+        component: typeActeEffetFinancier
     },
     // la route pour le type analyse
     {
-        path:"/creation-type-analyse",
+        path: "/creation-type-analyse",
         name: "typeAnalyse",
-        component:typeAnalyse
+        component: typeAnalyse
     },
     // la route pour le type de facture
     {
-        path:"/creation-type-facture",
-        name:"typeFacture",
-        component:typeFacture
+        path: "/creation-type-facture",
+        name: "typeFacture",
+        component: typeFacture
     },
     // la route pour le type de facture
     {
-        path:"/creation-type-unite-administrative",
-        name:"typeUa",
-        component:typeUa
+        path: "/creation-type-unite-administrative",
+        name: "typeUa",
+        component: typeUa
     },
     {
-        
-        path:"/ppm",
-        name:"ppm",
-        component:PlanPassationMarche
+
+        path: "/ppm",
+        name: "ppm",
+        component: PlanPassationMarche
     },
     {
-        path:"/ppm-hors-sib",
-        name:"ppmHorsSib",
-        component:PlanPassationMarcheHorsSib
+        path: "/ppm-hors-sib",
+        name: "ppmHorsSib",
+        component: PlanPassationMarcheHorsSib
     },
     {
-        path:"/ppm/:id",
-        name:"DetailPPM",
-        component:DetailPPM
+        path: "/ppm/:id",
+        name: "DetailPPM",
+        component: DetailPPM
     }
     ,
     {
-        path:"/cycle_de_vie/:id",
-        name:"CycleDeVie",
-        component:CycleDeVie
+        path: "/cycle_de_vie/:id",
+        name: "CycleDeVie",
+        component: CycleDeVie
     }
 
 ]

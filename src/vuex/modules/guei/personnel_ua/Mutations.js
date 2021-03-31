@@ -39,13 +39,13 @@ export const MODIFIER_PERMISSION_CONGE = (state, objetModifie) => {
 }
 export const MODIFIER_PERSONNEL = (state, objetModifie) => {
     state.acte_personnels = state.acte_personnels.map(articl => {
-      if (articl.id == objetModifie.id) {
-        articl = { ...objetModifie };
-      }
-  
-      return articl;
+        if (articl.id == objetModifie.id) {
+            articl = { ...objetModifie };
+        }
+
+        return articl;
     });
-  };
+};
 /**
 
 
@@ -109,6 +109,33 @@ const MODIFIER_ORDRE_DE_PAIEMENT = (state, objetModifie) => {
     })
 }
 
+
+
+
+//Personnel Rattacher
+export const GET_ALL_PERSONNEL_RATTACHER = (state, tableau_document) => {
+    state.PersonnelRattacher = tableau_document
+}
+
+export const AJOUTER_PERSONNEL_RATTACHER = (state, elementAjouter) => {
+    state.PersonnelRattacher.unshift(elementAjouter)
+}
+
+export const SUPPRIMER_PERSONNEL_RATTACHER = (state, id) => {
+    state.PersonnelRattacher = state.PersonnelRattacher.filter(prest => prest.id != id)
+}
+
+export const MODIFIER_PERSONNEL_RATTACHER = (state, elementModif) => {
+    state.PersonnelRattacher = state.PersonnelRattacher.map(response => {
+
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+//fin Probleme
 /**
 
 
@@ -182,7 +209,7 @@ const GET_SALAIRE_ACTUEL = (state, tableau_type_acte_personnels) => {
  */
 const AJOUTER_TYPE_ACTE_PERSONNELS = (state, nouvel_objet) => {
     state.type_acte_personnels.unshift(nouvel_objet)
-   // state.titres = [...nouvel_objet, ...state.titres]
+    // state.titres = [...nouvel_objet, ...state.titres]
 
 }
 
@@ -192,15 +219,15 @@ const AJOUTER_TYPE_ACTE_PERSONNELS = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_TYPE_ACTE_PERSONNELS= (state, id) => {
+const SUPPRIMER_TYPE_ACTE_PERSONNELS = (state, id) => {
     state.type_acte_personnels = state.type_acte_personnels.filter(titre => titre.id != id)
 }
 
 
 const MODIFIER_TYPE_ACTE_PERSONNELS = (state, objetModifie) => {
     state.type_acte_personnels = state.type_acte_personnels.map(type_acte_personnel => {
-        if(type_acte_personnel.id == objetModifie.id){
-            type_acte_personnel = {...objetModifie}
+        if (type_acte_personnel.id == objetModifie.id) {
+            type_acte_personnel = { ...objetModifie }
         }
         return type_acte_personnel
     })
@@ -236,15 +263,15 @@ const AJOUTER_FOCNTIONS = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_FONCTIONS= (state, id) => {
+const SUPPRIMER_FONCTIONS = (state, id) => {
     state.fonctions = state.fonctions.filter(fonction => fonction.id != id)
 }
 
 
 const MODIFIER_FONCTIONS = (state, objetModifie) => {
     state.fonctions = state.fonctions.map(fonction => {
-        if(fonction.id == objetModifie.id){
-            fonction = {...objetModifie}
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
         }
         return fonction
     })
@@ -282,15 +309,15 @@ const AJOUTER_CLASSES = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_CLASSES= (state, id) => {
+const SUPPRIMER_CLASSES = (state, id) => {
     state.classes = state.classes.filter(classe => classe.id != id)
 }
 
 
 const MODIFIER_CLASSES = (state, objetModifie) => {
     state.classes = state.classes.map(classe => {
-        if(classe.id == objetModifie.id){
-            classe = {...objetModifie}
+        if (classe.id == objetModifie.id) {
+            classe = { ...objetModifie }
         }
         return classe
     })
@@ -301,58 +328,58 @@ const MODIFIER_CLASSES = (state, objetModifie) => {
  */
 
 
-export const GET_ALL_DOSSIER_CANDIDAT =(state, tableau_candidat) => {
+export const GET_ALL_DOSSIER_CANDIDAT = (state, tableau_candidat) => {
     state.dossierPersonnels = tableau_candidat
 }
 
 export const AJOUTER_DOSSIER_CANDIDAT = (state, elementAjout) => {
     state.dossierPersonnels.unshift(elementAjout)
-   
+
 }
 
 
 export const MODIFIER_DOSSIER_CANDIDAT = (state, elementModifie) => {
-    state.dossierPersonnels= state.dossierPersonnels.map( item =>{
-        if(item.id == elementModifie.id){
-            item ={...elementModifie}
+    state.dossierPersonnels = state.dossierPersonnels.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
-    
+
 }
 
 
 export const SUPPRIMER_DOSSIER_CANDIDAT = (state, id) => {
-    state.dossierPersonnels = state.dossierPersonnels.filter( response => response.id !=id)
+    state.dossierPersonnels = state.dossierPersonnels.filter(response => response.id != id)
 }
 
 
 
 
 
-export const GET_ALL_CONTRAT_RESILIE =(state, tableau_contrat_resilie) => {
+export const GET_ALL_CONTRAT_RESILIE = (state, tableau_contrat_resilie) => {
     state.contrat_resilie = tableau_contrat_resilie
 }
 
 export const AJOUTER_CONTRAT_RESILIE = (state, elementAjout) => {
     state.contrat_resilie.unshift(elementAjout)
-   
+
 }
 
 
 export const MODIFIER_CONTRAT_RESILIE = (state, elementModifie) => {
-    state.contrat_resilie= state.contrat_resilie.map( item =>{
-        if(item.id == elementModifie.id){
-            item ={...elementModifie}
+    state.contrat_resilie = state.contrat_resilie.map(item => {
+        if (item.id == elementModifie.id) {
+            item = { ...elementModifie }
         }
         return item
     })
-    
+
 }
 
 
 export const SUPPRIMER_CONTRAT_RESILIE = (state, id) => {
-    state.contrat_resilie = state.contrat_resilie.filter( response => response.id !=id)
+    state.contrat_resilie = state.contrat_resilie.filter(response => response.id != id)
 }
 
 /**
@@ -380,15 +407,15 @@ const AJOUTER_NIVEAU_ETUDE = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_NIVEAU_ETUDE= (state, id) => {
+const SUPPRIMER_NIVEAU_ETUDE = (state, id) => {
     state.niveau_etudes = state.niveau_etudes.filter(classe => classe.id != id)
 }
 
 
 const MODIFIER_NIVEAU_ETUDE = (state, objetModifie) => {
     state.niveau_etudes = state.niveau_etudes.map(classe => {
-        if(classe.id == objetModifie.id){
-            classe = {...objetModifie}
+        if (classe.id == objetModifie.id) {
+            classe = { ...objetModifie }
         }
         return classe
     })
@@ -428,15 +455,15 @@ const AJOUTER_TYPE_CONTRAT = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_TYPE_CONTRAT= (state, id) => {
+const SUPPRIMER_TYPE_CONTRAT = (state, id) => {
     state.type_contrats = state.type_contrats.filter(type_contrat => type_contrat.id != id)
 }
 
 
 const MODIFIER_TYPE_CONTRAT = (state, objetModifie) => {
     state.type_contrats = state.type_contrats.map(type_contrat => {
-        if(type_contrat.id == objetModifie.id){
-            type_contrat = {...objetModifie}
+        if (type_contrat.id == objetModifie.id) {
+            type_contrat = { ...objetModifie }
         }
         return type_contrat
     })
@@ -471,15 +498,15 @@ const AJOUTER_SALARIE = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_TYPE_SALARIE= (state, id) => {
+const SUPPRIMER_TYPE_SALARIE = (state, id) => {
     state.type_salaries = state.type_salaries.filter(type_salarie => type_salarie.id != id)
 }
 
 
-const MODIFIER_TYPE_SALARIE = (state,  objetModifie) => {
+const MODIFIER_TYPE_SALARIE = (state, objetModifie) => {
     state.type_salaries = state.type_salaries.map(type_salarie => {
-        if(type_salarie.id == objetModifie.id){
-            type_salarie = {...objetModifie}
+        if (type_salarie.id == objetModifie.id) {
+            type_salarie = { ...objetModifie }
         }
         return type_salarie
     })
@@ -561,15 +588,15 @@ const AJOUTER_GRADE = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_GRADE= (state, id) => {
+const SUPPRIMER_GRADE = (state, id) => {
     state.grades = state.grades.filter(grade => grade.id != id)
 }
 
 
 const MODIFIER_GRADE = (state, objetModifie) => {
     state.grades = state.grades.map(grade => {
-        if(grade.id == objetModifie.id){
-            grade = {...objetModifie}
+        if (grade.id == objetModifie.id) {
+            grade = { ...objetModifie }
         }
         return grade
     })
@@ -598,9 +625,9 @@ const GET_ACTEURS = (state, data) => {
 }
 
 const DETAIL_ACTEURS = (state, data) => {
-    if(state.detail_acteurs.length==0){
+    if (state.detail_acteurs.length == 0) {
         state.detail_acteurs = data
-    }else{
+    } else {
         state.detail_acteurs = []
         state.detail_acteurs = data
     }
@@ -624,15 +651,15 @@ const GET_ALL_ACTEURDEPENSE = (state, data) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_ACTEURS= (state, id) => {
+const SUPPRIMER_ACTEURS = (state, id) => {
     state.acteur_depenses = state.acteur_depenses.filter(acteur_depense => acteur_depense.id != id)
 }
 
 
-const _DPS = (state,  objetModifie) => {
+const _DPS = (state, objetModifie) => {
     state.acteur_depenses = state.acteur_depenses.map(acteur_depense => {
-        if(acteur_depense.id == objetModifie.id){
-            acteur_depense = {...objetModifie}
+        if (acteur_depense.id == objetModifie.id) {
+            acteur_depense = { ...objetModifie }
         }
         return acteur_depense
     })
@@ -644,19 +671,19 @@ const NOMBRE_TAUX_ACTEURS = (state, data) => {
 }
 
 const SALAIRE_ACTUEL_ACTEURS = (state, data) => {
-    if(state.salaire_actuel_acteur==""){
+    if (state.salaire_actuel_acteur == "") {
         state.salaire_actuel_acteur = data
-    }else{
+    } else {
         state.salaire_actuel_acteur = data
     }
 
 }
 
 const ALL_SALAIRE_ACTEUR = (state, data) => {
-    if(state.all_salaires_acteurs.length==0){
+    if (state.all_salaires_acteurs.length == 0) {
 
         state.all_salaires_acteurs = data
-    }else{
+    } else {
         state.all_salaires_acteurs = []
         state.all_salaires_acteurs = data
     }
@@ -680,7 +707,7 @@ const AJOUTER_ACT_PERSONNEL = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_ACT_PERSONNEL= (state, id) => {
+const SUPPRIMER_ACT_PERSONNEL = (state, id) => {
     state.acte_personnels = state.acte_personnels.filter(acte_personnel => acte_personnel.id != id)
 }
 
@@ -700,52 +727,52 @@ const AJOUTER_CONGES = (state, nouvel_objet) => {
     // state.titres = [...nouvel_objet, ...state.titres]
 }
 
-const SUPPRIMER_CONGES= (state, id) => {
+const SUPPRIMER_CONGES = (state, id) => {
     state.conges = state.conges.filter(conge => conge.id != id)
 }
 
-const MODIFIER_CONGES = (state,  objetModifie) => {
+const MODIFIER_CONGES = (state, objetModifie) => {
     state.conges = state.conges.map(conge => {
-        if(conge.id == objetModifie.id){
-            conge = {...objetModifie}
+        if (conge.id == objetModifie.id) {
+            conge = { ...objetModifie }
         }
         return conge
     })
 }
 
 
-const LOAD_CONGE_ACTEUR_DEPENSE= (state, data) => {
-    if(state.conge_acteur_depense.length==0){
+const LOAD_CONGE_ACTEUR_DEPENSE = (state, data) => {
+    if (state.conge_acteur_depense.length == 0) {
         state.conge_acteur_depense = data
-    }else{
+    } else {
         state.conge_acteur_depense = []
         state.conge_acteur_depense = data
     }
 
 }
 
-const LOAD_TEMPS_MOYEN_FIN_ACTIVITE_AND_INTERRUPRION= (state, data) => {
-    if(state.temp_moyen_fin_activite_interruption==0){
+const LOAD_TEMPS_MOYEN_FIN_ACTIVITE_AND_INTERRUPRION = (state, data) => {
+    if (state.temp_moyen_fin_activite_interruption == 0) {
         state.temp_moyen_fin_activite_interruption = data
-    }else{
+    } else {
         state.temp_moyen_fin_activite_interruption = data
     }
 
 }
 
-const DELAI_DISPOSITION_ACT= (state, data) => {
-    if( state.delais_mise_disposition_act.length==0){
+const DELAI_DISPOSITION_ACT = (state, data) => {
+    if (state.delais_mise_disposition_act.length == 0) {
         state.delais_mise_disposition_act = data
-    }else{
+    } else {
         state.delais_mise_disposition_act = []
         state.delais_mise_disposition_act = data
     }
 }
 
-const JOUR_CONGE_DISPONIBLE_ACTEUR= (state, data) => {
-    if(state.jour_conge_disponible_acteur.length==0){
+const JOUR_CONGE_DISPONIBLE_ACTEUR = (state, data) => {
+    if (state.jour_conge_disponible_acteur.length == 0) {
         state.jour_conge_disponible_acteur = data
-    }else{
+    } else {
         state.jour_conge_disponible_acteur = []
         state.jour_conge_disponible_acteur = data
     }
@@ -754,10 +781,10 @@ const JOUR_CONGE_DISPONIBLE_ACTEUR= (state, data) => {
 
 
 
-const MODIFIER_ACT_PERSONNEL = (state,  objetModifie) => {
+const MODIFIER_ACT_PERSONNEL = (state, objetModifie) => {
     state.acte_personnels = state.acte_personnels.map(acte_personnel => {
-        if(acte_personnel.id == objetModifie.id){
-            acte_personnel = {...objetModifie}
+        if (acte_personnel.id == objetModifie.id) {
+            acte_personnel = { ...objetModifie }
         }
         return acte_personnel
     })
@@ -831,13 +858,13 @@ const SUPPRIMER_CATEGORIE_GRADE = (state, id) => {
 
 
 const MODIFIER_CATEGORIE_GRADE = (state, objetModifie) => {
-  state.categorieGrade = state.categorieGrade.map(type => {
-    if (type.id == objetModifie.id) {
-      type = { ...objetModifie };
-    }
+    state.categorieGrade = state.categorieGrade.map(type => {
+        if (type.id == objetModifie.id) {
+            type = { ...objetModifie };
+        }
 
-    return type;
-  });
+        return type;
+    });
 };
 
 //  * @param state
@@ -1011,15 +1038,15 @@ export const AJOUTER_FONCTIONS_PROFESSIONNEL = (state, nouvel_objet) => {
 }
 
 
-export const SUPPRIMER_FONCTIONS_PROFESSIONNEL= (state, id) => {
+export const SUPPRIMER_FONCTIONS_PROFESSIONNEL = (state, id) => {
     state.fonctionProfessionnel = state.fonctionProfessionnel.filter(fonction => fonction.id != id)
 }
 
 
 export const MODIFIER_FONCTIONS_PROFESSIONNEL = (state, objetModifie) => {
     state.fonctionProfessionnel = state.fonctionProfessionnel.map(fonction => {
-        if(fonction.id == objetModifie.id){
-            fonction = {...objetModifie}
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
         }
         return fonction
     })
@@ -1063,25 +1090,25 @@ export const AJOUTER_COMPTABLE_ASSIGNATAIRE = (state, nouvel_objet) => {
 }
 
 
-export const SUPPRIMER_COMPTABLE_ASSIGNATAIRE= (state, id) => {
+export const SUPPRIMER_COMPTABLE_ASSIGNATAIRE = (state, id) => {
     state.ComptableAssignataire = state.ComptableAssignataire.filter(fonction => fonction.id != id)
 }
 
 
 export const MODIFIER_COMPTABLE_ASSIGNATAIRE = (state, objetModifie) => {
     state.ComptableAssignataire = state.ComptableAssignataire.map(fonction => {
-        if(fonction.id == objetModifie.id){
-            fonction = {...objetModifie}
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
         }
         return fonction
     })
 }
 
 
-export const MODIFIER_ACTEUR_DP = (state, elementModif)=>{
+export const MODIFIER_ACTEUR_DP = (state, elementModif) => {
     state.acteur_depenses = state.acteur_depenses.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -1092,9 +1119,9 @@ export {
     AJOUTER_ORDRE_DE_PAIEMENT,
     SUPPRIMER_ORDRE_DE_PAIEMENT,
     MODIFIER_ORDRE_DE_PAIEMENT,
-    
-    
-    
+
+
+
     GET_PAIEMENTPERSONNEL,
     AJOUTER_PAIEMENTPERSONNEL,
     SUPPRIMER_PAIEMENTPERSONNEL,
@@ -1115,8 +1142,8 @@ export {
     AJOUTER_CLASSIFICATION_GRADE_FONCTION,
     SUPPRIMER_CLASSIFICATION_GRADE_FONCTION,
     MODIFIER_CLASSIFICATION_GRADE_FONCTION,
-    
-GET_CATEGORIE_GRADE,
+
+    GET_CATEGORIE_GRADE,
     AJOUTER_CATEGORIE_GRADE,
     SUPPRIMER_CATEGORIE_GRADE,
     MODIFIER_CATEGORIE_GRADE,
@@ -1124,7 +1151,7 @@ GET_CATEGORIE_GRADE,
 
 
 
-GET_FAMILLE_FONCTIONS,
+    GET_FAMILLE_FONCTIONS,
     AJOUTER_FAMILLE_FONCTIONS,
     SUPPRIMER_FAMILLE_FONCTIONS,
     MODIFIER_FAMILLE_FONCTIONS,
@@ -1155,7 +1182,7 @@ GET_FAMILLE_FONCTIONS,
     SUPPRIMER_TYPE_SALARIE,
     AJOUTER_SALARIE,
     MODIFIER_TYPE_SALARIE,
-    
+
     GET_GRADE,
     AJOUTER_GRADE,
     SUPPRIMER_GRADE,
