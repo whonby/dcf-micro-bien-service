@@ -194,11 +194,14 @@ export function SupprimerProblemeMarche({ commit }, id) {
 }
 //MODIFICATION
 
+
 export function ModifierProblemeMarche({ commit }, elementModifie) {
 
   asyncLoading(axios.put('/ProblemeMarche/' + elementModifie.id, {
-    code: elementModifie.code,
-    libelle: elementModifie.libelle,
+    probleme: elementModifie.probleme,
+    traitement: elementModifie.traitement,
+    decision: elementModifie.decision,
+    date: elementModifie.date,
 
   })).then(response => {
     commit('MODIFIER_PROBLEME_MARCHE', response.data)
