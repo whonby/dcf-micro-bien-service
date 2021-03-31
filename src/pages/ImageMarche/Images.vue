@@ -96,11 +96,6 @@
                 </nav>
 
                 <div class="vld-parent">
-
-                    <loading :active.sync="isLoading"
-                             :can-cancel="true"
-                             :on-cancel="onCancel"
-                             :is-full-page="fullPage"></loading>
                 <div class="row-fluid" style="" id="printMe">
 
                     <div class="span12">
@@ -115,6 +110,7 @@
                             </div>
                         </div>
 
+
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -125,20 +121,20 @@
                                 <th>Type de marché</th>
                                 <th>Infrastructure</th>
                                 <th>Regions</th>
-<!--                                <th>Statut</th>-->
+                                <!--                                <th>Statut</th>-->
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr v-for="item in listeMarchStatueExecuteAcheve" :key="'MARCHE012'+item.id">
                                 <td>{{item.exo_id}}</td>
-                                <td>{{selectionnerUniteAdministrative(item.unite_administrative_id)}}</td>
+                                <td>{{nomUniteAdmin(item.unite_administrative_id)}}</td>
                                 <td>{{item.numero_marche}}</td>
                                 <td>{{item.objet}}</td>
                                 <td>{{item.type_marche.libelle}}</td>
                                 <td>{{selectionnerInfrastructure(item.infrastructure_id)}}</td>
                                 <td>{{selectionLocationGeographique(item.localisation_geographie_id)}}</td>
-<!--                                <td></td>-->
+                                <!--                                <td></td>-->
                                 <td>
                                     <router-link :to="{ name: 'ListeImageMarche', params: { id: item.id }}"
                                                  class="btn btn-primary" title="Liste des images">
@@ -149,7 +145,6 @@
                             </tbody>
 
                         </table>
-
 
                     </div>
 
@@ -184,15 +179,13 @@
 
 
 
-
-        {{dataArrayPourcentage}}
     </div>
 </template>
 
 <script>
     import {partition} from "../../Repositories/Repository"
     // Import component
-    import Loading from 'vue-loading-overlay';
+ //   import Loading from 'vue-loading-overlay';
     // Import stylesheet
     import 'vue-loading-overlay/dist/vue-loading.css';
    // import VueApexCharts from 'vue-apexcharts'
@@ -205,7 +198,7 @@
     export default {
         name: "Images",
         components: {
-            Loading,
+        //   Loading,
             ModelListSelect,
         },
         data() {
@@ -233,26 +226,6 @@
                         icon: 'cached'
                     }
                 ],
-                dataPourcentage: [],
-                chartOptions: {
-                    chart: {
-                        width: 380,
-                        type: 'pie',
-                    },
-                    labels: ['A.Contra.', 'A.C.H.D', 'En Cont.', 'EN Contr.H.D', 'En Execution',"En Execution HD","Acheve Delais","Acheve H.D","En souffrance"],
-                    colors:['#8ea9db', '#f4b084', '#92d04f',"#632990","#d7b755","#d36f2a","#00b04f","#757171","#ff0000"],
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                width: 200
-                            },
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }]
-                },
                 page:0,
                 size:10,
                 active_el:0,
@@ -262,7 +235,7 @@
 
         },
         created(){
-           // console.log(this.listeMarchStatueExecuteAcheve)
+            // console.log(this.listeMarchStatueExecuteAcheve)
         },
         computed: {
             ...mapGetters("uniteadministrative", [
@@ -542,110 +515,8 @@
 
                 return objet
             },
-            getMarcheStatus(){
-                return status=>{
-                    if(status=="planifie"){
-                        status=0;
-                        return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==0)
-                    }
 
 
-                    if(status!=""){
-
-                        return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
-
-                    }else{
-                        return this.objetMarchePasUniteOuRegion
-
-                    }
-                }
-            },
-            nombreMarcheParStatue(){
-                return status=>{
-                    if(status!=""){
-                        if(status=="planifie"){
-                            status=0;
-                        }
-
-                        let nombre=0
-
-                        if(this.infrastructure!="" && this.type_marche==""){
-
-                            nombre= this.objetMarchePasUniteOuRegion.filter(item=>{
-                                if(item.attribue==status && item.infrastructure_id==this.infrastructure){
-                                    return item
-                                }
-                            }).length
-                        }
-
-                        if(this.infrastructure=="" && this.type_marche!=""){
-//                            liste_marches= this.objetMarchePasUniteOuRegion.filter(item=>{
-//                                if(item.attribue==status && item.type_marche_id==this.type_marche){
-//                                    return item
-//                                }
-//                            })
-                            nombre= this.objetMarchePasUniteOuRegion.filter(item=>{
-                                if(item.attribue==status && item.type_marche_id==this.type_marche){
-                                    return item
-                                }
-                            }).length
-                        }
-
-                        if(this.infrastructure!="" && this.type_marche!=""){
-
-//                            liste_marches= this.objetMarchePasUniteOuRegion.filter(item=>{
-//                                if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
-//                                    return item
-//                                }
-//                            })
-                            nombre= this.objetMarchePasUniteOuRegion.filter(item=>{
-                                if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
-                                    return item
-                                }
-                            }).length
-                        }
-
-                        if(this.infrastructure=="" && this.type_marche==""){
-//                            liste_marches=this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
-                            nombre=this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status).length
-                        }
-
-
-                        return nombre
-
-
-                    }
-                }
-            },
-            marcheUniteRegion(){
-                let vM=this;
-                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
-                if(vM.region!="" && vM.unite_administrative_id==""){
-                    objet =this.marches.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-
-                }
-
-                if(vM.unite_administrative_id!="" && vM.region==""){
-                    objet =this.listeMarcheUniteAdmin.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                if(vM.unite_administrative_id!="" && vM.region!="" ){
-                    objet =this.listeMarcheUniteAdmin.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-                return objet
-            },
 
             nombreTotalMarche(){
                 return this.objetMarchePasUniteOuRegion.length
@@ -721,16 +592,9 @@
 
 
             listeMarchStatueExecuteAcheve(){
+                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
 
-                let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
-                    if(item.attribue==2 || item.attribue==11 || item.attribue==10 || item.attribue==11 || item.attribue==7 || item.attribue==3){
-                       console.log(item)
-                        return item
-                    }
-                })
-
-               console.log(objet4.length)
-                return objet4
+                return objet.filter(item=>item.attribue==2)
             },
 
 
@@ -1015,9 +879,22 @@
             generateReport () {
                 this.$refs.html2Pdf.generatePdf()
             },
-
-
-
+            partition:partition,
+            onCancel() {
+                console.log('User cancelled the loader.')
+            },
+            getDataPaginate(index){
+                this.active_el = index;
+                this.page=index
+            },
+            precedent(){
+                this.active_el--
+                this.page --
+            },
+            suivant(){
+                this.active_el++
+                this.page ++
+            },
         },
         watch: {
             type_marche:function (value) {
@@ -1069,22 +946,7 @@
                 }
             },
 
-            partition:partition,
-            onCancel() {
-                console.log('User cancelled the loader.')
-            },
-            getDataPaginate(index){
-                this.active_el = index;
-                this.page=index
-            },
-            precedent(){
-                this.active_el--
-                this.page --
-            },
-            suivant(){
-                this.active_el++
-                this.page ++
-            },
+
 
         },
     }

@@ -188,24 +188,6 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
 
-                  modalGallerys () {
-                      var arr = [];
-                      this.imgs.forEach((value, index) => {
-                          console.log(index)
-                          let obj = {
-                              subHtml: "TEST：" +
-                                  value.info[0] +
-                                  "*" +
-                                  value.info[1] +
-                                  "<br>GUEI:" +
-                                  value.realname,
-                              thumb: value.thumb,
-                              src: value.src
-                          };
-                          arr.push(obj);
-                      });
-                      return arr;
-                  },
                   conversionDateVariable(){
                       return date=>{
                           let da=new Date(date)
