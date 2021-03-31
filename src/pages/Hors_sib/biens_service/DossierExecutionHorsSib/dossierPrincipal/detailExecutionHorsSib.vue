@@ -164,14 +164,19 @@ controlleur_fin
                       >
                     </li>
                     <li>
-                      <a data-toggle="tab" href="#tab03"
-                        >TABLEAU DE CALCUL DES MARCHES PLARIANNUELS
+                      <a data-toggle="tab" href="#tab030"
+                        >TABLEAU DE CALCUL DES MARCHES PLURIANNUEL
                       </a>
                     </li>
 
                     <li>
                       <a data-toggle="tab" href="#tab001"
                         >DIFFICULTE RENCONTRE
+                      </a>
+                    </li>
+                     <li>
+                      <a data-toggle="tab" href="#tab0401"
+                        >ETAT DES MARCHES EXECUTES
                       </a>
                     </li>
                     <!-- <li>
@@ -183,7 +188,7 @@ controlleur_fin
                   </ul>
                 </div>
                 <div class="widget-content tab-content">
-                  <div id="tab03" class="tab-pane">
+                  <div id="tab030" class="tab-pane">
                     <TableauMarchePluriannuel
                       :macheid="detail_marche.id"
                     ></TableauMarchePluriannuel>
@@ -387,12 +392,22 @@ controlleur_fin
                   <div id="tab03" class="tab-pane">
                     <imageMarche :macheid="detail_marche.id"></imageMarche>
                   </div>
+                  <div id="tab0401" class="tab-pane">
+                    <EtatExecutionMarche :macheid="detail_marche.id"></EtatExecutionMarche>
+                  </div>
+                  
 
                   <div id="tab040" class="tab-pane">
                     <graphiqueExecutionMarche
                       :macheid="detail_marche.id"
                     ></graphiqueExecutionMarche>
                   </div>
+                  <div id="tab040" class="tab-pane">
+                    <graphiqueExecutionMarche
+                      :macheid="detail_marche.id"
+                    ></graphiqueExecutionMarche>
+                  </div>
+                  
 
                   <div id="tab041" class="tab-pane">
                     <graphiqueSituationMarche
@@ -428,7 +443,7 @@ import decompte from "../dossierDecompte/decomptePro";
 import HistoriqueDecompteFacture from "../dossierDecompte/HistoriqueDecompteFacture";
 import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
 import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
-
+import EtatExecutionMarche from "../../../../../pages/DossierEtatExecutionMarche/EtatExecutionMarche";
 import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
 import TableauMarchePluriannuel from "../DossierMarchePluriannuel/TableauMarchePluriannuel";
@@ -438,6 +453,7 @@ export default {
   name: "compte",
   components: {
     marchePluriannuel,
+    EtatExecutionMarche,
     TableauMarchePluriannuel,
     avenant,
     facture,
