@@ -1292,7 +1292,7 @@
                           >
                         </td>
 
-<td colspan="">
+<!-- <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
                               >Bailleur</label
@@ -1313,8 +1313,8 @@
                               </select>
                             </div>
                           </div>
-                        </td>
-                        <!-- <td>
+                        </td> -->
+                        <td>
                           <label>Bailleur </label>
                           <model-list-select
                             style="border: 1px solid #000"
@@ -1326,7 +1326,7 @@
                             placeholder=""
                           >
                           </model-list-select>
-                        </td> -->
+                        </td>
                       </tr>
                     </table>
                   </div>
@@ -1488,12 +1488,7 @@
                             <ul class="nav nav-tabs">
                               <li class="active">
                                 <a data-toggle="tab" href="#INFORMATIONUA"
-                                  >VISA CONTRÔLEUR FINANCIER{{
-                                    CreditAutorise(
-                                      formData.unite_administrative_id,
-                                      formData.ligne_economique_id
-                                    )
-                                  }}</a
+                                  >VISA CONTRÔLEUR FINANCIER</a
                                 >
                               </li>
                             </ul>
@@ -2861,39 +2856,38 @@ affichePersoUA() {
       if (
         this.comparaison(this.formData.activite_id) == this.formData.activite_id
       ) {
-        return this.CreditAutoriseSousBudget(
-          this.formData.sous_budget_id,
-          this.formData.ligne_economique_id
-        );
+       
+         return this.CreditAutoriseSousBudget(
+                                      this.formData.sous_budget_id,
+                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.bailler_id);
       } else {
         return this.CreditAutorise(
-          this.formData.unite_administrative_id,
-          this.formData.ligne_economique_id
-        );
+                                      this.formData.unite_administrative_id,
+                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.bailler_id);
       }
     },
     CreditAutoriseSousBudget() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+     return (id, id1, id2, id3) => {
+    if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.sous_budget_id == id && qtreel.ligneeconomique_id == id1
+              qtreel.sous_budget_id == id &&  qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
           );
 
           if (qtereel) {
-            return qtereel.dotation;
+            return qtereel.dotation_nouvelle;
           }
           return 0;
         }
       };
     },
     CreditAutorise() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+      return (id, id1, id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.uniteadministrative_id == id &&  qtreel.type_financement_id==this.formData.type_financement_id && qtreel.source_financement_id==this.formData.sous_financement_id && 
-              qtreel.ligneeconomique_id == id1
+              qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
+              
           );
 
           if (qtereel) {
@@ -3316,13 +3310,15 @@ SousFinancement() {
     //   };
     // },
     cumulAnterieurUa() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+      return (id, id1,id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
-                qtreel.ligne_economique_id == id1 &&
+                qtreel.type_financement_id == id1 &&
+                qtreel.source_financement_id == id2 &&
+                qtreel.ligne_economique_id == id3 &&
                 qtreel.diff_op != null
             )
             .reduce(
@@ -3335,21 +3331,17 @@ SousFinancement() {
       };
     },
     cumulAnterieurSousBudget() {
-      return (id, id2, id1) => {
-        if (
-          id != null &&
-          id != "" &&
-          id2 != null &&
-          id2 != "" &&
-          id1 != null &&
-          id1 != ""
-        ) {
+      return (id, id1,id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.unite_administrative_id == id &&
-                qtreel.sous_budget_id == id2 &&
-                qtreel.ligne_economique_id == id1 &&
+               
+                qtreel.sous_budget_id == id &&
+                
+                  qtreel.type_financement_id == id1 &&
+                qtreel.source_financement_id == id2 &&
+                qtreel.ligne_economique_id == id3 &&
                 qtreel.diff_op != null
             )
             .reduce(
@@ -3367,12 +3359,16 @@ SousFinancement() {
       ) {
         return this.cumulAnterieurUa(
           this.formData.unite_administrative_id,
+          this.formData.type_financement_id,
+          this.formData.bailler_id,
           this.formData.ligne_economique_id
         );
       } else {
         return this.cumulAnterieurSousBudget(
-          this.formData.unite_administrative_id,
+          
           this.formData.sous_budget_id,
+         this.formData.type_financement_id,
+          this.formData.bailler_id,
           this.formData.ligne_economique_id
         );
       }

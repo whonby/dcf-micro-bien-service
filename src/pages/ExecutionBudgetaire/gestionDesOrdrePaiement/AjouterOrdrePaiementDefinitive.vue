@@ -71,7 +71,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Numéro OP Provisoire<code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">{{detailOpProvisoire.type_financement_id}}Numéro OP Provisoire{{detailOpProvisoire.recupererIdprovisoire}}<code style="color:red;font-size:16px">*</code></label>
                 
                 <div class="controls">
                   <input
@@ -1095,7 +1095,7 @@
                      <tr>
                        <td>
                        <div class="control-group">
-                <label class="control-label">Type de Financement  <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Type de Financement {{detailOpProvisoire.recupererId}} <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <!-- <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -1109,7 +1109,7 @@
 
                                 </model-list-select> -->
                                   <input
-                  :value="RecupererLibelleTypeFinancement(RecupereridTypeFinancement(recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
+                  :value="RecupererLibelleTypeFinancement(detailOpProvisoire.type_financement_id)"
                     type="text"
                     style="border:1px solid #000"
                    
@@ -1136,7 +1136,7 @@
 
                                 </model-list-select> -->
                                  <input
-                  :value="RecupererLibellSourceFinancement(RecupereridSourceFinancement(recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
+                  :value="RecupererLibellSourceFinancement(detailOpProvisoire.source_financement_id)"
                     type="text"
                     style="border:1px solid #000"
                    
@@ -1171,12 +1171,12 @@
                      <tr>
                     
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
+              <template v-if="this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id">
               <div class="control-group">
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutoriseSousBudget(detailOpProvisoire.sous_budget_id,detailOpProvisoire.ligne_economique_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                 
   
@@ -1188,7 +1188,7 @@
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutorise(detailOpProvisoire.unite_administrative_id,detailOpProvisoire.ligne_economique_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                  
                 </div>
@@ -1198,12 +1198,12 @@
               
             </td>
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
+              <template v-if="this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id">
                 <div class="control-group">
                 <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="parseFloat(this.EngagementsantérieursSousBudget(detailOpProvisoire.sous_budget_id,detailOpProvisoire.ligne_economique_id))" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1213,7 +1213,7 @@
                 <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="this.EngagementsantérieursUa(detailOpProvisoire.unite_administrative_id,this.detailOpProvisoire.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1233,12 +1233,12 @@
               
             </td>
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
+              <template v-if="this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id">
                 <div class="control-group">
                 <label class="control-label">Cumul engagements(D)1(B+C)</label>
                 <div class="controls">
                  
-                  <money :value="(parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))+(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="(parseFloat(this.EngagementsantérieursSousBudget(this.detailOpProvisoire.sous_budget_id,this.detailOpProvisoire.ligne_economique_id)-parseFloat(this.recupererEngageMarche(this.detailOpProvisoire.recupererIdprovisoire))))+(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -3556,7 +3556,7 @@ rechercheListeMarche(){
         if (objetMandater.length==1){
            let acteur= this.gettersgestionOrdrePaiement.find(item=>item.numero_ordre_paiement==this.formData.numero_ordre_anulation)
          this.detailOpProvisoire.recupererId=acteur.id,
-          this.detailOpProvisoire.recupererIdprovisoire=acteur.id_op_provisoire,
+          this.detailOpProvisoire.recupererIdprovisoire=acteur.numero_ordre_paiement,
          	
          this.detailOpProvisoire.recuperer_typeop=acteur.type_ordre_paiement,
          this.detailOpProvisoire.section_id=acteur.section_id,

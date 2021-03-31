@@ -66,11 +66,11 @@ Salaires actuel
                                       
                                     </td>
                                     <td>
-                                  <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé455</a>
+                                  <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé</a>
                                     </td>
 
                                     <td>
-                                    <a href="#addComptePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  compte4444</a>
+                                    <a href="#addComptePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  compte</a>
                                       </td>
                                   </div>
                                              </tr>

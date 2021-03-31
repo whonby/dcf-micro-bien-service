@@ -449,40 +449,40 @@ recupereMontantEmpruntTotal
                   </td>   
                   
                   <td colspan="">
-                     <div class="control-group">
+                     <!-- <div class="control-group">
                 <label class="control-label">Bailleur</label>
-                <div class="controls">
+                <div class="controls"> -->
                  
  
-                 <select v-model="formData.source_financement_id" class="span" style="border:1px solid #000" >
+                 <!-- <select v-model="formData.source_financement_id" class="span" style="border:1px solid #000" >
                     
                      <option
                         v-for="typeFact in afficheBailleurPaUa(formData.uniteadministrative_id,formData1.type_financement_id)"
                         :key="typeFact.id"
                         :value="typeFact.sous_financement_id"
                       >{{libelleSousFinancement(typeFact.sous_financement_id)}}</option>
-                  </select>
+                  </select> -->
 
 
                  
-                </div>
-              </div>
-                       <!-- <div class="control-group">
+                <!-- </div>
+              </div> -->
+                       <div class="control-group">
                 <label class="control-label">Bailleur</label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
-                                                   :list="listeActiviteUA"
+                                                   :list="sources_financements"
                                                    v-model="formData.source_financement_id"
-                                                   option-value="sous_financement_id"
-                                                   option-text="lib"
+                                                   option-value="id"
+                                                   option-text="libelle"
                                                    
                                                    placeholder=""
                                 >
 
                                 </model-list-select>
                 </div>
-              </div> -->
+              </div>
                   </td>
                   
 
@@ -596,7 +596,7 @@ recupereMontantEmpruntTotal
                        <div class="control-group">
                 <label class="control-label">Dotation Total</label>
                 <div class="controls">
-                  <money   :value="dotationTotal"  style="text-align:left;color:red"  class="span"></money>
+                  <money   :value="dotationTotal" readOnly style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
                   </td>

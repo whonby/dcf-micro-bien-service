@@ -12,7 +12,7 @@ recupBanque1
     <div id="modificationObservation" class="modal hide tailleModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification Observation de Agent Cf</h3>
+        <h3>Modification Observation de l'Agent Cf</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -233,7 +233,7 @@ recupBanque1
         <thead>
           <tr>
             
-            <th>type financement</th>
+            <th>Type financement</th>
             <th>Source Financement</th>
             <th>Montant Op</th>
             <th>Mode Paiement</th>
@@ -339,7 +339,7 @@ recupBanque1
                
                
 
-<template v-if="detailOp.id_op_provisoire==0">
+<template v-if="detailOp.id_op_provisoire == null">
  <td  style="color:red">
 {{ detailOp.numero_ordre_paiement || "Non renseigné" }}
                </td>
@@ -688,84 +688,28 @@ recupBanque1
                 >
               </li>
 
-             <li>
+             <!-- <li>
                 <a data-toggle="tab" href="#tab100">
                   Historique decompte
                   <span class="badge badge-important">
                     </span
                   ></a
                 >
-              </li>
-               <li>
+              </li> -->
+               <!-- <li>
                 <a data-toggle="tab" href="#tab10045">
                   Listes des Decomptes Année Anterieur
                   <span class="badge badge-important">
                     </span
                   ></a
                 >
-              </li>
+              </li> -->
             </ul>
 
 
           </div>
           <div class="widget-content tab-content">
 <div id="tab2078" class="tab-pane active">
-wwwwwwwwwwww
-</div>
-<div id="tab100" class="tab-pane ">
-  azertrt
-</div>
-<div id="tab10045" class="tab-pane ">
-  <tr>
-    <td>
-                          <label
-                            >Unité Administrative
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="listeDesUa"
-                            v-model="formData.unite_administrative_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                          
-                        </td>
-                        <td>
-                          <label
-                            >Unité Administrative
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="listeDesUa"
-                            v-model="formData.unite_administrative_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                          
-                        </td>
-  </tr>
-<div class="widget-title">
-            <ul class="nav nav-tabs">
-               <li v-for="item in arrayExerciceDecompte(detailOp.unite_administrative_id)" :key="item"><a data-toggle="tab" :href="'#'+item">Exercice {{item}}</a></li>
-
-            </ul>
-
-
-          </div>
-          <div class="widget-content tab-content">
-          
-
-
-<div v-for="item in arrayExerciceDecompte(detailOp.unite_administrative_id)" :key="'DEC'+item" :id="item" class="tab-pane">
-   
 <table class="table table-bordered table-striped">
                       <thead>
                       <tr>
@@ -783,7 +727,7 @@ wwwwwwwwwwww
 
                       </thead>
                       <tbody>
-                    <tr class="odd gradeX" v-for="type in decompteParExercice(detailOp.unite_administrative_id,item)" :key="type.id">
+                    <!-- <tr class="odd gradeX" v-for="type in decompteParExercice(detailOp.uniteadministrative_id,item)" :key="type.id">
                          
                           <td style="text-align:center;">{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
                           <td style="text-align:center;">{{AfficheEntrepriseLibelle(afficheIdEntreprise(type.marche_id)) || 'Non renseigné'}}</td>
@@ -801,7 +745,7 @@ wwwwwwwwwwww
                           </td>
                           
                           
-                      </tr> 
+                      </tr>  -->
                      <tr>
                        <td></td>
                         <td></td>
@@ -815,10 +759,9 @@ wwwwwwwwwwww
                       
                       </tbody>
                   </table>
-                  </div>
-          </div>
+ </div>
 
-</div>
+
           </div>
         
 
@@ -887,12 +830,12 @@ import moment from "moment";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
  import {formatageSomme} from "@/Repositories/Repository"
-import { ModelListSelect } from "vue-search-select";
-import "vue-search-select/dist/VueSearchSelect.css";
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
 import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
 export default {
   components: {
-    ModelListSelect
+    //ModelListSelect
   },
   data() {
     return {
