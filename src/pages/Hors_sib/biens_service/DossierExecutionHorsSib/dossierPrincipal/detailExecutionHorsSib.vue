@@ -169,8 +169,10 @@ controlleur_fin
                       </a>
                     </li>
 
-                     <li>
-                      <a data-toggle="tab" href="#tab001">DIFFICULTE RENCONTRE </a>
+                    <li>
+                      <a data-toggle="tab" href="#tab001"
+                        >DIFFICULTE RENCONTRE
+                      </a>
                     </li>
                      <li>
                       <a data-toggle="tab" href="#tab0401"
@@ -362,22 +364,20 @@ controlleur_fin
                       >
                     </div>
 
-                    <!-- <publication-Offre :macheid="detail_marche.id"></publication-Offre> -->
-
                     <marchePluriannuel
                       :macheid="detail_marche.id"
                     ></marchePluriannuel>
                   </div>
 
-                  
                   <!-- probleme marche -->
                   <div id="tab001" class="tab-pane">
-                    <div class="span4"></div>
+                    <div class="span4">
+                    </div>
                     <div class="span4"></div>
 
                     <div class="span4" align="right">
                       <a
-                        href="#ajouterProblemeMarchemodal"
+                        href="#AjouterProblemeMarcheModal"
                         data-toggle="modal"
                         class="btn btn-success"
                         align="rigth"
@@ -385,12 +385,9 @@ controlleur_fin
                       >
                     </div>
 
-                    <problemeMarche
-                      :macheid="detail_marche.id"
-                    ></problemeMarche>
+                    <ProblemeMarche :macheid="detail_marche.id"></ProblemeMarche>
                   </div>
-                  <!-- fin probleme marche -->
-
+                 <!-- fin probleme marche -->
 
                   <div id="tab03" class="tab-pane">
                     <imageMarche :macheid="detail_marche.id"></imageMarche>
@@ -438,7 +435,8 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "./../../../../../Repositories/Repository";
 import marchePluriannuel from "../DossierMarchePluriannuel/marchePluriannuel";
-import problemeMarche from "../DossierMarchePluriannuel/problemeMarche";
+import ProblemeMarche from "../DossierMarchePluriannuel/ProblemeMarche";
+
 import avenant from "../dossierAvenant/avenantHs";
 import facture from "../dossierFacture/factureHs";
 import decompte from "../dossierDecompte/decomptePro";
@@ -460,7 +458,7 @@ export default {
     avenant,
     facture,
     decompte,
-    problemeMarche,
+    ProblemeMarche,
     HistoriqueDecompteFacture,
     graphiqueExecutionMarche,
     graphiqueSituationMarche,
@@ -615,6 +613,8 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+
+    
 
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
@@ -3461,6 +3461,13 @@ export default {
 
     retourListeEntreprise() {
       this.$router.push({ name: "executionMarche" });
+    },
+
+    CallModalProblemeMarche() {
+      return this.$("#AjouterProblemeMarche").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
     },
 
     formatageSomme: formatageSomme,

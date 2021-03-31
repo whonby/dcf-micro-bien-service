@@ -20,8 +20,14 @@ import SituationExecutionLigne from "../../pages/Gestion_des_Rapports/BudgetExec
 import SituationExecutionRecapProjet from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapProjet.vue";
 import SituationExecutionRecapRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapRegie.vue";
 import SituationExecution from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecution.vue";
+import SituationExecutionBailActi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionBailActi.vue";
 const gestionrapport = [
 
+    {
+        path: "/SituationExecutionBailActi",
+        name: "SituationExecutionBailActi",
+        component: SituationExecutionBailActi
+    },
     {
         path: "/OrdrePaiementParPeriode",
         name: "OrdrePaiementParPeriode",
