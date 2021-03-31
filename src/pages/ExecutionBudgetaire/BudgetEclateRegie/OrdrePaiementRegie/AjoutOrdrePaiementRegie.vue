@@ -222,7 +222,23 @@ CreditAutorise
                 </div>
               </div>
                       </td>
-                      <td></td>
+                      <td>
+                         <td>
+                       <div class="control-group">
+                        <label class="control-label">Interim Sur Op</label>
+                        <div class="controls">
+                          <select
+                            v-model="formData.interimOp"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="Non">Non</option>
+                            <option value="Oui">Oui</option>
+                          </select>
+                        </div>
+                      </div>
+                      </td>
+
                       <td></td>
                       <td></td>
                       <td></td>
@@ -234,6 +250,86 @@ CreditAutorise
                       <td></td>
                     </tr>
                   </table>
+
+
+                  <!-- test******** -->
+                <div v-if="formData.interimOp=='Oui'">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#ENGAGEMENT"
+                    >VISA CONTRÔLEUR FINANCIER</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="ENGAGEMENT" class="tab-pane active">
+                      <table
+                        class="table table-bordered table-striped">
+                      <tr>
+                        <td colspan="">
+                           <div class="control-group">
+                            <label class="control-label">Date</label>
+                            <div class="controls">
+                              <input
+                                type="date"
+                                 v-model="formData.DateInterimOp"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        
+
+                       <td>
+                          <label
+                            >Nom
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="getterUtilisateur"
+                            v-model="formData.user_id"
+                            option-value="id"
+                            option-text="name"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                          <code
+                            style="color: red; font-size: 12px"
+                            v-if="formData.user_id == ''"
+                            >Veuillez renseigner ce champ</code
+                          >
+                        </td>
+
+
+                        <td colspan="">
+                           <div class="control-group">
+                            <label class="control-label">Visa</label>
+                            <div class="controls">
+                              <input
+                               v-model="formData.VisaInterimOp"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+
+                    </div>
+                    </div>
+                </div>
+                <!-- ********lega --> 
+
+
+
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
@@ -1806,7 +1902,12 @@ components: {
                  ligne_economique_id:"",
                  typedepense:"Marche",
                  numero_ordre_paiement:"",
-                 type_ordre_paiement:""
+                 type_ordre_paiement:"",
+                  interimOp:"Non",
+                  user_id:"",
+                  VisaInterimOp:"",
+                  DateInterimOp:"",
+                  interimOp:""
                 },
                 
                 editpiece:{},
@@ -3084,6 +3185,11 @@ if(this.formData.typedepense=='Marche'){
           mode_paiement_id:this.formData.mode_paiement_id,
           diff_op:1,
 
+             date_interim: this.formData.DateInterimOp,
+             visa_interim: this.formData.VisaInterimOp,
+             user_id_interim: this.formData.user_id,
+             imterim_op: this.formData.interimOp,
+
           grand_nature_id: this.GrandeNatureId(
               this.formData.ligne_economique_id
             ),
@@ -3099,6 +3205,9 @@ if(this.formData.typedepense=='Marche'){
        this.formData={
      exercice:this.anneeAmort,
         	type_ordre_paiement:"",
+          DateInterimOp:'',
+          VisaInterimOp:'',
+          user_id:'',
           numero_ordre_paiement:"",
           section_id:"",
            programme_id:"",

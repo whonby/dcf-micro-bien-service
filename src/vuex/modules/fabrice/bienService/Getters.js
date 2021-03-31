@@ -1155,6 +1155,8 @@ export const GroupeOrdrePaiementByLigneEconomique = (state, getters) => {
     return groupBy(getters.gettersgestionOrdrePaiement, "source_financement_id");
 };
 
+
+
 export const GroupeOrdrePaiementByGrandeNature = (state, getters) => {
 
     return groupBy(getters.gettersgestionOrdrePaiement, "grand_nature_id");
