@@ -161,13 +161,13 @@ export function ajouterCandidatSelectionner({ commit }, formData) {
 //probleme marche
 
 export function getProblemeMarche({ commit }) {
-  queue.push(() => axios.get('/ReceptionMarche').then(tony => {
+  queue.push(() => axios.get('/ProblemeMarche').then(tony => {
     commit('GET_ALL_PROBLEME_MARCHE', tony.data)
   }).catch(error => console.log(error)))
 }
 
 export function AjouterProblemeMarche({ commit }, formData) {
-  asyncLoading(axios.post('/ReceptionMarche', formData)).then(response => {
+  asyncLoading(axios.post('/ProblemeMarche', formData)).then(response => {
     if (response.status == 201) {
 
       commit('AJOUTER_PROBLEME_MARCHE', response.data)
@@ -189,14 +189,14 @@ export function SupprimerProblemeMarche({ commit }, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit('SUPPRIMER_PROBLEME_MARCHE', id)
-      axios.delete('/ReceptionMarche/' + id).then(() => dialog.close())
+      axios.delete('/ProblemeMarche/' + id).then(() => dialog.close())
     })
 }
 //MODIFICATION
 
 export function ModifierProblemeMarche({ commit }, elementModifie) {
 
-  asyncLoading(axios.put('/modifier_ReceptionMarche/' + elementModifie.id, {
+  asyncLoading(axios.put('/ProblemeMarche/' + elementModifie.id, {
     code: elementModifie.code,
     libelle: elementModifie.libelle,
 

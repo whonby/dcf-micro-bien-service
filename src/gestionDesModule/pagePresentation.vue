@@ -584,6 +584,9 @@ this.getMarche()
     this.getLot()
     this.getModePassations()
     this.getDossierCandidat()
+
+    this.getProblemeMarche()
+
     this.getOffreFinancier()
     this.getOffreTechnique()
 this.getLettreInvitation()
@@ -798,7 +801,7 @@ return objJson.id
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ["getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
-       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
+       'getTypeActeDepense','getProblemeMarche', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",

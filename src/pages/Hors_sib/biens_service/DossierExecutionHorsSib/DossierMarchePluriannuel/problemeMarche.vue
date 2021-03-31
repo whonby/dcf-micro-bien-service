@@ -13,18 +13,16 @@
       </thead>
       <tbody>
         <tr
-          v-for="(gettersProblemeMarch, index) in ListegettersProblemeMarche(
-            macheid
-          )"
-          :key="gettersProblemeMarch.id"
+          v-for="(ListegettersProblemeMarch, index) in ListegettersProblemeMarche(macheid)"
+          :key="ListegettersProblemeMarch.id"
         >
-          <td>{{ gettersProblemeMarch.probleme }}</td>
-          <td>{{ gettersProblemeMarch.traitement }}</td>
-          <td>{{ gettersProblemeMarch.decision }}</td>
-          <td>{{ gettersProblemeMarch.date }}</td>
+          <td>{{ ListegettersProblemeMarch.probleme }}</td>
+          <td>{{ ListegettersProblemeMarch.traitement }}</td>
+          <td>{{ ListegettersProblemeMarch.decision }}</td>
+          <td>{{ formaterDate(ListegettersProblemeMarch.date) }}</td>
           <td>
             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            <button
+           <button
               @click="afficherModalModificationMarchePluriannuel(index)"
               class="btn btn-primary"
             >
@@ -33,7 +31,7 @@
             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
             <button
               class="btn btn-danger"
-              @click="DeleteProbleme(gettersProblemeMarch.id)"
+              @click="DeleteProbleme(ListegettersProblemeMarch.id)"
             >
               supprimer
             </button>
@@ -42,7 +40,7 @@
       </tbody>
     </table>
 
-    <div id="AjouterProblemeMarche" class="modal hide grdirModalActeEffet">
+    <div id="AjouterProblemeMarcheModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Probleme sur le Marché</h3>
@@ -110,25 +108,25 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a @click.prevent="ajouterProbleme" class="btn btn-primary" href="#"
+        <a class="btn btn-primary" @click.prevent="ajouterProbleme" href="#"
           >Valider</a
         >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
 
-    <!-- modification -->
+     <!-- modification -->
 
     <div id="modifierMarchePM" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Probleme sur le Marché</h3>
+        <h3>Modification Probleme sur le Marché</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tr>
             <td>
-              <input type="hidden" v-model="editMarchePl.id" />
+            <input type="hidden" v-model="editMarchePl.id">
               <div class="control-group">
                 <div class="controls">
                   <label>Date <code>*</code></label>
@@ -217,14 +215,15 @@
     <notifications />
   </div>
 </template>
+
 <script>
-import { formatageSomme } from "../../../../../Repositories/Repository";
-import { mapActions, mapGetters } from "vuex";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
+import { formatageSomme } from "../../../../../Repositories/Repository";
+import moment from "moment";
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["macheid"],
-
   data() {
     return {
       formData: {
@@ -232,7 +231,6 @@ export default {
         probleme: "",
         decision: "",
         traitement: "",
-        
       },
       components: {
         ModelListSelect,
@@ -241,16 +239,13 @@ export default {
       editMarchePl: {},
     };
   },
-  created() {},
-  mounted() {},
+
   computed: {
     ...mapGetters("bienService", [
       "getterProgrammationMarchePlurieAnnuel",
-      "acteEffetFinanciers",
       "gettersProblemeMarche",
       "marches",
     ]),
-
     ...mapGetters("Utilisateurs", [
       "getterAffectionServiceCF",
       "getterUtilisateur",
@@ -264,12 +259,19 @@ export default {
     ...mapGetters("parametreGenerauxAdministratif", [
       "exercices_budgetaires",
       "grandes_natures",
-      "structures_geographiques",
-      "localisations_geographiques",
       "getterInfrastrucure",
     ]),
 
-    ListegettersProblemeMarche: function () {
+
+//      ListegettersProblemeMarche() {
+//         return this.gettersProblemeMarche.filter(
+//            // console.log(this.macheid)
+//           (idmarche) => idmarche.marche_id == this.macheid
+//         );
+//   },
+
+
+  ListegettersProblemeMarche: function () {
       return (macheid) => {
         if (macheid != "") {
           //console.log("Marche lettre inviation marche")
@@ -280,28 +282,7 @@ export default {
       };
     },
 
-    listeMarcheProbleme: function () {
-      return (macheid) => {
-        if (macheid != "") {
-          //console.log("Marche lettre inviation marche")
-          return this.gettersProblemeMarche.filter(
-            (idmarche) => idmarche.marche_id == macheid
-          );
-        }
-      };
-    },
-    // calcul du CP annuel prevu pour les type de financement
-
-    calculCPAnnuelPourLesTypeFinancement() {
-      const sommeCPAnnuel =
-        parseFloat(this.formData.cp_tresor) +
-        parseFloat(this.formData.cp_dons) +
-        parseFloat(this.formData.cp_emprunt);
-      if (isNaN(sommeCPAnnuel)) return null;
-      return parseFloat(sommeCPAnnuel).toFixed(2);
-    },
-
-    DeleteProbleme() {
+   DeleteProbleme() {
       return (id) => {
         if (id != null && id != "") {
           this.SupprimerProblemeMarche(id);
@@ -309,89 +290,9 @@ export default {
       };
     },
 
-    LibelleMarche() {
-      return (id) => {
-        if (id != null) {
-          let objet = this.marches.find((item) => item.id == id);
-          if (objet) return objet.objet;
-        }
-        return 0;
-      };
-    },
-
-    affiherLibelleTypefinancement() {
-      return (id) => {
-        if (id != null) {
-          let objet = this.types_financements.find((item) => item.id == id);
-          if (objet) return objet.libelle;
-        }
-        return null;
-      };
-    },
-
-    afficherLibelleAnneBudgetaire() {
-      return (id) => {
-        if (id != null) {
-          let objet = this.exercices_budgetaires.find((item) => item.id == id);
-          if (objet) return objet.annee;
-        }
-        return null;
-      };
-    },
-
-    afficherAnneBudgetaire() {
-      return (id) => {
-        if (id != null) {
-          let objet = this.getterProgrammationMarchePlurieAnnuel.find(
-            (item) => item.marche_id == id
-          );
-          if (objet) return objet.anneeBudgetaire;
-        }
-        return null;
-      };
-    },
-
-    anneeBugetaire() {
-      const anneBudget = this.exercices_budgetaires.find(
-        (anneBudg) => anneBudg.encours == 1
-      );
-      if (anneBudget) {
-        return anneBudget.annee;
-      }
-      return 0;
-    },
-
-    afficherMontantTtcDeActe() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.marche_id == id
-          );
-          console.log(this.acteEffetFinanciers);
-          if (qtereel) {
-            return qtereel.montant_act;
-          }
-          return 0;
-        }
-      };
-    },
-
-    // afficher la duree contractuel
-    afficherDureeContratuel() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.marche_id == id
-          );
-          console.log(this.acteEffetFinanciers);
-          if (qtereel) {
-            return qtereel.duree;
-          }
-          return 0;
-        }
-      };
-    },
   },
+
+  
   methods: {
     ...mapActions("bienService", [
       "ajouterProgrammationMarchePlurieAnnuel",
@@ -403,15 +304,6 @@ export default {
       "ModifierProblemeMarche",
     ]),
 
-    // afficherModalModif(index) {
-    //   this.$("#modifierMarcheP").modal({
-    //     backdrop: "static",
-    //     keyboard: false,
-    //   });
-    //   this.editMarchePl = this.listeMarchePluriannuel(this.macheid)[index];
-    //   //  console.log(this.edit_bailleur_marche)
-    // },
-
     afficherModalModificationMarchePluriannuel(index) {
       this.$("#modifierMarchePM").modal({
         backdrop: "static",
@@ -420,12 +312,21 @@ export default {
       this.editMarchePl = this.ListegettersProblemeMarche(this.macheid)[index];
       //  console.log(this.edit_bailleur_marche)
     },
+
+   
+
+formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
     formatageSomme: formatageSomme,
 
+     modificationLocal() {
+      // console.log(this.edite_appel_offre)
+      this.ModifierProblemeMarche(this.editMarchePl);
+      this.$("#modifierMarchePM").modal("hide");
+    },
+
     ajouterProbleme() {
-      //    this.$router.push({
-      //      name:'marcheHorsib'
-      //    })
       var nouvelObjet = {
         ...this.formData,
         // date: this.date,
@@ -436,7 +337,7 @@ export default {
         //user_id: this.macheid,
       };
       this.AjouterProblemeMarche(nouvelObjet);
-      this.$("#ajouterProblemeMarchemodal").modal("hide");
+      this.$("#AjouterProblemeMarcheModal").modal("hide");
 
       this.formData = {
         date: "",
@@ -445,20 +346,13 @@ export default {
         traitement: "",
       };
     },
-
-    modificationLocal() {
-      // console.log(this.edite_appel_offre)
-      this.ModifierProblemeMarche(this.editMarchePl);
-      this.$("#modifierMarchePM").modal("hide");
-    },
   },
+
+  mounted:{
+      // console.log(this.macheid);
+  }
 };
 </script>
 
-<style scoped>
-.grdirModalActeEffet {
-  width: 1100px;
-  margin: 0 -530px;
-  height: 600px;
-}
+<style>
 </style>

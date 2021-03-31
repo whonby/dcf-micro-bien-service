@@ -34,7 +34,7 @@
         <li :class="{active: active_el == 92 }" @click.prevent="navigateToTableaupluriannuel" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>TABLEAU PLURI-ANNUEL</span>
+            <span>EtAT EXECUTION DES MARCHES</span>
           </a>
         </li>
         <li :class="{active: active_el == 1033 }" @click.prevent="navigateTorapportExecution" >
@@ -238,7 +238,7 @@ navigateToSuiviMarcheProjetpARtYPEmArche(){
 navigateToTableaupluriannuel(){
         this.activate(92)
         this.$router.push({
-          name: 'tableauPluriannuel'
+          name: 'etatExecutionMarche'
         })
       },
        navigateToUniteAdministrative(){
