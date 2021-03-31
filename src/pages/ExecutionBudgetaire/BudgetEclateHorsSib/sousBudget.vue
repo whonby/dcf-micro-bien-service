@@ -282,7 +282,7 @@
                   
                 </div>
               </table>
-              <table class="table table-bordered table-striped">
+              <!-- <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                    
@@ -297,12 +297,7 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type, index) in listeSousBudget(formData.unite_administrative_id,formData.ligneeconomique_id)" :key="type.id">
-                    <!-- <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.execice || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{LibelleUniteAdministrative(type.unite_administrative_id) || 'Non renseigné'}}</td> -->
+                   
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.code || 'Non renseigné'}}</td>
@@ -350,7 +345,7 @@
                     <td></td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
             </div>
           </div>
         </div>

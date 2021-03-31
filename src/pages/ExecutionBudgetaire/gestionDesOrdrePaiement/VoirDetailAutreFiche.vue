@@ -553,7 +553,7 @@ recupBanque1
 </div>
 
 
-<div v-if="detailOp.type_ordre_paiement == 1 || detailOp.type_ordre_paiement == 4">
+<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null">
       <p style="
         font-size: 13px;
         text-align: center;
@@ -654,8 +654,8 @@ recupBanque1
 
     </div>
 
+<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null">
 
-<!-- lega -->
    <table class="table table-bordered table-striped">
       <td style="width: 90%"></td>
       
@@ -761,7 +761,7 @@ recupBanque1
                   </table>
  </div>
 
-
+</div>
           </div>
         
 
@@ -830,11 +830,13 @@ import moment from "moment";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
  import {formatageSomme} from "@/Repositories/Repository"
+ //import HistoriqueDecompteFacture from "/../../../Hors_sib/dossierDecompte/HistoriqueDecompteFacture.vue";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
 export default {
   components: {
+    //HistoriqueDecompteFacture
     //ModelListSelect
   },
   data() {
