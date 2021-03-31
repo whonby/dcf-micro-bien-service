@@ -42,7 +42,7 @@
       </tbody>
     </table>
 
-    <div id="ajouterProblemeMarchemodal" class="modal hide grdirModalActeEffet">
+    <div id="AjouterProblemeMarche" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Probleme sur le Marché</h3>
@@ -76,22 +76,6 @@
                 </div>
               </div>
             </td>
-
-            <!-- <td colspan="">
-              
-                  <label>Utilisateur <code>*</code></label>
-                  <model-list-select
-                    style="border: 1px solid #000"
-                    class="wide"
-                    :list="getterUtilisateur"
-                    v-model="formData.user_id"
-                    option-value="id"
-                    option-text="name"
-                    placeholder=""
-                  >
-                  </model-list-select>
-               
-            </td> -->
           </tr>
 
           <tr>
@@ -240,6 +224,7 @@ import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   props: ["macheid"],
+
   data() {
     return {
       formData: {
@@ -247,6 +232,7 @@ export default {
         probleme: "",
         decision: "",
         traitement: "",
+        
       },
       components: {
         ModelListSelect,

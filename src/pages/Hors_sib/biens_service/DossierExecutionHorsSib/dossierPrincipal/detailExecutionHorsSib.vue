@@ -169,8 +169,10 @@ controlleur_fin
                       </a>
                     </li>
 
-                     <li>
-                      <a data-toggle="tab" href="#tab001">DIFFICULTE RENCONTRE </a>
+                    <li>
+                      <a data-toggle="tab" href="#tab001"
+                        >DIFFICULTE RENCONTRE
+                      </a>
                     </li>
                     <!-- <li>
                         <a data-toggle="tab" href="#tab040">EVOLUTION DES MARCHES</a>
@@ -357,22 +359,26 @@ controlleur_fin
                       >
                     </div>
 
-                    <!-- <publication-Offre :macheid="detail_marche.id"></publication-Offre> -->
-
                     <marchePluriannuel
                       :macheid="detail_marche.id"
                     ></marchePluriannuel>
                   </div>
 
-                  
                   <!-- probleme marche -->
                   <div id="tab001" class="tab-pane">
-                    <div class="span4"></div>
+                    <div class="span4">
+                      <button
+                        class="btn btn-primary"
+                        @click="CallModalProblemeMarche"
+                      >
+                        Add
+                      </button>
+                    </div>
                     <div class="span4"></div>
 
                     <div class="span4" align="right">
                       <a
-                        href="#ajouterProblemeMarchemodal"
+                        href="#AjouterProblemeMarche"
                         data-toggle="modal"
                         class="btn btn-success"
                         align="rigth"
@@ -386,6 +392,80 @@ controlleur_fin
                   </div>
                   <!-- fin probleme marche -->
 
+      <div id="AjouterProblemeMarche" class="modal hide grdirModalActeEffet">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Probleme sur le Marché</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <div class="controls">
+                  <label>Date <code>*</code></label>
+                  <input
+                    type="date"
+                    class="span"
+                    placeholder=""
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <div class="controls">
+                  <label>Traitement <code>*</code></label>
+                  <select  class="span">
+                    <!-- <option>veuillez selectionner l'année</option> -->
+                    <option>En cours</option>
+                    <option>Résolu</option>
+                    <option>En attente</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="">
+              <div class="control-group">
+                <div class="controls">
+                  <label>Décision <code>*</code></label>
+                  <input
+                    type="text"
+                    class=""
+                    placeholder=""
+                  
+                  />
+                </div>
+              </div>
+            </td>
+
+            <td colspan="2">
+              <div class="control-group">
+                <div class="controls">
+                  <label for="">problème rencontré<code>*</code></label>
+                  <textarea
+                    name="probleme"
+                    cols="60"
+                    rows="8"
+                   
+                  ></textarea>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="#"
+          >Valider</a
+        >
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 
                   <div id="tab03" class="tab-pane">
                     <imageMarche :macheid="detail_marche.id"></imageMarche>
@@ -599,6 +679,8 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+
+    
 
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
@@ -3445,6 +3527,13 @@ export default {
 
     retourListeEntreprise() {
       this.$router.push({ name: "executionMarche" });
+    },
+
+    CallModalProblemeMarche() {
+      return this.$("#AjouterProblemeMarche").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
     },
 
     formatageSomme: formatageSomme,
