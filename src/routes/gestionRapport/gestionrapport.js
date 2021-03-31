@@ -1,7 +1,7 @@
 import suiviDesEntreprise from "../../pages/Gestion_des_Rapports/suiviDesEntreprise";
 
 import ficheSuivi from "../../pages/Gestion_des_Rapports/ficheSuivi";
-import tableauPluriannuel from "../../pages/Gestion_des_Rapports/tableauPluriannuel";
+import EtatExecutionMarche from "../../pages/Gestion_des_Rapports/EtatExecutionMarche";
 
 
 import tableaudebordbudg from "../../pages/bien_service/Tableau_de_bord/tableaudebordbudg.vue";
@@ -56,9 +56,9 @@ const gestionrapport = [
         component: SituationExecutionRecapRegie
     },
     {
-        path: "/tableauPluriannuel",
-        name: "tableauPluriannuel",
-        component: tableauPluriannuel
+        path: "/EtatExecutionMarche",
+        name: "etatExecutionMarche",
+        component: EtatExecutionMarche
     },
     {
         path: "/tableaudebordbudg",

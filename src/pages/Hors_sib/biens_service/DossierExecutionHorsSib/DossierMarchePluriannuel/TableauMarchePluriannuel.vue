@@ -315,7 +315,7 @@ export default {
 
   // recuperID du marche dans acte Effet financier
 
-  // afficher exercice du budgetaire
+  // afficher exercice du budgetaire  affichageAnneeConditionnel
 
   afficherExoBudgetaire(){
    return id=>{
@@ -705,8 +705,8 @@ afficherMontantTtcDeActe() {
 affichageAnneeConditionnel(){
   let anneeBudgetaire;
   const objetp=this.getterProgrammationMarchePlurieAnnuel.find(item => item.anneeBudgetaire== this.anneeBugetaire)
-       if(anneeBudgetaire=="") {
-          return null
+       if(anneeBudgetaire==undefined) {
+          return 0
        }
       
       return objetp.anneeBudgetaire
@@ -739,7 +739,7 @@ affichageAnneeConditionnel(){
 incrementAnnee(){
    const item=parseInt(this.affichageAnneeConditionnel) + parseInt(1)
     if(this.affichageAnneeConditionnel==""){
-      return null
+      return 0
     }
     return item;
 },
