@@ -1906,8 +1906,8 @@ components: {
                   interimOp:"Non",
                   user_id:"",
                   VisaInterimOp:"",
-                  DateInterimOp:"",
-                  interimOp:""
+                  DateInterimOp:""
+                  
                 },
                 
                 editpiece:{},
