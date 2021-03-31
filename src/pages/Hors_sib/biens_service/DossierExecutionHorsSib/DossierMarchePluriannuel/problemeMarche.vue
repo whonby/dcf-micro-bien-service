@@ -1,7 +1,6 @@
 <template>
   <div>
-
-      <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped">
       <thead>
         <tr>
           <th>Probleme</th>
@@ -14,35 +13,24 @@
       </thead>
       <tbody>
         <tr
-          v-for="gettersProblemeMarch in ListegettersProblemeMarche"
-          :key="gettersProblemeMarch.id"
+          v-for="ListegettersProblemeMarch in ListegettersProblemeMarche"
+          :key="ListegettersProblemeMarch.id"
         >
-          <td>{{ gettersProblemeMarch.probleme }}</td>
-          <td>{{ gettersProblemeMarch.traitement }}</td>
-          <td>{{ gettersProblemeMarch.decision }}</td>
-          <td>{{ gettersProblemeMarch.date }}</td>
+          <td>{{ ListegettersProblemeMarch.probleme }}</td>
+          <td>{{ ListegettersProblemeMarch.traitement }}</td>
+          <td>{{ ListegettersProblemeMarch.decision }}</td>
+          <td>{{ formaterDate(ListegettersProblemeMarch.date) }}</td>
           <td>
             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            <button
-             
-              class="btn btn-primary"
-            >
-              modifier
-            </button>
+            <button class="btn btn-primary">modifier</button>
             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            <button
-              class="btn btn-danger"
-              
-            >
-              supprimer
-            </button>
+            <button class="btn btn-danger">supprimer</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-
-      <div id="AjouterProblemeMarcheModal" class="modal hide grdirModalActeEffet">
+    <div id="AjouterProblemeMarcheModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Probleme sur le Marché</h3>
@@ -58,7 +46,7 @@
                     type="date"
                     class="span"
                     placeholder=""
-                  v-model="formData.date"
+                    v-model="formData.date"
                   />
                 </div>
               </div>
@@ -87,7 +75,7 @@
                     type="text"
                     class=""
                     placeholder=""
-                   v-model="formData.decision"
+                    v-model="formData.decision"
                   />
                 </div>
               </div>
@@ -101,7 +89,7 @@
                     name="probleme"
                     cols="60"
                     rows="8"
-                   v-model="formData.probleme"
+                    v-model="formData.probleme"
                   ></textarea>
                 </div>
               </div>
@@ -110,7 +98,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a  class="btn btn-primary"  @click.prevent="ajouterProbleme" href="#"
+        <a class="btn btn-primary" @click.prevent="ajouterProbleme" href="#"
           >Valider</a
         >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
@@ -123,17 +111,17 @@
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 import { formatageSomme } from "../../../../../Repositories/Repository";
+import moment from "moment";
 import { mapActions, mapGetters } from "vuex";
 export default {
-    props: ["macheid"],
-    data() {
+  props: ["macheid"],
+  data() {
     return {
       formData: {
         date: "",
         probleme: "",
         decision: "",
         traitement: "",
-        
       },
       components: {
         ModelListSelect,
@@ -144,12 +132,12 @@ export default {
   },
 
   computed: {
-       ...mapGetters("bienService", [
+    ...mapGetters("bienService", [
       "getterProgrammationMarchePlurieAnnuel",
       "gettersProblemeMarche",
       "marches",
     ]),
-      ...mapGetters("Utilisateurs", [
+    ...mapGetters("Utilisateurs", [
       "getterAffectionServiceCF",
       "getterUtilisateur",
       "getterAffectation",
@@ -164,19 +152,20 @@ export default {
       "grandes_natures",
       "getterInfrastrucure",
     ]),
+
+
+     ListegettersProblemeMarche() {
+        return this.gettersProblemeMarche.filter(
+           // console.log(this.macheid)
+          (idmarche) => idmarche.marche_id == this.macheid
+        );
   },
 
-  ListegettersProblemeMarche: function () {
-     
-          return this.gettersProblemeMarche.filter(
-            (idmarche) => idmarche.marche_id == this.macheid
-          );
-        
-      
-    },
+  },
 
-  methods:{
-       ...mapActions("bienService", [
+  
+  methods: {
+    ...mapActions("bienService", [
       "ajouterProgrammationMarchePlurieAnnuel",
       "modifierProgrammationMarchePlurieAnnuel",
       "supprimerProgrammationMarchePlurieAnnuel",
@@ -186,11 +175,14 @@ export default {
       "ModifierProblemeMarche",
     ]),
 
+   
+
+formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
     formatageSomme: formatageSomme,
 
-    
     ajouterProbleme() {
-     
       var nouvelObjet = {
         ...this.formData,
         // date: this.date,
@@ -210,12 +202,13 @@ export default {
         traitement: "",
       };
     },
+  },
 
+  mounted:{
+      // console.log(this.macheid);
   }
-
-}
+};
 </script>
 
 <style>
-
 </style>

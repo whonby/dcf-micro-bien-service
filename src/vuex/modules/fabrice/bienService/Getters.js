@@ -108,7 +108,7 @@ export const getterStructureDao = state => state.structure_daos
 export const getterMembreComiteEvaluation = state => state.membre_comite_evaluations
 
 export const getterProgrammationMarchePlurieAnnuel = state => state.programmationMarchePlurieAnnuel
-
+export const gettersProblemeMarche = state=> state.ProblemeMarche
 export const personnaliseGetterMarcheBailleur = (state, getters, rootState, rootGetters) =>
     state.bailleurMarche.map(element => {
         if (element.bailleur_id !== null && element.type_finnancement_id !== null) {
