@@ -73,7 +73,7 @@ recupereMontantEmpruntTotal
                   
                      <tr>
  
-                    <td colspan="">
+                    <!-- <td colspan="">
               <div class="control-group">
                 <label class="control-label">Exercice Budgetaire</label>
                 <div class="controls">
@@ -88,11 +88,11 @@ recupereMontantEmpruntTotal
                 </div>
               </div>
               
-                     </td>
+                     </td> -->
                   
-                  <td>
+                  <td colspan="2">
                        <div class="control-group">
-                <label class="control-label">Section{{idSection(formData.ligne_budgetaire_parent_id)}}</label>
+                <label class="control-label">Section</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -106,7 +106,7 @@ recupereMontantEmpruntTotal
                   </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Programme{{idProgramme(formData.ligne_budgetaire_parent_id)}}</label>
+                <label class="control-label">Programme</label>
                 <div class="controls">
                    <input
                     type="text"
@@ -121,7 +121,7 @@ recupereMontantEmpruntTotal
                      </td>
                      <td colspan="">
               <div class="control-group">
-                <label class="control-label">Action{{formData.ligne_budgetaire_parent_id}}</label>
+                <label class="control-label">Action</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -183,7 +183,7 @@ recupereMontantEmpruntTotal
                      </td>
                       <td>
                        <div class="control-group">
-                <label class="control-label">Unite administrative{{formData.uniteadministrative_id}} <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -202,7 +202,7 @@ recupereMontantEmpruntTotal
                   </td>
                    <td>
                        <div class="control-group">
-                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Code Activite {{formData.uniteadministrative_id}}<code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -1112,7 +1112,7 @@ else{
    afficheLesSousBudget() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.activite_parent_id==id1 && qtreel.execice==this.formData78.exo_id);
+           return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.activite_parent_id==id1);
 
      
       

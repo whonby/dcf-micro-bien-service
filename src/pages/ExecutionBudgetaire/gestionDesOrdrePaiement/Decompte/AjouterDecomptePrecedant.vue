@@ -92,7 +92,7 @@
                 
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="">
                        <div class="control-group">
                 <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
@@ -111,7 +111,7 @@
               </div>
               
                   </td>
-               <td colspan="2">
+               <td colspan="">
                        <div class="control-group">
                 <label class="control-label">Entreprise <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
@@ -130,6 +130,15 @@
               </div>
               
                   </td>
+                   <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Montant du marche</label>
+                                                    <div class="controls">
+                                                         <money :value="AfficheMontantMarche(formData.marche_id)"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                        
+                                                    </div>
+                                                </div>
+                </td>
             </tr>
             <tr>
                 <td colspan="4">
@@ -147,15 +156,28 @@
               </td>
             </tr>
             <tr>
+               
                 <td colspan="">
                      <div class="control-group">
-                                                    <label class="control-label">Montant du marche</label>
+                                                    <label class="control-label">Retenues d'avance</label>
                                                     <div class="controls">
-                                                         <money :value="AfficheMontantMarche(formData.marche_id)"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                         <money v-model="formData.montantmarche"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                                                         
                                                     </div>
                                                 </div>
                 </td>
+
+                  <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Retenues de </label>
+                                                    <div class="controls">
+                                                        <input type="date" v-model="formData.date_decompte"  placeholder="" class="span"/>
+                                                    </div>
+                                                </div>
+                </td>
+            </tr>
+            <tr>
+               
                 <td colspan="">
                      <div class="control-group">
                                                     <label class="control-label">Montant Payé</label>

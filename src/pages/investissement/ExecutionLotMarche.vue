@@ -259,7 +259,7 @@
                <table class="table table-bordered table-striped" v-if="this.detail_marche.economique_id != this.CodeExempte(this.detail_marche.economique_id)">
                 <thead>
                  <tr>
-                     <th>N°Lot</th>
+                     <th>N°Lot4</th>
                      <th>Objet marché</th>
                      <th>UA</th>
                     <th>Type marché</th>
@@ -679,7 +679,7 @@ listeDesLotExecution() {
          return id => {
         if (id != null && id != "") {
           return this.colect.filter(
-            element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2
+            element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2 || element.parent_id == id  && element.attribue == 2 && element.type_marche_id == 6
           );
         }
       };
@@ -689,7 +689,7 @@ listeDesLotExecution() {
   return id => {
         if (id != null && id != "") {
           return this.getMarchePersonnaliser.filter(
-element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2
+element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2 || element.parent_id == id  && element.attribue == 2 && element.type_marche_id == 6
           );
         }
       };

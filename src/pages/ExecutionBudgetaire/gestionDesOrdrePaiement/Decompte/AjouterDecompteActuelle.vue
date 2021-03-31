@@ -63,14 +63,16 @@
             </td>
             <td>
 
+
               <div class="control-group">
                 <label class="control-label">Montant Acompte HTVA</label>
                 <div class="controls">
-                  <input type="text" 
+                  <!-- <input type="text" 
                          class="span"
                          readonly
                          :value="MontantFacture(detail_Facture.id)"
-                  />
+                  /> -->
+                    <money :value="MontantFacture(detail_Facture.id)"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -134,12 +136,12 @@
                       class="span"
                      
                   />
-                  <money
+                  <!-- <money
                                :value="MontantRetenuGarantie(detail_Facture.marche_id)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
-                              ></money>
+                              ></money> -->
 
                 </div>
               </div>
@@ -148,14 +150,14 @@
               <div class="control-group">
                 <label class="control-label" > Retenue de garantie</label>
                 <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
                       
                          v-model="formData.retenu_garantie"
                       class="span"
                       
-                  />
-            
+                  /> -->
+            <money v-model="formData.retenu_garantie"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -164,13 +166,14 @@
               <div class="control-group">
                 <label class="control-label" >Retenue de pénalité</label>
                 <div class="controls">
-                  <input
+                  <money v-model="formData.retenu_penalite"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  <!-- <input
                       type="number"
                         v-model="formData.retenu_penalite"
 
                       class="span"
                       
-                  />
+                  /> -->
 
                 </div>
               </div>
@@ -181,14 +184,14 @@
               <div class="control-group">
                 <label class="control-label" >Montant HT (aprés retenues)</label>
                 <div class="controls">
-                  <input
+                  <!-- <input
                       type="text"  
                         :value="Montantapresretenues"
                      
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+<money  :value="Montantapresretenues"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -211,14 +214,14 @@
                <div class="control-group">
                 <label class="control-label" >Montant TTC</label>
                 <div class="controls">
-                  <input
+                  <!-- <input
                       type="text"
                       :value="MontantTTC"
 
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+<money  :value="MontantTTC"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
              </td>
@@ -229,14 +232,14 @@
               <div class="control-group">
                 <!-- <label class="control-label" >Part Bailleur </label> -->
                 <div class="controls">
-                  <input
+                  <!-- <input
                       type="hidden"  
                         :value="montantTTCMarche(detail_Facture.marche_id)"
                       step='100'
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+<money  :value="montantTTCMarche(detail_Facture.marche_id)"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -333,7 +336,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="NomEntreprise(detail_Facture.fournisseur_id)"
+                      :value="NomEntreprise(detail_Facture.entreprise_id)"
                       
                       class="span"
                       readonly
@@ -348,7 +351,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                     :value="AdresseEmailEntreprise(detail_Facture.fournisseur_id)"
+                     :value="AdresseEmailEntreprise(detail_Facture.entreprise_id)"
                       
                       class="span"
                       readonly
@@ -363,7 +366,7 @@
                   <input
                       type="text"
                        
-                      :value="ContribuableEntreprise(detail_Facture.fournisseur_id)"
+                      :value="ContribuableEntreprise(detail_Facture.entreprise_id)"
                       class="span"
                       readonly
                   />

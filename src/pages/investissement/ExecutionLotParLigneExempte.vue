@@ -9,7 +9,7 @@
                 <thead>
                  <tr>
                      <!-- <th>N°Lot222</th> -->
-                     <th>Objet marché4552</th>
+                     <th>Objet marché</th>
                      <th>UA</th>
                     <th>Type marché</th>
                     <th>Activité</th>
