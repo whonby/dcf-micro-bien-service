@@ -95,6 +95,7 @@
               </div>
             </td>
              <td >
+               
               <div class="control-group">
                 <label class="control-label" > Retenue de garantie</label>
                 <div class="controls">
@@ -239,7 +240,7 @@
                       class="span"
                       readonly
                   /> -->
-<money  :value="montantTTCMarche(detail_Facture.marche_id)"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+<money  :value="montantTTCMarche(detail_Facture.marche_id)"  type="hidden"  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -450,13 +451,14 @@
               <div class="control-group">
                 <label class="control-label" >Montant initial du marché HT</label>
                 <div class="controls">
-                  <input
+                  <money  :value="montantHtMarche(detail_Facture.marche_id)" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  <!-- <input
                       type="number"
                        :value="montantHtMarche(detail_Facture.marche_id)"
 
                       class="span"
                       readonly
-                  />
+                  /> -->
 
                 </div>
               </div>
@@ -467,13 +469,14 @@
               <div class="control-group">
                 <label class="control-label" >Montant total du marché TTC</label>
                 <div class="controls">
-                  <input
+                   <money  :value="montantTTCMarche(detail_Facture.marche_id)"  readonly style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  <!-- <input
                       type="text"  
                         :value="montantTTCMarche(detail_Facture.marche_id)"
                       step='100'
                       class="span"
                       readonly
-                  />
+                  /> -->
 
                 </div>
               </div>
@@ -483,12 +486,8 @@
                 <label class="control-label">PART Bailleur</label>
                 <div class="controls">
 
-
-                  <input type="text" 
-                         class="span"
-                         :value="SommeBailleurDuMarche"
-                         readonly
-                  />
+<money  :value="SommeBailleurDuMarche" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  
 
                 </div>
               </div>
@@ -497,13 +496,15 @@
                <div class="control-group">
                 <label class="control-label" >PART ETAT</label>
                 <div class="controls">
-                  <input
+                <money  :value="MontantEtatCoteIvoire(detail_Facture.marche_id)" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+         
+                  <!-- <input
                       type="text"
                       :value="MontantEtatCoteIvoire(detail_Facture.marche_id)"
 
                       class="span"
                       readonly
-                  />
+                  /> -->
 
                 </div>
               </div>

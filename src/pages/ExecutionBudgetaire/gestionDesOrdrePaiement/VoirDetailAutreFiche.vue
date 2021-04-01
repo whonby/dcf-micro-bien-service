@@ -683,84 +683,37 @@ recupBanque1
             <ul class="nav nav-tabs">
               <li class="active">
                 <a data-toggle="tab" href="#tab2078"
-                  >Listes des Decomptes Année en cours
+                  >Decomptes Année en cours
                   <span class="badge badge"></span></a
                 >
               </li>
 
-             <!-- <li>
+             <li>
                 <a data-toggle="tab" href="#tab100">
-                  Historique decompte
+                  Decomptes Anterieur
                   <span class="badge badge-important">
                     </span
                   ></a
                 >
-              </li> -->
-               <!-- <li>
-                <a data-toggle="tab" href="#tab10045">
-                  Listes des Decomptes Année Anterieur
-                  <span class="badge badge-important">
-                    </span
-                  ></a
-                >
-              </li> -->
+              </li>
+              
             </ul>
 
 
           </div>
           <div class="widget-content tab-content">
 <div id="tab2078" class="tab-pane active">
-<table class="table table-bordered table-striped">
-                      <thead>
-                      <tr>
+   <listeDecompte
+                      :macheid="detailOp.marche_id"
+                    ></listeDecompte>
 
-                          <th style="text-align:center;font-size:12px">DESCRIPTION DES PRESTATIONS</th>
-
-                          <th style="text-align:center;font-size:12px">TITULAIRE DU MARCHE</th>
-                          <th style="text-align:center;font-size:12px">MONTANT DU MARCHE</th>
-                          <th style="text-align:center;font-size:12px">MONTANT PAYE</th>
-                          <th style="text-align:center;font-size:12px">NUMERO DECOMPTE</th>
-                          <th style="text-align:center;font-size:12px">DATE</th>
-                         
-                          <th style="text-align:center;font-size:12px" colspan="2">ACTION </th>
-                      </tr>
-
-                      </thead>
-                      <tbody>
-                    <!-- <tr class="odd gradeX" v-for="type in decompteParExercice(detailOp.uniteadministrative_id,item)" :key="type.id">
-                         
-                          <td style="text-align:center;">{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{AfficheEntrepriseLibelle(afficheIdEntreprise(type.marche_id)) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantMarche(type.marche_id))) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formatageSomme(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{type.numero_decompte || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
-                               <td>
-                             
-                              <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
-                        <span>
-                          <i class="icon icon-trash"> Supprimer</i>
-                        </span>
-                              </button>
-                          </td>
-                          
-                          
-                      </tr>  -->
-                     <tr>
-                       <td></td>
-                        <td></td>
-                         <td></td>
-                          <td></td>
-                           <td>CUMUL DECOMPTE</td>
-                            <td>78555</td>
-                             <td></td>
- 
-                     </tr>
-                      
-                      </tbody>
-                  </table>
  </div>
+<div id="tab100" class="tab-pane">
+   <listeDecompteAnterieurHist
+                      :macheid="detailOp.marche_id"
+                    ></listeDecompteAnterieurHist>
 
+ </div>
 </div>
           </div>
         
@@ -830,13 +783,17 @@ import moment from "moment";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
  import {formatageSomme} from "@/Repositories/Repository"
- //import HistoriqueDecompteFacture from "/../../../Hors_sib/dossierDecompte/HistoriqueDecompteFacture.vue";
+
+ //import HistoriqueDecompteFacture from "@/pages/Hors_sib/dossierDecompte/HistoriqueDecompteFacture.vue"
+ import listeDecompte from "./Decompte/listeDecompte.vue";
+ import listeDecompteAnterieurHist from "./Decompte/listeDecompteAnterieurHist.vue";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
 export default {
   components: {
-    //HistoriqueDecompteFacture
+   listeDecompte,
+   listeDecompteAnterieurHist
     //ModelListSelect
   },
   data() {
