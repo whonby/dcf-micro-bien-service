@@ -1,14 +1,14 @@
 
 <template>
-    
+
 
 <div>
         <div class="container-fluid">
-            
+
 
 
             <div class="widget-box">
-              
+
                 <div class="widget-content">
                     <div class="widget-content nopadding">
                         <table class="table table-striped table-bordered" v-if="detail_marche">
@@ -27,7 +27,7 @@
                             </thead>
                             <tbody>
                             <tr v-if="detail_marche">
-                                
+
                                  <td class="taskOptions">
                                     {{detail_marche.exo_id}}
                                 </td>
@@ -54,11 +54,11 @@
                                <!-- <td>{{budgetDisponible}}</td> -->
                             </tr>
                             </tbody>
-                        </table>             
+                        </table>
 
                     </div>
                 </div>
-            </div> 
+            </div>
         <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
             <div class="widget-title">
             <ul class="nav nav-tabs">
@@ -81,7 +81,7 @@
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
                 </div>
     </div>
-    
+
         </template>
 
         <template v-else>
@@ -101,12 +101,12 @@
                                 <li class=""><a data-toggle="tab" href="#tab17">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab201">ANRMP</a></li>
-                              
-                                
-                                
+
+
+
                             </ul>
                         </div>
-                        
+
                          <div class="widget-content tab-content">
 <div id="tab0145" class="tab-pane active">
                                 <div class="span4"></div>
@@ -121,7 +121,7 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                
+
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -148,7 +148,7 @@
 
                 </div>
                  <div id="tab201" class="tab-pane">
-                
+
                <Arnmp :macheid="detail_marche.id"></Arnmp>
 
                 </div>
@@ -161,7 +161,7 @@
 
                </div>
 
-                         
+
 
                     </div>
                      </template>
@@ -169,7 +169,7 @@
 
 
 
-                     
+
                     <template  v-else-if="affcicheEtapeProcedure (30000000,'PSC-AC',detail_marche.id)">
 <div class="widget-box">
                         <div class="widget-title">
@@ -187,11 +187,11 @@
                                 <li class=""><a data-toggle="tab" href="#tab0142">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2010">ANRMP</a></li>
 
-                          
-                                
+
+
                             </ul>
                         </div>
-                        
+
                          <div class="widget-content tab-content">
 
                          <div id="tab01" class="tab-pane active">
@@ -210,12 +210,12 @@
                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                
+
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
-                               
+
                                         <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
-                                        
-                               
+
+
                                 <!-- <h4>Liste des receptions de cotation</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -243,12 +243,12 @@
 
                    <div id="tab78932" class="tab-pane">
                      <jugement :macheid="detail_marche.id"></jugement>
-               
+
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                 <div id="tab2540" class="tab-pane">
                      <reserveCf :macheid="detail_marche.id"></reserveCf>
-               
+
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
 
@@ -280,18 +280,18 @@
 
                 </div>
                  <div id="tab2010" class="tab-pane">
-                
+
                <Arnmp :macheid="detail_marche.id"></Arnmp>
 
                 </div>
                          </div>
 
-                         
+
 
                     </div>
                     </template>
                       <template v-else-if="affcicheEtapeProcedure(60000000, 'PSL', detail_marche.id) ">
- 
+
                      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -309,10 +309,10 @@
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution</a></li>
                                <li class=""><a data-toggle="tab" href="#tab0143723">Bailleur</a></li>
                                <li class=""><a data-toggle="tab" href="#tab014372">ANRMP</a></li>
-                                
+
                             </ul>
                         </div>
-                        
+
                          <div class="widget-content tab-content">
 
                          <div id="tab8975" class="tab-pane active">
@@ -393,18 +393,18 @@
                 </div>
 
                  <div id="tab7845" class="tab-pane">
-               
-               
+
+
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
                   <div id="tab9563" class="tab-pane">
                    <jugement :macheid="detail_marche.id"></jugement>
-               
+
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                       <div id="tab25401" class="tab-pane">
                    <reserveCf :macheid="detail_marche.id"></reserveCf>
-               
+
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                  <div id="tab06125" class="tab-pane">
@@ -440,19 +440,19 @@
 
                 </div>
                 <div id="tab014372" class="tab-pane">
-                
+
                <Arnmp :macheid="detail_marche.id"></Arnmp>
 
                 </div>
-                
+
                          </div>
 
-                        
+
 
                     </div>
-                    
+
                     </template>
-                    
+
                     <template v-else-if="affcicheEtapeProcedure(100000000, 'PSO', detail_marche.id) ">
                     <div class="widget-box">
                         <div class="widget-title">
@@ -471,11 +471,11 @@
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01432">Bailleur</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab014372025">ANRMP</a></li>
-                                
-                                
+
+
                             </ul>
                         </div>
-                        
+
                          <div class="widget-content tab-content">
 
                          <div id="tab001" class="tab-pane active">
@@ -537,7 +537,7 @@
                   <!--<component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>-->
                 </div>
-                
+
 
 
                 <div id="tab17041" class="tab-pane">
@@ -553,23 +553,23 @@
                 </div>
 
                  <div id="tab7884" class="tab-pane">
-               
-               
+
+
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
                   <div id="tab5498" class="tab-pane">
 
                     <jugement :macheid="detail_marche.id"></jugement>
-               
+
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                     <div id="tab254010" class="tab-pane">
 
                     <reserveCf :macheid="detail_marche.id"></reserveCf>
-               
+
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
-                
+
                  <div id="tab0612" class="tab-pane">
 <!--                 <div align="right">-->
 <!--                    <div class="widget-content">-->
@@ -608,22 +608,22 @@
 
                 </div>
                  <div id="tab014372025" class="tab-pane">
-                
+
                <Arnmp :macheid="detail_marche.id"></Arnmp>
 
                 </div>
                          </div>
 
-                        
+
 
                     </div>
-                    
+
                      </template>
   <template v-else-if="affcicheEtapeProcedure(100000000 , 'AON' , detail_marche.id)">
      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                  
+
                                  <li class="active"><a data-toggle="tab" href="#tab4569" title="L'offres">L'Offre</a></li>
                               <li class=""><a data-toggle="tab" href="#lot3" title="Lot">Lots</a></li>
 
@@ -632,7 +632,7 @@
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="Réception des offres">Réception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#ouverture">Ouverture</a></li>
-                                
+
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab45" title="Rapport ouverture">PV Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="Analyse">Analyse</a></li>
@@ -641,7 +641,7 @@
 
                                  <li class=""><a data-toggle="tab" href="#tab27" title="Demande ANO/DMP">D.DMP</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
-                                      
+
                                       <li class=""><a data-toggle="tab" href="#tab28" title="Demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
 
@@ -649,13 +649,13 @@
 
                                 <li class=""><a data-toggle="tab" href="#tab0143720">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01203">ANRMP</a></li>
-                               
-                                
+
+
                             </ul>
                         </div>
-                        
+
                          <div class="widget-content tab-content">
-                         
+
                        <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -696,27 +696,27 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                
+
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
-                               
+
                                         <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
-                                        
-                               
+
+
                                 <h4>Liste des réceptions des plis</h4>
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
 
 
-                         
+
                    <div id="ouverture" class="tab-pane">
                      <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
-               
+
                   <!--<component-ouverture :macheid="detail_marche.id"></component-ouverture>-->
 
                  <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>-->
                 </div>
-                      
+
 
                  <div id="tab5" class="tab-pane">
                    <dossierCandidat :macheid="detail_marche.id"></dossierCandidat>
@@ -755,9 +755,9 @@
 
 
                 </div>
-                
-              
-                
+
+
+
 
                   <div id="tab27" class="tab-pane">
 
@@ -788,7 +788,7 @@
 <!--                </div>-->
 
                     <AnoBailleur :macheid="detail_marche.id"></AnoBailleur>
-              
+
 <!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
 
                 </div>
@@ -814,7 +814,7 @@
 
                 </div>
                  <div id="tab01203" class="tab-pane">
-                
+
                <Arnmp :macheid="detail_marche.id"></Arnmp>
 
                 </div>
@@ -828,7 +828,7 @@
 
                          </div>
 
-                         
+
 
                     </div>
 </template>
@@ -843,13 +843,13 @@
                                 <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
-                               
-                              
-                                
-                                
+
+
+
+
                             </ul>
                         </div>
-        
+
             <div class="widget-content tab-content">
         <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
@@ -869,7 +869,7 @@
 
 
                     <AnoBailleur1 :macheid="detail_marche.id"></AnoBailleur1>
-              
+
 <!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
 
                 </div>
@@ -879,7 +879,7 @@
 <!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
                 </div>
-                
+
 
 
                          <div id="tab00214" class="tab-pane">
@@ -913,14 +913,14 @@
             </div>
         </template>
 
-           
+
               <!-- <div class="modal-footer">
-        
+
         <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
-       
+
       </div> -->
         </div>
-          
+
 
 </div>
 
@@ -933,7 +933,7 @@
     import Arnmp from '../../bien_service/dossierArnmp/Arnmp';
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
      //import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
-     import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
+     import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';
  //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
    // import addLot from '../dossierLot/addLot';
@@ -946,7 +946,7 @@
    // import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
    //  import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
-     
+
    import componentBailleur from '../../bien_service/component/bailleurMarche';
 import componentBailleur1 from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
       import executionLigneExempte from '../executionLigneExempte/executionLigneExempte';
@@ -966,7 +966,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
     import ActEffeFinanciere from "@/pages/bien_service/component/ActEffetFinancier/ActEffeFinanciere";
       import ActEffeFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
     export default {
-       
+
         components:{
           ActEffeFinanciere,
           ActEffeFinancier1,
@@ -990,13 +990,13 @@ dossierCandidat,
            // componentOuvertureMembre,
           //  componentAnalyse,
 //componentPv,
- 
-           
-     componentBailleur,     
+
+
+     componentBailleur,
             componentBailleur1,
-            
-       
-         
+
+
+
 
          //   componentDemandeAno,
 
@@ -1015,7 +1015,7 @@ dossierCandidat,
                     }
 
                 ],
-                    
+
               macheid:""
             };
         },
@@ -1033,9 +1033,9 @@ created() {
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
                "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","getterAnoDMPBailleur"
               ]),
- 
-               
-              ...mapGetters('parametreGenerauxBudgetaire', ['structures_budgetaires', 
+
+
+              ...mapGetters('parametreGenerauxBudgetaire', ['structures_budgetaires',
   'plans_budgetaires']),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
@@ -1043,9 +1043,9 @@ created() {
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
-                
+
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
-           
+
             ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
@@ -1078,11 +1078,11 @@ created() {
               console.log(offre)
               if(offre!=undefined){
                    //test
-                   
+
                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
                    //
                   if(mode_passation.code==procedure){
-                   
+
                       return true
                   }
 
@@ -1134,7 +1134,7 @@ return "Procédure Simplifiée à compétition Limitée(PSL)"
     {
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
-    
+
     else if(this.affcicheEtapeProcedure(0,'ED',this.detail_marche.id))
     {
      return "Entente diret ou Convention (ED ou CONV)"
@@ -1144,7 +1144,7 @@ return "Procédure Simplifiée à compétition Ouverte(PSO)"
 return "Appel d'Offre Ouvert(AON ou AOI ou AOR)"
     }
 
-  return null  
+  return null
 
 
 },
@@ -1166,18 +1166,18 @@ listeAvisAnoBailleur(){
 //     return id =>{
 //         if(id!=null && id!=""){
 //             let objet = this.getterDossierCandidats.find(item =>item.marche_id==id && item.numero_dossier==null)
-//             return objet  
+//             return objet
 //         }
 //         return null
 //     }
-    
+
 // },
 
 // activedButtonActeEffet(){
 //      return id =>{
 //         if(id!=null && id!=""){
 //             let objet = this.getterAnalyseDossiers.find(item =>item.marche_id==id && item.dossier_candidat_id==null)
-//             return objet  
+//             return objet
 //         }
 //         return null
 //     }
@@ -1202,7 +1202,7 @@ listeAvisAnoBailleur(){
 
 
 
- 
+
 
 
         afficherLibelleTypeProcedure() {
@@ -1232,47 +1232,47 @@ listeAvisAnoBailleur(){
     },
 
 MontantTotal(){
-  
-    
-    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
+
+
+    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
       if(isNaN(montant)) return null
       return montant
-}, 
+},
 budgetConsommerBienService(){
   return id => {
     if(id !=""){
-    return this.getMandatPersonnaliserVise.filter(element => element.economique_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
-      
+    return this.getMandatPersonnaliserVise.filter(element => element.economique_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+
     }
-    
+
   }
 },
 budgetConsommerTransfert(){
   return id => {
     if(id !=""){
-    return this.afficheTransfertValider.filter(element => element.ligne_budgetaire_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
-      
+    return this.afficheTransfertValider.filter(element => element.ligne_budgetaire_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0);
+
     }
-    
+
   }
 },
 budgetConsommerDesModule() {
       const val = parseInt(this.budgetConsommerBienService(this.detail_marche.economique_id)) + parseInt(this.budgetConsommerTransfert(this.detail_marche.economique_id));
-      
+
        if (val) {
         return parseInt(val).toFixed(0);
       }
-      
+
       return 0
     },
 
 budgetDisponible() {
       const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) - parseInt(this.budgetConsommerDesModule);
-      
+
        if (val) {
         return parseInt(val).toFixed(0);
       }
-      
+
       return 0
     },
 
@@ -1282,12 +1282,12 @@ budgetDisponible() {
 
 
         },
-        
+
         methods: {
             ...mapActions("bienService", ['ajouterCotation' , 'modifierCotation','supprimerCotation']),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
-            // 
-          
+            //
+
 isFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=true
                 this.isButtunAddDossierCandidat=false
@@ -1328,9 +1328,9 @@ formatageSomme:formatageSomme,
               retourListeEntreprise(){
                  this.$router.push({ name: 'marche' })
             },
-           
-           
-      
+
+
+
         }
     };
 </script>
