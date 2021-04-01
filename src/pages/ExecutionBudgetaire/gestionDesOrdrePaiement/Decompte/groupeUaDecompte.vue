@@ -199,7 +199,8 @@ quantite: {
       "modifierStock",
       "supprimerStock"
     ]),
-    ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
+    ...mapActions("uniteadministrative",
+     ["supprimerStockArticle"]),
     
   }
 };

@@ -133,6 +133,7 @@ import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaement
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
 import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListeDesOrdresPaiement.vue"
 import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/PersonnelRattacher.vue"
+import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
@@ -150,7 +151,12 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 
-const BienServiceRoutes = [
+const BienServiceRoutes = [ 
+    {
+        path: "/ListePersonnelRattacherByUa/:id",
+        name: "ListePersonnelRattacherByUa",
+        component: ListePersonnelRattacherByUa
+    },
     {
         path: "/AjouterDecompteActuelle",
         name: "AjouterDecompteActuelle",

@@ -344,12 +344,28 @@
                         </div>
                       </div>
                     </td>
+
+                     <td>
+                       <div class="control-group">
+                        <label class="control-label">Rattacher une Personne</label>
+                        <div class="controls">
+                          <select
+                            v-model="formData.RattacherPers"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="Non">Non</option>
+                            <option value="Oui">Oui</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
                     <td>
                        <div class="control-group">
                         <label class="control-label">Interim Sur Op</label>
                         <div class="controls">
                           <select
-                            v-model="formData.interimOp"
+                            v-model="formData.imterim_op"
                             class="span"
                             style="border: 1px solid #000"
                           >
@@ -364,7 +380,7 @@
 
 
                 <!-- test******** -->
-                <div v-if="formData.interimOp=='Oui'">
+                <div v-if="formData.imterim_op=='Oui'">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
@@ -386,7 +402,7 @@
                             <div class="controls">
                               <input
                                 type="date"
-                                 v-model="formData.DateInterimOp"
+                                 v-model="formData.date_interim"
                                 style="border: 1px solid #000"
                                 class="span"
                               />
@@ -404,7 +420,7 @@
                             style="border: 1px solid #000"
                             class="wide"
                             :list="getterUtilisateur"
-                            v-model="formData.user_id"
+                            v-model="formData.user_id_interim"
                             option-value="id"
                             option-text="name"
                             placeholder=""
@@ -412,7 +428,7 @@
                           </model-list-select>
                           <code
                             style="color: red; font-size: 12px"
-                            v-if="formData.user_id == ''"
+                            v-if="formData.user_id_interim == ''"
                             >Veuillez renseigner ce champ</code
                           >
                         </td>
@@ -423,7 +439,7 @@
                             <label class="control-label">Visa</label>
                             <div class="controls">
                               <input
-                               v-model="formData.VisaInterimOp"
+                               v-model="formData.visa_interim"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -458,7 +474,7 @@
                     >
                    <tr>
                         
-                        <td>
+                        <td v-if="formData.RattacherPers=='Non'">
                       <div class="control-group">
                         <label class="control-label">Béneficiaire</label>
                         <div class="controls">
@@ -470,6 +486,23 @@
                             <option value="0"></option>
                             <option v-for="depense in PersonnelParUA(this.formData.unite_administrative_id)" :key="depense.id" 
                :value="depense.id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+
+                     <td v-if="formData.RattacherPers=='Oui'">
+                      <div class="control-group">
+                        <label class="control-label">Béneficiaire</label>
+                        <div class="controls">
+                          <select
+                            v-model="formData.auteur_perso_id"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="0"></option>
+                            <option v-for="depense in PersonnelRattacher(this.formData.unite_administrative_id)" :key="depense.id" 
+               :value="depense.id"> {{Personnelmatricule(depense.personne_rattacher)}} =>{{Personnelnom(depense.personne_rattacher)}} {{Personnelprenom(depense.personne_rattacher)}}</option>
                           </select>
                         </div>
                       </div>
@@ -924,7 +957,7 @@
                             option-value="id"
                             option-text="numero_marche"
                             placeholder=""
-                            @change="RecupdateActeEffetFinancier"
+                           
                           >
                           </model-list-select>
                           <code
@@ -2567,11 +2600,8 @@ export default {
         typedepense: "Marche",
         numero_ordre_paiement: "",
         type_ordre_paiement: "",
-        interimOp:"Non",
-        user_id:"",
-        VisaInterimOp:"",
-        DateInterimOp:"",
-
+        imterim_op:"Non",
+        RattacherPers:"Non"
       
       },
 
@@ -2622,6 +2652,7 @@ export default {
       "FichierJoinDmdEngagement",
       "salairesActeur",
       "personnaliseActeurDepense",
+      "getterPersonneRattacher",
       "personnaFonction",
       "afficheNombrePersonnelRecuActeNormination",
       "fonctionBudgetaire",
@@ -2826,6 +2857,66 @@ affichePersoUA() {
         }
       };
     },
+
+      PersonnelRattacher() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.getterPersonneRattacher.filter(
+            (qtreel) =>
+              qtreel.ua_rattacheur == id 
+          );
+        }
+      };
+    },
+
+
+
+    Personnelnom() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.personnaliseActeurDepense.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.nom;
+          }
+          return 0;
+        }
+      };
+    },
+
+    Personnelmatricule() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.personnaliseActeurDepense.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.matricule;
+          }
+          return 0;
+        }
+      };
+    },
+
+    Personnelprenom() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.personnaliseActeurDepense.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.prenom;
+          }
+          return 0;
+        }
+      };
+    },
+
+
 
 
 
@@ -3943,7 +4034,6 @@ SousFinancement() {
 
     ValiderDateUpdate() {
 
-
       this.ModifierDateEffetFinancier(this.editMarcheDate);
       this.$("#exampleModalligneEco").modal("hide");
     },
@@ -3980,6 +4070,7 @@ SousFinancement() {
       };
       reader.readAsDataURL(file);
     },
+
     afficherModalModifierTypeTexte(id) {
       this.$("#ModifierexampleModal").modal({
         backdrop: "static",
@@ -4237,10 +4328,11 @@ SousFinancement() {
 
             mode_paiement_id: this.formData.mode_paiement_id,
 
-            date_interim: this.formData.DateInterimOp,
-            visa_interim: this.formData.VisaInterimOp,
-            user_id_interim: this.formData.user_id,
-            imterim_op: this.formData.interimOp,
+            date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
 
 
             grand_nature_id: this.GrandeNatureId(
@@ -4261,9 +4353,11 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
-            DateInterimOp:'',
-            VisaInterimOp:'',
-            user_id:'',
+        
+            date_interim:'',
+            visa_interim:'',
+            user_id_interim:'',
+
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4334,7 +4428,17 @@ SousFinancement() {
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
+            
               .gestionnaire_credit_fonction,
+
+            date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
+
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4355,6 +4459,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4434,6 +4541,13 @@ SousFinancement() {
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4454,6 +4568,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4537,6 +4654,13 @@ SousFinancement() {
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4547,6 +4671,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4617,6 +4744,13 @@ SousFinancement() {
              	mois_paiement: this.formData.mois_paiement,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4637,6 +4771,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4715,6 +4852,13 @@ SousFinancement() {
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4735,6 +4879,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
