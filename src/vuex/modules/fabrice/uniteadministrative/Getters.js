@@ -8,6 +8,7 @@ export const getHistoriquedecisionBudgetEclate =state =>state.Historiquedecision
 export const gethistoriqueBudgetEclate =state =>state.historiqueBudgetEclate;
 export const ReparationVehicules =state =>state.ReparationVehicules;
 export const GestionStockageArticles = state => state.stockageArticles;
+export const uaperso = state => state.uniteAdministratives;
 export const getterUniteAdministrativeBailleur = state => state.UniteAdministrativeBailleur.sort((a, b) => (a.numero_ordre > b.numero_ordre ? 1 : -1));
 
 // const typeTextes = state =>

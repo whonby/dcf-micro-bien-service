@@ -28,22 +28,20 @@ uniteAdministratives
         <tbody>
           <tr
             class="odd gradeX"
-            v-for="groupeUaPersonneRattach in groupeUaPersonneRattacher"
-            :key="groupeUaPersonneRattach[0].id"
+            v-for="getterPersonneRattach in groupeUaPersonneRattacher"
+            :key="getterPersonneRattach[0].id"
           >
             <td style="font-size: 25px">
               {{
-                libelleUniteAdministrative(
-                  groupeUaPersonneRattach[0].ua_rattacheur
-                ) || "Non renseigné"
+                libelleUniteAdministrative(getterPersonneRattach[0].ua_rattacheur) || "Non renseigné"
               }}
             </td>
 
             <td>
               <router-link
                 :to="{
-                  name: 'ListeDecompteAnterieur',
-                  params: { id: groupeUaPersonneRattach[0].ua_rattacheur },
+                  name: 'ListePersonnelRattacherByUa',
+                  params: { id: getterPersonneRattach[0].ua_rattacheur },
                 }"
                 class="btn btn-success"
               >
@@ -76,7 +74,7 @@ uniteAdministratives
                 style="border: 1px solid #000"
                 class="wide"
                 :list="uniteAdministratives"
-                v-model="formData2.uaProprietaire"
+                v-model="formData2.ua_proprietaire"
                 option-value="id"
                 option-text="libelle"
                 placeholder=""
@@ -84,14 +82,14 @@ uniteAdministratives
               </model-list-select>
               <code
                 style="color: red; font-size: 12px"
-                v-if="formData2.uaProprietaire == ''"
+                v-if="formData2.ua_proprietaire == ''"
                 >Veuillez renseigner ce champ</code
               >
             </td>
           </tr>
 
           <tr>
-            <td>
+            <!-- <td>
               <label
                 >Personnel à Rattacher
                 <code style="color: red; font-size: 16px">*</code>
@@ -99,10 +97,10 @@ uniteAdministratives
               <model-list-select
                 style="border: 1px solid #000"
                 class="wide"
-                :list="uniteAdministratives"
+                :list="PersonnelParUA(formData2.uaProprietaire)"
                 v-model="formData2.Personnel_Rattacher"
                 option-value="id"
-                option-text="libelle"
+                option-text="nom'+ 'prenom"
                 placeholder=""
               >
               </model-list-select>
@@ -111,6 +109,30 @@ uniteAdministratives
                 v-if="formData2.Personnel_Rattacher == ''"
                 >Veuillez renseigner ce champ</code
               >
+            </td> -->
+
+            <td>
+              <div class="control-group">
+                <label class="control-label">Personnel à Rattacher</label>
+                <div class="controls">
+                  <select
+                    v-model="formData2.personne_rattacher"
+                    class="span6"
+                    style="border: 1px solid #000"
+                  >
+                    <option
+                      v-for="depense in PersonnelParUA(
+                        this.formData2.ua_proprietaire
+                      )"
+                      :key="depense.id"
+                      :value="depense.id"
+                    >
+                      {{ depense.matricule }} =>{{ depense.nom }}
+                      {{ depense.prenom }}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </td>
           </tr>
 
@@ -124,7 +146,7 @@ uniteAdministratives
                 style="border: 1px solid #000"
                 class="wide"
                 :list="uniteAdministratives"
-                v-model="formData2.uaRattacheur"
+                v-model="formData2.ua_rattacheur"
                 option-value="id"
                 option-text="libelle"
                 placeholder=""
@@ -132,7 +154,7 @@ uniteAdministratives
               </model-list-select>
               <code
                 style="color: red; font-size: 12px"
-                v-if="formData2.uaRattacheur == ''"
+                v-if="formData2.ua_rattacheur == ''"
                 >Veuillez renseigner ce champ</code
               >
             </td>
@@ -140,7 +162,9 @@ uniteAdministratives
         </table>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary" href="#">Valider</a>
+        <a class="btn btn-primary" @click.prevent="AjouterRattacher" href="#"
+          >Rattacher</a
+        >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -161,7 +185,6 @@ export default {
     ModelListSelect,
   },
 
-  name: "besionImmolisation",
   data() {
     return {
       fabActions: [
@@ -173,42 +196,16 @@ export default {
           name: "searchMe",
           icon: "search",
         },
-        // {
-        //   name: "alertMe",
-        //   icon: "add_alert",
-        //   class: ""
-        // }
       ],
-      // json_fields: {
-      //         TYPE_UNITE_ADMINISTRATIVE: "typeUniteAdmin.libelle",
-      //         UNITE_ADMINISTRATIVE: "uniteAdminist.libelle",
-      //         DESIGNATION: "famille.libelle",
-      //         QUANTITE: "quantite",
-      //         PRIX_UNITAIRE: "prix_unitaire",
-      //         MONTANT_TOTAL: "montant_total",
-      //          DATE_DE_DEMANDE: "date_jour",
-      //       },
+
       quantite: {
         qteentrant1: "0",
         date_entre: "",
       },
       formData2: {
-        uaProprietaire: "",
-        Personnel_Rattacher: "",
-        uaRattacheur: "",
-      },
-      uniteAdministrative_id: "",
-      affiche_filtre: false,
-      affiche_boutton_filtre: true,
-      editStock: {
-        unite_administrative_id: "",
-        typeequipe_id: "",
-        famill_id: "",
-        typeua_id: "",
-        durevie: "",
-        articlestock_id: "",
-        quantitestock: "",
-        qteentrant1: "0",
+        ua_proprietaire: "",
+        ua_rattacheur: "",
+        personne_rattacher: "",
       },
       search: "",
     };
@@ -243,8 +240,11 @@ export default {
       "uniteAdministratives",
       "GestionStockageArticles",
       "groupeUniteAdministrativeDecompte",
+      "uaperso"
     ]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+
+
 
     libelleUniteAdministrative() {
       return (id) => {
@@ -261,11 +261,16 @@ export default {
       };
     },
 
-    //    groupeParUa() {
+    PersonnelParUA() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.personnaliseActeurDepense.filter(
+            (qtreel) => qtreel.unite_administrative_id == id
+          );
+        }
+      };
+    },
 
-    //            return this.groupeUniteAdministrativeDecompte.filter(
-    //                qtreel => qtreel[0].diff_decompte == 1);
-    //     },
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
@@ -276,15 +281,21 @@ export default {
     ]),
 
     ...mapActions("personnelUA", [
-      "getPersonnelRattacher",
       "AjouterPersonnelRattacher",
       "SupprimerPersonnelRattacher",
       "ModifierPersonnelRattacher",
     ]),
-    ...mapActions("uniteadministrative", [
-      "uniteAdministratives",
-      "supprimerStockArticle",
-    ]),
+
+    AjouterRattacher() {
+      this.AjouterPersonnelRattacher(this.formData2);
+      this.$("#ModalProblemePersonnel").modal("hide");
+
+      this.formData2 = {
+        ua_proprietaire: "",
+        ua_rattacheur: "",
+        personne_rattacher: "",
+      };
+    },
   },
 };
 </script>
