@@ -43,7 +43,6 @@ import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecut
 import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
 
-listeMarcheInvestissementHS
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
