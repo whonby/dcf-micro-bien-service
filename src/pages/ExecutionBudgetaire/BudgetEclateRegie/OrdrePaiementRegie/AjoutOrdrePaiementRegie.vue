@@ -290,9 +290,11 @@ CreditAutorise
                         </div>
                       </div>
                     </td>
-                     <td>
-                       <div class="control-group">
-                        <label class="control-label">Rattacher une Personne</label>
+                    <td>
+                      <div class="control-group">
+                        <label class="control-label"
+                          >Rattacher une Personne</label
+                        >
                         <div class="controls">
                           <select
                             v-model="formData.RattacherPers"
@@ -405,7 +407,7 @@ CreditAutorise
                 </div>
                 <!-- ********lega -->
 
-                 <div class="widget-title">
+                <div class="widget-title">
                   <ul class="nav nav-tabs">
                     <li class="active">
                       <a data-toggle="tab" href="#ENGAGEMENT"
@@ -421,48 +423,76 @@ CreditAutorise
                       class="table table-bordered table-striped"
                       v-if="formData.typedepense == 'Personnel'"
                     >
-                   <tr>
-                        
-                        <td v-if="formData.RattacherPers=='Non'">
-                      <div class="control-group">
-                        <label class="control-label">Béneficiaire</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.auteur_perso_id"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="0"></option>
-                            <option v-for="depense in PersonnelParUA(this.formData.unite_administrative_id)" :key="depense.id" 
-               :value="depense.id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
+                      <tr>
+                        <td v-if="formData.RattacherPers == 'Non'">
+                          <div class="control-group">
+                            <label class="control-label">Béneficiaire</label>
+                            <div class="controls">
+                              <select
+                                v-model="formData.auteur_perso_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option value="0"></option>
+                                <option
+                                  v-for="depense in PersonnelParUA(
+                                    this.formData.unite_administrative_id
+                                  )"
+                                  :key="depense.id"
+                                  :value="depense.id"
+                                >
+                                  {{ depense.matricule }} =>{{ depense.nom }}
+                                  {{ depense.prenom }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
 
-                     <td v-if="formData.RattacherPers=='Oui'">
-                      <div class="control-group">
-                        <label class="control-label">Béneficiaire</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.auteur_perso_id"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="0"></option>
-                            <option v-for="depense in PersonnelRattacher(this.formData.unite_administrative_id)" :key="depense.id" 
-               :value="depense.id"> {{Personnelmatricule(depense.personne_rattacher)}} =>{{Personnelnom(depense.personne_rattacher)}} {{Personnelprenom(depense.personne_rattacher)}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
+                        <td v-if="formData.RattacherPers == 'Oui'">
+                          <div class="control-group">
+                            <label class="control-label">Béneficiaire</label>
+                            <div class="controls">
+                              <select
+                                v-model="formData.auteur_perso_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option value="0"></option>
+                                <option
+                                  v-for="depense in PersonnelRattacher(
+                                    this.formData.unite_administrative_id
+                                  )"
+                                  :key="depense.id"
+                                  :value="depense.id"
+                                >
+                                  {{
+                                    Personnelmatricule(
+                                      depense.personne_rattacher
+                                    )
+                                  }}
+                                  =>{{
+                                    Personnelnom(depense.personne_rattacher)
+                                  }}
+                                  {{
+                                    Personnelprenom(depense.personne_rattacher)
+                                  }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label">Banque</label>
 
                             <div class="controls">
                               <input
-                                :value="libelleBanque(Recup_Banque(formData.auteur_perso_id))"
+                                :value="
+                                  libelleBanque(
+                                    Recup_Banque(formData.auteur_perso_id)
+                                  )
+                                "
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -473,11 +503,15 @@ CreditAutorise
                         </td>
                         <td colspan="">
                           <div class="control-group">
-                            <label class="control-label">Compte Bancaires</label>
+                            <label class="control-label"
+                              >Compte Bancaires</label
+                            >
 
                             <div class="controls">
                               <input
-                              :value="Recup_Numero_cOMPTE(formData.auteur_perso_id)"
+                                :value="
+                                  Recup_Numero_cOMPTE(formData.auteur_perso_id)
+                                "
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -491,30 +525,29 @@ CreditAutorise
                             >Mois Paiement
                             <code style="color: red; font-size: 16px">*</code>
                           </label>
-                           <select
+                          <select
                             v-model="formData.mois_paiement"
                             class="span"
                             style="border: 1px solid #000"
                           >
-                          <option value="0"></option>
+                            <option value="0"></option>
                             <option value="Janvier">Janvier</option>
-                           <option value="Février">Février</option>
-                           <option value="Mars">Mars</option>
-                           <option value="Avril">Avril</option>
-                           <option value="Mai">Mai</option>
-                           <option value="Juin">Juin</option>
-                           <option value="Juillet">Juillet</option>
-                           <option value="Août">Août</option>
-                           <option value="Septembre">Septembre</option>
-                           <option value="Octobre">Octobre</option>
-                           <option value="Novembre">Novembre</option>
-                           <option value="Dcembre">Dcembre</option>
+                            <option value="Février">Février</option>
+                            <option value="Mars">Mars</option>
+                            <option value="Avril">Avril</option>
+                            <option value="Mai">Mai</option>
+                            <option value="Juin">Juin</option>
+                            <option value="Juillet">Juillet</option>
+                            <option value="Août">Août</option>
+                            <option value="Septembre">Septembre</option>
+                            <option value="Octobre">Octobre</option>
+                            <option value="Novembre">Novembre</option>
+                            <option value="Dcembre">Dcembre</option>
                           </select>
-                         
                         </td>
-                   </tr>
-                   <tr>
-                     <td colspan="4">
+                      </tr>
+                      <tr>
+                        <td colspan="4">
                           <div class="control-group">
                             <label class="control-label">Objet </label>
 
@@ -528,10 +561,9 @@ CreditAutorise
                             </div>
                           </div>
                         </td>
-                        
-                   </tr>
-                   <tr>
-                      <td colspan="">
+                      </tr>
+                      <tr>
+                        <td colspan="">
                           <div class="control-group">
                             <label class="control-label">MONTANT ENGAGE</label>
                             <div class="controls">
@@ -543,23 +575,18 @@ CreditAutorise
                             </div>
                           </div>
                         </td>
-                         <td colspan="">
+                        <td colspan="">
                           <div class="control-group">
-                            <label class="control-label"
-                              >Type d'objet</label
-                            >
+                            <label class="control-label">Type d'objet</label>
                             <div class="controls">
                               <select
                                 v-model="formData.diff_op_personnel"
                                 class="span"
                                 style="border: 1px solid #000"
                               >
-                                <option> </option>
-                                   <option value="mission">Mission</option>
-                                    <option value="salaire">Salaire </option>
-                                
-                                 
-                               
+                                <option></option>
+                                <option value="mission">Mission</option>
+                                <option value="salaire">Salaire</option>
                               </select>
                             </div>
                           </div>
@@ -586,12 +613,10 @@ CreditAutorise
                             </div>
                           </div>
                         </td>
-                   </tr>
+                      </tr>
                     </table>
                   </div>
                 </div>
-
-
 
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
@@ -2497,13 +2522,12 @@ CreditAutorise
       </div>
     </div>
 
-     <div id="exampleModalligneEco" class="modal hide">
+    <div id="exampleModalligneEco" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier la Date de Acte D'effet Financier</h3>
       </div>
       <div class="modal-body">
-     
         <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Date:</label>
@@ -2526,9 +2550,6 @@ CreditAutorise
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-  
-
-
   </div>
 </template>
 <script>
@@ -2589,7 +2610,7 @@ export default {
         numeromarche: "",
         marche_id: "",
       },
-      editMarcheDate:{},
+      editMarcheDate: {},
       FormDataFacture: {},
       message_mandater: "",
       decision_cf_definitif: "",
@@ -2735,35 +2756,26 @@ export default {
       "types_financements",
     ]),
 
-
-       RecupdateActeEffetFinancier(){
-      let vm =this;
-        if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
-          const qtreel = this.acteEffetFinanciers.find(
-          (qtreel)=> qtreel.marche_id == this.formData2.marche_id
+    RecupdateActeEffetFinancier() {
+      let vm = this;
+      if (this.formData2.marche_id != null && this.formData2.marche_id != "") {
+        const qtreel = this.acteEffetFinanciers.find(
+          (qtreel) => qtreel.marche_id == this.formData2.marche_id
         );
-       
 
-         if(qtreel.date_debut_exectuion_definitif ==null ){
-           
-           vm.editMarcheDate=qtreel;
+        if (qtreel.date_debut_exectuion_definitif == null) {
+          vm.editMarcheDate = qtreel;
           return this.$("#exampleModalligneEco").modal({
-         backdrop: "static",
-          keyboard: false
-       });
-          
-         }
-
-        else{
-
-           return console.log('**lega**');
+            backdrop: "static",
+            keyboard: false,
+          });
+        } else {
+          return console.log("**lega**");
         }
-
-        }else{
-          return 0;
-        }
-
-      },
+      } else {
+        return 0;
+      }
+    },
 
     GrandeNatureId() {
       return (id) => {
@@ -3791,7 +3803,7 @@ export default {
       "modifierDossierFacture",
       "supprimerDossierFacture",
       "ajouterGestionOrdrePaiement",
-      "ModifierDateEffetFinancier"
+      "ModifierDateEffetFinancier",
     ]),
     ...mapActions("personnelUA", ["ajouterFichierJointDmd"]),
 
@@ -3803,7 +3815,6 @@ export default {
     },
 
     ValiderDateUpdate() {
-
       this.ModifierDateEffetFinancier(this.editMarcheDate);
       this.$("#exampleModalligneEco").modal("hide");
     },
@@ -4094,16 +4105,14 @@ export default {
             typedepense: this.formData.typedepense,
             odjet_autre_depense: this.intitule2,
             source_financement_id: this.formData.bailler_id,
-            
+
             diff_op: 1,
             auteur_perso_id: this.formData.auteur_perso_id,
             mois_paiement: this.formData.mois_paiement,
-           // odjet_autre_depense: this.formData02.odjet_autre_depense,
+            // odjet_autre_depense: this.formData02.odjet_autre_depense,
             montant_ordre_paiement: this.formData2.montant_engage,
             mode_paiement_id: this.formData.mode_paiement_id,
-            diff_op_personnel:this.formData.diff_op_personnel,
-            
-
+            diff_op_personnel: this.formData.diff_op_personnel,
 
             date_interim: this.formData.date_interim,
             visa_interim: this.formData.visa_interim,
