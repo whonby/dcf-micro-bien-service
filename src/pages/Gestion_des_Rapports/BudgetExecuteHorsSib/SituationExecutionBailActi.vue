@@ -6,7 +6,9 @@
       <div class="span10" style="background-color: transparent; !important;">
         <table class="table table-striped">
           <tbody>
-            <tr>
+            <br />
+            <br />
+            <!-- <tr>
               <td colspan="2">
                 <br />
 
@@ -24,7 +26,7 @@
                 >
                 </model-list-select>
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <td>
                 <div class="control-group">
@@ -71,9 +73,12 @@
         Exporter en PDF
       </button>
     </div>
-
+    <br />
     <div class="widget-content nopadding" id="printpdf">
-      <table class="table table-bordered table-striped" id="app1">
+      <table
+        class="table table-bordered table-striped html2pdf__page-break"
+        id="app1"
+      >
         <tr>
           <td style="text-align: center">
             <p>
@@ -105,7 +110,10 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        Listes des ordres de paiement {{ formData.date_debut }}
+        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR 
+
+
+        {{ formData.date_debut }}
         {{ formData.date_fin }}
       </h2>
 
@@ -118,8 +126,10 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        Listes des ordres de paiement du
-        {{ formaterDate(formData.date_debut) }} au
+      SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR DU
+
+
+        {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
       </h2>
       <p
@@ -134,119 +144,118 @@
       </p>
 
       <div
-        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite1"
+        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite3"
         :key="GroupeOrdrePaiementByActivit.id"
       >
-        <br />
+        <!-- <br />
         <p style="margin-left: 30px; font-size: 14px; font-weight: bold">
           ACTIVITE:
           {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
-        </p>
+        </p> -->
 
-       
-
-    <div class="widget-content nopadding" style="margin: 25px">
+     <div class="widget-content nopadding" style="margin: 25px">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Ligne Budgétaire</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Type</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;"> Activité/Bailleurs</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Budget Actuel</th>
             <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">
-              N°OP
+              Montant Exécuté
             </th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Bailleur</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Objet</th>
-
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Montant</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Visa Cf</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Taux(%)</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Disponible</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="odd gradeX"
-          v-for="listeordrepaiement in listeordrepaiements(
-                GroupeOrdrePaiementByActivit[0].activite_id
-              )"
-              :key="listeordrepaiement.id"
-          >
-            <td
-              style="font-size: 14px; font-weight: bold; text-align: center"
-            >
-             {{
-                  libelleLigneEconomique(
-                    listeordrepaiement.ligne_economique_id
-                  ) || "Non renseigné"
-                }}
+
+
+        <tr>
+            <td style="font-weight: bold; font-size:18px;"> {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</td>
+            <td style="font-weight: bold; font-size:18px;"> {{ formatageSommeSansFCFA(
+                  parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
+            <td style="font-weight: bold; font-size:18px;">{{ formatageSommeSansFCFA(
+                  parseFloat(MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
+            <td style="font-weight: bold; font-size:18px;">
+              {{
+                (
+                  ((MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
+                    MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)) /
+                    MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)) *
+                  100).toFixed(2) || "Non renseigné"
+              }}
             </td>
            
-              <td
-                v-if="listeordrepaiement.type_ordre_paiement == 1"
-                style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Direct</span>
+            <td style="font-weight: bold; font-size:18px;">{{formatageSommeSansFCFA(
+                  parseFloat( MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
+              MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))}}
               </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 2"
-               style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Provisoire</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 3"
-               style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Annulation</span>
-              </td>
-              <td v-else 
-             style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Définitif</span>
-              </td>
+          </tr>
+
+
+
+
+
+
+
+
+
+        
+           <tr
+            class="odd gradeX"
+            v-for="ListepaimentBailleur in ListepaimentBailleurs(GroupeOrdrePaiementByActivit[0].activite_id)" :key="ListepaimentBailleur.id"
             
-            <td style="font-size: 14px; font-weight: bold; text-align: center">
+          >
+            <td style="font-size: 14px">
+                
               {{
-                  listeordrepaiement.numero_ordre_paiement || "Non renseigné"
-                }}
-            </td>
-
-            <td style="font-size: 14px; font-weight: bold; text-align: center">
-             {{
-                  libelleBailleur(listeordrepaiement.source_financement_id) ||
-                  "Non renseigné"
-                }}
-            </td>
-            <td style="font-size: 14px; font-weight: bold; text-align: center">
-               {{ listeordrepaiement.odjet_autre_depense || "Non renseigné" }}
-            </td>
-
-            <td
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                color: green;
-              " >
-              {{
-                formatageSommeSansFCFA(
-                  parseFloat(listeordrepaiement.montant_ordre_paiement)
-                ) || "Non renseigné"
-              }}
-            </td>
-
-            <td style="font-size: 14px; font-weight: bold">
-              {{
-                formaterDate(listeordrepaiement.date_decision_cf) ||
+    libelleLigneEconomique(ListepaimentBailleur.source_financement_id) ||
                 "Non renseigné"
               }}
+            </td>
+            <td  style="widht:25px;font-weight: bold;">
+              {{
+                formatageSommeSansFCFA(
+                  parseFloat(
+                    MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id)
+                  )
+                )
+              }} 
+            </td>
+
+            <td style="font-size: 14px;font-weight: bold;">
+            
+               {{
+                formatageSommeSansFCFA(
+                  parseFloat(
+                    MontantBudgetExecuté1Bailleur(ListepaimentBailleur.source_financement_id)
+                  )
+                ) || "Non renseigné"
+              }} 
+            </td>
+            <td style="font-size: 14px;font-weight: bold;">
+               {{
+                (
+                  ((MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
+                    MontantBudgetExecuté1Bailleur(ListepaimentBailleur.source_financement_id)) /
+                    MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id)) *
+                  100
+                ).toFixed(2) || "Non renseigné"
+              }}
+            </td>
+            <td style="font-size: 14px;font-weight: bold;">
+               {{
+               formatageSommeSansFCFA(
+                  parseFloat( MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
+                  MontantBudgetExecuté1Bailleur(ListepaimentBailleur.source_financement_id))) ||
+                "Non renseigné"
+              }} 
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
     </div>
     </div>
-
-
   </div>
 </template>
   
@@ -254,12 +263,13 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+//import { formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-import { ModelListSelect } from "vue-search-select";
+//import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    ModelListSelect,
+    // ModelListSelect,
   },
   name: "typetext",
   data() {
@@ -442,32 +452,25 @@ export default {
       "sources_financements",
     ]),
 
-    ListeGroupByActivite1() {
-      if (this.uniteAdministrative_id != 0) {
+    ListeGroupByActivite3() {
+      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
-        );
-      } else if (
-        this.uniteAdministrative_id != 0 &&
-        this.formData.date_debut != "" &&
-        this.formData.date_fin != ""
-      ) {
-        return this.GroupeOrdrePaiementByActivite.filter(
-          (qtreel) =>
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+            (
+             qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null &&
+             qtreel[0].decision_cf == 9 &&
+            //  qtreel[0].exercice == this.anneeAmort &&
+              (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin))
         );
       } else {
         return this.GroupeOrdrePaiementByActivite;
         // .filter(
-        //   (qtreel) => (
-        //    // qtreel[0].exercice == this.anneeAmort
-        //    qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null)  ||
-
-        //   (
-        //     //qtreel[0].exercice == this.anneeAmort
-        //    qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
+        //   (qtreel) =>
+        //     (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null 
+        //      // && qtreel[0].exercice == this.anneeAmort
+        //      )
+             
         // );
       }
     },
@@ -487,10 +490,22 @@ export default {
       };
     },
 
+
+     libelleGroupeBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.GroupeOrdrePaiementByLigneEconomique.filter(
+            (qtreel) => qtreel.activite_id == id
+          );
+        }
+      };
+    },
+
+
     libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.plans_budgetaires.find(
+          const qtereel = this.sources_financements.find(
             (qtreel) => qtreel.id == id
           );
 
@@ -517,54 +532,113 @@ export default {
       };
     },
 
-    //GroupeOrdrePaiementByLigneEconomique
-
-    listeordrepaiementstest(){
+    MontantBudgetActuel() {
       return (id) => {
-          if (id != null && id != "") {
-            return this.GroupeOrdrePaiementByLigneEconomique.filter(
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
               (qtreel) =>
-                qtreel.activite_id == id
-            );
-          }
-        };
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
     },
 
-    listeordrepaiements() {
-      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
-        return (id) => {
-          if (id != null && id != "") {
-            return this.gettersgestionOrdrePaiement.filter(
+     MontantBudgetActuelBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
               (qtreel) =>
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8 &&
-                  qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin) ||
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 9 &&
-                  qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin)
-            );
-          }
-        };
-      } else {
-        return (id) => {
-          if (id != null && id != "") {
-            return this.gettersgestionOrdrePaiement.filter(
-              (qtreel) =>
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8) ||
-                (qtreel.activite_id == id &&
-                  qtreel.diff_op == null &&
-                  qtreel.decision_cf == 9)
-            );
-          }
-        };
-      }
+                qtreel.source_financement_id == id 
+               // && qtreel.annebudgetaire == this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
     },
+
+
+    
+
+    MontantBudgetExecuté() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) => qtreel.activite_id == id
+              // && qtreel.annebudgetaire ==this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+      MontantBudgetExecuté1Bailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) => qtreel.source_financement_id == id
+              // && qtreel.annebudgetaire ==this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+    // listeordrepaiements() {
+    //   if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+    //     return this.gettersgestionOrdrePaiement.filter(
+    //       (qtreel) =>
+    //         (qtreel.activite_id == id && qtreel.diff_op == null &&
+    //           qtreel.decision_cf == 8 &&
+    //           qtreel.date_decision_cf >= this.formData.date_debut &&
+    //           qtreel.date_decision_cf <= this.formData.date_fin) ||
+
+    //         (
+    //           qtreel.activite_id == id && qtreel.diff_op == null &&
+    //           qtreel.decision_cf == 9 &&
+    //           qtreel.date_decision_cf >= this.formData.date_debut &&
+    //           qtreel.date_decision_cf <= this.formData.date_fin)
+    //     );
+    //   } else {
+    //     return this.gettersgestionOrdrePaiement.filter(
+    //       (qtreel) =>
+    //         (qtreel.activite_id == id && qtreel.diff_op == null && qtreel.decision_cf == 8) ||
+    //         (qtreel.activite_id == id && qtreel.diff_op == null && qtreel.decision_cf == 9)
+    //     );
+    //   }
+    // },
 
     anneeAmort() {
       const norme = this.exercices_budgetaires.find(
@@ -640,6 +714,18 @@ export default {
     //   }
     // },
 
+    ListepaimentBailleurs(){
+       return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id)
+                 
+            );
+          }
+        };
+    },
+
     libelleUa() {
       return (id) => {
         if (id != null && id != "") {
@@ -663,6 +749,7 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
 
     genererEnPdf() {
       this.$htmlToPaper("printpdf");

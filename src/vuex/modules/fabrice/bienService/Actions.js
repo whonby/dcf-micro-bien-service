@@ -161,13 +161,13 @@ export function ajouterCandidatSelectionner({ commit }, formData) {
 //probleme marche
 
 export function getProblemeMarche({ commit }) {
-  queue.push(() => axios.get('/ReceptionMarche').then(tony => {
+  queue.push(() => axios.get('/ProblemeMarche').then(tony => {
     commit('GET_ALL_PROBLEME_MARCHE', tony.data)
   }).catch(error => console.log(error)))
 }
 
 export function AjouterProblemeMarche({ commit }, formData) {
-  asyncLoading(axios.post('/ReceptionMarche', formData)).then(response => {
+  asyncLoading(axios.post('/ProblemeMarche', formData)).then(response => {
     if (response.status == 201) {
 
       commit('AJOUTER_PROBLEME_MARCHE', response.data)
@@ -189,16 +189,19 @@ export function SupprimerProblemeMarche({ commit }, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit('SUPPRIMER_PROBLEME_MARCHE', id)
-      axios.delete('/ReceptionMarche/' + id).then(() => dialog.close())
+      axios.delete('/ProblemeMarche/' + id).then(() => dialog.close())
     })
 }
 //MODIFICATION
 
+
 export function ModifierProblemeMarche({ commit }, elementModifie) {
 
-  asyncLoading(axios.put('/modifier_ReceptionMarche/' + elementModifie.id, {
-    code: elementModifie.code,
-    libelle: elementModifie.libelle,
+  asyncLoading(axios.put('/ProblemeMarche/' + elementModifie.id, {
+    probleme: elementModifie.probleme,
+    traitement: elementModifie.traitement,
+    decision: elementModifie.decision,
+    date: elementModifie.date,
 
   })).then(response => {
     commit('MODIFIER_PROBLEME_MARCHE', response.data)
@@ -645,6 +648,30 @@ export function supprimerActeEffetFinancier({ commit }, id) {
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/acte_effet_finnanciers/' + id).then(() => dialog.close())
     })
+
+}
+
+
+
+
+
+//modifier date Acte effet Finnancier 
+
+
+
+export function ModifierDateEffetFinancier({ commit }, elementModifie) {
+
+  asyncLoading(axios.put('/acte_finnancier_date/' + elementModifie.id, {
+    date_debut_exectuion_definitif: elementModifie.date_debut_exectuion_definitif,
+  })).then(response => {
+    commit('MODIFIER_DATE_ACTE_EFFET_FINANCIER', response.data)
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 
 }
 

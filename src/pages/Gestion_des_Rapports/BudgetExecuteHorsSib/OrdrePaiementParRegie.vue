@@ -497,11 +497,17 @@ export default {
       "sources_financements",
     ]),
 
-    ListeGroupByActivite() {
+        ListeGroupByActivite() {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+           (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            qtreel[0].decision_cf ==8 && qtreel[0].diff_op==1) ||
+
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            qtreel[0].decision_cf ==9 && qtreel[0].diff_op==1)
         );
       } else if (
         this.uniteAdministrative_id != 0 &&
@@ -510,22 +516,48 @@ export default {
       ) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+            && qtreel[0].decision_cf ==8 && qtreel[0].diff_op==1) ||
+
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
+            qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+            && qtreel[0].decision_cf ==9 && qtreel[0].diff_op==1)
+
         );
-      }
+      } else if (
+        this.uniteAdministrative_id == 0 &&
+        this.formData.date_debut != "" &&
+        this.formData.date_fin != ""
+      ) {
+        return this.GroupeOrdrePaiementByActivite.filter(
+          (qtreel) =>
+            (qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+             && qtreel[0].decision_cf ==8 && qtreel[0].diff_op==1)  ||
 
-      // else if (this.uniteAdministrative_id != 0 && this.formData.date_debut != "" && this.formData.date_fin != "") {
-      //   return  this.GroupeOrdrePaiementByActivite.filter(
-      //     (qtreel) =>( qtreel[0].date_decision_cf >= this.formData.date_debut &&
-      //      qtreel[0].date_decision_cf <= this.formData.date_fin)
-      //   );
-
-      // }
-      else {
+             (qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin)
+             && qtreel[0].decision_cf ==9 && qtreel[0].diff_op==1)
+        );
+      } else {
         return this.GroupeOrdrePaiementByActivite;
+        // .filter(
+        //   (qtreel) => (qtreel[0].exercice == this.anneeAmort
+        //   && qtreel[0].decision_cf ==8 && qtreel[0].diff_op==1)  ||
+
+        //   (qtreel[0].exercice == this.anneeAmort
+        //   && qtreel[0].decision_cf ==9 && qtreel[0].diff_op==1)
+        // );
       }
     },
+    
 
     libelleBailleur() {
       return (id) => {

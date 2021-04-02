@@ -178,7 +178,7 @@ admin:admin,
 NombrePersonnel() {
       return id => {
         if (id != null && id != "") {
-           return this.all_acteur_depense.filter(qtreel => qtreel.unite_administrative_id == id).length;
+           return this.all_acteur_depense.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.sib==0).length;
 
       
         }

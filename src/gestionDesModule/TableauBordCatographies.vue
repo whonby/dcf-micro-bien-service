@@ -1748,9 +1748,9 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       /*this.activeUa=false*/
       console.log(objet)
 this.objetUnite=objet
-      this.unite_administrative_id=objet.unite_administrative_id
-      this.region=objet.region_id
-      this.infrastructure=objet.infrastructure_id
+      // this.unite_administrative_id=objet.unite_administrative_id
+      // this.region=objet.region_id
+      // this.infrastructure=objet.infrastructure_id
 
       this.info_sidebar_marche.enablePanel('infomarche');
 

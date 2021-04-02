@@ -11,20 +11,6 @@
                         <table class="table table-striped"  style="background: #f0c71d !important;">
                             <tbody>
                             <tr>
-<!--                                <td style="background: #f0c71d !important;" v-if="!noDCfNoAdmin">-->
-
-<!--                                    <label>CF<a href="#" @click.prevent="videTypeCF()" v-if="controlleur_fin" style="color: red"><i class="fa fa-trash-o"></i></a></label>-->
-<!--                                    <model-list-select style="background-color: #fff;"-->
-<!--                                                       class="wide"-->
-<!--                                                       :list="listeCF"-->
-<!--                                                       v-model="controlleur_fin"-->
-<!--                                                       option-value="id"-->
-<!--                                                       option-text="name"-->
-<!--                                                       placeholder="Controleur financier"-->
-<!--                                    >-->
-
-<!--                                    </model-list-select>-->
-<!--                                </td>-->
                                 <td style="background: #f0c71d !important;">
                                     <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                     </label>
@@ -110,11 +96,6 @@
                 </nav>
 
                 <div class="vld-parent">
-
-                    <loading :active.sync="isLoading"
-                             :can-cancel="true"
-                             :on-cancel="onCancel"
-                             :is-full-page="fullPage"></loading>
                 <div class="row-fluid" style="" id="printMe">
 
                     <div class="span12">
@@ -129,6 +110,7 @@
                             </div>
                         </div>
 
+
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -139,20 +121,20 @@
                                 <th>Type de marché</th>
                                 <th>Infrastructure</th>
                                 <th>Regions</th>
-<!--                                <th>Statut</th>-->
+                                <!--                                <th>Statut</th>-->
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr v-for="item in listeMarchStatueExecuteAcheve" :key="'MARCHE012'+item.id">
                                 <td>{{item.exo_id}}</td>
-                                <td>{{selectionnerUniteAdministrative(item.unite_administrative_id)}}</td>
+                                <td>{{nomUniteAdmin(item.unite_administrative_id)}}</td>
                                 <td>{{item.numero_marche}}</td>
                                 <td>{{item.objet}}</td>
                                 <td>{{item.type_marche.libelle}}</td>
                                 <td>{{selectionnerInfrastructure(item.infrastructure_id)}}</td>
                                 <td>{{selectionLocationGeographique(item.localisation_geographie_id)}}</td>
-<!--                                <td></td>-->
+                                <!--                                <td></td>-->
                                 <td>
                                     <router-link :to="{ name: 'ListeImageMarche', params: { id: item.id }}"
                                                  class="btn btn-primary" title="Liste des images">
@@ -163,7 +145,6 @@
                             </tbody>
 
                         </table>
-
 
                     </div>
 
@@ -198,15 +179,13 @@
 
 
 
-
-        {{dataArrayPourcentage}}
     </div>
 </template>
 
 <script>
     import {partition} from "../../Repositories/Repository"
     // Import component
-    import Loading from 'vue-loading-overlay';
+ //   import Loading from 'vue-loading-overlay';
     // Import stylesheet
     import 'vue-loading-overlay/dist/vue-loading.css';
    // import VueApexCharts from 'vue-apexcharts'
@@ -219,7 +198,7 @@
     export default {
         name: "Images",
         components: {
-            Loading,
+        //   Loading,
             ModelListSelect,
         },
         data() {
@@ -247,26 +226,6 @@
                         icon: 'cached'
                     }
                 ],
-                dataPourcentage: [],
-                chartOptions: {
-                    chart: {
-                        width: 380,
-                        type: 'pie',
-                    },
-                    labels: ['A.Contra.', 'A.C.H.D', 'En Cont.', 'EN Contr.H.D', 'En Execution',"En Execution HD","Acheve Delais","Acheve H.D","En souffrance"],
-                    colors:['#8ea9db', '#f4b084', '#92d04f',"#632990","#d7b755","#d36f2a","#00b04f","#757171","#ff0000"],
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                width: 200
-                            },
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }]
-                },
                 page:0,
                 size:10,
                 active_el:0,
@@ -276,7 +235,7 @@
 
         },
         created(){
-            console.log(this.listeMarchStatueExecuteAcheve)
+            // console.log(this.listeMarchStatueExecuteAcheve)
         },
         computed: {
             ...mapGetters("uniteadministrative", [
@@ -319,10 +278,6 @@
             nombreImageParMarche(){
               return id=>{
                   let objet=this.getterImageMarche.filter(item=>item.marche_id==id)
-                  console.log(".................................")
-                  console.log(id)
-                  console.log("..................................")
-                  console.log(objet)
                   return objet.length
               }
             },
@@ -560,272 +515,8 @@
 
                 return objet
             },
-            getMarcheStatus(){
-                return status=>{
-                    if(status=="planifie"){
-                        status=0;
-                        return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==0)
-                    }
 
 
-                    if(status!=""){
-
-                        return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
-
-                    }else{
-                        return this.objetMarchePasUniteOuRegion
-
-                    }
-                }
-            },
-            nombreMarcheParStatue(){
-                return status=>{
-                    if(status!=""){
-                        if(status=="planifie"){
-                            status=0;
-                        }
-
-//                        let objet={
-//                            etat_marche:status,
-//                            marches:""
-//                        }
-//                        let liste_marches=""
-                        let nombre=0
-
-                        if(this.infrastructure!="" && this.type_marche==""){
-//                            liste_marches=this.objetMarchePasUniteOuRegion.filter(item=>{
-//                                if(item.attribue==status && item.infrastructure_id==this.infrastructure){
-//                                    return item
-//                                }
-//                            })
-                            nombre= this.objetMarchePasUniteOuRegion.filter(item=>{
-                                if(item.attribue==status && item.infrastructure_id==this.infrastructure){
-                                    return item
-                                }
-                            }).length
-                        }
-
-                        if(this.infrastructure=="" && this.type_marche!=""){
-//                            liste_marches= this.objetMarchePasUniteOuRegion.filter(item=>{
-//                                if(item.attribue==status && item.type_marche_id==this.type_marche){
-//                                    return item
-//                                }
-//                            })
-                            nombre= this.objetMarchePasUniteOuRegion.filter(item=>{
-                                if(item.attribue==status && item.type_marche_id==this.type_marche){
-                                    return item
-                                }
-                            }).length
-                        }
-
-                        if(this.infrastructure!="" && this.type_marche!=""){
-
-//                            liste_marches= this.objetMarchePasUniteOuRegion.filter(item=>{
-//                                if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
-//                                    return item
-//                                }
-//                            })
-                            nombre= this.objetMarchePasUniteOuRegion.filter(item=>{
-                                if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
-                                    return item
-                                }
-                            }).length
-                        }
-
-                        if(this.infrastructure=="" && this.type_marche==""){
-//                            liste_marches=this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
-                            nombre=this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status).length
-                        }
-
-
-                        return nombre
-
-
-                    }
-                }
-            },
-            marcheUniteRegion(){
-                let vM=this;
-                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
-                if(vM.region!="" && vM.unite_administrative_id==""){
-                    objet =this.marches.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-
-                }
-
-                if(vM.unite_administrative_id!="" && vM.region==""){
-                    objet =this.listeMarcheUniteAdmin.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                if(vM.unite_administrative_id!="" && vM.region!="" ){
-                    objet =this.listeMarcheUniteAdmin.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-                return objet
-            },
-            pourcentageMarchePasStatus(){
-                return status=>{
-                    if(this.nombreTotalMarche==0){
-                        return 0.00
-                    }
-                    if(status=="planifie"){
-                        status="planifie";
-                        let taux= (this.nombreMarcheParStatue(status) * 100)/this.nombreTotalMarche
-                        return taux.toFixed(2)
-                    }
-                    let nombre=this.nombreMarcheParStatue(status)
-                    if(status==7){
-                        nombre = nombre + this.nombreMarcheParStatue(3)
-                    }
-
-                    let taux= (nombre * 100)/this.nombreTotalMarche
-                    return taux.toFixed(2)
-                }
-            },
-
-            /**
-             * Calcule de montant prevue
-             */
-            montantPrevue(){
-                let initeVal = 0;
-                let montant_prevue=  this.objetMarchePasUniteOuRegion.reduce(function (total, currentValue) {
-                    return total + parseFloat(currentValue.montant_marche) ;
-                }, initeVal);
-                return montant_prevue
-            },
-
-            montantApprouveMarche(){
-                if(this.objetMarchePasUniteOuRegion.length>0){
-                    //acteEffetFinanciers
-                    let vm=this;
-                    let montantTotal=0;
-                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
-                        let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
-                        let montant_avenant=0;
-                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
-                        if(objetAvenant!=undefined){
-                            let initeVal = 0;
-                            montant_avenant=objetAvenant.reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montant_avenant) ;
-                            }, initeVal);
-                        }
-                        if(objetAct!=undefined){
-                            //  console.log(objetAct)
-                            montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
-                        }
-                    })
-                    return montantTotal
-                }
-                return 0;
-            },
-
-            nbreAvenant(){
-                if(this.objetMarchePasUniteOuRegion.length>0){
-                    let vm=this;
-                    let nbr=0;
-                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
-                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id).length
-
-                        if(objetAvenant!=undefined){
-                            nbr=nbr + objetAvenant
-                        }
-
-                    })
-                    return nbr
-                }
-                return 0;
-            },
-            montantAvenant(){
-                if(this.objetMarchePasUniteOuRegion.length>0){
-                    //acteEffetFinanciers
-                    let vm=this;
-                    //let montantTotal=0;
-                    let montant_tatal=0;
-                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
-
-                        let montant_avenant=0;
-                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
-                        if(objetAvenant!=undefined){
-                            let initeVal = 0;
-                            montant_avenant=objetAvenant.reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montant_avenant) ;
-                            }, initeVal);
-                        }
-                        montant_tatal=parseFloat(montant_tatal)+parseFloat(montant_avenant)
-                    })
-                    return montant_tatal
-                }
-                return 0;
-            },
-            pourcentageMontantAvenant(){
-                let taux=(this.montantAvenant * 100)/this.montantApprouveMarche
-
-                return taux.toFixed(2)
-            },
-            montantExecute(){
-                if(this.objetMarchePasUniteOuRegion.length>0){
-                    let montant_execute=0;
-                    let vm=this;
-
-                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
-                        let initeVal = 0;
-                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montantmarche) ;
-                        }, initeVal);
-                        montant_execute=parseFloat(montant_execute) + parseFloat(montant)
-                    })
-
-
-
-                    return montant_execute
-                }
-                return 0;
-            },
-
-            montantRestant(){
-                return this.montantApprouveMarche - this.montantExecute;
-            },
-            tauxExecution(){
-
-                if(this.montantExecute){
-
-                    let taux=(this.montantExecute * 100)/ this.montantApprouveMarche
-                    if(taux==Infinity){
-                        return 0
-                    }
-                    return taux.toFixed(2)
-                }
-                return 0
-
-            },
-            dataArrayPourcentage(){
-                let vm=this
-                //console.log(parseFloat(this.pourcentageMarchePasStatus("planifie")))
-
-                if(vm.dataPourcentage.length>0){
-                    vm.dataPourcentage=[]
-                }
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus("planifie")))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(8)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(1)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(9)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(2)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(10)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(11)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(12)))
-                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(7)))
-                return ""
-            },
 
             nombreTotalMarche(){
                 return this.objetMarchePasUniteOuRegion.length
@@ -854,111 +545,10 @@
                 }
             },
 
-            montantPrevuePasUA(){
-                return unite=>{
-                    let vm=this
-                    let initeVal=0
-                    return vm.listeDesMarchePasStatus.filter(item=>item.unite_administrative_id==unite).reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.montant_marche) ;
-                    }, initeVal);
-
-                }
-            },
-
-            /**
-             * Calcule de taux financier pas unite administrative en fonction des etats des marchés
-             * @returns {Function}
-             */
-            tauxFinnancieStatusSelectionnerPasUA(){
-                return (unite,status)=>{
-                    console.log(status)
-                    if (status==0){
-                        let taux=(this.montantPrevuePasUA(unite) *100)/ this.montantStatusSelectionnerPrevueTotal
-                        return taux.toFixed(2)
-                    }
-                    if(unite!="" && status!=""){
-                        if(status==0 || status==8 || status==1 || status==9 ){
-                            console.log(unite)
-                            let taux=(this.montantPrevuePasUA(unite) *100)/ this.montantStatusSelectionnerPrevueTotal
-                            return taux.toFixed(2)
-                        }
 
 
-                        if(status==2 || status==10 || status==11 || status==12 || status==12){
-                            let taux2=(this.montantApprouvePasUA(unite) *100)/ this.montantApprouveStatusSelectionneTotal
-                            return taux2.toFixed(2)
-                        }
-                    }
-                }
-            },
-            /**
-             * Calcule de montant prevue fonction des etats des marchés
-             * @returns {Function}
-             */
-            montantStatusSelectionnerPrevueTotal(){
-                let initeVal=0
-                let vm=this
-                return vm.listeDesMarchePasStatus.reduce(function (total, currentValue) {
-                    return total + parseFloat(currentValue.montant_marche) ;
-                }, initeVal);
-            },
-            /**
-             * Calcule de montant approuve fonction des etats des marchés
-             * @returns {Function}
-             */
-            montantApprouveStatusSelectionneTotal(){
-                let vm=this;
-                let montantTotal=0;
-                vm.listeDesMarchePasStatus.forEach(function (val) {
-                    let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
-                    let montant_avenant=0;
-                    let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
-                    if(objetAvenant!=undefined){
-                        let initeVal = 0;
-                        montant_avenant=objetAvenant.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montant_avenant) ;
-                        }, initeVal);
-                    }
-                    if(objetAct!=undefined){
-                        //  console.log(objetAct)
-                        montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
-                    }
-                })
-                return montantTotal
-            },
-            montantApprouvePasUA(){
-                return unite=>{
 
-                    let vm=this;
-                    let montantTotal=0;
-                    vm.listeDesMarchePasStatus.filter(item=>item.unite_administrative_id==unite).forEach(function (val) {
-                        let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
-                        let montant_avenant=0;
-                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
-                        if(objetAvenant!=undefined){
-                            let initeVal = 0;
-                            montant_avenant=objetAvenant.reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montant_avenant) ;
-                            }, initeVal);
-                        }
-                        if(objetAct!=undefined){
-                            //  console.log(objetAct)
-                            montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
-                        }
-                    })
-                    return montantTotal
-                }
-            },
-            tauxStatusMarchePasUniteAdministrative(){
-                return unite=>{
-                    let vm=this
-                    if(vm.listeDesMarchePasStatus.length>0){
-                        let taux=(vm.nbrTotalMarchePasUA(unite) * 100)/ vm.listeDesMarchePasStatus.length
-                        return taux.toFixed(2)
-                    }
-                    return 0;
-                }
-            },
+
             nomUniteAdmin(){
                 return id=>{
                     if(id!=""){
@@ -995,176 +585,16 @@
                     return ""
                 }
             },
-            infoEtatMarche(){
-                return status=>{
-                    if(status==0){
-                        //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<font color='#fff'>En attente de contratualisation </font>"
-                    }
-                    if(status==8){
-                        return "<font color='#fff'>En attente de contratualisation hors delait</font>"
-                    }
-                    if(status==1){
-                        return "<font color='#fff'>En contratualisation</font>"
-                    }
-                    if(status==9){
-                        return "<font color='#fff'>En contractualisation Hors délai</font>"
-                    }
-
-                    if(status==2){
-                        return "<font color='#fff'>En execution</font>"
-                    }
-                    if(status==10){
-                        return "<font color='#fff'>En execution Hors délai</font>"
-                    }
-
-                    if(status==11){
-                        return "<font color='#fff'>Acheve dans le delais</font>"
-                    }
-                    if(status==12){
-                        return "<font color='#fff'>Acheve hors delais</font>"
-                    }
-
-                    if(status==7){
-                        return "<font color='#fff'>En suffrance</font>"
-                    }
-                    return null
-                }
-            },
-            getColorByStatus(){
-                return status=>{
-
-                    if(status==0){
-                        //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "#8ea9db !important"
-                    }
-                    if(status==8){
-                        return "#f4b084 !important"
-                    }
-                    if(status==1){
-                        return "#92d04f !important"
-                    }
-                    if(status==9){
-                        return "#632990 !important"
-                    }
-
-                    if(status==2){
-                        return "#d7b755 !important"
-                    }
-                    if(status==10){
-                        return "#d36f2a !important"
-                    }
-
-                    if(status==11){
-                        return "#00b04f !important"
-                    }
-                    if(status==12){
-                        return "#757171 !important"
-                    }
-
-                    if(status==7){
-                        return "#ff0000 !important"
-                    }
-                    return null
-                }
-            },
-            montantPasStatusContratPlanifie(){
-                return status=>{
-                    if(status=="planifie"){
-                        status=0;
-                    }
-                    let initeVal = 0;
-                    let montant_prevue=  this.listeMarchStatuePlanifieContratualisation.filter(item=>item.attribue==status).reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.montant_marche) ;
-                    }, initeVal);
-                    return montant_prevue
-                }
-            },
-            pourcentageMontantPrevuePasSatus(){
-                return status=>{
-                    let taux=(this.montantPasStatusContratPlanifie(status) * 100) / this.montantTotaleMarchePlanifieContratuel
-                    return taux.toFixed(2)
-                }
-            },
-            pourcentageMontantExcuteAcheve(){
-                return status=>{
-                    let taux=(this.montantPasStatusExecutionAcheve(status) * 100) / this.montantTotaleMarcheExecutionAcheve
-                    return taux.toFixed(2)
-                }
-            },
-            montantPasStatusExecutionAcheve(){
-                return status=>{
-                    if(this.listeMarchStatueExecuteAcheve.length>0){
-                        let montant_execute=0;
-                        let vm=this;
-
-                        this.listeMarchStatueExecuteAcheve.filter(item=>item.attribue==status).forEach(function (val) {
-                            let initeVal = 0;
-                            let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montantmarche) ;
-                            }, initeVal);
-                            montant_execute=parseFloat(montant_execute) + parseFloat(montant)
-                        })
 
 
 
-                        return montant_execute
-                    }
-                    return 0;
-                }
-            },
-
-
-            montantTotaleMarchePlanifieContratuel(){
-                let initeVal = 0;
-                let montant_prevue=  this.listeMarchStatuePlanifieContratualisation.reduce(function (total, currentValue) {
-                    return total + parseFloat(currentValue.montant_marche) ;
-                }, initeVal);
-                return montant_prevue
-            },
-
-            montantTotaleMarcheExecutionAcheve(){
-                if(this.listeMarchStatueExecuteAcheve.length>0){
-                    let montant_execute=0;
-                    let vm=this;
-
-                    this.listeMarchStatueExecuteAcheve.forEach(function (val) {
-                        let initeVal = 0;
-                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montantmarche) ;
-                        }, initeVal);
-                        montant_execute=parseFloat(montant_execute) + parseFloat(montant)
-                    })
 
 
 
-                    return montant_execute
-                }
-                return 0;
-            },
-
-            listeMarchStatuePlanifieContratualisation(){
-
-                let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
-                    if(item.attribue==9 || item.attribue==1 || item.attribue==8 || item.attribue==0){
-                        return item
-                    }
-                })
-
-                // console.log(objet4.length)
-                return objet4
-            },
             listeMarchStatueExecuteAcheve(){
+                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
 
-                let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
-                    if(item.attribue==2 || item.attribue==11 || item.attribue==10 || item.attribue==11 || item.attribue==7 || item.attribue==3){
-                       console.log(item)
-                        return item
-                    }
-                })
-
-               console.log(objet4.length)
-                return objet4
+                return objet.filter(item=>item.attribue==2)
             },
 
 
@@ -1439,15 +869,7 @@
                 }
 
                 console.log(objet)
-                // console.log(this.objetMarchePasUniteOuRegion)
 
-//        let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>{
-//            if(item.unite_administrative_id==id && item.attribue==this.status_marches){
-//                return item
-//            }
-//
-//        })
-//        this.ajouterTableauBordFiltre(objetMarche)
                 this.ajouterInfoTableauBordFiltre(objet)
 
                 this.$router.push({
@@ -1457,9 +879,22 @@
             generateReport () {
                 this.$refs.html2Pdf.generatePdf()
             },
-
-
-
+            partition:partition,
+            onCancel() {
+                console.log('User cancelled the loader.')
+            },
+            getDataPaginate(index){
+                this.active_el = index;
+                this.page=index
+            },
+            precedent(){
+                this.active_el--
+                this.page --
+            },
+            suivant(){
+                this.active_el++
+                this.page ++
+            },
         },
         watch: {
             type_marche:function (value) {
@@ -1511,22 +946,7 @@
                 }
             },
 
-            partition:partition,
-            onCancel() {
-                console.log('User cancelled the loader.')
-            },
-            getDataPaginate(index){
-                this.active_el = index;
-                this.page=index
-            },
-            precedent(){
-                this.active_el--
-                this.page --
-            },
-            suivant(){
-                this.active_el++
-                this.page ++
-            },
+
 
         },
     }

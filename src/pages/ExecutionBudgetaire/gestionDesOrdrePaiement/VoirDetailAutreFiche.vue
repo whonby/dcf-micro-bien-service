@@ -1,4 +1,4 @@
-
+recupBanque1
 <template>
   <div>
     <div align="left" style="cursor: pointer">
@@ -12,7 +12,7 @@
     <div id="modificationObservation" class="modal hide tailleModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification Observation de Agent Cf</h3>
+        <h3>Modification Observation de l'Agent Cf</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -223,7 +223,7 @@
 
             <td>{{ recupCompte2(recupCompte1)}}</td>
 
-            <td>{{ recupBanquee2(recupBanque1)}}</td>
+            <td>{{ recupBanquee2(recupBanquee1)}}</td>
 
             <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
           </tr>
@@ -233,7 +233,7 @@
         <thead>
           <tr>
             
-            <th>type financement</th>
+            <th>Type financement</th>
             <th>Source Financement</th>
             <th>Montant Op</th>
             <th>Mode Paiement</th>
@@ -339,7 +339,7 @@
                
                
 
-<template v-if="detailOp.id_op_provisoire==0">
+<template v-if="detailOp.id_op_provisoire == null">
  <td  style="color:red">
 {{ detailOp.numero_ordre_paiement || "Non renseigné" }}
                </td>
@@ -553,7 +553,7 @@
 </div>
 
 
-<div v-if="detailOp.type_ordre_paiement == 1 || detailOp.type_ordre_paiement == 4">
+<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null">
       <p style="
         font-size: 13px;
         text-align: center;
@@ -654,9 +654,28 @@
 
     </div>
 
+<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null">
 
-<!-- lega -->
-  
+   <table class="table table-bordered table-striped">
+      <td style="width: 90%"></td>
+      
+     
+      <td>
+        <router-link
+          :to="{ name: 'AjouterDecompteActuelle', params: { id: detailOp.id } }"
+          class="btn btn-success"
+          title="Editer Fiche de controle"
+        >
+          <span
+            class=""
+            style="font-weight: bolder; color: #fff"
+            >
+            <i class="icon icon-plus"> AJOUTER DECOMPTE</i>
+          </span >
+        </router-link>
+      </td>
+    
+    </table>
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -664,60 +683,86 @@
             <ul class="nav nav-tabs">
               <li class="active">
                 <a data-toggle="tab" href="#tab2078"
-                  >Tous les marchés
+                  >Listes des Decomptes Année en cours
                   <span class="badge badge"></span></a
                 >
               </li>
 
-             <li>
+             <!-- <li>
                 <a data-toggle="tab" href="#tab100">
-                  Planification
+                  Historique decompte
                   <span class="badge badge-important">
                     </span
                   ></a
                 >
-              </li>
+              </li> -->
+               <!-- <li>
+                <a data-toggle="tab" href="#tab10045">
+                  Listes des Decomptes Année Anterieur
+                  <span class="badge badge-important">
+                    </span
+                  ></a
+                >
+              </li> -->
             </ul>
 
 
           </div>
-          
+          <div class="widget-content tab-content">
+<div id="tab2078" class="tab-pane active">
+<table class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
 
-            <div id="tab2078" class="tab-pane active">
-              <div class="widget-title">
-                <span class="icon">
-                  <i class="icon-th"></i>
-                </span>
-                <h5>Liste des March&eacute;s</h5>
-                
-              </div>
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Année</th>
-                    <th>UA</th>
-                    <th>Type marché</th>
-                    <th>Mode de passation</th>
-                    <th>Activité</th>
-                    <th>Imputation</th>
-                    <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet marché</th>
-                    <th>Référence marché</th>
-                    <th>Statut</th>
-                    <th>Montant prévu</th>
-                    <th>Montant réel</th>
-                    <th title="mouvement du marché">Mouvement marché</th>
-                    <th>Etat en cours</th>
-                    <th>Cycle de vie</th>
-                    <th colspan="3">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody>
-              </table>
-            </div>
+                          <th style="text-align:center;font-size:12px">DESCRIPTION DES PRESTATIONS</th>
 
+                          <th style="text-align:center;font-size:12px">TITULAIRE DU MARCHE</th>
+                          <th style="text-align:center;font-size:12px">MONTANT DU MARCHE</th>
+                          <th style="text-align:center;font-size:12px">MONTANT PAYE</th>
+                          <th style="text-align:center;font-size:12px">NUMERO DECOMPTE</th>
+                          <th style="text-align:center;font-size:12px">DATE</th>
+                         
+                          <th style="text-align:center;font-size:12px" colspan="2">ACTION </th>
+                      </tr>
+
+                      </thead>
+                      <tbody>
+                    <!-- <tr class="odd gradeX" v-for="type in decompteParExercice(detailOp.uniteadministrative_id,item)" :key="type.id">
+                         
+                          <td style="text-align:center;">{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{AfficheEntrepriseLibelle(afficheIdEntreprise(type.marche_id)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantMarche(type.marche_id))) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{type.numero_decompte || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
+                               <td>
+                             
+                              <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                              </button>
+                          </td>
+                          
+                          
+                      </tr>  -->
+                     <tr>
+                       <td></td>
+                        <td></td>
+                         <td></td>
+                          <td></td>
+                           <td>CUMUL DECOMPTE</td>
+                            <td>78555</td>
+                             <td></td>
+ 
+                     </tr>
+                      
+                      </tbody>
+                  </table>
+ </div>
+
+</div>
+          </div>
         
 
   </div>
@@ -785,13 +830,15 @@ import moment from "moment";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
  import {formatageSomme} from "@/Repositories/Repository"
+ //import HistoriqueDecompteFacture from "/../../../Hors_sib/dossierDecompte/HistoriqueDecompteFacture.vue";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
-// import {admin,dcf,cf,noDCfNoAdmin} from "../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
+  components: {
+    //HistoriqueDecompteFacture
+    //ModelListSelect
+  },
   data() {
     return {
       fabActions: [
@@ -849,6 +896,7 @@ export default {
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetEclate",
+      "decomptefactures"
 
       // "chapitres",
       // "sections"
@@ -963,8 +1011,115 @@ export default {
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
       "plans_Decision",
+      
     ]),
-   
+    admin: admin,
+    dcf: dcf,
+    noDCfNoAdmin: noDCfNoAdmin,
+    listeDesUa() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+        this.uniteAdministratives.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect;
+      }
+
+      return this.uniteAdministratives;
+    },
+    afficheIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheMontantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_marche;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+    afficheObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+    afficherStatusSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMarcheDecompte() {
+      return id => {
+        if (id != null && id != "") {
+          return this.decomptefactures.filter(
+            element => element.uniteadministrative_id == id 
+          );
+        }
+      };
+    },
+    decompteParExercice(){
+      return (marche_id,exercice)=>{
+          let objet=this.afficheMarcheDecompte(this.detailOp.unite_administrative_id)
+          if(objet.length>0){
+              return objet.filter(item=>item.exercicebudget==exercice && item.diff_decompte==1)
+          }
+          return []
+      }
+      },
+   arrayExerciceDecompte(){
+           return (marche_id)=>{
+               let objet=this.afficheMarcheDecompte(marche_id)
+             //  let vm=this
+               let array_exercie=[]
+               if(objet.length>0){
+
+
+                   objet.forEach(function (val) {
+                       array_exercie.push(val.exercicebudget)
+                   })
+                   let unique = [...new Set(array_exercie)]
+                  // console.log(unique)
+                   if (unique.length==1){
+   return []
+                   }
+                   return unique
+               }
+               return []
+           }
+      },
     //fonction Lega le 18/03/2021
 recupererNomDuControleurF() {
       return id => {
@@ -1302,6 +1457,13 @@ AfficheSousBudgetLibelle() {
       "modifierServiceRealiteFaitOp",
       "supprimerServiceRealiteFaitOp",
     ]),
+     ...mapActions('uniteadministrative',[
+
+ "ModifierDecompteFacture",
+ "supprimerDecompteFacture"
+   
+   
+   ]),
     afficherModalListeExecution() {
       window.history.back();
     },

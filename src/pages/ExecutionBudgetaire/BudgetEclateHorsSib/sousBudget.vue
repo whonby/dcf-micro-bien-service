@@ -53,7 +53,7 @@
               
             </td>
           
-             <td colspan="2">
+             <td colspan="">
                                 <label>Unité Administrative <code style="color:red;font-size:16px">*</code>
                                 </label>
                                 <model-list-select style="border:1px solid #000"
@@ -68,11 +68,54 @@
                                 </model-list-select>
                                  
                             </td>
+                            <td colspan="2">
+                       <div class="control-group">
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="recuppererLeDernierNiveauActivite"
+                                                   v-model="formData.activite_parent_id"
+                                                   option-value="id"
+                                                   option-text="code"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
                      </tr>
                       <tr>
-                        
                        
-              <td colspan="">
+                  
+                   <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Libelle Activité</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="NomActivite(formData.activite_parent_id)"
+                    class="span"
+                    readonly
+                  />
+                  <!-- <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
+                    <option></option>
+                     <option
+                        v-for="typeFact in LibelleActivite(formData.uniteadministrative_id,formData78.exo_id)"
+                        :key="typeFact[0].id"
+                        :value="typeFact[0].activite_id"
+                      >{{NomActivite(typeFact[0].activite_id)}}</option>
+                  </select> -->
+                </div>
+              </div>
+              
+                     </td>  
+                       
+              <!-- <td colspan="">
               <div class="control-group">
                 <label class="control-label">Activité</label>
                 <div class="controls">
@@ -87,7 +130,7 @@
                 </div>
               </div>
               
-                     </td>
+                     </td> -->
                          <td colspan="">
               <div class="control-group">
                 <label class="control-label">Ligne budgetaire</label>
@@ -239,7 +282,7 @@
                   
                 </div>
               </table>
-              <table class="table table-bordered table-striped">
+              <!-- <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                    
@@ -254,12 +297,7 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type, index) in listeSousBudget(formData.unite_administrative_id,formData.ligneeconomique_id)" :key="type.id">
-                    <!-- <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.execice || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{LibelleUniteAdministrative(type.unite_administrative_id) || 'Non renseigné'}}</td> -->
+                   
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.code || 'Non renseigné'}}</td>
@@ -307,7 +345,7 @@
                     <td></td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
             </div>
           </div>
         </div>
@@ -401,7 +439,25 @@ components: {
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
 
+recuppererLeDernierNiveauActivite() {
+      
+           return this.plans_activites.filter(qtreel => this.recupererStructureActivite_id(qtreel.structure_activites_id) == 2 );
 
+      
+       
+    },
+    recupererStructureActivite_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau
+      }
+      return 0
+        }
+      };
+    },
       MontantParBailleur() {
       return (id,id3,id1,id2)=> {
         if (id != null && id != "" && id3 != null && id3 != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {

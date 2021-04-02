@@ -449,15 +449,29 @@ export default {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+            (qtreel[0].decision_cf == 8 &&
+              qtreel[0].diff_op == 1 &&
+              qtreel[0].exercice == this.anneeAmort &&
+              qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin) ||
+              
+            (qtreel[0].decision_cf == 9 &&
+              qtreel[0].diff_op == 1 &&
+              qtreel[0].exercice == this.anneeAmort &&
+              qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin)
         );
       } else {
         return this.GroupeOrdrePaiementByActivite;
         // .filter(
-        //   (qtreel) =>(qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null) ||
+        //   (qtreel) =>
+        //     (qtreel[0].decision_cf == 8 &&
+        //       qtreel[0].diff_op == 1 &&
+        //       qtreel[0].exercice == this.anneeAmort) ||
 
-        //   (qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
+        //     (qtreel[0].decision_cf == 9 &&
+        //       qtreel[0].diff_op == 1 &&
+        //       qtreel[0].exercice == this.anneeAmort)
         // );
       }
     },
@@ -532,8 +546,9 @@ export default {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
-              (qtreel) => qtreel.activite_id == id
-              // && qtreel.annebudgetaire ==this.anneeAmort
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.anneeAmort
             )
             .reduce(
               (prec, cur) =>
@@ -587,7 +602,7 @@ export default {
       return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
     },
 
-    // listeordrepaiements() {
+    // s() {
     //   if (this.uniteAdministrative_id != 0) {
     //     return this.gettersgestionOrdrePaiement.filter(
     //       (qtreel) =>

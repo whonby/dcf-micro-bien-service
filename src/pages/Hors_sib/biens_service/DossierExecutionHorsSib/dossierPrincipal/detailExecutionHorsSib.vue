@@ -164,14 +164,19 @@ controlleur_fin
                       >
                     </li>
                     <li>
-                      <a data-toggle="tab" href="#tab03"
-                        >TABLEAU DE CALCUL DES MARCHES PLARIANNUELS
+                      <a data-toggle="tab" href="#tab030"
+                        >TABLEAU DE CALCUL DES MARCHES PLURIANNUEL
                       </a>
                     </li>
 
+                    <li>
+                      <a data-toggle="tab" href="#tab001"
+                        >DIFFICULTE RENCONTRE
+                      </a>
+                    </li>
                      <li>
-                      <a data-toggle="tab" href="#tab0pm"
-                        >PROBLEME MARCHE
+                      <a data-toggle="tab" href="#tab0401"
+                        >ETAT DES MARCHES EXECUTES
                       </a>
                     </li>
                     <!-- <li>
@@ -183,7 +188,7 @@ controlleur_fin
                   </ul>
                 </div>
                 <div class="widget-content tab-content">
-                  <div id="tab03" class="tab-pane">
+                  <div id="tab030" class="tab-pane">
                     <TableauMarchePluriannuel
                       :macheid="detail_marche.id"
                     ></TableauMarchePluriannuel>
@@ -359,22 +364,50 @@ controlleur_fin
                       >
                     </div>
 
-                    <!-- <publication-Offre :macheid="detail_marche.id"></publication-Offre> -->
-
                     <marchePluriannuel
                       :macheid="detail_marche.id"
                     ></marchePluriannuel>
                   </div>
 
+                  <!-- probleme marche -->
+                  <div id="tab001" class="tab-pane">
+                    <div class="span4">
+                    </div>
+                    <div class="span4"></div>
+
+                    <div class="span4" align="right">
+                      <a
+                        href="#AjouterProblemeMarcheModal"
+                        data-toggle="modal"
+                        class="btn btn-success"
+                        align="rigth"
+                        >Ajouter</a
+                      >
+                    </div>
+
+                    <ProblemeMarche :macheid="detail_marche.id"></ProblemeMarche>
+                  </div>
+                 <!-- fin probleme marche -->
+
                   <div id="tab03" class="tab-pane">
                     <imageMarche :macheid="detail_marche.id"></imageMarche>
                   </div>
+                  <div id="tab0401" class="tab-pane">
+                    <EtatExecutionMarche :macheid="detail_marche.id"></EtatExecutionMarche>
+                  </div>
+                  
 
                   <div id="tab040" class="tab-pane">
                     <graphiqueExecutionMarche
                       :macheid="detail_marche.id"
                     ></graphiqueExecutionMarche>
                   </div>
+                  <div id="tab040" class="tab-pane">
+                    <graphiqueExecutionMarche
+                      :macheid="detail_marche.id"
+                    ></graphiqueExecutionMarche>
+                  </div>
+                  
 
                   <div id="tab041" class="tab-pane">
                     <graphiqueSituationMarche
@@ -402,13 +435,15 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "./../../../../../Repositories/Repository";
 import marchePluriannuel from "../DossierMarchePluriannuel/marchePluriannuel";
+import ProblemeMarche from "../DossierMarchePluriannuel/ProblemeMarche";
+
 import avenant from "../dossierAvenant/avenantHs";
 import facture from "../dossierFacture/factureHs";
 import decompte from "../dossierDecompte/decomptePro";
 import HistoriqueDecompteFacture from "../dossierDecompte/HistoriqueDecompteFacture";
 import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
 import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
-
+import EtatExecutionMarche from "../../../../../pages/DossierEtatExecutionMarche/EtatExecutionMarche";
 import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
 import TableauMarchePluriannuel from "../DossierMarchePluriannuel/TableauMarchePluriannuel";
@@ -418,10 +453,12 @@ export default {
   name: "compte",
   components: {
     marchePluriannuel,
+    EtatExecutionMarche,
     TableauMarchePluriannuel,
     avenant,
     facture,
     decompte,
+    ProblemeMarche,
     HistoriqueDecompteFacture,
     graphiqueExecutionMarche,
     graphiqueSituationMarche,
@@ -576,6 +613,8 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+
+    
 
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
@@ -3422,6 +3461,13 @@ export default {
 
     retourListeEntreprise() {
       this.$router.push({ name: "executionMarche" });
+    },
+
+    CallModalProblemeMarche() {
+      return this.$("#AjouterProblemeMarche").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
     },
 
     formatageSomme: formatageSomme,

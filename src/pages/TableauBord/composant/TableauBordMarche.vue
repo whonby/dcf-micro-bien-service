@@ -153,7 +153,8 @@
                   font-size: 15px;
                 "
               >
-                <b>{{ nombreTotalMarche }} Marchés</b>
+                <b v-if="nombreTotalMarche==0">{{ nombreTotalMarche }} Marché</b>
+                  <b v-else>{{ nombreTotalMarche }} Marchés</b>
               </td>
               <td
                 style="
@@ -214,7 +215,8 @@
                   font-size: 15px;
                 "
               >
-                <b>{{ nombreMarcheHPPM }} Marché </b>
+                <b v-if="nombreMarcheHPPM==0">{{ nombreMarcheHPPM }}  Marché </b>
+                  <b v-else>{{ nombreMarcheHPPM }} Marchés </b>
               </td>
               <td
                 style="
@@ -276,7 +278,8 @@
                   font-size: 15px;
                 "
               >
-                <b>{{ montantTotalMarcheGeneral }} Marchés</b>
+                <b v-if="nbrTotalMarcheGeneral==0">{{ nbrTotalMarcheGeneral }} Marché</b>
+                  <b v-else>{{ nbrTotalMarcheGeneral }} Marchés</b>
               </td>
               <td
                 style="
@@ -323,7 +326,7 @@
           class="main-breadcrumb"
           style="background: #806000"
         >
-          <ol class="breadcrumb" style="background: #806000 !important">
+          <ol class="breadcrumb" style="background: #111111 !important">
             <li class="breadcrumb-item" style="color: #fff !important">
               INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp;
               /
@@ -389,6 +392,7 @@
               <div
                 class="card-box bg-attente-contratualisation-hors-alert"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
                 @click="listePlanifierMarcheStatus('planifie')"
               >
                 <div class="inner">
@@ -423,6 +427,7 @@
                 :is-full-page="fullPage"
               ></loading>
               <div
+                      v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
                 @click="listePlanifierMarcheStatus(8)"
                 class="card-box bg-attente-contratualisation-avec-alert"
                 style="height: 90px !important; cursor: grab !important"
@@ -459,6 +464,7 @@
                 @click="listePlanifierMarcheStatus(1)"
                 class="card-box bg-en-contratualisation"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p>
@@ -494,6 +500,7 @@
                 @click="listePlanifierMarcheStatus(9)"
                 class="card-box bg-en-contratualisation-hort-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>En contractualisation Hors délai</b></p>
@@ -526,13 +533,14 @@
                 @click="listeMarcheStatus(2)"
                 class="card-box bg-en-execution"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>En exécution</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(2) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(2) }}%
+                  {{ pourcentageMarcheExecuteAcheve(2) }}%
                 </div>
                 <div class="icon2">
                   {{ formatageSomme(montantPasStatusExecutionAcheve(2)) }} /
@@ -558,13 +566,14 @@
                 @click="listeMarcheStatus(10)"
                 class="card-box bg-en-execution-horts-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>En Exécution Hors délai</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(10) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(10) }}%
+                  {{ pourcentageMarcheExecuteAcheve(10) }}%
                 </div>
                 <div class="icon2">
                   {{ formatageSomme(montantPasStatusExecutionAcheve(10)) }} /
@@ -590,13 +599,14 @@
                 @click="listeMarcheStatus(11)"
                 class="card-box bg-acheve-hors-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p><b>Achevés dans le délais</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(11) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(11) }}%
+                  {{ pourcentageMarcheExecuteAcheve(11) }}%
                 </div>
                 <div class="icon2">
                   {{ formatageSomme(montantPasStatusExecutionAcheve(11)) }} /
@@ -623,13 +633,14 @@
                 @click="listeMarcheStatus(12)"
                 class="card-box bg-acheve-delais"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p>Achevés Hors délai</p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(12) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(12) }}%
+                  {{ pourcentageMarcheExecuteAcheve(12) }}%
                 </div>
                 <div class="icon2">
                   {{ formatageSomme(montantPasStatusExecutionAcheve(12)) }} /
@@ -655,13 +666,14 @@
                 @click="listeMarcheStatus(7)"
                 class="card-box bg-en-souffrance"
                 style="height: 90px !important; cursor: grab !important"
+                v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
                   <p>En souffrance</p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(7) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(7) }}%
+                  {{ pourcentageMarcheExecuteAcheve(7) }}%
                 </div>
                 <div class="icon2">
                   {{ formatageSomme(montantPasStatusExecutionAcheve(7)) }} /
@@ -703,15 +715,28 @@
           </div>
 
           <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-            <div class="span4" style="border: 2px dotted #ffffff">
+            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
               <apexchart
-                type="pie"
-                width="350"
-                :options="chartOptions"
-                :series="dataPourcentage"
+                      type="pie"
+                      width="560"
+                      :options="chartOptions"
+                      :series="dataPourcentage"
               ></apexchart>
+              <h3>Projet de marchés {{nomUniteAdmiSelection(unite_administrative_id)}} {{nomTypeMarche(type_marche)}} {{nomInfrastructure(infrastructure)}} {{nomRegions(region)}}</h3>
             </div>
-            <div class="span8">
+
+            <div class="span6" style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
+              <apexchart
+                      type="pie"
+                      width="495"
+                      :options="chartOptions2"
+                      :series="dataPourcentage2"
+              ></apexchart>
+              <h3>Marchés approuvés {{nomUniteAdmiSelection(unite_administrative_id)}} {{nomTypeMarche(type_marche)}} {{nomInfrastructure(infrastructure)}} {{nomRegions(region)}}</h3>
+            </div>
+
+            <div class="span11" id="table_resultat">
+              <br>
               <nav
                 aria-label="breadcrumb"
                 class="main-breadcrumb"
@@ -727,9 +752,11 @@
                   </li>
                 </ol>
               </nav>
+              <transition  name="slide-fade" >
               <table
                 class="table table-bordered table-striped"
                 v-if="info_status_marche"
+
               >
                 <thead>
                   <tr>
@@ -879,7 +906,7 @@
                   </tr>
                 </tbody>
               </table>
-
+              </transition>
               <table
                 class="table table-bordered table-striped"
                 v-if="!info_status_marche"
@@ -977,617 +1004,9 @@
       @cache="filter"
     ></fab>
 
-    <vue-html2pdf
-      :show-layout="false"
-      :float-layout="true"
-      :enable-download="true"
-      :preview-modal="true"
-      :paginate-elements-by-height="1400"
-      filename="DCF"
-      :pdf-quality="2"
-      :manual-pagination="false"
-      pdf-format="a4"
-      pdf-orientation="landscape"
-      pdf-content-width="1000px"
-      @progress="onProgress($event)"
-      @hasStartedGeneration="hasStartedGeneration()"
-      @hasGenerated="hasGenerated($event)"
-      ref="html2Pdf"
-    >
-      <section slot="pdf-content">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td
-                style="
-                  background: #b4c6e7;
-                  border: 5px solid #fff;
-                  font-size: 15px;
-                "
-              >
-                <b>TOTAL MARCHES PLANIFIES - EXERCICE {{ anneeAmort }}</b>
-              </td>
-              <td
-                style="
-                  background: #b4c6e7;
-                  border: 5px solid #fff;
-                  text-align: center !important;
-                  font-size: 15px;
-                "
-              >
-                <b>{{ nombreTotalMarche }} Marchés</b>
-              </td>
-              <td
-                style="
-                  background: #b4c6e7;
-                  border: 5px solid #fff;
-                  text-align: center !important;
-                  font-size: 15px;
-                "
-              >
-                <b
-                  >{{
-                    formatageSomme(montantTotaleMarchePlanifieContratuel)
-                  }}
-                  TTC</b
-                >
-              </td>
-            </tr>
-            <tr>
-              <td
-                style="
-                  background: #b4c6e7;
-                  border: 5px solid #fff;
-                  font-size: 15px;
-                "
-              >
-                <b>TOTAL MARCHES HORS PPM - EXERCICE {{ anneeAmort }}</b>
-              </td>
-              <td
-                style="
-                  background: #b4c6e7;
-                  border: 5px solid #fff;
-                  text-align: center !important;
-                  font-size: 15px;
-                "
-              >
-                <b>0 Marché</b>
-              </td>
-              <td
-                style="
-                  background: #b4c6e7;
-                  border: 5px solid #fff;
-                  text-align: center !important;
-                  font-size: 15px;
-                "
-              >
-                <b>{{ formatageSomme(0) }} TTC</b>
-              </td>
-            </tr>
-            <tr>
-              <td
-                style="
-                  background: #2f5396;
-                  border: 5px solid #fff;
-                  color: #fff;
-                  font-size: 15px;
-                "
-              >
-                <b>TOTAL GENERAL MARCHES - EXERCICE {{ anneeAmort }}</b>
-              </td>
-              <td
-                style="
-                  background: #2f5396;
-                  border: 5px solid #fff;
-                  color: #fff;
-                  text-align: center !important;
-                  font-size: 15px;
-                "
-              >
-                <b>{{ nombreTotalMarche }} Marchés</b>
-              </td>
-              <td
-                style="
-                  background: #2f5396;
-                  border: 5px solid #fff;
-                  color: #fff;
-                  text-align: center !important;
-                  font-size: 15px;
-                "
-              >
-                <b
-                  >{{
-                    formatageSomme(montantTotaleMarchePlanifieContratuel)
-                  }}
-                  TTC</b
-                >
-              </td>
-              <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-            </tr>
-          </tbody>
-        </table>
-
-        <nav
-          aria-label="breadcrumb"
-          class="main-breadcrumb"
-          style="background: #806000"
-        >
-          <ol class="breadcrumb" style="background: #806000 !important">
-            <li class="breadcrumb-item" style="color: #fff !important">
-              INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp;
-              /
-            </li>
-            <li
-              class="breadcrumb-item"
-              style="color: #fff !important"
-              v-if="unite_administrative_id"
-            >
-              Situation {{ nomUniteAdmin(unite_administrative_id) }} des marchés
-              &nbsp;&nbsp;&nbsp;&nbsp; /
-            </li>
-            <li
-              class="breadcrumb-item"
-              style="color: #fff !important"
-              v-if="region"
-            >
-              Région {{ nomRegions(region) }} &nbsp;&nbsp;&nbsp;&nbsp; /
-            </li>
-            <li
-              class="breadcrumb-item"
-              style="color: #fff !important"
-              v-if="infrastructure"
-            >
-              Infrastructutre
-              {{ nomInfrastructure(infrastructure) }} &nbsp;&nbsp;&nbsp;&nbsp; /
-            </li>
-
-            <li
-              class="breadcrumb-item"
-              style="color: #fff !important"
-              v-if="type_marche"
-            >
-              Type Marche
-              {{ nomTypeMarche(type_marche) }} &nbsp;&nbsp;&nbsp;&nbsp; /
-            </li>
-            <li
-              class="breadcrumb-item"
-              style="color: #fff !important"
-              v-if="info_status_marche"
-              v-html="info_status_marche"
-            ></li>
-            <!--<li class="breadcrumb-item"> <button class="btn btn-info" @click="print"><i class="icon-print"></i></button></li>-->
-          </ol>
-        </nav>
-
-        <div class="">
-          <div class="row-fluid" style="">
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -3px !important;
-                border-right: 10px solid #f9f9f9;
-              "
-            >
-              <div
-                class="card-box bg-attente-contratualisation-hors-alert"
-                style="height: 90px !important; cursor: grab !important"
-                @click="listeMarcheStatus('planifie')"
-              >
-                <div class="inner">
-                  <p><b> En attente de contractualisation </b></p>
-                  <h3></h3>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue("planifie") }} Marché(s) /
-                  {{ pourcentageMarchePasStatus("planifie") }}%
-                </div>
-                <div class="icon2">
-                  {{
-                    formatageSomme(montantPasStatusContratPlanifie("planifie"))
-                  }}
-                  / {{ pourcentageMontantPrevuePasSatus("planifie") }}%
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #f9f9f9;
-              "
-            >
-              <div
-                @click="listePlanifierMarcheStatus(8)"
-                class="card-box bg-attente-contratualisation-avec-alert"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p><b>En attente de contractualisation Hors délai</b></p>
-                </div>
-
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(8) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(8) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusContratPlanifie(8)) }} /
-                  {{ pourcentageMontantPrevuePasSatus(8) }}%
-                </div>
-              </div>
-            </div>
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #f9f9f9;
-              "
-            >
-              <div
-                @click="listePlanifierMarcheStatus(1)"
-                class="card-box bg-en-contratualisation"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p><b>En contractualisation</b></p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(1) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(1) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusContratPlanifie(1)) }}/{{
-                    pourcentageMontantPrevuePasSatus(1)
-                  }}%
-                </div>
-              </div>
-            </div>
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #f9f9f9;
-              "
-            >
-              <div
-                @click="listePlanifierMarcheStatus(9)"
-                class="card-box bg-en-contratualisation-hort-delais"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p><b>En contractualisation Hors délai</b></p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(9) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(9) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusContratPlanifie(9)) }} /
-                  {{ pourcentageMontantPrevuePasSatus(9) }}%
-                </div>
-              </div>
-            </div>
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #fff;
-              "
-            >
-              <div
-                @click="listeMarcheStatus(2)"
-                class="card-box bg-en-execution"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p><b>En exécution</b></p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(2) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(2) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusExecutionAcheve(2)) }} /
-                  {{ pourcentageMontantExcuteAcheve(2) }}%
-                </div>
-              </div>
-            </div>
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #fff;
-              "
-            >
-              <div
-                @click="listeMarcheStatus(10)"
-                class="card-box bg-en-execution-horts-delais"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p><b>En Exécution Hors délai</b></p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(10) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(10) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusExecutionAcheve(10)) }} /
-                  {{ pourcentageMontantExcuteAcheve(10) }}%
-                </div>
-              </div>
-            </div>
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #fff;
-              "
-            >
-              <div
-                @click="listeMarcheStatus(11)"
-                class="card-box bg-acheve-hors-delais"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p><b>Achevés dans le délais</b></p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(11) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(11) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusExecutionAcheve(11)) }} /
-                  {{ pourcentageMontantExcuteAcheve(11) }}%
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #fff;
-              "
-            >
-              <div
-                @click="listeMarcheStatus(12)"
-                class="card-box bg-acheve-delais"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p>Achevés Hors délai</p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(12) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(12) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusExecutionAcheve(12)) }} /
-                  {{ pourcentageMontantExcuteAcheve(12) }}%
-                </div>
-              </div>
-            </div>
-            <div
-              class="span2"
-              style="
-                width: 170px;
-                margin-left: -0.9px !important;
-                border-right: 10px solid #fff;
-              "
-            >
-              <div
-                @click="listeMarcheStatus(7)"
-                class="card-box bg-en-souffrance"
-                style="height: 90px !important; cursor: grab !important"
-              >
-                <div class="inner">
-                  <p>En souffrance</p>
-                </div>
-                <div class="icon3">
-                  {{ nombreMarcheParStatue(7) }} Marché(s) /
-                  {{ pourcentageMarchePasStatus(7) }}%
-                </div>
-                <div class="icon2">
-                  {{ formatageSomme(montantPasStatusExecutionAcheve(7)) }} /
-                  {{ pourcentageMontantExcuteAcheve(7) }}%
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-            <div class="span12" style="border: 2px dotted #ffffff">
-              <apexchart
-                type="pie"
-                width="380"
-                :options="chartOptions"
-                :series="dataPourcentage"
-              ></apexchart>
-            </div>
-            <hr />
-            <div class="span12">
-              <nav
-                aria-label="breadcrumb"
-                class="main-breadcrumb"
-                v-if="info_status_marche"
-              >
-                <ol
-                  class="breadcrumb"
-                  :style="{ background: getColorByStatus(status_marches) }"
-                >
-                  <li class="breadcrumb-item" v-html="info_status_marche"></li>
-                  <li class="breadcrumb-item">
-                    <!--<a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a> -->
-                  </li>
-                </ol>
-              </nav>
-              <table
-                class="table table-bordered table-striped"
-                v-if="info_status_marche"
-              >
-                <thead>
-                  <tr>
-                    <th>UA</th>
-                    <th>Nombre Marchés</th>
-                    <th>Montant total</th>
-                    <th>Taux %</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="unite in listeUniteAdministrative" :key="unite.id">
-                    <td>{{ unite.libelle }}</td>
-                    <td style="text-align: center !important">
-                      {{ nbrTotalMarchePasUA(unite.id) }}
-                    </td>
-                    <td style="text-align: center !important">
-                      {{ formatageSomme(montantPrevuePasUA(unite.id)) }}
-                    </td>
-                    <td style="text-align: center !important">
-                      {{ tauxStatusMarchePasUniteAdministrative(unite.id) }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <table
-                class="table table-bordered table-striped"
-                v-if="!info_status_marche"
-              >
-                <thead>
-                  <tr>
-                    <th>UA</th>
-                    <th>Nombre Marchés</th>
-                    <th>Montant total</th>
-                    <!--<th v-if="status_marches==2">Montant base</th>-->
-                    <th>Taux</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
-      </section>
-    </vue-html2pdf>
 
     {{ dataArrayPourcentage }}
+      {{dataArrayPourcentage2}}
   </div>
 </template>
 
@@ -1642,21 +1061,47 @@ export default {
           type: "pie",
         },
         labels: [
-          "A.Contra.",
-          "A.C.H.D",
-          "En Cont.",
-          "EN Contr.H.D",
-          "En Execution",
-          "En Execution HD",
-          "Acheve Delais",
-          "Acheve H.D",
-          "En souffrance",
+          "En Attente de contratualisation.",
+          "En attente de contratualisation H.D",
+          "En Contratualisation.",
+          "En Contratualisation H.D",
         ],
         colors: [
           "#8ea9db",
           "#f4b084",
           "#92d04f",
           "#632990",
+        ],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+
+      dataPourcentage2: [],
+      chartOptions2: {
+        chart: {
+          width: 380,
+          type: "pie",
+        },
+        labels: [
+          "En Execution",
+          "Execution Hors delais",
+          "Achévé dans le delais.",
+          "Achévé Hors delai",
+          "En souffrance",
+        ],
+        colors: [
           "#d7b755",
           "#d36f2a",
           "#00b04f",
@@ -1677,10 +1122,33 @@ export default {
           },
         ],
       },
+
+
+        series: [44, 55, 13, 43, 22],
+        chartOptions1: {
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        },
     };
   },
   created() {
-    console.log(this.listeMarchStatueExecuteAcheve);
+    console.log("..........................")
+    console.log(this.opDejaVie);
+    console.log("..........................")
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -1715,8 +1183,10 @@ export default {
       "getterImageMarche",
       "acteEffetFinanciers",
       "getActeEffetFinancierPersonnaliser45",
+      "getActeEffetFinancierPersonnaliser",
       "typeMarches",
       "avenants",
+            "gettersgestionOrdrePaiement"
     ]),
     ...mapGetters("Utilisateurs", ["getterUtilisateur", "getterRoles"]),
     listeCF() {
@@ -1825,7 +1295,19 @@ export default {
       }
       return 0;
     },
-
+     opDejaVie(){
+      let objet=this.gettersgestionOrdrePaiement.filter(item=>{
+        if(item.type_ordre_paiement==1 || item.type_ordre_paiement==4){
+          return item
+        }
+      })
+       if(objet.length<1) return []
+       return objet.filter(item=>{
+         if(item.decision_cf==8 || item.decision_cf==9){
+           return item
+         }
+       });
+     },
     objetMarchePasUniteOuRegion() {
       let vM = this;
       let objet = this.listeMarcheUniteAdmin.filter(
@@ -2409,72 +1891,14 @@ export default {
     nombreMarcheParStatue() {
       return (status) => {
         if (status != "") {
-          if (status == "planifie") {
-            status = 0;
-          }
 
-          //                        let objet={
-          //                            etat_marche:status,
-          //                            marches:""
-          //                        }
-          //                        let liste_marches=""
-          let nombre = 0;
-
-          if (this.infrastructure != "" && this.type_marche == "") {
-            //                            liste_marches=this.objetMarchePasUniteOuRegion.filter(item=>{
-            //                                if(item.attribue==status && item.infrastructure_id==this.infrastructure){
-            //                                    return item
-            //                                }
-            //                            })
-            nombre = this.objetMarchePasUniteOuRegion.filter((item) => {
+          let nombre = this.listeMarchStatueExecuteAcheve.filter((item) => {
               if (
-                item.attribue == status &&
-                item.infrastructure_id == this.infrastructure
+                  item.attribue == status
               ) {
-                return item;
+                  return item;
               }
-            }).length;
-          }
-
-          if (this.infrastructure == "" && this.type_marche != "") {
-            //                            liste_marches= this.objetMarchePasUniteOuRegion.filter(item=>{
-            //                                if(item.attribue==status && item.type_marche_id==this.type_marche){
-            //                                    return item
-            //                                }
-            //                            })
-            nombre = this.objetMarchePasUniteOuRegion.filter((item) => {
-              if (
-                item.attribue == status &&
-                item.type_marche_id == this.type_marche
-              ) {
-                return item;
-              }
-            }).length;
-          }
-
-          if (this.infrastructure != "" && this.type_marche != "") {
-            //                            liste_marches= this.objetMarchePasUniteOuRegion.filter(item=>{
-            //                                if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
-            //                                    return item
-            //                                }
-            //                            })
-            nombre = this.objetMarchePasUniteOuRegion.filter((item) => {
-              if (
-                item.attribue == status &&
-                item.type_marche_id == this.type_marche &&
-                item.infrastructure_id == this.infrastructure
-              ) {
-                return item;
-              }
-            }).length;
-          }
-
-          if (this.infrastructure == "" && this.type_marche == "") {
-            //                            liste_marches=this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
-            nombre = this.objetMarchePasUniteOuRegion.filter(
-              (item) => item.attribue == status
-            ).length;
-          }
+          }).length;
 
           return nombre;
         }
@@ -2534,6 +1958,8 @@ export default {
         }
       };
     },
+
+
 
     marcheUniteRegion() {
       let vM = this;
@@ -2597,24 +2023,25 @@ export default {
         return taux.toFixed(2);
       };
     },
+    nbrTotalMarchePlanier(){
+      return this.listeMarchStatuePlanifieContratualisation.length
+    },
     pourcentageMarchePasStatusPlanifier() {
       return (status) => {
-        if (this.montantTotalMarcheGeneral == 0) {
+        if (this.nbrTotalMarcheGeneral == 0) {
           return 0.0;
         }
         if (status == "planifie") {
           status = "planifie";
-          let taux =
-            (this.nombreMarchePasStaturePlanifier(status) * 100) /
-            this.montantTotalMarcheGeneral;
+          let taux = (this.nombreMarchePasStaturePlanifier(status) * 100) / this.nbrTotalMarchePlanier;
+          console.log(taux)
           return taux.toFixed(2);
         }
         let nombre = this.nombreMarchePasStaturePlanifier(status);
-        if (status == 7) {
-          nombre = nombre + this.nombreMarchePasStaturePlanifier(3);
-        }
 
-        let taux = (nombre * 100) / this.montantTotalMarcheGeneral;
+        let taux = (nombre * 100) / this.nbrTotalMarchePlanier;
+             if (taux=="NaN")  return 0.0;
+        console.log(taux)
         return taux.toFixed(2);
       };
     },
@@ -2727,10 +2154,10 @@ export default {
 
         this.objetMarchePasUniteOuRegion.forEach(function (val) {
           let initeVal = 0;
-          let montant = vm.getMandatPersonnaliserVise
+          let montant = vm.opDejaVie
             .filter((item) => item.marche_id == val.id)
             .reduce(function (total, currentValue) {
-              return total + parseFloat(currentValue.total_general);
+              return total + parseFloat(currentValue.montant_ordre_paiement);
             }, initeVal);
           montant_execute = parseFloat(montant_execute) + parseFloat(montant);
         });
@@ -2755,25 +2182,35 @@ export default {
     },
     dataArrayPourcentage() {
       let vm = this;
-      //console.log(parseFloat(this.pourcentageMarchePasStatus("planifie")))
 
       if (vm.dataPourcentage.length > 0) {
         vm.dataPourcentage = [];
       }
       vm.dataPourcentage.push(
-        parseFloat(this.pourcentageMarchePasStatus("planifie"))
+        parseFloat(this.nombreMarchePasStaturePlanifier("planifie"))
       );
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(8)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(1)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(9)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(2)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(10)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(11)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(12)));
-      vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(7)));
+      vm.dataPourcentage.push(parseFloat(this.nombreMarchePasStaturePlanifier(8)));
+      vm.dataPourcentage.push(parseFloat(this.nombreMarchePasStaturePlanifier(1)));
+      vm.dataPourcentage.push(parseFloat(this.nombreMarchePasStaturePlanifier(9)));
       return "";
     },
 
+      dataArrayPourcentage2() {
+          let vm = this;
+
+          if (vm.dataPourcentage2.length > 0) {
+              vm.dataPourcentage2 = [];
+          }
+          vm.dataPourcentage2.push(
+              parseFloat(this.nombreMarcheParStatue(2))
+          );
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(10)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(11)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(12)));
+          vm.dataPourcentage2.push(parseFloat(this.nombreMarcheParStatue(7)));
+
+          return "";
+      },
     nombreTotalMarche() {
       return this.objetMarchePlanierPasUiteOuRegion.filter(
         (item) => item.plan_passation_marche_id != null
@@ -2809,7 +2246,7 @@ export default {
       }
       return 0;
     },
-    montantTotalMarcheGeneral() {
+    nbrTotalMarcheGeneral() {
       return this.objetMarchePlanierPasUiteOuRegion.length;
     },
     montantTotalGeneral() {
@@ -2829,6 +2266,14 @@ export default {
     nombreTotalExecutionMarche() {
       return this.listeMarchStatueExecuteAcheve.length;
     },
+      pourcentageMarcheExecuteAcheve(){
+        return status=>{
+            if(!status) return 0;
+            let taux=(this.nombreMarcheParStatue(status) * 100) /this.nombreTotalExecutionMarche
+            if(taux=="NaN") return 0;
+            return taux.toFixed(2)
+        }
+      },
     objetListeMarcheInfoUnite() {
       return this.listeMarcheUniteAdmin.filter((item) => item.parent_id != "");
     },
@@ -3006,7 +2451,7 @@ export default {
       return (id) => {
         if (id != "") {
           let objet = this.typeMarches.find((item) => item.id == id);
-          return objet.libelle;
+          return "/"+objet.libelle;
         }
         return "";
       };
@@ -3015,7 +2460,7 @@ export default {
       return (id) => {
         if (id != "") {
           let objet = this.getterInfrastrucure.find((item) => item.id == id);
-          return objet.libelle;
+          return "/"+objet.libelle;
         }
         return "";
       };
@@ -3026,7 +2471,7 @@ export default {
           let objet = this.localisations_geographiques.find(
             (item) => item.id == id
           );
-          return objet.libelle;
+          return "/"+objet.libelle;
         }
         return "";
       };
@@ -3120,8 +2565,7 @@ export default {
     pourcentageMontantPrevuePasSatus() {
       return (status) => {
         let taux =
-          (this.montantPasStatusContratPlanifie(status) * 100) /
-          this.montantTotaleMarchePlanifieContratuel;
+          (this.montantPasStatusContratPlanifie(status) * 100) / this.montantTotaleMarchePlanifieContratuel;
         return taux.toFixed(2);
       };
     },
@@ -3143,13 +2587,12 @@ export default {
             .filter((item) => item.attribue == status)
             .forEach(function (val) {
               let initeVal = 0;
-              let montant = vm.getMandatPersonnaliserVise
+              let montant = vm.opDejaVie
                 .filter((item) => item.marche_id == val.id)
                 .reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.total_general);
+                  return total + parseFloat(currentValue.montant_ordre_paiement);
                 }, initeVal);
-              montant_execute =
-                parseFloat(montant_execute) + parseFloat(montant);
+              montant_execute = parseFloat(montant_execute) + parseFloat(montant);
             });
 
           return montant_execute;
@@ -3176,10 +2619,10 @@ export default {
 
         this.listeMarchStatueExecuteAcheve.forEach(function (val) {
           let initeVal = 0;
-          let montant = vm.getMandatPersonnaliserVise
+          let montant = vm.opDejaVie
             .filter((item) => item.marche_id == val.id)
             .reduce(function (total, currentValue) {
-              return total + parseFloat(currentValue.total_general);
+              return total + parseFloat(currentValue.montant_ordre_paiement);
             }, initeVal);
           montant_execute = parseFloat(montant_execute) + parseFloat(montant);
         });
@@ -3216,10 +2659,143 @@ export default {
           return item;
         }
       });
+      let vm=this;
+   let collect=[]
+    objet4.forEach(function (value) {
+            let obj=vm.listeActeEffectFinnancier(value.id)
+        let date_debut_exectuion_definitif=""
+        let date_fin_exe=""
+        let date_reception_provisoire_definitif=""
+        let garantie=""
+        let date_reception_definitive=""
+        if(obj){
+             date_debut_exectuion_definitif=obj.date_debut_exectuion_definitif
+             date_fin_exe=obj.date_fin_exe
+             date_reception_provisoire_definitif=obj.date_reception_provisoire_definitif
+             garantie=obj.garantie
+             date_reception_definitive=obj.date_reception_definitive
+        }
+        value.attribue=vm.durreStatusMarche(value.id)
+             let obje={
+                ...value,
+                 date_debut_exectuion_definitif:date_debut_exectuion_definitif,
+                 date_fin_exe:date_fin_exe,
+                 date_reception_provisoire_definitif:date_reception_provisoire_definitif,
+                 garantie:garantie,
+                 date_reception_definitive:date_reception_definitive,
+             }
 
-      console.log(objet4.length);
+          collect.push(obje)
+      })
+
       return objet4;
     },
+
+      listeActeEffectFinnancier: function () {
+          return macheid => {
+              if (macheid != "") {
+                  return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+              }
+          }
+      },
+
+      durreStatusMarche(){
+          return marche_id=>{
+              if(marche_id){
+
+                  let objet=this.listeActeEffectFinnancier(marche_id)
+                if(objet){
+                  // console.log(objet.date_reception)
+
+
+                  if(objet.date_odre_service!=null && objet.date_fin_exe!=null && objet.date_reception_provisoire_definitif==null){
+                    let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_fin_exe)
+                    if(jour<1){
+                      return 2
+                    }
+                    if(jour==0) return 11
+                    return 10
+                  }
+
+                  if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
+                    let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_reception_definitive)
+                    if(jour<1){
+                      return 11
+                    }
+                    return 12
+                  }
+
+                  if(objet.date_reception_provisoire_definitif==null){
+                    let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_reception_definitive)
+                    if(jour<1){
+                      return 11
+                    }
+                    return 12
+                  }
+                  //let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
+                  let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_reception_provisoire_definitif)
+                  //return jour;
+                  if(jour<1){
+                    return 11
+                  }
+                  return 12
+
+                }
+                  return 2
+              }
+          }
+      },
+      nombreDejourCalcule(){
+          return (date1,date2)=>{
+              if(!date2){
+                  let date_day=new Date()
+                  date2= this.formatDate(date_day)
+                  console.log(date2)
+              }
+              if(date1==null) return null;
+
+              let date_debut=new Date(date1)
+              let date_fin = new Date(date2)
+              // let diffDays = date_fin.getDate() - date_debut.getDate();
+              var timeDiff = date_fin.getTime() - date_debut.getTime();
+              var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+              if (isNaN(diffDays)) return null;
+              if (parseFloat(diffDays) <0 ) return diffDays
+
+              return diffDays
+          }
+
+      },
+      nombreDejourCalculeSansDateDuJOUR(){
+
+          return (date1,date2)=>{
+              if(date1==null) return null;
+
+              let date_debut=new Date(date1)
+              let date_fin = new Date(date2)
+              // let diffDays = date_fin.getDate() - date_debut.getDate();
+              var timeDiff = date_fin.getTime() - date_debut.getTime();
+              var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+              if (isNaN(diffDays)) return null;
+              if (parseFloat(diffDays) <0 ) return diffDays
+
+              return diffDays
+          }
+
+
+      },
+
+    nomUniteAdmiSelection(){
+      return unite_id=>{
+        if(!unite_id) return "";
+         let objet=this.uniteAdministratives.find(item=>item.id==unite_id)
+        if(objet==undefined) return ""
+        return objet.libelle
+      }
+    },
+
   },
   methods: {
     ...mapActions("bienService", [
@@ -3243,7 +2819,6 @@ export default {
         region: this.region,
         stat: stat,
       };
-      // console.log(this.objetMarchePasUniteOuRegion)
 
       let objetMarche = "";
       if (
@@ -3311,6 +2886,7 @@ export default {
       this.videTypeMarche();
     },
     formatageSomme: formatageSomme,
+
     listeMarcheStatus(status) {
       if (status == "planifie") {
         status = 0;
@@ -3893,6 +3469,10 @@ export default {
         ...new Set(objet.map((item) => item.unite_administrative_id)),
       ];
       this.tableMarcheStatue = distinct;
+
+        // document.getElementById("#table_resultat").scrollIntoView({
+        //     behavior: "smooth"
+        // });
     },
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({
@@ -3931,15 +3511,7 @@ export default {
       };
 
       console.log(objet);
-      // console.log(this.objetMarchePasUniteOuRegion)
 
-      //        let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>{
-      //            if(item.unite_administrative_id==id && item.attribue==this.status_marches){
-      //                return item
-      //            }
-      //
-      //        })
-      //        this.ajouterTableauBordFiltre(objetMarche)
       this.ajouterInfoTableauBordFiltre(objet);
 
       this.$router.push({
@@ -4444,5 +4016,17 @@ export default {
 
 body {
   background: #f9f9f9 !important;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

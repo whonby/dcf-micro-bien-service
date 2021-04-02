@@ -71,7 +71,7 @@
      <li>
    <li>
 
-            <router-link :to="{name: 'marcheHorsib'}" tag ="a">
+            <router-link :to="{name: 'groupeMarcheParUa'}" tag ="a">
               LISTE DES MARCHES HORS PPM
             </router-link>
           </li>

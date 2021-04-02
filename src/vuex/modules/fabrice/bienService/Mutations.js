@@ -585,6 +585,17 @@ export const MODIFIER_ACTE_EFFET_FINANCIER = (state, elementModif) => {
     })
 }
 
+//modifier date acte effet financier lega
+
+export const MODIFIER_DATE_ACTE_EFFET_FINANCIER = (state, elementModif) => {
+    state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
 
 
 // delete acte effet financier

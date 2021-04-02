@@ -1,5 +1,6 @@
 <template>
     <div>
+    
 
         <h3 style="text-align:center">TABLEAU DE BORD : GESTION HORS SIB</h3>
         <div class="row-fluid">

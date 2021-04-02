@@ -1,7 +1,7 @@
 import suiviDesEntreprise from "../../pages/Gestion_des_Rapports/suiviDesEntreprise";
 
 import ficheSuivi from "../../pages/Gestion_des_Rapports/ficheSuivi";
-import tableauPluriannuel from "../../pages/Gestion_des_Rapports/tableauPluriannuel";
+import EtatExecutionMarche from "../../pages/Gestion_des_Rapports/EtatExecutionMarche";
 
 
 import tableaudebordbudg from "../../pages/bien_service/Tableau_de_bord/tableaudebordbudg.vue";
@@ -19,12 +19,24 @@ import OrdrePaiementParRegie from "../../pages/Gestion_des_Rapports/BudgetExecut
 import SituationExecutionLigne from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionLigne.vue";
 import SituationExecutionRecapProjet from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapProjet.vue";
 import SituationExecutionRecapRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapRegie.vue";
+import SituationExecution from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecution.vue";
+import SituationExecutionBailActi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionBailActi.vue";
 const gestionrapport = [
 
+    {
+        path: "/SituationExecutionBailActi",
+        name: "SituationExecutionBailActi",
+        component: SituationExecutionBailActi
+    },
     {
         path: "/OrdrePaiementParPeriode",
         name: "OrdrePaiementParPeriode",
         component: OrdrePaiementParPeriode
+    },
+    {
+        path: "/SituationExecution",
+        name: "SituationExecution",
+        component: SituationExecution
     },
     {
         path: "/OrdrePaiementParRegie",
@@ -50,9 +62,9 @@ const gestionrapport = [
         component: SituationExecutionRecapRegie
     },
     {
-        path: "/tableauPluriannuel",
-        name: "tableauPluriannuel",
-        component: tableauPluriannuel
+        path: "/EtatExecutionMarche",
+        name: "etatExecutionMarche",
+        component: EtatExecutionMarche
     },
     {
         path: "/tableaudebordbudg",
