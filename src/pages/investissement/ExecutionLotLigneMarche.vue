@@ -4,7 +4,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                  <tr>
-                     <th>N°Lot33</th>
+                     <th>N°Lot</th>
                      <th>Objet marché</th>
                      <th>UA</th>
                     <th>Type marché</th>

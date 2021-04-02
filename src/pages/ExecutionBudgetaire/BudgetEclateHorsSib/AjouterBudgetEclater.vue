@@ -1,4 +1,4 @@
-recupereMontantEmpruntTotal
+ajouterDecisionBudgetEclate
 <template>
 
 <div class="container-fluid">
@@ -202,7 +202,7 @@ recupereMontantEmpruntTotal
                   </td>
                    <td>
                        <div class="control-group">
-                <label class="control-label">Code Activite{{formData.uniteadministrative_id}} <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"

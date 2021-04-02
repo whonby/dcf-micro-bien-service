@@ -161,7 +161,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Retenues d'avance</label>
                                                     <div class="controls">
-                                                         <money v-model="formData.montantmarche"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                         <money v-model="formData.retenu_avance"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                                                         
                                                     </div>
                                                 </div>
@@ -169,16 +169,36 @@
 
                   <td colspan="">
                      <div class="control-group">
-                                                    <label class="control-label">Retenues de </label>
+                                                    <label class="control-label">Retenue de garantie </label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_decompte"  placeholder="" class="span"/>
+                                                        <!-- <input type="text" v-model="formData.retenu_garantie"  placeholder="" class="span"/> -->
+                                                         <money v-model="formData.retenu_garantie"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                                                     </div>
+                                                </div>
+                </td>
+                <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Retenue de pénalité </label>
+                                                    <div class="controls">
+                                                        <!-- <input type="text" v-model="formData.retenu_penalite"  placeholder="" class="span"/>
+                                                    -->
+                                                    <money v-model="formData.retenu_penalite"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                         </div>
                                                 </div>
                 </td>
             </tr>
             <tr>
                
                 <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Net Hors tva</label>
+                                                    <div class="controls">
+                                                         <money v-model="formData.nethtva"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                        
+                                                    </div>
+                                                </div>
+                </td>
+                  <td colspan="">
                      <div class="control-group">
                                                     <label class="control-label">Montant Payé</label>
                                                     <div class="controls">
@@ -197,7 +217,29 @@
                                                 </div>
                 </td>
             </tr>
-            
+             <tr>
+               
+                <td colspan="2">
+                     <div class="control-group">
+                                                    <label class="control-label">Part Etat</label>
+                                                    <div class="controls">
+                                                         <money v-model="formData.parts_etat"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                        
+                                                    </div>
+                                                </div>
+                </td>
+                  <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Part Bailleur</label>
+                                                    <div class="controls">
+                                                         <money v-model="formData.parts_bailleur"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                        
+                                                    </div>
+                                                </div>
+                </td>
+
+                  
+            </tr>
             </table>
           </div>
           

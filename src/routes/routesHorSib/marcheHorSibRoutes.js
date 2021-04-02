@@ -1,6 +1,7 @@
 import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
 import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
+import ajouterMarcheHorSib1 from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib1.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
 import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarcheHorsSib.vue";
 import marche_hors_sib from "../../pages/Hors_sib/biens_service/marche_hors_sib.vue";
@@ -43,7 +44,6 @@ import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecut
 import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
 
-listeMarcheInvestissementHS
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[

@@ -1,4 +1,4 @@
-
+date_interim
 <template>
   <div class="container-fluid">
     <hr />
@@ -392,6 +392,7 @@
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
+                    RecupdateActeEffetFinancier
                     <div id="ENGAGEMENT" class="tab-pane active">
                       <table
                         class="table table-bordered table-striped">
@@ -3044,7 +3045,7 @@ affichePersoUA() {
           );
 
           if (qtereel) {
-            return qtereel.user_id;
+            return qtereel.user_id_interim;
           }
           return 0;
         }
@@ -4387,11 +4388,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
-        
             date_interim:'',
             visa_interim:'',
             user_id_interim:'',
-
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
