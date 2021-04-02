@@ -915,6 +915,7 @@ CreditAutorise
                             option-value="id"
                             option-text="numero_marche"
                             placeholder=""
+                            @change="RecupdateActeEffetFinancier"
                           >
                           </model-list-select>
                           <code
@@ -2495,6 +2496,39 @@ CreditAutorise
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+
+     <div id="exampleModalligneEco" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier la Date de Acte D'effet Financier</h3>
+      </div>
+      <div class="modal-body">
+     
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date:</label>
+            <div class="controls">
+              <input
+                type="date"
+                class="span"
+                placeholder=""
+                v-model="editMarcheDate.date_debut_exectuion_definitif"
+              />
+              <input type="hidden" name="" id="" v-model="editMarcheDate.id" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="#" @click="ValiderDateUpdate"
+          >Valider</a
+        >
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+  
+
+
   </div>
 </template>
 <script>
@@ -2553,7 +2587,9 @@ export default {
       formData8: {},
       formData2: {
         numeromarche: "",
+        marche_id: "",
       },
+      editMarcheDate:{},
       FormDataFacture: {},
       message_mandater: "",
       decision_cf_definitif: "",
@@ -2698,6 +2734,36 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
+
+
+       RecupdateActeEffetFinancier(){
+      let vm =this;
+        if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
+          const qtreel = this.acteEffetFinanciers.find(
+          (qtreel)=> qtreel.marche_id == this.formData2.marche_id
+        );
+       
+
+         if(qtreel.date_debut_exectuion_definitif ==null ){
+           
+           vm.editMarcheDate=qtreel;
+          return this.$("#exampleModalligneEco").modal({
+         backdrop: "static",
+          keyboard: false
+       });
+          
+         }
+
+        else{
+
+           return console.log('**lega**');
+        }
+
+        }else{
+          return 0;
+        }
+
+      },
 
     GrandeNatureId() {
       return (id) => {
@@ -3725,6 +3791,7 @@ export default {
       "modifierDossierFacture",
       "supprimerDossierFacture",
       "ajouterGestionOrdrePaiement",
+      "ModifierDateEffetFinancier"
     ]),
     ...mapActions("personnelUA", ["ajouterFichierJointDmd"]),
 
@@ -3733,6 +3800,12 @@ export default {
     },
     genererEnPdf() {
       this.$htmlToPaper("printMe");
+    },
+
+    ValiderDateUpdate() {
+
+      this.ModifierDateEffetFinancier(this.editMarcheDate);
+      this.$("#exampleModalligneEco").modal("hide");
     },
 
     afficherModalListePersonnel() {

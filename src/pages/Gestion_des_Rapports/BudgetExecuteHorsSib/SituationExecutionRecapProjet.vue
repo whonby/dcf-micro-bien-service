@@ -139,78 +139,34 @@
         EXERCICE: {{ anneeAmort }}
       </p>
 
-      <table
-        class="table table-bordered table-striped"
-        style="margin-left: 5px; margin-right: 5px"
-      >
-        <thead style="background-color: #87ceeb">
+     <div class="widget-content nopadding" style="margin: 25px">
+      <table class="table table-bordered">
+        <thead>
           <tr>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Activités
-            </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Budget Actuel
-            </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                color: #000;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;"> Activités</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Budget Actuel</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">
               Montant Exécuté
             </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Taux(%)
-            </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Disponible
-            </th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Taux(%)</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Disponible</th>
           </tr>
         </thead>
         <tbody>
-          <tr
+
+
+         <tr
             class="odd gradeX"
             v-for="listeordrepaiement in ListeGroupByActivite"
             :key="listeordrepaiement.id"
           >
-            <td style="font-size: 14px">
+            <td style="font-size: 16px">
               {{
                 LibelleActivite(listeordrepaiement[0].activite_id) ||
                 "Non renseigné"
               }}
             </td>
-            <td>
+            <td style="font-size: 14px;font-weight: bold;">
               {{
                 formatageSommeSansFCFA(
                   parseFloat(
@@ -220,7 +176,7 @@
               }}
             </td>
 
-            <td style="font-size: 14px">
+            <td style="font-size: 14px;font-weight: bold;">
               {{
                 formatageSommeSansFCFA(
                   parseFloat(
@@ -229,7 +185,7 @@
                 ) || "Non renseigné"
               }}
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px;font-weight: bold;">
               {{
                 (
                   ((MontantBudgetActuel(listeordrepaiement[0].activite_id) -
@@ -239,7 +195,7 @@
                 ).toFixed(2) || "Non renseigné"
               }}
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px;font-weight: bold;">
               {{
                 MontantBudgetActuel(listeordrepaiement[0].activite_id) -
                   MontantBudgetExecuté(listeordrepaiement[0].activite_id) ||
@@ -248,8 +204,8 @@
             </td>
           </tr>
         </tbody>
-        
       </table>
+    </div>
     </div>
   </div>
 </template>
