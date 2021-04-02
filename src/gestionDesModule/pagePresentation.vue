@@ -3,7 +3,7 @@
     <div>
 
 
-
+<!-- <Chargement/> -->
 <br><br>
 
         <table class="table " style="background-color: #006400;">
@@ -304,6 +304,7 @@
 import { mapGetters,mapActions} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
+// import Chargement from '../components/Chargement.vue'
 
 import Ws from '@adonisjs/websocket-client'
 //import listeUaDeComptabiliteMatiere from '../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere'
@@ -311,6 +312,7 @@ import Ws from '@adonisjs/websocket-client'
 export default {
 components:{
   //listeUaDeComptabiliteMatiere
+  // Chargement,
 },
   data(){
     return{
@@ -952,6 +954,7 @@ let vm=this;
 
   }
 }
+ 
 </script>
 <style scoped>
 h4{
