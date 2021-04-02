@@ -957,6 +957,7 @@
                             option-value="id"
                             option-text="numero_marche"
                             placeholder=""
+                            @change="RecupdateActeEffetFinancier"
                            
                           >
                           </model-list-select>
@@ -2543,7 +2544,7 @@
         <h3>Modifier la Date de Acte D'effet Financier</h3>
       </div>
       <div class="modal-body">
-      
+     
         <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Date:</label>
@@ -2554,7 +2555,7 @@
                 placeholder=""
                 v-model="editMarcheDate.date_debut_exectuion_definitif"
               />
-              <input type="text" name="" id="" v-model="editMarcheDate.id" />
+              <input type="hidden" name="" id="" v-model="editMarcheDate.id" />
             </div>
           </div>
         </form>
@@ -2775,6 +2776,38 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
+
+
+
+    RecupdateActeEffetFinancier(){
+      let vm =this;
+        if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
+          const qtreel = this.acteEffetFinanciers.find(
+          (qtreel)=> qtreel.marche_id == this.formData2.marche_id
+        );
+       
+
+         if(qtreel.date_debut_exectuion_definitif ==null ){
+           
+           vm.editMarcheDate=qtreel;
+          return this.$("#exampleModalligneEco").modal({
+         backdrop: "static",
+          keyboard: false
+       });
+          
+         }
+
+        else{
+
+           return console.log('**lega**');
+        }
+
+        }else{
+          return 0;
+        }
+
+      },
+
     Recup_Banque() {
       return (id) => {
         if (id != null && id != "") {
@@ -4006,24 +4039,25 @@ SousFinancement() {
     ...mapActions("personnelUA", ["ajouterFichierJointDmd"]),
 
     // RecupdateActeEffetFinancier(){
+    //   //let vm =this;
     //     if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
     //       const qtreel = this.acteEffetFinanciers.find(
     //       (qtreel)=> qtreel.marche_id == this.formData2.marche_id
     //     );
+    //    // vm.editMarcheDate==
 
-    //      if(qtreel.date_debut_exectuion_definitif !=null ){
-    //      return console.log(qtreel.date_debut_exectuion_definitif)
-    //     //   return this.$("#exampleModal").modal({
-    //     //   backdrop: "static",
-    //     //   keyboard: false
-    //     // });
+    //      if(qtreel.date_debut_exectuion_definitif ==null ){
+    //   //     return this.$("#exampleModalligneEco").modal({
+    //   //    backdrop: "static",
+    //   //     keyboard: false
+    //   //  });
+    //   alert('ok')
 
     //      }
 
     //     else{
 
-    //      return console.log('lol....lega')
-
+    //        alert('ok')
     //     }
 
     //     }else{

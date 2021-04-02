@@ -153,70 +153,28 @@
           {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
         </p> -->
 
-      <table
-        class="table table-bordered table-striped"
-        style="margin-left: 5px; margin-right: 5px"
-      >
-        <thead style="background-color: #87ceeb">
+     <div class="widget-content nopadding" style="margin: 25px">
+      <table class="table table-bordered">
+        <thead>
           <tr>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Activité/Bailleurs
-            </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Budget Actuel
-            </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                color: #000;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;"> Activité/Bailleurs</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Budget Actuel</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">
               Montant Exécuté
             </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Taux(%)
-            </th>
-            <th
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                background-color: #87ceeb;
-              "
-            >
-              Disponible
-            </th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Taux(%)</th>
+            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Disponible</th>
           </tr>
         </thead>
         <tbody>
-            <tr>
+
+
+        <tr>
             <td style="font-weight: bold; font-size:18px;"> {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</td>
-            <td style="font-weight: bold; font-size:18px;"> {{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
-            <td style="font-weight: bold; font-size:18px;">{{ MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
+            <td style="font-weight: bold; font-size:18px;"> {{ formatageSommeSansFCFA(
+                  parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
+            <td style="font-weight: bold; font-size:18px;">{{ formatageSommeSansFCFA(
+                  parseFloat(MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
             <td style="font-weight: bold; font-size:18px;">
               {{
                 (
@@ -227,11 +185,22 @@
               }}
             </td>
            
-            <td style="font-weight: bold; font-size:18px;">{{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
-              MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}
+            <td style="font-weight: bold; font-size:18px;">{{formatageSommeSansFCFA(
+                  parseFloat( MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
+              MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))}}
               </td>
           </tr>
-          <tr
+
+
+
+
+
+
+
+
+
+        
+           <tr
             class="odd gradeX"
             v-for="ListepaimentBailleur in ListepaimentBailleurs(GroupeOrdrePaiementByActivit[0].activite_id)" :key="ListepaimentBailleur.id"
             
@@ -243,7 +212,7 @@
                 "Non renseigné"
               }}
             </td>
-            <td  style="widht:25px;">
+            <td  style="widht:25px;font-weight: bold;">
               {{
                 formatageSommeSansFCFA(
                   parseFloat(
@@ -253,7 +222,7 @@
               }} 
             </td>
 
-            <td style="font-size: 14px">
+            <td style="font-size: 14px;font-weight: bold;">
             
                {{
                 formatageSommeSansFCFA(
@@ -263,7 +232,7 @@
                 ) || "Non renseigné"
               }} 
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px;font-weight: bold;">
                {{
                 (
                   ((MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
@@ -273,39 +242,18 @@
                 ).toFixed(2) || "Non renseigné"
               }}
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px;font-weight: bold;">
                {{
-                MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
-                  MontantBudgetExecuté1Bailleur(ListepaimentBailleur.source_financement_id) ||
+               formatageSommeSansFCFA(
+                  parseFloat( MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
+                  MontantBudgetExecuté1Bailleur(ListepaimentBailleur.source_financement_id))) ||
                 "Non renseigné"
               }} 
             </td>
           </tr>
         </tbody>
-
-        <!-- <tfoot>
-          <tr>
-            <td style="font-weight: bold; font-size:18px;"> TOTAL:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</td>
-            <td style="font-weight: bold; font-size:18px;"> {{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
-            <td style="font-weight: bold; font-size:18px;">{{ MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
-            <td style="font-weight: bold; font-size:18px;">
-              {{
-                (
-                  ((MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
-                    MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)) /
-                    MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)) *
-                  100).toFixed(2) || "Non renseigné"
-              }}
-            </td>
-           
-            <td style="font-weight: bold; font-size:18px;">{{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
-              MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}
-              </td>
-          </tr>
-          <br/>
-          <br/>
-        </tfoot> -->
       </table>
+    </div>
     </div>
     </div>
   </div>
