@@ -90,10 +90,10 @@
                 PPM
             </router-link>
           </li>
-     <li> 
+     <!-- <li> 
             <router-link :to="{name: 'ajouterMarcheHorSib1'}" tag="a">
 TEST            </router-link>
-          </li>
+          </li> -->
     </ul>
   </div>
 </template>
