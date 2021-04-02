@@ -370,8 +370,14 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
                 isActive: false,
                 tileProviders: [
                     {
-                        name: 'Plan',
+                        name: 'Plan A',
                         visible: true,
+                        attribution: '',
+                        url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+                    },
+                    {
+                        name: 'Plan',
+                        visible: false,
                         attribution:
                             '',
                         url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
