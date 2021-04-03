@@ -1,4 +1,6 @@
 import axios from '../../../../request/bienService'
+
+import urlFile from '../../../../request/serviceImage'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall = require('housecall')
@@ -4544,14 +4546,14 @@ export function getGestionModules({ commit }) {
 
 
 export function getImageMarche({ commit }) {
-  queue.push(() => axios.get('/liste_image_marche').then((response) => {
+  queue.push(() => urlFile.get('/liste_image_marche').then((response) => {
     commit('GET_IMAGE_MARCHE', response.data)
 
   }).catch(error => console.log(error)))
 }
 
 export function ajouterImageMarche({ commit }, formData) {
-  asyncLoading(axios.post('/image_marche', formData)).then(response => {
+  asyncLoading(urlFile.post('/image_marche', formData)).then(response => {
     if (response.status == 201) {
       // console.log(response.data)
       commit('AJOUTER_IMAGE_MARCHE', response.data)
@@ -4576,7 +4578,7 @@ export function supprimerImageMarche({ commit }, id) {
     .then(dialog => {
       commit('DELETE_IMAGE_MARCHE', id)
       // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/image_marche/' + id).then(() => dialog.close())
+      urlFile.delete('/image_marche/' + id).then(() => dialog.close())
     })
 
 }

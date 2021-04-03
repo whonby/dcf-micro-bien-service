@@ -524,7 +524,7 @@ export default {
           if (id != null && id != "") {
             return this.GroupeOrdrePaiementByLigneEconomique.filter(
               (qtreel) =>
-                qtreel.activite_id == id
+                qtreel[0].activite_id == id
             );
           }
         };
@@ -663,6 +663,7 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+    
 
     genererEnPdf() {
       this.$htmlToPaper("printpdf");

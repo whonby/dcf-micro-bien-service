@@ -151,10 +151,8 @@
           {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
         </p>
 
-      <table
-        class="table table-bordered table-striped"
-        style="margin-left: 5px; margin-right: 5px"
-      >
+      <div class="widget-content nopadding" style="margin: 25px">
+      <table class="table table-bordered">
         <thead style="background-color: #87ceeb">
           <tr>
             <th
