@@ -110,7 +110,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULAVIE PAR BAILLEUR ET ACTIVITE
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
@@ -125,7 +125,8 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR DU
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULAVIE PAR BAILLEUR ET ACTIVITE
+        DU
 
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
@@ -151,8 +152,8 @@
           {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
         </p> -->
 
-       <div class="widget-content nopadding" style="margin: 25px">
-      <table class="table table-bordered">
+        <div class="widget-content nopadding" style="margin: 25px">
+          <table class="table table-bordered">
             <thead>
               <tr>
                 <th
@@ -162,7 +163,7 @@
                     background-color: #87ceeb;
                   "
                 >
-                  Activité/Bailleurs
+                  Bailleurs/Activité
                 </th>
                 <th
                   style="
@@ -183,17 +184,17 @@
                   Montant Exécuté
                 </th>
 
-                  <th
-                style="
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #87ceeb;
-                "
-              >
-                Montant Provisoire
-              </th>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #000;
+                    text-align: center;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Montant Provisoire
+                </th>
                 <th
                   style="
                     font-size: 14px;
@@ -218,7 +219,9 @@
               <tr>
                 <td style="font-weight: bold; font-size: 18px">
                   {{
-                    LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
+                    libelleBailleur(
+                      GroupeOrdrePaiementByActivit[0].source_financement_id
+                    )
                   }}
                 </td>
                 <td style="font-weight: bold; font-size: 18px">
@@ -226,7 +229,7 @@
                     formatageSommeSansFCFA(
                       parseFloat(
                         MontantBudgetActuel(
-                          GroupeOrdrePaiementByActivit[0].activite_id
+                          GroupeOrdrePaiementByActivit[0].source_financement_id
                         )
                       )
                     )
@@ -237,32 +240,35 @@
                     formatageSommeSansFCFA(
                       parseFloat(
                         MontantBudgetExecuté(
-                          GroupeOrdrePaiementByActivit[0].activite_id
+                          GroupeOrdrePaiementByActivit[0].source_financement_id
                         )
                       )
                     )
                   }}
                 </td>
 
-                 <td style="font-weight: bold; font-size: 18px">
-                {{
-                 formatageSommeSansFCFA(
-                  parseFloat( MontantBudgetExecutéProvisoire(
-                    GroupeOrdrePaiementByActivit[0].activite_id
-                  )))
-                }}
-              </td>
+                <td style="font-weight: bold; font-size: 18px">
+                  {{
+                    formatageSommeSansFCFA(
+                      parseFloat(
+                        MontantBudgetExecutéProvisoire(
+                          GroupeOrdrePaiementByActivit[0].source_financement_id
+                        )
+                      )
+                    )
+                  }}
+                </td>
                 <td style="font-weight: bold; font-size: 18px">
                   {{
                     (
                       ((MontantBudgetActuel(
-                        GroupeOrdrePaiementByActivit[0].activite_id
+                        GroupeOrdrePaiementByActivit[0].source_financement_id
                       ) -
                         MontantBudgetExecuté(
-                          GroupeOrdrePaiementByActivit[0].activite_id
+                          GroupeOrdrePaiementByActivit[0].source_financement_id
                         )) /
                         MontantBudgetActuel(
-                          GroupeOrdrePaiementByActivit[0].activite_id
+                          GroupeOrdrePaiementByActivit[0].source_financement_id
                         )) *
                       100
                     ).toFixed(2) || "Non renseigné"
@@ -274,10 +280,11 @@
                     formatageSommeSansFCFA(
                       parseFloat(
                         MontantBudgetActuel(
-                          GroupeOrdrePaiementByActivit[0].activite_id
+                          GroupeOrdrePaiementByActivit[0].source_financement_id
                         ) -
                           MontantBudgetExecuté(
-                            GroupeOrdrePaiementByActivit[0].activite_id
+                            GroupeOrdrePaiementByActivit[0]
+                              .source_financement_id
                           )
                       )
                     )
@@ -288,24 +295,18 @@
               <tr
                 class="odd gradeX"
                 v-for="ListepaimentBailleur in arrayExerciceDecompte(
-                  GroupeOrdrePaiementByActivit[0].activite_id
+                  GroupeOrdrePaiementByActivit[0].source_financement_id
                 )"
                 :key="ListepaimentBailleur.id"
               >
                 <td style="font-size: 14px">
-                  {{
-                    libelleLigneEconomique(
-                      ListepaimentBailleur
-                    ) || "Non renseigné"
-                  }}
+                  {{ LibelleActivite(ListepaimentBailleur) || "Non renseigné" }}
                 </td>
                 <td style="widht: 25px; font-weight: bold">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
-                        MontantBudgetActuelBailleur(
-                          ListepaimentBailleur
-                        )
+                        MontantBudgetActuelBailleur(ListepaimentBailleur)
                       )
                     )
                   }}
@@ -315,36 +316,29 @@
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
-                        MontantBudgetExecuté1Bailleur(
+                        MontantBudgetExecuté1Bailleur(ListepaimentBailleur)
+                      )
+                    ) || "Non renseigné"
+                  }}
+                </td>
+
+                <td style="font-size: 14px">
+                  {{
+                    formatageSommeSansFCFA(
+                      parseFloat(
+                        MontantBudgetExecutéProvisoireBailleur(
                           ListepaimentBailleur
                         )
                       )
                     ) || "Non renseigné"
                   }}
                 </td>
-
-                 <td style="font-size: 14px">
-            
-               {{
-                formatageSommeSansFCFA(
-                  parseFloat(
-                    MontantBudgetExecutéProvisoireBailleur(ListepaimentBailleur)
-                  )
-                ) || "Non renseigné"
-              }} 
-            </td>
                 <td style="font-size: 14px; font-weight: bold">
                   {{
                     (
-                      ((MontantBudgetActuelBailleur(
-                        ListepaimentBailleur
-                      ) -
-                        MontantBudgetExecuté1Bailleur(
-                          ListepaimentBailleur
-                        )) /
-                        MontantBudgetActuelBailleur(
-                          ListepaimentBailleur
-                        )) *
+                      ((MontantBudgetActuelBailleur(ListepaimentBailleur) -
+                        MontantBudgetExecuté1Bailleur(ListepaimentBailleur)) /
+                        MontantBudgetActuelBailleur(ListepaimentBailleur)) *
                       100
                     ).toFixed(2) || "Non renseigné"
                   }}
@@ -353,12 +347,8 @@
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
-                        MontantBudgetActuelBailleur(
-                          ListepaimentBailleur
-                        ) -
-                          MontantBudgetExecuté1Bailleur(
-                            ListepaimentBailleur
-                          )
+                        MontantBudgetActuelBailleur(ListepaimentBailleur) -
+                          MontantBudgetExecuté1Bailleur(ListepaimentBailleur)
                       )
                     ) || "Non renseigné"
                   }}
@@ -518,6 +508,7 @@ export default {
       "getterProceVerballe",
       "GroupeOrdrePaiementByActivite",
       "GroupeOrdrePaiementByLigneEconomique",
+      "GroupeOrdrePaiementByBailleur",
     ]),
     ...mapGetters("gestionMarche", [
       "groupeVille",
@@ -567,24 +558,25 @@ export default {
 
     ListeGroupByActivite3() {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
-        return this.GroupeOrdrePaiementByActivite.filter(
+        return this.GroupeOrdrePaiementByBailleur.filter(
           (qtreel) =>
-            qtreel[0].decision_cf == 8 &&
-            qtreel[0].diff_op == null &&
-            qtreel[0].decision_cf == 9 &&
-            //  qtreel[0].exercice == this.anneeAmort &&
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+            (qtreel[0].decision_cf == 8 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin) ||
+            (qtreel[0].decision_cf == 9 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin)
         );
       } else {
-        return this.GroupeOrdrePaiementByActivite;
-        // .filter(
-        //   (qtreel) =>
-        //     (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null
-        //      // && qtreel[0].exercice == this.anneeAmort
-        //      )
-
-        // );
+        return this.GroupeOrdrePaiementByBailleur.filter(
+          (qtreel) =>
+            (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null) ||
+            //&& qtreel[0].exercice == this.anneeAmort
+            (qtreel[0].decision_cf == 9 && qtreel[0].diff_op == null)
+            // && qtreel[0].exercice == this.anneeAmort
+        );
       }
     },
 
@@ -649,7 +641,7 @@ export default {
           return this.budgetEclate
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id &&
+                qtreel.source_financement_id == id &&
                 qtreel.annebudgetaire == this.anneeAmort
             )
             .reduce(
@@ -668,7 +660,7 @@ export default {
         if (id != null && id != "") {
           return this.budgetEclate
             .filter(
-              (qtreel) => qtreel.source_financement_id == id
+              (qtreel) => qtreel.activite_id == id
               // && qtreel.annebudgetaire == this.anneeAmort
             )
             .reduce(
@@ -682,49 +674,7 @@ export default {
       };
     },
 
-      MontantBudgetExecutéProvisoire() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-                qtreel.activite_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement == 2
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-
-    MontantBudgetExecuté() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) => qtreel.activite_id == id
-              // && qtreel.annebudgetaire ==this.anneeAmort
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-
-     MontantBudgetExecutéProvisoireBailleur() {
+    MontantBudgetExecutéProvisoire() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
@@ -746,13 +696,14 @@ export default {
       };
     },
 
-
-    MontantBudgetExecuté1Bailleur() {
+    MontantBudgetExecuté() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
-              (qtreel) => qtreel.source_financement_id == id
+              (qtreel) =>
+                qtreel.source_financement_id == id &&
+                qtreel.type_ordre_paiement != 2
               // && qtreel.annebudgetaire ==this.anneeAmort
             )
             .reduce(
@@ -767,12 +718,55 @@ export default {
       };
     },
 
+    MontantBudgetExecutéProvisoireBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                // && qtreel.annebudgetaire ==this.anneeAmort
+                qtreel.type_ordre_paiement == 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+    MontantBudgetExecuté1Bailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                // && qtreel.annebudgetaire ==this.anneeAmort
+                qtreel.type_ordre_paiement != 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
 
     listeordrepaiementstest() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement.filter(
-            (qtreel) => qtreel.activite_id == id
+            (qtreel) => qtreel.source_financement_id == id
           );
         }
       };
@@ -786,7 +780,7 @@ export default {
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.source_financement_id);
+            array_exercie.push(val.activite_id);
           });
           let unique = [...new Set(array_exercie)];
           console.log(unique);
@@ -798,7 +792,6 @@ export default {
         return [];
       };
     },
-
 
     // listeordrepaiements() {
     //   if (this.formData.date_debut != "" && this.formData.date_fin != "") {

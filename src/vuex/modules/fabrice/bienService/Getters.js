@@ -1156,6 +1156,12 @@ export const GroupeOrdrePaiementByLigneEconomique = (state, getters) =>
     return groupBy(getters.gettersgestionOrdrePaiement, "ligne_economique_id");
 };
 
+export const GroupeOrdrePaiementByBailleur = (state, getters) =>
+ {
+    
+    return groupBy(getters.gettersgestionOrdrePaiement, "source_financement_id");
+};
+
 
 
   export const GroupeOrdrePaiementByGrandeNature = (state, getters) => {
