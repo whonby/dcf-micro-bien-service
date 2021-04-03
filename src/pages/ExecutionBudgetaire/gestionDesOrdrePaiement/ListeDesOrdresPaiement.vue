@@ -6,8 +6,41 @@ listeUniteAdminPasSection
     <div class="row-fluid" v-if="affiche_filtre1" style="margin-top: -20px">
       <div class="span1"></div>
       <div class="span10" style="background-color: transparent; !important;">
-        <table class="table table-bordered table-striped">
-          <td style="width: 25%"></td>
+        
+      </div>
+    </div>
+
+
+    <div class="container-fluid">
+      <hr />
+      <div class="row-fluid">
+        <div class="span12">
+          <!-- <download-excel
+            class="btn btn-default pull-right"
+            style="cursor:pointer;"
+            :fields="json_fields"
+            title="Liste type texte"
+            :data="filtre_type_teste"
+            name="Liste type texte"
+            worksheet="Liste type texte"
+          >
+            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
+          </download-excel> -->
+
+          <div
+            style="
+              font-size: 30px;
+              text-align: center;
+              text-decoration: underline;
+              font-weight: bold;
+            "
+          >
+            <p>ORDRES DE PAIEMENTS PROJETS</p>
+          </div>
+
+          <br />
+          <table class="table table-bordered table-striped">
+          <td style="width: 15%"></td>
           <td style="width: 0%; font-weight: bolder; color: #000">
             <div align="right" style="cursor: pointer">
               <button
@@ -47,116 +80,6 @@ listeUniteAdminPasSection
           </td>
           <td style="width: 25%"></td>
         </table>
-      </div>
-    </div>
-
-    <div class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
-      <div class="span1"></div>
-      <div class="span10" style="background-color: transparent; !important;">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td colspan="">
-                <br />
-                <!-- <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
-    
-        </div>  -->
-
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="uniteAdministratives"
-                  v-model="uniteAdministrative_id"
-                  option-value="id"
-                  option-text="libelle"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
-                >
-                </model-list-select>
-              </td>
-              <td>
-                <br />
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >TYPE ORDRE PAIEMENT<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="options2"
-                  v-model="typeop_id"
-                  option-value="id"
-                  option-text="libelle"
-                >
-                </model-list-select>
-              </td>
-              <td>
-                <br />
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >NUMERO ORDRE PAIEMENT<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="listeUniteAdminPasSection"
-                  v-model="NumeroOp"
-                  option-value="numero_ordre_paiement"
-                  option-text="numero_ordre_paiement"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
-                >
-                </model-list-select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste type texte"
-            :data="filtre_type_teste"
-            name="Liste type texte"
-            worksheet="Liste type texte"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
-
-          <div
-            style="
-              font-size: 30px;
-              text-align: center;
-              text-decoration: underline;
-              font-weight: bold;
-            "
-          >
-            <p>ORDRES DE PAIEMENTS PROJETS</p>
-          </div>
-
-          <br />
-          <table class="table table-striped">
-            <tr>
-              <td style="width: 86%"></td>
-              <td>
-                <div align="right" style="cursor: pointer">
-                  <button
-                    class="btn btn-success"
-                    @click.prevent="AfficheBoutonAjouter()"
-                    style="font-weight: bolder; color: #fff; font-size: 25px"
-                  >
-                    <i class="icon icon-plus">AJOUTER ORDRE PAIEMENT</i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </table>
           <table class="table table-bordered table-striped">
             <td style="width: 10%"></td>
             <td style="width: 0%; font-weight: bolder; color: #000">
@@ -741,6 +664,69 @@ listeUniteAdminPasSection
             </td>
             <td style="width: 10%"></td>
           </table>
+              <div class="row-fluid"  style="margin-top: -20px">
+      <div class="span1"></div>
+      <div class="span10" style="background-color: transparent; !important;">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td colspan="">
+                <br />
+                <!-- <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
+    
+        </div>  -->
+
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdministrative_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+              </td>
+              <td>
+                <br />
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >TYPE ORDRE PAIEMENT<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="options2"
+                  v-model="typeop_id"
+                  option-value="id"
+                  option-text="libelle"
+                >
+                </model-list-select>
+              </td>
+              <td>
+                <br />
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >NUMERO ORDRE PAIEMENT<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="listeUniteAdminPasSection"
+                  v-model="NumeroOp"
+                  option-value="numero_ordre_paiement"
+                  option-text="numero_ordre_paiement"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -1613,12 +1599,12 @@ listeUniteAdminPasSection
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-    <fab
+    <!-- <fab
       :actions="fabActions"
       main-icon="apps"
       @searchMe="filter"
       bg-color="green"
-    ></fab>
+    ></fab> -->
     <button
       style="display: none"
       v-shortkey.once="['ctrl', 'f']"

@@ -5,22 +5,18 @@ uniteAdministratives
 
     <div >
         <br>
-        <br>
-        <br>
-        <div class="" align="right">
-                   <!-- <router-link :to="{name:'AjoutPersonnelSansContrat'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  Personnel Ua Sans Contrat
-
-                   </router-link>  -->
+        
+        <!-- <div class="" align="right">
+                   
 <router-link :to="{name:'AjouterDecomptePrecedant'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">AJOUTER DECOMPTE ANTERIEUR
 
                    </router-link> 
-                   </div>
-                   <br>
-                   <br>
+                   </div> -->
+                  
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                         <th style="width:90%">UNITE D'ADMINISTRATIVE</th>
+                         <th style="width:90%">{{detailOp.uniteadministrative_id}}ANNEE DECOMPTE{{detailOp.id}}</th>
                         <th colspan="2">ACTION</th>
                         
                     </tr>
@@ -28,16 +24,16 @@ uniteAdministratives
                     <tbody>
                         <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in groupeParUa"
+                    v-for="BesoinImmo in ListeDecompteParUniteAdministrative(detailOp.id)"
                     :key="BesoinImmo[0].id"
                   >
                   <td style="font-size:25px"
                    
-                    >{{libelleUniteAdministrative(BesoinImmo[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                    >{{BesoinImmo[0].exercicebudget || 'Non renseigné'}}</td>
                  
                      <td>
                        <router-link
-                        :to="{name : 'GroupeAnneDecompte', params: {id:BesoinImmo[0].uniteadministrative_id}}"
+                        :to="{name : 'ListeDecompteAnterieur', params: {id:BesoinImmo[0].uniteadministrative_id}}"
                         class="btn btn-success"
                         
                       >
@@ -145,11 +141,12 @@ quantite: {
       search: ""
     };
   },
-// created() {
-//     this.formData = this.filtre_Stock.find(
-//       Stock => Stock.id == this.$route.params.id
-//     )
-// },
+ created() {
+    this.marcheid = this.$route.params.id;
+    this.detailOp = this.decomptefactures.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
   computed: {
     ...mapGetters("SuiviImmobilisation", [
     
@@ -165,7 +162,7 @@ quantite: {
      "ficheArticle"
     ]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
-    ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
+    ...mapGetters("uniteadministrative", ["decomptefactures","groupeParAnneeDecompte","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
    libelleUniteAdministrative() {
@@ -180,7 +177,14 @@ quantite: {
         }
       };
     },
-    
+    ListeDecompteParUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           return this.groupeParAnneeDecompte.filter(qtreel => qtreel[0].uniteadministrative_id == id && qtreel[0].diff_decompte == 1);
+
+        }
+      };
+    },
 
 
    groupeParUa() {

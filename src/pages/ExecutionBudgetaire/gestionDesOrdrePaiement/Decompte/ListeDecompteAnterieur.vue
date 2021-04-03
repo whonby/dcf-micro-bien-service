@@ -40,7 +40,7 @@ wwwwwwwwwwww
 <div id="tab100" class="tab-pane ">
   azertrt
 </div> -->
-<div id="tab10045" class="tab-pane ">
+<div id="tab10045" class="tab-pane active">
   <!-- <tr>
     <td>
                           <label
@@ -76,10 +76,11 @@ wwwwwwwwwwww
                           </model-list-select>
                           
                         </td>
+
   </tr> -->
 <div class="widget-title">
             <ul class="nav nav-tabs">
-               <li v-for="item in arrayExerciceDecompte(detailOp.uniteadministrative_id)" :key="item"><a data-toggle="tab" :href="'#'+item">Exercice {{item}}</a></li>
+               <li v-for="item in arrayExerciceDecompte(detailOp.uniteadministrative_id)" :key="item" class=""><a data-toggle="tab" :href="'#'+item">Exercice {{item}}</a></li>
 
             </ul>
 

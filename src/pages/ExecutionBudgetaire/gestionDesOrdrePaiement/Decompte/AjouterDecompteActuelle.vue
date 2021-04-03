@@ -32,7 +32,7 @@
          <table class="table table-bordered table-striped">
            <tr>
               <td>
-
+Montantapresretenues
               <div class="control-group">
               <label class="control-label">N°décompte</label>
                 <div class="controls">
@@ -613,7 +613,7 @@ retenu_penalite:0
       
 },
   computed: {
-  ...mapGetters("bienService", ["gettersgestionOrdrePaiement","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+  ...mapGetters("bienService", ["avenants","gettersgestionOrdrePaiement","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -655,7 +655,23 @@ retenu_penalite:0
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
-    
+     MontantDeBase(){
+return parseFloat(this.AfficheMontantMarche(this.formData.marche_id))+parseFloat(this.MontantAvenant(this.formData.marche_id))
+  },
+  MontantAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0);
+
+     
+      }
+      }
+  },
 MontantTVAFacture() {
       return id => {
         if (id != null && id != "") {

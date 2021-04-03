@@ -4306,43 +4306,61 @@ export function modificationProceVerbalOffre2({ commit }, element_modifie, confi
 
 
 
-export function getAvenant({ commit }) {
-  queue.push(() => axios.get('/avenant').then((response) => {
-    commit('GET_ALL_AVENANT', response.data)
-
-  }).catch(error => console.log(error)))
-}
-
-// action pour ajouter bailleur
-export function ajouterAvenant({ commit }, formData) {
-  asyncLoading(axios.post('/avenant', formData)).then(response => {
-    if (response.status == 201) {
-      // console.log(response.data)
-      commit('AJOUTER_AVENANT', response.data)
-
-      this.$app.$notify({
-        title: 'success ',
-        text: 'Enregistrement effectué !',
-        type: "success"
-      })
-    }
-
-  }).catch(error => console.log(error))
-}
 
 // action pour modifier bailleur
 
 
-export function modifierAvenant({ commit }, element_modifie) {
-  asyncLoading(axios.put('/avenant', element_modifie)).then(response => {
-    commit('MODIFIER_AVENANT', response.data)
-    this.$app.$notify({
-      title: 'success ',
-      text: 'Modification effectué !',
-      type: "success"
+
+
+export function ajouterAvenant({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/avenant", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_AVENANT", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
     })
-  }).catch(error => console.log(error))
 }
+
+
+export function modifierAvenant({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/avenant/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_AVENANT", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+
+
+
+
+
+
+
+
+
+
 // supprimer categorie mision
 export function supprimerAvenant({ commit }, id) {
   this.$app.$dialog
@@ -4355,6 +4373,13 @@ export function supprimerAvenant({ commit }, id) {
 
 }
 
+
+export function getAvenant({ commit }) {
+  queue.push(() => axios.get('/avenant').then((response) => {
+    commit('GET_ALL_AVENANT', response.data)
+
+  }).catch(error => console.log(error)))
+}
 
 
 

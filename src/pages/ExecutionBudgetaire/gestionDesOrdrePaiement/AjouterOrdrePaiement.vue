@@ -105,7 +105,7 @@ date_interim
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Section{{idSection(libelleLigneEconomiqueParent(formData.activite_id))}}
+                            <label class="control-label">Section
                                       
                                        
                                      
@@ -1096,7 +1096,7 @@ date_interim
                     readonly
                   /> -->
                               <money
-                                :value="MontantReelMarche(formData2.marche_id)"
+                                :value="MontantDeBase"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -2695,6 +2695,7 @@ export default {
     ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters("bienService", [
+      "avenants",
       "gettersgestionOrdrePaiement",
       "gettersDossierAutreDepense",
       "gettersDossierMandat",
@@ -2777,8 +2778,23 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
+ MontantDeBase(){
+return parseFloat(this.MontantReelMarche(this.formData2.marche_id))+parseFloat(this.MontantAvenant(this.formData2.marche_id))
+  },
+MontantAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0);
 
-
+     
+      }
+      }
+  },
 
     RecupdateActeEffetFinancier(){
       let vm =this;

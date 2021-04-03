@@ -1079,7 +1079,7 @@ idTypeFinancement() {
     idGrandeNature() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.gdenature_id

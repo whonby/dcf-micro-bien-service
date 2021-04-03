@@ -1,7 +1,7 @@
 import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
 import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
-import ajouterMarcheHorSib1 from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib1.vue";
+ import ajouterMarcheHor from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib1.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
 import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarcheHorsSib.vue";
 import marche_hors_sib from "../../pages/Hors_sib/biens_service/marche_hors_sib.vue";
@@ -47,6 +47,11 @@ import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHors
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
+    {
+        path:"/ajouterMarcheHor",
+        name:"ajouterMarcheHor",
+        component:ajouterMarcheHor
+    },
     {
         path:"/groupeMarcheParUa",
         name:"groupeMarcheParUa",

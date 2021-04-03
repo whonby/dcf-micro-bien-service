@@ -199,7 +199,7 @@
                           >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
                           <td style="text-align:center;"
                               @dblclick="afficherModalModifierTypeTexte1(type.id)"
-                          >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
+                          >{{formatageSomme(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
                           <td style="text-align:center;"
                               @dblclick="afficherModalModifierTypeTexte1(type.id)"
                           >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
