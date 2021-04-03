@@ -369,6 +369,12 @@ import VGeosearch from 'vue2-leaflet-geosearch';
                 isActive: false,
                 tileProviders: [
                     {
+                        name: 'Plan A',
+                        visible: true,
+                        attribution: '',
+                        url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+                    },
+                    {
                         name: 'Plan',
                         visible: true,
                         attribution:
@@ -387,7 +393,6 @@ import VGeosearch from 'vue2-leaflet-geosearch';
                         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
                         attribution: '',
                     },
-
                     {
                         name: 'National Geo World Map',
                         visible: false,

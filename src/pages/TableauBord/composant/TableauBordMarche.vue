@@ -536,7 +536,7 @@
                 v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
-                  <p><b>En exécution</b></p>
+                  <p><b>En exécution dans délai</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(2) }} Marché(s) /
@@ -725,7 +725,7 @@
               <h3>Projet de marchés {{nomUniteAdmiSelection(unite_administrative_id)}} {{nomTypeMarche(type_marche)}} {{nomInfrastructure(infrastructure)}} {{nomRegions(region)}}</h3>
             </div>
 
-            <div class="span6" style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
+            <div class="span6" style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;" >
               <apexchart
                       type="pie"
                       width="495"
@@ -1095,7 +1095,7 @@ export default {
           type: "pie",
         },
         labels: [
-          "En Execution",
+          "En Execution dans délai",
           "Execution Hors delais",
           "Achévé dans le delais.",
           "Achévé Hors delai",
@@ -2587,10 +2587,10 @@ export default {
             .filter((item) => item.attribue == status)
             .forEach(function (val) {
               let initeVal = 0;
-              let montant = vm.opDejaVie
+              let montant = vm.acteEffetFinanciers
                 .filter((item) => item.marche_id == val.id)
                 .reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.montant_ordre_paiement);
+                  return total + parseFloat(currentValue.montant_act);
                 }, initeVal);
               montant_execute = parseFloat(montant_execute) + parseFloat(montant);
             });
@@ -2619,10 +2619,10 @@ export default {
 
         this.listeMarchStatueExecuteAcheve.forEach(function (val) {
           let initeVal = 0;
-          let montant = vm.opDejaVie
+          let montant = vm.acteEffetFinanciers
             .filter((item) => item.marche_id == val.id)
             .reduce(function (total, currentValue) {
-              return total + parseFloat(currentValue.montant_ordre_paiement);
+              return total + parseFloat(currentValue.montant_act);
             }, initeVal);
           montant_execute = parseFloat(montant_execute) + parseFloat(montant);
         });
