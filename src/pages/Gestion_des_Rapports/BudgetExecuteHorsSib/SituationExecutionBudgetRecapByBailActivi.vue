@@ -224,7 +224,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -235,7 +235,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -247,7 +247,7 @@
                   }}
                 </td>
 
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -258,7 +258,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; text-align:right">
                   {{
                     (
                       ((MontantBudgetActuel(
@@ -275,7 +275,7 @@
                   }}
                 </td>
 
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -302,7 +302,7 @@
                 <td style="font-size: 14px">
                   {{ LibelleActivite(ListepaimentBailleur) || "Non renseigné" }}
                 </td>
-                <td style="widht: 25px; font-weight: bold">
+                <td style="widht: 25px; font-weight: bold; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -312,7 +312,7 @@
                   }}
                 </td>
 
-                <td style="font-size: 14px; font-weight: bold">
+                <td style="font-size: 14px; font-weight: bold; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -322,7 +322,7 @@
                   }}
                 </td>
 
-                <td style="font-size: 14px">
+                <td style="font-size: 14px; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -333,7 +333,7 @@
                     ) || "Non renseigné"
                   }}
                 </td>
-                <td style="font-size: 14px; font-weight: bold">
+                <td style="font-size: 14px; font-weight: bold; text-align:right">
                   {{
                     (
                       ((MontantBudgetActuelBailleur(ListepaimentBailleur) -
@@ -343,7 +343,7 @@
                     ).toFixed(2) || "Non renseigné"
                   }}
                 </td>
-                <td style="font-size: 14px; font-weight: bold">
+                <td style="font-size: 14px; font-weight: bold; text-align:right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -563,7 +563,8 @@ export default {
             (qtreel[0].decision_cf == 8 &&
               qtreel[0].diff_op == null &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
-              qtreel[0].date_decision_cf <= this.formData.date_fin) ||
+              qtreel[0].date_decision_cf <= this.formData.date_fin) 
+              ||
             (qtreel[0].decision_cf == 9 &&
               qtreel[0].diff_op == null &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&

@@ -235,7 +235,7 @@
               <td style="font-size: 14px">
                 {{ LibelleActivite(ListepaimentBailleur) || "Non renseigné" }}
               </td>
-              <td>
+              <td  style="text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -245,7 +245,7 @@
                 }}
               </td>
 
-              <td style="font-size: 14px">
+              <td style="font-size: 14px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -255,7 +255,7 @@
                 }}
               </td>
 
-              <td style="font-size: 14px">
+              <td style="font-size: 14px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -266,7 +266,7 @@
                   ) || "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px">
+              <td style="font-size: 14px; text-align:right">
                 {{
                   (
                     ((MontantBudgetActuelActivite(ListepaimentBailleur) -
@@ -276,7 +276,7 @@
                   ).toFixed(2) || "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px">
+              <td style="font-size: 14px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -298,7 +298,7 @@
                   )
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -309,7 +309,7 @@
                   )
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -321,7 +321,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -332,7 +332,7 @@
                   )
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align:right">
                 {{
                   (
                     ((MontantBudgetActuel(
@@ -349,7 +349,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -578,14 +578,16 @@ export default {
             qtreel[0].date_decision_cf <= this.formData.date_fin
         );
       } else {
-        return this.GroupeOrdrePaiementByBailleur;
-        // .filter(
-        //   (qtreel) =>
-        //     (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null
-        //      // && qtreel[0].exercice == this.anneeAmort
-        //      )
+        return this.GroupeOrdrePaiementByBailleur.filter(
+          (qtreel) => (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null
+             // && qtreel[0].exercice == this.anneeAmort
+              )
+              ||
+              (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null
+             // && qtreel[0].exercice == this.anneeAmort
+              )
 
-        // );
+         );
       }
     },
 
