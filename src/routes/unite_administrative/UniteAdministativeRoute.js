@@ -58,12 +58,23 @@ import listeSousBudgetParUa from "../../pages/ExecutionBudgetaire/BudgetEclateHo
 import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/voirDetailBudget.vue"
 import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
 import BudgetEclateRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BudgetEclateRegie.vue"
-import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
+import groupeUaDecompte from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/groupeUaDecompte.vue"
 
-
+import ListeDecompteAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/ListeDecompteAnterieur.vue"
 import ListeBailleurUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeBailleurUniteAdministrative.vue"
 import ListeUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeUniteAdministrative.vue"
+import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/ListeDecompteAnterieur/:id",
+    name: "ListeDecompteAnterieur",
+    component: ListeDecompteAnterieur
+},
+  {
+    path: "/groupeUaDecompte",
+    name: "groupeUaDecompte",
+    component: groupeUaDecompte
+},
   {
     path: "/listeDesUaRegie",
     name: "listeDesUaRegie",

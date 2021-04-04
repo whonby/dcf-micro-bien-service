@@ -1,6 +1,65 @@
 reference_marche
 <template>
   <div>
+    <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
+        <br>
+        <table class="table table-bordered table-striped">
+           <thead>
+                  <tr>
+                     <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
+                    <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Nombre Marche Total</th>
+                     <th style="text-align:center;font-size:20px;color:#000">Nombre Marche en Planification</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Nombre Marche en contratualisation</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Nombre Marche de Execution</th>
+                    
+                   
+                  </tr>
+                </thead>
+                 <tbody>
+                    <tr>
+                       <!-- <td style="text-align:center;font-size:20px;color:#000">
+{{anneeAmort}}
+            </td> -->
+            <td style="text-align:center;font-size:20px;color:#000">
+{{libelleUA(detail_marche.unite_administrative_id)}}
+            </td>
+            <td>
+<button  class="btn  btn-info tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaTotal(detail_marche.unite_administrative_id)}}</span>
+                      
+                      </button>
+            </td>
+            <td>
+<button  class="btn  btn-danger tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaPlanifier(detail_marche.unite_administrative_id)}}</span>
+                      
+                      </button>
+            </td>
+             <td>
+<button  class="btn  btn-success tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaContratualisation(detail_marche.unite_administrative_id)}}</span>
+                      
+                      </button>
+            </td>
+             <td>
+<button  class="btn  btn-warning tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaExecute(detail_marche.unite_administrative_id)}}</span>
+                      
+                      </button>
+            </td>
+            
+          </tr>
+                 </tbody>
+         
+        </table>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -14,7 +73,7 @@ reference_marche
               <h5>
                 Liste des March&eacute;s hors ppm
                 <span class="badge badge-success">
-                  {{ marcheHorSibFiltre.length }}</span
+                  </span
                 >
               </h5>
               <div align="right">
@@ -37,16 +96,7 @@ reference_marche
               </select>
               Entrer
             </div>
-            <div class="" align="right">
-              <router-link
-                :to="{ name: 'ajouter_hors_sib' }"
-                tag="a"
-                data-toggle="modal"
-                class="btn btn-success"
-                align="rigth"
-                >Ajouter
-              </router-link>
-            </div>
+            
             <br />
 
             <div class="widget-content nopadding">
@@ -67,7 +117,7 @@ reference_marche
                     <th>Etat en cours</th>
                     <th title="mouvement du marché">Mouvement du marché</th>
                     <th style="">Suivi du marché</th>
-                    <th>Action</th>
+                    <th>Action45</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -388,7 +438,13 @@ export default {
       search: "",
     };
   },
-
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.marches.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+        
+},
   computed: {
     ...mapGetters("bienService", [
       "mandats",
@@ -463,13 +519,67 @@ export default {
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
 
+afficheMarcheParUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.marches.filter(
+            (qtreel) => qtreel.unite_administrative_id == id
+          );
+
+         
+        }
+      };
+    },
+afficheMarcheParUaPlanifier() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.marches.filter(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0
+          ).length;
+
+         
+        }
+      };
+    },
+     afficheMarcheParUaTotal() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.marches.filter(
+            (qtreel) => qtreel.unite_administrative_id == id
+          ).length;
+
+         
+        }
+      };
+    },
+    afficheMarcheParUaContratualisation() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.printMarcheNonAttribue.filter(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1
+          ).length;
+
+         
+        }
+      };
+    },
+    afficheMarcheParUaExecute() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.printMarcheNonAttribue.filter(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2
+          ).length;
+
+         
+        }
+      };
+    },
     marcheHorSibFiltre1() {
       const searchTerm = this.search.toLowerCase();
 
-      return this.printMarcheNonAttribue.filter((item) => {
-        return item.objet.toLowerCase().includes(searchTerm);
-        //item.reference_marche.toLowerCase().includes(searchTerm)
-        //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm)
+      return this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
+       return item.objet.toLowerCase().includes(searchTerm)
+      
       });
     },
 
@@ -618,7 +728,7 @@ export default {
       // const st = this.search.toLowerCase();
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.marcheHorSibFiltre1.filter((item) => {
+        this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
             (row) => row.unite_administrative_id == item.unite_administrative_id
           );
@@ -1404,6 +1514,9 @@ export default {
       "getMarche",
       "getActeEffetFinancier",
     ]),
+    pagePrecedent(){
+                window.history.back()
+            },
     //...mapActions("horSib", ['getMarcheHorSib']),
     modifierModalResiliation() {
       var nouvelObjet1 = {

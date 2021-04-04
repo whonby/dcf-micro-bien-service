@@ -1,4 +1,4 @@
-numero_ordre_paiement_combine
+date_interim
 <template>
   <div class="container-fluid">
     <hr />
@@ -105,7 +105,11 @@ numero_ordre_paiement_combine
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Section</label>
+                            <label class="control-label">Section{{idSection(libelleLigneEconomiqueParent(formData.activite_id))}}
+                                      
+                                       
+                                     
+                                    </label>
                             <div class="controls">
                               <input
                                 type="text"
@@ -114,7 +118,7 @@ numero_ordre_paiement_combine
                                   libelleSection(
                                     idSection(
                                       libelleLigneEconomiqueParent(
-                                        formData.ligne_economique_id
+                                        formData.activite_id
                                       )
                                     )
                                   )
@@ -138,7 +142,7 @@ numero_ordre_paiement_combine
                                   libelleProgramme(
                                     idProgramme(
                                       libelleLigneEconomiqueParent(
-                                        formData.ligne_economique_id
+                                        formData.activite_id
                                       )
                                     )
                                   )
@@ -160,7 +164,7 @@ numero_ordre_paiement_combine
                                   libelleAction(
                                     idAction(
                                       libelleLigneEconomiqueParent(
-                                        formData.ligne_economique_id
+                                        formData.activite_id
                                       )
                                     )
                                   )
@@ -334,7 +338,24 @@ numero_ordre_paiement_combine
                             style="border: 1px solid #000"
                           >
                             <option value="Marche">Marché</option>
+                             <option value="Personnel">Personnel</option>
                             <option value="Autres">Autres</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+
+                     <td>
+                       <div class="control-group">
+                        <label class="control-label">Rattacher une Personne</label>
+                        <div class="controls">
+                          <select
+                            v-model="formData.RattacherPers"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="Non">Non</option>
+                            <option value="Oui">Oui</option>
                           </select>
                         </div>
                       </div>
@@ -344,7 +365,7 @@ numero_ordre_paiement_combine
                         <label class="control-label">Interim Sur Op</label>
                         <div class="controls">
                           <select
-                            v-model="formData.interimOp"
+                            v-model="formData.imterim_op"
                             class="span"
                             style="border: 1px solid #000"
                           >
@@ -359,7 +380,7 @@ numero_ordre_paiement_combine
 
 
                 <!-- test******** -->
-                <div v-if="formData.interimOp=='Oui'">
+                <div v-if="formData.imterim_op=='Oui'">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
@@ -371,6 +392,7 @@ numero_ordre_paiement_combine
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
+                    RecupdateActeEffetFinancier
                     <div id="ENGAGEMENT" class="tab-pane active">
                       <table
                         class="table table-bordered table-striped">
@@ -381,7 +403,7 @@ numero_ordre_paiement_combine
                             <div class="controls">
                               <input
                                 type="date"
-                                 v-model="formData.DateInterimOp"
+                                 v-model="formData.date_interim"
                                 style="border: 1px solid #000"
                                 class="span"
                               />
@@ -399,7 +421,7 @@ numero_ordre_paiement_combine
                             style="border: 1px solid #000"
                             class="wide"
                             :list="getterUtilisateur"
-                            v-model="formData.user_id"
+                            v-model="formData.user_id_interim"
                             option-value="id"
                             option-text="name"
                             placeholder=""
@@ -407,7 +429,7 @@ numero_ordre_paiement_combine
                           </model-list-select>
                           <code
                             style="color: red; font-size: 12px"
-                            v-if="formData.user_id == ''"
+                            v-if="formData.user_id_interim == ''"
                             >Veuillez renseigner ce champ</code
                           >
                         </td>
@@ -418,7 +440,7 @@ numero_ordre_paiement_combine
                             <label class="control-label">Visa</label>
                             <div class="controls">
                               <input
-                               v-model="formData.VisaInterimOp"
+                               v-model="formData.visa_interim"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -447,6 +469,185 @@ numero_ordre_paiement_combine
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
                   <div id="ENGAGEMENT" class="tab-pane active">
+                    <table
+                      class="table table-bordered table-striped"
+                      v-if="formData.typedepense == 'Personnel'"
+                    >
+                   <tr>
+                        
+                        <td v-if="formData.RattacherPers=='Non'">
+                      <div class="control-group">
+                        <label class="control-label">Béneficiaire</label>
+                        <div class="controls">
+                          <select
+                            v-model="formData.auteur_perso_id"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="0"></option>
+                            <option v-for="depense in PersonnelParUA(this.formData.unite_administrative_id)" :key="depense.id" 
+               :value="depense.id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+
+                     <td v-if="formData.RattacherPers=='Oui'">
+                      <div class="control-group">
+                        <label class="control-label">Béneficiaire</label>
+                        <div class="controls">
+                          <select
+                            v-model="formData.auteur_perso_id"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="0"></option>
+                            <option v-for="depense in PersonnelRattacher(this.formData.unite_administrative_id)" :key="depense.id" 
+               :value="depense.id"> {{Personnelmatricule(depense.personne_rattacher)}} =>{{Personnelnom(depense.personne_rattacher)}} {{Personnelprenom(depense.personne_rattacher)}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">Banque</label>
+
+                            <div class="controls">
+                              <input
+                                :value="libelleBanque(Recup_Banque(formData.auteur_perso_id))"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">Compte Bancaires</label>
+
+                            <div class="controls">
+                              <input
+                              :value="Recup_Numero_cOMPTE(formData.auteur_perso_id)"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <label
+                            >Mois Paiement
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                           <select
+                            v-model="formData.mois_paiement"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                          <option value="0"></option>
+                            <option value="Janvier">Janvier</option>
+                           <option value="Février">Février</option>
+                           <option value="Mars">Mars</option>
+                           <option value="Avril">Avril</option>
+                           <option value="Mai">Mai</option>
+                           <option value="Juin">Juin</option>
+                           <option value="Juillet">Juillet</option>
+                           <option value="Août">Août</option>
+                           <option value="Septembre">Septembre</option>
+                           <option value="Octobre">Octobre</option>
+                           <option value="Novembre">Novembre</option>
+                           <option value="Dcembre">Dcembre</option>
+                          </select>
+                         
+                        </td>
+                   </tr>
+                   <tr>
+                     <td colspan="4">
+                          <div class="control-group">
+                            <label class="control-label">Objet </label>
+
+                            <div class="controls">
+                              <input
+                                v-model="formData02.odjet_autre_depense"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        
+                   </tr>
+                   <tr>
+                      <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">MONTANT ENGAGE</label>
+                            <div class="controls">
+                              <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                              <money
+                                v-model="formData2.montant_engage"
+                                style="text-align: left; color: red"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                         <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Type d'objet</label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.diff_op_personnel"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option> </option>
+                                   <option value="mission">Mission</option>
+                                    <option value="salaire">Salaire </option>
+                                
+                                 
+                               
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MODE DE REGLEMENT</label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.mode_paiement_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option
+                                  v-for="typeFact in modepaiements"
+                                  :key="typeFact.id"
+                                  :value="typeFact.id"
+                                >
+                                  {{ typeFact.libelle }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                   </tr>
+                    </table>
                     <table
                       class="table table-bordered table-striped"
                       v-if="formData.typedepense == 'Autres'"
@@ -758,6 +959,7 @@ numero_ordre_paiement_combine
                             option-text="numero_marche"
                             placeholder=""
                             @change="RecupdateActeEffetFinancier"
+                           
                           >
                           </model-list-select>
                           <code
@@ -1209,6 +1411,28 @@ numero_ordre_paiement_combine
                           >
                         </td>
 
+<!-- <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Bailleur</label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.bailler_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option
+                                  v-for="typeFact in AfficheSouSFinancement(formData.unite_administrative_id,formData.type_financement_id)"
+                                  :key="typeFact.id"
+                                  :value="typeFact.sous_financement_id"
+                                >
+                                  {{ SousFinancement(typeFact.sous_financement_id)}}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </td> -->
                         <td>
                           <label>Bailleur </label>
                           <model-list-select
@@ -1383,12 +1607,7 @@ numero_ordre_paiement_combine
                             <ul class="nav nav-tabs">
                               <li class="active">
                                 <a data-toggle="tab" href="#INFORMATIONUA"
-                                  >VISA CONTRÔLEUR FINANCIER{{
-                                    CreditAutorise(
-                                      formData.unite_administrative_id,
-                                      formData.ligne_economique_id
-                                    )
-                                  }}</a
+                                  >VISA CONTRÔLEUR FINANCIER</a
                                 >
                               </li>
                             </ul>
@@ -2326,7 +2545,7 @@ numero_ordre_paiement_combine
         <h3>Modifier la Date de Acte D'effet Financier</h3>
       </div>
       <div class="modal-body">
-      
+     
         <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Date:</label>
@@ -2337,7 +2556,7 @@ numero_ordre_paiement_combine
                 placeholder=""
                 v-model="editMarcheDate.date_debut_exectuion_definitif"
               />
-              <input type="text" name="" id="" v-model="editMarcheDate.id" />
+              <input type="hidden" name="" id="" v-model="editMarcheDate.id" />
             </div>
           </div>
         </form>
@@ -2383,11 +2602,8 @@ export default {
         typedepense: "Marche",
         numero_ordre_paiement: "",
         type_ordre_paiement: "",
-        interimOp:"Non",
-        user_id:"",
-        VisaInterimOp:"",
-        DateInterimOp:"",
-
+        imterim_op:"Non",
+        RattacherPers:"Non"
       
       },
 
@@ -2409,6 +2625,7 @@ export default {
         libelle: "",
       },
       formData8: {},
+      formData02:{},
       formData2: {
         numeromarche: "",
         marche_id: "",
@@ -2437,6 +2654,7 @@ export default {
       "FichierJoinDmdEngagement",
       "salairesActeur",
       "personnaliseActeurDepense",
+      "getterPersonneRattacher",
       "personnaFonction",
       "afficheNombrePersonnelRecuActeNormination",
       "fonctionBudgetaire",
@@ -2459,6 +2677,7 @@ export default {
     ]),
     ...mapGetters("uniteadministrative", [
       "budgetEclate",
+      "groupeParBAILLER",
       "groupeLigneEconomiqueBudget",
       "getSousBudget",
       "groupeActiviteBudgetEclate",
@@ -2469,6 +2688,7 @@ export default {
       "uniteZones",
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
+      "getterUniteAdministrativeBailleur"
     ]),
     // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
     ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
@@ -2557,42 +2777,183 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
-    //formData2.marche_id
 
-    // Listegetters: function () {
-    //       return (macheid) => {
-    //         if (macheid != "") {
-    //           //console.log("Marche lettre inviation marche")
-    //           return this.gettersProblemeMarche.filter(
-    //             (idmarche) => idmarche.marche_id == macheid
-    //           );
-    //         }
-    //       };
-    //     },
 
-    RecupdateActeEffetFinancier() {
-      let vm = this;
-      if (this.formData2.marche_id != null && this.formData2.marche_id != "") {
-        var qtreel = this.acteEffetFinanciers.find(
-          (qtreel) => qtreel.marche_id == this.formData2.marche_id
+
+    RecupdateActeEffetFinancier(){
+      let vm =this;
+        if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
+          const qtreel = this.acteEffetFinanciers.find(
+          (qtreel)=> qtreel.marche_id == this.formData2.marche_id
         );
-        //this.editMarcheDate=0;
-        vm.editMarcheDate = qtreel;
-        if (qtreel.date_debut_exectuion_definitif == null) {
+       
+
+         if(qtreel.date_debut_exectuion_definitif ==null ){
+           
+           vm.editMarcheDate=qtreel;
           return this.$("#exampleModalligneEco").modal({
-            backdrop: "static",
-            keyboard: false,
-          });
-          // this.editMarcheDate=qtreel;
-        } else {
-          return console(
-            qtreel.date_debut_exectuion_definitif + this.formData2.marche_id
-          );
+         backdrop: "static",
+          keyboard: false
+       });
+          
+         }
+
+        else{
+
+           return console.log('**lega**');
         }
-      } else {
-        return 0;
+
+        }else{
+          return 0;
+        }
+
+      },
+
+    Recup_Banque() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.acteur_depense_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.banq_id;
+          }
+          return 0;
+        }
+      };
+    },
+    idCompte() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.rib == id
+          );
+
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0;
+        }
+      };
+    },
+Recup_Numero_cOMPTE() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.acteur_depense_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.rib;
+          }
+          return 0;
+        }
+      };
+    },
+// affichePersoUA(){
+//   if(this.formData.unite_administrative_id!=""){
+//     return this.PersonnelParUA(this.formData.unite_administrative_id)
+//   }
+//   else{
+//     return ""
+//   }
+// },
+affichePersoUA() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+        this.PersonnelParUA(this.formData.unite_administrative_id).filter((item) => {
+        
+        
+            colect.push(item);
+           
+        });
+        return colect;
+      }
+
+      return "";
+    },
+    videChamps(){
+      if(this.formData.typedepense == 'Personnel'){
+        return this.PersonnelParUA(this.formData.unite_administrative_id)
+      }
+      else{
+        return this.formData.auteur_perso_id == ""
       }
     },
+    PersonnelParUA() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.personnaliseActeurDepense.filter(
+            (qtreel) =>
+              qtreel.unite_administrative_id == id 
+          );
+        }
+      };
+    },
+
+      PersonnelRattacher() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.getterPersonneRattacher.filter(
+            (qtreel) =>
+              qtreel.ua_rattacheur == id 
+          );
+        }
+      };
+    },
+
+
+
+    Personnelnom() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.personnaliseActeurDepense.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.nom;
+          }
+          return 0;
+        }
+      };
+    },
+
+    Personnelmatricule() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.personnaliseActeurDepense.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.matricule;
+          }
+          return 0;
+        }
+      };
+    },
+
+    Personnelprenom() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.personnaliseActeurDepense.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.prenom;
+          }
+          return 0;
+        }
+      };
+    },
+
+
+
+
+
 
     GrandeNatureId() {
       return (id) => {
@@ -2684,7 +3045,7 @@ export default {
           );
 
           if (qtereel) {
-            return qtereel.user_id;
+            return qtereel.user_id_interim;
           }
           return 0;
         }
@@ -2710,43 +3071,42 @@ export default {
       if (
         this.comparaison(this.formData.activite_id) == this.formData.activite_id
       ) {
-        return this.CreditAutoriseSousBudget(
-          this.formData.sous_budget_id,
-          this.formData.ligne_economique_id
-        );
+       
+         return this.CreditAutoriseSousBudget(
+                                      this.formData.sous_budget_id,
+                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.bailler_id);
       } else {
         return this.CreditAutorise(
-          this.formData.unite_administrative_id,
-          this.formData.ligne_economique_id
-        );
+                                      this.formData.unite_administrative_id,
+                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.bailler_id);
       }
     },
     CreditAutoriseSousBudget() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+     return (id, id1, id2, id3) => {
+    if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.sous_budget_id == id && qtreel.ligneeconomique_id == id1
+              qtreel.sous_budget_id == id &&  qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
           );
 
           if (qtereel) {
-            return qtereel.dotation;
+            return qtereel.dotation_nouvelle;
           }
           return 0;
         }
       };
     },
     CreditAutorise() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+      return (id, id1, id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.uniteadministrative_id == id &&
-              qtreel.ligneeconomique_id == id1
+              qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
+              
           );
 
           if (qtereel) {
-            return qtereel.dotation;
+            return qtereel.dotation_nouvelle;
           }
           return 0;
         }
@@ -2769,11 +3129,11 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.ligneeconomique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
-            return qtereel.ligne_budgetaire_parent_id;
+            return qtereel.activite_id;
           }
           return 0;
         }
@@ -2878,7 +3238,20 @@ export default {
 
       return 0;
     },
+SousFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
+          );
 
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return "";
+        }
+      };
+    },
     cumulReservation() {
       return (id) => {
         if (id != null && id != "") {
@@ -2974,6 +3347,15 @@ export default {
         if (id != null && id != "") {
           return this.listedesMarcheUa.filter(
             (qtreel) => qtreel.unite_administrative_id == id
+          );
+        }
+      };
+    },
+     AfficheSouSFinancement() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.getterUniteAdministrativeBailleur.filter(
+            (qtreel) => qtreel.ua_id == id && qtreel.type_financement_id == id1
           );
         }
       };
@@ -3143,13 +3525,15 @@ export default {
     //   };
     // },
     cumulAnterieurUa() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+      return (id, id1,id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
-                qtreel.ligne_economique_id == id1 &&
+                qtreel.type_financement_id == id1 &&
+                qtreel.source_financement_id == id2 &&
+                qtreel.ligne_economique_id == id3 &&
                 qtreel.diff_op != null
             )
             .reduce(
@@ -3162,21 +3546,17 @@ export default {
       };
     },
     cumulAnterieurSousBudget() {
-      return (id, id2, id1) => {
-        if (
-          id != null &&
-          id != "" &&
-          id2 != null &&
-          id2 != "" &&
-          id1 != null &&
-          id1 != ""
-        ) {
+      return (id, id1,id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.unite_administrative_id == id &&
-                qtreel.sous_budget_id == id2 &&
-                qtreel.ligne_economique_id == id1 &&
+               
+                qtreel.sous_budget_id == id &&
+                
+                  qtreel.type_financement_id == id1 &&
+                qtreel.source_financement_id == id2 &&
+                qtreel.ligne_economique_id == id3 &&
                 qtreel.diff_op != null
             )
             .reduce(
@@ -3194,12 +3574,16 @@ export default {
       ) {
         return this.cumulAnterieurUa(
           this.formData.unite_administrative_id,
+          this.formData.type_financement_id,
+          this.formData.bailler_id,
           this.formData.ligne_economique_id
         );
       } else {
         return this.cumulAnterieurSousBudget(
-          this.formData.unite_administrative_id,
+          
           this.formData.sous_budget_id,
+         this.formData.type_financement_id,
+          this.formData.bailler_id,
           this.formData.ligne_economique_id
         );
       }
@@ -3320,7 +3704,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3334,7 +3718,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3348,7 +3732,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3447,7 +3831,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3656,24 +4040,25 @@ export default {
     ...mapActions("personnelUA", ["ajouterFichierJointDmd"]),
 
     // RecupdateActeEffetFinancier(){
+    //   //let vm =this;
     //     if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
     //       const qtreel = this.acteEffetFinanciers.find(
     //       (qtreel)=> qtreel.marche_id == this.formData2.marche_id
     //     );
+    //    // vm.editMarcheDate==
 
-    //      if(qtreel.date_debut_exectuion_definitif !=null ){
-    //      return console.log(qtreel.date_debut_exectuion_definitif)
-    //     //   return this.$("#exampleModal").modal({
-    //     //   backdrop: "static",
-    //     //   keyboard: false
-    //     // });
+    //      if(qtreel.date_debut_exectuion_definitif ==null ){
+    //   //     return this.$("#exampleModalligneEco").modal({
+    //   //    backdrop: "static",
+    //   //     keyboard: false
+    //   //  });
+    //   alert('ok')
 
     //      }
 
     //     else{
 
-    //      return console.log('lol....lega')
-
+    //        alert('ok')
     //     }
 
     //     }else{
@@ -3683,7 +4068,6 @@ export default {
     //   },
 
     ValiderDateUpdate() {
-
 
       this.ModifierDateEffetFinancier(this.editMarcheDate);
       this.$("#exampleModalligneEco").modal("hide");
@@ -3721,6 +4105,7 @@ export default {
       };
       reader.readAsDataURL(file);
     },
+
     afficherModalModifierTypeTexte(id) {
       this.$("#ModifierexampleModal").modal({
         backdrop: "static",
@@ -3944,7 +4329,7 @@ export default {
             this.formData.numero_ordre_paiement;
           this.intitule2 =
             this.objetMarche(this.formData2.marche_id) +
-            "/" +
+            "-" +
             this.formData12.objet_decompte;
           var nouvelObjetOrdrePaiement = {
             exercice: this.anneeAmort,
@@ -3952,18 +4337,18 @@ export default {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -3978,10 +4363,11 @@ export default {
 
             mode_paiement_id: this.formData.mode_paiement_id,
 
-            date_interim: this.formData.DateInterimOp,
-            visa_interim: this.formData.VisaInterimOp,
-            user_id_interim: this.formData.user_id,
-            imterim_op: this.formData.interimOp,
+            date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
 
 
             grand_nature_id: this.GrandeNatureId(
@@ -4002,9 +4388,9 @@ export default {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
-            DateInterimOp:'',
-            VisaInterimOp:'',
-            user_id:'',
+            date_interim:'',
+            visa_interim:'',
+            user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4026,7 +4412,123 @@ export default {
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
           };
-        } else {
+        } 
+        else if(this.formData.typedepense == "Personnel")  {
+          this.intitule =
+            this.anneeAmort +
+            "-" +
+            this.tailleOpEnregistrer +
+            "-" +
+            this.formData.numero_ordre_paiement;
+           
+          var nouvelObjetOrdrePaiement78 = {
+            exercice: this.anneeAmort,
+            diff_op_personnel:this.formData.diff_op_personnel,
+             mois_paiement: this.formData.mois_paiement,
+            type_ordre_paiement: this.formData.type_ordre_paiement,
+            numero_ordre_paiement: this.intitule,
+            section_id: this.idSection(
+              this.libelleLigneEconomiqueParent(
+                this.formData.activite_id
+              )
+            ),
+            programme_id: this.idProgramme(
+              this.libelleLigneEconomiqueParent(
+                this.formData.activite_id
+              )
+            ),
+            unite_administrative_id: this.formData.unite_administrative_id,
+            action_id: this.idAction(
+              this.libelleLigneEconomiqueParent(
+                this.formData.activite_id
+              )
+            ),
+            sous_budget_id: this.formData.sous_budget_id,
+            activite_id: this.formData.activite_id,
+            ligne_economique_id: this.formData.ligne_economique_id,
+            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
+            // marche_id:this.formData2.marche_id,
+
+            grand_nature_id: this.GrandeNatureId(
+              this.formData.ligne_economique_id
+            ),
+
+            type_financement_id: this.formData.type_financement_id,
+            typedepense: this.formData.typedepense,
+            source_financement_id: this.formData.bailler_id,
+            montant_ordre_paiement: this.formData2.montant_engage,
+            mode_paiement_id: this.formData.mode_paiement_id,
+            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+            gestionnaire_credit_fonction: this.formData
+            
+              .gestionnaire_credit_fonction,
+
+            date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
+
+
+            controleur_financier_id: this.recupererIdUser(
+              this.recupererIdServiceCF(this.formData.unite_administrative_id)
+            ),
+            auteur_perso_id: this.formData.auteur_perso_id,
+            banque_perso: this.Recup_Banque(this.formData.auteur_perso_id),
+            compte_perso: this.idCompte(this.Recup_Numero_cOMPTE(this.formData.auteur_perso_id)),
+            // reference_autre_depense: this.formData45.reference_autre_depense,
+            odjet_autre_depense: this.formData02.odjet_autre_depense,
+            // livrable_autre_depense: this.formData45.livrable_autre_depense,
+            // beneficiaire_autre_depense: this.formData45
+              // .beneficiaire_autre_depense,
+            geo_autre_depense: this.formData45.geo_autre_depense,
+            dure_autre_depense: this.formData45.dure_autre_depense,
+          };
+
+          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement78);
+          this.formData = {
+            exercice: this.anneeAmort,
+            type_ordre_paiement: "",
+            numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
+            section_id: "",
+            programme_id: "",
+            unite_administrative_id: "",
+            action_id: "",
+            sous_budget_id: "",
+            activite_id: "",
+            ligne_economique_id: "",
+            entreprise_id: "",
+            marche_id: "",
+            type_financement_id: "",
+
+            source_financement_id: "",
+            montant_ordre_paiement: "",
+            mode_paiement_id: "",
+            gestionnaire_credit_non: "",
+            gestionnaire_credit_date: "",
+            gestionnaire_credit_fonction: "",
+            controleur_financier_id: this.recupererIdUser(
+              this.recupererIdServiceCF(this.formData.unite_administrative_id)
+            ),
+            nom_autre_depense: "",
+            compte_autre_depense: "",
+            adresse: "",
+            reference_autre_depense: "",
+            odjet_autre_depense: "",
+            livrable_autre_depense: "",
+            beneficiaire_autre_depense: "",
+            geo_autre_depense: "",
+            dure_autre_depense: "",
+          };
+        }
+        
+        
+        else  {
           this.intitule =
             this.anneeAmort +
             "-" +
@@ -4039,18 +4541,18 @@ export default {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4072,6 +4574,13 @@ export default {
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4092,6 +4601,9 @@ export default {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4141,18 +4653,18 @@ export default {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4175,6 +4687,13 @@ export default {
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4185,6 +4704,9 @@ export default {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",
@@ -4206,7 +4728,117 @@ export default {
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
           };
-        } else {
+        } 
+        else if(this.formData.typedepense == "Personnel")  {
+          this.intitule =
+            this.anneeAmort +
+            "-" +
+            this.tailleOpEnregistrer +
+            "-" +
+            this.formData.numero_ordre_paiement;
+          var nouvelObjetOrdrePaiement784 = {
+            exercice: this.anneeAmort,
+              diff_op_personnel:this.formData.diff_op_personnel,
+            type_ordre_paiement: this.formData.type_ordre_paiement,
+            numero_ordre_paiement: this.intitule,
+            section_id: this.idSection(
+              this.libelleLigneEconomiqueParent(
+                this.formData.activite_id
+              )
+            ),
+            programme_id: this.idProgramme(
+              this.libelleLigneEconomiqueParent(
+                this.formData.activite_id
+              )
+            ),
+            unite_administrative_id: this.formData.unite_administrative_id,
+            action_id: this.idAction(
+              this.libelleLigneEconomiqueParent(
+                this.formData.activite_id
+              )
+            ),
+            sous_budget_id: this.formData.sous_budget_id,
+            activite_id: this.formData.activite_id,
+            ligne_economique_id: this.formData.ligne_economique_id,
+            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
+            // marche_id:this.formData2.marche_id,
+
+            grand_nature_id: this.GrandeNatureId(
+              this.formData.ligne_economique_id
+            ),
+
+            type_financement_id: this.formData.type_financement_id,
+            typedepense: this.formData.typedepense,
+            source_financement_id: this.formData.bailler_id,
+            montant_ordre_paiement: this.formData2.montant_engage,
+            mode_paiement_id: this.formData.mode_paiement_id,
+            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+             	mois_paiement: this.formData.mois_paiement,
+            gestionnaire_credit_fonction: this.formData
+              .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
+            controleur_financier_id: this.recupererIdUser(
+              this.recupererIdServiceCF(this.formData.unite_administrative_id)
+            ),
+            auteur_perso_id: this.formData.auteur_perso_id,
+            banque_perso: this.Recup_Banque(this.formData.auteur_perso_id),
+            compte_perso: this.idCompte(this.Recup_Numero_cOMPTE(this.formData.auteur_perso_id)),
+            // reference_autre_depense: this.formData45.reference_autre_depense,
+            odjet_autre_depense: this.formData02.odjet_autre_depense,
+            // livrable_autre_depense: this.formData45.livrable_autre_depense,
+            // beneficiaire_autre_depense: this.formData45
+              // .beneficiaire_autre_depense,
+            geo_autre_depense: this.formData45.geo_autre_depense,
+            dure_autre_depense: this.formData45.dure_autre_depense,
+          };
+
+          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement784);
+          this.formData = {
+            exercice: this.anneeAmort,
+            type_ordre_paiement: "",
+            numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
+            section_id: "",
+            programme_id: "",
+            unite_administrative_id: "",
+            action_id: "",
+            sous_budget_id: "",
+            activite_id: "",
+            ligne_economique_id: "",
+            entreprise_id: "",
+            marche_id: "",
+            type_financement_id: "",
+
+            source_financement_id: "",
+            montant_ordre_paiement: "",
+            mode_paiement_id: "",
+            gestionnaire_credit_non: "",
+            gestionnaire_credit_date: "",
+            gestionnaire_credit_fonction: "",
+            controleur_financier_id: this.recupererIdUser(
+              this.recupererIdServiceCF(this.formData.unite_administrative_id)
+            ),
+            nom_autre_depense: "",
+            compte_autre_depense: "",
+            adresse: "",
+            reference_autre_depense: "",
+            odjet_autre_depense: "",
+            livrable_autre_depense: "",
+            beneficiaire_autre_depense: "",
+            geo_autre_depense: "",
+            dure_autre_depense: "",
+          };
+        }
+        else {
           this.intitule =
             this.anneeAmort +
             "-" +
@@ -4220,18 +4852,18 @@ export default {
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             unite_administrative_id: this.formData.unite_administrative_id,
             action_id: this.idAction(
               this.libelleLigneEconomiqueParent(
-                this.formData.ligne_economique_id
+                this.formData.activite_id
               )
             ),
             sous_budget_id: this.formData.sous_budget_id,
@@ -4253,6 +4885,13 @@ export default {
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData
               .gestionnaire_credit_fonction,
+
+                date_interim: this.formData.date_interim,
+            visa_interim: this.formData.visa_interim,
+            user_id_interim: this.formData.user_id_interim,
+            imterim_op: this.formData.imterim_op,
+            personne_rattacher: this.formData.RattacherPers,
+
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
@@ -4273,6 +4912,9 @@ export default {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
+            date_interim:'',
+          visa_interim:'',
+          user_id_interim:'',
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",

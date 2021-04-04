@@ -28,12 +28,12 @@
           <table class="table table-bordered table-striped">
             <tr>
             <td>
-                <div align="right">
+                <!-- <div align="right">
 
       <button class="btn btn-warning"  @click.prevent="BAILLEURUA" style="color:#fff;font-weight: bold;">AJOUTER BAILLEUR DES UA </button>
 
 
-                            </div>
+                            </div> -->
               </td>
               <td style="width:12%;" >
                 

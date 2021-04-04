@@ -1161,6 +1161,54 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+    afficheUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+    entrepriseid() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
+    grandNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.grd_nature_id;
+      }
+      return 0
+        }
+      };
+    },
+     ExerciceId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.exercice;
+      }
+      return 0
+        }
+      };
+    },
         },
 
 methods: {
@@ -1237,12 +1285,16 @@ rechercheMembreCojo(){
         this.message_mandater=" "
       }
     },
+   
 AjouterLiquidation() {
          var nouvelObjet = {
         ...this.formMandat,
         demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
         montant_engage:this.montantEngage(this.formData5.numeroDemande),
-    
+     exercice_budget: this.ExerciceId(this.formData5.numeroDemande),
+        ua_id:this.afficheUa(this.formData5.numeroDemande),
+        entreprise_id:this.entrepriseid(this.formData5.numeroDemande),
+        grd_nature_id:this.grandNature(this.formData5.numeroDemande)
         
       };
       var nouvelObjet1 = {

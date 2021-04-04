@@ -71,7 +71,7 @@
      <li>
    <li>
 
-            <router-link :to="{name: 'marcheHorsib'}" tag ="a">
+            <router-link :to="{name: 'groupeMarcheParUa'}" tag ="a">
               LISTE DES MARCHES HORS PPM
             </router-link>
           </li>
@@ -91,8 +91,8 @@
             </router-link>
           </li>
      <!-- <li> 
-            <router-link :to="{name: 'AjouteFacture'}" tag="a">
-FACTURE            </router-link>
+            <router-link :to="{name: 'ajouterMarcheHorSib1'}" tag="a">
+TEST            </router-link>
           </li> -->
     </ul>
   </div>

@@ -2,23 +2,27 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-     <li>
-        <router-link :to="{name: 'ListeDesOrdresPaiement'}" tag="a">
+      <li>
+        <router-link :to="{ name: 'ListeDesOrdresPaiement' }" tag="a">
           ORDRE PAIEMENT DES PROJETS
         </router-link>
       </li>
-<li>
-        <router-link :to="{name: 'OrdrePaiementRegie'}" tag="a">
+      <li>
+        <router-link :to="{ name: 'OrdrePaiementRegie' }" tag="a">
           ORDRE PAIEMENT DES REGIES
         </router-link>
       </li>
-
       <li>
-        <router-link :to="{name: 'AjouterDecomptePrecedant'}" tag="a">
+        <router-link :to="{ name: 'groupeUaDecompte' }" tag="a">
           DECOMPTE ANTERIEUR
         </router-link>
       </li>
 
+      <li>
+        <router-link :to="{ name: 'PersonneRattacher' }" tag="a">
+          PERSONNE RATTACHER
+        </router-link>
+      </li>
       <!-- <li>
         <router-link :to="{name: 'TestTableaux'}" tag="a">
           TABLEAUX
@@ -29,10 +33,5 @@
 </template>
 
 <script>
-
-
-export default {
-
-
-};
+export default {};
 </script>

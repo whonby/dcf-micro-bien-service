@@ -44,10 +44,23 @@
           SITUATION D'EXECUTION RECAP
         </router-link>
       </li>
+
+       <li>
+        <router-link :to="{ name: 'StuationExecutionBudgetByBaillActivi' }" tag="a">
+          SITUATION D'EXECUTION BUDGETByBailActivi
+        </router-link>
+      </li>
+
+       <li>
+        <router-link :to="{ name: 'SituationExecutionBudgetRecapByBailActivi' }" tag="a">
+          SITUATION D'EXECUTION BUDGET RECAPByBailActivi
+        </router-link>
+      </li>
       <!-- <li>
          <router-link :to="{name:''}" tag="a">
            PERSONNEL
          </router-link>
+         
 
        </li>
          <li>

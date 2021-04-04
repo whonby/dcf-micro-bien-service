@@ -586,6 +586,8 @@ this.getMarche()
     this.getDossierCandidat()
 
     this.getProblemeMarche()
+    this.getPersonnelRattacher()
+    
 
     this.getOffreFinancier()
     this.getOffreTechnique()
@@ -749,7 +751,7 @@ return objJson.id
      "getAllHistoriqueDecompteFacture"
     ]),
             ...mapActions('personnelUA', ["getComptableAssignataire","getFonctionsProfessionnel","getFichierJointDmd","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
-            "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
+            "getTypeContrat","getNiveauEtude","getPersonnelRattacher","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",

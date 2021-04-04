@@ -2268,6 +2268,7 @@
                 this.region=""
 
             },
+
             videInfrastructure(){
                 this.infrastructure=""
             },

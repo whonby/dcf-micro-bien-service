@@ -1,6 +1,7 @@
-Type de Recrutement
+uniteAdministratives
 <template>
     <div id="">
+       
         <notifications />
         <!-- <div class="quick-actions_homepage span12"  >
             <ul class="quick-actions" style="margin: 0px !important;">
@@ -14,13 +15,12 @@ Type de Recrutement
                 <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{totalTaux || '0' }} %</span>
                     Taux acteur accrédité
                 </a> </li>
-
             </ul>
         </div> -->
-<div  align="left" style="cursor:pointer;">
+ <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
     
-        </div>
+        </div> 
         <div class="container-fluid" style="heigth:100%">
 
             <hr>
@@ -29,7 +29,7 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     </a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
@@ -106,7 +106,7 @@ Type de Recrutement
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash">Supprimer</i></span>
                             </button>
                         </div>
 </td>
@@ -126,15 +126,15 @@ Type de Recrutement
                                         </div>
                                     </div>
                                     <div class="widget-content nopadding">
-                                        <table class="table table-bordered table-striped">
+                                          <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
                                                 <!-- <th>Situation matrimoniale </th> -->
-                                                <th>Matricule </th>
+                                                <th>Matricule</th>
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
                                                 <th>Date de naissance</th>
-                                                <th>Email</th>
+                                                    <th>Email</th>
                                                 <th >Unité administrative</th>
                                                 
                                                 <th >Service</th>
@@ -144,13 +144,13 @@ Type de Recrutement
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in afficheListePersonnel(formData.unite_administrative_id)" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in filtre_service" :key="item.id">
   
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheEmail(item.id) || 'Non renseigné'}}</td>
+                                               <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheMatriculePersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNomPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{affichePrenomsPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(afficheDateNaissancePersonnel(item.acteur_depense_id)) }}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheEmail(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                 
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(item.service_id)|| 'Non renseigné'}}</td>
@@ -178,7 +178,7 @@ Type de Recrutement
                    </td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
+                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.acteur_depense_id }}" class="btn btn-default ">
                                                             <span class=""><i class="icon-folder-open"></i></span>
                                                         </router-link>
 
@@ -944,12 +944,11 @@ recrutement:""
             this.allActeurDepense();
             this.getActeurFinContratAndActivite()
             this.getListeSalaireActuelAll()
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
-            this.formData = this.personnaliseActeurDepense.find(
+            
+            this.formData = this.acte_personnels.find(
       item => item.id == this.$route.params.id
     );
+   
         },
         computed: {
            admin:admin,
@@ -972,13 +971,15 @@ recrutement:""
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
 
-
-afficheListePersonnel() {
+afficheEmail() {
       return id => {
         if (id != null && id != "") {
-           return this.acteurActivite.filter(qtreel => qtreel.unite_administrative_id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
-      
+      if (qtereel) {
+        return qtereel.acteur_depense.email;
+      }
+      return 0
         }
       };
     },
@@ -1112,10 +1113,10 @@ afficheActeNorminationPerso() {
                 }
                 
             })
-            return colect.filter(items=>items.fonction_budgetaire_id != null);
+            return colect.filter(items=>items.fonction_budgetaire_id != null && items.sib==0);
         }
 
-       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null);
+       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null && items.sib==0);
 
     },
         //  listeActeEffectFinnancier: function () {
@@ -1328,7 +1329,26 @@ AffichierElementParent() {
             //     )
 
             // },
-           
+            filtre_service() {
+      const st = this.search.toLowerCase();
+      return this.afficheListePersonnel(this.formData.unite_administrative_id).filter(type => {
+        return (
+         
+          this.afficheMatriculePersonnel(type.acteur_depense_id).toLowerCase().includes(st)
+           || this.afficheNomPersonnel(type.acteur_depense_id).toLowerCase().includes(st)
+                        
+        );
+      })
+    },
+           afficheListePersonnel() {
+      return id1 => {
+        if (id1 != null && id1 != "") {
+           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id1 && qtreel.sib == 1);
+
+      
+        }
+      };
+    },
   acteurActivite() {
         const searchTerm = this.search.toLowerCase();
 
@@ -1345,10 +1365,10 @@ AffichierElementParent() {
             return colect.filter(items => {
                 return (
                     items.matricule.toLowerCase().includes(searchTerm)
-                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
-                ) && items.sib==1;
+                ) && items.sib==0;
             });
             
         }
@@ -1356,10 +1376,10 @@ AffichierElementParent() {
         return this.personnaliseActeurDepense.filter(items => {
             return (
                 items.matricule.toLowerCase().includes(searchTerm)
-                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
-            ) && items.sib==1;
+            ) && items.sib==0;
         });
 
     },
@@ -1383,7 +1403,7 @@ AffichierElementParent() {
                         || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
-                ) && items.sib==1;
+                );
             }).length;
             
         }
@@ -1394,7 +1414,7 @@ AffichierElementParent() {
                         || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
-            ) && items.sib==1;
+            );
         }).length;
 
     },
@@ -1433,7 +1453,7 @@ acteurNonActivite() {
                             || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                             || items.prenom.toLowerCase().includes(searchTerm)
                             || items.nom.toLowerCase().includes(searchTerm)
-                ) && items.sib==1;
+                ) && items.sib==0;
             });
         }
 
@@ -1443,25 +1463,14 @@ acteurNonActivite() {
                             || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                             || items.prenom.toLowerCase().includes(searchTerm)
                             || items.nom.toLowerCase().includes(searchTerm)
-            ) && items.sib==1;
+            ) && items.sib==0;
         });
 
     },
 
 
 
-afficheEmail() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
-      if (qtereel) {
-        return qtereel.acteur_depense.email;
-      }
-      return 0
-        }
-      };
-    },
 
 
 
@@ -1484,6 +1493,18 @@ afficheEmail() {
 
       if (qtereel) {
         return qtereel.acteur_depense.prenom;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDateNaissancePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.date_naissance;
       }
       return 0
         }
@@ -1552,10 +1573,10 @@ afficheEmail() {
           ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
 
-         afficherModalListeExecution(){
+         
+afficherModalListeExecution(){
                 window.history.back();
             },
-
 
               ajouterModalActeEffetFinancierLocal(){
         var nouveauObjet = {
@@ -1732,5 +1753,6 @@ afficherModalTypeRecretement() {
      width: 93%;
  margin: 0 -800px;
  
+
 }
 </style>

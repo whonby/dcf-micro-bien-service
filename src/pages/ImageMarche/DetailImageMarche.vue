@@ -33,7 +33,7 @@
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
                       Date:  {{conversionDateVariable(detailMarche.date_enregistrement)}}
-                      <p class="text-secondary mb-1">Distance :
+                      <p class="text-secondary mb-1" v-if="detailMarche.latitude">Distance :
 
                         {{distance(detailMarche.latitude, detailMarche.longitude, getMarche(detailMarche.marche_id).latitude, getMarche(detailMarche.marche_id).longitude, 'K')}}
                       </p>

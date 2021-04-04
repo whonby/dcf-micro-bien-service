@@ -536,7 +536,7 @@
                 v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
-                  <p><b>En exécution</b></p>
+                  <p><b>En exécution dans délai</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(2) }} Marché(s) /
@@ -725,7 +725,7 @@
               <h3>Projet de marchés {{nomUniteAdmiSelection(unite_administrative_id)}} {{nomTypeMarche(type_marche)}} {{nomInfrastructure(infrastructure)}} {{nomRegions(region)}}</h3>
             </div>
 
-            <div class="span6" style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
+            <div class="span6" style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;" >
               <apexchart
                       type="pie"
                       width="495"
@@ -1095,7 +1095,7 @@ export default {
           type: "pie",
         },
         labels: [
-          "En Execution",
+          "En Execution dans délai",
           "Execution Hors delais",
           "Achévé dans le delais.",
           "Achévé Hors delai",
@@ -1146,7 +1146,9 @@ export default {
     };
   },
   created() {
-    console.log(this.listeMarchStatueExecuteAcheve);
+    console.log("..........................")
+    console.log(this.opDejaVie);
+    console.log("..........................")
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -1184,6 +1186,7 @@ export default {
       "getActeEffetFinancierPersonnaliser",
       "typeMarches",
       "avenants",
+            "gettersgestionOrdrePaiement"
     ]),
     ...mapGetters("Utilisateurs", ["getterUtilisateur", "getterRoles"]),
     listeCF() {
@@ -1292,7 +1295,19 @@ export default {
       }
       return 0;
     },
-
+     opDejaVie(){
+      let objet=this.gettersgestionOrdrePaiement.filter(item=>{
+        if(item.type_ordre_paiement==1 || item.type_ordre_paiement==4){
+          return item
+        }
+      })
+       if(objet.length<1) return []
+       return objet.filter(item=>{
+         if(item.decision_cf==8 || item.decision_cf==9){
+           return item
+         }
+       });
+     },
     objetMarchePasUniteOuRegion() {
       let vM = this;
       let objet = this.listeMarcheUniteAdmin.filter(
@@ -2139,10 +2154,10 @@ export default {
 
         this.objetMarchePasUniteOuRegion.forEach(function (val) {
           let initeVal = 0;
-          let montant = vm.getMandatPersonnaliserVise
+          let montant = vm.opDejaVie
             .filter((item) => item.marche_id == val.id)
             .reduce(function (total, currentValue) {
-              return total + parseFloat(currentValue.total_general);
+              return total + parseFloat(currentValue.montant_ordre_paiement);
             }, initeVal);
           montant_execute = parseFloat(montant_execute) + parseFloat(montant);
         });
@@ -2572,10 +2587,10 @@ export default {
             .filter((item) => item.attribue == status)
             .forEach(function (val) {
               let initeVal = 0;
-              let montant = vm.getMandatPersonnaliserVise
+              let montant = vm.acteEffetFinanciers
                 .filter((item) => item.marche_id == val.id)
                 .reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.total_general);
+                  return total + parseFloat(currentValue.montant_act);
                 }, initeVal);
               montant_execute = parseFloat(montant_execute) + parseFloat(montant);
             });
@@ -2604,10 +2619,10 @@ export default {
 
         this.listeMarchStatueExecuteAcheve.forEach(function (val) {
           let initeVal = 0;
-          let montant = vm.getMandatPersonnaliserVise
+          let montant = vm.acteEffetFinanciers
             .filter((item) => item.marche_id == val.id)
             .reduce(function (total, currentValue) {
-              return total + parseFloat(currentValue.total_general);
+              return total + parseFloat(currentValue.montant_act);
             }, initeVal);
           montant_execute = parseFloat(montant_execute) + parseFloat(montant);
         });
@@ -2669,7 +2684,7 @@ export default {
                  garantie:garantie,
                  date_reception_definitive:date_reception_definitive,
              }
-        console.log(obje)
+
           collect.push(obje)
       })
 
@@ -2689,34 +2704,43 @@ export default {
               if(marche_id){
 
                   let objet=this.listeActeEffectFinnancier(marche_id)
-                  if(objet){
-                      // console.log(objet.date_reception)
-                      if(objet.date_debut_exectuion_definitif==null){
-                          return 2
-                      }
+                if(objet){
+                  // console.log(objet.date_reception)
 
-                      if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
-                          let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
-                          console.log(jour1)
-                          return 2;
-                      }
 
-                      if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
-                          let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_definitive)
-                          if(jour<1){
-                              return 2
-                          }
-                          return 10
-                      }
-                      //let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
-                      let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
-                      //return jour;
-                      if(jour<1){
-                          return 11
-                      }
-                      return 12
-
+                  if(objet.date_odre_service!=null && objet.date_fin_exe!=null && objet.date_reception_provisoire_definitif==null){
+                    let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_fin_exe)
+                    if(jour<1){
+                      return 2
+                    }
+                    if(jour==0) return 11
+                    return 10
                   }
+
+                  if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
+                    let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_reception_definitive)
+                    if(jour<1){
+                      return 11
+                    }
+                    return 12
+                  }
+
+                  if(objet.date_reception_provisoire_definitif==null){
+                    let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_reception_definitive)
+                    if(jour<1){
+                      return 11
+                    }
+                    return 12
+                  }
+                  //let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
+                  let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_odre_service,objet.date_reception_provisoire_definitif)
+                  //return jour;
+                  if(jour<1){
+                    return 11
+                  }
+                  return 12
+
+                }
                   return 2
               }
           }

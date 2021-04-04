@@ -1,5 +1,4 @@
-listePieceJustificativeOpDefinitive
-numero_Op_Definitive
+
 <template>
 
 <div class="container-fluid">
@@ -72,7 +71,7 @@ numero_Op_Definitive
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Numéro OP Provisoire<code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">{{detailOpProvisoire.type_financement_id}}Numéro OP Provisoire{{detailOpProvisoire.recupererIdprovisoire}}<code style="color:red;font-size:16px">*</code></label>
                 
                 <div class="controls">
                   <input
@@ -376,12 +375,109 @@ numero_Op_Definitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="ENGAGEMENT" class="tab-pane active">
+                       <table
+                      class="table table-bordered table-striped"
+                      v-if="recupererTypeDepense(this.detailOpProvisoire.recupererId)=='Personnel'"
+                      
+                    >
+                   <tr>
+                        
+                        <td>
+                      <div class="control-group">
+                        <label class="control-label">Béneficiaire</label>
+                        <div class="controls">
+                          <select
+                            v-model="detailOpProvisoire.auteur_perso_id"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                            <option value="0"></option>
+                            <option v-for="depense in PersonnelParUA(this.formData.unite_administrative_id)" :key="depense.id" 
+               :value="depense.id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">Banque</label>
+
+                            <div class="controls">
+                              <input
+                                :value="libelleBanque(Recup_Banque(detailOpProvisoire.auteur_perso_id))"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">Compte Bancaires</label>
+
+                            <div class="controls">
+                              <input
+                              :value="Recup_Numero_cOMPTE(detailOpProvisoire.auteur_perso_id)"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <label
+                            >Mois Paiement
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                           <select
+                            v-model="detailOpProvisoire.Mois_paiement"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                          <option value="0"></option>
+                            <option value="Janvier">Janvier</option>
+                           <option value="Février">Février</option>
+                           <option value="Mars">Mars</option>
+                           <option value="Avril">Avril</option>
+                           <option value="Mai">Mai</option>
+                           <option value="Juin">Juin</option>
+                           <option value="Juillet">Juillet</option>
+                           <option value="Août">Août</option>
+                           <option value="Septembre">Septembre</option>
+                           <option value="Octobre">Octobre</option>
+                           <option value="Novembre">Novembre</option>
+                           <option value="Dcembre">Dcembre</option>
+                          </select>
+                         
+                        </td>
+                   </tr>
+                   <tr>
+                     <td colspan="4">
+                          <div class="control-group">
+                            <label class="control-label">Objet </label>
+
+                            <div class="controls">
+                              <input
+                                v-model="detailOpProvisoire.odjet_autre_depense"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                   </tr>
+                    </table>
                       <table class="table table-bordered table-striped" v-if="recupererTypeDepense(this.detailOpProvisoire.recupererId)=='Autres'">
           <tr>
              
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" >NOM2</label>
+                  <label class="control-label" >NOM</label>
                  
                   <div class="controls">
                    
@@ -472,7 +568,7 @@ numero_Op_Definitive
              
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" >NOM1{{detailOpProvisoire.entreprise_id}}</label>
+                  <label class="control-label" >NOM</label>
                  
                   <div class="controls">
                    
@@ -999,7 +1095,7 @@ numero_Op_Definitive
                      <tr>
                        <td>
                        <div class="control-group">
-                <label class="control-label">Type de Financement  <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Type de Financement {{detailOpProvisoire.recupererId}} <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <!-- <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -1013,7 +1109,7 @@ numero_Op_Definitive
 
                                 </model-list-select> -->
                                   <input
-                  :value="RecupererLibelleTypeFinancement(RecupereridTypeFinancement(recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
+                  :value="RecupererLibelleTypeFinancement(detailOpProvisoire.type_financement_id)"
                     type="text"
                     style="border:1px solid #000"
                    
@@ -1040,7 +1136,7 @@ numero_Op_Definitive
 
                                 </model-list-select> -->
                                  <input
-                  :value="RecupererLibellSourceFinancement(RecupereridSourceFinancement(recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
+                  :value="RecupererLibellSourceFinancement(detailOpProvisoire.source_financement_id)"
                     type="text"
                     style="border:1px solid #000"
                    
@@ -1075,12 +1171,12 @@ numero_Op_Definitive
                      <tr>
                     
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
+              <template v-if="this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id">
               <div class="control-group">
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutoriseSousBudget(detailOpProvisoire.sous_budget_id,detailOpProvisoire.ligne_economique_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                 
   
@@ -1092,7 +1188,7 @@ numero_Op_Definitive
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutorise(detailOpProvisoire.unite_administrative_id,detailOpProvisoire.ligne_economique_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                  
                 </div>
@@ -1102,12 +1198,12 @@ numero_Op_Definitive
               
             </td>
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
+              <template v-if="this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id">
                 <div class="control-group">
                 <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="parseFloat(this.EngagementsantérieursSousBudget(detailOpProvisoire.sous_budget_id,detailOpProvisoire.ligne_economique_id))" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1117,7 +1213,7 @@ numero_Op_Definitive
                 <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="this.EngagementsantérieursUa(detailOpProvisoire.unite_administrative_id,this.detailOpProvisoire.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1137,12 +1233,12 @@ numero_Op_Definitive
               
             </td>
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
+              <template v-if="this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id">
                 <div class="control-group">
                 <label class="control-label">Cumul engagements(D)1(B+C)</label>
                 <div class="controls">
                  
-                  <money :value="(parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))+(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="(parseFloat(this.EngagementsantérieursSousBudget(this.detailOpProvisoire.sous_budget_id,this.detailOpProvisoire.ligne_economique_id)-parseFloat(this.recupererEngageMarche(this.detailOpProvisoire.recupererIdprovisoire))))+(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -2047,7 +2143,60 @@ components: {
 // return this.
 // }
 //     },
+PersonnelParUA() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.personnaliseActeurDepense.filter(
+            (qtreel) =>
+              qtreel.unite_administrative_id == id 
+          );
+        }
+      };
+    },
 
+
+Recup_Banque() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.acteur_depense_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.banq_id;
+          }
+          return 0;
+        }
+      };
+    },
+    idCompte() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.rib == id
+          );
+
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0;
+        }
+      };
+    },
+Recup_Numero_cOMPTE() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getCompte.find(
+            (qtreel) => qtreel.acteur_depense_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.rib;
+          }
+          return 0;
+        }
+      };
+    },
 tailleOpEnregistrer(){
   return this.gettersgestionOrdrePaiement.length + 1
 },
@@ -2421,7 +2570,7 @@ recupererIdMarche	() {
     return "Marche"
   }
   else{
-return ""
+return "Personnel"
   }
 },
 recupererTypeDepense() {
@@ -3407,7 +3556,7 @@ rechercheListeMarche(){
         if (objetMandater.length==1){
            let acteur= this.gettersgestionOrdrePaiement.find(item=>item.numero_ordre_paiement==this.formData.numero_ordre_anulation)
          this.detailOpProvisoire.recupererId=acteur.id,
-          this.detailOpProvisoire.recupererIdprovisoire=acteur.id_op_provisoire,
+          this.detailOpProvisoire.recupererIdprovisoire=acteur.numero_ordre_paiement,
          	
          this.detailOpProvisoire.recuperer_typeop=acteur.type_ordre_paiement,
          this.detailOpProvisoire.section_id=acteur.section_id,

@@ -21,7 +21,21 @@ import SituationExecutionRecapProjet from "../../pages/Gestion_des_Rapports/Budg
 import SituationExecutionRecapRegie from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionRecapRegie.vue";
 import SituationExecution from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecution.vue";
 import SituationExecutionBailActi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionBailActi.vue";
+import StuationExecutionBudgetByBaillActivi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/StuationExecutionBudgetByBaillActivi.vue";
+import SituationExecutionBudgetRecapByBailActivi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionBudgetRecapByBailActivi.vue";
 const gestionrapport = [
+
+    {
+        path: "/SituationExecutionBudgetRecapByBailActivi",
+        name: "SituationExecutionBudgetRecapByBailActivi",
+        component: SituationExecutionBudgetRecapByBailActivi
+    },
+
+    {
+        path: "/StuationExecutionBudgetByBaillActivi",
+        name: "StuationExecutionBudgetByBaillActivi",
+        component: StuationExecutionBudgetByBaillActivi
+    },
 
     {
         path: "/SituationExecutionBailActi",
