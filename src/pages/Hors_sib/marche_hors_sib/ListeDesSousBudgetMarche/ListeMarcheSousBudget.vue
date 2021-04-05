@@ -25,33 +25,33 @@ reference_marche
 {{anneeAmort}}
             </td> -->
             <td style="text-align:center;font-size:20px;color:#000">
-{{libelleUA(detail_marche.unite_administrative_id)}}
+{{libelleUA(detail_marche.unite_zone)}}
             </td>
             <td>
 <button  class="btn  btn-info tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaTotal(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaTotal(detail_marche.unite_zone)}}</span>
                       
                       </button>
             </td>
             <td>
 <button  class="btn  btn-danger tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaPlanifier(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaPlanifier(detail_marche.unite_zone)}}</span>
                       
                       </button>
             </td>
              <td>
 <button  class="btn  btn-success tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaContratualisation(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaContratualisation(detail_marche.unite_zone)}}</span>
                       
                       </button>
             </td>
              <td>
 <button  class="btn  btn-warning tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaExecute(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaExecute(detail_marche.unite_zone)}}</span>
                       
                       </button>
             </td>
@@ -131,7 +131,7 @@ reference_marche
                     </td>
                     <td @dblclick="ModalModifierMarcheHorsPPM(marche.id)">
                       {{
-                        libelleUA(marche.unite_administrative_id) ||
+                        libelleUA(marche.unite_zone) ||
                         "Non renseigné"
                       }}
                     </td>
@@ -326,9 +326,9 @@ reference_marche
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { formatageSomme } from "../../../src/Repositories/Repository";
-import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
-import { partition } from "../../../src/Repositories/Repository";
+import { formatageSomme } from "@/Repositories/Repository";
+import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
+import { partition } from "@/Repositories/Repository";
 //import {partition} from '../../../src/Repositories/partition'
 //import {partition} from '../../../src/Repositories/partition';
 //import {partition} from '../../../../'
@@ -369,7 +369,7 @@ export default {
         reference_marche: "",
         montant_marche: "",
         type_marche_id: "",
-        unite_administrative_id: "",
+        unite_zone: "",
         gdenature_id: "",
         // activite_id:"",
         // typeappel_id:"",
@@ -410,7 +410,7 @@ export default {
         reference_marche: "",
         montant_marche: "",
         type_marche_id: "",
-        unite_administrative_id: "",
+        unite_zone: "",
         imputation: "",
         // activite_id:"",
         exo_id: "",
@@ -487,6 +487,7 @@ created() {
       "getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral",
       "budgetEclate",
+      "getSousBudget"
     ]),
     ...mapGetters("parametreGenerauxActivite", [
       "structures_activites",
@@ -523,7 +524,7 @@ afficheMarcheParUa() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id
+            (qtreel) => qtreel.unite_zone == id
           );
 
          
@@ -534,7 +535,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0
+            (qtreel) => qtreel.unite_zone == id && qtreel.attribue == 0
           ).length;
 
          
@@ -545,7 +546,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id
+            (qtreel) => qtreel.unite_zone == id
           ).length;
 
          
@@ -556,7 +557,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1
+            (qtreel) => qtreel.unite_zone == id && qtreel.attribue == 1
           ).length;
 
          
@@ -567,7 +568,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2
+            (qtreel) => qtreel.unite_zone == id && qtreel.attribue == 2
           ).length;
 
          
@@ -577,7 +578,7 @@ afficheMarcheParUaPlanifier() {
     marcheHorSibFiltre1() {
       const searchTerm = this.search.toLowerCase();
 
-      return this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
+      return this.afficheMarcheParUa(this.detail_marche.unite_zone).filter((item) => {
        return item.objet.toLowerCase().includes(searchTerm)
       
       });
@@ -646,7 +647,7 @@ afficheMarcheParUaPlanifier() {
             (element) =>
               element.economique_id == id &&
               element.status == "actu" &&
-              element.ua_id == this.formData.unite_administrative_id
+              element.ua_id == this.formData.unite_zone
           );
         }
       };
@@ -658,7 +659,7 @@ afficheMarcheParUaPlanifier() {
             (element) =>
               element.economique_id == id &&
               element.status == "actu" &&
-              element.ua_id == this.editMarche.unite_administrative_id
+              element.ua_id == this.editMarche.unite_zone
           );
         }
       };
@@ -705,21 +706,32 @@ afficheMarcheParUaPlanifier() {
         }
       };
     },
-
-    libelleUA() {
-      return (id) => {
+libelleUA() {
+      return id => {
         if (id != null && id != "") {
-          const qtereel = this.uniteAdministratives.find(
-            (qtreel) => qtreel.id == id
-          );
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
 
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
+      if (qtereel) {
+        return qtereel.activite_enfant
+      }
+      return 0
         }
       };
     },
+    // libelleUA() {
+    //   return (id) => {
+    //     if (id != null && id != "") {
+    //       const qtereel = this.uniteAdministratives.find(
+    //         (qtreel) => qtreel.id == id
+    //       );
+
+    //       if (qtereel) {
+    //         return qtereel.libelle;
+    //       }
+    //       return 0;
+    //     }
+    //   };
+    // },
 
     //  afficheMarcheHorsPPM(){
     //    return this.printMarcheNonAttribue.filter(items=>items.sib==1);
@@ -728,9 +740,9 @@ afficheMarcheParUaPlanifier() {
       // const st = this.search.toLowerCase();
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
+        this.afficheMarcheParUa(this.detail_marche.unite_zone).filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
-            (row) => row.unite_administrative_id == item.unite_administrative_id
+            (row) => row.unite_zone == item.unite_zone
           );
           if (val != undefined) {
             colect.push(item);
@@ -763,7 +775,7 @@ afficheMarcheParUaPlanifier() {
         let colect = [];
         this.uniteAdministratives.filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
-            (row) => row.unite_administrative_id == item.id
+            (row) => row.unite_zone == item.id
           );
           if (val != undefined) {
             colect.push(item);
@@ -1079,7 +1091,7 @@ afficheMarcheParUaPlanifier() {
           const qtereel = this.marches.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.unite_administrative_id;
+            return qtereel.unite_zone;
           }
           return 0;
         }
@@ -1240,7 +1252,7 @@ afficheMarcheParUaPlanifier() {
       return this.editMarche.typeappel_id == "";
     },
     deverouGrandNature() {
-      return this.formData.unite_administrative_id == "";
+      return this.formData.unite_zone == "";
     },
     deveroueconomiq() {
       return this.formData.gdenature_id == "";
@@ -1580,7 +1592,7 @@ afficheMarcheParUaPlanifier() {
         reference_marche: "",
         montant_marche: "",
         type_marche_id: "",
-        unite_administrative_id: "",
+        unite_zone: "",
         gdenature_id: "",
         //activite_id:"",
         // typeappel_id:"",

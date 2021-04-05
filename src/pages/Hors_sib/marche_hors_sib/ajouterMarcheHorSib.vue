@@ -451,7 +451,7 @@ libelleUA
                           @click.prevent="ajouterMarcheHorSibLocal"
                         >Valider</a>
                         <a
-                          @click.prevent="allerPageMarcheHorsib()"
+                          @click.prevent="pagePrecedent()"
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -990,6 +990,9 @@ AfficheGrandeDepense() {
       "supprimerMarcheHorSib",
       "getMarcheHorSib",
     ]),
+    pagePrecedent(){
+                window.history.back()
+            },
     allerPageMarcheHorsib() {
       this.$router.push({
         name: "marcheHorsib",

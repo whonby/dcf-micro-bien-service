@@ -1,4 +1,6 @@
 import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
+import ListeDesSousBudgetMarche from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeDesSousBudgetMarche.vue";
+import ListeMarcheSousBudget from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeMarcheSousBudget.vue";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
 // import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
  import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
@@ -47,7 +49,11 @@ import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHors
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
-   
+    {
+        path: "/ListeMarcheSousBudget/:id",
+        name: "ListeMarcheSousBudget",
+        component: ListeMarcheSousBudget
+    },
     {
         path:"/groupeMarcheParUa",
         name:"groupeMarcheParUa",
@@ -67,6 +73,12 @@ const marcheHorSibRoutes =[
         path: "/liste-Reception-Des-Lots",
         name: "listeDesReceptionDesLot",
         component: listeDesReceptionDesLot
+    },
+    
+    {
+        path: "/ListeDesSousBudgetMarche/:id",
+        name: "ListeDesSousBudgetMarche",
+        component: ListeDesSousBudgetMarche
     },
     {
         path: "/ListesPersonnelParUa/:id",

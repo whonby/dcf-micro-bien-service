@@ -20,7 +20,7 @@ uniteAdministratives
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                         <th style="width:90%">UNITE D'ADMINISTRATIVE</th>
+                         <th style="width:90%">ANNEE DES DECOMPTE</th>
                         <th colspan="2">ACTION</th>
                         
                     </tr>
@@ -28,21 +28,22 @@ uniteAdministratives
                     <tbody>
                         <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in groupeParUa"
-                    :key="BesoinImmo[0].id"
+                    v-for="BesoinImmo in arrayExerciceDecompte"
+                    :key="BesoinImmo.id"
                   >
+
                   <td style="font-size:25px"
                    
-                    >{{libelleUniteAdministrative(BesoinImmo[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                    >{{BesoinImmo || 'Non renseigné'}}</td>
                  
                      <td>
                        <router-link
-                        :to="{name : 'GroupeAnneDecompte', params: {id:BesoinImmo[0].uniteadministrative_id}}"
+                        :to="{name : 'ListeDecompteAnterieur', params: {id:BesoinImmo}}"
                         class="btn btn-success"
                         
                       >
                         <span>
-                          <i class="icon icon-folder-open" style="font-size:14px"> Voir Décompte Anterieur</i>
+                          <i class="icon icon-folder-open" style="font-size:14px"> Voir Décompte</i>
                         </span>
                       </router-link>
                      </td>
@@ -165,8 +166,34 @@ quantite: {
      "ficheArticle"
     ]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
-    ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
+    ...mapGetters("uniteadministrative", ["decomptefactures","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+
+
+arrayExerciceDecompte() {
+      // return (id) => {
+        
+        let objet = this.decomptefactures;
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.exercicebudget);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     // };
+    },
+
+
+
+
 
    libelleUniteAdministrative() {
       return id => {

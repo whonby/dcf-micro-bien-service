@@ -72,12 +72,19 @@
                       <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
                    
-                   <td>
+                   <td v-if="type[0].unite_zone == 0">
                       <router-link :to="{ name: 'marcheHorsib', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
+                    <td v-else-if="type[0].unite_zone != 0">
+                      <router-link :to="{ name: 'ListeDesSousBudgetMarche', params: { id: type[0].id }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Sous Budget</i></span>
+                   </router-link> 
+                    </td>
+                     <td v-else style="background-color:lightblue"></td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
                     <!-- <td>
                       <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">

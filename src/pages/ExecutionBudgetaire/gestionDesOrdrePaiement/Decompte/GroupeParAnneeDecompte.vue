@@ -16,7 +16,7 @@ uniteAdministratives
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                         <th style="width:90%">{{detailOp.uniteadministrative_id}}ANNEE DECOMPTE{{detailOp.id}}</th>
+                         <th style="width:90%">ANNEE DECOMPTE{{detailOp.id}}</th>
                         <th colspan="2">ACTION</th>
                         
                     </tr>
@@ -24,16 +24,16 @@ uniteAdministratives
                     <tbody>
                         <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in ListeDecompteParUniteAdministrative(detailOp.id)"
-                    :key="BesoinImmo[0].id"
+                    v-for="BesoinImmo in arrayExerciceDecompte(detailOp.id)"
+                    :key="BesoinImmo.id"
                   >
                   <td style="font-size:25px"
                    
-                    >{{BesoinImmo[0].exercicebudget || 'Non renseigné'}}</td>
+                    >{{BesoinImmo || 'Non renseigné'}}</td>
                  
                      <td>
                        <router-link
-                        :to="{name : 'ListeDecompteAnterieur', params: {id:BesoinImmo[0].uniteadministrative_id}}"
+                        :to="{name : 'ListeDecompteAnterieur', params: {id:BesoinImmo}}"
                         class="btn btn-success"
                         
                       >
@@ -164,6 +164,40 @@ quantite: {
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     ...mapGetters("uniteadministrative", ["decomptefactures","groupeParAnneeDecompte","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+
+AnneParUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.decomptefactures.filter(
+            (qtreel) => qtreel.uniteadministrative_id == id
+          );
+        }
+      };
+    },
+
+arrayExerciceDecompte() {
+      return (id) => {
+        
+        let objet = this.AnneParUa(id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.exercicebudget);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     };
+    },
+
+
+
 
    libelleUniteAdministrative() {
       return id => {
