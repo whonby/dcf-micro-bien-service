@@ -151,10 +151,8 @@
           {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
         </p>
 
-      <table
-        class="table table-bordered table-striped"
-        style="margin-left: 5px; margin-right: 5px"
-      >
+      <div class="widget-content nopadding" style="margin: 25px">
+      <table class="table table-bordered">
         <thead style="background-color: #87ceeb">
           <tr>
             <th
@@ -223,7 +221,7 @@
                 "Non renseigné"
               }}
             </td>
-            <td>
+            <td style="text-align:right">
               {{
                 formatageSommeSansFCFA(
                   parseFloat(
@@ -233,7 +231,7 @@
               }} 
             </td>
 
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align:right">
             
                {{
                 formatageSommeSansFCFA(
@@ -243,7 +241,7 @@
                 ) || "Non renseigné"
               }} 
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align:right">
                {{
                 (
                   ((MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
@@ -253,7 +251,7 @@
                 ).toFixed(2) || "Non renseigné"
               }}
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align:right">
                {{
                 MontantBudgetActuelBailleur(ListepaimentBailleur.source_financement_id) -
                   MontantBudgetExecuté1Bailleur(ListepaimentBailleur.source_financement_id) ||
@@ -266,9 +264,9 @@
         <tfoot>
           <tr>
             <td style="font-weight: bold; font-size:18px;"> TOTAL:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</td>
-            <td style="font-weight: bold; font-size:18px;"> {{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
-            <td style="font-weight: bold; font-size:18px;">{{ MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
-            <td style="font-weight: bold; font-size:18px;">
+            <td style="font-weight: bold; font-size:18px;text-align:right"> {{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
+            <td style="font-weight: bold; font-size:18px;text-align:right">{{ MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}</td>
+            <td style="font-weight: bold; font-size:18px;text-align:right">
               {{
                 (
                   ((MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
@@ -278,7 +276,7 @@
               }}
             </td>
            
-            <td style="font-weight: bold; font-size:18px;">{{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
+            <td style="font-weight: bold; font-size:18px;text-align:right">{{ MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)-
               MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)}}
               </td>
           </tr>

@@ -43,6 +43,7 @@
                     <td> </td>
                   </tr>
                   <tr>
+
                     <th style="width:10%"></th>
                       <td> </td>
                    </tr>
@@ -62,7 +63,7 @@
                  -->
                  
                <th style="width:10%"></th>
-         <th style="width:15%" colspan="3">{{affichageAnneeConditionnel}} </th> 
+         <th style="width:15%" colspan="3">{{affichageAnneeConditionnel(macheid)}} </th> 
          <th style="width:15%" colspan="3">{{incrementAnnee}} </th>
          <th style="width:15%" colspan="3">{{incrementAnnee1}} </th>
 
@@ -702,15 +703,35 @@ afficherMontantTtcDeActe() {
       };
     },
 // afficher lannée conditionnel
+
 affichageAnneeConditionnel(){
-  let anneeBudgetaire;
-  const objetp=this.getterProgrammationMarchePlurieAnnuel.find(item => item.anneeBudgetaire== this.anneeBugetaire)
-       if(anneeBudgetaire==undefined) {
-          return 0
-       }
-      
-      return objetp.anneeBudgetaire
+  return id=>{
+    if(id!="" && id!=null){
+      let objet=this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id)
+        if(objet){
+          return objet.anneeBudgetaire
+        }
+        return 0
+    }
+  }
 },
+
+
+
+// affichageAnneeConditionnel(){
+//   //let anneeBudgetaire;
+//    return macheid =>{
+    
+//       const objetp=this.getterProgrammationMarchePlurieAnnuel.find(item => item.marche_id==macheid && this.afficherAnnee(this.macheid)==this.anneeBugetaire)
+     
+//        if(objetp){
+//          return objetp.anneeBudgetaire
+//        }
+     
+//    }
+//    },
+  
+       
 
      anneeBugetaire(){
      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
@@ -737,7 +758,7 @@ affichageAnneeConditionnel(){
    },
 //incrementer l'année  affichageAnneeConditionnel
 incrementAnnee(){
-   const item=parseInt(this.affichageAnneeConditionnel) + parseInt(1)
+   const item=parseInt(this.affichageAnneeConditionnel(this.macheid)) + parseInt(1)
     if(this.affichageAnneeConditionnel==""){
       return 0
     }
@@ -757,106 +778,134 @@ incrementAnnee1(){
    calculDuMontantReportTresor(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
               this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1 
                &&
-               this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-                if(resulta) return resulta.report_nouveau
+               this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                  return resulta
+                } 
+                return 0
            }
-           return 0
+           
        }
    },
 
     calculDuMontantReportTresorAnneSuivante(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
               this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1 
                &&
-               this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-                if(resulta) return resulta.report_nouveau
+               this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                  return resulta
+                }
+                return 0 
            }
-           return 0
+           
        }
    },
 
     calculDuMontantReportTresorAnneUlterieure(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
               this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1 
                &&
-               this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-                if(resulta) return resulta.report_nouveau
+               this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                  return resulta
+                } 
+                return 0
            }
-           return 0
+           
        }
    },
 
 
-   calculDuMontantReportDons(){
-       return idReport =>{
-           if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+   calculDuMontantReportDons :function(){
+       return macheid =>{
+           if(macheid!="" && macheid!=null){
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==macheid && 
                this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement 
                &&
-                this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-                if(resulta) return resulta.report_nouveau
+                this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta){
+                   return resulta
+                }
+              return 0   
            }
-           return 0
+          
        }
    },
+
+
+   // afficher le cumul des reports a nouveau
+   
 
 
     calculDuMontantReportDonsAnneeSuivante(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
                this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement 
                &&
-                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-                if(resulta) return resulta.report_nouveau
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                  return resulta
+                }
+              return 0
            }
-           return 0
+          
        }
    },
 
     calculDuMontantReportDonsAnneeUlterieure(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
                this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement 
                &&
-                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-                if(resulta) return resulta.report_nouveau
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                   return resulta
+                }
+              return 0   
            }
-           return 0
+           
        }
    },
 
     calculDuMontantReportEmprunt(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
                 this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
                &&
-                this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-                if(resulta) return resulta.report_nouveau
+                this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta){
+                  return resulta
+                }
+               return 0 
            }
-           return 0
+          
        }
    },
 
    calculDuMontantReportEmpruntAnneeSuivante(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
                 this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
                &&
-                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-                if(resulta) return resulta.report_nouveau
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                  return resulta
+                }
+                return 0
            }
-           return 0
+           
        }
    },
 
@@ -864,13 +913,16 @@ incrementAnnee1(){
  calculDuMontantReportEmpruntAnneeUlterieure(){
        return idReport =>{
            if(idReport!="" && idReport!=null){
-               let resulta= this.getterProgrammationMarchePlurieAnnuel.find(e=>e.marche_id==idReport && 
+               let resulta= this.getterProgrammationMarchePlurieAnnuel.filter(e=>e.marche_id==idReport && 
                 this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
                &&
-                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-                if(resulta) return resulta.report_nouveau
+                this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.report_nouveau), 0)
+                if(resulta) {
+                  return resulta
+                }
+               return 0  
            }
-           return 0
+           
        }
    },
    // recuperer le code de type de financement et la source de financement anneeBugetaireQuiNestPasEncour12
@@ -937,35 +989,66 @@ afficherMontantCPDons(){
 
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-     this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
-    && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.cp_dons
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+     this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+    && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
+    
   }
 },
+
+// afficherMontantCPDons4(){
+
+
+//   return id=>{
+//     if(id!=""){
+//       let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+//      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+//     && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP), 0)
+//       if(respo) {
+//         return respo
+//       }
+//       return 0
+//     }
+    
+//   }
+// },
+
+// afficher le cummul des montants cp des dons
+// cumulmontantCpDons(){
+//   return this.afficherMontantCPDons(this.macheid).reduce
+// },
 afficherMontantCPDonsAnneeSuivante(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-     this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
-    && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.cp_dons
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+     this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+    && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
+    
   }
 },
 
 afficherMontantCPDonsAnneeUlterieure(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-     this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
-    && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.cp_dons
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+     this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+    && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
+  
   }
 },
 
@@ -973,36 +1056,45 @@ afficherMontantCPEmprunt(){
   
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.cp_emprunt
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
+    
   }
 },
 
 afficherMontantCPEmpruntAnneeSuivante(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.cp_emprunt
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo){
+        return respo
+      }
+       return 0
     }
-    return 0
+  
   }
 },
 
 afficherMontantCPEmpruntAnneeUlterieure(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.cp_emprunt
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+         return respo
+      } 
+      return 0
     }
-    return 0
+    
   }
 },
 
@@ -1011,36 +1103,45 @@ afficherMontantCPTresor(){
   
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
       this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.cp_tresor
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+        return respo
+      } 
+      return 0
     }
-    return 0
+    
   }
 },
 
 afficherMontantCPTresorAnneeSuivante(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
       this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.cp_tresor
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+       return respo
+      } 
+      return 0
     }
-    return 0
+    
   }
 },
 
 afficherMontantCPTresorAnneeUlterieure(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
       this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.cp_tresor
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP), 0)
+      if(respo) {
+        return respo
+      }
+      return 0 
     }
-    return 0
+    
   }
 },
 
@@ -1059,10 +1160,12 @@ afficherIdMarche(){
 afficherMontantCPNotifieDons(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.montantCP_notifie
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      } 
     }
     return 0
   }
@@ -1072,24 +1175,28 @@ afficherMontantCPNotifieDons(){
 afficherMontantCPNotifieDonsAnneeSuivante(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.montantCP_notifie
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
 afficherMontantCPNotifieDonsAnneeUlterieure(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Dons(this.macheid)==this.affiherLibelleTypefinancement
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.montantCP_notifie
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
@@ -1097,36 +1204,42 @@ afficherMontantCPNotifieDonsAnneeUlterieure(){
 afficherMontantCPNotifieEmprunt(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.montantCP_notifie
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
 afficherMontantCPNotifieEmpruntAnneeSuivante(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.montantCP_notifie
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
 afficherMontantCPNotifieEmpruntAnneeUlterieure(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
-      this.recupereIDTypeFinacementDansMarchePluriannuelCP_Emprunt(this.macheid)==this.affiherLibelleTypefinancement0
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.montantCP_notifie
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
+      this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement0
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
@@ -1134,36 +1247,42 @@ afficherMontantCPNotifieEmpruntAnneeUlterieure(){
 afficherMontantCPNotifieTresor(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
        this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaire)
-      if(respo) return respo.montantCP_notifie
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaire).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
 afficherMontantCPNotifieTresorAnneeSuivante(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
        this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour)
-      if(respo) return respo.montantCP_notifie
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 
 afficherMontantCPNotifieTresorAnneeUlterieure(){
   return id=>{
     if(id!=""){
-      let respo= this.getterProgrammationMarchePlurieAnnuel.find(item=>item.marche_id==id &&
+      let respo= this.getterProgrammationMarchePlurieAnnuel.filter(item=>item.marche_id==id &&
        this.recupereIDTypeFinacementDansMarchePluriannuel(this.macheid)==this.affiherLibelleTypefinancement1
-       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12)
-      if(respo) return respo.montantCP_notifie
+       && this.afficherIdExo(this.macheid)==this.anneeBugetaireQuiNestPasEncour12).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montantCP_notifie), 0)
+      if(respo) {
+        return respo
+      }
+      return 0
     }
-    return 0
   }
 },
 

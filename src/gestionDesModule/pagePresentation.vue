@@ -163,11 +163,11 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
 
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>EXECUTION SIB</h5>
+                                                  <h5>EXECUTION SIGOBE</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-book"></i>
                                                   </div>
-                                                  <p> Gérer l’ensemble des transactions effectuées par les UA liées au SIB (Système d’Information Budgétaire).</p>
+                                                  <p> Gérer l’ensemble des transactions effectuées par les UA liées au SIGOBE (Système d’Information Budgétaire).</p>
                                               </div>
                                           </div>
                                       </div>
@@ -175,11 +175,11 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>EXECUTION HORS SIB</h5>
+                                                  <h5>EXECUTION HORS SIGOBE</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-folder-open"></i>
                                                   </div>
-                                                  <p>Gérer l’ensemble des transactions effectuées par les UA non liées au SIB .</p>
+                                                  <p>Gérer l’ensemble des transactions effectuées par les UA non liées au SIGOBE .</p>
                                               </div>
                                           </div>
                                       </div>

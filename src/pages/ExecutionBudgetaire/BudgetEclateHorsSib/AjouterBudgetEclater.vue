@@ -1,4 +1,4 @@
-recupereMontantEmpruntTotal
+ajouterDecisionBudgetEclate
 <template>
 
 <div class="container-fluid">
@@ -202,7 +202,7 @@ recupereMontantEmpruntTotal
                   </td>
                    <td>
                        <div class="control-group">
-                <label class="control-label">Code Activite{{formData.uniteadministrative_id}} <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -319,7 +319,7 @@ recupereMontantEmpruntTotal
                      </td>
                        <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Ligne budgetaire</label>
+                <label class="control-label">Ligne budgetaire4</label>
                 <div class="controls">
                  
  
@@ -327,9 +327,9 @@ recupereMontantEmpruntTotal
                     
                      <option
                         v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
-                        :key="typeFact[0].id"
-                        :value="typeFact[0].economique_id"
-                      >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
+                        :key="typeFact.id"
+                        :value="typeFact.economique_id"
+                      >{{libelleLigneEconomique(typeFact.economique_id)}}</option>
                   </select>
 
 
@@ -1079,7 +1079,7 @@ idTypeFinancement() {
     idGrandeNature() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.gdenature_id
@@ -1425,7 +1425,7 @@ LibelleActivite() {
       RecupererlibelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
-           return this.groupeLigneEconomiqueBudget.filter(qtreel => qtreel[0].activite_id == id);
+           return this.budgetGeneral.filter(qtreel => qtreel.activite_id == id);
 
       
         }

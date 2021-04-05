@@ -685,11 +685,16 @@ export default {
 
       tileProviders: [
 
+      {
+          name: 'Plan A',
+          visible: true,
+          attribution: '',
+          url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+      },
         {
           name: 'Plan',
-          visible: true,
-          attribution:
-              '',
+          visible: false,
+          attribution: '',
           url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
         },
         {
@@ -867,7 +872,6 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           this.filtre_unite_admin.forEach(function (value) {
               let objet=vM.marches.filter(item=>{
                       if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
-                          //  console.log(item.parent_id)
                           return item
                       }
                   }

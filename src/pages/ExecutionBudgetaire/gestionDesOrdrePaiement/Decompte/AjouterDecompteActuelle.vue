@@ -32,7 +32,7 @@
          <table class="table table-bordered table-striped">
            <tr>
               <td>
-
+Montantapresretenues
               <div class="control-group">
               <label class="control-label">N°décompte</label>
                 <div class="controls">
@@ -95,6 +95,7 @@
               </div>
             </td>
              <td >
+               
               <div class="control-group">
                 <label class="control-label" > Retenue de garantie</label>
                 <div class="controls">
@@ -239,7 +240,7 @@
                       class="span"
                       readonly
                   /> -->
-<money  :value="montantTTCMarche(detail_Facture.marche_id)"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+<money  :value="montantTTCMarche(detail_Facture.marche_id)"  type="hidden"  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -450,13 +451,14 @@
               <div class="control-group">
                 <label class="control-label" >Montant initial du marché HT</label>
                 <div class="controls">
-                  <input
+                  <money  :value="montantHtMarche(detail_Facture.marche_id)" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  <!-- <input
                       type="number"
                        :value="montantHtMarche(detail_Facture.marche_id)"
 
                       class="span"
                       readonly
-                  />
+                  /> -->
 
                 </div>
               </div>
@@ -467,13 +469,14 @@
               <div class="control-group">
                 <label class="control-label" >Montant total du marché TTC</label>
                 <div class="controls">
-                  <input
+                   <money  :value="montantTTCMarche(detail_Facture.marche_id)"  readonly style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  <!-- <input
                       type="text"  
                         :value="montantTTCMarche(detail_Facture.marche_id)"
                       step='100'
                       class="span"
                       readonly
-                  />
+                  /> -->
 
                 </div>
               </div>
@@ -483,12 +486,8 @@
                 <label class="control-label">PART Bailleur</label>
                 <div class="controls">
 
-
-                  <input type="text" 
-                         class="span"
-                         :value="SommeBailleurDuMarche"
-                         readonly
-                  />
+<money  :value="SommeBailleurDuMarche" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  
 
                 </div>
               </div>
@@ -497,13 +496,15 @@
                <div class="control-group">
                 <label class="control-label" >PART ETAT</label>
                 <div class="controls">
-                  <input
+                <money  :value="MontantEtatCoteIvoire(detail_Facture.marche_id)" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+         
+                  <!-- <input
                       type="text"
                       :value="MontantEtatCoteIvoire(detail_Facture.marche_id)"
 
                       class="span"
                       readonly
-                  />
+                  /> -->
 
                 </div>
               </div>
@@ -612,7 +613,7 @@ retenu_penalite:0
       
 },
   computed: {
-  ...mapGetters("bienService", ["gettersgestionOrdrePaiement","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+  ...mapGetters("bienService", ["avenants","gettersgestionOrdrePaiement","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -654,7 +655,23 @@ retenu_penalite:0
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
-    
+     MontantDeBase(){
+return parseFloat(this.AfficheMontantMarche(this.formData.marche_id))+parseFloat(this.MontantAvenant(this.formData.marche_id))
+  },
+  MontantAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0);
+
+     
+      }
+      }
+  },
 MontantTVAFacture() {
       return id => {
         if (id != null && id != "") {

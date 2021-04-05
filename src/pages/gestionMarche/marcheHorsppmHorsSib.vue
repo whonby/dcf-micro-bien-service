@@ -248,7 +248,7 @@ reference_marche
                   <span class=""><i class="  icon-zoom-out"></i></span>
                    </router-link>  -->
                     </td>
-
+ <td v-else style="background-color:lightblue"></td>
                     <!-- </td>
                    
                        <td v-else>
@@ -522,7 +522,7 @@ created() {
 afficheMarcheParUa() {
       return (id) => {
         if (id != null && id != "") {
-          return this.printMarcheNonAttribue.filter(
+          return this.marches.filter(
             (qtreel) => qtreel.unite_administrative_id == id
           );
 
@@ -533,7 +533,7 @@ afficheMarcheParUa() {
 afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
-          return this.printMarcheNonAttribue.filter(
+          return this.marches.filter(
             (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0
           ).length;
 
@@ -544,7 +544,7 @@ afficheMarcheParUaPlanifier() {
      afficheMarcheParUaTotal() {
       return (id) => {
         if (id != null && id != "") {
-          return this.printMarcheNonAttribue.filter(
+          return this.marches.filter(
             (qtreel) => qtreel.unite_administrative_id == id
           ).length;
 
@@ -578,9 +578,8 @@ afficheMarcheParUaPlanifier() {
       const searchTerm = this.search.toLowerCase();
 
       return this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
-        return item.objet.toLowerCase().includes(searchTerm) ||
-        item.reference_marche.toLowerCase().includes(searchTerm)
-        //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm)
+       return item.objet.toLowerCase().includes(searchTerm)
+      
       });
     },
 
@@ -729,7 +728,7 @@ afficheMarcheParUaPlanifier() {
       // const st = this.search.toLowerCase();
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.marcheHorSibFiltre1.filter((item) => {
+        this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
             (row) => row.unite_administrative_id == item.unite_administrative_id
           );

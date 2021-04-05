@@ -982,7 +982,7 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         return element;
     })
 
-
+    
 /// afficher les informations  du tableau de bord  d'investissement///
 
 // afficher le nombre de marche
@@ -1132,10 +1132,10 @@ export const getterEntrepriseSousTraitance = state => state.entreprise_soustrait
 
 
 
-export const GroupeEntreprise = (state, getters) => {
-    //delete getters.trieUaImmobilisation.
-    return groupBy(getters.acteEffetFinanciers, "entreprise_id");
-};
+// export const GroupeEntreprise = (state, getters) => {
+//     //delete getters.trieUaImmobilisation.
+//     return groupBy(getters.acteEffetFinanciers, "entreprise_id");
+// };
 
 
 
@@ -1154,6 +1154,12 @@ export const GroupeOrdrePaiementByLigneEconomique = (state, getters) =>
  {
     
     return groupBy(getters.gettersgestionOrdrePaiement, "ligne_economique_id");
+};
+
+export const GroupeOrdrePaiementByBailleur = (state, getters) =>
+ {
+    
+    return groupBy(getters.gettersgestionOrdrePaiement, "source_financement_id");
 };
 
 

@@ -28,14 +28,14 @@ ajouterHistorisqueBudgetEclate
                 <input type="search" placeholder />
               </div>-->
             </div>
-
+ajouterDecisionBudgetEclate
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION{{idBudgetEclateRegierSousBudget(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id)}}</a>
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION</a>
                       </li>
                     </ul>
                   </div>
@@ -75,7 +75,7 @@ ajouterHistorisqueBudgetEclate
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleSection(idSection(idLigneEconomique(iddmandeEngagement(formData.numero_op_systeme))))"
+                   :value="libelleSection(idSection(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -89,7 +89,7 @@ ajouterHistorisqueBudgetEclate
                    <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleProgramme(idProgramme(idLigneEconomique(iddmandeEngagement(formData.numero_op_systeme))))"
+                   :value="libelleProgramme(idProgramme(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -104,7 +104,7 @@ ajouterHistorisqueBudgetEclate
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleAction(idAction(idLigneEconomique(iddmandeEngagement(formData.numero_op_systeme))))"
+                   :value="libelleAction(idAction(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -123,7 +123,7 @@ ajouterHistorisqueBudgetEclate
                    <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="LibelleGrandeNature(idGrandeNature(idLigneEconomique(iddmandeEngagement(formData.numero_op_systeme))))"
+                   :value="LibelleGrandeNature(idGrandeNature(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -166,7 +166,26 @@ ajouterHistorisqueBudgetEclate
               </div>
               
                      </td>
-                   <td colspan="2">
+                     <td>
+                       <div class="control-group">
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="recuppererLeDernierNiveauActivite"
+                                                   v-model="formData.activite_id"
+                                                   option-value="id"
+                                                   option-text="code"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                   <!-- <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Activité</label>
                 <div class="controls">
@@ -180,14 +199,29 @@ ajouterHistorisqueBudgetEclate
                 </div>
               </div>
               
-                     </td>
+                     </td> -->
                    
                       
                      </tr>
                      
             
                         <tr>
- 
+ <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Libelle Activité</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="NomActivite(formData.activite_id)"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+              
+                     </td>
                        <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Ligne budgetaire</label>
@@ -259,16 +293,26 @@ ajouterHistorisqueBudgetEclate
                      <div class="control-group">
                 <label class="control-label">Bailleur</label>
                 <div class="controls">
-                 
+                 <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="sources_financements"
+                                                   v-model="formData.source_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
  
-                 <select v-model="formData.source_financement_id" class="span" style="border:1px solid #000" >
+                 <!-- <select v-model="formData.source_financement_id" class="span" style="border:1px solid #000" >
                     
                      <option
                         v-for="typeFact in afficheBailleurPaUa(formData.uniteadministrative_id,formData1.type_financement_id)"
                         :key="typeFact.id"
                         :value="typeFact.sous_financement_id"
                       >{{libelleSousFinancement(typeFact.sous_financement_id)}}</option>
-                  </select>
+                  </select> -->
 
 
                  
@@ -569,8 +613,49 @@ sous_budget_id:0
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+NomActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_activites.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code.concat('  ',qtereel.libelle)
+      }
+      return 0
+        }
+      };
+    },
+recuppererLeDernierNiveauActivite() {
+      
+           return this.plans_activites.filter(qtreel => this.recupererStructureActivite_id(qtreel.structure_activites_id) == 2 );
 
+      
+       
+    },
+    recupererStructureActivite_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau
+      }
+      return 0
+        }
+      };
+    },
+recupererStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau
+      }
+      return 0
+        }
+      };
+    },
 
 libelleSousFinancement() {
       return id => {
@@ -1105,18 +1190,18 @@ recuppererLeDernierNiveau() {
        
     },
 
-recupererStructure() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
+// recupererStructure() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.niveau
-      }
-      return 0
-        }
-      };
-    },
+//       if (qtereel) {
+//         return qtereel.niveau
+//       }
+//       return 0
+//         }
+//       };
+//     },
 
       libelleAction() {
       return id => {
@@ -1158,7 +1243,7 @@ recupererStructure() {
     idSection() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.section_id
@@ -1170,7 +1255,7 @@ recupererStructure() {
     idProgramme() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.program_id
@@ -1182,7 +1267,7 @@ recupererStructure() {
 idAction() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.action_id
@@ -1502,7 +1587,7 @@ methods: {
       "supprimerBudgetEclateRegie",
       "modifierBudgetEclateRegie ",
      "ajouterBudgetEclateRegie",
-      "ajouterHistoriqueDecisionBudgetEclate",
+     "ajouterDecisionBudgetEclate",
       "ajouterHistorisqueBudgetEclate"
       
       
@@ -1672,6 +1757,7 @@ dotation_nouvelle:"",
 report:"",
       }
      }
+
    }
 
     },

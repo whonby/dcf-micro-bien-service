@@ -1,4 +1,4 @@
-
+date_interim
 <template>
   <div class="container-fluid">
     <hr />
@@ -105,7 +105,7 @@
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Section{{idSection(libelleLigneEconomiqueParent(formData.activite_id))}}
+                            <label class="control-label">Section
                                       
                                        
                                      
@@ -392,6 +392,7 @@
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
+                    RecupdateActeEffetFinancier
                     <div id="ENGAGEMENT" class="tab-pane active">
                       <table
                         class="table table-bordered table-striped">
@@ -1095,7 +1096,7 @@
                     readonly
                   /> -->
                               <money
-                                :value="MontantReelMarche(formData2.marche_id)"
+                                :value="MontantDeBase"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -2694,6 +2695,7 @@ export default {
     ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters("bienService", [
+      "avenants",
       "gettersgestionOrdrePaiement",
       "gettersDossierAutreDepense",
       "gettersDossierMandat",
@@ -2776,8 +2778,23 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
+ MontantDeBase(){
+return parseFloat(this.MontantReelMarche(this.formData2.marche_id))+parseFloat(this.MontantAvenant(this.formData2.marche_id))
+  },
+MontantAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0);
 
-
+     
+      }
+      }
+  },
 
     RecupdateActeEffetFinancier(){
       let vm =this;
@@ -3044,7 +3061,7 @@ affichePersoUA() {
           );
 
           if (qtereel) {
-            return qtereel.user_id;
+            return qtereel.user_id_interim;
           }
           return 0;
         }
@@ -4387,11 +4404,9 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: "",
             numero_ordre_paiement: "",
-        
             date_interim:'',
             visa_interim:'',
             user_id_interim:'',
-
             section_id: "",
             programme_id: "",
             unite_administrative_id: "",

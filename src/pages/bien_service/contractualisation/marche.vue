@@ -464,10 +464,34 @@ typeMarches
                   <i class="icon-th"></i>
                 </span>
                 <h5>Liste des Marchés Suspendus</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search6"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size6"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -488,7 +512,9 @@ typeMarches
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(marche, index) in afficherMarcheSupenduPAR_AU"
+                    v-for="(marche, index) in partition(rechercheUa6, size6)[
+                      page6
+                    ]"
                     :key="marche.id"
                   >
                     <td
@@ -598,6 +624,31 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+                 <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page6 == 0 }">
+                    <a @click.prevent="precedent6()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa6, size6)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el6 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate6(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page6 == partition(rechercheUa6, size6).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant6()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div id="tab2000256" class="tab-pane">
               <div class="widget-title">
@@ -605,10 +656,34 @@ typeMarches
                   <i class="icon-th"></i>
                 </span>
                 <h5>Liste des Marchés Terminés</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search7"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size7"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -628,7 +703,9 @@ typeMarches
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="marche in afficherMarcherTerminerParUA"
+                    v-for="marche in partition(rechercheUa7, size7)[
+                      page7
+                    ]"
                     :key="marche.id"
                   >
                     <td>
@@ -700,6 +777,31 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+                   <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page7 == 0 }">
+                    <a @click.prevent="precedent7()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa7, size7)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el7 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate7(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page7 == partition(rechercheUa7, size7).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant7()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div id="tab10" class="tab-pane">
@@ -708,10 +810,34 @@ typeMarches
                   <i class="icon-th"></i>
                 </span>
                 <h5>Liste des Marchés en cours de Contractualisation</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search3"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size3"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -732,7 +858,9 @@ typeMarches
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(marche, index) in afficherContratualisationParUA"
+                    v-for="(marche, index) in partition(rechercheUa3, size3)[
+                      page3
+                    ]"
                     :key="marche.id"
                   >
                     <td
@@ -884,6 +1012,31 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page3 == 0 }">
+                    <a @click.prevent="precedent3()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa3, size3)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el3 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate3(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page3 == partition(rechercheUa3, size3).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant3()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div id="tab2078" class="tab-pane active">
               <div class="widget-title">
@@ -891,10 +1044,34 @@ typeMarches
                   <i class="icon-th"></i>
                 </span>
                 <h5>Liste des March&eacute;s</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search1"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size1"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -920,7 +1097,9 @@ typeMarches
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(marche, index) in filtre_unite_admin"
+                    v-for="(marche, index) in  partition(rechercheUa1, size1)[
+                      page1
+                    ]"
                     :key="marche.id"
                   >
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -1114,17 +1293,67 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+              
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page1 == 0 }">
+                    <a @click.prevent="precedent1()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa1, size1)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el1 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate1(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page1 == partition(rechercheUa1, size1).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant1()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div id="tab20" class="tab-pane">
               <div class="widget-title">
                 <span class="icon">
                   <i class="icon-th"></i>
                 </span>
-                <h5>Liste des marchés en exécution</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                <h5>Liste des marchés en exécutions</h5>
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search4"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size4"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -1145,7 +1374,9 @@ typeMarches
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(marche, index) in afficherExecutionPAU"
+                    v-for="(marche, index) in partition(rechercheUa4, size4)[
+                      page4
+                    ]"
                     :key="marche.id"
                   >
                     <template
@@ -1267,6 +1498,31 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page4 == 0 }">
+                    <a @click.prevent="precedent4()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa4, size4)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el4 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate4(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page4 == partition(rechercheUa4, size4).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant4()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div id="tab100" class="tab-pane">
               <div class="widget-title">
@@ -1274,10 +1530,34 @@ typeMarches
                   <i class="icon-th"></i>
                 </span>
                 <h5>Liste des marchés en planification</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search2"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size2"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -1299,7 +1579,9 @@ typeMarches
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(marche, index) in afficherPlanificationPA"
+                    v-for="(marche, index) in partition(rechercheUa2, size2)[
+                      page2
+                    ]"
                     :key="marche.id"
                   >
                     <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
@@ -1420,6 +1702,31 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page2 == 0 }">
+                    <a @click.prevent="precedent2()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa2, size2)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el2 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate2(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page2 == partition(rechercheUa2, size2).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant2()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div id="tab20002" class="tab-pane">
@@ -1428,10 +1735,34 @@ typeMarches
                   <i class="icon-th"></i>
                 </span>
                 <h5>Liste des marchés résiliés</h5>
-                <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search5"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size5"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -1452,7 +1783,9 @@ typeMarches
                   <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
                   <tr
                     class="odd gradeX"
-                    v-for="marche in afficherResilierPUA"
+                    v-for="marche in  partition(rechercheUa5, size5)[
+                      page5
+                    ]"
                     :key="marche.id"
                   >
                     <td>
@@ -1525,6 +1858,32 @@ typeMarches
                   </tr>
                 </tbody>
               </table>
+
+              
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page5 == 0 }">
+                    <a @click.prevent="precedent5()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa5, size5)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el5 == index }"
+                  >
+                    <a @click.prevent="getDataPaginate5(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page5 == partition(rechercheUa5, size5).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant5()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -1863,6 +2222,7 @@ typeMarches
 import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "../../../../src/Repositories/Repository";
 import { admin, dcf, noDCfNoAdmin } from "../../../../src/Repositories/Auth";
+import { partition } from "../../../../src/Repositories/Repository";
 export default {
   name: "type facture",
   data() {
@@ -1873,16 +2233,43 @@ export default {
           icon: "add",
         },
 
-        // {
-        //   name: "alertMe",
-        //   icon: "add_alert",
-        //   class: ""
-        // }
       ],
-      //   json_fields: {
-      //     CODE: "code",
-      //     libelle: "libelle"
-      //   },
+       page1: 0,
+      size1: 10,
+      active_el1: 0,
+      search1: "",
+
+       page2: 0,
+      size2: 10,
+      active_el2: 0,
+      search2: "",
+
+      page3: 0,
+      size3: 10,
+      active_el3: 0,
+      search3: "",
+
+       page4: 0,
+      size4: 10,
+      active_el4: 0,
+      search4: "",
+
+      page5: 0,
+      size5: 10,
+      active_el5: 0,
+      search5: "",
+
+      page6: 0,
+      size6: 10,
+      active_el6: 0,
+      search6: "",
+
+       page7: 0,
+      size7: 10,
+      active_el7: 0,
+      search7: "",
+      
+      
 
       formData: {
         objet: "",
@@ -1951,7 +2338,7 @@ export default {
       // date_resiliation:""
       //       },
       indicateur_test: 1,
-      search: "",
+      
     };
   },
   created() {
@@ -2022,6 +2409,55 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
+
+    rechercheUa1() {
+      const st = this.search1.toLowerCase();
+      return this.filtre_unite_admin.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
+
+     rechercheUa2() {
+      const st = this.search2.toLowerCase();
+      return this.afficherPlanificationPA.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
+
+    rechercheUa3() {
+      const st = this.search3.toLowerCase();
+      return this.afficherContratualisationParUA.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
+
+    rechercheUa4() {
+      const st = this.search4.toLowerCase();
+      return this.afficherExecutionPAU.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
+
+    rechercheUa5() {
+      const st = this.search5.toLowerCase();
+      return this.afficherResilierPUA.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
+
+    rechercheUa6() {
+      const st = this.search6.toLowerCase();
+      return this.afficherMarcheSupenduPAR_AU.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
+
+    rechercheUa7() {
+      const st = this.search7.toLowerCase();
+      return this.afficherMarcherTerminerParUA.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
 
     CodeExempte() {
       return (id) => {
@@ -3128,6 +3564,107 @@ export default {
       "getMarche",
       "getActeEffetFinancier",
     ]),
+
+    partition: partition,
+//1ere partie
+    getDataPaginate1(index) {
+      this.active_el1 = index;
+      this.page1 = index;
+    },
+    precedent1() {
+      this.active_el1--;
+      this.page1--;
+    },
+    suivant1() {
+      this.active_el1++;
+      this.page1++;
+    },
+
+    //2eme partie
+    getDataPaginate2(index) {
+      this.active_el2 = index;
+      this.page2 = index;
+    },
+    precedent2() {
+      this.active_el2--;
+      this.page2--;
+    },
+    suivant2() {
+      this.active_el2++;
+      this.page2++;
+    },
+
+     //3eme partie
+    getDataPaginate3(index) {
+      this.active_el3 = index;
+      this.page3 = index;
+    },
+    precedent3() {
+      this.active_el3--;
+      this.page3--;
+    },
+    suivant3() {
+      this.active_el3++;
+      this.page3++;
+    },
+
+    //4eme partie
+    getDataPaginate4(index) {
+      this.active_el4 = index;
+      this.page4 = index;
+    },
+    precedent4() {
+      this.active_el4--;
+      this.page4--;
+    },
+    suivant4() {
+      this.active_el4++;
+      this.page4++;
+    },
+
+    //5eme partie
+    getDataPaginate5(index) {
+      this.active_el5 = index;
+      this.page5 = index;
+    },
+    precedent5() {
+      this.active_el5--;
+      this.page5--;
+    },
+    suivant5() {
+      this.active_el5++;
+      this.page5++;
+    },
+
+    //6eme partie
+    getDataPaginate6(index) {
+      this.active_el6 = index;
+      this.page6 = index;
+    },
+    precedent6() {
+      this.active_el6--;
+      this.page6--;
+    },
+    suivant6() {
+      this.active_el6++;
+      this.page6++;
+    },
+
+
+    //7eme partie
+    getDataPaginate7(index) {
+      this.active_el7 = index;
+      this.page7 = index;
+    },
+    precedent7() {
+      this.active_el7--;
+      this.page7--;
+    },
+    suivant7() {
+      this.active_el7++;
+      this.page7++;
+    },
+
     modifierModalResiliation() {
       var nouvelObjet1 = {
         ...this.editActeEffetFinancier,

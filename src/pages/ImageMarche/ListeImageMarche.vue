@@ -5,6 +5,11 @@
 
     <div class="main-body">
 
+         <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div>
+
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb" v-if="detail">

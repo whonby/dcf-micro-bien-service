@@ -139,9 +139,9 @@
                     
                      <option
                         v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_parent_id)"
-                        :key="typeFact[0].id"
-                        :value="typeFact[0].economique_id"
-                      >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
+                        :key="typeFact.id"
+                        :value="typeFact.economique_id"
+                      >{{libelleLigneEconomique(typeFact.economique_id)}}</option>
                   </select>
                 </div>
               </div>
@@ -587,7 +587,7 @@ return (parseFloat(this.MontantParBailleur(this.formData.unite_administrative_id
       RecupererlibelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
-           return this.groupeLigneEconomiqueBudget.filter(qtreel => qtreel[0].activite_id == id);
+           return this.budgetGeneral.filter(qtreel => qtreel.activite_id == id);
 
       
         }

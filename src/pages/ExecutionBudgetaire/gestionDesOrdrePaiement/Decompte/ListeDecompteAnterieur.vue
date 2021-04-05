@@ -1,98 +1,85 @@
-
+uniteAdministratives
 <template>
   <div>
-      <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title">
-            <ul class="nav nav-tabs">
-              <!-- <li class="active">
-                <a data-toggle="tab" href="#tab2078"
-                  >Listes des Decomptes Année en cours
-                  <span class="badge badge"></span></a
+<div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div> 
+<div class="row-fluid"  style="margin-top: -20px">
+      <div class="span1"></div>
+      <div class="span10" style="background-color: transparent; !important;">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td colspan="">
+                <br />
+                <!-- <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
+    
+        </div>  -->
+
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdministrativeid"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
                 >
-              </li> -->
-
-             <!-- <li>
-                <a data-toggle="tab" href="#tab100">
-                  Historique decompte
-                  <span class="badge badge-important">
-                    </span
-                  ></a
+                </model-list-select>
+              </td>
+              <td>
+                <br />
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >ENTREPRISE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="entreprises"
+                  v-model="entrepriseid"
+                  option-value="id"
+                  option-text="raison_sociale"
                 >
-              </li> -->
-               <li class="active">
-                <a data-toggle="tab" href="#tab10045">
-                  Listes des Decomptes Année Anterieur
-                  <span class="badge badge-important">
-                    </span
-                  ></a
+                </model-list-select>
+              </td>
+              <!-- <td>
+                <br />
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >NUMERO ORDRE PAIEMENT<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="listeUniteAdminPasSection"
+                  v-model="NumeroOp"
+                  option-value="numero_ordre_paiement"
+                  option-text="numero_ordre_paiement"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
                 >
-              </li>
-            </ul>
+                </model-list-select>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div >
+        <br>
+        
+        <!-- <div class="" align="right">
+                   
+<router-link :to="{name:'AjouterDecomptePrecedant'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">AJOUTER DECOMPTE ANTERIEUR
 
-
-          </div>
-          <div class="widget-content tab-content">
-<!-- <div id="tab2078" class="tab-pane active">
-wwwwwwwwwwww
-</div>
-<div id="tab100" class="tab-pane ">
-  azertrt
-</div> -->
-<div id="tab10045" class="tab-pane ">
-  <!-- <tr>
-    <td>
-                          <label
-                            >Unité Administrative
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="listeDesUa"
-                            v-model="formData.uniteadministrative_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                          
-                        </td>
-                        <td>
-                          <label
-                            >Unité Administrative
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="listeDesUa"
-                            v-model="formData.uniteadministrative_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                          
-                        </td>
-  </tr> -->
-<div class="widget-title">
-            <ul class="nav nav-tabs">
-               <li v-for="item in arrayExerciceDecompte(detailOp.uniteadministrative_id)" :key="item"><a data-toggle="tab" :href="'#'+item">Exercice {{item}}</a></li>
-
-            </ul>
-
-
-          </div>
-          <div class="widget-content tab-content">
-          
-
-
-<div v-for="item in arrayExerciceDecompte(detailOp.uniteadministrative_id)" :key="'DEC'+item" :id="item" class="tab-pane">
-   
-<table class="table table-bordered table-striped">
-                      <thead>
+                   </router-link> 
+                   </div> -->
+                  <h1 style="text-align:center;">DECOMPTE : {{marcheid}}</h1>
+    <table class="table table-bordered table-striped">
+                    <thead>
                       <tr>
 
                           <th style="text-align:center;font-size:12px">DESCRIPTION DES PRESTATIONS</th>
@@ -105,158 +92,171 @@ wwwwwwwwwwww
                          
                           <th style="text-align:center;font-size:12px" colspan="2">ACTION </th>
                       </tr>
-
-                      </thead>
-                      <tbody>
-                    <tr class="odd gradeX" v-for="type in decompteParExercice(detailOp.uniteadministrative_id,item)" :key="type.id">
-                         
-                          <td style="text-align:center;">{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{AfficheEntrepriseLibelle(afficheIdEntreprise(type.marche_id)) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantMarche(type.marche_id))) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formatageSomme(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{type.numero_decompte || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                    v-for="BesoinImmo in ListeDEsEntreprise"
+                    :key="BesoinImmo.id"
+                  >
+                    <td style="text-align:center;">{{afficheObjetMarche(BesoinImmo.marche_id) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{AfficheEntrepriseLibelle(afficheIdEntreprise(BesoinImmo.marche_id)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantMarche(BesoinImmo.marche_id))) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(BesoinImmo.montantmarche)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{BesoinImmo.numero_decompte || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">{{formaterDate(BesoinImmo.date_decompte) || 'Non renseigné'}}</td>
                                <td>
                              
-                              <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
+                              <button class="btn btn-danger" @click="supprimerDecompteFacture(BesoinImmo.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                               </button>
                           </td>
-                          
-                          
-                      </tr> 
-                     <tr>
-                       <td></td>
-                        <td></td>
-                         <td></td>
-                          <td></td>
-                           <td>CUMUL DECOMPTE</td>
-                            <td>78555</td>
-                             <td></td>
- 
-                     </tr>
-                      
-                      </tbody>
-                  </table>
-                  </div>
-          </div>
+                 
+                  </tr>
+                  <tr>
+                   <td></td>
+                  <td></td>
+                
+                 <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Total</td>
+                  <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande))}}</td>
+                  <td></td>
+  <td></td>
+                  <td></td>
+                  </tr>
+                    </tbody> 
+                </table>   
+     
+    </div>
 
-</div>
-          </div>
-        
+    <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+  @shortkey="ajouterEntreEnPatrimoine()">Open</button>
 
-  </div>
-  </div>
-  </div>
-   
+ <fab :actions="fabActions"
+                main-icon="apps"
+          @cache="ajouterEntreEnPatrimoine"
+        @searchMe="filter"
+         
+        bg-color="green"
+
+  ></fab> -->
+<notifications  />
   </div>
 </template>
   
 <script>
-import { mapGetters, mapActions } from "vuex";
-import moment from "moment";
-// import jsPDF from "jspdf";
-// import "jspdf-autotable";
- import {formatageSomme} from "@/Repositories/Repository"
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
-// import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
+import { formatageSomme } from '@/Repositories/Repository';
+    import {mapGetters, mapActions} from 'vuex';
+    import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
+  import moment from "moment";
+// import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth";
+
 export default {
-  components: {
-   // ModelListSelect
+   components: {
+    
+    ModelListSelect,
+     
   },
+  name: 'besionImmolisation',
   data() {
     return {
       fabActions: [
         {
           name: "cache",
           icon: "add",
+          
         },
+        {
+                  name: 'searchMe',
+                   icon: "search"
+              }
+        // {
+        //   name: "alertMe",
+        //   icon: "add_alert",
+        //   class: ""
+        // }
       ],
-      page: 0,
-      size: 10,
-      active_el: 0,
+// json_fields: {
+//         TYPE_UNITE_ADMINISTRATIVE: "typeUniteAdmin.libelle",
+//         UNITE_ADMINISTRATIVE: "uniteAdminist.libelle",
+//         DESIGNATION: "famille.libelle",
+//         QUANTITE: "quantite",
+//         PRIX_UNITAIRE: "prix_unitaire",
+//         MONTANT_TOTAL: "montant_total",
+//          DATE_DE_DEMANDE: "date_jour",
+//       },
+entrepriseid:0,
+uniteAdministrativeid:0,
+quantite: {
+       
+        qteentrant1:"0",
+        date_entre:""
+       
+      },
+      detailOp1:{
+        exercicebudget:""
+      },
       formData: {
-        code: "",
-        libelle: "",
-        section_id: "",
-        localisationgeo_id: "",
-        type_ua_id: "",
-        date_creation: "",
-
-        servicegest_id: "",
-        nature_section_id: "",
+        unite_administrative_id: "",
+        typeequipe_id: "",
+        famill_id: "",
+        typeua_id: "",
+        durevie: "",
+        articlestock_id: "",
+        quantitestock: "",
+        qtesortie:"0"
+        
+       
       },
-      editObservation: {},
-      editUniteAdministrative: {
-        code: "",
-        libelle: "",
-        section_id: "",
-        localisationgeo_id: "",
-        type_ua_id: "",
-        date_creation: "",
-        servicegest_id: "",
-        nature_section_id: "",
+     
+       affiche_filtre:false,
+      affiche_boutton_filtre:true,
+      editStock: {
+       unite_administrative_id: "",
+        typeequipe_id: "",
+        famill_id: "",
+        typeua_id: "",
+        durevie: "",
+        articlestock_id: "",
+        quantitestock: "",
+        qteentrant1:"0",
+        
+        
       },
-      json_fields: {
-        TYPE_UNIT_ADMINISTRATIVE: "typeua.libelle",
-        SECTION: "secti.nom_section",
-        SERVICE_GESTIONNAIRE: "servivegest.libelle",
-        LOCALISATION_GEO: "localgeo.libelle",
-        CODE: "code",
-        LIBELLE: "libelle",
-        DATE_CREATION: "date_creation",
-      },
-      search: "",
+      search: ""
     };
   },
-
-  created() {
+ created() {
     this.marcheid = this.$route.params.id;
-    this.detailOp = this.decomptefactures.find(
+    this.detailOp1 = this.decomptefactures.find(
       (idmarche) => idmarche.id == this.$route.params.id
     );
   },
   computed: {
-    ...mapGetters("uniteadministrative", [
-      "jointureUaChapitreSection",
-      "uniteAdministratives",
-      "budgetEclate",
-      "decomptefactures",
-      "groupeUniteAdministrativeDecompte"
-
-      // "chapitres",
-      // "sections"
-    ]),
-    ...mapGetters("parametreGenerauxAdministratif", [
-      "chapitres",
-      "sections",
+    ...mapGetters("SuiviImmobilisation", [
+    
+      "equipements",
+      "familles",
+      "articles",
+     "marqueVehicules",
+     "ModeleVehicules",
       "type_Unite_admins",
-      "services_gestionnaires",
-      "structures_administratives",
-      "localisations_geographiques",
-      "afficheServiceGestionnaireNiveau4",
-      "afficheLocalisationGeoNiveau5",
-      "natures_sections",
-      "structures_geographiques",
+      "totalQteEntrant",
+      "totalQteSortant",
+     "getterUa_idImo",
+     "ficheArticle"
     ]),
-    ...mapGetters("parametreGenerauxFonctionnelle", ["plans_fonctionnels"]),
-
-    ...mapGetters("Utilisateurs", [
-      "getterAffectionServiceCF",
-      "getterUtilisateur",
-      "getterAffectation",
-      "getterUniteAdministrativeByUser",
+    ...mapGetters("gestionMarche", ["entreprises", "secteur_activites"]),
+    ...mapGetters("parametreGenerauxSourceDeFinancement", [
+      "sources_financements",
+      "types_financements",
     ]),
-    ...mapGetters("bienService", [
-      "gettersServiceRealiteFaitOp",
-      "groupeUniteAdministrativeDecompte",
-      "getFacturePersonnaliser",
-      "getterActeEffetFinanciers",
-      "modepaiements",
+     ...mapGetters("bienService", [
+      "groupeEntreprise",
       "mandats",
+      "getMandatPersonnaliserVise",
       "getActeEffetFinancierPersonnaliser45",
       "getActeEffetFinancierPersonnaliser",
       "acteEffetFinanciers",
@@ -265,8 +265,6 @@ export default {
       "afficheContratualisation",
       "affichePlanifier",
       "nombremarchesExecute",
-      "avenants",
-      "getMandatPersonnaliserVise",
       "AfficheMarcheNonAttribue",
       "nombreTotalMarche",
       "marches",
@@ -279,90 +277,55 @@ export default {
       "text_juridiques",
       "gettersOuverturePersonnaliser",
       "typeActeEffetFinanciers",
-      "personnaliseGetterMarcheBailleur",
-      "getterMandate",
-      "getActeEffetFinancierPersonnaliserContrat",
-      "getterCojos",
-      "getterDemandeAno",
-      "getterAnoDMPBailleur",
-      "motifDecisions"
     ]),
+    ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
+    ...mapGetters("uniteadministrative", ["decomptefactures","groupeParAnneeDecompte","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
-    ...mapGetters("personnelUA", ["acteur_depenses", "paiementPersonnel"]),
 
-    ...mapGetters("uniteadministrative", [
-      "plans_programmes",
-      "uniteAdministratives",
-      "afficheNiveauAction",
-      "afficheNiveauActivite",
-      "derniereNivoPlanBudgetaire",
-      "getPersonnaliseBudgetGeneralParPersonnel",
-      "budgetEclate",
-      "getSousBudget"
-    ]),
+  SommeDesDmdParBonCommande() {
+   
+    return this.ListeDEsEntreprise.filter(item=>item.exercicebudget==this.marcheid).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
+    },
 
-    ...mapGetters("parametreGenerauxAdministratif", [
-      "sections",
-      "type_Unite_admins",
-      "plans_programmes",
-      "natures_sections",
-      "grandes_natures",
-      "afficheNiveauPlanProg",
-      "exercices_budgetaires",
-      "localisations_geographiques",
-    ]),
-    ...mapGetters("parametreGenerauxSourceDeFinancement", [
-      "sources_financements",
-      "types_financements",
-    ]),
-    ...mapGetters("parametreGenerauxFonctionnelle", [
-      "plans_fonctionnels",
-      "afficheNiveauPlanFonctionnel",
-    ]),
+ ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.AnneParUa;
 
-    ...mapGetters("parametreGenerauxActivite", [
-      "plans_activites",
-      "afficheNiveauAction",
-      "afficheNiveauActivite",
-    ]),
+      //retourne la section selectionner
 
-    ...mapGetters("parametreGenerauxBudgetaire", [
-      "plans_budgetaires",
-      "derniereNivoPlanBudgetaire",
-    ]),
-    ...mapGetters("gestionMarche", [
-      "entreprises",
-      "secteur_activites",
-      "banques",
-      "comptes",
-      "getCompte",
-    ]),
-    ...mapGetters("parametreGenerauxFonctionnelle", [
-      "structuresDecision",
-      "plans_Decision",
-      
-    ]),
-    // admin: admin,
-    // dcf: dcf,
-    // noDCfNoAdmin: noDCfNoAdmin,
-    listeDesUa() {
-      if (this.noDCfNoAdmin) {
-        let colect = [];
-        this.uniteAdministratives.filter((item) => {
-          let val = this.getterUniteAdministrativeByUser.find(
-            (row) => row.uniteadministrative_id == item.id
-          );
-          if (val != undefined) {
-            colect.push(item);
+      if (this.uniteAdministrativeid != 0 ) {
+        objet = this.AnneParUa.filter((item) => {
+          if (item.unite_administrative_id == vM.uniteAdministrativeid ) {
             return item;
           }
         });
-        return colect;
+        return objet;
       }
-
-      return this.uniteAdministratives;
+      // if (this.entrepriseid != 0 && this.uniteAdministrativeid == 0) {
+      //   objet = this.AnneParUa(this.marcheid).filter((item) => {
+      //     if (item.entreprise_id == vM.entrepriseid && item.exercicebudget==this.marcheid) {
+      //       return item;
+      //     }
+      //   });
+      // }
+    
+      // if (this.uniteAdministrativeid != 0 && this.entrepriseid != 0) {
+      //   objet = this.AnneParUa(this.marcheid).filter((item) => {
+      //     if (
+      //       item.uniteAdministrative_id == vM.uniteAdministrativeid &&
+      //       item.entreprise_id == vM.entrepriseid && item.exercicebudget==this.marcheid
+      //     ) {
+      //       return item;
+      //     }
+      //   });
+      //   return objet;
+      // }
+      
+      return objet;
     },
-    afficheIdEntreprise() {
+
+afficheIdEntreprise() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
@@ -386,180 +349,7 @@ export default {
         }
       };
     },
-    afficheObjetMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.objet;
-      }
-      return 0
-        }
-      };
-    },
-    afficherStatusSib() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.sib;
-      }
-      return 0
-        }
-      };
-    },
-    afficheMarcheDecompte() {
-      return id => {
-        if (id != null && id != "") {
-          return this.decomptefactures.filter(
-            element => element.uniteadministrative_id == id 
-          );
-        }
-      };
-    },
-    decompteParExercice(){
-      return (marche_id,exercice)=>{
-          let objet=this.afficheMarcheDecompte(this.detailOp.uniteadministrative_id)
-          if(objet.length>0){
-              return objet.filter(item=>item.exercicebudget==exercice && item.diff_decompte==1)
-          }
-          return []
-      }
-      },
-   arrayExerciceDecompte(){
-           return (marche_id)=>{
-               let objet=this.afficheMarcheDecompte(marche_id)
-             //  let vm=this
-               let array_exercie=[]
-               if(objet.length>0){
-
-
-                   objet.forEach(function (val) {
-                       array_exercie.push(val.exercicebudget)
-                   })
-                   let unique = [...new Set(array_exercie)]
-                  // console.log(unique)
-                   if (unique.length==1){
-   return []
-                   }
-                   return unique
-               }
-               return []
-           }
-      },
-    //fonction Lega le 18/03/2021
-recupererNomDuControleurF() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getterUtilisateur.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.name;
-      }
-      return 0
-        }
-      };
-    },
-recupererIdUser() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getterAffectionServiceCF.find(qtreel => qtreel.servicecf_id == id && qtreel.date_fin==null);
-
-      if (qtereel) {
-        return qtereel.user_id;
-      }
-      return 0
-        }
-      };
-    },
- recupererIdServiceCF() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getterAffectation.find(qtreel => qtreel.uniteadministrative_id == id   && qtreel.date_fin==null);
-
-      if (qtereel) {
-        return qtereel.servicecf_id;
-      }
-      return 0
-        }
-      };
-    },
-    AfficheSectionLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.sections.find((qtreel) => qtreel.id == id);
-
-          if (qtereel) {
-            return qtereel.nom_section;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheProgrammeLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.plans_programmes.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheUaLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.uniteAdministratives.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheActiviteLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.plans_activites.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheLigneEconoLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.plans_budgetaires.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheEntrepriseLibelle() {
+     AfficheEntrepriseLibelle() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.entreprises.find((qtreel) => qtreel.id == id);
@@ -571,256 +361,118 @@ recupererIdUser() {
         }
       };
     },
+afficheObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+AnneParUa() {
+  return this.decomptefactures.filter( (qtreel) => qtreel.exercicebudget == this.marcheid)
+      
+    },
 
-    recupCompte1(){
-    
-          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.entreprise_id == this.detailOp.entreprise_id);
-
-          if (qtereel) {
-            return qtereel.compte_id;
-          }
-          return 0;
+arrayExerciceDecompte() {
+      return (id1) => {
         
-     
-    },  
-
-    recupCompte2(){
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.comptes.find((qtreel) => qtreel.id == id);
-
-          if (qtereel) {
-            return qtereel.rib;
+        let objet = this.AnneParUa(id1);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.exercicebudget);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
           }
-          return 0;
+          return unique;
+        }
+        return [];
+     };
+    },
+
+
+
+
+   libelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    ListeDecompteParUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           return this.groupeParAnneeDecompte.filter(qtreel => qtreel[0].uniteadministrative_id == id && qtreel[0].diff_decompte == 1);
+
         }
       };
     },
 
-     recupBanquee1(){
-          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.entreprise_id == this.detailOp.entreprise_id);
-          if (qtereel) {
-            return qtereel.banq_id;
-          }
-          return 0;
-    },
 
-     recupBanquee2(){
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.banques.find((qtreel) => qtreel.id == id);
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheNumeroMarcheLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.marches.find((qtreel) => qtreel.id == id);
-
-          if (qtereel) {
-            return qtereel.numero_marche;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheTypeFinancementLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.types_financements.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-       AfficheSourceFinancementLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.sources_financements.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-    AfficheModePaiementLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.modepaiements.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-       AfficheFamilleMotifLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.motifDecisions.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-     AfficheMotifLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.motifDecisions.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
-
-AfficheActionLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.plans_activites.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
+   groupeParUa() {
+      
+           return this.groupeUniteAdministrativeDecompte.filter(qtreel => qtreel[0].diff_decompte == 1);
 
     
-AfficheSousBudgetLibelle() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.getSousBudget.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.activite_enfant;
-          }
-          return 0;
-        }
-      };
     },
-
-    //fin des fonctions Lega  
-
-    listeServiceRealiteFait() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersServiceRealiteFaitOp.filter(
-            (qtreel) => qtreel.op_definitif_id == id
-          );
-        }
-      };
-    },
-    afficheNumeroOPAnnulation() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.groupeUniteAdministrativeDecompte.find(
-            (qtreel) => qtreel.numero_ordre_paiement == id
-          );
-
-          if (qtereel) {
-            return qtereel.id_op_provisoire;
-          }
-          return 0;
-        }
-      };
-    },
-  
-
-    afficheNumeroOP() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.groupeUniteAdministrativeDecompte.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.numero_ordre_paiement;
-          }
-          return 0;
-        }
-      };
-    },
+    
+   
   },
   methods: {
-    ...mapActions("bienService", [
-      "ajouterServiceRealiteFaitOp",
-      "modifierServiceRealiteFaitOp",
-      "supprimerServiceRealiteFaitOp",
+    ...mapActions("SuiviImmobilisation", [
+      "getAllStock",
+      "ajouterStock",
+      "modifierStock",
+      "supprimerStock"
     ]),
-     ...mapActions('uniteadministrative',[
-
- "ModifierDecompteFacture",
- "supprimerDecompteFacture"
-   
-   
-   ]),
-    afficherModalListeExecution() {
-      window.history.back();
-    },
-  
+    ...mapActions("uniteadministrative",
+     ["supprimerStockArticle"]),
     
-    alert() {
-      console.log("ok");
-    },
 
+    pagePrecedent(){
+                window.history.back()
+            },
+            
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
     formatageSomme:formatageSomme,
-    ExporterEnExel() {
-      this.$refs.excel.click();
-    },
-  },
+  }
 };
 </script>
-<style>
-.tailleModal {
-  width: 53%;
-  margin: 0 -28%;
+<style scoped>
+.taillemodal {
+  width: 800px;
+  margin: 0 -380px;
 }
-td{
-  font-size:14px;
+.taillemodalMod{
+   width: 500px;
+  margin: 0 -200px;
 }
-th{
-  font-size:14px;
+.sommecolor{
+  background-color: red;
+  color:red;
+  font-size: 120%;
+  text-align: center;
+  font-weight:bold;
+}
+.tailgrandStock{
+  width: 88%;
+  margin: 0 -42%;
 }
 </style>

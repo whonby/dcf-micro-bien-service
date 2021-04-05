@@ -1,27 +1,66 @@
-
+libelleUA
 <template>
-  <div>
-    <div align="center" style="margin-">
-      <h3>Marchés /Contrats</h3>
-    </div>
-    <br />
-    <div class="">
-      <table class="table table-bordered table-striped">
-        <tr>
-          <td>
+
+<div class="container-fluid">
+      <hr />
+      
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Ajouter Marché/Contrat</h5>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
+
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                    <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+               <h3>Marchés /Contrats</h3>
+              
+            </div>
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#SansContratIdent">Information</a>
+                      </li>
+                       
+                     
+                      
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="SansContratIdent" class="tab-pane active">
+                      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+           <tr>
+               <td>
             <div class="control-group">
               <label class="control-label">Année Budgétaire </label>
               <div class="controls">
                 <input
                   type="text"
                   :value="anneeBugetaire"
-                  class="span4"
+                  class="span"
                   readonly
+                  style="border:1px solid #000"
+                  
                 />
               </div>
             </div>
           </td>
-          <td colspan="2">
+          <td colspan="3">
             <!-- <div class="" align="left">
                         Selectionner UA:
                         <model-list-select style="background-color: rgb(255,255,255);"
@@ -45,7 +84,8 @@
               <div class="controls">
                 <select
                   v-model="formData.unite_administrative_id"
-                  class="span8"
+                  class="span"
+                  style="border:1px solid #000"
                 >
                   <option
                     v-for="plans in groupeUaPourMarheHorSib"
@@ -62,26 +102,28 @@
               </div>
             </div>
           </td>
-          <td colspan="">
+         
+           </tr>
+           <tr>
+                <td colspan="">
             <div class="control-group">
               <label class="control-label">Référence du marché</label>
               <div class="controls">
                 <input
                   type="text"
                   v-model="formData.reference_marche"
-                  class="span3"
+                  class="span"
                   placeholder="Saisir la référence du marché"
+                  style="border:1px solid #000"
                 />
               </div>
             </div>
           </td>
-        </tr>
-        <tr>
           <td colspan="">
             <div class="control-group">
               <label class="control-label">Type de marché </label>
               <div class="controls">
-                <select v-model="formData.type_marche_id" class="span4">
+                <select v-model="formData.type_marche_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in typeMarches"
                     :key="plans.id"
@@ -105,7 +147,7 @@
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                     </select> -->
 
-                <select v-model="formData.gdenature_id" class="span4">
+                <select v-model="formData.gdenature_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in grandes_natures"
                     :key="plans.id"
@@ -117,89 +159,158 @@
               </div>
             </div>
           </td>
-          <td colspan="2">
+               </tr>
+               <tr>
+                    <td colspan="4">
             <div class="control-group">
               <label class="control-label">Objet marché / contrat</label>
               <div class="controls">
                 <textarea
+                style="border:1px solid #000"
                   v-model="formData.objet"
-                  class="span7"
+                  class="span"
                   rows="2"
                   placeholder="Saisir le texte"
                 ></textarea>
               </div>
             </div>
           </td>
-        </tr>
-        
 
-        <tr>
-          <td>
+               </tr>
+               <tr>
+                 <td>
             <div class="control-group">
-              <label class="control-label">Classification Economique</label>
+              <label class="control-label">Activité</label>
+              <div class="controls">
+                <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
+                  <option
+                        v-for="activite in activiteDynamiques(formData.unite_administrative_id)" 
+                        :key="activite[0].activite_id"
+                        :value="activite[0].activite_id"
+                      >{{afficherLesActivite(activite[0].activite_id)}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
+          <template v-if="comparereActivite(this.formData.activite_id)== this.formData.activite_id">
+ <td >
+           
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >Sous Budget</label
+              >
               <div class="controls">
                 <select
-                  v-model="formData.economique_id"
-                  :readOnly="deveroueconomiq"
-                  class="span4"
+                  v-model="formData.unite_zone"
+                  class="span"
+                  style="border:1px solid #000"
                 >
+                <option></option>
                   <option
-                    v-for="eco in ligneBudgeteyuy(
-                      formData.unite_administrative_id
-                    )"
-                    :key="eco.ligneeconomique_id"
-                    :value="eco.ligneeconomique_id"
+                    v-for="plans in AfficheUniteZone(formData.activite_id)"
+                    :key="plans.id"
+                    :value="plans.id"
                   >
-                    {{ afficherPlanEconomique(eco.ligneeconomique_id) }}
+                    {{
+                     
+                        plans.activite_enfant
+                      
+                    }}
                   </option>
                 </select>
               </div>
             </div>
           </td>
-          <td>
+           <td >
+            
             <div class="control-group">
-              <label class="control-label">Activité</label>
+              <label class="control-label" title="unite administrative"
+                >Ligne Economique</label
+              >
               <div class="controls">
-                <select v-model="formData.activite_id" class="span4">
-                  <!-- <option
-                        v-for="activite in activiteDynamiques(formData.economique_id) :readOnly="deverouactivite""
-                        :key="activite.activite_id"
-                        :value="activite.activite_id"
-                      >{{afficherLesActivite(activite.activite_id)}}</option> -->
+                <select
+                style="border:1px solid #000"
+                  v-model="formData.economique_id"
+                  class="span"
+                >
+                  <option
+                    v-for="plans in AfficheUniteZoneLigneEconnomique(formData.unite_zone)"
+                    :key="plans.id"
+                    :value="plans.ligneeconomique_id"
+                  >
+                    {{
+                     
+                        libelleLigneEconomique(plans.ligneeconomique_id)
+                      
+                    }}
+                  </option>
                 </select>
               </div>
             </div>
           </td>
-          <td>
+          </template>
+         <template v-else>
+<td colspan="2">
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >Ligne Economique</label
+              >
+              <div class="controls">
+                <select
+                style="border:1px solid #000"
+                  v-model="formData.economique_id"
+                  class="span"
+                >
+                  <option
+                    v-for="plans in AfficheUALigneEconnomique(formData.unite_administrative_id)"
+                    :key="plans[0].id"
+                    :value="plans[0].ligneeconomique_id"
+                  >
+                    {{libelleLigneEconomique(plans[0].ligneeconomique_id)}}
+                     
+                        
+                      
+                   
+                  </option>
+                </select>
+              </div>
+            </div>
+          
+          
+          </td>
+         </template>
+         
+           
+ 
+          
+                 </tr>
+              <tr>
+                <td>
             <div class="control-group">
               <label class="control-label">Imputation Budgétaire</label>
               <div class="controls">
                 <input
                   type="text"
-                  :value="ImputationBudget(formData.economique_id)"
-                  class="span4"
+                  :value="ImputationBudget"
+                  class="span"
                   placeholder="Saisir le Imputation"
                   readonly
+                  style="border:1px solid #000"
                 />
               </div>
             </div>
           </td>
-          <td colspan="">
+           <td colspan="">
             <div class="control-group">
               <label class="control-label">Type de financement</label>
               <div class="controls">
-                <!-- <input
-           type="text"
-           v-model="formData.type_financement"
-           class="span4"
-          
-           readonly
-         /> -->
-                <select v-model="formData.type_financement" class="span3">
+               
+                <select v-model="formData.type_financement" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in types_financements"
                     :key="plans.id"
                     :value="plans.id"
+                    style="border:1px solid #000"
                   >
                     {{ plans.libelle }}
                   </option>
@@ -207,9 +318,7 @@
               </div>
             </div>
           </td>
-        </tr>
-        <tr>
-          <td colspan="">
+           <td colspan="">
             <div class="control-group">
               <label class="control-label">Source de financement</label>
               <div class="controls">
@@ -220,7 +329,7 @@
            
            readonly
          /> -->
-                <select v-model="formData.source_financement" class="span4">
+                <select v-model="formData.source_financement" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in sources_financements"
                     :key="plans.id"
@@ -232,12 +341,13 @@
               </div>
             </div>
           </td>
-
-          <td colspan="">
+              </tr>
+              <tr>
+                <td colspan="">
             <div class="control-group">
               <label class="control-label">Procédure Passation</label>
               <div class="controls">
-                <select v-model="formData.procedure_passation_id" class="span4">
+                <select v-model="formData.procedure_passation_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in afficherListeModePassation"
                     :key="plans.id"
@@ -253,20 +363,16 @@
             <div class="control-group">
               <label class="control-label">Montant prévu</label>
               <div class="controls">
-                <money v-model="formData.montant_marche" class="span4"></money>
-                <!-- <input
-           type="number"
-           v-model="formData.montant_marche"
-           class="span4" /> -->
+                <money v-model="formData.montant_marche" class="span" style="border:1px solid #000"></money>
+               
               </div>
             </div>
           </td>
-
           <td>
             <div class="control-group">
               <label class="control-label">Nature des prix</label>
               <div class="controls">
-                <select v-model="formData.nature_prix_id" class="span3">
+                <select v-model="formData.nature_prix_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in Nature_des_prix"
                     :key="plans.id"
@@ -278,87 +384,13 @@
               </div>
             </div>
           </td>
-
-          <!-- <td>
-     <div class="control-group">
-      <label class="control-label">Livrable</label>
-      <div class="controls">
-     <input
-       type="text"
-       v-model="formData.livrable"
-       class="span3"
-       placeholder="Saisir le livrable"
-     />
-   </div>
-   </div>
-     </td> -->
-        </tr>
-
-        <tr>
-          <!-- <td colspan="">
-              
-               <div class="control-group">
-            <label class="control-label">Motif de passation</label>
-            <div class="controls">
-            
-               <select v-model="formData.motif_passation_id" class="span4" >
-               <option v-for="plans in motif_passation" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>   -->
-
-          <!-- <td colspan="2">
-            <div class="control-group">
-              <label class="control-label">Infrastructure</label>
-              <div class="controls">
-                <select v-model="formData.infrastructure_id" class="span6">
-                  <option
-                    v-for="plans in getterInfrastrucure"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td> -->
-
-          <!-- <td>
-                  <div class="control-group">
-       <label class="control-label">Departement</label>
-       <div class="controls">
-        
-               <select v-model="formData.departement_id" class="span3" :readOnly="deveroiullage">
-               <option v-for="plans in recupererParentId(formData.localisation_geographie_id)" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-      
-       </div>
-     </div>
-         </td> -->
-        </tr>
-      </table>
-
-      <div class="widget-title">
-        <ul class="nav nav-tabs">
-          <li class="active">
-            <a data-toggle="tab">INFRASTRUCTURES ET EQUIPEMENTS</a>
-          </li>
-        </ul>
-      </div>
-      <table
-        class="table table-bordered table-striped"
-        style="border: 1px solid #000"
-      >
-        <tr>
-          <td colspan="1">
+                </tr>
+                <tr>
+                  <td colspan="">
             <div class="control-group">
               <label class="control-label">Chapitre</label>
               <div class="controls">
-                <select v-model="formData.chapitre_infra_id" class="span4">
+                <select v-model="formData.chapitre_infra_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in ListChapitre"
                     :key="plans.id"
@@ -370,12 +402,11 @@
               </div>
             </div>
           </td>
-
-          <td colspan="1">
+          <td colspan="">
             <div class="control-group">
               <label class="control-label">Catégorie</label>
               <div class="controls">
-                <select v-model="formData.cat_infra_id" class="span4">
+                <select v-model="formData.cat_infra_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in ListCategorie(formData.chapitre_infra_id)"
                     :key="plans.id"
@@ -387,12 +418,11 @@
               </div>
             </div>
           </td>
-
-          <td colspan="1">
+          <td colspan="">
             <div class="control-group">
               <label class="control-label">Sous Catégorie</label>
               <div class="controls">
-                <select v-model="formData.souscat_infra_id" class="span4">
+                <select v-model="formData.souscat_infra_id" class="span" style="border:1px solid #000">
                   <option
                     v-for="plans in ListSousCategorie(formData.cat_infra_id)"
                     :key="plans.id"
@@ -404,31 +434,75 @@
               </div>
             </div>
           </td>
-        </tr>
-      </table>
-
-      <div class="modal-footer">
-        <a
-          class="btn btn-primary"
-          href="#"
-          @click.prevent="ajouterMarcheHorSibLocal"
-          >Enregistrer</a
-        >
-        <a
-          data-dismiss="modal"
-          class="btn"
-          @click.prevent="allerPageMarcheHorsib"
-          href="#"
-          >Fermer</a
-        >
+                </tr>
+            </table>
+          </div>
+          
+                    </div>
+                 
+                    
+                  </div>
+                  <br />
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                          class="btn btn-primary"
+                          @click.prevent="ajouterMarcheHorSibLocal"
+                        >Valider</a>
+                        <a
+                          @click.prevent="pagePrecedent()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </table>
+            </div>
+         
+          </div>
+        </div>
       </div>
+      <notifications/>
     </div>
 
-    <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-    <notifications />
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </template>
-  
+
 <script>
 import { mapGetters, mapActions } from "vuex";
 //import { formatageSomme } from "../../../src/Repositories/Repository";
@@ -542,6 +616,9 @@ export default {
       "getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral",
       "getPersonnaliseTransfert",
+      "getSousBudget",
+      "groupeActiviteBudgetEclate",
+      "groupeParBAILLER"
     ]),
     ...mapGetters("parametreGenerauxActivite", [
       "structures_activites",
@@ -581,6 +658,78 @@ export default {
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
+
+
+ImputationBudget(){
+      return this.AfficheCodeActivite(this.formData.activite_id) + "   "+  this.AfficheCodeBudgetaire(this.formData.economique_id)
+},
+
+
+ libelleLigneEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat("  ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+
+comparereActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getSousBudget.find(
+            (qtreel) => qtreel.activite_parent_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.activite_parent_id;
+          }
+          return 0;
+        }
+      };
+    },
+AfficheUALigneEconnomique() {
+      return (id) => {
+        if (id != null && id != "" ) {
+          return this.groupeParBAILLER.filter(
+            (qtreel) => qtreel[0].uniteadministrative_id == id
+          );
+
+         
+        }
+      };
+    },
+AfficheUniteZoneLigneEconnomique() {
+      return (id) => {
+        if (id != null && id != "" ) {
+          return this.budgetEclate.filter(
+            (qtreel) => qtreel.sous_budget_id == id
+          );
+
+         
+        }
+      };
+    },
+AfficheUniteZone() {
+      return (id) => {
+        if (id != null && id != "" ) {
+          return this.getSousBudget.filter(
+            (qtreel) => qtreel.activite_parent_id == id
+          );
+
+         
+        }
+      };
+    },
+
+
+
 
 AfficheGrandeDepense() {
       return (id,id1) => {
@@ -674,11 +823,11 @@ AfficheGrandeDepense() {
     activiteDynamiques() {
       return (id) => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(
+          return this.groupeActiviteBudgetEclate.filter(
             (element) =>
-              element.ligneeconomique_id == id &&
-              element.uniteadministrative_id ==
-                this.formData.unite_administrative_id
+              
+              element[0].uniteadministrative_id ==id
+                
           );
         }
       };
@@ -698,10 +847,25 @@ AfficheGrandeDepense() {
       };
     },
 
-    ImputationBudget() {
+    AfficheCodeBudgetaire() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheCodeActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_activites.find(
             (qtreel) => qtreel.id == id
           );
 
@@ -826,6 +990,9 @@ AfficheGrandeDepense() {
       "supprimerMarcheHorSib",
       "getMarcheHorSib",
     ]),
+    pagePrecedent(){
+                window.history.back()
+            },
     allerPageMarcheHorsib() {
       this.$router.push({
         name: "marcheHorsib",
@@ -846,15 +1013,15 @@ AfficheGrandeDepense() {
     // ajouter marche hors sib
 
     ajouterMarcheHorSibLocal() {
-      this.$router.push({
-        name: "marcheHorsib",
-      });
+      // this.$router.push({
+      //   name: "marcheHorsib",
+      // });
 
       var nouvelObjet = {
         ...this.formData,
         exo_id: this.anneeBugetaire,
         sib: 1,
-        imputation: this.ImputationBudget(this.formData.economique_id),
+        imputation: this.ImputationBudget,
       };
       
       this.ajouterMarcheHorSib(nouvelObjet);

@@ -59,12 +59,17 @@ import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSi
 import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
 import BudgetEclateRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BudgetEclateRegie.vue"
 import groupeUaDecompte from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/groupeUaDecompte.vue"
-
+import GroupeAnneDecompte from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/GroupeParAnneeDecompte.vue"
 import ListeDecompteAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/ListeDecompteAnterieur.vue"
 import ListeBailleurUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeBailleurUniteAdministrative.vue"
 import ListeUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeUniteAdministrative.vue"
 import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/GroupeAnneDecompte/:id",
+    name: "GroupeAnneDecompte",
+    component: GroupeAnneDecompte
+},
   {
     path: "/ListeDecompteAnterieur/:id",
     name: "ListeDecompteAnterieur",

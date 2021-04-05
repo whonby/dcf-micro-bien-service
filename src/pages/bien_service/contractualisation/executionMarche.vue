@@ -20,10 +20,34 @@
                 <i class="icon-th"></i>
               </span>
               <h5>March&eacute;s Biens et Fournitures en Exécution</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search"
+                    />
+                  </div>
+                </div>
+                <div class="span4">
+                  <br />
+                  Afficher
+                  <select
+                    name="pets"
+                    id="pet-select"
+                    v-model="size"
+                    class="span3"
+                  >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  Entrer
+                </div>
             </div>
 
 
@@ -50,7 +74,9 @@
                 <tbody v-if="MarcheExecutionBienEtFourniture.length>0">
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                MarcheExecutionBienEtFourniture"
+                 partition(rechercheUa, size)[
+                      page
+                    ]"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -125,13 +151,31 @@
                 </tbody>
               </table>
 
-                           <!-- <div class="row-fluid vld-parent"  align="center" style="margin:10px ">
-                             <loading :active="true"
-                                      :can-cancel="false"
-                                      :is-full-page="fullPage"></loading> -->
-<!--                             <clip-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></clip-loader>-->
-<!--                             <pulse-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></pulse-loader>-->
-                           <!-- </div> -->
+                           
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page == 0 }">
+                    <a @click.prevent="precedent()" href="#">Précedent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(rechercheUa, size)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el == index }"
+                  >
+                    <a @click.prevent="getDataPaginate(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled: page == partition(rechercheUa, size).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
 
                         </div>
  
@@ -152,6 +196,7 @@
  import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from '../../../../src/Repositories/Auth';
+ import { partition } from "../../../../src/Repositories/Repository";
 
 export default {
   name:'type facture',
@@ -164,6 +209,9 @@ export default {
     return {
       isLoading: false,
       fullPage: false,
+       page: 0,
+      size: 10,
+      active_el: 0,
       fabActions: [
         {
           name: "cache",
@@ -288,6 +336,13 @@ loading(){
   }
   return true
 },
+
+rechercheUa() {
+      const st = this.search.toLowerCase();
+      return this.MarcheExecutionBienEtFourniture.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
 // pour tous les marches en investissement
    MarcheExecutionBienEtFourniture() {
        // const st = this.search.toLowerCase();
@@ -1090,6 +1145,21 @@ return element;
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
+
+    partition: partition,
+
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
       modifierModalResiliation(){
       var nouvelObjet1 = {
       ...this.editActeEffetFinancier,

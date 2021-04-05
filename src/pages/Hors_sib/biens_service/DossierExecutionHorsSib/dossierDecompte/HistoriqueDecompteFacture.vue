@@ -36,7 +36,7 @@
                     <td style="text-align:center;"
                     >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
                     <td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
+                    >{{formatageSomme(parseFloat(montantmarche)) || 'Non renseigné'}}</td>
 <td style="text-align:center;"
                     >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
 
@@ -167,13 +167,13 @@ export default {
 props:["macheid"],
  created() {
             this.marcheid=this.$route.params.id
-   this.detail_Facture = this.getFacturePersonnaliser.find(
+   this.detail_Facture = this.decomptefactures.find(
        idmarche => idmarche.id == this.$route.params.id
          )
       
 },
   computed: {
- ...mapGetters("bienService", ["getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+ ...mapGetters("bienService", ["decomptefactures","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -190,7 +190,7 @@ props:["macheid"],
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
  "decomptefactures",
- "HistoriqueDecompteFactures"
+ "decomptefactures"
    
    
    ]), 
@@ -287,7 +287,7 @@ FamilleMotifCf() {
      afficheMarcheDecompte() {
       return id => {
         if (id != null && id != "") {
-          return this.HistoriqueDecompteFactures.filter(
+          return this.decomptefactures.filter(
             element => element.marche_id == id
           );
         }
@@ -409,7 +409,7 @@ if (qtereel) {
     CumulMontantFacture() {
       return id => {
         if (id != null && id != "") {
-           return this.getFacturePersonnaliser.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_propose_ht), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
 
         }
       };
@@ -417,7 +417,7 @@ if (qtereel) {
     CumulAvance() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
 
         }
       };
@@ -425,7 +425,7 @@ if (qtereel) {
     CumulGArantie() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
 
         }
       };
@@ -433,7 +433,7 @@ if (qtereel) {
     CumulPenalite() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
 
         }
       };
@@ -441,7 +441,7 @@ if (qtereel) {
     CumulNetHtva() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
 
         }
       };
@@ -449,7 +449,7 @@ if (qtereel) {
     CumulNetTTC() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
 
         }
       };
@@ -457,7 +457,7 @@ if (qtereel) {
     CumulPartEtat() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
 
         }
       };
@@ -465,7 +465,7 @@ if (qtereel) {
     CumulPartBailler() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_bailleur), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_bailleur), 0).toFixed(0);
 
         }
       };
@@ -473,10 +473,10 @@ if (qtereel) {
      MontantFacture() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+           const qtereel = this.decomptefactures.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.prix_propose_ht;
+        return qtereel.montantmarche;
       }
       return 0
         }
@@ -530,7 +530,7 @@ if (qtereel) {
       CumulRetenuAvance() {
       return id => {
         if (id != null && id != "") {
-           return this.HistoriqueDecompteFactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
 
      
         }
@@ -557,7 +557,7 @@ if (qtereel) {
     MontantTVAFacture() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+           const qtereel = this.decomptefactures.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.tva;
@@ -832,10 +832,10 @@ if (qtereel) {
     MontantFactureHT() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+           const qtereel = this.decomptefactures.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.prix_propose_ht;
+        return qtereel.montantmarche;
       }
       return 0
         }
@@ -844,7 +844,7 @@ if (qtereel) {
  afficheDecompteTableau() {
       return id => {
         if (id != null && id != "") {
-          return this.HistoriqueDecompteFactures.filter(
+          return this.decomptefactures.filter(
             element => element.marche_id == id 
           );
         }
@@ -907,7 +907,7 @@ if (qtereel) {
         backdrop: 'static',
         keyboard: false
       });
-      this.editDecompte = this.HistoriqueDecompteFactures.find(item=>item.id==id)
+      this.editDecompte = this.decomptefactures.find(item=>item.id==id)
     },
   }
 };
