@@ -229,6 +229,68 @@ CodeExempte
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    </td> -->
+<<<<<<< HEAD
+           <td>
+          
+                     <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
+                      <span class=""><i class="icon-trash"></i>
+                      Supprimer
+                      </span>
+                    </button>
+                   </td>
+                  
+                   
+
+                       </tr>
+                        <tr>
+                      
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                      <td > 
+                      </td>
+                    <td >
+                          
+                           
+                      </td>
+                      
+                       <td>
+                           
+                           
+                      </td>
+                       <td style="font-weight:bold;"> Total Marché
+                      </td>
+                    <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(montantMarche))}}
+                           
+                      </td>
+                        <td>
+                          
+                      </td>
+                      
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                    </tr>
+=======
                     <td>
                       <button
                         @click.prevent="supprimerMarche(activites.id)"
@@ -260,6 +322,7 @@ CodeExempte
                     <td></td>
                     <td></td>
                   </tr>
+>>>>>>> 197de8d84b1914cd47dd389ecfe7feb46d8ac141
                 </tbody>
               </table>
 

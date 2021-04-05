@@ -30,7 +30,6 @@ import detailOpdefinitif from '../../pages/Hors_sib/biens_service/DossierExecuti
 
 // import ModifierServiceRealiteHorsSib from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ModifierServiceRealiteHorsSib.vue"
 
-
 import detailOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpProvisoire';
 
 import detailOpAnnulation from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpAnnulation';
