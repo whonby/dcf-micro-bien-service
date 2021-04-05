@@ -19,6 +19,7 @@ import DetailMarcheExecution from "../../pages/gestion_marche/MarcheContrat/exec
 import banque from '../../pages/gestion_marche/Banque/banque.vue';
 import DetaillEntreprise from '../../pages/gestion_marche/Entreprise/DetaillEntreprise.vue';
 import detailMarcheParEntreprise from '../../pages/gestionMarche/detailMarcheParEntreprise.vue';
+
 import changeRegimeForme from '../../pages/gestion_marche/Entreprise/formulaireChangeImposit.vue';
 const GestionMarcheRoutes = [
     {

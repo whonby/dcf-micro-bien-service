@@ -27,7 +27,6 @@ import detailOpdefinitif from '../../pages/Hors_sib/biens_service/DossierExecuti
 
 // import ModifierServiceRealiteHorsSib from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ModifierServiceRealiteHorsSib.vue"
 
-
 import detailOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpProvisoire';
 
 import detailOpAnnulation from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpAnnulation';
@@ -43,7 +42,6 @@ import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecut
 import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
 
-listeMarcheInvestissementHS
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[

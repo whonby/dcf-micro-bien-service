@@ -81,7 +81,10 @@
                    <td >
                         <router-link :to="{ name: 'ReceptionDesLots', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Detail Reception">
-        <span class=""><i class=" icon-fast-forward"></i></span>
+        <span class="">
+          <i class=" icon-fast-forward"></i> <br>
+          Réception Marché
+          </span>
     </router-link>
                    </td>
                

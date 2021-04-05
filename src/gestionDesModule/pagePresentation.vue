@@ -3,7 +3,7 @@
     <div>
 
 
-<!-- <Chargement/> -->
+<chargement v-if="show"></chargement>
 <br><br>
 
         <table class="table " style="background-color: #006400;">
@@ -43,7 +43,6 @@
                  </td> -->
             </tr>
         </table>
-
 
 <!--        <table class="table " style="background-color: black;">-->
 <!--            <tr style="background-color: black;">-->
@@ -304,7 +303,7 @@
 import { mapGetters,mapActions} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
-// import Chargement from '../components/Chargement.vue'
+import Chargement from '../components/Chargement.vue'
 
 import Ws from '@adonisjs/websocket-client'
 //import listeUaDeComptabiliteMatiere from '../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere'
@@ -312,16 +311,18 @@ import Ws from '@adonisjs/websocket-client'
 export default {
 components:{
   //listeUaDeComptabiliteMatiere
-  // Chargement,
+  Chargement,
 },
   data(){
     return{
         isConnected:false,
-      budgetGeneralCharge:""
+      budgetGeneralCharge:"",
+      
 
     }
   },
 created(){
+    this.show = false;
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
     this.getServiceCF()
