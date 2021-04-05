@@ -871,8 +871,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           let vM=this;
           this.filtre_unite_admin.forEach(function (value) {
               let objet=vM.marches.filter(item=>{
-                      if(item.parent_id==null && item.unite_administrative_id==value.id && item.sib==1 ){
-                          //  console.log(item.parent_id)
+                      if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
                           return item
                       }
                   }

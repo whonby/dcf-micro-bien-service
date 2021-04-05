@@ -3515,7 +3515,7 @@ export default {
       this.ajouterInfoTableauBordFiltre(objet);
 
       this.$router.push({
-        name: "TableauBordCartographie",
+        name: "DetailCarteMarche",
       });
     },
     generateReport() {

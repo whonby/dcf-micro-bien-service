@@ -319,7 +319,7 @@ ajouterDecisionBudgetEclate
                      </td>
                        <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Ligne budgetaire4</label>
+                <label class="control-label">Ligne budgetaire</label>
                 <div class="controls">
                  
  

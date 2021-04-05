@@ -1,9 +1,14 @@
 import Cartographie from "../../pages/cartographie/Cartographie";
 import TableauBordCartographie from "@/gestionDesModule/TableauBordCatographies";
 import CarteInfrastructureCIPasRegions from "@/pages/cartographie/CarteInfrastructureCIPasRegions";
-import DetailCarteMarche from "../../pages/cartographie/DetailRegionCartographieInfrastructureRegion.vue"
 import CarteExecutionBugetaire from "../../pages/cartographie/CarteExecutionBudgetairePasRegionsEnAECP"
+import DetailCarteMarche from "../../pages/cartographie/CarteMarcheDetail"
 const CartographieRoutes = [
+    {
+        path:"/detail-carte-marche",
+        name:"DetailCarteMarche",
+        component:DetailCarteMarche
+    },
     {
         path:"/carte-execution-budgetaire",
         name:"CarteExecutionBugetaire",
