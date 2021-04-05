@@ -3,6 +3,11 @@ controlleur_fin
   <div>
     <div class="row-fluid">
       <div class="span12">
+
+          <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div>
         <div class="widget-box">
           <div class="widget-title">
             <span class="icon">
@@ -3463,6 +3468,10 @@ export default {
       this.$router.push({ name: "executionMarche" });
     },
 
+
+afficherModalListeExecution(){
+                window.history.back();
+            },
     CallModalProblemeMarche() {
       return this.$("#AjouterProblemeMarche").modal({
         backdrop: "static",
