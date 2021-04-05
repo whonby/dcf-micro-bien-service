@@ -8,6 +8,11 @@
 
 
     <div class="main-body">
+       <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div>
+        <br/>
 
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
@@ -323,6 +328,10 @@ getterImageParMarche() {
 
 
     ]),
+
+    afficherModalListeExecution(){
+                window.history.back();
+            },
 
 
      distance(lat1, lon1, lat2, lon2, unit) {
