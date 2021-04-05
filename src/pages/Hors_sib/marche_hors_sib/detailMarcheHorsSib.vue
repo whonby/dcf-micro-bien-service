@@ -14,7 +14,7 @@
                         <div class="row-fluid" v-if="detail_marche">
                             <div class="span4">
                                 <div class="span4" align="left">
-                                <button  class="btn btn-danger" @click.prevent="allerPageMarcheHorsib" href="#">Retour</button>
+                                <button  class="btn btn-danger" @click.prevent="pagePrecedent" href="#">Retour</button>
 
                             </div>
                             </div>
@@ -1897,9 +1897,16 @@ const val = parseFloat(this.afficherLaDotationIntial1(this.detail_marche.economi
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             //
 
-             allerPageMarcheHorsib(){
-       window.history.back()
-    },
+             pagePrecedent(){
+                window.history.back()
+            },
+
+      retourpass(){
+      this.$router.push({
+              name: "groupeMarcheParUa",
+            });
+      },
+                  
 
 isFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=true

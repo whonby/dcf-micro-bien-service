@@ -3,6 +3,11 @@
   <div>
    
     <div class="container-fluid">
+
+      <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
       <hr />
       <div class="row-fluid">
         <div class="span12">
@@ -363,6 +368,10 @@ afficherlibelleUa() {
       "modifierTypeTexte",
       "supprimerTypeTexte"
     ]),
+
+    pagePrecedent(){
+                window.history.back()
+            },
    formatageSommeSansFCFA:formatageSommeSansFCFA,
    formatageSomme:formatageSomme,
     alert() {

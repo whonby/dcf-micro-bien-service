@@ -795,11 +795,19 @@ export default {
   },
   methods: {
     ...mapActions("horSib", ["modifierMarcheHorSib", "getMarcheHorSib"]),
+    // allerPageMarcheHorsib() {
+    //   this.$router.push({
+    //     name: "marcheHorsib",
+    //   });
+    // },
+
     allerPageMarcheHorsib() {
-      this.$router.push({
-        name: "marcheHorsib",
-      });
+     window.history.back()
     },
+
+    
+
+    
 
     recherche() {
       // console.log(this.search)
@@ -816,9 +824,7 @@ export default {
     // ajouter marche hors sib
 
     modifierMarcheHorSibLocal() {
-      this.$router.push({
-        name: "marcheHorsib",
-      });
+     
       var nouvelObjet = {
         ...this.editMarcheHorSib,
         exo_id: this.anneeBugetaireModifier,
@@ -849,6 +855,10 @@ export default {
         exo_id: "",
         sib: 1,
       };
+
+       this.$router.push({
+        name: "GestionMarcheHorSib",
+      });
     },
   },
 };

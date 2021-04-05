@@ -66,7 +66,7 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div>  
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -232,7 +232,7 @@
 
                 {{ libelleLigneEconomique(ListepaimentBailleur) || "Non renseigné" }}
               </td>
-              <td>
+              <td style="text-align: right;">
               {{
                 formatageSommeSansFCFA(
                   parseFloat(
@@ -242,7 +242,7 @@
               }} 
             </td>
 
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align: right;">
             
                {{
                 formatageSommeSansFCFA(
@@ -253,7 +253,7 @@
               }} 
             </td>
 
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align: right;">
             
                {{
                 formatageSommeSansFCFA(
@@ -263,7 +263,7 @@
                 ) || "Non renseigné"
               }} 
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align: right;">
                {{
                 (
                   ((MontantBudgetActuelBailleur(ListepaimentBailleur) -
@@ -273,7 +273,7 @@
                 ).toFixed(2) || "Non renseigné"
               }}
             </td>
-            <td style="font-size: 14px">
+            <td style="font-size: 14px; text-align: right;">
                {{
                formatageSommeSansFCFA(
                   parseFloat( MontantBudgetActuelBailleur(ListepaimentBailleur) -
@@ -291,7 +291,7 @@
                   LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                   formatageSommeSansFCFA(
                   parseFloat(MontantBudgetActuel(
@@ -299,7 +299,7 @@
                   )))
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetExecuté(
@@ -308,7 +308,7 @@
                 }}
               </td>
 
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetExecutéProvisoire(
@@ -316,7 +316,7 @@
                   )))
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                   (
                     ((MontantBudgetActuel(
@@ -333,7 +333,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetActuel(
@@ -935,7 +935,7 @@ export default {
     formatageSommeSansFCFA: formatageSommeSansFCFA,
 
     ExporterEnExel() {
-      this.$refs.excel.click();
+      this.$refs.excel.click("printpdf");
     },
   },
 };

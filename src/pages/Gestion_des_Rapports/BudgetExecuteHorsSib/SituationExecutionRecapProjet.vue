@@ -202,7 +202,7 @@
                   "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px; font-weight: bold">
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -212,7 +212,7 @@
                 }}
               </td>
 
-              <td style="font-size: 14px; font-weight: bold">
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -221,7 +221,7 @@
                   ) || "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px; font-weight: bold">
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
                  (
                     ((MontantBudgetActuel(listeordrepaiement[0].activite_id) -
@@ -231,7 +231,7 @@
                   ).toFixed(2) || "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px; font-weight: bold">
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat( MontantBudgetActuel(listeordrepaiement[0].activite_id) -
