@@ -7,13 +7,13 @@
 
          <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
-    
+
         </div>
 
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb" v-if="detail">
-              <li class="breadcrumb-item" v-if="detail">{{detail.objet}}</li>
+              <li class="breadcrumb-item" v-if="detail"><h1>{{detail.objet}}</h1></li>
 
             </ol>
           </nav>
@@ -274,7 +274,7 @@ getterImageParMarche() {
 
     ]),
 
-    
+
 afficherModalListeExecution(){
                 window.history.back();
             },

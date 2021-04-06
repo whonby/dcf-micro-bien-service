@@ -2,7 +2,7 @@
 <div>
     <header>
          <div  class="" style="margin-rigth:10px;">
-                   <h3 style="text-align:center">TABLEAU DE BORD GESTIONS DES MARCHES HORS SIB</h3> 
+                   <h3 style="text-align:center">TABLEAU DE BORD GESTION DES MARCHES HORS SIGOBE</h3>
                 </div>
     </header>
 <tableau-bord-marche :sib="1"></tableau-bord-marche>
