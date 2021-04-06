@@ -40,10 +40,10 @@
                 <tr>
                 <th>Année</th>
                   <th>UA</th>
-                  <th>Reférence marché</th>
+                  <th>Référence marché</th>
                   <th>Objet marché</th>
                   <th>Type de marché</th>
-                   <th>Procedure de passation</th>
+                   <th>Procédure de passation</th>
                   <th>Région</th>
                   <th>Montant prévu</th>
                   <th title="mouvement du marché">Mouvement marché</th>
@@ -74,7 +74,7 @@
                       {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
                     
                     <td>
-                         <span v-if="activites.economique_id == CodeExempte(activites.economique_id) ">Exemptée procedure</span>
+                         <span v-if="activites.economique_id == CodeExempte(activites.economique_id) ">Exemptée procédure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
                
@@ -156,7 +156,7 @@
               
                    <div class="pagination alternate">
              <ul>
-           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
            <li  v-for="(titre, index) in partition(ListeMarcheInfrastructureNiveau1,size).length" :key="index" :class="{ active : active_el == index }">
            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
             <li :class="{ disabled : page == partition(ListeMarcheInfrastructureNiveau1,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>

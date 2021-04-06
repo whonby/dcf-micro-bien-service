@@ -44,10 +44,17 @@ import AjouterDecompte from '../../pages/Hors_sib/biens_service/DossierExecution
 import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecomptePro.vue';
 import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
-
+//Lien de modification d'image 
+import ModifieImage from '../../pages/ImageMarche/ModifieImage.vue';
+ 
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
+    {
+        path: "/modifie-image/:id",
+        name: "modifie-image",
+        component: ModifieImage
+    },
     {
         path: "/ListeMarcheSousBudget/:id",
         name: "ListeMarcheSousBudget",

@@ -77,12 +77,12 @@ CodeExempte
                   <tr>
                     <th>Année</th>
                     <th>UA</th>
-                    <th>Reférence marché</th>
+                    <th>Référence marché</th>
                     <th>Objet marché</th>
                     <th>Type de marché</th>
-                    <th>Procedure de passation</th>
+                    <th>Procédure de passation</th>
                     <th>Localisation géographie</th>
-                    <th>Montant prevu</th>
+                    <th>Montant prévu</th>
                     <th title="mouvement du marché">Mouvement marché</th>
                     <th>Statut</th>
 

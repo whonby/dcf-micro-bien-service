@@ -750,11 +750,9 @@
 //console.log(this.typeMarches)
             this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
-
+console.log(this.getterListeMarcheTableauBordFiltre)
             if(this.getterInfoTableauBordFiltre){
-//    console.log("...............AAAAA..............")
-//console.log(this.getterInfoTableauBordFiltre)
-//        console.log("..........454788...................")
+
                 if(this.getterInfoTableauBordFiltre.infrastructure!=""){
                     this.infrastructure=this.getterInfoTableauBordFiltre.infrastructure
                     // this.getterInfrastrucure.find(item=>item.id==this.getterInfoTableauBordFiltre.infrastructure)
@@ -830,7 +828,7 @@
             ]),
             ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
                 "getterImageMarche","acteEffetFinanciers",
-                "typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants"]),
+                "typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants","getterListeMarcheTableauBordFiltre"]),
 
             noDCfNoAdmin:noDCfNoAdmin,
             conversionDate(){
@@ -870,7 +868,7 @@
                 let colect=[]
                 let vM=this;
                 this.filtre_unite_admin.forEach(function (value) {
-                    let objet=vM.marches.filter(item=>{
+                    let objet=vM.getterListeMarcheTableauBordFiltre.filter(item=>{
                             if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
                                 return item
                             }
