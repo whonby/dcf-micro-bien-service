@@ -36,10 +36,10 @@ montantEnPlanification
                  <tr>
                 <th>Année</th>
                   <th>UA</th>
-                  <th>Reférence marché</th>
+                  <th>Référence marché</th>
                   <th>Objet marché</th>
                   <th>Type de marché</th>
-                   <th>Procedure de passation</th>
+                   <th>Procédure de passation</th>
                   <th>Localisation géographie</th>
                   <th>Montant prévu</th>
                   <th title="mouvement du marché">Mouvement marché</th>
@@ -158,7 +158,7 @@ montantEnPlanification
 
                     <div class="pagination alternate">
              <ul>
-           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
            <li  v-for="(titre, index) in partition(rechercheUa,size).length" :key="index" :class="{ active : active_el == index }">
            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
             <li :class="{ disabled : page == partition(rechercheUa,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>

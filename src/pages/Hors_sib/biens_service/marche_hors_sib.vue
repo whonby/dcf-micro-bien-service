@@ -77,12 +77,12 @@ CodeExempte
                   <tr>
                     <th>Année</th>
                     <th>UA</th>
-                    <th>Reférence marché</th>
+                    <th>Référence marché</th>
                     <th>Objet marché</th>
                     <th>Type de marché</th>
-                    <th>Procedure de passation</th>
+                    <th>Procédure de passation</th>
                     <th>Localisation géographie</th>
-                    <th>Montant prevu</th>
+                    <th>Montant prévu</th>
                     <th title="mouvement du marché">Mouvement marché</th>
                     <th>Statut</th>
 
@@ -229,7 +229,6 @@ CodeExempte
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    </td> -->
-<<<<<<< HEAD
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
@@ -290,39 +289,6 @@ CodeExempte
                           
                       </td>
                     </tr>
-=======
-                    <td>
-                      <button
-                        @click.prevent="supprimerMarche(activites.id)"
-                        class="btn btn-danger"
-                      >
-                        <span class=""><i class="icon-trash"></i></span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                    <td></td>
-                    <td style="font-weight: bold">Total Marché</td>
-                    <td
-                      style="text-align: center; color: red; font-weight: bold"
-                    >
-                      {{ formatageSomme(parseFloat(montantMarche)) }}
-                    </td>
-                    <td></td>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
->>>>>>> 197de8d84b1914cd47dd389ecfe7feb46d8ac141
                 </tbody>
               </table>
 

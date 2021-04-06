@@ -30,7 +30,7 @@
                 <div id="tab1" class="tab-pane active">
 
                     <div class="row-fluid gutters-sm">
-                        <div class="span3 " v-for="(marche_image,i) in getterImageParMarche(detail.id)" :key="marche_image.id">
+                        <div class="span3 " v-for="(marche_image,i) in getterImageParMarche(detail.id)" :key="marche_image.id" >
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
@@ -53,13 +53,13 @@
                                         <button  class="btn btn-danger" v-on:click="suppressionImg(marche_image.id)">
                                             <span><i class="fa fa-trash-o" aria-hidden="true"></i>  Supprimer </span>
                                         </button>
-                                        <router-link to="/modifie-image">Modifier</router-link>
+                                        <router-link :to="{name:'modifie-image', params:{id:marche_image.id}}" class="btn btn-success">Modifier</router-link>
                                         <!-- <button type="button" data-toggle="modal" data-target="#editModal" 
                                         class="btn btn-success"
                                         v-on:click="getImage(marche_image.id)">
                                             <span><i class="fa fa-pencil" aria-hidden="true"></i>  Modifier </span>
                                         </button> -->
-                                        <modifie-image></modifie-image>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -104,8 +104,7 @@
                             v-on:vdropzone-sending="sendingEvent"
                             v-on:vdropzone-success="uploadSuccess"
                             v-on:vdropzone-error="uploadError"
-                            v-on:vdropzone-removed-file="fileRemoved"
-                    >
+                            v-on:vdropzone-removed-file="fileRemoved">
                         <div class="dropzone-custom-content">
                             <h3 class="dropzone-custom-title">
                                 Faites glisser et déposez pour chargé l'image</h3>
@@ -127,13 +126,13 @@
 import {mapGetters, mapActions} from 'vuex';
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-import ModifieImage from './ModifieImage'
+//import ModifieImage from './ModifieImage'
 
 
 import VueGallerySlideshow from 'vue-gallery-slideshow'
 export default {
     components:{
-        'modifie-image':ModifieImage,
+        //'modifie-image':ModifieImage,
         VueGallerySlideshow,
         vueDropzone: vue2Dropzone
     },

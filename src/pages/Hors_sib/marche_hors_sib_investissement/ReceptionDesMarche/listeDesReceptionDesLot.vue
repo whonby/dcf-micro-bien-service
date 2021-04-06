@@ -28,7 +28,7 @@
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
                                 <!-- <th style="font-size:12px;font-weight:bold;">Procédure de passation </th> -->
-                                <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
+                                <th style="font-size:12px;font-weight:bold;">Unité administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
                     <th style="font-size:12px;font-weight:bold;">Imputation</th>
                        <th style="font-size:12px;font-weight:bold;">Montant de base</th>
