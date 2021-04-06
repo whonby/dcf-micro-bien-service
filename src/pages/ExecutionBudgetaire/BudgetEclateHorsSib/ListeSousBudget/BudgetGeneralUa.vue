@@ -121,16 +121,16 @@
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;background:green;">INVERTISSEMENT</td>
                      <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateTresor(detail_marche.uniteadministrative_id)))}}</td>
                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateDon(detail_marche.uniteadministrative_id)))}}</td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.uniteadministrative_id)))}}</td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.uniteadministrative_id))) || 0}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateEmprunt(detail_marche.uniteadministrative_id))) || 0}}</td>
                     
                   </tr>
                   <tr>
                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">TOTAL BUDGET ECLATE</td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommePersonneBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommePersonneBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommePersonneBudgetEclateEmprunt(detail_marche.uniteadministrative_id))) || 0}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateTresor(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateDon(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommeInvestivementBudgetEclateEmprunt(detail_marche.uniteadministrative_id))+parseFloat(SommePersonneBudgetEclateTresor(detail_marche.uniteadministrative_id))+parseFloat(SommePersonneBudgetEclateDon(detail_marche.uniteadministrative_id))+parseFloat(SommePersonneBudgetEclateEmprunt(detail_marche.uniteadministrative_id))) || 0}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -238,7 +238,7 @@ SommeInvestivementBudgetEclateTresor() {
     SommeInvestivementBudgetEclateEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
      
         }
@@ -397,12 +397,12 @@ SommePersonneBudgetEclateTresor() {
     MontantResor() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 14);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.tresor
-      }
-      return 0
+      // if (qtereel) {
+      //   return qtereel.tresor
+      // }
+      // return 0
         }
       };
     },
@@ -421,26 +421,27 @@ SommePersonneBudgetEclateTresor() {
     MontantDon() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 13);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.don
-      }
-      return 0
+      // if (qtereel) {
+      //   return qtereel.don
+      // }
+      // return 0
         }
       };
     },
      MontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 15);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.emprunt
+      // if (qtereel) {
+      //   return qtereel.emprunt
+      // }
+      // return 0
+      //   }
       }
-      return 0
-        }
-      };
+      }
     },
 
     filtre_type_teste() {

@@ -186,7 +186,7 @@
 
                 <th style="font-size:15px;" title="Budget de bien et service">Biens et Services</th>
                 <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements</th>
-                <th style="font-size:15px;" title="Budget en transfert">Transferts</th>
+                <!-- <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
 
                 <th style="font-size:15px;background: blue; color:#fff">Total</th>
                 <th style="font-size:15px;background: forestgreen; color:#fff">Consommés</th>
@@ -208,19 +208,19 @@
                 <td
                   style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</td>
-                <td
+                <!-- <td
                   style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</td>
+                >{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</td> -->
 
                 <td
                   style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</td>
                 <td style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id)))}}</td>
+                >{{formatageSomme(parseFloat(ComsommationBudgetaire(unite.id)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;"
             
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)) - ((parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)) +  parseFloat(budgetConsommerPersonnelle(unite.id)))) )}}</td>
+                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)) - (parseFloat(ComsommationBudgetaire(unite.id))))}}</td>
                 
                 <td style="font-weight:bold;font-size:12px;">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)+0.01))) * 1000).toFixed(2)|| 0}}%</td>
           
@@ -362,10 +362,12 @@
                 "uniteAdministratives",
                 "getterBudgeCharge",
                 "budgetGeneral",
-                "transferts"
+                "transferts",
+                "budgetEclate"
+                
             ]),
             
-    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats","gettersgestionOrdrePaiement"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
@@ -415,22 +417,39 @@ return this.uniteAdministratives
       };
     },
 
-
-
- budgetBienService() {
+ComsommationBudgetaire() {
       return id => {
-        if (id != "") {
-          return this.budgetGeneral
-            .filter(element => element.ua_id == id  && element.gdenature_id==5 && element.actived ==1) 
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
+        if (id != null && id != "") {
+           return  this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9 || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==8 || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+     
         }
       };
     },
+budgetBienService() {
+      return id => {
+        if (id != null && id != "") {
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+
+//  budgetBienService() {
+//       return id => {
+//         if (id != "") {
+//           return this.budgetGeneral
+//             .filter(element => element.ua_id == id  && element.gdenature_id==5 && element.actived ==1) 
+//             .reduce(
+//               (prec, cur) =>
+//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+//               0
+//             )
+//             .toFixed(0);
+//         }
+//       };
+//     },
 
 
             // budgetBienService(){
@@ -569,47 +588,74 @@ afficherTotalBudgetModuleTransfert() {
     //     }
     //   };
     // },
-budgetPersonnel() {
+// budgetPersonnel() {
         
-        if(this.noDCfNoAdmin){
-            let colect=[];
+//         if(this.noDCfNoAdmin){
+//             let colect=[];
             
-            this.budgetGeneral.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return id => {
-        if (id != "") {
-          return colect
-            .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
-        }
-      };
+//             this.budgetGeneral.filter(item=>{
+//                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//             return id => {
+//         if (id != "") {
+//           return colect
+//             .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
+//             .reduce(
+//               (prec, cur) =>
+//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+//               0
+//             )
+//             .toFixed(0);
+//         }
+//       };
            
-        }
-         return id => {
-        if (id != "") {
-          return this.budgetGeneral
-            .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
+//         }
+//          return id => {
+//         if (id != "") {
+//           return this.budgetGeneral
+//             .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
+//             .reduce(
+//               (prec, cur) =>
+//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+//               0
+//             )
+//             .toFixed(0);
+//         }
+//       };
+       
+//     },
+
+MontantTotalPargdeNature() {
+      return id => {
+        if (id != null && id != "") {
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+
+     
         }
       };
-       
     },
+budgetPersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
+     
+        }
+      };
+    },
+    budgetInverstisement() {
+      return id => {
+        if (id != null && id != "") {
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+
+     
+        }
+      };
+    },
             // budgetPersonnel(){
             //     return unite_id=>{
             //         let vM=this;
@@ -647,47 +693,46 @@ budgetPersonnel() {
     //   };
     // },
 
-    budgetInverstisement() {
+    // budgetInverstisement() {
         
-        if(this.noDCfNoAdmin){
-            let colect=[];
+    //     if(this.noDCfNoAdmin){
+    //         let colect=[];
             
-            this.budgetGeneral.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-             return id => {
-        if (id != "") {
-          return colect
-            .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
-        }
-      };
+    //         this.budgetGeneral.filter(item=>{
+    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+    //             if (val!=undefined){
+    //                 colect.push(item)
+    //                 return item
+    //             }
+    //         })
+    //          return id => {
+    //     if (id != "") {
+    //       return colect
+    //         .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
+    //         .reduce(
+    //           (prec, cur) =>
+    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
             
-        }
-          return id => {
-        if (id != "") {
-          return this.budgetGeneral
-            .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
-        }
-      };
-        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
-
-    },
+    //     }
+    //       return id => {
+    //     if (id != "") {
+    //       return this.budgetGeneral
+    //         .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
+    //         .reduce(
+    //           (prec, cur) =>
+    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
+        
+    // },
             
             // budgetInverstisement(){
             //     return unite_id=>{
@@ -1181,47 +1226,47 @@ budgetConsommerBienService() {
 //       };
 //     },
 
-MontantTotalPargdeNature() {
+// MontantTotalPargdeNature() {
         
-        if(this.noDCfNoAdmin){
-            let colect=[];
+//         if(this.noDCfNoAdmin){
+//             let colect=[];
             
-            this.budgetGeneral.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
+//             this.budgetGeneral.filter(item=>{
+//                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
   
-                return id => {
-        if (id != null && id != "") {
- var montant = colect.filter(idUa => idUa.ua_id == id && idUa.actived == 1).reduce((prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
-          if (isNaN(montant)) return null;
-          return montant;
-        }
-        return 0;
-      };
+//                 return id => {
+//         if (id != null && id != "") {
+//  var montant = colect.filter(idUa => idUa.ua_id == id && idUa.actived == 1).reduce((prec, cur) =>
+//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+//               0
+//             )
+//             .toFixed(0);
+//           if (isNaN(montant)) return null;
+//           return montant;
+//         }
+//         return 0;
+//       };
             
-        }
+//         }
        
-               return id => {
-        if (id != null && id != "") {
- var montant = this.budgetGeneral.filter(idUa => idUa.ua_id == id && idUa.actived == 1).reduce((prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
-          if (isNaN(montant)) return null;
-          return montant;
-        }
-        return 0;
-      };
-    },
+//                return id => {
+//         if (id != null && id != "") {
+//  var montant = this.budgetGeneral.filter(idUa => idUa.ua_id == id && idUa.actived == 1).reduce((prec, cur) =>
+//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+//               0
+//             )
+//             .toFixed(0);
+//           if (isNaN(montant)) return null;
+//           return montant;
+//         }
+//         return 0;
+//       };
+//     },
 
     affichebudgetActive() {
       var activeBudget = this.budgetGeneral.filter(

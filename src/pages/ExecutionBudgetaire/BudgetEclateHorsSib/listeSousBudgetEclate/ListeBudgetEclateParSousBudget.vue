@@ -398,15 +398,15 @@ SommePersonneBudgetEclateTresor() {
         return [];
      };
     },
-    MontantResor() {
+     MontantResor() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 14);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.tresor
-      }
-      return 0
+      // if (qtereel) {
+      //   return qtereel.tresor
+      // }
+      // return 0
         }
       };
     },
@@ -425,26 +425,27 @@ SommePersonneBudgetEclateTresor() {
     MontantDon() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 13);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.don
-      }
-      return 0
+      // if (qtereel) {
+      //   return qtereel.don
+      // }
+      // return 0
         }
       };
     },
      MontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 15);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.emprunt
+      // if (qtereel) {
+      //   return qtereel.emprunt
+      // }
+      // return 0
+      //   }
       }
-      return 0
-        }
-      };
+      }
     },
 
     filtre_type_teste() {

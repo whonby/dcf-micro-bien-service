@@ -66,6 +66,7 @@ import ListeUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEcla
 import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
 import listeUniteZone from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetEclate/listeUniteZone.vue"
 import ListeBudgetEclateParSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetEclate/ListeBudgetEclateParSousBudget.vue"
+
 const UniteAdministativeRoutes = [
   {
     path: "/ListeBudgetEclateParSousBudget/:id",

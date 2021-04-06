@@ -34,7 +34,7 @@
             </router-link>
           </li> -->
         
-  <li class="dropdown" id="menuBUDGET" v-if="!noDCfNoAdmin">
+  <li class="dropdown" id="menuBUDGET" v-if="admin() || dcf()">
         <a
           title="UNITES ADMINISTRATIVES"
           href="#"
@@ -143,7 +143,7 @@
 <!--              IMPORTATION DU BUDGET-->
 <!--            </router-link>-->
 <!--          </li>-->
-          <li>
+          <li v-if="admin() || dcf()">
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
               BUDGET PAR UA
             </router-link>
