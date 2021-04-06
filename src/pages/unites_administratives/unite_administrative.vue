@@ -446,6 +446,7 @@
                       >
                         <span>
                           <i class="icon icon-trash"></i>
+                          Supprimer
                         </span>
                       </button>
                     </td>
@@ -460,7 +461,7 @@
           </div>
            <div class="pagination alternate">
                     <ul>
-                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
                         <li  v-for="(titre, index) in partition(filtre_unite_admin,size).length" :key="index" :class="{ active : active_el == index }">
                             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
                         <li :class="{ disabled : page == partition(filtre_unite_admin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>

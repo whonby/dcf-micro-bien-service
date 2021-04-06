@@ -166,7 +166,7 @@
              <div class="pagination alternate">
             <ul>
               <li :class="{ disabled: page == 0 }">
-                <a @click.prevent="precedent()" href="#">Précedent</a>
+                <a @click.prevent="precedent()" href="#">Précédent</a>
               </li>
               <li
                 v-for="(titre, index) in partition(rechercheUa, size).length"

@@ -222,7 +222,7 @@
             
                 >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)) - (parseFloat(ComsommationBudgetaire(unite.id))))}}</td>
                 
-                <td style="font-weight:bold;font-size:12px;">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)+0.01))) * 1000).toFixed(2)|| 0}}%</td>
+                <td style="font-weight:bold;font-size:12px;">{{(((parseFloat(MontantTotalPargdeNature(unite.id)) - (parseFloat(ComsommationBudgetaire(unite.id))))/(parseFloat(MontantTotalPargdeNature(unite.id))))*100).toFixed(2)|| 0}}%</td>
           
              <td>
                

@@ -43,6 +43,12 @@
                         {{distance(detailMarche.latitude, detailMarche.longitude, getMarche(detailMarche.marche_id).latitude, getMarche(detailMarche.marche_id).longitude, 'K')}}
                       </p>
                       <p class="text-muted font-size-sm">{{detailMarche.observation}}</p>
+                      <button class="btn btn-danger" @click="suppressionImg(detailMarche.id)">
+                        <span><i class="fa fa-trash-o" aria-hidden="true"></i>  Supprimer </span>
+                      </button>
+                      <router-link to="/" class="btn btn-success">
+                      <span><i class="fa fa-pencil" aria-hidden="true"></i>  Modifier </span>
+                      </router-link>
 
                     </div>
                 </div>
@@ -54,13 +60,13 @@
                 <div class="card-body">
                 <div class="" style="height: 500px; width: 100%; border: 2px dotted #eee">
 
-  <l-map ref="map" :zoom=7.4 :center="initialLocation" >
+                <l-map ref="map" :zoom=7.4 :center="initialLocation" >
 
                 <l-icon-default></l-icon-default>
                 <l-control-layers position="topright"  ></l-control-layers>
 <!--                <l-draw-toolbar position="topright"/>-->
                 <l-control-fullscreen position="topleft"
-                                      :options="{ title: { 'false': 'Go big!', 'true': 'Be regular' } }"
+                                :options="{ title: { 'false': 'Go big!', 'true': 'Be regular' } }"
                 />
                 <l-tile-layer
                     v-for="tileProvider in tileProviders"
@@ -72,13 +78,13 @@
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
 
 
-                  <l-circle-marker
-                                   :lat-lng="[detailMarche.latitude,detailMarche.longitude]"
+                <l-circle-marker
+                                  :lat-lng="[detailMarche.latitude,detailMarche.longitude]"
 
-                                   :radius="15"
-                                   :color="'#3A01DF'"
-                                   :fillColor="'#3A01DF'"
-                                   :fillOpacity="4"
+                                  :radius="15"
+                                  :color="'#3A01DF'"
+                                  :fillColor="'#3A01DF'"
+                                  :fillOpacity="4"
 
                   >
                     <l-popup>
@@ -329,11 +335,10 @@ getterImageParMarche() {
 
     ]),
 
-    afficherModalListeExecution(){
-                window.history.back();
-            },
-
-
+    suppressionImg(){
+      this.$delete(this.getterImageMarche, this.detailMarche.id)
+      console.log(this.detailMarche.id)
+    },
      distance(lat1, lon1, lat2, lon2, unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;

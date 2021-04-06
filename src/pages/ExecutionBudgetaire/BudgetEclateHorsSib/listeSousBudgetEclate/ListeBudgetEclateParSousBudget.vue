@@ -45,7 +45,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th style="font-size:14px">Ligne Budgetaire{{marcheid}}</th>
+                    <th style="font-size:14px">Ligne Budgetaire</th>
                     <th style="font-size:14px">Tresor(FCFA)</th>
                     <th style="font-size:14px">Don(FCFA)</th>
                      <th style="font-size:14px">Emprunt(FCFA)</th>
@@ -401,7 +401,7 @@ SommePersonneBudgetEclateTresor() {
      MontantResor() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.tresor
@@ -425,7 +425,7 @@ SommePersonneBudgetEclateTresor() {
     MontantDon() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.don
@@ -437,7 +437,7 @@ SommePersonneBudgetEclateTresor() {
      MontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.emprunt
