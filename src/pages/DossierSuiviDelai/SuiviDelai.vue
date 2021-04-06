@@ -5,22 +5,16 @@
         <template>
   <div >
 
-
-            <!-- <div align="right" style="cursor:pointer;">
-           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-          </div> -->
-
-
  <div ref="document">
-     <table class="table table-striped"  style="background: #f0c71d !important;">
+     <table class="table table-striped">
          <tbody>
          <tr>
-             <td style="background: #00499c !important;color: #fff;height: 10px !important;">
+             <td>
 
                  <label>Ministère
                      <a href="#" @click.prevent="videTypeCF()" v-if="section_id" style="color: red">
                          <i class="fa fa-trash-o"></i></a></label>
-                 <model-list-select style="background-color: #fff;"
+                 <model-list-select style="background-color: #fff;border: 2px solid #000"
                                     class="wide"
                                     :list="sections"
                                     v-model="section_id"
@@ -31,10 +25,10 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #00499c !important;color: #fff">
+             <td>
                  <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
-                 <model-list-select style="background-color: #fff;"
+                 <model-list-select style="background-color: #fff;border: 2px solid #000"
                                     class="wide"
                                     :list="filtre_unite_admin"
                                     v-model="unite_administrative_id"
@@ -45,10 +39,10 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #00499c !important;color: #fff">
+             <td>
                  <label>Regions <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
-                 <model-list-select style="background-color: #fff;"
+                 <model-list-select style="background-color: #fff;border: 2px solid #000"
                                     class="wide"
                                     :list="regions"
                                     v-model="region"
@@ -59,10 +53,10 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #00499c !important;color: #fff">
+             <td>
                  <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
-                 <model-list-select style="background-color: #fff;"
+                 <model-list-select style="background-color: #fff;border: 2px solid #000"
                                     class="wide"
                                     :list="getterInfrastrucure"
                                     v-model="infrastructure"
@@ -74,10 +68,10 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #00499c !important;color: #fff">
+             <td>
                  <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
-                 <model-list-select style="background-color: #fff;"
+                 <model-list-select style="background-color: #fff;border: 2px solid #000"
                                     class="wide"
                                     :list="typeMarches"
                                     v-model="type_marche"
