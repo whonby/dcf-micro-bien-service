@@ -230,7 +230,7 @@
               v-for="ListepaimentBailleur in arrayExerciceDecompte(
                 GroupeOrdrePaiementByActivit[0].source_financement_id
               )"
-              :key="ListepaimentBailleur.id"
+              :key="ListepaimentBailleur"
             >
               <td style="font-size: 14px">
                 {{ LibelleActivite(ListepaimentBailleur) || "Non renseigné" }}
@@ -269,8 +269,7 @@
               <td style="font-size: 14px; text-align:right">
                 {{
                   (
-                    ((MontantBudgetActuelActivite(ListepaimentBailleur) -
-                      MontantBudgetExecutéActivite(ListepaimentBailleur)) /
+                    (MontantBudgetExecutéActivite(ListepaimentBailleur) /
                       MontantBudgetActuelActivite(ListepaimentBailleur)) *
                     100
                   ).toFixed(2) || "Non renseigné"
@@ -303,7 +302,7 @@
                   formatageSommeSansFCFA(
                     parseFloat(
                       MontantBudgetActuel(
-                        GroupeOrdrePaiementByActivit[0].source_financement_id
+                        GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
                       )
                     )
                   )
@@ -314,7 +313,7 @@
                   formatageSommeSansFCFA(
                     parseFloat(
                       MontantBudgetExecuté(
-                        GroupeOrdrePaiementByActivit[0].source_financement_id
+                        GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
                       )
                     )
                   )
@@ -326,7 +325,7 @@
                   formatageSommeSansFCFA(
                     parseFloat(
                       MontantBudgetExecutéProvisoire(
-                        GroupeOrdrePaiementByActivit[0].source_financement_id
+                        GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
                       )
                     )
                   )
@@ -335,15 +334,12 @@
               <td style="font-weight: bold; font-size: 18px; text-align:right">
                 {{
                   (
-                    ((MontantBudgetActuel(
-                      GroupeOrdrePaiementByActivit[0].source_financement_id
-                    ) -
-                      MontantBudgetExecuté(
-                        GroupeOrdrePaiementByActivit[0].source_financement_id
-                      )) /
+                    (MontantBudgetExecuté(
+                      GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
+                    ) /
                       MontantBudgetActuel(
-                        GroupeOrdrePaiementByActivit[0].source_financement_id
-                      )) *
+                        GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
+                      ))  *
                     100
                   ).toFixed(2) || "Non renseigné"
                 }}
@@ -354,10 +350,10 @@
                   formatageSommeSansFCFA(
                     parseFloat(
                       MontantBudgetActuel(
-                        GroupeOrdrePaiementByActivit[0].source_financement_id
+                        GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
                       ) -
                         MontantBudgetExecuté(
-                          GroupeOrdrePaiementByActivit[0].source_financement_id
+                          GroupeOrdrePaiementByActivit[0].source_financement_id,GroupeOrdrePaiementByActivit[0].activite_id
                         )
                     )
                   )
@@ -647,13 +643,14 @@ export default {
     },
 
     MontantBudgetActuel() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
                 qtreel.source_financement_id == id &&
                 qtreel.annebudgetaire == this.anneeAmort
+                && qtreel.activite_id==id1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -686,14 +683,15 @@ export default {
     },
 
     MontantBudgetExecutéProvisoire() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.source_financement_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement == 2
+                qtreel.source_financement_id == id 
+                 && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement == 2
+                && qtreel.activite_id==id1
             )
             .reduce(
               (prec, cur) =>
@@ -708,14 +706,15 @@ export default {
     },
 
     MontantBudgetExecuté() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.source_financement_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement != 2
+                qtreel.source_financement_id == id
+                && qtreel.annebudgetaire ==this.anneeAmort
+                && qtreel.type_ordre_paiement != 2
+                && qtreel.activite_id==id1
             )
             .reduce(
               (prec, cur) =>

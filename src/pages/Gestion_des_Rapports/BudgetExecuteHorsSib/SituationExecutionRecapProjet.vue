@@ -223,12 +223,10 @@
               </td>
               <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
-                 (
-                    ((MontantBudgetActuel(listeordrepaiement[0].activite_id) -
-                      MontantBudgetExecuté(listeordrepaiement[0].activite_id)) /
+                 
+                    ((MontantBudgetExecuté(listeordrepaiement[0].activite_id) /
                       MontantBudgetActuel(listeordrepaiement[0].activite_id)) *
-                    100
-                  ).toFixed(2) || "Non renseigné"
+                    100).toFixed(2) || "Non renseigné"
                 }}
               </td>
               <td style="font-size: 14px; font-weight: bold; text-align:right">
@@ -535,7 +533,7 @@ export default {
             .filter(
               (qtreel) => qtreel.activite_id == id &&
               qtreel.type_ordre_paiement !=2
-              // && qtreel.annebudgetaire ==this.anneeAmort
+              && qtreel.exercice ==this.anneeAmort
             )
             .reduce(
               (prec, cur) =>
