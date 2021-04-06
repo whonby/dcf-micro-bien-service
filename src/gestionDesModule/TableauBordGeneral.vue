@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 style="text-align: center; text-decoration: underline">
-      TABLEAU DE BORD GENERAL BUDGET GENERAL SIB
+      TABLEAU DE BORD GENERAL BUDGET GENERAL SIGOBE
     </h1>
     <br />
     <div class="container-fluid">
@@ -1605,6 +1605,8 @@ export default {
           .toFixed(0);
       }
     },
+
+    
     GrandeNatureInvestissementsCpExecute() {
       if (this.sections_id != 0 && this.ua_id == 0) {
         return this.gettersDemandeEngagement

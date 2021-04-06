@@ -226,7 +226,7 @@
               v-for="ListepaimentBailleur in arrayExerciceDecompte(
                 GroupeOrdrePaiementByActivit[0].activite_id
               )"
-              :key="ListepaimentBailleur.id"
+              :key="ListepaimentBailleur"
             >
               <td style="font-size: 14px">
 
@@ -265,11 +265,9 @@
             </td>
             <td style="font-size: 14px; text-align: right;">
                {{
-                (
-                  ((MontantBudgetActuelBailleur(ListepaimentBailleur) -
-                    MontantBudgetExecuté1Bailleur(ListepaimentBailleur)) /
-                    MontantBudgetActuelBailleur(ListepaimentBailleur)) *
-                  100
+                
+                  ((MontantBudgetExecuté1Bailleur(ListepaimentBailleur) /
+                    MontantBudgetActuelBailleur(ListepaimentBailleur)) *100
                 ).toFixed(2) || "Non renseigné"
               }}
             </td>
@@ -319,16 +317,13 @@
               <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                   (
-                    ((MontantBudgetActuel(
+                    ((MontantBudgetExecuté(
                       GroupeOrdrePaiementByActivit[0].activite_id
-                    ) -
-                      MontantBudgetExecuté(
-                        GroupeOrdrePaiementByActivit[0].activite_id
-                      )) /
+                    ) /
                       MontantBudgetActuel(
                         GroupeOrdrePaiementByActivit[0].activite_id
-                      )) *
-                    100
+                      )) 
+                    ) * 100
                   ).toFixed(2) || "Non renseigné"
                 }}
               </td>

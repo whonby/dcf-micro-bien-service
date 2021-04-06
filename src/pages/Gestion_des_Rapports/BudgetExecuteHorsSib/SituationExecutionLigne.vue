@@ -149,7 +149,8 @@
           
         </p>
 
-       <div class="widget-content nopadding" style="margin: 25px">
+       <div class="widget-content nopadding" style="margin: 25px"
+        v-for="listeLigne in arrayExerciceDecompte(GroupeOrdrePaiementByActivit[0].activite_id)" :key="listeLigne">
       <table class="table table-bordered">
           <thead style="background-color: #87ceeb">
             <tr>
@@ -192,7 +193,7 @@
                   background-color: #87ceeb;
                 "
               >
-                Montant Prov
+                Montant  Provisoire
               </th>
               <th
                 style="
@@ -218,76 +219,66 @@
             </tr>
           </thead>
           <tbody>
+           
             <tr >
               
-              <td style="background-color:#87ceeb;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
+              <td style="background-color:#87ceeb;width:800px;">{{ LibelleGrandeNature(listeLigne)}}</td>
+              <td style="background-color:#87ceeb;text-align:right;">
+                {{ formatageSommeSansFCFA(parseFloat( MontantBudgetActuel(listeLigne)))}}</td>
+              <td style="background-color:#87ceeb;text-align:right;">
+                {{ formatageSommeSansFCFA(
+                    parseFloat(MontantBudgetExecuté(listeLigne)))}}</td>
+              <td style="background-color:#87ceeb;text-align:right;">
+                {{ formatageSommeSansFCFA(
+                    parseFloat(MontantBudgetExecutéProvisoire(listeLigne)))}}</td>
+              <td style="background-color:#87ceeb;text-align:right;">
+                {{
+                  (
+                    ((MontantBudgetActuel(listeLigne) -
+                      MontantBudgetExecuté(listeLigne)) /
+                      MontantBudgetActuel(listeLigne)) *
+                    100
+                  ).toFixed(2) || "Non renseigné"
+                }}
+                </td>
+              <td style="background-color:#87ceeb;text-align:right;">
+                {{ formatageSommeSansFCFA(
+                    parseFloat((MontantBudgetActuel(listeLigne)-MontantBudgetExecuté(listeLigne))))}}</td>
               
+            
+              
+              <!-- <td style="background-color:#87ceeb;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
+               -->
             </tr>
-           <tr >
-              
-              <td style="background-color:#87ceeb;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
-              
-            </tr>
+            
             <tr 
-              class="odd gradeX" v-for="listeordrepaiement in listeordrepaiements(GroupeOrdrePaiementByActivit[0].activite_id)" :key="listeordrepaiement.id"
+              class="odd gradeX" v-for="listeordrepaiement in listeordrepaiements(listeLigne)" :key="listeordrepaiement.id"
             >
-              <td style="font-size: 14px">
+               <td style="width: 800px;">
+                 {{ libelleLigneEconomique(listeordrepaiement.ligne_economique_id)}}</td>
+              <td style="text-align:right;">
+                {{ formatageSommeSansFCFA(
+                    parseFloat(MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id)))}}</td>
+              <td style="text-align:right;">
+                {{formatageSommeSansFCFA(
+                    parseFloat( MontantBudgetExecutéActivite(listeordrepaiement.ligne_economique_id)))}}</td>
+              <td style="text-align:right;">
+                {{ formatageSommeSansFCFA(
+                    parseFloat(MontantBudgetExecutéProvisoireActivite(listeordrepaiement.ligne_economique_id)))}}</td>
+              <td style="text-align:right;">
                 {{
-                  libelleLigneEconomique(
-                    listeordrepaiement.ligne_economique_id
-                  ) || "Non renseigné"
+                  (
+                    ((MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id) -
+                      MontantBudgetExecutéActivite(listeordrepaiement.ligne_economique_id)) /
+                      MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id)) *
+                    100
+                  ).toFixed(2) || "Non renseigné"
                 }}
-              </td>
-
-              <td
-                v-if="listeordrepaiement.type_ordre_paiement == 1"
-                style="font-size: 14px"
-              >
-                <span>OP Direct</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 2"
-                style="font-size: 14px"
-              >
-                <span>OP Provisoire</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 3"
-                style="font-size: 14px"
-              >
-                <span>OP Annulation</span>
-              </td>
-              <td v-else style="font-size: 14px">
-                <span>OP Définitif</span>
-              </td>
-              <td style="font-size: 14px">
-                {{
-                  listeordrepaiement.numero_ordre_paiement || "Non renseigné"
-                }}
-              </td>
-              <td style="font-size: 14px">
-                {{
-                  libelleBailleur(listeordrepaiement.source_financement_id) ||
-                  "Non renseigné"
-                }}
-              </td>
-              <td style="font-size: 14px">
-                {{ listeordrepaiement.odjet_autre_depense || "Non renseigné" }}
-              </td>
-              <td style="font-size: 14px">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(listeordrepaiement.montant_ordre_paiement)
-                  ) || "Non renseigné"
-                }}
-              </td>
-
-              <!-- <td style="font-size: 14px">
-                {{
-                  formaterDate(listeordrepaiement.date_decision_cf) ||
-                  "Non renseigné"
-                }}
-              </td> -->
+                </td>
+              <td style="text-align:right;">
+                {{ formatageSommeSansFCFA(
+                    parseFloat((MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id)-MontantBudgetExecutéActivite(listeordrepaiement.ligne_economique_id))))}}</td>
+              
             </tr>
           </tbody>
         </table>
@@ -559,6 +550,135 @@ export default {
       };
     },
 
+    MontantBudgetActuel() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.grandenature_id == id 
+              //  && qtreel.annebudgetaire == this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+      MontantBudgetExecuté() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.grand_nature_id == id &&
+                // && qtreel.annebudgetaire ==this.anneeAmort
+                qtreel.type_ordre_paiement != 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+     MontantBudgetExecutéProvisoire() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.grand_nature_id == id &&
+                // && qtreel.annebudgetaire ==this.anneeAmort
+                qtreel.type_ordre_paiement == 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+     MontantBudgetActuelActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) => qtreel.ligneeconomique_id == id
+              // && qtreel.annebudgetaire == this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+      MontantBudgetExecutéActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.ligne_economique_id == id &&
+                // && qtreel.annebudgetaire ==this.anneeAmort
+                qtreel.type_ordre_paiement != 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+      MontantBudgetExecutéProvisoireActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.ligne_economique_id == id &&
+                // && qtreel.annebudgetaire ==this.anneeAmort
+                qtreel.type_ordre_paiement == 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
 
     libelleBailleur() {
       return (id) => {
@@ -613,7 +733,7 @@ export default {
           );
 
           if (qtereel) {
-            return qtereel.libelle;
+            return qtereel.code.concat(' '),qtereel.libelle;
           }
           return 0;
         }
@@ -627,13 +747,13 @@ export default {
           if (id != null && id != "") {
             return this.gettersgestionOrdrePaiement.filter(
               (qtreel) =>
-                (qtreel.activite_id == id &&
+                (qtreel.grand_nature_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin) ||
 
-                (qtreel.activite_id == id &&
+                (qtreel.grand_nature_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 9 &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
@@ -646,11 +766,11 @@ export default {
           if (id != null && id != "") {
             return this.gettersgestionOrdrePaiement.filter(
               (qtreel) =>
-                (qtreel.activite_id == id &&
+                (qtreel.grand_nature_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8) ||
                   
-                (qtreel.activite_id == id &&
+                (qtreel.grand_nature_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 9)
             );
@@ -675,6 +795,38 @@ export default {
     },
     AfficheAmoirie() {
       return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
+    },
+
+
+      listeordrepaiementLigne() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement.filter(
+            (qtreel) => qtreel.activite_id == id
+          );
+        }
+      };
+    },
+
+    arrayExerciceDecompte() {
+      return (idactivite) => {
+        console.log(idactivite);
+        let objet = this.listeordrepaiementLigne(idactivite);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.grand_nature_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+      };
     },
 
     // listeordrepaiements() {
