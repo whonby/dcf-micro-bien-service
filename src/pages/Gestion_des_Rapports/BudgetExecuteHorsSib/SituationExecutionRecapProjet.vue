@@ -533,7 +533,7 @@ export default {
             .filter(
               (qtreel) => qtreel.activite_id == id &&
               qtreel.type_ordre_paiement !=2
-              // && qtreel.annebudgetaire ==this.anneeAmort
+              && qtreel.exercice ==this.anneeAmort
             )
             .reduce(
               (prec, cur) =>

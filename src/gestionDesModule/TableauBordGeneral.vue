@@ -1,11 +1,7 @@
 <template>
   <div>
     <h1 style="text-align: center; text-decoration: underline">
-<<<<<<< HEAD
       TABLEAU DE BORD GENERAL BUDGET GENERAL SIGOBE
-=======
-       BUDGET GENERAL SIGOBE
->>>>>>> 27756907219b6f8a20440e5a2e04354d23a0fe98
     </h1>
     <br />
     <div class="container-fluid">
@@ -1609,8 +1605,6 @@ export default {
           .toFixed(0);
       }
     },
-
-    
     GrandeNatureInvestissementsCpExecute() {
       if (this.sections_id != 0 && this.ua_id == 0) {
         return this.gettersDemandeEngagement

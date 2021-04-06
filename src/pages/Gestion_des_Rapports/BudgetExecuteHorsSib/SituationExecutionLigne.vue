@@ -224,26 +224,25 @@
               
               <td style="background-color:#87ceeb;width:800px;">{{ LibelleGrandeNature(listeLigne)}}</td>
               <td style="background-color:#87ceeb;text-align:right;">
-                {{ formatageSommeSansFCFA(parseFloat( MontantBudgetActuel(listeLigne)))}}</td>
+                {{ formatageSommeSansFCFA(parseFloat( MontantBudgetActuel(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
               <td style="background-color:#87ceeb;text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat(MontantBudgetExecuté(listeLigne)))}}</td>
+                    parseFloat(MontantBudgetExecuté(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
               <td style="background-color:#87ceeb;text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat(MontantBudgetExecutéProvisoire(listeLigne)))}}</td>
+                    parseFloat(MontantBudgetExecutéProvisoire(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
               <td style="background-color:#87ceeb;text-align:right;">
                 {{
                   (
-                    ((MontantBudgetActuel(listeLigne) -
-                      MontantBudgetExecuté(listeLigne)) /
-                      MontantBudgetActuel(listeLigne)) *
+                     (MontantBudgetExecuté(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id) /
+                      MontantBudgetActuel(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id) ) *
                     100
                   ).toFixed(2) || "Non renseigné"
                 }}
                 </td>
               <td style="background-color:#87ceeb;text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat((MontantBudgetActuel(listeLigne)-MontantBudgetExecuté(listeLigne))))}}</td>
+                    parseFloat((MontantBudgetActuel(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)-MontantBudgetExecuté(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id))))}}</td>
               
             
               
@@ -252,32 +251,33 @@
             </tr>
             
             <tr 
-              class="odd gradeX" v-for="listeordrepaiement in listeordrepaiements(listeLigne)" :key="listeordrepaiement.id"
+              class="odd gradeX" 
+              v-for="listeLignes in arrayExerciceDecompte2(listeLigne)" :key="listeLignes"
             >
                <td style="width: 800px;">
-                 {{ libelleLigneEconomique(listeordrepaiement.ligne_economique_id)}}</td>
+                 
+                 {{ libelleLigneEconomique(listeLignes)}}</td>
               <td style="text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat(MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id)))}}</td>
+                    parseFloat(MontantBudgetActuelActivite(listeLignes,listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
               <td style="text-align:right;">
                 {{formatageSommeSansFCFA(
-                    parseFloat( MontantBudgetExecutéActivite(listeordrepaiement.ligne_economique_id)))}}</td>
+                    parseFloat( MontantBudgetExecutéActivite(listeLignes,listeLigne)))}}</td>
               <td style="text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat(MontantBudgetExecutéProvisoireActivite(listeordrepaiement.ligne_economique_id)))}}</td>
+                    parseFloat(MontantBudgetExecutéProvisoireActivite(listeLignes,listeLigne)))}}</td>
               <td style="text-align:right;">
                 {{
                   (
-                    ((MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id) -
-                      MontantBudgetExecutéActivite(listeordrepaiement.ligne_economique_id)) /
-                      MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id)) *
+                    (MontantBudgetExecutéActivite(listeLignes,listeLigne) /
+                      MontantBudgetActuelActivite(listeLignes,listeLigne)) *
                     100
                   ).toFixed(2) || "Non renseigné"
                 }}
                 </td>
               <td style="text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat((MontantBudgetActuelActivite(listeordrepaiement.ligne_economique_id)-MontantBudgetExecutéActivite(listeordrepaiement.ligne_economique_id))))}}</td>
+                    parseFloat((MontantBudgetActuelActivite(listeLignes,listeLigne)-MontantBudgetExecutéActivite(listeLignes,listeLigne))))}}</td>
               
             </tr>
           </tbody>
@@ -551,13 +551,14 @@ export default {
     },
 
     MontantBudgetActuel() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
                 qtreel.grandenature_id == id 
-              //  && qtreel.annebudgetaire == this.anneeAmort
+               && qtreel.annebudgetaire == this.anneeAmort
+               && qtreel.activite_id==id1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -571,14 +572,15 @@ export default {
     },
 
       MontantBudgetExecuté() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.grand_nature_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement != 2
+                qtreel.grand_nature_id == id 
+                 && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement != 2
+                && qtreel.activite_id==id1
             )
             .reduce(
               (prec, cur) =>
@@ -593,14 +595,15 @@ export default {
     },
 
      MontantBudgetExecutéProvisoire() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.grand_nature_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement == 2
+                qtreel.grand_nature_id == id 
+                && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement == 2
+                && qtreel.activite_id==id1
             )
             .reduce(
               (prec, cur) =>
@@ -615,12 +618,14 @@ export default {
     },
 
      MontantBudgetActuelActivite() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1,id3) => {
+        if (id != null && id != "" && id1 != null && id1 != ""  && id3 != null && id3!= "") {
           return this.budgetEclate
             .filter(
               (qtreel) => qtreel.ligneeconomique_id == id
-              // && qtreel.annebudgetaire == this.anneeAmort
+              && qtreel.annebudgetaire == this.anneeAmort
+              && qtreel.grandenature_id==id1
+              && qtreel.activite_id==id3
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -634,14 +639,17 @@ export default {
     },
 
       MontantBudgetExecutéActivite() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.ligne_economique_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement != 2
+                qtreel.ligne_economique_id == id 
+                && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement != 2
+               // && qtreel.type_ordre_paiement != 4
+                && qtreel.grand_nature_id==id1
+
             )
             .reduce(
               (prec, cur) =>
@@ -657,14 +665,15 @@ export default {
 
 
       MontantBudgetExecutéProvisoireActivite() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.ligne_economique_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement == 2
+                qtreel.ligne_economique_id == id 
+                && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement == 2
+                && qtreel.grand_nature_id==id1
             )
             .reduce(
               (prec, cur) =>
@@ -817,6 +826,39 @@ export default {
         if (objet.length > 0) {
           objet.forEach(function (val) {
             array_exercie.push(val.grand_nature_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+      };
+    },
+
+
+
+    listeordrepaiementLigne2() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement.filter(
+            (qtreel) => qtreel.grand_nature_id == id
+          );
+        }
+      };
+    },
+
+    arrayExerciceDecompte2() {
+      return (idactivite) => {
+        console.log(idactivite);
+        let objet = this.listeordrepaiementLigne2(idactivite);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligne_economique_id);
           });
           let unique = [...new Set(array_exercie)];
           console.log(unique);
