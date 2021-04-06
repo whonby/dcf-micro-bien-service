@@ -268,7 +268,7 @@ navigateToGestionMarche(){
        navigateToUniteAdministrative(){
         this.activate(1)
         this.$router.push({
-          name: 'TableauBordUaSimple'
+          name: 'uniteadministrative'
         })
       },
  navigateToTableauBord(){

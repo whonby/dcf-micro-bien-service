@@ -60,7 +60,7 @@
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
                      <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Libelle Sous Budget{{detailOp.uniteadministrative_id}}</th>
+                    <th style="width:50%;font-size:12px" >Libelle Sous Budget</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
                    
@@ -73,9 +73,9 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td>
                    
                    <td >
-                      <router-link :to="{ name: 'ListeMarcheSousBudget', params: { id: type.uniteadministrative_id }}"
+                      <router-link :to="{ name: 'ListeBudgetEclateParSousBudget', params: { id: type.sous_budget_id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
+                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Budget Ventille</i></span>
                    </router-link> 
                     </td>
                     

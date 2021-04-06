@@ -39,7 +39,7 @@
   
                 <td colspan="">
                      <div class="control-group">
-                                                    <label class="control-label">L'unite administrative{{detail.acte_personnel_id}}</label>
+                                                    <label class="control-label">L'unite administrative</label>
                                                     <div class="controls">
                                                        <select v-model="detail.unite_administrative_id" class="span">
                                                             <option></option>
