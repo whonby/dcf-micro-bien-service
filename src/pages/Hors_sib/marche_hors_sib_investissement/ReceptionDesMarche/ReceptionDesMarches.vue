@@ -119,7 +119,6 @@
                     </td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-<<<<<<< HEAD
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
@@ -176,62 +175,6 @@
                           
                       </td>
                     </tr>
-=======
-                    <td
-                      @dblclick="afficherModalModifierTypePrestation(index)"
-                      style="text-align: center"
-                    >
-                      {{
-                        formatageSomme(parseFloat(marche.montant_marche)) ||
-                        "Non renseigné"
-                      }}
-                    </td>
-                    <td
-                      @dblclick="afficherModalModifierTypePrestation(index)"
-                      style="text-align: center"
-                    >
-                      {{
-                        formatageSomme(
-                          parseFloat(afficheMontantReelMarche(marche.id))
-                        ) || "Non renseigné"
-                      }}
-                    </td>
-
-                    <td>
-                      <router-link
-                        :to="{
-                          name: 'ReceptionDesLots',
-                          params: { id: marche.id },
-                        }"
-                        class="btn btn-inverse"
-                        title="Detail Reception"
-                      >
-                        <span class=""><i class="icon-fast-forward"></i></span>
-                      </router-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight: bold">Total Marché</td>
-                    <td
-                      style="text-align: center; color: red; font-weight: bold"
-                    >
-                      {{
-                        formatageSomme(parseFloat(montantMarcheInvestissement))
-                      }}
-                    </td>
-
-                    <td></td>
-                    <td></td>
-                  </tr>
->>>>>>> 197de8d84b1914cd47dd389ecfe7feb46d8ac141
                 </tbody>
               </table>
 

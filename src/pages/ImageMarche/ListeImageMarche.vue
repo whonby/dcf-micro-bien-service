@@ -294,7 +294,6 @@ getterImageParMarche() {
        console.log(this.formD.marche_id)
     },
 
-<<<<<<< HEAD
     getImageId(id){
         return this.getterImageMarche.filter((elmt) =>{
             return elmt.marche_id == id;
@@ -308,12 +307,6 @@ getterImageParMarche() {
         //     }
         // };
     },
-=======
-
-afficherModalListeExecution(){
-                window.history.back();
-            },
->>>>>>> 5e3e0b87426eb46cbb1e94cfc83293a2f85084c7
           onClickShowImage(i) {
               this.index = i;
               console.log(i)
