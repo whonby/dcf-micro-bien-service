@@ -46,7 +46,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Ges Sous Budgets du :{{marcheid}}</h5>
+                            <h5>Listes Des Sous Budgets du :{{marcheid}}</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -73,7 +73,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td>
                    
                    <td >
-                      <router-link :to="{ name: 'ListeBudgetEclateParSousBudget', params: { id: type.sous_budget_id }}"
+                      <router-link :to="{ name: 'ListeBudgetEclateParSousBudget', params: { id: type[0].sous_budget_id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Budget Ventille</i></span>
                    </router-link> 
