@@ -501,7 +501,7 @@ tauxArrondit() {
       return 0
     },
     afficherEnorere2(){
-if(this.formData.exonere == 1){
+if(this.formData.exonere == 0){
   return 0
 }
 else {
@@ -510,7 +510,7 @@ else {
 }
 },
 afficherEnorere(){
-if(this.formData.exonere == 1){
+if(this.formData.exonere == 0){
   return 0
 }
 else {

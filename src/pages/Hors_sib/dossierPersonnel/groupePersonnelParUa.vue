@@ -1,7 +1,40 @@
 uniteAdministratives
 <template>
   <div>
+<div class="row-fluid"  style="margin-top: -20px">
+      <div class="span1"></div>
+      <div class="span10" style="background-color: transparent; !important;">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td colspan="">
+                <br />
+                <!-- <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
+    
+        </div>  -->
 
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdministrative_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+              </td>
+              
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <div >
         <br>
@@ -28,16 +61,16 @@ uniteAdministratives
                     <tbody>
                         <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listeDesStockGlobalUa"
-                    :key="BesoinImmo[0].id"
+                    v-for="BesoinImmo in ListeDEsEntreprise"
+                    :key="BesoinImmo.id"
                   >
                   <td style="font-size:25px"
                    
-                    >{{libelleUniteAdministrative(BesoinImmo[0].unite_administrative_id) || 'Non renseigné'}}</td>
+                    >{{libelleUniteAdministrative(BesoinImmo.id) || 'Non renseigné'}}</td>
                  
                      <td>
                        <router-link
-                        :to="{name : 'ListesPersonnelParUa', params: {id:BesoinImmo[0].id}}"
+                        :to="{name : 'ListesPersonnelParUa', params: {id:BesoinImmo.id}}"
                         class="btn btn-success"
                         title="Voir Personnel"
                       >
@@ -47,7 +80,7 @@ uniteAdministratives
                       </router-link>
                      </td>
                      <td>
-                       <button  class="btn btn-info">{{NombrePersonnel(BesoinImmo[0].unite_administrative_id)}} PERSONNELS</button>
+                       <button  class="btn btn-info">{{NombrePersonnel(BesoinImmo.id)}} PERSONNELS</button>
                      </td>
                   </tr>
                   
@@ -76,13 +109,14 @@ uniteAdministratives
     import {mapGetters, mapActions} from 'vuex';
     import moment from "moment";
 import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth";
-
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-//   components: {
+  components: {
     
-//     ModelListSelect,
+    ModelListSelect,
      
-//   },
+  },
   name: 'besionImmolisation',
   data() {
     return {
@@ -117,6 +151,7 @@ quantite: {
         date_entre:""
        
       },
+      
       formData: {
         unite_administrative_id: "",
         typeequipe_id: "",
@@ -235,7 +270,7 @@ PrixUnitaireParModel() {
                     let colect=[];
                     let vM=this
                     this.uniteAdministratives.filter(item=>{
-                        console.log("OK bonjour GUE")
+                        
                         if(vM.getterUniteAdministrativeByUser.length>0){
                             let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                             if (val!=undefined){
@@ -249,6 +284,26 @@ PrixUnitaireParModel() {
                 }
                 return this.uniteAdministratives
             },
+              ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.filtre_unite_admin;
+
+      //retourne la section selectionner
+
+      if (this.uniteAdministrative_id != "") {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.id == vM.uniteAdministrative_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+     
+   
+      
+      
+      return objet;
+    },
 filtre_Stock() {
        
         if (this.noDCfNoAdmin){

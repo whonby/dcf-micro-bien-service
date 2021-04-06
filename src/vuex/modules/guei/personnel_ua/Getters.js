@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-personnaFonction
+
 export const fonctionProfessionnel  = state => state.fonctionProfessionnel;
 export const ComptableAssignataire  = state => state.ComptableAssignataire;
 const type_acte_personnels = state => state.type_acte_personnels;

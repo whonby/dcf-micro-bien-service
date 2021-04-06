@@ -293,7 +293,7 @@ quantite: {
       let objet = this.AnneParUa;
 
       //retourne la section selectionner
-
+   console.log(objet)
       if (this.uniteAdministrativeid != 0 ) {
         objet = this.AnneParUa.filter((item) => {
           if (item.unite_administrative_id == vM.uniteAdministrativeid ) {

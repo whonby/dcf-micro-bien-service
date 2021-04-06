@@ -229,37 +229,66 @@ CodeExempte
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    </td> -->
-                    <td>
-                      <button
-                        @click.prevent="supprimerMarche(activites.id)"
-                        class="btn btn-danger"
-                      >
-                        <span class=""><i class="icon-trash"></i></span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+           <td>
+          
+                     <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
+                      <span class=""><i class="icon-trash"></i>
+                      Supprimer
+                      </span>
+                    </button>
+                   </td>
+                  
+                   
 
-                    <td></td>
-                    <td style="font-weight: bold">Total Marché</td>
-                    <td
-                      style="text-align: center; color: red; font-weight: bold"
-                    >
-                      {{ formatageSomme(parseFloat(montantMarche)) }}
-                    </td>
-                    <td></td>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                       </tr>
+                        <tr>
+                      
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                      <td > 
+                      </td>
+                    <td >
+                          
+                           
+                      </td>
+                      
+                       <td>
+                           
+                           
+                      </td>
+                       <td style="font-weight:bold;"> Total Marché
+                      </td>
+                    <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(montantMarche))}}
+                           
+                      </td>
+                        <td>
+                          
+                      </td>
+                      
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                    </tr>
                 </tbody>
               </table>
 

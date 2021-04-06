@@ -1,15 +1,28 @@
 
 <template>
   <div>
- 
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
-
-    <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
-
-   
-    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
-    <!-- End Page Header -->
-    <!-- Default Light Table -->
+ <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
+    <!-- <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="" align="right">
+              <router-link
+                :to="{ name: 'ajouter_hors_sib' }"
+                tag="a"
+                data-toggle="modal"
+                class="btn btn-success"
+                align="rigth"
+                >Ajouter Marche Hors PPM
+              </router-link>
+            </div>
+              </td>
+              
+            </tr>
+          </table> -->
+          
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -22,47 +35,10 @@
             :data="BudgetEchateParUa"
             name="Liste type texte"
             worksheet="Liste type texte"
-          >sousBudget
+          >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-          <table class="table table-bordered table-striped">
-            <tr>
-              <td>
-                <!-- <div align="right">
-
-      <button class="btn btn-warning"  @click.prevent="BAILLEURUA" style="color:#fff;font-weight: bold;">AJOUTER BAILLEUR DES UA </button>
-
-
-                            </div>
-              </td> -->
-              <td style="width:12%;">
-                <div align="right">
-
-      <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
-
-
-                            </div>
-              </td>
-              <td style="width:12%;" >
-                
-                <div align="right">
-
-      <button class="btn btn-success"  @click.prevent="ajouterBudgetEclarter">ECLATER LE BUDGET </button>
-
-
-                            </div>
-              </td>
-              <td style="width:12%;">
-                <div align="right">
-
-      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE </button>
-
-
-                            </div>
-              </td>
-            </tr>
-          </table>
-          
+               
                             
                             
           <div class="widget-box">
@@ -70,7 +46,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Unites administratives</h5>
+                            <h5>Listes Ges Sous Budgets du :{{marcheid}}</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -84,30 +60,25 @@
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
                      <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Unité Administrative</th>
+                    <th style="width:50%;font-size:12px" >Libelle Sous Budget</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
                    
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBudgetEclate" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td>
                    
-                   <td v-if="type[0].sous_budget_id==0">
-                      <router-link :to="{ name: 'listeDesBudgetVentille', params: { id: type[0].id }}"
+                   <td >
+                      <router-link :to="{ name: 'ListeBudgetEclateParSousBudget', params: { id: type.sous_budget_id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Budget Ventille</i></span>
                    </router-link> 
                     </td>
-                     <td v-if="type[0].sous_budget_id != 0">
-                      <router-link :to="{ name: 'listeUniteZone', params: { id: type[0].id }}"
-                class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Sous Budget</i></span>
-                   </router-link> 
-                    </td>
+                    
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
                     <!-- <td>
                       <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">
@@ -127,9 +98,9 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="ajouterBudgetEclarter" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="ajouterBudgetEclarter" main-icon="apps" bg-color="green"></fab>
     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="ajouterBudgetEclarter()">Open</button>
-<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <notifications  />
     <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
   </div>
@@ -146,6 +117,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
  
   name:'typetext',
+
   data() {
     return {
       fabActions: [
@@ -172,9 +144,15 @@ export default {
       search: ""
     };
   },
-
+created() {
+    this.marcheid = this.$route.params.id;
+    this.detailOp = this.budgetEclate.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
   computed: {
         ...mapGetters("uniteadministrative", [
+            "groupeParUniteZone",
       "directions",
       "servicesua",
       "fonctionsua",
@@ -187,11 +165,13 @@ export default {
       "budgetEclate",
       "GroupeUaReceptrice",
       "transferts",
-      "groupeUniteAdministrativeBudgetEclate"
+      "groupeUniteAdministrativeBudgetEclate",
+      "groupeUaSousBudget",
+      "getSousBudget"
       // "chapitres",
       // "sections"
     ]),
-    ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+    ...mapGetters("bienService", ["GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -224,7 +204,36 @@ export default {
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
+afficheGroupeUaParMarche(){
+    return this.groupeParUniteZone.filter(item=>item[0].uniteadministrative_id == this.detailOp.uniteadministrative_id)
+},
 
+libelleSOusBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_enfant
+      }
+      return 0
+        }
+      };
+    },
+
+
+CodeSOusBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
     idUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -271,14 +280,14 @@ export default {
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
+    pagePrecedent(){
+                window.history.back()
+            },
     ModificationBudgetaire(){
                 this.$router.push({ name: 'ModificationBudgetaire' })
             },
-             BAILLEURUA(){
-                this.$router.push({ name: 'ListeUniteAdministrative' })
-            },
             SOUSbUDGET(){
-                this.$router.push({ name: 'listeSousBudgetParUa' })
+                this.$router.push({ name: 'sousBudget' })
             },
   ajouterBudgetEclarter(){
                 this.$router.push({ name: 'AjouterBudgetEclater' })

@@ -11,8 +11,8 @@ reference_marche
                   <tr>
                      <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
                     <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Nombre Marche Total</th>
-                     <th style="text-align:center;font-size:20px;color:#000">Nombre Marche en Planification</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Nbre Marche Hors PPM Total</th>
+                     <th style="text-align:center;font-size:20px;color:#000">Nbre Marche en Planification</th>
                     <th style="text-align:center;font-size:20px;color:#000">Nombre Marche en contratualisation</th>
                     <th style="text-align:center;font-size:20px;color:#000">Nombre Marche de Execution</th>
                     
