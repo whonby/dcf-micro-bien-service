@@ -586,7 +586,8 @@
                     @click="supprimerBanqueUa(bankUa.id)"
                   >
                     <span>
-                      <i class="icon icon-trash"></i>
+                      <i class="icon icon-trash"></i> 
+                      Supprimer
                     </span>
                   </button>
                 </td>

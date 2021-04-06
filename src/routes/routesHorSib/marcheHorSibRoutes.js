@@ -46,7 +46,7 @@ import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Conv
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
 //Lien de modification d'image 
 import ModifieImage from '../../pages/ImageMarche/ModifieImage.vue';
-
+ 
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[

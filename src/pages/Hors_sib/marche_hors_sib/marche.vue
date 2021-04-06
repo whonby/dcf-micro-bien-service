@@ -48,7 +48,12 @@
 
               <th>Cycle de vie</th>
               <!-- <th>Etat en cours</th> -->
-              <th colspan="3">Action</th>
+              <th style="font-size:10px;">
+                Marché en Contractualisation
+              </th>
+              <th>
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
