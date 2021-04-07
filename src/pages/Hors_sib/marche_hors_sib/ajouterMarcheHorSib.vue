@@ -117,6 +117,7 @@ libelleUA
                   style="border:1px solid #000"
                 />
               </div>
+              <p>erreur</p>
             </div>
           </td>
           <td colspan="">
@@ -658,13 +659,17 @@ export default {
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
-
+  
 
 ImputationBudget(){
       return this.AfficheCodeActivite(this.formData.activite_id) + "   "+  this.AfficheCodeBudgetaire(this.formData.economique_id)
 },
 
-
+VerifieRefId(){
+  return this.marches.filter((item) => {
+    return item.formData.reference_marche.includes(this.formData.reference_marche)
+  })
+},
  libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
