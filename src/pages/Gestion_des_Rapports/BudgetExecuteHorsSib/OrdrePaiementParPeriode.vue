@@ -109,7 +109,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        Listes des ordres de paiement {{ formData.date_debut }}
+        LISTE DES ORDRES DE PAIEMENT {{ formData.date_debut }}
         {{ formData.date_fin }}
       </h2>
 
@@ -122,8 +122,8 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        Listes des ordres de paiement du
-        {{ formaterDate(formData.date_debut) }} au
+        LISTE DES ORDRES DE PAIEMENT DU
+        {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
       </h2>
       <p
@@ -307,6 +307,13 @@
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" style="font-size: 14px; font-weight: bold; text-align:center"> MONTANT TOTAL :</td>
+                <td colspan="2" style="font-size: 14px; font-weight: bold; text-align:center">{{formatageSommeSansFCFA(
+                      parseFloat(MontantBudgetExecutéActivite(GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -510,7 +517,13 @@ export default {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            && qtreel[0].exercice == this.anneeAmort 
+            && qtreel[0].decision_cf ==8 ) ||
+
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            && qtreel[0].exercice == this.anneeAmort 
+            && qtreel[0].decision_cf ==9 )
         );
       } else if (
         this.uniteAdministrative_id != 0 &&
@@ -518,21 +531,28 @@ export default {
         this.formData.date_fin != ""
       ) {
         return this.GroupeOrdrePaiementByActivite.filter(
-          (qtreel) =>
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+          (qtreel) =>(qtreel[0].decision_cf ==8 
+             && qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin))  ||
+
+            (qtreel[0].decision_cf ==9
+             && qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin))
+
         );
       } else {
-        return this.GroupeOrdrePaiementByActivite;
-        // .filter(
-        //   (qtreel) => (
-        //    // qtreel[0].exercice == this.anneeAmort
-        //    qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null)  ||
+        return this.GroupeOrdrePaiementByActivite.filter(
+    (qtreel) => (
+         qtreel[0].exercice == this.anneeAmort &&
+        qtreel[0].decision_cf ==8 )  ||
 
-        //   (
-        //     //qtreel[0].exercice == this.anneeAmort
-        //    qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
-        // );
+       (
+        qtreel[0].exercice == this.anneeAmort &&
+         qtreel[0].decision_cf ==9)
+        );
+        
       }
     },
 
@@ -581,7 +601,28 @@ export default {
       };
     },
 
-    //GroupeOrdrePaiementByLigneEconomique
+     MontantBudgetExecutéActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id 
+                &&
+                 qtreel.exercice ==this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
 
     listeordrepaiementstest() {
       return (id) => {

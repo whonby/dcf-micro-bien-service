@@ -15,11 +15,11 @@
         </router-link>
       </li> -->
 
-       <li>
+       <!-- <li>
         <router-link :to="{ name: 'SituationExecutionLigne' }" tag="a">
           SITUATION D'EXECUTION 
         </router-link>
-      </li>
+      </li> -->
 
        <li>
         <router-link :to="{ name: 'SituationExecutionRecapProjet' }" tag="a">
@@ -51,11 +51,11 @@
         </router-link>
       </li>
 
-       <li>
+       <!-- <li>
         <router-link :to="{ name: 'SituationExecutionBudgetRecapByBailActivi' }" tag="a">
           SITUATION D'EXECUTION BUDGET RECAPByBailActivi
         </router-link>
-      </li>
+      </li> -->
       <!-- <li>
          <router-link :to="{name:''}" tag="a">
            PERSONNEL

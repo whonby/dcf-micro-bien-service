@@ -28,7 +28,14 @@
         <li :class="{active: active_el == 35 }" @click.prevent="navigateTobudget">
           <a title="TABLEAU DE BORD DU BUDGET" href="#">
             <i class="icon-dashboard"></i>
-            <span>TABLEAU DE BORD DU BUDGET </span>
+            <span>TABLEAU DE BORD DU BUDGET SIGOBE </span>
+          </a>
+        </li>
+
+         <li :class="{active: active_el == 102 }" @click.prevent="navigateTobudgethorssib">
+          <a title="TABLEAU DE BORD DU BUDGET" href="#">
+            <i class="icon-dashboard"></i>
+            <span>TABLEAU DE BORD DU BUDGET HORS SIGOBE </span>
           </a>
         </li>
         <!-- <li  :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
@@ -216,6 +223,15 @@ return objJson.id
           name: 'TableauBordGeneralBugdet'
         })
       },
+
+
+navigateTobudgethorssib(){
+        this.activate(102)
+        this.$router.push({
+          name: 'TableauBordGeneralBugdetHs'
+        })
+      },
+
       navigateTomarche(){
         this.activate(36)
         this.$router.push({

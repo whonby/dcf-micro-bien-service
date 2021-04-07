@@ -226,7 +226,7 @@
               v-for="ListepaimentBailleur in arrayExerciceDecompte(
                 GroupeOrdrePaiementByActivit[0].activite_id
               )"
-              :key="ListepaimentBailleur.id"
+              :key="ListepaimentBailleur"
             >
               <td style="font-size: 14px">
 
@@ -236,7 +236,7 @@
               {{
                 formatageSommeSansFCFA(
                   parseFloat(
-                    MontantBudgetActuelBailleur(ListepaimentBailleur)
+                    MontantBudgetActuelBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
                   )
                 )
               }} 
@@ -247,7 +247,7 @@
                {{
                 formatageSommeSansFCFA(
                   parseFloat(
-                    MontantBudgetExecuté1Bailleur(ListepaimentBailleur)
+                    MontantBudgetExecuté1Bailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
                   )
                 ) || "Non renseigné"
               }} 
@@ -258,26 +258,26 @@
                {{
                 formatageSommeSansFCFA(
                   parseFloat(
-                    MontantBudgetExecutéProvisoireBailleur(ListepaimentBailleur)
+                    MontantBudgetExecutéProvisoireBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
                   )
                 ) || "Non renseigné"
               }} 
             </td>
             <td style="font-size: 14px; text-align: right;">
                {{
-                (
-                  ((MontantBudgetActuelBailleur(ListepaimentBailleur) -
-                    MontantBudgetExecuté1Bailleur(ListepaimentBailleur)) /
-                    MontantBudgetActuelBailleur(ListepaimentBailleur)) *
-                  100
-                ).toFixed(2) || "Non renseigné"
+                
+                  (
+                    ((MontantBudgetExecuté1Bailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)/
+                      MontantBudgetActuelBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)) 
+                    ) * 100
+                  ).toFixed(2) || "Non renseigné"
               }}
             </td>
             <td style="font-size: 14px; text-align: right;">
                {{
                formatageSommeSansFCFA(
-                  parseFloat( MontantBudgetActuelBailleur(ListepaimentBailleur) -
-                  MontantBudgetExecuté1Bailleur(ListepaimentBailleur))) ||
+                  parseFloat( MontantBudgetActuelBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id) -
+                  MontantBudgetExecuté1Bailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id))) ||
                 "Non renseigné"
               }} 
             </td>
@@ -319,16 +319,13 @@
               <td style="font-weight: bold; font-size: 18px; text-align: right;">
                 {{
                   (
-                    ((MontantBudgetActuel(
+                    ((MontantBudgetExecuté(
                       GroupeOrdrePaiementByActivit[0].activite_id
-                    ) -
-                      MontantBudgetExecuté(
-                        GroupeOrdrePaiementByActivit[0].activite_id
-                      )) /
+                    ) /
                       MontantBudgetActuel(
                         GroupeOrdrePaiementByActivit[0].activite_id
-                      )) *
-                    100
+                      )) 
+                    ) * 100
                   ).toFixed(2) || "Non renseigné"
                 }}
               </td>
@@ -645,12 +642,13 @@ export default {
     },
 
     MontantBudgetActuelBailleur() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id, id1) => {
+        if (id != null && id1 != "" && id!="" && id1!=null) {
           return this.budgetEclate
             .filter(
               (qtreel) => qtreel.source_financement_id == id
-              // && qtreel.annebudgetaire == this.anneeAmort
+              && qtreel.activite_id==id1
+              && qtreel.annebudgetaire == this.anneeAmort
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -669,9 +667,9 @@ export default {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement == 2
+                qtreel.activite_id == id 
+                && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement == 2
             )
             .reduce(
               (prec, cur) =>
@@ -691,9 +689,9 @@ export default {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement != 2
+                qtreel.activite_id == id 
+                 && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement != 2
             )
             .reduce(
               (prec, cur) =>
@@ -708,14 +706,15 @@ export default {
     },
 
     MontantBudgetExecutéProvisoireBailleur() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.source_financement_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement == 2
+                 qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement == 2
+                 && qtreel.activite_id ==id1
             )
             .reduce(
               (prec, cur) =>
@@ -730,14 +729,16 @@ export default {
     },
 
     MontantBudgetExecuté1Bailleur() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != ""&& id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.source_financement_id == id &&
-                // && qtreel.annebudgetaire ==this.anneeAmort
-                qtreel.type_ordre_paiement != 2
+                qtreel.source_financement_id == id
+                && qtreel.exercice ==this.anneeAmort
+                && qtreel.type_ordre_paiement != 2
+                && qtreel.activite_id ==id1
+                
             )
             .reduce(
               (prec, cur) =>
@@ -913,6 +914,10 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    total(){
+      return this.MontantBudgetExecuté1Bailleur
+    },
 
     genererEnPdf() {
       this.$htmlToPaper("printpdf");

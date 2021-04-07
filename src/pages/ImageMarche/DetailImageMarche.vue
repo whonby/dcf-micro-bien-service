@@ -13,6 +13,11 @@
         </button>
 
     <div class="main-body">
+       <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div>
+        <br/>
 
             
           <!-- Breadcrumb -->

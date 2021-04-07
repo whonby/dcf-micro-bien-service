@@ -34,7 +34,7 @@
             </router-link>
           </li> -->
         
-  <li class="dropdown" id="menuBUDGET">
+  <li class="dropdown" id="menuBUDGET" v-if="admin() || dcf()">
         <a
           title="UNITES ADMINISTRATIVES"
           href="#"
@@ -42,7 +42,7 @@
           data-target="#menuBUDGET"
           class="dropdown-toggle"
         >
-          <span class="text">UNITE ADMINISTRATIVE</span>
+          <span class="text" >UNITE ADMINISTRATIVE</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -143,7 +143,7 @@
 <!--              IMPORTATION DU BUDGET-->
 <!--            </router-link>-->
 <!--          </li>-->
-          <li>
+          <li v-if="admin() || dcf()">
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
               BUDGET PAR UA
             </router-link>
@@ -181,7 +181,8 @@
 
 <script>
 import { mapMutations, mapActions } from "vuex";
-import {admin,dcf} from "../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../Repositories/Auth"
+
 export default {
   mounted() {
     // console.log(this.$store.state);
@@ -197,7 +198,7 @@ export default {
       ...mapActions('Utilisateurs', ['logoutUser']),
     admin:admin,
     dcf:dcf,
- 
+ noDCfNoAdmin:noDCfNoAdmin
 
 
   }

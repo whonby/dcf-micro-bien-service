@@ -150,7 +150,7 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 
-const BienServiceRoutes = [ 
+const BienServiceRoutes = [
     {
         path: "/ListePersonnelRattacherByUa/:id",
         name: "ListePersonnelRattacherByUa",

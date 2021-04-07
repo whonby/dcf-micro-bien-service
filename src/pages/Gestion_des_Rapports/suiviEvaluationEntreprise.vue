@@ -88,7 +88,8 @@
            
              <br/>
              <div id="printMe">
-             <h5 style="text-align='center';font-size:16px">EVALUATION DES ENTREPRISES</h5>
+             <h5 style="text-align='center';font-size:16px">ETAT DE SUIVI DE L'EXECUTION DES MARCHES PAR ENTREPRISE</h5>
+             <h2 style="text-align='center';">{{libelleUa(uniteAdministrative_id)}}</h2>
    <table class="table table-bordered table-striped">
 <thead>
                   <tr >
@@ -245,7 +246,7 @@ search:""
     
   },
 created(){
-console.log(this.listeArrayDesc)
+console.log(this.groupeEntreprise2)
 },
   computed: {
     ...mapGetters("SuiviImmobilisation", [
@@ -273,9 +274,20 @@ console.log(this.listeArrayDesc)
                 "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
                 "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
                 "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
-                "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
+                "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur","groupeEntreprise2"]),
                 ...mapGetters("gestionMarche", ["entreprises"]),
- 
+ libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
  listeActeEffectFinnancier() {
       return macheid => {
         if (macheid != "") {
@@ -483,8 +495,8 @@ NombreDeMarcheRecu() {
 
  listeArrayDesc(){
     let collection=[];
-  //  let vm=this;
-    this.GroupeEntreprise.forEach(function(val){
+ //console.log(this.GroupeEntreprise)
+    this.groupeEntreprise2.forEach(function(val){
       let objet={
          entreprise_id:val[0].entreprise_id,
          nbr_marche:val.length,

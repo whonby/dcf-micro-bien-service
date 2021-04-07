@@ -203,6 +203,7 @@ created() {
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
+   
 afficheGroupeUaParMarche(){
     return this.marches.filter(item=>item.unite_administrative_id == this.detailOp.unite_administrative_id)
 },

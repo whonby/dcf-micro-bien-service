@@ -1,160 +1,30 @@
 <template>
   <div>
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> PERSONNELS
-          </a>
-        </li>
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>BIENS ET SERVICES
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>TRANSFERTS
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>INVESTISSEMENTS
-          </a>
-        </li>
-         <li class="bg_ls">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> TOTAL
-          </a>
-        </li>
-        <li class="bg_lg">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>CONSOMMES
-          </a>
-        </li>
-         <li class="bg_lr">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>DISPONIBLES
-          </a>
-        </li>
-         <li class="bg_lb">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-default">{{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%</span>TAUX EXECUTION
-          </a>
-        </li>
-       
-      
-
-      </ul>
-    </div>
-<div id="modificationModal" class="modal hide tabFormulaire">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">�</button>
-        <h3>DETAIL BUDGET  </h3>
-      </div>
-      <div class="modal-body">
-         <table class="table table-bordered table-striped">
-            
- <tbody>
-                    
-    <tr >
-    
-    
-     <th height="20px" colspan="5" style="color: #000000;font-size:14px">UNITE ADMINISTRATIVE : {{editUniteAdministrative.libelle}}</th>
-     
- </tr>
-                    <tr >
-    
-    
-     <th height="20px"  style="color: #000000;font-size:14px">BUDGET PERSONNEL</th>
-      <th width="50px" colspan="4" style="font-size:14px;color: #000000;">{{formatageSomme(parseFloat(budgetPersonnel(editUniteAdministrative.id)))}}</th>
-     
-     
- </tr>
-                  
-   <tr >
-   
-    
-      <th height="20px"  style="color: #000000;font-size:14px"> BUDGET BIENS ET SERVICE</th>
-       <th width="50px" colspan="4" style="text-align:center;font-size:14px;color: #000000;">{{formatageSomme(parseFloat(budgetBienService(editUniteAdministrative.id)))}}</th>
-     
-     
- </tr>
-                        
-  <tr >
-   
-   
-    
-      <th height="20px"  style="color: #000000;font-size:14px">BUDGET INVESTISSEMENT</th>
-      <th width="50px" colspan="4" style="font-size:14px;color: #000000;">{{formatageSomme(parseFloat(budgetInverstisement(editUniteAdministrative.id)))}}</th>
-     
-     
- </tr>            
-           
-  <tr >
-   
-   
-    
-      <th height="20px"  style="color: #000000;font-size:14px">BUDGET TANSFERTS</th>
-      <th width="50px" colspan="4" style="font-size:14px;color: #000000;">{{formatageSomme(parseFloat(budgetTranfert(editUniteAdministrative.id)))}}</th>
-    
- </tr>     
- 
-   <tr >
-   
-   
-    
-      <th height="20px"  style="color: #000000;font-size:14px;">TOTAL BUDGET</th>
-      <th width="50px" colspan="4" style="font-size:14px;color: #000000;background-color: orange;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id)))}}</th>
-     
-    
- </tr>     
-   <tr >
-   
-   
-  
-      <th height="10px"  style="color: #000000;font-size:14px">MONTANT CONSOMMER</th>
-       <th width="50px" colspan="4" style="font-size:14px;color: #000000;background-color: #ffffff;">{{formatageSomme(parseFloat(budgetConsommerTransfert(editUniteAdministrative.id)) + parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id)))}}</th>
-     
-     
- </tr>     
-   <tr >
-   
-   
-    
-      <th height="20px"  style="color: #000000;font-size:14px">DISPONIBLE BUDGET</th>
-       <th width="50px" colspan="4" style="font-size:14px;color: #ffffff;background-color: green;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id))-(parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))}}</th>
-
- </tr>     
-  <tr >
-   
-    
-      <th height="20px"  style="color: #000000;font-size:14px">TAUX EXECUTION</th>
-       <th width="50px" colspan="4" style="font-size:14px;color:green;background-color: #ffffff;">{{((((parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))/(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id))))*100).toFixed(2)}}%</th>
-     
- </tr>     
-                  </tbody>  
-         </table>
-      </div>
-      <div class="modal-footer">
-       
-        <a data-dismiss="modal" class="btn" href="#">FERMER</a>
-      </div>
-    </div>
-
-
-
-
-
-
+       <!-- <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td colspan="">
+                <br />
+              
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >UNITE ADMINISTRATIVE{{uniteAdmin_id}}<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdmin_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+              </td>
+              
+             
+            </tr>
+          </tbody>
+        </table> -->
     <div class="container-fluid">
       <notifications />
       <div class="widget-box">
@@ -182,99 +52,51 @@
             <thead>
               <tr style="">
                 <th style="font-size:15px;">Unité administrative</th>
-                <th style="font-size:15px;" title="Budget du personnel">Personnels</th>
+                <th style="font-size:15px;" title="Budget du personnel">Personnels (FCFA)</th>
 
-                <th style="font-size:15px;" title="Budget de bien et service">Biens et Services</th>
-                <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements</th>
+                <th style="font-size:15px;" title="Budget de bien et service">Biens et Services (FCFA)</th>
+                <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements (FCFA)</th>
                 <!-- <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
 
-                <th style="font-size:15px;background: blue; color:#fff">Total</th>
-                <th style="font-size:15px;background: forestgreen; color:#fff">Consommés</th>
-                <th style="font-size:15px;background: red;color:#fff">Disponibles</th>
+                <th style="font-size:15px;background: blue; color:#fff">Total (FCFA)</th>
+                <th style="font-size:15px;background: forestgreen; color:#fff">Consommés (FCFA)</th>
+                <th style="font-size:15px;background: red;color:#fff">Disponibles (FCFA)</th>
                 <th style="font-size:15px;background:deepskyblue;color:#fff">Taux Exécution (%)</th>
-                  <th style="font-size:15px;background: default;color:#fff">Action</th>
+                  <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
               </tr>
             </thead>
             <tbody>
               <tr v-for="unite in partition(uniteAdmin,size)[page]" :key="unite.id">
                 
-                <td style="font-weight:bold;font-size:12px;">{{unite.libelle}}</td>
+                <td style="font-weight:bold;font-size:12px;">{{libelleUniteAdministrative(unite)}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetPersonnel(unite.id)))}}</td>
+                  style="font-weight:bold;font-size:12px;text-align:center"
+                >{{formatageSommeSansFCFA(parseFloat(budgetPersonnel(unite)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetBienService(unite.id)))}}</td>
+                  style="font-weight:bold;font-size:12px;;text-align:center"
+                >{{formatageSommeSansFCFA(parseFloat(budgetBienService(unite)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</td>
+                  style="font-weight:bold;font-size:12px;;text-align:center"
+                >{{formatageSommeSansFCFA(parseFloat(budgetInverstisement(unite)))}}</td>
                 <!-- <td
                   style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</td> -->
+                >{{formatageSommeSansFCFA(parseFloat(budgetTranfert(unite)))}}</td> -->
 
                 <td
-                  style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</td>
-                <td style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(ComsommationBudgetaire(unite.id)))}}</td>
+                  style="font-weight:bold;font-size:12px;;text-align:center"
+                >{{formatageSommeSansFCFA(parseFloat(MontantTotalPargdeNature(unite)))}}</td>
+                <td style="font-weight:bold;font-size:12px;;text-align:center"
+                >{{formatageSommeSansFCFA(parseFloat(ComsommationBudgetaire(unite)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;"
+                  style="font-weight:bold;font-size:12px;;text-align:center"
             
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)) - (parseFloat(ComsommationBudgetaire(unite.id))))}}</td>
+                >{{formatageSommeSansFCFA(parseFloat(MontantTotalPargdeNature(unite)) - (parseFloat(ComsommationBudgetaire(unite))))}}</td>
                 
-                <td style="font-weight:bold;font-size:12px;">{{(((parseFloat(MontantTotalPargdeNature(unite.id)) - (parseFloat(ComsommationBudgetaire(unite.id))))/(parseFloat(MontantTotalPargdeNature(unite.id))))*100).toFixed(2)|| 0}}%</td>
+                <td style="font-weight:bold;font-size:12px;;text-align:center">{{((parseFloat(ComsommationBudgetaire(unite))/parseFloat(MontantTotalPargdeNature(unite)))*100).toFixed(2)|| 0}}%</td>
           
-             <td>
-               
-                <button
-                        class="btn btn-info"
-                        @click="afficherModalModifierUniteAdministrative(unite.id)"
-                      >
-                        <span>
-                          <i class="icon-share-alt"></i>
-                        </span>
-                      </button>
-              
-             </td>
+             
               </tr>
 
-              <!-- <tr>
-                <td style="background: orangered;color:#fff">Total Budget des  UA</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                > {{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                > {{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) )}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px" 
-                > {{((parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ) || 0}}</td>
-              </tr>  -->
-              
-              
             </tbody>
           </table>
          
@@ -298,14 +120,16 @@
 <script>
 
     import { mapGetters, mapActions } from "vuex";
-    import { formatageSomme,partition } from "../../Repositories/Repository";
-    import {admin,dcf,noDCfNoAdmin} from "../../Repositories/Auth"
-    
+    import { formatageSommeSansFCFA,partition } from "@/Repositories/Repository";
+    import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
+//     import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
         components:{
             //ProgressBar
+            //ModelListSelect
         },
         data() {
             return {
@@ -319,6 +143,7 @@
                     }
 
                 ],
+                uniteAdmin_id:"",
                 editUniteAdministrative:{},
                 detailBudget:"",
                 budgetGeneralCharge:"",
@@ -383,15 +208,69 @@
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+libelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+
+
+groupeParUa() {
+    //   return (id) => {
+        
+        let objet = this.budgetEclate;
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.uniteadministrative_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     //};
+    },
+    ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.uniteAdmin;
+
+      //retourne la section selectionner
+
+      if (this.uniteAdmin_id != "") {
+        objet = this.uniteAdmin.filter((item) => {
+            console.log(this.uniteAdmin)
+          if (item.uniteadministrative_id == vM.uniteAdmin_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+     
+   
+      
+      
+      return objet;
+    },
 uniteAdmin() {
       
-
+ 
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+            this.groupeParUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -401,7 +280,7 @@ uniteAdmin() {
             return colect
         }
 
-return this.uniteAdministratives
+return this.groupeParUa
 
        
 
@@ -436,57 +315,7 @@ budgetBienService() {
       };
     },
 
-//  budgetBienService() {
-//       return id => {
-//         if (id != "") {
-//           return this.budgetGeneral
-//             .filter(element => element.ua_id == id  && element.gdenature_id==5 && element.actived ==1) 
-//             .reduce(
-//               (prec, cur) =>
-//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-//               0
-//             )
-//             .toFixed(0);
-//         }
-//       };
-//     },
 
-
-            // budgetBienService(){
-            //   return unite_id=>{
-            //       let vM=this;
-            //       if(unite_id!='' && vM.budgetGeneralCharge!=""){
-
-
-            //           let budget=vM.budgetGeneralCharge.filter(item=>{
-            //               if(item.gdenature_id==5 && item.ua_id==unite_id ){
-            //                   return item
-            //               }
-            //           })
-
-            //           if(budget!=undefined){
-
-            //               return parseFloat(budget.Dotation_Initiale);
-            //           }
-            //           return 0
-            //       }
-            //       return 0
-            //   }
-            // },
-
-
-
-             
-            // // afficher la somme des totaux
-            // afficherLaSommeDesTotaux(){
-            //   return this.MontantTotalPargdeNature.reduce((prec,cur)=>parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0) 
-            // },
-
-            // afficher les totaux du budget pour le module personnel
-              // afficherTotalBudgetModulePersonnel(){
-              //  return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
-
-              // },
 afficherTotalBudgetModulePersonnel() {
         
         if(this.noDCfNoAdmin){
@@ -574,61 +403,6 @@ afficherTotalBudgetModuleTransfert() {
     },
 
 
-    //           budgetPersonnel() {
-    //   return id => {
-    //     if (id != "") {
-    //       return this.budgetGeneral
-    //         .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
-    //         .reduce(
-    //           (prec, cur) =>
-    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-    //           0
-    //         )
-    //         .toFixed(0);
-    //     }
-    //   };
-    // },
-// budgetPersonnel() {
-        
-//         if(this.noDCfNoAdmin){
-//             let colect=[];
-            
-//             this.budgetGeneral.filter(item=>{
-//                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-//                 if (val!=undefined){
-//                     colect.push(item)
-//                     return item
-//                 }
-//             })
-//             return id => {
-//         if (id != "") {
-//           return colect
-//             .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
-//             .reduce(
-//               (prec, cur) =>
-//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-//               0
-//             )
-//             .toFixed(0);
-//         }
-//       };
-           
-//         }
-//          return id => {
-//         if (id != "") {
-//           return this.budgetGeneral
-//             .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
-//             .reduce(
-//               (prec, cur) =>
-//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-//               0
-//             )
-//             .toFixed(0);
-//         }
-//       };
-       
-//     },
-
 MontantTotalPargdeNature() {
       return id => {
         if (id != null && id != "") {
@@ -656,120 +430,7 @@ budgetPersonnel() {
         }
       };
     },
-            // budgetPersonnel(){
-            //     return unite_id=>{
-            //         let vM=this;
-            //         if(unite_id!='' && vM.budgetGeneralCharge!=""){
-
-            //             let budget=vM.budgetGeneralCharge.find(item=>{
-            //                 if(item.gdenature_id==2  && item.ua_id==unite_id ){
-            //                     return item
-            //                 }
-            //             })
-
-            //             if(budget!=undefined){
-
-            //                 return parseFloat(budget.Dotation_Initiale);
-            //             }
-            //             return 0
-            //         }
-            //         return 0
-            //     }
-            // },
-
-
-    // budgetInverstisement() {
-    //   return id => {
-    //     if (id != "") {
-    //       return this.budgetGeneral
-    //         .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
-    //         .reduce(
-    //           (prec, cur) =>
-    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-    //           0
-    //         )
-    //         .toFixed(0);
-    //     }
-    //   };
-    // },
-
-    // budgetInverstisement() {
         
-    //     if(this.noDCfNoAdmin){
-    //         let colect=[];
-            
-    //         this.budgetGeneral.filter(item=>{
-    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-    //             if (val!=undefined){
-    //                 colect.push(item)
-    //                 return item
-    //             }
-    //         })
-    //          return id => {
-    //     if (id != "") {
-    //       return colect
-    //         .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
-    //         .reduce(
-    //           (prec, cur) =>
-    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-    //           0
-    //         )
-    //         .toFixed(0);
-    //     }
-    //   };
-            
-    //     }
-    //       return id => {
-    //     if (id != "") {
-    //       return this.budgetGeneral
-    //         .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
-    //         .reduce(
-    //           (prec, cur) =>
-    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-    //           0
-    //         )
-    //         .toFixed(0);
-    //     }
-    //   };
-        
-    // },
-            
-            // budgetInverstisement(){
-            //     return unite_id=>{
-            //         let vM=this;
-            //         if(unite_id!='' && vM.budgetGeneralCharge!=""){
-            //             console.log("------65")
-            //             console.log(vM.budgetGeneralCharge)
-            //             let budget=vM.budgetGeneralCharge.find(item=>{
-            //                 if(item.gdenature_id==7  && item.ua_id==unite_id ){
-            //                     return item
-            //                 }
-            //             })
-            //             console.log(budget)
-            //             if(budget!=undefined){
-
-            //                 return parseFloat(budget.Dotation_Initiale);
-            //             }
-            //             return 0
-            //         }
-            //         return 0
-            //     }
-            // },
-
-    //         budgetTranfert() {
-    //   return id => {
-    //     if (id != "") {
-    //       return this.budgetGeneral
-    //         .filter(element => element.ua_id == id  && element.gdenature_id==6 && element.actived ==1) 
-    //         .reduce(
-    //           (prec, cur) =>
-    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-    //           0
-    //         )
-    //         .toFixed(0);
-    //     }
-    //   };
-    // },
      budgetTranfert() {
         
         if(this.noDCfNoAdmin){
@@ -811,43 +472,7 @@ budgetPersonnel() {
         // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
     },
-            // budgetTranfert(){
-            //     return unite_id=>{
-            //         let vM=this;
-            //         if(unite_id!='' && vM.budgetGeneralCharge!=""){
-
-            //             let budget=vM.budgetGeneral.find(item=>{
-            //                 if(item.gdenature_id==6  && item.ua_id==unite_id){
-            //                     return item
-            //                 }
-            //             })
-
-            //             if(budget!=undefined){
-
-            //                 return parseFloat(budget.Dotation_Initiale);
-            //             }
-            //             return 0
-            //         }
-            //         return 0
-            //     }
-            // },
-
- 
-            
-    // budgetConsommerTransfert() {
-    //   return id => {
-    //     if (id != "") {
-    //       return this.transferts
-    //         .filter(element => element.ua_id == id)
-    //         .reduce(
-    //           (prec, cur) =>
-    //             parseFloat(prec) + parseFloat(cur.montant_total_contrat),
-    //           0
-    //         )
-    //         .toFixed(0);
-    //     }
-    //   };
-    // },
+           
 budgetConsommerTransfert() {
         
         if(this.noDCfNoAdmin){
@@ -1323,7 +948,7 @@ getDataPaginate(index){
 
 
 
-            formatageSomme: formatageSomme,
+            formatageSommeSansFCFA: formatageSommeSansFCFA,
             OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];

@@ -1906,60 +1906,7 @@ export default {
         });
         return objet;
       }
-      // if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.TypeMarche(item.marche_id)==vM.typemarche_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //   if(this.entre_id=="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //  if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //    if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //    if(this.entre_id!="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && item.entreprise_id==vM.entre_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //   if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
+      
       return objet;
     },
     NombreTotalOP() {

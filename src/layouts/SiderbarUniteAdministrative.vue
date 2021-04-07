@@ -47,7 +47,7 @@
           <li @click.prevent="monEquipe" v-if="noDCfNoAdmin() || cf()" :class="{active: active_el == 100 }">
               <a  title="" href="#">
                   <i class="icon-group"></i>
-                  <span>MOM EQUIPE && STRUCTURE CONTROLE</span>
+                  <span>MOM EQUIPE</span>
               </a>
           </li>
 
@@ -268,7 +268,7 @@ navigateToGestionMarche(){
        navigateToUniteAdministrative(){
         this.activate(1)
         this.$router.push({
-          name: 'TableauBordUaSimple'
+          name: 'uniteadministrative'
         })
       },
  navigateToTableauBord(){
