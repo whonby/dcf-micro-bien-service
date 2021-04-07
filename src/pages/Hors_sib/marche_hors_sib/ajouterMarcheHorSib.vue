@@ -110,14 +110,15 @@ libelleUA
               <label class="control-label">Référence du marché</label>
               <div class="controls">
                 <input
+                 :value="formData.reference_marche"
                   type="text"
-                  v-model="formData.reference_marche"
+                  readonly
                   class="span"
                   placeholder="Saisir la référence du marché"
                   style="border:1px solid #000"
                 />
               </div>
-              <p>erreur</p>
+              <!-- <code v-if="formData.reference_marche && verifieRefId">exite déja</code> -->
             </div>
           </td>
           <td colspan="">
@@ -519,6 +520,9 @@ export default {
   },
   data() {
     return {
+      code:'',
+      codes:'',
+      charact:'ABCDEFGHIGKLMNOPQRSTUVWXYZ123456789abcdefghijklmnopqrstuvwxyz',
       fabActions: [
         {
           name: "cache",
@@ -576,7 +580,9 @@ export default {
       search: "",
     };
   },
-
+  created(){
+    console.log(this.rand_alea(5))
+  },
   computed: {
     ...mapGetters("bienService", [
       "mandats",
@@ -660,16 +666,16 @@ export default {
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
   
-
+  // verifieRefId(){
+  //   return this.marches.filter((item) => {
+  //     return item.reference_marche.toUpperCase().includes(this.formData.reference_marche.toUpperCase())
+  //     //console.log(item.reference_marche)
+  //   })
+  // },
 ImputationBudget(){
       return this.AfficheCodeActivite(this.formData.activite_id) + "   "+  this.AfficheCodeBudgetaire(this.formData.economique_id)
 },
 
-VerifieRefId(){
-  return this.marches.filter((item) => {
-    return item.formData.reference_marche.includes(this.formData.reference_marche)
-  })
-},
  libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
@@ -988,6 +994,8 @@ AfficheGrandeDepense() {
       return 0;
     },
   },
+  //générer une référence dynamique
+  
   methods: {
     ...mapActions("horSib", [
       "ajouterMarcheHorSib",
@@ -995,6 +1003,13 @@ AfficheGrandeDepense() {
       "supprimerMarcheHorSib",
       "getMarcheHorSib",
     ]),
+      rand_alea(long){
+        for (let i = 0; i < long; i++) {
+          this.codes += (this.charact.charAt(Math.floor(Math.random() * this.charact.length)))
+      }
+      this.formData.reference_marche = ('M_C/'+this.codes+'/'+ this.anneeBugetaire);
+      return this.formData.reference_marche;
+    },
     pagePrecedent(){
                 window.history.back()
             },
