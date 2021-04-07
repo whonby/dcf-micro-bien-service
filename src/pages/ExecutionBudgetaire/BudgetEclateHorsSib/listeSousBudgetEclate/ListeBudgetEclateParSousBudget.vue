@@ -34,7 +34,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>VENTILATION DU BUDGET</h5>
+              <h5>{{marcheid}}VENTILATION DU BUDGET{{marcheid}}</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -401,7 +401,7 @@ SommePersonneBudgetEclateTresor() {
      MontantResor() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.tresor
@@ -425,7 +425,7 @@ SommePersonneBudgetEclateTresor() {
     MontantDon() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.don
@@ -437,7 +437,7 @@ SommePersonneBudgetEclateTresor() {
      MontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.emprunt

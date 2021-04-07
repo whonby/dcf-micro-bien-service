@@ -66,8 +66,13 @@ import ListeUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEcla
 import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
 import listeUniteZone from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetEclate/listeUniteZone.vue"
 import ListeBudgetEclateParSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetEclate/ListeBudgetEclateParSousBudget.vue"
-
+import recapitulatifBudgetHorsSigobe from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/recapitulatifBudgetHorsSigobe",
+    name: "recapitulatifBudgetHorsSigobe",
+    component: recapitulatifBudgetHorsSigobe
+},
   {
     path: "/ListeBudgetEclateParSousBudget/:id",
     name: "ListeBudgetEclateParSousBudget",

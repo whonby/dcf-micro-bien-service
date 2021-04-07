@@ -75,7 +75,7 @@
                    <td >
                       <router-link :to="{ name: 'ListeBudgetEclateParSousBudget', params: { id: type[0].sous_budget_id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Budget Ventille</i></span>
+                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Budget Ventille</i></span>
                    </router-link> 
                     </td>
                     

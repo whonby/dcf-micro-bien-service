@@ -1,4 +1,4 @@
-ajouterHistorisqueBudgetEclate
+
 <template>
 
 <div class="container-fluid">
@@ -28,7 +28,7 @@ ajouterHistorisqueBudgetEclate
                 <input type="search" placeholder />
               </div>-->
             </div>
-ajouterDecisionBudgetEclate
+
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">

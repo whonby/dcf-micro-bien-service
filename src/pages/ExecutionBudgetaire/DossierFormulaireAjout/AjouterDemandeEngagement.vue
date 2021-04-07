@@ -380,7 +380,27 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <td>
+                         <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Montant du marché</label
+                            >
+                            <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Montant Autre Depense</label>
+                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Montant Reservé</label> -->
+                            <div class="controls">
+                             
+                              <money
+                                v-model="formData2.montant_marché"
+                                readOnly
+                                style="text-align: left; color: red"
+                                class="span"
+                              ></money>
+                              <!-- <money v-model="formData2.montant_autre_depense" v-if="formData.type_engagement_id=='Autre'" readOnly  style="text-align:left;color:red"  class="span"></money>
+                    <money v-model="formData2.montant_Reserve" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'" readOnly  style="text-align:left;color:red"  class="span"></money> -->
+                            </div>
+                          </div>
+                        </td>
+                        <!-- <td>
                           <div class="control-group">
                             <label class="control-label"
                               >Unité administrative</label
@@ -400,10 +420,10 @@ numeroOrdre
                               >
                             </div>
                           </div>
-                        </td>
+                        </td> -->
                       </tr>
                       <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                           <div class="control-group">
                             <label class="control-label">Objet de marché</label>
                             <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Objet Autres depense</label> -->
@@ -435,32 +455,7 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Montant du marché</label
-                            >
-                            <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Montant Autre Depense</label>
-                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Montant Reservé</label> -->
-                            <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   :value="formData2.montant_marché"
-                    class="span"
-                    readonly
-                  /> -->
-                              <money
-                                v-model="formData2.montant_marché"
-                                readOnly
-                                style="text-align: left; color: red"
-                                class="span"
-                              ></money>
-                              <!-- <money v-model="formData2.montant_autre_depense" v-if="formData.type_engagement_id=='Autre'" readOnly  style="text-align:left;color:red"  class="span"></money>
-                    <money v-model="formData2.montant_Reserve" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'" readOnly  style="text-align:left;color:red"  class="span"></money> -->
-                            </div>
-                          </div>
-                        </td>
+                       
                       </tr>
                       <tr>
                         <td>

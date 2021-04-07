@@ -299,7 +299,7 @@
                 </div>
               </div>
             </td>
-             <td colspan="2">
+             <td colspan="">
                <div class="control-group">
                 <label class="control-label" >PART ETAT</label>
                 <div class="controls">
@@ -316,6 +316,21 @@
                 </div>
               </div>
              </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Date decompte</label>
+                <div class="controls">
+
+
+                  <input type="date" 
+                         class="span"
+                        v-model="formData.date_decompte"
+                         
+                  />
+
+                </div>
+              </div>
+            </td>
            </tr>
           
           

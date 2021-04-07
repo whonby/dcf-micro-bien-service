@@ -62,7 +62,7 @@
         <li @click.prevent="navigateTableBordBordBudgetEclate" :class="{active: active_el ==780}">
            <a href="#">
                   <i class="icon-truck"></i>
-                  <span>BUDGET ECLATE</span>
+                  <span>BUDGET</span>
               </a>
         </li>
           <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==45}">
@@ -299,7 +299,7 @@ navigateToGestionMarche(){
        navigateTableBordBordBudgetEclate(){
           this.activate(780)
           this.$router.push({
-              name: 'TableauBordGestionMarche'
+              name: 'BudgetEclate'
           })
       },
       navigateTableBordBord(){
