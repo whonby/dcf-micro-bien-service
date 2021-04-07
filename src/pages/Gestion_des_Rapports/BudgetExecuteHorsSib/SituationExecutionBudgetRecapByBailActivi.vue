@@ -261,15 +261,12 @@
                 <td style="font-weight: bold; font-size: 18px; text-align:right">
                   {{
                     (
-                      ((MontantBudgetActuel(
+                      (MontantBudgetExecuté(
                         GroupeOrdrePaiementByActivit3[0].source_financement_id
-                      ) -
-                        MontantBudgetExecuté(
-                          GroupeOrdrePaiementByActivit3[0].source_financement_id
-                        )) /
+                      ) /
                         MontantBudgetActuel(
                           GroupeOrdrePaiementByActivit3[0].source_financement_id
-                        )) *
+                        ))*
                       100
                     ).toFixed(2) || "Non renseigné"
                   }}
@@ -336,8 +333,7 @@
                 <td style="font-size: 14px; font-weight: bold; text-align:right">
                   {{
                     (
-                      ((MontantBudgetActuelBailleur(ListepaimentBailleur) -
-                        MontantBudgetExecuté1Bailleur(ListepaimentBailleur)) /
+                        (MontantBudgetExecuté1Bailleur(ListepaimentBailleur)/
                         MontantBudgetActuelBailleur(ListepaimentBailleur)) *
                       100
                     ).toFixed(2) || "Non renseigné"
