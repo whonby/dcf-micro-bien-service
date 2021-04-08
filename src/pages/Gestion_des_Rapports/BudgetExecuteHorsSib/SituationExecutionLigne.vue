@@ -222,6 +222,7 @@
            
             <tr >
               
+              
               <td style="background-color:#87ceeb;width:800px;">{{ LibelleGrandeNature(listeLigne)}}</td>
               <td style="background-color:#87ceeb;text-align:right;">
                 {{ formatageSommeSansFCFA(parseFloat( MontantBudgetActuel(listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
@@ -269,15 +270,15 @@
               <td style="text-align:right;">
                 {{
                   (
-                    (MontantBudgetExecutéActivite(listeLignes,listeLigne) /
-                      MontantBudgetActuelActivite(listeLignes,listeLigne)) *
+                    (MontantBudgetExecutéActivite(listeLignes,listeLigne,) /
+                      MontantBudgetActuelActivite(listeLignes,listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)) *
                     100
                   ).toFixed(2) || "Non renseigné"
                 }}
                 </td>
               <td style="text-align:right;">
                 {{ formatageSommeSansFCFA(
-                    parseFloat((MontantBudgetActuelActivite(listeLignes,listeLigne)-MontantBudgetExecutéActivite(listeLignes,listeLigne))))}}</td>
+                    parseFloat((MontantBudgetActuelActivite(listeLignes,listeLigne,GroupeOrdrePaiementByActivit[0].activite_id)-MontantBudgetExecutéActivite(listeLignes,listeLigne))))}}</td>
               
             </tr>
           </tbody>
@@ -849,7 +850,36 @@ export default {
         }
       };
     },
+// TotalGeneral(){
+//   return(id)=>{
+//     if(id!=null && id!=""){
+//       let data1 = this.arrayExerciceDecompte2(id);
+//       var sommetotal =0;
+//       if(data1.length >0){
+//         data1.forEach(function(val){
+//           var sommeTotal=  this.budgetEclate
+//             .filter(
+//               (qtreel) => qtreel.ligneeconomique_id == val
+//               && qtreel.annebudgetaire == this.anneeAmort
+             
+//             )
+//             .reduce(
+//               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+//               0
+//             )
+//             .toFixed(0);
+//         });
 
+//         if(sommeTotal>0){
+//           return sommeTotal;
+//         }else{
+//           return 0;
+//         }
+//       }
+//       return 0;
+//     }
+//   }
+// },
     arrayExerciceDecompte2() {
       return (idactivite) => {
         console.log(idactivite);

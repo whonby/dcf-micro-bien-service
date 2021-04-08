@@ -1,67 +1,64 @@
 libelleUA
 <template>
+  <div class="container-fluid">
+    <hr />
 
-<div class="container-fluid">
-      <hr />
-      
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Ajouter Marché/Contrat</h5>
-              <!-- <div align="right">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title">
+            <span class="icon">
+              <i class="icon-th"></i>
+            </span>
+            <h5>Ajouter Marché/Contrat</h5>
+            <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
               </div>-->
-            </div>
+          </div>
 
-            <div class="table-responsive text-nowrap">
-              <table class="table table-bordered table-striped">
-                <div class="widget-box">
-                    <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-               <h3>Marchés /Contrats</h3>
-              
-            </div>
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#SansContratIdent">Information</a>
-                      </li>
-                       
-                     
-                      
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                    <div id="SansContratIdent" class="tab-pane active">
-                      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-           <tr>
-               <td>
-            <div class="control-group">
-              <label class="control-label">Année Budgétaire </label>
-              <div class="controls">
-                <input
-                  type="text"
-                  :value="anneeBugetaire"
-                  class="span"
-                  readonly
-                  style="border:1px solid #000"
-                  
-                />
-              </div>
-            </div>
-          </td>
-          <td colspan="3">
-            <!-- <div class="" align="left">
+          <div class="table-responsive text-nowrap">
+            <table class="table table-bordered table-striped">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon">
+                    <i class="icon-th"></i>
+                  </span>
+                  <h3>Marchés /Contrats</h3>
+                </div>
+                <div class="widget-title">
+                  <ul class="nav nav-tabs">
+                    <li class="active">
+                      <a data-toggle="tab" href="#SansContratIdent"
+                        >Information</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="widget-content tab-content">
+                  <!--ongle identification-->
+                  <div id="SansContratIdent" class="tab-pane active">
+                    <div class="modal-body">
+                      <table class="table table-bordered table-striped">
+                        <tr>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Année Budgétaire
+                              </label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  :value="anneeBugetaire"
+                                  class="span"
+                                  readonly
+                                  style="border: 1px solid #000"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="3">
+                            <!-- <div class="" align="left">
                         Selectionner UA:
                         <model-list-select style="background-color: rgb(255,255,255);"
                           class="wide"
@@ -77,69 +74,78 @@ libelleUA
                        
                       
                     </div> -->
-            <div class="control-group">
-              <label class="control-label" title="unite administrative"
-                >UA</label
-              >
-              <div class="controls">
-                <select
-                  v-model="formData.unite_administrative_id"
-                  class="span"
-                  style="border:1px solid #000"
-                >
-                  <option
-                    v-for="plans in groupeUaPourMarheHorSib"
-                    :key="plans[0].id"
-                    :value="plans[0].uniteadministrative_id"
-                  >
-                    {{
-                      afficherLibelleUniteAdministrative(
-                        plans[0].uniteadministrative_id
-                      )
-                    }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-         
-           </tr>
-           <tr>
-                <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Référence du marché</label>
-              <div class="controls">
-                <input
-                  type="text"
-                  v-model="formData.reference_marche"
-                  class="span"
-                  placeholder="Saisir la référence du marché"
-                  style="border:1px solid #000"
-                />
-              </div>
-            </div>
-          </td>
-          <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Type de marché </label>
-              <div class="controls">
-                <select v-model="formData.type_marche_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in typeMarches"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="control-group">
-              <label class="control-label">Grande Nature</label>
-              <div class="controls">
-                <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+                            <div class="control-group">
+                              <label
+                                class="control-label"
+                                title="unite administrative"
+                                >UA</label
+                              >
+                              <div class="controls">
+                                <select
+                                  v-model="formData.unite_administrative_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in groupeUaPourMarheHorSib"
+                                    :key="plans[0].id"
+                                    :value="plans[0].uniteadministrative_id"
+                                  >
+                                    {{
+                                      afficherLibelleUniteAdministrative(
+                                        plans[0].uniteadministrative_id
+                                      )
+                                    }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Référence du marché</label
+                              >
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  v-model="formData.reference_marche"
+                                  class="span"
+                                  placeholder="Saisir la référence du marché"
+                                  style="border: 1px solid #000"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Type de marché
+                              </label>
+                              <div class="controls">
+                                <select
+                                  v-model="formData.type_marche_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in typeMarches"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label">Grande Nature</label>
+                              <div class="controls">
+                                <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
                       <option
                         v-for="gdeNature in groupgranNature"
                         :key="gdeNature[0].id"
@@ -147,360 +153,389 @@ libelleUA
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                     </select> -->
 
-                <select v-model="formData.gdenature_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in grandes_natures"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-               </tr>
-               <tr>
-                    <td colspan="4">
-            <div class="control-group">
-              <label class="control-label">Objet marché / contrat</label>
-              <div class="controls">
-                <textarea
-                style="border:1px solid #000"
-                  v-model="formData.objet"
-                  class="span"
-                  rows="2"
-                  placeholder="Saisir le texte"
-                ></textarea>
-              </div>
-            </div>
-          </td>
-
-               </tr>
-               <tr>
-                 <td>
-            <div class="control-group">
-              <label class="control-label">Activité</label>
-              <div class="controls">
-                <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
-                  <option
-                        v-for="activite in activiteDynamiques(formData.unite_administrative_id)" 
-                        :key="activite[0].activite_id"
-                        :value="activite[0].activite_id"
-                      >{{afficherLesActivite(activite[0].activite_id)}}</option>
-                </select>
-              </div>
-            </div>
-          </td>
-          <template v-if="comparereActivite(this.formData.activite_id)== this.formData.activite_id">
- <td >
-           
-            <div class="control-group">
-              <label class="control-label" title="unite administrative"
-                >Sous Budget</label
-              >
-              <div class="controls">
-                <select
-                  v-model="formData.unite_zone"
-                  class="span"
-                  style="border:1px solid #000"
-                >
-                <option></option>
-                  <option
-                    v-for="plans in AfficheUniteZone(formData.activite_id)"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{
-                     
-                        plans.activite_enfant
-                      
-                    }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-           <td >
-            
-            <div class="control-group">
-              <label class="control-label" title="unite administrative"
-                >Ligne Economique</label
-              >
-              <div class="controls">
-                <select
-                style="border:1px solid #000"
-                  v-model="formData.economique_id"
-                  class="span"
-                >
-                  <option
-                    v-for="plans in AfficheUniteZoneLigneEconnomique(formData.unite_zone)"
-                    :key="plans.id"
-                    :value="plans.ligneeconomique_id"
-                  >
-                    {{
-                     
-                        libelleLigneEconomique(plans.ligneeconomique_id)
-                      
-                    }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-          </template>
-         <template v-else>
-<td colspan="2">
-            <div class="control-group">
-              <label class="control-label" title="unite administrative"
-                >Ligne Economique</label
-              >
-              <div class="controls">
-                <select
-                style="border:1px solid #000"
-                  v-model="formData.economique_id"
-                  class="span"
-                >
-                  <option
-                    v-for="plans in AfficheUALigneEconnomique(formData.unite_administrative_id)"
-                    :key="plans[0].id"
-                    :value="plans[0].ligneeconomique_id"
-                  >
-                    {{libelleLigneEconomique(plans[0].ligneeconomique_id)}}
-                     
-                        
-                      
-                   
-                  </option>
-                </select>
-              </div>
-            </div>
-          
-          
-          </td>
-         </template>
-         
-           
- 
-          
-                 </tr>
-              <tr>
-                <td>
-            <div class="control-group">
-              <label class="control-label">Imputation Budgétaire</label>
-              <div class="controls">
-                <input
-                  type="text"
-                  :value="ImputationBudget"
-                  class="span"
-                  placeholder="Saisir le Imputation"
-                  readonly
-                  style="border:1px solid #000"
-                />
-              </div>
-            </div>
-          </td>
-           <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Type de financement</label>
-              <div class="controls">
-               
-                <select v-model="formData.type_financement" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in types_financements"
-                    :key="plans.id"
-                    :value="plans.id"
-                    style="border:1px solid #000"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-           <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Source de financement</label>
-              <div class="controls">
-                <!-- <input
+                                <select
+                                  v-model="formData.gdenature_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in grandes_natures"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="4">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Objet marché / contrat</label
+                              >
+                              <div class="controls">
+                                <textarea
+                                  style="border: 1px solid #000"
+                                  v-model="formData.objet"
+                                  class="span"
+                                  rows="2"
+                                  placeholder="Saisir le texte"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label">Activité</label>
+                              <div class="controls">
+                                <select
+                                  v-model="formData.activite_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="activite in activiteDynamiques(
+                                      formData.unite_administrative_id
+                                    )"
+                                    :key="activite[0].activite_id"
+                                    :value="activite[0].activite_id"
+                                  >
+                                    {{
+                                      afficherLesActivite(
+                                        activite[0].activite_id
+                                      )
+                                    }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                          <template
+                            v-if="
+                              comparereActivite(this.formData.activite_id) ==
+                              this.formData.activite_id
+                            "
+                          >
+                            <td>
+                              <div class="control-group">
+                                <label
+                                  class="control-label"
+                                  title="unite administrative"
+                                  >Sous Budget</label
+                                >
+                                <div class="controls">
+                                  <select
+                                    v-model="formData.unite_zone"
+                                    class="span"
+                                    style="border: 1px solid #000"
+                                  >
+                                    <option></option>
+                                    <option
+                                      v-for="plans in AfficheUniteZone(
+                                        formData.activite_id
+                                      )"
+                                      :key="plans.id"
+                                      :value="plans.id"
+                                    >
+                                      {{ plans.activite_enfant }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="control-group">
+                                <label
+                                  class="control-label"
+                                  title="unite administrative"
+                                  >Ligne Economique</label
+                                >
+                                <div class="controls">
+                                  <select
+                                    style="border: 1px solid #000"
+                                    v-model="formData.economique_id"
+                                    class="span"
+                                  >
+                                    <option
+                                      v-for="plans in AfficheUniteZoneLigneEconnomique(
+                                        formData.unite_zone
+                                      )"
+                                      :key="plans.id"
+                                      :value="plans.ligneeconomique_id"
+                                    >
+                                      {{
+                                        libelleLigneEconomique(
+                                          plans.ligneeconomique_id
+                                        )
+                                      }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </td>
+                          </template>
+                          <template v-else>
+                            <td colspan="2">
+                              <div class="control-group">
+                                <label
+                                  class="control-label"
+                                  title="unite administrative"
+                                  >Ligne Economique</label
+                                >
+                                <div class="controls">
+                                  <select
+                                    style="border: 1px solid #000"
+                                    v-model="formData.economique_id"
+                                    class="span"
+                                  >
+                                    <option
+                                      v-for="plans in AfficheUALigneEconnomique(
+                                        formData.unite_administrative_id
+                                      )"
+                                      :key="plans[0].id"
+                                      :value="plans[0].ligneeconomique_id"
+                                    >
+                                      {{
+                                        libelleLigneEconomique(
+                                          plans[0].ligneeconomique_id
+                                        )
+                                      }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </td>
+                          </template>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Imputation Budgétaire</label
+                              >
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  :value="ImputationBudget"
+                                  class="span"
+                                  placeholder="Saisir le Imputation"
+                                  readonly
+                                  style="border: 1px solid #000"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Type de financement</label
+                              >
+                              <div class="controls">
+                                <select
+                                  v-model="formData.type_financement"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in types_financements"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                    style="border: 1px solid #000"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Source de financement</label
+                              >
+                              <div class="controls">
+                                <!-- <input
            type="text"
            v-model="formData.source_financement"
            class="span4"
            
            readonly
          /> -->
-                <select v-model="formData.source_financement" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in sources_financements"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-              </tr>
-              <tr>
-                <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Procédure Passation</label>
-              <div class="controls">
-                <select v-model="formData.procedure_passation_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in afficherListeModePassation"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-          <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Montant prévu</label>
-              <div class="controls">
-                <money v-model="formData.montant_marche" class="span" style="border:1px solid #000"></money>
-               
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="control-group">
-              <label class="control-label">Nature des prix</label>
-              <div class="controls">
-                <select v-model="formData.nature_prix_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in Nature_des_prix"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-                </tr>
-                <tr>
-                  <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Chapitre</label>
-              <div class="controls">
-                <select v-model="formData.chapitre_infra_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in ListChapitre"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-          <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Catégorie</label>
-              <div class="controls">
-                <select v-model="formData.cat_infra_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in ListCategorie(formData.chapitre_infra_id)"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-          <td colspan="">
-            <div class="control-group">
-              <label class="control-label">Sous Catégorie</label>
-              <div class="controls">
-                <select v-model="formData.souscat_infra_id" class="span" style="border:1px solid #000">
-                  <option
-                    v-for="plans in ListSousCategorie(formData.cat_infra_id)"
-                    :key="plans.id"
-                    :value="plans.id"
-                  >
-                    {{ plans.libelle }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-                </tr>
-            </table>
-          </div>
-          
-                    </div>
-                 
-                    
-                  </div>
-                  <br />
-                  <div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a
-                          class="btn btn-primary"
-                          @click.prevent="ajouterMarcheHorSibLocal"
-                        >Valider</a>
-                        <a
-                          @click.prevent="pagePrecedent()"
-                          class="btn"
-                          href="#"
-                        >Fermer</a>
-                      </div>
+                                <select
+                                  v-model="formData.source_financement"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in sources_financements"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Procédure Passation</label
+                              >
+                              <div class="controls">
+                                <select
+                                  v-model="formData.procedure_passation_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in afficherListeModePassation"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label">Montant prévu</label>
+                              <div class="controls">
+                                <money
+                                  v-model="formData.montant_marche"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                ></money>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Nature des prix</label
+                              >
+                              <div class="controls">
+                                <select
+                                  v-model="formData.nature_prix_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in Nature_des_prix"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label">Chapitre</label>
+                              <div class="controls">
+                                <select
+                                  v-model="formData.chapitre_infra_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in ListChapitre"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label">Catégorie</label>
+                              <div class="controls">
+                                <select
+                                  v-model="formData.cat_infra_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in ListCategorie(
+                                      formData.chapitre_infra_id
+                                    )"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                          <td colspan="">
+                            <div class="control-group">
+                              <label class="control-label"
+                                >Sous Catégorie</label
+                              >
+                              <div class="controls">
+                                <select
+                                  v-model="formData.souscat_infra_id"
+                                  class="span"
+                                  style="border: 1px solid #000"
+                                >
+                                  <option
+                                    v-for="plans in ListSousCategorie(
+                                      formData.cat_infra_id
+                                    )"
+                                    :key="plans.id"
+                                    :value="plans.id"
+                                  >
+                                    {{ plans.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
                 </div>
-              </table>
-            </div>
-         
+                <br />
+                <div align="right">
+                  <div class="controls">
+                    <div data-toggle="buttons-checkbox" class="btn-group">
+                      <a
+                        class="btn btn-primary"
+                        @click.prevent="ajouterMarcheHorSibLocal"
+                        >Valider</a
+                      >
+                      <a @click.prevent="pagePrecedent()" class="btn" href="#"
+                        >Fermer</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </table>
           </div>
         </div>
       </div>
-      <notifications/>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <notifications />
+  </div>
 </template>
 
 <script>
@@ -618,7 +653,7 @@ export default {
       "getPersonnaliseTransfert",
       "getSousBudget",
       "groupeActiviteBudgetEclate",
-      "groupeParBAILLER"
+      "groupeParBAILLER",
     ]),
     ...mapGetters("parametreGenerauxActivite", [
       "structures_activites",
@@ -659,13 +694,15 @@ export default {
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
 
+    ImputationBudget() {
+      return (
+        this.AfficheCodeActivite(this.formData.activite_id) +
+        "   " +
+        this.AfficheCodeBudgetaire(this.formData.economique_id)
+      );
+    },
 
-ImputationBudget(){
-      return this.AfficheCodeActivite(this.formData.activite_id) + "   "+  this.AfficheCodeBudgetaire(this.formData.economique_id)
-},
-
-
- libelleLigneEconomique() {
+    libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.plans_budgetaires.find(
@@ -680,7 +717,7 @@ ImputationBudget(){
       };
     },
 
-comparereActivite() {
+    comparereActivite() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.getSousBudget.find(
@@ -694,49 +731,38 @@ comparereActivite() {
         }
       };
     },
-AfficheUALigneEconnomique() {
+    AfficheUALigneEconnomique() {
       return (id) => {
-        if (id != null && id != "" ) {
+        if (id != null && id != "") {
           return this.groupeParBAILLER.filter(
             (qtreel) => qtreel[0].uniteadministrative_id == id
           );
-
-         
         }
       };
     },
-AfficheUniteZoneLigneEconnomique() {
+    AfficheUniteZoneLigneEconnomique() {
       return (id) => {
-        if (id != null && id != "" ) {
+        if (id != null && id != "") {
           return this.budgetEclate.filter(
             (qtreel) => qtreel.sous_budget_id == id
           );
-
-         
         }
       };
     },
-AfficheUniteZone() {
+    AfficheUniteZone() {
       return (id) => {
-        if (id != null && id != "" ) {
+        if (id != null && id != "") {
           return this.getSousBudget.filter(
             (qtreel) => qtreel.activite_parent_id == id
           );
-
-         
         }
       };
     },
 
-
-
-
-AfficheGrandeDepense() {
-      return (id,id1) => {
+    AfficheGrandeDepense() {
+      return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.id == id
-          );
+          const qtereel = this.budgetEclate.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
             return qtereel.code.concat("  ", qtereel.libelle);
@@ -745,7 +771,6 @@ AfficheGrandeDepense() {
         }
       };
     },
-
 
     ListChapitre() {
       return this.plans_Infrastructures.filter((item) => item.parent == null);
@@ -824,10 +849,7 @@ AfficheGrandeDepense() {
       return (id) => {
         if (id != null && id != "") {
           return this.groupeActiviteBudgetEclate.filter(
-            (element) =>
-              
-              element[0].uniteadministrative_id ==id
-                
+            (element) => element[0].uniteadministrative_id == id
           );
         }
       };
@@ -990,9 +1012,7 @@ AfficheGrandeDepense() {
       "supprimerMarcheHorSib",
       "getMarcheHorSib",
     ]),
-    pagePrecedent(){
-                window.history.back()
-            },
+    
     allerPageMarcheHorsib() {
       this.$router.push({
         name: "marcheHorsib",
@@ -1023,7 +1043,7 @@ AfficheGrandeDepense() {
         sib: 1,
         imputation: this.ImputationBudget,
       };
-      
+
       this.ajouterMarcheHorSib(nouvelObjet);
       this.formData = {
         //latitude:"",
