@@ -42,11 +42,12 @@
                 LES DELAIS
             </router-link>
         </li>
-        <li>
+
+        <!-- <li>
             <router-link :to="{name: 'ficheReparationVehicule'}" tag="a">
                 TABLE DE SYNTHESE
             </router-link>
-        </li>
+        </li> -->
            <!-- <li>
             <router-link :to="{name: 'suiviMarcheDesProjets'}" tag="a">
              MARCHE UA

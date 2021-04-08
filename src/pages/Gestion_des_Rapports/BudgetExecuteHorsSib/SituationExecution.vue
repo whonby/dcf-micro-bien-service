@@ -234,11 +234,8 @@
               </td>
               <td style="text-align: right;">
               {{
-                formatageSommeSansFCFA(
-                  parseFloat(
-                    MontantBudgetActuelBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
-                  )
-                )
+                
+                 Montanttest(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
               }} 
             </td>
 
@@ -719,6 +716,32 @@ export default {
             .reduce(
               (prec, cur) =>
                 parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+
+    /////*********** */
+     Montanttest() {
+      return (id , id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id == id 
+                && qtreel.annebudgetaire ==this.anneeAmort 
+                && qtreel.activite_id==id1
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.dotation),
               0
             )
             .toFixed(0);

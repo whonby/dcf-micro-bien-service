@@ -135,9 +135,89 @@
         <tr></tr>
 
         <tr>
+          
           <td>
             <div class="control-group">
-              <label class="control-label">Classification Economique</label>
+              <label class="control-label">Activité</label>
+              <div class="controls">
+                <select v-model="editMarcheHorSib.activite_id" class="span4">
+                  <option
+                    v-for="activite in activiteDynamiques(
+                      editMarcheHorSib.unite_administrative_id
+                    )"
+                    :key="activite[0].activite_id"
+                    :value="activite[0].activite_id"
+                  >
+                    {{ afficherLesActivite(activite[0].activite_id) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+
+ <template
+                            v-if="
+                              comparereActivite(this.editMarcheHorSib.activite_id) ==
+                              this.editMarcheHorSib.activite_id
+                            " 
+                          >
+
+          <td>
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >Sous Budget</label
+              >
+              <div class="controls">
+                <select
+                  v-model="editMarcheHorSib.unite_zone"
+                  class="span"
+                  style="border: 1px solid #000"
+                >
+                  <option></option>
+                  <option
+                    v-for="plans in AfficheUniteZone(
+                      editMarcheHorSib.activite_id
+                    )"
+                    :key="plans.id"
+                    :value="plans.id"
+                  >
+                    {{ plans.activite_enfant }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+
+
+          <td>
+            <div class="control-group">
+              <label class="control-label">Ligne Economique</label>
+              <div class="controls">
+                <select
+                  v-model="editMarcheHorSib.economique_id"
+                  :readOnly="deveroueconomiq"
+                  class="span4"
+                >
+                  <option
+                    v-for="eco in ligneBudgeteyuy(
+                      editMarcheHorSib.unite_zone
+                    )"
+                    :key="eco.ligneeconomique_id"
+                    :value="eco.ligneeconomique_id"
+                  >
+                    {{ afficherPlanEconomique(eco.ligneeconomique_id) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+
+           </template>
+
+           <template v-else>
+              <td>
+            <div class="control-group">
+              <label class="control-label">Ligne Economique</label>
               <div class="controls">
                 <select
                   v-model="editMarcheHorSib.economique_id"
@@ -157,24 +237,10 @@
               </div>
             </div>
           </td>
-          <td>
-            <div class="control-group">
-              <label class="control-label">Activité</label>
-              <div class="controls">
-                <select v-model="editMarcheHorSib.activite_id" class="span4">
-                  <option
-                    v-for="activite in activiteDynamiques(
-                      editMarcheHorSib.economique_id
-                    )"
-                    :key="activite.activite_id"
-                    :value="activite.activite_id"
-                  >
-                    {{ afficherLesActivite(activite.activite_id) }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
+           </template>
+
+
+
           <td>
             <div class="control-group">
               <label class="control-label">Imputation Budgétaire</label>
@@ -277,8 +343,7 @@
             </div>
           </td>
 
-
-           <td>
+          <td>
             <div class="control-group">
               <label class="control-label">Nature des prix</label>
               <div class="controls">
@@ -311,8 +376,6 @@
         </tr>
 
         <tr>
-         
-
           <!-- <td colspan="">
               
                <div class="control-group">
@@ -434,7 +497,7 @@
         <a
           data-dismiss="modal"
           class="btn"
-          @click.prevent="allerPageMarcheHorsib"
+          @click.prevent="pagePrecedent()"
           href="#"
           >Fermer</a
         >
@@ -557,10 +620,12 @@ export default {
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
       "groupUa",
+      "getSousBudget",
       "budgetEclate",
       "groupgranNature",
       "getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral",
+      "groupeActiviteBudgetEclate",
     ]),
     ...mapGetters("parametreGenerauxActivite", [
       "structures_activites",
@@ -643,11 +708,9 @@ export default {
     activiteDynamiques() {
       return (id) => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(
+          return this.groupeActiviteBudgetEclate.filter(
             (element) =>
-              element.ligneeconomique_id == id &&
-              element.uniteadministrative_id ==
-                this.editMarcheHorSib.unite_administrative_id
+              element[0].uniteadministrative_id == id
           );
         }
       };
@@ -666,6 +729,32 @@ export default {
         }
       };
     },
+
+    AfficheUniteZone() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.getSousBudget.filter(
+            (qtreel) => qtreel.activite_parent_id == id
+          );
+        }
+      };
+    },
+
+     comparereActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getSousBudget.find(
+            (qtreel) => qtreel.activite_parent_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.activite_parent_id;
+          }
+          return 0;
+        }
+      };
+    },
+
     deveroueconomiq() {
       return this.editMarcheHorSib.unite_administrative_id == "";
     },
@@ -802,12 +891,12 @@ export default {
     // },
 
     allerPageMarcheHorsib() {
-     window.history.back()
+      window.history.back();
     },
 
-    
-
-    
+    pagePrecedent() {
+      window.history.back();
+    },
 
     recherche() {
       // console.log(this.search)
@@ -824,7 +913,6 @@ export default {
     // ajouter marche hors sib
 
     modifierMarcheHorSibLocal() {
-     
       var nouvelObjet = {
         ...this.editMarcheHorSib,
         exo_id: this.anneeBugetaireModifier,
@@ -856,7 +944,7 @@ export default {
         sib: 1,
       };
 
-       this.$router.push({
+      this.$router.push({
         name: "GestionMarcheHorSib",
       });
     },

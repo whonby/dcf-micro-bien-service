@@ -24,7 +24,7 @@ afficheNumeroMarche
                       <a data-toggle="tab" href="#tab1102">SUIVI DES DELAIS</a>
                     </li>
 
-                     <li class="active">
+                     <li class="">
                       <a data-toggle="tab" href="#tab1">TABLEAU DE BORD</a>
                     </li>
                     <li>
@@ -61,10 +61,11 @@ afficheNumeroMarche
                       </div> -->
                   <!--ongle identification-->
                   <div id="tab1102" class="tab-pane active">
-                    RECHERCHE PAR ANNEE
+                    <SuiviDelai></SuiviDelai>
+
                   </div>
 
-                   <div id="tab1" class="tab-pane active">
+                   <div id="tab1" class="tab-pane">
                     RECHERCHE PAR ANNEE
                   </div>
                   <div id="tab2" class="tab-pane">RECHERCHE PAR SECTION</div>
@@ -100,13 +101,13 @@ afficheNumeroMarche
 import { mapGetters, mapActions } from "vuex";
 // import moment from "moment";
 // import { formatageSomme } from './../../../../../Repositories/Repository';
-//import SuiviDelai from "/../../../DossierSuiviDelai/SuiviDelai.vue"
+import SuiviDelai from "./SuiviDelais"
 
 export default {
   watch: {},
   name: "compte",
   components: {
-   // SuiviDelai
+    SuiviDelai
   },
   data() {
     return {
