@@ -275,11 +275,20 @@ SommeBienServiceBudgetEclateTresor() {
 LigneParUaInvertissement() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1);
 
      
         }
       };
+    },
+    anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
     },
     arrayExerciceDecompteInvertissement() {
       return (id) => {
@@ -311,7 +320,7 @@ LigneParUaInvertissement() {
 LigneParUaBienService() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1);
 
      
         }
@@ -368,7 +377,7 @@ SommePersonneBudgetEclateTresor() {
     LigneParUa() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1);
 
      
         }

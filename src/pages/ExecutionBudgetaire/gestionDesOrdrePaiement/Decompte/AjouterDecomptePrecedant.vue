@@ -293,7 +293,7 @@
                 <label class="control-label">PART Bailleur</label>
                 <div class="controls">
 
-<money  :value="SommeBailleurDuMarche" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+<money  v-model="formData.parts_bailleur"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
                   
 
                 </div>
@@ -303,7 +303,7 @@
                <div class="control-group">
                 <label class="control-label" >PART ETAT</label>
                 <div class="controls">
-                <money  :value="MontantEtatCoteIvoire(formData.marche_id)" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                <money  v-model="formData.parts_etat"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
          
                   <!-- <input
                       type="text"
