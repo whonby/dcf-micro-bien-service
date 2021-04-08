@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 style="text-align: center; text-decoration: underline">
-      TABLEAU DE BORD GENERAL BUDGET GENERAL SIGOBE
+      TABLEAU DE BORD DU BUDGET SIGOBE
     </h1>
     <br />
     <div class="container-fluid">

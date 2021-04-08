@@ -12,6 +12,11 @@
           BUDGET DES REGIES
         </router-link>
       </li>
+      <li>
+        <router-link :to="{name: 'recapitulatifBudgetHorsSigobe'}" tag="a">
+          RECAPITULATIF BUDGET DES PROJETS
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>

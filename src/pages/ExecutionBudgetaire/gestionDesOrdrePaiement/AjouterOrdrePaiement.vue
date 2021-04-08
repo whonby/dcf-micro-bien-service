@@ -1004,7 +1004,7 @@ date_interim
                         </td>
                       </tr>
                       <tr>
-                        <td colspan="4">
+                        <td colspan="2">
                           <div class="control-group">
                             <label class="control-label">OBJET DECOMPTE</label>
                             <div class="controls">
@@ -1017,8 +1017,6 @@ date_interim
                             </div>
                           </div>
                         </td>
-                      </tr>
-                      <tr>
                         <td>
                           <div class="control-group">
                             <label class="control-label">LIVRABLES</label>
@@ -1031,7 +1029,7 @@ date_interim
                             </div>
                           </div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="">
                           <div class="control-group">
                             <label class="control-label">BENEFICIAIRES</label>
                             <div class="controls">
@@ -1049,6 +1047,10 @@ date_interim
                             </div>
                           </div>
                         </td>
+                      </tr>
+                      <tr>
+                        
+                        
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label">GEOLOCALISATION</label>
@@ -1063,8 +1065,6 @@ date_interim
                             </div>
                           </div>
                         </td>
-                      </tr>
-                      <tr>
                         <td>
                           <div class="control-group">
                             <label class="control-label"
@@ -1078,49 +1078,6 @@ date_interim
                                 class="span"
                                 readonly
                               />
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >MONTANT DU MARCHE</label
-                            >
-                            <div class="controls">
-                              <!-- <input
-                  
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
-                    class="span"
-                    readonly
-                  /> -->
-                              <money
-                                :value="MontantDeBase"
-                                readOnly
-                                style="text-align: left; color: red"
-                                class="span"
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">MONTANT ENGAGE</label>
-                            <div class="controls">
-                              <!-- <input
-                  
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
-                    class="span"
-                    readonly
-                  /> -->
-                              <money
-                                v-model="formData2.montant_engage"
-                                style="text-align: left; color: red"
-                                class="span"
-                              ></money>
                             </div>
                           </div>
                         </td>
@@ -1146,6 +1103,92 @@ date_interim
                             </div>
                           </div>
                         </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MONTANT DU MARCHE</label
+                            >
+                            <div class="controls">
+                              
+                              <money
+                                :value="MontantReelMarche(this.formData2.marche_id)"
+                                readOnly
+                                style="text-align: left; color: red;border: 1px solid #000"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        
+                        
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MONTANT AVENANT</label
+                            >
+                            <div class="controls">
+                         
+                              <money
+                                :value="MontantAvenant(this.formData2.marche_id)"
+                                readOnly
+                                
+                                style="text-align: left; color: red;border: 1px solid #000"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                         <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">MONTANT DE BASE</label>
+                            <div class="controls">
+                           
+                              <money
+                               :value="MontantDeBase"
+                               readOnly
+                                style="text-align: left; color: red;border: 1px solid #000"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                         <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">RESTE A PAYE</label>
+                            <div class="controls">
+                           
+                              <money
+                               :value="ResteAPayeSurMarche"
+                               readOnly
+                                style="text-align: left; color: red;border: 1px solid #000"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">MONTANT ENGAGE</label>
+                            <div class="controls">
+                              <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                              <money
+                                v-model="formData2.montant_engage"
+                                style="text-align: left; color: red;border: 1px solid #000"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                        
                       </tr>
                     </table>
 
@@ -1619,6 +1662,7 @@ date_interim
                                 type="date"
                                 style="border: 1px solid #000"
                                 class="span"
+                                readonly
                               />
                             </div>
                           </div>
@@ -1648,6 +1692,7 @@ date_interim
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
+                                readonly
                               />
                             </div>
                           </div>
@@ -2780,6 +2825,23 @@ export default {
     ]),
  MontantDeBase(){
 return parseFloat(this.MontantReelMarche(this.formData2.marche_id))+parseFloat(this.MontantAvenant(this.formData2.marche_id))
+  },
+  ResteAPayeSurMarche(){
+return parseFloat(this.MontantDeBase)-parseFloat(this.MontantPayeMarche(this.formData2.marche_id))
+  },
+  MontantPayeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+
+     
+      }
+      }
   },
 MontantAvenant() {
       return id => {

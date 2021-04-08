@@ -5,7 +5,12 @@
 
 
 
-
+        <button class="btn btn-success" @click="PagePrecedante()">
+          <span>
+           <i class="fa fa-undo" aria-hidden="true"></i>
+            Page précédente
+            </span>
+        </button>
 
     <div class="main-body">
        <div  align="left" style="cursor:pointer;">
@@ -14,6 +19,7 @@
         </div>
         <br/>
 
+            
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb" v-if="detailMarche">
@@ -34,6 +40,7 @@
                     <div class="mt-3">
                        <h4>{{detailMarche.libelle}}</h4>
                         </div>
+                        
                   </div>
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
@@ -338,6 +345,9 @@ getterImageParMarche() {
     suppressionImg(){
       this.$delete(this.getterImageMarche, this.detailMarche.id)
       console.log(this.detailMarche.id)
+    },
+    PagePrecedante(){
+      this.$router.push({path:'/liste_image_marche', params:{id:this.detailMarche.id}})
     },
      distance(lat1, lon1, lat2, lon2, unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {

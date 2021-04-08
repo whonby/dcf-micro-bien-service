@@ -169,6 +169,10 @@ export const listeAnoDmpBailleur = state =>
     )
 
 
+    export const groupeEntreprise2 = (state) => {
+
+        return groupBy(state.acteEffetFinanciers, "entreprise_id");
+    };
 
 // afficher nombre de contrat dans personnel
 

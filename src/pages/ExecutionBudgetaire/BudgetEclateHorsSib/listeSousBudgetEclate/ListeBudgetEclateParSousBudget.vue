@@ -1,7 +1,19 @@
 
 <template>
   <div>
-   <h1 style="text-align:center">{{libelleUa(detail_marche.sous_budget_id)}}</h1>
+    <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
+    
+        </div> 
+        <br>
+     <div align="right">
+
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
+                             <div id="printMe">
+   <h1 style="text-align:center">{{libelleUa(marcheid)}}</h1>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -22,7 +34,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>VENTILATION DU BUDGET</h5>
+              <h5>{{marcheid}}VENTILATION DU BUDGET{{marcheid}}</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -41,7 +53,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompte(detail_marche.sous_budget_id)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompte(marcheid)" :key="type.id">
                     <td
                      
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
@@ -59,14 +71,14 @@
                     >{{formatageSommeSansFCFA(parseFloat(MontantDon(type))+parseFloat(MontantResor(type))+parseFloat(MontantEmprunt(type))) || 0}}</td>
                   </tr>
                   <tr>
-                    <td style="font-size:14px;color:#fff;text-align:left;font-weight:bold;background:green;">PERSONNEL</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateTresor(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateDon(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateEmprunt(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateTresor(detail_marche.sous_budget_id))+parseFloat(SommePersonneBudgetEclateDon(detail_marche.sous_budget_id))+parseFloat(SommePersonneBudgetEclateEmprunt(detail_marche.sous_budget_id))) || 0}}</td>
+                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;background:green;">PERSONNEL</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateTresor(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateDon(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateEmprunt(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateTresor(marcheid))+parseFloat(SommePersonneBudgetEclateDon(marcheid))+parseFloat(SommePersonneBudgetEclateEmprunt(marcheid))) || 0}}</td>
                     
                   </tr>
-                  <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService(detail_marche.sous_budget_id)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService(marcheid)" :key="type.id">
                     <td
                      
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
@@ -84,14 +96,14 @@
                     >{{formatageSommeSansFCFA(parseFloat(MontantDon(type))+parseFloat(MontantResor(type))+parseFloat(MontantEmprunt(type))) || 0}}</td>
                   </tr>
                   <tr>
-                    <td style="font-size:14px;color:#fff;text-align:left;font-weight:bold;background:green;">BIENS SERVICE</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.sous_budget_id))) || 0}}</td>
+                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;background:green;">BIENS SERVICE</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateDon(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))) || 0}}</td>
                     
                   </tr>
-                  <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteInvertissement(detail_marche.sous_budget_id)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteInvertissement(marcheid)" :key="type.id">
                     <td
                      
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
@@ -109,19 +121,19 @@
                     >{{formatageSommeSansFCFA(parseFloat(MontantDon(type))+parseFloat(MontantResor(type))+parseFloat(MontantEmprunt(type))) || 0}}</td>
                   </tr>
                   <tr>
-                    <td style="font-size:14px;color:#fff;text-align:left;font-weight:bold;background:green;">INVERTISSEMENT</td>
-                     <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateTresor(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateDon(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.sous_budget_id)))}}</td>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.sous_budget_id))) || 0}}</td>
+                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;background:green;">INVERTISSEMENT</td>
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateTresor(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateDon(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))) || 0}}</td>
                     
                   </tr>
                   <tr>
-                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">TOTAL BUDGET ECLATE</td>
-<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateTresor(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateDon(detail_marche.sous_budget_id))+parseFloat(SommeBienServiceBudgetEclateEmprunt(detail_marche.sous_budget_id))+parseFloat(SommePersonneBudgetEclateTresor(detail_marche.sous_budget_id))+parseFloat(SommePersonneBudgetEclateDon(detail_marche.sous_budget_id))+parseFloat(SommePersonneBudgetEclateEmprunt(detail_marche.sous_budget_id))) || 0}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">TOTAL BUDGET ECLATE</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))+parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))+parseFloat(SommePersonneBudgetEclateTresor(marcheid))+parseFloat(SommePersonneBudgetEclateDon(marcheid))+parseFloat(SommePersonneBudgetEclateEmprunt(marcheid))) || 0}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -132,7 +144,7 @@
       </div>
     </div>
 
-   
+   </div>
     <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
   </div>
 </template>
@@ -194,7 +206,7 @@ created() {
       "getSousBudget"
     ]),
     // afficheLigneEclate(){
-    //   return this.arrayExerciceDecompte.filter(item=>item.sous_budget_id ==this.detail_marche.sous_budget_id)
+    //   return this.arrayExerciceDecompte.filter(item=>item.sous_budget_id ==this.marcheid)
     // },
     
     libelleUa() {
@@ -386,15 +398,15 @@ SommePersonneBudgetEclateTresor() {
         return [];
      };
     },
-    MontantResor() {
+     MontantResor() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 14);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.tresor
-      }
-      return 0
+      // if (qtereel) {
+      //   return qtereel.tresor
+      // }
+      // return 0
         }
       };
     },
@@ -413,26 +425,27 @@ SommePersonneBudgetEclateTresor() {
     MontantDon() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 13);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.don
-      }
-      return 0
+      // if (qtereel) {
+      //   return qtereel.don
+      // }
+      // return 0
         }
       };
     },
      MontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.detail_marche.sous_budget_id && qtreel.type_financement_id == 15);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.sous_budget_id==this.marcheid && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
-      if (qtereel) {
-        return qtereel.emprunt
+      // if (qtereel) {
+      //   return qtereel.emprunt
+      // }
+      // return 0
+      //   }
       }
-      return 0
-        }
-      };
+      }
     },
 
     filtre_type_teste() {
@@ -453,6 +466,12 @@ SommePersonneBudgetEclateTresor() {
       "modifierTypeTexte",
       "supprimerTypeTexte"
     ]),
+     afficherModalListePersonnel(){
+                window.history.back()
+            },
+      genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
     formatageSommeSansFCFA:formatageSommeSansFCFA,
     //afiicher modal ajouter
     afficherModalAjouterTitre() {

@@ -47,7 +47,7 @@
           <li @click.prevent="monEquipe" v-if="noDCfNoAdmin() || cf()" :class="{active: active_el == 100 }">
               <a  title="" href="#">
                   <i class="icon-group"></i>
-                  <span>MOM EQUIPE && STRUCTURE CONTROLE</span>
+                  <span>MOM EQUIPE</span>
               </a>
           </li>
 

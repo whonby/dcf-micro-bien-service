@@ -74,78 +74,71 @@ libelleUA
                        
                       
                     </div> -->
-                            <div class="control-group">
-                              <label
-                                class="control-label"
-                                title="unite administrative"
-                                >UA</label
-                              >
-                              <div class="controls">
-                                <select
-                                  v-model="formData.unite_administrative_id"
-                                  class="span"
-                                  style="border: 1px solid #000"
-                                >
-                                  <option
-                                    v-for="plans in groupeUaPourMarheHorSib"
-                                    :key="plans[0].id"
-                                    :value="plans[0].uniteadministrative_id"
-                                  >
-                                    {{
-                                      afficherLibelleUniteAdministrative(
-                                        plans[0].uniteadministrative_id
-                                      )
-                                    }}
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="">
-                            <div class="control-group">
-                              <label class="control-label"
-                                >Référence du marché</label
-                              >
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  v-model="formData.reference_marche"
-                                  class="span"
-                                  placeholder="Saisir la référence du marché"
-                                  style="border: 1px solid #000"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                          <td colspan="">
-                            <div class="control-group">
-                              <label class="control-label"
-                                >Type de marché
-                              </label>
-                              <div class="controls">
-                                <select
-                                  v-model="formData.type_marche_id"
-                                  class="span"
-                                  style="border: 1px solid #000"
-                                >
-                                  <option
-                                    v-for="plans in typeMarches"
-                                    :key="plans.id"
-                                    :value="plans.id"
-                                  >
-                                    {{ plans.libelle }}
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="control-group">
-                              <label class="control-label">Grande Nature</label>
-                              <div class="controls">
-                                <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >UA</label
+              >
+              <div class="controls">
+                <select
+                  v-model="formData.unite_administrative_id"
+                  class="span"
+                  style="border:1px solid #000"
+                >
+                  <option
+                    v-for="plans in groupeUaPourMarheHorSib"
+                    :key="plans[0].id"
+                    :value="plans[0].uniteadministrative_id"
+                  >
+                    {{
+                      afficherLibelleUniteAdministrative(
+                        plans[0].uniteadministrative_id
+                      )
+                    }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+         
+           </tr>
+           <tr>
+                <td colspan="">
+            <div class="control-group">
+              <label class="control-label">Référence du marché</label>
+              <div class="controls">
+                <input
+                 :value="formData.reference_marche"
+                  type="text"
+                  readonly
+                  class="span"
+                  placeholder="Saisir la référence du marché"
+                  style="border:1px solid #000"
+                />
+              </div>
+              <!-- <code v-if="formData.reference_marche && verifieRefId">exite déja</code> -->
+            </div>
+          </td>
+          <td colspan="">
+            <div class="control-group">
+              <label class="control-label">Type de marché </label>
+              <div class="controls">
+                <select v-model="formData.type_marche_id" class="span" style="border:1px solid #000">
+                  <option
+                    v-for="plans in typeMarches"
+                    :key="plans.id"
+                    :value="plans.id"
+                  >
+                    {{ plans.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="control-group">
+              <label class="control-label">Grande Nature</label>
+              <div class="controls">
+                <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
                       <option
                         v-for="gdeNature in groupgranNature"
                         :key="gdeNature[0].id"
@@ -553,6 +546,9 @@ export default {
   },
   data() {
     return {
+      code:'',
+      codes:'',
+      charact:'ABCDEFGHIGKLMNOPQRSTUVWXYZ123456789abcdefghijklmnopqrstuvwxyz',
       fabActions: [
         {
           name: "cache",
@@ -610,7 +606,9 @@ export default {
       search: "",
     };
   },
-
+  created(){
+    console.log(this.rand_alea(5))
+  },
   computed: {
     ...mapGetters("bienService", [
       "mandats",
@@ -693,16 +691,18 @@ export default {
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
+  
+  // verifieRefId(){
+  //   return this.marches.filter((item) => {
+  //     return item.reference_marche.toUpperCase().includes(this.formData.reference_marche.toUpperCase())
+  //     //console.log(item.reference_marche)
+  //   })
+  // },
+ImputationBudget(){
+      return this.AfficheCodeActivite(this.formData.activite_id) + "   "+  this.AfficheCodeBudgetaire(this.formData.economique_id)
+},
 
-    ImputationBudget() {
-      return (
-        this.AfficheCodeActivite(this.formData.activite_id) +
-        "   " +
-        this.AfficheCodeBudgetaire(this.formData.economique_id)
-      );
-    },
-
-    libelleLigneEconomique() {
+ libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.plans_budgetaires.find(
@@ -1005,6 +1005,8 @@ export default {
       return 0;
     },
   },
+  //générer une référence dynamique
+  
   methods: {
     ...mapActions("horSib", [
       "ajouterMarcheHorSib",
@@ -1012,7 +1014,16 @@ export default {
       "supprimerMarcheHorSib",
       "getMarcheHorSib",
     ]),
-    
+      rand_alea(long){
+        for (let i = 0; i < long; i++) {
+          this.codes += (this.charact.charAt(Math.floor(Math.random() * this.charact.length)))
+      }
+      this.formData.reference_marche = ('M_C/'+this.codes+'/'+ this.anneeBugetaire);
+      return this.formData.reference_marche;
+    },
+    pagePrecedent(){
+                window.history.back()
+            },
     allerPageMarcheHorsib() {
       this.$router.push({
         name: "marcheHorsib",

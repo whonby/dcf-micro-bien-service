@@ -99,13 +99,13 @@
                    <td v-if="type[0].sous_budget_id==0">
                       <router-link :to="{ name: 'listeDesBudgetVentille', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Budget Ventille</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Budget Ventille</i></span>
                    </router-link> 
                     </td>
                      <td v-if="type[0].sous_budget_id != 0">
                       <router-link :to="{ name: 'listeUniteZone', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Sous Budget</i></span>
+                  <span class=""><i class="    icon-align-right" style="font-weight: bold;"> Listes Sous Budget</i></span>
                    </router-link> 
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
