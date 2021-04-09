@@ -160,7 +160,16 @@ controlleur_fin
                         data-toggle="tab"
                         href="#tab21"
                         title="programmation du marché pluriannuel"
-                        >PROGRAMMATION DU MARCHE PLURIANNUEL</a
+                        >PROGRAMMATION DU MARCHE PAR BAILLEUR</a
+                      >
+                    </li>
+
+                     <li>
+                      <a
+                        data-toggle="tab"
+                        href="#tab23"
+                        title="programmation du marché pluriannuel"
+                        >PROGRAMMATION DU MARCHE PAR PLURIANNUEL</a
                       >
                     </li>
                     <li>
@@ -360,13 +369,37 @@ controlleur_fin
                         data-toggle="modal"
                         class="btn btn-success"
                         align="rigth"
-                        >Ajouter</a
+                        >Ajouter répartition par bailleur</a
                       >
                     </div>
 
                     <marchePluriannuel
                       :macheid="detail_marche.id"
                     ></marchePluriannuel>
+                  </div>
+
+
+
+
+                     <div id="tab23" class="tab-pane">
+                    <div class="span4"></div>
+                    <div class="span4"></div>
+
+                    <div class="span4" align="right">
+                     
+
+                       <a
+                        href="#ajouterMarche"
+                        data-toggle="modal"
+                        class="btn btn-primary"
+                        align="rigth"
+                        >Ajouter répartition par plurianniuel</a
+                      >
+                    </div>
+
+                    <marcheParBailleur
+                      :macheid="detail_marche.id"
+                    ></marcheParBailleur>
                   </div>
 
                   <!-- probleme marche -->
@@ -435,6 +468,7 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "./../../../../../Repositories/Repository";
 import marchePluriannuel from "../DossierMarchePluriannuel/marchePluriannuel";
+import marcheParBailleur from "../DossierMarchePluriannuel/marcheParBailleur";
 import ProblemeMarche from "../DossierMarchePluriannuel/ProblemeMarche";
 
 import avenant from "../dossierAvenant/avenantHs";
@@ -453,6 +487,7 @@ export default {
   name: "compte",
   components: {
     marchePluriannuel,
+    marcheParBailleur,
     EtatExecutionMarche,
     TableauMarchePluriannuel,
     avenant,
