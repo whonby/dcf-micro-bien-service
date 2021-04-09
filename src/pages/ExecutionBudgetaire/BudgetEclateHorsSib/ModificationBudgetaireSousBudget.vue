@@ -109,7 +109,7 @@
  
                     <td>
                        <div class="control-group">
-                <label class="control-label">Unite administrative {{formData.uniteadministrative_id}}<code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -146,7 +146,7 @@
               
                   </td>
                   
-                   <td colspan="2">
+                   <td colspan="">
               <div class="control-group">
                 <label class="control-label">Libelle Activité</label>
                 <div class="controls">
@@ -162,7 +162,23 @@
               </div>
               
                      </td>
+                  <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Sous Budget</label>
+                <div class="controls">
+                  <select v-model="formData10.sous_budget_id" class="span" style="border:1px solid #000">
+                    <option></option>
+                     <option
+                        v-for="typeFact in afficheLesSousBudget(formData.uniteadministrative_id,formData.activite_id)"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.activite_enfant}}</option>
+                  </select>
                   
+                </div>
+              </div>
+              
+                     </td>
                    <!-- <td colspan="">
               <div class="control-group">
                 <label class="control-label">Activité</label>
@@ -375,7 +391,7 @@
                        <div class="control-group">
                 <label class="control-label">Dotation</label>
                 <div class="controls">
-                  <money  :value="recuppererMontantDotationNouvel(formData.uniteadministrative_id,formData1.ligneeconomique_id,formData1.type_financement_id,formData.source_financement_id,formData.grandenature_id)" readonly  style="text-align:left;color:red"  class="span"></money>
+                  <money  :value="recuppererMontantDotationNouvel(formData10.sous_budget_id,formData1.ligneeconomique_id,formData1.type_financement_id,formData.source_financement_id,formData.grandenature_id)" readonly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
                   </td>
@@ -500,7 +516,7 @@ sous_budget_id:0
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["getSousBudget","groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -526,6 +542,17 @@ sous_budget_id:0
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+
+      afficheLesSousBudget() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.activite_parent_id==id1);
+
+     
+      
+        }
+      };
+    },
      
 //formatageSomme(parseFloat(recupereMontantDon(type[0].ligneeconomique_id))+parseFloat(recupereMontantEmprunt(type[0].ligneeconomique_id)))
 recuppererLeDernierNiveau() {
@@ -727,18 +754,18 @@ if(this.formData1.variation_budget>0){
       };
     },
  dotationDon(){
-return parseFloat(this.recuppererMontantDon(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
+return parseFloat(this.recuppererMontantDon(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
 },
 
   dotationEmprunt(){
-return parseFloat(this.recuppererMontantEmprunt(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
+return parseFloat(this.recuppererMontantEmprunt(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
 },
     
     dotationTresor(){
-return parseFloat(this.recuppererMontantTresor(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
+return parseFloat(this.recuppererMontantTresor(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
 },
 dotationTotal(){
-return parseFloat(this.recuppererMontantDotationNouvel(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id))+parseFloat(this.formData1.variation_budget)
+return parseFloat(this.recuppererMontantDotationNouvel(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id))+parseFloat(this.formData1.variation_budget)
 },
 recupererAnneePrecedant(){
 
@@ -1059,7 +1086,7 @@ return this.uniteAdministratives
     recuppererMontantReport() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_budget_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.report
@@ -1071,7 +1098,7 @@ return this.uniteAdministratives
     recuppererMontantDotationNouvel() {
       return (id1,id,id2,id3,id4 ) => {
         if ( id1 != null && id1 != "" && id != null && id != ""  && id2 != null && id2 != "" && id3 != null && id3 != "" && id4 != null && id4 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_budget_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
 
       if (qtereel) {
         return qtereel.dotation
@@ -1083,7 +1110,7 @@ return this.uniteAdministratives
     recupererId() {
       return (id1,id,id2,id3,id4 ) => {
         if ( id1 != null && id1 != "" && id != null && id != ""  && id2 != null && id2 != "" && id3 != null && id3 != "" && id4 != null && id4 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_budget_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
 
       if (qtereel) {
         return qtereel.id
@@ -1095,7 +1122,7 @@ return this.uniteAdministratives
     recuppererMontantDotationFinal() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_budget_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.dotation
@@ -1204,7 +1231,7 @@ methods: {
       };
      
     var decisionBudget11452 = {
-      id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
+      id: this.recupererId(this.formData.sous_budget_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
       budget_active:0
       };
       this.modifierBudgetEclate(decisionBudget11452);
@@ -1232,7 +1259,7 @@ type_financement_id:""
           sous_budget_id:this.formData10.sous_budget_id
       };
       var decisionBudget1123 = {
-               	id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
+               	id: this.recupererId(this.formData.sous_budget_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
       budget_active:0
       };
       this.modifierBudgetEclate(decisionBudget1123);
@@ -1262,7 +1289,7 @@ report:"",
          
       };
       var decisionBudget119 = {
-               	id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
+               	id: this.recupererId(this.formData.sous_budget_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
     budget_active:0
       };
       this.modifierBudgetEclate(decisionBudget119);

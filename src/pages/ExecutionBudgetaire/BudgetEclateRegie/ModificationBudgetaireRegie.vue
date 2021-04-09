@@ -479,7 +479,7 @@ components: {
                  budgetaire_parent_id:""
                 },
                  formData10:{
-sous_budget_id:0
+
                 },
                 formData1:{
                   type_financement_id:"",
@@ -500,7 +500,7 @@ sous_budget_id:0
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["groupeParBAILLER","BudgetEclateRegie","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -582,7 +582,7 @@ ReduitCumulReservation(){
     cumulReservation() {
       return (id) => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort && qtreel.cumul_reservation < 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cumul_reservation), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort && qtreel.cumul_reservation < 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cumul_reservation), 0).toFixed(0);
 
         }
       };
@@ -594,7 +594,7 @@ ReduitCumulReservation(){
 recupereMontantEtat() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.type_financement_id==14 && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.type_financement_id==14 && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
      
       
@@ -604,7 +604,7 @@ recupereMontantEtat() {
 recupereMontantDon() {
       return id => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.type_financement_id==13  && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+          return this.BudgetEclateRegie.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.type_financement_id==13  && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
         }
       };
@@ -612,7 +612,7 @@ recupereMontantDon() {
     recupereMontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.type_financement_id==15  && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.type_financement_id==15  && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
         }
       };
     },
@@ -621,7 +621,7 @@ recupereMontantDon() {
 recupereMontantEtatTotal() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
      
       
@@ -631,7 +631,7 @@ recupereMontantEtatTotal() {
 recupereMontantDonTotal() {
       return id => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+          return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
         }
       };
@@ -639,7 +639,7 @@ recupereMontantDonTotal() {
     recupereMontantEmpruntTotal() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
         }
       };
     },
@@ -647,7 +647,7 @@ recupereMontantDonTotal() {
 listeBudgetaireEclate() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort );
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort );
 
         }
       };
@@ -678,7 +678,7 @@ return parseFloat(this.DotationRestantAnneePrecedant(this.formData.uniteadminist
 cumulDotationParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
         }
       };
@@ -686,7 +686,7 @@ cumulDotationParUa() {
 cumulDotationParUaEtActivite() {
       return (id,id1) => {
         if (id != null && id != "",id1 != null && id1 != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id == id1 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id == id1 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
         }
       };
@@ -721,7 +721,7 @@ if(this.formData1.variation_budget>0){
   DotationRestantAnneePrecedant() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.recupererAnneePrecedant ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.recupererAnneePrecedant ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
         }
       };
@@ -999,7 +999,7 @@ return this.uniteAdministratives
     doublonLigneBudgetaire() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.ligneeconomique_id
@@ -1008,10 +1008,10 @@ return this.uniteAdministratives
         }
       };
     },
-    idBudgetEclater() {
+    idBudgetEclateRegier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.id
@@ -1023,7 +1023,7 @@ return this.uniteAdministratives
     montantDon() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.don
@@ -1035,7 +1035,7 @@ return this.uniteAdministratives
     montantTresor() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.tresor
@@ -1047,7 +1047,7 @@ return this.uniteAdministratives
     montantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.emprunt
@@ -1059,7 +1059,7 @@ return this.uniteAdministratives
     recuppererMontantReport() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.report
@@ -1071,7 +1071,7 @@ return this.uniteAdministratives
     recuppererMontantDotationNouvel() {
       return (id1,id,id2,id3,id4 ) => {
         if ( id1 != null && id1 != "" && id != null && id != ""  && id2 != null && id2 != "" && id3 != null && id3 != "" && id4 != null && id4 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
 
       if (qtereel) {
         return qtereel.dotation
@@ -1083,7 +1083,7 @@ return this.uniteAdministratives
     recupererId() {
       return (id1,id,id2,id3,id4 ) => {
         if ( id1 != null && id1 != "" && id != null && id != ""  && id2 != null && id2 != "" && id3 != null && id3 != "" && id4 != null && id4 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
 
       if (qtereel) {
         return qtereel.id
@@ -1095,7 +1095,7 @@ return this.uniteAdministratives
     recuppererMontantDotationFinal() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.dotation
@@ -1115,7 +1115,7 @@ return (parseFloat(this.SommeCumul)+parseFloat(this.dotationTotal))
 recuppererMontantEmprunt() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.emprunt
@@ -1127,7 +1127,7 @@ recuppererMontantEmprunt() {
     recuppererMontantDon() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.don
@@ -1139,7 +1139,7 @@ recuppererMontantEmprunt() {
     recuppererMontantTresor() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
         return qtereel.tresor
@@ -1153,11 +1153,12 @@ recuppererMontantEmprunt() {
 
 methods: {
    ...mapActions("uniteadministrative", [
-      "ajouterBudgetEclate",
-      "supprimerBudgetEclate",
-      "modifierBudgetEclate",
+      "ajouterBudgetEclateRegie",
+      "supprimerBudgetEclateRegie",
+      "modifierBudgetEclateRegie",
       
     ]),
+
     apercuFacture() {
       this.$("#ApercuFacture").modal({
         backdrop: "static",
@@ -1200,15 +1201,15 @@ methods: {
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           variation_budget:this.formData1.variation_budget,
-          sous_budget_id:this.formData10.sous_budget_id
+          
       };
      
     var decisionBudget11452 = {
       id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
       budget_active:0
       };
-      this.modifierBudgetEclate(decisionBudget11452);
-      this.ajouterBudgetEclate(nouvelObjettrsor);
+      this.modifierBudgetEclateRegie(decisionBudget11452);
+      this.ajouterBudgetEclateRegie(nouvelObjettrsor);
       
      this.formData1 = {
 ligneeconomique_id:"",
@@ -1229,14 +1230,14 @@ type_financement_id:""
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           variation_budget:this.formData1.variation_budget,
-          sous_budget_id:this.formData10.sous_budget_id
+          
       };
       var decisionBudget1123 = {
                	id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
       budget_active:0
       };
-      this.modifierBudgetEclate(decisionBudget1123);
-      this.ajouterBudgetEclate(nouvelObjet1);
+      this.modifierBudgetEclateRegie(decisionBudget1123);
+      this.ajouterBudgetEclateRegie(nouvelObjet1);
       
       this.formData1 = {
 ligneeconomique_id:"",
@@ -1258,16 +1259,16 @@ report:"",
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
            variation_budget:this.formData1.variation_budget,
-          sous_budget_id:this.formData10.sous_budget_id
+          
          
       };
       var decisionBudget119 = {
                	id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
     budget_active:0
       };
-      this.modifierBudgetEclate(decisionBudget119);
+      this.modifierBudgetEclateRegie(decisionBudget119);
     
-      this.ajouterBudgetEclate(nouvelObjet3);
+      this.ajouterBudgetEclateRegie(nouvelObjet3);
      
       this.formData1 = {
 ligneeconomique_id:"",

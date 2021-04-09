@@ -35,7 +35,7 @@
 
                             </div>
               </td> -->
-              <td style="width:12%;">
+              <td style="width:5%;">
                 <div align="right">
 
       <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
@@ -43,7 +43,7 @@
 
                             </div>
               </td>
-              <td style="width:12%;" >
+              <td style="width:10%;" >
                 
                 <div align="right">
 
@@ -55,7 +55,15 @@
               <td style="width:12%;">
                 <div align="right">
 
-      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE </button>
+      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE UA </button>
+
+
+                            </div>
+              </td>
+               <td style="width:15%;">
+                <div align="right">
+
+      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaireSousBudget">MODIFICATION BUDGETAIRE SOUS BUDGET </button>
 
 
                             </div>
@@ -127,7 +135,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="ajouterBudgetEclarter" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="ajouterBudgetEclarter" main-icon="apps" bg-color="green"></fab> -->
     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="ajouterBudgetEclarter()">Open</button>
 <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
@@ -274,8 +282,8 @@ export default {
     ModificationBudgetaire(){
                 this.$router.push({ name: 'ModificationBudgetaire' })
             },
-             BAILLEURUA(){
-                this.$router.push({ name: 'ListeUniteAdministrative' })
+             ModificationBudgetaireSousBudget(){
+                this.$router.push({ name: 'ModificationBudgetaireSousBudget' })
             },
             SOUSbUDGET(){
                 this.$router.push({ name: 'listeSousBudgetParUa' })

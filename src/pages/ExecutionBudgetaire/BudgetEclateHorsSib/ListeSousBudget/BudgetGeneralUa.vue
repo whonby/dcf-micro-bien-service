@@ -201,6 +201,8 @@ created() {
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
     ]),
+    ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
+ 'structures_geographiques','localisations_geographiques','getterInfrastrucure',"taux"]),
     // afficheLigneEclate(){
     //   return this.arrayExerciceDecompte.filter(item=>item.uniteadministrative_id ==this.detail_marche.uniteadministrative_id)
     // },
@@ -349,7 +351,7 @@ LigneParUaBienService() {
 SommePersonneBudgetEclateEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.type_financement_id == 15 && qtreel.annebudgetaire == this.anneeAmort && qtreel.budget_active == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
      
         }
@@ -358,7 +360,7 @@ SommePersonneBudgetEclateEmprunt() {
 SommePersonneBudgetEclateDon() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.type_financement_id == 13 && qtreel.annebudgetaire == this.anneeAmort && qtreel.budget_active == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
      
         }
@@ -368,7 +370,7 @@ SommePersonneBudgetEclateDon() {
 SommePersonneBudgetEclateTresor() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.type_financement_id == 14 && qtreel.annebudgetaire == this.anneeAmort && qtreel.budget_active == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
      
         }
@@ -406,7 +408,7 @@ SommePersonneBudgetEclateTresor() {
     MontantResor() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 14 && qtreel.annebudgetaire == this.anneeAmort && qtreel.budget_active == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.tresor
@@ -430,7 +432,7 @@ SommePersonneBudgetEclateTresor() {
     MontantDon() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 13 && qtreel.annebudgetaire == this.anneeAmort && qtreel.budget_active == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.don
@@ -442,7 +444,7 @@ SommePersonneBudgetEclateTresor() {
      MontantEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return this.budgetEclate.filter(qtreel => qtreel.ligneeconomique_id == id && qtreel.uniteadministrative_id==this.detail_marche.uniteadministrative_id && qtreel.type_financement_id == 15 && qtreel.annebudgetaire == this.anneeAmort && qtreel.budget_active == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
       // if (qtereel) {
       //   return qtereel.emprunt
