@@ -70,6 +70,10 @@
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
       </button>
+      &nbsp;&nbsp;&nbsp;
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
     </div>
 
     <div class="widget-content nopadding" id="printpdf">
@@ -105,7 +109,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        Listes des ordres de paiement {{ formData.date_debut }}
+        LISTE DES ORDRES DE PAIEMENT {{ formData.date_debut }}
         {{ formData.date_fin }}
       </h2>
 
@@ -118,8 +122,8 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        Listes des ordres de paiement du
-        {{ formaterDate(formData.date_debut) }} au
+        LISTE DES ORDRES DE PAIEMENT DU
+        {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
       </h2>
       <p
@@ -143,110 +147,177 @@
           {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
         </p>
 
-       
+        <div class="widget-content nopadding" style="margin: 25px">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Ligne Budgétaire
+                </th>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Type
+                </th>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  N°OP
+                </th>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Bailleur
+                </th>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Objet
+                </th>
 
-    <div class="widget-content nopadding" style="margin: 25px">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Ligne Budgétaire</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Type</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">
-              N°OP
-            </th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Bailleur</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Objet</th>
-
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Montant</th>
-            <th style="font-size: 14px; font-weight: bold; background-color: #87ceeb;">Visa Cf</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="odd gradeX"
-          v-for="listeordrepaiement in listeordrepaiements(
-                GroupeOrdrePaiementByActivit[0].activite_id
-              )"
-              :key="listeordrepaiement.id"
-          >
-            <td
-              style="font-size: 14px; font-weight: bold; text-align: center"
-            >
-             {{
-                  libelleLigneEconomique(
-                    listeordrepaiement.ligne_economique_id
-                  ) || "Non renseigné"
-                }}
-            </td>
-           
-              <td
-                v-if="listeordrepaiement.type_ordre_paiement == 1"
-                style="font-size: 14px; font-weight: bold; text-align: center"
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Montant
+                </th>
+                <th
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    background-color: #87ceeb;
+                  "
+                >
+                  Visa Cf
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="odd gradeX"
+                v-for="listeordrepaiement in listeordrepaiements(
+                  GroupeOrdrePaiementByActivit[0].activite_id
+                )"
+                :key="listeordrepaiement.id"
               >
-                <span>OP Direct</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 2"
-               style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Provisoire</span>
-              </td>
-              <td
-                v-else-if="listeordrepaiement.type_ordre_paiement == 3"
-               style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Annulation</span>
-              </td>
-              <td v-else 
-             style="font-size: 14px; font-weight: bold; text-align: center"
-              >
-                <span>OP Définitif</span>
-              </td>
-            
-            <td style="font-size: 14px; font-weight: bold; text-align: center">
-              {{
-                  listeordrepaiement.numero_ordre_paiement || "Non renseigné"
-                }}
-            </td>
+                <td
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  {{
+                    libelleLigneEconomique(
+                      listeordrepaiement.ligne_economique_id
+                    ) || "Non renseigné"
+                  }}
+                </td>
 
-            <td style="font-size: 14px; font-weight: bold; text-align: center">
-             {{
-                  libelleBailleur(listeordrepaiement.source_financement_id) ||
-                  "Non renseigné"
-                }}
-            </td>
-            <td style="font-size: 14px; font-weight: bold; text-align: center">
-               {{ listeordrepaiement.odjet_autre_depense || "Non renseigné" }}
-            </td>
+                <td
+                  v-if="listeordrepaiement.type_ordre_paiement == 1"
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  <span>OP Direct</span>
+                </td>
+                <td
+                  v-else-if="listeordrepaiement.type_ordre_paiement == 2"
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  <span>OP Provisoire</span>
+                </td>
+                <td
+                  v-else-if="listeordrepaiement.type_ordre_paiement == 3"
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  <span>OP Annulation</span>
+                </td>
+                <td
+                  v-else
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  <span>OP Définitif</span>
+                </td>
 
-            <td
-              style="
-                font-size: 14px;
-                font-weight: bold;
-                text-align: center;
-                color: green;
-              " >
-              {{
-                formatageSommeSansFCFA(
-                  parseFloat(listeordrepaiement.montant_ordre_paiement)
-                ) || "Non renseigné"
-              }}
-            </td>
+                <td
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  {{
+                    listeordrepaiement.numero_ordre_paiement || "Non renseigné"
+                  }}
+                </td>
 
-            <td style="font-size: 14px; font-weight: bold">
-              {{
-                formaterDate(listeordrepaiement.date_decision_cf) ||
-                "Non renseigné"
-              }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <td
+                  style="font-size: 14px; font-weight: bold; text-align: center"
+                >
+                  {{
+                    libelleBailleur(listeordrepaiement.source_financement_id) ||
+                    "Non renseigné"
+                  }}
+                </td>
+                <td
+                  style="font-size: 14px; font-weight: bold; text-align:center "
+                >
+                  {{
+                    listeordrepaiement.odjet_autre_depense || "Non renseigné"
+                  }}
+                </td>
+
+                <td
+                  style="
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-align: right;
+                    color: green;
+                  "
+                >
+                  {{
+                    formatageSommeSansFCFA(
+                      parseFloat(listeordrepaiement.montant_ordre_paiement)
+                    ) || "Non renseigné"
+                  }}
+                </td>
+
+                <td style="font-size: 14px; font-weight: bold">
+                  {{
+                    formaterDate(listeordrepaiement.date_decision_cf) ||
+                    "Non renseigné"
+                  }}
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" style="font-size: 14px; font-weight: bold; text-align:center"> MONTANT TOTAL :</td>
+                <td colspan="2" style="font-size: 14px; font-weight: bold; text-align:center">{{formatageSommeSansFCFA(
+                      parseFloat(MontantBudgetExecutéActivite(GroupeOrdrePaiementByActivit[0].activite_id)))}}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
     </div>
-
-    </div>
-    </div>
-
-
   </div>
 </template>
   
@@ -394,7 +465,7 @@ export default {
       "getterMembreCojo",
       "getterProceVerballe",
       "GroupeOrdrePaiementByActivite",
-      "GroupeOrdrePaiementByLigneEconomique"
+      "GroupeOrdrePaiementByLigneEconomique",
     ]),
     ...mapGetters("gestionMarche", [
       "groupeVille",
@@ -446,7 +517,13 @@ export default {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
-            qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            && qtreel[0].exercice == this.anneeAmort 
+            && qtreel[0].decision_cf ==8 ) ||
+
+            (qtreel[0].unite_administrative_id == this.uniteAdministrative_id
+            && qtreel[0].exercice == this.anneeAmort 
+            && qtreel[0].decision_cf ==9 )
         );
       } else if (
         this.uniteAdministrative_id != 0 &&
@@ -454,21 +531,28 @@ export default {
         this.formData.date_fin != ""
       ) {
         return this.GroupeOrdrePaiementByActivite.filter(
-          (qtreel) =>
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+          (qtreel) =>(qtreel[0].decision_cf ==8 
+             && qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin))  ||
+
+            (qtreel[0].decision_cf ==9
+             && qtreel[0].exercice == this.anneeAmort &&
+            (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+            qtreel[0].date_decision_cf <= this.formData.date_fin))
+
         );
       } else {
-        return this.GroupeOrdrePaiementByActivite;
-        // .filter(
-        //   (qtreel) => (
-        //    // qtreel[0].exercice == this.anneeAmort
-        //    qtreel[0].decision_cf ==8 && qtreel[0].diff_op==null)  ||
+        return this.GroupeOrdrePaiementByActivite.filter(
+    (qtreel) => (
+         qtreel[0].exercice == this.anneeAmort &&
+        qtreel[0].decision_cf ==8 )  ||
 
-        //   (
-        //     //qtreel[0].exercice == this.anneeAmort
-        //    qtreel[0].decision_cf ==9 && qtreel[0].diff_op==null)
-        // );
+       (
+        qtreel[0].exercice == this.anneeAmort &&
+         qtreel[0].decision_cf ==9)
+        );
+        
       }
     },
 
@@ -517,17 +601,37 @@ export default {
       };
     },
 
-    //GroupeOrdrePaiementByLigneEconomique
-
-    listeordrepaiementstest(){
+     MontantBudgetExecutéActivite() {
       return (id) => {
-          if (id != null && id != "") {
-            return this.GroupeOrdrePaiementByLigneEconomique.filter(
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
               (qtreel) =>
-                qtreel[0].activite_id == id
-            );
-          }
-        };
+                qtreel.activite_id == id 
+                &&
+                 qtreel.exercice ==this.anneeAmort
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+    listeordrepaiementstest() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.GroupeOrdrePaiementByLigneEconomique.filter(
+            (qtreel) => qtreel[0].activite_id == id
+          );
+        }
+      };
     },
 
     listeordrepaiements() {
@@ -663,7 +767,6 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
-    
 
     genererEnPdf() {
       this.$htmlToPaper("printpdf");

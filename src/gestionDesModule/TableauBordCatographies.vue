@@ -437,7 +437,7 @@ montantBudegtPasUniteAdminOuRegion
           <div id="contratualisation">Marché en contractualisation</div>
       </div>
       <div id="MarchePlanification1">
-          <div id="planifier">Marché planifié </div>
+          <div id="planifier">Projet de marchés </div>
       </div>
       <div id="MarcheExecution1">
           <div id="execution">Marché en exécution</div>
@@ -830,8 +830,20 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
         "getterImageMarche","acteEffetFinanciers",
-        "typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants"]),
-
+        "typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants","gettersgestionOrdrePaiement"]),
+      opDejaVie(){
+          let objet=this.gettersgestionOrdrePaiement.filter(item=>{
+              if(item.type_ordre_paiement==1 || item.type_ordre_paiement==4){
+                  return item
+              }
+          })
+          if(objet.length<1) return []
+          return objet.filter(item=>{
+              if(item.decision_cf==8 || item.decision_cf==9){
+                  return item
+              }
+          });
+      },
       noDCfNoAdmin:noDCfNoAdmin,
       conversionDate(){
           let da=new Date()
@@ -871,8 +883,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           let vM=this;
           this.filtre_unite_admin.forEach(function (value) {
               let objet=vM.marches.filter(item=>{
-                      if(item.parent_id==null && item.unite_administrative_id==value.id && item.sib==1 ){
-                          //  console.log(item.parent_id)
+                      if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
                           return item
                       }
                   }
@@ -1053,8 +1064,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           return id=>{
               let vm=this;
               let initeVal = 0;
-              let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.total_general) ;
+              let montant=vm.opDejaVie.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.montant_ordre_paiement) ;
               }, initeVal);
 
               if(montant!=undefined){
@@ -1250,8 +1261,30 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       return max=>{
         return Math.floor(Math.random() * Math.floor(max));
       }
-
 },
+      montantPasStatusExecutionAcheve() {
+          return (status) => {
+              if (this.listeMarchStatueExecuteAcheve.length > 0) {
+                  let montant_execute = 0;
+                  let vm = this;
+
+                  this.listeMarchStatueExecuteAcheve
+                      .filter((item) => item.attribue == status)
+                      .forEach(function (val) {
+                          let initeVal = 0;
+                          let montant = vm.acteEffetFinanciers
+                              .filter((item) => item.marche_id == val.id)
+                              .reduce(function (total, currentValue) {
+                                  return total + parseFloat(currentValue.montant_act);
+                              }, initeVal);
+                          montant_execute = parseFloat(montant_execute) + parseFloat(montant);
+                      });
+
+                  return montant_execute;
+              }
+              return 0;
+          };
+      },
     montantBudegtPasUniteAdminOuRegion(){
      // let localisation=[]
       let vM=this;

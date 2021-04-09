@@ -3,6 +3,11 @@
   <div>
    
     <div class="container-fluid">
+
+      <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
       <hr />
       <div class="row-fluid">
         <div class="span12">
@@ -117,14 +122,16 @@
 
 <div class="btn-group" v-if="afficherStatusSib(marche.id)==0">
 <router-link :to="{ name: 'listeDesReceptionDesLot', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail execution Marche">
+                class="btn btn-warning " title="Detail execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
             </div>
 <div class="btn-group" v-if="afficherStatusSib(marche.id)==1">
 <router-link :to="{ name: 'listeDesReceptionDesLot', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail execution Marche Gestion Hors Sib">
-                  <span class=""><i class="  icon-random"></i></span>
+                class="btn btn-success " title="Detail execution Marche Gestion Hors Sib">
+                  <span class=""><i class="icon-random"></i>
+                  Ajouter
+                  </span>
                    </router-link> 
             </div>
 
@@ -363,6 +370,10 @@ afficherlibelleUa() {
       "modifierTypeTexte",
       "supprimerTypeTexte"
     ]),
+
+    pagePrecedent(){
+                window.history.back()
+            },
    formatageSommeSansFCFA:formatageSommeSansFCFA,
    formatageSomme:formatageSomme,
     alert() {

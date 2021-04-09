@@ -817,6 +817,9 @@ idDecisionBudgetaire() {
       "modifierDecisionBudgetEclate",
       "ajouterHistoriqueDecisionBudgetEclate"
     ]),
+           genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
      tableToExcel(table, name){
                 if (!table.nodeType) table = this.$refs.table
                 var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}

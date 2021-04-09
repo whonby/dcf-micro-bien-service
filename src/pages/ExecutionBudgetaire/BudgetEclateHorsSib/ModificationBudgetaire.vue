@@ -67,7 +67,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleSection(idSection(formData.ligne_budgetaire_parent_id))"
+                   :value="libelleSection(idSection(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -81,7 +81,7 @@
                    <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleProgramme(idProgramme(formData.ligne_budgetaire_parent_id))"
+                   :value="libelleProgramme(idProgramme(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -96,7 +96,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleAction(idAction(formData.ligne_budgetaire_parent_id))"
+                   :value="libelleAction(idAction(formData.activite_id))"
                     class="span"
                     readonly
                   />
@@ -190,7 +190,7 @@
                  <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR BAILLEUR{{doublonLigneBudgetaire(formData1.ligneeconomique_id)}}</a>
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR BAILLEUR</a>
                       </li>
                     </ul>
                   </div>
@@ -259,21 +259,21 @@
                   
                      
                  </table>
-                 <div class="widget-title">
+                 <!-- <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION BUDGET PRECEDENT{{idBudgetEclater(formData1.ligneeconomique_id)}}</a>
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION BUDGET PRECEDENT</a>
                       </li>
                     </ul>
-                  </div>
-                  <table class="table table-bordered table-striped" style="border:1px solid #000">
+                  </div> -->
+                  <!-- <table class="table table-bordered table-striped" style="border:1px solid #000">
                      
                      <tr>
  
                   
                   <td>
                        <div class="control-group">
-                <label class="control-label">Cumul Reservation{{ReduitCumulReservation}}</label>
+                <label class="control-label">Cumul Reservation</label>
                 <div class="controls">
                    <money :value="-cumulReservation(formData.uniteadministrative_id)" readOnly   style="text-align:left;color:red"  class="span"></money>
                 </div>
@@ -293,7 +293,7 @@
                      </tr>
                   
                      
-                 </table>
+                 </table> -->
                   
                  <div class="widget-title">
                     <ul class="nav nav-tabs">
@@ -347,7 +347,8 @@
                        <div class="control-group">
                 <label class="control-label">Report</label>
                 <div class="controls">
-                  <money   :value="recuppererMontantReport(formData.uniteadministrative_id,formData1.ligneeconomique_id)" readonly style="text-align:left;color:red"  class="span" ></money>
+                  <!-- <money   :value="recuppererMontantReport(formData.uniteadministrative_id,formData1.ligneeconomique_id)" readonly style="text-align:left;color:red"  class="span" ></money> -->
+                   <money   v-model="formData.report" style="text-align:left;color:red"  class="span" ></money>
                 </div>
               </div>
                   </td>
@@ -356,7 +357,7 @@
                        <div class="control-group">
                 <label class="control-label">Dotation</label>
                 <div class="controls">
-                  <money  :value="recuppererMontantDotationNouvel(formData.uniteadministrative_id,formData1.ligneeconomique_id)" readonly  style="text-align:left;color:red"  class="span"></money>
+                  <money  :value="recuppererMontantDotationNouvel(formData.uniteadministrative_id,formData1.ligneeconomique_id,formData1.type_financement_id,formData.source_financement_id)" readonly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
                   </td>
@@ -383,7 +384,7 @@
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
-                        v-if="MontantAEclate > 0"
+                        
                           class="btn btn-primary"
                           @click.prevent="AjouterLiquidation"
                         >Modifier</a>
@@ -395,56 +396,8 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div align="left">
-
-      <button class="btn btn-info"  @click.prevent="apercuFacture">Aperçu Ventilation budget  {{anneeAmort}} </button>
-
-
-                            </div> -->
-                            <div id="printMe">
-                 <table class="table table-bordered table-striped">
-                <thead>
-                   <tr>
-                    <th></th>
-                    <th colspan="3" style="font-size:14px;color:#000">BUDGET</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <th style="font-size:14px;color:#000">LIGNE BUDGETAIRE</th>
-                     <th style="font-size:14px;color:#000">ETAT</th>
-                    <th style="font-size:14px;color:#000">DON</th>
-                    <th style="font-size:14px;color:#000">EMPRUNT</th>
-                    <th style="font-size:14px;color:#000">BUDGET TOTAL</th>
-                    <th style="font-size:14px;color:#000">SUPPRIMER</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listeBudgetaireEclate(formData.uniteadministrative_id)" :key="type.id">
-                    <td style="font-size:12px;color:#000;text-align:center">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
-                      <td style="font-size:12px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                                         <td style="font-size:12px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:12px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
-                    <td style="font-size:12px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                    <td>
-                      <button class="btn btn-danger" @click="supprimerBudgetEclate(type.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight:bold;font-size:14px">TOTAL</td>
-                    <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(formData.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(formData.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(formData.uniteadministrative_id))))}}</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-                            </div>
+                  
+                            
                     </div>
                   </div>
 
@@ -809,7 +762,7 @@ recupererStructure() {
     idSection() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.section_id
@@ -821,7 +774,7 @@ recupererStructure() {
     idProgramme() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.program_id
@@ -833,7 +786,7 @@ recupererStructure() {
 idAction() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
 
       if (qtereel) {
         return qtereel.action_id
@@ -1075,9 +1028,9 @@ return this.uniteAdministratives
       };
     },
     recuppererMontantDotationNouvel() {
-      return (id1,id) => {
-        if ( id1 != null && id1 != "" && id != null && id != "" ) {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+      return (id1,id,id2,id3,id4 ) => {
+        if ( id1 != null && id1 != "" && id != null && id != ""  && id2 != null && id2 != "" && id3 != null && id3 != "" && id4 != null && id4 != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort && qtreel.budget_active==1 && qtreel.grandenature_id==id4);
 
       if (qtereel) {
         return qtereel.dotation

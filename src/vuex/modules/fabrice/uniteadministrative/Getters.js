@@ -868,3 +868,16 @@ export const groupeUniteAdministrativeDecompte = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.decomptefactures, "uniteadministrative_id");
 };
+
+
+
+
+export const groupeParAnneeDecompte = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.decomptefactures, "exercicebudget");
+};
+
+export const groupeParUniteZone = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "sous_budget_id");
+};

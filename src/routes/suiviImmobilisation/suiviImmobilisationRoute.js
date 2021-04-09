@@ -118,31 +118,31 @@ import AjouterReparationMateriel from '../../pages/suivi_control_budgetaires/sui
 import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmobilisation/dossierExecution/principalExecution.vue'
 
 
- import SortiDuPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/SortiDuPatrimoine.vue'
+import SortiDuPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/SortiDuPatrimoine.vue'
 
 
 
- import listeDesArticlesTransferer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/listeDesArticlesTransferer.vue'
+import listeDesArticlesTransferer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/listeDesArticlesTransferer.vue'
 
- import ListeEquipementEnStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/ListeEquipementEnStock.vue'
+import ListeEquipementEnStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/ListeEquipementEnStock.vue'
 
- 
- import AjouterAffectation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/AjouterAffectation.vue'
 
- 
- 
+import AjouterAffectation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/AjouterAffectation.vue'
 
- 
- import DetailMaterielGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMateriel.vue'
- import DetailMobilierGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMobilier.vue'
- import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
 
- import modificationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationVehicule.vue'
 
- 
- import modificationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMobilier.vue'
 
- import modificationMateriel from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMateriel.vue'
+
+import DetailMaterielGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMateriel.vue'
+import DetailMobilierGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMobilier.vue'
+import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
+
+import modificationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationVehicule.vue'
+
+
+import modificationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMobilier.vue'
+
+import modificationMateriel from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMateriel.vue'
 
 import listeDesArticlesAReparer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/listeDesArticlesAReparer.vue'
 
@@ -273,29 +273,29 @@ const suiviImmobilisationRoutes = [
   },
   {
     path: '/gestion-Stock-Corporels',
-   name:"gestionStockCorporels",
-  
-   component: gestionStockCorporels
-},
-//   {
-//     path: '/Ajouter-Reparation-HorsSib-Mobilier',
-//    name:"AjouterReparationHorsSibMobilier",
-  
-//    component: AjouterReparationHorsSibMobilier
-// },
-// {
-//   path: '/Ajouter-Reparation-SibMobilier',
-//  name:"AjouterReparationSibMobilier",
- 
-//  component: AjouterReparationSibMobilier
-// },
-//   {
-//     path: '/liste-Des-Reparation-Mobilier',
-//    name:"listeDesReparationMobilier",
-   
-//    component: listeDesReparationMobilier
-// },
-  
+    name: "gestionStockCorporels",
+
+    component: gestionStockCorporels
+  },
+  //   {
+  //     path: '/Ajouter-Reparation-HorsSib-Mobilier',
+  //    name:"AjouterReparationHorsSibMobilier",
+
+  //    component: AjouterReparationHorsSibMobilier
+  // },
+  // {
+  //   path: '/Ajouter-Reparation-SibMobilier',
+  //  name:"AjouterReparationSibMobilier",
+
+  //  component: AjouterReparationSibMobilier
+  // },
+  //   {
+  //     path: '/liste-Des-Reparation-Mobilier',
+  //    name:"listeDesReparationMobilier",
+
+  //    component: listeDesReparationMobilier
+  // },
+
   // {
   //   path: "/ModifierReparationMobilier/:id",
   //   name: "ModifierReparationMobilier",
@@ -308,11 +308,11 @@ const suiviImmobilisationRoutes = [
 
   {
     path: '/Comptabilite-Matieres',
-   name:"demarrage",
-   meta: {layout: "no-sidebar"},
-   component: demarrage
-},
-  
+    name: "demarrage",
+    meta: { layout: "no-sidebar" },
+    component: demarrage
+  },
+
   {
     path: "/ModifierEntrePatrimoineVehicule/:id",
     name: "ModifierEntrePatrimoineVehicule",
@@ -533,7 +533,7 @@ const suiviImmobilisationRoutes = [
     component: ficheAnalyse
   },
   {
-    path: "/demande-Equipement", 
+    path: "/demande-Equipement",
     name: "demandeEquipement",
     component: demandeEquipement
   },
@@ -578,12 +578,12 @@ const suiviImmobilisationRoutes = [
     component: listeStructurePlusEquipe
   },
   {
-    path: "/listeActeurEquipe", 
+    path: "/listeActeurEquipe",
     name: "listeActeurEquipe",
     component: listeActeurEquipe
   },
   // {
-    
+
   //   path: "/Taux-Equipement-Ministère",
   //   name: "TauxEquipementMinistère",
   //   component: TauxEquipementMinistère
@@ -619,11 +619,12 @@ const suiviImmobilisationRoutes = [
     component: Famille
   },
   {
-  path:"/liste-ua-compta-matiere",
-  name:"liste_ua_compta",
-  meta: {layout: "no-sidebar",
-  },
-  component:listeUaDeComptabiliteMatiere
+    path: "/liste-ua-compta-matiere",
+    name: "liste_ua_compta",
+    meta: {
+      layout: "no-sidebar",
+    },
+    component: listeUaDeComptabiliteMatiere
   },
 
   {
@@ -677,8 +678,8 @@ const suiviImmobilisationRoutes = [
     name: "RechercheTauxUniteAd",
     component: RechercheTauxParUniteAdm
   },
-  
-  
+
+
   //detail immobilisation
   {
     path: "/Detail-Immobilisation/:id_immobilisation",

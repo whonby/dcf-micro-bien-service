@@ -190,6 +190,7 @@ export default {
           this.afficheMarcheGestionSib(items[0].marche_id) == 0
       );
     },
+    
     afficheMarcheGestionSib() {
       return (id) => {
         if (id != null && id != "") {

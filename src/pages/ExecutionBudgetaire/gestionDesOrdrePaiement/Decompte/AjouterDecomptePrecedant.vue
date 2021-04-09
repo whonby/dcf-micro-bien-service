@@ -134,7 +134,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Montant du marche</label>
                                                     <div class="controls">
-                                                         <money :value="AfficheMontantMarche(formData.marche_id)"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                         <money :value="MontantDeBase"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                                                         
                                                     </div>
                                                 </div>
@@ -156,104 +156,191 @@
               </td>
             </tr>
             <tr>
-               
-                <td colspan="">
+              <td colspan="">
                      <div class="control-group">
-                                                    <label class="control-label">Retenues d'avance</label>
-                                                    <div class="controls">
-                                                         <money v-model="formData.retenu_avance"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                                                        
-                                                    </div>
-                                                </div>
-                </td>
-
-                  <td colspan="">
-                     <div class="control-group">
-                                                    <label class="control-label">Retenue de garantie </label>
-                                                    <div class="controls">
-                                                        <!-- <input type="text" v-model="formData.retenu_garantie"  placeholder="" class="span"/> -->
-                                                         <money v-model="formData.retenu_garantie"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                                                    </div>
-                                                </div>
-                </td>
-                <td colspan="">
-                     <div class="control-group">
-                                                    <label class="control-label">Retenue de pénalité </label>
-                                                    <div class="controls">
-                                                        <!-- <input type="text" v-model="formData.retenu_penalite"  placeholder="" class="span"/>
-                                                    -->
-                                                    <money v-model="formData.retenu_penalite"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                                                         </div>
-                                                </div>
-                </td>
-            </tr>
-            <tr>
-               
-                <td colspan="">
-                     <div class="control-group">
-                                                    <label class="control-label">Net Hors tva</label>
-                                                    <div class="controls">
-                                                         <money v-model="formData.nethtva"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                                                        
-                                                    </div>
-                                                </div>
-                </td>
-                  <td colspan="">
-                     <div class="control-group">
-                                                    <label class="control-label">Montant Payé</label>
+                                                    <label class="control-label">Montant Facture</label>
                                                     <div class="controls">
                                                          <money v-model="formData.montantmarche"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
                                                         
                                                     </div>
                                                 </div>
                 </td>
+               <td >
+              <div class="control-group">
+                <label class="control-label" > Retenue d'avance</label>
+                <div class="controls">
+                  <money v-model="formData.retenu_avance"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                
 
-                  <td colspan="">
-                     <div class="control-group">
-                                                    <label class="control-label">Date de paiement</label>
-                                                    <div class="controls">
-                                                        <input type="date" v-model="formData.date_decompte"  placeholder="" class="span"/>
-                                                    </div>
-                                                </div>
-                </td>
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Retenue de garantie</label>
+                <div class="controls">
+                
+            <money v-model="formData.retenu_garantie"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                </div>
+              </div>
+            </td>
             </tr>
-             <tr>
-               
-                <td colspan="2">
-                     <div class="control-group">
-                                                    <label class="control-label">Part Etat</label>
-                                                    <div class="controls">
-                                                         <money v-model="formData.parts_etat"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                                                        
-                                                    </div>
-                                                </div>
-                </td>
-                  <td colspan="">
-                     <div class="control-group">
-                                                    <label class="control-label">Part Bailleur</label>
-                                                    <div class="controls">
-                                                         <money v-model="formData.parts_bailleur"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                                                        
-                                                    </div>
-                                                </div>
-                </td>
+             
+           <tr>
+             <td colspan="">
+              <div class="control-group">
+                <label class="control-label" >Retenue de pénalité</label>
+                <div class="controls">
+                  <money v-model="formData.retenu_penalite"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                
 
+                </div>
+              </div>
+            </td>
+              <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData.exonere" class="span">
                   
-            </tr>
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
+               
+                <!-- <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Montant (Apres Retenu)</label>
+                                                    <div class="controls">
+                                                         <money :value="montantDeBase"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                                        
+                                                    </div>
+                                                </div>
+                </td> -->
+               
+            <td >
+              <div class="control-group">
+                <label class="control-label" >Montant HT (aprés retenues)</label>
+                <div class="controls">
+                  <!-- <input
+                      type="text"  
+                        :value="Montantapresretenues"
+                     
+                      class="span"
+                      readonly
+                  /> -->
+<money :value="montantDeBaseapresretenues" readonly   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                </div>
+              </div>
+            </td>
+             
+           </tr>
+            <tr>
+               <td>
+              <div class="control-group">
+                <label class="control-label">TVA(18%)</label>
+                <div class="controls">
+
+
+                  <input type="text" 
+                         class="span"
+                        :value="afficherEnorere"
+                         readonly
+                  />
+
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant Tva</label>
+                <div class="controls">
+                  <!-- <input
+                      type="text"  
+                        :value="Montantapresretenues"
+                     
+                      class="span"
+                      readonly
+                  /> -->
+<money :value="montantTva"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                </div>
+              </div>
+            </td>
+             
+             <td>
+               <div class="control-group">
+                <label class="control-label" >Montant TTC</label>
+                <div class="controls">
+                  <!-- <input
+                      type="text"
+                      :value="montantHTt"
+
+                      class="span"
+                      readonly
+                  /> -->
+<money    style="text-align:left;color:red;font-size:16px" readonly :value="montantHTt"  class="span"></money>
+                </div>
+              </div>
+             </td>
+             
+           </tr>
+           <tr>
+             <td>
+              <div class="control-group">
+                <label class="control-label">PART Bailleur</label>
+                <div class="controls">
+
+<money  :value="SommeBailleurDuMarche" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  
+
+                </div>
+              </div>
+            </td>
+             <td colspan="">
+               <div class="control-group">
+                <label class="control-label" >PART ETAT</label>
+                <div class="controls">
+                <money  :value="MontantEtatCoteIvoire(formData.marche_id)" readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+         
+                  <!-- <input
+                      type="text"
+                      :value="MontantEtatCoteIvoire(formData.marche_id)"
+
+                      class="span"
+                      readonly
+                  /> -->
+
+                </div>
+              </div>
+             </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Date decompte</label>
+                <div class="controls">
+
+
+                  <input type="date" 
+                         class="span"
+                        v-model="formData.date_decompte"
+                         
+                  />
+
+                </div>
+              </div>
+            </td>
+           </tr>
+          
+          
+          
             </table>
           </div>
           
                     </div>
                    
-                     <!-- <div id="tab3" class="tab-pane">
-                      
-
-                    </div> -->
-                    <!--ongle 3 -->
-                    <!-- <div id="tab3" class="tab-pane">
                     
-                      
-                    </div> -->
                   </div>
                   <br />
                   <div align="right">
@@ -338,7 +425,7 @@ components: {
                 ],
                 liste:[],
                 formData : {
-                
+                exonere:0,
                    diff_decompte:1
                 },
 
@@ -358,7 +445,7 @@ components: {
     //        admin:admin,
     //   dcf:dcf,
     //   noDCfNoAdmin:noDCfNoAdmin,
- ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+ ...mapGetters("bienService", ["personnaliseGetterMarcheBailleur","avenants",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',"gettersMotifPassations",
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -373,7 +460,7 @@ components: {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite',""]),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
- 'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
+ 'structures_geographiques','localisations_geographiques','getterInfrastrucure',"taux"]),
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
@@ -381,6 +468,286 @@ components: {
   
 
   ...mapGetters("Utilisateurs", ["user","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+  // Montantapresretenues(){
+  //     const val =  parseFloat(this.MontantFacture(this.formData.id))-parseFloat(parseFloat(this.formData.retenu_garantie) + parseFloat(this.formData.retenu_avance)+ parseFloat(this.formData.retenu_penalite));
+      
+  //      if (val) {
+  //       return parseFloat(val).toFixed(0);
+  //     }
+
+      
+  //     return 0
+  //   },
+  montantHTt() {
+      const val =    parseFloat(this.montantDeBaseapresretenues) + parseFloat(this.montantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+  montantTva() {
+      const val =   parseFloat(this.montantDeBaseapresretenues) * parseFloat(this.afficherEnorere2);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+    afficherEnorere2(){
+if(this.formData.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
+afficherEnorere(){
+if(this.formData.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+montantDeBaseapresretenues(){
+return parseFloat(this.formData.montantmarche)-(parseFloat(this.formData.retenu_penalite)+parseFloat(this.formData.retenu_garantie)+parseFloat(this.formData.retenu_avance))
+},
+
+MontantHTBailleur(){
+      const val =  parseFloat(this.Montantapresretenues)*(parseFloat(this.TauxBailleurDuMarche)/100);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    MontantHTEtat(){
+      const val =  parseFloat(this.MontantTTC)*(parseFloat(this.TauxBailleurTresor(this.formData.marche_id))/100);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    TauxBailleurTresor() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    TauxBailleurEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+     
+        }
+      };
+    }, 
+    
+    TauxBailleurDon() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    TauxBailleurDuMarche(){
+      const val = parseFloat(this.TauxBailleurDon(this.formData.marche_id)) + parseFloat(this.TauxBailleurEmprunt(this.formData.marche_id));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+montantTTCMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+ retenuAvanceResteApayes(){
+      const val = parseFloat(this.MontantRetenuAvance(this.formData.marche_id)) - parseFloat(this.CumulRetenuAvance(this.formData.marche_id));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+     MontantRetenuAvance() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.avance_demarrage_ht;
+      }
+      return 0
+        }
+      };
+    }, 
+    MontantRetenuGarantie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_ht_retenu_garantie;
+      }
+      return 0
+        }
+      };
+    }, 
+  CumulRetenuAvanceNouveau(){
+      const val = parseFloat(this.CumulRetenuAvance(this.formData.marche_id)) + parseFloat(this.formData.retenu_avance);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+     CumulRetenuGarantie() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
+
+     
+        }
+      };
+    }, 
+    retenuGarantieResteApayes(){
+      const val = parseFloat(this.MontantRetenuGarantie(this.formData.marche_id)) - parseFloat(this.CumulRetenuGarantie(this.formData.marche_id));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    CumulRetenuGarantieNouveau(){
+      const val = parseFloat(this.CumulRetenuGarantie(this.formData.marche_id)) + parseFloat(this.formData.retenu_garantie);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    CumulRetenuAvance() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
+
+     
+        }
+      };
+    }, 
+    MontantBailleurEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant), 0).toFixed(0);
+
+     
+        }
+      };
+    }, 
+    
+    MontantBailleurDon() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    SommeBailleurDuMarche(){
+      const val = parseFloat(this.MontantBailleurEmprunt(this.formData.marche_id)) + parseFloat(this.MontantBailleurDon(this.formData.marche_id));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    MontantEtatCoteIvoire() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+
+
+
+  MontantDeBase(){
+return parseFloat(this.AfficheMontantMarche(this.formData.marche_id))+parseFloat(this.MontantAvenant(this.formData.marche_id))
+  },
+  MontantAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0);
+
+     
+      }
+      }
+  },
 AfficheMontantMarche() {
       return id => {
         if (id != null && id != "") {
@@ -429,7 +796,16 @@ AfficheMontantMarche() {
             AjouterDecompte () {
              var objetNouveau={
                ...this.formData,
-               diff_decompte:1
+               diff_decompte:1,
+                
+        marche_id:this.formData.marche_id,
+       
+      nethtva:this.montantTVA,
+      netttc:this.Montantapresretenues,
+      parts_etat:this.MontantEtatCoteIvoire(this.formData.marche_id),
+      parts_bailleur:this.SommeBailleurDuMarche, 
+      montantmarche:this.montantHTt,
+      exercicebudget:this.formData.exercicebudget
                
              }
                 this.ajouterDecompteFacture(objetNouveau)

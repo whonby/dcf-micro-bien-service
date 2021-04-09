@@ -38,7 +38,7 @@ import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vu
 import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
 import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJuridique.vue';
 // import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
-
+ListeImageMarche
 import marche from '../../pages/bien_service/contractualisation/marche.vue';
 import historiqueMarche from '../../pages/gestionMarche/historiqueMarche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
@@ -104,7 +104,6 @@ import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
 import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
 import listeMarchePPM from "../../pages/gestionMarche/listeMarchePPM.vue"
 import AnoBailleur1 from "../../pages/bien_service/component/AnoBailleur/AnoBailleur1.vue"
-
 import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/FicheContratualisation"
 
 import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/AjouterTacheParMarche.vue"
@@ -151,7 +150,7 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 
-const BienServiceRoutes = [ 
+const BienServiceRoutes = [
     {
         path: "/ListePersonnelRattacherByUa/:id",
         name: "ListePersonnelRattacherByUa",

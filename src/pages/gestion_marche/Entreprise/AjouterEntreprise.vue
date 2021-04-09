@@ -2,8 +2,6 @@
 <template>
     <div>
 
-
-
         <notifications />
         <!-- End Page Header -->
         <!-- Default Light Table -->
@@ -24,7 +22,11 @@
                              <label class="control-label" title="">Numéro d'identifiant unique </label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Numéro IDU" v-model="formData.numero_idu">
+                                                            <code v-if="formData.numero_idu && verifieId.length >= 1">
+                                                                {{formData.numero_idu}} existe déja
+                                                            </code>                 
                                                     </div>
+                                                    
                                                 </div>
                  
              </td>
@@ -280,9 +282,10 @@
         <a
           @click.prevent="ajouterTitreLocal"
           class="btn btn-primary"
-          href="#"
-        
-        >Enregistrer</a>
+          href="#"  
+          >Enregistrer
+         
+        </a>
         <a data-dismiss="modal" class="btn" @click.prevent="retourListeEntreprise" href="#">Fermer</a>
       </div>
 
@@ -301,10 +304,6 @@
         ></fab>-->
 
         <!----- ajouter modal   ---->
-
-
-
-
 
 
 
@@ -383,11 +382,18 @@
 
                         return item.code.toLowerCase().includes(searchTerm)
                             || item.libelle.toLowerCase().includes(searchTerm)
-
-
                     }
                 )
 
+            },
+            // grisserBoutton(){
+            //     //let elements = this.formData.numero_idu;
+            //     return this.formData != null? true : false;
+            // },
+            verifieId(){
+                return this.entreprises.filter((numero) => {
+                    return numero.numero_idu.includes(this.formData.numero_idu);
+                })
             },
             
                villeDynamiques() {
@@ -401,7 +407,9 @@
     },
     affichePays(){
         return this.getterplan_pays.filter(items=>items.parent == null );
-    }
+    },
+    
+
         },
         methods: {
             // methode pour notre action

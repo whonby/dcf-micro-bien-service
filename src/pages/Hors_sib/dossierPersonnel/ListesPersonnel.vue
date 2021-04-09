@@ -1,4 +1,4 @@
-uniteAdministratives
+formData.id
 <template>
     <div id="">
        
@@ -945,7 +945,7 @@ recrutement:""
             this.getActeurFinContratAndActivite()
             this.getListeSalaireActuelAll()
             
-            this.formData = this.acte_personnels.find(
+            this.formData = this.uniteAdministratives.find(
       item => item.id == this.$route.params.id
     );
    
@@ -1331,7 +1331,7 @@ AffichierElementParent() {
             // },
             filtre_service() {
       const st = this.search.toLowerCase();
-      return this.afficheListePersonnel(this.formData.unite_administrative_id).filter(type => {
+      return this.afficheListePersonnel(this.formData.id).filter(type => {
         return (
          
           this.afficheMatriculePersonnel(type.acteur_depense_id).toLowerCase().includes(st)

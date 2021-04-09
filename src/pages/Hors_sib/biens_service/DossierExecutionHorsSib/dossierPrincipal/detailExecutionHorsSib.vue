@@ -3,6 +3,11 @@ controlleur_fin
   <div>
     <div class="row-fluid">
       <div class="span12">
+
+          <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div>
         <div class="widget-box">
           <div class="widget-title">
             <span class="icon">
@@ -147,8 +152,18 @@ controlleur_fin
                     <li class="active">
                       <a data-toggle="tab" href="#tab1">TABLEAU DE BORD</a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
+                    </li> -->
+                    <li>
+                      <a data-toggle="tab" href="#tab789"
+                        >AVENANT</a
+                      >
+                    </li>
+                    <li>
+                      <a data-toggle="tab" href="#tab563"
+                        >DECOMPTE</a
+                      >
                     </li>
                     <li>
                       <a data-toggle="tab" href="#tab22"
@@ -197,6 +212,14 @@ controlleur_fin
                   </ul>
                 </div>
                 <div class="widget-content tab-content">
+                  <div id="tab563" class="tab-pane">
+                     <decompte
+                                  :macheid="detail_marche.id"
+                                ></decompte>
+                  </div>
+                  <div id="tab789" class="tab-pane">
+                   <avenant :macheid="detail_marche.id"></avenant>
+                  </div>
                   <div id="tab030" class="tab-pane">
                     <TableauMarchePluriannuel
                       :macheid="detail_marche.id"
@@ -481,6 +504,7 @@ import EtatExecutionMarche from "../../../../../pages/DossierEtatExecutionMarche
 import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
 import TableauMarchePluriannuel from "../DossierMarchePluriannuel/TableauMarchePluriannuel";
+
 import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
 export default {
   watch: {},
@@ -3498,6 +3522,10 @@ export default {
       this.$router.push({ name: "executionMarche" });
     },
 
+
+afficherModalListeExecution(){
+                window.history.back();
+            },
     CallModalProblemeMarche() {
       return this.$("#AjouterProblemeMarche").modal({
         backdrop: "static",

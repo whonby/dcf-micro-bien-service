@@ -85,26 +85,36 @@
                 LISTE DES MARCHES PAR ENTREPRISES
             </router-link>
           </li>
-            <li>
+
+            <li v-if="admin() ||dcf()">
             <router-link :to="{name: 'ppmHorsSib'}" tag ="a">
                 PPM
             </router-link>
           </li>
      <!-- <li> 
-            <router-link :to="{name: 'ajouterMarcheHorSib1'}" tag="a">
+            <router-link :to="{name: 'ajouterMarcheHor'}" tag="a">
 TEST            </router-link>
           </li> -->
     </ul>
   </div>
 </template>
 
-<script>
 
+<script>
+import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
+import { mapMutations, mapActions } from "vuex";
 export default {
+
+   methods: {
+      ...mapMutations('parametrageMenu', ['activate']),
+      ...mapActions('Utilisateurs', ['logoutUser']),
+    admin:admin,
+    dcf:dcf,
+ noDCfNoAdmin:noDCfNoAdmin
+  }
 
 };
 </script>
-
 
 
 

@@ -190,7 +190,7 @@
                 <button
                   class="btn btn-link"
                   style="font-size: 15px; color: #000"
-                  @click="click_cartographie()"
+                  @click="click_cartographie('ppm')"
                 >
                   <b>VOIR SITUATION GEOGRAPHIQUE</b>
                 </button>
@@ -253,6 +253,7 @@
                 <button
                   class="btn btn-link"
                   style="font-size: 15px; color: #000"
+                  @click="click_cartographie('hp_ppm')"
                 >
                   <b>VOIR SITUATION GEOGRAPHIQUE</b>
                 </button>
@@ -312,7 +313,7 @@
                 <button
                   style="font-size: 15px; color: #fff"
                   class="btn btn-link"
-                  @click="click_cartographie()"
+                  @click="click_cartographie('total')"
                 >
                   <b>VOIR SITUATION GEOGRAPHIQUE</b>
                 </button>
@@ -328,31 +329,31 @@
         >
           <ol class="breadcrumb" style="background: #111111 !important">
             <li class="breadcrumb-item" style="color: #fff !important">
-              INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp;
-              /
+             <h3> INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp;
+                 /</h3>
             </li>
             <li
               class="breadcrumb-item"
               style="color: #fff !important"
               v-if="unite_administrative_id"
             >
-              Situation {{ nomUniteAdmin(unite_administrative_id) }} des marchés
-              &nbsp;&nbsp;&nbsp;&nbsp; /
+                <h3> Situation {{ nomUniteAdmin(unite_administrative_id) }} des marchés
+              &nbsp;&nbsp;&nbsp;&nbsp; / </h3>
             </li>
             <li
               class="breadcrumb-item"
               style="color: #fff !important"
               v-if="region"
             >
-              Région {{ nomRegions(region) }} &nbsp;&nbsp;&nbsp;&nbsp; /
+                <h3> Région {{ nomRegions(region) }} &nbsp;&nbsp;&nbsp;&nbsp;/</h3>
             </li>
             <li
               class="breadcrumb-item"
               style="color: #fff !important"
               v-if="infrastructure"
             >
-              Infrastructutre
-              {{ nomInfrastructure(infrastructure) }} &nbsp;&nbsp;&nbsp;&nbsp; /
+                <h3> Infrastructutre
+              {{ nomInfrastructure(infrastructure) }} &nbsp;</h3>
             </li>
 
             <li
@@ -360,12 +361,11 @@
               style="color: #fff !important"
               v-if="type_marche"
             >
-              Type Marche
-              {{ nomTypeMarche(type_marche) }} &nbsp;&nbsp;&nbsp;&nbsp; /
+                <h2>  Type Marche {{ nomTypeMarche(type_marche) }} </h2>
             </li>
             <li
               class="breadcrumb-item"
-              style="color: #fff !important"
+              style="color: #fff !important;"
               v-if="info_status_marche"
               v-html="info_status_marche"
             ></li>
@@ -602,7 +602,7 @@
                 v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
-                  <p><b>Achevés dans le délais</b></p>
+                  <p><b>Achevés dans le délai</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(11) }} Marché(s) /
@@ -614,7 +614,6 @@
                 </div>
               </div>
             </div>
-
             <div
               class="span2 vld-parent"
               style="
@@ -681,7 +680,6 @@
                 </div>
               </div>
             </div>
-
             <div
               class="span2 vld-parent"
               style="
@@ -1061,10 +1059,10 @@ export default {
           type: "pie",
         },
         labels: [
-          "En Attente de contratualisation.",
-          "En attente de contratualisation H.D",
-          "En Contratualisation.",
-          "En Contratualisation H.D",
+          "En Attente de contractualisation.",
+          "En attente de contractualisation H.D",
+          "En Contractualisation.",
+          "En Contractualisation H.D",
         ],
         colors: [
           "#8ea9db",
@@ -1096,13 +1094,13 @@ export default {
         },
         labels: [
           "En Execution dans délai",
-          "Execution Hors delais",
-          "Achévé dans le delais.",
-          "Achévé Hors delai",
+          "Execution hors delai",
+          "Achévé dans le delai.",
+          "Achévé hors delai",
           "En souffrance",
         ],
         colors: [
-          "#d7b755",
+          "#ffbd3d",
           "#d36f2a",
           "#00b04f",
           "#757171",
@@ -1146,9 +1144,7 @@ export default {
     };
   },
   created() {
-    console.log("..........................")
-    console.log(this.opDejaVie);
-    console.log("..........................")
+
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -1185,8 +1181,7 @@ export default {
       "getActeEffetFinancierPersonnaliser45",
       "getActeEffetFinancierPersonnaliser",
       "typeMarches",
-      "avenants",
-            "gettersgestionOrdrePaiement"
+      "avenants", "gettersgestionOrdrePaiement"
     ]),
     ...mapGetters("Utilisateurs", ["getterUtilisateur", "getterRoles"]),
     listeCF() {
@@ -1959,8 +1954,6 @@ export default {
       };
     },
 
-
-
     marcheUniteRegion() {
       let vM = this;
       let objet = this.listeMarcheUniteAdmin.filter(
@@ -2098,10 +2091,10 @@ export default {
     },
 
     nbreAvenant() {
-      if (this.objetMarchePasUniteOuRegion.length > 0) {
+      if (this.listeMarchStatueExecuteAcheve.length > 0) {
         let vm = this;
         let nbr = 0;
-        this.objetMarchePasUniteOuRegion.forEach(function (val) {
+        this.listeMarchStatueExecuteAcheve.forEach(function (val) {
           let objetAvenant = vm.avenants.filter(
             (item) => item.marche_id == val.id
           ).length;
@@ -2115,12 +2108,12 @@ export default {
       return 0;
     },
     montantAvenant() {
-      if (this.objetMarchePasUniteOuRegion.length > 0) {
+      if (this.listeMarchStatueExecuteAcheve.length > 0) {
         //acteEffetFinanciers
         let vm = this;
         //let montantTotal=0;
         let montant_tatal = 0;
-        this.objetMarchePasUniteOuRegion.forEach(function (val) {
+        this.listeMarchStatueExecuteAcheve.forEach(function (val) {
           let montant_avenant = 0;
           let objetAvenant = vm.avenants.filter(
             (item) => item.marche_id == val.id
@@ -2304,11 +2297,49 @@ export default {
       return (unite) => {
         let vm = this;
         let initeVal = 0;
-        return vm.listeDesMarchePasStatus
-          .filter((item) => item.unite_administrative_id == unite)
-          .reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche);
-          }, initeVal);
+          let objet= vm.listeDesMarchePasStatus.filter((item) => item.unite_administrative_id == unite)
+
+          if (
+              vm.status_marches == 0 ||
+              vm.status_marches == 8 ||
+              vm.status_marches == 1 ||
+              vm.status_marches == 9
+          ) {
+              return objet.reduce(function (total, currentValue) {
+                      return total + parseFloat(currentValue.montant_marche);
+                  }, initeVal);
+
+          }
+
+          if (
+              this.status_marches == 2 ||
+              this.status_marches == 10 ||
+              this.status_marches == 11 ||
+              this.status_marches == 12 ||
+              this.status_marches == 12
+          ) {
+              let montant_total=0;
+              let vm=this;
+              objet.forEach(function (value) {
+                  let objet_act= vm.acteEffetFinanciers.filter(item=>item.marche_id==value.id)
+                  let montant=0;
+                  if(objet_act==undefined){
+                      montant=0
+                  }else{
+                      let initeVal = 0;
+                      montant =objet_act.reduce(function (total, currentValue) {
+                          if(currentValue.montant_act=='') currentValue.montant_act=0;
+                          return total + parseFloat(currentValue.montant_act);
+                      }, initeVal)
+                  }
+
+                  montant_total=parseFloat(montant_total) + parseFloat(montant)
+              })
+              return montant_total
+          }
+
+
+        return 0
       };
     },
 
@@ -2480,34 +2511,34 @@ export default {
       return (status) => {
         if (status == 0) {
           //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-          return "<font color='#fff'>En attente de contratualisation </font>";
+          return "<font color='#fff'><h3>En attente de contratualisation</h3> </font>";
         }
         if (status == 8) {
-          return "<font color='#fff'>En attente de contratualisation hors delait</font>";
+          return "<font color='#fff'><h3>En attente de contratualisation hors delait</h3></font>";
         }
         if (status == 1) {
-          return "<font color='#fff'>En contratualisation</font>";
+          return "<font color='#fff'><h3>En contratualisation</h3></font>";
         }
         if (status == 9) {
-          return "<font color='#fff'>En contractualisation Hors délai</font>";
+          return "<font color='#fff'><h3>En contractualisation Hors délai</h3></font>";
         }
 
         if (status == 2) {
-          return "<font color='#fff'>En execution</font>";
+          return "<font color='#fff'><h3>En execution</h3></font>";
         }
         if (status == 10) {
-          return "<font color='#fff'>En execution Hors délai</font>";
+          return "<font color='#fff'><h3>En execution Hors délai</h3></font>";
         }
 
         if (status == 11) {
-          return "<font color='#fff'>Acheve dans le delais</font>";
+          return "<font color='#fff'><h3>Acheve dans le delais</h3></font>";
         }
         if (status == 12) {
-          return "<font color='#fff'>Acheve hors delais</font>";
+          return "<font color='#fff'><h3>Acheve hors delais</h3></font>";
         }
 
         if (status == 7) {
-          return "<font color='#fff'>En suffrance</font>";
+          return "<font color='#fff'><h3>En suffrance</h3></font>";
         }
         return null;
       };
@@ -2529,7 +2560,7 @@ export default {
         }
 
         if (status == 2) {
-          return "#d7b755 !important";
+          return "#ffbd3d !important";
         }
         if (status == 10) {
           return "#d36f2a !important";
@@ -2571,33 +2602,34 @@ export default {
     },
     pourcentageMontantExcuteAcheve() {
       return (status) => {
-        let taux =
-          (this.montantPasStatusExecutionAcheve(status) * 100) /
-          this.montantTotaleMarcheExecutionAcheve;
+        let taux = (this.montantPasStatusExecutionAcheve(status) * 100) / this.montantTotalMarcheEnExecution;
         return taux.toFixed(2);
       };
     },
+
+      //calcul de montant des marche en execution pas staturs
     montantPasStatusExecutionAcheve() {
       return (status) => {
-        if (this.listeMarchStatueExecuteAcheve.length > 0) {
-          let montant_execute = 0;
-          let vm = this;
+          if(this.listeMarchStatueExecuteAcheve.length==0) return 0
 
-          this.listeMarchStatueExecuteAcheve
-            .filter((item) => item.attribue == status)
-            .forEach(function (val) {
-              let initeVal = 0;
-              let montant = vm.acteEffetFinanciers
-                .filter((item) => item.marche_id == val.id)
-                .reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.montant_act);
-                }, initeVal);
-              montant_execute = parseFloat(montant_execute) + parseFloat(montant);
-            });
+          let montant_total=0;
+          let vm=this;
+          this.listeMarchStatueExecuteAcheve.filter(item=>item.attribue == status).forEach(function (value) {
+              let objet_act= vm.acteEffetFinanciers.filter(item=>item.marche_id==value.id)
+              let montant=0;
+              if(objet_act==undefined){
+                  montant=0
+              }else{
+                  let initeVal = 0;
+                  montant =objet_act.reduce(function (total, currentValue) {
+                      if(currentValue.montant_act=='') currentValue.montant_act=0;
+                      return total + parseFloat(currentValue.montant_act);
+                  }, initeVal)
+              }
 
-          return montant_execute;
-        }
-        return 0;
+              montant_total=parseFloat(montant_total) + parseFloat(montant)
+          })
+          return montant_total
       };
     },
 
@@ -2619,12 +2651,17 @@ export default {
 
         this.listeMarchStatueExecuteAcheve.forEach(function (val) {
           let initeVal = 0;
-          let montant = vm.acteEffetFinanciers
-            .filter((item) => item.marche_id == val.id)
+
+            // let _objet=vm.listeActeEffectFinnancier(val.id)
+
+
+          let montant = vm.acteEffetFinanciers.filter((item) => item.marche_id == val.id)
             .reduce(function (total, currentValue) {
+
               return total + parseFloat(currentValue.montant_act);
-            }, initeVal);
-          montant_execute = parseFloat(montant_execute) + parseFloat(montant);
+             }, initeVal);
+
+           montant_execute = parseFloat(montant_execute) + parseFloat(montant);
         });
 
         return montant_execute;
@@ -2646,11 +2683,32 @@ export default {
 
       return objet4;
     },
+      //calcule du totale des montants de base de marchés
+      montantTotalMarcheEnExecution(){
+        if(this.listeMarchStatueExecuteAcheve.length==0) return 0
+          let montant_total=0;
+           let vm=this;
+          this.listeMarchStatueExecuteAcheve.forEach(function (value) {
+              let objet_act= vm.acteEffetFinanciers.filter(item=>item.marche_id==value.id)
+              let montant=0;
+              if(objet_act==undefined){
+                montant=0
+               }else{
+                    let initeVal = 0;
+                    montant =objet_act.reduce(function (total, currentValue) {
+                        if(currentValue.montant_act=='') currentValue.montant_act=0;
+                          return total + parseFloat(currentValue.montant_act);
+                      }, initeVal)
+              }
+
+            montant_total=parseFloat(montant_total) + parseFloat(montant)
+          })
+          return montant_total
+      },
     listeMarchStatueExecuteAcheve() {
       let objet4 = this.objetMarchePasUniteOuRegion.filter((item) => {
         if (
           item.attribue == 2 ||
-          item.attribue == 11 ||
           item.attribue == 10 ||
           item.attribue == 11 ||
           item.attribue == 7 ||
@@ -2677,7 +2735,7 @@ export default {
         }
         value.attribue=vm.durreStatusMarche(value.id)
              let obje={
-                ...value,
+                 ...value,
                  date_debut_exectuion_definitif:date_debut_exectuion_definitif,
                  date_fin_exe:date_fin_exe,
                  date_reception_provisoire_definitif:date_reception_provisoire_definitif,
@@ -2688,13 +2746,13 @@ export default {
           collect.push(obje)
       })
 
-      return objet4;
+      return collect;
     },
 
       listeActeEffectFinnancier: function () {
           return macheid => {
               if (macheid != "") {
-                  return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+                  return this.acteEffetFinanciers.find(idmarche => idmarche.marche_id == macheid)
               }
           }
       },
@@ -2820,6 +2878,8 @@ export default {
         stat: stat,
       };
 
+
+
       let objetMarche = "";
       if (
         this.status_marches == 0 ||
@@ -2842,7 +2902,7 @@ export default {
         this.status_marches == 10 ||
         this.status_marches == 11 ||
         this.status_marches == 12 ||
-        this.status_marches == 12
+        this.status_marches == 7
       ) {
         objetMarche = this.objetMarchePasUniteOuRegion.filter((item) => {
           if (
@@ -3192,7 +3252,7 @@ export default {
           return item;
         }
       });
-      console.log(objet.length);
+
       if (
         vM.region != "" &&
         vM.unite_administrative_id == "" &&
@@ -3484,38 +3544,45 @@ export default {
       // Pass the element id here
       this.$htmlToPaper("printMe");
     },
-    click_cartographie() {
-      let stat = "pl";
-
-      if (this.info_status_marche != "") {
+    click_cartographie(type) {
+        let stat = "pl";
         if (this.status_marches == "planifie") {
-          this.status_marches = 0;
-          stat = "planifier";
+            this.status_marches = 0;
+            stat = "planifier";
         }
 
-        if (this.status_marches == 0) {
-          this.status_marches = "planifier";
-          stat = "planifier";
+
+        let objet = {
+            status_marche: this.status_marches,
+            infrastructure: this.infrastructure,
+            unite_administrative: this.unite_administrative_id,
+            type_marche: this.type_marche,
+            region: this.region,
+            stat: stat,
+        };
+        let objetMarche = this.objetMarchePasUniteOuRegion;
+
+        if(type=="total"){
+            objetMarche=this.objetMarchePasUniteOuRegion
         }
-      } else {
-        this.status_marches = "";
-      }
+        if(type=="hp_ppm"){
+            objetMarche=objetMarche.filter(
+                (item) => item.plan_passation_marche_id == null
+            );
+        }
+        if(type=="ppm"){
+            objetMarche=objetMarche.filter(
+                (item) => item.plan_passation_marche_id != null
+            );
+        }
 
-      let objet = {
-        status_marche: this.status_marches,
-        infrastructure: this.infrastructure,
-        unite_administrative: this.unite_administrative_id,
-        type_marche: this.type_marche,
-        region: this.region,
-        statut: stat,
-      };
 
-      console.log(objet);
-
-      this.ajouterInfoTableauBordFiltre(objet);
+        console.log(objetMarche)
+        this.ajouterTableauBordFiltre(objetMarche);
+        this.ajouterInfoTableauBordFiltre(objet);
 
       this.$router.push({
-        name: "TableauBordCartographie",
+        name: "DetailCarteMarche",
       });
     },
     generateReport() {
@@ -3812,7 +3879,7 @@ export default {
   background-color: #652b92 !important;
 }
 .bg-en-execution {
-  background-color: #d7b755 !important;
+  background-color: #ffbd3d !important;
 }
 
 .bg-en-execution-horts-delais {

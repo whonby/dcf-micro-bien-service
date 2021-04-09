@@ -1,4 +1,3 @@
-CodeExempte
 
 <template>
   <div class="container-fluid">
@@ -36,20 +35,25 @@ CodeExempte
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>Année</th>
+              <th>Année78</th>
               <th>UA</th>
-              <th>Reférence marché</th>
+              <th>Référence marché</th>
               <th>Objet marché</th>
               <th>Type de marché</th>
-              <th>Procedure de passation</th>
+              <th>Procédure de passation</th>
               <th>Région</th>
-              <th>Montant prevu</th>
+              <th>Montant prévu</th>
               <th title="mouvement du marché">Mouvement marché</th>
               <th>Statut</th>
 
               <th>Cycle de vie</th>
               <!-- <th>Etat en cours</th> -->
-              <th colspan="3">Action</th>
+              <th style="font-size:10px;">
+                Marché en Contractualisation
+              </th>
+              <th>
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>

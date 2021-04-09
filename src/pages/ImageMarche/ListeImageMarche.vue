@@ -5,10 +5,15 @@
 
     <div class="main-body">
 
+         <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+
+        </div>
+
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb" v-if="detail">
-              <li class="breadcrumb-item" v-if="detail">{{detail.objet}}</li>
+              <li class="breadcrumb-item" v-if="detail"><h1>{{detail.objet}}</h1></li>
 
             </ol>
           </nav>
@@ -25,7 +30,7 @@
                 <div id="tab1" class="tab-pane active">
 
                     <div class="row-fluid gutters-sm">
-                        <div class="span3 " v-for="(marche_image,i) in getterImageParMarche(detail.id)" :key="marche_image.id">
+                        <div class="span3 " v-for="(marche_image,i) in getterImageParMarche(detail.id)" :key="marche_image.id" >
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
@@ -39,14 +44,22 @@
                                         </div>
 
                                     </div>
-                                    <div class="mt-3">
+                                    <div class="mt-3 d-flex justify-context-center">
                                         <h4>Nom de l'Agent : DCF</h4>
                                         Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
                                         <p class="text-secondary mb-1">Distance :
                                             {{distance(marche_image.latitude, marche_image.longitude,detail.latitude,detail.longitude, 'K')}}
                                         </p>
-
-
+                                        <button  class="btn btn-danger" v-on:click="suppressionImg(marche_image.id)">
+                                            <span><i class="fa fa-trash-o" aria-hidden="true"></i>  Supprimer </span>
+                                        </button>
+                                        <router-link :to="{name:'modifie-image', params:{id:marche_image.id}}" class="btn btn-success">Modifier</router-link>
+                                        <!-- <button type="button" data-toggle="modal" data-target="#editModal" 
+                                        class="btn btn-success"
+                                        v-on:click="getImage(marche_image.id)">
+                                            <span><i class="fa fa-pencil" aria-hidden="true"></i>  Modifier </span>
+                                        </button> -->
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +104,7 @@
                             v-on:vdropzone-sending="sendingEvent"
                             v-on:vdropzone-success="uploadSuccess"
                             v-on:vdropzone-error="uploadError"
-                            v-on:vdropzone-removed-file="fileRemoved"
-                    >
+                            v-on:vdropzone-removed-file="fileRemoved">
                         <div class="dropzone-custom-content">
                             <h3 class="dropzone-custom-title">
                                 Faites glisser et déposez pour chargé l'image</h3>
@@ -114,16 +126,19 @@
 import {mapGetters, mapActions} from 'vuex';
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+//import ModifieImage from './ModifieImage'
 
 
 import VueGallerySlideshow from 'vue-gallery-slideshow'
 export default {
     components:{
+        //'modifie-image':ModifieImage,
         VueGallerySlideshow,
         vueDropzone: vue2Dropzone
     },
     data(){
         return{
+            editImage:'',
             index: 0,
            fabActions: [
         {
@@ -158,16 +173,16 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
         this.formD.user_id=user.id
     },
 
-              computed: {
-            ...mapGetters("bienService", ["getterImageMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
+        computed: {
+    ...mapGetters("bienService", ["getterImageMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+        "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+        "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+        "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+        "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+            "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+        "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
-                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
+        ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
 
 
@@ -188,14 +203,16 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
 
-                  conversionDateVariable(){
-                      return date=>{
-                          let da=new Date(date)
-                          let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                          return da.toLocaleDateString("fr-FR", options)
-                      }
+        conversionDateVariable(){
+            return date=>{
+                let da=new Date(date)
+                let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                return da.toLocaleDateString("fr-FR", options)
+            }
 
-                  },
+        },
+ 
+
   afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
@@ -215,11 +232,11 @@ AffichePhoto() {
 
    let url=process.env.VUE_APP_BIEN_SERVICE_URL
         return url+'/imagemarches/'+fichier;
-
      // return "Pas d'image "
         }
       };
     },
+    
 
 getterImageParMarche() {
       return id => {
@@ -243,6 +260,7 @@ getterImageParMarche() {
                 }
 
      },
+    
       },
 
       methods:{
@@ -256,7 +274,7 @@ getterImageParMarche() {
       "modifierService",
       "supprimerService",
       "modifierLiquidation",
-                "supprimerLiquidation"
+      "supprimerLiquidation"
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 ...mapActions("SuiviImmobilisation", [
@@ -268,6 +286,27 @@ getterImageParMarche() {
 
 
     ]),
+    suppressionImg(){
+        // return this.getterImageMarche.filter((elmt) => {
+        //     return elmt.marche_id !== id;
+        // })
+       this.$delete(this.getterImageMarche, this.formD.marche_id)
+       console.log(this.formD.marche_id)
+    },
+
+    getImageId(id){
+        return this.getterImageMarche.filter((elmt) =>{
+            return elmt.marche_id == id;
+        })
+    },
+    getImage(){
+        // return (id) =>{
+        //     if (id !== null) {
+        //       this.editImage = this.getterImageMarche.find(itm => itm.marche_id == id)
+        //        console.log(this.editImage+" cc")
+        //     }
+        // };
+    },
           onClickShowImage(i) {
               this.index = i;
               console.log(i)

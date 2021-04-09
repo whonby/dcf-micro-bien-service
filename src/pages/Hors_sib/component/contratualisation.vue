@@ -7,20 +7,40 @@
             <i class="icon-th"></i>
               </span>
               <h5>Liste des Marchés en contratualisation   </h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="span8">
+                  <div align="right">
+                    Recherche:
+                    <input
+                      type="search"
+                      class="span8"
+                      placeholder="Recherche par Objet"
+                      v-model="search"
+                    />
+                  </div>
+                </div>
             </div>
+            <div class="span4">
+            <br>
+          Afficher
+         <select name="pets" id="pet-select" v-model="size" class="span3">
+            <option value="10">10</option>
+            <option value="25">25</option>
+           <option value="50">50</option>
+       <option value="100">100</option>
+      </select>
+           Entrer
+        </div>
+            
             <table class="table table-bordered table-striped">
                 <thead>
                  <tr>
                 <th>Année</th>
                   <th>UA</th>
-                  <th>Reférence marché</th>
+                  <th>Référence marché</th>
                   <th>Objet marché</th>
                   <th>Type de marché</th>
-                   <th>Procedure de passation</th>
+                   <th>Procédure de passation</th>
                   <th>Localisation géographie</th>
                   <th>Montant prévu</th>
                   <th title="mouvement du marché">Mouvement marché</th>
@@ -31,7 +51,7 @@
                 </thead>
                 <tbody>
                    <tr class="odd gradeX" v-for="activites in 
-                afficherContratualisationParUA"
+               partition (rechercheUa, size)[page]"
                  :key="activites.id">
                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.exo_id || 'Non renseigné'}}</td>
@@ -134,6 +154,16 @@
               </table>
 
 
+               <div class="pagination alternate">
+             <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
+           <li  v-for="(titre, index) in partition(rechercheUa,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(rechercheUa,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+           </ul>
+        </div>
+
+
                         </div>
     </div>
 </template>
@@ -141,10 +171,14 @@
 import {mapGetters,mapActions} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
 import {formatageSomme} from "../../../Repositories/Repository"
+import {partition} from "../../../Repositories/Repository"
 export default {
     data(){
         return{
-
+          search:"",
+           page:0,
+       size:10,
+       active_el:0,
         }
     },
     created(){
@@ -178,6 +212,13 @@ export default {
  'structures_geographiques','localisations_geographiques']),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+
+      rechercheUa() {
+      const st = this.search.toLowerCase();
+      return this.afficherContratualisationParUA.filter((type) => {
+        return type.objet.toLowerCase().includes(st);
+      });
+    },
      // afficher la liste des marchés hors sib
 
 //  afficherListeMarcheHorsSib(){
@@ -290,6 +331,21 @@ afficherLibelleTypeMarche(){
     methods:{
  ...mapActions("horSib",['']),
  formatageSomme:formatageSomme,
+   partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+      
     }
 }
 </script>

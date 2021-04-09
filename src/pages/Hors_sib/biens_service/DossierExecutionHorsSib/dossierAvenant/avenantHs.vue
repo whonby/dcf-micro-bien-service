@@ -65,7 +65,7 @@
             <div class="control-group">
             <label class="control-label">Objet</label>
             <div class="controls">
-              <textarea rows="1"  v-model="formData.objet_avenant"  class="span10" type="text">
+              <textarea rows="1"  v-model="formData.objet_avenant"  class="span12" type="text">
 
               </textarea>
 
@@ -73,30 +73,45 @@
           </div>
            </td>
            <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
+         </tr>
+         <tr>
+           <td>
            <div class="control-group">
             <label class="control-label">Montant du marche</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 :value="afficheMontantMarcheReel(macheid)"
                 class="span"
                readonly
-              />
+              /> -->
+              <money :value="afficheMontantMarcheReel(macheid)"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
             </div>
           </div>
          </td>
-         </tr>
-         <tr>
           <td>
            <div class="control-group">
             <label class="control-label">Montant ht</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 v-model="formData.montant_ht"
                 class="span"
                
-              />
+              /> -->
+               <money v-model="formData.montant_ht"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
             </div>
           </div>
          </td>
@@ -106,38 +121,41 @@
             <div class="controls">
               <input
                 type="text"
-                :value="affcherTauxEnCours"
+                :value="afficherEnorere"
                 class="span"
                readonly
               />
             </div>
           </div>
          </td>
-            <td>
-           <div class="control-group">
-            <label class="control-label">TVA</label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="affichierMontantTVA"
-                class="span"
-               readonly
-              />
-            </div>
-          </div>
-         </td>
+           
          </tr>
          <tr>
             <td>
            <div class="control-group">
+            <label class="control-label">TVA</label>
+            <div class="controls">
+              <!-- <input
+                type="text"
+                :value="affichierMontantTVA"
+                class="span"
+               readonly
+              /> -->
+              <money :value="affichierMontantTVA"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+            </div>
+          </div>
+         </td>
+            <td>
+           <div class="control-group">
             <label class="control-label">Montant Avenant</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 :value="affichierMontantAvenantTTC"
                 class="span"
                readonly
-              />
+              /> -->
+               <money :value="affichierMontantAvenantTTC"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                <code v-if="parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)">
            Montant Avenant est supperieure au 30% du marche</code>
             </div>
@@ -245,40 +263,55 @@
          </td>
        </tr>
          <tr>
-           <td colspan="3">
+           <td colspan="2">
                 
             <div class="control-group">
             <label class="control-label">Objet</label>
             <div class="controls">
-              <textarea rows="1"  v-model="editAvenant.objet_avenant"  class="span10" type="text">
+              <textarea rows="1"  v-model="editAvenant.objet_avenant"  class="span12" type="text">
 
               </textarea>
 
             </div>
           </div>
            </td>
+            <td>
+                <div class="control-group">
+                <label class="control-label">exonéré{{editAvenant.exonere}}</label>
+                <div class="controls">
+                  <select v-model="editAvenant.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
          </tr>
          <tr>
-          <td>
+            <td>
            <div class="control-group">
             <label class="control-label">Montant ht</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 v-model="editAvenant.montant_ht"
                 class="span"
                
-              />
+              /> -->
+              <money v-model="editAvenant.montant_ht"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
+
             </div>
           </div>
          </td>
-            <td>
+ <td>
            <div class="control-group">
             <label class="control-label">Taux</label>
             <div class="controls">
               <input
                 type="text"
-                :value="affcherTauxEnCours"
+                :value="afficherEnorereEdit"
                 class="span"
                readonly
               />
@@ -289,27 +322,30 @@
            <div class="control-group">
             <label class="control-label">TVA</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 :value="affichierMontantTVAModifier"
                 class="span"
                readonly
-              />
+              /> -->
+               <money :value="affichierMontantTVAModifier"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
             </div>
           </div>
          </td>
          </tr>
+         
          <tr>
             <td>
            <div class="control-group">
             <label class="control-label">Montant Avenant</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 :value="affichierMontantAvenantTTCModifier"
                 class="span"
                readonly
-              />
+              /> -->
+               <money :value="affichierMontantAvenantTTCModifier"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
             </div>
           </div>
          </td>
@@ -438,6 +474,7 @@ type_acte_financier:"",
 objet_avenant:"",
 montant_ht:"",
 date_avenant:"",
+exonere:0
 
       },
        formData2:{
@@ -509,6 +546,63 @@ search:""
       ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
 
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+    afficherEnorere2(){
+if(this.formData.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
+ afficherEnorere3(){
+if(this.editAvenant.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
+afficherEnorere(){
+if(this.formData.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+
+afficherEnorereEdit(){
+if(this.editAvenant.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+
 quinzePourcentDuMarche() {
       const val = (parseFloat(this.afficheMontantMarcheReel(this.macheid)) * 0.30);
       
@@ -558,25 +652,16 @@ affichierLibelleTypeActeFinancier() {
         }
       };
     },
-    affcherTauxEnCours() {
+   
+// tauxArrondit() {
       
-      
-      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+//       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.libelle;
-      }
-      return 0
-    },
-tauxArrondit() {
-      
-      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
-
-      if (norme) {
-        return norme.arrondit;
-      }
-      return 0
-    },
+//       if (norme) {
+//         return norme.arrondit;
+//       }
+//       return 0
+//     },
 affichierMontantAvenantTTCModifier() {
       const val = (parseFloat(this.affichierMontantTVAModifier) + parseFloat(this.editAvenant.montant_ht));
       
@@ -587,7 +672,7 @@ affichierMontantAvenantTTCModifier() {
       return 0
     },
 affichierMontantTVAModifier() {
-      const val = (parseFloat(this.editAvenant.montant_ht) * parseFloat(this.tauxArrondit));
+      const val = (parseFloat(this.editAvenant.montant_ht) * parseFloat(this.afficherEnorere3));
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -614,7 +699,7 @@ affichierMontantAvenantTTC() {
       return 0
     },
 affichierMontantTVA() {
-      const val = (parseFloat(this.formData.montant_ht) * parseFloat(this.tauxArrondit));
+      const val = (parseFloat(this.formData.montant_ht) * parseFloat(this.afficherEnorere2));
       
        if (val) {
         return parseFloat(val).toFixed(0);
@@ -622,6 +707,20 @@ affichierMontantTVA() {
       
       return 0
     },
+
+
+//  montantTva() {
+//       const val =   parseFloat(this.montantDeBaseapresretenues) * parseFloat(this.afficherEnorere2);
+      
+//        if (val) {
+//         return parseInt(val).toFixed(0);
+//       }
+      
+//       return 0
+//     },
+
+
+
     afficheTypeActeFinancier() {
       return id => {
         if (id != null && id != "") {
@@ -755,7 +854,8 @@ else
       ...this.formData,
       marche_id :this.macheid,
    type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
-   montant_avenant:this.affichierMontantAvenantTTC
+   montant_avenant:this.affichierMontantAvenantTTC,
+   taux:this.afficherEnorere2
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
@@ -775,7 +875,7 @@ afficherModalModifierTypeTexte(index) {
     },
     modifierTypeTexteLocal() {
              if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTCModifier)){
-alert("Montant Avenant est supperieure au 15% du marche")
+alert("Montant Avenant est supperieure au 30% du marche")
          }
 else
 {
@@ -783,7 +883,9 @@ else
       ...this.editAvenant,
       marche_id :this.macheid,
    type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
-   montant_avenant:this.affichierMontantAvenantTTCModifier
+   montant_avenant:this.affichierMontantAvenantTTCModifier,
+     taux:this.afficherEnorere3,
+      	exonere:this.editAvenant.exonere
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');

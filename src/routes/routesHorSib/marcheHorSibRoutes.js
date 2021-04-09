@@ -1,7 +1,9 @@
 import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
+import ListeDesSousBudgetMarche from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeDesSousBudgetMarche.vue";
+import ListeMarcheSousBudget from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeMarcheSousBudget.vue";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
-import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
-//import ajouterMarcheHorSib1 from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib1.vue";
+// import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
+ import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
 import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarcheHorsSib.vue";
 import marche_hors_sib from "../../pages/Hors_sib/biens_service/marche_hors_sib.vue";
@@ -28,7 +30,6 @@ import detailOpdefinitif from '../../pages/Hors_sib/biens_service/DossierExecuti
 
 // import ModifierServiceRealiteHorsSib from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ModifierServiceRealiteHorsSib.vue"
 
-
 import detailOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpProvisoire';
 
 import detailOpAnnulation from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpAnnulation';
@@ -43,10 +44,22 @@ import AjouterDecompte from '../../pages/Hors_sib/biens_service/DossierExecution
 import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecomptePro.vue';
 import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
-
+//Lien de modification d'image 
+import ModifieImage from '../../pages/ImageMarche/ModifieImage.vue';
+ 
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
+    {
+        path: "/modifie-image/:id",
+        name: "modifie-image",
+        component: ModifieImage
+    },
+    {
+        path: "/ListeMarcheSousBudget/:id",
+        name: "ListeMarcheSousBudget",
+        component: ListeMarcheSousBudget
+    },
     {
         path:"/groupeMarcheParUa",
         name:"groupeMarcheParUa",
@@ -66,6 +79,12 @@ const marcheHorSibRoutes =[
         path: "/liste-Reception-Des-Lots",
         name: "listeDesReceptionDesLot",
         component: listeDesReceptionDesLot
+    },
+    
+    {
+        path: "/ListeDesSousBudgetMarche/:id",
+        name: "ListeDesSousBudgetMarche",
+        component: ListeDesSousBudgetMarche
     },
     {
         path: "/ListesPersonnelParUa/:id",
