@@ -231,14 +231,7 @@ ajouterDecisionBudgetEclate
                     class="span"
                     readonly
                   />
-                  <!-- <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
-                    <option></option>
-                     <option
-                        v-for="typeFact in LibelleActivite(formData.uniteadministrative_id,anneeAmort)"
-                        :key="typeFact[0].id"
-                        :value="typeFact[0].activite_id"
-                      >{{NomActivite(typeFact[0].activite_id)}}</option>
-                  </select> -->
+                  
                 </div>
               </div>
               
