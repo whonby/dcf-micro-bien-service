@@ -141,17 +141,9 @@
         EXERCICE: {{ anneeAmort }}
       </p>
 
-      <div
-        v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite3"
-        :key="GroupeOrdrePaiementByActivit.id"
-      >
-        <br />
-        <p style="margin-left: 30px; font-size: 14px; font-weight: bold">
-          ACTIVITE:
-          {{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}
-        </p>
+      
 
-       <div class="widget-content nopadding" style="margin: 25px">
+       <div class="widget-content nopadding" style="margin: 25px"  >
       <table class="table table-bordered">
           <thead style="background-color: #87ceeb">
             <tr>
@@ -161,6 +153,7 @@
                   font-weight: bold;
                   text-align: center;
                   background-color: #87ceeb;
+                  width: 800px
                 "
               >
                 Bailleurs
@@ -220,26 +213,29 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr
+          <tbody v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite3"
+        :key="GroupeOrdrePaiementByActivit[0].id">
+            
+            <tr 
               class="odd gradeX"
               v-for="ListepaimentBailleur in arrayExerciceDecompte(
                 GroupeOrdrePaiementByActivit[0].activite_id
               )"
               :key="ListepaimentBailleur"
             >
-              <td style="font-size: 14px">
+              <td style="font-size: 14px; width: 800px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
 
                 {{ libelleLigneEconomique(ListepaimentBailleur) || "Non renseigné" }}
               </td>
-              <td style="text-align: right;">
+              <td style="text-align: right; ; width: 200px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
               {{
                 
-                 Montanttest(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
+                formatageSommeSansFCFA(
+                  parseFloat( Montanttest(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)))
               }} 
             </td>
 
-            <td style="font-size: 14px; text-align: right;">
+            <td style="font-size: 14px; text-align: right; width: 200px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
             
                {{
                 formatageSommeSansFCFA(
@@ -250,7 +246,7 @@
               }} 
             </td>
 
-            <td style="font-size: 14px; text-align: right;">
+            <td style="font-size: 14px; text-align: right; width: 200px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
             
                {{
                 formatageSommeSansFCFA(
@@ -260,7 +256,7 @@
                 ) || "Non renseigné"
               }} 
             </td>
-            <td style="font-size: 14px; text-align: right;">
+            <td style="font-size: 14px; text-align: right; width: 200px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                {{
                 
                   (
@@ -270,7 +266,7 @@
                   ).toFixed(2) || "Non renseigné"
               }}
             </td>
-            <td style="font-size: 14px; text-align: right;">
+            <td style="font-size: 14px; text-align: right; width: 200px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                {{
                formatageSommeSansFCFA(
                   parseFloat( MontantBudgetActuelBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id) -
@@ -279,16 +275,13 @@
               }} 
             </td>
             </tr>
-          </tbody>
-
-          <tfoot>
             <tr>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px ; width: 800px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 TOTAL:{{
                   LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align: right;">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                   formatageSommeSansFCFA(
                   parseFloat(MontantBudgetActuel(
@@ -296,7 +289,7 @@
                   )))
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align: right;">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetExecuté(
@@ -305,7 +298,7 @@
                 }}
               </td>
 
-                <td style="font-weight: bold; font-size: 18px; text-align: right;">
+                <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetExecutéProvisoire(
@@ -313,7 +306,7 @@
                   )))
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align: right;">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                   (
                     ((MontantBudgetExecuté(
@@ -327,7 +320,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px; text-align: right;">
+              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetActuel(
@@ -339,9 +332,14 @@
                 }}
               </td>
             </tr>
+            
+          </tbody>
+
+          <tfoot>
+            
           </tfoot>
+          
         </table>
-      </div>
       </div>
     </div>
   </div>
@@ -527,6 +525,7 @@ export default {
       "uniteZones",
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
+      "groupeByActivite"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -542,24 +541,18 @@ export default {
 
     ListeGroupByActivite3() {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
-        return this.GroupeOrdrePaiementByActivite.filter(
+        return this.groupeByActivite.filter(
           (qtreel) =>
-            qtreel[0].decision_cf == 8 &&
-            qtreel[0].diff_op == null &&
-            qtreel[0].decision_cf == 9 &&
-            //  qtreel[0].exercice == this.anneeAmort &&
-            qtreel[0].date_decision_cf >= this.formData.date_debut &&
-            qtreel[0].date_decision_cf <= this.formData.date_fin
+            qtreel[0].annebudgetaire == this.anneeAmort
         );
       } else {
-        return this.GroupeOrdrePaiementByActivite;
-        // .filter(
-        //   (qtreel) =>
-        //     (qtreel[0].decision_cf == 8 && qtreel[0].diff_op == null
-        //      // && qtreel[0].exercice == this.anneeAmort
-        //      )
+        return this.groupeByActivite
+        .filter(
+          (qtreel) =>
+            (qtreel[0].annebudgetaire == this.anneeAmort
+             )
 
-        // );
+        );
       }
     },
 
@@ -873,10 +866,26 @@ export default {
     //   }
     // },
 
+     verifActiviteId() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.activite_id == id
+            &&  qtreel.exercice == this.anneeAmort
+          );
+
+          if (qtereel) {
+            return 1;
+          }
+          return 0;
+        }
+      };
+    },
+
     listeordrepaiementstest() {
       return (id) => {
         if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement.filter(
+          return this.budgetEclate.filter(
             (qtreel) => qtreel.activite_id == id
           );
         }

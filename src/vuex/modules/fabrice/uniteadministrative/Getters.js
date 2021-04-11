@@ -758,6 +758,12 @@ export const groupeUaPourMarheHorSib = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "uniteadministrative_id");
 };
+
+export const groupeByActivite = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "activite_id");
+};
+
 export {
   // typeTextes,
   uniteAdministratives,
