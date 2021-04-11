@@ -2,7 +2,7 @@ uniteAdministratives
 <template>
   <div>
     <br>
-    <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+    <div  class="row-fluid"  style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
@@ -597,14 +597,14 @@ uniteAdministratives
     <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="ajouterEntreEnPatrimoine()">Open</button> -->
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           
         @searchMe="filter"
          
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
   </div>
 </template>
