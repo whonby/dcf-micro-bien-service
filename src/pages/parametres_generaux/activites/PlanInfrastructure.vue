@@ -19,7 +19,7 @@
                                               title="Liste plan infrastructure "
                                               name ="Liste plan infrastructure"
                                               worksheet = "plan infrastructure"
-                                            :data="localisationsFiltre">
+                                            :data="plans_Infrastructures">
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -31,10 +31,10 @@
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Plan infrastructure</h5>
-             <div align="right">
+             <!-- <div align="right">
         Recherche: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
          
@@ -347,20 +347,20 @@ export default {
      return this.plans_Infrastructures.filter(plan => plan.parent == null)
    },
      
-        localisationsFiltre(){
+//         localisationsFiltre(){
 
-     const searchTerm = this.search.toLowerCase();
+//      const searchTerm = this.search.toLowerCase();
 
-return this.plans_Infrastructures.filter((item) => {
+// return this.plans_Infrastructures.filter((item) => {
   
-    return item.code.toLowerCase().includes(searchTerm) 
-    || item.libelle.toLowerCase().includes(searchTerm) 
+//     return item.code.toLowerCase().includes(searchTerm) 
+//     || item.libelle.toLowerCase().includes(searchTerm) 
    
   
 
-   }
-)
-   },
+//    }
+// )
+//    },
    codeAction(){
      const codeprog = this.plans_programmes.find(sect => sect.id == this.formData.programme_id)
     const numeroordre = this.formData.numero_ordre
