@@ -567,7 +567,8 @@ export default {
       "uniteZones",
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
-      "groupeByActivite"
+      "groupeByActivite",
+      "groupeByBailleur"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -924,7 +925,8 @@ export default {
     arrayExerciceDecompte() {
       return (idactivite) => {
         console.log(idactivite);
-        let objet = this.listeordrepaiementLigne(idactivite);
+        if(idactivite !=null && idactivite!=""){
+           let objet = this.listeordrepaiementLigne(idactivite);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -939,7 +941,10 @@ export default {
           return unique;
         }
         return [];
-      };
+      }
+
+      }
+       
     },
 
     listeordrepaiementLigne2() {

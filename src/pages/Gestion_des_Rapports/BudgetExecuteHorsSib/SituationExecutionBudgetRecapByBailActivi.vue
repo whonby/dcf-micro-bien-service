@@ -532,7 +532,8 @@ export default {
       "uniteZones",
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
-      "groupeByActivite"
+      "groupeByActivite",
+      "groupeByBailleur"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -548,19 +549,17 @@ export default {
 
 
     ListeGroupByActivite12() {
-      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
-        return this.groupeByActivite.filter(
+     if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+        return this.groupeByBailleur.filter(
           (qtreel) =>
-            qtreel[0].annebudgetaire == this.anneeAmort
+            qtreel[0].annebudgetaire == this.anneeAmort 
         );
       } else {
-        return this.groupeByActivite
-        .filter(
-          (qtreel) =>
-            (qtreel[0].annebudgetaire == this.anneeAmort
-             )
+        return this.groupeByBailleur.filter(
+          (qtreel) => 
+             qtreel[0].annebudgetaire == this.anneeAmort     
 
-        );
+         );
       }
     },
 
@@ -774,7 +773,7 @@ export default {
     listeordrepaiementlega1() {
       return (id) => {
         if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement.filter(
+          return this.budgetEclate.filter(
             (qtreel) => qtreel.source_financement_id == id
           );
         }
@@ -784,7 +783,8 @@ export default {
     arrayExerciceDecompte() {
       return (idactivite) => {
         console.log(idactivite);
-        let objet = this.listeordrepaiementlega1(idactivite);
+        if(idactivite!="" && idactivite!=null){
+            let objet = this.listeordrepaiementlega1(idactivite);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -799,6 +799,8 @@ export default {
           return unique;
         }
         return [];
+        }
+       
       };
     },
 

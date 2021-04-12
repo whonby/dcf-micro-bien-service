@@ -27,7 +27,7 @@
                   <tr>
                     <th>N°</th>
                     <th>Intitulé du lot</th>
-                    <th>Infrastructure</th>
+                    <!-- <th>Infrastructure</th> -->
                     <th>Région</th>
                     <th title="Sous Prefecture">S/P</th>
                     <th>Latitude</th>
@@ -50,12 +50,7 @@
                     <td @dblclick="editeMarcheLot(marche.id)">
                       {{ marche.objet || "Non renseigné" }}
                     </td>
-                    <td @dblclick="editeMarcheLot(marche.id)">
-                      {{
-                        LIBELLEInfas(marche.infrastructure_id) ||
-                        "Non renseigné"
-                      }}
-                    </td>
+                    
                     <td @dblclick="editeMarcheLot(marche.id)">
                       {{
                         afficherLibelleLocalisationGeographie(
