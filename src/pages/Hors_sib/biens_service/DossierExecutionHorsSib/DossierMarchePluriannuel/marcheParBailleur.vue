@@ -5,7 +5,11 @@
                      <thead>
                              <tr>
                                       
-                                        <th>Année Budgetaire</th>
+                                        <th>Année Budgetaire </th>
+                                        <th>Type  de financement</th>
+                                        <th>Montant CP (F CFA)</th>
+                                        <th>Cummul des types financement (F CFA)</th>
+                                        <th>Cummul des bailleurs (F CFA) </th> 
                                          
                                         <th>Action</th>
                                     </tr>
@@ -14,10 +18,21 @@
                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeMarchePluriannuel(macheid)"
                                         :key="appelOffre.id">
                                        
-                                            <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
+                                            <td @dblclick="afficherModalMarchePl(index)">
                                             {{appelOffre.anneeBudgetaire || 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalMarchePl(index)">
+                                            {{affiherLibelleTypefinancement(appelOffre.type_financement) || 'Non renseigné'}}</td>
+                                              <td @dblclick="afficherModalMarchePl(index)">
+                                            {{formatageSommeSansFCFA(parseFloat(appelOffre.montant)) || 'Non renseigné'}}</td>
+                                              <td @dblclick="afficherModalMarchePl(index)">
+                                            {{formatageSommeSansFCFA(parseFloat(appelOffre.cummul_type_financement)) || 'Non renseigné'}}</td>
+
+                                            <!-- <td @dblclick="afficherModalMarchePl(index)">
+                                            {{formatageSommeSansFCFA(parseFloat(appelOffre.montant_cummul_bailleur)) || 'Non renseigné'}}</td> -->
+                                            <td @dblclick="afficherModalMarchePl(index)">
+                                            {{formatageSommeSansFCFA(parseFloat(appelOffre.somme_des_bailleur)) || 'Non renseigné'}}</td>
                                             
-                                            
+                                             
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerProgrammationMarchePlurieAnnuel(appelOffre.id)"  class="btn btn-danger ">
@@ -124,7 +139,7 @@
 
                               <td>
                   <hr>
-                  <button class="btn btn-danger" @click.prevent="addS()" >
+                  <button class="btn btn-danger" @click.prevent="addS()" v-if="cummulDesBailleur<= this.formData.montant">
                   Ajouter
                 </button>
                 </td>
@@ -174,7 +189,7 @@
                        
                     </table>
                      <td>
-                         <label>Cummul des montants par bailleur</label>
+                    <label>Cummul des montants par bailleur</label>
                       <input type="text"  :value="cummulDesBailleur" readonly />
                   </td>
                        
@@ -190,21 +205,21 @@
 
         <!-- modification de marché plurianniuel -->
 
-         <div id="modifierMarcheP" class="modal hide grdirModalActeEffet">
+         <div id="modifierMarchePluriannuel" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier  marché pluriannuel</h3>
             </div>
             <div class="modal-body">
 
-                    <table class="table table-bordered table-striped">
+                   <table class="table table-bordered table-striped">
                           <tr>
                            <td colspan="">
                   <div class="control-group">
-                     <label class="control-label">Année Budgétaire </label>
+                     <label class="control-label" > Année budgetaire</label>
                     <div class="controls ">
 
-             <select v-model="formData.anneeBudgetaire" class="span" >
+             <select v-model="editMarchePlu.anneeBudgetaire" class="span" >
               
                <option v-for="plans in exercices_budgetaires" :key="plans.id" 
                :value="plans.annee"> {{plans.annee}}</option>
@@ -220,7 +235,7 @@
             <label class="control-label">Type de financement</label>
             <div class="controls">
             
-               <select v-model="formData.type_financement" class="span" >
+               <select v-model="editMarchePlu.type_financement" class="span" >
                <option v-for="plans in types_financements" :key="plans.id" 
                :value="plans.id"> {{plans.libelle}}</option>
                <!-- <code v-if="message_offre">{{message_offre}}</code> -->
@@ -232,53 +247,112 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Cummul des types de finacement <code>*</code></label>
-                                <input type="text" class="span" placeholder=""  readonly /> 
+                                <input type="text" class="span" placeholder="" :value="afficherTypeFinancement(editMarchePlu.type_financement)" readonly /> 
                             </div>
                         </div>
                             </td>
-              
+                              
+                                 <td colspan="">
+                        <div class="control-group">
+                            <div class="controls">
+                                <label >Montant  <code>*</code></label>
+                                <money type="text" class="span" placeholder="" v-model="editMarchePlu.montant"  > </money>
+                            </div>
+                        </div>
+                            </td>
                              
                       
                            
                             </tr>
 
                             <tr>
-                                 <td>
+                                 <td colspan="">
+                      <div class="control-group">
+            <label class="control-label">Source de financement</label>
+            <div class="controls">
+            
+               <select v-model="editMarchePlu.source_financement_id" class="span" >
+               <option v-for="plans in listeSourceFinancement(editMarchePlu.type_financement)" :key="plans.id" 
+               :value="plans.source_financement_id"> {{afficherLibelle(plans.source_financement_id) }}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                        </td>
+
+                          <td colspan="">
                         <div class="control-group">
                             <div class="controls">
-                                <label>Montant  <code>*</code></label>
-                                <input type="text" class="span" placeholder=""  /> 
+                                <label >Taux <code>*</code></label>
+                                <input type="text" class="span" placeholder="" :value="afficherTaux(editMarchePlu.source_financement_id)"  /> 
                             </div>
                         </div>
                             </td>
 
-                             <td>
+                             <td colspan="">
                         <div class="control-group">
                             <div class="controls">
-                                <label>Montant de type de financement 1 <code>*</code></label>
-                                <input type="text" class="span" placeholder=""  /> 
+                                <label >Montant par bailleur <code>*</code></label>
+                                <input type="text" class="span" placeholder=""   :value="CalculSomme" readonly/> 
                             </div>
                         </div>
                             </td>
-                             <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label> montant de type de financement <code>*</code></label>
-                                <input type="text" class="span" placeholder=""  /> 
-                            </div>
-                        </div>
-                            </td>
-              
+
+                              <td>
+                  <hr>
+                  <button class="btn btn-danger" @click.prevent="addS()" v-if="cummulDesBailleur<= this.formData.montant">
+                  Ajouter
+                </button>
+                </td>
+
                             </tr>
 
-                            
-                           
 
-                        
-                           
-                                
-                      
+             <tr class="odd gradeX" v-for="item in structure"
+                  :key="item.id">
+
+                <td> 
+                  {{item.source_financement_id || 'Non renseigné'}}
+                </td>
+                 <td>
+                  {{item.taux_cp || 'Non renseigné'}}
+                </td>
+                 <td>
+                  {{item.CalculSomme || 'Non renseigné'}}
+                </td>
+                 
+                    
+                <div class="btn-group">
+                  <button class="btn btn-link" title="Supprimer"  @click.prevent="supprimeStructureSelectionner(item.id)">
+                    <span class=""><i class="icon-trash"></i>Supprimer</span>
+                  </button>
+
+                </div>
+
+              </tr>
+
+             
+                 
+              
+
+                            <!-- <tr>
+                         
+                             <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label v-html="tailleTableau(formData.type_financement)"> </label>
+                               
+                            </div>
+                        </div>
+                            </td>
+                            </tr> -->
+                     
+                       
                     </table>
+                     <td>
+                    <label>Cummul des montants par bailleur</label>
+                      <input type="text"  :value="cummulDesBailleur" readonly />
+                  </td>
                    
 
                 
@@ -308,7 +382,7 @@ export default {
                 montant:"",
             },
             structure:[],
-            editMarchePl:{}
+            editMarchePlu:{}
 
         }
     },
@@ -333,7 +407,15 @@ export default {
                 }
             },
 
-
+  affiherLibelleTypefinancement(){
+                return id =>{
+                    if(id!=null){
+                        let objet = this.types_financements.find(item =>item.id==id)
+                        if(objet) return objet.libelle
+                    }
+                    return null
+                }
+            },
            
 
             listeSourceFinancement(){
@@ -485,15 +567,15 @@ export default {
                     return null
                 }
             },
-             affiherLibelleTypefinancement(){
-                return id =>{
-                    if(id!=null){
-                        let objet = this.types_financements.find(item =>item.id==id)
-                        if(objet) return objet.libelle
-                    }
-                    return null
-                }
-            },
+            //  affiherLibelleTypefinancement(){
+            //     return id =>{
+            //         if(id!=null){
+            //             let objet = this.types_financements.find(item =>item.id==id)
+            //             if(objet) return objet.libelle
+            //         }
+            //         return null
+            //     }
+            // },
 
             afficherLibelleAnneBudgetaire(){
                 return id =>{
@@ -585,12 +667,12 @@ cummulDesBailleur() {
 ...mapActions("bienService",['ajouterProgrammationMarchePlurieAnnuel','modifierProgrammationMarchePlurieAnnuel','supprimerProgrammationMarchePlurieAnnuel']),
 
 
-  afficherModalModificationMarchePluriannuel(index){
-                this.$('#modifierMarcheP').modal({
+  afficherModalMarchePl(index){
+                this.$('#modifierMarchePluriannuel').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editMarchePl = this.listeMarchePluriannuel(this.macheid)[index]
+                this.editMarchePlu = this.listeMarchePluriannuel(this.macheid)[index]
               //  console.log(this.edit_bailleur_marche)
             },
 formatageSommeSansFCFA:formatageSommeSansFCFA,
@@ -631,14 +713,14 @@ supprimeStructureSelectionner(id){
             //    })
               var nouvelObjet = {
                 ...this.formData,
-               montantCP:this.calculCPAnnuelPourLesTypeFinancement,
+               cummul_type_financement:this.afficherTypeFinancement(this.formData.type_financement),
                marche_id:this.macheid,
-               montantBase:this.afficherMontantTtcDeActe(this.macheid),
-               duree_contratuel:this.afficherDureeContratuel(this.macheid)
+               montant_cummul_bailleur:this.CalculSomme,
+               somme_des_bailleur:this.cummulDesBailleur
               }
              this.ajouterProgrammationMarchePlurieAnnuel(nouvelObjet) 
               this.formData ={
-     	type_financement:"",
+     	   //type_financement:"",
                 montant:"",
                // montantCP_notifie:"",
                // source_financement_id:"",
@@ -651,13 +733,13 @@ supprimeStructureSelectionner(id){
 
              modificationLocal(){
                 //   var nouvevObjetModif={
-                //       ...this.editMarchePl,
+                //       ...this.editMarchePlu,
                 //      duree_contratuel:this.afficherDureeContratuel(this.macheid),
                 //     montantCP:this.calculCPAnnuelPourLesTypeFinancementModif
                 //   }
              // console.log(this.edite_appel_offre)
-                this.modifierProgrammationMarchePlurieAnnuel(this.editMarchePl)
-                this.$('#modifierMarcheP').modal('hide');
+                this.modifierProgrammationMarchePlurieAnnuel(this.editMarchePlu)
+                this.$('#modifierMarchePluriannuel').modal('hide');
             },
 
 
