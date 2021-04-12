@@ -29,33 +29,33 @@ reference_marche
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="marche in afficheEntrepriseAuMoinUnMarche"
-                    :key="marche[0].id"
+                    v-for="marche in arrayExerciceDecompteBienService"
+                    :key="marche.id"
                   >
                     <td>
                       {{
-                        afficheRaisonSocial(marche[0].entreprise_id) ||
+                        afficheRaisonSocial(marche) ||
                         "Non renseigné"
                       }}
                     </td>
                     <td>
                       {{
                         afficheLibelleSecteurActivite(
-                          afficheIdSecteurActivite(marche[0].entreprise_id)
+                          afficheIdSecteurActivite(marche)
                         ) || "Non renseigné"
                       }}
                     </td>
                     <td>
                       {{
                         afficheLibelleRegimeImposition(
-                          afficheIdRegimeImposition(marche[0].entreprise_id)
+                          afficheIdRegimeImposition(marche)
                         ) || "Non renseigné"
                       }}
                     </td>
                     <td>
                       {{
                         afficheLibelleFormeJuridique(
-                          afficheIdFormeJuridique(marche[0].entreprise_id)
+                          afficheIdFormeJuridique(marche)
                         ) || "Non renseigné"
                       }}
                     </td>
@@ -64,7 +64,7 @@ reference_marche
                       <router-link
                         :to="{
                           name: 'detailMarcheParEntreprise',
-                          params: { id: marche[0].entreprise_id },
+                          params: { id: marche },
                         }"
                         class="btn btn-default"
                         title="historique execution Marche"
@@ -160,6 +160,33 @@ export default {
       "getterregimeImpositions",
       "getterplan_pays",
     ]),
+arrayExerciceDecompteBienService() {
+      //return (id) => {
+        
+        let objet = this.acteEffetFinanciers;
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.entreprise_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+  //   };
+    },
+
+
+
+
+
+
+
     anneeAmort() {
       const norme = this.exercices_budgetaires.find(
         (normeEquipe) => normeEquipe.encours == 1

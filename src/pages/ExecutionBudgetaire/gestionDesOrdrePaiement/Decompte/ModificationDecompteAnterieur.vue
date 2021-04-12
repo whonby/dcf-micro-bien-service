@@ -22,7 +22,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Decompte</h5>
+              <h5>Modifier Decompte</h5>
               
             </div>
                   <div class="widget-title">
@@ -241,7 +241,7 @@
             <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">Taux</label>
+                <label class="control-label">TVA(18%)</label>
                 <div class="controls">
 
 
@@ -437,8 +437,10 @@ components: {
             };
         },
 
-        created() {
-            this.allActeurDepense();
+       created() {
+        
+            this.formData=this.decomptefactures.find(item=>item.id==this.$route.params.id)
+         
             
         },
         computed: {
@@ -453,7 +455,7 @@ components: {
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
 
-     ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
+     ...mapGetters("uniteadministrative",["decomptefactures",'getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupeUaPourMarheHorSib" ,"budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral","getPersonnaliseTransfert" ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
@@ -780,7 +782,8 @@ AfficheMontantMarche() {
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
            
 ...mapActions("uniteadministrative", [
-      "ajouterDecompteFacture",
+      "ModifierDecompteFacture",
+      
       
     ]),
            afficherModalListeExecution(){
@@ -808,7 +811,7 @@ AfficheMontantMarche() {
       exercicebudget:this.formData.exercicebudget
                
              }
-                this.ajouterDecompteFacture(objetNouveau)
+                this.ModifierDecompteFacture(objetNouveau)
                 
                 this.formData = {
                     marche_id: "",

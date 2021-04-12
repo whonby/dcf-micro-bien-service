@@ -100,11 +100,11 @@ uniteAdministratives
                     :key="BesoinImmo.id"
                   >
                     <td style="text-align:center;">{{afficheObjetMarche(BesoinImmo.marche_id) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{AfficheEntrepriseLibelle(afficheIdEntreprise(BesoinImmo.marche_id)) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantMarche(BesoinImmo.marche_id))) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formatageSomme(parseFloat(BesoinImmo.montantmarche)) || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{BesoinImmo.numero_decompte || 'Non renseigné'}}</td>
-                          <td style="text-align:center;">{{formaterDate(BesoinImmo.date_decompte) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;" @dblclick="afficherModalModifierTitre(BesoinImmo.id)">{{AfficheEntrepriseLibelle(afficheIdEntreprise(BesoinImmo.marche_id)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;" @dblclick="afficherModalModifierTitre(BesoinImmo.id)">{{formatageSomme(parseFloat(AfficheMontantMarche(BesoinImmo.marche_id))) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;" @dblclick="afficherModalModifierTitre(BesoinImmo.id)">{{formatageSomme(parseFloat(BesoinImmo.montantmarche)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;" @dblclick="afficherModalModifierTitre(BesoinImmo.id)">{{BesoinImmo.numero_decompte || 'Non renseigné'}}</td>
+                          <td style="text-align:center;" @dblclick="afficherModalModifierTitre(BesoinImmo.id)">{{formaterDate(BesoinImmo.date_decompte) || 'Non renseigné'}}</td>
                                <td>
                              
                               <button class="btn btn-danger" @click="supprimerDecompteFacture(BesoinImmo.id)">
@@ -293,34 +293,35 @@ quantite: {
       let objet = this.AnneParUa;
 
       //retourne la section selectionner
-   console.log(objet)
-      if (this.uniteAdministrativeid != 0 ) {
-        objet = this.AnneParUa.filter((item) => {
-          if (item.unite_administrative_id == vM.uniteAdministrativeid ) {
+   //console.log(objet)
+      if (vM.uniteAdministrativeid != 0 ) {
+        objet = vM.AnneParUa.filter((item) => {
+          if (item.uniteadministrative_id == vM.uniteAdministrativeid ) {
             return item;
           }
         });
         return objet;
       }
-      // if (this.entrepriseid != 0 && this.uniteAdministrativeid == 0) {
-      //   objet = this.AnneParUa(this.marcheid).filter((item) => {
-      //     if (item.entreprise_id == vM.entrepriseid && item.exercicebudget==this.marcheid) {
-      //       return item;
-      //     }
-      //   });
-      // }
+      if (vM.entrepriseid != 0 ) {
+        objet = vM.AnneParUa.filter((item) => {
+          if (item.entreprise_id == vM.entrepriseid ) {
+            return item;
+          }
+        });
+        return objet;
+      }
     
-      // if (this.uniteAdministrativeid != 0 && this.entrepriseid != 0) {
-      //   objet = this.AnneParUa(this.marcheid).filter((item) => {
-      //     if (
-      //       item.uniteAdministrative_id == vM.uniteAdministrativeid &&
-      //       item.entreprise_id == vM.entrepriseid && item.exercicebudget==this.marcheid
-      //     ) {
-      //       return item;
-      //     }
-      //   });
-      //   return objet;
-      // }
+      if (vM.uniteAdministrativeid != 0 && vM.entrepriseid != 0) {
+        objet = vM.AnneParUa.filter((item) => {
+          if (
+            item.uniteAdministrative_id == vM.uniteAdministrativeid &&
+            item.entreprise_id == vM.entrepriseid 
+          ) {
+            return item;
+          }
+        });
+        return objet;
+      }
       
       return objet;
     },
@@ -379,9 +380,9 @@ AnneParUa() {
     },
 
 arrayExerciceDecompte() {
-      return (id1) => {
+      //return (id1) => {
         
-        let objet = this.AnneParUa(id1);
+        let objet = this.AnneParUa;
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -396,7 +397,7 @@ arrayExerciceDecompte() {
           return unique;
         }
         return [];
-     };
+    // };
     },
 
 
@@ -441,9 +442,14 @@ arrayExerciceDecompte() {
       "supprimerStock"
     ]),
     ...mapActions("uniteadministrative",
-     ["supprimerStockArticle"]),
+     ["supprimerDecompteFacture"]),
     
+afficherModalModifierTitre(id) {
 
+      this.$router.push({
+        path: "/ModificationDecompteAnterieur/" + id
+      });
+    },
     pagePrecedent(){
                 window.history.back()
             },

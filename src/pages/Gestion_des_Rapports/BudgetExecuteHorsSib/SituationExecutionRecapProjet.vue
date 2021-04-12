@@ -226,7 +226,7 @@
                  
                     ((MontantBudgetExecuté(listeordrepaiement[0].activite_id) /
                       MontantBudgetActuel(listeordrepaiement[0].activite_id)) *
-                    100).toFixed(2) || "Non renseigné"
+                    100).toFixed(3) || "Non renseigné"
                 }}
               </td>
               <td style="font-size: 14px; font-weight: bold; text-align:right">

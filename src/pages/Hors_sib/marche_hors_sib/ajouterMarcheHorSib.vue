@@ -255,15 +255,15 @@ libelleUA
                                     class="span"
                                   >
                                     <option
-                                      v-for="plans in AfficheUniteZoneLigneEconnomique(
+                                      v-for="plans in ligneEconomiqueSousBudget(
                                         formData.unite_zone
                                       )"
                                       :key="plans.id"
-                                      :value="plans.ligneeconomique_id"
+                                      :value="plans"
                                     >
                                       {{
                                         libelleLigneEconomique(
-                                          plans.ligneeconomique_id
+                                          plans
                                         )
                                       }}
                                     </option>
@@ -287,15 +287,15 @@ libelleUA
                                     class="span"
                                   >
                                     <option
-                                      v-for="plans in AfficheUALigneEconnomique(
+                                      v-for="plans in arrayExerciceDecompteBienService(
                                         formData.unite_administrative_id
                                       )"
-                                      :key="plans[0].id"
-                                      :value="plans[0].ligneeconomique_id"
+                                      :key="plans.id"
+                                      :value="plans"
                                     >
                                       {{
                                         libelleLigneEconomique(
-                                          plans[0].ligneeconomique_id
+                                          plans
                                         )
                                       }}
                                     </option>
@@ -589,6 +589,7 @@ export default {
         chapitre_infra_id: "",
         cat_infra_id: "",
         souscat_infra_id: "",
+        unite_zone:"",
         // activite_id:"",
         // typeappel_id:"",
         exo_id: "",
@@ -692,6 +693,76 @@ export default {
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
   
+
+
+
+LigneParUaBienService() {
+      return id => {
+        if (id != null && id != "") {
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id  && qtreel.annebudgetaire==this.anneeBugetaire && qtreel.budget_active==1);
+
+     
+        }
+      };
+    },
+    arrayExerciceDecompteBienService() {
+      return (id) => {
+        
+        let objet = this.LigneParUaBienService(id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     };
+    },
+
+
+
+
+
+ligneEconomiqueSousBudget() {
+      return id => {
+        if (id != null && id != "") {
+           return  this.budgetEclate.filter(qtreel => qtreel.sous_budget_id == id  && qtreel.annebudgetaire==this.anneeBugetaire && qtreel.budget_active==1);
+
+     
+        }
+      };
+    },
+    groupeLigneEconomiqueUniteZone() {
+      return (id) => {
+        
+        let objet = this.ligneEconomiqueSousBudget(id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     };
+    },
+
+
+
+
   // verifieRefId(){
   //   return this.marches.filter((item) => {
   //     return item.reference_marche.toUpperCase().includes(this.formData.reference_marche.toUpperCase())
@@ -735,7 +806,7 @@ ImputationBudget(){
       return (id) => {
         if (id != null && id != "") {
           return this.groupeParBAILLER.filter(
-            (qtreel) => qtreel[0].uniteadministrative_id == id
+            (qtreel) => qtreel[0].uniteadministrative_id == id && qtreel[0].budget_active==1
           );
         }
       };
@@ -743,8 +814,8 @@ ImputationBudget(){
     AfficheUniteZoneLigneEconnomique() {
       return (id) => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(
-            (qtreel) => qtreel.sous_budget_id == id
+          return this.groupeParBAILLER.filter(
+            (qtreel) => qtreel[0].sous_budget_id == id && qtreel[0].budget_active==1
           );
         }
       };
