@@ -499,14 +499,9 @@ libelleUA
         </div>
       </div>
     </div>
-<<<<<<< HEAD
 
 
 
-=======
-    <notifications />
-  </div>
->>>>>>> 7d0844ce2bdaf0c0fd227c893194e8165fd65b62
 </template>
 
 <script>
