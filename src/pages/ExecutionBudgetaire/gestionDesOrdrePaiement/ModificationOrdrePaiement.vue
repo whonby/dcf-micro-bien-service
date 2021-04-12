@@ -14,7 +14,7 @@ date_interim
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Modifier Ordre Paiement</h5>
+            <h5>Modifier Ordre Paiement{{formData.id}}</h5>
             <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -591,12 +591,12 @@ date_interim
                   
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
+                   v-model="formData.montant_ordre_paiement"
                     class="span"
                     readonly
                   /> -->
                               <money
-                                v-model="formData2.montant_engage"
+                                v-model="formData.montant_ordre_paiement"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
@@ -732,7 +732,7 @@ date_interim
                                 style="border: 1px solid #000"
                                 :value="
                                   Numero_Nom_Entreprise(
-                                    idEntreprise(formData2.marche_id)
+                                    idEntreprise(formData.marche_id)
                                   )
                                 "
                                 class="span"
@@ -752,7 +752,7 @@ date_interim
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
-                                  Numero_CC(idEntreprise(formData2.marche_id))
+                                  Numero_CC(idEntreprise(formData.marche_id))
                                 "
                                 class="span"
                               />
@@ -770,7 +770,7 @@ date_interim
                                 style="border: 1px solid #000"
                                 :value="
                                   Numero_adresse_Entreprise(
-                                    idEntreprise(formData2.marche_id)
+                                    idEntreprise(formData.marche_id)
                                   )
                                 "
                                 class="span"
@@ -791,7 +791,7 @@ date_interim
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleBanque(
-                                    idbanque(idEntreprise(formData2.marche_id))
+                                    idbanque(idEntreprise(formData.marche_id))
                                   )
                                 "
                                 class="span"
@@ -904,12 +904,12 @@ date_interim
                   
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
+                   v-model="formData.montant_ordre_paiement"
                     class="span"
                     readonly
                   /> -->
                               <money
-                                v-model="formData2.montant_engage"
+                                v-model="formData.montant_ordre_paiement"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
@@ -954,7 +954,7 @@ date_interim
                             style="border: 1px solid #000"
                             class="wide"
                             :list="RecuppererMarcheAttribuer"
-                            v-model="formData2.marche_id"
+                            v-model="formData.marche_id"
                             option-value="id"
                             option-text="numero_marche"
                             placeholder=""
@@ -964,7 +964,7 @@ date_interim
                           </model-list-select>
                           <code
                             style="color: red; font-size: 12px"
-                            v-if="formData2.marche_id == ''"
+                            v-if="formData.marche_id == ''"
                             >Veuillez renseigner ce champ</code
                           >
                         </td>
@@ -995,7 +995,7 @@ date_interim
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="objetMarche(formData2.marche_id)"
+                                :value="objetMarche(formData.marche_id)"
                                 class="span"
                                 readonly
                               />
@@ -1038,7 +1038,7 @@ date_interim
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleUniteAdministrative(
-                                    formData2.marche_id
+                                    formData.unite_administrative_id
                                   )
                                 "
                                 class="span"
@@ -1058,7 +1058,7 @@ date_interim
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="geolocalisation(formData2.marche_id)"
+                                :value="geolocalisation(formData.marche_id)"
                                 class="span"
                                 readonly
                               />
@@ -1074,7 +1074,7 @@ date_interim
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="dureeMarche(formData2.marche_id)"
+                                :value="dureeMarche(formData.marche_id)"
                                 class="span"
                                 readonly
                               />
@@ -1111,7 +1111,7 @@ date_interim
                             <div class="controls">
                               
                               <money
-                                :value="MontantReelMarche(this.formData2.marche_id)"
+                                :value="MontantReelMarche(this.formData.marche_id)"
                                 readOnly
                                 style="text-align: left; color: red;border: 1px solid #000"
                                 class="span"
@@ -1131,7 +1131,7 @@ date_interim
                             <div class="controls">
                          
                               <money
-                                :value="MontantAvenant(this.formData2.marche_id)"
+                                :value="MontantAvenant(this.formData.marche_id)"
                                 readOnly
                                 
                                 style="text-align: left; color: red;border: 1px solid #000"
@@ -1176,12 +1176,12 @@ date_interim
                   
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
+                   v-model="formData.montant_ordre_paiement"
                     class="span"
                     readonly
                   /> -->
                               <money
-                                v-model="formData2.montant_engage"
+                                v-model="formData.montant_ordre_paiement"
                                 style="text-align: left; color: red;border: 1px solid #000"
                                 class="span"
                               ></money>
@@ -1461,7 +1461,7 @@ date_interim
                             >
                             <div class="controls">
                               <select
-                                v-model="formData.bailler_id"
+                                v-model="formData.source_financement_id"
                                 class="span"
                                 style="border: 1px solid #000"
                               >
@@ -1477,12 +1477,12 @@ date_interim
                           </div>
                         </td> -->
                         <td>
-                          <label>Bailleur </label>
+                          <label>Bailleur </label>	
                           <model-list-select
                             style="border: 1px solid #000"
                             class="wide"
                             :list="sources_financements"
-                            v-model="formData.bailler_id"
+                            v-model="formData.source_financement_id"
                             option-value="id"
                             option-text="libelle"
                             placeholder=""
@@ -1545,7 +1545,7 @@ date_interim
                             >
                             <div class="controls">
                               <money
-                                v-model="formData2.montant_engage"
+                                v-model="formData.montant_ordre_paiement"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -2828,10 +2828,10 @@ created() {
       "types_financements",
     ]),
  MontantDeBase(){
-return parseFloat(this.MontantReelMarche(this.formData2.marche_id))+parseFloat(this.MontantAvenant(this.formData2.marche_id))
+return parseFloat(this.MontantReelMarche(this.formData.marche_id))+parseFloat(this.MontantAvenant(this.formData.marche_id))
   },
   ResteAPayeSurMarche(){
-return parseFloat(this.MontantDeBase)-parseFloat(this.MontantPayeMarche(this.formData2.marche_id))
+return parseFloat(this.MontantDeBase)-parseFloat(this.MontantPayeMarche(this.formData.marche_id))
   },
   MontantPayeMarche() {
       return id => {
@@ -2864,9 +2864,9 @@ MontantAvenant() {
 
     RecupdateActeEffetFinancier(){
       let vm =this;
-        if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
+        if(this.formData.marche_id !=null && this.formData.marche_id !=""){
           const qtreel = this.acteEffetFinanciers.find(
-          (qtreel)=> qtreel.marche_id == this.formData2.marche_id
+          (qtreel)=> qtreel.marche_id == this.formData.marche_id
         );
        
 
@@ -3101,7 +3101,7 @@ affichePersoUA() {
     Cumulengagements() {
       const val =
         parseFloat(this.cumulBudgetEnterieure) +
-        parseFloat(this.formData2.montant_engage);
+        parseFloat(this.formData.montant_ordre_paiement);
       return parseFloat(val).toFixed(0);
     },
 
@@ -3127,7 +3127,7 @@ affichePersoUA() {
           );
 
           if (qtereel) {
-            return qtereel.user_id_interim;
+            return qtereel.user_id;
           }
           return 0;
         }
@@ -3156,11 +3156,11 @@ affichePersoUA() {
        
          return this.CreditAutoriseSousBudget(
                                       this.formData.sous_budget_id,
-                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.bailler_id);
+                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.source_financement_id);
       } else {
         return this.CreditAutorise(
                                       this.formData.unite_administrative_id,
-                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.bailler_id);
+                                      this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.source_financement_id);
       }
     },
     CreditAutoriseSousBudget() {
@@ -3616,7 +3616,7 @@ SousFinancement() {
                 qtreel.type_financement_id == id1 &&
                 qtreel.source_financement_id == id2 &&
                 qtreel.ligne_economique_id == id3 &&
-                qtreel.diff_op != null
+                qtreel.diff_op == null
             )
             .reduce(
               (prec, cur) =>
@@ -3657,7 +3657,7 @@ SousFinancement() {
         return this.cumulAnterieurUa(
           this.formData.unite_administrative_id,
           this.formData.type_financement_id,
-          this.formData.bailler_id,
+          this.formData.source_financement_id,
           this.formData.ligne_economique_id
         );
       } else {
@@ -3665,7 +3665,7 @@ SousFinancement() {
           
           this.formData.sous_budget_id,
          this.formData.type_financement_id,
-          this.formData.bailler_id,
+          this.formData.source_financement_id,
           this.formData.ligne_economique_id
         );
       }
@@ -4123,9 +4123,9 @@ SousFinancement() {
 
     // RecupdateActeEffetFinancier(){
     //   //let vm =this;
-    //     if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
+    //     if(this.formData.marche_id !=null && this.formData.marche_id !=""){
     //       const qtreel = this.acteEffetFinanciers.find(
-    //       (qtreel)=> qtreel.marche_id == this.formData2.marche_id
+    //       (qtreel)=> qtreel.marche_id == this.formData.marche_id
     //     );
     //    // vm.editMarcheDate==
 
@@ -4278,7 +4278,7 @@ SousFinancement() {
             (this.formData2.compte_entreprise_id = acteur.entreprise_id),
             (this.formData2.adresse_entreprise_id = acteur.entreprise_id),
             (this.formData2.banque_entreprise_id = acteur.banq_id),
-            (this.formData2.marche_id = acteur.marche_id),
+            (this.formData.marche_id = acteur.marche_id),
             (this.formData2.livrable_id = acteur.marche_id),
             (this.formData2.beneficiaire_id = acteur.unite_administrative_id),
             (this.formData2.geo_id = acteur.marche_id),
@@ -4292,7 +4292,7 @@ SousFinancement() {
             (this.formData2.compte_entreprise_id = ""),
             (this.formData2.adresse_entreprise_id = ""),
             (this.formData2.banque_entreprise_id = ""),
-            (this.formData2.marche_id = ""),
+            (this.formData.marche_id = ""),
             (this.formData2.livrable_id = ""),
             (this.formData2.beneficiaire_id = ""),
             (this.formData2.geo_id = ""),
@@ -4305,7 +4305,7 @@ SousFinancement() {
           (this.formData2.compte_entreprise_id = ""),
           (this.formData2.adresse_entreprise_id = ""),
           (this.formData2.banque_entreprise_id = ""),
-          (this.formData2.marche_id = ""),
+          (this.formData.marche_id = ""),
           (this.formData2.livrable_id = ""),
           (this.formData2.beneficiaire_id = ""),
           (this.formData2.geo_id = ""),
@@ -4410,10 +4410,11 @@ SousFinancement() {
             "-" +
             this.formData.numero_ordre_paiement;
           this.intitule2 =
-            this.objetMarche(this.formData2.marche_id) +
+            this.objetMarche(this.formData.marche_id) +
             "-" +
             this.formData12.objet_decompte;
           var nouvelObjetOrdrePaiement = {
+            id:this.formData.id,
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
@@ -4436,12 +4437,12 @@ SousFinancement() {
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            entreprise_id: this.idEntreprise(this.formData2.marche_id),
-            marche_id: this.formData2.marche_id,
+            entreprise_id: this.idEntreprise(this.formData.marche_id),
+            marche_id: this.formData.marche_id,
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData2.montant_engage,
+            source_financement_id: this.formData.source_financement_id,
+            montant_ordre_paiement: this.formData.montant_ordre_paiement,
 
             mode_paiement_id: this.formData.mode_paiement_id,
 
@@ -4504,6 +4505,7 @@ SousFinancement() {
             this.formData.numero_ordre_paiement;
            
           var nouvelObjetOrdrePaiement78 = {
+            id:this.formData.id,
             exercice: this.anneeAmort,
             diff_op_personnel:this.formData.diff_op_personnel,
              mois_paiement: this.formData.mois_paiement,
@@ -4528,8 +4530,8 @@ SousFinancement() {
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
+            // entreprise_id:this.idEntreprise(this.formData.marche_id),
+            // marche_id:this.formData.marche_id,
 
             grand_nature_id: this.GrandeNatureId(
               this.formData.ligne_economique_id
@@ -4537,8 +4539,8 @@ SousFinancement() {
 
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData2.montant_engage,
+            source_financement_id: this.formData.source_financement_id,
+            montant_ordre_paiement: this.formData.montant_ordre_paiement,
             mode_paiement_id: this.formData.mode_paiement_id,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
@@ -4618,6 +4620,7 @@ SousFinancement() {
             "-" +
             this.formData.numero_ordre_paiement;
           var nouvelObjetOrdrePaiement1 = {
+            id:this.formData.id,
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
@@ -4640,8 +4643,8 @@ SousFinancement() {
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
+            // entreprise_id:this.idEntreprise(this.formData.marche_id),
+            // marche_id:this.formData.marche_id,
 
             grand_nature_id: this.GrandeNatureId(
               this.formData.ligne_economique_id
@@ -4649,8 +4652,8 @@ SousFinancement() {
 
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData2.montant_engage,
+            source_financement_id: this.formData.source_financement_id,
+            montant_ordre_paiement: this.formData.montant_ordre_paiement,
             mode_paiement_id: this.formData.mode_paiement_id,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
@@ -4726,10 +4729,11 @@ SousFinancement() {
             "-" +
             this.formData.numero_ordre_paiement;
           this.intitule2 =
-            this.objetMarche(this.formData2.marche_id) +
+            this.objetMarche(this.formData.marche_id) +
             "/" +
             this.formData12.objet_decompte;
           var nouvelObjetOrdrePaiement12 = {
+            id:this.formData.id,
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
@@ -4752,12 +4756,12 @@ SousFinancement() {
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            entreprise_id: this.idEntreprise(this.formData2.marche_id),
-            marche_id: this.formData2.marche_id,
+            entreprise_id: this.idEntreprise(this.formData.marche_id),
+            marche_id: this.formData.marche_id,
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData2.montant_engage,
+            source_financement_id: this.formData.source_financement_id,
+            montant_ordre_paiement: this.formData.montant_ordre_paiement,
             mode_paiement_id: this.formData.mode_paiement_id,
 
             grand_nature_id: this.GrandeNatureId(
@@ -4819,6 +4823,7 @@ SousFinancement() {
             "-" +
             this.formData.numero_ordre_paiement;
           var nouvelObjetOrdrePaiement784 = {
+            id:this.formData.id,
             exercice: this.anneeAmort,
               diff_op_personnel:this.formData.diff_op_personnel,
             type_ordre_paiement: this.formData.type_ordre_paiement,
@@ -4842,8 +4847,8 @@ SousFinancement() {
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
+            // entreprise_id:this.idEntreprise(this.formData.marche_id),
+            // marche_id:this.formData.marche_id,
 
             grand_nature_id: this.GrandeNatureId(
               this.formData.ligne_economique_id
@@ -4851,8 +4856,8 @@ SousFinancement() {
 
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData2.montant_engage,
+            source_financement_id: this.formData.source_financement_id,
+            montant_ordre_paiement: this.formData.montant_ordre_paiement,
             mode_paiement_id: this.formData.mode_paiement_id,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
@@ -4929,6 +4934,7 @@ SousFinancement() {
             this.formData.numero_ordre_paiement;
 
           var nouvelObjetOrdrePaiement136 = {
+            id:this.formData.id,
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
@@ -4951,8 +4957,8 @@ SousFinancement() {
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
+            // entreprise_id:this.this.idEntreprise(this.formData.marche_id),
+            // marche_id:this.formData.marche_id,
 
             grand_nature_id: this.GrandeNatureId(
               this.formData.ligne_economique_id
@@ -4960,8 +4966,8 @@ SousFinancement() {
 
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData2.montant_engage,
+            source_financement_id: this.formData.source_financement_id,
+            montant_ordre_paiement: this.formData.montant_ordre_paiement,
             mode_paiement_id: this.formData.mode_paiement_id,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
