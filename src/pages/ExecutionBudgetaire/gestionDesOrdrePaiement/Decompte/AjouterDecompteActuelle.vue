@@ -32,7 +32,7 @@
          <table class="table table-bordered table-striped">
            <tr>
               <td>
-Montantapresretenues
+
               <div class="control-group">
               <label class="control-label">N°décompte</label>
                 <div class="controls">
@@ -176,11 +176,25 @@ Montantapresretenues
                       
                   /> -->
 
+
                 </div>
               </div>
             </td>
            </tr>
            <tr>
+              <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
              <td >
               <div class="control-group">
                 <label class="control-label" >Montant HT (aprés retenues)</label>
@@ -196,59 +210,60 @@ Montantapresretenues
                 </div>
               </div>
             </td>
+            
               <td>
               <div class="control-group">
-                <label class="control-label">TVA(18%)</label>
+                <label class="control-label">Taux</label>
                 <div class="controls">
-
-
-                  <input type="text" 
+ <input type="text" 
                          class="span"
-                        
+                        :value="afficherEnorere"
                          readonly
                   />
 
                 </div>
               </div>
             </td>
-             <td>
-               <div class="control-group">
-                <label class="control-label" >Montant TTC</label>
-                <div class="controls">
-                  <!-- <input
-                      type="text"
-                      :value="MontantTTC"
-
-                      class="span"
-                      readonly
-                  /> -->
-<money  :value="MontantTTC"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                </div>
-              </div>
-             </td>
+            
              
            </tr>
            <tr>
              <td >
               <div class="control-group">
-                <!-- <label class="control-label" >Part Bailleur </label> -->
+                <label class="control-label" >Montant Tva</label>
                 <div class="controls">
-                  <!-- <input
-                      type="hidden"  
-                        :value="montantTTCMarche(detail_Facture.marche_id)"
-                      step='100'
-                      class="span"
-                      readonly
-                  /> -->
-<money  :value="montantTTCMarche(detail_Facture.marche_id)"  type="hidden"  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                 
+<money :value="montantTVA"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
               <td>
-              <div class="control-group">
-                <!-- <label class="control-label">Taux Bailleur(HT)</label> -->
+               <div class="control-group">
+                <label class="control-label" >Montant TTC</label>
                 <div class="controls">
+                
+<money  :value="MontantTTC"   readonly style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                </div>
+              </div>
+             </td>
+              <td colspan="">
+               <div class="control-group">
+                <label class="control-label" >PART ETAT</label>
+                <div class="controls">
+                <money  v-model="formData.parts_etat"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+         
 
+                </div>
+              </div>
+             </td>
+            
+         
+                  
+<money  :value="montantTTCMarche(detail_Facture.marche_id)"  type="hidden"  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+               
+          
+           
+       
 
                   <input type="hidden" 
                          class="span"
@@ -256,13 +271,7 @@ Montantapresretenues
                          readonly
                   />
 
-                </div>
-              </div>
-            </td>
-             <td>
-               <div class="control-group">
-                <!-- <label class="control-label" >Montant HT Bailleur</label> -->
-                <div class="controls">
+          
                   <input
                       type="hidden"
                       :value="MontantHTBailleur"
@@ -271,16 +280,21 @@ Montantapresretenues
                       readonly
                   />
 
-                </div>
-              </div>
-             </td>
              
            </tr>
             <tr>
-             <td >
+              <td>
               <div class="control-group">
-                <!-- <label class="control-label" >Part Etat </label> -->
+                <label class="control-label">PART Bailleur</label>
                 <div class="controls">
+
+<money  v-model="formData.parts_bailleur"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                  
+
+                </div>
+              </div>
+            </td>
+          
                   <input
                       type="hidden"  
                         :value="montantTTCMarche(detail_Facture.marche_id)"
@@ -289,28 +303,13 @@ Montantapresretenues
                       readonly
                   />
 
-                </div>
-              </div>
-            </td>
-              <td>
-              <div class="control-group">
-                <!-- <label class="control-label">Taux Etat(HT+TVA)</label> -->
-                <div class="controls">
-
-
+           
                   <input type="hidden" 
                          class="span"
                          :value="TauxBailleurTresor(detail_Facture.marche_id)"
                          readonly
                   />
 
-                </div>
-              </div>
-            </td>
-             <td>
-               <div class="control-group">
-                <!-- <label class="control-label" >Montant TTC Etat</label> -->
-                <div class="controls">
                   <input
                       type="hidden"
                       :value="MontantHTEtat"
@@ -319,10 +318,6 @@ Montantapresretenues
                       readonly
                   />
 
-                </div>
-              </div>
-             </td>
-             
            </tr>
          </table>
         
@@ -596,6 +591,7 @@ export default {
         }
       ],
 formData:{
+  exonere:0,
 retenu_avance:0,
 retenu_garantie:0,
 retenu_penalite:0
@@ -655,6 +651,44 @@ retenu_penalite:0
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
+
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+    afficherEnorere2(){
+if(this.formData.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
+afficherEnorere(){
+if(this.formData.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
      MontantDeBase(){
 return parseFloat(this.AfficheMontantMarche(this.formData.marche_id))+parseFloat(this.MontantAvenant(this.formData.marche_id))
   },
@@ -672,7 +706,7 @@ return parseFloat(this.AfficheMontantMarche(this.formData.marche_id))+parseFloat
       }
       }
   },
-MontantTVAFacture() {
+montantTVAFacture() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
@@ -740,7 +774,7 @@ MontantTVAFacture() {
       return 0
     },
     MontantTTC(){
-      const val =  parseFloat(this.Montantapresretenues);
+      const val =  parseFloat(this.Montantapresretenues) + parseFloat(this.montantTVA);
       
        if (val) {
         return parseFloat(val).toFixed(0);
@@ -749,7 +783,7 @@ MontantTVAFacture() {
       return 0
     },
     montantTVA(){
-      const val =  parseFloat(this.Montantapresretenues)*parseFloat(this.tauxArrondit);
+      const val =  parseFloat(this.Montantapresretenues) * parseFloat(this.afficherEnorere2);
       
        if (val) {
         return parseFloat(val).toFixed(0);
@@ -757,25 +791,8 @@ MontantTVAFacture() {
       
       return 0
     },
-affcherTauxEnCours() {
-      
-      
-      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.libelle;
-      }
-      return 0
-    },
-tauxArrondit() {
-      
-      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.arrondit;
-      }
-      return 0
-    },
 Montantapresretenues(){
       const val =  parseFloat(this.MontantFacture(this.detail_Facture.id))-parseFloat(parseFloat(this.formData.retenu_garantie) + parseFloat(this.formData.retenu_avance)+ parseFloat(this.formData.retenu_penalite));
       
@@ -1078,8 +1095,8 @@ Montantapresretenues(){
         facture_id:this.detail_Facture.id,
       nethtva:this.montantTVA,
       netttc:this.Montantapresretenues,
-      parts_etat:this.MontantHTEtat,
-      parts_bailleur:this.MontantHTBailleur, 
+      // parts_etat:this.MontantHTEtat,
+      // parts_bailleur:this.MontantHTBailleur, 
       montantmarche:this.Montantapresretenues,
       exercicebudget:this.anneeAmort
       };

@@ -1935,3 +1935,4 @@ export function supprimerUniteAdministrativeBailleur({ commit}, id) {
           axios.delete("/UniteAdministrativeBailleur/" + id).then(() => dialog.close());
       });
 }
+

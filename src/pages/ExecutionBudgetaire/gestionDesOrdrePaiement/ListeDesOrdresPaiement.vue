@@ -795,7 +795,7 @@ listeUniteAdminPasSection
                     v-for="type in partition(ListeDEsEntreprise, size)[page]"
                     :key="type.id"
                   >
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -804,7 +804,7 @@ listeUniteAdminPasSection
                     >
                       {{ type.exercice || "Non renseigné" }}
                     </td>
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-if="type.type_ordre_paiement == 1"
                       style="
                         font-size: 14px;
@@ -814,7 +814,7 @@ listeUniteAdminPasSection
                     >
                       <span>OP Direct</span>
                     </td>
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-else-if="type.type_ordre_paiement == 2"
                       style="
                         font-size: 14px;
@@ -825,7 +825,7 @@ listeUniteAdminPasSection
                       <span>OP Provisoire</span>
                     </td>
 
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-else-if="type.type_ordre_paiement == 3"
                       style="
                         font-size: 14px;
@@ -835,7 +835,7 @@ listeUniteAdminPasSection
                     >
                       <span>OP Annulation</span>
                     </td>
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-else
                       style="
                         font-size: 14px;
@@ -846,7 +846,7 @@ listeUniteAdminPasSection
                       <span>OP Définitif</span>
                     </td>
 
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -875,16 +875,16 @@ listeUniteAdminPasSection
                     <!-- <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
                     >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td> -->
-                    <td style="font-size: 14px; font-weight: bold">
+                    <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
                       {{ type.odjet_autre_depense || "Non renseigné" }}
                     </td>
-                    <td style="font-size: 14px; font-weight: bold">
+                    <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
                       {{
                         libelleUa(type.unite_administrative_id) ||
                         "Non renseigné"
                       }}
                     </td>
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -897,7 +897,7 @@ listeUniteAdminPasSection
                         ) || "Non renseigné"
                       }}
                     </td>
-                    <td>
+                    <td @dblclick="afficherModalModifierTitre(type.id)">
                       <router-link
                         :to="{
                           name: 'VoirDetailAutreFiche',
@@ -926,7 +926,7 @@ listeUniteAdminPasSection
                    </router-link>
                     </td>
                    <td v-else style="background-color:lightblue"></td> -->
-                    <td>
+                    <td @dblclick="afficherModalModifierTitre(type.id)">
                       <button
                         v-if="type.decision_cf == 8"
                         class="btn btn-success tailBtn"
@@ -1673,7 +1673,12 @@ export default {
       search: "",
     };
   },
-
+created() {
+    this.marcheid = this.$route.params.id;
+    this.detailOp1 = this.gettersgestionOrdrePaiement.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
   computed: {
     ...mapGetters("Utilisateurs", [
       "getterAffectionServiceCF",
@@ -2365,7 +2370,12 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+afficherModalModifierTitre(id) {
 
+      this.$router.push({
+        path: "/ModificationOrdrePaiement/" + id
+      });
+    },
     partition: partition,
 
     getDataPaginate(index) {

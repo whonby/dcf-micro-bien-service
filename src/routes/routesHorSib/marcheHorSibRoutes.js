@@ -2,6 +2,7 @@ import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
 import ListeDesSousBudgetMarche from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeDesSousBudgetMarche.vue";
 import ListeMarcheSousBudget from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeMarcheSousBudget.vue";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
+import groupeToutMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeToutMarcheParUa.vue";
 // import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
  import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
@@ -59,6 +60,11 @@ const marcheHorSibRoutes =[
         path: "/ListeMarcheSousBudget/:id",
         name: "ListeMarcheSousBudget",
         component: ListeMarcheSousBudget
+    },
+    {
+        path:"/groupeToutMarcheParUa",
+        name:"groupeToutMarcheParUa",
+        component:groupeToutMarcheParUa
     },
     {
         path:"/groupeMarcheParUa",

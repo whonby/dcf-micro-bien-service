@@ -511,9 +511,7 @@ export default {
     //     },
 
     afficherListeMrcheSib() {
-      console.log("...................");
-      console.log(this.listeMarcheUniteAdmin);
-      console.log("....................");
+     
       return this.listeMarcheUniteAdmin;
       // return (
       //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -539,6 +537,16 @@ export default {
         return colect;
       }
       return this.uniteAdministratives;
+    },
+    
+    ToutMarcheDesUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.marches.filter((qtreel) => qtreel.unite_administrative_id == id);
+
+         
+        }
+      };
     },
     listeMarcheUniteAdmin() {
       let colect = [];

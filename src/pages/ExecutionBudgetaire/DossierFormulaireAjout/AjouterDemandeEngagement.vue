@@ -108,7 +108,7 @@ numeroOrdre
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleSection(
-                                    idSection(formData.ligne_economique_id)
+                                    idSection(formData.activite_id)
                                   )
                                 "
                                 class="span"
@@ -128,25 +128,7 @@ numeroOrdre
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleProgramme(
-                                    idProgramme(formData.ligne_economique_id)
-                                  )
-                                "
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Action</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="
-                                  libelleAction(
-                                    idAction(formData.ligne_economique_id)
+                                    idProgramme(formData.activite_id)
                                   )
                                 "
                                 class="span"
@@ -157,14 +139,14 @@ numeroOrdre
                         </td>
                         <td colspan="2">
                           <div class="control-group">
-                            <label class="control-label">Activité</label>
+                            <label class="control-label">Action</label>
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
-                                  libelleActivite(
-                                    idActivite(formData.ligne_economique_id)
+                                  libelleAction(
+                                    idAction(formData.activite_id)
                                   )
                                 "
                                 class="span"
@@ -173,6 +155,7 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
+                       
                       </tr>
                       <tr>
                         <td>
@@ -197,7 +180,45 @@ numeroOrdre
                           >
                         </td>
 
-                        <td>
+                       <td>
+                       <div class="control-group">
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="recuppererLeDernierNiveauActivite"
+                                                   v-model="formData.activite_id"
+                                                   option-value="id"
+                                                   option-text="code"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                  
+                   <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Libelle Activité</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="libelleActivite(formData.activite_id)"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+              
+                     </td>
+                      </tr>
+                      <tr>
+ <td>
                           <div class="control-group">
                             <label class="control-label"
                               >Grande nature de dépense
@@ -227,7 +248,7 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <td>
+                        <td colspan="2">
                           <div class="control-group">
                             <label class="control-label"
                               >Ligne économique
@@ -1175,7 +1196,7 @@ numeroOrdre
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleActivite(
-                                    idActivite(formData.ligne_economique_id)
+                                    idActivite(formData.activite_id)
                                   )
                                 "
                                 class="span"
@@ -2783,7 +2804,44 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+recuppererLeDernierNiveau() {
+      
+           return this.plans_budgetaires.filter(qtreel => this.recupererStructure(qtreel.structure_budgetaire_id) == 6 );
 
+      
+       
+    },
+recuppererLeDernierNiveauActivite() {
+      
+           return this.plans_activites.filter(qtreel => this.recupererStructureActivite_id(qtreel.structure_activites_id) == 2 );
+
+      
+       
+    },
+    recupererStructureActivite_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau
+      }
+      return 0
+        }
+      };
+    },
+recupererStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau
+      }
+      return 0
+        }
+      };
+    },
     recupereLeNumeroCompte() {
       return (id) => {
         if (id != null && id != "") {
@@ -3214,7 +3272,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3228,7 +3286,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3319,7 +3377,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id
+            (qtreel) => qtreel.activite_id == id
           );
 
           if (qtereel) {
@@ -3839,9 +3897,9 @@ export default {
         var nouvelObjet1 = {
           ...this.formData,
           numero_dmd_combine: this.intitule,
-          programme_id: this.idProgramme(this.formData.ligne_economique_id),
-          action_id: this.idAction(this.formData.ligne_economique_id),
-          activite_id: this.idActivite(this.formData.ligne_economique_id),
+          programme_id: this.idProgramme(this.formData.activite_id),
+          action_id: this.idAction(this.formData.activite_id),
+          activite_id: this.formData.activite_id,
           nom_autre: this.Numero_Nom_Entreprise(
             this.formData2.numero_cc_fournisseur_nom
           ),
@@ -3853,7 +3911,7 @@ export default {
           ),
           total_general: this.TotalGeneralDemandeEngagement,
           exercice: this.anneeAmort,
-          section_id: this.idSection(this.formData.ligne_economique_id),
+          section_id: this.idSection(this.formData.activite_id),
           uaBeneficiaire_id: this.formData.uaBeneficiaire_id,
           entreprise_id: this.idEntreprise(this.formData2.numero_marche),
           numero_marche: this.formData2.numero_marche,
@@ -3868,15 +3926,15 @@ export default {
         var nouvelObjet2 = {
           ...this.formData,
           numero_dmd_combine: this.intitule,
-          programme_id: this.idProgramme(this.formData.ligne_economique_id),
-          action_id: this.idAction(this.formData.ligne_economique_id),
-          activite_id: this.idActivite(this.formData.ligne_economique_id),
+          programme_id: this.idProgramme(this.formData.activite_id),
+          action_id: this.idAction(this.formData.activite_id),
+          activite_id: this.formData.activite_id,
           nom_autre: this.libelleUniteAdministrative(
             this.formData2.uaBeneficiaire_id
           ),
           total_general: this.TotalGeneralDemandeEngagement,
           exercice: this.anneeAmort,
-          section_id: this.idSection(this.formData.ligne_economique_id),
+          section_id: this.idSection(this.formData.activite_id),
           uaBeneficiaire_id: this.formData.uaBeneficiaire_id,
           entreprise_id: this.formData2.entrprise_id,
           autre_depense_id: this.idAutreDepense(
@@ -3890,15 +3948,15 @@ export default {
         var nouvelObjet3 = {
           ...this.formData,
           numero_dmd_combine: this.intitule,
-          programme_id: this.idProgramme(this.formData.ligne_economique_id),
-          action_id: this.idAction(this.formData.ligne_economique_id),
-          activite_id: this.idActivite(this.formData.ligne_economique_id),
+          programme_id: this.idProgramme(this.formData.activite_id),
+          action_id: this.idAction(this.formData.activite_id),
+          activite_id: this.formData.activite_id,
           nom_autre: this.formData2.nom_autre,
           adresse: this.formData2.numero_cc_autre_adresse,
           numero_cc_autre: this.formData2.numero_cc_autre,
           total_general: this.TotalGeneralDemandeEngagement,
           exercice: this.anneeAmort,
-          section_id: this.idSection(this.formData.ligne_economique_id),
+          section_id: this.idSection(this.formData.activite_id),
           uaBeneficiaire_id: this.formData.uaBeneficiaire_id,
           entreprise_id: this.formData2.entrprise_id,
           autre_depense_id: this.idAutreDepense(
