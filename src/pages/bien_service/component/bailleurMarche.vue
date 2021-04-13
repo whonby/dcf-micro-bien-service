@@ -476,7 +476,7 @@
                 <div class="controls">
                   <input
                     type="number"
-                    :value="montantHTtBailleur"
+                    :value="montantHTtBailleur_edit"
              
                     class="span"
                    readonly
@@ -496,7 +496,7 @@
                 <div class="controls">
                   <input
                     type="number"
-                    :value="PayeDesBailleur"
+                    :value="PayeDesBailleur_edit"
               readonly
                     class="span"
                  
@@ -578,6 +578,12 @@ PayeDesBailleur() {
       const val = parseFloat(this.sommeTotalDesBailleur(this.infoLot.id)) + parseFloat(this.montantHTtBailleur);
       return parseFloat(val).toFixed(0);
     },
+
+    PayeDesBailleur_edit() {
+
+      const val = parseFloat(this.sommeTotalDesBailleur(this.infoLot.id)) + parseFloat(this.montantHTtBailleur_edit);
+      return parseFloat(val).toFixed(0);
+    },
 sommeTotalDesBailleur() {
      return id => {
         if (id != null && id != "") {
@@ -653,6 +659,10 @@ sommeTotalDesBailleur() {
     CalCulDuTaux(){
       return this.formBailleur.tauxBailler / 100
     },
+
+     CalCulDuTaux_edit(){
+      return this.editBailleur.tauxbailleur / 100
+    },
     // TauxBailleur() {
     //   const val = (parseFloat(this.formBailleur.tauxBailler)/100) + (parseFloat(this.afficherEnorere)/100);
     //   return parseFloat(val).toFixed(2);
@@ -690,6 +700,28 @@ sommeTotalDesBailleur() {
       return 0
       }
       
+    },
+
+     montantHTtBailleur_edit() {
+      if(this.formBailleur.exonere == 0){
+
+        const val = (parseFloat(this.afficherMontantHtMarche(this.infoLot.id)))*this.CalCulDuTaux_edit;
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+      }
+      else{
+        
+       const val = (parseFloat(this.afficherMontantTTCMarche(this.infoLot.id)))*this.CalCulDuTaux_edit;
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+      }
     },
     montantHTtBailleur() {
       if(this.formBailleur.exonere == 0){
@@ -869,7 +901,7 @@ ModifierBailleurLocal(){
 var nouvelObjet = {
         ...this.editBailleur,
         acte_effet_id:this.enregistreIdActe(this.infoLot.id),
-        tauxbailleur:this.editBailleur.tauxBailler,
+        tauxbailleur:this.editBailleur.tauxbailleur,
          montant:this.afficherMontantTTCMarche(this.infoLot.id),
                tva:this.afficherEnorereModifier,
                montant_tva:this.montantTvaActuelModifier,

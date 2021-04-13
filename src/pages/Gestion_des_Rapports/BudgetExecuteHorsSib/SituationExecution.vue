@@ -895,7 +895,8 @@ export default {
     arrayExerciceDecompte() {
       return (idactivite) => {
         console.log(idactivite);
-        let objet = this.listeordrepaiementstest(idactivite);
+        if(idactivite!=null && idactivite!=""){
+          let objet = this.listeordrepaiementstest(idactivite);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -910,6 +911,8 @@ export default {
           return unique;
         }
         return [];
+        }
+        
       };
     },
 

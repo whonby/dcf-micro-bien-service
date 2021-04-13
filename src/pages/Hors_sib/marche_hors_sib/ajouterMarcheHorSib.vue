@@ -527,8 +527,10 @@ libelleUA
         </div>
       </div>
     </div>
-    <notifications />
-  </div>
+    </div>
+
+
+
 </template>
 
 <script>
@@ -548,7 +550,7 @@ export default {
     return {
       code:'',
       codes:'',
-      charact:'ABCDEFGHIGKLMNOPQRSTUVWXYZ123456789abcdefghijklmnopqrstuvwxyz',
+      charact:'ABCDEFGHIGKLMNOPQRSTUVWXYZ0123456789',
       fabActions: [
         {
           name: "cache",
@@ -609,6 +611,7 @@ export default {
   },
   created(){
     console.log(this.rand_alea(5))
+    console.log(this.marches)
   },
   computed: {
     ...mapGetters("bienService", [
@@ -1075,6 +1078,12 @@ ImputationBudget(){
       }
       return 0;
     },
+    // contraintObjet(){
+    //  return this.marches.filter((item) =>{
+    //    return item.objet.toUpperCase().includes(this.formData.objet.toUpperCase())
+    //  })
+    // },
+
   },
   //générer une référence dynamique
   
@@ -1089,9 +1098,10 @@ ImputationBudget(){
         for (let i = 0; i < long; i++) {
           this.codes += (this.charact.charAt(Math.floor(Math.random() * this.charact.length)))
       }
-      this.formData.reference_marche = ('M_C/'+this.codes+'/'+ this.anneeBugetaire);
+      this.formData.reference_marche = (this.codes+'-'+ this.anneeBugetaire);
       return this.formData.reference_marche;
     },
+    
     pagePrecedent(){
                 window.history.back()
             },

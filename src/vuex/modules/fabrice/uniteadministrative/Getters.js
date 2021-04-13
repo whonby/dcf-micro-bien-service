@@ -764,6 +764,11 @@ export const groupeByActivite = (state, getters) => {
   return groupBy(getters.budgetEclate, "activite_id");
 };
 
+export const groupeByBailleur = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "source_financement_id");
+};
+
 export {
   // typeTextes,
   uniteAdministratives,

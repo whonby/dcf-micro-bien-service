@@ -5,7 +5,7 @@
                      <thead>
                              <tr>
                                       
-                                        <th>Année Budgetaire</th>
+                                        <!-- <th>Année Budgetaire</th> -->
                                           <th>Montant de Base </th>
                                         <th> Montant  CP annuel prevu</th> 
                                         <th> Taux sur  CP  </th>
@@ -21,8 +21,8 @@
                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeMarchePluriannuel(macheid)"
                                         :key="appelOffre.id">
                                        
-                                            <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
-                                            {{appelOffre.anneeBudgetaire || 'Non renseigné'}}</td>
+                                            <!-- <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
+                                            {{appelOffre.anneeBudgetaire || 'Non renseigné'}}</td> -->
                                              <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSommeSansFCFA(parseFloat(appelOffre.montantBase)) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
@@ -55,31 +55,27 @@
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter  marché pluriannuel</h3>
+
             </div>
             <div class="modal-body">
  <table class="table table-bordered table-striped">
                           <tr>
-                           <td colspan="">
+                           <!-- <td colspan="">
                   <div class="control-group">
                      <label class="control-label">Année Budgétaire </label>
                     <div class="controls ">
 
              <select v-model="formData.anneeBudgetaire" class="span" >
-                 <!-- <option>veuillez selectionner l'année</option> -->
+              
                <option v-for="plans in exercices_budgetaires" :key="plans.id" 
                :value="plans.annee"> {{plans.annee}}</option>
-               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+              
            </select>
                             
-                     <!-- <input
-                type="text"
-                :value="anneeBugetaire"
-                class="span5"
-               readonly
-              /> -->
+                 
                </div>
                </div>
-              </td>
+              </td> -->
               
                                <td colspan="">
                             <div class="control-group">
@@ -210,19 +206,19 @@
 
                     <table class="table table-bordered table-striped">
                           <tr>
-                            <td>
+                            <!-- <td>
                         <div class="control-group">
                             <label class="control-label">Année Budgetaire <code>*</code> :</label>
                             <div class="controls">
                                  <select v-model="editMarchePl.anneeBudgetaire" class="span" >
                <option v-for="plans in exercices_budgetaires" :key="plans.id" 
                :value="plans.annee"> {{plans.annee}}</option>
-               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+             
            </select>
-                                <!-- <input type="text" class="span5" placeholder="Type appel" :value="anneeBudgetairemodifier" readonly> -->
+                               
                             </div>
                         </div>
-                            </td>
+                            </td> -->
                                <td colspan="">
                             <div class="control-group">
                             <label class="control-label">Montant de base  <code>*</code> :</label>
@@ -357,7 +353,7 @@ export default {
         return{
             formData:{
                 	type_financement:"",
-                    anneeBudgetaire:"",
+                   // anneeBudgetaire:"",
                 montantCP:"",
                 montantCP_notifie:"",
                 taux_cp:"",
@@ -393,7 +389,7 @@ export default {
                 return macheid => {
                     if (macheid != "") {
                         //console.log("Marche lettre inviation marche")
-                        return this.getterProgrammationMarchePlurieAnnuel.filter(idmarche => idmarche.marche_id == macheid)
+                        return this.getterProgrammationMarchePlurieAnnuel.filter(idmarche => idmarche.marche_id == macheid && idmarche.anneeBudgetaire==null)
                     }
                 }
             },
@@ -540,6 +536,7 @@ formatageSommeSansFCFA:formatageSommeSansFCFA,
 
 
 
+
   ajouterLocal(){
             //    this.$router.push({
             //      name:'marcheHorsib'  
@@ -558,7 +555,7 @@ formatageSommeSansFCFA:formatageSommeSansFCFA,
                 montantCP_notifie:"",
                 source_financement_id:"",
                 report_nouveau:"",
-                anneeBudgetaire:""
+              //  anneeBudgetaire:""
 
    
               }
@@ -567,6 +564,7 @@ formatageSommeSansFCFA:formatageSommeSansFCFA,
              modificationLocal(){
                   var nouvevObjetModif={
                       ...this.editMarchePl,
+                     duree_contratuel:this.afficherDureeContratuel(this.macheid),
                     montantCP:this.calculCPAnnuelPourLesTypeFinancementModif
                   }
              // console.log(this.edite_appel_offre)

@@ -5,7 +5,7 @@
 
 
 
-        <button class="btn btn-success" @click="PagePrecedante()">
+        <button class="btn btn-success" @click.prevent="PagePrecedante()">
           <span>
            <i class="fa fa-undo" aria-hidden="true"></i>
             Page précédente
@@ -241,6 +241,8 @@ detailMarche:"",
     props:["macheid"],
     created(){
 this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.id)
+  //const userId = this.$route.params.id
+    console.log(this.marches[this.$route.params.id].id)
     },
 
               computed: {
@@ -316,11 +318,12 @@ getterImageParMarche() {
         }
       };
     },
+  
       },
 
       methods:{
 
-          ...mapActions('bienService',[  "ajouterAvenant",
+        ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
       "supprimerAvenant",]),
  ...mapActions("uniteadministrative", [
@@ -347,7 +350,8 @@ getterImageParMarche() {
       console.log(this.detailMarche.id)
     },
     PagePrecedante(){
-      this.$router.push({path:'/liste_image_marche', params:{id:this.detailMarche.id}})
+      const userId = 328
+      this.$router.push({path:`/liste_image_marche/${userId}`})
     },
      distance(lat1, lon1, lat2, lon2, unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
