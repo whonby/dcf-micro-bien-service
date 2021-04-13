@@ -13,7 +13,7 @@
                       <li class="active">
                         <a data-toggle="tab" href="#NiveauGeneral">BUDGET GENERALE</a>
                       </li>
-                       <li>
+                       <!-- <li>
                         <a data-toggle="tab" href="#Niveau1" v-if="NiveauSousBudget1(detail_marche.uniteadministrative_id,1)!=0">{{NiveauSousBudget1(detail_marche.uniteadministrative_id,1)}}</a>
                       </li>
                         <li>
@@ -30,7 +30,7 @@
                       </li>
                      <li>
                          <a data-toggle="tab" href="#Niveau6" v-if="NiveauSousBudget6(detail_marche.uniteadministrative_id,6)!=0">{{NiveauSousBudget6(detail_marche.uniteadministrative_id,6)}}</a>
-                      </li>
+                      </li> -->
                       
                     </ul>
                   </div>
@@ -39,7 +39,7 @@
                     <div id="NiveauGeneral" class="tab-pane active">
  <BudgetGeneralUa></BudgetGeneralUa>
           </div>
-                <div id="Niveau1" class="tab-pane">
+                <!-- <div id="Niveau1" class="tab-pane">
   <ListeSousBudgetNiveau1></ListeSousBudgetNiveau1>
           </div>
                   <div id="Niveau2" class="tab-pane">
@@ -56,7 +56,7 @@
           </div>  
                  <div id="Niveau6" class="tab-pane">
   <ListeSousBudgetNiveau6></ListeSousBudgetNiveau6>
-          </div>         
+          </div>          -->
 
                       
                       
@@ -75,22 +75,22 @@
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from "@/Repositories/Repository"
 import moment from 'moment';
-import ListeSousBudgetNiveau1 from './ListeSousBudget/ListeSousBudgetNiveau1.vue'
-import ListeSousBudgetNiveau2 from './ListeSousBudget/ListeSousBudgetNiveau2.vue'
-import ListeSousBudgetNiveau3 from './ListeSousBudget/ListeSousBudgetNiveau3.vue'
-import ListeSousBudgetNiveau4 from './ListeSousBudget/ListeSousBudgetNiveau4.vue'
-import ListeSousBudgetNiveau5 from './ListeSousBudget/ListeSousBudgetNiveau5.vue'
-import ListeSousBudgetNiveau6 from './ListeSousBudget/ListeSousBudgetNiveau6.vue'
+// import ListeSousBudgetNiveau1 from './ListeSousBudget/ListeSousBudgetNiveau1.vue'
+// import ListeSousBudgetNiveau2 from './ListeSousBudget/ListeSousBudgetNiveau2.vue'
+// import ListeSousBudgetNiveau3 from './ListeSousBudget/ListeSousBudgetNiveau3.vue'
+// import ListeSousBudgetNiveau4 from './ListeSousBudget/ListeSousBudgetNiveau4.vue'
+// import ListeSousBudgetNiveau5 from './ListeSousBudget/ListeSousBudgetNiveau5.vue'
+// import ListeSousBudgetNiveau6 from './ListeSousBudget/ListeSousBudgetNiveau6.vue'
 import BudgetGeneralUa from './ListeSousBudget/BudgetGeneralUa.vue'
 export default {
   components:{
-      BudgetGeneralUa,
-   ListeSousBudgetNiveau1,
-   ListeSousBudgetNiveau2,
-   ListeSousBudgetNiveau3,
-   ListeSousBudgetNiveau4,
-   ListeSousBudgetNiveau5,
-   ListeSousBudgetNiveau6
+  BudgetGeneralUa,
+  //  ListeSousBudgetNiveau1,
+  //  ListeSousBudgetNiveau2,
+  //  ListeSousBudgetNiveau3,
+  //  ListeSousBudgetNiveau4,
+  //  ListeSousBudgetNiveau5,
+  //  ListeSousBudgetNiveau6
   },
   data() {
     return {

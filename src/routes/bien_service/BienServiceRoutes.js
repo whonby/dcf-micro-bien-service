@@ -38,6 +38,10 @@ import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vu
 import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
 import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJuridique.vue';
 // import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecdd7754345a06c0e5f96b57accf71b0ebd3b3e5
 import marche from '../../pages/bien_service/contractualisation/marche.vue';
 import historiqueMarche from '../../pages/gestionMarche/historiqueMarche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
@@ -133,6 +137,7 @@ import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOr
 import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/PersonnelRattacher.vue"
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
+import ModificationOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ModificationOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
@@ -169,6 +174,12 @@ const BienServiceRoutes = [
         path: "/AjouterDecomptePrecedant",
         name: "AjouterDecomptePrecedant",
         component: AjouterDecomptePrecedant
+    },
+    
+    {
+        path: "/ModificationOrdrePaiement/:id",
+        name: "ModificationOrdrePaiement",
+        component: ModificationOrdrePaiement
     },
     {
         path: "/VoirDetailAutreFiche/:id",

@@ -1,7 +1,7 @@
 import { groupBy } from "../../../../Repositories/Repository";
-export const budgetEclate = state => state.budgetEclate.sort((a, b) => (a.id > b.id ? 1 : -1));
+export const budgetEclate = state => state.budgetEclate.sort((a, b) => (a.ligneeconomique_id > b.ligneeconomique_id ? 1 : -1));
 export const getvehicules =state =>state.vehicules;
-export const BudgetEclateRegie = state => state.BudgetEclateRegie.sort((a, b) => (a.id > b.id ? 1 : -1));
+export const BudgetEclateRegie = state => state.BudgetEclateRegie.sort((a, b) => (a.ligneeconomique_id > b.ligneeconomique_id ? 1 : -1));
 export const getSousBudget =state =>state.SousBudget.sort((a, b) => (a.nombre_sous_budget > b.nombre_sous_budget ? 1 : -1));
 export const getdecisionBudgetEclate =state =>state.decisionBudgetEclate;
 export const getHistoriquedecisionBudgetEclate =state =>state.HistoriquedecisionBudgetEclate;
@@ -758,6 +758,17 @@ export const groupeUaPourMarheHorSib = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "uniteadministrative_id");
 };
+
+export const groupeByActivite = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "activite_id");
+};
+
+export const groupeByBailleur = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "source_financement_id");
+};
+
 export {
   // typeTextes,
   uniteAdministratives,

@@ -15,7 +15,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Liste des March&eacute;s7</h5>
+          <h5>Liste des March&eacute;s</h5>
           <div align="right">
             Recherche:
             <input type="search" v-model="search" placeholder=" saisir objet" />
@@ -35,7 +35,7 @@
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>Année78</th>
+              <th>Année</th>
               <th>UA</th>
               <th>Référence marché</th>
               <th>Objet marché</th>
@@ -511,9 +511,7 @@ export default {
     //     },
 
     afficherListeMrcheSib() {
-      console.log("...................");
-      console.log(this.listeMarcheUniteAdmin);
-      console.log("....................");
+     
       return this.listeMarcheUniteAdmin;
       // return (
       //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -539,6 +537,16 @@ export default {
         return colect;
       }
       return this.uniteAdministratives;
+    },
+    
+    ToutMarcheDesUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.marches.filter((qtreel) => qtreel.unite_administrative_id == id);
+
+         
+        }
+      };
     },
     listeMarcheUniteAdmin() {
       let colect = [];

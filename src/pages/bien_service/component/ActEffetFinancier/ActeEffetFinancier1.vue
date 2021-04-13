@@ -540,7 +540,11 @@ avance_demarrage_ht
                     >Durée d'exécution contractuelle(jrs)</label
                   >
                   <div class="controls">
-                    <input type="number" v-model="durre_prevue" class="span" />
+                    <input
+                      type="number"
+                      v-model="durre_prevue"
+                      class="span"
+                    />
                   </div>
                 </div>
               </td>
@@ -2219,7 +2223,7 @@ export default {
         montant_act: "",
         date_attributaire: "",
         date_reception: "",
-        duree: "",
+        //durre_prevue: "",
         date_fin_exe: "",
         date_odre_service: "",
         livrable_id: "",
@@ -3888,6 +3892,7 @@ export default {
           montant_tva_retenu_garanti: this.afficherMontantTvaTaxeRetenuGarantie,
           montant_ttc_retenue_garantie: this.afficherMontantRetenueGarantie,
           tva: this.montantTva,
+          duree:this.durre_prevue,
           sous_traitance: this.sous_traitance,
           garantie: this.garantie,
           montant_act: this.montantHTt,
@@ -3930,7 +3935,7 @@ export default {
           montant_act: "",
           date_attributaire: "",
           date_reception: "",
-          duree: "",
+          durre_prevue: "",
           date_fin_exe: "",
           date_odre_service: "",
           livrable_id: "",

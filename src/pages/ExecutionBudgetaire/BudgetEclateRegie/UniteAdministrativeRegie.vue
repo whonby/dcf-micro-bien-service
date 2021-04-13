@@ -45,14 +45,14 @@
 
                             </div>
               </td>
-              <!-- <td style="width:12%;">
+              <td style="width:12%;">
                 <div align="right">
 
-      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE </button>
+      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE REGIE </button>
 
 
                             </div>
-              </td> -->
+              </td>
             </tr>
           </table>
           
@@ -92,7 +92,7 @@
                    <td>
                       <router-link :to="{ name: 'listeDesBudgetVentilleRegie', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Budgets</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;">  Voir Budget Ventille</i></span>
                    </router-link> 
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="ajouterBudgetEclarter" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="ajouterBudgetEclarter" main-icon="apps" bg-color="green"></fab> -->
     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="ajouterBudgetEclarter()">Open</button>
 <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
@@ -259,7 +259,7 @@ export default {
       // "ajouterHistoriqueBudgetGeneral"
     ]),
     ModificationBudgetaire(){
-                this.$router.push({ name: 'ModificationBudgetaire' })
+                this.$router.push({ name: 'ModificationBudgetaireRegie' })
             },
             SOUSbUDGET(){
                 this.$router.push({ name: 'sousBudget' })
