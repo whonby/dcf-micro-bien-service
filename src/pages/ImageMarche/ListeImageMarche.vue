@@ -6,7 +6,7 @@
     <div class="main-body">
 
          <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    <button class="btn btn-success" @click.prevent="PagePrecedent">Page Précédente</button>
 
         </div>
 
@@ -168,9 +168,11 @@ detail:"",
     created(){
         let objet=localStorage.getItem('Users');
         let user=JSON.parse (objet)
-this.detail=this.marches.find(item=>item.id==this.$route.params.id)
+        this.detail=this.marches.find(item=>item.id==this.$route.params.id)
         this.formD.marche_id=this.$route.params.id
         this.formD.user_id=user.id
+        console.log(this.$route.params.id)
+        console.log(this.marches[this.$route.params.id])
     },
 
         computed: {
@@ -217,6 +219,12 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.name
+},
+marcheId(){
+    return this.marches.find((tem) =>{
+        return tem.marche_id,
+        console.log(tem.marche_id)
+    })
 },
 getMarche(){
 return marche_id=>{
@@ -286,6 +294,9 @@ getterImageParMarche() {
 
 
     ]),
+    PagePrecedent(){
+        this.$router.push('/images')
+    },
     suppressionImg(){
         // return this.getterImageMarche.filter((elmt) => {
         //     return elmt.marche_id !== id;

@@ -146,6 +146,187 @@ libelleUA
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                     </select> -->
 
+<<<<<<< HEAD
+                <select v-model="formData.gdenature_id" class="span" style="border:1px solid #000">
+                  <option
+                    v-for="plans in grandes_natures"
+                    :key="plans.id"
+                    :value="plans.id"
+                  >
+                    {{ plans.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+               </tr>
+               <tr>
+                    <td colspan="4">
+            <div class="control-group">
+              <label class="control-label">Objet marché / contrat</label>
+              <div class="controls">
+                <textarea
+                style="border:1px solid #000"
+                  v-model="formData.objet"
+                  class="span"
+                  rows="2"
+                  placeholder="Saisir le texte"
+                ></textarea>
+              </div>
+              <!-- <code v-if="formData.objet && contraintObjet.length >=1">
+                {{formData.objet}} existe deja
+              </code> -->
+            </div>
+          </td>
+
+               </tr>
+               <tr>
+                 <td>
+            <div class="control-group">
+              <label class="control-label">Activité</label>
+              <div class="controls">
+                <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
+                  <option
+                        v-for="activite in activiteDynamiques(formData.unite_administrative_id)" 
+                        :key="activite[0].activite_id"
+                        :value="activite[0].activite_id"
+                      >{{afficherLesActivite(activite[0].activite_id)}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
+          <template v-if="comparereActivite(this.formData.activite_id)== this.formData.activite_id">
+ <td >
+           
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >Sous Budget</label
+              >
+              <div class="controls">
+                <select
+                  v-model="formData.unite_zone"
+                  class="span"
+                  style="border:1px solid #000"
+                >
+                <option></option>
+                  <option
+                    v-for="plans in AfficheUniteZone(formData.activite_id)"
+                    :key="plans.id"
+                    :value="plans.id"
+                  >
+                    {{
+                     
+                        plans.activite_enfant
+                      
+                    }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+           <td >
+            
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >Ligne Economique</label
+              >
+              <div class="controls">
+                <select
+                style="border:1px solid #000"
+                  v-model="formData.economique_id"
+                  class="span"
+                >
+                  <option
+                    v-for="plans in AfficheUniteZoneLigneEconnomique(formData.unite_zone)"
+                    :key="plans.id"
+                    :value="plans.ligneeconomique_id"
+                  >
+                    {{
+                     
+                        libelleLigneEconomique(plans.ligneeconomique_id)
+                      
+                    }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+          </template>
+         <template v-else>
+<td colspan="2">
+            <div class="control-group">
+              <label class="control-label" title="unite administrative"
+                >Ligne Economique</label
+              >
+              <div class="controls">
+                <select
+                style="border:1px solid #000"
+                  v-model="formData.economique_id"
+                  class="span"
+                >
+                  <option
+                    v-for="plans in AfficheUALigneEconnomique(formData.unite_administrative_id)"
+                    :key="plans[0].id"
+                    :value="plans[0].ligneeconomique_id"
+                  >
+                    {{libelleLigneEconomique(plans[0].ligneeconomique_id)}}
+                     
+                        
+                      
+                   
+                  </option>
+                </select>
+              </div>
+            </div>
+          
+          
+          </td>
+         </template>
+         
+           
+ 
+          
+                 </tr>
+              <tr>
+                <td>
+            <div class="control-group">
+              <label class="control-label">Imputation Budgétaire</label>
+              <div class="controls">
+                <input
+                  type="text"
+                  :value="ImputationBudget"
+                  class="span"
+                  placeholder="Saisir le Imputation"
+                  readonly
+                  style="border:1px solid #000"
+                />
+              </div>
+            </div>
+          </td>
+           <td colspan="">
+            <div class="control-group">
+              <label class="control-label">Type de financement</label>
+              <div class="controls">
+               
+                <select v-model="formData.type_financement" class="span" style="border:1px solid #000">
+                  <option
+                    v-for="plans in types_financements"
+                    :key="plans.id"
+                    :value="plans.id"
+                    style="border:1px solid #000"
+                  >
+                    {{ plans.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </td>
+           <td colspan="">
+            <div class="control-group">
+              <label class="control-label">Source de financement</label>
+              <div class="controls">
+                <!-- <input
+=======
                                 <select
                                   v-model="formData.gdenature_id"
                                   class="span"
@@ -353,6 +534,7 @@ libelleUA
                               >
                               <div class="controls">
                                 <!-- <input
+>>>>>>> ecdd7754345a06c0e5f96b57accf71b0ebd3b3e5
            type="text"
            v-model="formData.source_financement"
            class="span4"
@@ -527,8 +709,9 @@ libelleUA
         </div>
       </div>
     </div>
-    <notifications />
-  </div>
+
+
+
 </template>
 
 <script>
@@ -548,7 +731,7 @@ export default {
     return {
       code:'',
       codes:'',
-      charact:'ABCDEFGHIGKLMNOPQRSTUVWXYZ123456789abcdefghijklmnopqrstuvwxyz',
+      charact:'ABCDEFGHIGKLMNOPQRSTUVWXYZ0123456789',
       fabActions: [
         {
           name: "cache",
@@ -609,6 +792,7 @@ export default {
   },
   created(){
     console.log(this.rand_alea(5))
+    console.log(this.marches)
   },
   computed: {
     ...mapGetters("bienService", [
@@ -1075,6 +1259,12 @@ ImputationBudget(){
       }
       return 0;
     },
+    // contraintObjet(){
+    //  return this.marches.filter((item) =>{
+    //    return item.objet.toUpperCase().includes(this.formData.objet.toUpperCase())
+    //  })
+    // },
+
   },
   //générer une référence dynamique
   
@@ -1089,9 +1279,10 @@ ImputationBudget(){
         for (let i = 0; i < long; i++) {
           this.codes += (this.charact.charAt(Math.floor(Math.random() * this.charact.length)))
       }
-      this.formData.reference_marche = ('M_C/'+this.codes+'/'+ this.anneeBugetaire);
+      this.formData.reference_marche = (this.codes+'-'+ this.anneeBugetaire);
       return this.formData.reference_marche;
     },
+    
     pagePrecedent(){
                 window.history.back()
             },
