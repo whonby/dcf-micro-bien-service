@@ -350,7 +350,7 @@ getterImageParMarche() {
       console.log(this.detailMarche.id)
     },
     PagePrecedante(){
-      const userId = 328
+      const userId = 175
       this.$router.push({path:`/liste_image_marche/${userId}`})
     },
      distance(lat1, lon1, lat2, lon2, unit) {
