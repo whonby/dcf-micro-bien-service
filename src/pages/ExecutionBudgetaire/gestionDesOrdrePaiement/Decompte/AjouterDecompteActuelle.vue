@@ -1099,7 +1099,8 @@ Montantapresretenues(){
       // parts_etat:this.MontantHTEtat,
       // parts_bailleur:this.MontantHTBailleur, 
       montantmarche:this.Montantapresretenues,
-      exercicebudget:this.anneeAmort
+      exercicebudget:this.anneeAmort,
+      op_id:this.detail_Facture.id
       };
       this.ajouterDecompteFacture(nouvelObjet);
       this.ajouterHistoriqueDecompteFacture(nouvelObjet)

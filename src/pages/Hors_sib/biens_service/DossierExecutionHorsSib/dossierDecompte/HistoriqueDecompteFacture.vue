@@ -20,7 +20,7 @@
           <th style="text-align:center;font-size:12px">Famille Motif Cf </th>
            <th style="text-align:center;font-size:12px">Motif Cf </th>
             <th style="text-align:center;font-size:12px">Autres Motif </th>
-          <th style="text-align:center;font-size:12px">Décision </th>
+          <th style="text-align:center;font-size:12px">Décision 85</th>
                   </tr>
 
 
@@ -30,9 +30,7 @@
                                     <tr class="odd gradeX" v-for="type in afficheMarcheDecompte(macheid)" :key="type.id">
                     <td style="text-align:center;"
                     >{{type.numero_decompte || 'Non renseigné'}}</td>
-                    <!-- <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                    
                     <td style="text-align:center;"
                     >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
                     <td style="text-align:center;"

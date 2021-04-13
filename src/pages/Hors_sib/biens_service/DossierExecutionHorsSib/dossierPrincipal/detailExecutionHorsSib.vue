@@ -144,18 +144,22 @@ controlleur_fin
               </div>
             </div>
           </div>
+          <tableauBordExecution
+                      :macheid="detail_marche.id"
+                    ></tableauBordExecution>
+         
           <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-striped">
               <div class="widget-box">
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
-                    <li class="active">
+                    <!-- <li class="active">
                       <a data-toggle="tab" href="#tab1">TABLEAU DE BORD</a>
-                    </li>
+                    </li> -->
                     <!-- <li>
                       <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
                     </li> -->
-                    <li>
+                    <li class="active">
                       <a data-toggle="tab" href="#tab789"
                         >AVENANT</a
                       >
@@ -208,7 +212,7 @@ controlleur_fin
                                   :macheid="detail_marche.id"
                                 ></decompte>
                   </div>
-                  <div id="tab789" class="tab-pane">
+                  <div id="tab789" class="tab-pane active">
                    <avenant :macheid="detail_marche.id"></avenant>
                   </div>
                   <div id="tab030" class="tab-pane">
@@ -217,11 +221,11 @@ controlleur_fin
                     ></TableauMarchePluriannuel>
                   </div>
                   <!--ongle identification-->
-                  <div id="tab1" class="tab-pane active">
+                  <!-- <div id="tab1" class="tab-pane active">
                     <tableauBordExecution
                       :macheid="detail_marche.id"
                     ></tableauBordExecution>
-                  </div>
+                  </div> -->
                   <div id="tab2" class="tab-pane">
                     <div class="widget-content nopadding">
                       <div class="row-fluid">

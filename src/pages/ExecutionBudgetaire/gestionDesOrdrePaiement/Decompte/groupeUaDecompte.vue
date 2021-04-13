@@ -167,13 +167,27 @@ quantite: {
     ]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     ...mapGetters("uniteadministrative", ["decomptefactures","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
-    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 
+AnneParUa() {
+     
+            return this.decomptefactures.filter(item=>item.exercicebudget != this.anneeAmort)
+         
+    },
+anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
+    },
 arrayExerciceDecompte() {
       // return (id) => {
         
-        let objet = this.decomptefactures;
+        let objet = this.AnneParUa;
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

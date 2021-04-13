@@ -653,8 +653,8 @@ recupBanque1
     </table>
 
     </div>
-
-<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null">
+<!-- <div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null"> -->
+<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null || detailOp.type_ordre_paiement == 2 && detailOp.diff_op_personnel == null">
 
    <table class="table table-bordered table-striped">
       <td style="width: 90%"></td>
@@ -709,9 +709,9 @@ recupBanque1
 
  </div>
 <div id="tab100" class="tab-pane">
-   <listeDecompteAnterieurHist
+   <GroupeParAnneeDecompte
                       :macheid="detailOp.marche_id"
-                    ></listeDecompteAnterieurHist>
+                    ></GroupeParAnneeDecompte>
 
  </div>
 </div>
@@ -786,14 +786,14 @@ import "jspdf-autotable";
 
  //import HistoriqueDecompteFacture from "@/pages/Hors_sib/dossierDecompte/HistoriqueDecompteFacture.vue"
  import listeDecompte from "./Decompte/listeDecompte.vue";
- import listeDecompteAnterieurHist from "./Decompte/listeDecompteAnterieurHist.vue";
+ import GroupeParAnneeDecompte from "./Decompte/GroupeParAnneeDecompte.vue";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
 export default {
   components: {
    listeDecompte,
-   listeDecompteAnterieurHist
+   GroupeParAnneeDecompte
     //ModelListSelect
   },
   data() {

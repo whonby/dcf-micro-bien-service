@@ -288,7 +288,7 @@ FamilleMotifCf() {
       return id => {
         if (id != null && id != "") {
           return this.decomptefactures.filter(
-            element => element.marche_id == id && element.exercicebudget==this.anneeAmort
+            element => element.marche_id == id 
           );
         }
       };
