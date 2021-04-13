@@ -92,6 +92,7 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
+import ImageParDossier from "../../pages/ImageMarche/ImageParDossier.vue";
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
@@ -150,6 +151,11 @@ import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDes
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/image-par-dossier",
+        name: "ImageParDossier",
+        component: ImageParDossier
+    },
     {
         path: "/ListePersonnelRattacherByUa/:id",
         name: "ListePersonnelRattacherByUa",

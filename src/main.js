@@ -14,6 +14,7 @@ import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 import VueLoading from 'vuejs-loading-plugin'
 import './../node_modules/jquery/dist/jquery.min.js';
 import './../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap';
 import App from './App.vue'
 import router from './routes'
 import store from './vuex/store'
