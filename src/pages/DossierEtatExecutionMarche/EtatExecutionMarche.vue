@@ -202,7 +202,145 @@
                                       
               </tbody>  
               </table>
+        <br>
     </div>
+    <br>
+      <table>
+        <tr>
+          <td>Decompte</td>
+          <td>Date</td>
+          <td>Action TVA</td>
+          <th colspan="3">
+            Retenue
+          </th>
+          <td>TVA net</td>
+          <td>netTV</td>
+          <td>Etat</td>
+          <td>Bailler</td>
+        </tr>
+       
+        <tr>
+          <td>0</td>
+          <td>15/03/2021</td>
+          <td>15 12365</td>
+          <td>Avance</td>
+          <td>Garantie</td>
+          <td>Penalités</td>
+          <td>15 12365</td>
+          <td> 12365</td>
+         <td>15 </td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>15/03/2021</td>
+          <td>12354</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        
+          <td> 145 354</td>
+          <td> 145 </td>
+          <td>354</td>
+          <td>0</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="background-color: aquamarine;">
+            <td>CUMULS</td>
+            <td></td>
+            <td>12546</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>15688254</td>
+            <td>365258987</td>
+            <td>365974587</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>%CUMULS</td>
+            <td></td>
+            <td>#VALLEUR!</td>
+            <td>0.0% </td>
+            <td>#VALEUR!</td>
+            <td>#VALEUR!</td>
+            <td>#VALEUR!</td>
+            <td>#VALEUR!</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+      </table>
+      <br>
+       <table>
+        <tr>
+            <td colspan="3">ENGAGEMENTS VISES</td>
+            <td>TAUX</td>
+        </tr>
+        <tr>
+            <td colspan="2">Par Bailleur</td>
+            <td>0</td>
+            <td>%0</td>
+        </tr>
+        <tr>
+            <td>Par Etat</td>
+            <td> </td>
+            <td>#REFT! </td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td> </td>
+            <td>#REFT! </td>
+            <td>0%</td>
+        </tr> 
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td colspan="3">RESTE A ENGAGER</td>
+            <td>TAUX</td>
+        </tr>
+        <tr>
+            <td colspan="2">Par Bailleur</td>
+            <td>0</td>
+            <td>%0</td>
+        </tr>
+        <tr>
+            <td>Par Etat</td>
+            <td> </td>
+            <td>#REFT! </td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td> </td>
+            <td>Valeur </td>
+            <td>0%</td>
+        </tr> 
+    </table>
   </div>
 </template>
 <script>
@@ -562,3 +700,17 @@ AfficheLogODCF() {
   }
 }
 </script>
+<style scoped>
+  table{
+    border-collapse: collapse
+  }
+  
+  th{
+    border: 1px solid black;
+  }
+  td{
+    border: 1px solid black;
+    padding: 10px;
+  }
+  
+</style>

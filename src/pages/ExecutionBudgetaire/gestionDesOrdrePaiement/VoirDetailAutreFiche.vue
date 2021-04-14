@@ -669,7 +669,7 @@ recupBanque1
             class=""
             style="font-weight: bolder; color: #fff"
             >
-            <i class="icon-arrow-left"> AJOUTER DECOMPTE PRECEDENT</i>
+            <i class="icon-arrow-left"> AJOUTER DECOMPTE ANTERIEUR</i>
           </span >
         </router-link>
       </td>

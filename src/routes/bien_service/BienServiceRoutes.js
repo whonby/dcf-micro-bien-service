@@ -48,7 +48,6 @@ import Engagement from '../../pages/bien_service/contractualisation/engagement.v
 import detailExecution from '../../pages/bien_service/contractualisation/DossierExecution/dossierPrincipal/detailExecution.vue';
 import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
-
 import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
 import tableauBord from '../../pages/bien_service/contractualisation/tableauBord.vue';
 import typeAppel from '../../pages/bien_service/parametres/type_appel.vue';
@@ -93,6 +92,7 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
+import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue";
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
@@ -150,6 +150,10 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
+
+import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
+import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
+import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
     {
