@@ -657,9 +657,22 @@ recupBanque1
 <div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null || detailOp.type_ordre_paiement == 2 && detailOp.diff_op_personnel == null">
 
    <table class="table table-bordered table-striped">
-      <td style="width: 90%"></td>
+      <td style="width: 70%"></td>
       
-     
+     <td>
+        <router-link
+          :to="{ name: 'AjouterDecomptePreced', params: { id: detailOp.id } }"
+          class="btn btn-danger"
+          title="Editer Fiche de controle"
+        >
+          <span
+            class=""
+            style="font-weight: bolder; color: #fff"
+            >
+            <i class="icon-arrow-left"> AJOUTER DECOMPTE PRECEDENT</i>
+          </span >
+        </router-link>
+      </td>
       <td>
         <router-link
           :to="{ name: 'AjouterDecompteActuelle', params: { id: detailOp.id } }"
@@ -670,7 +683,7 @@ recupBanque1
             class=""
             style="font-weight: bolder; color: #fff"
             >
-            <i class="icon icon-plus"> AJOUTER DECOMPTE</i>
+            <i class="  icon-arrow-right"> AJOUTER DECOMPTE ACTUEL</i>
           </span >
         </router-link>
       </td>

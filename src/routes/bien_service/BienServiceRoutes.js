@@ -149,8 +149,14 @@ import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesO
 import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/VoirDetailAutreFiche.vue"
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
+import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/AjouterDecomptePreced",
+        name: "AjouterDecomptePreced",
+        component: AjouterDecomptePreced
+    },
     {
         path: "/ListePersonnelRattacherByUa/:id",
         name: "ListePersonnelRattacherByUa",
