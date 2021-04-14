@@ -22,8 +22,8 @@ reference_marche
                                             <th>UA</th>
                                             <th>Type marche</th>
                                            <th>Numero marché</th>
-                                            <th>Objet marche</th>
-                                            <th>Montant reel</th>
+                                            <th>Objet marche{{idEntreprise}}</th>
+                                            <th>{{marcheid}}Montant reel{{detail_Entreprise.entreprise_id}}</th>
                                             
                                            
                                         </tr>
@@ -32,13 +32,14 @@ reference_marche
                    <tr class="odd gradeX" v-for="entrep in 
                 listeToutMarcheParEntrep(idEntreprise)"
                  :key="entrep.id">
-                  <td>{{afficheAnneeDuMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                 <td>{{entrep.marche_id || 'Non renseigné'}}</td>
+                  <!-- <td>{{afficheAnneeDuMarche(entrep.marche_id) || 'Non renseigné'}}</td>
                    <td>{{afficheLibelleUa(afficheIdUA(entrep.marche_id)) || 'Non renseigné'}}</td>
                    <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
                    <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
                    <td>{{afficheObjetMarche(entrep.marche_id) || 'Non renseigné'}}</td>
                    <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
-                          
+                           -->
                          
                    </tr>
                    <tr>
@@ -80,6 +81,13 @@ export default {
      
     };
   },
+  created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.acteEffetFinanciers.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+        
+},
 props:["idEntreprise"],
   computed: {
      ...mapGetters("bienService", ["groupeEntreprise",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
