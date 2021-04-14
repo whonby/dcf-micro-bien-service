@@ -1,4 +1,4 @@
-date_interim
+numero_op_hors_sib
 <template>
   <div class="container-fluid">
     <hr />
@@ -392,7 +392,7 @@ date_interim
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
-                    RecupdateActeEffetFinancier
+                    
                     <div id="ENGAGEMENT" class="tab-pane active">
                       <table
                         class="table table-bordered table-striped">
@@ -1038,7 +1038,7 @@ date_interim
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleUniteAdministrative(
-                                    formData2.marche_id
+                                    formData.unite_administrative_id
                                   )
                                 "
                                 class="span"
@@ -3123,7 +3123,7 @@ affichePersoUA() {
           );
 
           if (qtereel) {
-            return qtereel.user_id_interim;
+            return qtereel.user_id;
           }
           return 0;
         }
@@ -3612,7 +3612,7 @@ SousFinancement() {
                 qtreel.type_financement_id == id1 &&
                 qtreel.source_financement_id == id2 &&
                 qtreel.ligne_economique_id == id3 &&
-                qtreel.diff_op != null
+                qtreel.diff_op == null
             )
             .reduce(
               (prec, cur) =>

@@ -462,9 +462,9 @@
              <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant total du marché TTC</label>
+                <label class="control-label" >Montant de Base(Marche + Avenant)</label>
                 <div class="controls">
-                   <money  :value="montantTTCMarche(detail_Facture.marche_id)"  readonly style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                   <money  :value="MontantDeBase"  readonly style="text-align:left;color:red;font-size:16px"  class="span"></money>
                   <!-- <input
                       type="text"  
                         :value="montantTTCMarche(detail_Facture.marche_id)"
@@ -690,7 +690,7 @@ else {
 }
 },
      MontantDeBase(){
-return parseFloat(this.AfficheMontantMarche(this.formData.marche_id))+parseFloat(this.MontantAvenant(this.formData.marche_id))
+return parseFloat(this.montantTTCMarche(this.detail_Facture.marche_id))+parseFloat(this.MontantAvenant(this.detail_Facture.marche_id))
   },
   MontantAvenant() {
       return id => {
@@ -850,6 +850,7 @@ Montantapresretenues(){
         }
       };
     },
+    
     montantTTCMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1098,7 +1099,8 @@ Montantapresretenues(){
       // parts_etat:this.MontantHTEtat,
       // parts_bailleur:this.MontantHTBailleur, 
       montantmarche:this.Montantapresretenues,
-      exercicebudget:this.anneeAmort
+      exercicebudget:this.anneeAmort,
+      op_id:this.detail_Facture.id
       };
       this.ajouterDecompteFacture(nouvelObjet);
       this.ajouterHistoriqueDecompteFacture(nouvelObjet)

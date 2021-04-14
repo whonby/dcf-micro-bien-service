@@ -275,7 +275,7 @@ CreditAutorise
                     <td>
                       <div class="control-group">
                         <label class="control-label"
-                          >Type de depense{{ formData.typedepense }}</label
+                          >Type de depense</label
                         >
                         <div class="controls">
                           <select
@@ -1440,12 +1440,9 @@ CreditAutorise
                             >
                             <div class="controls">
                               <money
-                                :value="
-                                  cumulAnterieurUa(
-                                    formData.unite_administrative_id,
-                                    formData.ligne_economique_id
-                                  )
-                                "
+                                :value="CreditAutorise1(
+                                      formData.unite_administrative_id,
+                                      formData.ligne_economique_id,formData.type_financement_id,formData.bailler_id)"                                
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -1461,10 +1458,13 @@ CreditAutorise
                             <div class="controls">
                               <money
                                 :value="
+                                  
                                   cumulAnterieurUa(
-                                    this.formData.unite_administrative_id,
-                                    this.formData.ligne_economique_id
-                                  )
+          formData.unite_administrative_id,
+          formData.type_financement_id,
+          formData.bailler_id,
+          formData.ligne_economique_id
+        )
                                 "
                                 readOnly
                                 style="text-align: left; color: red"
@@ -3307,27 +3307,31 @@ export default {
         }
       };
     },
-    //   CreditAutorise() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id && qtreel.actived==1);
+  
+     CreditAutorise1() {
+      return (id, id1, id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
+          const qtereel = this.BudgetEclateRegie.find((qtreel) => qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
+              
+          );
 
-    //   if (qtereel) {
-
-    //        return qtereel.Dotation_Initiale;
-    //   }
-    //   return ""
-    //     }
-    //   };
-    // },
+          if (qtereel) {
+            return qtereel.dotation_nouvelle;
+          }
+          return 0;
+        }
+      };
+    },
     cumulAnterieurUa() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
+      return (id, id1,id2, id3) => {
+        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
-                qtreel.ligne_economique_id == id1 &&
+                qtreel.type_financement_id == id1 &&
+                qtreel.source_financement_id == id2 &&
+                qtreel.ligne_economique_id == id3 &&
                 qtreel.diff_op == 1
             )
             .reduce(

@@ -16,35 +16,31 @@ uniteAdministratives
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                         <th style="width:90%">ANNEE DECOMPTE{{detailOp.id}}</th>
-                        <th colspan="2">ACTION</th>
+                         <th style="width:80%">ANNEE</th>
+                          <th style="width:20%">MONTANT PAR ANNEE</th>
+                        
                         
                     </tr>
                     </thead>
                     <tbody>
                         <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in arrayExerciceDecompte(detailOp.id)"
+                    v-for="BesoinImmo in arrayExerciceDecompte(detail_Facture.marche_id)"
                     :key="BesoinImmo.id"
                   >
-                  <td style="font-size:25px"
+                  <td style="font-size:20px"
                    
                     >{{BesoinImmo || 'Non renseigné'}}</td>
-                 
-                     <td>
-                       <router-link
-                        :to="{name : 'ListeDecompteAnterieur', params: {id:BesoinImmo}}"
-                        class="btn btn-success"
-                        
-                      >
-                        <span>
-                          <i class="icon icon-folder-open" style="font-size:14px"> Voir Décompte Anterieur</i>
-                        </span>
-                      </router-link>
-                     </td>
-                 
+                 <td style="font-size:14px;text-align:center;"
+                   
+                    >{{formatageSomme(parseFloat(MontantDecompteParAnnee(BesoinImmo))) || 'Non renseigné'}}</td>
+                     
                   </tr>
-                  
+                  <tr>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Total</td>
+                  <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(MontantDecompteParAnneeTotal))}}</td>
+
+                  </tr>
                     </tbody> 
                 </table>   
      
@@ -66,7 +62,7 @@ uniteAdministratives
 </template>
   
 <script>
-//  import {formatageSomme} from "../../../vuex/modules/guei/Repositories/Repository"
+import {formatageSomme} from "@/Repositories/Repository"
     import {mapGetters, mapActions} from 'vuex';
     // import moment from "moment";
 // import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth";
@@ -141,13 +137,20 @@ quantite: {
       search: ""
     };
   },
- created() {
-    this.marcheid = this.$route.params.id;
-    this.detailOp = this.decomptefactures.find(
-      (idmarche) => idmarche.id == this.$route.params.id
-    );
-  },
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_Facture = this.gettersgestionOrdrePaiement.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+      
+},
   computed: {
+    ...mapGetters("bienService", ["avenants","gettersgestionOrdrePaiement","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
+     'nombremarchesExecute',
+     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
+     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
     ...mapGetters("SuiviImmobilisation", [
     
       "equipements",
@@ -163,18 +166,42 @@ quantite: {
     ]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     ...mapGetters("uniteadministrative", ["decomptefactures","groupeParAnneeDecompte","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
-    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+        ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
+MontantDecompteParAnneeTotal() {
+     
+           return this.decomptefactures.filter(qtreel =>qtreel.marche_id == this.detail_Facture.marche_id && qtreel.uniteadministrative_id == this.detail_Facture.unite_administrative_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
 
+     
+        
+    },
+MontantDecompteParAnnee() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.exercicebudget == id && qtreel.marche_id == this.detail_Facture.marche_id && qtreel.uniteadministrative_id == this.detail_Facture.unite_administrative_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
+
+     
+        }
+      };
+    },
 AnneParUa() {
       return (id) => {
         if (id != null && id != "") {
           return this.decomptefactures.filter(
-            (qtreel) => qtreel.uniteadministrative_id == id
+            (qtreel) => qtreel.marche_id == id && qtreel.exercicebudget != this.anneeAmort
           );
         }
       };
     },
+anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
+    },
 arrayExerciceDecompte() {
       return (id) => {
         
@@ -239,7 +266,7 @@ arrayExerciceDecompte() {
     ]),
     ...mapActions("uniteadministrative",
      ["supprimerStockArticle"]),
-    
+    formatageSomme:formatageSomme,
   }
 };
 </script>

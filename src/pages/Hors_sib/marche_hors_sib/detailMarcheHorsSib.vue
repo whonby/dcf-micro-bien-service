@@ -348,7 +348,7 @@
 
                                 <li class=""><a data-toggle="tab" href="#tab06125">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution</a></li>
-                               <li class=""><a data-toggle="tab" href="#tab0143723">bailleur</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab0143723">Bailleur</a></li>
                                <li class=""><a data-toggle="tab" href="#tab014201">ANRMP</a></li>
 
 

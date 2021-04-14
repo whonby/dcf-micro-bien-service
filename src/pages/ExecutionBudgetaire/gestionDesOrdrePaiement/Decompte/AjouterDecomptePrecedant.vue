@@ -132,7 +132,7 @@
                   </td>
                    <td colspan="">
                      <div class="control-group">
-                                                    <label class="control-label">Montant du marche</label>
+                                                    <label class="control-label">Montant de Base(Marche + Avenant)</label>
                                                     <div class="controls">
                                                          <money :value="MontantDeBase"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                                                         

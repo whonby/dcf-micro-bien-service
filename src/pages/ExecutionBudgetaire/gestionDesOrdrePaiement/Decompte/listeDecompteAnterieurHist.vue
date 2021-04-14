@@ -280,7 +280,16 @@ FamilleMotifCf() {
       };
     },
 
+anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
+    },
 
 
 
@@ -288,7 +297,7 @@ FamilleMotifCf() {
       return id => {
         if (id != null && id != "") {
           return this.decomptefactures.filter(
-            element => element.marche_id == id
+            element => element.marche_id == id && element.exercicebudget != this.anneeAmort
           );
         }
       };

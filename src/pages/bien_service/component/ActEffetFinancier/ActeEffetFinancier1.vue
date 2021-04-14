@@ -512,7 +512,7 @@ avance_demarrage_ht
                       class="span"
                       placeholder=" "
                     />
-                    <input type="hidden" v-model="formEffetFinancier.ua_id" />
+                    <!-- <input type="hidden" v-model="formEffetFinancier.ua_id" /> -->
                   </div>
                 </div>
               </td>
@@ -526,7 +526,7 @@ avance_demarrage_ht
                   <div class="controls">
                     <input
                       type="date"
-                      v-model="formEffetFinancier.date_odre_service"
+                      v-model="date_debut_previsionnel"
                       class="span"
                       placeholder=""
                     />
@@ -1488,10 +1488,10 @@ avance_demarrage_ht
                       class="span"
                       placeholder=" "
                     />
-                    <input
+                    <!-- <input
                       type="hidden"
                       v-model="editActeEffetFinancier.ua_id"
-                    />
+                    /> -->
                   </div>
                 </div>
               </td>
@@ -1567,7 +1567,7 @@ avance_demarrage_ht
                 <div class="control-group">
                   <label class="control-label" title="">garantie</label>
                   <div class="controls">
-                    <select v-model="garantie" class="span">
+                    <select v-model="editActeEffetFinancier.garantie" class="span">
                       <option value="oui">Oui</option>
                       <option value="non">Non</option>
                     </select>
@@ -1588,14 +1588,14 @@ avance_demarrage_ht
 
               <td>
                 <div>
-                  <div class="control-group" v-if="garantie == 'oui'">
+                  <div class="control-group" v-if="editActeEffetFinancier.garantie == 'oui'">
                     <label class="control-label" title=" "
                       >Durree de garantie(JOUR)
                     </label>
                     <div class="controls">
                       <input
                         type="number"
-                        v-model="durre_garantieModifier"
+                        v-model="editActeEffetFinancier.durre_garantie"
                         class="span"
                         placeholder=""
                       />
@@ -2160,7 +2160,8 @@ export default {
         taux_retenue_garantie: "",
         tva: "",
         taux: "",
-        ua_id: "",
+        //ua_id: "",
+        httcc_id:"",
         // avance_demarrage_ht:0,
         avance_demarrage_ttc: 0,
         tva_avance_demarage: "",
@@ -2185,6 +2186,8 @@ export default {
         banq_id: "",
         compte_id: "",
         numero_marche: "",
+        durre_garantie:"",
+        garantie:"",
       },
       // editEffetFinancier:{},
       sous_traitance: "non",
@@ -2194,7 +2197,7 @@ export default {
       structure_id: [],
       date_debut_previsionnel: "",
       date_debut_previsionnelModifier: "",
-      durre_prevueModifier: "",
+      durre_prevueModifier:"",
       durre_garantieModifier: "",
       durre_prevue: "",
       durre_garantie: "",
@@ -2212,7 +2215,8 @@ export default {
         taux_retenue_garantie: "",
         tva: "",
         taux: "",
-        ua_id: "",
+        //ua_id: "",
+        httcc_id:"",
         // avance_demarrage_ht:0,
         avance_demarrage_ttc: 0,
         tva_avance_demarage: "",
@@ -2429,6 +2433,7 @@ export default {
         }
       };
     },
+    
     affichieridMarcheGlobal() {
       return (id) => {
         if (id != null && id != "") {
@@ -3300,26 +3305,7 @@ export default {
       return 0;
     },
 
-    // avanceDemarrage(){
-    //   const val = parseFloat(this.formEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
-
-    //   if (val) {
-    //     return parseFloat(val).toFixed(0);
-    //   }
-
-    //   return 0
-    // },
-    //   avanceDemarrageModifier(){
-    //   const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTvaModifier);
-
-    //   if (val) {
-    //     return parseFloat(val).toFixed(0);
-    //   }
-
-    //   return 0
-    // },
-
-    // calcul du montant hors taxe de l'avance de demarage
+    
     avanceDemarrageMontantTva() {
       let montantTV = this.avanceDemarageHorsTaxe * this.afficherEnorere;
 
@@ -3337,24 +3323,6 @@ export default {
       return parseFloat(montant).toFixed(0);
     },
 
-    //  avanceDemarrageMontantTvaModifier() {
-    //   const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
-
-    //   if (val) {
-    //     return parseFloat(val).toFixed(0);
-    //   }
-
-    //   return 0
-    // },
-    // avanceDemarrageMontantTvaModifier() {
-    //     const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editActeEffetFinancier.taux_avance_demarrage)/100);
-
-    //     if (val) {
-    //       return parseFloat(val).toFixed(0);
-    //     }
-
-    //     return 0
-    //   },
 
     editAvanceDemarrageMontantTva() {
       const val = parseFloat(
@@ -3796,6 +3764,7 @@ export default {
         (item) => item.id == this.editActeEffetFinancier.marche_id
       );
       this.marche_lot = this.editActeEffetFinancier.marche_id;
+      this.durre_prevueModifier = this.editActeEffetFinancier.duree;
       // if ( this.analyseByLot(this.editActeEffetFinancier.marche_id).length>0){
       //     this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id)),
       //         this.dossier_candidat_id=this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id
@@ -3823,8 +3792,8 @@ export default {
           .afficherMontantRetenueGarantieModifier,
         tva: this.montantTvaModifier,
         sous_traitance: this.sous_traitance,
-        garantie: this.garantieModifier,
-        duree: this.durre_prevueModifier,
+        //garantie: this.garantieModifier,
+        //duree: this.durre_prevueModifier,
         montant_act: this.montantHTtModifier,
         avance_demarrage_ht: this.avanceDemarageHorsTaxeModifier,
         montant_ht_bon_execution: this
@@ -3840,16 +3809,16 @@ export default {
         marche_id: this.marche_lot,
         marchegeneral_id: this.affichieridMarcheGlobal(this.marche_lot),
         sous_traitance_array: this.structure_id,
-        banq_id: this.affichierIdBanque(
-          this.afficherLeCompteEnFonctionDeLaBanque(
-            this.editActeEffetFinancier.banq_id
-          )
-        ),
-        compte_id: this.afficherIdCompte(
-          this.afficherLeCompteEnFonctionDeLaBanque(
-            this.editActeEffetFinancier.banq_id
-          )
-        ),
+        // banq_id: this.affichierIdBanque(
+        //   this.afficherLeCompteEnFonctionDeLaBanque(
+        //     this.editActeEffetFinancier.banq_id
+        //   )
+        // ),
+        // compte_id: this.afficherIdCompte(
+        //   this.afficherLeCompteEnFonctionDeLaBanque(
+        //     this.editActeEffetFinancier.banq_id
+        //   )
+        // ),
         text_juridique_id: 0,
       };
       let marcheObjet = this.marches.find(
@@ -3878,9 +3847,12 @@ export default {
           ...this.formEffetFinancier,
           ua_id: this.afficherIDUA(this.macheid),
           taux: this.afficherEnorere,
-          tva_cautionnement: this.afficherMontantTvaDuCautionnement,
-          montant_ttc_cautionnement: this.afficherMontantTTCDuCautionnement,
-          montant_ht_cautionnement: this.afficheMontantHorsTaxeDuCautionnement,
+          tva_cautionnement: 
+          this.afficherMontantTvaDuCautionnement,
+          montant_ttc_cautionnement: 
+          this.afficherMontantTTCDuCautionnement,
+          montant_ht_cautionnement:
+           this.afficheMontantHorsTaxeDuCautionnement,
           montant_ht_retenu_garantie: this
             .afficherMontantHorsTaxeRetenuGarantie,
           montant_ht_bon_execution: this
@@ -3889,12 +3861,15 @@ export default {
             .afficherMontantTvaDeGarantieDeBonneExecution,
           montant_ttc_bon_execution: this
             .afficherMontantTTCDeGarantieDeBonneExecution,
-          montant_tva_retenu_garanti: this.afficherMontantTvaTaxeRetenuGarantie,
-          montant_ttc_retenue_garantie: this.afficherMontantRetenueGarantie,
+          montant_tva_retenu_garanti: 
+          this.afficherMontantTvaTaxeRetenuGarantie,
+          montant_ttc_retenue_garantie: 
+          this.afficherMontantRetenueGarantie,
           tva: this.montantTva,
           duree:this.durre_prevue,
           sous_traitance: this.sous_traitance,
           garantie: this.garantie,
+          durre_garantie:this.durre_garantie,
           montant_act: this.montantHTt,
           avance_demarrage_ttc: this.avanceDemarrageTTC,
           avance_demarrage_ht: this.avanceDemarageHorsTaxe,
@@ -3913,7 +3888,7 @@ export default {
 
         //this.formEffetFinancier.entreprise_id=entreprisePremier.id
         this.ajouterActeEffetFinancier(nouvelObjet);
-        this.$("#modificationModal").modal("hide");
+        
         let marcheObjet = this.marches.find(
           (marche) => marche.id == this.marche_lot
         );
@@ -3935,7 +3910,7 @@ export default {
           montant_act: "",
           date_attributaire: "",
           date_reception: "",
-          durre_prevue: "",
+          //durre_prevue: "",
           date_fin_exe: "",
           date_odre_service: "",
           livrable_id: "",
@@ -3951,7 +3926,9 @@ export default {
           // avance_demarrage_ht:0,
           sous_traitance: "",
         };
+        
         this.structure_id = [];
+        this.$("#ajouterAct").modal("hide");
       } else {
         var nouvelObjet12 = {
           ...this.formEffetFinancier,
@@ -3967,6 +3944,8 @@ export default {
           tva: this.CaculermontantTva,
           sous_traitance: this.sous_traitance,
           garantie: this.garantie,
+          durre_garantie:this.durre_garantie,
+          duree:this.durre_prevue,
           montant_act: this.formEffetFinancier.montant_act,
           montant_act_ht: this.CaculerMontantHtParTTC,
           avance_demarrage_ttc: this.avanceDemarrageTTC,
@@ -3986,7 +3965,7 @@ export default {
 
         //this.formEffetFinancier.entreprise_id=entreprisePremier.id
         this.ajouterActeEffetFinancier(nouvelObjet12);
-        this.$("#modificationModal").modal("hide");
+        //this.$("#modificationModal").modal("hide");
         let marcheObjet2 = this.marches.find(
           (marche) => marche.id == this.marche_lot
         );
@@ -4008,13 +3987,13 @@ export default {
           montant_act: "",
           date_attributaire: "",
           date_reception: "",
-          duree: "",
+         // duree: "",
           date_fin_exe: "",
           date_odre_service: "",
           livrable_id: "",
           autorite_approbation: "",
           date_approbation: "",
-          ua_id: "",
+         // ua_id: "",
           type_act_effet_id: "",
           analyse_dossier_id: "",
           entreprise_id: "",
@@ -4025,6 +4004,7 @@ export default {
           sous_traitance: "",
         };
         this.structure_id = [];
+        this.$("#ajouterAct").modal("hide");
       }
     },
     addStructure() {
@@ -4072,7 +4052,7 @@ export default {
       // this.formEffetFinancier.duree=value
       //console.log(value)
       if (this.date_debut_previsionnel) {
-        this.formEffetFinancier.duree = value;
+        this.durre_prevue = value;
         //    console.log(this.dateDefinitivePrevisionnel(this.date_debut_previsionnel,value))
         this.formEffetFinancier.date_reception = this.dateDefinitivePrevisionnel(
           this.date_debut_previsionnel,
@@ -4092,7 +4072,7 @@ export default {
     },
     durre_garantie: function (value) {
       if (value) {
-        this.formEffetFinancier.durre_garantie = value;
+        this.durre_garantie = value;
         if (this.date_debut_previsionnel != "" && this.durre_prevue != "") {
           let date = this.dateDefinitivePrevisionnel(
             this.date_debut_previsionnel,
@@ -4110,7 +4090,7 @@ export default {
       if (value == "non") {
         if (this.date_debut_previsionnel != "" && this.durre_prevue != "") {
           let date = this.dateDefinitivePrevisionnel(
-            this.formEffetFinancier.date_debut_previsionnel,
+            this.date_debut_previsionnel,
             this.durre_prevue
           );
           this.formEffetFinancier.date_fin_exe = date;
@@ -4128,15 +4108,15 @@ export default {
     date_debut_previsionnelModifier: function (value) {
       // this.formEffetFinancier.date_odre_service=value
       // console.log(this.formEffetFinancier.date_odre_service)
-      if (this.durre_prevueModifier) {
-        this.editActeEffetFinancier.date_odre_service = this.date_debut_previsionnel;
+      if (this.editActeEffetFinancier.duree) {
+        this.editActeEffetFinancier.date_odre_service = this.date_debut_previsionnelModifier;
         this.editActeEffetFinancier.date_reception = this.dateDefinitivePrevisionnel(
           value,
-          this.durre_prevueModifier
+          this.editActeEffetFinancier.duree
         );
         this.editActeEffetFinancier.date_fin_exe = this.dateDefinitivePrevisionnel(
           value,
-          this.durre_prevueModifier
+          this.editActeEffetFinancier.duree
         );
         console.log(this.editActeEffetFinancier);
         this.editActeEffetFinancier.duree = this.durre_prevueModifier;

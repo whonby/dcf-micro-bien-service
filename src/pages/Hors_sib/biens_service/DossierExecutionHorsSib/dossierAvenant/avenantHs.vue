@@ -60,12 +60,12 @@
          </td>
        </tr>
          <tr>
-           <td colspan="2">
+           <td colspan="">
                 
             <div class="control-group">
             <label class="control-label">Objet</label>
             <div class="controls">
-              <textarea rows="1"  v-model="formData.objet_avenant"  class="span12" type="text">
+              <textarea rows="2"  v-model="formData.objet_avenant"  class="span" type="text">
 
               </textarea>
 
@@ -85,9 +85,7 @@
                 </div>
               </div>
               </td>
-         </tr>
-         <tr>
-           <td>
+              <td>
            <div class="control-group">
             <label class="control-label">Montant du marche</label>
             <div class="controls">
@@ -101,6 +99,9 @@
             </div>
           </div>
          </td>
+         </tr>
+         <tr>
+           
           <td>
            <div class="control-group">
             <label class="control-label">Montant ht</label>
@@ -128,9 +129,6 @@
             </div>
           </div>
          </td>
-           
-         </tr>
-         <tr>
             <td>
            <div class="control-group">
             <label class="control-label">TVA</label>
@@ -145,6 +143,9 @@
             </div>
           </div>
          </td>
+         </tr>
+         <tr>
+           
             <td>
            <div class="control-group">
             <label class="control-label">Montant Avenant</label>
@@ -162,6 +163,19 @@
           </div>
          </td>
          <td>
+           <div class="control-group">
+            <label class="control-label">Taux d'Avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="tauxAvenant"
+                class="span"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+         <td>
             <div class="control-group">
             <label class="control-label">Date avenant</label>
             <div class="controls">
@@ -174,26 +188,14 @@
             </div>
           </div>
          </td>
-          <!-- <td>
-            <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="quinzePourcentDuMarche"
-                class="span"
-               
-              />
-            </div>
-          </div>
-         </td> -->
+         
          </tr>
           </table>
         
       </div>
       <div class="modal-footer">
         <a
-        v-if="parseFloat(this.quinzePourcentDuMarche) > parseFloat(this.affichierMontantAvenantTTC)"
+        
           @click.prevent="ajouterTypeTexteLocal"
           class="btn btn-primary"
           href="#"
@@ -263,7 +265,7 @@
          </td>
        </tr>
          <tr>
-           <td colspan="2">
+           <td colspan="">
                 
             <div class="control-group">
             <label class="control-label">Objet</label>
@@ -277,7 +279,7 @@
            </td>
             <td>
                 <div class="control-group">
-                <label class="control-label">exonéré{{editAvenant.exonere}}</label>
+                <label class="control-label">exonéré</label>
                 <div class="controls">
                   <select v-model="editAvenant.exonere" class="span">
                   
@@ -288,23 +290,19 @@
                 </div>
               </div>
               </td>
-         </tr>
-         <tr>
-            <td>
+              <td>
            <div class="control-group">
             <label class="control-label">Montant ht</label>
             <div class="controls">
-              <!-- <input
-                type="text"
-                v-model="editAvenant.montant_ht"
-                class="span"
-               
-              /> -->
+            
               <money v-model="editAvenant.montant_ht"    style="text-align:left;color:red;font-size:16px"  class="span"></money>
 
             </div>
           </div>
          </td>
+         </tr>
+         <tr>
+            
  <td>
            <div class="control-group">
             <label class="control-label">Taux</label>
@@ -350,6 +348,19 @@
           </div>
          </td>
          <td>
+           <div class="control-group">
+            <label class="control-label">Taux d'Avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="tauxAvenantModifier"
+                class="span"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+         <td>
             <div class="control-group">
             <label class="control-label">Date avenant</label>
             <div class="controls">
@@ -376,7 +387,25 @@
       </div>
     </div>
                 
-               
+                <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="" align="right">
+              <button
+                              @click.prevent="afficherModalAjouterTitre"
+                              class="btn btn-success"
+                            >
+                              <span>
+                                <i class="icon icon-plus-sign"
+                                  >Ajouter Avenant</i
+                                ></span
+                              >
+                            </button>
+            </div>
+              </td>
+              
+            </tr>
+          </table>
                  
                       <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
@@ -386,6 +415,7 @@
                         <th>Numéro avenant</th>
                     <th>Objet Avenant</th>
                     <th>Montant Avenant</th>
+                     <th>Taux Avenant</th>
                      <th>Date Avenant</th>
                     
                     <th>Action</th>
@@ -409,6 +439,9 @@
                     <td style="text-align: center"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
+                     <td style="text-align: center"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.taux_avenant || 0}}%</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formaterDate(type.date_avenant) || 'Non renseigné'}}</td>
@@ -417,7 +450,7 @@
                     <td>
                       <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"></i> Supprimer
                         </span>
                       </button>
                     </td>
@@ -429,6 +462,8 @@
                     
                       <td style="font-weight:bold;">Total Avenant</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.macheid)))}}</td>
+                     <td style="text-align: center;color:red;font-weight:bold;">{{parseFloat(TauxAvenantMarche(this.macheid))}} %</td>
+                    <td></td>
                     <td></td>
                   </tr>
                                     </tbody>
@@ -445,7 +480,7 @@
 
 
 
- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+ <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab> -->
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
@@ -545,6 +580,28 @@ search:""
     ]),
       ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
+tauxAvenant(){
+  //return ((parseFloat(this.affichierMontantAvenantTTC)/parseFloat(this.afficheMontantMarcheReel(this.macheid)))*100)
+
+ const val = ((parseFloat(this.affichierMontantAvenantTTC)/parseFloat(this.afficheMontantMarcheReel(this.macheid)))*100);
+      
+       if (val) {
+        return parseInt(val).toFixed(2);
+      }
+      
+      return 0
+},
+tauxAvenantModifier(){
+  //return ((parseFloat(this.affichierMontantAvenantTTC)/parseFloat(this.afficheMontantMarcheReel(this.macheid)))*100)
+
+ const val = ((parseFloat(this.affichierMontantAvenantTTCModifier)/parseFloat(this.afficheMontantMarcheReel(this.macheid)))*100);
+      
+       if (val) {
+        return parseInt(val).toFixed(2);
+      }
+      
+      return 0
+},
 
 affcherTauxEnCours() {
       
@@ -743,6 +800,16 @@ affichierMontantTVA() {
                     }
                 }
             },
+            TauxAvenantMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.taux_avenant).toFixed(2)
+                        },valInite);
+                    }
+                }
+            },
     afficheMarcheAvenant() {
       return id => {
         if (id != null && id != "") {
@@ -846,7 +913,12 @@ afficherLibelleService() {
     },
        ajouterTypeTexteLocal() {
          if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)){
-alert("Montant Avenant est supperieure au 30% du marche")
+
+this.$notify({
+                 title: 'ERROR',
+                 text: "Montant Avenant est supperieure au 30% du marche",
+                 type:"error"
+             })
          }
 else
 {
@@ -855,10 +927,19 @@ else
       marche_id :this.macheid,
    type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
    montant_avenant:this.affichierMontantAvenantTTC,
-   taux:this.afficherEnorere2
+   taux:this.afficherEnorere2,
+   taux_avenant:this.tauxAvenant
+   
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
+this.formData = {
+        
+        montant_ht: "",
+        exonere: "",
+        objet_avenant: "",
+        numero_avenant: "",
+      };
      
 }
     
@@ -875,7 +956,12 @@ afficherModalModifierTypeTexte(index) {
     },
     modifierTypeTexteLocal() {
              if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTCModifier)){
-alert("Montant Avenant est supperieure au 30% du marche")
+// alert("Montant Avenant est supperieure au 30% du marche")
+this.$notify({
+                 title: 'ERROR',
+                 text: "Montant Avenant est supperieure au 30% du marche",
+                 type:"error"
+             })
          }
 else
 {
@@ -885,7 +971,8 @@ else
    type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
    montant_avenant:this.affichierMontantAvenantTTCModifier,
      taux:this.afficherEnorere3,
-      	exonere:this.editAvenant.exonere
+      	exonere:this.editAvenant.exonere,
+        taux_avenant:this.tauxAvenantModifier
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');

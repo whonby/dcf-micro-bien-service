@@ -34,7 +34,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>{{marcheid}}VENTILATION DU BUDGET{{marcheid}}</h5>
+              <h5>VENTILATION DU BUDGET</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -124,16 +124,16 @@
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;background:green;">INVERTISSEMENT</td>
                      <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateTresor(marcheid)))}}</td>
                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateDon(marcheid)))}}</td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid)))}}</td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))) || 0}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateEmprunt(marcheid)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:green;">{{formatageSommeSansFCFA(parseFloat(SommeInvestivementBudgetEclateTresor(marcheid))+parseFloat(SommeInvestivementBudgetEclateDon(marcheid))+parseFloat(SommeInvestivementBudgetEclateEmprunt(marcheid))) || 0}}</td>
                     
                   </tr>
                   <tr>
                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">TOTAL BUDGET ECLATE</td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;"></td>
-<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))+parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))+parseFloat(SommePersonneBudgetEclateTresor(marcheid))+parseFloat(SommePersonneBudgetEclateDon(marcheid))+parseFloat(SommePersonneBudgetEclateEmprunt(marcheid))) || 0}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommePersonneBudgetEclateTresor(marcheid))+parseFloat(SommeInvestivementBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))) || 0}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeInvestivementBudgetEclateDon(marcheid))+parseFloat(SommePersonneBudgetEclateDon(marcheid))) || 0}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))+parseFloat(SommeInvestivementBudgetEclateEmprunt(marcheid))+parseFloat(SommePersonneBudgetEclateEmprunt(marcheid))) || 0}}</td>
+<td style="font-size:14px;color:#000;text-align:center;font-weight:bold;background:orange;">{{formatageSommeSansFCFA(parseFloat(SommeBienServiceBudgetEclateTresor(marcheid))+parseFloat(SommeBienServiceBudgetEclateDon(marcheid))+parseFloat(SommeBienServiceBudgetEclateEmprunt(marcheid))+parseFloat(SommeInvestivementBudgetEclateTresor(marcheid))+parseFloat(SommeInvestivementBudgetEclateDon(marcheid))+parseFloat(SommeInvestivementBudgetEclateEmprunt(marcheid))+parseFloat(SommePersonneBudgetEclateTresor(marcheid))+parseFloat(SommePersonneBudgetEclateDon(marcheid))+parseFloat(SommePersonneBudgetEclateEmprunt(marcheid))) || 0}}</td>
                   </tr>
                 </tbody>
               </table>

@@ -11,10 +11,10 @@ reference_marche
                   <tr>
                      <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
                     <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Nbre Marche Hors PPM Total</th>
-                     <th style="text-align:center;font-size:20px;color:#000">Nbre Marche en Planification</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Nombre Marche en contratualisation</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Nombre Marche de Execution</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Total Marche Hors PPM </th>
+                     <th style="text-align:center;font-size:20px;color:#000">Marche en Planification</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en contratualisation</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en Execution</th>
                     
                    
                   </tr>
@@ -114,7 +114,7 @@ reference_marche
                     <th>Référence marché</th>
                     <th>Statut</th>
                     <th>Montant prévisionnel</th>
-                    <th>Etat en cours</th>
+                    <th>Statut Marché</th>
                     <th title="mouvement du marché">Mouvement du marché</th>
                     <th style="">Suivi du marché</th>
                     <th>Action</th>

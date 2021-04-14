@@ -280,9 +280,18 @@ quantite: {
     ]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     ...mapGetters("uniteadministrative", ["decomptefactures","groupeParAnneeDecompte","uniteAdministratives","GestionStockageArticles","groupeUniteAdministrativeDecompte"]),
-    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 
+anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
+    },
   SommeDesDmdParBonCommande() {
    
     return this.ListeDEsEntreprise.filter(item=>item.exercicebudget==this.marcheid).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
@@ -375,7 +384,7 @@ afficheObjetMarche() {
       };
     },
 AnneParUa() {
-  return this.decomptefactures.filter( (qtreel) => qtreel.exercicebudget == this.marcheid)
+  return this.decomptefactures.filter( (qtreel) => qtreel.exercicebudget != this.marcheid)
       
     },
 

@@ -18,7 +18,7 @@ export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
 export const banqueUa = state => state.banqueUa;
-export const decomptefactures = state => state.decomptefactures;
+export const decomptefactures = state => state.decomptefactures.sort((a, b) => (a.numero_decompte > b.numero_decompte ? 1 : -1));
 export const HistoriqueDecompteFactures = state => state.historiqueDecomptefactures.sort((a, b) => (a.date_decompte > b.date_decompte ? 1 : -1));
 export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
