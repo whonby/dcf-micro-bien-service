@@ -4,7 +4,8 @@
         <div class="container-fluid" style="height: 100em;">
 
             <div>
-
+                <button @click="DossierImage" class="btn btn-warning">Dossier Image</button>
+                <br>
                 <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
 
                     <div class="span10" style="background: #f0c71d !important;">
@@ -894,6 +895,9 @@
             suivant(){
                 this.active_el++
                 this.page ++
+            },
+            DossierImage(){
+                this.$router.push('/dossier-image-ministere')
             },
         },
         watch: {
