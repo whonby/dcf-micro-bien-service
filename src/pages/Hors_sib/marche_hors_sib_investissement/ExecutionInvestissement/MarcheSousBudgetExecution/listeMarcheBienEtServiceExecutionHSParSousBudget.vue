@@ -207,8 +207,8 @@
 //import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 //import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 import { mapGetters, mapActions } from "vuex";
-import { admin, dcf, noDCfNoAdmin } from "../../../../Repositories/Auth";
-import { formatageSomme,partition} from "../../../../Repositories/Repository";
+import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
+import { formatageSomme,partition} from "@/Repositories/Repository";
 
 export default {
   name: "type facture",
@@ -409,11 +409,11 @@ created() {
         });
         return colect.filter(
           (element) =>
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.unite_zone == this.detailOp.unite_zone &&
               element.parent_id == null &&
               element.sib == 1 &&
               element.attribue == 2) ||
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+            (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_zone == this.detailOp.unite_zone &&
               element.parent_id == null &&
               element.sib == 1 &&
               element.attribue == 2)
@@ -421,11 +421,11 @@ created() {
       }
       return this.printMarcheNonAttribue.filter(
         (element) =>
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&  element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&  element.unite_zone == this.detailOp.unite_zone &&
             element.parent_id == null &&
             element.sib == 1 &&
             element.attribue == 2) ||
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+          (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_zone == this.detailOp.unite_zone &&
             element.parent_id == null &&
             element.sib == 1 &&
             element.attribue == 2)

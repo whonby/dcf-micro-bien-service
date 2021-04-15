@@ -9,7 +9,7 @@
           </li>
      <li>
    <li>
-            <router-link :to="{name: 'listeMarcheBienEtServiceHS'}" tag ="a">
+            <router-link :to="{name: 'GroupeMarcheExecutionParUa'}" tag ="a">
               EXECUTION DES MARCHES
             </router-link>
           </li>

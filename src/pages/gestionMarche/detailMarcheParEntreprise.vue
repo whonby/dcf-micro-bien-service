@@ -73,16 +73,168 @@
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
-  <LIsteToutMarcheParEntreprise :idEntreprise="detail_Entreprise.entreprise_id"></LIsteToutMarcheParEntreprise>
+ <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                                            
+                                            <th>Année</th>
+                                           
+                                            <th>UA</th>
+                                            <th>Type marche</th>
+                                           <th>Numero marché</th>
+                                            <th>Objet marche</th>
+                                            <th>Montant reel</th>
+                                            
+                                           
+                                        </tr>
+                </thead>
+                <tbody>
+                   <tr class="odd gradeX" v-for="entrep in 
+                listeToutMarcheParEntrep(detail_Entreprise.entreprise_id)"
+                 :key="entrep.id">
+                 <td>{{afficheAnneeDuMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                  
+                   <td>{{afficheLibelleUa(afficheIdUA(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{afficheObjetMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
+                          
+                         
+                   </tr>
+                   <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                   
+                     <td style="color:red;font-size:14px;text-align:center">CHIFFRE D'AFFAIRE</td>
+                     <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(montantToutMarcheParEntrep(detail_Entreprise.entreprise_id )))}}</td>
+                   </tr>
+                </tbody>
+              </table>
           </div>
                             <div id="tab2" class="tab-pane ">
-  <listeMarcheExecuteParEntreprise :idEntreprise="detail_Entreprise.entreprise_id"></listeMarcheExecuteParEntreprise>
+  <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                                            
+                                            <th>Année</th>
+                                           
+                                            <th>UA</th>
+                                            <th>Type marche</th>
+                                           <th>Numero marché</th>
+                                            <th>Objet marche</th>
+                                            <th>Montant reel</th>
+                                            
+                                           
+                                        </tr>
+                </thead>
+                <tbody>
+                   <tr class="odd gradeX" v-for="entrep in 
+                listeMarcheEnExecutionParEntreprise(detail_Entreprise.entreprise_id)"
+                 :key="entrep.id">
+                  <td>{{afficheAnneeDuMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleUa(afficheIdUA(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{conversionMajiscule(afficheObjetMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
+                          
+                         
+                   </tr>
+                    <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td style="color:red;font-size:14px;text-align:center">MONTANT TOTAL</td>
+                     <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(montantToutMarcheExecuteParEntrep(detail_Entreprise.entreprise_id)))}}</td>
+                   </tr>
+                </tbody>
+              </table>
         </div>
                       <div id="tab22" class="tab-pane ">
-                        <listeMarcheTermineParEntreprise :idEntreprise="detail_Entreprise.entreprise_id"></listeMarcheTermineParEntreprise>
+                         <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                                            
+                                            <th>Année</th>
+                                           
+                                            <th>UA</th>
+                                            <th>Type marche</th>
+                                           <th>Numero marché</th>
+                                            <th>Objet marche</th>
+                                            <th>Montant reel</th>
+                                            
+                                           
+                                        </tr>
+                </thead>
+                <tbody>
+                   <tr class="odd gradeX" v-for="entrep in 
+                listeMarcheEnTermineParEntreprise(detail_Entreprise.entreprise_id)"
+                 :key="entrep.id">
+                  <td>{{afficheAnneeDuMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleUa(afficheIdUA(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{conversionMajiscule(afficheObjetMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
+                          
+                         
+                   </tr>
+                    <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td style="color:red;font-size:14px;text-align:center">MONTANT TOTAL</td>
+                     <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(montantToutMarcheTermineParEntrep(detail_Entreprise.entreprise_id)))}}</td>
+                   </tr>
+                </tbody>
+              </table>
+                        <!-- <listeMarcheTermineParEntreprise :detail_Entreprise.entreprise_id="detail_Entreprise.entreprise_id"></listeMarcheTermineParEntreprise> -->
                       </div>
                       <div id="tab23" class="tab-pane ">
-                         <listeMarcheResilieParEntreprise :idEntreprise="detail_Entreprise.entreprise_id"></listeMarcheResilieParEntreprise>
+                         <!-- <listeMarcheResilieParEntreprise :detail_Entreprise.entreprise_id="detail_Entreprise.entreprise_id"></listeMarcheResilieParEntreprise> -->
+                      <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                                            
+                                            <th>Année</th>
+                                           
+                                            <th>UA</th>
+                                            <th>Type marche</th>
+                                           <th>Numero marché</th>
+                                            <th>Objet marche</th>
+                                            <th>Montant reel</th>
+                                            
+                                           
+                                        </tr>
+                </thead>
+                <tbody>
+                   <tr class="odd gradeX" v-for="entrep in 
+                listeMarcheEnResilieParEntreprise(detail_Entreprise.entreprise_id)"
+                 :key="entrep.id">
+                  <td>{{afficheAnneeDuMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleUa(afficheIdUA(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
+                   <td>{{conversionMajiscule(afficheObjetMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
+                          
+                         
+                   </tr>
+                    <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td style="color:red;font-size:14px;text-align:center">MONTANT TOTAL</td>
+                     <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(montantToutMarcheResilieParEntrep(detail_Entreprise.entreprise_id)))}}</td>
+                   </tr>
+                </tbody>
+              </table>
                       </div>
       </div>
       <div class="modal-footer">
@@ -136,17 +288,17 @@
     import { mapGetters, mapActions } from "vuex";
      import moment from "moment";
     import { formatageSomme } from './../../../src/Repositories/Repository';
-    import LIsteToutMarcheParEntreprise from '../gestionMarche/marcheParEntreprise/LIsteToutMarcheParEntreprise.vue'
-  import listeMarcheExecuteParEntreprise from '../gestionMarche/marcheParEntreprise/listeMarcheExecuteParEntreprise.vue'
-   import listeMarcheTermineParEntreprise from '../gestionMarche/marcheParEntreprise/listeMarcheTermineParEntreprise.vue'
-    import listeMarcheResilieParEntreprise from '../gestionMarche/marcheParEntreprise/listeMarcheResilieParEntreprise.vue'
+    //import LIsteToutMarcheParEntreprise from '../gestionMarche/marcheParEntreprise/LIsteToutMarcheParEntreprise.vue'
+  // import listeMarcheExecuteParEntreprise from '../gestionMarche/marcheParEntreprise/listeMarcheExecuteParEntreprise.vue'
+  //  import listeMarcheTermineParEntreprise from '../gestionMarche/marcheParEntreprise/listeMarcheTermineParEntreprise.vue'
+  //   import listeMarcheResilieParEntreprise from '../gestionMarche/marcheParEntreprise/listeMarcheResilieParEntreprise.vue'
  export default {
         name: 'compte',
         components:{
-           LIsteToutMarcheParEntreprise,
-           listeMarcheExecuteParEntreprise,
-           listeMarcheTermineParEntreprise,
-           listeMarcheResilieParEntreprise
+          //  LIsteToutMarcheParEntreprise,
+          //  listeMarcheExecuteParEntreprise,
+          //  listeMarcheTermineParEntreprise,
+          //  listeMarcheResilieParEntreprise
         },
         data() {
             return {
@@ -224,9 +376,112 @@ created() {
     ]),
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+          montantToutMarcheExecuteParEntrep: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 2 && this.afficheMarcheGestionSib(idmarche.marche_id)== 0).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+                    }
+                }
+            },
+      conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
+    },
+            montantToutMarcheTermineParEntrep: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort  && this.afficheEtatMarche(idmarche.marche_id)== 5 ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+                    }
+                }
+            },
+            afficheEtatMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
+ listeMarcheEnResilieParEntreprise: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && this.afficheEtatMarche(idmarche.marche_id)== 3 )
+                    }
+                }
+            },
+              montantToutMarcheResilieParEntrep: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && this.afficheEtatMarche(idmarche.marche_id)== 3 ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+                    }
+                }
+            },
+listeMarcheEnTermineParEntreprise: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 5)
+                    }
+                }
+            },
+listeMarcheEnExecutionParEntreprise: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort &&  this.afficheEtatMarche(idmarche.marche_id)== 2 )
+                    }
+                }
+            },
+   afficheMarcheGestionSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
-            afficheAnneeDuMarche() {
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 0
+        }
+      };
+    },
+    listeToutMarcheParEntrep: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort)
+                    }
+                }
+            },
+
+            montantToutMarcheParEntrep: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort  && this.afficheMarcheGestionSib(idmarche.marche_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+                    }
+                }
+            },
+   
+   anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+    afficheAnneeDuMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
@@ -238,6 +493,106 @@ created() {
         }
       };
     },
+
+
+ afficheIdUA() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheLibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    
+
+    afficheIdTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheLibelleTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficheNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+    afficheObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+     afficheMontantReel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+    //         afficheAnneeDuMarche() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.exo_id;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
  afficheRaisonSocial() {
       return id => {
         if (id != null && id != "") {

@@ -149,6 +149,7 @@ import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesO
 import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/VoirDetailAutreFiche.vue"
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
+import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
 
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
@@ -156,24 +157,9 @@ import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
     {
-        path: "/image-marche",
-        name: "DossierImg",
-        component: DossierImg
-    },
-    {
-        path: "/dossier-image-par-marche",
-        name: "DossierImageParMarche",
-        component: DossierImageParMarche
-    },
-    {
-        path: "/dossier-image-ua",
-        name: "DossierImageUa",
-        component: DossierImageUa
-    },
-    {
-        path: "/dossier-image-ministere",
-        name: "ImageParMinistere",
-        component: ImageParMinistere
+        path: "/AjouterDecomptePreced",
+        name: "AjouterDecomptePreced",
+        component: AjouterDecomptePreced
     },
     {
         path: "/ListePersonnelRattacherByUa/:id",

@@ -109,7 +109,7 @@ props:["idEntreprise"],
                 return id => {
                     if (id != "") {
                       // console.log("Marche leste acte effect finnancier")
-                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 2 && this.afficheMarcheGestionSib(idmarche.marche_id)== 1)
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort  && this.afficheEtatMarche(idmarche.marche_id)== 2 && this.afficheMarcheGestionSib(idmarche.marche_id)== 1)
                     }
                 }
             },
@@ -117,7 +117,7 @@ props:["idEntreprise"],
                 return id => {
                     if (id != "") {
                       // console.log("Marche leste acte effect finnancier")
-                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 2 && this.afficheMarcheGestionSib(idmarche.marche_id)== 1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort  && this.afficheEtatMarche(idmarche.marche_id)== 2 && this.afficheMarcheGestionSib(idmarche.marche_id)== 1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
                     }
                 }
             },

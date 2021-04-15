@@ -102,6 +102,7 @@
 
 
 
+
                    <td colspan="2" style="text-align:center;color:red">CUMULS</td>
                    
                    <td style="text-align:center;color:red;font-size:14px">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
@@ -409,7 +410,7 @@ if (qtereel) {
     CumulMontantFacture() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
 
         }
       };
@@ -417,7 +418,7 @@ if (qtereel) {
     CumulAvance() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
 
         }
       };
@@ -425,7 +426,7 @@ if (qtereel) {
     CumulGArantie() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
 
         }
       };
@@ -433,7 +434,7 @@ if (qtereel) {
     CumulPenalite() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
 
         }
       };
@@ -441,7 +442,7 @@ if (qtereel) {
     CumulNetHtva() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
 
         }
       };
@@ -449,7 +450,7 @@ if (qtereel) {
     CumulNetTTC() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
 
         }
       };
@@ -457,7 +458,7 @@ if (qtereel) {
     CumulPartEtat() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
 
         }
       };
