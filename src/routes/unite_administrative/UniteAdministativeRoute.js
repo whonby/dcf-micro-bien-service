@@ -56,6 +56,7 @@ import ModificationBudgetaireSousBudget from "../../pages/ExecutionBudgetaire/Bu
 import ModificationBudgetaireRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/ModificationBudgetaireRegie.vue"
 import sousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/sousBudget.vue"
 import VoirSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/VoirSousBudget.vue"
+import ModifierSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ModifierSousBudget.vue"
 import listeSousBudgetParUa from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetParUa.vue"
 import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/voirDetailBudget.vue"
 import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
@@ -121,9 +122,13 @@ const UniteAdministativeRoutes = [
     name: "ListeUniteAdministrative",
     component: ListeUniteAdministrative
 },
+{
+  path: "/ModifierSousBudget/:id",
+  name: "ModifierSousBudget",
+  component: ModifierSousBudget
+},
   
-  
-  
+
   {
     path: "/VoirSousBudget/:id",
     name: "VoirSousBudget",

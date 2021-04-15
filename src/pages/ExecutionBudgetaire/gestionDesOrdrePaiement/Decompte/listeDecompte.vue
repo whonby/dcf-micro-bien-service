@@ -9,14 +9,14 @@
           <th style="text-align:center;font-size:12px">N°Décompte</th>
           
           <th style="text-align:center;font-size:12px">Date</th>
-          <th style="text-align:center;font-size:12px">Acompte HTVA</th>
-          <th style="text-align:center;font-size:12px">Avance</th>
-          <th style="text-align:center;font-size:12px">Garantie</th>
-          <th style="text-align:center;font-size:12px">Penalités </th>
-          <th style="text-align:center;font-size:12px">Net HTVA </th>
-          <th style="text-align:center;font-size:12px">Net TTC</th>
-          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
-          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
+          <th style="text-align:center;font-size:12px">Acompte HTVA (FCFA)</th>
+          <th style="text-align:center;font-size:12px">Avance (FCFA)</th>
+          <th style="text-align:center;font-size:12px">Garantie (FCFA)</th>
+          <th style="text-align:center;font-size:12px">Penalités (FCFA) </th>
+          <th style="text-align:center;font-size:12px">Net HTVA (FCFA)</th>
+          <th style="text-align:center;font-size:12px">Net TTC (FCFA)</th>
+          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%)) (FCFA)</th>
+          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) (FCFA)</th>
           <!-- <th style="text-align:center;font-size:12px">Famille Motif Cf </th>
            <th style="text-align:center;font-size:12px">Motif Cf </th>
             <th style="text-align:center;font-size:12px">Autres Motif </th>
@@ -33,32 +33,32 @@
                     <!-- <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
-                    <td style="text-align:center;"
+                    <td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
                     >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
-                    <td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
-<td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
+                    <td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
+<td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
 
-<td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
+<td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
 
-<td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
-<td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
-
-                    
-                      <td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
+<td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
+<td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
 
                     
-                      <td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
+                      <td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
 
                     
-                      <td style="text-align:center;"
-                    >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
+                      <td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
+
+                    
+                      <td style="text-align:center;" @dblclick="afficherModalModifierTitre(type.id)"
+                    >{{formatageSommeSansFCFA(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
                    
 <!-- <td style="text-align:center;"
                     >{{libelleMotifCf(MotifCf(type.facture_id)) || 'Non renseigné'}}</td>
@@ -105,14 +105,14 @@
 
                    <td colspan="2" style="text-align:center;color:red">CUMULS</td>
                    
-                   <td style="text-align:center;color:red;font-size:14px">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:14px">{{formatageSommeSansFCFA(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulAvance(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulGArantie(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulPenalite(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulNetHtva(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulNetTTC(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulPartEtat(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSommeSansFCFA(parseFloat(CumulPartBailler(macheid)))}}</td>
                    <!-- <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td> -->
@@ -145,7 +145,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import { formatageSomme } from '@/Repositories/Repository';
+import { formatageSommeSansFCFA } from '@/Repositories/Repository';
 // // import { ModelListSelect } from "vue-search-select";
 // // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -882,6 +882,12 @@ if (qtereel) {
    
    
    ]),
+   afficherModalModifierTitre(id) {
+
+      this.$router.push({
+        path: "/ModificationDecompteAnterieur/" + id
+      });
+    },
      modifierDecompteLocal() {
          var nouvelObjet = {
         ...this.editDecompte,
@@ -901,7 +907,7 @@ if (qtereel) {
       }
        },
        
-    formatageSomme:formatageSomme,
+    formatageSommeSansFCFA:formatageSommeSansFCFA,
  formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },

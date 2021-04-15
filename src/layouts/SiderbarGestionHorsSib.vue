@@ -274,7 +274,7 @@ return objJson.id
        navigateurOrdrePaiement(){
         this.activate(1200)
         this.$router.push({
-          name:'tableau_de_bors_sib_investissement'
+          name:'ListeDesOrdresPaiement'
         })
       },
        navigateToRapport(){

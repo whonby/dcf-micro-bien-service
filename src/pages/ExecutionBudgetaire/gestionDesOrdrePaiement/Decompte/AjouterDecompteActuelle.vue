@@ -1090,16 +1090,24 @@ Montantapresretenues(){
      AjouterDecompte() {
       
 
+
+
+      
+
       var nouvelObjet = {
         ...this.formData,
         marche_id:this.detail_Facture.marche_id,
         facture_id:this.detail_Facture.id,
-      nethtva:this.montantTVA,
-      netttc:this.Montantapresretenues,
+      //nethtva:this.montantTVA,
+      //netttc:this.Montantapresretenues,
       // parts_etat:this.MontantHTEtat,
       // parts_bailleur:this.MontantHTBailleur, 
-      montantmarche:this.Montantapresretenues,
+     // montantmarche:this.Montantapresretenues,
       exercicebudget:this.anneeAmort,
+
+nethtva:this.Montantapresretenues,
+       montantmarche:this.MontantFacture(this.detail_Facture.id),
+      netttc:this.montantHTt,
       op_id:this.detail_Facture.id
       };
       this.ajouterDecompteFacture(nouvelObjet);

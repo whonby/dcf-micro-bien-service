@@ -81,6 +81,7 @@
                   <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService(marcheid)" :key="type.id">
                     <td
                      
+                     
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
                      <td
                      style="font-size:14px;color:#000;text-align:center;font-weight:bold;"

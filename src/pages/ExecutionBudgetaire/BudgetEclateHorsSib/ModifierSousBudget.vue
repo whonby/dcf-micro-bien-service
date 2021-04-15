@@ -14,7 +14,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Sous Budget</h5>
+              <h5>Modifier Sous Budget</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -238,7 +238,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="formData1.activite_enfant"
+                  v-model="formData.activite_enfant"
                     class="span"
                      
                   />
@@ -250,7 +250,7 @@
                        <div class="control-group">
                 <label class="control-label">Montant Attribué</label>
                 <div class="controls">
-                   <money v-model="formData1.montant_budgetaire" :readOnly="griserMontant"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                   <money v-model="formData.montant_budgetaire" :readOnly="griserMontant"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
                  <code style="color:red;font-size:12px" v-if="dotationTotal==0">Montant de la Ligne Budgetaire est Saturé</code>
                 </div>
               </div>
@@ -402,7 +402,10 @@ components: {
         },
 
         created() {
-          
+         
+            this.formData=this.getSousBudget.find(item=>item.id==this.$route.params.id)
+            
+           
         },
         computed: {
            admin:admin,
@@ -684,7 +687,7 @@ return this.uniteAdministratives
 
 methods: {
       ...mapActions("uniteadministrative", [
-      "ajouterSousBudget",
+      "modifierSousBudget",
       "supprimerSousBudget"
       
      
@@ -694,8 +697,9 @@ methods: {
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 formatageSomme:formatageSomme,
 ajouterTypeTexteLocal() {
-    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "/" + this.numeroOrdre
+    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "" + this.numeroOrdre
     var nouvell={
+        ...this.formData,
         execice:this.anneeAmort,
         activite_parent_id:this.formData.activite_parent_id,
         ligneeconomique_id:this.formData.ligneeconomique_id,
@@ -707,9 +711,9 @@ ajouterTypeTexteLocal() {
         source_financement_id:this.formData.source_financement_id,
         nombre_sous_budget:this.nombreSousBudgetParUa(this.formData.unite_administrative_id)
     }
-      this.ajouterSousBudget(nouvell);
+      this.modifierSousBudget(nouvell);
 
-      this.formData1 = {
+      this.formData = {
        
         activite_enfant:"",
         montant_budgetaire:0,

@@ -696,7 +696,7 @@ recupBanque1
             <ul class="nav nav-tabs">
               <li class="active">
                 <a data-toggle="tab" href="#tab2078"
-                  >Decomptes Année en cours
+                  >Decomptes
                   <span class="badge badge"></span></a
                 >
               </li>

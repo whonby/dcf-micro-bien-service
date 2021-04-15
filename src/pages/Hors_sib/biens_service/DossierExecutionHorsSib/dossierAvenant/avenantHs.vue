@@ -805,8 +805,8 @@ affichierMontantTVA() {
                     if (id != "") {
                       let valInite=0;
                         return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.taux_avenant).toFixed(2)
-                        },valInite);
+                           return total + parseFloat(currentVal.taux_avenant)
+                        },valInite).toFixed(2);
                     }
                 }
             },

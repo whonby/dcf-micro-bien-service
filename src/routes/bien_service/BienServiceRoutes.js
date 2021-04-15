@@ -157,6 +157,26 @@ import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
     {
+        path: "/dossier-image-ministere",
+        name: "ImageParMinistere",
+        component: ImageParMinistere
+    },
+    {
+        path: "/dossier-image-ua",
+        name: "DossierImageUa",
+        component: DossierImageUa
+    },
+    {
+        path: "/dossier-image-par-marche",
+        name: "DossierImageParMarche",
+        component: DossierImageParMarche
+    },
+    {
+        path: "/image-marche",
+        name: "DossierImg",
+        component: DossierImg
+    },
+    {
         path: "/AjouterDecomptePreced",
         name: "AjouterDecomptePreced",
         component: AjouterDecomptePreced
