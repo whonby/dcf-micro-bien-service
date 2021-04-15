@@ -237,6 +237,8 @@
         },
         created(){
             // console.log(this.listeMarchStatueExecuteAcheve)
+            console.log(this.marches)
+            console.log(this.getterImageMarche)
         },
         computed: {
             ...mapGetters("uniteadministrative", [
