@@ -2,7 +2,15 @@
 <template>
     <div>
 
-                
+                 <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre24522210"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
@@ -41,7 +49,7 @@
 
               
      
-<!-- debut ajout acte effet financier --->
+
 
 
 
@@ -434,6 +442,12 @@ typeProcedureLibelle() {
             
             ]),
 
+  ajouterOffre24522210() {
+      this.$("#ajouterMandate").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
 modificationMandater(){
                 this.modifierMandater(this.editer_mandater)
                 this.$('#modificationMantater').modal('hide');

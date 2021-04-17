@@ -1,11 +1,20 @@
-gettersReserveCf
+
 <template>
     <div>
-        <div align="right">
+        <!-- <div align="right">
     <div class="widget-content">
       <a href="#ajouterReserveCf" data-toggle="modal" class="btn btn-primary">Ajouter</a>
     </div>
-  </div>
+  </div> -->
+   <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre245222101"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
   <table class="table table-bordered table-striped">
      <thead>
     <tr>
@@ -290,7 +299,12 @@ afficherListeReseveCf() {
     },
     methods:{
 ...mapActions("bienService",['ajouterReserveCf', 'modifierReserveCf','supprimerReserveCf']),
-
+ajouterOffre245222101() {
+      this.$("#ajouterReserveCf").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
   afficherModificationReserveCf(index){
                 this.$('#modifierReserveCf').modal({
                     backdrop: 'static',

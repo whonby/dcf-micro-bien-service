@@ -4,7 +4,7 @@
       <div class="row-fluid">
         <div class="span4"></div>
         <div class="span4"></div>
-        <div class="span4" align="right">
+        <!-- <div class="span4" align="right">
           <a
             href="#exampleModal"
             data-toggle="modal"
@@ -12,6 +12,15 @@
             align="rigth"
             >Ajouter</a
           >
+        </div> -->
+        <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="FonctionAjouterLot"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
         </div>
         <div class="span12">
           <div class="widget-box">
@@ -943,6 +952,12 @@ export default {
         parent_id: "",
         numero_lot: "",
       };
+    },
+    FonctionAjouterLot() {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
     },
     editeMarcheLot(index) {
       this.$("#editBailleuMarche").modal({

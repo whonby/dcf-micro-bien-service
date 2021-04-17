@@ -2,10 +2,19 @@
   <div>
 
 
-    <div align="right" v-if="nbrAtteint(macheid)">
+    <!-- <div align="right" v-if="nbrAtteint(macheid)">
 
       <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-    </div>
+    </div> -->
+    <div align="right" style="cursor: pointer" v-if="nbrAtteint(macheid)">
+          <button
+            class="btn btn-success"
+            @click.prevent="AjouterMembreCojo23"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
       <div align="right" v-else>
           <a  data-toggle="modal" class="btn btn-danger">Le nombre limite de participants est atteint</a>
       </div>
@@ -465,7 +474,12 @@ enregistreIdService() {
 
     ...mapActions('bienService',['supprimerMembreCojo',
       'ajouterMembreCojo','modificationMembreCojo']),
-
+AjouterMembreCojo23() {
+      this.$("#ajouter_membre_cojo").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     editeMembreCojoM(){
       var nouvelObjet={
         ...this.edite_membre_cojo,
