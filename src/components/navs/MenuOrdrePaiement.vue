@@ -8,6 +8,11 @@
         </router-link>
       </li>
       <li>
+        <router-link :to="{ name: 'ListeOpParUa' }" tag="a">
+          ORDRE PAIEMENT DES PROJETS 1
+        </router-link>
+      </li>
+      <li>
         <router-link :to="{ name: 'OrdrePaiementRegie' }" tag="a">
           ORDRE PAIEMENT DES REGIES
         </router-link>

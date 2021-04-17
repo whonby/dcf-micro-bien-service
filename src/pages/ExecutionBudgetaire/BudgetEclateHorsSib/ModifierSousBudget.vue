@@ -225,7 +225,7 @@
                     style="border:1px solid #000"
                   :value="recupererNumeroOrdre"
                     class="span"
-                    readonly 
+                     
                   />
                 </div>
               </div>
@@ -697,9 +697,10 @@ methods: {
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 formatageSomme:formatageSomme,
 ajouterTypeTexteLocal() {
-    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "" + this.numeroOrdre
+    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "/" + this.numeroOrdre
     var nouvell={
         ...this.formData,
+        id:this.formData.id,
         execice:this.anneeAmort,
         activite_parent_id:this.formData.activite_parent_id,
         ligneeconomique_id:this.formData.ligneeconomique_id,

@@ -133,6 +133,8 @@ import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOr
 import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/PersonnelRattacher.vue"
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
+import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
+import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
 import ModificationOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ModificationOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
@@ -156,6 +158,16 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/VoirOrdrePaiement/:id",
+        name: "VoirOrdrePaiement",
+        component: VoirOrdrePaiement
+    },
+    {
+        path: "/ListeOpParUa",
+        name: "ListeOpParUa",
+        component: ListeOpParUa
+    },
     {
         path: "/dossier-image-ministere",
         name: "ImageParMinistere",

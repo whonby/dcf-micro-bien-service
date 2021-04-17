@@ -90,7 +90,7 @@
                     >{{formatageSommeSansFCFA(parseFloat(MontantEmprunt(type))) || 0}}</td>
                     <td
                      style="font-size:14px;color:#000;text-align:center;font-weight:bold;"
-                    >{{formatageSommeSansFCFA(parseFloat(45)) || 0}}</td>
+                    >{{formatageSommeSansFCFA(parseFloat(MontantDon(type))+parseFloat(MontantResor(type))+parseFloat(MontantEmprunt(type))) || 0}}</td>
                   </tr>
                   <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;background:green;">BIENS SERVICE</td>

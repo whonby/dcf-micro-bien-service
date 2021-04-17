@@ -58,6 +58,7 @@
                      
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
                      <td
+
                      style="font-size:14px;color:#000;text-align:center;font-weight:bold;"
                     >{{formatageSommeSansFCFA(parseFloat(MontantResor(type))) || 0}}</td>
                   <td
@@ -243,7 +244,7 @@ SommeInvestivementBudgetEclateTresor() {
     SommeInvestivementBudgetEclateEmprunt() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.sous_budget_id == id && qtreel.grandenature_id == 7 && qtreel.type_financement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+           return  this.budgetEclate.filter(qtreel => qtreel.sous_budget_id == id && qtreel.grandenature_id == 7 && qtreel.type_financement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
 
      
         }
