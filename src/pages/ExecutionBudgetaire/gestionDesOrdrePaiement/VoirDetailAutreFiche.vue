@@ -191,7 +191,8 @@ recupBanque1
             <th>Ua</th>
             <th>Activite</th>
             <th>ligne Economique</th>
-            <th>Entreprise</th>
+            <th>Type Depense</th>
+            <th>Entreprise lier au Marche</th>
             <th>Compte Fournisseur</th>
             <th>Banque</th>
 
@@ -218,7 +219,9 @@ recupBanque1
             <td>
               {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
             </td>
-
+ <td>
+              {{ detailOp.typedepense }}
+            </td>
             <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
 
             <td>{{ recupCompte2(recupCompte1)}}</td>
@@ -273,6 +276,8 @@ recupBanque1
             <th>Autres Motif</th>
             <th>Observation</th>
             <th>Autres Depense</th>
+            <th>Entreprise lier aux Autres depenses</th>
+            
             <th>Compte fournisseur</th>
 
             <th>Adresse</th>
@@ -287,6 +292,7 @@ recupBanque1
           <td>{{ detailOp.autre_motif}}</td>
           <td>{{ detailOp.observation}}</td>
           <td>{{ detailOp.odjet_autre_depense}}</td>
+          <td>{{ detailOp.nom_autre_depense}}</td>
           <td>{{ detailOp.compte_autre_depense}}</td>
           <td>{{ detailOp.adresse}}</td>
         </tbody>
@@ -322,7 +328,9 @@ recupBanque1
           <th>Ua</th>
           <th>Activite</th>
           <th>ligne Economique</th>
-          <th>Entreprise</th>
+          <th>Type Depense</th>
+         
+          <th>Entreprise lier au Marche</th>
             <th>Compte Fournisseur</th>
             <th>Banque</th>
 
@@ -365,7 +373,9 @@ recupBanque1
             <td>
               {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
             </td>
-
+ <td>
+              {{ detailOp.typedepense }}
+            </td>
             <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
 
             <td>{{ recupCompte2(recupCompte1)}}</td>
@@ -418,6 +428,7 @@ recupBanque1
           <th>Autres Motif</th>
           <th>Observation</th>
           <th>Autres Depense</th>
+             <th>Entreprise lier aux Autres depense</th>
           <th>Compte fournisseur</th>
 
           <th>Adresse</th>
@@ -437,6 +448,7 @@ recupBanque1
           <td>{{ detailOp.autre_motif}}</td>
           <td>{{ detailOp.observation}}</td>
           <td>{{ detailOp.odjet_autre_depense}}</td>
+          <td>{{ detailOp.nom_autre_depense}}</td>
           <td>{{ detailOp.compte_autre_depense}}</td>
           <td>{{ detailOp.adresse}}</td>
       </tbody>
@@ -1216,7 +1228,7 @@ recupererIdUser() {
 
     recupCompte1(){
     
-          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.entreprise_id == this.detailOp.entreprise_id);
+          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.marche_id == this.detailOp.marche_id);
 
           if (qtereel) {
             return qtereel.compte_id;
@@ -1240,7 +1252,7 @@ recupererIdUser() {
     },
 
      recupBanquee1(){
-          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.entreprise_id == this.detailOp.entreprise_id);
+          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.marche_id == this.detailOp.marche_id);
           if (qtereel) {
             return qtereel.banq_id;
           }
