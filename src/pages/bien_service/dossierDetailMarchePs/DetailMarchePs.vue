@@ -48,7 +48,7 @@
                                 </td>
                                   <td>
 
-                         <span v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">Exemptée procedure</span>
+                         <span v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id)">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
                                <!-- <td>{{budgetDisponible}}</td> -->
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-        <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
+        <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id)">
             <div class="widget-title">
             <ul class="nav nav-tabs">
              <li class="active"><a data-toggle="tab" href="#tab0074">Attribution</a></li>
@@ -111,9 +111,7 @@
 <div id="tab0145" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
+                                                                <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
@@ -197,9 +195,7 @@
                          <div id="tab01" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
+                                                                <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
@@ -318,9 +314,7 @@
                          <div id="tab8975" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
+                                                                <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
@@ -481,9 +475,7 @@
                          <div id="tab001" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
+                                                                <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
@@ -659,9 +651,7 @@
                        <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-
+                                
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
@@ -854,9 +844,7 @@
         <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-
+                                
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
@@ -956,7 +944,7 @@ import componentBailleur1 from '../../bien_service/dossierDetailMarchePs/dossier
      //    import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 import reserveCf from '../../bien_service/dossierReserveCF/reserveCf'
 import LotMarche from "@/pages/bien_service/component/LotMarche";
-import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
+import OuvertureOffre from "../../bien_service/component/OuvertureOffre/OuvertureOffre";
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";

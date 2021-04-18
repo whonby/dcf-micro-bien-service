@@ -1,10 +1,18 @@
 <template>
   <div>
-    <div align="right">
+    <!-- <div align="right">
 
       <a href="#ajouterCojoB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-    </div>
-
+    </div> -->
+<div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="AjouterInfoCojo"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
@@ -482,7 +490,12 @@ name: "InfoCojo",
       }
     },
 // la fonction pour afficher le modal du cojo
-
+AjouterInfoCojo() {
+      this.$("#ajouterCojoB").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     modificationCojo(){
       var nouvelObjet1 ={
         ...this.edite_cojo,

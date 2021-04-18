@@ -2,8 +2,17 @@
 <template>
     <div>
 
-                <h4>Liste des bailleurs du marché</h4>
 
+                <h4>Liste des bailleurs du marché</h4>
+<div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre245"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                                 <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                     <tr>
@@ -712,6 +721,12 @@ else {
                 "modificationMarcheBailleur","supprimerMarcheBailleur"
             
             ]),
+            ajouterOffre245() {
+      this.$("#addBailleurMarche").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
               //  rechercheMandater(){
               //    if(sommeMontant > montantActe){
                    

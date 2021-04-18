@@ -2,7 +2,15 @@
 <template>
     <div>
 
-                
+                <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="1222"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
                      <thead>
@@ -54,7 +62,7 @@
 
 
 
-<div id="ajouterOffre1" class="modal hide grdirModalActeEffet">
+<div id="11" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter  offre</h3>
@@ -504,7 +512,12 @@ typeProcedureLibelle() {
             
             ]),
 
-
+1222() {
+      this.$("#ajouterOffre1").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
 
         afficherModalModifierActeDepense(index){
                 this.$('#modificationModal').modal({

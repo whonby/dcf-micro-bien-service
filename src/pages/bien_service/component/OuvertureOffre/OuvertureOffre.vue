@@ -15,17 +15,17 @@
 
         <div class="widget-content tab-content">
           <div id="cojo" class="tab-pane active">
-            <info-cojo :macheid="macheid"></info-cojo>
+            <InfoCojo :macheid="macheid"></InfoCojo>
           </div>
           <div id="membre" class="tab-pane ">
-            <membre-cojo :macheid="macheid"></membre-cojo>
+            <MembreCojo :macheid="macheid"></MembreCojo>
           </div>
 
           <div id="dossier_candata" class="tab-pane ">
-            <dossier-candidat :macheid="macheid"></dossier-candidat>
+            <DossierCandidat :macheid="macheid"></DossierCandidat>
           </div>
            <div id="membre_evalu" class="tab-pane ">
-            <membre-evalu :macheid="macheid"></membre-evalu>
+            <MembreEvalu :macheid="macheid"></MembreEvalu>
           </div>
         </div>
 
@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import InfoCojo from "@/pages/bien_service/component/OuvertureOffre/InfoCojo";
-import MembreCojo from "@/pages/bien_service/component/OuvertureOffre/MembreCojo";
-import MembreEvalu from "@/pages/bien_service/component/OuvertureOffre/MembreEvalu";
-import DossierCandidat from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/DossierCandidat";
+import InfoCojo from "./InfoCojo";
+import MembreCojo from "./MembreCojo";
+import MembreEvalu from "./MembreEvalu";
+import DossierCandidat from "./dossier_candidat/DossierCandidat";
 export default {
 name: "OuvertureOffre",
   props:["macheid"],

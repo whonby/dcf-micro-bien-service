@@ -31,6 +31,20 @@
                   <div id="DECOMPTE" class="tab-pane">
          <table class="table table-bordered table-striped">
            <tr>
+               <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Exercice</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.exercicebudget" class="span12">
+                                                            <option></option>
+                                                            <option v-for="item in exercices_budgetaires" :key="item.id" :value="item.annee">
+                                                                {{item.annee}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
               <td>
 
               <div class="control-group">
@@ -61,7 +75,12 @@
                 </div>
               </div>
             </td>
-            <td>
+            
+            
+             
+           </tr>
+            <tr>
+                <td>
 
 
               <div class="control-group">
@@ -76,10 +95,6 @@
                 </div>
               </div>
             </td>
-            
-             
-           </tr>
-            <tr>
                <td >
               <div class="control-group">
                 <label class="control-label" > Retenue d'avance </label>
@@ -110,7 +125,10 @@
               </div>
             </td>
             
-             <td colspan="">
+             
+           </tr>
+            <tr>
+                <td colspan="">
               <div class="control-group">
                 <label class="control-label" >Retenue de pénalité</label>
                 <div class="controls">
@@ -124,8 +142,6 @@
                 </div>
               </div>
             </td>
-           </tr>
-            <tr>
                <td >
               <div class="control-group">
                 <label class="control-label" > Retenue d'avance</label>
@@ -163,7 +179,10 @@
               </div>
             </td>
             
-             <td colspan="">
+             
+           </tr>
+           <tr>
+               <td colspan="">
               <div class="control-group">
                 <label class="control-label" >Retenue de pénalité</label>
                 <div class="controls">
@@ -180,8 +199,6 @@
                 </div>
               </div>
             </td>
-           </tr>
-           <tr>
               <td>
                 <div class="control-group">
                 <label class="control-label">exonéré</label>
@@ -211,7 +228,12 @@
               </div>
             </td>
             
-              <td>
+              
+            
+             
+           </tr>
+           <tr>
+               <td>
               <div class="control-group">
                 <label class="control-label">Taux</label>
                 <div class="controls">
@@ -224,10 +246,6 @@
                 </div>
               </div>
             </td>
-            
-             
-           </tr>
-           <tr>
              <td >
               <div class="control-group">
                 <label class="control-label" >Montant Tva</label>
@@ -246,16 +264,7 @@
                 </div>
               </div>
              </td>
-              <td colspan="">
-               <div class="control-group">
-                <label class="control-label" >PART ETAT</label>
-                <div class="controls">
-                <money  v-model="formData.parts_etat"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
-         
-
-                </div>
-              </div>
-             </td>
+              
             
          
                   
@@ -283,6 +292,16 @@
              
            </tr>
             <tr>
+                <td colspan="">
+               <div class="control-group">
+                <label class="control-label" >PART ETAT</label>
+                <div class="controls">
+                <money  v-model="formData.parts_etat"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+         
+
+                </div>
+              </div>
+             </td>
               <td>
               <div class="control-group">
                 <label class="control-label">PART Bailleur</label>
@@ -1090,24 +1109,16 @@ Montantapresretenues(){
      AjouterDecompte() {
       
 
-
-
-      
-
       var nouvelObjet = {
         ...this.formData,
         marche_id:this.detail_Facture.marche_id,
         facture_id:this.detail_Facture.id,
-      //nethtva:this.montantTVA,
-      //netttc:this.Montantapresretenues,
+      nethtva:this.montantTVA,
+      netttc:this.Montantapresretenues,
       // parts_etat:this.MontantHTEtat,
       // parts_bailleur:this.MontantHTBailleur, 
-     // montantmarche:this.Montantapresretenues,
-      exercicebudget:this.anneeAmort,
-
-nethtva:this.Montantapresretenues,
-       montantmarche:this.MontantFacture(this.detail_Facture.id),
-      netttc:this.montantHTt,
+      montantmarche:this.Montantapresretenues,
+      exercicebudget:this.formData.exercicebudget,
       op_id:this.detail_Facture.id
       };
       this.ajouterDecompteFacture(nouvelObjet);

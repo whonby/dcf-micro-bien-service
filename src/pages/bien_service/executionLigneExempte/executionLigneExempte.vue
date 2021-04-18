@@ -11,13 +11,22 @@ afficherIDUA(
 
 
                 </div> -->
-                 <div align="right">
+                 <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ModalajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
 
 
-                </div>
+                </div> -->
+                <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre212"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                 <h4> Liste acte effet financier</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
@@ -1889,7 +1898,12 @@ nombreDejourCalculeModifier(){
       this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==index)
       //  this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
     },
-
+ajouterOffre212() {
+      this.$("#ModalajouterActeEffetFinancier").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     afficherModalModifierActeEffetFinancier(id){
       this.$('#modifierActeEF').modal({
         backdrop: 'static',

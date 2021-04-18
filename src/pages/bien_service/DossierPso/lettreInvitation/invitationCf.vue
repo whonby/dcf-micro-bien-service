@@ -4,6 +4,15 @@
 
                 <h4>Liste Lettres Invitations</h4>
                 <!-- <h4>Liste des offres</h4> -->
+                <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre24522214"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                    <tr>
@@ -456,6 +465,12 @@ typeProcedureLibelle() {
             
             ]),
 
+  ajouterOffre24522214() {
+      this.$("#ajouterLettreInvitation").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
             //  afficherModalModifierTransmission(index){
             //     this.$('#modificationAajouterAnalys01').modal({
             //         backdrop: 'static',

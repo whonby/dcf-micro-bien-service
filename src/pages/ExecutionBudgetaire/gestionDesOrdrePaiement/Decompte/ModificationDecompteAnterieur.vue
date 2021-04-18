@@ -796,18 +796,19 @@ AfficheMontantMarche() {
                 });
             },
             
-            AjouterDecompte () {
+           AjouterDecompte () {
              var objetNouveau={
                ...this.formData,
                diff_decompte:1,
                 
         marche_id:this.formData.marche_id,
        
-      nethtva:this.montantTVA,
-      netttc:this.Montantapresretenues,
-      parts_etat:this.MontantEtatCoteIvoire(this.formData.marche_id),
-      parts_bailleur:this.SommeBailleurDuMarche, 
-      montantmarche:this.montantHTt,
+      nethtva:this.montantDeBaseapresretenues,
+     // netttc:this.Montantapresretenues,
+      // parts_etat:this.MontantEtatCoteIvoire(this.formData.marche_id),
+      // parts_bailleur:this.SommeBailleurDuMarche, 
+      montantmarche:this.formData.montantmarche,
+      netttc:this.montantHTt,
       exercicebudget:this.formData.exercicebudget
                
              }
@@ -822,7 +823,7 @@ AfficheMontantMarche() {
                     montantmarche: "",
                      date_decompte: ""
                 }
-                // this.$router.push({ name: 'Acteur' })
+               
             },
 // afficher
             

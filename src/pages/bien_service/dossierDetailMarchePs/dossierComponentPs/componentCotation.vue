@@ -8,7 +8,15 @@
 
                                    </div> -->
 
-
+<div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre2452"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
@@ -488,7 +496,12 @@ affichierReferenceAppelOffre() {
             ...mapActions("bienService", ['ajouterCotation' ,"getCotation", 'modifierCotation','supprimerCotation']),
             // ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
 
-
+  ajouterOffre2452() {
+      this.$("#addCotation").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
  recherche() {
               // console.log(this.search)
                 let entre=this.entreprises.find(item=>item.id==this.search);

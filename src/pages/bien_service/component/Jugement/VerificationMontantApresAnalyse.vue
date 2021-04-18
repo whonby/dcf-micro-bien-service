@@ -553,7 +553,7 @@ name: "ActEffeFinanciere",
     return{
       lot:"",
       formBailleur:{},
-      editBailleur:"",
+      editBailleur:{},
       EditOffreFinanciere:{
         
       },
@@ -561,7 +561,7 @@ name: "ActEffeFinanciere",
       dossier_candidat_id:"",
      marche_lot:"",
       infoLot:"",
-        editer:""
+        editer:{}
     }
   },
   created(){

@@ -1757,7 +1757,7 @@ name: "DossierCandidat",
     dossierCandidature: function () {
       return marcheid => {
         if (marcheid != "") {
-          console.log("Guei Roland")
+         
           return this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == marcheid)
         }
       }

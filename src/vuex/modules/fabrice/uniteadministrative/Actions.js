@@ -1924,6 +1924,7 @@ export function modifierUniteAdministrativeBailleur({ commit }, nouveau) {
       })
     });
 }
+
 //supprimer
 export function supprimerUniteAdministrativeBailleur({ commit }, id) {
   this.$app.$dialog
