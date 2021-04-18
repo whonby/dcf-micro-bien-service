@@ -171,11 +171,11 @@ export default {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }*/
-                // let config = {
-                //     header : {
-                //         'Content-Type' : 'multipart/form-data'
-                //     }
-                // }
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
                 let formData={
                    // exercicebudget_id:this.exercice_budget,
                     dataExcel:this.tableData
@@ -185,8 +185,8 @@ export default {
                 this.bgWidth=this.i+"%"
                 this.$("#exampleModal").modal('hide');
                 console.log(formData);
-                //console.log(config);
-                this.importPlanProgramme(formData).then(data=>{
+                console.log(config);
+                this.importPlanProgramme(formData,config).then(data=>{
                     console.log(data)
                     this.tableData=[]
                 }).catch(erro=>{

@@ -70,10 +70,6 @@
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
       </button>
-      &nbsp;&nbsp;&nbsp;
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
     </div>
 
     <div class="widget-content nopadding" id="printpdf">
@@ -145,7 +141,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Ligne Budgétaire
@@ -154,7 +150,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Type
@@ -163,7 +159,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 N°OP
@@ -172,7 +168,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Bailleur
@@ -181,7 +177,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Objet
@@ -191,7 +187,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Montant
@@ -200,7 +196,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Visa Cf
@@ -301,7 +297,7 @@
             <tr>
               <td
                 colspan="5"
-                style="font-size: 14px; font-weight: bold; text-align: center"
+                style="font-size: 14px; font-weight: bold !important; text-align: center"
               >
                 MONTANT TOTAL :
                 {{
@@ -310,7 +306,7 @@
               </td>
               <td
                 colspan="2"
-                style="font-size: 14px; font-weight: bold; text-align: center"
+                style="font-size: 14px; font-weight: bold !important; text-align: center"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -326,7 +322,7 @@
           </tbody>
           <tfoot style=" border: solid white !important;">
             <tr>
-              <td colspan="3" style=" border: solid white !important;">
+              <td colspan="3" style=" border: solid white !important; text-align:center;">
                 Système de Gestion des Ordres de Paiement hors SIB
               </td>
               <td colspan="2" style=" border: solid white !important;">
@@ -545,10 +541,14 @@ return objJson.name
           (qtreel) =>
             (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
               qtreel[0].exercice == this.anneeAmort &&
-              qtreel[0].decision_cf == 8) ||
+               qtreel.diff_op == null 
+               
+              && qtreel[0].decision_cf == 8) 
+              ||
             (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
-              qtreel[0].exercice == this.anneeAmort &&
-              qtreel[0].decision_cf == 9)
+              qtreel[0].exercice == this.anneeAmort
+              && qtreel.diff_op == null  
+              && qtreel[0].decision_cf == 9)
         );
       } else if (
         this.uniteAdministrative_id != 0 &&
@@ -558,10 +558,13 @@ return objJson.name
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].decision_cf == 8 &&
+              qtreel.diff_op == null &&
               qtreel[0].exercice == this.anneeAmort &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
-              qtreel[0].date_decision_cf <= this.formData.date_fin) ||
+              qtreel[0].date_decision_cf <= this.formData.date_fin) 
+              ||
             (qtreel[0].decision_cf == 9 &&
+              qtreel.diff_op == null &&
               qtreel[0].exercice == this.anneeAmort &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
               qtreel[0].date_decision_cf <= this.formData.date_fin)
@@ -570,8 +573,11 @@ return objJson.name
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].exercice == this.anneeAmort &&
-              qtreel[0].decision_cf == 8) ||
+            qtreel.diff_op == null &&
+              qtreel[0].decision_cf == 8) 
+              ||
             (qtreel[0].exercice == this.anneeAmort &&
+            qtreel.diff_op == null &&
               qtreel[0].decision_cf == 9)
         );
       }
@@ -698,11 +704,14 @@ return objJson.name
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin) ||
+                  qtreel.date_decision_cf <= this.formData.date_fin)
+                   ||
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin)
             );
@@ -715,10 +724,13 @@ return objJson.name
               (qtreel) =>
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8) ||
+                  qtreel.exercice==this.anneeAmort
+                  && qtreel.decision_cf == 8)
+                   ||
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
-                  qtreel.decision_cf == 9)
+                  qtreel.exercice==this.anneeAmort
+                  && qtreel.decision_cf == 9)
             );
           }
         };
