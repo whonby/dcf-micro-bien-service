@@ -324,7 +324,16 @@
               </td>
             </tr>
           </tbody>
-          <tfoot></tfoot>
+          <tfoot style=" border: solid white !important;">
+            <tr>
+              <td colspan="3" style=" border: solid white !important;">
+                Système de Gestion des Ordres de Paiement hors SIB
+              </td>
+              <td colspan="2" style=" border: solid white !important;">
+                généré le {{foramateDatenow}} à 08:52 par {{afficheNomUtilisateur}} 
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -523,6 +532,13 @@ export default {
       "sources_financements",
     ]),
 
+    afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+
     ListeGroupByActivite1() {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
@@ -607,7 +623,42 @@ export default {
     },
 
     MontantBudgetExecutéActivite() {
-      return (id) => {
+       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+             return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>(
+                qtreel.activite_id == id 
+                && qtreel.exercice == this.anneeAmort
+                && qtreel.diff_op == null 
+                && qtreel.decision_cf == 8
+                && (qtreel.date_decision_cf >= this.formData.date_debut &&
+                  qtreel.date_decision_cf <= this.formData.date_fin))
+                  ||
+
+                  (
+                qtreel.activite_id == id 
+                && qtreel.exercice == this.anneeAmort
+                && qtreel.diff_op == null 
+                && qtreel.decision_cf == 9
+                && (qtreel.date_decision_cf >= this.formData.date_debut &&
+                  qtreel.date_decision_cf <= this.formData.date_fin))
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+
+       }else{
+
+         return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
@@ -624,6 +675,8 @@ export default {
           return 0;
         }
       };
+       }
+      
     },
 
     listeordrepaiementstest() {
@@ -776,6 +829,11 @@ export default {
 
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+
+    foramateDatenow(){
+      var currentdate=new Date();
+      return this.formaterDate(currentdate)
     },
 
     partition: partition,

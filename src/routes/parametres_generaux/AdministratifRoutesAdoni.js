@@ -6,6 +6,7 @@ import NatureSection from "../../pages/parametres_generaux/administratifs/Nature
 import Section from "../../pages/parametres_generaux/administratifs/Section.vue";
 import StructureProgramme from "../../pages/parametres_generaux/administratifs/StructureProgramme.vue";
 import PlanProgramme from "../../pages/parametres_generaux/administratifs/PlanProgramme.vue";
+import ImportationProgramme from "../../pages/parametres_generaux/administratifs/ImportationProgramme.vue";
 import StructureAdministrative from "../../pages/parametres_generaux/administratifs/StructureAdministrative.vue";
 import ServiceGestionnaire from "../../pages/parametres_generaux/administratifs/ServiceGestionnaire.vue";
 import Chapitre from "../../pages/parametres_generaux/administratifs/Chapitre.vue";
@@ -32,6 +33,12 @@ const AdministratifRoutesAdoni = [
     path: "/grpeCorporel",
     name: "grpeCorporel",
     component: grpeCorporel
+  },
+
+  {
+    path: "/ImportationProgramme",
+    name: "ImportationProgramme",
+    component: ImportationProgramme
   },
   {
     path: "/TypeBienCorporel",
