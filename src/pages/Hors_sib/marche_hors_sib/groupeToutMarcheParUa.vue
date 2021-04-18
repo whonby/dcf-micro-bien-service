@@ -59,7 +59,7 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
+                     <th style="width:20%;font-size:12px" >Code UA5</th>
                     <th style="width:50%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>

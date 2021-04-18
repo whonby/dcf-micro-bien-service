@@ -6,7 +6,7 @@
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
         </div>
-    <h1 style="text-align:center">{{libelleUa(marcheid)}}</h1>
+    <h1 style="text-align:center">Ordres De Paiement Du Projet : {{libelleUa(marcheid)}}</h1>
    <table class="table table-bordered table-striped">
             <td style="width: 10%"></td>
             <td style="width: 0%; font-weight: bolder; color: #000">
@@ -646,6 +646,7 @@
             </tr>
           </tbody>
         </table>
+        
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">

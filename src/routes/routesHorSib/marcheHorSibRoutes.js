@@ -51,10 +51,28 @@ import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Conv
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
 //Lien de modification d'image 
 import ModifieImage from '../../pages/ImageMarche/ModifieImage.vue';
- 
+import GroupeParUaSuiviMarcheBienService from "../../pages/Hors_sib/biens_service/GroupeParUaSuiviMarcheBienService.vue";
+import GroupeParSousBudgetSuiviMarcheBienService from "../../pages/Hors_sib/biens_service/GroupeParSousBudgetSuiviMarcheBienService.vue";
+import ListeMarcheHorsSibParSousBudget from "../../pages/Hors_sib/biens_service/ListeMarcheHorsSibParSousBudget.vue";
+
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
+    {
+        path: "/ListeMarcheHorsSibParSousBudget/:id",
+        name: "ListeMarcheHorsSibParSousBudget",
+        component: ListeMarcheHorsSibParSousBudget
+    },
+    {
+        path: "/GroupeParSousBudgetSuiviMarcheBienService",
+        name: "GroupeParSousBudgetSuiviMarcheBienService",
+        component: GroupeParSousBudgetSuiviMarcheBienService
+    },
+    {
+        path: "/GroupeParUaSuiviMarcheBienService",
+        name: "GroupeParUaSuiviMarcheBienService",
+        component: GroupeParUaSuiviMarcheBienService
+    },
     {
         path: "/listeMarcheBienEtServiceExecutionHSParSousBudget/:id",
         name: "listeMarcheBienEtServiceExecutionHSParSousBudget",
@@ -257,7 +275,7 @@ const marcheHorSibRoutes =[
         component:tableau_de_bord_biens_service
     },
     {
-        path:"/suivi-marche-hors-sib",
+        path:"/suivi-marche-hors-sib/:id",
         name:"suivi_marhe",
         component:marche_hors_sib
     },
