@@ -3067,3 +3067,16 @@ export const MODIFIER_HISTORIQUE_DECISION_CF_OP = (state, elementModif)=>{
 export const SUPPRIMER_HISTORIQUE_DECISION_CF_OP = (state, id)=> {
     state.historiqueDecisionCfOP = state.historiqueDecisionCfOP.filter(prest => prest.id !=id)
 }
+
+
+
+
+export const GET_ALL_BUDGET_IMPORTER = (state, tableau_document) => {
+    state.budgetEclateImport = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_BUDGET_IMPORTER = (state, elementAjouter) => {
+    state.budgetEclateImport.unshift(elementAjouter)
+}
