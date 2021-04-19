@@ -666,7 +666,7 @@ recupBanque1
 
     </div>
 <!-- <div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null"> -->
-<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null || detailOp.type_ordre_paiement == 2 && detailOp.diff_op_personnel == null">
+<div v-if="detailOp.type_ordre_paiement == 1 && detailOp.diff_op_personnel == null && detailOp.typedepense=='Marche'  || detailOp.type_ordre_paiement == 4 && detailOp.diff_op_personnel == null && detailOp.typedepense=='Marche'|| detailOp.type_ordre_paiement == 2 && detailOp.diff_op_personnel == null && detailOp.typedepense=='Marche'">
 
    <table class="table table-bordered table-striped">
       <td style="width: 70%"></td>

@@ -33,7 +33,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Des Sous Budgets du :{{marcheid}}</h5>
+                            <h5>Listes Des Sous Budgets</h5>
              
             </div>
 
@@ -56,10 +56,10 @@
                       <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type) || 'Non renseigné'}}</td>
                    <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type) || 'Non renseigné'}}</td>
                    
-                   <td >
+                   <td>
                       <router-link :to="{ name: 'VoirOrdrePaiementSousBudget', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
                     </td>
                     
@@ -155,7 +155,7 @@ created() {
       // "chapitres",
       // "sections"
     ]),
-    ...mapGetters("bienService", ["GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+    ...mapGetters("bienService", ["gettersgestionOrdrePaiement","GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -193,7 +193,7 @@ created() {
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.unite_administrative_id == this.marcheid);
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.sous_budget_id == this.marcheid);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

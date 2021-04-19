@@ -99,13 +99,13 @@
                    <td v-if="idUaBudgetEclate(type) == 0">
                       <router-link :to="{ name: 'VoirOrdrePaiement', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="    icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
                     </td>
                     <td v-else-if="idUaBudgetEclate(type) != 0">
                       <router-link :to="{ name: 'ListeDesSousBudgetOp', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="    icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
+                  <span class=""><i class="icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
                    </router-link> 
                     </td>
                     
