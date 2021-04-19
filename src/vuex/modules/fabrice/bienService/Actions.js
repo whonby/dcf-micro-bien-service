@@ -5925,3 +5925,57 @@ export function supprimerHistoriqueDecisionOp({ commit }, id) {
       axios.delete("/HistoriqueDecisionOp/" + id).then(() => dialog.close());
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function getBudgetEclateImporter({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/BudgetImport")
+      .then(response => {
+        commit("GET_ALL_BUDGET_ECLATE_IMPORTE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBudgetEclateImporter({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/BudgetImport", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_ECLATE_IMPORTE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+

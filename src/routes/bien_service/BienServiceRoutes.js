@@ -154,12 +154,18 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
+import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
 
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/importationBudgetEclate",
+        name: "importationBudgetEclate",
+        component: importationBudgetEclate
+    },
     {
         path: "/VoirOrdrePaiementSousBudget/:id",
         name: "VoirOrdrePaiementSousBudget",

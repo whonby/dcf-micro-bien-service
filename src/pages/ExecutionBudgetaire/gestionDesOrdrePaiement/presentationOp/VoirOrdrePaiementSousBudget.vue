@@ -2,6 +2,273 @@
 <template>
 
 <div>
+   <div id="validationOpDefinitif121" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Décision CF </label>
+                <div class="controls">
+                  <select v-model="editMandat.decision_cf" class="span5">
+                    <option value=""></option>
+                    <option value="8">Visé</option>
+                    <option value="9">Visé avec Observation</option>
+                    <option value="2">Différé</option>
+                    <option value="3">Réjeté</option>
+                    <option value="0">Attente</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Famille de Motif</label>
+                <div class="controls">
+                  <select v-model="editMandat.famille_motif" class="span5">
+                    <option value="0"></option>
+                    <option
+                      v-for="varText in AffichierElementParent"
+                      :key="varText.id"
+                      :value="varText.id"
+                    >
+                      {{ varText.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Motif</label>
+                <div class="controls">
+                  <select v-model="editMandat.motif" class="span5">
+                    <option value="0"></option>
+                    <option
+                      v-for="varText in AffichierElementEnfant(
+                        editMandat.famille_motif
+                      )"
+                      :key="varText.id"
+                      :value="varText.id"
+                    >
+                      {{ varText.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Autres Motif</label>
+                <div class="controls">
+                  <textarea
+                    class="span10"
+                    row="6"
+                    v-model="editMandat.autre_motif"
+                    :readonly="griserAutreMotif"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Date Decision CF :</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    class="span5"
+                    v-model="editMandat.date_decision_cf"
+                  />
+                  <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Observation CF</label>
+                <div class="controls">
+                  <textarea
+                    class="span10"
+                    row="6"
+                    v-model="editMandat.observation"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Nom du CF</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    class="span5"
+                    :value="
+                      recupererNomDuControleurF(
+                        recupererIdUser(
+                          recupererIdServiceCF(
+                            editMandat.unite_administrative_id
+                          )
+                        )
+                      )
+                    "
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <table
+          class="table table-bordered table-striped"
+          v-if="editMandat.decision_cf == 2"
+        >
+          <div class="row-fluid">
+            <div class="span6">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon"> <i class="icon-eye-open"></i> </span>
+                  <h5>Motif à Corrigé</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <templete v-if="verifier(editMandat.id) == editMandat.id">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="type in listeOpdiffere(editMandat.id)"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{
+                              MotifLibelle(type.famille_motif) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{ MotifLibelle(type.motif) || "Non renseigné" }}
+                          </td>
+
+                          <td>
+                            <button
+                              class="btn btn-danger"
+                              @click="DetacheMotif(type.id)"
+                            >
+                              <span>
+                                <i class="icon-external-link"></i>Détaché
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </templete>
+                  <templete v-else>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </templete>
+                </div>
+              </div>
+            </div>
+            <div class="span6">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon"> <i class="icon-arrow-right"></i> </span>
+                  <h5>Motif Corrige</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <templete v-if="verifier(editMandat.id) == editMandat.id">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="type in EurreurCorrige(editMandat.id)"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{
+                              MotifLibelle(type.famille_motif) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{ MotifLibelle(type.motif) || "Non renseigné" }}
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-info"
+                              @click="DetacheMotifAttache(type.id)"
+                            >
+                              <span>
+                                <i class="icon-external-link"></i>Attaché
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </templete>
+                  <templete v-else>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </templete>
+                </div>
+              </div>
+            </div>
+          </div>
+        </table>
+        <br />
+      </div>
+
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal()"
+          class="btn btn-primary"
+          href="#"
+          >Valider</a
+        >
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
@@ -841,7 +1108,7 @@
                       <button
                         v-if="type.decision_cf == 8"
                         class="btn btn-success tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture78(type.id)"
                       >
                         <span
                           style="
@@ -855,7 +1122,7 @@
                       <button
                         v-else-if="type.decision_cf == 2"
                         class="btn btn-warning tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture78(type.id)"
                       >
                         <span
                           style="
@@ -869,7 +1136,7 @@
                       <button
                         v-else-if="type.decision_cf == 3"
                         class="btn btn-danger tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture78(type.id)"
                       >
                         <span
                           style="
@@ -883,7 +1150,7 @@
                       <button
                         v-else-if="type.decision_cf == 9"
                         class="btn btn-success tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture78(type.id)"
                       >
                         <span
                           title="Visé avec observation"
@@ -898,7 +1165,7 @@
                       <button
                         v-else
                         class="btn btn-info tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture78(type.id)"
                       >
                         <span
                           style="
@@ -1838,11 +2105,11 @@ afficherModalModifierTitre(id) {
       };
       this.ajouterHistoriqueDecisionOp(nouveauObjet);
       this.modifierGestionOrdrePaiement(this.editMandat);
-      this.$("#validationOpDefinitif").modal("hide");
+      this.$("#validationOpDefinitif12").modal("hide");
     },
     modifierDecisionFinal() {
       this.modifierGestionOrdrePaiement(this.editDecisionFinal);
-      this.$("#validationOpDefinitif").modal("hide");
+      this.$("#validationOpDefinitif12").modal("hide");
     },
     ModifierOpAnnulation() {
       var nouvelObjet = {
@@ -1865,8 +2132,8 @@ afficherModalModifierTitre(id) {
         (item) => item.id == id
       );
     },
-    apercuFacture(id) {
-      this.$("#validationOpDefinitif").modal({
+    apercuFacture78(id) {
+      this.$("#validationOpDefinitif12").modal({
         backdrop: "static",
         keyboard: false,
       });
