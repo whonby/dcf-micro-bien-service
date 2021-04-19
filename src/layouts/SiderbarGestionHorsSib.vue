@@ -274,7 +274,7 @@ return objJson.id
        navigateurOrdrePaiement(){
         this.activate(1200)
         this.$router.push({
-          name:'ListeDesOrdresPaiement'
+          name:'ListeOpParUa'
         })
       },
        navigateToRapport(){
@@ -293,7 +293,7 @@ return objJson.id
 navigateToGestionMarche(){
     this.activate(25)
     this.$router.push({
-        name: 'GestionMarcheHorSib'
+        name: 'groupeMarcheParUa'
     })
       },
        navigateTableBordBordBudgetEclate(){

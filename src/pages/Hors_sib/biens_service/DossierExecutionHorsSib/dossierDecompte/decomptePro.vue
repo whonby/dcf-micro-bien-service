@@ -152,9 +152,9 @@
                           </td>
 
                           <td v-if="typeOp(type.op_id) == 1 || typeOp(type.op_id) == 4">
-                              <router-link :to="{ name: '', params: { id: type.id }}"
-                                           class="btn btn-danger " title="Realite Service  Fait">
-                                  <span class=""><i class="icon-eye-open" title="Realite Service  Fait"></i>RSF</span>
+                              <router-link :to="{ name: 'ObservationServiceRealiteFait', params: { id: type.op_id }}"
+                                           class="btn btn-danger " title="Observation Realite Service  Fait">
+                                  <span class=""><i class="icon-eye-open" title="Observation Realite Service  Fait"></i></span>
                               </router-link>
                               
                           </td> 
@@ -951,8 +951,7 @@ props:["macheid"],
    this.detail_Facture = this.getFacturePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
          )
-     console.log("............")
-     console.log(this.arrayExerciceDecompte(this.macheid))
+   
       
 },
   computed: {
@@ -973,8 +972,6 @@ props:["macheid"],
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
  "decomptefactures"
-   
-   
    ]), 
 
    ...mapGetters('parametreGenerauxAdministratif',[

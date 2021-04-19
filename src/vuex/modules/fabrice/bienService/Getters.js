@@ -1178,3 +1178,10 @@ export const GroupeUniteAdministrativeMarche = (state, getters) => {
     return groupBy(getters.marches, "unite_administrative_id");
     
 };
+
+
+export const GroupeUniteZoneMarche = (state, getters) => {
+
+    return groupBy(getters.marches, "unite_zone");
+    
+};
