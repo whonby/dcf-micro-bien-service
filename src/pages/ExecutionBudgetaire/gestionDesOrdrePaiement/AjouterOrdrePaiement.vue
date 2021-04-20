@@ -82,6 +82,7 @@
                       style="border: 1px solid #000; font-size: 15px"
                      v-model="formData.numero_ordre_paiement"
                       class="span"
+                      
                     />
                   </div>
                 </div>
