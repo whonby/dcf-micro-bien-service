@@ -26,10 +26,8 @@
           <i class="fas far fa-angle-right fa-2x"></i>
         </button>
 
-				<div class="lb-modal-img" @click="close">
-                    <router-link :to="{name:'test', params:{id: 65}}"> 
+				<div class="lb-modal-img" @click="close">            
 					<img :src="src" />
-                    </router-link>
 					<div class="spinner spinner-dots-wave" v-if="loading">
 						<span class="badge badge-primary rounded-circle w-10 h-10">
               <i class="sr-only">&nbsp;</i>

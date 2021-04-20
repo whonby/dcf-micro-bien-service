@@ -7,7 +7,6 @@
                  <p class="text-secondary mb-1">Distance :
                     <b>8.52°</b>
                 </p>
-
                <div id="tab2" class="tab-pane">
                     <table class="table">
                         <tr>

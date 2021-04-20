@@ -1,6 +1,6 @@
 <template>
     <div>
-
+       
         <div class="container-fluid" style="height: 100em;">
 
             <div>
@@ -348,7 +348,6 @@
                         })
                     }
 
-
                 })
                 return colect
             },
@@ -407,7 +406,6 @@
                         }
                     })
                 }
-
 
                 //retourne les marches de region et unite adminstrative selectionner
                 if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
@@ -662,8 +660,6 @@
             },
             formatageSomme:formatageSomme,
             listeMarcheStatus(status){
-
-
 
                 if(status=="planifie"){
                     status=0

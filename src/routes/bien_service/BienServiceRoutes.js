@@ -92,7 +92,6 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
-import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue";
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
@@ -151,6 +150,7 @@ import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDes
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
 
+import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
@@ -949,6 +949,27 @@ const BienServiceRoutes = [
         path: "/cycle_de_vie/:id",
         name: "CycleDeVie",
         component: CycleDeVie
+    },
+    {
+        path: "/dossier-image-ministere",
+        name: "ImageParMinistere",
+        component: ImageParMinistere
+    },
+    {
+        path: "/dossier-image-ua",
+        name: "DossierImageUa",
+        component: DossierImageUa
+    },
+    {
+        path: "/dossier-image-marche",
+        name: "DossierImageParMarche",
+        component: DossierImageParMarche
+    },
+    {
+        path: "/image-marches",
+        name: "DossierImg",
+        component: DossierImg 
+
     }
 
 ]

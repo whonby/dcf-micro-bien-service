@@ -243,6 +243,7 @@ detailMarche:"",
 this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.id)
   //const userId = this.$route.params.id
     console.log(this.marches[this.$route.params.id].id)
+    console.log(this.getterImageMarche[this.$route.params.id].date_enregistrement)
     },
 
               computed: {

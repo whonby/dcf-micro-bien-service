@@ -1,39 +1,51 @@
 <template>
-  <div>
-    <div class="gallery-row">
-      <div class="gallery-container">
-         <!-- <div class="container">
-              <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                    <h1>salut les potes</h1>
+<div>
+    <div class="row container">
+        <div class="col-md">
 
+            <div class="gallery-row">
+                <div class="gallery-container">
+                    <lightbox :items="images"></lightbox>
                 </div>
             </div>
-         </div> -->
-             <lightbox :items="images"></lightbox>
-     
-      </div>
-    </div>
-        <br> <br> <br> <br>
-       <div class="container mt-5">
-        <div class="row">
-          <div class="col-md">
-           <h2 class="text-center">15/Janvier/2021</h2>
-          </div>
-          <div class="col-md">
-            <h2 class="text-center">10/Mars/2021</h2>
-          </div>
-          <div style="background-color:#fff; color:#000;" class="col-md">
-            <h2 class="text-center">05/Mars/2021</h2>
-          </div>
-          <div class="col-md">
-            <h2 class="text-center">03/Fevrier/2021</h2>
-          </div>
         </div>
-      </div>
-  </div>
+        <div class="col-md">derer</div>
+
+    </div>
+    <br><br>
+    <!-- <div class="row container">
+        <div class="col-md  vue-bg">
+            <div class="row">
+                <div style="font-size:25px;" class="col-sm-4 text-center">
+                    03
+                </div>
+                <div class="col-sm-8 text-center">
+                   Mardi Mars 2021
+                </div>
+            </div>
+        </div>
+        <div class="col-md  vue-bg">
+            <div class="row">
+                <div style="font-size:25px;" class="col-sm-4 text-center"> 05</div>
+                <div class="col-sm-8 text-center">Lundi Mars 2021</div>
+            </div>
+        </div>
+        <div  class="col-md  vue-bg">
+            <div class="row">
+                <div style="font-size:25px;" class="col-sm-4 text-center"> 15</div>
+                <div class="col-sm-8 text-center">Lundi Mars 2021 </div>
+            </div>
+        </div>
+        <div class="col-md  vue-bg">
+            <div class="row">
+                <div style="font-size:25px;" class="col-sm-4 text-center"> 10</div>
+                <div class="col-sm-8 text-center">Lundi Mars 2021 </div>
+            </div>
+        </div>
+       
+    </div> -->
+   
+</div>
 </template>
 <script>
 import lightbox from "./lightbox.vue";
@@ -61,15 +73,14 @@ export default {
         "https://media.gettyimages.com/photos/arches-national-parkutahusa-picture-id643321562?k=6&m=643321562&s=612x612&w=0&h=7Zed_3gkr4TCGs6U7rsGpA1Kj8VLngFcpi-Q1PDsNUU=",
         "https://i.pinimg.com/236x/36/e1/c4/36e1c493f212e4ff1775164731647894.jpg",
         "https://i.pinimg.com/236x/ba/a3/96/baa396ffa04a7639651bb4ed28a30e98.jpg",
-        "https://cdn.pixabay.com/photo/2021/01/21/17/58/herbstastern-5938056__480.jpg",
-        "https://cdn.pixabay.com/photo/2021/03/22/18/09/fallow-deer-6115404__480.jpg",
-        "https://cdn.pixabay.com/photo/2019/03/30/10/40/italy-4090933__480.jpg",
-        "https://cdn.pixabay.com/photo/2020/08/10/11/22/mountains-5477557__480.jpg",
-        "https://cdn.pixabay.com/photo/2021/04/07/05/56/woman-6158131__480.jpg",
-        "https://cdn.pixabay.com/photo/2021/04/01/14/50/lily-6142496__480.jpg",
-        "https://cdn.pixabay.com/photo/2020/11/05/19/29/woman-5716038__480.jpg",
-        "https://cdn.pixabay.com/photo/2021/01/15/17/01/green-5919790__480.jpg",
-        "https://cdn.pixabay.com/photo/2021/03/21/13/36/boy-6112145__480.jpg",
+        "https://images.unsplash.com/photo-1618188619101-f496886c663b?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1618256613388-eb325a9086b8?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1618256613388-eb325a9086b8?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1618248047249-9bb3341fd6b6?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1618254546122-8480f0040419?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1617899615427-8ec249947f67?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDExfGFldTZyTC1qNmV3fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1580479928902-64943157c5d1?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE1fGFldTZyTC1qNmV3fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1604328699206-5f24c5ed8dd4?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE2fGFldTZyTC1qNmV3fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
         "https://images.unsplash.com/photo-1604328699206-5f24c5ed8dd4?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE2fGFldTZyTC1qNmV3fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
       ]
     };
@@ -78,6 +89,14 @@ export default {
 </script>
 
 <style>
+.vue-bg{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(69, 72, 241);
+    padding: 15px;
+}
 .gallery-container {
   height: 604.8px;
   width: 750px;
@@ -87,25 +106,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.col-md{
-  height: 80px;
-  color: #fff;
-  border: 1px solid #333;
-  border-radius: 5px;
-  background: rgb(44, 57, 235);
-  padding: 10px;
-}
-.col-sm{
-  display: inline-block;
-  height: 10px;
-  color: #fff;
-  
-}
-.vue-bg{
-    background-color: blue;
-    padding-top: 10px;
-    width: 100%;
-    height: 100px;
 }
 </style>
