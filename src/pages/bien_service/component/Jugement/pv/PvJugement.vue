@@ -1,11 +1,20 @@
 <template>
 <div>
 
-  <div align="right">
+  <!-- <div align="right">
     <div class="widget-content">
       <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Joindre Document</a>
     </div>
-  </div>
+  </div> -->
+   <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre245222101"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> JOINDRE DOCUMENT </i>
+          </button>
+        </div>
   <table class="table table-bordered table-striped"  v-if="macheid">
     <thead>
     <tr>
@@ -475,6 +484,12 @@ name: "PvJugement",
       'ajouterProceVerbal','modificationProceVerbalOffre',"getProceVerbal"]),
 
 
+  ajouterOffre245222101() {
+      this.$("#ajouterPvBienservice").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     OnchangeFichier(e) {
       const files = e.target.files;
       this.selectedFile = event.target.files[0];

@@ -5,24 +5,7 @@
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
         </div>
-    <!-- <table class="table table-bordered table-striped">
-            <tr>
-              <td>
-                <div class="" align="right">
-              <router-link
-                :to="{ name: 'ajouter_hors_sib' }"
-                tag="a"
-                data-toggle="modal"
-                class="btn btn-success"
-                align="rigth"
-                >Ajouter Marche Hors PPM
-              </router-link>
-            </div>
-              </td>
-              
-            </tr>
-          </table> -->
-          
+    
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -46,7 +29,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Ges Sous Budgets du :{{marcheid}}</h5>
+                            <h5>Listes Unites administratives</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -60,7 +43,7 @@
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
                      <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Libelle Sous Budget</th>
+                    <th style="width:50%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
                    
@@ -69,16 +52,22 @@
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
                    
-                   <td >
-                      <router-link :to="{ name: 'ListeMarcheSousBudget', params: { id: type.id }}"
+                   <td v-if="type[0].unite_zone == 0">
+                      <router-link :to="{ name: 'suivi_marhe', params: { id: type[0].unite_administrative_id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
+                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
-                    
+                    <td v-else-if="type[0].unite_zone != 0">
+                      <router-link :to="{ name: 'GroupeParSousBudgetSuiviMarcheBienService', params: { id: type[0].unite_administrative_id }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="    icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
+                   </router-link> 
+                    </td>
+                     <td v-else style="background-color:lightblue"></td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
                     <!-- <td>
                       <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">
@@ -117,7 +106,6 @@ import { mapGetters, mapActions } from "vuex";
 export default {
  
   name:'typetext',
-
   data() {
     return {
       fabActions: [
@@ -144,12 +132,7 @@ export default {
       search: ""
     };
   },
-created() {
-    this.marcheid = this.$route.params.id;
-    this.detailOp = this.marches.find(
-      (idmarche) => idmarche.id == this.$route.params.id
-    );
-  },
+
   computed: {
         ...mapGetters("uniteadministrative", [
       "directions",
@@ -165,12 +148,11 @@ created() {
       "GroupeUaReceptrice",
       "transferts",
       "groupeUniteAdministrativeBudgetEclate",
-      "groupeUaSousBudget",
-      "getSousBudget"
+      "groupeUaSousBudget"
       // "chapitres",
       // "sections"
     ]),
-    ...mapGetters("bienService", ["GroupeUniteZoneMarche","GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+    ...mapGetters("bienService", ["GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -203,37 +185,12 @@ created() {
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
-   
 afficheGroupeUaParMarche(){
-    return this.GroupeUniteZoneMarche.filter(item=>item[0].unite_administrative_id == this.detailOp.unite_administrative_id)
+    return this.GroupeUniteAdministrativeMarche.filter(item=>item[0].sib==1)
 },
 
-libelleSOusBudget() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.activite_enfant
-      }
-      return 0
-        }
-      };
-    },
 
 
-CodeSOusBudget() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.code
-      }
-      return 0
-        }
-      };
-    },
     idUniteAdministrative() {
       return id => {
         if (id != null && id != "") {

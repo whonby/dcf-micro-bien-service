@@ -1,4 +1,5 @@
 import uniteadministrative from "../../pages/unites_administratives/unite_administrative.vue";
+
 //import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
 import tableaudebord from "../../pages/unites_administratives/tableau_de_bord.vue";
 import typetext from "../../pages/unites_administratives/type_texte.vue";
@@ -56,6 +57,7 @@ import ModificationBudgetaireSousBudget from "../../pages/ExecutionBudgetaire/Bu
 import ModificationBudgetaireRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/ModificationBudgetaireRegie.vue"
 import sousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/sousBudget.vue"
 import VoirSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/VoirSousBudget.vue"
+import ModifierSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ModifierSousBudget.vue"
 import listeSousBudgetParUa from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetParUa.vue"
 import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/voirDetailBudget.vue"
 import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
@@ -64,6 +66,7 @@ import groupeUaDecompte from "../../pages/ExecutionBudgetaire/gestionDesOrdrePai
 import GroupeAnneDecompte from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/GroupeParAnneeDecompte.vue"
 import ListeDecompteAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/ListeDecompteAnterieur.vue"
 import ModificationDecompteAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/ModificationDecompteAnterieur.vue"
+import ObservationServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/ObservationServiceRealiteFait.vue"
 import ListeBailleurUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeBailleurUniteAdministrative.vue"
 import ListeUniteAdministrative from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/DocUniteAdministrativeBailleur/ListeUniteAdministrative.vue"
 import listeDesUaRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BailleurRegie/listeDesUaRegie.vue"
@@ -71,6 +74,11 @@ import listeUniteZone from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/
 import ListeBudgetEclateParSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetEclate/ListeBudgetEclateParSousBudget.vue"
 import recapitulatifBudgetHorsSigobe from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/ObservationServiceRealiteFait/:id",
+    name: "ObservationServiceRealiteFait",
+    component: ObservationServiceRealiteFait
+},
   {
     path: "/ModificationDecompteAnterieur/:id",
     name: "ModificationDecompteAnterieur",
@@ -121,9 +129,13 @@ const UniteAdministativeRoutes = [
     name: "ListeUniteAdministrative",
     component: ListeUniteAdministrative
 },
+{
+  path: "/ModifierSousBudget/:id",
+  name: "ModifierSousBudget",
+  component: ModifierSousBudget
+},
   
-  
-  
+
   {
     path: "/VoirSousBudget/:id",
     name: "VoirSousBudget",

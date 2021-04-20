@@ -5,7 +5,15 @@
                                        Rechercher: <input type="search" v-model="search" />
 
                                    </div> -->
-
+<div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre24521"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
@@ -202,6 +210,12 @@ export default {
         'ajouterRapportJugement','modifierRapportJugement','getRapportJugement']),
 
 
+  ajouterOffre24521() {
+      this.$("#ajouterRapportOuvertureB").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
              OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];

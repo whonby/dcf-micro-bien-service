@@ -234,7 +234,7 @@
                       </tr>
                       <tr>
                         <th style="font-size: 14px; color: #000">
-                          LIGNE BUDGETAIRE785421
+                          LIGNE BUDGETAIRE
                         </th>
                         <th style="font-size: 14px; color: #000">ETAT</th>
                         <th style="font-size: 14px; color: #000">DON</th>

@@ -132,6 +132,10 @@ import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOr
 import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/PersonnelRattacher.vue"
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
+import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
+import ListeDesSousBudgetOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeDesSousBudgetOp.vue"
+import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
+import VoirOrdrePaiementSousBudget from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiementSousBudget.vue"
 import ModificationOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ModificationOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
@@ -149,6 +153,7 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
+import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
 
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
@@ -156,6 +161,51 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/importationBudgetEclate",
+        name: "importationBudgetEclate",
+        component: importationBudgetEclate
+    },
+    {
+        path: "/VoirOrdrePaiementSousBudget/:id",
+        name: "VoirOrdrePaiementSousBudget",
+        component: VoirOrdrePaiementSousBudget
+    },
+    {
+        path: "/ListeDesSousBudgetOp/:id",
+        name: "ListeDesSousBudgetOp",
+        component: ListeDesSousBudgetOp
+    },
+    {
+        path: "/VoirOrdrePaiement/:id",
+        name: "VoirOrdrePaiement",
+        component: VoirOrdrePaiement
+    },
+    {
+        path: "/ListeOpParUa",
+        name: "ListeOpParUa",
+        component: ListeOpParUa
+    },
+    {
+        path: "/dossier-image-ministere",
+        name: "ImageParMinistere",
+        component: ImageParMinistere
+    },
+    {
+        path: "/dossier-image-ua",
+        name: "DossierImageUa",
+        component: DossierImageUa
+    },
+    {
+        path: "/dossier-image-par-marche",
+        name: "DossierImageParMarche",
+        component: DossierImageParMarche
+    },
+    {
+        path: "/image-marche",
+        name: "DossierImg",
+        component: DossierImg
+    },
     {
         path: "/AjouterDecomptePreced",
         name: "AjouterDecomptePreced",

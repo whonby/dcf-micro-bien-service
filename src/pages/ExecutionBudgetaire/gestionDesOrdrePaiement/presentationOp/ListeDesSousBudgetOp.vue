@@ -27,30 +27,14 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste type texte"
-            :data="BudgetEchateParUa"
-            name="Liste type texte"
-            worksheet="Liste type texte"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
-               
-                            
-                            
+         
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Ges Sous Budgets du :{{marcheid}}</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
-              </div> -->
+                            <h5>Listes Des Sous Budgets</h5>
+             
             </div>
 
             <div class="widget-content nopadding">
@@ -67,15 +51,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type) || 'Non renseigné'}}</td>
                    
-                   <td >
-                      <router-link :to="{ name: 'ListeMarcheSousBudget', params: { id: type.id }}"
+                   <td>
+                      <router-link :to="{ name: 'VoirOrdrePaiementSousBudget', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
                     </td>
                     
@@ -146,12 +130,13 @@ export default {
   },
 created() {
     this.marcheid = this.$route.params.id;
-    this.detailOp = this.marches.find(
+    this.detailOp = this.gettersgestionOrdrePaiement.find(
       (idmarche) => idmarche.id == this.$route.params.id
     );
   },
   computed: {
         ...mapGetters("uniteadministrative", [
+            "groupeParUniteZone",
       "directions",
       "servicesua",
       "fonctionsua",
@@ -170,7 +155,7 @@ created() {
       // "chapitres",
       // "sections"
     ]),
-    ...mapGetters("bienService", ["GroupeUniteZoneMarche","GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+    ...mapGetters("bienService", ["gettersgestionOrdrePaiement","GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -203,9 +188,33 @@ created() {
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
-   
+
+
+arrayExerciceDecompteBienService() {
+      //return (id) => {
+        
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.sous_budget_id == this.marcheid);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.sous_budget_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+    // };
+    },
+
+
+
 afficheGroupeUaParMarche(){
-    return this.GroupeUniteZoneMarche.filter(item=>item[0].unite_administrative_id == this.detailOp.unite_administrative_id)
+    return this.groupeParUniteZone.filter(item=>item[0].uniteadministrative_id == this.detailOp.uniteadministrative_id)
 },
 
 libelleSOusBudget() {

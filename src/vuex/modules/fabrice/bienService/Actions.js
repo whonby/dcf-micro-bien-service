@@ -5925,3 +5925,45 @@ export function supprimerHistoriqueDecisionOp({ commit }, id) {
       axios.delete("/HistoriqueDecisionOp/" + id).then(() => dialog.close());
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function getBudgetEclateImporter({ commit }) {
+  queue.push(() => axios.get('/BudgetImport').then((response) => {
+    commit('GET_ALL_BUDGET_ECLATE_IMPORTE', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+export function ajoutergetBudgetEclateImporter({ commit }, objetAjoute, config) {
+  return asyncLoading(axios.post('/BudgetImport', objetAjoute, config)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_BUDGET_ECLATE_IMPORTE', response.data)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}

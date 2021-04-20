@@ -3,7 +3,7 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
        <li>
-            <router-link :to="{name: 'suivi_marhe'}" tag="a">
+            <router-link :to="{name: 'GroupeParUaSuiviMarcheBienService'}" tag="a">
               SUIVI DES MARCHES HORS SIB
             </router-link>
           </li>

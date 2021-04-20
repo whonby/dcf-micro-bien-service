@@ -1,4 +1,4 @@
-
+ajouterMandate
 <template>
 
 
@@ -67,7 +67,7 @@
                                 </td>
                                   <td>
 
-                         <span v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">Exemptée procedure</span>
+                         <span v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id)">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
                                <!-- <td>{{budgetDisponible}}</td> -->
@@ -92,11 +92,11 @@
 
 
        <div id="tab0021403" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
              <div class="widget-content">
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
-                </div>
+                </div> -->
                 <componentBailleur :macheid="detail_marche.id"></componentBailleur>
                 </div>
     </div>
@@ -149,8 +149,7 @@
                    <div id="tab01145_offre" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
@@ -163,8 +162,8 @@
                              <div id="tab478_reception" class="tab-pane">
                                  <div class="span4"></div>
                                  <div class="span4"></div>
-                                 <div class="span4" align="right">
-                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
+                                 <!-- <div class="span4" align="right">
+                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div> -->
                                  <component-cotation :macheid="detail_marche"></component-cotation>
                              </div>
 
@@ -184,13 +183,13 @@
                              </div>
 
                              <div id="tab4110_pv_jugement" class="tab-pane">
-                                 <div align="right">
+                                 <!-- <div align="right">
                                      <div class="widget-content">
                                          <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                                      </div>
 
 
-                                 </div>
+                                 </div> -->
                                  <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                              </div>
@@ -248,8 +247,7 @@
                          <div id="tab01145" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
@@ -262,9 +260,9 @@
                         <div id="tab478" class="tab-pane">
                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
+                                <!-- <div class="span4" align="right">
 
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div> -->
 
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -278,13 +276,13 @@
                 </div>
 
                         <div id="tab41180" class="tab-pane">
-                      <div align="right">
+                      <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                 </div>
@@ -360,8 +358,7 @@
                          <div id="tab8975" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
@@ -378,8 +375,8 @@
                 <div id="tab78458" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
@@ -387,8 +384,8 @@
  <div id="tab21230" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
@@ -396,8 +393,8 @@
                           <div id="tab1235" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -405,8 +402,8 @@
                              <div id="tab444" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -418,13 +415,13 @@
                         </div>
 
                 <div id="tab1041" class="tab-pane">
-                      <div align="right">
+                      <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                 </div>
@@ -518,8 +515,7 @@
                          <div id="tab001" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
@@ -535,8 +531,8 @@
                 <div id="tab041" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
@@ -544,8 +540,8 @@
  <div id="tab0864" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
@@ -553,8 +549,8 @@
                           <div id="tab051" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -562,8 +558,8 @@
                              <div id="tab444" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -578,13 +574,13 @@
 
 
                 <div id="0124041" class="tab-pane">
-                      <div align="right">
+                      <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                 </div>
@@ -729,8 +725,7 @@
                        <div id="tab4562139" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
 
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
@@ -744,8 +739,8 @@
                               <div id="tab0001" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div> -->
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
                          </div>
@@ -753,8 +748,8 @@
                          <div id="tab04" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
@@ -765,9 +760,9 @@
                          <div id="tab0045" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
+                                <!-- <div class="span4" align="right">
 
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div> -->
 
                                         <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
 
@@ -793,13 +788,13 @@
                 </div>
 
                   <div id="tab4502145" class="tab-pane">
-               <div align="right">
+               <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                 </div>
@@ -974,8 +969,7 @@
                          <div id="tabAMI" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
@@ -991,8 +985,8 @@
                 <div id="tabLettreAMI" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
@@ -1000,8 +994,8 @@
  <div id="tabMandateAMI" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
@@ -1009,8 +1003,8 @@
                           <div id="tabReceptionAMI" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -1018,8 +1012,8 @@
                              <div id="tab444" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -1135,8 +1129,7 @@
                          <div id="tabDP" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <publicationOffreDP :macheid="detail_marche.id"></publicationOffreDP>
@@ -1152,8 +1145,8 @@
                 <div id="tabLettreDP" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
@@ -1161,8 +1154,8 @@
  <div id="tabMandateDP" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
@@ -1170,8 +1163,8 @@
                           <div id="tabReceptionDP" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
@@ -1289,8 +1282,8 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
 
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
 
                         <!-- <publication-Offre :macheid="detail_marche.id"></publication-Offre> -->
 
@@ -1373,8 +1366,7 @@
         <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
 
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>

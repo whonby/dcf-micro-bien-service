@@ -46,6 +46,15 @@
                     </tbody>
                 </table> -->
                 <!-- <h4>Liste des offres</h4> -->
+                 <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre22"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
                 <table class="table table-bordered table-striped" v-if="macheid" >
                      <thead>
                              <tr>
@@ -756,6 +765,12 @@ typeProcedureLibelle() {
             ]),
 
 
+ajouterOffre22() {
+      this.$("#ajouterOffre").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
 
         afficherModalModifierActeDepense(index){
                 this.$('#modificationModal').modal({

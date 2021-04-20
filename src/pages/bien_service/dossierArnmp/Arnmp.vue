@@ -1,11 +1,20 @@
 
 <template>
     <div>
-        <div align="right">
+        <!-- <div align="right">
     <div class="widget-content">
       <a href="#ajouterArnmp" data-toggle="modal" class="btn btn-primary">Ajouter</a>
     </div>
-  </div>
+  </div> -->
+   <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre2452221"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
   <table class="table table-bordered table-striped">
      <thead>
     <tr>
@@ -508,6 +517,12 @@ afficheNomEntreprise() {
     methods:{
 ...mapActions("bienService",['ajouterArnmp', 'modifierArnmp','supprimerArnmp']),
 
+  ajouterOffre2452221() {
+      this.$("#ajouterArnmp").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
   afficherModificationReserveCf(index){
                 this.$('#modifierArnmpms').modal({
                     backdrop: 'static',

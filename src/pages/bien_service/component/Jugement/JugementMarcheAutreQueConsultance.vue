@@ -1,12 +1,20 @@
 <template>
 <div>
-  <div align="right">
+  <!-- <div align="right">
     <div class="widget-content">
       <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
     </div>
-  </div>
+  </div> -->
 
-
+<div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffre245245"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
 <div v-for="item in lot" :key="item.id" class="widget-content">
   <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
@@ -552,7 +560,12 @@ afficheNomEntreprise() {
   methods:{
     ...mapActions('bienService',['supprimerAnalyseDossier',
       'ajouterAnalyseDossier','modifierAnalyseDossier',"ajouterAnalyseDossierMultiple","supprimerAnalyseDossierMultiple"]),
-
+ajouterOffre245245() {
+      this.$("#ajouterMP").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     ajouterAnalyseD(){
       var nouvelObjet ={
         ...this.formAnalyseDossier,

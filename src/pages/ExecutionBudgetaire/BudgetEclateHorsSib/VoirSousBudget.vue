@@ -37,7 +37,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                       <th>Numero ordre</th>
+                       <!-- <th>Numero ordre</th> -->
                     <th>Code Sous Budget</th>
                     <th>Libelle</th>
                      <th>Activite</th>
@@ -49,32 +49,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in listeDesSousBudget(detail_marche.unite_administrative_id)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in listeDesSousBudget(detail_marche.unite_administrative_id)" :key="type.id">
+                    <!-- <td
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.nombre_sous_budget || 'Non renseigné'}}</td> -->
                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.nombre_sous_budget || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.code || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.activite_enfant || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{libelleActivite(type.activite_parent_id) || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{libelleLigneBudgetaire(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{libelleTypeFinancement(type.type_financement_id) || 'Non renseigné'}}</td>
 
 
 <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{libelleSousFinancement(type.source_financement_id) || 'Non renseigné'}}</td>
 <td
-                      @dblclick="afficherModalModifierTypeTexte(index)" style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)" style="text-align:center;font-weight:bold;"
                     >{{formatageSomme(parseFloat(type.montant_budgetaire)) || 'Non renseigné'}}</td>
                     <td>
                       <button class="btn btn-danger" @click="supprimerSousBudget(type.id)">
@@ -86,7 +86,7 @@
                   </tr>
                   <tr>
                      <td></td>
-                            <td></td>
+                            <!-- <td></td> -->
                             <td></td>
                             <td></td>
                             <td></td>
@@ -252,6 +252,12 @@ created() {
       "modifierTypeTexte",
       "supprimerSousBudget"
     ]),
+    afficherModalModifierTypeTexte(id) {
+
+      this.$router.push({
+        path: "/ModifierSousBudget/" + id
+      });
+    },
   formatageSomme:formatageSomme,
     pagePrecedent(){
                 window.history.back()
