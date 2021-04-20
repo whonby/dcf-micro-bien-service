@@ -471,7 +471,11 @@ taille(){
             return Objet
     },
     calculTauxParBailleurResteEngager(){
-      return parseFloat(this.calculMontantResteEngager / parseFloat(this.sommeDesBailleurMarche) *100).toFixed(2)
+       let objet= parseFloat(this.calculMontantResteEngager / parseFloat(this.sommeDesBailleurMarche) *100).toFixed(2)
+        if(isNaN(objet)){
+          return 0
+        }
+        return objet
     },
 
     calculmontantEtatResteEngager(){
@@ -591,7 +595,7 @@ if (qtereel) {
     CumulGArantie() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
 
         }
       };
@@ -599,7 +603,7 @@ if (qtereel) {
     CumulPenalite() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
 
         }
       };
@@ -607,7 +611,7 @@ if (qtereel) {
     CumulNetHtva() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
 
         }
       };
@@ -615,7 +619,7 @@ if (qtereel) {
     CumulNetTTC() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
 
         }
       };
@@ -623,7 +627,7 @@ if (qtereel) {
     CumulPartEtat() {
       return id => {
         if (id != null && id != "") {
-           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id && qtreel.exercicebudget==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
 
         }
       };
@@ -717,7 +721,11 @@ if (qtereel) {
     },
 
     calculDuTauxBailleur(){
-      return (parseFloat(this.sommeDesBailleur) / parseFloat(this.sommeDesBailleurMarche) * 100).toFixed(2)
+      let objet= parseFloat((this.sommeDesBailleur) / parseFloat(this.sommeDesBailleurMarche) * 100).toFixed(2)
+       if(isNaN(objet)){
+         return 0
+       }
+       return objet
     },
      afficheMarcheMontanParBailleurTresor() {
       return id => {
@@ -743,7 +751,11 @@ if (qtereel) {
 
 // afficher le taux tresor
 afficherTauxTresor(){
-  return parseFloat(this.calculDuTauxBailleur)+ parseFloat(this.calculDuTauxTresor).toFixed(2)
+   let objet= parseFloat(this.calculDuTauxBailleur) + parseFloat(this.calculDuTauxTresor).toFixed(2)
+    if(isNaN(objet)){
+      return 0
+    }
+    return objet
 },
     
     afficheMarcheDecompteParBailleurTresors() {

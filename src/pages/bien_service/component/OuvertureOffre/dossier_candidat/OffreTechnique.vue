@@ -1,9 +1,18 @@
 <template>
 <div>
   <notifications />
-  <div align="right">
+  <!-- <div align="right">
     <a href="#ajouter_offre_fin" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-  </div>
+  </div> -->
+  <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffTen"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
   <div class="widget-box" >
     <div class="widget-content nopadding">
       <table class="table table-bordered table-striped">
@@ -877,6 +886,13 @@ listeOffreTechniqueLotCandidat(){
       "ajouterLettreInvitation",
 
     ]),
+
+      ajouterOffTen() {
+      this.$("#ajouter_offre_fin").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     formatageSomme:formatageSomme,
     ajouterOffreT(){
       let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formchnique.marche_id)
