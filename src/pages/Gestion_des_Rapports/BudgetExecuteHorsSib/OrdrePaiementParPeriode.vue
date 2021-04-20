@@ -326,7 +326,7 @@
                 Système de Gestion des Ordres de Paiement hors SIB
               </td>
               <td colspan="2" style=" border: solid white !important;">
-                généré le {{foramateDatenow}} à 08:52 par {{afficheNomUtilisateur}} 
+                généré le {{nombreJourTraitementCalucle}} à 08:52 par {{afficheNomUtilisateur}} 
               </td>
             </tr>
           </tfoot>
@@ -407,12 +407,7 @@ export default {
       "sections",
     ]),
     ...mapGetters("personnelUA", [
-      "salairesActeur",
-      "personnaliseActeurDepense",
-      "personnaFonction",
-      "afficheNombrePersonnelRecuActeNormination",
-      "fonctionBudgetaire",
-      "type_salaries",
+  
       "type_contrats",
       "acte_personnels",
       "type_acte_personnels",
@@ -445,25 +440,12 @@ export default {
       "typeCandidat",
       "acteDepense",
       "getMarchePersonnaliser",
-      "appelOffres",
-      "lots",
-      "villes",
-      "communes",
-      "pays",
-      "modePassations",
-      "procedurePassations",
-      "getterDossierCandidats",
       "marches",
       "gettersPersonnaliserRapportJugement",
       "getterOffreFinanciers",
       "gettersOffreTechniques",
       "getterLettreInvitation",
       "getterMandate",
-      "getterCojos",
-      "conditions",
-      "getterAnalyseDossiers",
-      "typeAnalyses",
-      "getterDemandeAno",
       "documentProcedures",
       "getterAnalyseDMP",
       "getterAnoDMPBailleur",
@@ -527,6 +509,32 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+     nombreJourTraitementCalucle() {
+      let date = new Date();
+      let aaaa = date.getFullYear();
+      let gg = date.getDate();
+      let mm = date.getMonth() + 1;
+      let moi;
+      let jour;
+      if (gg < 10) {
+        jour = "0" + gg;
+      } else {
+        jour = gg;
+      }
+
+      if (mm < 10) {
+        moi = "0" + mm;
+      } else {
+        moi = mm;
+      }
+
+      let cur_day = aaaa + "-" + moi + "-" + jour;
+
+      return cur_day;
+
+      // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+    },
 
     afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");

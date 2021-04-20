@@ -335,8 +335,15 @@
             
           </tbody>
 
-          <tfoot>
-            
+          <tfoot style=" border: solid white !important;">
+            <tr>
+              <td colspan="3" style=" border: solid white !important; text-align:center;">
+                Système de Gestion des Ordres de Paiement hors SIB
+              </td>
+              <td colspan="2" style=" border: solid white !important;">
+                généré le {{nombreJourTraitementCalucle}} à 08:52 par {{afficheNomUtilisateur}} 
+              </td>
+            </tr>
           </tfoot>
           
         </table>
@@ -538,6 +545,41 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+     nombreJourTraitementCalucle() {
+      let date = new Date();
+      let aaaa = date.getFullYear();
+      let gg = date.getDate();
+      let mm = date.getMonth() + 1;
+      let moi;
+      let jour;
+      if (gg < 10) {
+        jour = "0" + gg;
+      } else {
+        jour = gg;
+      }
+
+      if (mm < 10) {
+        moi = "0" + mm;
+      } else {
+        moi = mm;
+      }
+
+     // let cur_day = aaaa + "-" + moi + "-" + jour;
+      let cur_day = jour + "-" + moi + "-" + aaaa;
+
+      return cur_day;
+     
+
+      // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+    },
+
+    afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
 
     ListeGroupByActivite3() {
       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
