@@ -17,11 +17,11 @@
           RECAPITULATIF BUDGET DES PROJETS
         </router-link>
       </li>
-       <!-- <li>
+       <li>
         <router-link :to="{name: 'importationBudgetEclate'}" tag="a">
           IMPORTATION BUDGET
         </router-link>
-      </li> -->
+      </li>
     </ul>
   </div>
 </template>

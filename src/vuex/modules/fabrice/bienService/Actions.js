@@ -5943,39 +5943,27 @@ export function supprimerHistoriqueDecisionOp({ commit }, id) {
 
 
 
+
+
+
 export function getBudgetEclateImporter({ commit }) {
-  queue.push(() => {
-    axios
-      .get("/BudgetImport")
-      .then(response => {
-        commit("GET_ALL_BUDGET_ECLATE_IMPORTE", response.data);
-      })
-      .catch(error => console.log(error));
-  });
+  queue.push(() => axios.get('/BudgetImport').then((response) => {
+    commit('GET_ALL_BUDGET_ECLATE_IMPORTE', response.data)
+
+  }).catch(error => console.log(error)))
 }
 
-// ajouter type texte
-export function ajouterBudgetEclateImporter({ commit }, nouveau) {
-  asyncLoading(axios
-    .post("/BudgetImport", nouveau))
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_BUDGET_ECLATE_IMPORTE", response.data);
-
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
-      }
-    }).catch(error => {
-      console.log(error)
-      this.$app.$loading(true)
+export function ajoutergetBudgetEclateImporter({ commit }, objetAjoute, config) {
+  return asyncLoading(axios.post('/BudgetImport', objetAjoute, config)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_BUDGET_ECLATE_IMPORTE', response.data)
       this.$app.$notify({
-        title: 'Erreur',
-        text: "ce Numero existe déja",
-        type: "error"
-      });
-    })
-}
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
 
+  }).catch(error => console.log(error))
+}

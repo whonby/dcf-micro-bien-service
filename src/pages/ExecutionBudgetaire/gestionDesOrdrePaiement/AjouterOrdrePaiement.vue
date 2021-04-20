@@ -1,6 +1,7 @@
 
 <template>
   <div class="container-fluid">
+    {{RechercheNumeroOP}}
     <hr />
     <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
@@ -14,7 +15,8 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Ajouter Ordre Paiement</h5>
+            <h5>Ajouter Ordre Paiement{{VerificationNumeroOp(formData.numero_ordre_paiement)}}</h5>
+            
             <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -78,8 +80,9 @@
                     <input
                       type="text"
                       style="border: 1px solid #000; font-size: 15px"
-                      v-model="formData.numero_ordre_paiement"
+                     v-model="formData.numero_ordre_paiement"
                       class="span"
+                      
                     />
                   </div>
                 </div>
@@ -4101,6 +4104,34 @@ SousFinancement() {
         }
       };
     },
+RechercheNumeroOP(){
+  if(this.VerificationNumeroOp(this.formData.numero_ordre_paiement) == this.formData.numero_ordre_paiement){
+    
+this.$notify({
+                 title: 'ERROR',
+                 text: "Numero Op Déja Enregistrer",
+                 type:"error"
+             })
+  }
+  else{
+    return this.formData.numero_ordre_paiement
+  }
+  return 0
+},
+    VerificationNumeroOp() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.numero_op_prov_definitive == id
+          );
+
+          if (qtereel) {
+            return qtereel.numero_op_prov_definitive;
+          }
+          return 0;
+        }
+      };
+    },
   },
 
   methods: {
@@ -4416,6 +4447,7 @@ SousFinancement() {
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
+            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
@@ -4516,6 +4548,7 @@ this.$notify({
             this.formData12.objet_decompte;
           var nouvelObjetOrdrePaiement = {
             exercice: this.anneeAmort,
+            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
@@ -4607,6 +4640,7 @@ this.$notify({
            
           var nouvelObjetOrdrePaiement78 = {
             exercice: this.anneeAmort,
+            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             diff_op_personnel:this.formData.diff_op_personnel,
              mois_paiement: this.formData.mois_paiement,
             type_ordre_paiement: this.formData.type_ordre_paiement,
@@ -4644,9 +4678,7 @@ this.$notify({
             mode_paiement_id: this.formData.mode_paiement_id,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData
-            
-              .gestionnaire_credit_fonction,
+            gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
 
             date_interim: this.formData.date_interim,
             visa_interim: this.formData.visa_interim,
@@ -4778,6 +4810,7 @@ this.$notify({
               .beneficiaire_autre_depense,
             geo_autre_depense: this.formData45.geo_autre_depense,
             dure_autre_depense: this.formData45.dure_autre_depense,
+            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
           };
 
           this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
@@ -4881,6 +4914,7 @@ this.$notify({
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
+            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
           };
 
           this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement12);
@@ -4925,6 +4959,7 @@ this.$notify({
               diff_op_personnel:this.formData.diff_op_personnel,
             type_ordre_paiement: this.formData.type_ordre_paiement,
             numero_ordre_paiement: this.intitule,
+            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
@@ -5075,7 +5110,7 @@ this.$notify({
             user_id_interim: this.formData.user_id_interim,
             imterim_op: this.formData.imterim_op,
             personne_rattacher: this.formData.RattacherPers,
-
+numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             controleur_financier_id: this.recupererIdUser(
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),

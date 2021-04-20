@@ -90,7 +90,7 @@ budgetEclateImporter:[],
     rapportOuverture: [],
     gettersTransmissions: [],
     plan_passation_marche: [],
-
+    voirBudgetImporter: [],
     role_membrecojo: [],
     selectionner_candidats: [],
 
