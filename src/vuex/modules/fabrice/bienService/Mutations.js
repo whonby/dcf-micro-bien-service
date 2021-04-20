@@ -3074,3 +3074,6 @@ export const GET_ALL_BUDGET_ECLATE_IMPORTE = (state, tableau_document) => {
 export const AJOUTER_BUDGET_ECLATE_IMPORTE = (state, elementAjouter) => {
     state.budgetEclateImporter.unshift(elementAjouter)
 }
+export const GET_ALL_VOIR_BUDGET_ECLATE_IMPORTE = (state, tableau_document) => {
+    state.voirBudgetImporter = tableau_document
+}
