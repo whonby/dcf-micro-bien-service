@@ -9,8 +9,9 @@ uniteAdministratives
 
                    </router-link>  -->
         <a
-          href="#ModalProblemePersonnel"
+          href="#"
           data-toggle="modal"
+          @click.prevent="callPersonnelRattacher"
           class="btn btn-success"
           align="rigth"
           >RATTACHER UNE PERSONNE</a
@@ -33,7 +34,9 @@ uniteAdministratives
           >
             <td style="font-size: 25px">
               {{
-                libelleUniteAdministrative(getterPersonneRattach[0].ua_rattacheur) || "Non renseigné"
+                libelleUniteAdministrative(
+                  getterPersonneRattach[0].ua_rattacheur
+                ) || "Non renseigné"
               }}
             </td>
 
@@ -240,11 +243,9 @@ export default {
       "uniteAdministratives",
       "GestionStockageArticles",
       "groupeUniteAdministrativeDecompte",
-      "uaperso"
+      "uaperso",
     ]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
-
-
 
     libelleUniteAdministrative() {
       return (id) => {
@@ -270,7 +271,6 @@ export default {
         }
       };
     },
-
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
@@ -285,6 +285,9 @@ export default {
       "SupprimerPersonnelRattacher",
       "ModifierPersonnelRattacher",
     ]),
+    callPersonnelRattacher() {
+      this.$("#ModalProblemePersonnel").modal("show");
+    },
 
     AjouterRattacher() {
       this.AjouterPersonnelRattacher(this.formData2);

@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h2 style="text-align: center">IMPORTATION DES PROGRAMMES</h2>
+    <h2 style="text-align: center">IMPORTATION DES UNITES ADMINISTRATIVES</h2>
 
     <div id="tab2" class="tab-pane">
       <input type="text" class="span" readonly :value="anneeAmort" />
 
       <upload-excel-component
         :on-success="handleSuccess"
-        :before-upload="beforeUpload"
-      />
+        :before-upload="beforeUpload"/>
       <hr />
       <a
         align="right"
@@ -184,7 +183,8 @@ export default {
         .then((data) => {
           console.log(data);
           this.tableData = [];
-        }).catch((erro) => {
+        })
+        .catch((erro) => {
           console.log(erro);
           // this.getAllBudgetGeneral()
           // this.getAllUniteAdministrative()

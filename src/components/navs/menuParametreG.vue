@@ -840,8 +840,8 @@
 
             <li class="divider"></li>
           <li>
-            <router-link :to ="{name: 'NormeMission'}" tag="a">
-              <i class="icon-key"></i> Norme de missions
+            <router-link :to ="{name: 'ImportationUA'}" tag="a">
+              <i class="icon-key"></i> Importation Des UA
             </router-link>
           
           </li>
