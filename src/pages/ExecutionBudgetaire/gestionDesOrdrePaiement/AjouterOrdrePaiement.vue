@@ -281,6 +281,7 @@
                                     :key="typeFact.id"
                                     :value="typeFact"
                                   >
+                                  
                                     {{
                                       libelleLigneEconomique(
                                         typeFact
