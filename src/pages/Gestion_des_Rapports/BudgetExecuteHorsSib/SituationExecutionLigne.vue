@@ -439,6 +439,7 @@ export default {
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
+  
     };
   },
 
@@ -600,10 +601,11 @@ export default {
     },
 
     ListeGroupByActivite() {
-      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+      if (this.activite_id!=0) {
         return this.groupeByActivite.filter(
           (qtreel) =>
             qtreel[0].annebudgetaire == this.anneeAmort
+            && qtreel[0].activite_id==this.activite_id
         );
       } else {
         return this.groupeByActivite

@@ -224,6 +224,11 @@ const GET_PLAN_PROGRAMME = (state , tableau_plan_programme) => {
 const AJOUTER_PLAN_PROGRAMME = (state , objetAjout) =>{
     state.plans_programmes.unshift(objetAjout)
 }
+
+// importer plan programme
+const IMPORT_PLAN_PROGRAMME = (state , objetAjout) =>{
+    state.plans_programmes.unshift(objetAjout)
+}
 // modifier plan programme
 const MODIFIER_PLAN_PROGRAMME = (state, nouveau_objet) =>{
     state.plans_programmes = state.plans_programmes.map( plan_programme => {
@@ -760,6 +765,7 @@ GET_PLAN_PROGRAMME,
 AJOUTER_PLAN_PROGRAMME,
 MODIFIER_PLAN_PROGRAMME,
 SUPPRIMER_PLAN_PROGRAMME,
+IMPORT_PLAN_PROGRAMME,
 
 // exportation service gestionnaire
 GET_SERVICE_GESTIONNAIRE,

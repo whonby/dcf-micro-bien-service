@@ -3,15 +3,25 @@
 
 
 
+
  <!-- <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
     <div class="span4">
       <h5>L'OFFRE FINANCIERE </h5>
     </div>
   </div>-->
   <notifications />
-  <div align="right">
+  <!-- <div align="right">
     <a href="#addd10" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-  </div>
+  </div> -->
+     <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterOffin"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
   <div class="widget-box" >
 
     <div class="widget-content nopadding">
@@ -546,6 +556,16 @@ montantTvaModifier() {
       "ajouterLettreInvitation",
 
     ]),
+
+
+    ajouterOffin() {
+      this.$("#addd10").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
+
+    
     formatageSomme:formatageSomme,
     ajouterOffreF(){
       if(this.formOffreFinanciere.httcc_id===0){
