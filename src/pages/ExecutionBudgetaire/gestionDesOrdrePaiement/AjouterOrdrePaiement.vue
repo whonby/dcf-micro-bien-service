@@ -15,7 +15,7 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Ajouter Ordre Paiement{{VerificationNumeroOp(formData.numero_ordre_paiement)}}</h5>
+            <h5>Ajouter Ordre Paiement</h5>
             
             <!-- <div align="right">
                 Search:
@@ -277,16 +277,13 @@
                                 >
                                   <option></option>
                                   <option
-                                    v-for="typeFact in afficheLesSousBudgetLigneBudgetaire(
-                                      formData.activite_id,
-                                      formData.sous_budget_id
-                                    )"
+                                    v-for="typeFact in LigneEconomiqueSousBudget"
                                     :key="typeFact.id"
-                                    :value="typeFact.ligneeconomique_id"
+                                    :value="typeFact"
                                   >
                                     {{
                                       libelleLigneEconomique(
-                                        typeFact.ligneeconomique_id
+                                        typeFact
                                       )
                                     }}
                                   </option>
@@ -297,7 +294,7 @@
                           <template v-else>
                             <div class="control-group">
                               <label class="control-label"
-                                >Classification Economique</label
+                                >Classification Economique{{formData.ligne_economique_id}}</label
                               >
                               <div class="controls">
                                 <select
@@ -307,16 +304,13 @@
                                 >
                                   <option></option>
                                   <option
-                                    v-for="typeFact in RecupererlibelleLigneEconomique(
-                                      formData.unite_administrative_id,
-                                      formData.activite_id
-                                    )"
-                                    :key="typeFact.id"
-                                    :value="typeFact.ligneeconomique_id"
+                                    v-for="typeFact in arrayExerciceDecompteBienService"
+                                    :key="typeFact"
+                                    :value="typeFact"
                                   >
                                     {{
                                       libelleLigneEconomique(
-                                        typeFact.ligneeconomique_id
+                                        typeFact
                                       )
                                     }}
                                   </option>
@@ -3193,7 +3187,46 @@ affichePersoUA() {
         }
       };
     },
-
+arrayExerciceDecompteBienService() {
+      //return (id) => {
+        
+        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==0);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+      }
+        return [];
+  //  };
+    },
+    LigneEconomiqueSousBudget() {
+      //return (id) => {
+        
+        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+      }
+        return [];
+  //  };
+    },
     RecupererlibelleLigneEconomique() {
       return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
