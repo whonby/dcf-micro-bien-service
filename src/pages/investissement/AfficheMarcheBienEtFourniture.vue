@@ -9,7 +9,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>March&eacute;s d'investissement en Exécution85</h5>
+              <h5>March&eacute;s d'investissement en Exécution</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />

@@ -14,7 +14,7 @@ date_interim
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Modifier Ordre Paiement{{formData.id}}</h5>
+            <h5>Modifier Ordre Paiement</h5>
             <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -1792,7 +1792,7 @@ date_interim
                         >Valider</a
                       >
                       <a
-                        @click.prevent="afficherModalListePersonnel()"
+                        @click.prevent="pagePrecedent()"
                         class="btn"
                         href="#"
                         >Fermer</a
@@ -4163,7 +4163,7 @@ SousFinancement() {
     },
 
     afficherModalListePersonnel() {
-      this.$router.push({ name: "ListeDesOrdresPaiement" });
+      this.$router.push({ name: "ListeOpParUa" });
     },
 
     OnchangeFichier(e) {
