@@ -42,7 +42,7 @@ CodeExempte
                 <span class="icon">
                   <i class="icon-th"></i>
                 </span>
-                <h5>Liste des March&eacute;s896</h5>
+                <h5>Liste des March&eacute;{{marcheid}}</h5>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <div class="span8">
                   <div align="right">
@@ -513,9 +513,9 @@ export default {
     ]),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-afficheMarcheHorsSib() {
-     
-          return this.marches.filter((element) => element.unite_administrative_id == this.marcheid && element.sib==1 && element.gdenature_id == 5 && element.parent_id == null && element.plan_passation_marche_id == null || element.gdenature_id == 5 &&  element.parent_id == null && element.sib == 1 && element.plan_passation_marche_id == null);
+marcheHorSibFiltre() {
+     console.log(this.marcheHorSibFiltre12)
+          return this.marcheHorSibFiltre12.filter((element) => element.unite_administrative_id == this.marcheid);
 
     },
     rechercheUa() {
@@ -525,12 +525,12 @@ afficheMarcheHorsSib() {
       });
     },
 
-    marcheHorSibFiltre() {
+    marcheHorSibFiltre12() {
       // const st = this.search.toLowerCase();
 
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.afficheMarcheHorsSib.filter((item) => {
+        this.gettersMarcheHorsib.filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
             (row) => row.unite_administrative_id == item.unite_administrative_id
           );
@@ -539,11 +539,13 @@ afficheMarcheHorsSib() {
             return item;
           }
         });
-        return colect
+        return colect.filter((element) => element.sib==1 && element.gdenature_id == 5 && element.parent_id == null && element.plan_passation_marche_id == null || element.gdenature_id == 5 &&  element.parent_id == null && element.sib == 1 && element.plan_passation_marche_id == null);
+
       
       }
 
-      return this.afficheMarcheHorsSib
+      return this.gettersMarcheHorsib.filter((element) => element.sib==1 && element.gdenature_id == 5 && element.parent_id == null && element.plan_passation_marche_id == null || element.gdenature_id == 5 &&  element.parent_id == null && element.sib == 1 && element.plan_passation_marche_id == null);
+
 
      
     },

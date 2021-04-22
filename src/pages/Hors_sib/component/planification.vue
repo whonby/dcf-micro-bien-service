@@ -219,25 +219,25 @@ export default {
 
      rechercheUa() {
       const st = this.search.toLowerCase();
-      return this.afficherListeMarcheHorsSib.filter((type) => {
+      return this.afficheMarcheEnPlanification.filter((type) => {
         return type.objet.toLowerCase().includes(st);
       });
     },
 
      // afficher la liste des marchés hors sib
 
-//  afficherListeMarcheHorsSib(){
+//  afficheMarcheEnPlanification(){
 
 //        return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1 && item.attribue==0)
 //  },
  // afficher nombreMarcheEnPlanification
 
  nombreMarchePlanifierHorSib(){
-   return this.afficherListeMarcheHorsSib.length
+   return this.afficheMarcheEnPlanification.length
  },
 
      montantMarchePlanfierHorSib(){
-  return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.afficheMarcheEnPlanification.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
  recupererCodeTypeMarche() {
@@ -252,7 +252,9 @@ export default {
         }
       };
     },
-
+afficheMarcheEnPlanification(){
+return this.afficherListeMarcheHorsSib.filter(element => element.unite_administrative_id == this.macheid)
+},
     afficherListeMarcheHorsSib() {
        // const st = this.search.toLowerCase();
         if (this.noDCfNoAdmin){
@@ -264,7 +266,7 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => element.unite_administrative_id == this.macheid && element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element =>  element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -273,7 +275,7 @@ export default {
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.unite_administrative_id == this.macheid && element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -283,7 +285,7 @@ export default {
     },
 
     afficherNombreMarchepalinificationHorsib(){
-      return this.afficherListeMarcheHorsSib.length
+      return this.afficheMarcheEnPlanification.length
     },
 
     // afficher le nombre de marche hors sib

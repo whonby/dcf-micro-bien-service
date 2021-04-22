@@ -295,7 +295,7 @@
                           <template v-else>
                             <div class="control-group">
                               <label class="control-label"
-                                >Classification Economique{{formData.ligne_economique_id}}</label
+                                >Classification Economique</label
                               >
                               <div class="controls">
                                 <select
@@ -3165,7 +3165,7 @@ affichePersoUA() {
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==0);
+        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id == 0 && budget.budget_active==1);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -3185,7 +3185,7 @@ arrayExerciceDecompteBienService() {
     LigneEconomiqueSousBudget() {
       //return (id) => {
         
-        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id);
+        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id  && budget.budget_active==1);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

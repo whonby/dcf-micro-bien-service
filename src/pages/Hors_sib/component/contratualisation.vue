@@ -216,7 +216,7 @@ export default {
 
       rechercheUa() {
       const st = this.search.toLowerCase();
-      return this.afficherContratualisationParUA.filter((type) => {
+      return this.afficheMarcheEnContrat.filter((type) => {
         return type.objet.toLowerCase().includes(st);
       });
     },
@@ -248,7 +248,9 @@ export default {
         }
       };
     },
-
+afficheMarcheEnContrat(){
+return this.afficherContratualisationParUA.filter(element => element.unite_administrative_id == this.macheid)
+},
     afficherContratualisationParUA() {
        // const st = this.search.toLowerCase();
 
@@ -262,11 +264,11 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => element.unite_administrative_id == this.macheid && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.unite_administrative_id == this.macheid && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
            
         
 
