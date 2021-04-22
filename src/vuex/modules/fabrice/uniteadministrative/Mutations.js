@@ -197,6 +197,11 @@ const AJOUTER_UNITE_ADMINISTRATIVE = (state, nouveau_unite_administrative) => {
   // state.typeTextes = [...nouveau_type, ...state.typeTextes]
   state.uniteAdministratives.unshift(nouveau_unite_administrative);
 };
+
+const IMPORTER_UNITE_ADMINISTRATIVE = (state, nouveau_unite_administrative) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.uniteAdministratives.unshift(nouveau_unite_administrative);
+};
 // modifier unite administrative
 const MODIFIER_UNITE_ADMINISTRATIVE = (state, objetModifie) => {
   state.uniteAdministratives = state.uniteAdministratives.map(
@@ -459,29 +464,29 @@ export const SUPPRIMER_BUDGET_CHARGE = (state, id) => {
 
 
 export const GET_LIGNE_EXEMPTER = (state, tableauBudgetGeneral) => {
-    state.ligneExempter = tableauBudgetGeneral;
+  state.ligneExempter = tableauBudgetGeneral;
 };
 
 // ajouter type_textes
 export const AJOUTER_LIGNE_EXEMPTER = (state, nouveau_budgetGeneral) => {
-    // state.typeTextes = [...nouveau_type, ...state.typeTextes]
-    state.ligneExempter.unshift(nouveau_budgetGeneral);
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.ligneExempter.unshift(nouveau_budgetGeneral);
 };
 
 // modifier type_textes
 export const MODIFIER_LIGNE_EXEMPTER = (state, objetModifie) => {
-    state.ligneExempter = state.ligneExempter.map(type => {
-        if (type.id == objetModifie.id) {
-            type = { ...objetModifie };
-        }
+  state.ligneExempter = state.ligneExempter.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
 
-        return type;
-    });
+    return type;
+  });
 };
 
 // supprimer type_texte
 export const SUPPRIMER_LIGNE_EXEMPTER = (state, id) => {
-    state.ligneExempter = state.ligneExempter.filter(type => type.id != id);
+  state.ligneExempter = state.ligneExempter.filter(type => type.id != id);
 };
 
 
@@ -882,7 +887,7 @@ export {
   MODIFIER_BANQUE_UA,
   SUPPRIMER_BANQUE_UA,
 
-  
+
 
   GET_ALL_STRUCTURE_ORGANIGRAMME_UA,
   AJOUTER_STRUCTURE_ORGANIGRAMME_UA,
@@ -974,6 +979,7 @@ export {
   AJOUTER_UNITE_ADMINISTRATIVE,
   MODIFIER_UNITE_ADMINISTRATIVE,
   SUPPRIMER_UNITE_ADMINISTRATIVE,
+  IMPORTER_UNITE_ADMINISTRATIVE,
   /*export fin mutation ua */
 
   /*export debut mutation note service */

@@ -133,6 +133,8 @@
     >
       Open
     </button>
+
+    <notifications  />
   </div>
 </template>
 

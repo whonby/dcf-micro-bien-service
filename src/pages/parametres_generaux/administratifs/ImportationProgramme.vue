@@ -67,6 +67,8 @@
                                     <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
                                 </el-table>-->
     </div>
+
+    <notifications />
   </div>
 </template>
 
@@ -184,7 +186,8 @@ export default {
         .then((data) => {
           console.log(data);
           this.tableData = [];
-        }).catch((erro) => {
+        })
+        .catch((erro) => {
           console.log(erro);
           // this.getAllBudgetGeneral()
           // this.getAllUniteAdministrative()

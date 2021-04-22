@@ -371,18 +371,50 @@ export function ajouterPlanProgramme({ commit, dispatch }, nouveauObjet) {
             type: "success"
         })
     }).catch(error => console.log(error))
+
 }
-// importer plan programme Lega
+
+
+//********// importer plan programme Lega */
+
 export function importPlanProgramme({ commit }, nouveauObjet) {
-    asyncLoading(axios.post('/importProgramme', nouveauObjet)).then(response => {
-        commit('IMPORT_PLAN_PROGRAMME', response.data)
+
+    asyncLoading(axios.post('/importProgramme', nouveauObjet)).then(res => {
+      if (res.status === 201) {
         this.$app.$notify({
-            title: 'success ',
-            text: 'Importation effectué avec success !',
-            type: "success"
-        })
-    }).catch(error => console.log(error))
-}
+          title: 'success',
+          text: 'importaion Effectuée',
+          type: "success"
+        });
+        commit('IMPORT_PLAN_PROGRAMME', res.data)
+      }else{
+        this.$app.$notify({
+          title: 'Erreur',
+          text: 'Importaion Echouée ces données existe déjà !',
+          type: "Erreur"
+        });
+      }
+    })
+      .catch(error => {
+        console.log(error)
+        this.$app.$notify({
+          title: 'Erreur',
+          text: "Importaion Echouée ces données existe déjà !",
+          type: "error"
+        });
+      })
+  }
+
+// export function importPlanProgramme({ commit }, nouveauObjet) {
+//     asyncLoading(axios.post('/importProgramme', nouveauObjet)).then(response => {
+//         commit('IMPORT_PLAN_PROGRAMME', response.data)
+//         this.$app.$notify({
+//             title: 'success ',
+//             text: 'Importation effectué avec success !',
+//             type: "success"
+//         })
+//     }).catch(error => console.log(error))
+// }
 
 
 // modifier plan programme
@@ -500,6 +532,7 @@ export function getServiceGestionnaire({ commit }) {
 //  }).catch(error => console.log(error))
 // }
 EncoursExerciceBudgetaire
+
 export function ajouterServiceGestionnaire({ commit, dispatch }, nouveauObjet) {
     this.$app.$loading(true)
     axios.post('/ajouter_service_gestionnaire', nouveauObjet).then(res => {
