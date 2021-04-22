@@ -49,24 +49,13 @@
           <tr v-for="data in tableData" :key="data.id">
             <!-- <td>{{data["SECTION"]}}</td> -->
             <td>{{ data["PROGRAMME"] }}</td>
-            <!-- <td>{{data["GRANDE NATURE DE DEPENSE"]}}</td>
-                                        <td>{{data["UA"]}}</td>
-                                        <td>{{data["ZONE"]}}</td>
-                                        <td>{{data["ACTION"]}}</td>
-                                        <td>{{data["ACTION"]}}</td>
-                                        <td>{{data["TYPE FINANCEMENT"]}}</td>
-                                        <td>{{data["SOURCE FINANCEMENT"]}}</td>
-                                        <td>{{data["LIGNE"]}}</td>
-                                        <td>{{data["AE"]}}</td>
-                                        <td>{{data["CP"]}}</td> -->
           </tr>
         </tbody>
       </table>
       <hr />
-      <!-- <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
-                                    <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
-                                </el-table>-->
     </div>
+
+    <notifications />
   </div>
 </template>
 
@@ -184,7 +173,8 @@ export default {
         .then((data) => {
           console.log(data);
           this.tableData = [];
-        }).catch((erro) => {
+        })
+        .catch((erro) => {
           console.log(erro);
           // this.getAllBudgetGeneral()
           // this.getAllUniteAdministrative()
