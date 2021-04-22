@@ -6,7 +6,7 @@
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en contratualisation   </h5>
+              <h5>Liste des Marchés en contratualisation {{macheid}}  </h5>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <div class="span8">
                   <div align="right">
@@ -32,7 +32,7 @@
            Entrer
         </div>
             
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" v-if="macheid">
                 <thead>
                  <tr>
                 <th>Année</th>
@@ -181,6 +181,7 @@ export default {
        active_el:0,
         }
     },
+    props:["macheid"],
     created(){
 
     },
@@ -261,11 +262,11 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => element.unite_administrative_id == this.macheid && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => element.unite_administrative_id == this.macheid && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
            
         
 

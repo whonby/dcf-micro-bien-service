@@ -10,22 +10,24 @@
       <div class="modal-body">
        <table class="table table-bordered table-striped">
          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Année</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   :value="anneeAmort"
-                    class="span5"
-                    readonly
-                  />
-                </div>
+           <td colspan="12">
+            <div class="control-group">
+              <label class="control-label">Objet de la Depense</label>
+              <div class="controls">
+                <textarea
+                style="border:1px solid #000"
+                  v-model="formData.objet"
+                  class="span"
+                  rows="2"
+                  placeholder="Saisir le texte"
+                ></textarea>
               </div>
-              
-            </td>
-           <td>
+              <!-- <code v-if="formData.objet && contraintObjet.length >=1">
+                {{formData.objet}} existe deja
+              </code> -->
+            </div>
+          </td>
+           <!-- <td>
               <div class="control-group">
                 <label class="control-label">Référence</label>
                 <div class="controls">
@@ -72,9 +74,9 @@
                 </div>
               </div>
               
-            </td>
+            </td> -->
          </tr>
-         <tr>
+         <!-- <tr>
            <td>
               <div class="control-group">
                 <label class="control-label">Montant</label>
@@ -84,8 +86,8 @@
                 </div>
               </div>
               
-            </td>
-            <td>
+            </td> -->
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Compte Bancaire</label>
                 <div class="controls">
@@ -115,7 +117,7 @@
               </div>
               
             </td>
-         </tr>
+         </tr> -->
        </table>
       </div>
       <div class="modal-footer">
@@ -292,30 +294,30 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Année</th>
-                    <th>Référence</th>
+                    <!-- <th>Année</th>
+                    <th>Référence</th> -->
                     <th>Objet</th>
                      
-                    <th>Bénéficiaire</th>
+                    <!-- <th>Bénéficiaire</th>
                     <th>Compte</th>
                      <th>Montant</th>
                     
-                    <th>Date</th>
+                    <th>Date</th> -->
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type, index) in filtre_type_teste" :key="type.id">
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.exercice || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.reference || 'Non renseigné'}}</td>
+                    >{{type.reference || 'Non renseigné'}}</td> -->
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.objet || 'Non renseigné'}}</td>
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.beneficiaire || 'Non renseigné'}}</td>
                     <td
@@ -326,9 +328,9 @@
                     >{{formatageSomme(parseFloat(type.montant)) || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.date || 'Non renseigné'}}</td>
+                    >{{type.date || 'Non renseigné'}}</td>-->
 
-                    <td>
+                    <td> 
                       <button class="btn btn-danger" @click="supprimerDossierAutreDepense(type.id)">
                         <span class="">
                           <i class=" icon-trash"></i>   Supprimer

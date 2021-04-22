@@ -6,7 +6,7 @@ montantEnPlanification
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en Planification  </h5>
+              <h5>{{macheid}}Liste des Marchés en Planification  </h5>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <div class="span8">
                   <div align="right">
@@ -31,7 +31,7 @@ montantEnPlanification
       </select>
            Entrer
         </div>
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" v-if="macheid">
                 <thead>
                  <tr>
                 <th>Année</th>
@@ -187,6 +187,7 @@ export default {
     created(){
 
     },
+    props:["macheid"],
     computed:{
        ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
@@ -263,7 +264,7 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => element.unite_administrative_id == this.macheid && element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -272,7 +273,7 @@ export default {
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => element.unite_administrative_id == this.macheid && element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

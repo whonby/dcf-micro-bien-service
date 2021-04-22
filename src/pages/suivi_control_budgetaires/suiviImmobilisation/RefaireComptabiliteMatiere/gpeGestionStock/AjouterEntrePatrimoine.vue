@@ -30,8 +30,21 @@
                   <div id="IDENT" class="tab-pane active">
         <table class="table table-bordered table-striped">
             <tr>
+               <td colspan="">
+                    <div class="control-group">
+                  <label class="control-label">Type d'Entre</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData3.typeentre">
+                      <option></option>                     
+                      <option value="0">Op</option>
+                      <option value="1">Autres</option>
+                    </select>
+                     
+                  </div>
+                </div>
+                 </td>
               <td>
-                                <label >Unite Administrative</label><code style="color:red;font-weight:bold;">*</code>
+                                <label >Unite Administrative</label>
                                 <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="uniteAdministratives"
@@ -43,22 +56,7 @@
 
                                 </model-list-select>
                             </td>
-                      <!-- <td colspan="">
-                    <div class="control-group">
-                  <label class="control-label">Unite Administrative</label>
-                  <div class="controls">
-                    <select  class="span" v-model="formData3.uAdministrative_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
                      
-                  </div>
-                </div>
-                 </td> -->
                      <td colspan="">
                     <div class="control-group">
                   <label class="control-label">Fournisseur</label>
@@ -77,39 +75,31 @@
                   </div>
                 </div>
                  </td>
-                 <td colspan="">
-                    <div class="control-group">
-                  <label class="control-label">Numéro du Marche</label>
-                  <div class="controls">
-                    
-                     <input
-                type="text"
-              v-model="formData3.numero_marche"
-                class="span"
                 
-              />
+                    <td colspan="">
+                    <div class="control-group">
+                  <label class="control-label">Numero Ordre Paiement</label>
+                  <div class="controls">
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="AfficheNumeroOpParUa"
+                                                   v-model="formData3.op_id"
+                                                   option-value="numero_op_prov_definitive"
+                                                   option-text="numero_ordre_paiement"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                   
                   </div>
                 </div>
-                 </td>
-                      
+                 </td>  
                     
                   </tr>
                   <tr>
-                     <td colspan="">
-                    <div class="control-group">
-                  <label class="control-label" >Numéro de Facture</label>
-                  <div class="controls">
-                    <input
-                type="text"
-              v-model="formData3.numero_facture"
-                class="span"
-                
-              />
-                  </div>
-                </div>
-                 </td>
+                     
             
-            <td>
+            <td colspan="2">
                                 <label >Groupe</label>
                                 <!-- <model-list-select style="background-color: #fff;"
                                                    class="wide"
@@ -131,45 +121,80 @@
                                 </option>
                                   </select>
                             </td>
-                            <td>
-              <div class="control-group">
-            <label class="control-label">Famille</label>
+                      
+                         <td colspan="2">
+                    <div class="control-group">
+                  <label class="control-label">Famille</label>
+                  <div class="controls">
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="dependDuGroupe"
+                                                   v-model="formData7.famill_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                   
+                  </div>
+                </div>
+                 </td>  
+             
+            
+                  </tr>
+                  <tr v-if="formData3.typeentre==0">
+                    <td colspan="3">
+                    <div class="control-group">
+                  <label class="control-label">Article</label>
+                  <div class="controls">
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="AfficheArticleApartirOp"
+                                                   v-model="formData3.article_id"
+                                                   option-value="id"
+                                                   option-text="designation"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                   
+                  </div>
+                </div>
+                 </td>  
+                      <td>
+               <div class="control-group">
+            <label class="control-label">Quantité reçue</label>
             <div class="controls">
-                              <select   class="span" v-model="formData7.famill_id">
-                                <option></option>
-                                <option v-for="typeUniteA in dependDuGroupe(formData7.groupe_famille_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id">
-                                   
-                      {{typeUniteA.libelle}}
-                                </option>
-                                  </select>
-                                  
+                              <input
+                type="text"
+                :value="QuantiteArticle(formData3.article_id)"
+          
+                class="span"
+                
+              />
+                  
             </div>
           </div>
             </td>
-            
-            
                   </tr>
-                  <tr>
-                    <td>
+                  <tr v-if="formData3.typeentre ==1">
+                    <td colspan="3">
               <div class="control-group">
             <label class="control-label">Article</label>
             <div class="controls">
-                              <select   class="span" v-model="formData3.articlestock_id">
-                                <option></option>
-                                <option v-for="typeUniteA in afficheListeArticleParFamille(formData7.groupe_famille_id,formData7.famill_id)"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].id">
-                                   
-                      {{typeUniteA[0].libelle}}
-                                </option>
-                                  </select>
-                                  
+                             
+                                   <textarea
+                style="border:1px solid #000"
+                  v-model="formData3.articlestock_id"
+                  class="span"
+                  rows="2"
+                  placeholder="Saisir le texte"
+                ></textarea>
             </div>
           </div>
             </td>
-                    <td>
+                    <td colspan="1">
                <div class="control-group">
             <label class="control-label">Quantité reçue</label>
             <div class="controls">
@@ -183,19 +208,11 @@
             </div>
           </div>
             </td>
-            <td>
+            <!-- <td>
                      <div class="control-group">
              <label class="control-label">Type de bien corporel</label>
               <div class="controls">
-                 <!-- <select  class="span" v-model="formData.typestockage">
-                      <option></option>                     
-                     <option value="1">Matériel</option> 
-                     <option value="2">Véhicule</option> 
-                     <option value="3">Mobilier</option>
-                     <option value="4">Immobilier</option> 
-                     <option value="5">Gros Travaux</option> 
-                     
-                    </select> -->
+                
                      <input
                 type="text"
             :value="afficheLibelleTypeBien(AfficheTypeDeBien(formData7.famill_id))"
@@ -204,7 +221,7 @@
               />
               </div>
             </div>
-                            </td>
+                            </td> -->
                   </tr>
                    <br/>
                  <br/>
@@ -1222,7 +1239,8 @@ formData:{
 },
 famille_id:"",
 formData3:{
-uAdministrative_id:""
+uAdministrative_id:"",
+typeentre:0
 },
 formData1:{
 
@@ -1239,7 +1257,7 @@ props:["macheid"],
       
 },
   computed: {
-  ...mapGetters("bienService", ["getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+  ...mapGetters("bienService", ["gettersDossierFacturePiece","gettersgestionOrdrePaiement","getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -1292,14 +1310,42 @@ cf:cf,
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
      
 
+  AfficheNumeroOpParUa() {
+    
+  return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == this.formData3.uAdministrative_id && qtreel.type_ordre_paiement == 1 && qtreel.decision_cf==8 || qtreel.unite_administrative_id == this.formData3.uAdministrative_id && qtreel.type_ordre_paiement == 1 && qtreel.decision_cf==9 || qtreel.unite_administrative_id == this.formData3.uAdministrative_id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==8 || qtreel.unite_administrative_id == this.formData3.uAdministrative_id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==9);
 
-dependDuGroupe() {
+    },
+//               lesClassDe3() { 
+// const isClassDe3 = (code) => code.charAt(0) == "2" || code.charAt(0) == "6"; 
+// return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+//  },
+
+ AfficheArticleApartirOp() {
+    
+  return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_op_hors_sib == this.formData3.op_id && qtreel.etat_acticle =="definitive");
+
+    },
+
+
+QuantiteArticle() {
       return id => {
         if (id != null && id != "") {
-           return  this.familles.filter(qtreel => qtreel.equipemt_id == id);
+           const qtereel = this.gettersDossierFacturePiece.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.quantite;
+      }
+      return 
         }
       };
+    },
+
+
+dependDuGroupe() {
+    
+       
+  return this.familles.filter(qtreel => qtreel.equipemt_id == this.formData7.groupe_famille_id);
+
     },
 
 

@@ -1637,12 +1637,14 @@ listePieceJustificativeOpdefinitive
                         @click.prevent="AjouterOrdrePaiementAnulation"
                         >Valider</a
                       >
-                      <a
-                        @click.prevent="afficherModalListePersonnel()"
+                       <a
+                        @click.prevent="pagePrecedent()"
                         class="btn"
                         href="#"
                         >Fermer</a
                       >
+                      
+                     
                     </div>
                   </div>
                 </div>
@@ -3739,9 +3741,7 @@ export default {
       this.$htmlToPaper("printMe");
     },
 
-    afficherModalListePersonnel() {
-      this.$router.push({ name: "ListeDesOrdresPaiement" });
-    },
+    
 
     OnchangeFichier(e) {
       const files = e.target.files;
@@ -4095,7 +4095,7 @@ export default {
         };
 
         this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
-        this.afficherModalListePersonnel();
+        this.pagePrecedent();
         this.formData = {};
       } else {
         this.intitule =
@@ -4156,7 +4156,7 @@ export default {
         };
 
         this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement2);
-        this.afficherModalListePersonnel();
+        this.pagePrecedent();
         this.formData = {};
       }
     },
