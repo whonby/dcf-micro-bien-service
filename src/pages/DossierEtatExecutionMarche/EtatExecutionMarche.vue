@@ -308,8 +308,8 @@
             <td>#VALEUR!  </td>
             <td>#VALEUR!    </td>
             <td># VALEUR!     </td>
-            <td>0</td>
-            <td></td>
+            <td>{{culmulMontantPaEtat}}</td>
+            <td>{{CumulMontantParBailleur}}</td>
         </tr>
         </tbody>
       </table>
@@ -430,9 +430,9 @@ export default {
       "agenceBanques",
     ]),
 
-taille(){
-  return this.gettersgestionOrdrePaiement.length;
-},
+// taille(){
+//   return this.gettersgestionOrdrePaiement.length;
+// },
 
   afficherIDUA(){
    return macheid=>{
@@ -444,15 +444,15 @@ taille(){
    }
   },
 
-    anneeAmort() {
+    // anneeAmort() {
       
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+    //   const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.annee;
-      }
-      return 0
-    },
+    //   if (norme) {
+    //     return norme.annee;
+    //   }
+    //   return 0
+    // },
 
      CumulMontantFacture() {
       return id => {
@@ -590,6 +590,20 @@ if (qtereel) {
 
         }
       };
+    },
+     CumulMontantParBailleur() {
+        let objet = parseFloat(this.CumulPartBailler(this.macheid) / (this.sommeDesBailleurMarche)* 100).toFixed(2)
+         if(isNaN(objet)){
+           return 0
+         }
+         return objet 
+    },
+    culmulMontantPaEtat(){
+      let obj= parseFloat(this.CumulPartEtat(this.macheid) / parseFloat(this.afficheMarcheMontanParBailleurTresor(this.macheid))* 100).toFixed(2)
+      if(isNaN(obj)){
+        return 0
+      }
+      return obj
     },
 
     CumulGArantie() {
