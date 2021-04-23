@@ -7,11 +7,11 @@
           ORDRE PAIEMENT DES PROJETS
         </router-link>
       </li> -->
-       <!-- <li>
+       <li>
         <router-link :to="{ name: 'AutresDepense' }" tag="a">
           AUTRES DEPENSE
         </router-link>
-      </li> -->
+      </li>
       <li>
         <router-link :to="{ name: 'ListeOpParUa' }" tag="a">
           ORDRE PAIEMENT DES PROJETS
