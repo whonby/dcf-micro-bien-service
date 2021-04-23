@@ -966,93 +966,7 @@
               </div>
                           </td>
                           </tr> -->
-                      <tr>
-                        <td colspan="4">
-                          
-                          <label
-                            class="control-label"
-                            style="
-                              font-size: 14px;
-                              font-weight: bold;
-                              text-align: center;
-                            "
-                           
-                            >Pièce Justificative</label
-                          >
-
-
-                          <table
-                            class="table table-bordered table-striped"
-                            
-                          >
-                            <thead>
-                              <tr></tr>
-                              <tr>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Numero Ordre
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Nature de la pièce
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Reference
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Date de la pièce
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                class="odd gradeX"
-                                v-for="type in listePieceJustificativeOpDefinitive(
-                                  numeroOp(detailOpProvisoire.numero_ordre_paiement)
-                                )"
-                                :key="type.id"
-                              >
-                                <td
-                                  style="width:20%,text-align:center"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.numero_ordre || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 30%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    listePieceJustifica(type.libelle) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                                <td
-                                  style="width: 20%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.reference || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 15%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    formaterDate(type.date_piece) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
+                      
                     </table>
 
                     <table class="table table-bordered table-striped" v-else>
@@ -1481,7 +1395,113 @@
                         </tbody>
                             </table>
  </tr>
+ <table class="table table-bordered table-striped">
+   <div
+                            class=""
+                            align="right"
+                            
+                          >
+                            <button
+                              @click.prevent="afficherModalAjouterService"
+                              class="btn btn-success"
+                            >
+                              <span>
+                                <i class="icon icon-plus-sign"
+                                  >AJOUTER PIECE</i
+                                ></span
+                              >
+                            </button>
+                          </div>
+ <tr>
+                        <td colspan="4">
+                          
+                          <label
+                            class="control-label"
+                            style="
+                              font-size: 14px;
+                              font-weight: bold;
+                              text-align: center;
+                            "
+                           
+                            >Pièce Justificative</label
+                          >
+
+
+                          <table
+                            class="table table-bordered table-striped"
+                            
+                          >
+                            <thead>
+                             
+                              <tr>
+                                <th style="font-size: 14px; font-weight: bold">
+                                  Numero Ordre
+                                </th>
+                                <th style="font-size: 14px; font-weight: bold">
+                                  Nature de la pièce
+                                </th>
+                                <th style="font-size: 14px; font-weight: bold">
+                                  Reference
+                                </th>
+                                <th style="font-size: 14px; font-weight: bold">
+                                  Date de la pièce
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                class="odd gradeX"
+                                v-for="type in listePieceJustificativeOpDefinitive(
+                                  numeroOp(detailOpProvisoire.numero_ordre_paiement)
+                                )"
+                                :key="type.id"
+                              >
+                                <td
+                                  style="width:20%,text-align:center"
+                                  @dblclick="
+                                    afficherModalModifierTypeTexte(type.id)
+                                  "
+                                >
+                                  {{ type.numero_ordre || "Non renseigné" }}
+                                </td>
+                                <td
+                                  style="width: 30%"
+                                  @dblclick="
+                                    afficherModalModifierTypeTexte(type.id)
+                                  "
+                                >
+                                  {{
+                                    listePieceJustifica(type.libelle) ||
+                                    "Non renseigné"
+                                  }}
+                                </td>
+                                <td
+                                  style="width: 20%"
+                                  @dblclick="
+                                    afficherModalModifierTypeTexte(type.id)
+                                  "
+                                >
+                                  {{ type.reference || "Non renseigné" }}
+                                </td>
+                                <td
+                                  style="width: 15%"
+                                  @dblclick="
+                                    afficherModalModifierTypeTexte(type.id)
+                                  "
+                                >
+                                  {{
+                                    formaterDate(type.date_piece) ||
+                                    "Non renseigné"
+                                  }}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
   </table>
+  </table>
+
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                     <li class="active">
@@ -1940,437 +1960,9 @@
 
           <a data-dismiss="modal" class="btn" href="#">Fermer</a>
         </div>
-        <!-- <div align="left">
-          <button class="btn btn-info" @click.prevent="apercuFacture">
-            Aperçu de la facture
-          </button>
-        </div> -->
+       
 
-        <table class="table table-bordered table-striped">
-          <div class="widget-box">
-            
-            <div class="widget-content tab-content">
-              <!--ongle identification-->
-              <div id="" class="tab-pane active">
-                <div class="widget-content nopadding">
-              
-                  <div id="printMe">
-                    <table
-                      class="table table-bordered table-striped"
-                     
-                    >
-                      <thead>
-                        <tr>
-                          <th>Designation</th>
-                          <th>Quantité</th>
-                          <th>Prix unitaire</th>
-                          <th>Total</th>
-                          <th style="width: 10px">Supprimer</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          class="odd gradeX"
-                          v-for="(type, index) in listeFacturePiece(
-                            numeroOp(detailOpProvisoire.numero_ordre_paiement)
-                          )"
-                          :key="type.id"
-                        >
-                          <td @dblclick="afficherModalModifierTypeTexte(index)">
-                            {{ type.designation || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{ type.quantite || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(parseFloat(type.prix_unitaire)) ||
-                              "Non renseigné"
-                            }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(type.total_facture_ht)
-                              ) || "Non renseigné"
-                            }}
-                          </td>
-                          <td>
-                            <button
-                              class="btn btn-danger"
-                              @click="supprimerDossierFacture(type.id)"
-                            >
-                              <span>
-                                <i class="icon icon-trash"></i>
-                              </span>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ht
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  SommeDesDmdParBonCommande(
-                                    formData.numero_ordre_paiement
-                                  )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Taux
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{ afficherEnorere }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Tva
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_ordre_paiement
-                                    )
-                                  ) * afficherEnorere
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ttc
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_ordre_paiement
-                                    )
-                                  ) +
-                                    parseFloat(
-                                      SommeDesDmdParBonCommande(
-                                        formData.numero_ordre_paiement
-                                      ) * afficherEnorere
-                                    )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div id="" class="tab-pane active">
-                <div class="widget-content nopadding">
-                  <div
-                    class=""
-                    align="right"
-                  
-                  >
-                    <button
-                      @click.prevent="afficherModalAjouterFacture"
-                      class="btn btn-success"
-                    >
-                      <span>
-                        <i class="icon icon-plus-sign">Ajouter Facture</i></span
-                      >
-                    </button>
-                  </div>
-                  <div id="printMe">
-                    <table
-                      class="table table-bordered table-striped"
-                      v-if="formData.type_ordre_paiement == 2"
-                    >
-                      <thead>
-                        <tr>
-                          <th>Designation</th>
-                          <th>Quantité</th>
-                          <th>Prix unitaire</th>
-                          <th>Total</th>
-                          <th style="width: 10px">Supprimer</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          class="odd gradeX"
-                          v-for="(type, index) in listeFacturePiece(
-                            formData.numero_ordre_paiement
-                          )"
-                          :key="type.id"
-                        >
-                          <td @dblclick="afficherModalModifierTypeTexte(index)">
-                            {{ type.designation || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{ type.quantite || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(parseFloat(type.prix_unitaire)) ||
-                              "Non renseigné"
-                            }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(type.total_facture_ht)
-                              ) || "Non renseigné"
-                            }}
-                          </td>
-                          <td>
-                            <button
-                              class="btn btn-danger"
-                              @click="supprimerDossierFacture(type.id)"
-                            >
-                              <span>
-                                <i class="icon icon-trash"></i>
-                              </span>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ht
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  SommeDesDmdParBonCommande(
-                                    formData.numero_ordre_paiement
-                                  )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Taux
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{ afficherEnorere }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Tva
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_ordre_paiement
-                                    )
-                                  ) * afficherEnorere
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ttc
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_ordre_paiement
-                                    )
-                                  ) +
-                                    parseFloat(
-                                      SommeDesDmdParBonCommande(
-                                        formData.numero_ordre_paiement
-                                      ) * afficherEnorere
-                                    )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </table>
+        
       </div>
     </div>
 
@@ -4557,7 +4149,7 @@ afficherModalAjouterFacture() {
       // };
     },
     AjoutePieceJustific() {
-      if (this.formData.type_procedure_id == "Engagement par Bon de Commande") {
+       
         this.intitule =
           this.anneeAmort + "" + this.formData.numero_ordre_paiement;
         var nouvelObjetProforma = {
@@ -4579,34 +4171,35 @@ afficherModalAjouterFacture() {
           libelle: "",
           reference: "",
           date_piece: "",
-        };
-      } else {
-        this.intitule =
-          this.anneeAmort + "" + this.formData.numero_ordre_paiement;
-        var nouvelObjetdefinitive = {
-          numero_ordre: this.numeroOrdreDefinitive(
-            this.formData.numero_ordre_paiement
-          ),
-          numero_ordrepaiement: this.formData.numero_ordre_paiement,
-          numero_ordre_paiement_combine: this.intitule,
-          libelle: this.formData1.libelle,
-          reference: this.formData1.reference,
-          date_piece: this.formData1.date_piece,
-          etat_piece: "definitive",
-        };
+          }
+        },
+      // } else {
+      //   this.intitule =
+      //     this.anneeAmort + "" + this.formData.numero_ordre_paiement;
+      //   var nouvelObjetdefinitive = {
+      //     numero_ordre: this.numeroOrdreDefinitive(
+      //       this.formData.numero_ordre_paiement
+      //     ),
+      //     numero_ordrepaiement: this.formData.numero_ordre_paiement,
+      //     numero_ordre_paiement_combine: this.intitule,
+      //     libelle: this.formData1.libelle,
+      //     reference: this.formData1.reference,
+      //     date_piece: this.formData1.date_piece,
+      //     etat_piece: "definitive",
+      //   };
 
-        this.ajouterPieceJustificative(nouvelObjetdefinitive);
-        this.ajouterFichierJoin();
-        this.$("#exampleModal").modal("hide");
-        this.formData1 = {
-          numero_ordrepaiement: "",
-          numero_ordre_paiement_combine: "",
-          libelle: "",
-          reference: "",
-          date_piece: "",
-        };
-      }
-    },
+      //   this.ajouterPieceJustificative(nouvelObjetdefinitive);
+      //   this.ajouterFichierJoin();
+      //   this.$("#exampleModal").modal("hide");
+      //   this.formData1 = {
+      //     numero_ordrepaiement: "",
+      //     numero_ordre_paiement_combine: "",
+      //     libelle: "",
+      //     reference: "",
+      //     date_piece: "",
+      //   };
+      // }
+    // },
 
     ajouterFichierJoin() {
       if (this.formData.type_procedure_id == "Engagement par Bon de Commande") {
@@ -4858,9 +4451,9 @@ id:this.detailOpProvisoire.numero_ordre_paiement,
 
 <style scoped>
 .taille {
-  width: 80%;
+  width: 70%;
   margin: 0 -40%;
-  height: 50%;
+
 }
 .tailles {
   width: 55%;

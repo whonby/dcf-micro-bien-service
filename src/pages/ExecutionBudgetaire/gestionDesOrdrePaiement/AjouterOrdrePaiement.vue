@@ -4419,6 +4419,7 @@ afficherModalModifierFacture(id) {
           ...this.editFacture,
           total_facture_ht: this.MontantFactureHtModifier,
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
+          numero_ordrepaiement: this.formData.numero_ordre_paiement,
           etat_acticle: "proforma",
           montant_ttc:this.MontantFactureTTCModifier,
           taux:this.afficherEnorereModifeir,
@@ -4438,7 +4439,8 @@ afficherModalModifierFacture(id) {
         var nouvelObjetdefinitive = {
           ...this.editFacture,
           total_facture_ht: this.MontantFactureHtModifier,
-          //	numero_ordre_paiement_engagement:this.intitule,
+           numero_ordrepaiement: this.formData.numero_ordre_paiement,
+         
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
           etat_acticle: "definitive",
            montant_ttc:this.MontantFactureTTCModifier,
@@ -5227,7 +5229,7 @@ numero_op_prov_definitive:this.formData.numero_ordre_paiement,
 .taille {
   width: 70%;
   margin: 0 -40%;
-  height: 50%;
+  
 }
 .tailles {
   width: 60%;
