@@ -305,9 +305,9 @@
             <td>{{(CumulMontantFacture(macheid) / parseFloat(calculMontantTotalMarchePlusAvenant)*100).toFixed(2) }} </td>
             <td> {{afficherTauxAvance}} </td>
             <td> {{afficherTauxGarantie}} </td>
-            <td>#VALEUR!  </td>
-            <td>#VALEUR!    </td>
-            <td># VALEUR!     </td>
+            <td>{{0}} </td>
+            <td>{{0}} </td>
+            <td>{{0}}     </td>
             <td>{{culmulMontantPaEtat}}</td>
             <td>{{CumulMontantParBailleur}}</td>
         </tr>
