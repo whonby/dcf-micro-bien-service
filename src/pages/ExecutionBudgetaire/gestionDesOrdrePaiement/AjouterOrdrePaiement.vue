@@ -819,10 +819,10 @@ RecuperereTaux
                       v-if="formData.typedepense == 'Autres'"
                     >
                       <tr>
-                        <td colspan="3">
+                        <!-- <td colspan="3">
                           <div class="control-group">
                             <label class="control-label"
-                              >OBJET DE LA DEPENSE</label
+                              >OBJET DE LA DEPENSE2</label
                             >
                             <div class="controls">
                               <input
@@ -833,6 +833,50 @@ RecuperereTaux
                               />
                             </div>
                           </div>
+                        </td> -->
+                         <td colspan="2">
+                          <label
+                            >Autres Depense
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="gettersDossierAutreDepense"
+                            v-model="formData.autre_depense_id"
+                            option-value="id"
+                            option-text="objet"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                         
+                          
+                        </td>
+                         <td>
+                          <label
+                            >Mois Paiement
+                            
+                          </label>
+                           <select
+                            v-model="formData.mois_paiement"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                          <option value="0"></option>
+                            <option value="Janvier">Janvier</option>
+                           <option value="Février">Février</option>
+                           <option value="Mars">Mars</option>
+                           <option value="Avril">Avril</option>
+                           <option value="Mai">Mai</option>
+                           <option value="Juin">Juin</option>
+                           <option value="Juillet">Juillet</option>
+                           <option value="Août">Août</option>
+                           <option value="Septembre">Septembre</option>
+                           <option value="Octobre">Octobre</option>
+                           <option value="Novembre">Novembre</option>
+                           <option value="Dcembre">Dcembre</option>
+                          </select>
+                         
                         </td>
                       </tr>
                       <tr>
@@ -1892,6 +1936,7 @@ RecuperereTaux
                   <div class="controls">
                     <div data-toggle="buttons-checkbox" class="btn-group">
                       <a
+                       :readOnly="RechercheNumeroOP" 
                         class="btn btn-primary"
                         @click.prevent="AjouterOrdrePaiement"
                         >Valider</a
@@ -2614,6 +2659,7 @@ export default {
     ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters("bienService", [
+      
       "avenants",
       "gettersgestionOrdrePaiement",
       "gettersDossierAutreDepense",
@@ -3808,6 +3854,18 @@ montantTvaModifier() {
         }
       };
     },
+        objetAutreDepense() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierAutreDepense.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.objet;
+          }
+          return "Non renseigné";
+        }
+      };
+    },
     geolocalisation() {
       return (id) => {
         if (id != null && id != "") {
@@ -4171,7 +4229,7 @@ afficherModalModifierFacture(id) {
     },
 
     afficherModalListePersonnel() {
-      this.$router.push({ name: "ListeDesOrdresPaiement" });
+        window.history.back();
     },
 
     OnchangeFichier(e) {
@@ -4780,6 +4838,8 @@ this.$notify({
             this.tailleOpEnregistrer +
             "-" +
             this.formData.numero_ordre_paiement;
+            
+            
           var nouvelObjetOrdrePaiement1 = {
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
@@ -4833,10 +4893,10 @@ this.$notify({
             compte_autre_depense: this.formData45.compte_autre_depense,
             adresse: this.formData45.adresse,
             reference_autre_depense: this.formData45.reference_autre_depense,
-            odjet_autre_depense: this.formData45.odjet_autre_depense,
+            autre_depense_id:this.formData.autre_depense_id,
+            odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
             livrable_autre_depense: this.formData45.livrable_autre_depense,
-            beneficiaire_autre_depense: this.formData45
-              .beneficiaire_autre_depense,
+            beneficiaire_autre_depense: this.formData45.beneficiaire_autre_depense,
             geo_autre_depense: this.formData45.geo_autre_depense,
             dure_autre_depense: this.formData45.dure_autre_depense,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
@@ -5147,7 +5207,8 @@ numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             compte_autre_depense: this.formData45.compte_autre_depense,
             adresse: this.formData45.adresse,
             reference_autre_depense: this.formData45.reference_autre_depense,
-            odjet_autre_depense: this.formData45.odjet_autre_depense,
+            autre_depense_id:this.formData.autre_depense_id,
+            odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
             livrable_autre_depense: this.formData45.livrable_autre_depense,
             beneficiaire_autre_depense: this.formData45
               .beneficiaire_autre_depense,
