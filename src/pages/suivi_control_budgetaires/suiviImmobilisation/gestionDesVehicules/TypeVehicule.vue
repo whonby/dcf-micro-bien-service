@@ -16,7 +16,7 @@
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span5"
+                class="span"
                 placeholder="Saisir le libellé"
               />
             </div>
@@ -51,7 +51,7 @@
               <input
                 type="text"
                 v-model="editService.libelle"
-                class="span5"
+                class="span"
                 placeholder="Saisir le libelle"
               />
             </div>
@@ -85,7 +85,7 @@
           <!-- > -->
             <!-- <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i> -->
           <!-- </download-excel> -->
-                                    <div>
+                                    <!-- <div> -->
                                  <!-- <download-excel
                                      class="btn btn-success pull-right"
                                      style="cursor:pointer;"
@@ -96,10 +96,39 @@
                                      :data="filtre_service">
              <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
                                           </download-excel>  -->
-                <div  align="right" style="cursor:pointer;">
+                <!-- <div  align="right" style="cursor:pointer;">
     <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
         </div> 
-                              </div>
+                              </div> -->
+                              <table class="table table-bordered table-striped">
+          <td style="width: 15%"></td>
+          <td style="width: 0%; font-weight: bolder; color: #000">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-danger"
+                @click.prevent="genererEnPdf()"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class=" icon-print"> Exporter en PDF</i>
+              </button>
+            </div>
+          </td>
+          <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="afficherModalAjouterService"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER TYPE VEHICULE</i
+                >
+              </button>
+            </div>
+          </td>
+          
+         
+        </table>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -160,7 +189,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab> -->
      <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterService()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
@@ -176,7 +205,7 @@ export default {
   data() {
     return {
        page:0,
-       size:10,
+       size:5,
       active_el:0,
       fabActions: [
         {

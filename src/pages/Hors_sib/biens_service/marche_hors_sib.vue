@@ -9,24 +9,24 @@ CodeExempte
               <li class="active">
                 <a data-toggle="tab" href="#tab0000"
                   >Tous les marchés
-                  <span class="badge badge">{{ nombreMarcheHorsSib }}</span></a
+                  <!-- <span class="badge badge">{{ nombreMarcheHorsSib }}</span>--></a
                 >
               </li>
 
               <li>
                 <a data-toggle="tab" href="#tab10000">
                   Planification 
-                  <span class="badge badge-important">
+                  <!-- <span class="badge badge-important">
                     {{ afficherNombreMarchepalinificationHorsib }}
-                  </span></a
-                >
+                  </span>--></a
+                > 
               </li>
               <li>
                 <a data-toggle="tab" href="#tab109">
                   Contractualisation
-                  <span class="badge badge-success">
+                  <!-- <span class="badge badge-success">
                     {{ nombreMarcheContratualisationHorSib }}
-                  </span></a
+                  </span>--></a 
                 >
               </li>
               <!-- <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
@@ -42,7 +42,7 @@ CodeExempte
                 <span class="icon">
                   <i class="icon-th"></i>
                 </span>
-                <h5>Liste des March&eacute;s</h5>
+                <h5>Liste des March&eacute;{{marcheid}}</h5>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <div class="span8">
                   <div align="right">
@@ -320,10 +320,10 @@ CodeExempte
             </div>
 
             <div id="tab10000" class="tab-pane">
-              <planification></planification>
+              <planification :macheid="detail_marche.id"></planification>
             </div>
             <div id="tab109" class="tab-pane">
-              <contratualisation></contratualisation>
+              <contratualisation :macheid="detail_marche.id"></contratualisation>
             </div>
           </div>
         </div>
@@ -513,15 +513,10 @@ export default {
     ]),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-afficheMarcheHorsSib() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersMarcheHorsib.filter((qtreel) => qtreel.unite_administrative_id == id);
+marcheHorSibFiltre() {
+     console.log(this.marcheHorSibFiltre12)
+          return this.marcheHorSibFiltre12.filter((element) => element.unite_administrative_id == this.marcheid);
 
-     
-          
-        }
-      };
     },
     rechercheUa() {
       const st = this.search.toLowerCase();
@@ -530,12 +525,12 @@ afficheMarcheHorsSib() {
       });
     },
 
-    marcheHorSibFiltre() {
+    marcheHorSibFiltre12() {
       // const st = this.search.toLowerCase();
 
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.afficheMarcheHorsSib(this.marcheid).filter((item) => {
+        this.gettersMarcheHorsib.filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
             (row) => row.unite_administrative_id == item.unite_administrative_id
           );
@@ -544,42 +539,17 @@ afficheMarcheHorsSib() {
             return item;
           }
         });
-        return colect.filter(
-          (element) =>
-            (element.gdenature_id == 5 &&
-              element.sib == 1 &&
-              element.parent_id == null &&
-              element.plan_passation_marche_id == null) ||
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&
-              element.parent_id == null &&
-              element.sib == 1 &&
-              element.plan_passation_marche_id == null)
-        );
-        // return colect.filter(items => {
-        //     return (
-        //         items.secti.nom_section.toLowerCase().includes(st) ||
-        //         items.libelle.toLowerCase().includes(st)
-        //     );
-        // });
+        return colect.filter((element) => element.sib==1 && element.gdenature_id == 5 && element.parent_id == null && element.plan_passation_marche_id == null || element.gdenature_id == 5 &&  element.parent_id == null && element.sib == 1 && element.plan_passation_marche_id == null);
+
+      
       }
 
-      return this.gettersMarcheHorsib.filter(
-        (element) =>
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&
-            element.sib == 1 &&
-            element.parent_id == null &&
-            element.plan_passation_marche_id == null) ||
-          (element.gdenature_id == 5 &&
-            element.parent_id == null &&
-            element.sib == 1 &&
-            element.plan_passation_marche_id == null)
-      );
+      return this.gettersMarcheHorsib.filter((element) => element.sib==1 && element.gdenature_id == 5 && element.parent_id == null && element.plan_passation_marche_id == null || element.gdenature_id == 5 &&  element.parent_id == null && element.sib == 1 && element.plan_passation_marche_id == null);
 
-      // return (
-      //     items.secti.nom_section.toLowerCase().includes(st) ||
-      //     items.libelle.toLowerCase().includes(st)
-      // );
+
+     
     },
+
 
     recupererCodeTypeMarche() {
       return (id) => {

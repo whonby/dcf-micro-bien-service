@@ -1486,7 +1486,7 @@
                           @click.prevent="AjouterOrdrePaiement" 
                         >Valider</a>
                         <a
-                          @click.prevent="afficherModalListePersonnel()"
+                          @click.prevent="pagePrecedent()"
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -3474,10 +3474,6 @@ pagePrecedent(){
  genererEnPdf(){
   this.$htmlToPaper('printMe');
 },
-
-afficherModalListePersonnel(){
-                this.$router.push({ name: 'ListeDesOrdresPaiement' })
-            },
 
 
       

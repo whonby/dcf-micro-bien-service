@@ -38,6 +38,7 @@ import ListeUaTauxEquipement75 from '../../pages/suivi_control_budgetaires/suivi
 import ListeUaTauxEquipement100 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement75a100.vue'
 import detailTauxEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/detailTauxEquipement.vue'
 import marqueVehicules from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/marqueVehicules.vue'
+import ParametrageVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/ParametrageVehicule.vue'
 import ModeleVehicules from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeModel/ModeleVehicules.vue'
 import TypeEnergie from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeEnergie.vue'
 import TypeEntretien from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeEntretien.vue'
@@ -158,6 +159,11 @@ import Inventaire from '../../pages/suivi_control_budgetaires/suiviImmobilisatio
 
 import DetailInventaire from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailInventaire/DetailInventaireVehicule.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/ParametrageVehicule",
+    name: "ParametrageVehicule",
+    component: ParametrageVehicule
+  },
   {
     path: "/DetailInventaire/:id",
     name: "DetailInventaire",

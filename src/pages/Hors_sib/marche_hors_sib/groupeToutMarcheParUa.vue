@@ -59,7 +59,7 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA5</th>
+                     <th style="width:20%;font-size:12px" >Code UA</th>
                     <th style="width:50%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
@@ -75,13 +75,13 @@
                    <td v-if="type.unite_zone == 0">
                       <router-link :to="{ name: 'marcheHorsib', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
+                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
                     <td v-else-if="type.unite_zone != 0">
                       <router-link :to="{ name: 'ListeDesSousBudgetMarche', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Sous Budget</i></span>
+                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Sous Budget</i></span>
                    </router-link> 
                     </td>
                      <td v-else style="background-color:lightblue"></td>

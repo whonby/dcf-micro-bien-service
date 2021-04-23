@@ -2103,8 +2103,17 @@ afficherModalModifierTitre(id) {
         diff_decision: 0,
         id_op: this.editMandat.id,
       };
+       var nouveauObjet1 = {
+          ...this.editMandat,
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision_cf: this.editMandat.date_decision_cf,
+        diff_op: 0,
+        id: this.editMandat.id,
+      };
       this.ajouterHistoriqueDecisionOp(nouveauObjet);
-      this.modifierGestionOrdrePaiement(this.editMandat);
+      this.modifierGestionOrdrePaiement(nouveauObjet1);
       this.$("#validationOpDefinitif12").modal("hide");
     },
     modifierDecisionFinal() {

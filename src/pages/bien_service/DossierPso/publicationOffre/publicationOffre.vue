@@ -126,7 +126,7 @@
 <div id="ajouterOffre" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  offre</h3>
+                <h3>Ajouter  offre </h3>
             </div>
             <div class="modal-body">
 

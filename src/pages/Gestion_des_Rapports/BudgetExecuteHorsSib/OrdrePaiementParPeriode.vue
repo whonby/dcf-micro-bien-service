@@ -70,10 +70,6 @@
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
       </button>
-      &nbsp;&nbsp;&nbsp;
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
     </div>
 
     <div class="widget-content nopadding" id="printpdf">
@@ -145,7 +141,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Ligne Budgétaire
@@ -154,7 +150,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Type
@@ -163,7 +159,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 N°OP
@@ -172,7 +168,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Bailleur
@@ -181,7 +177,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Objet
@@ -191,7 +187,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Montant
@@ -200,7 +196,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb;
+                  background-color: #87ceeb !important;
                 "
               >
                 Visa Cf
@@ -301,7 +297,7 @@
             <tr>
               <td
                 colspan="5"
-                style="font-size: 14px; font-weight: bold; text-align: center"
+                style="font-size: 14px; font-weight: bold !important; text-align: center"
               >
                 MONTANT TOTAL :
                 {{
@@ -310,7 +306,7 @@
               </td>
               <td
                 colspan="2"
-                style="font-size: 14px; font-weight: bold; text-align: center"
+                style="font-size: 14px; font-weight: bold !important; text-align: center"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -324,7 +320,16 @@
               </td>
             </tr>
           </tbody>
-          <tfoot></tfoot>
+          <tfoot style=" border: solid white !important;">
+            <tr>
+              <td colspan="3" style=" border: solid white !important; text-align:center;">
+                Système de Gestion des Ordres de Paiement hors SIB
+              </td>
+              <td colspan="2" style=" border: solid white !important;">
+                généré le {{nombreJourTraitementCalucle}} à 08:52 par {{afficheNomUtilisateur}} 
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -402,12 +407,7 @@ export default {
       "sections",
     ]),
     ...mapGetters("personnelUA", [
-      "salairesActeur",
-      "personnaliseActeurDepense",
-      "personnaFonction",
-      "afficheNombrePersonnelRecuActeNormination",
-      "fonctionBudgetaire",
-      "type_salaries",
+  
       "type_contrats",
       "acte_personnels",
       "type_acte_personnels",
@@ -440,25 +440,12 @@ export default {
       "typeCandidat",
       "acteDepense",
       "getMarchePersonnaliser",
-      "appelOffres",
-      "lots",
-      "villes",
-      "communes",
-      "pays",
-      "modePassations",
-      "procedurePassations",
-      "getterDossierCandidats",
       "marches",
       "gettersPersonnaliserRapportJugement",
       "getterOffreFinanciers",
       "gettersOffreTechniques",
       "getterLettreInvitation",
       "getterMandate",
-      "getterCojos",
-      "conditions",
-      "getterAnalyseDossiers",
-      "typeAnalyses",
-      "getterDemandeAno",
       "documentProcedures",
       "getterAnalyseDMP",
       "getterAnoDMPBailleur",
@@ -523,16 +510,53 @@ export default {
       "sources_financements",
     ]),
 
+     nombreJourTraitementCalucle() {
+      let date = new Date();
+      let aaaa = date.getFullYear();
+      let gg = date.getDate();
+      let mm = date.getMonth() + 1;
+      let moi;
+      let jour;
+      if (gg < 10) {
+        jour = "0" + gg;
+      } else {
+        jour = gg;
+      }
+
+      if (mm < 10) {
+        moi = "0" + mm;
+      } else {
+        moi = mm;
+      }
+
+      let cur_day = aaaa + "-" + moi + "-" + jour;
+
+      return cur_day;
+
+      // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+    },
+
+    afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+
     ListeGroupByActivite1() {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
               qtreel[0].exercice == this.anneeAmort &&
-              qtreel[0].decision_cf == 8) ||
+               qtreel.diff_op == null 
+               
+              && qtreel[0].decision_cf == 8) 
+              ||
             (qtreel[0].unite_administrative_id == this.uniteAdministrative_id &&
-              qtreel[0].exercice == this.anneeAmort &&
-              qtreel[0].decision_cf == 9)
+              qtreel[0].exercice == this.anneeAmort
+              && qtreel.diff_op == null  
+              && qtreel[0].decision_cf == 9)
         );
       } else if (
         this.uniteAdministrative_id != 0 &&
@@ -542,10 +566,13 @@ export default {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].decision_cf == 8 &&
+              qtreel.diff_op == null &&
               qtreel[0].exercice == this.anneeAmort &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
-              qtreel[0].date_decision_cf <= this.formData.date_fin) ||
+              qtreel[0].date_decision_cf <= this.formData.date_fin) 
+              ||
             (qtreel[0].decision_cf == 9 &&
+              qtreel.diff_op == null &&
               qtreel[0].exercice == this.anneeAmort &&
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
               qtreel[0].date_decision_cf <= this.formData.date_fin)
@@ -554,8 +581,11 @@ export default {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].exercice == this.anneeAmort &&
-              qtreel[0].decision_cf == 8) ||
+            qtreel.diff_op == null &&
+              qtreel[0].decision_cf == 8) 
+              ||
             (qtreel[0].exercice == this.anneeAmort &&
+            qtreel.diff_op == null &&
               qtreel[0].decision_cf == 9)
         );
       }
@@ -607,7 +637,42 @@ export default {
     },
 
     MontantBudgetExecutéActivite() {
-      return (id) => {
+       if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+             return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>(
+                qtreel.activite_id == id 
+                && qtreel.exercice == this.anneeAmort
+                && qtreel.diff_op == null 
+                && qtreel.decision_cf == 8
+                && (qtreel.date_decision_cf >= this.formData.date_debut &&
+                  qtreel.date_decision_cf <= this.formData.date_fin))
+                  ||
+
+                  (
+                qtreel.activite_id == id 
+                && qtreel.exercice == this.anneeAmort
+                && qtreel.diff_op == null 
+                && qtreel.decision_cf == 9
+                && (qtreel.date_decision_cf >= this.formData.date_debut &&
+                  qtreel.date_decision_cf <= this.formData.date_fin))
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+
+       }else{
+
+         return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
@@ -624,6 +689,8 @@ export default {
           return 0;
         }
       };
+       }
+      
     },
 
     listeordrepaiementstest() {
@@ -645,11 +712,14 @@ export default {
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
-                  qtreel.date_decision_cf <= this.formData.date_fin) ||
+                  qtreel.date_decision_cf <= this.formData.date_fin)
+                   ||
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
                   qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
                   qtreel.date_decision_cf >= this.formData.date_debut &&
                   qtreel.date_decision_cf <= this.formData.date_fin)
             );
@@ -662,10 +732,13 @@ export default {
               (qtreel) =>
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8) ||
+                  qtreel.exercice==this.anneeAmort
+                  && qtreel.decision_cf == 8)
+                   ||
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
-                  qtreel.decision_cf == 9)
+                  qtreel.exercice==this.anneeAmort
+                  && qtreel.decision_cf == 9)
             );
           }
         };
@@ -776,6 +849,11 @@ export default {
 
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+
+    foramateDatenow(){
+      var currentdate=new Date();
+      return this.formaterDate(currentdate)
     },
 
     partition: partition,
