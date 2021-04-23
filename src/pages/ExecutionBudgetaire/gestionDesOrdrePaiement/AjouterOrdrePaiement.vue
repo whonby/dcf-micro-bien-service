@@ -1,4 +1,4 @@
-
+RecuperereTaux
 <template>
   <div class="container-fluid">
     {{RechercheNumeroOP}}
@@ -1201,7 +1201,7 @@
                               text-align: center;
                             "
                             
-                            >Facture</label
+                            >VOIR FACTURE</label
                           >
                            <div
                             class=""
@@ -1214,7 +1214,7 @@
                             >
                               <span>
                                 <i class="icon icon-plus-sign"
-                                  >Ajouter Facture </i
+                                  >AJOUTER FACTURE </i
                                 ></span
                               >
                             </button>
@@ -1413,6 +1413,7 @@
                     <table class="table table-bordered table-striped">
                       <tr>
                         <td colspan="">
+                         
                           <label
                             class="control-label"
                             style="
@@ -1420,13 +1421,14 @@
                               font-weight: bold;
                               text-align: center;
                             "
-                            v-if="formData.type_ordre_paiement == 2"
-                            >Pièce Justificative</label
+                            
+                            >LISTE DES PIECES </label
                           >
+
                           <div
                             class=""
                             align="right"
-                            v-if="formData.type_ordre_paiement == 2"
+                            
                           >
                             <button
                               @click.prevent="afficherModalAjouterService"
@@ -1434,104 +1436,7 @@
                             >
                               <span>
                                 <i class="icon icon-plus-sign"
-                                  >Ajouter pièces </i
-                                ></span
-                              >
-                            </button>
-                          </div>
-                          <table
-                            class="table table-bordered table-striped"
-                            v-if="formData.type_ordre_paiement == 2"
-                          >
-                            <thead>
-                              <tr>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Numero Ordre
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Nature de la pièce
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Reference
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Date de la pièce
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                class="odd gradeX"
-                                v-for="type in listePieceJustificative(
-                                  formData.numero_ordre_paiement
-                                )"
-                                :key="type.id"
-                              >
-                                <td
-                                  style="width:20%,text-align:center"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.numero_ordre || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 30%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    listePieceJustifica(type.libelle) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                                <td
-                                  style="width: 20%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.reference || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 15%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    formaterDate(type.date_piece) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          <label
-                            class="control-label"
-                            style="
-                              font-size: 14px;
-                              font-weight: bold;
-                              text-align: center;
-                            "
-                            v-if="formData.type_ordre_paiement == 1"
-                            >Pièce Justificative</label
-                          >
-
-                          <div
-                            class=""
-                            align="right"
-                            v-if="formData.type_ordre_paiement == 1"
-                          >
-                            <button
-                              @click.prevent="afficherModalAjouterService"
-                              class="btn btn-success"
-                            >
-                              <span>
-                                <i class="icon icon-plus-sign"
-                                  >Ajouter pièces</i
+                                  >AJOUTER PIECE</i
                                 ></span
                               >
                             </button>
@@ -1539,7 +1444,7 @@
 
                           <table
                             class="table table-bordered table-striped"
-                            v-if="formData.type_ordre_paiement == 1"
+                            
                           >
                             <thead>
                               <tr></tr>
@@ -2129,7 +2034,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Exonéré</label>
                 <div class="controls">
@@ -2139,7 +2044,7 @@
                   </select>
                 </div>
               </div>
-            </td>
+            </td> -->
           </tr>
         </table>
       </div>
@@ -2156,8 +2061,6 @@
           <a data-dismiss="modal" class="btn" href="#">Fermer</a>
         </div>
         
-
-
       </div>
     </div>
 
@@ -4096,8 +3999,7 @@ montantTvaModifier() {
         if (id != null && id != "") {
           return this.gettersnomPieceJustificative.filter(
             (qtreel) =>
-              qtreel.numero_op_hors_sib == id &&
-              qtreel.etat_piece == "definitive"
+              qtreel.numero_op_hors_sib == id 
           );
         }
       };
@@ -5323,7 +5225,7 @@ numero_op_prov_definitive:this.formData.numero_ordre_paiement,
 
 <style scoped>
 .taille {
-  width: 80%;
+  width: 70%;
   margin: 0 -40%;
   height: 50%;
 }
