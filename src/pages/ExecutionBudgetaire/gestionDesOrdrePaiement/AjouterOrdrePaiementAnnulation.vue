@@ -2158,7 +2158,7 @@
                   <div
                     class=""
                     align="right"
-                    v-if="formData.type_ordre_paiement == 2"
+                  
                   >
                     <button
                       @click.prevent="afficherModalAjouterFacture"
