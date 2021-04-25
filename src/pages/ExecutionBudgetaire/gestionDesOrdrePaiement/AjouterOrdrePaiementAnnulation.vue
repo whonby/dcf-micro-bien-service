@@ -906,8 +906,9 @@
                                 :value="
                                   montantMarche(RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement))
                                 "
-                                readOnly
+                                
                                 style="text-align: left; color: red"
+                                readOnly
                                 class="span"
                               ></money>
                             </div>
@@ -921,6 +922,7 @@
                                 
                                 :value="RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)"
                                 style="text-align: left; color: red"
+                                readOnly
                                 class="span"
                               ></money>
                              
@@ -1050,7 +1052,7 @@
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >MONTANT EN CHIFFRES</label
+                              >MONTANT ENGAGE</label
                             >
                             <div class="controls">
                               <!-- <input
@@ -1062,7 +1064,7 @@
                     readonly
                   /> -->
                               <money
-                                
+                                readonly
                                 :value="RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)"
                                 style="text-align: left; color: red"
                                 class="span"
@@ -1197,7 +1199,7 @@
                             align="right"
                             
                           >
-                            <button
+                            <!-- <button
                               @click.prevent="afficherModalAjouterFacture"
                               class="btn btn-success"
                             >
@@ -1206,7 +1208,7 @@
                                   >AJOUTER FACTURE </i
                                 ></span
                               >
-                            </button>
+                            </button> -->
                           </div>
                            <table
                             class="table table-bordered table-striped"
@@ -1401,7 +1403,7 @@
                             align="right"
                             
                           >
-                            <button
+                            <!-- <button
                               @click.prevent="afficherModalAjouterService"
                               class="btn btn-success"
                             >
@@ -1410,7 +1412,7 @@
                                   >AJOUTER PIECE</i
                                 ></span
                               >
-                            </button>
+                            </button> -->
                           </div>
  <tr>
                         <td colspan="4">
