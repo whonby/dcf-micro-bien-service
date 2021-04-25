@@ -5,7 +5,7 @@
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide">
+ <div id="ModalModel" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter le model</h3>
@@ -17,7 +17,7 @@
                      <div class="control-group">
              <label class="control-label">Type de bien corporel</label>
               <div class="controls">
-                 <select  class="span5" v-model="formData.typecorporel">
+                 <select  class="span" v-model="formData.typecorporel">
                       <option></option>                     
                      <option value="1">Matériel et mobilier</option> 
                      <option value="2">Véhicule</option> 
@@ -31,7 +31,7 @@
                      <div class="control-group">
               <label class="control-label" style="font-size:14px">Marque</label>
               <div class="controls">
-                <select  v-model="formData.marque_id" class="span5">
+                <select  v-model="formData.marque_id" class="span">
             <option v-for="resultat in fitreMarqueParTypeCorporel(formData.typecorporel)" :key="resultat.id" 
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
@@ -45,7 +45,7 @@
 <div class="control-group">
               <label class="control-label" style="font-size:14px">Libelle</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span5"  />
+                <input type="text" v-model="formData.libelle" class="span"  />
               </div>
             </div>
                  </td>
@@ -69,7 +69,7 @@
 
 <!----- modifier modal debut  ---->
 
- <div id="modifierModal" class="modal hide">
+ <div id="modifierModalModel" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier le model</h3>
@@ -81,7 +81,7 @@
                      <div class="control-group">
              <label class="control-label">Type de bien corporel</label>
               <div class="controls">
-                 <select  class="span5" v-model="editSection.typecorporel">
+                 <select  class="span" v-model="editSection.typecorporel">
                       <option></option>                     
                      <option value="1">Matériel et mobilier</option> 
                      <option value="2">Véhicule</option> 
@@ -95,7 +95,7 @@
                        <div class="control-group">
               <label class="control-label" style="font-size:14px">Marque</label>
               <div class="controls">
-               <select  v-model="editSection.marque_id" class="span5">
+               <select  v-model="editSection.marque_id" class="span">
             <option v-for="resultat in fitreMarqueParTypeCorporel(editSection.typecorporel)" :key="resultat.id" 
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
@@ -110,7 +110,7 @@
                     <div class="control-group">
               <label class="control-label" style="font-size:14px">Libelle</label>
               <div class="controls">
-                <input type="text" v-model="editSection.libelle" class="span5" placeholder="" />
+                <input type="text" v-model="editSection.libelle" class="span" placeholder="" />
               </div>
             </div>
                </td>
@@ -137,8 +137,16 @@
         <div class="span12">
           <div>
 
-                                        <download-excel
-                                            class="btn btn-success pull-right"
+                                        
+                      <!-- <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>  -->
+             <table class="table table-bordered table-striped">
+          
+          <td style="width: 0%; font-weight: bolder; color: #000">
+            <div align="right" style="cursor: pointer">
+             <download-excel
+                                            class="btn btn-danger pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste Section "
@@ -148,9 +156,36 @@
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                      <div align="right" style="cursor:pointer;">
-           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-          </div> 
+            </div>
+          </td>
+          <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-danger"
+                @click.prevent="genererEnPdf"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon-print">
+                  Exporter en PDF</i
+                >
+              </button>
+            </div>
+          </td>
+          
+         <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="afficherModalajouterModeleVehicule"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER MODEL</i
+                >
+              </button>
+            </div>
+          </td>
+        </table>
                                      </div>
                                      
           <div class="widget-box">
@@ -167,7 +202,7 @@
             </div>
 
             <div class="widget-content nopadding" v-if="marqueVehicules.length" >
-              <ModelItemComponent v-for="equipement in marqueVehicules"
+              <ModelItemComponent v-for="equipement in partition(marqueVehicules, size)[page]"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalmodifierModeleVehicule" 
@@ -180,24 +215,31 @@
                 <p style="text-align:center;font-size:20px;color:red;">Aucun Article</p>
               </div> -->
 
-            
-              
+             <div class="pagination alternate">
+              <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(marqueVehicules,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+           <li :class="{ disabled : page == partition(marqueVehicules,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+       </ul>
+        </div>
             </div>
+           
           </div>
         </div>
       </div>
     </div>
-
+  
     
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalajouterModeleVehicule()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalajouterModeleVehicule"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
   </div>
 
@@ -210,6 +252,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import ModelItemComponent from './ModelItemComponent'
+import {partition} from '@/Repositories/Repository'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
@@ -219,6 +262,9 @@ export default {
   },
   data() {
     return {
+       page:0,
+       size:5,
+      active_el:0,
       json_fields: {
             'NATURE_SECTION': 'groupe.libelle',
             'NUMERO_ORDRE_SECTION': 'article.code',
@@ -277,7 +323,19 @@ export default {
     'ajouterModeleVehicule', 
    'supprimerModeleVehicule', 'modifierModeleVehicule']),  
 
-
+ partition:partition,
+       getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
    // exportation en pdf
 
      genererEnPdf(){
@@ -306,7 +364,7 @@ getColumns() {
     
     //afiicher modal ajouter
     afficherModalajouterModeleVehicule(){
-       this.$('#exampleModal').modal({
+       this.$('#ModalModel').modal({
               backdrop: 'static',
               keyboard: false
              });
@@ -323,7 +381,7 @@ getColumns() {
     },
     // afficher modal de modification
     afficherModalmodifierModeleVehicule(article) {
-      this.$("#modifierModal").modal({
+      this.$("#modifierModalModel").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -334,7 +392,7 @@ getColumns() {
 modifierModeleVehiculeLocal(){
  
   this.modifierModeleVehicule(this.editSection);
-  this.$("#modifierModal").modal('hide');
+  this.$("#modifierModalModel").modal('hide');
   this.editSection = {
                 code: "",
              nom_section: "",

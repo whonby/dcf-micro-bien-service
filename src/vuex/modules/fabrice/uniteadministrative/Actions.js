@@ -250,6 +250,36 @@ export function ajouterUniteAdministrative({ commit, dispatch }, nouveauObjet) {
   // })
 }
 
+//***************************** importation des UA lega**** */
+
+export function importationUniteAdministrative({ commit }, nouveauObjet) {
+
+  asyncLoading(axios.post('/importUA', nouveauObjet)).then(res => {
+    if (res.status === 201) {
+      this.$app.$notify({
+        title: 'success',
+        text: 'importaion Effectuée',
+        type: "success"
+      });
+      commit('IMPORTER_UNITE_ADMINISTRATIVE', res.data)
+    }else{
+      this.$app.$notify({
+        title: 'Erreur',
+        text: 'Importaion Echouée ces données existe déjà !',
+        type: "Erreur"
+      });
+    }
+  })
+    .catch(error => {
+      console.log(error)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "Importaion Echouée ces données existe déjà !",
+        type: "error"
+      });
+    })
+}
+
 
 
 

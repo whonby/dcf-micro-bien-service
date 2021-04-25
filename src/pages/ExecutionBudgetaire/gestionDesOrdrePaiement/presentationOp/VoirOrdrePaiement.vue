@@ -1275,7 +1275,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 10,
+      size: 20,
       active_el: 0,
       fabActions: [
         {

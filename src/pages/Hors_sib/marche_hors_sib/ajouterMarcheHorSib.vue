@@ -264,11 +264,11 @@ libelleUA
                   class="span"
                 >
                   <option
-                    v-for="plans in AfficheUALigneEconnomique(formData.unite_administrative_id)"
-                    :key="plans[0].id"
-                    :value="plans[0].ligneeconomique_id"
+                    v-for="plans in LigneBudgetaireParUa"
+                    :key="plans.id"
+                    :value="plans"
                   >
-                    {{libelleLigneEconomique(plans[0].ligneeconomique_id)}}
+                    {{libelleLigneEconomique(plans)}}
                      
                         
                       
@@ -794,6 +794,46 @@ ImputationBudget(){
           );
         }
       };
+    },
+    LigneEconomiqueSousBudget() {
+      //return (id) => {
+        
+        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.unite_zone && budget.budget_active==1);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+      }
+        return [];
+  //  };
+    },
+    LigneBudgetaireParUa() {
+      //return (id) => {
+        
+        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==0 && budget.budget_active==1);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+      }
+        return [];
+  //  };
     },
     AfficheUniteZone() {
       return (id) => {

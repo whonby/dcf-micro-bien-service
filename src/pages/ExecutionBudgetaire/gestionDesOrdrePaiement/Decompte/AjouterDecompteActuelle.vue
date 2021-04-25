@@ -72,7 +72,7 @@
                          readonly
                          :value="MontantFacture(detail_Facture.id)"
                   /> -->
-                    <money :value="MontantFacture(detail_Facture.id)"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                    <money v-model="formData.montantmarche"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -794,7 +794,7 @@ montantTVAFacture() {
 
 
 Montantapresretenues(){
-      const val =  parseFloat(this.MontantFacture(this.detail_Facture.id))-parseFloat(parseFloat(this.formData.retenu_garantie) + parseFloat(this.formData.retenu_avance)+ parseFloat(this.formData.retenu_penalite));
+      const val =  parseFloat(this.formData.montantmarche)-parseFloat(parseFloat(this.formData.retenu_garantie) + parseFloat(this.formData.retenu_avance)+ parseFloat(this.formData.retenu_penalite));
       
        if (val) {
         return parseFloat(val).toFixed(0);

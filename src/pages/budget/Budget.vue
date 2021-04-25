@@ -229,7 +229,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Importation de budge</th>
+                        <th>Importation de budget</th>
                         <th></th>
                     </tr>
                     </thead>
