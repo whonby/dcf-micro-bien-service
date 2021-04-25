@@ -1,4 +1,4 @@
-VOIR FACTURE
+
 <template>
   <div class="container-fluid">
     <hr />
@@ -638,7 +638,7 @@ VOIR FACTURE
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="RecupererObjet(detailOpProvisoire.numero_ordre_paiement)"
-                                
+                                readonly
                                 class="span"
                               />
                             </div>
@@ -651,7 +651,7 @@ VOIR FACTURE
                             <label class="control-label">LIVRABLES</label>
                             <div class="controls">
                               <input
-                               
+                               readonly
                                 :value="RecupererLivrable(detailOpProvisoire.numero_ordre_paiement)"
                                 type="text"
                                 style="border: 1px solid #000"
@@ -669,6 +669,7 @@ VOIR FACTURE
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
+                                readonly
                               />
                             </div>
                           </div>
@@ -678,7 +679,7 @@ VOIR FACTURE
                             <label class="control-label">GEOLOCALISATION</label>
                             <div class="controls">
                               <input
-                                
+                                readonly
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -696,7 +697,7 @@ VOIR FACTURE
                             <div class="controls">
                               <input
                               :value="RecupererDure(detailOpProvisoire.numero_ordre_paiement)"
-                                
+                                readonly
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -707,7 +708,7 @@ VOIR FACTURE
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >MONTANT EN CHIFFRES</label
+                              >MONTANT ENGAGE</label
                             >
                             <div class="controls">
                               <!-- <input
@@ -719,7 +720,7 @@ VOIR FACTURE
                     readonly
                   /> -->
                               <money
-                                
+                                readonly
                                 :value="RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)"
                                 style="text-align: left; color: red"
                                 class="span"
@@ -735,7 +736,7 @@ VOIR FACTURE
                             <div class="controls">
                                <input
                               :value="recupererLibelleModePaiement(RecupererModePaiement(detailOpProvisoire.numero_ordre_paiement))"
-                                
+                                readonly
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -997,6 +998,7 @@ VOIR FACTURE
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
+                                readonly
                               />
                             </div>
                           </div>
@@ -1035,7 +1037,7 @@ VOIR FACTURE
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >MONTANT EN CHIFFRES</label
+                              >MONTANT ENGAGE</label
                             >
                             <div class="controls">
                               <!-- <input

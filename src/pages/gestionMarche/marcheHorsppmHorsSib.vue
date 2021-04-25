@@ -1,10 +1,10 @@
 reference_marche
 <template>
   <div>
-    <div  align="left" style="cursor:pointer;">
+    <!-- <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
-        </div>
+        </div> -->
         <br>
         <table class="table table-bordered table-striped">
            <thead>
