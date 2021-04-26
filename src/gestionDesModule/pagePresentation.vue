@@ -142,7 +142,7 @@
                                           <div  class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; ">
 
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>UNITES ADMINISTRATIVE (UA)</h5>
+                                                  <h5>UNITES ADMINISTRATIVES (UA)</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-home"></i>
                                                   </div>
@@ -197,7 +197,7 @@
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-globe"></i>
                                                   </div>
-                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA dans le monde</p>
+                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA</p>
                                               </div>
                                           </div>
                                       </div>
