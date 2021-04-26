@@ -16,9 +16,10 @@ reference_marche
                      <th>COMPTE</th>
                       <th>MOIS PAIEMENT</th>
                        <th>MODE PAIEMENT</th>
-                        <th>MONTANT</th>
+                        <th>MONTANT (FCFA)</th>
                   
                   </tr>
+
                 </thead>
                 <tbody>
                       <tr class="odd gradeX" v-for="(type) in afficheDetailAutreDepense" :key="type">
@@ -27,7 +28,7 @@ reference_marche
  <td style="font-size:16px;color:#000;text-align:center">{{type.compte_autre_depense  || 'Non renseigné'}}</td>
  <td style="font-size:16px;color:#000;text-align:center">{{type.mois_paiement || 'Non renseigné'}}</td>
  <td style="font-size:16px;color:#000;text-align:center">{{libelleModePaiement(type.mode_paiement_id)  || 'Non renseigné'}}</td>
- <td style="font-size:16px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.montant_ordre_paiement))  || 'Non renseigné'}}</td>
+ <td style="font-size:16px;color:#000;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.montant_ordre_paiement))  || 'Non renseigné'}}</td>
                           </tr>
                           <tr>
 <td style="font-size:16px;color:#000;text-align:center"></td>
@@ -35,7 +36,7 @@ reference_marche
  <td style="font-size:16px;color:#000;text-align:center"></td>
  <td style="font-size:16px;color:#000;text-align:center"></td>
  <td style="font-size:16px;color:#000;text-align:center;font-weight: bold">TOTAL</td>
- <td style="text-align: center; color: red; font-weight: bold">{{formatageSomme(parseFloat(SommeAutreDepense))}}</td>
+ <td style="text-align: center; color: red; font-weight: bold">{{formatageSommeSansFCFA(parseFloat(SommeAutreDepense))}}</td>
                           </tr>
                  
                 </tbody>
@@ -83,7 +84,7 @@ reference_marche
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { formatageSomme } from "../../../src/Repositories/Repository";
+import { formatageSommeSansFCFA } from "../../../src/Repositories/Repository";
 import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
 import { partition } from "../../../src/Repositories/Repository";
 //import {partition} from '../../../src/Repositories/partition'
@@ -264,7 +265,7 @@ arrayExerciceDecompteBienService() {
 
    
 
-formatageSomme:formatageSomme,
+formatageSommeSansFCFA:formatageSommeSansFCFA,
     partition: partition,
     getDataPaginate(index) {
       this.active_el = index;
