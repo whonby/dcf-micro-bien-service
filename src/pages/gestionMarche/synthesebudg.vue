@@ -23,7 +23,7 @@
               <table class="table table-bordered table-striped" id="titre">
                 <thead>
                    <tr style="background-color: green;color: #FFFFFF;">
-    <td style="width:10%;text-align:center">LIGNE BUDGETAIRE</td>
+    <td style="width:10%;text-align:center">NATURE DE DEPENSE </td>
     <td style="width:12%;text-align:center"> TYPE DE FINANCEMENT </td>
      <td style="width:12%;text-align:center">SOURCE DE FINANCEMENT</td>
      <td style="width:12%;text-align:center">TOTAL(FINANCEMENT)</td>
@@ -36,7 +36,7 @@
  <tbody>
                     <tr>
     <td height="10px" rowspan="3" style="text-align:center;">PERSONNELS</td>
-    <td height="10px">CONTREPARTIE  </td>
+    <td height="10px">TRESOR  </td>
      <td style="width:12%">ETAT</td>
      <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresor))}}</td>
    <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresorConsommer))}}</td>
@@ -77,7 +77,7 @@
  </tr>                
    <tr>
    <td   rowspan="3" style="text-align:center;width:12%">BIENS ET SERVICES</td>
-   <td style="width:12%" > CONTREPARTIE </td>
+   <td style="width:12%" > TRESOR </td>
     <td style="width:12%" >ETAT</td>
     <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
     <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
@@ -119,7 +119,7 @@
                    </tr>   
                    <tr>
    <td  rowspan="3" style="text-align:center;width:10%">TRANSFERTS </td>
-   <td style="width:12%"> CONTREPARTIE </td>
+   <td style="width:12%"> TRESOR </td>
     <td style="width:12%">ETAT</td>
   
     <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert))}}</td>
@@ -167,7 +167,7 @@
 
                    <tr>
    <td  rowspan="3" style="text-align:center;width:10%">INVESTISSEMENTS </td>
-   <td style="width:12%"> CONTREPARTIE </td>
+   <td style="width:12%"> TRESOR </td>
     <td style="width:12%">ETAT</td>
   
     <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement))}}</td>
@@ -223,7 +223,7 @@
 
   <tr>
    <th style="width:10%;font-size:14px;font-weight: bold;">TOTAL</th>
-   <td style="width:12%"> CONTREPARTIE </td>
+   <td style="width:12%"> TRESOR </td>
     <td style="width:12%">ETAT</td>
     <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert))+(parseFloat(AfficheMontantTresorIvestissement)))}}</td>
    <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(AfficheMontantTresorConsommerInvestissement))}}</td>

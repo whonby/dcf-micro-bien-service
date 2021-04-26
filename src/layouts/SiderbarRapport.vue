@@ -40,7 +40,7 @@
         <li :class="{active: active_el == 1033 }" @click.prevent="navigateTorapportExecution" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>BUDGET EXECUTE H/SIB</span>
+            <span>BUDGET EXECUTE HORS/SIGOBE</span>
           </a>
         </li>
        

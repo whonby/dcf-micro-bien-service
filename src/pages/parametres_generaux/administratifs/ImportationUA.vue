@@ -279,9 +279,14 @@ export default {
           let localisation_geo = value["LOCALISATION GEOGRAPHIQUE"].split(" ");
           let libelle_service_gestion = value["SERVICES GESTIONNAIRES DE CREDIT"].substr(9);
           let libelle_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(7);
+          
 
           let code_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(0,4);
           let code_service_sgc = value["SERVICES GESTIONNAIRES DE CREDIT"].substr(0,4);
+
+         // let code_nature_section = value["SECTION"].substr(0,1);
+           let code_section = value["SECTION"].substr(1,3);
+           let libelle_section = value["SECTION"].substr(4);
 
          
 
@@ -294,6 +299,32 @@ export default {
           let LocalisationGeo = vm.localisations_geographiques.find(
             (item) => item.code == localisation_geo[0]
           );
+
+          //  let nat_section = vm.sections.find(
+          //   (item) => item.code == localisation_geo[0]
+          // );
+
+           let section = vm.sections.find((item) => item.code == code_section);
+
+
+
+
+//**** recherche de nouvel section et nature de section les ajouter en même temps */ 
+          if (section == undefined) {
+            let objet = {
+              code: code_section,
+              libelle: libelle_section,
+              parent: vm.recup_parent_serviceGC(code_service_sgc),
+              structure_administrative_id:4,
+            };
+            let isExisteSGC = vm.servicegestioncredit_detecter.find(
+              (item) => item.code == service_gestion_credit[0]
+            );
+            if (isExisteSGC == undefined) {
+              vm.servicegestioncredit_detecter.push(objet);
+              vm.ajouterServiceGestionnaire(objet);
+            }
+          }
 
 //**** recherche de nouvel service gestion de credit et les ajouter en même temps */
           if (ServiceGestionCredit == undefined) {
