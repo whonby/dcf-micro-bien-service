@@ -6,7 +6,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Liste des UA Importés</h5>
+          <!-- <h5>Liste des UA Importés</h5> -->
         </div>
         <div class="">
           <div class="widget-box">
@@ -15,6 +15,15 @@
                 <!-- <li class="active"><a data-toggle="tab" href="#tab1">Budget importé</a></li> -->
                 <li class="active">
                   <a data-toggle="tab" href="#tab2">Importation des UA</a>
+                </li>
+
+                <li class="" v-if="section_dettecter.length > 0">
+                  <a data-toggle="tab" href="#tab5"
+                    ><span>Nouvelle Section  Detecté</span>
+                    <span class="label label-important">{{
+                      section_dettecter.length
+                    }}</span></a
+                  >
                 </li>
                 <li class="" v-if="servicegestioncredit_detecter.length > 0">
                   <a data-toggle="tab" href="#tab3"
@@ -91,6 +100,48 @@
                 <!-- <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
                                     <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
                                 </el-table>-->
+              </div>
+
+
+
+
+              <div
+                id="tab5"
+                class="tab-pane"
+                v-if="section_dettecter.length > 0"
+              >
+                <table class="table table-bordered table-striped" id="source">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Libellé</th>
+                      <th>Nature Section</th>
+                      <!-- <th>parent</th> -->
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      class="odd gradeX"
+                      v-for="source_financement in section_dettecter"
+                      :key="source_financement.code"
+                    >
+                      <td>
+                        {{ source_financement.code || "Non renseigné" }}
+                      </td>
+                      <td>
+                        {{ source_financement.libelle || "Non renseigné" }}
+                      </td>
+                       <td>
+                        {{ source_financement.naturesection || "Non renseigné" }}
+                      </td>
+                       <!-- <td>
+                        {{ source_financement.parent || "Non renseigné" }}
+                      </td> -->
+                      
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <div
@@ -199,6 +250,8 @@ export default {
       unite_admin_dettecte: [],
       servicegestioncredit_detecter: [],
       localisation_geo_dettecter: [],
+      nat_section_dettecter: [],
+      section_dettecter: [],
     };
   },
 
@@ -284,9 +337,10 @@ export default {
           let code_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(0,4);
           let code_service_sgc = value["SERVICES GESTIONNAIRES DE CREDIT"].substr(0,4);
 
-         // let code_nature_section = value["SECTION"].substr(0,1);
+           let code_nature_section = value["SECTION"].substr(0,1);
            let code_section = value["SECTION"].substr(1,3);
            let libelle_section = value["SECTION"].substr(4);
+           let libelle_naturesection = value["SECTION"].substr(4);
 
          
 
@@ -300,9 +354,9 @@ export default {
             (item) => item.code == localisation_geo[0]
           );
 
-          //  let nat_section = vm.sections.find(
-          //   (item) => item.code == localisation_geo[0]
-          // );
+           let nat_section = vm.natures_sections.find(
+            (item) => item.code == code_nature_section
+          );
 
            let section = vm.sections.find((item) => item.code == code_section);
 
@@ -310,19 +364,36 @@ export default {
 
 
 //**** recherche de nouvel section et nature de section les ajouter en même temps */ 
-          if (section == undefined) {
+
+ if (nat_section == undefined) {
+            let objet = {
+              code: code_nature_section,
+              libelle: libelle_naturesection,
+            };
+            let isExisteSGC = vm.nat_section_dettecter.find(
+              (item) => item.code == code_nature_section
+            );
+            if (isExisteSGC == undefined) {
+              vm.nat_section_dettecter.push(objet);
+             // vm.ajouterServiceGestionnaire(objet);
+            }
+          }
+
+
+         // **** sections***
+          if (section == undefined && nat_section !=undefined) {
             let objet = {
               code: code_section,
               libelle: libelle_section,
-              parent: vm.recup_parent_serviceGC(code_service_sgc),
-              structure_administrative_id:4,
+              naturesection: vm.recup_nature_section(code_nature_section),
+              //structure_administrative_id:4,
             };
-            let isExisteSGC = vm.servicegestioncredit_detecter.find(
-              (item) => item.code == service_gestion_credit[0]
+            let isExisteSGC = vm.section_dettecter.find(
+              (item) => item.code == code_section
             );
             if (isExisteSGC == undefined) {
-              vm.servicegestioncredit_detecter.push(objet);
-              vm.ajouterServiceGestionnaire(objet);
+              vm.section_dettecter.push(objet);
+              //vm.ajouterServiceGestionnaire(objet);
             }
           }
 
@@ -431,6 +502,21 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+    recup_nature_section(){
+          return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.natures_sections.find(
+            (qtreel) => qtreel.code == id
+          );
+
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0;
+        }
+      };
+    },
 
      recup_parent_loca_geo(){
        return (id) => {
