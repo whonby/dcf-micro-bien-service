@@ -283,6 +283,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
+
                                         <table class="table"> <tr>
                                             <td>
                                                 <label>Ligne </label>
@@ -363,6 +364,7 @@
                                 </div>
                             </div>
                           </div>
+                          <td>
 
                           <div class="control-group">
                             <label class="control-label">Dotation CP</label>
@@ -412,8 +414,7 @@
                             </div>
                           </div>
                         </td>
-                      </tr>
-                    </table>
+                     
                     <div align="center">
                       <button
                         class="btn btn-danger"
@@ -427,12 +428,10 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      </div>
-      </div>
-      </div>
-    
+        
+        
+ 
+     
 
 </template>
 

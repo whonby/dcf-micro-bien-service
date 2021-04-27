@@ -107,6 +107,14 @@
           </a>
         </li>
 
+        <li @click.prevent="navigateToAutredepense" :class="{active: active_el ==20}">
+          <a title="INVESTISSEMENT" href="#">
+            <i class="icon-truck"></i>
+            <span>AUTRE DEPENSE</span>
+           
+          </a>
+        </li>
+
            <li @click.prevent="navigateurOrdrePaiement" :class="{active: active_el ==1200}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>
@@ -354,6 +362,14 @@ navigateRetourAuMenu(){
           name:'tableau_de_bors_sib_investissement'
         })
       },
+
+       navigateToAutredepense(){
+        this.activate(40)
+        this.$router.push({
+          name:'AutresDepense'
+        })
+      },
+
       navigateToImage(){
           this.activate(75)
           this.$router.push({
