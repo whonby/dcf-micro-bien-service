@@ -12,7 +12,7 @@
                             <div class="widget-box">
                                 <div class="widget-title">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#tab1">Liste Budget Modification</a></li>
+                                        <li class="active"><a data-toggle="tab" href="#tab1"> État du budget modifié </a></li>
                                         <li class=""><a data-toggle="tab" href="#tab2">Modification</a></li>
                                     </ul>
                                 </div>
