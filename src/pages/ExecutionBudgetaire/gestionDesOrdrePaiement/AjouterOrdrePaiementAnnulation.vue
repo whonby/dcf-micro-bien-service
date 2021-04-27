@@ -4347,7 +4347,7 @@ id:this.detailOpProvisoire.numero_ordre_paiement,
           marche_id: this.RecupererIdMarche(this.detailOpProvisoire.numero_ordre_paiement),
           type_financement_id: this.RecupererIdTypeFinancement(this.detailOpProvisoire.numero_ordre_paiement),
           source_financement_id: this.RecupererIdSousFinancement(this.detailOpProvisoire.numero_ordre_paiement),
-          montant_ordre_paiement: this.SoustratMontantEngage,
+          montant_ordre_paiement: 0,
 
           gestionnaire_credit_non: this.RecupererNomGestionnaire(this.detailOpProvisoire.numero_ordre_paiement),
           gestionnaire_credit_date: this.RecupererDateBenef(this.detailOpProvisoire.numero_ordre_paiement),

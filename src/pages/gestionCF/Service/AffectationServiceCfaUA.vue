@@ -1,5 +1,7 @@
 <template>
     <div class="DetailCF">
+        
+        <p style="text-align:center;font-size:14px">Liste du personnel et des UA contrôlées</p>
         <notifications />
         <div class="container-fluid" v-if="detail">
             <div class="row-fluid">
@@ -37,7 +39,7 @@
                         <div class="widget-box">
                             <div class="widget-title">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#tab1">LISTE UNITE ADMINISTRATIVE</a></li>
+                                    <li class="active"><a data-toggle="tab" href="#tab1">LISTE DES UNITES ADMINISTRATIVES CONTROLEES</a></li>
                                     <li class="" v-if="!noDCfNoAdmin() || !cf()"><a data-toggle="tab" href="#tab2">AFFECTATION CF AU SERVICE</a></li>
                                     <li class=""><a data-toggle="tab" href="#tab3">PERSONNEL SERVICE</a></li>
                                 </ul>

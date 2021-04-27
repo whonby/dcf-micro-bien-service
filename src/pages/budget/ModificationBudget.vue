@@ -1,406 +1,366 @@
 <template>
-  <div>
-    <div class="container-fluid" style="margin-top: -20px">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title">
-              <span class="icon"> <i class="icon-file"></i> </span>
-              <h5>Modification du budget</h5>
-            </div>
-            <div class="widget-content nopadding">
-              <div class="widget-box">
-                <div class="widget-title">
-                  <ul class="nav nav-tabs">
-                    <li class="active">
-                      <a data-toggle="tab" href="#tab1"
-                        >État du budget modifié</a
-                      >
-                    </li>
-                    <li class="">
-                      <a data-toggle="tab" href="#tab2">Modification</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="widget-content tab-content">
-                  <div id="tab1" class="tab-pane active">
-                    <div align="right">
-                      <button
-                        class="btn btn-default"
-                        @click="tableToExcel('table', 'Modfication')"
-                      >
-                        Exporter en Excel
-                      </button>
-                    </div>
-                    <table
-                      class="table table-bordered table-striped"
-                      ref="table"
-                      id="loremTable"
-                      summary="lorem ipsum sit amet"
-                      rules="groups"
-                      frame="hsides"
-                      border="2"
-                    >
-                      <thead>
-                        <tr>
-                          <th>UA</th>
-                          <th>Activite</th>
-                          <th>Ligne</th>
-                          <th>Dotation AE Initial</th>
-                          <th>Dotation CP Initial</th>
-                          <th>Variation AE</th>
-                          <th>Variation CP</th>
-                          <th>Dotation Actuel AE</th>
-                          <th>Dotation Actuel CP</th>
-                          <th>Cumul AE</th>
-                          <th>Cumul CP</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          v-for="item in ListeBudgetUaModifier"
-                          :key="'LIS' + item.id"
-                        >
-                          <td>{{ uaBudget(item.ua_id) }}</td>
-                          <td>{{ activiteBudget(item.activite_id) }}</td>
-                          <td>{{ ligneBudget(item.economique_id) }}</td>
-                          <td>
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  budgetInite(
-                                    item.Dotation_Initiale,
-                                    item.cumul_ae
-                                  )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td>
-                            {{
-                              formatageSomme(
-                                parseFloat(budgetInite(item.cp, item.cumul_cp))
-                              )
-                            }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.variation_ae)) }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.varisation_cp)) }}
-                          </td>
-                          <td>
-                            {{
-                              formatMoney(parseFloat(item.Dotation_Initiale))
-                            }}
-                          </td>
-                          <td>{{ formatMoney(parseFloat(item.cp)) }}</td>
-                          <td>{{ formatMoney(parseFloat(item.cumul_ae)) }}</td>
-                          <td>{{ formatMoney(parseFloat(item.cumul_cp)) }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+    <div>
+        <div class="container-fluid" style="margin-top: -20px">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-file"></i> </span>
+                            <h5>Modification du budget</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+
+                            <div class="widget-box">
+                                <div class="widget-title">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab1">État du budget modifié</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab2">Modification</a></li>
+                                    </ul>
+                                </div>
+                                <div class="widget-content tab-content">
+                                    <div id="tab1" class="tab-pane active">
+                                        <div align="right">
+                                            <button class="btn btn-default" @click="tableToExcel('table', 'Modfication')">
+                                                Exporte Excel
+                                            </button>
+                                        </div>
+                                        <table class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+                                            <thead>
+                                            <tr>
+                                                <th>UA</th>
+                                                <th>Activite</th>
+                                                <th>Ligne</th>
+                                                <th>Dotation AE Initial </th>
+                                                <th>Dotation CP Initial</th>
+                                                <th>Variation AE</th>
+                                                <th>Variation CP</th>
+                                                <th>Dotation Actuel AE</th>
+                                                <th>Dotation Actuel CP</th>
+                                                <th>Cumul AE</th>
+                                                <th>Cumul CP</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="item in ListeBudgetUaModifier" :key="'LIS'+item.id">
+                                                <td>{{uaBudget(item.ua_id)}}</td>
+                                                <td>{{activiteBudget(item.activite_id)}}</td>
+                                                <td>{{ligneBudget(item.economique_id)}}</td>
+                                                <td>
+                                                    {{formatageSomme(parseFloat(budgetInite(item.Dotation_Initiale,item.cumul_ae)))}}
+                                                </td>
+                                                <td>{{formatageSomme(parseFloat(budgetInite(item.cp,item.cumul_cp)))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.variation_ae))}}</td>
+                                                <td>
+                                                    {{formatMoney(parseFloat(item.varisation_cp))}}
+                                                </td>
+                                                <td>{{formatMoney(parseFloat(item.Dotation_Initiale))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.cp))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.cumul_ae))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.cumul_cp))}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab2" class="tab-pane" style="height: 1025px !important;">
+                                       <div class="span">
+                                           <div class="control-group">
+                                               <label class="control-label">Type de modification</label>
+                                               <select v-model="type_modification">
+                                                   <option></option>
+                                                   <option value="OUI">SOMME NULL</option>
+                                                   <option value="NON">SOMME NON NULL</option>
+                                               </select>
+                                           </div>
+
+                                       </div>
+                                       <table class="table">
+                                           <tr>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Date acte</label>
+                                                       <div class="controls">
+                                                           <input
+                                                                   type="date"
+                                                                   v-model="formData.date_act"
+                                                                   class="span"
+
+                                                           />
+                                                       </div>
+                                                   </div>
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Numero Acte</label>
+                                                       <div class="controls">
+                                                           <input
+                                                                   type="text"
+                                                                   v-model="formData.numero_act"
+                                                                   class="span"
+
+                                                           />
+                                                       </div>
+                                                   </div>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Fichier acte</label>
+                                                       <input type="file"   @change="OnchangeFichier" />
+                                                   </div>
+                                               </td>
+ <td>
+                                                   <div class="control-group">
+                  <label class="control-label">signataire de l’acte </label>
+                  <div class="controls">
+                    <select  class="span">
+                      <option></option>
+                    </select>
                   </div>
-                  <div
-                    id="tab2"
-                    class="tab-pane"
-                    style="height: 1025px !important"
-                  >
-                    <div class="span">
-                      <div class="control-group">
-                        <label class="control-label"
-                          >Type de modification</label
-                        >
-                        <select v-model="type_modification">
-                          <option></option>
-                          <option value="OUI">SOMME NULL</option>
-                          <option value="NON">SOMME NON NULL</option>
-                        </select>
-                      </div>
-                    </div>
-                    <table class="table">
-                      <tr>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Date acte</label>
-                            <div class="controls">
-                              <input
-                                type="date"
-                                v-model="formData.date_act"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Numero Acte</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                v-model="formData.numero_act"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label">Fichier acte</label>
-                            <input type="file" @change="OnchangeFichier" />
-                          </div>
-                        </td>
+                </div>
+                                               </td>
+                                               <td>
+                                                   <label>Ministère</label>
+                                                   <model-list-select style="background-color: #fff;"
+                                                                      class="wide"
+                                                                      :list="sections"
+                                                                      v-model="formData.section"
+                                                                      option-value="id"
+                                                                      option-text="nom_section"
+                                                                      placeholder="Ministère"
+                                                   >
 
-                        <td>
-                          <label>Ministère</label>
-                          <model-list-select
-                            style="background-color: #fff"
-                            class="wide"
-                            :list="sections"
-                            v-model="formData.section"
-                            option-value="id"
-                            option-text="nom_section"
-                            placeholder="Ministère"
-                          >
-                          </model-list-select>
-                        </td>
+                                                   </model-list-select>
+                                               </td>
 
-                        <td>
-                          <label>Grande nature</label>
-                          <model-list-select
-                            style="background-color: #fff"
-                            class="wide"
-                            :list="grandes_natures"
-                            v-model="grand_nature"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder="Grande nature depense"
-                          >
-                          </model-list-select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <label>Unité Administrative</label>
-                          <model-list-select
-                            style="background-color: #fff"
-                            class="wide"
-                            :list="listeUniteAdminPasSection"
-                            v-model="ua_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder="Unite Administrative"
-                          >
-                          </model-list-select>
-                        </td>
-                        <td>
-                          <label>Activité</label>
-                          <model-list-select
-                            style="background-color: #fff"
-                            class="wide"
-                            :list="listeActiviteUA(ua_id)"
-                            v-model="formData.activite_id"
-                            option-value="id"
-                            option-text="lib"
-                            placeholder="Activite"
-                          >
-                          </model-list-select>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Dotation initiale AE</label
-                            >
-                            <div class="controls">
-                              <money
-                                :value="
-                                  activiteDotationInitialAE(
-                                    ua_id,
-                                    formData.activite_id
-                                  )
-                                "
-                                readOnly
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Dotation initiale CP</label
-                            >
-                            <div class="controls">
-                              <!--                                                           <input-->
-                              <!--                                                                   type="text"-->
-                              <!--                                                                   v-model="formData.total_dotation_initial"-->
-                              <!--                                                                   class="span"-->
+                                               <td>
+                                                   <label>Grande nature</label>
+                                                   <model-list-select style="background-color: #fff;"
+                                                                      class="wide"
+                                                                      :list="grandes_natures"
+                                                                      v-model="grand_nature"
+                                                                      option-value="id"
+                                                                      option-text="libelle"
+                                                                      placeholder="Grande nature depense"
+                                                   >
 
-                              <!--                                                           />-->
-                              <money
-                                :value="
-                                  activiteDotationInitialCP(
-                                    ua_id,
-                                    formData.activite_id
-                                  )
-                                "
-                                readOnly
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Total variation AE</label
-                            >
-                            <div class="controls">
-                              <!--                                                           <input-->
-                              <!--                                                                   type="text"-->
-                              <!--                                                                   v-model="formData.total_variation"-->
-                              <!--                                                                   class="span"-->
-                              <!--                                                           />-->
-                              <money :value="totalVariationAE" readOnly></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Total variation CP</label
-                            >
-                            <div class="controls">
-                              <money :value="totalVariationCP" readOnly></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Total Dotation AE
-                            </label>
-                            <div class="controls">
-                              <!--                                                           <input-->
-                              <!--                                                                   type="text"-->
-                              <!--                                                                   v-model="formData.total_dotation_finale"-->
-                              <!--                                                                   class="span"-->
-                              <!--                                                           />-->
-                              <money
-                                :value="totalActiveDotationAE"
-                                readOnly
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Total Dotation CP
-                            </label>
-                            <div class="controls">
-                              <!--                                                           <input-->
-                              <!--                                                                   type="text"-->
-                              <!--                                                                   v-model="formData.total_dotation_finale"-->
-                              <!--                                                                   class="span"-->
-                              <!--                                                           />-->
-                              <money
-                                :value="totalActiveDotationCP"
-                                readOnly
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </table>
-                    <table class="table" v-if="ligne_selectionne.length > 0">
-                      <thead>
-                        <tr>
-                          <th>Ligne</th>
-                          <th>Dotation AE</th>
-                          <th>Dotation CP</th>
-                          <th>Variation AE</th>
-                          <th>Variation CP</th>
-                          <th>Dotation Final AE</th>
-                          <th>Dotation Final CP</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          v-for="item in ligne_selectionne"
-                          :key="'LO' + item.id"
-                        >
-                          <td>{{ item.libele_ligne }}</td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.dotationAE)) }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.dotationCP)) }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.variationAE)) }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.variationCP)) }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.dotationFinalae)) }}
-                          </td>
-                          <td>
-                            {{ formatMoney(parseFloat(item.dotationFinalcp)) }}
-                          </td>
-                          <td>
-                            <button
-                              @click.prevent="supprimerLigne(item.ligne)"
-                              class="btn btn-danger"
-                            >
-                              <span class=""
-                                ><i class="icon-trash">Supprimer</i></span
-                              >
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table class="table">
-                      <tr>
-                        <td>
-                          <label>Ligne </label>
-                          <model-list-select
-                            style="background-color: #fff"
-                            class="wide"
-                            :list="ligneActivite(ua_id, formData.activite_id)"
-                            v-model="formData.economique_id"
-                            option-value="id"
-                            option-text="lib"
-                            placeholder="Ligne"
-                          >
-                          </model-list-select>
+                                                   </model-list-select>
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td>
+                                                   <label>Unité Administrative</label>
+                                                   <model-list-select style="background-color: #fff;"
+                                                                      class="wide"
+                                                                      :list="listeUniteAdminPasSection"
+                                                                      v-model="ua_id"
+                                                                      option-value="id"
+                                                                      option-text="libelle"
+                                                                      placeholder="Unite Administrative"
+                                                   >
 
-                          <div class="control-group">
-                            <label class="control-label"></label>
-                            <button
-                              class="btn btn-primary"
-                              @click="ajouterLigne(formData.economique_id)"
-                            >
-                              Ajouter La ligne
-                            </button>
-                          </div>
-                        </td>
+                                                   </model-list-select>
+                                               </td>
+                                               <td>
+                                                   <label>Activité</label>
+                                                   <model-list-select style="background-color: #fff;"
+                                                                      class="wide"
+                                                                      :list="listeActiviteUA(ua_id)"
+                                                                      v-model="formData.activite_id"
+                                                                      option-value="id"
+                                                                      option-text="lib"
+                                                                      placeholder="Activite"
+                                                   >
 
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Dotation AE</label>
-                            <div class="controls">
-                              <money
-                                :value="
-                                  ligneDotationInitialAE(
-                                    ua_id,
-                                    formData.activite_id,
-                                    formData.economique_id
-                                  )
-                                "
-                                readOnly
-                              ></money>
+                                                   </model-list-select>
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Dotation initiale AE</label>
+                                                       <div class="controls">
+
+                                                           <money  :value="activiteDotationInitialAE(ua_id,formData.activite_id)" readOnly></money>
+                                                       </div>
+                                                   </div>
+
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Dotation initiale CP</label>
+                                                       <div class="controls">
+                                                           <!--                                                           <input-->
+                                                           <!--                                                                   type="text"-->
+                                                           <!--                                                                   v-model="formData.total_dotation_initial"-->
+                                                           <!--                                                                   class="span"-->
+
+                                                           <!--                                                           />-->
+                                                           <money  :value="activiteDotationInitialCP(ua_id,formData.activite_id)" readOnly></money>
+                                                       </div>
+                                                   </div>
+
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total variation AE</label>
+                                                       <div class="controls">
+<!--                                                           <input-->
+<!--                                                                   type="text"-->
+<!--                                                                   v-model="formData.total_variation"-->
+<!--                                                                   class="span"-->
+<!--                                                           />-->
+                                                           <money  :value="totalVariationAE" readOnly></money>
+                                                       </div>
+                                                   </div>
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total variation CP</label>
+                                                       <div class="controls">
+                                                           <money  :value="totalVariationCP" readOnly></money>
+                                                       </div>
+                                                   </div>
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total Dotation AE </label>
+                                                       <div class="controls">
+<!--                                                           <input-->
+<!--                                                                   type="text"-->
+<!--                                                                   v-model="formData.total_dotation_finale"-->
+<!--                                                                   class="span"-->
+<!--                                                           />-->
+                                                           <money   :value="totalActiveDotationAE" readOnly></money>
+                                                       </div>
+                                                   </div>
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total Dotation CP </label>
+                                                       <div class="controls">
+                                                           <!--                                                           <input-->
+                                                           <!--                                                                   type="text"-->
+                                                           <!--                                                                   v-model="formData.total_dotation_finale"-->
+                                                           <!--                                                                   class="span"-->
+                                                           <!--                                                           />-->
+                                                           <money  :value="totalActiveDotationCP" readOnly></money>
+                                                       </div>
+                                                   </div>
+                                               </td>
+
+                                           </tr>
+
+                                       </table>
+                                        <table class="table" v-if="ligne_selectionne.length>0">
+                                            <thead>
+                                            <tr>
+                                                <th>Ligne</th>
+                                                <th>Dotation AE</th>
+                                                <th>Dotation CP</th>
+                                                <th>Variation AE</th>
+                                                <th>Variation CP</th>
+                                                <th>Dotation Final AE</th>
+                                                <th>Dotation Final CP</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="item in ligne_selectionne" :key="'LO'+item.id">
+                                                <td>{{item.libele_ligne}}</td>
+                                                <td>{{formatMoney(parseFloat(item.dotationAE))}}</td>
+                                                <td>
+                                                    {{formatMoney(parseFloat(item.dotationCP))}}
+                                                </td>
+                                                <td>{{formatMoney(parseFloat(item.variationAE))}}
+
+                                                </td>
+                                                <td>{{formatMoney(parseFloat(item.variationCP))}}
+                                                 </td>
+                                                <td>{{formatMoney(parseFloat(item.dotationFinalae))}}
+                                                    </td>
+                                                <td>
+                                                    {{formatMoney(parseFloat(item.dotationFinalcp))}}
+                                                </td>
+                                                <td> <button @click.prevent="supprimerLigne(item.ligne)"  class="btn btn-danger ">
+                                                    <span class=""><i class="icon-trash">Supprimer</i></span></button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table"> <tr>
+                                            <td>
+                                                <label>Ligne </label>
+                                                <model-list-select style="background-color: #fff;"
+                                                                   class="wide"
+                                                                   :list="ligneActivite(ua_id,formData.activite_id)"
+                                                                   v-model="formData.economique_id"
+                                                                   option-value="id"
+                                                                   option-text="lib"
+                                                                   placeholder="Ligne"
+                                                >
+
+                                                </model-list-select>
+
+                                                <div class="control-group">
+                                                    <label class="control-label"></label>
+                                                    <button class="btn btn-primary" @click="ajouterLigne(formData.economique_id)">Ajouter La ligne</button>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation AE</label>
+                                                    <div class="controls">
+                                                        <money  :value="ligneDotationInitialAE(ua_id,formData.activite_id,formData.economique_id)" readOnly></money>
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation CP</label>
+                                                    <div class="controls">
+                                                        <money  :value="ligneDotationInitialCP(ua_id,formData.activite_id,formData.economique_id)" readOnly></money>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="control-group">
+                                                    <label class="control-label">Varition AE </label>
+                                                    <div class="controls">
+
+                                                        <money   v-model="variation_ae" ></money>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Variation CP </label>
+                                                    <div class="controls">
+
+                                                        <money   v-model="variation_cp" ></money>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation Finale AE </label>
+                                                    <div class="controls">
+
+                                                        <money   :value="dotationFinalAE" readOnly></money>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation Finale CP </label>
+                                                    <div class="controls">
+
+                                                        <money   :value="dotationFinalCP" readOnly></money>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        </table>
+
+                                <div align="center">
+                                    <button class="btn btn-danger" @click="modificationBudget">Valider la modification</button>
+                                </div>
+
+                                    </div>
+
+                                </div>
                             </div>
                           </div>
 
@@ -469,8 +429,11 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+      </div>
+      </div>
+    
+
 </template>
 
 <script>

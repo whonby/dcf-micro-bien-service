@@ -181,7 +181,7 @@ code
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td style="background-color: blue;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET INITIAL</td>
+                  <td style="background-color: blue;color:#fff;text-align:center;font-size:14px;font-weight:bold;">BUDGET INITIAL</td>
                   <td style="text-align:center;font-size:16px;font-weight:bold;">{{formatageSomme(parseFloat(TotalBudgetInitial))}}</td>
                   
                 </tr>
@@ -196,7 +196,7 @@ code
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td style="background-color: green;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET EXECUTE</td>
+                  <td style="background-color: green;color:#fff;text-align:center;font-size:14px;font-weight:bold;">BUDGET EXECUTE</td>
                   <td style="text-align:center;font-size:16px;font-weight:bold;" v-if="formData.section !=''">{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</td>
                    <td style="text-align:center;font-size:16px;font-weight:bold;" v-else>{{formatageSomme(parseFloat(budgetConsommerDesModule1))}}</td>
                   
@@ -212,7 +212,7 @@ code
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td style="background-color: red;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET ACTUEL</td>
+                  <td style="background-color: red;color:#fff;text-align:center;font-size:14px;font-weight:bold;">BUDGET ACTUEL</td>
                   <td style="text-align:center;font-size:16px;font-weight:bold;" v-if="formData.section !=''">{{formatageSomme(parseFloat(TotalBudgetInitial)-(parseFloat(budgetConsommerDesModule)))}}</td>
 
                    <td style="text-align:center;font-size:16px;font-weight:bold;" v-else>{{formatageSomme(parseFloat(TotalBudgetInitial)-(parseFloat(budgetConsommerDesModule1)))}}</td>
