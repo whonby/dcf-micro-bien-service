@@ -6,7 +6,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Liste des UA Importés</h5>
+          <!-- <h5>Liste des UA Importés</h5> -->
         </div>
         <div class="">
           <div class="widget-box">
@@ -25,14 +25,14 @@
                     }}</span></a
                   >
                 </li>
-                <li class="" v-if="servicegestioncredit_detecter.length > 0">
+                <!-- <li class="" v-if="servicegestioncredit_detecter.length > 0">
                   <a data-toggle="tab" href="#tab3"
                     ><span>Nouvelle Service Gestionnaire de Credit Detecté</span>
                     <span class="label label-important">{{
                       servicegestioncredit_detecter.length
                     }}</span></a
                   >
-                </li>
+                </li> -->
                 <li class="" v-if="localisation_geo_dettecter.length > 0">
                   <a data-toggle="tab" href="#tab4"
                     >Nouvelle Localisation Géolocalisation detectée
