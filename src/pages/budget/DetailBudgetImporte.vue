@@ -16,7 +16,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Unite administrative</th>
+                            <th>Unite Administrative</th>
                             <th style="background: deepskyblue; color:#fff">Budget du personnel</th>
                             <th style="background: #8b0000;color:#fff">Budget de bien et service</th>
                             <th style="background: orangered;color:#fff">Budget en transfert</th>

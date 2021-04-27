@@ -51,9 +51,9 @@ export const formatageSommeSansFCFA = montant => {
       .split("")
       .reverse()
       .reduce((acc, montant, i) => {
-        return montant == "-"
+        return montant == ""
           ? acc
-          : montant + (i && !(i % 3) ? "." : "") + acc;
+          : montant + (i && !(i % 3) ? " " : "") + acc;
       }, "") 
   );
 };

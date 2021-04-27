@@ -110,7 +110,7 @@ import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/Ajout
 import AjouterTacheRealise from "../../pages/investissement/AjouterTache/AjouterTacheRealise.vue"
 import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
 import ModificationOp from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ModificationOp.vue"
-
+import PagePrincipalMarche from '../../pages/gestionMarche/PagePrincipalMarche.vue';
 import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
@@ -141,7 +141,8 @@ import ModificationOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDe
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
-
+import listeDesUaDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/listeDesUaDesRegie.vue"
+import VoirOrdrePaiementDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/VoirOrdrePaiementDesRegie.vue"
 import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
@@ -161,6 +162,17 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    
+    {
+        path: "/VoirOrdrePaiementDesRegie/:id",
+        name: "VoirOrdrePaiementDesRegie",
+        component: VoirOrdrePaiementDesRegie
+    },
+    {
+        path: "/PagePrincipalMarche/:id",
+        name: "PagePrincipalMarche",
+        component: PagePrincipalMarche
+    },
     {
         path: "/importationBudgetEclate",
         name: "importationBudgetEclate",
@@ -263,10 +275,15 @@ const BienServiceRoutes = [
         name: "TestTableaux",
         component: TestTableaux
     },
-
+    
+    {
+        path: "/listeDesUaDesRegie",
+        name: "listeDesUaDesRegie",
+        component: listeDesUaDesRegie
+    },
     //ordre de paiement des regies
     {
-        path: "/OrdrePaiementRegie",
+        path: "/OrdrePaiementRegie/:id",
         name: "OrdrePaiementRegie",
         component: OrdrePaiementRegie
     },

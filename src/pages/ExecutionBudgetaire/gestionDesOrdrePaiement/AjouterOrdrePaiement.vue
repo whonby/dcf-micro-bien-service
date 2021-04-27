@@ -1,4 +1,4 @@
-
+RecuperereTaux
 <template>
   <div class="container-fluid">
     {{RechercheNumeroOP}}
@@ -558,7 +558,7 @@
                            <option value="Septembre">Septembre</option>
                            <option value="Octobre">Octobre</option>
                            <option value="Novembre">Novembre</option>
-                           <option value="Dcembre">Dcembre</option>
+                           <option value="Decembre">Decembre</option>
                           </select>
                          
                         </td>
@@ -819,10 +819,10 @@
                       v-if="formData.typedepense == 'Autres'"
                     >
                       <tr>
-                        <td colspan="3">
+                        <!-- <td colspan="3">
                           <div class="control-group">
                             <label class="control-label"
-                              >OBJET DE LA DEPENSE</label
+                              >OBJET DE LA DEPENSE2</label
                             >
                             <div class="controls">
                               <input
@@ -833,6 +833,50 @@
                               />
                             </div>
                           </div>
+                        </td> -->
+                         <td colspan="2">
+                          <label
+                            >Autres Depense
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="gettersDossierAutreDepense"
+                            v-model="formData.autre_depense_id"
+                            option-value="id"
+                            option-text="objet"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                         
+                          
+                        </td>
+                         <td>
+                          <label
+                            >Mois Paiement
+                            
+                          </label>
+                           <select
+                            v-model="formData.mois_paiement"
+                            class="span"
+                            style="border: 1px solid #000"
+                          >
+                          <option value="0"></option>
+                            <option value="Janvier">Janvier</option>
+                           <option value="Février">Février</option>
+                           <option value="Mars">Mars</option>
+                           <option value="Avril">Avril</option>
+                           <option value="Mai">Mai</option>
+                           <option value="Juin">Juin</option>
+                           <option value="Juillet">Juillet</option>
+                           <option value="Août">Août</option>
+                           <option value="Septembre">Septembre</option>
+                           <option value="Octobre">Octobre</option>
+                           <option value="Novembre">Novembre</option>
+                           <option value="Dcembre">Dcembre</option>
+                          </select>
+                         
                         </td>
                       </tr>
                       <tr>
@@ -1201,7 +1245,7 @@
                               text-align: center;
                             "
                             
-                            >Facture</label
+                            >VOIR FACTURE</label
                           >
                            <div
                             class=""
@@ -1214,7 +1258,7 @@
                             >
                               <span>
                                 <i class="icon icon-plus-sign"
-                                  >Ajouter Facture </i
+                                  >AJOUTER FACTURE </i
                                 ></span
                               >
                             </button>
@@ -1413,6 +1457,7 @@
                     <table class="table table-bordered table-striped">
                       <tr>
                         <td colspan="">
+                         
                           <label
                             class="control-label"
                             style="
@@ -1420,13 +1465,14 @@
                               font-weight: bold;
                               text-align: center;
                             "
-                            v-if="formData.type_ordre_paiement == 2"
-                            >Pièce Justificative</label
+                            
+                            >LISTE DES PIECES </label
                           >
+
                           <div
                             class=""
                             align="right"
-                            v-if="formData.type_ordre_paiement == 2"
+                            
                           >
                             <button
                               @click.prevent="afficherModalAjouterService"
@@ -1434,104 +1480,7 @@
                             >
                               <span>
                                 <i class="icon icon-plus-sign"
-                                  >Ajouter pièces </i
-                                ></span
-                              >
-                            </button>
-                          </div>
-                          <table
-                            class="table table-bordered table-striped"
-                            v-if="formData.type_ordre_paiement == 2"
-                          >
-                            <thead>
-                              <tr>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Numero Ordre
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Nature de la pièce
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Reference
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Date de la pièce
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                class="odd gradeX"
-                                v-for="type in listePieceJustificative(
-                                  formData.numero_ordre_paiement
-                                )"
-                                :key="type.id"
-                              >
-                                <td
-                                  style="width:20%,text-align:center"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.numero_ordre || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 30%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    listePieceJustifica(type.libelle) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                                <td
-                                  style="width: 20%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.reference || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 15%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    formaterDate(type.date_piece) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          <label
-                            class="control-label"
-                            style="
-                              font-size: 14px;
-                              font-weight: bold;
-                              text-align: center;
-                            "
-                            v-if="formData.type_ordre_paiement == 1"
-                            >Pièce Justificative</label
-                          >
-
-                          <div
-                            class=""
-                            align="right"
-                            v-if="formData.type_ordre_paiement == 1"
-                          >
-                            <button
-                              @click.prevent="afficherModalAjouterService"
-                              class="btn btn-success"
-                            >
-                              <span>
-                                <i class="icon icon-plus-sign"
-                                  >Ajouter pièces</i
+                                  >AJOUTER PIECE</i
                                 ></span
                               >
                             </button>
@@ -1539,7 +1488,7 @@
 
                           <table
                             class="table table-bordered table-striped"
-                            v-if="formData.type_ordre_paiement == 1"
+                            
                           >
                             <thead>
                               <tr></tr>
@@ -1987,6 +1936,7 @@
                   <div class="controls">
                     <div data-toggle="buttons-checkbox" class="btn-group">
                       <a
+                       :readOnly="RechercheNumeroOP" 
                         class="btn btn-primary"
                         @click.prevent="AjouterOrdrePaiement"
                         >Valider</a
@@ -2129,7 +2079,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Exonéré</label>
                 <div class="controls">
@@ -2139,7 +2089,7 @@
                   </select>
                 </div>
               </div>
-            </td>
+            </td> -->
           </tr>
         </table>
       </div>
@@ -2156,8 +2106,6 @@
           <a data-dismiss="modal" class="btn" href="#">Fermer</a>
         </div>
         
-
-
       </div>
     </div>
 
@@ -2711,6 +2659,7 @@ export default {
     ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters("bienService", [
+      
       "avenants",
       "gettersgestionOrdrePaiement",
       "gettersDossierAutreDepense",
@@ -3905,6 +3854,18 @@ montantTvaModifier() {
         }
       };
     },
+        objetAutreDepense() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierAutreDepense.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.objet;
+          }
+          return "Non renseigné";
+        }
+      };
+    },
     geolocalisation() {
       return (id) => {
         if (id != null && id != "") {
@@ -4096,8 +4057,7 @@ montantTvaModifier() {
         if (id != null && id != "") {
           return this.gettersnomPieceJustificative.filter(
             (qtreel) =>
-              qtreel.numero_op_hors_sib == id &&
-              qtreel.etat_piece == "definitive"
+              qtreel.numero_op_hors_sib == id 
           );
         }
       };
@@ -4269,7 +4229,7 @@ afficherModalModifierFacture(id) {
     },
 
     afficherModalListePersonnel() {
-      this.$router.push({ name: "ListeDesOrdresPaiement" });
+        window.history.back();
     },
 
     OnchangeFichier(e) {
@@ -4517,6 +4477,7 @@ afficherModalModifierFacture(id) {
           ...this.editFacture,
           total_facture_ht: this.MontantFactureHtModifier,
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
+          numero_ordrepaiement: this.formData.numero_ordre_paiement,
           etat_acticle: "proforma",
           montant_ttc:this.MontantFactureTTCModifier,
           taux:this.afficherEnorereModifeir,
@@ -4536,7 +4497,8 @@ afficherModalModifierFacture(id) {
         var nouvelObjetdefinitive = {
           ...this.editFacture,
           total_facture_ht: this.MontantFactureHtModifier,
-          //	numero_ordre_paiement_engagement:this.intitule,
+           numero_ordrepaiement: this.formData.numero_ordre_paiement,
+         
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
           etat_acticle: "definitive",
            montant_ttc:this.MontantFactureTTCModifier,
@@ -4876,6 +4838,8 @@ this.$notify({
             this.tailleOpEnregistrer +
             "-" +
             this.formData.numero_ordre_paiement;
+            
+            
           var nouvelObjetOrdrePaiement1 = {
             exercice: this.anneeAmort,
             type_ordre_paiement: this.formData.type_ordre_paiement,
@@ -4929,10 +4893,10 @@ this.$notify({
             compte_autre_depense: this.formData45.compte_autre_depense,
             adresse: this.formData45.adresse,
             reference_autre_depense: this.formData45.reference_autre_depense,
-            odjet_autre_depense: this.formData45.odjet_autre_depense,
+            autre_depense_id:this.formData.autre_depense_id,
+            odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
             livrable_autre_depense: this.formData45.livrable_autre_depense,
-            beneficiaire_autre_depense: this.formData45
-              .beneficiaire_autre_depense,
+            beneficiaire_autre_depense: this.formData45.beneficiaire_autre_depense,
             geo_autre_depense: this.formData45.geo_autre_depense,
             dure_autre_depense: this.formData45.dure_autre_depense,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
@@ -5243,7 +5207,8 @@ numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             compte_autre_depense: this.formData45.compte_autre_depense,
             adresse: this.formData45.adresse,
             reference_autre_depense: this.formData45.reference_autre_depense,
-            odjet_autre_depense: this.formData45.odjet_autre_depense,
+            autre_depense_id:this.formData.autre_depense_id,
+            odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
             livrable_autre_depense: this.formData45.livrable_autre_depense,
             beneficiaire_autre_depense: this.formData45
               .beneficiaire_autre_depense,
@@ -5323,9 +5288,9 @@ numero_op_prov_definitive:this.formData.numero_ordre_paiement,
 
 <style scoped>
 .taille {
-  width: 80%;
+  width: 70%;
   margin: 0 -40%;
-  height: 50%;
+  
 }
 .tailles {
   width: 60%;

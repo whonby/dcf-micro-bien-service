@@ -91,7 +91,7 @@
 
             </div>
 
-              <h3 style="text-align:center">TABLEAU DE BORD : GESTION SIB</h3>
+              <h3 style="text-align:center">TABLEAU DE BORD : GESTION SIGOBE</h3>
 
             <div class="row-fluid" style="" id="printMe">
                 <div class="span2 vld-parent" style="width: 250px;margin-left: -3px !important;border-right: 10px solid #fff">

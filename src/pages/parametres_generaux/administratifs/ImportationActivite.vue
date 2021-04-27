@@ -14,25 +14,25 @@
               <ul class="nav nav-tabs">
                 <!-- <li class="active"><a data-toggle="tab" href="#tab1">Budget importé</a></li> -->
                 <li class="active">
-                  <a data-toggle="tab" href="#tab2">Importation des UA</a>
+                  <a data-toggle="tab" href="#tab2">Importation des Activités</a>
                 </li>
 
-                <li class="" v-if="section_dettecter.length > 0">
+                <li class="" v-if="action_detecter.length > 0">
                   <a data-toggle="tab" href="#tab5"
-                    ><span>Nouvelle Section  Detecté</span>
+                    ><span>Nouvelle action  Detecté</span>
                     <span class="label label-important">{{
-                      section_dettecter.length
+                      action_detecter.length
                     }}</span></a
                   >
                 </li>
-                <li class="" v-if="servicegestioncredit_detecter.length > 0">
+                <!-- <li class="" v-if="servicegestioncredit_detecter.length > 0">
                   <a data-toggle="tab" href="#tab3"
-                    ><span>Nouvel Service Gestionnaire de Credit Detecté</span>
+                    ><span>Nouvelle Service Gestionnaire de Credit Detecté</span>
                     <span class="label label-important">{{
                       servicegestioncredit_detecter.length
                     }}</span></a
                   >
-                </li>
+                </li> -->
                 <li class="" v-if="localisation_geo_dettecter.length > 0">
                   <a data-toggle="tab" href="#tab4"
                     >Nouvelle Localisation Géolocalisation detectée
@@ -252,6 +252,7 @@ export default {
       localisation_geo_dettecter: [],
       nat_section_dettecter: [],
       section_dettecter: [],
+      action_detecter:[],
     };
   },
 
