@@ -9,7 +9,7 @@
       </li> -->
        <li>
         <router-link :to="{ name: 'AutresDepense' }" tag="a">
-          AUTRES DEPENSE
+          AUTRES DEPENSES
         </router-link>
       </li>
       <li>

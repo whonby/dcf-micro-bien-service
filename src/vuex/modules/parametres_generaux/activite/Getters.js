@@ -22,6 +22,6 @@ export{
 structures_activites,
 structures_Infrastructures,
 plans_Infrastructures, 
-    plans_activites
+plans_activites
 
 }

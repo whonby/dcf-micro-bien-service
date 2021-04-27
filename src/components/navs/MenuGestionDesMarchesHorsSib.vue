@@ -88,7 +88,7 @@
 
             <li v-if="admin() ||dcf()">
             <router-link :to="{name: 'ppmHorsSib'}" tag ="a">
-                PPM
+                IMPORTATION PPM
             </router-link>
           </li>
      <!-- <li> 
