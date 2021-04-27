@@ -81,6 +81,11 @@
             </router-link>
           </li>
            <li>
+        <router-link :to="{ name: 'AutresDepense' }" tag="a">
+          AUTRES DEPENSES
+        </router-link>
+      </li>
+           <li>
             <router-link :to="{name: 'marcheEntreprise'}" tag ="a">
                 LISTE DES MARCHES PAR ENTREPRISES
             </router-link>
@@ -91,6 +96,7 @@
                 PPM
             </router-link>
           </li>
+          
      <!-- <li> 
             <router-link :to="{name: 'ajouterMarcheHor'}" tag="a">
 TEST            </router-link>

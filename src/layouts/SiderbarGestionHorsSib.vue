@@ -72,7 +72,7 @@
               </a>
           </li>
 
-         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
+         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==25}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>GESTION DES MARCHES</span>
@@ -361,7 +361,7 @@ navigateRetourAuMenu(){
           })
       },
  navigateToBienEtService(){
-        this.activate(7)
+        this.activate(30)
         this.$router.push({
           name: 'tableau_de_bord_hors'
         })
