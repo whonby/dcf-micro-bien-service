@@ -141,7 +141,8 @@ import ModificationOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDe
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
-
+import listeDesUaDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/listeDesUaDesRegie.vue"
+import VoirOrdrePaiementDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/VoirOrdrePaiementDesRegie.vue"
 import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
@@ -161,6 +162,12 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    
+    {
+        path: "/VoirOrdrePaiementDesRegie/:id",
+        name: "VoirOrdrePaiementDesRegie",
+        component: VoirOrdrePaiementDesRegie
+    },
     {
         path: "/PagePrincipalMarche/:id",
         name: "PagePrincipalMarche",
@@ -268,10 +275,15 @@ const BienServiceRoutes = [
         name: "TestTableaux",
         component: TestTableaux
     },
-
+    
+    {
+        path: "/listeDesUaDesRegie",
+        name: "listeDesUaDesRegie",
+        component: listeDesUaDesRegie
+    },
     //ordre de paiement des regies
     {
-        path: "/OrdrePaiementRegie",
+        path: "/OrdrePaiementRegie/:id",
         name: "OrdrePaiementRegie",
         component: OrdrePaiementRegie
     },

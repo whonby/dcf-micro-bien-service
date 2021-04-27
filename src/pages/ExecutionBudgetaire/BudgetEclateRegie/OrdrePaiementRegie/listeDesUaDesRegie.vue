@@ -70,7 +70,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Unites administratives des Projets</h5>
+                            <h5>Listes Unites administratives des Regies</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -96,18 +96,13 @@
                       <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td>
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
                    
-                   <td v-if="idUaBudgetEclate(type) == 0">
-                      <router-link :to="{ name: 'VoirOrdrePaiement', params: { id: type }}"
+                   <td>
+                      <router-link :to="{ name: 'VoirOrdrePaiementDesRegie', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
                     </td>
-                    <td v-else-if="idUaBudgetEclate(type) != 0 || idUaBudgetEclate(type) != -1">
-                      <router-link :to="{ name: 'ListeDesSousBudgetOp', params: { id: type }}"
-                class="btn btn-Success " title="">
-                  <span class=""><i class="icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
-                   </router-link> 
-                    </td>
+                   
                     
                   </tr>
                   
@@ -225,7 +220,7 @@ afficheGroupeUaParMarche(){
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.diff_op == null);
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.diff_op != null);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

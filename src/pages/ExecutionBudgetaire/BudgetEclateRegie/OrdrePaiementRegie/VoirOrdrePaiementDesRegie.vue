@@ -1,162 +1,280 @@
 
 <template>
-  <div>
-    <br />
-    <br />
-    <div class="row-fluid" v-if="affiche_filtre1" style="margin-top: -20px">
-      <div class="span1"></div>
-      <div class="span10" style="background-color: transparent; !important;">
+
+<div>
+   <div id="validationOpDefinitif1" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <td style="width: 25%"></td>
-          <td style="width: 0%; font-weight: bolder; color: #000">
-            <div align="right" style="cursor: pointer">
-              <button
-                class="btn btn-success"
-                @click.prevent="ajouterOpRegieSysteme"
-                style="font-weight: bolder; color: #fff; font-size: 20px"
-              >
-                <i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i>
-              </button>
-            </div>
-          </td>
-          <td style="width: 0px">
-            <div align="right" style="cursor: pointer">
-              <button
-                class="btn btn-danger"
-                @click.prevent="ajouterOpRegieAnnulation"
-                style="font-weight: bolder; color: #fff; font-size: 20px"
-              >
-                <i class="icon icon-plus">
-                  AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i
-                >
-              </button>
-            </div>
-          </td>
-          <td style="width: 0px">
-            <div align="right" style="cursor: pointer">
-              <button
-                class="btn btn-primary"
-                @click.prevent="ajouterOpRegieDeffinitif"
-                style="font-weight: bolder; color: #fff; font-size: 20px"
-              >
-                <i class="icon icon-plus">
-                  AJOUTER ORDRE DE PAIEMENT DEFINITIF</i
-                >
-              </button>
-            </div>
-          </td>
-          <td style="width: 25%"></td>
-        </table>
-      </div>
-    </div>
-
-    <div class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
-      <div class="span1"></div>
-      <div class="span10" style="background-color: transparent; !important;">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td colspan="">
-                <br />
-                <!-- <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
-    
-        </div>  -->
-
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="uniteAdministratives"
-                  v-model="uniteAdministrative_id"
-                  option-value="id"
-                  option-text="libelle"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
-                >
-                </model-list-select>
-              </td>
-              <td>
-                <br />
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >TYPE ORDRE PAIEMENT<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="options2"
-                  v-model="typeop_id"
-                  option-value="id"
-                  option-text="libelle"
-                >
-                </model-list-select>
-              </td>
-              <td>
-                <br />
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >NUMERO ORDRE PAIEMENT<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="listeUniteAdminPasSection"
-                  v-model="NumeroOp"
-                  option-value="numero_ordre_paiement"
-                  option-text="numero_ordre_paiement"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
-                >
-                </model-list-select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste type texte"
-            :data="filtre_type_teste"
-            name="Liste type texte"
-            worksheet="Liste type texte"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
-          <div
-            style="
-              font-size: 30px;
-              text-align: center;
-              text-decoration: underline;
-              font-weight: bold;
-            "
-          >
-            <p>ORDRES DE PAIEMENTS REGIE</p>
-          </div>
-
-          <br />
-          <table class="table table-striped">
-            <tr>
-              <td style="width: 86%"></td>
-              <td>
-                <div align="right" style="cursor: pointer">
-                  <button
-                    class="btn btn-success"
-                    @click.prevent="AfficheBoutonAjouter()"
-                    style="font-weight: bolder; color: #fff; font-size: 25px"
-                  >
-                    <i class="icon icon-plus">AJOUTER ORDRE PAIEMENT</i>
-                  </button>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Décision CF </label>
+                <div class="controls">
+                  <select v-model="editMandat.decision_cf" class="span5">
+                    <option value=""></option>
+                    <option value="8">Visé</option>
+                    <option value="9">Visé avec Observation</option>
+                    <option value="2">Différé</option>
+                    <option value="3">Réjeté</option>
+                    <option value="0">Attente</option>
+                  </select>
                 </div>
-              </td>
-            </tr>
-          </table>
-          <table class="table table-bordered table-striped">
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Famille de Motif</label>
+                <div class="controls">
+                  <select v-model="editMandat.famille_motif" class="span5">
+                    <option value="0"></option>
+                    <option
+                      v-for="varText in AffichierElementParent"
+                      :key="varText.id"
+                      :value="varText.id"
+                    >
+                      {{ varText.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Motif</label>
+                <div class="controls">
+                  <select v-model="editMandat.motif" class="span5">
+                    <option value="0"></option>
+                    <option
+                      v-for="varText in AffichierElementEnfant(
+                        editMandat.famille_motif
+                      )"
+                      :key="varText.id"
+                      :value="varText.id"
+                    >
+                      {{ varText.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Autres Motif</label>
+                <div class="controls">
+                  <textarea
+                    class="span10"
+                    row="6"
+                    v-model="editMandat.autre_motif"
+                    :readonly="griserAutreMotif"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Date Decision CF :</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    class="span5"
+                    v-model="editMandat.date_decision_cf"
+                  />
+                  <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Observation CF</label>
+                <div class="controls">
+                  <textarea
+                    class="span10"
+                    row="6"
+                    v-model="editMandat.observation"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Nom du CF</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    class="span5"
+                    :value="
+                      recupererNomDuControleurF(
+                        recupererIdUser(
+                          recupererIdServiceCF(
+                            editMandat.unite_administrative_id
+                          )
+                        )
+                      )
+                    "
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <table
+          class="table table-bordered table-striped"
+          v-if="editMandat.decision_cf == 2"
+        >
+          <div class="row-fluid">
+            <div class="span6">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon"> <i class="icon-eye-open"></i> </span>
+                  <h5>Motif à Corrigé</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <templete v-if="verifier(editMandat.id) == editMandat.id">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="type in listeOpdiffere(editMandat.id)"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{
+                              MotifLibelle(type.famille_motif) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{ MotifLibelle(type.motif) || "Non renseigné" }}
+                          </td>
+
+                          <td>
+                            <button
+                              class="btn btn-danger"
+                              @click="DetacheMotif(type.id)"
+                            >
+                              <span>
+                                <i class="icon-external-link"></i>Détaché
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </templete>
+                  <templete v-else>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </templete>
+                </div>
+              </div>
+            </div>
+            <div class="span6">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon"> <i class="icon-arrow-right"></i> </span>
+                  <h5>Motif Corrige</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <templete v-if="verifier(editMandat.id) == editMandat.id">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="type in EurreurCorrige(editMandat.id)"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{
+                              MotifLibelle(type.famille_motif) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{ MotifLibelle(type.motif) || "Non renseigné" }}
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-info"
+                              @click="DetacheMotifAttache(type.id)"
+                            >
+                              <span>
+                                <i class="icon-external-link"></i>Attaché
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </templete>
+                  <templete v-else>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </templete>
+                </div>
+              </div>
+            </div>
+          </div>
+        </table>
+        <br />
+      </div>
+
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal()"
+          class="btn btn-primary"
+          href="#"
+          >Valider</a
+        >
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+    <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
+    <h1 style="text-align:center">Ordres De Paiement Du Projet : {{libelleUa(marcheid)}}</h1>
+   <table class="table table-bordered table-striped">
             <td style="width: 10%"></td>
             <td style="width: 0%; font-weight: bolder; color: #000">
               <div align="right" style="cursor: pointer">
@@ -740,57 +858,110 @@
             </td>
             <td style="width: 10%"></td>
           </table>
-          <!-- <table class="table table-bordered table-striped">
-             <td style="width:55%">
+          <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td colspan="">
+                <br />
+              
 
-       
-          </td>
-            <td style="width:0%;font-weight:bolder;color:#000">
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterOpRegieSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i></button>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >ANNEE BUDGETAIRE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="exercices_budgetaires"
+                  v-model="uniteAdministrative_id"
+                  option-value="annee"
+                  option-text="annee"
+                  placeholder=""
+                >
+                </model-list-select>
+              </td>
+              <td>
+                <br />
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >TYPE ORDRE PAIEMENT<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="options2"
+                  v-model="typeop_id"
+                  option-value="id"
+                  option-text="libelle"
+                >
+                </model-list-select>
+              </td>
+              <td>
+                <br />
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >NUMERO ORDRE PAIEMENT<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="listeUniteAdminPasSection"
+                  v-model="NumeroOp"
+                  option-value="numero_ordre_paiement"
+                  option-text="numero_ordre_paiement"
+                  placeholder=""
+                >
+                </model-list-select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      
+                       <li class="active">
+                       
+                        <a data-toggle="tab" href="#OPPROVISOIRE">LISTES DES OP  </a>
+                      </li>
+                       <!-- <li class="">
+                           <a data-toggle="tab" href="#OPANNULATION">OP ANNULATION</a>
+                        
+                      </li>
+                     <li class="">
+                           <a data-toggle="tab" href="#OPDEFINITIF">OP DEFINITIF</a>
+                        
+                      </li>
+                       <li class="">
+                           <a data-toggle="tab" href="#OPDIRECT">OP DIRECT</a>
+                        
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+  <div id="OPPROVISOIRE" class="tab-pane active">
     
-        </div> 
-       
-          </td>
-           <td style="width:0px">
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="ajouterOpRegieAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i></button>
-    
-        </div> 
-       
-          </td> 
-           <td style="width:0px">
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-primary" @click.prevent="ajouterOpRegieDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT DEFINITIF</i></button>
-    
-        </div> 
-       
-          </td> 
-            </table> -->
-          <div class="widget-box">
+              <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
               <h5>Listes des Ordres de Paiements</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
-              </div> -->
+             
             </div>
-<div class="span4">
-                    <br>
-                    Afficher
-                    <select name="pets" id="pet-select" v-model="size" class="span3">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    Entrer
-                </div>
+            <div class="span4">
+              <br />
+              Afficher
+              <select name="pets" id="pet-select" v-model="size" class="span3">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              Entrer
+            </div>
             <div class="widget-content nopadding">
-              <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th style="font-size: 14px; font-weight: bold">Exercice</th>
@@ -800,47 +971,34 @@
                     <th style="font-size: 14px; font-weight: bold; color: #000">
                       N°Ordre paiement
                     </th>
-                    <!-- pp 
-                    <th style="font-size: 14px; font-weight: bold; color: #000">
-                      N°OP Provisoire
-                    </th>
-                    <th style="font-size: 14px; font-weight: bold; color: #000">
-                      N°OP Annulation
-                    </th>
-                    <th style="font-size: 14px; font-weight: bold; color: #000">
-                      N°OP Definitif
-                    </th>
-                    -->
-
-                    <th style="font-size: 14px; font-weight: bold">Objet Op</th>
-                    <th style="font-size: 14px; font-weight: bold">UA</th>
-                    <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
-                    <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
+                  
+                    <th style="font-size: 14px; font-weight: bold">Objet OP</th>
+                    <!-- <th style="font-size: 14px; font-weight: bold">UA</th> -->
+                   
                     <th style="font-size: 14px; font-weight: bold">
-                      Engagement actuel
+                      Engagement actuel (FCFA)
                     </th>
                     <th style="font-size: 14px; font-weight: bold">
                       Voir Détail
                     </th>
+                   
                     <th style="font-size: 14px; font-weight: bold">
                       Décision CF
                     </th>
                     <th style="font-size: 14px; font-weight: bold">
                       Supprimer
                     </th>
-                    <!-- <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
-                     <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th> -->
 
-                    <!-- <th>Montant Disponible</th> -->
+                   
                   </tr>
                 </thead>
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="type in partition(ListeDEsEntreprise,size)[page]"
+                    v-for="type in partition(ListeDEsEntreprise, size)[page]"
                     :key="type.id"
                   >
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -849,7 +1007,7 @@
                     >
                       {{ type.exercice || "Non renseigné" }}
                     </td>
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-if="type.type_ordre_paiement == 1"
                       style="
                         font-size: 14px;
@@ -859,8 +1017,7 @@
                     >
                       <span>OP Direct</span>
                     </td>
-
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-else-if="type.type_ordre_paiement == 2"
                       style="
                         font-size: 14px;
@@ -870,7 +1027,8 @@
                     >
                       <span>OP Provisoire</span>
                     </td>
-                    <td
+
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-else-if="type.type_ordre_paiement == 3"
                       style="
                         font-size: 14px;
@@ -880,7 +1038,7 @@
                     >
                       <span>OP Annulation</span>
                     </td>
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       v-else
                       style="
                         font-size: 14px;
@@ -891,7 +1049,7 @@
                       <span>OP Définitif</span>
                     </td>
 
-                    <td
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -901,59 +1059,17 @@
                     >
                       {{ type.numero_ordre_paiement || "Non renseigné" }}
                     </td>
-                    <!-- 
-                    <td
-                      v-if="type.id_op_provisoire != null"
-                      style="
-                        font-size: 14px;
-                        font-weight: bold;
-                        text-align: center;
-                        color: red;
-                      "
-                    >
-                      {{ afficheNumeroOpDefinitive(type.id_op_provisoire) }}
-                    </td>
-                    <td v-else style="background-color: lightblue"></td>
-                    <td
-                      v-if="type.id_op_Annulation != null"
-                      style="
-                        font-size: 14px;
-                        font-weight: bold;
-                        text-align: center;
-                        color: blue;
-                      "
-                    >
-                      {{ afficheNumeroOpDefinitive(type.id_op_Annulation) }}
-                    </td>
-                    <td v-else style="background-color: lightblue"></td>
-                    <td
-                      v-if="type.id_op_definitif != null"
-                      style="
-                        font-size: 14px;
-                        font-weight: bold;
-                        text-align: center;
-                        color: blue;
-                      "
-                    >
-                      {{ afficheNumeroOpDefinitive(type.id_op_definitif) }}
-                    </td>
-                    <td v-else style="background-color: lightblue"></td>
-                        -->
 
-                    <!-- <td v-if="type.marche_id != null"
-                      style="font-size:14px;font-weight:bold"
-                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td> -->
-                    <td style="font-size: 14px; font-weight: bold">
+                    <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
                       {{ type.odjet_autre_depense || "Non renseigné" }}
                     </td>
-                    <td style="font-size: 14px; font-weight: bold">
+                    <!-- <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
                       {{
                         libelleUa(type.unite_administrative_id) ||
                         "Non renseigné"
                       }}
-                    </td>
-
-                    <td
+                    </td> -->
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -961,15 +1077,12 @@
                       "
                     >
                       {{
-                        formatageSomme(
+                        formatageSommeSansFCFA(
                           parseFloat(type.montant_ordre_paiement)
                         ) || "Non renseigné"
                       }}
                     </td>
-
-                    <td
-                      
-                    >
+                    <td @dblclick="afficherModalModifierTitre(type.id)">
                       <router-link
                         :to="{
                           name: 'VoirDetailAutreFiche',
@@ -990,12 +1103,13 @@
                         >
                       </router-link>
                     </td>
-                   
-                    <td>
+
+                    
+                    <td >
                       <button
                         v-if="type.decision_cf == 8"
                         class="btn btn-success tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture0(type.id)"
                       >
                         <span
                           style="
@@ -1009,7 +1123,7 @@
                       <button
                         v-else-if="type.decision_cf == 2"
                         class="btn btn-warning tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture0(type.id)"
                       >
                         <span
                           style="
@@ -1023,7 +1137,7 @@
                       <button
                         v-else-if="type.decision_cf == 3"
                         class="btn btn-danger tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture0(type.id)"
                       >
                         <span
                           style="
@@ -1037,7 +1151,7 @@
                       <button
                         v-else-if="type.decision_cf == 9"
                         class="btn btn-success tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture0(type.id)"
                       >
                         <span
                           title="Visé avec observation"
@@ -1052,7 +1166,7 @@
                       <button
                         v-else
                         class="btn btn-info tailBtn"
-                        @click="apercuFacture(type.id)"
+                        @click="apercuFacture0(type.id)"
                       >
                         <span
                           style="
@@ -1077,482 +1191,92 @@
                   </tr>
                 </tbody>
               </table>
+                  </div>
             </div>
+ <div class="pagination alternate">
+            <ul>
+              <li :class="{ disabled: page == 0 }">
+                <a @click.prevent="precedent()" href="#">Précedent</a>
+              </li>
+              <li
+                v-for="(titre, index) in partition(ListeDEsEntreprise, size)
+                  .length"
+                :key="index"
+                :class="{ active: active_el == index }"
+              >
+                <a @click.prevent="getDataPaginate(index)" href="#">{{
+                  index + 1
+                }}</a>
+              </li>
+              <li
+                :class="{
+                  disabled:
+                    page == partition(ListeDEsEntreprise, size).length - 1,
+                }"
+              >
+                <a @click.prevent="suivant()" href="#">Suivant</a>
+              </li>
+            </ul>
           </div>
-           <div class="pagination alternate">
-              <ul>
-                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                   <li  v-for="(titre, index) in partition(ListeDEsEntreprise,size).length" :key="index" :class="{ active : active_el == index }">
-                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                <li :class="{ disabled : page == partition(ListeDEsEntreprise,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+  
+  </div                                                                                                                                                                         >
+          <!-- <div id="OPANNULATION" class="tab-pane ">
+            
+            OPANNULATION
 
-              </ul>
-           </div>
+          </div>
+ <div id="OPDEFINITIF" class="tab-pane">
+            
+            OPDEFINITIF
+
+          </div> -->
+  <!-- <div id="OPDIRECT" class="tab-pane">
+            
+            OPDIRECT
+
+          </div> -->
         </div>
       </div>
-    </div>
-
-    <notifications />
-
-    <div id="decisionDefinitif" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Décision CF </label>
-                <div class="controls">
-                  <select
-                    v-model="editDecisionFinal.decision_cf_definitif"
-                    class="span5"
-                  >
-                    <option value=""></option>
-                    <option value="8">Visé</option>
-                    <option value="9">Visé avec Observation</option>
-                    <option value="2">Différé</option>
-                    <option value="3">Réjeté</option>
-                    <option value="0">Attente</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Famille de Motif</label>
-                <div class="controls">
-                  <select
-                    v-model="editDecisionFinal.famille_motif"
-                    class="span5"
-                  >
-                    <option value=""></option>
-                    <option
-                      v-for="varText in AffichierElementParent"
-                      :key="varText.id"
-                      :value="varText.id"
-                    >
-                      {{ varText.libelle }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Motif</label>
-                <div class="controls">
-                  <select v-model="editDecisionFinal.motif" class="span5">
-                    <option value=""></option>
-                    <option
-                      v-for="varText in AffichierElementEnfant(
-                        editDecisionFinal.famille_motif
-                      )"
-                      :key="varText.id"
-                      :value="varText.id"
-                    >
-                      {{ varText.libelle }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Autres Motif</label>
-                <div class="controls">
-                  <textarea
-                    class="span10"
-                    row="6"
-                    v-model="editDecisionFinal.autre_motif"
-                    :readonly="griserAutreMotif"
-                  >
-                  </textarea>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date Decision CF :</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    class="span5"
-                    v-model="editDecisionFinal.date_decision_definitive_cf"
-                  />
-                  <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Observation CF</label>
-                <div class="controls">
-                  <textarea
-                    class="span10"
-                    row="6"
-                    v-model="editDecisionFinal.observation"
-                  >
-                  </textarea>
-                </div>
-              </div>
-            </td>
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Nom du CF</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    class="span5"
-                    :value="
-                      recupererNomDuControleurF(
-                        recupererIdUser(
-                          recupererIdServiceCF(
-                            editDecisionFinal.unite_administrative_id
-                          )
-                        )
-                      )
-                    "
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierDecisionFinal()"
-          class="btn btn-primary"
-          href="#"
-          >Valider</a
-        >
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-    <div id="validationOpDefinitif" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Décision CF </label>
-                <div class="controls">
-                  <select v-model="editMandat.decision_cf" class="span5">
-                    <option value=""></option>
-                    <option value="8">Visé</option>
-                    <option value="9">Visé avec Observation</option>
-                    <option value="2">Différé</option>
-                    <option value="3">Réjeté</option>
-                    <option value="0">Attente</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label"
-                  >Famille de Motif {{ editMandat.id }}</label
-                >
-                <div class="controls">
-                  <select v-model="editMandat.famille_motif" class="span5">
-                    <option value=""></option>
-                    <option
-                      v-for="varText in AffichierElementParent"
-                      :key="varText.id"
-                      :value="varText.id"
-                    >
-                      {{ varText.libelle }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Motif</label>
-                <div class="controls">
-                  <select v-model="editMandat.motif" class="span5">
-                    <option value=""></option>
-                    <option
-                      v-for="varText in AffichierElementEnfant(
-                        editMandat.famille_motif
-                      )"
-                      :key="varText.id"
-                      :value="varText.id"
-                    >
-                      {{ varText.libelle }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Autres Motif</label>
-                <div class="controls">
-                  <textarea
-                    class="span10"
-                    row="6"
-                    v-model="editMandat.autre_motif"
-                    :readonly="griserAutreMotif"
-                  >
-                  </textarea>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date Decision CF :</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    class="span5"
-                    v-model="editMandat.date_decision_cf"
-                  />
-                  <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Observation CF</label>
-                <div class="controls">
-                  <textarea
-                    class="span10"
-                    row="6"
-                    v-model="editMandat.observation"
-                  >
-                  </textarea>
-                </div>
-              </div>
-            </td>
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Nom du CF</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    class="span5"
-                    :value="
-                      recupererNomDuControleurF(
-                        recupererIdUser(
-                          recupererIdServiceCF(
-                            editMandat.unite_administrative_id
-                          )
-                        )
-                      )
-                    "
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierTypeTexteLocal()"
-          class="btn btn-primary"
-          href="#"
-          >Valider</a
-        >
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-    <div id="decisionAnnulation" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Décision CF </label>
-                <div class="controls">
-                  <select
-                    v-model="EditAnulation.decision_cf_op_annul"
-                    class="span5"
-                  >
-                    <option value=""></option>
-                    <option value="8">Visé</option>
-                    <option value="9">Visé avec Observation</option>
-                    <option value="2">Différé</option>
-                    <option value="3">Réjeté</option>
-                    <option value="0">Attente</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Famille de Motif </label>
-                <div class="controls">
-                  <select
-                    v-model="EditAnulation.famille_motif_id_op_annul"
-                    class="span5"
-                  >
-                    <option value="0"></option>
-                    <option
-                      v-for="varText in AffichierElementParent"
-                      :key="varText.id"
-                      :value="varText.id"
-                    >
-                      {{ varText.libelle }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Motif</label>
-                <div class="controls">
-                  <select v-model="EditAnulation.motif_op_annul" class="span5">
-                    <option value="0"></option>
-                    <option
-                      v-for="varText in AffichierElementEnfant(
-                        EditAnulation.famille_motif_id_op_annul
-                      )"
-                      :key="varText.id"
-                      :value="varText.id"
-                    >
-                      {{ varText.libelle }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Autres Motif</label>
-                <div class="controls">
-                  <textarea
-                    class="span10"
-                    row="6"
-                    v-model="EditAnulation.autre_motif_op_annul"
-                    :readonly="griserAutreMotif"
-                  >
-                  </textarea>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date Decision CF :</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    class="span5"
-                    v-model="EditAnulation.date_decision_op_annul"
-                  />
-                  <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Observation CF</label>
-                <div class="controls">
-                  <textarea
-                    class="span10"
-                    row="6"
-                    v-model="EditAnulation.observation_op_annul"
-                  >
-                  </textarea>
-                </div>
-              </div>
-            </td>
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Nom du CF</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    class="span5"
-                    :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(recupererIdUa(EditAnulation.id))))"
-                      
-                   
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ModifierOpAnnulation()"
-          class="btn btn-primary"
-          href="#"
-          >Valider</a
-        >
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-    <fab
-      :actions="fabActions"
-      main-icon="apps"
-      @searchMe="filter"
-      bg-color="green"
-    ></fab>
-    <button
-      style="display: none"
-      v-shortkey.once="['ctrl', 'f']"
-      @shortkey="afficherModalAjouterTitre()"
-    >
-      Open
-    </button>
-    <button
-      style="display: none"
-      v-shortkey.once="['ctrl', 'e']"
-      @shortkey="ExporterEnExel()"
-    >
-      Open
-    </button>
+      
+              </table>
+ 
   </div>
-</template>
+
+
+    
+
+              
+     
+
+
+
+
   
+
+
+
+
+
+
+    </div>
+</template>
+
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { formatageSomme,partition } from "@/Repositories/Repository";
-
+import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+import { partition } from "@/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-  name: "typetext",
   components: {
     ModelListSelect,
   },
+  name: "typetext",
   data() {
     return {
-       page:0,
-       size:10,
-      active_el:0,
+      page: 0,
+      size: 20,
+      active_el: 0,
       fabActions: [
         {
           name: "searchMe",
@@ -1573,13 +1297,15 @@ export default {
       affiche_filtre1: false,
       affiche_filtre: false,
       affiche_boutton_filtre: true,
-      typeop_id: 0,
-      NumeroOp: 0,
-      uniteAdministrative_id: 0,
       formData: {
         code: "",
         libelle: "",
       },
+      EditDetache: {},
+      typeop_id: 0,
+      NumeroOp: 0,
+      uniteAdministrative_id: 0,
+
       editMandat: {},
       EditAnulation: {},
       editDecisionFinal: {},
@@ -1593,6 +1319,17 @@ created() {
     );
   },
   computed: {
+      ...mapGetters("parametreGenerauxAdministratif", [
+      "taux",
+      "sections",
+      "type_Unite_admins",
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "afficheNiveauPlanProg",
+      "exercices_budgetaires",
+      "afficheLocalisationGeoNiveau5",
+    ]),
     ...mapGetters("Utilisateurs", [
       "getterAffectionServiceCF",
       "getterUtilisateur",
@@ -1623,6 +1360,8 @@ created() {
       "affichePersonnelRecuActeNormination",
     ]),
     ...mapGetters("bienService", [
+      "gettershistoriqueDecisionCfOP",
+      "typeMarches",
       "gettersgestionOrdrePaiementAnnulation",
       "gettersgestionOrdrePaiement",
       "gettersDossierAutreDepense",
@@ -1691,6 +1430,7 @@ created() {
       "afficheNiveauAction",
       "afficheNiveauActivite",
     ]),
+    ...mapGetters("gestionMarche", ["entreprises"]),
     ...mapGetters("uniteadministrative", [
       "budgetEclate",
       "groupeLigneEconomiqueBudget",
@@ -1708,179 +1448,102 @@ created() {
       "structuresDecision",
       "plans_Decision",
     ]),
-    listeordrepaiementProvisoire() {
-      return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op != null  && qtreel.unite_administrative_id == this.marcheid
-      );
+
+    listeOpdiffere() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettershistoriqueDecisionCfOP.filter(
+            (qtreel) =>
+              qtreel.id_op == id &&
+              qtreel.diff_decision == 0 &&
+              qtreel.decision_cf == 2
+          );
+        }
+      };
     },
-    listeUniteAdminPasSection() {
-      if (this.uniteAdministrative_id != "" && this.typeop_id != "") {
-        return this.listeordrepaiementregie.filter(
-          (item) =>
-            item.unite_administrative_id == this.uniteAdministrative_id &&
-            item.type_ordre_paiement == this.typeop_id
-        );
-      }
-      return this.listeordrepaiementregie;
+    EurreurCorrige() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettershistoriqueDecisionCfOP.filter(
+            (qtreel) =>
+              qtreel.id_op == id &&
+              qtreel.diff_decision == 1 &&
+              qtreel.decision_cf == 2
+          );
+        }
+      };
+    },
+    MotifLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_Decision.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+    FamilleMotifLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_Decision.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+    verifier() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettershistoriqueDecisionCfOP.find(
+            (qtreel) => qtreel.id_op == id
+          );
+
+          if (qtereel) {
+            return qtereel.id_op;
+          }
+          return 0;
+        }
+      };
+    },
+    VideUa() {
+      return this.uniteAdministrative_id == "";
     },
 
-    NombreTotalOPDIRECTEnttente() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 1 && item.decision_cf == 0
-      ).length;
+    VideNumeroOp() {
+      return this.NumeroOp == "";
     },
-    NombreTotalOPDIRECTVise() {
-      return this.ListeDEsEntreprise.filter(
-        (item) =>
-          (item.type_ordre_paiement == 1 && item.decision_cf == 8) ||
-          (item.type_ordre_paiement == 1 && item.decision_cf == 9)
-      ).length;
+    VideTypeOp() {
+      return this.typeop_id == "";
     },
-    NombreTotalOPDIRECTDiffere() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 1 && item.decision_cf == 2
-      ).length;
-    },
-    NombreTotalOPDIRECTRejete() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 1 && item.decision_cf == 3
-      ).length;
-    },
-    NombreTotalOPDIRECT() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 1
-      ).length;
-    },
-
-    NombreTotalOPProvisoireEnttente() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 2 && item.decision_cf == 0
-      ).length;
-    },
-    NombreTotalOPProvisoireVise() {
-      return this.ListeDEsEntreprise.filter(
-        (item) =>
-          (item.type_ordre_paiement == 2 && item.decision_cf == 8) ||
-          (item.type_ordre_paiement == 2 && item.decision_cf == 9)
-      ).length;
-    },
-    NombreTotalOPProvisoireDiffere() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 2 && item.decision_cf == 2
-      ).length;
-    },
-    NombreTotalOPProvisoireRejete() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 2 && item.decision_cf == 3
-      ).length;
-    },
-
-    NombreTotalOPProvisoire() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 2
-      ).length;
-    },
-
-    NombreTotalOPANNULATIONEnttente() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 3 && item.decision_cf == 0
-      ).length;
-    },
-    NombreTotalOPANNULATIONVise() {
-      return this.ListeDEsEntreprise.filter(
-        (item) =>
-          (item.type_ordre_paiement == 3 && item.decision_cf == 8) ||
-          (item.type_ordre_paiement == 3 && item.decision_cf == 9)
-      ).length;
-    },
-    NombreTotalOPANNULATIONDiffere() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 3 && item.decision_cf == 2
-      ).length;
-    },
-    NombreTotalOPANNULATIONRejete() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 3 && item.decision_cf == 3
-      ).length;
-    },
-    NombreTotalOPAnnulation() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 3
-      ).length;
-    },
-
-    NombreTotalOPDefinitifEnttente() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 4 && item.decision_cf == 0
-      ).length;
-    },
-    NombreTotalOPDefinitifVise() {
-      return this.ListeDEsEntreprise.filter(
-        (item) =>
-          (item.type_ordre_paiement == 4 && item.decision_cf == 8) ||
-          (item.type_ordre_paiement == 4 && item.decision_cf == 9)
-      ).length;
-    },
-    NombreTotalOPDefinitifDiffere() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 4 && item.decision_cf == 2
-      ).length;
-    },
-    NombreTotalOPDefinitifRejete() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 4 && item.decision_cf == 3
-      ).length;
-    },
-    NombreTotalOPDefinitive() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.type_ordre_paiement == 4
-      ).length;
-    },
-
-    NombreTotalOPTotalEnttente() {
-      return this.ListeDEsEntreprise.filter((item) => item.decision_cf == 0)
-        .length;
-    },
-    NombreTotalOPTotalVise() {
-      return this.ListeDEsEntreprise.filter(
-        (item) => item.decision_cf == 8 || item.decision_cf == 9
-      ).length;
-    },
-    NombreTotalOPTotalDiffere() {
-      return this.ListeDEsEntreprise.filter((item) => item.decision_cf == 2)
-        .length;
-    },
-    NombreTotalOPTotalRejete() {
-      return this.ListeDEsEntreprise.filter((item) => item.decision_cf == 3)
-        .length;
-    },
-    OPTotal() {
-      return this.ListeDEsEntreprise.length;
-    },
-
     ListeDEsEntreprise() {
       let vM = this;
-      let objet = this.listeordrepaiementregie;
+      let objet = this.listeordrepaiementProvisoire;
 
       //retourne la section selectionner
 
       if (this.uniteAdministrative_id != 0 && this.typeop_id == 0) {
-        objet = this.listeordrepaiementregie.filter((item) => {
-          if (item.unite_administrative_id == vM.uniteAdministrative_id) {
+        objet = this.listeordrepaiementProvisoire.filter((item) => {
+          if (item.exercice == vM.uniteAdministrative_id) {
             return item;
           }
         });
         return objet;
       }
       if (this.typeop_id != 0 && this.uniteAdministrative_id == 0) {
-        objet = this.listeordrepaiementregie.filter((item) => {
+        objet = this.listeordrepaiementProvisoire.filter((item) => {
           if (item.type_ordre_paiement == vM.typeop_id) {
             return item;
           }
         });
       }
       if (this.NumeroOp != 0) {
-        objet = this.listeordrepaiementregie.filter((item) => {
+        objet = this.listeordrepaiementProvisoire.filter((item) => {
           if (item.numero_ordre_paiement == vM.NumeroOp) {
             return item;
           }
@@ -1888,9 +1551,9 @@ created() {
         return objet;
       }
       if (this.uniteAdministrative_id != 0 && this.typeop_id != 0) {
-        objet = this.listeordrepaiementregie.filter((item) => {
+        objet = this.listeordrepaiementProvisoire.filter((item) => {
           if (
-            item.unite_administrative_id == vM.uniteAdministrative_id &&
+            item.exercice == vM.uniteAdministrative_id &&
             item.type_ordre_paiement == vM.typeop_id
           ) {
             return item;
@@ -1898,61 +1561,156 @@ created() {
         });
         return objet;
       }
-      // if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.TypeMarche(item.marche_id)==vM.typemarche_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //   if(this.entre_id=="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //  if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //    if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //    if(this.entre_id!="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && item.entreprise_id==vM.entre_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
-      //   if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
-
-      //       objet =objet.filter(item=>{
-      //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id){
-      //               return item
-      //           }
-      //       })
-
-      //   }
+      
       return objet;
+    },
+    NombreTotalOP() {
+      return this.ListeDEsEntreprise.filter(item =>item.unite_administrative_id == this.marcheid).length;
+    },
+    NombreTotalOPDIRECTEnttente() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 1 && item.decision_cf == 0 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    
+    NombreTotalOPDIRECTVise() {
+      return this.ListeDEsEntreprise.filter(
+        (item) =>
+          (item.type_ordre_paiement == 1 && item.decision_cf == 8 &&  item.unite_administrative_id == this.marcheid) ||
+          (item.type_ordre_paiement == 1 && item.decision_cf == 9 &&  item.unite_administrative_id == this.marcheid)
+      ).length;
+    },
+    NombreTotalOPDIRECTDiffere() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 1 && item.decision_cf == 2 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPDIRECTRejete() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 1 && item.decision_cf == 3 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPDIRECT() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 1 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+
+    NombreTotalOPProvisoireEnttente() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 2 && item.decision_cf == 0 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPProvisoireVise() {
+      return this.ListeDEsEntreprise.filter(
+        (item) =>
+          (item.type_ordre_paiement == 2 && item.decision_cf == 8 &&  item.unite_administrative_id == this.marcheid) ||
+          (item.type_ordre_paiement == 2 && item.decision_cf == 9 &&  item.unite_administrative_id == this.marcheid)
+      ).length;
+    },
+    NombreTotalOPProvisoireDiffere() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 2 && item.decision_cf == 2 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPProvisoireRejete() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 2 && item.decision_cf == 3 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+
+    NombreTotalOPProvisoire() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 2 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+
+    NombreTotalOPANNULATIONEnttente() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 3 && item.decision_cf == 0 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPANNULATIONVise() {
+      return this.ListeDEsEntreprise.filter(
+        (item) =>
+          (item.type_ordre_paiement == 3 && item.decision_cf == 8 &&  item.unite_administrative_id == this.marcheid) ||
+          (item.type_ordre_paiement == 3 && item.decision_cf == 9 &&  item.unite_administrative_id == this.marcheid)
+      ).length;
+    },
+    NombreTotalOPANNULATIONDiffere() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 3 && item.decision_cf == 2 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPANNULATIONRejete() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 3 && item.decision_cf == 3 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPAnnulation() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 3 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+
+    NombreTotalOPDefinitifEnttente() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 4 && item.decision_cf == 0 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPDefinitifVise() {
+      return this.ListeDEsEntreprise.filter(
+        (item) =>
+          (item.type_ordre_paiement == 4 && item.decision_cf == 8 &&  item.unite_administrative_id == this.marcheid) ||
+          (item.type_ordre_paiement == 4 && item.decision_cf == 9 &&  item.unite_administrative_id == this.marcheid)
+      ).length;
+    },
+    NombreTotalOPDefinitifDiffere() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 4 && item.decision_cf == 2 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPDefinitifRejete() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 4 && item.decision_cf == 3 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPDefinitive() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.type_ordre_paiement == 4 &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+
+    NombreTotalOPTotalEnttente() {
+      return this.ListeDEsEntreprise.filter((item) => item.decision_cf == 0 &&  item.unite_administrative_id == this.marcheid)
+        .length;
+    },
+    NombreTotalOPTotalVise() {
+      return this.ListeDEsEntreprise.filter(
+        (item) => item.decision_cf == 8 &&  item.unite_administrative_id == this.marcheid || item.decision_cf == 9  &&  item.unite_administrative_id == this.marcheid
+      ).length;
+    },
+    NombreTotalOPTotalDiffere() {
+      return this.ListeDEsEntreprise.filter((item) => item.decision_cf == 2 &&  item.unite_administrative_id == this.marcheid)
+        .length;
+    },
+    NombreTotalOPTotalRejete() {
+      return this.ListeDEsEntreprise.filter((item) => item.decision_cf == 3 &&  item.unite_administrative_id == this.marcheid)
+        .length;
+    },
+    OPTotal() {
+      return this.ListeDEsEntreprise.filter(item=>item.unite_administrative_id == this.marcheid).length;
+    },
+
+    listeUniteAdminPasSection() {
+      if (this.uniteAdministrative_id != "" && this.typeop_id != "") {
+        return this.listeordrepaiementProvisoire.filter(
+          (item) =>
+            item.unite_administrative_id == this.uniteAdministrative_id &&
+            item.type_ordre_paiement == this.typeop_id
+        );
+      }
+      return this.listeordrepaiementProvisoire;
     },
 
     afficheNumeroOpDefinitive() {
@@ -1970,12 +1728,7 @@ created() {
       };
     },
 
-    listeordrepaiementregie() {
-      return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op != null
-      );
-    },
-
+    
     afficheIdOpProvisoire() {
       return (id) => {
         if (id != null && id != "") {
@@ -2006,7 +1759,7 @@ created() {
     },
     filtre_type_teste() {
       const st = this.search.toLowerCase();
-      return this.listeordrepaiementregie.filter((type) => {
+      return this.listeordrepaiementProvisoire.filter((type) => {
         return type.numero_ordre_paiement.toLowerCase().includes(st);
       });
     },
@@ -2255,13 +2008,84 @@ created() {
         }
       };
     },
+    listeordrepaiementProvisoire() {
+      return this.gettersgestionOrdrePaiement.filter(
+        (qtreel) => qtreel.diff_op != null  && qtreel.unite_administrative_id == this.marcheid
+      );
+    },
+    
+      
+      
   },
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
       "modifierGestionOrdrePaiementAnnulat",
       "supprimerGestionOrdrePaiement",
+      "ajouterHistoriqueDecisionOp",
+      "modifierHistoriqueDecisionOp",
     ]),
+afficherModalModifierTitre(id) {
+
+      this.$router.push({
+        path: "/ModificationOrdrePaiement/" + id
+      });
+    },
+    partition: partition,
+
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
+
+    DetacheMotif(id) {
+      this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
+        (item) => item.id == id
+      );
+      this.ModifierMotif();
+    },
+    DetacheMotifAttache(id) {
+      this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
+        (item) => item.id == id
+      );
+
+      this.ModifierMotifAttche();
+    },
+
+    ModifierMotif() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 1,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    ModifierMotifAttche() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
     AfficheBoutonAjouter() {
       this.affiche_filtre1 = !this.affiche_filtre1;
     },
@@ -2272,12 +2096,30 @@ created() {
       this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });
     },
     modifierTypeTexteLocal() {
-      this.modifierGestionOrdrePaiement(this.editMandat);
-      this.$("#validationOpDefinitif").modal("hide");
+      var nouveauObjet = {
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision: this.editMandat.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.editMandat.id,
+      };
+        var nouveauObjet1 = {
+          ...this.editMandat,
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision_cf: this.editMandat.date_decision_cf,
+        diff_op: 0,
+        id: this.editMandat.id,
+      };
+      this.ajouterHistoriqueDecisionOp(nouveauObjet);
+      this.modifierGestionOrdrePaiement(nouveauObjet1);
+      this.$("#validationOpDefinitif1").modal("hide");
     },
     modifierDecisionFinal() {
       this.modifierGestionOrdrePaiement(this.editDecisionFinal);
-      this.$("#validationOpDefinitif").modal("hide");
+      this.$("#validationOpDefinitif1").modal("hide");
     },
     ModifierOpAnnulation() {
       var nouvelObjet = {
@@ -2300,8 +2142,8 @@ created() {
         (item) => item.id == id
       );
     },
-    apercuFacture(id) {
-      this.$("#validationOpDefinitif").modal({
+    apercuFacture0(id) {
+      this.$("#validationOpDefinitif1").modal({
         backdrop: "static",
         keyboard: false,
       });
@@ -2309,7 +2151,9 @@ created() {
         (item) => item.id == id
       );
     },
-
+ pagePrecedent(){
+                window.history.back()
+            },
     DecisionDefinitifCf(id) {
       this.$("#decisionDefinitif").modal({
         backdrop: "static",
@@ -2319,30 +2163,15 @@ created() {
         (item) => item.id == id
       );
     },
-    
-getDataPaginate(index){
-          this.active_el = index;
-          this.page=index
-      },
-      precedent(){
-          this.active_el--
-          this.page --
-      },
-      suivant(){
-          this.active_el++
-          this.page ++
-      },
-
-    partition:partition,
-    formatageSomme: formatageSomme,
-    ajouterOpRegieSysteme() {
-      this.$router.push({ name: "AjoutOrdrePaiementRegie" });
+    formatageSommeSansFCFA: formatageSommeSansFCFA,
+    ajouterOpSysteme() {
+      this.$router.push({ name: "AjoutOrdrePaiement" });
     },
-    ajouterOpRegieAnnulation() {
-      this.$router.push({ name: "AjoutOrdrePaiementRegieAnnulation" });
+    ajouterOpAnnulation() {
+      this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });
     },
-    ajouterOpRegieDeffinitif() {
-      this.$router.push({ name: "AjoutOrdrePaiementRegieDefinitive" });
+    ajouterOpDeffinitif() {
+      this.$router.push({ name: "AjouterOrdrePaiementDefinitive" });
     },
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
@@ -2386,8 +2215,12 @@ getDataPaginate(index){
 .tailgrand {
   width: 65%;
   margin: 0 -30%;
+  height: 50%;
 }
 .tailBtn {
   width: 100%;
+}
+.modal-body {
+  max-height: 85%;
 }
 </style>
