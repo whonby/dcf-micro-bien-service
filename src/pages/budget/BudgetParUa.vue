@@ -189,8 +189,8 @@
                 <!-- <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
 
                 <th style="font-size:15px;background: blue; color:#fff">Total</th>
-                <th style="font-size:15px;background: forestgreen; color:#fff">Consommés</th>
-                <th style="font-size:15px;background: red;color:#fff">Disponibles</th>
+                <th style="font-size:15px;background: forestgreen; color:#fff">Exécuté</th>
+                <th style="font-size:15px;background: red;color:#fff">Disponible</th>
                 <th style="font-size:15px;background:deepskyblue;color:#fff">Taux Exécution (%)</th>
                   <th style="font-size:15px;background: default;color:#fff">Action</th>
               </tr>

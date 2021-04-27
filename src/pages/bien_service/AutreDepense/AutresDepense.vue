@@ -32,7 +32,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterTypeTexteLocal(formData)"
+          @click.prevent="ajouterTypeTexteLocal()"
           class="btn btn-primary"
           href="#"
         
@@ -271,12 +271,9 @@ export default {
       this.ajouterDossierAutreDepense(objetNouvel);
 
       this.formData = {
-        reference: "",
+       
         objet: "",
-        date: "",
-        beneficiaire: "",
-        montant: "",
-        compte_bancaire: ""
+      
       };
     },
     // afficher modal de modification
