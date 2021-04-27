@@ -12,7 +12,7 @@
                             <div class="widget-box">
                                 <div class="widget-title">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#tab1">Liste Budget Modification</a></li>
+                                        <li class="active"><a data-toggle="tab" href="#tab1">État du budget modifié</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab2">Modification</a></li>
                                     </ul>
                                 </div>
@@ -105,7 +105,16 @@
                                                        <input type="file"   @change="OnchangeFichier" />
                                                    </div>
                                                </td>
-
+ <td>
+                                                   <div class="control-group">
+                  <label class="control-label">signataire de l’acte </label>
+                  <div class="controls">
+                    <select  class="span">
+                      <option></option>
+                    </select>
+                  </div>
+                </div>
+                                               </td>
                                                <td>
                                                    <label>Ministère</label>
                                                    <model-list-select style="background-color: #fff;"
