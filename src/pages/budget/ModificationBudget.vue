@@ -351,10 +351,12 @@
                                                 </div>
                                             </td>
 
-                                        </tr></table>
-<div align="center">
-    <button class="btn btn-danger" @click="modificationBudget">Valider la modification</button>
-</div>
+                                        </tr>
+                                        </table>
+
+                                <div align="center">
+                                    <button class="btn btn-danger" @click="modificationBudget">Valider la modification</button>
+                                </div>
 
                                     </div>
 
@@ -427,8 +429,11 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+      </div>
+      </div>
+    
+
 </template>
 
 <script>
