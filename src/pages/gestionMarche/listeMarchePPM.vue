@@ -767,7 +767,7 @@ reference_marche
                         v-else-if="marche.attribue == 1"
                         class="btn btn-success"
                       >
-                        <span title=" MARCHE EN COURS DE CONTRATUALISATION"
+                        <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
                           >CT</span
                         >
                       </button>
