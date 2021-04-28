@@ -96,7 +96,7 @@
                 </button>
                 <button 
                       v-else-if="marche.attribue == 1"  class="btn  btn-success">
-                <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
+                <span title=" MARCHE EN COURS DE CONTRACTUALISATION">CT</span>
        
                 </button>
                  <button 
@@ -124,7 +124,7 @@
                     </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="historique la contratualisation">
+                class="btn btn-default " title="historique la contractualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
                     
@@ -138,7 +138,7 @@
                    
                        <td v-else>
   <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
-                class="btn btn-default " title="Continué le processuce de contratualisation">
+                class="btn btn-default " title="Continué le processuce de contractualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
                        </td>

@@ -35,6 +35,11 @@ const GET_PLAN_ACTIVITE = (state, tableau_plan_activite) => {
 const AJOUTER_PLAN_ACTIVITE = (state, nouveuaObjet) => {
     state.plans_activites.unshift(nouveuaObjet)
 }
+
+//  importation structure budgetaire
+const IMPORTATION_PLAN_ACTIVITE = (state, nouveuaObjet) => {
+    state.plans_activites.unshift(nouveuaObjet)
+}
 // modifier structure budgetaire 
 const MODIFIER_PLAN_ACTIVITE = (state, objetModifie) => {
 
@@ -133,5 +138,6 @@ export{
     AJOUTER_PLAN_ACTIVITE,
     MODIFIER_PLAN_ACTIVITE,
     SUPPRIMER_PLAN_ACTIVITE,
+    IMPORTATION_PLAN_ACTIVITE,
  
 }

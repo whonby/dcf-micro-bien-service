@@ -72,7 +72,7 @@
               </a>
           </li>
 
-         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
+         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==25}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>GESTION DES MARCHES</span>
@@ -84,7 +84,7 @@
             <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==30}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==7}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
@@ -103,6 +103,14 @@
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>INVESTISSEMENT</span>
+           
+          </a>
+        </li>
+
+        <li @click.prevent="navigateToAutredepense" >
+          <a title="INVESTISSEMENT" href="#">
+            <i class="icon-truck"></i>
+            <span>AUTRE DEPENSE</span>
            
           </a>
         </li>
@@ -354,6 +362,14 @@ navigateRetourAuMenu(){
           name:'tableau_de_bors_sib_investissement'
         })
       },
+
+       navigateToAutredepense(){
+        this.activate(15)
+        this.$router.push({
+          name:'AutresDepense'
+        })
+      },
+
       navigateToImage(){
           this.activate(75)
           this.$router.push({

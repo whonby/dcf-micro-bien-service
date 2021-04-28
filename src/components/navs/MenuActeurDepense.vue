@@ -15,7 +15,7 @@
          </router-link>
 
        </li>
-         <li>
+         <!-- <li>
          <router-link :to="{name:'paiementPersonnel'}" tag="a">
           PAIEMENT PERSONNEL
          </router-link>
@@ -26,7 +26,7 @@
            EXECUTION PERSONNEL
          </router-link>
 
-       </li>
+       </li> -->
         <li>
          <router-link :to="{name:'Mission'}" tag="a">
            SUIVI DES MISSIONS

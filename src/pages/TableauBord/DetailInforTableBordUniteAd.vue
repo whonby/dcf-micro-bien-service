@@ -80,13 +80,13 @@
                 return status=>{
                     if(status==0){
                         //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<h5><font color='#410041'>En attente de contratualisation hors alert</font></h5>"
+                        return "<h5><font color='#410041'>En attente de contractualisation hors alert</font></h5>"
                     }
                     if(status==8){
-                        return "<h5><font color='#e81776'>En attente de contratualisation avec alert</font></h5>"
+                        return "<h5><font color='#e81776'>En attente de contractualisation avec alert</font></h5>"
                     }
                     if(status==1){
-                        return "<h5><font color='#FF00FF'>En contratualisation</font></h5>"
+                        return "<h5><font color='#FF00FF'>En contractualisation</font></h5>"
                     }
 
                     if(status==2){

@@ -13,8 +13,8 @@ reference_marche
                     <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
                     <th style="text-align:center;font-size:20px;color:#000">Total Marche Hors PPM </th>
                      <th style="text-align:center;font-size:20px;color:#000">Marche en Planification</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en contratualisation</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en Execution</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en contractualisation</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en Exeécution</th>
                     
                    
                   </tr>
@@ -25,33 +25,33 @@ reference_marche
 {{anneeAmort}}
             </td> -->
             <td style="text-align:center;font-size:20px;color:#000">
-{{libelleUA(detail_marche.unite_administrative_id)}}
+{{libelleUA(marcheid)}}
             </td>
             <td>
 <button  class="btn  btn-info tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaTotal(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaTotal(marcheid)}}</span>
                       
                       </button>
             </td>
             <td>
 <button  class="btn  btn-danger tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaPlanifier(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaPlanifier(marcheid)}}</span>
                       
                       </button>
             </td>
              <td>
 <button  class="btn  btn-success tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaContratualisation(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaContratualisation(marcheid)}}</span>
                       
                       </button>
             </td>
              <td>
 <button  class="btn  btn-warning tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
                      
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaExecute(detail_marche.unite_administrative_id)}}</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaExecute(marcheid)}}</span>
                       
                       </button>
             </td>
@@ -191,7 +191,7 @@ reference_marche
                         v-else-if="marche.attribue == 1"
                         class="btn btn-success"
                       >
-                        <span title=" MARCHE EN COURS DE CONTRATUALISATION"
+                        <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
                           >CT</span
                         >
                       </button>
@@ -534,7 +534,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0 && qtreel.parent_id == null
           ).length;
 
          
@@ -545,7 +545,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.parent_id == null
           ).length;
 
          
@@ -556,7 +556,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1 && qtreel.parent_id == null
           ).length;
 
          
@@ -567,7 +567,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2 && qtreel.parent_id != null
           ).length;
 
          
@@ -577,7 +577,7 @@ afficheMarcheParUaPlanifier() {
     marcheHorSibFiltre1() {
       const searchTerm = this.search.toLowerCase();
 
-      return this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
+      return this.afficheMarcheParUa(this.marcheid).filter((item) => {
        return item.objet.toLowerCase().includes(searchTerm)
       
       });
@@ -728,7 +728,7 @@ afficheMarcheParUaPlanifier() {
       // const st = this.search.toLowerCase();
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.afficheMarcheParUa(this.detail_marche.unite_administrative_id).filter((item) => {
+        this.afficheMarcheParUa(this.marcheid).filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
             (row) => row.unite_administrative_id == item.unite_administrative_id
           );

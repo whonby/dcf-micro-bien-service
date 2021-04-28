@@ -43,7 +43,7 @@
         <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon icon-th"></i>
-            <span>ACTEURS DE LA DEPENSE</span>
+            <span>ACTEUR DE LA DEPENSE</span>
           </a>
         </li>
         <li @click.prevent="activate(3)" :class="{active: active_el ==3}">

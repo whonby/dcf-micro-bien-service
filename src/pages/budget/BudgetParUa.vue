@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="quick-actions_homepage">
+    <!-- <div class="quick-actions_homepage">
       <ul class="quick-actions">
         <li class="bg_lo">
           <a href="#">
@@ -54,7 +54,7 @@
       
 
       </ul>
-    </div>
+    </div> -->
 <div id="modificationModal" class="modal hide tabFormulaire">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">�</button>
@@ -112,7 +112,7 @@
    
    
     
-      <th height="20px"  style="color: #000000;font-size:14px;">TOTAL BUDGET</th>
+      <th height="20px"  style="color: #000000;font-size:14px;">BUDGET INITIAL</th>
       <th width="50px" colspan="4" style="font-size:14px;color: #000000;background-color: orange;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id)))}}</th>
      
     
@@ -121,7 +121,7 @@
    
    
   
-      <th height="10px"  style="color: #000000;font-size:14px">MONTANT CONSOMMER</th>
+      <th height="10px"  style="color: #000000;font-size:14px">BUDGET EXECUTE</th>
        <th width="50px" colspan="4" style="font-size:14px;color: #000000;background-color: #ffffff;">{{formatageSomme(parseFloat(budgetConsommerTransfert(editUniteAdministrative.id)) + parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id)))}}</th>
      
      
@@ -130,7 +130,7 @@
    
    
     
-      <th height="20px"  style="color: #000000;font-size:14px">DISPONIBLE BUDGET</th>
+      <th height="20px"  style="color: #000000;font-size:14px">BUDGET DISPONIBLE</th>
        <th width="50px" colspan="4" style="font-size:14px;color: #ffffff;background-color: green;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id))-(parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))}}</th>
 
  </tr>     
@@ -182,15 +182,15 @@
             <thead>
               <tr style="">
                 <th style="font-size:15px;">Unité administrative</th>
-                <th style="font-size:15px;" title="Budget du personnel">Personnels</th>
+                <!-- <th style="font-size:15px;" title="Budget du personnel">Personnels</th>
 
                 <th style="font-size:15px;" title="Budget de bien et service">Biens et Services</th>
                 <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements</th>
-                <!-- <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
+                <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
 
-                <th style="font-size:15px;background: blue; color:#fff">Total</th>
-                <th style="font-size:15px;background: forestgreen; color:#fff">Exécuté</th>
-                <th style="font-size:15px;background: red;color:#fff">Disponible</th>
+                <th style="font-size:15px;background: blue; color:#fff">Budget initial </th>
+                <th style="font-size:15px;background: forestgreen; color:#fff">Budget exécuté </th>
+                <th style="font-size:15px;background: red;color:#fff">Budget disponible </th>
                 <th style="font-size:15px;background:deepskyblue;color:#fff">Taux Exécution (%)</th>
                   <th style="font-size:15px;background: default;color:#fff">Action</th>
               </tr>
@@ -199,7 +199,7 @@
               <tr v-for="unite in partition(uniteAdmin,size)[page]" :key="unite.id">
                 
                 <td style="font-weight:bold;font-size:12px;">{{unite.libelle}}</td>
-                <td
+                <!-- <td
                   style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetPersonnel(unite.id)))}}</td>
                 <td
@@ -207,7 +207,7 @@
                 >{{formatageSomme(parseFloat(budgetBienService(unite.id)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;"
-                >{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</td>
+                >{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</td> -->
                 <!-- <td
                   style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</td> -->

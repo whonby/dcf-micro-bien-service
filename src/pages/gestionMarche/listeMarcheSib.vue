@@ -126,7 +126,7 @@ CodeExempte
                   v-else-if="activites.attribue == 1"
                   class="btn btn-success"
                 >
-                  <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
+                  <span title=" MARCHE EN COURS DE CONTRACTUALISATION">CT</span>
                 </button>
                 <button
                   v-else-if="activites.attribue == 3"

@@ -838,7 +838,7 @@
         <ul class="dropdown-menu">
           <li class="divider"></li>
           <li>
-            <router-link :to ="{name: 'ImportationProgramme'}" tag="a">
+            <router-link :to ="{name: 'ImportationProgramme'}" tag="a">  
               <i class="icon-key"></i> Importation Programme
             </router-link>
           
@@ -847,7 +847,15 @@
             <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'ImportationUA'}" tag="a">
-              <i class="icon-key"></i> Importation Des UA
+              <i class="icon-key"></i> Importation des UA
+            </router-link>
+          
+          </li>
+
+           <li class="divider"></li>
+          <li>
+            <router-link :to ="{name: 'ImportationActivite'}" tag="a">
+              <i class="icon-key"></i> Importation des Activités
             </router-link>
           
           </li>

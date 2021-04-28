@@ -157,7 +157,7 @@
                                      :can-cancel="true"
                                      :on-cancel="onCancel"
                                      :is-full-page="fullPage"></loading>
-                            <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listePlanifierMarcheStatus('planifie')">
+                            <div class="card-box bg-attente-contractualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listePlanifierMarcheStatus('planifie')">
                                 <div class="inner">
                                     <p> <b> En attente de contractualisation
                                     </b></p>
@@ -181,7 +181,7 @@
                                      :can-cancel="true"
                                      :on-cancel="onCancel"
                                      :is-full-page="fullPage"></loading>
-                            <div @click="listePlanifierMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listePlanifierMarcheStatus(8)" class="card-box bg-attente-contractualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En attente de
                                         contractualisation
@@ -205,7 +205,7 @@
                                      :can-cancel="true"
                                      :on-cancel="onCancel"
                                      :is-full-page="fullPage"></loading>
-                            <div @click="listePlanifierMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listePlanifierMarcheStatus(1)" class="card-box bg-en-contractualisation" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p>
                                         <b>En contractualisation</b>
@@ -225,7 +225,7 @@
                                      :can-cancel="true"
                                      :on-cancel="onCancel"
                                      :is-full-page="fullPage"></loading>
-                            <div @click="listePlanifierMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listePlanifierMarcheStatus(9)" class="card-box bg-en-contratuaclisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation
                                         Hors délai</b> </p>
@@ -269,7 +269,7 @@
                                      :is-full-page="fullPage"></loading>
                             <div @click="listeMarcheStatus(10)" class="card-box bg-en-execution-horts-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
-                                    <p><b>En Exécution Hors délai</b> </p>
+                                    <p><b>En exécution hors délais</b> </p>
 
                                 </div>
                                 <div class="icon3">
@@ -290,7 +290,7 @@
                                      :is-full-page="fullPage"></loading>
                             <div @click="listeMarcheStatus(11)" class="card-box bg-acheve-hors-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
-                                    <p><b>Achevés dans le délais</b> </p>
+                                    <p><b>Achevés dans les délais</b> </p>
 
                                 </div>
                                 <div class="icon3">
@@ -312,7 +312,7 @@
                                      :is-full-page="fullPage"></loading>
                             <div @click="listeMarcheStatus(12)" class="card-box bg-acheve-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
-                                    <p> Achevés Hors délai </p>
+                                    <p> Achevés hors délai </p>
 
                                 </div>
                                 <div class="icon3">
@@ -650,7 +650,7 @@
 
                     <div class="row-fluid" style="" >
                         <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
-                            <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
+                            <div class="card-box bg-attente-contractualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                                 <div class="inner">
                                     <p> <b> En attente de contractualisation
                                     </b></p>
@@ -669,7 +669,7 @@
                         </div>
 
                         <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listePlanifierMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listePlanifierMarcheStatus(8)" class="card-box bg-attente-contratuaclisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En attente de
                                         contractualisation
@@ -690,7 +690,7 @@
                             </div>
                         </div>
                         <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listePlanifierMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listePlanifierMarcheStatus(1)" class="card-box bg-en-contratuaclisation" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation</b>   </p>
 
@@ -705,7 +705,7 @@
                             </div>
                         </div>
                         <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listePlanifierMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listePlanifierMarcheStatus(9)" class="card-box bg-en-contratuaclisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation
                                         Hors délai</b> </p>
@@ -759,7 +759,7 @@
                         <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
                             <div @click="listeMarcheStatus(11)" class="card-box bg-acheve-hors-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
-                                    <p><b>Achevés dans le délais</b> </p>
+                                    <p><b>Achevés dans les délais</b> </p>
 
                                 </div>
                                 <div class="icon3">
@@ -2043,30 +2043,30 @@
                 return status=>{
                     if(status==0){
                         //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<font color='#fff'>En attente de contratualisation </font>"
+                        return "<font color='#fff'>En attente de contractualisation </font>"
                     }
                     if(status==8){
-                        return "<font color='#fff'>En attente de contratualisation hors delait</font>"
+                        return "<font color='#fff'>En attente de contractualisation hors delait</font>"
                     }
                     if(status==1){
-                        return "<font color='#fff'>En contratualisation</font>"
+                        return "<font color='#fff'>En contratuaclisation</font>"
                     }
                     if(status==9){
-                        return "<font color='#fff'>En contractualisation Hors délai</font>"
+                        return "<font color='#fff'>En contractuaclisation Hors délai</font>"
                     }
 
                     if(status==2){
-                        return "<font color='#fff'>En execution</font>"
+                        return "<font color='#fff'>En exécution</font>"
                     }
                     if(status==10){
-                        return "<font color='#fff'>En execution Hors délai</font>"
+                        return "<font color='#fff'>En exécution Hors délai</font>"
                     }
 
                     if(status==11){
-                        return "<font color='#fff'>Acheve dans le delais</font>"
+                        return "<font color='#fff'>Acheve dans les délais</font>"
                     }
                     if(status==12){
-                        return "<font color='#fff'>Acheve hors delais</font>"
+                        return "<font color='#fff'>Acheve hors délais</font>"
                     }
 
                     if(status==7){
@@ -2972,29 +2972,29 @@
     }
 
 
-    .bg-attente-contratualisation-hors-alert {
+    .bg-attente-contractualisation-hors-alert {
 
         background-color: #8ea9db !important;
     }
-    .bg-attente-contratualisation-avec-alert {
+    .bg-attente-contractualisation-avec-alert {
         background-color: #f4b084 !important;
     }
-    .bg-en-contratualisation {
+    .bg-en-contractuaclisation {
         background-color: #92d050 !important;
     }
 
-    .bg-en-contratualisation-hort-delais {
+    .bg-en-contratuaclisation-hors-délai {
         background-color: #652b92 !important;
     }
-    .bg-en-execution {
+    .bg-en-exécution {
         background-color: #d7b755 !important;
     }
 
-    .bg-en-execution-horts-delais {
+    .bg-en-exécution-hors-délai {
         background-color: #d36f2b !important;
     }
 
-    .bg-acheve-hors-delais {
+    .bg-Acheve-hors-délai {
         background-color: #00b04f !important;
     }
 
@@ -3004,10 +3004,10 @@
     .bg-en-avenant{
         background-color: #ff6c1d !important;
     }
-    .bg-acheve-delais {
+    .bg-acheve-delai {
         background-color: #757171 !important;
     }
-    .bg-horts-ppm{
+    .bg-hors-ppm{
         background-color: #ffb62f !important;
     }
 
