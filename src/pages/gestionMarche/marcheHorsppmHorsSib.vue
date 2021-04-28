@@ -13,8 +13,8 @@ reference_marche
                     <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
                     <th style="text-align:center;font-size:20px;color:#000">Total Marche Hors PPM </th>
                      <th style="text-align:center;font-size:20px;color:#000">Marche en Planification</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en contratualisation</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en Execution</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en contractualisation</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en Exeécution</th>
                     
                    
                   </tr>
@@ -191,7 +191,7 @@ reference_marche
                         v-else-if="marche.attribue == 1"
                         class="btn btn-success"
                       >
-                        <span title=" MARCHE EN COURS DE CONTRATUALISATION"
+                        <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
                           >CT</span
                         >
                       </button>

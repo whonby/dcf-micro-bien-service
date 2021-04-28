@@ -84,7 +84,7 @@
             <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==30}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==7}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
@@ -377,7 +377,7 @@ navigateRetourAuMenu(){
           })
       },
  navigateToBienEtService(){
-        this.activate(30)
+        this.activate(7)
         this.$router.push({
           name: 'tableau_de_bord_hors'
         })
