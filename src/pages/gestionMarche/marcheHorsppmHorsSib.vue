@@ -534,7 +534,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0 && qtreel.parent_id == null
           ).length;
 
          
@@ -545,7 +545,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.parent_id == null
           ).length;
 
          
@@ -556,7 +556,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1 && qtreel.parent_id == null
           ).length;
 
          
@@ -567,7 +567,7 @@ afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
           return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2 && qtreel.parent_id != null
           ).length;
 
          
