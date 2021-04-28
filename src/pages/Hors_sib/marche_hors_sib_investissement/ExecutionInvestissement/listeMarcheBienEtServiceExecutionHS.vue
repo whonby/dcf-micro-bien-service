@@ -1,10 +1,66 @@
 
 <template>
   <div class="container-fluid">
-    <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    <br/>
     
-        </div>
+   <div class="span10 " >
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Type de marché
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="typeMarches"
+                                                   v-model="type_marche_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                          <td>
+                                <!-- <label style="color:#000;font-size:14px;font-weight: bolder;" align="right">Objet
+                                </label> -->
+
+                                <!-- <div class="span3" >
+                  <div align="right">
+                    
+                    <input
+                      type="search"
+                      class="span4"
+                      placeholder="Recherche par Objet"
+                      v-model="search"
+                    />
+                  </div>
+                </div> -->
+                                <!-- <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="test"
+                                                   v-model="objet1"
+                                                   option-value="id"
+                                                   option-text="objet"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select> -->
+                            </td>
+                            
+                            
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+    <!-- <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button> -->
+    
+
+       
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -25,7 +81,7 @@
                 </span>
                 <h5>March&eacute;s Biens et Fournitures en Exécution</h5>
                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                 <div class="span8">
+                 <!-- <div class="span8">
                   <div align="right">
                     Recherche:
                     <input
@@ -35,7 +91,7 @@
                       v-model="search"
                     />
                   </div>
-                </div>
+                </div> -->
             
 
 
@@ -83,7 +139,7 @@
                     class="odd gradeX"
                     v-for="(
                       marche, index
-                    ) in partition(rechercheUa, size)[page]"
+                    ) in partition(rechercheUa(type_marche_id), size)[page]"
                     :key="marche.id"
                   >
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -178,7 +234,7 @@
                 <a @click.prevent="precedent()" href="#">Précedent</a>
               </li>
               <li
-                v-for="(titre, index) in partition(rechercheUa, size).length"
+                v-for="(titre, index) in partition(rechercheUa(type_marche_id), size).length"
                 :key="index"
                 :class="{ active: active_el == index }"
               >
@@ -188,7 +244,7 @@
               </li>
               <li
                 :class="{
-                  disabled: page == partition(rechercheUa, size).length - 1,
+                  disabled: page == partition(rechercheUa(type_marche_id), size).length - 1,
                 }"
               >
                 <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -209,12 +265,14 @@
 import { mapGetters, mapActions } from "vuex";
 import { admin, dcf, noDCfNoAdmin } from "../../../../Repositories/Auth";
 import { formatageSomme,partition} from "../../../../Repositories/Repository";
+import {  ModelListSelect } from 'vue-search-select'
 
 export default {
   name: "type facture",
   components: {
     //PulseLoader,
     // ClipLoader,
+    ModelListSelect
   },
   data() {
     return {
@@ -245,6 +303,8 @@ export default {
       //     CODE: "code",
       //     libelle: "libelle"
       //   },
+      type_marche_id:"",
+      objet1:"",
 
       formData: {
         objet: "",
@@ -380,11 +440,48 @@ created() {
       "getterUniteAdministrativeByUser",
     ]),
 
+          test(){
+
+     const searchTerm = this.search.toLowerCase();
+
+return this.afficherMarcheInvestissementParDroitAccess.filter((item) => {
+  
+     return item.objet.toLowerCase().includes(searchTerm) 
+    
+   }
+)
+   },
+// rechercheUa(){
+//   const st = this.search.toLowerCase();
+//   return this.afficherMarcheInvestissementParDroitAccess.filter((item ) => {
+  
+//      return item.objet.toLowerCase().includes(searchTerm) 
+    
+
+  
+  
+
+//    }
+// )
+     
+//        // return type.objet.toLowerCase().includes(st)  ;
+//             //  type.afficherTypeMarcheLibelle(type.type_marche_id) 
+// },
     rechercheUa() {
-      const st = this.search.toLowerCase();
-      return this.afficherMarcheInvestissementParDroitAccess.filter((type) => {
-        return type.objet.toLowerCase().includes(st);
-      });
+      return id =>{
+        if(id!=null && id!=""){
+           return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.type_marche_id == id)
+ 
+       
+        }
+        return this.afficherMarcheInvestissementParDroitAccess
+      }
+      
+      //const st = this.search.toLowerCase();
+     
+       // return type.objet.toLowerCase().includes(st)  ;
+            //  type.afficherTypeMarcheLibelle(type.type_marche_id) ;
+   
     },
 
     loading() {
@@ -407,13 +504,14 @@ created() {
             return item;
           }
         });
+
         return colect.filter(
           (element) =>
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
               element.parent_id == null &&
               element.sib == 1 &&
               element.attribue == 2) ||
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+            (this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
               element.parent_id == null &&
               element.sib == 1 &&
               element.attribue == 2)
@@ -421,11 +519,11 @@ created() {
       }
       return this.printMarcheNonAttribue.filter(
         (element) =>
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&  element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 &&  element.unite_administrative_id == this.detailOp.unite_administrative_id &&
             element.parent_id == null &&
             element.sib == 1 &&
             element.attribue == 2) ||
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+          (this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
             element.parent_id == null &&
             element.sib == 1 &&
             element.attribue == 2)
@@ -544,7 +642,7 @@ created() {
     // afficher le montant de tout les marche
 
     montantMarcheInvestissement() {
-      return this.afficherMarcheInvestissementParDroitAccess.reduce(
+      return this.rechercheUa(this.type_marche_id).reduce(
         (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
         0
       );
@@ -1295,9 +1393,9 @@ created() {
         // Code à éxécuter si l'utilisateur clique sur "Annuler"
       }
     },
- pagePrecedent(){
-                window.history.back()
-            },
+//  pagePrecedent(){
+//                 window.history.back()
+//             },
     modifierModalActeEffetFinancierLocal2(index) {
       if (confirm("Voulez-vous basculer en Execution ?")) {
         this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[
