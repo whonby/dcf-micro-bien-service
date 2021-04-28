@@ -107,7 +107,7 @@
           </a>
         </li>
 
-        <li @click.prevent="navigateToAutredepense" :class="{active: active_el ==1}">
+        <li @click.prevent="navigateToAutredepense" >
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>AUTRE DEPENSE</span>
@@ -364,7 +364,7 @@ navigateRetourAuMenu(){
       },
 
        navigateToAutredepense(){
-        this.activate(1)
+        this.activate(15)
         this.$router.push({
           name:'AutresDepense'
         })
