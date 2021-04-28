@@ -5,7 +5,7 @@
                 <div align="right" style="cursor: pointer">
           <button
             class="btn btn-success"
-            @click.prevent="1222"
+            @click.prevent="add"
             style="font-weight: bolder; color: #fff"
           >
             <i class="icon icon-plus"> AJOUTER </i>
@@ -62,7 +62,7 @@
 
 
 
-<div id="11" class="modal hide grdirModalActeEffet">
+<div id="ajouterOffre1" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter  offre</h3>
@@ -512,7 +512,7 @@ typeProcedureLibelle() {
             
             ]),
 
-1222() {
+add() {
       this.$("#ajouterOffre1").modal({
         backdrop: "static",
         keyboard: false,

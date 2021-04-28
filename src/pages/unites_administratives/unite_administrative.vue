@@ -163,7 +163,19 @@
                         </model-list-select> -->
               </td>
             </tr>
-          
+          <tr>
+            <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Acteur</label>
+                  <div class="controls">
+                    <select  class="span5">
+                      <option></option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+          </tr>
         </table>
       </div>
       <div class="modal-footer">

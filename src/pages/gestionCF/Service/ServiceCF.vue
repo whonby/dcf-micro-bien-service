@@ -3,8 +3,7 @@
 
         <notifications />
 
-        <!-- End Page Header -->
-        <!-- Default Light Table -->
+        
         <div class="container-fluid">
             <hr>
             <div class="row-fluid">

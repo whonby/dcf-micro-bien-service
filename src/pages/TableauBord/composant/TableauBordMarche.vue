@@ -536,7 +536,7 @@
                 v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
-                  <p><b>En exécution dans délai</b></p>
+                  <p><b>En exécution dans le délai</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(2) }} Marché(s) /
@@ -602,7 +602,7 @@
                 v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
-                  <p><b>Achevés dans le délai</b></p>
+                  <p><b>Achevé dans le délai</b></p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(11) }} Marché(s) /
@@ -635,7 +635,7 @@
                 v-scroll-to="{ element: '#table_resultat', duration: 5000 }"
               >
                 <div class="inner">
-                  <p>Achevés Hors délai</p>
+                  <p>Achevé Hors délai</p>
                 </div>
                 <div class="icon3">
                   {{ nombreMarcheParStatue(12) }} Marché(s) /
@@ -780,7 +780,7 @@
                         color: '#fff',
                       }"
                     >
-                      Taux Marche %
+                      Taux Marché %
                     </th>
                     <th
                       :style="{
@@ -796,7 +796,7 @@
                         color: '#fff',
                       }"
                     >
-                      TAUX FINANCIER
+                      Taux Financier
                     </th>
                     <th
                       :style="{
@@ -879,7 +879,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                    <!--<td c v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                     <td></td>
                     <td></td>
                     <td></td>
@@ -2511,30 +2511,30 @@ export default {
       return (status) => {
         if (status == 0) {
           //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-          return "<font color='#fff'><h3>En attente de contratualisation</h3> </font>";
+          return "<font color='#fff'><h3>En attente de contractualisation</h3> </font>";
         }
         if (status == 8) {
-          return "<font color='#fff'><h3>En attente de contratualisation hors delait</h3></font>";
+          return "<font color='#fff'><h3>En attente de contractualisation hors délai</h3></font>";
         }
         if (status == 1) {
-          return "<font color='#fff'><h3>En contratualisation</h3></font>";
+          return "<font color='#fff'><h3>En contractualisation</h3></font>";
         }
         if (status == 9) {
           return "<font color='#fff'><h3>En contractualisation Hors délai</h3></font>";
         }
 
         if (status == 2) {
-          return "<font color='#fff'><h3>En execution</h3></font>";
+          return "<font color='#fff'><h3>En exécution</h3></font>";
         }
         if (status == 10) {
-          return "<font color='#fff'><h3>En execution Hors délai</h3></font>";
+          return "<font color='#fff'><h3>En exécution Hors délai</h3></font>";
         }
 
         if (status == 11) {
-          return "<font color='#fff'><h3>Acheve dans le delais</h3></font>";
+          return "<font color='#fff'><h3>Acheve dans le délai</h3></font>";
         }
         if (status == 12) {
-          return "<font color='#fff'><h3>Acheve hors delais</h3></font>";
+          return "<font color='#fff'><h3>Acheve hors délai</h3></font>";
         }
 
         if (status == 7) {

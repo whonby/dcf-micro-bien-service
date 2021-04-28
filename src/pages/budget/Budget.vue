@@ -110,7 +110,7 @@
 
                                         <th>SECTION</th>
                                         <th>PROGRAMME</th>
-                                        <th>GRANDE NATURE DE DEPENSE</th>
+                                        <th>NATURE DE DEPENSE</th>
                                         <th>UA </th>
                                         <th>ZONE </th>
                                         <th>ACTION</th>

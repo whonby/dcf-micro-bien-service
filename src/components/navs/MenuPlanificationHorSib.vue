@@ -4,7 +4,7 @@
     <ul class="nav">
        <li>
             <router-link :to="{name: 'GroupeParUaSuiviMarcheBienService'}" tag="a">
-              SUIVI DES MARCHES HORS SIB
+              SUIVI DES MARCHES HORS SIGOBE
             </router-link>
           </li>
      <li>

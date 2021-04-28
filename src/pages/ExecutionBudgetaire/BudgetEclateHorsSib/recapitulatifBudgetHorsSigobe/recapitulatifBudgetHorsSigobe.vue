@@ -25,6 +25,7 @@
             </tr>
           </tbody>
         </table> -->
+        <h2 style="text-align:center;font-size:25px">Tableau Récapitulatif Budget des Projets</h2>
     <div class="container-fluid">
       <notifications />
       <div class="widget-box">
@@ -32,7 +33,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Detail budget {{detailBudget}}</h5>
+          <h5>Detail budget </h5>
         </div>
 
        <div class="span4">
@@ -52,10 +53,10 @@
             <thead>
               <tr style="">
                 <th style="font-size:15px;">Unité administrative</th>
-                <th style="font-size:15px;" title="Budget du personnel">Personnels (FCFA)</th>
+                <!-- <th style="font-size:15px;" title="Budget du personnel">Personnels (FCFA)</th>
 
                 <th style="font-size:15px;" title="Budget de bien et service">Biens et Services (FCFA)</th>
-                <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements (FCFA)</th>
+                <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements (FCFA)</th> -->
                 <!-- <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
 
                 <th style="font-size:15px;background: blue; color:#fff">Total (FCFA)</th>
@@ -69,7 +70,7 @@
               <tr v-for="unite in partition(uniteAdmin,size)[page]" :key="unite.id">
                 
                 <td style="font-weight:bold;font-size:12px;">{{libelleUniteAdministrative(unite)}}</td>
-                <td
+                <!-- <td
                   style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSommeSansFCFA(parseFloat(budgetPersonnel(unite)))}}</td>
                 <td
@@ -77,7 +78,7 @@
                 >{{formatageSommeSansFCFA(parseFloat(budgetBienService(unite)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;;text-align:center"
-                >{{formatageSommeSansFCFA(parseFloat(budgetInverstisement(unite)))}}</td>
+                >{{formatageSommeSansFCFA(parseFloat(budgetInverstisement(unite)))}}</td> -->
                 <!-- <td
                   style="font-weight:bold;font-size:12px;"
                 >{{formatageSommeSansFCFA(parseFloat(budgetTranfert(unite)))}}</td> -->
@@ -134,7 +135,7 @@
         data() {
             return {
               page:0,
-              size:10,
+              size:20,
               active_el:0,
                 fabActions: [
                     {

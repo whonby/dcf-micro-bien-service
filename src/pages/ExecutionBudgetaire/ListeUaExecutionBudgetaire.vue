@@ -197,54 +197,75 @@ uniteAdministratives
    
     <div >
       <hr />
-      <h2 style="text-align:center">LISTES DES DEMANDES D'ENGAGEMENTS</h2>
+      <h2 style="text-align:center">DEMANDES D'ENGAGEMENTS</h2>
       <table class="table table-bordered table-striped">
-        <tr>
-          <td>
-             <div align="left">
-               
-                <span style="font-size:25px">Rechercher une demande</span><br>
-                <input type="search" class="span8" placeholder="Saisissez le numero de l'engagement" v-model="search" />
-              </div>
+          <td style="width: 15%"></td>
+          <td style="width: 0%; font-weight: bolder; color: #000">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="ajouterDemandeEngage"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus"> AJOUTER DEMANDE ENGAGEMENT</i>
+              </button>
+            </div>
           </td>
-             <td>
-<div  align="lef" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="AjouterLettreAvance"><i class="icon icon-folder-open"> Lettre avance</i></button>
-    
-        </div> 
+          <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-danger"
+                @click.prevent="ajouterLiquidation"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER LIQUIDATION</i
+                >
+              </button>
+            </div>
           </td>
-          <td>
- <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Ajouter demande d'engagement</i></button>
-    
-        </div>
+          <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-primary"
+                @click.prevent="ajouterMandat"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER MANDAT</i
+                >
+              </button>
+            </div>
           </td>
-          <!-- <td>
- <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Ajouter demande d'engagement</i></button>
-    
-        </div>
+           <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-primary"
+                @click.prevent="ajouterOpSysteme"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER OP SYSTEME</i
+                >
+              </button>
+            </div>
           </td>
-          <td>
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterLiquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
-    
-        </div> 
+           <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-primary"
+                @click.prevent="AjouterLettreAvance"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER LETTRE D'AVANCE</i
+                >
+              </button>
+            </div>
           </td>
-          <td>
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterMandat"><i class="icon icon-folder-open"> Nouveau Mandat</i></button>
+          <td style="width: 25%"></td>
+        </table>
     
-        </div> 
-          </td>-->
-          <!-- <td>
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
-    
-        </div> 
-          </td>  -->
-        </tr>
-      </table>
       
         
       <div class="row-fluid">

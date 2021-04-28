@@ -116,14 +116,14 @@
           <li>
             <router-link :to="{name: 'marqueVehicules'}" tag="a">
               <i class="icon-check"></i>
-             Marques Véhicule
+             Marques Véhicules
             </router-link>
           </li>
             <li class="divider"></li>
           <li>
             <router-link :to="{name: 'ModeleVehicules'}" tag="a">
               <i class="icon-check"></i>
-             Modèles Véhicule
+             Modèles Véhicules
             </router-link>
           </li>
             <li class="divider"></li>
@@ -162,7 +162,7 @@
           <li class="divider"></li>
            <li>
             <router-link :to="{name: 'Appreciation'}" tag="a">
-              <i class="icon-user"></i> Appreciation
+              <i class="icon-user"></i> Appréciation
             </router-link>
           </li>
         </ul>

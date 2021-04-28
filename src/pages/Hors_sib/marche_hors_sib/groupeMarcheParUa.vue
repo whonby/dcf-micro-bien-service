@@ -59,7 +59,9 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
+                     <!-- <th style="width:20%;font-size:12px" >Code UA</th> -->
+                       <th style="width:20%;font-size:12px" >Section</th>
+                         <th style="width:20%;font-size:12px" >Programme</th>
                     <th style="width:50%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
@@ -69,7 +71,9 @@
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
+                      <!-- <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td> -->
+                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSection(idSection(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
+<td style="font-size:16px;color:#000;text-align:center">{{libelleProgramme(idProgramme(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
                    
                    <td v-if="type[0].unite_zone == 0">
@@ -152,6 +156,7 @@ export default {
 
   computed: {
         ...mapGetters("uniteadministrative", [
+          "budgetGeneral",
       "directions",
       "servicesua",
       "fonctionsua",
@@ -202,6 +207,57 @@ export default {
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
+  idSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.ua_id == id);
+
+      if (qtereel) {
+        return qtereel.section_id
+      }
+      return 0
+        }
+      };
+    },
+idProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.ua_id == id);
+
+      if (qtereel) {
+        return qtereel.program_id
+      }
+      return 0
+        }
+      };
+    },
+
+ libelleSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_section.concat(' - ', qtereel.nom_section);
+      }
+      return 0
+        }
+      };
+    },
+
+ libelleProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat(' - ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
 afficheGroupeUaParMarche(){
     return this.GroupeUniteAdministrativeMarche.filter(item=>item[0].sib==1)
 },
@@ -220,6 +276,7 @@ afficheGroupeUaParMarche(){
         }
       };
     },
+   
     idServiceGestionnaire() {
       return id => {
         if (id != null && id != "") {

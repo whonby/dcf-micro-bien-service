@@ -97,11 +97,18 @@
                     <th style="font-weight: bold; font-size: 14px">
                       Budget Initial
                     </th>
+                     <th style="font-weight: bold; font-size: 14px">
+                      Modification
+                    </th>
+                     <th style="font-weight: bold; font-size: 14px">
+                      Budget modifié
+                    </th>
+                    
                     <th style="font-weight: bold; font-size: 14px">
                       Budget Executé
                     </th>
                     <th style="font-weight: bold; font-size: 14px">
-                      Budget Actuel
+                      Budget disponible 
                     </th>
                     <!-- <th style="font-weight: bold;font-size:14px">Taux excution</th> -->
                     <th style="font-weight: bold; font-size: 14px">
@@ -141,6 +148,58 @@
                       {{
                         formatageSomme(
                           parseFloat(TotalBudgetInitial(uniteadministrative.id))
+                        )
+                      }}
+                    </td>
+                    <td
+                      style="
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 14px;
+                      "
+                    >
+                      {{
+                        formatageSomme(
+                          parseFloat(
+                            budgetConsommerBienService(uniteadministrative.id)
+                          ) +
+                            parseFloat(
+                              budgetConsommerPersonnel(uniteadministrative.id)
+                            ) +
+                            parseFloat(
+                              budgetConsommerInvertissement(
+                                uniteadministrative.id
+                              )
+                            ) +
+                            parseFloat(
+                              budgetConsommerTransfert(uniteadministrative.id)
+                            )
+                        )
+                      }}
+                    </td>
+                    <td
+                      style="
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 14px;
+                      "
+                    >
+                      {{
+                        formatageSomme(
+                          parseFloat(
+                            budgetConsommerBienService(uniteadministrative.id)
+                          ) +
+                            parseFloat(
+                              budgetConsommerPersonnel(uniteadministrative.id)
+                            ) +
+                            parseFloat(
+                              budgetConsommerInvertissement(
+                                uniteadministrative.id
+                              )
+                            ) +
+                            parseFloat(
+                              budgetConsommerTransfert(uniteadministrative.id)
+                            )
                         )
                       }}
                     </td>

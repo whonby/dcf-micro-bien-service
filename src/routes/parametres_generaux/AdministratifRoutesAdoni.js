@@ -8,6 +8,7 @@ import StructureProgramme from "../../pages/parametres_generaux/administratifs/S
 import PlanProgramme from "../../pages/parametres_generaux/administratifs/PlanProgramme.vue";
 import ImportationProgramme from "../../pages/parametres_generaux/administratifs/ImportationProgramme.vue";
 import ImportationUA from "../../pages/parametres_generaux/administratifs/ImportationUA.vue";
+import ImportationActivite from "../../pages/parametres_generaux/administratifs/ImportationActivite.vue";
 import StructureAdministrative from "../../pages/parametres_generaux/administratifs/StructureAdministrative.vue";
 import ServiceGestionnaire from "../../pages/parametres_generaux/administratifs/ServiceGestionnaire.vue";
 import Chapitre from "../../pages/parametres_generaux/administratifs/Chapitre.vue";
@@ -29,17 +30,23 @@ import grpeCorporel from '../../pages/parametres_generaux/administratifs/grpeCor
 import TypeBienCorporel from '../../pages/parametres_generaux/administratifs/TypeBienCorporel.vue'
 
 const AdministratifRoutesAdoni = [
-  // route type unite administrative
+  // route type unite administrative  
   {
     path: "/grpeCorporel",
     name: "grpeCorporel",
-    component: grpeCorporel  
+    component: grpeCorporel
   },
 
   {
     path: "/ImportationUA",
     name: "ImportationUA",
     component: ImportationUA
+  },
+
+  {
+    path: "/ImportationActivite",
+    name: "ImportationActivite",
+    component: ImportationActivite
   },
 
   {
@@ -120,80 +127,80 @@ const AdministratifRoutesAdoni = [
     name: "typeUniteAdministrative",
     component: TypeUniteAdmin
   },
-    // {
-    //   // route pour le titre
-    //   path:"/tableauBordGeneralOriginal",
-    //    name:"Titre",
-    //    component: Titre
-    //  },
-     // chemin de la structure programme
-     {
-       path:"/structure-programme",
-       name:"StructureProgramme",
-       component:StructureProgramme
-     },
-     // chemin du plan programme
-     {
-       path:"/plan-programme",
-       name:"PlanProgramme",
-       component:PlanProgramme
-     },
+  // {
+  //   // route pour le titre
+  //   path:"/tableauBordGeneralOriginal",
+  //    name:"Titre",
+  //    component: Titre
+  //  },
+  // chemin de la structure programme
+  {
+    path: "/structure-programme",
+    name: "StructureProgramme",
+    component: StructureProgramme
+  },
+  // chemin du plan programme
+  {
+    path: "/plan-programme",
+    name: "PlanProgramme",
+    component: PlanProgramme
+  },
 
-     {
-      // route pour l'exercice budgetaire 
-      path:"/exercice-budgetaire",
-        name:"ExerciceBudgetaire",
-        component:ExerciceBudgetaire
+  {
+    // route pour l'exercice budgetaire 
+    path: "/exercice-budgetaire",
+    name: "ExerciceBudgetaire",
+    component: ExerciceBudgetaire
 
-     },
-     // route pour la nature de section
-     {
-       path:"/nature-section",
-       name:"NatureSection",
-       component:NatureSection
-     },
-     // route section
-     {
-       path:"/section",
-       name:"Section",
-       component:Section
-     },
-     // route structure structure administrative
-     {
-       path:"/structure-administrative",
-       name:"StructureAdministrative",
-       component:StructureAdministrative
-     },
-     // route service gestionnaire
-     {
-    path:"/service-gestionnaire",
-    name:"ServiceGestionnaire",
-    component:ServiceGestionnaire
-     },
-     // route chapitre
-     {
-       path:"/chapitre",
-       name:"Chapitre",
-       component:Chapitre
-     },
-     // route grande nature
-     {
-       path:"/grande-nature",
-       name:"GrandeNature",
-       component:GrandeNature
-     },
-     // route structure geographie
-     {
-       path:"/structure-geographique",
-       name:"SrtuctureGeographique",
-       component:StructureGeographique
-     },
-     // route localisation geographique
-     {
-       path:"/localisation-georaphique",
-       name:"LocalisationGeographique",
-       component:LocalisationGeographique
-     }
+  },
+  // route pour la nature de section
+  {
+    path: "/nature-section",
+    name: "NatureSection",
+    component: NatureSection
+  },
+  // route section
+  {
+    path: "/section",
+    name: "Section",
+    component: Section
+  },
+  // route structure structure administrative
+  {
+    path: "/structure-administrative",
+    name: "StructureAdministrative",
+    component: StructureAdministrative
+  },
+  // route service gestionnaire
+  {
+    path: "/service-gestionnaire",
+    name: "ServiceGestionnaire",
+    component: ServiceGestionnaire
+  },
+  // route chapitre
+  {
+    path: "/chapitre",
+    name: "Chapitre",
+    component: Chapitre
+  },
+  // route grande nature
+  {
+    path: "/grande-nature",
+    name: "GrandeNature",
+    component: GrandeNature
+  },
+  // route structure geographie
+  {
+    path: "/structure-geographique",
+    name: "SrtuctureGeographique",
+    component: StructureGeographique
+  },
+  // route localisation geographique
+  {
+    path: "/localisation-georaphique",
+    name: "LocalisationGeographique",
+    component: LocalisationGeographique
+  }
 ]
 
 export default AdministratifRoutesAdoni;

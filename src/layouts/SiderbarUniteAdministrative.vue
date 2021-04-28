@@ -38,16 +38,22 @@
             <span>PARAMETRES GENERAUX</span>
           </a>
         </li> -->
-        <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
+        <li @click.prevent="navigateToUniteAdministrative12" >
           <a  title="" href="#">
             <i class="icon-home"></i>
             <span>UNITE ADMINISTRATIVE</span>
           </a>
         </li>
+        <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
+          <a  title="" href="#">
+            <i class="icon-home"></i>
+            <span>VOIR BUDGET</span>
+          </a>
+        </li>
           <li @click.prevent="monEquipe" v-if="noDCfNoAdmin() || cf()" :class="{active: active_el == 100 }">
               <a  title="" href="#">
                   <i class="icon-group"></i>
-                  <span>MOM EQUIPE</span>
+                  <span>MON EQUIPE</span>
               </a>
           </li>
 
@@ -265,10 +271,16 @@ navigateToGestionMarche(){
         })
       },
 
+navigateToUniteAdministrative12(){
+         this.activate(15)
+        this.$router.push({
+          name: 'uniteadministrative'
+        })
+      },
        navigateToUniteAdministrative(){
         this.activate(1)
         this.$router.push({
-          name: 'uniteadministrative'
+          name: ''
         })
       },
  navigateToTableauBord(){

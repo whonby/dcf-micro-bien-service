@@ -29,6 +29,7 @@
    <MenuBudgetEclate v-if="active_el ==780"></MenuBudgetEclate>
    <MenuOrdrePaiement v-if="active_el ==1200"></MenuOrdrePaiement>
     <MenuBudgetExecuteHorsSib v-if="active_el ==1033"></MenuBudgetExecuteHorsSib>
+    <MenuTableaudebordreal v-if="active_el ==1034"></MenuTableaudebordreal>
     <!-- <Search></Search> -->
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -67,10 +68,12 @@ import MenuGestionParc from "../components/navs/MenuGestionParc"
 import MenuRapportMarche from "../components/navs/MenuRapportMarche"
 import MenuRapportVehicule from "../components/navs/MenuRapportVehicule"
 import MenuTableauBordGeneral from "../components/navs/MenuTableauBordGeneral"
+import MenuTableaudebordreal from "../components/navs/MenuTableau_de_bord"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
     MenuBudgetExecuteHorsSib,
+    MenuTableaudebordreal,
     MenuOrdrePaiement,
     MenuBudgetEclate,
     MenuTableauBordGeneral,

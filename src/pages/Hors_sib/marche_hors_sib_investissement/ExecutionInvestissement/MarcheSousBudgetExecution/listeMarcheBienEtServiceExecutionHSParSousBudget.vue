@@ -12,7 +12,7 @@
             <ul class="nav nav-tabs">
               <li class="active">
                 <a data-toggle="tab" href="#marcheExecution">
-                  Marchés en Executions <span class="badge badge"></span
+                  Marchés en Exécutions <span class="badge badge"></span
                 ></a>
               </li>
             </ul>

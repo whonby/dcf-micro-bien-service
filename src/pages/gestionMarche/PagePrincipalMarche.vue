@@ -14,10 +14,10 @@
                         <a data-toggle="tab" href="#MANDATEMENT">LISTES DES MARCHES</a>
                     
                       </li>
-                       <li class="">
+                       <!-- <li class="">
                         
                         <a data-toggle="tab" href="#MANDATEMENT1">LISTES DES AUTRES DEPENSES</a>
-                      </li>
+                      </li> -->
                      
                     </ul>
                   </div>
@@ -62,10 +62,10 @@
                        </div>
                       </div> -->
           </div>
-                <div id="MANDATEMENT1" class="tab-pane">
+                <!-- <div id="MANDATEMENT1" class="tab-pane">
 
                    <GestionAutresDepense></GestionAutresDepense>
-                </div>
+                </div> -->
 
                        
 
@@ -83,7 +83,7 @@
   
 <script>
 import marcheHorsppmHorsSib from "./marcheHorsppmHorsSib.vue"
-import GestionAutresDepense from "./GestionAutresDepense.vue"
+//import GestionAutresDepense from "./GestionAutresDepense.vue"
 // import MandatDifferer from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatDifferer.vue"
 // import MandatRejetter from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatRejetter.vue"
 // import MandatVise from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatVise.vue"
@@ -94,7 +94,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   components:{
       marcheHorsppmHorsSib,
-      GestionAutresDepense
+     // GestionAutresDepense
 //     MandatViseAvecObservation,
 //     MandatVise,
 //     MandatRejetter,

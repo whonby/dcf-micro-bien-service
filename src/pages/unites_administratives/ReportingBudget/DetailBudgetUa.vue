@@ -94,7 +94,7 @@
 
 
             </div>
-            <p style="text-align:center;font-size:30px">Listes du Budget du : {{detail_Budget.libelle}}</p>
+            <p style="text-align:center;font-size:30px">Listes des Budgets de : {{detail_Budget.libelle}}</p>
       <hr />
       <div >
         <div >

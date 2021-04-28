@@ -217,7 +217,7 @@ afficheDetailAutreDepense(){
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.unite_administrative_id==this.marcheid);
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.unite_administrative_id==this.marcheid && item.autre_depense_id != null);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
