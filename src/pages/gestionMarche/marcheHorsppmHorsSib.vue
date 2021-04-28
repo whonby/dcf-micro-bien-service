@@ -11,10 +11,10 @@ reference_marche
                   <tr>
                      <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
                     <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Total Marche Hors PPM </th>
+                    <th style="text-align:center;font-size:20px;color:#000">Total Marche</th>
                      <th style="text-align:center;font-size:20px;color:#000">Marche en Planification</th>
                     <th style="text-align:center;font-size:20px;color:#000">Marche en contractualisation</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en Exeécution</th>
+                    <th style="text-align:center;font-size:20px;color:#000">Marche en Exécution</th>
                     
                    
                   </tr>
