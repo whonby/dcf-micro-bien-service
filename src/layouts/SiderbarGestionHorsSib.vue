@@ -26,7 +26,7 @@
        </li>
        
        
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+        <li :class="{active: active_el == 1034 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
@@ -62,15 +62,15 @@
         <li @click.prevent="navigateTableBordBordBudgetEclate" :class="{active: active_el ==780}">
            <a href="#">
                   <i class="icon-truck"></i>
-                  <span>BUDGET</span>
+                  <span>GESTION DU BUDGET</span>
               </a>
         </li>
-          <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==45}">
+          <!-- <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==45}">
               <a href="#">
                   <i class="icon-truck"></i>
                   <span>TABLEAU DE BORD DE MARCHE</span>
               </a>
-          </li>
+          </li> -->
 
          <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==25}">
           <a href="#">
@@ -78,7 +78,7 @@
             <span>GESTION DES MARCHES</span>
           </a>
         </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 31 }">
+        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 31 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
@@ -89,7 +89,7 @@
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
           </a>
-        </li>
+        </li> -->
 
        <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
@@ -99,18 +99,18 @@
         </li> -->
 
 
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==20}">
+        <!-- <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==20}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>INVESTISSEMENT</span>
            
           </a>
-        </li>
+        </li> -->
 
         <li @click.prevent="navigateToAutredepense" >
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
-            <span>AUTRE DEPENSE</span>
+            <span>GESTION AUTRE DEPENSE</span>
            
           </a>
         </li>
@@ -118,14 +118,14 @@
            <li @click.prevent="navigateurOrdrePaiement" :class="{active: active_el ==1200}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>
-                  <span>ORDRE DE PAIEMENT</span>
+                  <span>GESTION DES OP</span>
 
               </a>
           </li>
           <li @click.prevent="navigateToImage" :class="{active: active_el ==75}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>
-                  <span>IMAGERIES</span>
+                  <span>GESTION DES IMAGES</span>
 
               </a>
           </li>
@@ -332,7 +332,7 @@ navigateToGestionMarche(){
         })
       },
  navigateToTableauBord(){
-        this.activate(11)
+        this.activate(1034)
         this.$router.push({
           name: 'TableauBordGestionHorsSibSimple'
         })

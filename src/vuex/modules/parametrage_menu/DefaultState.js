@@ -24,6 +24,11 @@ const defaultstate = {
     MenuBudgetEclater:780,
     MenuOrdrePaiement:1200,
     MenuRapportBudgetExecuteHorsSib:1033,
+
+    //route de gestion des menus***//
+    tableaubordhorssigobe:1034,
+    tableaudebord:1035,
+
     active_el: 11
 };
 
