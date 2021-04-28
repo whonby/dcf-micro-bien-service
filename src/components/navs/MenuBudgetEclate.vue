@@ -9,7 +9,7 @@
       </li>
 <li>
         <router-link :to="{name: 'UniteAdministrativeRegie'}" tag="a">
-          BUDGET DES REGIES
+          BUDGET ECLATE DES REGIES
         </router-link>
       </li>
       <li>

@@ -862,6 +862,12 @@
         </ul>
       </li>
 
+       <li>
+            <router-link :to="{name: 'AutresDepense'}" tag="a">
+              <i class="icon-key"></i> AUTRES DEPENSES
+            </router-link>
+          </li> -->
+
 
 
 

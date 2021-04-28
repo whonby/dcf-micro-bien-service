@@ -63,31 +63,37 @@
           
         </ul>
       </li> -->
-       <li>
+       <!-- <li>
             <router-link :to="{name: 'GestionMarcheHorSib'}" tag="a">
               LISTE DES MARCHES
             </router-link>
-          </li>
+          </li> -->
      <li>
    <li>
 
             <router-link :to="{name: 'groupeMarcheParUa'}" tag ="a">
-              LISTE DES MARCHES HORS PPM
+              LISTE DES MARCHES 
             </router-link>
           </li>
-          <li>
+          <!-- <li>
            <router-link :to="{name: 'listeMarcheppm'}" tag ="a">
                 LISTE DES MARCHES PPM
             </router-link>
-          </li>
+          </li> -->
            <!-- <li>
         <router-link :to="{ name: 'AutresDepense' }" tag="a">
           AUTRES DEPENSES
         </router-link>
       </li> -->
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'marcheEntreprise'}" tag ="a">
                 LISTE DES MARCHES PAR ENTREPRISES
+            </router-link>
+          </li> -->
+
+           <li>
+            <router-link :to="{name: 'marcheEntreprise'}" tag ="a">
+                EXECUTION DES MARCHES
             </router-link>
           </li>
 
