@@ -254,18 +254,18 @@
     }
 
 
-    .bg-attente-contratualisation-hors-alert {
+    .bg-attente-contractualisation-hors-alert {
 
         background-color: #8ea9db !important;
     }
-    .bg-attente-contratualisation-avec-alert {
+    .bg-attente-contractualisation-avec-alert {
         background-color: #f4b084 !important;
     }
-    .bg-en-contratualisation {
+    .bg-en-contractualisation {
         background-color: #92d050 !important;
     }
 
-    .bg-en-contratualisation-hort-delais {
+    .bg-en-contractualisation-hort-delais {
         background-color: #652b92 !important;
     }
     .bg-en-execution {

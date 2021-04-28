@@ -76,7 +76,7 @@
           </li>
            <li>
             <router-link :to="{name: 'AutresDepense'}" tag ="a">
-                AUTRES DEPENSE
+                AUTRES DEPENSES
             </router-link>
           </li>
            <li>
@@ -86,7 +86,7 @@
           </li>
             <li>
             <router-link :to="{name: 'ppm'}" tag ="a">
-                PPM
+                IMPORTATION PPM
             </router-link>
           </li>
      <!-- <li> 

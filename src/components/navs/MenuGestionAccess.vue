@@ -6,7 +6,7 @@
         <ul class="nav">
             <li class="dropdown" id="source_financement">
         <a title = "Source de financement" href="#" data-toggle="dropdown" data-target="#source_financement" class="dropdown-toggle">
-          <span class="text"> GESTION DES MODULE </span>
+          <span class="text"> GESTION DES MODULES </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
