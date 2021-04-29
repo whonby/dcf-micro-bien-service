@@ -194,7 +194,7 @@
                     background-color: #87ceeb;
                   "
                 >
-                  Taux(%)
+                  Taux En Exécution (%)
                 </th>
                 <th
                   style="
@@ -210,14 +210,14 @@
             <tbody  v-for="GroupeOrdrePaiementByActivit3 in ListeGroupByActivite12"
         :key="GroupeOrdrePaiementByActivit3[0].id">
               <tr>
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; background-color:#83F747 !important">
                   {{
                     libelleBailleur(
                       GroupeOrdrePaiementByActivit3[0].source_financement_id
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -228,7 +228,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -240,7 +240,7 @@
                   }}
                 </td>
 
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -251,7 +251,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     (
                       (MontantBudgetExecuté(
@@ -265,7 +265,7 @@
                   }}
                 </td>
 
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
