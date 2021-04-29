@@ -331,6 +331,7 @@ navigateToGestionMarche(){
           name: 'tableaudebord'
         })
       },
+      
  navigateToTableauBord(){
         this.activate(1034)
         this.$router.push({

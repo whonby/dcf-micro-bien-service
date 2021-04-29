@@ -172,7 +172,9 @@
                                               </div>
                                           </div>
                                       </div>
+                                       <li :class="{active: active_el == 1034 }" @click.prevent="navigateToTableauBord">
                                       <div class="span4"  @click="goToModule(4)">
+                                        
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -184,6 +186,7 @@
                                               </div>
                                           </div>
                                       </div>
+                                       </li>
                                   </div>
                               </div>
                               <!-- Single Timeline Content-->
@@ -301,7 +304,7 @@
 
 
 <script>
-import { mapGetters,mapActions} from "vuex";
+import { mapGetters,mapActions,mapState,mapMutations} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
 import Chargement from '../components/Chargement.vue'
@@ -643,7 +646,9 @@ this.getTousActivite()
 
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation",
       "getterUniteAdministrativeByUser"]),
-
+   ...mapState('parametrageMenu', {
+     active_el: state => state.active_el
+  }),
 
 afficherModule1() {
       return id1 => {
@@ -700,10 +705,11 @@ return objJson.id
   },
 
 
+
   methods:{
  admin:admin,
      dcf:dcf,
-
+...mapMutations('parametrageMenu', ['activate']),
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
       ...mapActions('parametreGenerauxFonctionnelle',
@@ -803,7 +809,7 @@ return objJson.id
 
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
-
+ 
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
@@ -840,12 +846,21 @@ return objJson.id
         name: 'TableauDeBordG'
       })
     },
-    activeMenuModuleGestionHorSIB(){
+
+    navigateToTableauBord(){
       this.activeMenuModuleSidcf(4)
-      this.$router.push({
-        name: 'TableauDeBordG'
-      })
-    },
+        this.activate(1034)
+        this.$router.push({
+          name: 'TableauBordGestionHorsSibSimple'
+        })
+      },
+    // navigateToTableauBord(){
+    //   this.activeMenuModuleSidcf(4)
+    //   this.$router.push({
+    //     name: 'TableauBordGestionHorsSibSimple'
+    //   })
+    // },
+
     activeMenuModuleCartographie(){
       this.activeMenuModuleSidcf(5)
       this.$router.push({
