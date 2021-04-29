@@ -2,15 +2,18 @@
 <template>
   <div class="container-fluid">
     <br/>
+     <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
-   <div class="span10 " >
+        </div>
+   <!-- <div class="span10 " > -->
                     <table class="table table-striped">
                         <tbody>
                         <tr>
                         
                             
                             <td>
-                                <label style="color:#000;font-size:14px;font-weight: bolder;">Type de marché
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">TYPE DE MARCHE
                                 </label>
                                 <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
@@ -23,31 +26,22 @@
 
                                 </model-list-select>
                             </td>
-                          <td>
-                                <!-- <label style="color:#000;font-size:14px;font-weight: bolder;" align="right">Objet
-                                </label> -->
-
-                                <!-- <div class="span3" >
-                  <div align="right">
-                    
-                    <input
-                      type="search"
-                      class="span4"
-                      placeholder="Recherche par Objet"
-                      v-model="search"
-                    />
-                  </div>
-                </div> -->
-                                <!-- <model-list-select style="background-color: #fff;border:2px solid #000"
+                           <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">OBJET DU MARCHE{{libelle_marche_id}}
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
-                                                   :list="test"
-                                                   v-model="objet1"
+                                                   :list="marches"
+                                                   v-model="libelle_marche_id"
                                                    option-value="id"
                                                    option-text="objet"
                                                    placeholder=""
                                 >
 
-                                </model-list-select> -->
+                                </model-list-select>
+                            </td>
+                          <td>
+                              
                             </td>
                             
                             
@@ -56,7 +50,7 @@
                         </tbody>
                     </table>
 
-                </div>
+                <!-- </div> -->
     <!-- <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button> -->
     
 
@@ -139,7 +133,7 @@
                     class="odd gradeX"
                     v-for="(
                       marche, index
-                    ) in partition(rechercheUa(type_marche_id), size)[page]"
+                    ) in partition(afficherMarcheInvestissementParDroitAccess, size)[page]"
                     :key="marche.id"
                   >
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -234,7 +228,7 @@
                 <a @click.prevent="precedent()" href="#">Précedent</a>
               </li>
               <li
-                v-for="(titre, index) in partition(rechercheUa(type_marche_id), size).length"
+                v-for="(titre, index) in partition(afficherMarcheInvestissementParDroitAccess, size).length"
                 :key="index"
                 :class="{ active: active_el == index }"
               >
@@ -244,7 +238,7 @@
               </li>
               <li
                 :class="{
-                  disabled: page == partition(rechercheUa(type_marche_id), size).length - 1,
+                  disabled: page == partition(afficherMarcheInvestissementParDroitAccess, size).length - 1,
                 }"
               >
                 <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -291,7 +285,7 @@ export default {
         // }
       ],
        page: 0,
-      size: 10,
+      size: 20,
       active_el: 0,
       color: "#3AB982",
       height: "35px",
@@ -304,7 +298,7 @@ export default {
       //     libelle: "libelle"
       //   },
       type_marche_id:"",
-      objet1:"",
+      libelle_marche_id:"",
 
       formData: {
         objet: "",
@@ -468,13 +462,13 @@ return this.afficherMarcheInvestissementParDroitAccess.filter((item) => {
 //             //  type.afficherTypeMarcheLibelle(type.type_marche_id) 
 // },
     rechercheUa() {
-      return id =>{
-        if(id!=null && id!=""){
-           return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.type_marche_id == id)
+      return id1 =>{
+        if(id1!=null && id1!=""){
+           return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.type_marche_id == id1  || item.id == this.libelle_marche_id )
  
        
         }
-        return this.afficherMarcheInvestissementParDroitAccess
+        return this.afficherMarcheInvestissementParDroitAccess.filter(item => item.unite_administrative_id == this.marcheid)
       }
       
       //const st = this.search.toLowerCase();
@@ -507,26 +501,27 @@ return this.afficherMarcheInvestissementParDroitAccess.filter((item) => {
 
         return colect.filter(
           (element) =>
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+            (element.unite_administrative_id == this.marcheid &&
               element.parent_id == null &&
               element.sib == 1 &&
-              element.attribue == 2) ||
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+              element.attribue == 2 && element.type_marche_id ==this.type_marche_id ||
+              
+              element.unite_administrative_id == this.marcheid &&
               element.parent_id == null &&
               element.sib == 1 &&
-              element.attribue == 2)
+              element.attribue == 2 && element.id == this.libelle_marche_id)
         );
       }
       return this.printMarcheNonAttribue.filter(
         (element) =>
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 &&  element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+          (element.unite_administrative_id == this.marcheid &&
             element.parent_id == null &&
             element.sib == 1 &&
-            element.attribue == 2) ||
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
-            element.parent_id == null &&
-            element.sib == 1 &&
-            element.attribue == 2)
+            element.attribue == 2  || 
+              element.parent_id == null &&
+              element.sib == 1 &&
+              element.attribue == 2 && element.id == this.libelle_marche_id) 
+         
       );
     },
 
@@ -1393,9 +1388,9 @@ return this.afficherMarcheInvestissementParDroitAccess.filter((item) => {
         // Code à éxécuter si l'utilisateur clique sur "Annuler"
       }
     },
-//  pagePrecedent(){
-//                 window.history.back()
-//             },
+ pagePrecedent(){
+                window.history.back()
+            },
     modifierModalActeEffetFinancierLocal2(index) {
       if (confirm("Voulez-vous basculer en Execution ?")) {
         this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[

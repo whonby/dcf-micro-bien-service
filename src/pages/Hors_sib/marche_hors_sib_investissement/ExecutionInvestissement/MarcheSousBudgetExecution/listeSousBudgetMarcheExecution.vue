@@ -73,7 +73,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
                    
                    <td >
-                      <router-link :to="{ name: 'listeMarcheBienEtServiceExecutionHSParSousBudget', params: { id: type.id }}"
+                      <router-link :to="{ name: 'listeMarcheBienEtServiceExecutionHSParSousBudget', params: { id: type.unite_zone }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 

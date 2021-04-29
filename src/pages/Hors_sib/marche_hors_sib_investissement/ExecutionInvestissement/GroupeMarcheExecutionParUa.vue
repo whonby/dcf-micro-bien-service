@@ -57,13 +57,13 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
                    
                    <td v-if="type[0].unite_zone == 0">
-                      <router-link :to="{ name: 'listeMarcheBienEtServiceHS', params: { id: type[0].id }}"
+                      <router-link :to="{ name: 'listeMarcheBienEtServiceHS', params: { id: type[0].unite_administrative_id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
                     <td v-else-if="type[0].unite_zone != 0">
-                      <router-link :to="{ name: 'listeSousBudgetMarcheExecution', params: { id: type[0].id }}"
+                      <router-link :to="{ name: 'listeSousBudgetMarcheExecution', params: { id: type[0].unite_administrative_id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
                    </router-link> 
