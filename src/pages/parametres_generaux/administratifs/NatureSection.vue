@@ -20,7 +20,7 @@
                                               name ="Liste nature de section"
                                               worksheet = "nature de section"
                                             :data="localisationsFiltre">
-                         <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                         <i title="Exporter en excel" class="icon-table"> Exporter en Excel</i>
 
                                                  </download-excel> 
                                                    <div align="right" style="cursor:pointer;">
@@ -30,7 +30,7 @@
                   
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-             <h5>Liste des natures de sections</h5>
+             <h5>Liste des natures de section</h5>
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune nature de section enregistrée</h6>
+                <h6 style="color:red;">Aucune nature de section enrégistrée</h6>
               </div>
             </div>
           </div>

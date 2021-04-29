@@ -1,67 +1,170 @@
 reference_marche
 <template>
   <div>
-    <!-- <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
-    
-        </div> -->
-        <br>
-        <table class="table table-bordered table-striped">
-           <thead>
-                  <tr>
-                     <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
-                    <th style="text-align:center;font-size:20px;color:#000">Unite administrative</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Total Marche</th>
-                     <th style="text-align:center;font-size:20px;color:#000">Marche en Planification</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en contractualisation</th>
-                    <th style="text-align:center;font-size:20px;color:#000">Marche en Exécution</th>
-                    
-                   
-                  </tr>
-                </thead>
-                 <tbody>
-                    <tr>
-                       <!-- <td style="text-align:center;font-size:20px;color:#000">
+        <div class="span8" style="margin-right:25px; margin-bottom:30px;">
+                <label style="color: #000; font-size: 14px; font-weight: bolder">
+                  CHOISIR LE TYPE DE MARCHE<a href="#" style="color: red"></a>
+                </label>
+                    <model-list-select
+                      style="background-color: #fff; border: 2px solid #000"
+                      class="wide"
+                      :list="options2"
+                      v-model="libelle_typemarche"
+                      option-value="libelle"
+                      option-text="libelle">
+                    </model-list-select>
+         </div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
+          <th style="text-align: center; font-size: 20px; color: #000">
+            Unité administrative
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            v-if="libelle_typemarche == 0"
+          >
+            Total Marché
+          </th>
+          <th style="text-align: center; font-size: 20px; color: #000" v-else>
+            Total Marché {{ libelle_typemarche }}
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            v-if="libelle_typemarche == 0"
+          >
+            Marché en Planification
+          </th>
+
+          <th style="text-align: center; font-size: 20px; color: #000" v-else>
+            Marché en Planification {{ libelle_typemarche }}
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            v-if="libelle_typemarche == 0"
+          >
+            Marché en contractualisation
+          </th>
+
+          <th style="text-align: center; font-size: 20px; color: #000" v-else>
+            Marché en contractualisation {{ libelle_typemarche }}
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            v-if="libelle_typemarche == 0"
+          >
+            Marché en Exécution
+          </th>
+
+          <th style="text-align: center; font-size: 20px; color: #000" v-else>
+            Marché en Exécution {{ libelle_typemarche }}
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            v-if="libelle_typemarche == 0"
+          >
+            Marché Terminé
+          </th>
+
+          <th style="text-align: center; font-size: 20px; color: #000" v-else>
+            Marché Terminé {{ libelle_typemarche }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- <td style="text-align:center;font-size:20px;color:#000">
 {{anneeAmort}}
             </td> -->
-            <td style="text-align:center;font-size:20px;color:#000">
-{{libelleUA(marcheid)}}
-            </td>
-            <td>
-<button  class="btn  btn-info tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaTotal(marcheid)}}</span>
-                      
-                      </button>
-            </td>
-            <td>
-<button  class="btn  btn-danger tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaPlanifier(marcheid)}}</span>
-                      
-                      </button>
-            </td>
-             <td>
-<button  class="btn  btn-success tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaContratualisation(marcheid)}}</span>
-                      
-                      </button>
-            </td>
-             <td>
-<button  class="btn  btn-warning tailBtn" style="font-weight:bolder;color:#fff;font-size:18px;width:100%" >                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px;"  >{{afficheMarcheParUaExecute(marcheid)}}</span>
-                      
-                      </button>
-            </td>
-            
-          </tr>
-                 </tbody>
-         
-        </table>
+          <td style="text-align: center; font-size: 20px; color: #000">
+            {{ libelleUA(marcheid) }}
+          </td>
+          <td>
+            <button
+              class="btn btn-info tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaTotal(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaPlanifier(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaContratualisation(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-warning tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaExecute(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+                background-color: black;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaTermine(marcheid)
+              }}</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div class="container-fluid">
-      <hr />
       <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">
@@ -70,11 +173,14 @@ reference_marche
                 <i class="icon-th"></i>
               </span>
 
-              <h5>
-                Liste des March&eacute;s hors ppm
-                <span class="badge badge-success">
-                  </span
-                >
+              <h5 v-if="libelle_typemarche == 0">
+                Liste des March&eacute;s
+                <span class="badge badge-success"> </span>
+              </h5>
+
+              <h5 v-else>
+                Liste des March&eacute;s {{ libelle_typemarche }}
+                <span class="badge badge-success"> </span>
               </h5>
               <div align="right">
                 Recherche:
@@ -96,7 +202,7 @@ reference_marche
               </select>
               Entrer
             </div>
-            
+
             <br />
 
             <div class="widget-content nopadding">
@@ -248,7 +354,7 @@ reference_marche
                   <span class=""><i class="  icon-zoom-out"></i></span>
                    </router-link>  -->
                     </td>
- <td v-else style="background-color:lightblue"></td>
+                    <td v-else style="background-color: lightblue"></td>
                     <!-- </td>
                    
                        <td v-else>
@@ -329,11 +435,15 @@ import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "../../../src/Repositories/Repository";
 import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
 import { partition } from "../../../src/Repositories/Repository";
+import { ModelListSelect } from "vue-search-select";
 //import {partition} from '../../../src/Repositories/partition'
 //import {partition} from '../../../src/Repositories/partition';
 //import {partition} from '../../../../'
 export default {
   name: "type facture",
+  components: {
+    ModelListSelect,
+  },
   data() {
     return {
       page: 0,
@@ -355,6 +465,12 @@ export default {
       //     CODE: "code",
       //     libelle: "libelle"
       //   },
+
+      libelle_typemarche: 0,
+      options2: [
+        { id: "1", libelle: "HORS PPM" },
+        { id: "2", libelle: "PPM" },
+      ],
 
       formData: {
         libelle_procedure: "",
@@ -438,13 +554,12 @@ export default {
       search: "",
     };
   },
-created() {
-            this.marcheid=this.$route.params.id
-   this.detail_marche = this.marches.find(
-       idmarche => idmarche.id == this.$route.params.id
-         )
-        
-},
+  created() {
+    this.marcheid = this.$route.params.id;
+    this.detail_marche = this.marches.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
   computed: {
     ...mapGetters("bienService", [
       "mandats",
@@ -519,58 +634,190 @@ created() {
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
 
-afficheMarcheParUa() {
+    afficheMarcheParUa() {
       return (id) => {
         if (id != null && id != "") {
           return this.marches.filter(
             (qtreel) => qtreel.unite_administrative_id == id
           );
-
-         
         }
       };
     },
-afficheMarcheParUaPlanifier() {
+    afficheMarcheParUaPlanifier() {
       return (id) => {
         if (id != null && id != "") {
-          return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 0 && qtreel.parent_id == null
-          ).length;
-
-         
+          if (
+            this.libelle_typemarche == "HORS PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.marches.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 0 &&
+                qtreel.parent_id == null &&
+                qtreel.plan_passation_marche_id == null
+            ).length;
+          } else if (
+            this.libelle_typemarche == "PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.marches.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 0 &&
+                qtreel.parent_id == null &&
+                qtreel.plan_passation_marche_id != null
+            ).length;
+          } else {
+            return this.marches.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 0 &&
+                qtreel.parent_id == null
+            ).length;
+          }
         }
       };
     },
-     afficheMarcheParUaTotal() {
+    afficheMarcheParUaTotal() {
       return (id) => {
         if (id != null && id != "") {
-          return this.marches.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.parent_id == null
-          ).length;
-
-         
+          if (
+            this.libelle_typemarche == "HORS PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.marches.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.parent_id == null &&
+                qtreel.plan_passation_marche_id == null
+            ).length;
+          } else if (
+            this.libelle_typemarche == "PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.marches.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.parent_id == null &&
+                qtreel.plan_passation_marche_id != null
+            ).length;
+          } else {
+            return this.marches.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.parent_id == null
+              // && qtreel.plan_passation_marche_id==null
+            ).length;
+          }
         }
       };
     },
     afficheMarcheParUaContratualisation() {
       return (id) => {
         if (id != null && id != "") {
-          return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 1 && qtreel.parent_id == null
-          ).length;
-
-         
+          if (
+            this.libelle_typemarche == "HORS PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 1 &&
+                qtreel.parent_id == null &&
+                qtreel.plan_passation_marche_id == null
+            ).length;
+          } else if (
+            this.libelle_typemarche == "PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 1 &&
+                qtreel.parent_id == null &&
+                qtreel.plan_passation_marche_id != null
+            ).length;
+          } else {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 1 &&
+                qtreel.parent_id == null
+            ).length;
+          }
         }
       };
     },
     afficheMarcheParUaExecute() {
       return (id) => {
         if (id != null && id != "") {
-          return this.printMarcheNonAttribue.filter(
-            (qtreel) => qtreel.unite_administrative_id == id && qtreel.attribue == 2 && qtreel.parent_id != null
-          ).length;
+          if (
+            this.libelle_typemarche == "HORS PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 2 &&
+                qtreel.parent_id != null &&
+                qtreel.plan_passation_marche_id == null
+            ).length;
+          } else if (
+            this.libelle_typemarche == "PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 2 &&
+                qtreel.parent_id != null &&
+                qtreel.plan_passation_marche_id != null
+            ).length;
+          } else {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 2 &&
+                qtreel.parent_id != null
+            ).length;
+          }
+        }
+      };
+    },
 
-         
+    afficheMarcheParUaTermine() {
+      return (id) => {
+        if (id != null && id != "") {
+          if (
+            this.libelle_typemarche == "HORS PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 5 &&
+                qtreel.parent_id != null &&
+                qtreel.plan_passation_marche_id == null
+            ).length;
+          } else if (
+            this.libelle_typemarche == "PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 5 &&
+                qtreel.parent_id != null &&
+                qtreel.plan_passation_marche_id != null
+            ).length;
+          } else {
+            return this.printMarcheNonAttribue.filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.attribue == 5 &&
+                qtreel.parent_id != null
+            ).length;
+          }
         }
       };
     },
@@ -578,8 +825,7 @@ afficheMarcheParUaPlanifier() {
       const searchTerm = this.search.toLowerCase();
 
       return this.afficheMarcheParUa(this.marcheid).filter((item) => {
-       return item.objet.toLowerCase().includes(searchTerm)
-      
+        return item.objet.toLowerCase().includes(searchTerm);
       });
     },
 
@@ -739,21 +985,44 @@ afficheMarcheParUaPlanifier() {
         });
 
         return colect.filter((items) => {
-          if (
-            items.sib == 1 &&
-            items.plan_passation_marche_id == null &&
-            items.parent_id == null
-          ) {
-            return items;
+          if (this.libelle_typemarche == "HORS PPM" && this.libelle_typemarche != 0) {
+            if (items.sib == 1 && items.plan_passation_marche_id == null && items.parent_id == null) {
+              return items;
+            }
+          } else if (this.libelle_typemarche == "PPM" && this.libelle_typemarche != 0) {
+              if (items.sib == 1 && items.plan_passation_marche_id != null && items.parent_id == null) {
+                return items;
+              }
+          } else {
+              if (items.sib == 1 && items.parent_id == null) {
+                return items;
+              }
           }
         });
       } else {
-        return this.marcheHorSibFiltre1.filter(
-          (items) =>
-            items.sib == 1 &&
-            items.plan_passation_marche_id == null &&
-            items.parent_id == null
-        );
+        if (this.libelle_typemarche == "HORS PPM" && this.libelle_typemarche != 0) {
+          return this.marcheHorSibFiltre1.filter(
+            (items) =>
+              items.sib == 1 &&
+              items.plan_passation_marche_id == null &&
+              items.parent_id == null
+          );
+        }
+        else if(this.libelle_typemarche == "PPM" && this.libelle_typemarche != 0){
+            return this.marcheHorSibFiltre1.filter(
+            (items) =>
+              items.sib == 1 &&
+              items.plan_passation_marche_id != null &&
+              items.parent_id == null
+          );
+        }
+        else {
+          return this.marcheHorSibFiltre1.filter(
+            (items) =>
+              items.sib == 1 &&
+              items.parent_id == null
+          );
+        }
       }
     },
 
@@ -1514,9 +1783,9 @@ afficheMarcheParUaPlanifier() {
       "getMarche",
       "getActeEffetFinancier",
     ]),
-    pagePrecedent(){
-                window.history.back()
-            },
+    pagePrecedent() {
+      window.history.back();
+    },
     //...mapActions("horSib", ['getMarcheHorSib']),
     modifierModalResiliation() {
       var nouvelObjet1 = {
