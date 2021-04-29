@@ -390,7 +390,7 @@ controlleur_fin
                     <div class="span4"></div>
                     <div class="span4"></div>
 
-                    <div class="span4" align="right">
+                    <!-- <div class="span4" align="right">
                       <a
                         href="#ajouterMarcheP"
                         data-toggle="modal"
@@ -398,7 +398,7 @@ controlleur_fin
                         align="rigth"
                         >Ajouter répartition par bailleur</a
                       >
-                    </div>
+                    </div> -->
 
                     <marchePluriannuel
                       :macheid="detail_marche.id"
@@ -412,7 +412,7 @@ controlleur_fin
                     <div class="span4"></div>
                     <div class="span4"></div>
 
-                    <div class="span4" align="right">
+                    <!-- <div class="span4" align="right">
                      
 
                        <a
@@ -422,7 +422,7 @@ controlleur_fin
                         align="rigth"
                         >Ajouter répartition par plurianniuel</a
                       >
-                    </div>
+                    </div> -->
 
                     <marcheParBailleur
                       :macheid="detail_marche.id"
