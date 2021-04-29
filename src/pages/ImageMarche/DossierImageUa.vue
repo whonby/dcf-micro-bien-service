@@ -5,7 +5,7 @@
                <div class="col-md-3 h-100 d-flex justify-content-center align-items-center">
                    
                    <span style="font-size:20px;">
-                       <router-link to="/dossier-image-par-marche">
+                       <router-link to="/dossier-image-marche">
                         <img :src="url" alt="" 
                         sizes="10px;" srcset="">
                             <br>

@@ -22,7 +22,7 @@
                                               name ="Liste de role membre Cojo"
                                               worksheet = "role membre Cojo"
                                             :data="roleFiltre">
-                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                       <i title="Exporter en excel" class="icon-table"> Exporter en Excel</i>
 
                                                  </download-excel> 
                                  <div align="right" style="cursor:pointer;">

@@ -92,7 +92,6 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
-import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue";
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
@@ -125,7 +124,8 @@ import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voi
 import FicheRealiteServiceFait from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheRealiteServiceFait.vue"
 import FicheDeControle from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheDeControle.vue"
 import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.vue";
-
+import GroupeUaDesAutresDepense from "../../pages/bien_service/AutreDepense/GroupeUaDesAutresDepense.vue";
+import GestionAutresDepense from "../../pages/bien_service/AutreDepense/GestionAutresDepense.vue";
 import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheRealiteServiceFait.vue"
 import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
@@ -157,12 +157,23 @@ import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesO
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
 import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
 
+import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
     
+    {
+        path: "/GroupeUaDesAutresDepense",
+        name: "GroupeUaDesAutresDepense",
+        component: GroupeUaDesAutresDepense
+    },
+    {
+        path: "/GestionAutresDepense/:id",
+        name: "GestionAutresDepense",
+        component: GestionAutresDepense
+    },
     {
         path: "/VoirOrdrePaiementDesRegie/:id",
         name: "VoirOrdrePaiementDesRegie",
@@ -1016,6 +1027,27 @@ const BienServiceRoutes = [
         path: "/cycle_de_vie/:id",
         name: "CycleDeVie",
         component: CycleDeVie
+    },
+    {
+        path: "/dossier-image-ministere",
+        name: "ImageParMinistere",
+        component: ImageParMinistere
+    },
+    {
+        path: "/dossier-image-ua",
+        name: "DossierImageUa",
+        component: DossierImageUa
+    },
+    {
+        path: "/dossier-image-marche",
+        name: "DossierImageParMarche",
+        component: DossierImageParMarche
+    },
+    {
+        path: "/image-marches",
+        name: "DossierImg",
+        component: DossierImg 
+
     }
 
 ]
