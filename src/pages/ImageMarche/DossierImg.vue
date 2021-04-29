@@ -52,7 +52,9 @@ import lightbox from "./lightbox.vue";
 import "./lightbox.css";
 
 export default {
-  
+  components: {
+      lightbox
+  },
 }
 </script>
 <style lang="">

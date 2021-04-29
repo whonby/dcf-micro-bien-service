@@ -5,6 +5,60 @@
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
         </div>
+          <div class="span10 " >
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Type de marché
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="typeMarches"
+                                                   v-model="type_marche_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                          <td>
+                                <!-- <label style="color:#000;font-size:14px;font-weight: bolder;" align="right">Objet
+                                </label> -->
+
+                                <!-- <div class="span3" >
+                  <div align="right">
+                    
+                    <input
+                      type="search"
+                      class="span4"
+                      placeholder="Recherche par Objet"
+                      v-model="search"
+                    />
+                  </div>
+                </div> -->
+                                <!-- <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="test"
+                                                   v-model="objet1"
+                                                   option-value="id"
+                                                   option-text="objet"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select> -->
+                            </td>
+                            
+                            
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -83,7 +137,7 @@
                     class="odd gradeX"
                     v-for="(
                       marche, index
-                    ) in partition(rechercheUa, size)[page]"
+                    ) in partition(rechercheUa(type_marche_id), size)[page]"
                     :key="marche.id"
                   >
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -178,7 +232,7 @@
                 <a @click.prevent="precedent()" href="#">Précedent</a>
               </li>
               <li
-                v-for="(titre, index) in partition(rechercheUa, size).length"
+                v-for="(titre, index) in partition(rechercheUa(type_marche_id), size).length"
                 :key="index"
                 :class="{ active: active_el == index }"
               >
@@ -188,7 +242,7 @@
               </li>
               <li
                 :class="{
-                  disabled: page == partition(rechercheUa, size).length - 1,
+                  disabled: page == partition(rechercheUa(type_marche_id), size).length - 1,
                 }"
               >
                 <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -245,7 +299,7 @@ export default {
       //     CODE: "code",
       //     libelle: "libelle"
       //   },
-
+type_marche_id:"",
       formData: {
         objet: "",
         livrable: "",
@@ -379,13 +433,28 @@ created() {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
-
-    rechercheUa() {
-      const st = this.search.toLowerCase();
-      return this.afficherMarcheInvestissementParDroitAccess.filter((type) => {
-        return type.objet.toLowerCase().includes(st);
-      });
+  rechercheUa() {
+      return id =>{
+        if(id!=null && id!=""){
+           return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.type_marche_id == id && item.unite_zone==this.marcheid)
+ 
+       
+        }
+        return this.afficherMarcheInvestissementParDroitAccess.filter(item => item.unite_zone == this.marcheid)
+      }
+      
+      //const st = this.search.toLowerCase();
+     
+       // return type.objet.toLowerCase().includes(st)  ;
+            //  type.afficherTypeMarcheLibelle(type.type_marche_id) ;
+   
     },
+    // rechercheUa() {
+    //   const st = this.search.toLowerCase();
+    //   return this.afficherMarcheInvestissementParDroitAccess.filter((type) => {
+    //     return type.objet.toLowerCase().includes(st);
+    //   });
+    // },
 
     loading() {
       if (this.afficherMarcheInvestissementParDroitAccess.length > 0) {
@@ -542,13 +611,18 @@ created() {
     },
 
     // afficher le montant de tout les marche
-
-    montantMarcheInvestissement() {
-      return this.afficherMarcheInvestissementParDroitAccess.reduce(
+ montantMarcheInvestissement() {
+      return this.rechercheUa(this.type_marche_id).reduce(
         (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
         0
       );
     },
+    // montantMarcheInvestissement() {
+    //   return this.afficherMarcheInvestissementParDroitAccess.reduce(
+    //     (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
+    //     0
+    //   );
+    // },
 
     afficheMarchExecuter() {
       return this.getActeEffetFinancierPersonnaliser45.filter(

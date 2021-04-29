@@ -124,7 +124,8 @@ import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voi
 import FicheRealiteServiceFait from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheRealiteServiceFait.vue"
 import FicheDeControle from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheDeControle.vue"
 import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.vue";
-
+import GroupeUaDesAutresDepense from "../../pages/bien_service/AutreDepense/GroupeUaDesAutresDepense.vue";
+import GestionAutresDepense from "../../pages/bien_service/AutreDepense/GestionAutresDepense.vue";
 import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheRealiteServiceFait.vue"
 import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
@@ -163,6 +164,16 @@ import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
     
+    {
+        path: "/GroupeUaDesAutresDepense",
+        name: "GroupeUaDesAutresDepense",
+        component: GroupeUaDesAutresDepense
+    },
+    {
+        path: "/GestionAutresDepense/:id",
+        name: "GestionAutresDepense",
+        component: GestionAutresDepense
+    },
     {
         path: "/VoirOrdrePaiementDesRegie/:id",
         name: "VoirOrdrePaiementDesRegie",

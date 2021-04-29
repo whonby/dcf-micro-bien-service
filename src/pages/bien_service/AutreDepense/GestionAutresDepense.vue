@@ -1,6 +1,10 @@
-reference_marche
+
 <template>
   <div >
+    <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
       <div id="exampleModal" class="modal hide gdtailleModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="btn btn-danger"  type="button" style="color:#000;font-weight: bolder">Fermer</button>
@@ -44,6 +48,7 @@ reference_marche
       </div>
      
     </div>
+   <h2 style="text-align:center;font-size:25px">LISTES DES AUTRES DEPENSES EXECUTES</h2>
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -84,9 +89,9 @@ reference_marche
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { formatageSommeSansFCFA } from "../../../src/Repositories/Repository";
-import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
-import { partition } from "../../../src/Repositories/Repository";
+import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
+import { partition } from "@/Repositories/Repository";
 //import {partition} from '../../../src/Repositories/partition'
 //import {partition} from '../../../src/Repositories/partition';
 //import {partition} from '../../../../'

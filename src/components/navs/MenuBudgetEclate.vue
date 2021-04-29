@@ -14,7 +14,7 @@
       </li>
       <li>
         <router-link :to="{name: 'recapitulatifBudgetHorsSigobe'}" tag="a">
-          RECAPITULATIF BUDGET DES PROJETS
+          SYSTHESE DU BUDGET PAR UA
         </router-link>
       </li>
        <!-- <li>

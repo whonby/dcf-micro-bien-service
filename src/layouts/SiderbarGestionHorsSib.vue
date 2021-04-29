@@ -282,6 +282,7 @@ return objJson.id
        navigateurOrdrePaiement(){
         this.activate(1200)
         this.$router.push({
+        //  name:'TableauBordOp'
           name:'ListeOpParUa'
         })
       },
@@ -301,12 +302,14 @@ return objJson.id
 navigateToGestionMarche(){
     this.activate(25)
     this.$router.push({
+      //  name: 'TableauBordGestionMarche'
         name: 'groupeMarcheParUa'
     })
       },
        navigateTableBordBordBudgetEclate(){
           this.activate(780)
           this.$router.push({
+             // name: 'TableauBordDuBudgetEclate'
               name: 'BudgetEclate'
           })
       },
@@ -331,6 +334,7 @@ navigateToGestionMarche(){
           name: 'tableaudebord'
         })
       },
+      
  navigateToTableauBord(){
         this.activate(1034)
         this.$router.push({
@@ -366,7 +370,7 @@ navigateRetourAuMenu(){
        navigateToAutredepense(){
         this.activate(15)
         this.$router.push({
-          name:'AutresDepense'
+          name:'GroupeUaDesAutresDepense'
         })
       },
 

@@ -1,6 +1,15 @@
 
 <template>
     <div>
+        <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-primary"
+            @click.prevent="ajjouterMA"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> Ajouter répartition par plurianniuel </i>
+          </button>
+        </div>
            <table class="table table-bordered table-striped" v-if="macheid">
                      <thead>
                              <tr>
@@ -667,6 +676,12 @@ cummulDesBailleur() {
 ...mapActions("bienService",['ajouterProgrammationMarchePlurieAnnuel','modifierProgrammationMarchePlurieAnnuel','supprimerProgrammationMarchePlurieAnnuel']),
 
 
+ajjouterMA() {
+      this.$("#ajouterMarche").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
   afficherModalMarchePl(index){
                 this.$('#modifierMarchePluriannuel').modal({
                     backdrop: 'static',
