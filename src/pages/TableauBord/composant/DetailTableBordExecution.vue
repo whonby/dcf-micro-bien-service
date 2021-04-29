@@ -9,7 +9,7 @@
     </div>
     <div class="span6" align="right">
         <button class="btn btn-default" @click="tableToExcel('table', 'SITUATION EXECCUTION')">
-            Exporte en excel
+            Exporter en Excel
         </button>
     </div>
 </div>

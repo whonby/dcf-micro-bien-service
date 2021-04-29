@@ -4,8 +4,9 @@
 
        
         <div>
-         <div style="text-align:center;font-size:50px;color:#000;margin-top:20%;">
-          TABLEAU DE BORD HORS SIGOBE EN COURS...
+         <div style="text-align:center;font-size:50px;color:#000;margin-top:15%;" :class="{active: active_el ==780}">
+          TABLEAU DE BORD HORS SIGOBE EN COURS... <br/>
+          <button></button>
          </div>
      </div>
     </div>

@@ -282,7 +282,8 @@ return objJson.id
        navigateurOrdrePaiement(){
         this.activate(1200)
         this.$router.push({
-          name:'TableauBordOp'
+        //  name:'TableauBordOp'
+          name:'ListeOpParUa'
         })
       },
        navigateToRapport(){
@@ -301,13 +302,15 @@ return objJson.id
 navigateToGestionMarche(){
     this.activate(25)
     this.$router.push({
-        name: 'TableauBordGestionMarche'
+      //  name: 'TableauBordGestionMarche'
+        name: 'groupeMarcheParUa'
     })
       },
        navigateTableBordBordBudgetEclate(){
           this.activate(780)
           this.$router.push({
-              name: 'TableauBordDuBudgetEclate'
+             // name: 'TableauBordDuBudgetEclate'
+              name: 'BudgetEclate'
           })
       },
       navigateTableBordBord(){
