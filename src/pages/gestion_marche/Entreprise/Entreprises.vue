@@ -1,6 +1,16 @@
 getSecteurActivite
 <template>
     <div>
+
+            <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajouterEntreS"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> AJOUTER </i>
+          </button>
+        </div>
  <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -192,7 +202,7 @@ getSecteurActivite
                                     class="btn btn-default " title="Detail entreprise ">
                                    <span class=""><i class="icon-folder-open"> Détail EN/SE</i></span>
                                          </router-link> 
-                                                        <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></a>
+                                                        <button href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></button>
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"> Supprimer</i></span></button>
 
@@ -699,6 +709,12 @@ getDateFinSanction() {
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
            
            
+ajouterEntreS() {
+      this.$("#myModal2").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
            
                 
            // pagination

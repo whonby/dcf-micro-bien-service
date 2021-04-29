@@ -1,6 +1,17 @@
 
 <template>
     <div>
+
+
+         <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="ajjouterM"
+            style="font-weight: bolder; color: #fff"
+          >
+            <i class="icon icon-plus"> Ajouter répartition par bailleur</i>
+          </button>
+        </div>
            <table class="table table-bordered table-striped" v-if="macheid">
                      <thead>
                              <tr>
@@ -51,6 +62,7 @@
                                     </tr>
                     </tbody>
                 </table>
+
                 <div id="ajouterMarcheP" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -523,7 +535,12 @@ export default {
     methods:{
 ...mapActions("bienService",['ajouterProgrammationMarchePlurieAnnuel','modifierProgrammationMarchePlurieAnnuel','supprimerProgrammationMarchePlurieAnnuel']),
 
-
+ajjouterM() {
+      this.$("#ajouterMarcheP").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
   afficherModalModificationMarchePluriannuel(index){
                 this.$('#modifierMarcheP').modal({
                     backdrop: 'static',
