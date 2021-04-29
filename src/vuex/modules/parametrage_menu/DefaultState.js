@@ -27,7 +27,7 @@ const defaultstate = {
 
     //route de gestion des menus***//
     tableaubordhorssigobe:1034,
-    tableaudebord:1035,
+    tableaudebordsigobe:1035,
 
     active_el: 11
 };

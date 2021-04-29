@@ -153,7 +153,7 @@ reference_marche
                 color: #fff;
                 font-size: 18px;
                 width: 100%;
-                background-color: black;
+                background-color: black !important;
               "
             >
               <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
@@ -311,7 +311,7 @@ reference_marche
                         v-else-if="marche.attribue == 5"
                         class="btn btn-inverse"
                       >
-                        <span title="MARCHE EN TERMINE">TE</span>
+                        <span title="MARCHE TERMINE">TE</span>
                       </button>
                       <button v-else-if="marche.attribue == 7" class="btn btn">
                         <span title="MARCHE SUSPENDU">SU</span>
@@ -656,6 +656,7 @@ export default {
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null
+                && qtreel.sib==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -667,6 +668,7 @@ export default {
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null
+                && qtreel.sib==1
             ).length;
           } else {
             return this.marches.filter(
@@ -674,6 +676,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null
+                && qtreel.sib==1
             ).length;
           }
         }
@@ -691,6 +694,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null
+                && qtreel.sib==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -701,12 +705,13 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null
+                && qtreel.sib==1
             ).length;
           } else {
             return this.marches.filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id && qtreel.parent_id == null
-              // && qtreel.plan_passation_marche_id==null
+                 && qtreel.sib==1
             ).length;
           }
         }
@@ -725,6 +730,7 @@ export default {
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null
+                && qtreel.sib==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -736,6 +742,7 @@ export default {
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null
+                && qtreel.sib==1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -743,6 +750,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null
+                && qtreel.sib==1
             ).length;
           }
         }
@@ -761,6 +769,7 @@ export default {
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id == null
+                && qtreel.sib==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -772,6 +781,7 @@ export default {
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id != null
+                && qtreel.sib==1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -779,6 +789,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null
+                && qtreel.sib==1
             ).length;
           }
         }
@@ -798,6 +809,7 @@ export default {
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id == null
+                && qtreel.sib==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -809,6 +821,7 @@ export default {
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id != null
+                && qtreel.sib==1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -816,6 +829,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null
+                && qtreel.sib==1
             ).length;
           }
         }

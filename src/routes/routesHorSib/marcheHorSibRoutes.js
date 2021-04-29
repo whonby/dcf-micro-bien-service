@@ -3,6 +3,7 @@ import marche from "../../pages/Hors_sib/marche_hors_sib/marche";
 import ListeDesSousBudgetMarche from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeDesSousBudgetMarche.vue";
 import ListeMarcheSousBudget from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeMarcheSousBudget.vue";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
+import groupeMarcheParUaSIgobe from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUaSIgobe.vue";
 import groupeToutMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeToutMarcheParUa.vue";
 // import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
 
@@ -103,6 +104,12 @@ const marcheHorSibRoutes =[
         path:"/groupeMarcheParUa",
         name:"groupeMarcheParUa",
         component:groupeMarcheParUa
+    },
+
+    {
+        path:"/groupeMarcheParUaSIgobe",
+        name:"groupeMarcheParUaSIgobe",
+        component:groupeMarcheParUaSIgobe
     },
     {
         path: "/AjoutPersonnelAvecContrat",
