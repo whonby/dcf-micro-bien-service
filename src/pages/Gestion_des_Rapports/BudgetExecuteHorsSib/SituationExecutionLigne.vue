@@ -202,7 +202,7 @@
                       background-color: #87ceeb;
                     "
                   >
-                    Taux(%)
+                    Taux En Exécution (%)
                   </th>
                   <th
                     style="
@@ -224,11 +224,11 @@
                 <tr>
                   <!-- <td>{{ sommeLigneGrandeNature(listeLigne) }}</td> -->
 
-                  <td style="background-color: #ff9966; width: 800px" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; width: 800px" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                     <b>{{ LibelleGrandeNature(listeLigne) }}</b>
                     
                   </td>
-                  <td style="background-color: #ff9966; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -241,7 +241,7 @@
                      }} 
                     </b>
                   </td>
-                  <td style="background-color: #ff9966; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -254,7 +254,7 @@
                      }}
                     </b>
                   </td>
-                  <td style="background-color: #ff9966; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -267,7 +267,7 @@
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #ff9966; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                     <b>{{
                       (
                         (MontantBudgetExecuté(
@@ -283,7 +283,7 @@
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #ff9966; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
@@ -302,7 +302,7 @@
                     <!-- </b> -->
                   </td>
 
-                  <!-- <td style="background-color:#ff9966;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
+                  <!-- <td style="background-color:#83F747 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
                -->
                 </tr>
 

@@ -199,7 +199,7 @@
                   background-color: #87ceeb;
                 "
               >
-                Taux(%)
+                Taux En Exécution (%)
               </th>
               <th
                 style="
@@ -276,12 +276,12 @@
             </td>
             </tr>
             <tr>
-              <td style="font-weight: bold; font-size: 18px ; width: 800px"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+              <td style="font-weight: bold; font-size: 18px ; width: 800px; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 TOTAL:{{
                   LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+              <td style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                   formatageSommeSansFCFA(
                   parseFloat(MontantBudgetActuel(
@@ -289,7 +289,7 @@
                   )))
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+              <td style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetExecuté(
@@ -298,7 +298,7 @@
                 }}
               </td>
 
-                <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                <td style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetExecutéProvisoire(
@@ -306,7 +306,7 @@
                   )))
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+              <td style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                   (
                     ((MontantBudgetExecuté(
@@ -320,7 +320,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px; text-align: right;"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+              <td style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important"  v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 {{
                  formatageSommeSansFCFA(
                   parseFloat( MontantBudgetActuel(
