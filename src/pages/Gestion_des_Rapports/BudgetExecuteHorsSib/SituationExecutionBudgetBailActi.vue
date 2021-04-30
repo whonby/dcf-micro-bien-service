@@ -194,7 +194,7 @@
                 background-color: #87ceeb;
               "
             >
-              Taux(%)
+              Taux d'Exécution (%)
             </th>
             <th
               style="

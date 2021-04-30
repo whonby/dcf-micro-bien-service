@@ -140,8 +140,9 @@
               <th
                 style="
                   font-size: 14px;
+                  color:#000;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Ligne Budgétaire
@@ -149,8 +150,9 @@
               <th
                 style="
                   font-size: 14px;
+                   color:#000;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Type
@@ -158,8 +160,9 @@
               <th
                 style="
                   font-size: 14px;
+                   color:#000;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: #FC762F !important;
                 "
               >
                 N°OP
@@ -167,8 +170,9 @@
               <th
                 style="
                   font-size: 14px;
+                   color:#000;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Bailleur
@@ -177,7 +181,8 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                   color:#000;
+                  background-color: #FC762F !important;
                 "
               >
                 Objet
@@ -186,8 +191,9 @@
               <th
                 style="
                   font-size: 14px;
+                   color:#000;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Montant
@@ -196,7 +202,8 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                   color:#000;
+                  background-color: #FC762F !important;
                 "
               >
                 Visa Cf

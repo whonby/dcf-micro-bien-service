@@ -143,14 +143,15 @@
 
          <div class="widget-content nopadding" style="margin: 25px">
         <table class="table table-bordered">
-          <thead style="background-color: #87ceeb">
+          <thead style="background-color: #FC762F !important">
             <tr>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F !important;
                 "
               >
               <b>Activités</b>
@@ -161,7 +162,8 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  color: #000;
+                  background-color: #FC762F !important;
                 "
               >
               <b>Budget Actuel</b>
@@ -173,7 +175,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F !important;
                 "
               >
                 <b>Montant Exécuté</b>
@@ -185,7 +187,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F !important;
                 "
               >
                 Montant Provisoire
@@ -195,17 +197,19 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  color: #000;
+                  background-color: #FC762F !important;
                 "
               >
-                <b>Taux En Exécution (%)</b>
+                <b>Taux d'Exécution (%)</b>
               </th>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F !important;
                 "
               >
                <b> Disponible</b>

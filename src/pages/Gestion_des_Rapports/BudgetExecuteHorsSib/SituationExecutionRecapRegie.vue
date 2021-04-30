@@ -141,14 +141,14 @@
 
       <div class="widget-content nopadding" style="margin: 25px">
         <table class="table table-bordered">
-        <thead style="background-color: #87ceeb">
+        <thead style="background-color: #FC762F">
           <tr>
             <th
               style="
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: #FC762F;
               "
             >
               Activités
@@ -158,7 +158,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: #FC762F;
               "
             >
               Budget Actuel
@@ -169,7 +169,7 @@
                 font-weight: bold;
                 color: #000;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: #FC762F;
               "
             >
               Montant Exécuté
@@ -179,17 +179,17 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: #FC762F;
               "
             >
-              Taux(%)
+              Taux d'Exécution (%)
             </th>
             <th
               style="
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: #FC762F;
               "
             >
               Disponible

@@ -134,6 +134,7 @@
         style="
           margin-left: 30px;
           font-size: 14px;
+          color: #000;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -148,8 +149,9 @@
                 <th
                   style="
                     font-size: 14px;
+                    color: #000;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color:  #FC762F !important;
                   "
                 >
                   Activité/Bailleurs
@@ -157,8 +159,9 @@
                 <th
                   style="
                     font-size: 14px;
+                    color: #000;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color:  #FC762F !important;
                   "
                 >
                   Budget Actuel
@@ -166,8 +169,9 @@
                 <th
                   style="
                     font-size: 14px;
+                    color: #000;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color:  #FC762F !important;
                   "
                 >
                   Montant Exécuté
@@ -179,7 +183,7 @@
                     font-weight: bold;
                     color: #000;
                     text-align: center;
-                    background-color: #87ceeb;
+                    background-color:  #FC762F !important;
                   "
                 >
                   Montant Provisoire
@@ -188,16 +192,18 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    color: #000;
+                    background-color:  #FC762F !important;
                   "
                 >
-                  Taux En Exécution (%)
+                  Taux d'Exécution (%)
                 </th>
                 <th
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    color: #000;
+                    background-color: #FC762F !important;
                   "
                 >
                   Disponible
