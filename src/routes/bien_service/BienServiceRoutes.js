@@ -110,6 +110,7 @@ import AjouterTacheRealise from "../../pages/investissement/AjouterTache/Ajouter
 import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
 import ModificationOp from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ModificationOp.vue"
 import PagePrincipalMarche from '../../pages/gestionMarche/PagePrincipalMarche.vue';
+import PagePrincipalMarcheSigobe from '../../pages/gestionMarche/PagePrincipalMarcheSigobe.vue';
 import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
@@ -183,6 +184,12 @@ const BienServiceRoutes = [
         path: "/PagePrincipalMarche/:id",
         name: "PagePrincipalMarche",
         component: PagePrincipalMarche
+    },
+
+    {
+        path: "/PagePrincipalMarcheSigobe/:id",
+        name: "PagePrincipalMarcheSigobe",
+        component: PagePrincipalMarcheSigobe
     },
     {
         path: "/importationBudgetEclate",
