@@ -3,7 +3,6 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
      <li>
-       
         <router-link :to="{name: 'BudgetEclate'}" tag="a">
           BUDGET ECLATE DES PROJETS
         </router-link>
