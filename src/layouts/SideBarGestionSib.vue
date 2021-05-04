@@ -102,9 +102,9 @@
 
 
         <li @click.prevent="ExecutionBudgetaire" :class="{active: active_el ==100}">
-          <a title="INVESTISSEMENT" href="#">
+          <a title="CONTROLE DE L'EXECUTION" href="#">
             <i class="icon-truck"></i>
-            <span>GESTION BUDGETAIRE</span>
+            <span>CONTROLE EXECUTION</span>
            
           </a>
         </li>
@@ -300,7 +300,7 @@ navigateToGestionMarche(){
  ExecutionBudgetaire(){
         this.activate(100)
         this.$router.push({
-          name:'ListeUaExecutionBudgetaire'
+          name:'listeDesUaSigobe'
         })
       },
 

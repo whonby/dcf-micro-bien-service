@@ -157,14 +157,24 @@ import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDes
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
 import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
-
+import listeDesUaSigobe from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesUaSigobe.vue"
+import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
-    
+    {
+        path: "/VoirModaliteExecution/:id",
+        name: "VoirModaliteExecution",
+        component: VoirModaliteExecution
+    },
+    {
+        path: "/listeDesUaSigobe",
+        name: "listeDesUaSigobe",
+        component: listeDesUaSigobe
+    },
     {
         path: "/GroupeUaDesAutresDepense",
         name: "GroupeUaDesAutresDepense",

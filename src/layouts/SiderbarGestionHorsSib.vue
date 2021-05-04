@@ -118,7 +118,7 @@
            <li @click.prevent="navigateurOrdrePaiement" :class="{active: active_el ==1200}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>
-                  <span>GESTION DES OP</span>
+                  <span>CONTROLE DE L'EXECUTION</span>
 
               </a>
           </li>
