@@ -181,9 +181,9 @@ recupBanque1
           <tr>
             <th>Exercice</th>
 
-            <th>Type op</th>
+            <th>Type ordre paiement</th>
 
-            <th>Numéro op</th>
+            <th>Numéro ordre paiement</th>
             <th>Section</th>
 
             <th>Programme</th>
@@ -204,7 +204,7 @@ recupBanque1
           <tr class="odd gradeX">
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
 
-            <td v-if="detailOp.type_ordre_paiement == 1">OP Direct</td>
+            <td v-if="detailOp.type_ordre_paiement == 1">Ordre Paiement Direct</td>
 
             <td style="color:red">{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
 
@@ -238,7 +238,7 @@ recupBanque1
             
             <th>Type financement</th>
             <th>Source Financement</th>
-            <th>Montant Op</th>
+            <th>Montant Ordre paiement</th>
             <th>Mode Paiement</th>
             <th>Nom et prenoms cf</th>
             <th>famille motif</th>
@@ -318,9 +318,9 @@ recupBanque1
         <tr>
           <th>Exercice</th>
 
-          <th>Type op</th>
+          <th>Type ordre paiement</th>
 
-          <th>Numéro op</th>
+          <th>Numéro ordre paiement</th>
           <th>Section</th>
 
           <th>Programme</th>
@@ -343,7 +343,7 @@ recupBanque1
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
              <td v-if="detailOp.type_ordre_paiement == 2 || detailOp.type_ordre_paiement == 3 ||
-              detailOp.type_ordre_paiement == 4">OP Provisoire</td>
+              detailOp.type_ordre_paiement == 4">Ordre Paiement Provisoire</td>
                
                
 
@@ -392,7 +392,7 @@ recupBanque1
          
           <th>type financement</th>
           <th>Source Financement</th>
-          <th>Montant Op</th>
+          <th>Montant Ordre Paiement</th>
           <th>Mode Paiement</th>
           <th>Nom et prenoms cf</th>
           <th>famille motif</th>
@@ -468,8 +468,8 @@ recupBanque1
       <thead>
         <tr>
           <th>Exercice</th>
-          <th>Type op</th>
-          <th>Numéro op</th>
+          <th>Type ordre paiement</th>
+          <th>Numéro ordre paiement</th>
          <th>Nom et prenoms cf</th>
           <th>famille motif</th>
           <th>Motif</th>
@@ -483,7 +483,7 @@ recupBanque1
          <tr class="odd gradeX">
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
-             <td v-if="detailOp.type_ordre_paiement == 3 || detailOp.type_ordre_paiement == 4">OP Annulation</td>
+             <td v-if="detailOp.type_ordre_paiement == 3 || detailOp.type_ordre_paiement == 4">Ordre Paiement Annulation</td>
              <template v-if="detailOp.id_op_Annulation==0">
  <td  style="color:red">
 {{ detailOp.numero_ordre_paiement || "Non renseigné" }}
@@ -528,9 +528,9 @@ recupBanque1
         <tr>
           <th>Exercice</th>
 
-          <th>Type op</th>
+          <th>Type ordre paiement</th>
 
-          <th>Numéro op</th>
+          <th>Numéro ordre paiement</th>
            <th>Nom et prenoms cf</th>
           <th>famille motif</th>
           <th>Motif</th>
@@ -545,7 +545,7 @@ recupBanque1
          <tr class="odd gradeX">
 
             <td>{{ detailOp.exercice || "Non renseigné" }}</td>
-             <td v-if="detailOp.type_ordre_paiement == 4">OP Definitf</td>
+             <td v-if="detailOp.type_ordre_paiement == 4">Ordre Paiement Definitf</td>
               <td style="color:red">{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
  <td>{{recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detailOp.unite_administrative_id)))}}</td>
            <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>

@@ -314,7 +314,7 @@ uniteAdministratives
                        <th style="font-size:14px;font-weight:bold">Mandat</th>
                        <th style="font-size:14px;font-weight:bold">Op Systeme</th>
                        <th style="font-size:14px;font-weight:bold">Fiche Réalité</th>
-                       <th style="font-size:14px;font-weight:bold">Fiche Annexe</th>
+                       <th style="font-size:14px;font-weight:bold">Fiche annexe d’autorisation de contrôle </th>
                         <th style="font-size:14px;font-weight:bold">Voir Détail</th>
                         <th  style="font-size:14px;font-weight:bold" colspan="2">Action</th>
                   </tr>
@@ -556,7 +556,7 @@ uniteAdministratives
                      <td v-if="type.type_procedure_id=='Engagement direct'">
                       <router-link :to="{ name: 'FicheDeControle1', params: { id: type.id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;">Fiche Annexe</i></span>
+                  <span class=""><i class="   icon-print" style="font-weight: bold;">Fiche annexe d’autorisation de contrôle</i></span>
                    </router-link> 
                     </td>
                     <td v-else style="background-color:lightblue"></td>

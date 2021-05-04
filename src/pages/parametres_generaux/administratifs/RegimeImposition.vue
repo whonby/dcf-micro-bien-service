@@ -30,7 +30,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Regimes d'impositions</h5>
+              <h5>Liste des impôts synthétiques </h5>
               <div align="right">
                 Recherche:
                 <input type="text" v-model="search" />
@@ -102,7 +102,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Forme juridique</h3>
+        <h3>Ajouter impôt synthétique </h3>
       </div>
       <div class="modal-body">
            <table class="table table-bordered table-striped">
