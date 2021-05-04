@@ -138,6 +138,18 @@
                               <div class="single-timeline-area">
 
                                   <div class="row-fluid">
+                                     <div class="span4"  @click="goToModule(1)" v-if="!noDCfNoAdmin">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text">
+                                                  <h5>PARAMETRES GENERAUX</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-cogs"></i>
+                                                  </div>
+                                                  <p> Permet de codifier les données de base</p>
+                                              </div>
+                                          </div>
+                                      </div>
                                       <div class="span4" @click="goToModule(2)">
                                           <div  class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; ">
 
@@ -160,11 +172,30 @@
 <!--                                              </div>-->
 <!--                                          </div>-->
 <!--                                      </div>-->
-                                      <div class="span4" @click="goToModule(3)">
+ <div class="span4"  >
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text">
+                                                  <h5>GESTION DU PERSONNEL</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-group"></i>
+                                                  </div>
+                                                  <p> permet de traiter la gestion des actes de personnel (recrutement et début de carrière, suivi de carrière et sortie de carrière)</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                     
+                                       <!-- </li> -->
+                                  </div>
+                              </div>
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+                                  <div class="row-fluid">
+ <div class="span4" @click="goToModule(3)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
 
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>EXECUTION SIGOBE</h5>
+                                                  <h5>GESTION SIGOBE</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-book"></i>
                                                   </div>
@@ -172,13 +203,13 @@
                                               </div>
                                           </div>
                                       </div>
-                                       <li :class="{active: active_el == 1034 }" @click.prevent="navigateToTableauBord">
+                                       <!-- <li :class="{active: active_el == 1034 }" @click.prevent="navigateToTableauBord"> -->
                                       <div class="span4"  @click="goToModule(4)">
                                         
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>EXECUTION HORS SIGOBE</h5>
+                                                  <h5>GESTION HORS SIGOBE</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-folder-open"></i>
                                                   </div>
@@ -186,26 +217,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                       </li>
-                                  </div>
-                              </div>
-                              <!-- Single Timeline Content-->
-                              <div class="single-timeline-area">
-                                  <div class="row-fluid">
-
-                                      <div class="span4"  @click="goToModule(5)">
-                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
-                                              <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>CARTOGRAPHIES DU BUDGETS ET DES MARCHES</h5>
-                                                  <div>
-                                                      <i style="font-size: 35px !important;" class="icon-globe"></i>
-                                                  </div>
-                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA Nationales et Internationales</p>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="span4"  @click="goToModule(8)">
+                                       <div class="span4"  @click="goToModule(8)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -217,7 +229,29 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="span4"  @click="goToModule(7)">
+                                      
+                                     
+                                    
+                                  </div>
+                              </div>
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+
+                                  <div class="row-fluid">
+
+                                     <div class="span4"  @click="goToModule(5)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>CARTOGRAPHIES DU BUDGETS ET DES MARCHES</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-globe"></i>
+                                                  </div>
+                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA Nationales et Internationales</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                        <div class="span4"  @click="goToModule(7)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-id-card" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -229,25 +263,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                  </div>
-                              </div>
-                              <!-- Single Timeline Content-->
-                              <div class="single-timeline-area">
-
-                                  <div class="row-fluid">
-
-                                      <div class="span4"  @click="goToModule(1)" v-if="!noDCfNoAdmin">
-                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
-                                              <div class="timeline-text">
-                                                  <h5>PARAMETRES GENERAUX</h5>
-                                                  <div>
-                                                      <i style="font-size: 35px !important;" class="icon-cogs"></i>
-                                                  </div>
-                                                  <p> Permet de codifier les données de base</p>
-                                              </div>
-                                          </div>
-                                      </div>
+                                      
                                       <div class="span4"  @click="goToModule(9)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
