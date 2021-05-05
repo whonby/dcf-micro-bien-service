@@ -1048,7 +1048,7 @@ RecuperereTaux
                       <tr>
                         <td colspan="2">
                           <div class="control-group">
-                            <label class="control-label">OBJET DECOMPTE</label>
+                            <label class="control-label">Numéro de décompte</label>
                             <div class="controls">
                               <input
                                 type="text"
@@ -1782,6 +1782,7 @@ RecuperereTaux
                               />
                             </div>
                           </div>
+<!--                           
                           <div class="control-group">
                             <label class="control-label">Fonction</label>
                             <div class="controls">
@@ -1792,7 +1793,9 @@ RecuperereTaux
                                 class="span"
                               />
                             </div>
-                          </div>
+                          </div> -->
+
+
                         </td>
                         <td colspan="2">
                           <div class="widget-title">
@@ -2558,6 +2561,7 @@ export default {
       editFacture:{},
       formData: {
         unite_administrative_id: "",
+        signataire:"",
         activite_id: "",
         ligne_economique_id: "",
         typedepense: "Marche",
@@ -3989,6 +3993,7 @@ montantTvaModifier() {
         (qtreel) => qtreel.numero_marche != null && qtreel.attribue == 2
       );
     },
+
     listeDesUa() {
       if (this.noDCfNoAdmin) {
         let colect = [];
@@ -4006,6 +4011,7 @@ montantTvaModifier() {
 
       return this.uniteAdministratives;
     },
+
     TotalGeneralDemandeEngagement() {
       const val =
         parseFloat(this.formData.montant_tresor) +

@@ -5,6 +5,7 @@
          <div style="text-align:center;font-size:50px;color:#000;margin-top:20%;">
           TABLEAU DE BORD GESTION OP EN COURS...
          </div>
+         
      </div>
 </template>
 

@@ -160,7 +160,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Bailleurs
@@ -170,7 +170,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Budget Actuel
@@ -181,7 +181,7 @@
                 font-weight: bold;
                 color: #000;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Montant Exécuté
@@ -191,7 +191,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Taux d'Exécution (%)
@@ -201,7 +201,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Disponible

@@ -148,7 +148,11 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
+<<<<<<< HEAD
                 background-color: #FC762F;
+=======
+                background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
               "
             >
               Activités
@@ -158,7 +162,11 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
+<<<<<<< HEAD
                 background-color: #FC762F;
+=======
+                background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
               "
             >
               Budget Actuel
@@ -169,7 +177,11 @@
                 font-weight: bold;
                 color: #000;
                 text-align: center;
+<<<<<<< HEAD
                 background-color: #FC762F;
+=======
+                background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
               "
             >
               Montant Exécuté
@@ -179,7 +191,11 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
+<<<<<<< HEAD
                 background-color: #FC762F;
+=======
+                background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
               "
             >
               Taux d'Exécution (%)
@@ -189,7 +205,11 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
+<<<<<<< HEAD
                 background-color: #FC762F;
+=======
+                background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
               "
             >
               Disponible

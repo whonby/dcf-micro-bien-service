@@ -110,7 +110,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION BUDGETAIRE RECAPITULAVIE PAR BAILLEUR ET ACTIVITE
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR BAILLEUR ET ACTIVITE
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
@@ -125,7 +125,7 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION BUDGETAIRE RECAPITULAVIE PAR BAILLEUR ET ACTIVITE
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR BAILLEUR ET ACTIVITE
         DU
 
         {{ formaterDate(formData.date_debut) }} AU

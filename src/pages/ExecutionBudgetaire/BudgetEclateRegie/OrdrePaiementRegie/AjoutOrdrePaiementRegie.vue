@@ -1048,7 +1048,7 @@ RecuperereTaux
                       <tr>
                         <td colspan="2">
                           <div class="control-group">
-                            <label class="control-label">OBJET DECOMPTE</label>
+                            <label class="control-label">Numéro de décompte </label>
                             <div class="controls">
                               <input
                                 type="text"
@@ -1782,7 +1782,8 @@ RecuperereTaux
                               />
                             </div>
                           </div>
-                          <div class="control-group">
+
+                          <!-- <div class="control-group">
                             <label class="control-label">Fonction</label>
                             <div class="controls">
                               <input
@@ -1792,7 +1793,8 @@ RecuperereTaux
                                 class="span"
                               />
                             </div>
-                          </div>
+                          </div> -->
+
                         </td>
                         <td colspan="2">
                           <div class="widget-title">
@@ -1938,9 +1940,7 @@ RecuperereTaux
                       <a
                        :readOnly="RechercheNumeroOP" 
                         class="btn btn-primary"
-                        @click.prevent="AjouterOrdrePaiement"
-                        >Valider</a
-                      >
+                        @click.prevent="AjouterOrdrePaiement">Valider</a>
                       <a
                         @click.prevent="afficherModalListePersonnel()"
                         class="btn"

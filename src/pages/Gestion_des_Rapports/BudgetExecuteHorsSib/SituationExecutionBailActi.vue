@@ -110,7 +110,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
@@ -125,7 +125,7 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR DU
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR DU
 
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
