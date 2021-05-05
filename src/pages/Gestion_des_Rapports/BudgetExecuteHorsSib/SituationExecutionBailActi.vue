@@ -149,7 +149,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Activité/Bailleurs
@@ -158,7 +158,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Budget Actuel
@@ -167,7 +167,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Montant Exécuté
@@ -179,7 +179,7 @@
                     font-weight: bold;
                     color: #000;
                     text-align: center;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Montant Provisoire
@@ -188,7 +188,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Taux En Exécution (%)
@@ -197,7 +197,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Disponible
