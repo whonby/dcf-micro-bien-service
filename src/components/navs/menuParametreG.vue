@@ -375,8 +375,24 @@
            Type d'analyse
             </router-link>
           </li>
-         
-           
+         <li>
+            <router-link :to="{name: 'AutresDepense'}" tag="a">
+              <i class="icon-bar-chart"></i>
+        Autre(s) Depense(s)
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{name: 'listeProcedureDroitCommun'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Procédure Droit Commun
+            </router-link>
+          </li>
+            <li>
+            <router-link :to="{name: 'listeDesProcedureDerogatoire'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Procédure Dérogatoire
+            </router-link>
+          </li>
            <!-- <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -862,11 +878,11 @@
         </ul>
       </li>
 
-       <li>
+       <!-- <li>
             <router-link :to="{name: 'AutresDepense'}" tag="a">
               <i class="icon-key"></i> AUTRES DEPENSES
             </router-link>
-          </li> -->
+          </li>  -->
 
 
 

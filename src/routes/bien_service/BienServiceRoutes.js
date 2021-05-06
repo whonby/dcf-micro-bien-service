@@ -158,6 +158,8 @@ import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesO
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
 import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
 import listeDesUaSigobe from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesUaSigobe.vue"
+import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesProcedureDerogatoire.vue"
+import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
 import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
@@ -165,6 +167,16 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/listeDesProcedureDerogatoire",
+        name: "listeDesProcedureDerogatoire",
+        component: listeDesProcedureDerogatoire
+    },
+    {
+        path: "/listeProcedureDroitCommun",
+        name: "listeProcedureDroitCommun",
+        component: listeProcedureDroitCommun
+    },
     {
         path: "/VoirModaliteExecution/:id",
         name: "VoirModaliteExecution",

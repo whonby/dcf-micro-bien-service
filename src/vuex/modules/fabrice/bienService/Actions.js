@@ -5936,6 +5936,133 @@ export function supprimerHistoriqueDecisionOp({ commit }, id) {
 
 
 
+export function getProcedureDroitCommun({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/ProcedureDroitCommun")
+      .then(response => {
+        commit("GET_ALL_PROCEDURE_DROIT_COMMUN", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterProcedureDroitCommun({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ProcedureDroitCommun", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_PROCEDURE_DROIT_COMMUN", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+
+
+export function modifierProcedureDroitCommun({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/ProcedureDroitCommun/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_PROCEDURE_DROIT_COMMUN", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerProcedureDroitCommun({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_PROCEDURE_DROIT_COMMUN", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ProcedureDroitCommun/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+export function getProcedureDerogatoire({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/ProcedureDerogatoire")
+      .then(response => {
+        commit("GET_ALL_PROCEDURE_DEROGATOIRE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterProcedureDerogatoire({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ProcedureDerogatoire", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_PROCEDURE_DEROGATOIRE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+
+
+export function modifierProcedureDerogatoire({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/ProcedureDerogatoire/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_PROCEDURE_DEROGATOIRE", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerProcedureDerogatoire({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_PROCEDURE_DEROGATOIRE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ProcedureDerogatoire/" + id).then(() => dialog.close());
+    });
+}
 
 
 
