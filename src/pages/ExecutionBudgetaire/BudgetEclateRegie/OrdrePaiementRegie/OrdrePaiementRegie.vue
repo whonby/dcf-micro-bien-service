@@ -812,7 +812,7 @@
                     </th>
                     -->
 
-                    <th style="font-size: 14px; font-weight: bold">Objet Op</th>
+                    <th style="font-size: 14px; font-weight: bold">Objet ordre de paiement </th>
                     <th style="font-size: 14px; font-weight: bold">UA</th>
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
                     <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
@@ -1586,7 +1586,12 @@ export default {
       search: "",
     };
   },
-
+created() {
+    this.marcheid = this.$route.params.id;
+    this.detailOp1 = this.gettersgestionOrdrePaiement.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
   computed: {
     ...mapGetters("Utilisateurs", [
       "getterAffectionServiceCF",
@@ -1703,7 +1708,11 @@ export default {
       "structuresDecision",
       "plans_Decision",
     ]),
-
+    listeordrepaiementProvisoire() {
+      return this.gettersgestionOrdrePaiement.filter(
+        (qtreel) => qtreel.diff_op != null  && qtreel.unite_administrative_id == this.marcheid
+      );
+    },
     listeUniteAdminPasSection() {
       if (this.uniteAdministrative_id != "" && this.typeop_id != "") {
         return this.listeordrepaiementregie.filter(

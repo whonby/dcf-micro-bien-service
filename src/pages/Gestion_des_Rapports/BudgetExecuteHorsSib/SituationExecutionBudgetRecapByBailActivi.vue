@@ -110,7 +110,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION BUDGETAIRE RECAPITULAVIE PAR BAILLEUR ET ACTIVITE
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR BAILLEUR ET ACTIVITE
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
@@ -125,7 +125,7 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION BUDGETAIRE RECAPITULAVIE PAR BAILLEUR ET ACTIVITE
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR BAILLEUR ET ACTIVITE
         DU
 
         {{ formaterDate(formData.date_debut) }} AU
@@ -152,7 +152,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                   background-color: 	#FFA500 !important;
                   "
                 >
                   Bailleurs/Activité
@@ -161,7 +161,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                   background-color: 	#FFA500 !important;
                   "
                 >
                   Budget Actuel
@@ -170,7 +170,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                   background-color: 	#FFA500 !important;
                   "
                 >
                   Montant Exécuté
@@ -182,7 +182,7 @@
                     font-weight: bold;
                     color: #000;
                     text-align: center;
-                    background-color: #87ceeb;
+                   background-color: 	#FFA500 !important;
                   "
                 >
                   Montant Provisoire
@@ -191,16 +191,16 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                   background-color: 	#FFA500 !important;
                   "
                 >
-                  Taux(%)
+                  Taux En Exécution (%)
                 </th>
                 <th
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                   background-color: 	#FFA500 !important;
                   "
                 >
                   Disponible
@@ -210,14 +210,14 @@
             <tbody  v-for="GroupeOrdrePaiementByActivit3 in ListeGroupByActivite12"
         :key="GroupeOrdrePaiementByActivit3[0].id">
               <tr>
-                <td style="font-weight: bold; font-size: 18px">
+                <td style="font-weight: bold; font-size: 18px; background-color:#83F747 !important">
                   {{
                     libelleBailleur(
                       GroupeOrdrePaiementByActivit3[0].source_financement_id
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -228,7 +228,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -240,7 +240,7 @@
                   }}
                 </td>
 
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -251,7 +251,7 @@
                     )
                   }}
                 </td>
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     (
                       (MontantBudgetExecuté(
@@ -265,7 +265,7 @@
                   }}
                 </td>
 
-                <td style="font-weight: bold; font-size: 18px; text-align:right">
+                <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(

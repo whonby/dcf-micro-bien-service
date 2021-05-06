@@ -5929,25 +5929,40 @@ export function supprimerHistoriqueDecisionOp({ commit }, id) {
 
 
 
+<<<<<<< HEAD
 export function getBudgetImporter({ commit }) {
   queue.push(() => {
     axios
       .get("/BudgetImport")
       .then(response => {
         commit("GET_ALL_BUDGET_IMPORTER", response.data);
+=======
+
+
+
+
+
+
+
+export function getProcedureDroitCommun({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/ProcedureDroitCommun")
+      .then(response => {
+        commit("GET_ALL_PROCEDURE_DROIT_COMMUN", response.data);
       })
       .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterBudgetImporter({ commit }, nouveau) {
+export function ajouterProcedureDroitCommun({ commit }, nouveau) {
   asyncLoading(axios
-    .post("/BudgetImport", nouveau))
+    .post("/ProcedureDroitCommun", nouveau))
     .then(response => {
       if (response.status == 201) {
-        commit("AJOUTER_BUDGET_IMPORTER", response.data);
-       
+        commit("AJOUTER_PROCEDURE_DROIT_COMMUN", response.data);
+
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -5963,4 +5978,139 @@ export function ajouterBudgetImporter({ commit }, nouveau) {
         type: "error"
       });
     })
+}
+
+
+export function modifierProcedureDroitCommun({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/ProcedureDroitCommun/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_PROCEDURE_DROIT_COMMUN", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerProcedureDroitCommun({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_PROCEDURE_DROIT_COMMUN", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ProcedureDroitCommun/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+export function getProcedureDerogatoire({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/ProcedureDerogatoire")
+      .then(response => {
+        commit("GET_ALL_PROCEDURE_DEROGATOIRE", response.data);
+>>>>>>> aca81cc75ea8f61f6315b2f0bc019c1d405c8be7
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+<<<<<<< HEAD
+export function ajouterBudgetImporter({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/BudgetImport", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_IMPORTER", response.data);
+       
+=======
+export function ajouterProcedureDerogatoire({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ProcedureDerogatoire", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_PROCEDURE_DEROGATOIRE", response.data);
+
+>>>>>>> aca81cc75ea8f61f6315b2f0bc019c1d405c8be7
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+}
+
+
+export function modifierProcedureDerogatoire({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/ProcedureDerogatoire/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_PROCEDURE_DEROGATOIRE", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerProcedureDerogatoire({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_PROCEDURE_DEROGATOIRE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ProcedureDerogatoire/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+
+
+
+export function getBudgetEclateImporter({ commit }) {
+  queue.push(() => axios.get('/BudgetImport').then((response) => {
+    commit('GET_ALL_BUDGET_ECLATE_IMPORTE', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+export function ajoutergetBudgetEclateImporter({ commit }, objetAjoute, config) {
+  return asyncLoading(axios.post('/BudgetImport', objetAjoute, config)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_BUDGET_ECLATE_IMPORTE', response.data)
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
 }

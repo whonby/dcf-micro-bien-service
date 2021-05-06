@@ -7,13 +7,19 @@
           ORDRE PAIEMENT DES PROJETS
         </router-link>
       </li> -->
+      <!-- <li>
+        <router-link :to="{ name: 'AutresDepense' }" tag="a">
+          AUTRES DEPENSES
+        </router-link>
+      </li> -->
+
       <li>
         <router-link :to="{ name: 'ListeOpParUa' }" tag="a">
           ORDRE PAIEMENT DES PROJETS
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'OrdrePaiementRegie' }" tag="a">
+        <router-link :to="{ name: 'listeDesUaDesRegie' }" tag="a">
           ORDRE PAIEMENT DES REGIES
         </router-link>
       </li>
@@ -28,6 +34,7 @@
           PERSONNE RATTACHER
         </router-link>
       </li>
+
       <!-- <li>
         <router-link :to="{name: 'TestTableaux'}" tag="a">
           TABLEAUX

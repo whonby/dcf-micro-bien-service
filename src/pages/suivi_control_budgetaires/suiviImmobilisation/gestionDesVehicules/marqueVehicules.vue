@@ -14,7 +14,7 @@
                      <div class="control-group">
              <label class="control-label">Type de bien corporel</label>
               <div class="controls">
-                 <select  class="span5" v-model="formData.typecorporel">
+                 <select  class="span" v-model="formData.typecorporel">
                       <option></option>                     
                      <option value="1">Matériel et mobilier</option> 
                      <option value="2">Véhicule</option> 
@@ -32,7 +32,7 @@
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span5"
+                class="span"
                 placeholder="Saisir le libellé"
               />
             </div>
@@ -67,7 +67,7 @@
                      <div class="control-group">
              <label class="control-label">Type de bien corporel</label>
               <div class="controls">
-                 <select  class="span5" v-model="editService.typecorporel">
+                 <select  class="span" v-model="editService.typecorporel">
                       <option></option>                     
                      <option value="1">Matériel et mobilier</option> 
                      <option value="2">Véhicule</option> 
@@ -84,7 +84,7 @@
               <input
                 type="text"
                 v-model="editService.libelle"
-                class="span5"
+                class="span"
                 placeholder="Saisir le libelle"
               />
             </div>
@@ -110,30 +110,38 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-           <!-- <download-excel -->
-            <!-- class="btn btn-default pull-right" -->
-            <!-- style="cursor:pointer;" -->
-            <!-- :fields="json_fields" -->
-            <!-- title="Liste des services" -->
-            <!-- :data="filtre_service" -->
-            <!-- name="Liste des services" -->
-          <!-- > -->
-            <!-- <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i> -->
-          <!-- </download-excel> -->
+         
                                     <div>
-                                 <!-- <download-excel
-                                     class="btn btn-success pull-right"
-                                     style="cursor:pointer;"
-                                       :fields = "json_fields"
-                                       title="Liste des services"
-                                       name ="Liste des services"
-                                       worksheet = "entreprise non sanctionner"
-                                     :data="filtre_service">
-             <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
-                                          </download-excel>  -->
-                <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-        </div> 
+                              <table class="table table-bordered table-striped">
+          <td style="width: 15%"></td>
+          <td style="width: 0%; font-weight: bolder; color: #000">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-danger"
+                @click.prevent="genererEnPdf()"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class=" icon-print"> Exporter en PDF</i>
+              </button>
+            </div>
+          </td>
+          <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="afficherModalAjouterService"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER MARQUE</i
+                >
+              </button>
+            </div>
+          </td>
+          
+         
+        </table>
+               
                               </div>
           <div class="widget-box">
             <div class="widget-title">
@@ -195,7 +203,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab> -->
      <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterService()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
@@ -211,7 +219,7 @@ export default {
   data() {
     return {
        page:0,
-       size:10,
+       size:5,
       active_el:0,
       fabActions: [
         {

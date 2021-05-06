@@ -150,20 +150,22 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
-                Activités
+              <b>Activités</b>
+                
               </th>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
-                Budget Actuel
+              <b>Budget Actuel</b>
+                
               </th>
               <th
                 style="
@@ -171,10 +173,10 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
-                Montant Exécuté
+                <b>Montant Exécuté</b>
               </th>
 
               <th
@@ -183,7 +185,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Montant Provisoire
@@ -193,20 +195,20 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
-                Taux(%)
+                <b>Taux En Exécution (%)</b>
               </th>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
-                Disponible
+               <b> Disponible</b>
               </th>
             </tr>
           </thead>
@@ -222,10 +224,10 @@
               )"
               :key="ListepaimentBailleur"
             >
-              <td style="font-size: 14px">
-                {{ LibelleActivite(ListepaimentBailleur) || "Non renseigné" }}
+              <td style="font-size: 14px"  v-if="LibelleActivite(ListepaimentBailleur) != null">
+                {{ LibelleActivite(ListepaimentBailleur) || "Non renseigné" }} 
               </td>
-              <td  style="text-align:right"  >
+              <td  style="text-align:right" v-if="LibelleActivite(ListepaimentBailleur) != null" >
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -235,7 +237,7 @@
                 }}
               </td>
 
-              <td style="font-size: 14px; text-align:right" >
+              <td style="font-size: 14px; text-align:right" v-if="LibelleActivite(ListepaimentBailleur) != null" >
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -245,7 +247,7 @@
                 }}
               </td>
 
-              <td style="font-size: 14px; text-align:right" >
+              <td style="font-size: 14px; text-align:right" v-if="LibelleActivite(ListepaimentBailleur) != null" >
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -256,7 +258,7 @@
                   ) || "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px; text-align:right" >
+              <td style="font-size: 14px; text-align:right" v-if="LibelleActivite(ListepaimentBailleur) != null">
                 {{
                   (
                     (MontantBudgetExecutéActivite(ListepaimentBailleur) /
@@ -265,7 +267,7 @@
                   ).toFixed(2) || "Non renseigné"
                 }}
               </td>
-              <td style="font-size: 14px; text-align:right">
+              <td style="font-size: 14px; text-align:right" v-if="LibelleActivite(ListepaimentBailleur) != null">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -279,14 +281,14 @@
 
 
             <tr>
-              <td style="font-weight: bold; font-size: 18px">
+              <td style="font-weight: bold; font-size: 18px; background-color:#83F747 !important">
                 TOTAL:{{
                   libelleBailleur(
                     GroupeOrdrePaiementByBailleur[0].source_financement_id
                   )
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align:right">
+              <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -297,7 +299,7 @@
                   )
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align:right">
+              <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -309,7 +311,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px; text-align:right">
+              <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -320,7 +322,7 @@
                   )
                 }}
               </td>
-              <td style="font-weight: bold; font-size: 18px; text-align:right">
+              <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                 {{
                   (
                     (MontantBudgetExecuté(
@@ -334,7 +336,7 @@
                 }}
               </td>
 
-              <td style="font-weight: bold; font-size: 18px; text-align:right">
+              <td style="font-weight: bold; font-size: 18px; text-align:right; background-color:#83F747 !important">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(

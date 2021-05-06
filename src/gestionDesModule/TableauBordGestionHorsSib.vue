@@ -2,80 +2,13 @@
     <div>
     
 
-        <h3 style="text-align:center">TABLEAU DE BORD : GESTION HORS SIGOBE</h3>
-        <div class="row-fluid">
-      <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>BIENS SERVICES</h5>
-          </div>
-          <div >
-            <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialB))}}</span><h4>BIENS & SERVICES</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetExcuterBienService))}}</span><h4>EXECUTE</h4></a> </li>
-    
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleBienService))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionBienService}}%</span><h4>EXECUTION</h4></a> </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>PERSONNEL</h5>
-          </div>
-          <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialPersonnel))}}</span><h4>PERSONNEL</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerPersonnel))}}</span><h4>EXECUTE</h4></a> </li>
-   
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponiblePersonnel))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionPersonnel}}%</span><h4>EXECUTION</h4></a> </li>
-
-            </ul>
-        </div>
-      </div> -->
-<div class="row-fluid">
-      <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>INVESTISSEMENT</h5>
-          </div>
-          <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialInvetissement))}}</span><h4>INVESTISSEMENT</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetExecutéInvestissement))}}</span><h4>EXECUTE</h4></a> </li>
-    
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleInvestissement))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionInvestissement}}%</span><h4>EXECUTION</h4></a> </li>
-            </ul>
-        </div>
-      </div>
-    </div>
-    
-      <!-- <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>TRANSFERT</h5>
-          </div>
-          <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialTranferst))}}</span><h4>TRANSFERT</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerTransfert))}}</span><h4>EXECUTE</h4></a> </li>
-   
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleTransfert))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecution}}%</span><h4>EXECUTION</h4></a> </li>
-
-            </ul>
-        </div>
-      </div> -->
-    </div>
+       
+        <div>
+         <div style="text-align:center;font-size:50px;color:#000;margin-top:15%;" :class="{active: active_el ==780}">
+          TABLEAU DE BORD HORS SIGOBE EN COURS... <br/>
+          <button></button>
+         </div>
+     </div>
     </div>
 
 </template>

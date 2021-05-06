@@ -1,10 +1,60 @@
 
 <template>
   <div class="container-fluid">
-    <div  align="left" style="cursor:pointer;">
+    <br/>
+     <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
         </div>
+   <!-- <div class="span10 " > -->
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">TYPE DE MARCHE
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="typeMarches"
+                                                   v-model="id_type_marche"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                           <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">OBJET DU MARCHE
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="marches"
+                                                   v-model="libelle_marche_id"
+                                                   option-value="id"
+                                                   option-text="objet"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                          <td>
+                              
+                            </td>
+                            
+                            
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                <!-- </div> -->
+    <!-- <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button> -->
+    
+
+       
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -25,7 +75,7 @@
                 </span>
                 <h5>March&eacute;s Biens et Fournitures en Exécution</h5>
                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                 <div class="span8">
+                 <!-- <div class="span8">
                   <div align="right">
                     Recherche:
                     <input
@@ -35,7 +85,7 @@
                       v-model="search"
                     />
                   </div>
-                </div>
+                </div> -->
             
 
 
@@ -83,7 +133,7 @@
                     class="odd gradeX"
                     v-for="(
                       marche, index
-                    ) in partition(rechercheUa, size)[page]"
+                    ) in partition(ListeDEsEntreprise, size)[page]"
                     :key="marche.id"
                   >
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -178,7 +228,7 @@
                 <a @click.prevent="precedent()" href="#">Précedent</a>
               </li>
               <li
-                v-for="(titre, index) in partition(rechercheUa, size).length"
+                v-for="(titre, index) in partition(ListeDEsEntreprise, size).length"
                 :key="index"
                 :class="{ active: active_el == index }"
               >
@@ -188,7 +238,7 @@
               </li>
               <li
                 :class="{
-                  disabled: page == partition(rechercheUa, size).length - 1,
+                  disabled: page == partition(ListeDEsEntreprise, size).length - 1,
                 }"
               >
                 <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -209,12 +259,14 @@
 import { mapGetters, mapActions } from "vuex";
 import { admin, dcf, noDCfNoAdmin } from "../../../../Repositories/Auth";
 import { formatageSomme,partition} from "../../../../Repositories/Repository";
+import {  ModelListSelect } from 'vue-search-select'
 
 export default {
   name: "type facture",
   components: {
     //PulseLoader,
     // ClipLoader,
+    ModelListSelect
   },
   data() {
     return {
@@ -233,7 +285,7 @@ export default {
         // }
       ],
        page: 0,
-      size: 10,
+      size: 20,
       active_el: 0,
       color: "#3AB982",
       height: "35px",
@@ -245,6 +297,8 @@ export default {
       //     CODE: "code",
       //     libelle: "libelle"
       //   },
+      id_type_marche:0,
+      libelle_marche_id:0,
 
       formData: {
         objet: "",
@@ -380,11 +434,92 @@ created() {
       "getterUniteAdministrativeByUser",
     ]),
 
+          test(){
+
+     const searchTerm = this.search.toLowerCase();
+
+return this.afficherMarcheInvestissementParDroitAccess.filter((item) => {
+  
+     return item.objet.toLowerCase().includes(searchTerm) 
+    
+   }
+)
+   },
+// rechercheUa(){
+//   const st = this.search.toLowerCase();
+//   return this.afficherMarcheInvestissementParDroitAccess.filter((item ) => {
+  
+//      return item.objet.toLowerCase().includes(searchTerm) 
+    
+
+  
+  
+
+//    }
+// )
+     
+//        // return type.objet.toLowerCase().includes(st)  ;
+//             //  type.afficherTypeMarcheLibelle(type.type_marche_id) 
+// },
+recupererMarcheParUa(){
+  return this.afficherMarcheInvestissementParDroitAccess.filter(item=>item.unite_administrative_id == this.marcheid)
+},
+ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.recupererMarcheParUa;
+
+      //retourne la section selectionner
+
+      if (this.id_type_marche != 0 && this.libelle_marche_id == 0) {
+        objet = this.recupererMarcheParUa.filter((item) => {
+          if (item.type_marche_id == vM.id_type_marche) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      if (this.libelle_marche_id != 0 && this.id_type_marche == 0) {
+        objet = this.recupererMarcheParUa.filter((item) => {
+          if (item.id == vM.libelle_marche_id) {
+            return item;
+          }
+        });
+      }
+    
+      if (this.id_type_marche != 0 && this.libelle_marche_id != 0) {
+        objet = this.recupererMarcheParUa.filter((item) => {
+          if (
+            item.type_marche_id == vM.id_type_marche &&
+            item.id == vM.libelle_marche_id
+          ) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      
+      return objet;
+    },
     rechercheUa() {
-      const st = this.search.toLowerCase();
-      return this.afficherMarcheInvestissementParDroitAccess.filter((type) => {
-        return type.objet.toLowerCase().includes(st);
-      });
+      if(this.type_marche_id!=""){
+         return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_administrative_id == this.marcheid && item.type_marche_id == this.type_marche_id)
+      }
+      else if(this.libelle_marche_id!=""){
+return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_administrative_id == this.marcheid && item.objet == this.libelle_marche_id)
+      }
+      else if(this.type_marche_id !="" && this.libelle_marche_id !=""){
+ return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_administrative_id == this.marcheid && item.type_marche_id == this.type_marche_id && item.id == this.libelle_marche_id)
+      }
+      else{
+        return this.afficherMarcheInvestissementParDroitAccess.filter(item => item.unite_administrative_id == this.marcheid)
+           }
+  
+      
+      //const st = this.search.toLowerCase();
+     
+       // return type.objet.toLowerCase().includes(st)  ;
+            //  type.afficherTypeMarcheLibelle(type.type_marche_id) ;
+   
     },
 
     loading() {
@@ -398,7 +533,7 @@ created() {
       // const st = this.search.toLowerCase();
       if (this.noDCfNoAdmin) {
         let colect = [];
-        this.printMarcheNonAttribue.filter((item) => {
+        this.marches.filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
             (row) => row.unite_administrative_id == item.ua_id
           );
@@ -407,28 +542,23 @@ created() {
             return item;
           }
         });
+
         return colect.filter(
+          
           (element) =>
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+            (element.unite_administrative_id == this.marcheid &&
               element.parent_id == null &&
               element.sib == 1 &&
-              element.attribue == 2) ||
-            (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
-              element.parent_id == null &&
-              element.sib == 1 &&
-              element.attribue == 2)
+              element.attribue == 2 ) 
         );
       }
       return this.printMarcheNonAttribue.filter(
         (element) =>
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&  element.unite_administrative_id == this.detailOp.unite_administrative_id &&
+          (element.unite_administrative_id == this.marcheid &&
             element.parent_id == null &&
             element.sib == 1 &&
-            element.attribue == 2) ||
-          (this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.unite_administrative_id == this.detailOp.unite_administrative_id &&
-            element.parent_id == null &&
-            element.sib == 1 &&
-            element.attribue == 2)
+            element.attribue == 2  ) 
+         
       );
     },
 
@@ -544,7 +674,7 @@ created() {
     // afficher le montant de tout les marche
 
     montantMarcheInvestissement() {
-      return this.afficherMarcheInvestissementParDroitAccess.reduce(
+      return this.ListeDEsEntreprise.reduce(
         (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
         0
       );

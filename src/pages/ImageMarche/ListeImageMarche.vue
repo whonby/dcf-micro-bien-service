@@ -1,6 +1,6 @@
 <template>
     <div>
-
+       
        <div class="container-fluid">
 
     <div class="main-body">
@@ -49,8 +49,9 @@
                                         Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
                                         <p class="text-secondary mb-1">Distance :
                                             {{distance(marche_image.latitude, marche_image.longitude,detail.latitude,detail.longitude, 'K')}}
-                                        </p>
-                                        <button  class="btn btn-danger" v-on:click="suppressionImg(marche_image.id)">
+                                        </p> 
+                                        <br> <br>
+                                        <button class="btn btn-danger" v-on:click="suppressionImg(marche_image.id)">
                                             <span><i class="fa fa-trash-o" aria-hidden="true"></i>  Supprimer </span>
                                         </button>
                                         <router-link :to="{name:'modifie-image', params:{id:marche_image.id}}" class="btn btn-success">Modifier</router-link>
@@ -117,6 +118,7 @@
 
         </div>
     </div>
+
         </div>
 
 

@@ -141,7 +141,7 @@ export function ajouterBudgetGeneral({ commit, dispatch }, nouveau) {
 }
 
 // modifier
-export function modifierBudgetGeneral({ commit, dispatch}, nouveau) {
+export function modifierBudgetGeneral({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifier_Budget_General/" + nouveau.id, {
       exercicebudget_id: nouveau.exercicebudget_id,
@@ -171,7 +171,7 @@ export function modifierBudgetGeneral({ commit, dispatch}, nouveau) {
     });
 }
 //supprimer
-export function supprimerBudgetGeneral({ commit, dispatch}, id) {
+export function supprimerBudgetGeneral({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -225,19 +225,19 @@ export function getAllUniteAdministrative({ commit }) {
 //     });
 // }
 
-export  function ajouterUniteAdministrative({commit,dispatch}, nouveauObjet){
+export function ajouterUniteAdministrative({ commit, dispatch }, nouveauObjet) {
   this.$app.$loading(true)
-  axios.post('/ajouter_unite_administrative', nouveauObjet ).then(res => {
-      this.$app.$notify({
-          title: 'success',
-          text: 'Enregistrement effectuer',
-          type:"success"
-      });
-      commit('AJOUTER_UNITE_ADMINISTRATIVE', res.data)
-      dispatch('getAllUniteAdministrative')
-      dispatch('getAllUniteAdministrative')
-      dispatch('getAllUniteAdministrative')
-      this.$app.$loading(false)
+  axios.post('/ajouter_unite_administrative', nouveauObjet).then(res => {
+    this.$app.$notify({
+      title: 'success',
+      text: 'Enregistrement effectuer',
+      type: "success"
+    });
+    commit('AJOUTER_UNITE_ADMINISTRATIVE', res.data)
+    dispatch('getAllUniteAdministrative')
+    dispatch('getAllUniteAdministrative')
+    dispatch('getAllUniteAdministrative')
+    this.$app.$loading(false)
   })
   // .catch(error =>{
   //     console.log(error)
@@ -248,6 +248,36 @@ export  function ajouterUniteAdministrative({commit,dispatch}, nouveauObjet){
   //         type:"error"
   //     });
   // })
+}
+
+//***************************** importation des UA lega**** */
+
+export function importationUniteAdministrative({ commit }, nouveauObjet) {
+
+  asyncLoading(axios.post('/importUA', nouveauObjet)).then(res => {
+    if (res.status === 201) {
+      this.$app.$notify({
+        title: 'success',
+        text: 'importaion Effectuée',
+        type: "success"
+      });
+      commit('IMPORTER_UNITE_ADMINISTRATIVE', res.data)
+    }else{
+      this.$app.$notify({
+        title: 'Erreur',
+        text: 'Importaion Echouée ces données existe déjà !',
+        type: "Erreur"
+      });
+    }
+  })
+    .catch(error => {
+      console.log(error)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "Importaion Echouée ces données existe déjà !",
+        type: "error"
+      });
+    })
 }
 
 
@@ -317,7 +347,7 @@ export function ajouterUniteZone({ commit, dispatch }, nouveau) {
       id_zone_geographique: nouveau.id_zone_geographique,
       id_unite_administrative: nouveau.id_unite_administrative,
       libelle: nouveau.libelle,
-      	longitude: nouveau.longitude,
+      longitude: nouveau.longitude,
       latitude: nouveau.latitude,
       telephone_cel: nouveau.telephone_cel,
       adresse_postale: nouveau.adresse_postale,
@@ -396,7 +426,7 @@ export function getAllTransfert({ commit }) {
 export function ajouterTransfert({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouterTransfert", {
-      	num_transfert: nouveau.num_transfert,
+      num_transfert: nouveau.num_transfert,
       acteurdepense_id: nouveau.acteurdepense_id,
       // grande_natrue_id:nouveau.grande_natrue_id,
       // inputation_id:nouveau.inputation_id,
@@ -409,7 +439,7 @@ export function ajouterTransfert({ commit, dispatch }, nouveau) {
       grandnatire_id: nouveau.grandnatire_id,
       ua_id: nouveau.ua_id,
       date_jours: nouveau.date_jours,
-      typefinancement_id:nouveau.typefinancement_id,
+      typefinancement_id: nouveau.typefinancement_id,
       exerciceencours: nouveau.exerciceencours
 
     }))
@@ -433,26 +463,26 @@ export function ajouterTransfert({ commit, dispatch }, nouveau) {
 export function modifierTransfert({ commit, dispatch }, elementModifie) {
   asyncLoading(axios
     .put("/modifierTransfert/" + elementModifie.id, {
-      	num_transfert: elementModifie.num_transfert,
+      num_transfert: elementModifie.num_transfert,
       acteurdepense_id: elementModifie.acteurdepense_id,
-      grande_natrue_id:elementModifie.grande_natrue_id,
-      inputation_id:elementModifie.inputation_id,
+      grande_natrue_id: elementModifie.grande_natrue_id,
+      inputation_id: elementModifie.inputation_id,
       unitezone_id: elementModifie.unitezone_id,
       montant_total_contrat: elementModifie.montant_total_contrat,
       montant_transfert: elementModifie.montant_transfert,
       fonction_id: elementModifie.fonction_id,
       montant_restant: elementModifie.montant_restant,
-      ligne_budgetaire_id:elementModifie.ligne_budgetaire_id,
-      grandnatire_id:elementModifie.grandnatire_id,
-      ua_id:elementModifie.ua_id,
-        	decision_cf:elementModifie.decision_cf,
-      motif:elementModifie.motif,
-      observation:elementModifie.observation,
-      date_motif:elementModifie.date_motif,
-      date_jours:elementModifie.date_jours,
-      delaitraitement:elementModifie.delaitraitement,
-      typefinancement_id:elementModifie.typefinancement_id,
-      exerciceencours:elementModifie.exerciceencours
+      ligne_budgetaire_id: elementModifie.ligne_budgetaire_id,
+      grandnatire_id: elementModifie.grandnatire_id,
+      ua_id: elementModifie.ua_id,
+      decision_cf: elementModifie.decision_cf,
+      motif: elementModifie.motif,
+      observation: elementModifie.observation,
+      date_motif: elementModifie.date_motif,
+      date_jours: elementModifie.date_jours,
+      delaitraitement: elementModifie.delaitraitement,
+      typefinancement_id: elementModifie.typefinancement_id,
+      exerciceencours: elementModifie.exerciceencours
     }))
     .then(response => {
       commit("MODIFIER_TRANSFERT", response.data);
@@ -494,7 +524,7 @@ export function getAllHistoriqueTransfert({ commit }) {
 }
 
 // ajouter type texte
-export function ajouterHistoriqueTransfert({ commit}, nouveau) {
+export function ajouterHistoriqueTransfert({ commit }, nouveau) {
   asyncLoading(axios
     .post("/ajouterHistoTransfert", {
       num_transfert: nouveau.num_transfert,
@@ -534,7 +564,7 @@ export function ajouterHistoriqueTransfert({ commit}, nouveau) {
 }
 
 // modifier
-export function modifierHistoriqueTransfert({ commit}, nouveau) {
+export function modifierHistoriqueTransfert({ commit }, nouveau) {
   asyncLoading(axios
     .put("/modifierHistoTransfert/" + nouveau.id, {
       num_transfert: nouveau.num_transfert,
@@ -567,7 +597,7 @@ export function modifierHistoriqueTransfert({ commit}, nouveau) {
     });
 }
 //supprimer
-export function supprimerHistoriqueTransfert({ commit}, id) {
+export function supprimerHistoriqueTransfert({ commit }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -604,7 +634,7 @@ export function getAllDirection({ commit }) {
 export function ajouterDirection({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouterDirectionUa", {
-      	d_ua_id: nouveau.d_ua_id,
+      d_ua_id: nouveau.d_ua_id,
 
       libelle: nouveau.libelle,
 
@@ -683,9 +713,9 @@ export function ajouterService({ commit, dispatch }, nouveau) {
       // direction_id	: nouveau.direction_id	,
       serviceua_id: nouveau.serviceua_id,
       exercicebudget: nouveau.exercicebudget,
-      normeequipement : nouveau.normeequipement,
-      historiqueequipement:nouveau.historiqueequipement,
-      montantequipement:nouveau.montantequipement
+      normeequipement: nouveau.normeequipement,
+      historiqueequipement: nouveau.historiqueequipement,
+      montantequipement: nouveau.montantequipement
 
     }))
 
@@ -712,9 +742,9 @@ export function modifierService({ commit, dispatch }, nouveau) {
       s_ua_id: nouveau.s_ua_id,
       exercicebudget: nouveau.exercicebudget,
       serviceua_id: nouveau.serviceua_id,
-      normeequipement : nouveau.normeequipement,
-      historiqueequipement:nouveau.historiqueequipement,
-      montantequipement:nouveau.montantequipement
+      normeequipement: nouveau.normeequipement,
+      historiqueequipement: nouveau.historiqueequipement,
+      montantequipement: nouveau.montantequipement
     }))
     .then(response => {
       commit("MODIFIER_SERVICE", response.data);
@@ -819,62 +849,62 @@ export function supprimerFonction({ commit, dispatch }, id) {
     });
 }
 
-export function importBudget({ commit }, element_modifie,config) {
-    return asyncLoading(axios
-        .post("/importBudge",element_modifie,config))
-        .then(response => {
-         /*   if (response.status == 201) {
+export function importBudget({ commit }, element_modifie, config) {
+  return asyncLoading(axios
+    .post("/importBudge", element_modifie, config))
+    .then(response => {
+      /*   if (response.status == 201) {
 
-            }*/
-            commit("IMPORT_BUDGET", response.data);
-        });
+         }*/
+      commit("IMPORT_BUDGET", response.data);
+    });
 }
 
 
 export function getBudgeChager({ commit }) {
-    queue.push(() => {
-        axios
-            .get("/budgetCharger")
-            .then(response => {
-                commit("GET_BUDGET_CHARGE", response.data);
-            })
-            .catch(error => console.log(error));
-    });
+  queue.push(() => {
+    axios
+      .get("/budgetCharger")
+      .then(response => {
+        commit("GET_BUDGET_CHARGE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
 }
 
 // ajouter type texte
 export function ajouterBudgetCharge({ commit, dispatch }, nouveau) {
-    return asyncLoading(axios
-        .post("/budgetCharger",nouveau))
+  return asyncLoading(axios
+    .post("/budgetCharger", nouveau))
 
-        .then(response => {
-            commit("AJOUTER_BUDGET_CHARGE", response.data);
-            dispatch('getAllBudgetGeneral')
-            dispatch('getAllUniteAdministrative')
-            dispatch('getBudgeChager')
-            this.$app.$notify({
-                title: 'Success',
-                text: 'Enregistrement Effectué avec Succès!',
-                type: "success"
-            })
-        });
+    .then(response => {
+      commit("AJOUTER_BUDGET_CHARGE", response.data);
+      dispatch('getAllBudgetGeneral')
+      dispatch('getAllUniteAdministrative')
+      dispatch('getBudgeChager')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Enregistrement Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 
 export function modificationBudgetCharge({ commit, dispatch }, nouveau) {
-    return asyncLoading(axios
-        .post("/budgetChargerModification",nouveau))
+  return asyncLoading(axios
+    .post("/budgetChargerModification", nouveau))
 
-        .then(response => {
-            commit("AJOUTER_BUDGET_CHARGE", response.data);
-            dispatch('getAllBudgetGeneral')
-            dispatch('getAllUniteAdministrative')
-            dispatch('getBudgeChager')
-            this.$app.$notify({
-                title: 'Success',
-                text: 'Enregistrement Effectué avec Succès!',
-                type: "success"
-            })
-        });
+    .then(response => {
+      commit("AJOUTER_BUDGET_CHARGE", response.data);
+      dispatch('getAllBudgetGeneral')
+      dispatch('getAllUniteAdministrative')
+      dispatch('getBudgeChager')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Enregistrement Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 
 
@@ -884,55 +914,55 @@ export function modificationBudgetCharge({ commit, dispatch }, nouveau) {
 
 
 export function getLigneExempter({ commit }) {
-    queue.push(() => {
-        axios
-            .get("/ligne_exemptes")
-            .then(response => {
-                commit("GET_LIGNE_EXEMPTER", response.data);
-            })
-            .catch(error => console.log(error));
-    });
+  queue.push(() => {
+    axios
+      .get("/ligne_exemptes")
+      .then(response => {
+        commit("GET_LIGNE_EXEMPTER", response.data);
+      })
+      .catch(error => console.log(error));
+  });
 }
 
 // ajouter type texte
 export function ajouterLigneExempter({ commit }, nouveau) {
-    asyncLoading(axios
-        .post("/ligne_exemptes", nouveau))
-        .then(response => {
-            if (response.status == 201) {
-                commit("AJOUTER_LIGNE_EXEMPTER", response.data);
+  asyncLoading(axios
+    .post("/ligne_exemptes", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_LIGNE_EXEMPTER", response.data);
 
-                this.$app.$notify({
-                    title: 'Success',
-                    text: 'Enregistrement Effectué avec Succès!',
-                    type: "success"
-                })
-            }
-        });
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 // modifier
 export function modifierLigneExempter({ commit }, nouveau) {
-    asyncLoading(axios
-        .put("/ligne_exemptes/" + nouveau.id,nouveau))
-        .then(response => {
-            commit("MODIFIER_LIGNE_EXEMPTER", response.data);
-            this.$app.$notify({
-                title: 'Success',
-                text: 'Modification Effectué avec Succès!',
-                type: "success"
-            })
-        });
+  asyncLoading(axios
+    .put("/ligne_exemptes/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_LIGNE_EXEMPTER", response.data);
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerLigneExempter({ commit }, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit("SUPPRIMER_LIGNE_EXEMPTER", id);
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete("/ligne_exemptes/" + id).then(() => dialog.close());
-        });
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_LIGNE_EXEMPTER", id);
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ligne_exemptes/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -959,41 +989,41 @@ export function getAllDecompteFacture({ commit }) {
 
 export function ajouterDecompteFacture({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/ajouterdecomptefacture", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_DECOMPTE_FACTURE", response.data);
+    .post("/ajouterdecomptefacture", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DECOMPTE_FACTURE", response.data);
 
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 export function ModifierDecompteFacture({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/modifierdecomptefacture/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_DECOMPTE_FACTURE", response.data);
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+    .put("/modifierdecomptefacture/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_DECOMPTE_FACTURE", response.data);
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
 export function supprimerDecompteFacture({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_DECOMPTE_FACTURE", id);
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/supprimerdecomptefacture/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_DECOMPTE_FACTURE", id);
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerdecomptefacture/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -1023,12 +1053,12 @@ export function ajouterRealiteServiceFait({ commit }, nouveau) {
 
 // modifier
 export function modifierRealiteServiceFait({ commit }, nouveau) {
-  asyncLoading(axios.put("/modifierRealiteFait/" + nouveau.id , {
+  asyncLoading(axios.put("/modifierRealiteFait/" + nouveau.id, {
 
 
-      	section_id: nouveau.section_id,
-      marche_id: nouveau.marche_id,
-      fournisseur_id: nouveau.fournisseur_id,
+    section_id: nouveau.section_id,
+    marche_id: nouveau.marche_id,
+    fournisseur_id: nouveau.fournisseur_id,
     facture_id: nouveau.facture_id,
     ua_id: nouveau.ua_id,
     decision_service_beneficiaire: nouveau.decision_service_beneficiaire,
@@ -1039,26 +1069,26 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     date_controleur_financier: nouveau.date_controleur_financier,
     observation_controleur_financier: nouveau.observation_controleur_financier,
     nom_controleur_financier: nouveau.nom_controleur_financier,
-    	montant: nouveau.	montant,
-      exercice_budget: nouveau.	exercice_budget,
+    montant: nouveau.montant,
+    exercice_budget: nouveau.exercice_budget,
     engagement_id: nouveau.engagement_id,
     marchetype: nouveau.marchetype,
     motif_controleur: nouveau.motif_controleur
-    }
+  }
 
   )).then(response => {
-      commit("MODIFIER_REALITE_SERVICE_FAIT", response.data);
+    commit("MODIFIER_REALITE_SERVICE_FAIT", response.data);
 
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
+    this.$app.$notify({
+      title: 'Success',
+      text: 'Modification Effectué avec Succès!',
+      type: "success"
+    })
+  });
 }
 
 //supprimer
-export function supprimerRealiteServiceFait({ commit}, id) {
+export function supprimerRealiteServiceFait({ commit }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -1094,7 +1124,7 @@ export function ajouterLiquidation({ commit }, nouveau) {
 }
 
 // modifier
-export function modifierLiquidation({ commit, dispatch}, nouveau) {
+export function modifierLiquidation({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifierLiquidation/" + nouveau.id, {
 
@@ -1115,15 +1145,15 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
       egagement_id: nouveau.egagement_id,
       decision_emetteur: nouveau.decision_emetteur,
       nom_emetteur: nouveau.nom_emetteur,
-      	date_emetteur: nouveau.date_emetteur,
+      date_emetteur: nouveau.date_emetteur,
 
       observation_emetteur: nouveau.observation_emetteur,
-       decision_ordonnateur: nouveau.decision_ordonnateur,
+      decision_ordonnateur: nouveau.decision_ordonnateur,
       observation_ordonnateur: nouveau.observation_ordonnateur,
       nom_ordonnateur: nouveau.nom_ordonnateur,
       date_ordonnateur: nouveau.date_ordonnateur,
 
-       decision_controleur_financier: nouveau.decision_controleur_financier,
+      decision_controleur_financier: nouveau.decision_controleur_financier,
       nom_controleur_financier: nouveau.nom_controleur_financier,
       date_controleur_financier: nouveau.date_controleur_financier,
       observation_controleur_financier: nouveau.observation_controleur_financier,
@@ -1211,11 +1241,11 @@ export function modifierStructureOrganigrammeUa({ commit, dispatch }, plan_fonct
   asyncLoading(axios.put('/modifierStructureOrganigramme/' + plan_fonctionnel.id, {
     ua_id: plan_fonctionnel.ua_id,
     libelle: plan_fonctionnel.libelle,
-   niveau:plan_fonctionnel.niveau
+    niveau: plan_fonctionnel.niveau
   })).then(res => {
     commit('MODIFIER_STRUCTURE_ORGANIGRAMME_UA', res.data)
     dispatch('getStructureOrganigrammeUa')
-        dispatch('getAllUniteAdministrative')
+    dispatch('getAllUniteAdministrative')
     this.$app.$notify({
       title: 'success ',
       text: 'Modification effectué avec success !',
@@ -1231,7 +1261,7 @@ export function supprimerStructureOrganigrammeUa({ commit, dispatch }, id) {
     .then(dialog => {
       commit('SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA', id)
       dispatch('getStructureOrganigrammeUa')
-        dispatch('getAllUniteAdministrative')
+      dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/supprimerStructureOrganigramme/' + id).then(() => dialog.close())
     })
@@ -1349,35 +1379,35 @@ export function getAllBudgetEclate({ commit }) {
 
 export function ajouterBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/budgetEclate", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_BUDGET_ECLATE", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/budgetEclate", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_ECLATE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 export function modifierBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/budgetEclate/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_BUDGET_ECLATE", response.data);
-          
+    .put("/budgetEclate/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_BUDGET_ECLATE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Enregistrement Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Enregistrement Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 
-export function supprimerBudgetEclate({ commit, dispatch}, id) {
+export function supprimerBudgetEclate({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -1404,35 +1434,35 @@ export function getAllHistorisqueBudgetEclate({ commit }) {
 
 export function ajouterHistorisqueBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/HistoriquebudgetEclate", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_HISTORIQUE_BUDGET_ECLATE", response.data);
-             
-              // this.$app.$notify({
-              //     title: 'Success',
-              //     text: 'Enregistrement Effectué avec Succès!',
-              //     type: "success"
-              // })
-          }
-      });
+    .post("/HistoriquebudgetEclate", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_BUDGET_ECLATE", response.data);
+
+        // this.$app.$notify({
+        //     title: 'Success',
+        //     text: 'Enregistrement Effectué avec Succès!',
+        //     type: "success"
+        // })
+      }
+    });
 }
 export function modifierHistorisqueBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/HistoriquebudgetEclate/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_HISTORIQUE_BUDGET_ECLATE", response.data);
-          
+    .put("/HistoriquebudgetEclate/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_BUDGET_ECLATE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 
-export function supprimerHistorisqueBudgetEclate({ commit, dispatch}, id) {
+export function supprimerHistorisqueBudgetEclate({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
@@ -1462,40 +1492,40 @@ export function getAllDecisionBudgetEclate({ commit }) {
 
 export function ajouterDecisionBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/DecisionBudgetEclate", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_DECISION_BUDGET_ECLATE", response.data);
-             
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/DecisionBudgetEclate", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DECISION_BUDGET_ECLATE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 export function modifierDecisionBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/DecisionBudgetEclate/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_DECISION_BUDGET_ECLATE", response.data);
-          
+    .put("/DecisionBudgetEclate/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_DECISION_BUDGET_ECLATE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 
-export function supprimerDecisionBudgetEclate({ commit}, id) {
+export function supprimerDecisionBudgetEclate({ commit }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_DECISION_BUDGET_ECLATE", id);
-      
+
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/DecisionBudgetEclate/" + id).then(() => dialog.close());
     });
@@ -1511,59 +1541,59 @@ export function supprimerDecisionBudgetEclate({ commit}, id) {
 
 export function getVehicule({ commit }) {
   queue.push(() => {
-      axios
-          .get("/Vehicule")
-          .then(response => {
-              commit("GET_ALL_VEHICULE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/Vehicule")
+      .then(response => {
+        commit("GET_ALL_VEHICULE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterNouveauVehicule({ commit,dispatch }, nouveau) {
+export function ajouterNouveauVehicule({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .post("/Vehicule", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_VEHICULE", response.data);
-              dispatch('getVehicule')
-              dispatch('getAllUniteAdministrative')
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/Vehicule", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_VEHICULE", response.data);
+        dispatch('getVehicule')
+        dispatch('getAllUniteAdministrative')
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 // modifier
-export function modifierVehicule({ commit ,dispatch}, nouveau) {
+export function modifierVehicule({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .put("/Vehicule/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_VEHICULE", response.data);
-          dispatch('getVehicule')
-              dispatch('getAllUniteAdministrative')
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+    .put("/Vehicule/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_VEHICULE", response.data);
+      dispatch('getVehicule')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
-export function supprimerVehicule({ commit,dispatch }, id) {
+export function supprimerVehicule({ commit, dispatch }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_VEHICULE", id);
-          dispatch('getVehicule')
-              dispatch('getAllUniteAdministrative')
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/Vehicule/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_VEHICULE", id);
+      dispatch('getVehicule')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/Vehicule/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -1571,59 +1601,59 @@ export function supprimerVehicule({ commit,dispatch }, id) {
 
 export function getReparationVehicule({ commit }) {
   queue.push(() => {
-      axios
-          .get("/ReparationVehicule")
-          .then(response => {
-              commit("GET_ALL_REPARATION_VEHICULE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/ReparationVehicule")
+      .then(response => {
+        commit("GET_ALL_REPARATION_VEHICULE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterReparationVehicule({ commit,dispatch }, nouveau) {
+export function ajouterReparationVehicule({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .post("/ReparationVehicule", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_REPARATION_VEHICULE", response.data);
-              dispatch('getReparationVehicule')
-              dispatch('getAllUniteAdministrative')
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/ReparationVehicule", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_REPARATION_VEHICULE", response.data);
+        dispatch('getReparationVehicule')
+        dispatch('getAllUniteAdministrative')
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 // modifier
-export function modifierReparationVehicule({ commit ,dispatch}, nouveau) {
+export function modifierReparationVehicule({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .put("/ReparationVehicule/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_REPARATION_VEHICULE", response.data);
-          dispatch('getReparationVehicule')
-              dispatch('getAllUniteAdministrative')
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+    .put("/ReparationVehicule/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_REPARATION_VEHICULE", response.data);
+      dispatch('getReparationVehicule')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
-export function supprimerReparationVehicule({ commit,dispatch }, id) {
+export function supprimerReparationVehicule({ commit, dispatch }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_REPARATION_VEHICULE", id);
-          dispatch('getReparationVehicule')
-              dispatch('getAllUniteAdministrative')
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/ReparationVehicule/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_REPARATION_VEHICULE", id);
+      dispatch('getReparationVehicule')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/ReparationVehicule/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -1632,60 +1662,60 @@ export function supprimerReparationVehicule({ commit,dispatch }, id) {
 
 export function getStockArticleUa({ commit }) {
   queue.push(() => {
-      axios
-          .get("/StockArticle")
-          .then(response => {
-              commit("GET_ALL_STOCK_ARTICLE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/StockArticle")
+      .then(response => {
+        commit("GET_ALL_STOCK_ARTICLE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterStockArticle({ commit,dispatch }, nouveau) {
+export function ajouterStockArticle({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .post("/StockArticle", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_STOCK_ARTICLE", response.data);
-              dispatch('getStockArticle')
-              dispatch('getAllUniteAdministrative')
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/StockArticle", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_STOCK_ARTICLE", response.data);
+        dispatch('getStockArticle')
+        dispatch('getAllUniteAdministrative')
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 
 
-export function modifierStockArticle({ commit ,dispatch}, nouveau) {
+export function modifierStockArticle({ commit, dispatch }, nouveau) {
   asyncLoading(axios
-      .put("/StockArticle/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_STOCK_ARTICLE", response.data);
-          dispatch('getStockArticle')
+    .put("/StockArticle/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_STOCK_ARTICLE", response.data);
+      dispatch('getStockArticle')
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
-export function supprimerStockArticle({ commit,dispatch }, id) {
+export function supprimerStockArticle({ commit, dispatch }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_STOCK_ARTICLE", id);
-          dispatch('getStockArticle')
-              dispatch('getAllUniteAdministrative')
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/StockArticle/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_STOCK_ARTICLE", id);
+      dispatch('getStockArticle')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/StockArticle/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -1708,18 +1738,18 @@ export function getAllHistoriqueDecompteFacture({ commit }) {
 
 export function ajouterHistoriqueDecompteFacture({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/HistoriqueDecompteFacture", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_HISTORIQUE_DECOMPTE_FACTURE", response.data);
+    .post("/HistoriqueDecompteFacture", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_DECOMPTE_FACTURE", response.data);
 
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 
@@ -1737,18 +1767,18 @@ export function getAllHistoriqueDecisionBudgetEclate({ commit }) {
 
 export function ajouterHistoriqueDecisionBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/HistoriqueDecisionBudgetEclate", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_HISTORIQUE_DECISION_BUDGET_ECLATE", response.data);
-             
-              // this.$app.$notify({
-              //     title: 'Success',
-              //     text: 'Enregistrement Effectué avec Succès!',
-              //     type: "success"
-              // })
-          }
-      });
+    .post("/HistoriqueDecisionBudgetEclate", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_DECISION_BUDGET_ECLATE", response.data);
+
+        // this.$app.$notify({
+        //     title: 'Success',
+        //     text: 'Enregistrement Effectué avec Succès!',
+        //     type: "success"
+        // })
+      }
+    });
 }
 
 
@@ -1757,58 +1787,58 @@ export function ajouterHistoriqueDecisionBudgetEclate({ commit }, nouveau) {
 
 export function getSousBudget({ commit }) {
   queue.push(() => {
-      axios
-          .get("/SousBudget")
-          .then(response => {
-              commit("GET_ALL_SOUS_BUDGET", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/SousBudget")
+      .then(response => {
+        commit("GET_ALL_SOUS_BUDGET", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterSousBudget({ commit}, nouveau) {
+export function ajouterSousBudget({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/SousBudget", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_SOUS_BUDGET", response.data);
-            
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/SousBudget", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_SOUS_BUDGET", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 
 
-export function modifierSousBudget({ commit}, nouveau) {
+export function modifierSousBudget({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/SousBudget/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_SOUS_BUDGET", response.data);
-         
+    .put("/SousBudget/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_SOUS_BUDGET", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
-export function supprimerSousBudget({ commit}, id) {
+export function supprimerSousBudget({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_SOUS_BUDGET", id);
-          
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/SousBudget/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_SOUS_BUDGET", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/SousBudget/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -1818,58 +1848,58 @@ export function supprimerSousBudget({ commit}, id) {
 
 export function getBudgetEclateRegie({ commit }) {
   queue.push(() => {
-      axios
-          .get("/BudgetEclateRegie")
-          .then(response => {
-              commit("GET_ALL_BUDGET_ECLATE_REGIE", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/BudgetEclateRegie")
+      .then(response => {
+        commit("GET_ALL_BUDGET_ECLATE_REGIE", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterBudgetEclateRegie({ commit}, nouveau) {
+export function ajouterBudgetEclateRegie({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/BudgetEclateRegie", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_BUDGET_ECLATE_REGIE", response.data);
-            
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/BudgetEclateRegie", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_ECLATE_REGIE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 
 
-export function modifierBudgetEclateRegie({ commit}, nouveau) {
+export function modifierBudgetEclateRegie({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/BudgetEclateRegie/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_BUDGET_ECLATE_REGIE", response.data);
-         
+    .put("/BudgetEclateRegie/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_BUDGET_ECLATE_REGIE", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Enregistrement Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Enregistrement Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 //supprimer
-export function supprimerBudgetEclateRegie({ commit}, id) {
+export function supprimerBudgetEclateRegie({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_BUDGET_ECLATE_REGIE", id);
-          
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/BudgetEclateRegie/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_BUDGET_ECLATE_REGIE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/BudgetEclateRegie/" + id).then(() => dialog.close());
+    });
 }
 
 
@@ -1882,58 +1912,58 @@ export function supprimerBudgetEclateRegie({ commit}, id) {
 
 export function getUniteAdministrativeBailleur({ commit }) {
   queue.push(() => {
-      axios
-          .get("/UniteAdministrativeBailleur")
-          .then(response => {
-              commit("GET_ALL_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
-          })
-          .catch(error => console.log(error));
+    axios
+      .get("/UniteAdministrativeBailleur")
+      .then(response => {
+        commit("GET_ALL_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
+      })
+      .catch(error => console.log(error));
   });
 }
 
 // ajouter type texte
-export function ajouterUniteAdministrativeBailleur({ commit}, nouveau) {
+export function ajouterUniteAdministrativeBailleur({ commit }, nouveau) {
   asyncLoading(axios
-      .post("/UniteAdministrativeBailleur", nouveau))
-      .then(response => {
-          if (response.status == 201) {
-              commit("AJOUTER_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
-            
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
-          }
-      });
+    .post("/UniteAdministrativeBailleur", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 
 
 
-export function modifierUniteAdministrativeBailleur({ commit}, nouveau) {
+export function modifierUniteAdministrativeBailleur({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/UniteAdministrativeBailleur/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
-         
+    .put("/UniteAdministrativeBailleur/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_UNITE_ADMINISTRATIVE_BAILLEUR", response.data);
 
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Enregistrement Effectué avec Succès!',
-              type: "success"
-          })
-      });
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Enregistrement Effectué avec Succès!',
+        type: "success"
+      })
+    });
 }
 
 //supprimer
-export function supprimerUniteAdministrativeBailleur({ commit}, id) {
+export function supprimerUniteAdministrativeBailleur({ commit }, id) {
   this.$app.$dialog
-      .confirm("Voulez vouz vraiment supprimer ?.")
-      .then(dialog => {
-          commit("SUPPRIMER_UNITE_ADMINISTRATIVE_BAILLEUR", id);
-          
-          // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/UniteAdministrativeBailleur/" + id).then(() => dialog.close());
-      });
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_UNITE_ADMINISTRATIVE_BAILLEUR", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/UniteAdministrativeBailleur/" + id).then(() => dialog.close());
+    });
 }
 

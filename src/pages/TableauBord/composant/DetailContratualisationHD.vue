@@ -456,30 +456,30 @@
                 return status=>{
                     if(status==0){
                         //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<font color='#fff'>En attente de contratualisation </font>"
+                        return "<font color='#fff'>En attente de contractualisation </font>"
                     }
                     if(status==8){
-                        return "<font color='#fff'>En attente de contratualisation hors delait</font>"
+                        return "<font color='#fff'>En attente de contractualisation hors délai</font>"
                     }
                     if(status==1){
-                        return "<font color='#fff'>En contratualisation</font>"
+                        return "<font color='#fff'>En contractualisation</font>"
                     }
                     if(status==9){
                         return "<font color='#fff'>En contractualisation Hors délai</font>"
                     }
 
                     if(status==2){
-                        return "<font color='#fff'>En execution</font>"
+                        return "<font color='#fff'>En exécution</font>"
                     }
                     if(status==10){
-                        return "<font color='#fff'>En execution Hors délai</font>"
+                        return "<font color='#fff'>En exécution Hors délai</font>"
                     }
 
                     if(status==11){
-                        return "<font color='#fff'>Acheve dans le delais</font>"
+                        return "<font color='#fff'>Acheve dans le délai</font>"
                     }
                     if(status==12){
-                        return "<font color='#fff'>Acheve hors delais</font>"
+                        return "<font color='#fff'>Acheve hors délai</font>"
                     }
 
                     if(status==7){

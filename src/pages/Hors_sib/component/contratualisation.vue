@@ -6,7 +6,7 @@
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en contratualisation   </h5>
+              <h5>Liste des Marchés en contratualisation {{macheid}}  </h5>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <div class="span8">
                   <div align="right">
@@ -32,7 +32,7 @@
            Entrer
         </div>
             
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" v-if="macheid">
                 <thead>
                  <tr>
                 <th>Année</th>
@@ -181,6 +181,7 @@ export default {
        active_el:0,
         }
     },
+    props:["macheid"],
     created(){
 
     },
@@ -215,7 +216,7 @@ export default {
 
       rechercheUa() {
       const st = this.search.toLowerCase();
-      return this.afficherContratualisationParUA.filter((type) => {
+      return this.afficheMarcheEnContrat.filter((type) => {
         return type.objet.toLowerCase().includes(st);
       });
     },
@@ -247,7 +248,9 @@ export default {
         }
       };
     },
-
+afficheMarcheEnContrat(){
+return this.afficherContratualisationParUA.filter(element => element.unite_administrative_id == this.macheid)
+},
     afficherContratualisationParUA() {
        // const st = this.search.toLowerCase();
 

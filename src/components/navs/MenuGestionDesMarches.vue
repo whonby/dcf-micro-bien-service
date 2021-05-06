@@ -64,29 +64,46 @@
         </ul>
       </li> -->
        <li>
-            <router-link :to="{name: 'listeMarche'}" tag="a">
+            <router-link :to="{name: 'groupeMarcheParUaSIgobe'}" tag="a">
               LISTE DES MARCHES
             </router-link>
           </li>
+
+           <!-- <li>
+            <router-link :to="{name: 'listeMarche'}" tag="a">
+              LISTE DES MARCHES
+            </router-link>
+          </li> -->
      <li>
    <li>
-            <router-link :to="{name: 'marcheHorsppm'}" tag ="a">
+            <!-- <router-link :to="{name: 'marcheHorsppm'}" tag ="a">
               LISTE DES MARCHES HORS PPM
             </router-link>
-          </li>
+          </li> -->
+
+
            <li>
+        <router-link :to="{ name: 'GroupeMarcheExecutionParUa' }" tag="a">
+          EXECUTION DES MARCHES
+        </router-link>
+      </li>
+
+
+           <!-- <li>
             <router-link :to="{name: 'AutresDepense'}" tag ="a">
-                AUTRES DEPENSE
+                AUTRES DEPENSES
             </router-link>
-          </li>
-           <li>
+          </li> -->
+
+           <!-- <li>
             <router-link :to="{name: 'marcheEntreprise'}" tag ="a">
                 LISTE DES MARCHES PAR ENTREPRISES
             </router-link>
-          </li>
+          </li> -->
+
             <li>
             <router-link :to="{name: 'ppm'}" tag ="a">
-                PPM
+                IMPORTATION PPM
             </router-link>
           </li>
      <!-- <li> 

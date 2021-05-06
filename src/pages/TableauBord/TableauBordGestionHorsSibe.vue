@@ -244,7 +244,7 @@
               >
                 <div class="inner">
                   <h3>{{ nombreMarcheParStatue("planifie") }}</h3>
-                  <p>En attente de contratualisation hors alert</p>
+                  <p>En attente de contractualisation hors alert</p>
                 </div>
 
                 <div class="icon2">
@@ -261,7 +261,7 @@
               >
                 <div class="inner">
                   <h3>{{ nombreMarcheParStatue(8) }}</h3>
-                  <p>En attente de contratualisation avec alert</p>
+                  <p>En attente de contractualisation avec alert</p>
                 </div>
                 <div class="icon2">{{ pourcentageMarchePasStatus(8) }}%</div>
               </div>
@@ -274,7 +274,7 @@
               >
                 <div class="inner">
                   <h3>{{ nombreMarcheParStatue(1) }}</h3>
-                  <p>En contratualisation</p>
+                  <p>En contractualisation</p>
                 </div>
                 <div class="icon2">{{ pourcentageMarchePasStatus(1) }}%</div>
               </div>
@@ -287,7 +287,7 @@
               >
                 <div class="inner">
                   <h3>{{ nombreMarcheParStatue(2) }}</h3>
-                  <p>En execution</p>
+                  <p>En exécution</p>
                 </div>
                 <div class="icon2">{{ pourcentageMarchePasStatus(2) }}%</div>
               </div>
@@ -1228,17 +1228,17 @@ export default {
       return (status) => {
         if (status == 0) {
           //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-          return "<font color='#410041'>En attente de contratualisation hors alert</font>";
+          return "<font color='#410041'>En attente de contractualisation hors alert</font>";
         }
         if (status == 8) {
-          return "<font color='#e81776'>En attente de contratualisation avec alert</font>";
+          return "<font color='#e81776'>En attente de contractualisation avec alert</font>";
         }
         if (status == 1) {
-          return "<font color='#FF00FF'>En contratualisation</font>";
+          return "<font color='#FF00FF'>En contractualisation</font>";
         }
 
         if (status == 2) {
-          return "<font color='#008000'>En execution</font>";
+          return "<font color='#008000'>En exécution</font>";
         }
 
         if (status == 7) {

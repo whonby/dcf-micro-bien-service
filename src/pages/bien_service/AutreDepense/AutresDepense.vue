@@ -10,117 +10,29 @@
       <div class="modal-body">
        <table class="table table-bordered table-striped">
          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Année</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   :value="anneeAmort"
-                    class="span5"
-                    readonly
-                  />
-                </div>
+           <td colspan="12">
+            <div class="control-group">
+              <label class="control-label">Objet de la Depense</label>
+              <div class="controls">
+                <textarea
+                style="border:1px solid #000"
+                  v-model="formData.objet"
+                  class="span12"
+                  rows="2"
+                  placeholder="Saisir le texte"
+                ></textarea>
               </div>
               
-            </td>
-           <td>
-              <div class="control-group">
-                <label class="control-label">Référence</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formData.reference"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-            
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Bénéficiaire</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formData.beneficiaire"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
+            </div>
+          </td>
+        
          </tr>
-         <tr>
-           <td colspan="3">
-              <div class="control-group">
-                <label class="control-label">Objet</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formData.objet"
-                    class="span12"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-         </tr>
-         <tr>
-           <td>
-              <div class="control-group">
-                <label class="control-label">Montant</label>
-                <div class="controls">
-                  
-                  <money v-model="formData.montant"   style="text-align:left;color:red"  class="span5"></money>
-                </div>
-              </div>
-              
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Compte Bancaire</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formData.compte_bancaire"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    
-                   v-model="formData.date"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-         </tr>
+      
        </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterTypeTexteLocal(formData)"
+          @click.prevent="ajouterTypeTexteLocal()"
           class="btn btn-primary"
           href="#"
         
@@ -140,117 +52,29 @@
       <div class="modal-body">
         <table class="table table-bordered table-striped">
          <tr>
-           <td>
-              <div class="control-group">
-                <label class="control-label">Année</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   :value="anneeAmort"
-                    class="span5"
-                    readonly
-                  />
-                </div>
+           <td colspan="12">
+            <div class="control-group">
+              <label class="control-label">Objet de la Depense</label>
+              <div class="controls">
+                <textarea
+                style="border:1px solid #000"
+                  v-model="editTypeTexte.objet"
+                  class="span12"
+                  rows="2"
+                  placeholder="Saisir le texte"
+                ></textarea>
               </div>
               
-            </td>
-           <td>
-              <div class="control-group">
-                <label class="control-label">Reférence</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editTypeTexte.reference"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-            
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">bénéficiaire</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editTypeTexte.beneficiaire"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
+            </div>
+          </td>
+        
          </tr>
-         <tr>
-           <td colspan="3">
-              <div class="control-group">
-                <label class="control-label">Objet</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editTypeTexte.objet"
-                    class="span12"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-         </tr>
-         <tr>
-           <td>
-              <div class="control-group">
-                <label class="control-label">Montant</label>
-                <div class="controls">
-                  
-                  <money v-model="editTypeTexte.montant"   style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-              
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Compte</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editTypeTexte.compte_bancaire"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    
-                   v-model="editTypeTexte.date"
-                    class="span5"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td>
-         </tr>
+      
        </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierDossierAutreDepense(editTypeTexte)"
+          @click.prevent="modifierTypeTexteLocal()"
           class="btn btn-primary"
           href="#"
           
@@ -292,30 +116,30 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Année</th>
-                    <th>Référence</th>
-                    <th>Objet</th>
+                    <!-- <th>Année</th>
+                    <th>Référence</th> -->
+                    <th style="width:90%">Objet</th>
                      
-                    <th>Bénéficiaire</th>
+                    <!-- <th>Bénéficiaire</th>
                     <th>Compte</th>
                      <th>Montant</th>
                     
-                    <th>Date</th>
+                    <th>Date</th> -->
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in filtre_type_teste" :key="type.id">
-                     <td
+                  <tr class="odd gradeX" v-for="(type) in gettersDossierAutreDepense" :key="type.id">
+                     <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.exercice || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.reference || 'Non renseigné'}}</td>
+                    >{{type.reference || 'Non renseigné'}}</td> -->
                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.objet || 'Non renseigné'}}</td>
-                     <td
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{conversionMajiscule(type.objet) || 'Non renseigné'}}</td>
+                     <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.beneficiaire || 'Non renseigné'}}</td>
                     <td
@@ -326,9 +150,9 @@
                     >{{formatageSomme(parseFloat(type.montant)) || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.date || 'Non renseigné'}}</td>
+                    >{{type.date || 'Non renseigné'}}</td>-->
 
-                    <td>
+                    <td> 
                       <button class="btn btn-danger" @click="supprimerDossierAutreDepense(type.id)">
                         <span class="">
                           <i class=" icon-trash"></i>   Supprimer
@@ -398,6 +222,12 @@ export default {
       "exercices_budgetaires",
       "afficheLocalisationGeoNiveau5"
     ]),
+      conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
+    },
     filtre_type_teste() {
       const st = this.search.toLowerCase();
       return this.gettersDossierAutreDepense.filter(type => {
@@ -441,28 +271,25 @@ export default {
       this.ajouterDossierAutreDepense(objetNouvel);
 
       this.formData = {
-        reference: "",
+       
         objet: "",
-        date: "",
-        beneficiaire: "",
-        montant: "",
-        compte_bancaire: ""
+      
       };
     },
     // afficher modal de modification
-    afficherModalModifierTypeTexte(index) {
+    afficherModalModifierTypeTexte(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
      
-      this.editTypeTexte = this.gettersDossierAutreDepense[index];
+      this.editTypeTexte = this.gettersDossierAutreDepense.find(item=>item.id==id);
     },
     formatageSomme:formatageSomme,
     // fonction pour vider l'input modification
     modifierTypeTexteLocal() {
-      this.modifierTypeTexte(this.editTypeTexte);
+      this.modifierDossierAutreDepense(this.editTypeTexte);
 this.$("#modificationModal").modal('hide');
       // this.editTypeTexte = {
       //   code: "",
@@ -483,8 +310,8 @@ ExporterEnExel(){
 
 <style scoped>
 .taillemodal {
-  width: 75%;
-  margin: 0 -38%;
+  width: 53%;
+  margin: 0 -30%;
 }
 
 </style>

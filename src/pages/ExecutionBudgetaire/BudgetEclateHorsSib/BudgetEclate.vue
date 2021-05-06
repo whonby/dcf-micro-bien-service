@@ -1,7 +1,7 @@
 
 <template>
   <div>
- 
+  <h2 style="text-align:center;font-size:25px">BUDGETS VENTILLES OU SOUS BUDGET PAR UNITE ADMINISTRATIVE</h2>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->

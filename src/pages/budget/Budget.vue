@@ -86,6 +86,8 @@
                                     </table>
                                 </div>
                             </div>
+
+
                             <div id="tab2" class="tab-pane">
                                     <input
                                             type="text"
@@ -108,7 +110,7 @@
 
                                         <th>SECTION</th>
                                         <th>PROGRAMME</th>
-                                        <th>GRANDE NATURE DE DEPENSE</th>
+                                        <th>NATURE DE DEPENSE</th>
                                         <th>UA </th>
                                         <th>ZONE </th>
                                         <th>ACTION</th>
@@ -142,6 +144,8 @@
                                     <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
                                 </el-table>-->
                             </div>
+
+                            
                             <div id="tab3" class="tab-pane" v-if="source_financement_detecter.length>0" >
                                 <table class="table table-bordered table-striped" id="source">
                                     <thead>
@@ -225,7 +229,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Importation de budge</th>
+                        <th>Importation de budget</th>
                         <th></th>
                     </tr>
                     </thead>

@@ -14,7 +14,7 @@
 
     <div class="main-body">
        <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    <!-- <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button> -->
     
         </div>
         <br/>
@@ -243,6 +243,7 @@ detailMarche:"",
 this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.id)
   //const userId = this.$route.params.id
     console.log(this.marches[this.$route.params.id].id)
+    console.log(this.getterImageMarche[this.$route.params.id].date_enregistrement)
     },
 
               computed: {

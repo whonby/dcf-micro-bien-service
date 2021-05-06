@@ -2,13 +2,9 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
+      <!-- administratifs-->
 
-<!-- administratifs-->
-
-
-
-
-        <!-- <li class="dropdown" id="planification">
+      <!-- <li class="dropdown" id="planification">
             <a  href="#" data-toggle="dropdown" data-target="#planification" class="dropdown-toggle">
                 <span class="text">PLANIFICATION DES MARCHES </span>
                 <b class="caret"></b>
@@ -34,8 +30,8 @@
 
             </ul>
         </li> -->
-      
-       <!-- <li class="dropdown" id="execut">
+
+      <!-- <li class="dropdown" id="execut">
         <a  href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
           <span class="text">EXECUTION DU MARCHES </span>
           <b class="caret"></b>
@@ -63,35 +59,46 @@
           
         </ul>
       </li> -->
-       <li>
+      <!-- <li>
             <router-link :to="{name: 'GestionMarcheHorSib'}" tag="a">
               LISTE DES MARCHES
             </router-link>
-          </li>
-     <li>
-   <li>
-
-            <router-link :to="{name: 'groupeMarcheParUa'}" tag ="a">
-              LISTE DES MARCHES HORS PPM
-            </router-link>
-          </li>
-          <li>
+          </li> -->
+      <li></li>
+      <li>
+        <router-link :to="{ name: 'groupeMarcheParUa' }" tag="a">
+          LISTE DES MARCHES
+        </router-link>
+      </li>
+      <!-- <li>
            <router-link :to="{name: 'listeMarcheppm'}" tag ="a">
                 LISTE DES MARCHES PPM
             </router-link>
-          </li>
-           <li>
+          </li> -->
+      <!-- <li>
+        <router-link :to="{ name: 'AutresDepense' }" tag="a">
+          AUTRES DEPENSES
+        </router-link>
+      </li> -->
+      <!-- <li>
             <router-link :to="{name: 'marcheEntreprise'}" tag ="a">
                 LISTE DES MARCHES PAR ENTREPRISES
             </router-link>
-          </li>
+          </li> -->
 
-            <li v-if="admin() ||dcf()">
-            <router-link :to="{name: 'ppmHorsSib'}" tag ="a">
-                PPM
-            </router-link>
-          </li>
-     <!-- <li> 
+      <li>
+        <router-link :to="{ name: 'GroupeMarcheExecutionParUa' }" tag="a">
+          EXECUTION DES MARCHES
+        </router-link>
+      </li>
+
+      <li v-if="admin() || dcf()">
+        <router-link :to="{ name: 'ppmHorsSib' }" tag="a">
+          IMPORTATION PPM
+        </router-link>
+      </li>
+
+      <!-- <li> 
             <router-link :to="{name: 'ajouterMarcheHor'}" tag="a">
 TEST            </router-link>
           </li> -->
@@ -104,15 +111,13 @@ TEST            </router-link>
 import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
 import { mapMutations, mapActions } from "vuex";
 export default {
-
-   methods: {
-      ...mapMutations('parametrageMenu', ['activate']),
-      ...mapActions('Utilisateurs', ['logoutUser']),
-    admin:admin,
-    dcf:dcf,
- noDCfNoAdmin:noDCfNoAdmin
-  }
-
+  methods: {
+    ...mapMutations("parametrageMenu", ["activate"]),
+    ...mapActions("Utilisateurs", ["logoutUser"]),
+    admin: admin,
+    dcf: dcf,
+    noDCfNoAdmin: noDCfNoAdmin,
+  },
 };
 </script>
 

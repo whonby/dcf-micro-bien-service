@@ -9,14 +9,19 @@
       </li>
 <li>
         <router-link :to="{name: 'UniteAdministrativeRegie'}" tag="a">
-          BUDGET DES REGIES
+          BUDGET ECLATE DES REGIES
         </router-link>
       </li>
       <li>
         <router-link :to="{name: 'recapitulatifBudgetHorsSigobe'}" tag="a">
-          RECAPITULATIF BUDGET DES PROJETS
+          SYSTHESE DU BUDGET PAR UA
         </router-link>
       </li>
+       <!-- <li>
+        <router-link :to="{name: 'importationBudgetEclate'}" tag="a">
+          IMPORTATION BUDGET
+        </router-link>
+      </li> -->
     </ul>
   </div>
 </template>

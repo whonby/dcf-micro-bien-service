@@ -3067,16 +3067,74 @@ export const MODIFIER_HISTORIQUE_DECISION_CF_OP = (state, elementModif)=>{
 export const SUPPRIMER_HISTORIQUE_DECISION_CF_OP = (state, id)=> {
     state.historiqueDecisionCfOP = state.historiqueDecisionCfOP.filter(prest => prest.id !=id)
 }
+export const GET_ALL_BUDGET_ECLATE_IMPORTE = (state, tableau_document) => {
+    state.budgetEclateImporter = tableau_document
+}
+
+export const AJOUTER_BUDGET_ECLATE_IMPORTE = (state, elementAjouter) => {
+    state.budgetEclateImporter.unshift(elementAjouter)
+}
+export const GET_ALL_VOIR_BUDGET_ECLATE_IMPORTE = (state, tableau_document) => {
+    state.voirBudgetImporter = tableau_document
+}
+
+
+
+
+
+export const GET_ALL_PROCEDURE_DROIT_COMMUN= (state, tableau_document) =>{
+    state.ProcedureDroitCommuns = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_PROCEDURE_DROIT_COMMUN = (state, elementAjouter) => {
+    state.ProcedureDroitCommuns.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_PROCEDURE_DROIT_COMMUN = (state, elementModif)=>{
+    state.ProcedureDroitCommuns = state.ProcedureDroitCommuns.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_PROCEDURE_DROIT_COMMUN = (state, id)=> {
+    state.ProcedureDroitCommuns = state.ProcedureDroitCommuns.filter(prest => prest.id !=id)
+}
 
 
 
 
 export const GET_ALL_BUDGET_IMPORTER = (state, tableau_document) => {
     state.budgetEclateImport = tableau_document
+
+
+export const GET_ALL_PROCEDURE_DEROGATOIRE= (state, tableau_document) =>{
+    state.ProcedureDerogatoires = tableau_document
 }
 
 // add * document
 
 export const AJOUTER_BUDGET_IMPORTER = (state, elementAjouter) => {
     state.budgetEclateImport.unshift(elementAjouter)
+export const AJOUTER_PROCEDURE_DEROGATOIRE = (state, elementAjouter) => {
+    state.ProcedureDerogatoires.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_PROCEDURE_DEROGATOIRE = (state, elementModif)=>{
+    state.ProcedureDerogatoires = state.ProcedureDerogatoires.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_PROCEDURE_DEROGATOIRE = (state, id)=> {
+    state.ProcedureDerogatoires = state.ProcedureDerogatoires.filter(prest => prest.id !=id)
 }

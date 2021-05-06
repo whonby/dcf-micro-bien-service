@@ -326,10 +326,13 @@
                             <thead>
                             <tr>
                                 <th>UA </th>
-                                <th>Nombre Marchés</th>
-                                <th>Montant total</th>
+                                <th>Acteur</th>
+                                <th>Budget initial </th>
+                                <th>Budget exécuté </th>
+                                <th>Budget disponible  </th>
+                                
                                 <!--<th v-if="status_marches==2">Montant base</th>-->
-                                <th>Taux</th>
+                                <th>Taux Exécution</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -337,6 +340,8 @@
                             <tr>
                                 <td></td>
                                 <td></td>
+                                <td></td>
+                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td></td>
@@ -555,7 +560,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 let vm=this;
                 this.filtre_unite_admin.forEach(function (value) {
                     let budgetMontant=vm.gettersDossierMandat.filter(item => {
-                        if(this.exo(item.demande_engagement_id)==vm.anneeAmort && this.DemandeEngagement(item.demande_engagement_id)==value.id){
+                        if( this.DemandeEngagement(item.demande_engagement_id)==value.id){
                             return item
                         }
                     }).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_engage),0)

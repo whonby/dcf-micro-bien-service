@@ -328,9 +328,6 @@ let date = new Date();
 
         return cur_day
 
-
-    
-   
    },
   },
   methods: {

@@ -150,7 +150,7 @@
 
                     <div class="row-fluid" style="" id="printMe">
                         <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
-                            <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
+                            <div class="card-box bg-attente-contractualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                                 <div class="inner">
                                     <p> <b> En attente de contractualisation
                                     </b></p>
@@ -169,7 +169,7 @@
                         </div>
 
                         <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contractualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En attente de
                                         contractualisation
@@ -190,7 +190,7 @@
                             </div>
                         </div>
                         <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listeMarcheStatus(1)" class="card-box bg-en-contractualisation" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation</b>   </p>
 
@@ -205,7 +205,7 @@
                             </div>
                         </div>
                         <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listeMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listeMarcheStatus(9)" class="card-box bg-en-contractualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation
                                         Hors délai</b> </p>
@@ -592,7 +592,7 @@
 
                     <div class="row-fluid" style="" >
                         <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
-                            <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
+                            <div class="card-box bg-attente-contratuaclisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                                 <div class="inner">
                                     <p> <b> En attente de contractualisation
                                     </b></p>
@@ -611,7 +611,7 @@
                         </div>
 
                         <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contractualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En attente de
                                         contractualisation
@@ -632,7 +632,7 @@
                             </div>
                         </div>
                         <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listeMarcheStatus(1)" class="card-box bg-en-contractualisation" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation</b>   </p>
 
@@ -647,7 +647,7 @@
                             </div>
                         </div>
                         <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                            <div @click="listeMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div @click="listeMarcheStatus(9)" class="card-box bg-en-contractualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
                                 <div class="inner">
                                     <p><b>En contractualisation
                                         Hors délai</b> </p>
@@ -1637,13 +1637,13 @@
                 return status=>{
                     if(status==0){
                         //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<font color='#fff'>En attente de contratualisation </font>"
+                        return "<font color='#fff'>En attente de contractualisation </font>"
                     }
                     if(status==8){
-                        return "<font color='#fff'>En attente de contratualisation hors delait</font>"
+                        return "<font color='#fff'>En attente de contractualisation hors delait</font>"
                     }
                     if(status==1){
-                        return "<font color='#fff'>En contratualisation</font>"
+                        return "<font color='#fff'>En contractualisation</font>"
                     }
                     if(status==9){
                         return "<font color='#fff'>En contractualisation Hors délai</font>"
@@ -2362,18 +2362,18 @@
     }
 
 
-    .bg-attente-contratualisation-hors-alert {
+    .bg-attente-contractualisation-hors-alert {
 
         background-color: #8ea9db !important;
     }
-    .bg-attente-contratualisation-avec-alert {
+    .bg-attente-contractualisation-avec-alert {
         background-color: #f4b084 !important;
     }
-    .bg-en-contratualisation {
+    .bg-en-contractualisation {
         background-color: #92d050 !important;
     }
 
-    .bg-en-contratualisation-hort-delais {
+    .bg-en-contractualisation-hort-delais {
         background-color: #652b92 !important;
     }
     .bg-en-execution {

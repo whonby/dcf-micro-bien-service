@@ -288,7 +288,7 @@ numeroOrdre
                         <td>
                           <div class="control-group">
                             <label class="control-label"
-                              >Type de procédure
+                              >Procédures de Droit Commun 
                               <code style="color: red; font-size: 16px"
                                 >*</code
                               ></label
@@ -331,7 +331,7 @@ numeroOrdre
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >Type d'engagement</label
+                              >Procédures Dérogatoires </label
                             >
                             <div class="controls">
                               <select
@@ -355,6 +355,11 @@ numeroOrdre
                                   value="Régularisation avances de trésorerie"
                                 >
                                   Régularisation avances de trésorerie(AT)
+                                </option>
+                                <option
+                                  value="lettre d’avances"
+                                >
+                                  Lettre d’avances
                                 </option>
                                 <option value="Autre">Autre</option>
                               </select>
@@ -3580,9 +3585,9 @@ recupererStructure() {
       this.$htmlToPaper("printMe");
     },
 
-    afficherModalListePersonnel() {
-      this.$router.push({ name: "ListeUaExecutionBudgetaire" });
-    },
+    // afficherModalListePersonnel() {
+    //   this.$router.push({ name: "ListeUaExecutionBudgetaire" });
+    // },
 
     OnchangeFichier(e) {
       const files = e.target.files;
@@ -4015,7 +4020,9 @@ recupererStructure() {
         keyboard: false,
       });
     },
-
+ afficherModalListePersonnel(){
+                window.history.back()
+            },
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },

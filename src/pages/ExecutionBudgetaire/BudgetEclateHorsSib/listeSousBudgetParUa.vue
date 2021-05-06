@@ -71,7 +71,7 @@
                    <td>
                       <router-link :to="{ name: 'VoirSousBudget', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Sous Budgets</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Listes Sous Budgets</i></span>
                    </router-link> 
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->

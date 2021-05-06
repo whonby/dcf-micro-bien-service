@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="printpdf">
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
@@ -7,7 +7,7 @@
     </div>
     <br />
 
-    <div class="widget-content nopadding" id="printpdf">
+    <div class="widget-content nopadding" >
       <table
         class="table table-bordered table-striped html2pdf__page-break"
         id="app1"
@@ -51,9 +51,9 @@
         "
        
       >
-       {{afficherLibelleSection(afficherIDSection(375)) || 'Non renseigné'}} 
+       {{afficherLibelleSection(afficherIDSection(macheid)) || 'Non renseigné'}} 
        <br/>
-     <h4 style="color:red;">  {{afficherLibelleUa(afficherIDUA(375)) || 'Non renseigné'}}</h4>
+     <h4 style="color:red;">  {{afficherLibelleUa(afficherIDUA(macheid)) || 'Non renseigné'}}</h4>
       
       </h2>
       
@@ -86,8 +86,8 @@
         <table class="table table-bordered table-striped" id="titre">
                 <thead>
                    <tr style="background-color: green;color: #FFFFFF;">
-    <td style="width:50%;text-align:center">Nom de l'Entreprise:   {{printEntreprise(afficherEntrepriseId(375))}}</td> 
-    <td style="width:50%;text-align:center"> N° de Marché /Contrat  :  {{afficherNumeroMarche(375)}} </td>
+    <td style="width:50%;text-align:center">Nom de l'Entreprise:   {{printEntreprise(afficherEntrepriseId(macheid))}}</td> 
+    <td style="width:50%;text-align:center"> N° de Marché /Contrat  :  {{afficherNumeroMarche(macheid)}} </td>
      <!-- <td style="width:12%;text-align:center">SOURCE DE FINANCEMENT</td>
      <td style="width:12%;text-align:center">TOTAL(FINANCEMENT)</td>
     <td style="width:12%;text-align:center">EXECUTE</td>
@@ -98,8 +98,8 @@
  </thead>
  <tbody>
                     <tr>
-    <td height="10px" rowspan="" style="text-align:center;">N° de compte contribuable:  {{printEntrepriseNumberCompte(afficherEntrepriseId(375))}}</td>
-    <td height="10px">Date d'Approbation :  {{afficherDateAprobation(375)}}</td> 
+    <td height="10px" rowspan="" style="text-align:center;">N° de compte contribuable:  {{printEntrepriseNumberCompte(afficherEntrepriseId(macheid))}}</td>
+    <td height="10px">Date d'Approbation :  {{afficherDateAprobation(macheid)}}</td> 
      <!-- <td style="width:12%">ETAT</td> -->
      <!-- <td height="10px" style="text-align:center;font-size:12px"></td>
    <td height="10px" style="text-align:center;font-size:12px"></td>
@@ -116,10 +116,11 @@
      <td height="10px" style="text-align:center;font-size:12px"></td> -->
       
  </tr>
+
                    <tr>
    
-   <td rowspan="2" height="20px" width="100px">Objet: {{afficherObjet(375)}}  </td>
-    <td height="20px">PART  Bailleur   : {{afficherIDTypeFinancementLibelle(afficherIDTypeFinancement(375))}}                          {{formatageSomme(parseFloat(sommeCaluler))}} </td>
+   <td rowspan="2" height="20px" width="100px">Objet: {{afficherObjet(macheid)}}  </td>
+    <td height="20px">PART  Bailleur   : {{afficherIDTypeFinancementLibelle(afficherIDTypeFinancement(macheid))}}                          {{formatageSomme(parseFloat(sommeCaluler))}} </td>
     <!-- <td height="20px" style="text-align:center;" ></td>
     <td height="20px" style="text-align:center;"></td>
    <td  height="20px" style="text-align:center;"></td> -->
@@ -130,7 +131,7 @@
                    <tr>
    
    <!-- <td height="20px">EMPRUNT  </td> -->
-    <td style="width:12%"> PART ETAT: {{afficherIDTypeFinancementLibelleEmprunt(afficherIDTypeFinancement(375))}}                 {{formatageSomme(parseFloat(sommeCaluler))}}  </td>
+    <td style="width:12%"> PART ETAT: {{afficherIDTypeFinancementLibelleEmprunt(afficherIDTypeFinancement(macheid))}}                 {{formatageSomme(parseFloat(sommeCaluler))}}  </td>
      <!-- <td height="20px" style="text-align:center;"></td>
     
     <td style="text-align:center;height:20%"></td>
@@ -141,22 +142,22 @@
 </tr>
      
                    <tr>
-   <td  rowspan="4" style="text-align:center;width:10%">Montant initial du marché HTVA:
+   <td  rowspan="4" style=" text-align:center;width:10%">Montant initial du marché HTVA: {{formatageSomme(parseFloat(montantInitialDuMarche(macheid) ))}}
      <br/>
        <br/>
        <br/>
-     Montant total du marché HTVA:
+     Montant total du marché HTVA: {{formatageSomme(parseFloat(montantMarcheTaota ))}}
          <br/>
        <br/>
      <span style="margin-left:-150px;">
-       <h6>debut:01/01/2021    ;     fin:01/02/1995  </h6>          
+       <h6>debut:{{formaterDate(affichageDateDebut(macheid)) }}   ;     fin:{{formaterDate(affichageDateFin(macheid))}}  </h6>          
         
         </span>  
 
       </td>
       
    
-   <td style="width:12%"> Avenant 1 HTVA:</td>
+   <td style="width:12%"> Avenant 1 HTVA: {{formatageSomme(parseFloat(montantAvenant(macheid) ))}} </td>
     <!-- <td style="width:12%">ETAT</td>
   
     <td  style="text-align:center;width:12%"></td>
@@ -205,34 +206,72 @@
         <br>
     </div>
     <br>
-      <table>
-        <tr>
-          <td>Decompte</td>
-          <td>Date</td>
-          <td>Action TVA</td>
-          <th colspan="3">
-            Retenue
+      <table  class="table table-bordered table-striped" v-if="macheid">
+        <thead>
+        <tr  >
+          <th style="text-align:center;font-size:12px" rowspan="2">Decompte</th>
+          <th style="text-align:center;font-size:12px" rowspan="2">Date</th>
+          <th style="text-align:center;font-size:12px" rowspan="2">Acompte HTVA</th>
+          <th style="text-align:center;font-size:12px" colspan="3"> Retenue 
+           
+             
+           
           </th>
-          <td>TVA net</td>
-          <td>netTV</td>
-          <td>Etat</td>
-          <td>Bailler</td>
+          <th style="text-align:center;font-size:12px" rowspan="2">TVA net</th>
+          <th style="text-align:center;font-size:12px" rowspan="2">netTV</th>
+          <th style="text-align:center;font-size:12px" rowspan="2">Etat</th>
+          <th style="text-align:center;font-size:12px" rowspan="2">Bailler</th>
         </tr>
+
+
+         <tr  >
+        
+          <th style="text-align:center;font-size:12px" colspan=""> d'Avance</th>
+            
+           <th style="text-align:center;font-size:12px" colspan=""> de Garantie  </th>
+           <th style="text-align:center;font-size:12px" colspan=""> de Penalités </th>
+
+             
+      
+        </tr>
+        </thead>
+        <tbody>
        
-        <tr>
-          <td>0</td>
-          <td>15/03/2021</td>
-          <td>15 12365</td>
-          <td>Avance</td>
-          <td>Garantie</td>
-          <td>Penalités</td>
-          <td>15 12365</td>
-          <td> 12365</td>
-         <td>15 </td>
-          <td>0</td>
+        <tr class="odd gradeX" v-for="type in afficheMarcheDecompte(macheid)" :key="type.id">
+            <td style="text-align:center;"
+                    >{{type.numero_decompte || 'Non renseigné'}}</td>
+                    <!-- <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                    <td style="text-align:center;"
+                    >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
+                    <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.montantmarche)) || 'Non renseigné'}}</td>
+                    <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
+
+                    <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
+
+                    <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
+                     <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
+
+                    
+                      <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
+
+                    
+                      <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
+
+                    
+                      <td style="text-align:center;"
+                    >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
         </tr>
-        <tr>
-          <td>0</td>
+        <!-- <tr>
+          <td></td>
           <td>15/03/2021</td>
           <td>12354</td>
           <td>0</td>
@@ -243,107 +282,89 @@
           <td> 145 </td>
           <td>354</td>
           <td>0</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        </tr> -->
+       
         <tr style="background-color: aquamarine;">
-            <td>CUMULS</td>
-            <td></td>
-            <td>12546</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>15688254</td>
-            <td>365258987</td>
-            <td>365974587</td>
-            <td>0</td>
+           <td colspan="2" style="text-align:center;background-color: aquamarine;">CUMULS</td>
+                   
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
+                   <td style="text-align:center;color:red;font-size:20px">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
         </tr>
-        <tr>
-            <td>%CUMULS</td>
-            <td></td>
-            <td>#VALLEUR!</td>
-            <td>0.0% </td>
-            <td>#VALEUR!</td>
-            <td>#VALEUR!</td>
-            <td>#VALEUR!</td>
-            <td>#VALEUR!</td>
-            <td>0</td>
-            <td></td>
+
+        
+                 
+        <tr >
+            <td colspan="2" style="text-align:center;background-color: aquamarine;">%CUMULS</td>
+            <!-- <td></td> -->
+            <td>{{(CumulMontantFacture(macheid) / parseFloat(calculMontantTotalMarchePlusAvenant)*100).toFixed(2) }} </td>
+            <td> {{afficherTauxAvance}} </td>
+            <td> {{afficherTauxGarantie}} </td>
+            <td>{{0}} </td>
+            <td>{{0}} </td>
+            <td>{{0}}     </td>
+            <td>{{culmulMontantPaEtat}}</td>
+            <td>{{CumulMontantParBailleur}}</td>
         </tr>
+        </tbody>
       </table>
       <br>
-       <table>
+       <table class="table table-bordered table-striped" >
         <tr>
             <td colspan="3">ENGAGEMENTS VISES</td>
-            <td>TAUX</td>
+            <td style="text-align:center;">TAUX</td>
         </tr>
         <tr>
             <td colspan="2">Par Bailleur</td>
-            <td>0</td>
-            <td>%0</td>
+            <td style="text-align:center;">{{formatageSomme(parseFloat(sommeDesBailleur))}} </td>
+            <td style="text-align:center;">{{calculDuTauxBailleur}} %</td>
         </tr>
         <tr>
             <td>Par Etat</td>
-            <td> </td>
-            <td>#REFT! </td>
-            <td>0%</td>
+            <td style="text-align:center;"> </td>
+            <td style="text-align:center;">{{formatageSomme(parseFloat(afficheMarcheDecompteParBailleurTresors(macheid)))}} </td>
+            <td style="text-align:center;">{{calculDuTauxTresor}} %</td>
         </tr>
         <tr>
             <td>Total</td>
             <td> </td>
-            <td>#REFT! </td>
-            <td>0%</td>
+            <td style="text-align:center;">{{formatageSomme(parseFloat(sommeDesBailleur) + parseFloat(afficheMarcheDecompteParBailleurTresors(macheid) ))}} </td>
+            <td style="text-align:center;">{{afficherTauxTresor}} %</td>
         </tr> 
     </table>
     <br>
-    <table>
+    <table class="table table-bordered table-striped">
         <tr>
-            <td colspan="3">RESTE A ENGAGER</td>
-            <td>TAUX</td>
+            <td colspan="3" style="text-align:center;">RESTE A ENGAGER</td>
+            <td style="text-align:center;">TAUX</td>
         </tr>
         <tr>
-            <td colspan="2">Par Bailleur</td>
-            <td>0</td>
-            <td>%0</td>
+            <td colspan="2" style="text-align:center;">Par Bailleur</td>
+            <td style="text-align:center;">{{calculMontantResteEngager}}</td>
+            <td style="text-align:center;">{{calculTauxParBailleurResteEngager}} %</td>
         </tr>
         <tr>
-            <td>Par Etat</td>
+            <td style="text-align:center;">Par Etat</td>
             <td> </td>
-            <td>#REFT! </td>
-            <td>0%</td>
+            <td style="text-align:center;">{{calculmontantEtatResteEngager}} </td>
+            <td style="text-align:center;">{{calculTauxEtatResteEngager}} %</td>
         </tr>
         <tr>
-            <td>Total</td>
+            <td style="text-align:center;">Total</td>
             <td> </td>
-            <td>Valeur </td>
-            <td>0%</td>
+            <td style="text-align:center;">{{formatageSomme(parseFloat(calculMontantResteEngager) + parseFloat(calculmontantEtatResteEngager))}} </td>
+            <td style="text-align:center;">{{totauxTauxResteEngager}} %</td>
         </tr> 
     </table>
   </div>
 </template>
 <script>
+import moment from "moment";
 import {mapActions, mapGetters} from "vuex";
 import {formatageSomme} from "../../../src/Repositories/Repository"
 export default {
@@ -360,7 +381,7 @@ export default {
   computed:{
  ...mapGetters("bienService", ["acteEffetFinanciers","getterProgrammationMarchePlurieAnnuel",
   "getMarchePersonnaliser","marches","gettersDossierMandat","gettersgestionOrdrePaiement",
-  "gettersDossierLiquidation","gettersDemandeEngagement"]),
+  "gettersDossierLiquidation","gettersDemandeEngagement","avenants","personnaliseGetterMarcheBailleur"]),
 
 ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures"]),
 
@@ -393,6 +414,7 @@ export default {
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
  "budgetGeneral",
+ "decomptefactures",
  "getPersonnaliseTransfert"
    
    
@@ -408,9 +430,9 @@ export default {
       "agenceBanques",
     ]),
 
-taille(){
-  return this.gettersgestionOrdrePaiement.length;
-},
+// taille(){
+//   return this.gettersgestionOrdrePaiement.length;
+// },
 
   afficherIDUA(){
    return macheid=>{
@@ -421,6 +443,355 @@ taille(){
      }
    }
   },
+
+    // anneeAmort() {
+      
+    //   const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+    //   if (norme) {
+    //     return norme.annee;
+    //   }
+    //   return 0
+    // },
+
+     CumulMontantFacture() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantmarche), 0).toFixed(0);
+
+        }
+      };
+    },
+
+    calculMontantResteEngager(){
+           let Objet= parseFloat(this.sommeDesBailleurMarche) - parseFloat(this.sommeDesBailleur)
+            if(isNaN(Objet)){
+              return 0
+            }
+            return Objet
+    },
+    calculTauxParBailleurResteEngager(){
+       let objet= parseFloat(this.calculMontantResteEngager / parseFloat(this.sommeDesBailleurMarche) *100).toFixed(2)
+        if(isNaN(objet)){
+          return 0
+        }
+        return objet
+    },
+
+    calculmontantEtatResteEngager(){
+       let objet= parseFloat(this.afficheMarcheMontanParBailleurTresor(this.macheid) - parseFloat(this.afficheMarcheDecompteParBailleurTresors(this.macheid)))
+        if(isNaN(objet)){
+          return 0
+        }
+        return objet
+    },
+
+    calculTauxEtatResteEngager(){
+       let objet= parseFloat(this.calculmontantEtatResteEngager / parseFloat(this.afficheMarcheMontanParBailleurTresor(this.macheid)) * 100).toFixed(2)
+        if(isNaN(objet)){
+          return 0
+        }
+        return objet
+    },
+
+totauxTauxResteEngager(){
+  return parseFloat(this.calculTauxEtatResteEngager) + parseFloat(this.calculTauxParBailleurResteEngager)
+},
+    // afficher ID du marche dans la table acte effet finanaceier
+//     afficherIdMarcheDansActeEffetFinancier(){
+//       return macheid => {
+//         if (macheid != null && macheid != "") {
+//            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.macheid == macheid);
+// if (qtereel) {
+//         return qtereel.marche_id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+    MontantMarcheHt() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.montant_act_ht;
+      }
+      return 0
+        }
+      };
+    },
+
+    //
+     MontantAvanceTTc() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.avance_demarrage_ttc;
+      }
+      return 0
+        }
+      };
+    },
+
+     MontantGarantieTTc() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.montant_ttc_rentenue_garantie;
+      }
+      return 0
+        }
+      };
+    },
+
+     MontantAvenantHt() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.montant_ht;
+      }
+      return 0
+        }
+      };
+    },
+
+    // calcule le montant total du marche
+    calculMontantTotalMarchePlusAvenant(){
+     return parseFloat(this.MontantMarcheHt(this.macheid))+ parseFloat(this.MontantAvenantHt(this.macheid))
+    },
+
+    afficherTauxGarantie(){
+      let vm=this;
+        const objet= (vm.CumulGArantie(this.macheid) / vm.MontantGarantieTTc(this.macheid) * 100).toFixed(2)
+          if(isNaN(objet)){
+            return 0
+          }
+          return objet.toFixed(2)
+    },
+ // afficher le taux avance
+ afficherTauxAvance(){
+   let vM=this;
+    const objet= (vM.CumulAvance(vM.macheid) / vM.MontantAvanceTTc(vM.macheid) * 100).toFixed(2)
+       if(isNaN(objet)) {
+           return 0
+       } 
+        return objet
+ },
+    
+
+     CumulAvance() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
+
+        }
+      };
+    },
+     CumulMontantParBailleur() {
+        let objet = parseFloat(this.CumulPartBailler(this.macheid) / (this.sommeDesBailleurMarche)* 100).toFixed(2)
+         if(isNaN(objet)){
+           return 0
+         }
+         return objet 
+    },
+    culmulMontantPaEtat(){
+      let obj= parseFloat(this.CumulPartEtat(this.macheid) / parseFloat(this.afficheMarcheMontanParBailleurTresor(this.macheid))* 100).toFixed(2)
+      if(isNaN(obj)){
+        return 0
+      }
+      return obj
+    },
+
+    CumulGArantie() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulPenalite() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulNetHtva() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulNetTTC() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulPartEtat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulPartBailler() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_bailleur), 0).toFixed(0);
+
+        }
+      };
+    },
+
+    afficheMarcheDecompte() {
+      return id => {
+        if (id != null && id != "") {
+          return this.decomptefactures.filter(
+            element => element.marche_id == id 
+          );
+        }
+      };
+    },
+
+
+    afficheMarcheDecompteParBailleurDons() {
+      return id => {
+        if (id != null && id != "") {
+          let objet= this.decomptefactures.filter(
+            element => element.marche_id == id && element.type_financement_id==13 && element.type_ordre_paiement==1 && element.decision_cf==8 && element.diff_op==null
+             || element.type_ordre_paiement==1 && element.decision_cf==9 && element.diff_op==null
+             || element.type_ordre_paiement==4 && element.decision_cf==8 && element.diff_op==null
+             || element.type_ordre_paiement==4 && element.decision_cf==9 && element.diff_op==null
+          ).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0);
+          if(objet){
+            return objet.toFixed(2)
+          }
+          return 0
+        }
+      };
+    },
+
+    afficheMarcheDecompteParBailleurEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+          let objet= this.decomptefactures.filter(
+            element => element.marche_id == id && element.type_financement_id==14 && element.type_ordre_paiement==1 && element.decision_cf==8 && element.diff_op==null
+             || element.type_ordre_paiement==1 && element.decision_cf==9 && element.diff_op==null
+             || element.type_ordre_paiement==4 && element.decision_cf==8 && element.diff_op==null
+             || element.type_ordre_paiement==4 && element.decision_cf==9 && element.diff_op==null
+          ).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0);
+          if(objet){
+            return objet.toFixed(2)
+          }
+          return 0
+        }
+      };
+    },
+
+
+        afficheMarcheMontanParBailleurEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+          let objet= this.personnaliseGetterMarcheBailleur.filter(
+            element => element.marche_id == id && element.type_finnancement_id==14 
+          ).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montant), 0);
+          if(objet){
+            return objet.toFixed(2)
+          }
+          return 0
+        }
+      };
+    },
+
+
+  afficheMarcheMontanParBailleurDons() {
+      return id => {
+        if (id != null && id != "") {
+          let objet= this.personnaliseGetterMarcheBailleur.filter(
+            element => element.marche_id == id && element.type_finnancement_id==13 
+          ).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montant), 0);
+          if(objet){
+            return objet.toFixed(2)
+          }
+          return 0
+        }
+      };
+    },
+    
+     sommeDesBailleurMarche(){
+      return parseFloat(this.afficheMarcheMontanParBailleurDons(this.macheid) ) + parseFloat(this.afficheMarcheMontanParBailleurEmprunt(this.macheid))
+    },
+
+    calculDuTauxBailleur(){
+      let objet= parseFloat((this.sommeDesBailleur) / parseFloat(this.sommeDesBailleurMarche) * 100).toFixed(2)
+       if(isNaN(objet)){
+         return 0
+       }
+       return objet
+    },
+     afficheMarcheMontanParBailleurTresor() {
+      return id => {
+        if (id != null && id != "") {
+          let objet= this.personnaliseGetterMarcheBailleur.filter(
+            element => element.marche_id == id && element.type_finnancement_id==15 
+          ).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montant), 0);
+          if(objet){
+            return objet.toFixed(2)
+          }
+          return 0
+        }
+      };
+    },
+
+       calculDuTauxTresor(){
+      let answer= parseFloat(this.afficheMarcheDecompteParBailleurTresors(this.macheid) / parseFloat(this.afficheMarcheMontanParBailleurTresor(this.macheid)) * 100).toFixed(2)
+       if(isNaN(answer)){
+         return 0
+       }
+       return answer
+    },
+
+// afficher le taux tresor
+afficherTauxTresor(){
+   let objet= parseFloat(this.calculDuTauxBailleur) + parseFloat(this.calculDuTauxTresor).toFixed(2)
+    if(isNaN(objet)){
+      return 0
+    }
+    return objet
+},
+    
+    afficheMarcheDecompteParBailleurTresors() {
+      return id => {
+        if (id != null && id != "") {
+           let objet= this.decomptefactures.filter(
+            element => element.marche_id == id && element.type_financement_id==15 && element.type_ordre_paiement==1 && element.decision_cf==8 && element.diff_op==null
+             || element.type_ordre_paiement==1 && element.decision_cf==9 && element.diff_op==null
+             || element.type_ordre_paiement==4 && element.decision_cf==8 && element.diff_op==null
+             || element.type_ordre_paiement==4 && element.decision_cf==9 && element.diff_op==null
+          ).reduce((prec,cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0);
+          if(objet){
+            return objet.toFixed(2)
+          }
+          return 0
+        }
+      };
+    },
+
+    sommeDesBailleur(){
+      return parseFloat(this.afficheMarcheDecompteParBailleurDons(this.macheid) ) + parseFloat(this.afficheMarcheDecompteParBailleurEmprunt(this.macheid))
+    },
   // afficher le libelle d'unite administratie
   afficherLibelleUa(){
      return macheid=>{
@@ -470,6 +841,82 @@ taille(){
      }
    }
   },
+
+  // afficher le montant initial du marché
+   montantInitialDuMarche(){
+     return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id );
+           // console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.montant_act_ht;
+      }
+      return 0
+        }
+      };
+   },
+   // afficher le numero de decompte
+   afficherDecompteMarche(){
+     return id=>{
+         let answer = this.decomptefactures.filter(idecompte => idecompte.marche_id==id)
+             return answer.numero_decompte;  
+          
+     }
+     
+   },
+   
+
+   // affichage la date debut  
+   affichageDateDebut(){
+      return id=>{
+        if(id!=null && id!=""){
+          const response =this.acteEffetFinanciers.find(item => item.marche_id==id)
+
+          if(response){
+            return response.date_odre_service
+          }
+          return 0
+        }
+      }
+   },
+// afficher date fin 
+     affichageDateFin(){
+      return id=>{
+        if(id!=null && id!=""){
+          const response =this.acteEffetFinanciers.find(item => item.marche_id==id)
+
+          if(response){
+            return response.date_fin_exe
+          }
+          return 0
+        }
+      }
+   },
+
+   // afficher le montant d'avenant
+    montantAvenant(){
+     return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.filter(qtreel => qtreel.marche_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ht), 0);
+            //console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel;
+      }
+      return 0
+        }
+      };
+   },
+
+
+   // afficher le calcul du montant marche total
+
+   montantMarcheTaota(){
+      let objet= parseFloat(this.montantInitialDuMarche(this.macheid))+ parseFloat(this.montantAvenant(this.macheid))
+        if(isNaN(objet)){
+          return 0
+        }
+        return objet
+   },
 
   // recuperation de ID de type de financer 
 
@@ -692,6 +1139,10 @@ AfficheLogODCF() {
   methods:{
     ...mapActions("bienService",['']),
     formatageSomme:formatageSomme,
+
+    formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
 
     genererEnPdf() {
       this.$htmlToPaper("printpdf");

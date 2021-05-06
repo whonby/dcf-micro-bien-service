@@ -1,6 +1,7 @@
 const defaultState = {
 
 budgetEclateImport:[],
+budgetEclateImporter:[],
     prestations: [],
     acteDepenses: [],
     bailleurs: [],
@@ -90,7 +91,7 @@ budgetEclateImport:[],
     rapportOuverture: [],
     gettersTransmissions: [],
     plan_passation_marche: [],
-
+    voirBudgetImporter: [],
     role_membrecojo: [],
     selectionner_candidats: [],
 
@@ -122,7 +123,9 @@ budgetEclateImport:[],
     gestionOrdrePaiementAnnulation: [],
     ServiceRealiteFaitOp: [],
     historiqueDecisionCfOP: [],
-    ProblemeMarche: []
+    ProblemeMarche: [],
+    ProcedureDroitCommuns: [],
+    ProcedureDerogatoires: [],
 
 }
 

@@ -92,7 +92,6 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
-import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue";
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
@@ -110,7 +109,8 @@ import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/Ajout
 import AjouterTacheRealise from "../../pages/investissement/AjouterTache/AjouterTacheRealise.vue"
 import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
 import ModificationOp from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ModificationOp.vue"
-
+import PagePrincipalMarche from '../../pages/gestionMarche/PagePrincipalMarche.vue';
+import PagePrincipalMarcheSigobe from '../../pages/gestionMarche/PagePrincipalMarcheSigobe.vue';
 import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
@@ -125,7 +125,8 @@ import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voi
 import FicheRealiteServiceFait from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheRealiteServiceFait.vue"
 import FicheDeControle from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheDeControle.vue"
 import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.vue";
-
+import GroupeUaDesAutresDepense from "../../pages/bien_service/AutreDepense/GroupeUaDesAutresDepense.vue";
+import GestionAutresDepense from "../../pages/bien_service/AutreDepense/GestionAutresDepense.vue";
 import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheRealiteServiceFait.vue"
 import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
@@ -141,7 +142,8 @@ import ModificationOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDe
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
-
+import listeDesUaDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/listeDesUaDesRegie.vue"
+import VoirOrdrePaiementDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/VoirOrdrePaiementDesRegie.vue"
 import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
@@ -154,12 +156,68 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
-
+import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
+import listeDesUaSigobe from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesUaSigobe.vue"
+import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesProcedureDerogatoire.vue"
+import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
+import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution.vue"
+import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/listeDesProcedureDerogatoire",
+        name: "listeDesProcedureDerogatoire",
+        component: listeDesProcedureDerogatoire
+    },
+    {
+        path: "/listeProcedureDroitCommun",
+        name: "listeProcedureDroitCommun",
+        component: listeProcedureDroitCommun
+    },
+    {
+        path: "/VoirModaliteExecution/:id",
+        name: "VoirModaliteExecution",
+        component: VoirModaliteExecution
+    },
+    {
+        path: "/listeDesUaSigobe",
+        name: "listeDesUaSigobe",
+        component: listeDesUaSigobe
+    },
+    {
+        path: "/GroupeUaDesAutresDepense",
+        name: "GroupeUaDesAutresDepense",
+        component: GroupeUaDesAutresDepense
+    },
+    {
+        path: "/GestionAutresDepense/:id",
+        name: "GestionAutresDepense",
+        component: GestionAutresDepense
+    },
+    {
+        path: "/VoirOrdrePaiementDesRegie/:id",
+        name: "VoirOrdrePaiementDesRegie",
+        component: VoirOrdrePaiementDesRegie
+    },
+    {
+        path: "/PagePrincipalMarche/:id",
+        name: "PagePrincipalMarche",
+        component: PagePrincipalMarche
+    },
+
+    {
+        path: "/PagePrincipalMarcheSigobe/:id",
+        name: "PagePrincipalMarcheSigobe",
+        component: PagePrincipalMarcheSigobe
+    },
+    {
+        path: "/importationBudgetEclate",
+        name: "importationBudgetEclate",
+        component: importationBudgetEclate
+    },
     {
         path: "/VoirOrdrePaiementSousBudget/:id",
         name: "VoirOrdrePaiementSousBudget",
@@ -257,10 +315,15 @@ const BienServiceRoutes = [
         name: "TestTableaux",
         component: TestTableaux
     },
-
+    
+    {
+        path: "/listeDesUaDesRegie",
+        name: "listeDesUaDesRegie",
+        component: listeDesUaDesRegie
+    },
     //ordre de paiement des regies
     {
-        path: "/OrdrePaiementRegie",
+        path: "/OrdrePaiementRegie/:id",
         name: "OrdrePaiementRegie",
         component: OrdrePaiementRegie
     },
@@ -993,6 +1056,27 @@ const BienServiceRoutes = [
         path: "/cycle_de_vie/:id",
         name: "CycleDeVie",
         component: CycleDeVie
+    },
+    {
+        path: "/dossier-image-ministere",
+        name: "ImageParMinistere",
+        component: ImageParMinistere
+    },
+    {
+        path: "/dossier-image-ua",
+        name: "DossierImageUa",
+        component: DossierImageUa
+    },
+    {
+        path: "/dossier-image-marche",
+        name: "DossierImageParMarche",
+        component: DossierImageParMarche
+    },
+    {
+        path: "/image-marches",
+        name: "DossierImg",
+        component: DossierImg 
+
     }
 
 ]

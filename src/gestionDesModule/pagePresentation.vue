@@ -138,15 +138,28 @@
                               <div class="single-timeline-area">
 
                                   <div class="row-fluid">
+                                     <div class="span4"  @click="goToModule(1)" v-if="!noDCfNoAdmin">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text">
+                                                  <h5>PARAMETRES GENERAUX</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-cogs"></i>
+                                                  </div>
+                                                  <p> Permet de codifier les données de base</p>
+                                              </div>
+                                          </div>
+                                      </div>
                                       <div class="span4" @click="goToModule(2)">
                                           <div  class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; ">
 
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>UNITES ADMINISTRATIVE (UA)</h5>
+                                                  <h5>UNITES ADMINISTRATIVES (UA)</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-home"></i>
                                                   </div>
-                                                  <p>Présente la gestion des unités administratives et la gestion du budget (planification et exécution).</p>
+                                                  <p>Présente la gestion des unités administratives et la gestion du budget .</p>
+                                                  <!-- <p>Présente la gestion des unités administratives et la gestion du budget (planification et exécution).</p> -->
                                               </div>
                                           </div>
                                       </div>
@@ -159,23 +172,44 @@
 <!--                                              </div>-->
 <!--                                          </div>-->
 <!--                                      </div>-->
-                                      <div class="span4" @click="goToModule(3)">
-                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
-
-                                              <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>EXECUTION SIGOBE</h5>
+ <div class="span4"  >
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text">
+                                                  <h5>GESTION DU PERSONNEL</h5>
                                                   <div>
-                                                      <i style="font-size: 35px !important;" class="icon-book"></i>
+                                                      <i style="font-size: 35px !important;" class="icon-group"></i>
                                                   </div>
-                                                  <p> Gérer l’ensemble des transactions effectuées par les UA liées au SIGOBE (Système d’Information Budgétaire).</p>
+                                                  <p> permet de traiter la gestion des actes de personnel (recrutement et début de carrière, suivi de carrière et sortie de carrière)</p>
                                               </div>
                                           </div>
                                       </div>
+                                     
+                                       <!-- </li> -->
+                                  </div>
+                              </div>
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+                                  <div class="row-fluid">
+ <div class="span4" @click="goToModule(3)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
+
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>GESTION SIGOBE</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-book"></i>
+                                                  </div>
+                                                  <p> Gérer l’ensemble des transactions effectuées par les UA liées au SIGOBE (Système Intégré  de Gestion des Opérations Budgetaires de l'Etat).</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                       <!-- <li :class="{active: active_el == 1034 }" @click.prevent="navigateToTableauBord"> -->
                                       <div class="span4"  @click="goToModule(4)">
+                                        
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>EXECUTION HORS SIGOBE</h5>
+                                                  <h5>GESTION HORS SIGOBE</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-folder-open"></i>
                                                   </div>
@@ -183,25 +217,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                  </div>
-                              </div>
-                              <!-- Single Timeline Content-->
-                              <div class="single-timeline-area">
-                                  <div class="row-fluid">
-
-                                      <div class="span4"  @click="goToModule(5)">
-                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
-                                              <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>CARTOGRAPHIES DU BUDGETS ET DES MARCHES</h5>
-                                                  <div>
-                                                      <i style="font-size: 35px !important;" class="icon-globe"></i>
-                                                  </div>
-                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA dans le monde</p>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="span4"  @click="goToModule(8)">
+                                       <div class="span4"  @click="goToModule(8)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -213,7 +229,29 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="span4"  @click="goToModule(7)">
+                                      
+                                     
+                                    
+                                  </div>
+                              </div>
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+
+                                  <div class="row-fluid">
+
+                                     <div class="span4"  @click="goToModule(5)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>CARTOGRAPHIES DU BUDGETS ET DES MARCHES</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-globe"></i>
+                                                  </div>
+                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA Nationales et Internationales</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                        <div class="span4"  @click="goToModule(7)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-id-card" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -225,25 +263,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                  </div>
-                              </div>
-                              <!-- Single Timeline Content-->
-                              <div class="single-timeline-area">
-
-                                  <div class="row-fluid">
-
-                                      <div class="span4"  @click="goToModule(1)" v-if="!noDCfNoAdmin">
-                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
-                                              <div class="timeline-text">
-                                                  <h5>PARAMETRES GENERAUX</h5>
-                                                  <div>
-                                                      <i style="font-size: 35px !important;" class="icon-cogs"></i>
-                                                  </div>
-                                                  <p> Permet de codifier les données de base</p>
-                                              </div>
-                                          </div>
-                                      </div>
+                                      
                                       <div class="span4"  @click="goToModule(9)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
@@ -252,7 +272,7 @@
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-dashboard"></i>
                                                   </div>
-                                                  <p> Permet de codifier les données de base</p>
+                                                  <p> Présente tous les Tableaux de Bord</p>
                                               </div>
                                           </div>
                                       </div>
@@ -300,7 +320,7 @@
 
 
 <script>
-import { mapGetters,mapActions} from "vuex";
+import { mapGetters,mapActions,mapState,mapMutations} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
 import Chargement from '../components/Chargement.vue'
@@ -344,6 +364,9 @@ this.getDossierFacture()
 this.getGestionOrdrePaiementAnnulat()
 this.getServiceRealiteFaitOp()
 this.getHistoriqueDecisionOp()
+this.getBudgetEclateImporter()
+this.getProcedureDroitCommun()
+this.getProcedureDerogatoire()
 this.getDossierAutreDepense()
 this.getGestionOrdrePaiement()
 this.getFormeJuridiques()
@@ -641,7 +664,9 @@ this.getTousActivite()
 
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation",
       "getterUniteAdministrativeByUser"]),
-
+   ...mapState('parametrageMenu', {
+     active_el: state => state.active_el
+  }),
 
 afficherModule1() {
       return id1 => {
@@ -698,10 +723,11 @@ return objJson.id
   },
 
 
+
   methods:{
  admin:admin,
      dcf:dcf,
-
+...mapMutations('parametrageMenu', ['activate']),
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
       ...mapActions('parametreGenerauxFonctionnelle',
@@ -801,11 +827,11 @@ return objJson.id
 
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
-
+ 
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense','getProblemeMarche', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
@@ -838,12 +864,21 @@ return objJson.id
         name: 'TableauDeBordG'
       })
     },
-    activeMenuModuleGestionHorSIB(){
+
+    navigateToTableauBord(){
       this.activeMenuModuleSidcf(4)
-      this.$router.push({
-        name: 'TableauDeBordG'
-      })
-    },
+        this.activate(1034)
+        this.$router.push({
+          name: 'TableauBordGestionHorsSibSimple'
+        })
+      },
+    // navigateToTableauBord(){
+    //   this.activeMenuModuleSidcf(4)
+    //   this.$router.push({
+    //     name: 'TableauBordGestionHorsSibSimple'
+    //   })
+    // },
+
     activeMenuModuleCartographie(){
       this.activeMenuModuleSidcf(5)
       this.$router.push({
