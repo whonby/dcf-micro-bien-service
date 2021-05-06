@@ -110,7 +110,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
@@ -125,7 +125,7 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION RECAPITULAVIE PAR ACTIVITE ET BAILLEUR DU
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR DU
 
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
@@ -149,7 +149,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Activité/Bailleurs
@@ -158,7 +158,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Budget Actuel
@@ -167,7 +167,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Montant Exécuté
@@ -179,7 +179,7 @@
                     font-weight: bold;
                     color: #000;
                     text-align: center;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Montant Provisoire
@@ -188,7 +188,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Taux En Exécution (%)
@@ -197,7 +197,7 @@
                   style="
                     font-size: 14px;
                     font-weight: bold;
-                    background-color: #87ceeb;
+                    background-color: 	#FFA500 !important;
                   "
                 >
                   Disponible

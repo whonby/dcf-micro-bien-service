@@ -150,7 +150,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
               <b>Activités</b>
@@ -161,7 +161,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
               <b>Budget Actuel</b>
@@ -173,7 +173,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 <b>Montant Exécuté</b>
@@ -185,7 +185,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Montant Provisoire
@@ -195,7 +195,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 <b>Taux En Exécution (%)</b>
@@ -205,7 +205,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: 	#FFA500 !important;
                 "
               >
                <b> Disponible</b>

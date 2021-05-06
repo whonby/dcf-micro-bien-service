@@ -972,7 +972,7 @@
                       N°Ordre paiement
                     </th>
                   
-                    <th style="font-size: 14px; font-weight: bold">Objet OP</th>
+                    <th style="font-size: 14px; font-weight: bold">Objet ordre de paiement </th>
                     <!-- <th style="font-size: 14px; font-weight: bold">UA</th> -->
                    
                     <th style="font-size: 14px; font-weight: bold">

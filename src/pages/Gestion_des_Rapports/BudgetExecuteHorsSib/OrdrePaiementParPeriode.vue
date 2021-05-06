@@ -141,7 +141,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: #FFA500 !important;
                 "
               >
                 Ligne Budgétaire
@@ -150,7 +150,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Type
@@ -159,7 +159,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 N°OP
@@ -168,7 +168,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Bailleur
@@ -177,7 +177,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Objet
@@ -187,7 +187,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Montant
@@ -196,7 +196,7 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-                  background-color: #87ceeb !important;
+                  background-color: 	#FFA500 !important;
                 "
               >
                 Visa Cf

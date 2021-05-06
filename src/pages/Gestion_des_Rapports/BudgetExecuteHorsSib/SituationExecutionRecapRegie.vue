@@ -148,7 +148,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Activités
@@ -158,7 +158,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Budget Actuel
@@ -169,7 +169,7 @@
                 font-weight: bold;
                 color: #000;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Montant Exécuté
@@ -179,7 +179,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Taux(%)
@@ -189,7 +189,7 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                background-color: #87ceeb;
+                background-color: 	#FFA500 !important;
               "
             >
               Disponible
