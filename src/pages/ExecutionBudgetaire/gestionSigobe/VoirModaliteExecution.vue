@@ -5,83 +5,124 @@
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
     
         </div> 
-     <div class="table-responsive text-nowrap">
-              <table class="table table-bordered table-striped">
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#Droit">Procédures de Droit Commun </a>
-                        <a data-toggle="tab" href="#Derogatoires">Procédures Dérogatoires </a>
-                      </li>
-                      
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                    <div id="Droit" class="tab-pane active">
-     <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#ENGAGEMENTDIRECT">ENGAGEMENT DIRECT</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#ENGAGEMENTBONCOMMANDE">ENGAGEMENT PAR BON COMMANDE</a>
-                      </li>
-                       <!-- <li>
-                        <a data-toggle="tab" href="#ViséLiquidation">Dossiers Visés</a>
-                      </li>
-                        <li>
-                        <a data-toggle="tab" href="#ObservationLiquidation">Dossiers Visés avec Observation</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#DiffereLiquidation">Dossiers différés</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#RejettéLiquidation">Dossiers Rejettés</a>
-                      </li> -->
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-<div id="ENGAGEMENTDIRECT" class="tab-pane active">
-                        ENGAGEMENT DIRECT
-                       </div>
-                       <div id="ENGAGEMENTBONCOMMANDE" class="tab-pane">
-                     ENGAGEMENT BON COMMANDE
-                       </div>
-                       <!-- <div id="ViséLiquidation" class="tab-pane">
-                        <MandatVise :macheid="detail_marche.id"></MandatVise>
-                       </div> -->
-                       <!-- <div id="DiffereLiquidation" class="tab-pane">
-                        <MandatDifferer :macheid="detail_marche.id"></MandatDifferer>
-                       </div> -->
-                       <!-- <div id="RejettéLiquidation" class="tab-pane">
-                        <MandatRejetter :macheid="detail_marche.id"></MandatRejetter>
-                       </div> -->
-                       <!-- <div id="ObservationLiquidation" class="tab-pane">
-                        <MandatViseAvecObservation :macheid="detail_marche.id"></MandatViseAvecObservation>
-                       </div> -->
-                      </div>
+        <br>
+         <br>
+        <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
+            <h5 style="text-align: center;font-size:25px">{{idUniteAdministrative(marcheid)}}</h5>
+            </a> </div>
+
+        <div class="widget-box collapsible">
+          <div class="widget-title" style="background-color: coral;color:#fff !important;font-size:15px"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-sitemap" ></i></span>
+            <h5 style="color:#fff !important;font-size:20px">PROCEDURES DE DROIT COMMUN </h5>
+            </a> </div>
+            <br>
+          <div class="collapse in" id="collapseOne">
+              
+        <div class="widget-box collapsible">
+       <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:30px"> <a href="#ENGAGEMENTDIRECT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" ></i></span>
+            <h5 style="background-color: #fff!important;color:#000!important;font-size:15px;">ENGAGEMENT DIRECT </h5>
+            </a> 
+            
+            </div>
+             <div class="collapse" id="ENGAGEMENTDIRECT">
+<div class="widget-box collapsible">
+    <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">DEMANDE ENGAGAMENT </h5>
+            </a> 
+            
+            </div>
+            
+            <div class="collapse" id="DEMANDEENGAGAMENT" style="font-size:15px; margin-left:110px"><ListeDemandeEngagement :macheid="marcheid"></ListeDemandeEngagement></div>
+            <br>
+            <!-- DEBUT LIQUIDATION -->
+            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">LIQUIDATION </h5>
+            </a> 
+            
+            </div>
+            
+            
+             <div class="collapse" id="LIQUIDATION" style="font-size:15px; margin-left:110px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
+             <!-- DEBUT MANDAT -->
+             <br>
+            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#MANDAT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">MANDAT </h5>
+            </a> 
+            
+            </div>
+            
+              <div class="collapse" id="MANDAT" style="font-size:15px; margin-left:110px"><ListeMandat :macheid="marcheid"></ListeMandat></div>
+    <br>
+    </div>
+
+             </div>
+              <br>
+          <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:30px"> <a href="#ENGAGEMENTBONCOMMANDE" data-toggle="collapse"> <span class="icon"><i class=" icon-arrow-down" ></i></span>
+            <h5 style="background-color: #fff!important;color:#000!important;font-size:15px;">ENGAGEMENT PAR BON DE COMMANDE</h5>
+            </a> 
+            
+            </div>
+            <div class="collapse" id="ENGAGEMENTBONCOMMANDE" style="background-color: coral;color:#fff!important;font-size:15px; margin-left:70px">
+<div class="widget-box collapsible">
+    <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENTBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">DEMANDE ENGAGAMENT </h5>
+            </a> 
+            
+            </div>
+            
+            <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px"><ListeDemandeEngagement :macheid="marcheid"></ListeDemandeEngagement></div>
+            <br>
+ <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">BON DE COMMANDE </h5>
+            </a> 
+            
+            </div>
+            
+            
+             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
+             <!-- DEBUT MANDAT -->
+             <br>
+ <!-- DEBUT LIQUIDATION -->
+            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">LIQUIDATION </h5>
+            </a> 
+            
+            </div>
+            
+            
+             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
+             <!-- DEBUT MANDAT -->
+             <br>
+            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#MANDATBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">MANDAT </h5>
+            </a> 
+            
+            </div>
+            
+              <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px"><ListeMandat :macheid="marcheid"></ListeMandat></div>
+    <br>
+ </div>
+            </div>
+             </div>
           </div>
-               
-
-                       
-
-                      
-                      
-      </div>
-       </div>
-      
-              </table>
- 
-  </div>
+          
+          <!-- <div class="widget-title" style="background-color: coral;"> <a href="#collapseTwo" data-toggle="collapse"> <span class="icon"><i class="icon-sitemap"></i></span>
+            <h5 style="color:#fff !important;font-size:20px">PROCEDURES DEROGATOIRES </h5>
+            </a> </div>
+          <div class="collapse" id="collapseTwo">
+            <div class="widget-content"> This box is now open </div>
+          </div> -->
+         
+        </div>
+    
 
   </div>
 </template>
   
 <script>
-//import MandatEnAttente from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatEnAttente.vue"
+import ListeDemandeEngagement from "./ListeDemandeEngagement"
+import ListeDesLiquidation from "./ListeDesLiquidation"
+import ListeMandat from "./ListeMandat"
 // import MandatDifferer from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatDifferer.vue"
 // import MandatRejetter from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatRejetter.vue"
 // import MandatVise from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatVise.vue"
@@ -91,7 +132,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   components:{
-    // MandatViseAvecObservation,
+  ListeDemandeEngagement,
+  ListeMandat,
+  ListeDesLiquidation,
     // MandatVise,
     // MandatRejetter,
     // MandatDifferer,
@@ -111,9 +154,7 @@ export default {
   },
 created() {
             this.marcheid=this.$route.params.id
-   this.detail_marche = this.gettersDemandeEngagement.find(
-       idmarche => idmarche.id == this.$route.params.id
-         )
+
          
 },
   computed: {
@@ -122,8 +163,36 @@ created() {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-   
-    
+    ...mapGetters("uniteadministrative", [
+      "directions",
+      "servicesua",
+      "fonctionsua",
+      "getPersonnaliseBudgetGeneral",
+      "montantBudgetGeneral",
+      "uniteZones",
+      "getPersonnaliseBudgetGeneralParTransfert",
+      "uniteAdministratives",
+      "jointureUaChapitreSection",
+      "budgetEclate",
+      "GroupeUaReceptrice",
+      "transferts",
+      "groupeUniteAdministrativeBudgetEclate",
+      "groupeUaSousBudget"
+      // "chapitres",
+      // "sections"
+    ]),
+     idUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
   },
   methods: {
     ...mapActions("uniteadministrative", [

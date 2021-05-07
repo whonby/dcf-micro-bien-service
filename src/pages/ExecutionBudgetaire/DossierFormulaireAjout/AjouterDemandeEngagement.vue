@@ -3585,9 +3585,9 @@ recupererStructure() {
       this.$htmlToPaper("printMe");
     },
 
-    afficherModalListePersonnel() {
-      this.$router.push({ name: "ListeUaExecutionBudgetaire" });
-    },
+    // afficherModalListePersonnel() {
+    //   this.$router.push({ name: "ListeUaExecutionBudgetaire" });
+    // },
 
     OnchangeFichier(e) {
       const files = e.target.files;
@@ -4020,7 +4020,9 @@ recupererStructure() {
         keyboard: false,
       });
     },
-
+ afficherModalListePersonnel(){
+                window.history.back()
+            },
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
