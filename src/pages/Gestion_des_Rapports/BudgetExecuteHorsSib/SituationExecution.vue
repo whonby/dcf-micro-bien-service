@@ -142,17 +142,11 @@
         EXERCICE: {{ anneeAmort }}
       </p>
 
-<<<<<<< HEAD
       
 
        <div class="widget-content nopadding" style="margin: 25px"  >
       <table class="table table-bordered">
           <thead style="background-color: #FC762F !important">
-=======
-      <div class="widget-content nopadding" style="margin: 25px">
-        <table class="table table-bordered">
-          <thead style="background-color: #ffa500 !important">
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
             <tr>
               <th
                 style="
@@ -160,13 +154,8 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
                   width: 800px
-=======
-                  background-color: #ffa500 !important;
-                  width: 800px;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Bailleurs
@@ -177,11 +166,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: #ffa500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Budget Actuel
@@ -192,11 +177,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: #ffa500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Montant Exécuté
@@ -208,11 +189,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: #ffa500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Montant Provisoire
@@ -222,12 +199,8 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-<<<<<<< HEAD
                   color: #000;
                   background-color: #FC762F !important;
-=======
-                  background-color: #ffa500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Taux d' Exécution (%)
@@ -238,11 +211,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: #ffa500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Disponible
