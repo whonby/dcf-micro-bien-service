@@ -46,6 +46,8 @@ import ListeStockArticle from "../../pages/suivi_control_budgetaires/suiviImmobi
 
 import ReportingBudget from "../../pages/unites_administratives/ReportingBudget/ReportingBudget.vue"
 import listeDesUaBudget from "../../pages/unites_administratives/ReportingBudget/listeDesUaBudget.vue"
+import listeDesUaParProgramme from "../../pages/unites_administratives/ReportingBudget/ListeDesUaParProgramme.vue"
+import ListeUADesProgrammes from "../../pages/unites_administratives/ReportingBudget/ListeUADesProgrammes.vue"
 import DetailBudgetUa from "../../pages/unites_administratives/ReportingBudget/DetailBudgetUa.vue"
 import ModificationBudget from "../../pages/budget/ModificationBudget"
 import BudgetPasProgramme from "../../pages/budget/BudgetPasProgramme"
@@ -215,6 +217,19 @@ const UniteAdministativeRoutes = [
     path: "/listeDesUaBudget",
     name: "listeDesUaBudget",
     component: listeDesUaBudget
+},
+//
+
+{
+  path: "/listeDesUaParProgramme",
+  name: "listeDesUaParProgramme",
+  component: listeDesUaParProgramme
+},
+
+{
+  path: "/ListeUADesProgrammes/:id",
+  name: "ListeUADesProgrammes",
+  component: ListeUADesProgrammes
 },
   {
     path: "/ReportingBudget",
