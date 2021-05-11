@@ -122,7 +122,9 @@ budgetEclateImporter:[],
     gestionOrdrePaiementAnnulation: [],
     ServiceRealiteFaitOp: [],
     historiqueDecisionCfOP: [],
-    ProblemeMarche: []
+    ProblemeMarche: [],
+    ProcedureDroitCommuns: [],
+    ProcedureDerogatoires: [],
 
 }
 

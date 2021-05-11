@@ -300,7 +300,7 @@ navigateToGestionMarche(){
  ExecutionBudgetaire(){
         this.activate(100)
         this.$router.push({
-          name:'listeDesUaSigobe'
+          name:'ListeUaExecutionBudgetaire'
         })
       },
 
