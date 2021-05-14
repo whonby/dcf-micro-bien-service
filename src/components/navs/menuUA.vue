@@ -184,6 +184,12 @@
             </router-link>
           </li>
 
+          <li >
+            <router-link :to="{name: 'listeDesUaParProgramme'}" tag="a">
+              UA PAR PROGRAMME
+            </router-link>
+          </li>
+
     </ul>
   </div>
 </template>

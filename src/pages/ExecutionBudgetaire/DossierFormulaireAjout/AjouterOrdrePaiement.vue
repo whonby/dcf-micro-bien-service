@@ -615,7 +615,7 @@
                   />
                 </div>
               </div>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Fonction</label>
                 <div class="controls">
                   <input
@@ -626,7 +626,7 @@
                     readonly
                   />
                 </div>
-              </div>
+              </div> -->
               
                      </td>
                      <td colspan="2">

@@ -29,8 +29,7 @@ export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 // export const nombreArchivageDocument = state => state.archivageDocuments.length;
 // export const nombreTypeText = state => state.typeTextes.length;
-const budgetGeneral = state =>
-  state.budgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
+const budgetGeneral = state =>state.budgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const nombreTransfert = state => state.transferts.length;
 const historiquebudgetGeneral = state =>
   state.historiquebudgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
@@ -891,4 +890,9 @@ export const groupeParAnneeDecompte = (state, getters) => {
 export const groupeParUniteZone = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "sous_budget_id");
+};
+
+export const groupeBudgetbyProgramme = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "program_id");
 };
