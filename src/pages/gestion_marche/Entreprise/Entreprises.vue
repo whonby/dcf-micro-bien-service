@@ -11,7 +11,7 @@ getSecteurActivite
             <i class="icon icon-plus"> AJOUTER </i>
           </button>
         </div>
- <div id="exampleModal" class="modal hide">
+    <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>SANCTION</h3>
@@ -136,7 +136,7 @@ getSecteurActivite
                        <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div>
+                                </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toutes les entreprises</h5>
@@ -202,7 +202,7 @@ getSecteurActivite
                                     class="btn btn-default " title="Detail entreprise ">
                                    <span class=""><i class="icon-folder-open"> Détail EN/SE</i></span>
                                          </router-link> 
-                                                        <button href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></button>
+                                                        <button href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="ajouterEntreS"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></button>
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"> Supprimer</i></span></button>
 
@@ -381,6 +381,9 @@ getSecteurActivite
                                                 <th>Email </th>
                                                 <th>Téléphone</th>
                                                <th>Statut</th>
+                                               <th>Date début</th>
+                                               <th>Date fin</th>
+                                               <th>Motif</th>
                                                 <th colspan="3">Action</th>
                                             </tr>
                                             </thead>
@@ -397,6 +400,9 @@ getSecteurActivite
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
                                                 <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                                 <td v-if="item.active == 0" style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>
+                                                <td>Date debut</td>
+                                                <td>Date fin</td>
+                                                <td>Motif</td>
         <td>
   <a href="#exampleModal" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-eye-open" title="Voir la Cause"> Voir la cause</i></a>
 </td>
@@ -550,7 +556,8 @@ historiqueEntreprise
                     motif:""
                 },
                 entrepriseSetect:'',
-entrepre:""
+                entrepre:""
+                
             };
         },
 
@@ -558,7 +565,9 @@ entrepre:""
             // this.getFonctions()
             //  console.log(this.fonctions)
             // console.log(this.getFonction)
-this.getEntreprise()
+    console.log("hello")
+    console.log(this.entreprises)
+    this.getEntreprise()
         },
         computed: {
 // methode pour maper notre guetter
