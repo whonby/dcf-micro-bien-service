@@ -1,38 +1,11 @@
 
 <template>
   <div>
- <div  align="left" style="cursor:pointer;">
+ <!-- <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
-        </div>
-    <table class="table table-bordered table-striped">
-            <tr>
-               <td style="width: 0%; font-weight: bolder; color: #000">
-            <div align="right" style="cursor: pointer">
-              <button
-                class="btn btn-success"
-                @click.prevent="ajouterDemandeEngage"
-                style="font-weight: bolder; color: #fff; font-size: 20px"
-              >
-                <i class="icon icon-plus"> AJOUTER DEMANDE ENGAGEMENT</i>
-              </button>
-            </div>
-          </td>
-              <td style="width: 0px">
-            <div align="right" style="cursor: pointer">
-              <button
-                class="btn btn-primary"
-                @click.prevent="ajouterOpSysteme"
-                style="font-weight: bolder; color: #fff; font-size: 20px"
-              >
-                <i class="icon icon-plus">
-                  AJOUTER OP SYSTEME</i
-                >
-              </button>
-            </div>
-          </td>
-            </tr>
-          </table>
+        </div> -->
+    
           
     <div class="container-fluid">
       <hr />
@@ -57,7 +30,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Liste(s) Unite(s) administrative(s)</h5>
+                            <h5>Listes Unites administratives</h5>
+                          
+                           
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -78,24 +53,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
                    
-                   <td>
-                      <router-link :to="{ name: 'VoirModaliteExecution', params: { id: type }}"
+                   <td v-if="type[0].unite_zone == 0">
+                      <router-link :to="{ name: 'listeMarcheBienEtServiceHS', params: { id: type[0].unite_administrative_id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="icon-eye-open" style="font-weight: bold;">Modalités d’Exécution</i></span>
+                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
-                    <!-- <td v-else-if="type.unite_zone != 0">
-                      <router-link :to="{ name: 'ListeDesSousBudgetMarche', params: { id: type }}"
+                    <td v-else-if="type[0].unite_zone != 0">
+                      <router-link :to="{ name: 'listeSousBudgetMarcheExecution', params: { id: type[0].unite_administrative_id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;"> Voir Sous Budget</i></span>
+                  <span class=""><i class="icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
                    </router-link> 
                     </td>
-                     <td v-else style="background-color:lightblue"></td> -->
+                     <td v-else style="background-color:lightblue"></td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
                     <!-- <td>
                       <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">
@@ -127,7 +102,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 
-// import {admin,dcf,cf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
   // import {  ModelListSelect } from 'vue-search-select'
   //   import 'vue-search-select/dist/VueSearchSelect.css'
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -180,7 +155,7 @@ export default {
       // "chapitres",
       // "sections"
     ]),
-    ...mapGetters("bienService", ["gettersDemandeEngagement","GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+    ...mapGetters("bienService", ["GroupeUniteAdministrativeMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -212,31 +187,69 @@ export default {
  ...mapGetters('personnelUA', ['all_acteur_depense']),
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+    admin: admin,
+    dcf: dcf,
+    noDCfNoAdmin: noDCfNoAdmin,
    
-afficheGroupeUaParMarche(){
-    return this.marches.filter(item=>item.sib==1)
+
+
+    // afficherMarcheInvestissementParDroitAccess() {
+    //   // const st = this.search.toLowerCase();
+    //   if (this.noDCfNoAdmin) {
+    //     let colect = [];
+    //     this.GroupeUniteAdministrativeMarche.filter((item) => {
+    //       let val = this.getterUniteAdministrativeByUser.find(
+    //         (row) => row.unite_administrative_id == item.ua_id
+    //       );
+    //       if (val != undefined) {
+    //         colect.push(item);
+    //         return item;
+    //       }
+    //     });
+
+    //     return colect.filter(
+          
+    //       (element) =>
+    //         (element.unite_administrative_id == this.marcheid &&
+    //           element.parent_id == null &&
+    //           element.sib == 1 &&
+    //           element.attribue == 2 ) 
+    //     );
+    //   }
+    //   return this.printMarcheNonAttribue.filter(
+    //     (element) =>
+    //       (element.unite_administrative_id == this.marcheid &&
+    //         element.parent_id == null &&
+    //         element.sib == 1 &&
+    //         element.attribue == 2  ) 
+         
+    //   );
+    // },
+
+  afficheNomUtilisateur(){
+      let objLinea = localStorage.getItem("Users");
+      let objJson = JSON.parse(objLinea);
+      return objJson.id
+
 },
 
-arrayExerciceDecompteBienService() {
-      //return (id) => {
-        
-        let objet = this.gettersDemandeEngagement;
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.ua_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-    // };
-    },
+afficheGroupeUaParMarche(){
+   if (this.noDCfNoAdmin) {
+     return this.GroupeUniteAdministrativeMarche.filter((item)=>{
+       this.getterUniteAdministrativeByUser.find((row) => row.unite_administrative_id == item[0].unite_administrative_id
+       && item[0].sib ==0);
+     });
+   }else{
+     return this.GroupeUniteAdministrativeMarche.filter(item=>item[0].sib==0);
+
+
+   }
+    
+},
+
+
 
     idUniteAdministrative() {
       return id => {
@@ -287,11 +300,14 @@ arrayExerciceDecompteBienService() {
     pagePrecedent(){
                 window.history.back()
             },
-   ajouterDemandeEngage(){
-                this.$router.push({ name: 'AjouterDemandeEngagement' })
+    ModificationBudgetaire(){
+                this.$router.push({ name: 'ModificationBudgetaire' })
             },
-            ajouterOpSysteme(){
-                this.$router.push({ name: 'AjouterOrdrePaiement' })
+            SOUSbUDGET(){
+                this.$router.push({ name: 'sousBudget' })
+            },
+  ajouterBudgetEclarter(){
+                this.$router.push({ name: 'AjouterBudgetEclater' })
             },
   }
 };

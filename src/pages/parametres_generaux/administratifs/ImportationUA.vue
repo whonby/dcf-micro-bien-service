@@ -19,7 +19,7 @@
 
                 <li class="" v-if="section_dettecter.length > 0">
                   <a data-toggle="tab" href="#tab5"
-                    ><span>Nouvelle Section  Detecté</span>
+                    ><span>Nouvelle Section Detecté</span>
                     <span class="label label-important">{{
                       section_dettecter.length
                     }}</span></a
@@ -58,7 +58,8 @@
                   class="btn btn-primary"
                   href="#"
                   v-if="tableData.length"
-                  >Importer</a>
+                  >Importer</a
+                >
 
                 <table
                   class="table table-bordered table-striped"
@@ -71,8 +72,6 @@
                       <th>SECTION</th>
                       <th>SERVICES GESTIONNAIRES DE CREDIT</th>
                       <th>LOCALISATION GEOGRAPHIQUE</th>
-                      <th>CODE UA</th>
-                      <th>NOM UA</th>
                       <th>DATE DE CREATION</th>
                       <!-- <th>SOURCE FINANCEMENT</th>
              <th>LIGNE</th>
@@ -86,8 +85,6 @@
                       <td>{{ data["SECTION"] }}</td>
                       <td>{{ data["SERVICES GESTIONNAIRES DE CREDIT"] }}</td>
                       <td>{{ data["LOCALISATION GEOGRAPHIQUE"] }}</td>
-                      <td>{{ data["CODE UA"] }}</td>
-                      <td>{{ data["NOM UA"] }}</td>
                       <td>{{ data["DATE DE CREATION"] }}</td>
                       <!--<td>{{data["SOURCE FINANCEMENT"]}}</td>
                                         <td>{{data["LIGNE"]}}</td>
@@ -102,9 +99,6 @@
                                 </el-table>-->
               </div>
 
-
-
-
               <div
                 id="tab5"
                 class="tab-pane"
@@ -117,7 +111,6 @@
                       <th>Libellé</th>
                       <th>Nature Section</th>
                       <!-- <th>parent</th> -->
-                     
                     </tr>
                   </thead>
                   <tbody>
@@ -132,13 +125,14 @@
                       <td>
                         {{ source_financement.libelle || "Non renseigné" }}
                       </td>
-                       <td>
-                        {{ source_financement.naturesection || "Non renseigné" }}
+                      <td>
+                        {{
+                          source_financement.naturesection || "Non renseigné"
+                        }}
                       </td>
-                       <!-- <td>
+                      <!-- <td>
                         {{ source_financement.parent || "Non renseigné" }}
                       </td> -->
-                      
                     </tr>
                   </tbody>
                 </table>
@@ -156,7 +150,6 @@
                       <th>Libellé</th>
                       <th>structure_administrative_id</th>
                       <th>parent</th>
-                     
                     </tr>
                   </thead>
                   <tbody>
@@ -171,13 +164,15 @@
                       <td>
                         {{ source_financement.libelle || "Non renseigné" }}
                       </td>
-                       <td>
-                        {{ source_financement.structure_administrative_id || "Non renseigné" }}
+                      <td>
+                        {{
+                          source_financement.structure_administrative_id ||
+                          "Non renseigné"
+                        }}
                       </td>
-                       <td>
+                      <td>
                         {{ source_financement.parent || "Non renseigné" }}
                       </td>
-                      
                     </tr>
                   </tbody>
                 </table>
@@ -195,7 +190,6 @@
                       <th>Libellé</th>
                       <th>structure_localisation_geographique_id</th>
                       <th>parent</th>
-                    
                     </tr>
                   </thead>
                   <tbody>
@@ -210,13 +204,15 @@
                       <td>
                         {{ source_financement.libelle || "Non renseigné" }}
                       </td>
-                       <td>
-                        {{ source_financement.structure_localisation_geographique_id || "Non renseigné" }}
+                      <td>
+                        {{
+                          source_financement.structure_localisation_geographique_id ||
+                          "Non renseigné"
+                        }}
                       </td>
-                       <td>
+                      <td>
                         {{ source_financement.parent || "Non renseigné" }}
                       </td>
-                     
                     </tr>
                   </tbody>
                 </table>
@@ -293,7 +289,6 @@ export default {
       "importPlanProgramme",
       "ajouterServiceGestionnaire",
       "ajouterLocalisationGeographique",
-      
     ]),
 
     formatageSomme: formatageSomme,
@@ -328,44 +323,50 @@ export default {
         this.tableData.forEach(function (value) {
           console.log(value);
           //recherche de nouvelle source de financement
-          let service_gestion_credit = value["SERVICES GESTIONNAIRES DE CREDIT"].split(" ");
+          let service_gestion_credit = value[
+            "SERVICES GESTIONNAIRES DE CREDIT"
+          ].split(" ");
           let localisation_geo = value["LOCALISATION GEOGRAPHIQUE"].split(" ");
-          let libelle_service_gestion = value["SERVICES GESTIONNAIRES DE CREDIT"].substr(9);
-          let libelle_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(7);
-          
+          let libelle_service_gestion = value[
+            "SERVICES GESTIONNAIRES DE CREDIT"
+          ].substr(9);
+          let libelle_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(
+            7
+          );
 
-          let code_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(0,4);
-          let code_service_sgc = value["SERVICES GESTIONNAIRES DE CREDIT"].substr(0,4);
+          let code_service_geo = value["LOCALISATION GEOGRAPHIQUE"].substr(
+            0,
+            4
+          );
+          let code_service_sgc = value[
+            "SERVICES GESTIONNAIRES DE CREDIT"
+          ].substr(0, 4);
 
-           let code_nature_section = value["SECTION"].substr(0,1);
-           let code_section = value["SECTION"].substr(1,3);
-           let libelle_section = value["SECTION"].substr(4);
-           let libelle_naturesection = value["SECTION"].substr(4);
-
-         
+          let code_nature_section = value["SECTION"].substr(0, 1);
+          let code_section = value["SECTION"].substr(1, 3);
+          let libelle_section = value["SECTION"].substr(4);
+          let libelle_naturesection = value["SECTION"].substr(4);
 
           console.log(service_gestion_credit[0]);
           console.log(localisation_geo[0]);
-          
+
           let ServiceGestionCredit = vm.services_gestionnaires.find(
-            (item) => item.code == service_gestion_credit[0]);
+            (item) => item.code == service_gestion_credit[0]
+          );
 
           let LocalisationGeo = vm.localisations_geographiques.find(
             (item) => item.code == localisation_geo[0]
           );
 
-           let nat_section = vm.natures_sections.find(
+          let nat_section = vm.natures_sections.find(
             (item) => item.code == code_nature_section
           );
 
-           let section = vm.sections.find((item) => item.code == code_section);
+          let section = vm.sections.find((item) => item.code == code_section);
 
+          //**** recherche de nouvel section et nature de section les ajouter en même temps */
 
-
-
-//**** recherche de nouvel section et nature de section les ajouter en même temps */ 
-
- if (nat_section == undefined) {
+          if (nat_section == undefined) {
             let objet = {
               code: code_nature_section,
               libelle: libelle_naturesection,
@@ -375,13 +376,12 @@ export default {
             );
             if (isExisteSGC == undefined) {
               vm.nat_section_dettecter.push(objet);
-             // vm.ajouterServiceGestionnaire(objet);
+              // vm.ajouterServiceGestionnaire(objet);
             }
           }
 
-
-         // **** sections***
-          if (section == undefined && nat_section !=undefined) {
+          // **** sections***
+          if (section == undefined && nat_section != undefined) {
             let objet = {
               code: code_section,
               libelle: libelle_section,
@@ -397,13 +397,13 @@ export default {
             }
           }
 
-//**** recherche de nouvel service gestion de credit et les ajouter en même temps */
+          //**** recherche de nouvel service gestion de credit et les ajouter en même temps */
           if (ServiceGestionCredit == undefined) {
             let objet = {
               code: service_gestion_credit[0],
               libelle: libelle_service_gestion,
               parent: vm.recup_parent_serviceGC(code_service_sgc),
-              structure_administrative_id:4,
+              structure_administrative_id: 4,
             };
             let isExisteSGC = vm.servicegestioncredit_detecter.find(
               (item) => item.code == service_gestion_credit[0]
@@ -414,13 +414,13 @@ export default {
             }
           }
 
-         //**** recherche de nouvel localisation geolocalisation et les ajouter en même temps */
+          //**** recherche de nouvel localisation geolocalisation et les ajouter en même temps */
           if (LocalisationGeo == undefined) {
             let objet = {
               code: localisation_geo[0],
               libelle: libelle_service_geo,
-               parent: vm.recup_parent_loca_geo(code_service_geo),
-              structure_localisation_geographique_id:4,
+              parent: vm.recup_parent_loca_geo(code_service_geo),
+              structure_localisation_geographique_id: 4,
             };
 
             let isExisteLG = vm.localisation_geo_dettecter.find(
@@ -503,8 +503,8 @@ export default {
       "sources_financements",
     ]),
 
-    recup_nature_section(){
-          return (id) => {
+    recup_nature_section() {
+      return (id) => {
         if (id != null && id != "") {
           const qtereel = this.natures_sections.find(
             (qtreel) => qtreel.code == id
@@ -518,8 +518,8 @@ export default {
       };
     },
 
-     recup_parent_loca_geo(){
-       return (id) => {
+    recup_parent_loca_geo() {
+      return (id) => {
         if (id != null && id != "") {
           const qtereel = this.localisations_geographiques.find(
             (qtreel) => qtreel.code == id
@@ -533,7 +533,7 @@ export default {
       };
     },
 
-     recup_parent_serviceGC() {
+    recup_parent_serviceGC() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.services_gestionnaires.find(
@@ -547,7 +547,6 @@ export default {
         }
       };
     },
-
 
     anneeAmort() {
       const norme = this.exercices_budgetaires.find(

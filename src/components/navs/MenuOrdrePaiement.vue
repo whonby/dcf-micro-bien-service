@@ -29,11 +29,11 @@
         </router-link>
       </li>
 
-      <li>
+      <!-- <li>
         <router-link :to="{ name: 'PersonneRattacher' }" tag="a">
           PERSONNE RATTACHER
         </router-link>
-      </li>
+      </li> -->
 
       <!-- <li>
         <router-link :to="{name: 'TestTableaux'}" tag="a">

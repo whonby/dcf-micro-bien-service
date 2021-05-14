@@ -31,6 +31,8 @@
                 <i class="icon-th"></i>
               </span>
                             <h5>Listes Unites administratives</h5>
+                          
+                           
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -100,7 +102,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 
-// import {admin,dcf,cf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
   // import {  ModelListSelect } from 'vue-search-select'
   //   import 'vue-search-select/dist/VueSearchSelect.css'
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -185,9 +187,69 @@ export default {
  ...mapGetters('personnelUA', ['all_acteur_depense']),
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+    admin: admin,
+    dcf: dcf,
+    noDCfNoAdmin: noDCfNoAdmin,
    
+
+
+    // afficherMarcheInvestissementParDroitAccess() {
+    //   // const st = this.search.toLowerCase();
+    //   if (this.noDCfNoAdmin) {
+    //     let colect = [];
+    //     this.GroupeUniteAdministrativeMarche.filter((item) => {
+    //       let val = this.getterUniteAdministrativeByUser.find(
+    //         (row) => row.unite_administrative_id == item.ua_id
+    //       );
+    //       if (val != undefined) {
+    //         colect.push(item);
+    //         return item;
+    //       }
+    //     });
+
+    //     return colect.filter(
+          
+    //       (element) =>
+    //         (element.unite_administrative_id == this.marcheid &&
+    //           element.parent_id == null &&
+    //           element.sib == 1 &&
+    //           element.attribue == 2 ) 
+    //     );
+    //   }
+    //   return this.printMarcheNonAttribue.filter(
+    //     (element) =>
+    //       (element.unite_administrative_id == this.marcheid &&
+    //         element.parent_id == null &&
+    //         element.sib == 1 &&
+    //         element.attribue == 2  ) 
+         
+    //   );
+    // },
+
+  afficheNomUtilisateur(){
+      let objLinea = localStorage.getItem("Users");
+      let objJson = JSON.parse(objLinea);
+      return objJson.id
+
+},
+
 afficheGroupeUaParMarche(){
-    return this.GroupeUniteAdministrativeMarche.filter(item=>item[0].sib==1)
+   if (this.noDCfNoAdmin) {
+     return this.GroupeUniteAdministrativeMarche.filter((item)=>{
+       this.getterUniteAdministrativeByUser.find((row) => row.unite_administrative_id == item[0].unite_administrative_id
+       && item[0].sib==1);
+     });
+   }else{
+     return this.GroupeUniteAdministrativeMarche.filter(item=>item[0].sib==1);
+
+    //   return this.GroupeUniteAdministrativeMarche.filter((item)=>{
+    //    this.getterUniteAdministrativeByUser.find((row) => row.unite_administrative_id == item.ua_id
+    //    && item[0].sib==1);
+    //  });
+   }
+    
 },
 
 

@@ -4,32 +4,26 @@
     <ul class="nav">
       <!-- administratifs-->
 
-      <!-- <li class="dropdown" id="planification">
+       <!-- <li class="dropdown" id="planification">
             <a  href="#" data-toggle="dropdown" data-target="#planification" class="dropdown-toggle">
                 <span class="text">PLANIFICATION DES MARCHES </span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-
                 <li>
-
                     <router-link :to="{name: 'ppm'}" tag="a">
                         <i class="icon-list-alt"></i>
                         PPM
                     </router-link>
                 </li>
-
                 <li>
                     <router-link :to="{name: 'marche'}" tag="a">
                         <i class="icon-key"></i>
                         Marchés & contract planier
                     </router-link>
-
                 </li>
-
-
             </ul>
-        </li> -->
+        </li>  -->
 
       <!-- <li class="dropdown" id="execut">
         <a  href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
@@ -51,13 +45,9 @@
               Marchés & contract attribués
             </router-link>
           </li>
-         
-        
-         
-          
-         
           
         </ul>
+
       </li> -->
       <!-- <li>
             <router-link :to="{name: 'GestionMarcheHorSib'}" tag="a">
@@ -98,10 +88,41 @@
         </router-link>
       </li>
 
-      <!-- <li> 
-            <router-link :to="{name: 'ajouterMarcheHor'}" tag="a">
-TEST            </router-link>
-          </li> -->
+       <!-- <li class="dropdown" id="planification">
+            <a  href="#" data-toggle="dropdown" data-target="#planification" class="dropdown-toggle">
+                <span class="text">EXECUTION DES MARCHES </span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <router-link :to="{name: 'GroupeMarcheExecutionParUa'}" tag="a">
+                        <i class=""></i>
+                        Personnels
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{name: 'GroupeMarcheExecutionParUa'}" tag="a">
+                        <i class=""></i>
+                        Biens et Services
+                    </router-link>
+                </li>
+
+                 <li>
+                    <router-link :to="{name: 'GroupeMarcheExecutionParUa'}" tag="a">
+                        <i class=""></i>
+                        Transferts
+                    </router-link>
+                </li>
+
+                 <li>
+                    <router-link :to="{name: 'GroupeMarcheExecutionParUa'}" tag="a">
+                        <i class=""></i>
+                        Investissements
+                    </router-link>
+                </li>
+            </ul>
+        </li>  -->
+      
     </ul>
   </div>
 </template>
