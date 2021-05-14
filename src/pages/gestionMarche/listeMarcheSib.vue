@@ -88,15 +88,14 @@ reference_marche
           </td>
           <td>
             <button
-              class="btn btn-info tailBtn"
+              class="btn btn"
               style="
                 font-weight: bolder;
-                color: #fff;
                 font-size: 18px;
                 width: 100%;
               "
             >
-              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+              <span style="font-weight: bolder; font-size: 18px">{{
                 afficheMarcheParUaTotal(marcheid)
               }}</span>
             </button>
@@ -165,6 +164,61 @@ reference_marche
         </tr>
       </tbody>
     </table>
+
+
+     <div>
+      <fieldset>
+        <legend>Légende:</legend>
+        <table>
+          <tr>
+             <td>
+              RESILIE:
+              <button class="btn btn-info">
+                <span title="" style="">RE</span>
+              </button>
+            </td>
+
+             <td>
+              PLANIFICATION:
+              <button class="btn btn-danger">
+                <span title="" style="">PL</span>
+              </button>
+            </td>
+            <td>
+              CONTRACTUALISATION:
+              <button class="btn btn-success">
+                <span title="" style="">CT</span>
+              </button>
+            </td>
+
+            <td>
+              EXECUTION:
+              <button class="btn btn-warning">
+                <span title="" style="">EX</span>
+              </button>
+            </td>
+
+             <td>
+              SUSPENDU:
+              <button class="btn btn">
+                <span title="" style="">SU</span>
+              </button>
+            </td>
+            
+            <td>
+              TERMINE:
+              <button class="btn btn-inverse">
+                <span title="" style="">TE</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+
+
+
+
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">

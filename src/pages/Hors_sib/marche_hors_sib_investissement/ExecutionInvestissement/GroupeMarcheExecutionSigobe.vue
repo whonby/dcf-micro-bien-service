@@ -244,10 +244,7 @@ afficheGroupeUaParMarche(){
    }else{
      return this.GroupeUniteAdministrativeMarche.filter(item=>item[0].sib==0);
 
-    //   return this.GroupeUniteAdministrativeMarche.filter((item)=>{
-    //    this.getterUniteAdministrativeByUser.find((row) => row.unite_administrative_id == item.ua_id
-    //    && item[0].sib==1);
-    //  });
+
    }
     
 },

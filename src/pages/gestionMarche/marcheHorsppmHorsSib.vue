@@ -1,19 +1,20 @@
 reference_marche
 <template>
   <div>
-        <div class="span8" style="margin-right:25px; margin-bottom:30px;">
-                <label style="color: #000; font-size: 14px; font-weight: bolder">
-                  CHOISIR LE TYPE DE MARCHE<a href="#" style="color: red"></a>
-                </label>
-                    <model-list-select
-                      style="background-color: #fff; border: 2px solid #000"
-                      class="wide"
-                      :list="options2"
-                      v-model="libelle_typemarche"
-                      option-value="libelle"
-                      option-text="libelle">
-                    </model-list-select>
-         </div>
+    <div class="span8" style="margin-right: 25px; margin-bottom: 30px">
+      <label style="color: #000; font-size: 14px; font-weight: bolder">
+        CHOISIR LE TYPE DE MARCHE<a href="#" style="color: red"></a>
+      </label>
+      <model-list-select
+        style="background-color: #fff; border: 2px solid #000"
+        class="wide"
+        :list="options2"
+        v-model="libelle_typemarche"
+        option-value="libelle"
+        option-text="libelle"
+      >
+      </model-list-select>
+    </div>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -87,15 +88,14 @@ reference_marche
           </td>
           <td>
             <button
-              class="btn btn-info tailBtn"
+              class="btn btn"
               style="
                 font-weight: bolder;
-                color: #fff;
                 font-size: 18px;
                 width: 100%;
               "
             >
-              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+              <span style="font-weight: bolder; font-size: 18px">{{
                 afficheMarcheParUaTotal(marcheid)
               }}</span>
             </button>
@@ -164,6 +164,57 @@ reference_marche
         </tr>
       </tbody>
     </table>
+
+    <div>
+      <fieldset>
+        <legend>Légende:</legend>
+        <table>
+          <tr>
+             <td>
+              RESILIE:
+              <button class="btn btn-info">
+                <span title="" style="">RE</span>
+              </button>
+            </td>
+
+             <td>
+              PLANIFICATION:
+              <button class="btn btn-danger">
+                <span title="" style="">PL</span>
+              </button>
+            </td>
+            <td>
+              CONTRACTUALISATION:
+              <button class="btn btn-success">
+                <span title="" style="">CT</span>
+              </button>
+            </td>
+
+            <td>
+              EXECUTION:
+              <button class="btn btn-warning">
+                <span title="" style="">EX</span>
+              </button>
+            </td>
+
+             <td>
+              SUSPENDU:
+              <button class="btn btn">
+                <span title="" style="">SU</span>
+              </button>
+            </td>
+            
+            <td>
+              TERMINE:
+              <button class="btn btn-inverse">
+                <span title="" style="">TE</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">
@@ -655,8 +706,8 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
-                qtreel.plan_passation_marche_id == null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id == null &&
+                qtreel.sib == 1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -667,16 +718,16 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
-                qtreel.plan_passation_marche_id != null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id != null &&
+                qtreel.sib == 1
             ).length;
           } else {
             return this.marches.filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 0 &&
-                qtreel.parent_id == null
-                && qtreel.sib==1
+                qtreel.parent_id == null &&
+                qtreel.sib == 1
             ).length;
           }
         }
@@ -693,8 +744,8 @@ export default {
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
-                qtreel.plan_passation_marche_id == null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id == null &&
+                qtreel.sib == 1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -704,14 +755,15 @@ export default {
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
-                qtreel.plan_passation_marche_id != null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id != null &&
+                qtreel.sib == 1
             ).length;
           } else {
             return this.marches.filter(
               (qtreel) =>
-                qtreel.unite_administrative_id == id && qtreel.parent_id == null
-                 && qtreel.sib==1
+                qtreel.unite_administrative_id == id &&
+                qtreel.parent_id == null &&
+                qtreel.sib == 1
             ).length;
           }
         }
@@ -729,8 +781,8 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
-                qtreel.plan_passation_marche_id == null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id == null &&
+                qtreel.sib == 1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -741,16 +793,16 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
-                qtreel.plan_passation_marche_id != null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id != null &&
+                qtreel.sib == 1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 1 &&
-                qtreel.parent_id == null
-                && qtreel.sib==1
+                qtreel.parent_id == null &&
+                qtreel.sib == 1
             ).length;
           }
         }
@@ -768,8 +820,8 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
-                qtreel.plan_passation_marche_id == null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id == null &&
+                qtreel.sib == 1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -780,16 +832,16 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
-                qtreel.plan_passation_marche_id != null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id != null &&
+                qtreel.sib == 1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 2 &&
-                qtreel.parent_id != null
-                && qtreel.sib==1
+                qtreel.parent_id != null &&
+                qtreel.sib == 1
             ).length;
           }
         }
@@ -808,8 +860,8 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
-                qtreel.plan_passation_marche_id == null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id == null &&
+                qtreel.sib == 1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -820,16 +872,16 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
-                qtreel.plan_passation_marche_id != null
-                && qtreel.sib==1
+                qtreel.plan_passation_marche_id != null &&
+                qtreel.sib == 1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 5 &&
-                qtreel.parent_id != null
-                && qtreel.sib==1
+                qtreel.parent_id != null &&
+                qtreel.sib == 1
             ).length;
           }
         }
@@ -999,42 +1051,58 @@ export default {
         });
 
         return colect.filter((items) => {
-          if (this.libelle_typemarche == "HORS PPM" && this.libelle_typemarche != 0) {
-            if (items.sib == 1 && items.plan_passation_marche_id == null && items.parent_id == null) {
+          if (
+            this.libelle_typemarche == "HORS PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            if (
+              items.sib == 1 &&
+              items.plan_passation_marche_id == null &&
+              items.parent_id == null
+            ) {
               return items;
             }
-          } else if (this.libelle_typemarche == "PPM" && this.libelle_typemarche != 0) {
-              if (items.sib == 1 && items.plan_passation_marche_id != null && items.parent_id == null) {
-                return items;
-              }
+          } else if (
+            this.libelle_typemarche == "PPM" &&
+            this.libelle_typemarche != 0
+          ) {
+            if (
+              items.sib == 1 &&
+              items.plan_passation_marche_id != null &&
+              items.parent_id == null
+            ) {
+              return items;
+            }
           } else {
-              if (items.sib == 1 && items.parent_id == null) {
-                return items;
-              }
+            if (items.sib == 1 && items.parent_id == null) {
+              return items;
+            }
           }
         });
       } else {
-        if (this.libelle_typemarche == "HORS PPM" && this.libelle_typemarche != 0) {
+        if (
+          this.libelle_typemarche == "HORS PPM" &&
+          this.libelle_typemarche != 0
+        ) {
           return this.marcheHorSibFiltre1.filter(
             (items) =>
               items.sib == 1 &&
               items.plan_passation_marche_id == null &&
               items.parent_id == null
           );
-        }
-        else if(this.libelle_typemarche == "PPM" && this.libelle_typemarche != 0){
-            return this.marcheHorSibFiltre1.filter(
+        } else if (
+          this.libelle_typemarche == "PPM" &&
+          this.libelle_typemarche != 0
+        ) {
+          return this.marcheHorSibFiltre1.filter(
             (items) =>
               items.sib == 1 &&
               items.plan_passation_marche_id != null &&
               items.parent_id == null
           );
-        }
-        else {
+        } else {
           return this.marcheHorSibFiltre1.filter(
-            (items) =>
-              items.sib == 1 &&
-              items.parent_id == null
+            (items) => items.sib == 1 && items.parent_id == null
           );
         }
       }
