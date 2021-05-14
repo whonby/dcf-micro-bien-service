@@ -5,6 +5,7 @@
     <MenuTableau v-if="active_el == 11"></MenuTableau>
     <MenuParamG v-if="active_el == 17"></MenuParamG>
     <MenuUA v-if="active_el == 1"></MenuUA>
+    <!-- <MenuUA1 v-if="active_el == 15"></MenuUA1> -->
     <MenuActeurDepense v-if="active_el == 2"></MenuActeurDepense>
     <MenuPlanification v-if="active_el ==3"></MenuPlanification>
     <MenuInvestissement v-if="active_el == 4"></MenuInvestissement>
@@ -49,6 +50,7 @@ import MenuTableauBordGestionMarche from "../components/navs/MenuTableauBordGest
 import MenuTableau from "../components/navs/menuTableauBord";
 import MenuParamG from "../components/navs/menuParametreG";
 import MenuUA from "../components/navs/menuUA";
+//import MenuUA1 from "../components/navs/MenuUA1";
 import MenuActeurDepense from "../components/navs/MenuActeurDepense";
 import MenuPlanification from "../components/navs/MenuPlanification";
 import MenuInvestissement from "../components/navs/MenuInvestissement";
@@ -91,6 +93,7 @@ export default {
     MenuTableau,
     MenuParamG,
     MenuUA,
+    //MenuUA1,
     MenuActeurDepense,
     MenuPlanification,
     MenuInvestissement,
