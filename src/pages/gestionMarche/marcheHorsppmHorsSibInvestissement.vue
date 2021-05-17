@@ -3,7 +3,7 @@ reference_marche
   <div>
         <div class="span8" style="margin-right:25px; margin-bottom:30px;">
                 <label style="color: #000; font-size: 14px; font-weight: bolder">
-                  CHOISIR LE TYPE DE MARCHE 48<a href="#" style="color: red"></a>
+                  CHOISIR LE TYPE DE MARCHE<a href="#" style="color: red"></a>
                 </label>
                     <model-list-select
                       style="background-color: #fff; border: 2px solid #000"
@@ -164,6 +164,55 @@ reference_marche
         </tr>
       </tbody>
     </table>
+     <div>
+      <fieldset>
+        <legend>Légende:</legend>
+        <table>
+          <tr>
+             <td>
+              RESILIE:
+              <button class="btn btn-info">
+                <span title="" style="">RE</span>
+              </button>
+            </td>
+
+             <td>
+              PLANIFICATION:
+              <button class="btn btn-danger">
+                <span title="" style="">PL</span>
+              </button>
+            </td>
+            <td>
+              CONTRACTUALISATION:
+              <button class="btn btn-success">
+                <span title="" style="">CT</span>
+              </button>
+            </td>
+
+            <td>
+              EXECUTION:
+              <button class="btn btn-warning">
+                <span title="" style="">EX</span>
+              </button>
+            </td>
+
+             <td>
+              SUSPENDU:
+              <button class="btn btn">
+                <span title="" style="">SU</span>
+              </button>
+            </td>
+            
+            <td>
+              TERMINE:
+              <button class="btn btn-inverse">
+                <span title="" style="">TE</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">
@@ -174,7 +223,7 @@ reference_marche
               </span>
 
               <h5 v-if="libelle_typemarche == 0">
-                Liste des March&eacute;s
+                Liste des March&eacute;s 
                 <span class="badge badge-success"> </span>
               </h5>
 
@@ -1000,15 +1049,17 @@ export default {
 
         return colect.filter((items) => {
           if (this.libelle_typemarche == "HORS PPM" && this.libelle_typemarche != 0) {
-            if (items.sib == 1 && items.plan_passation_marche_id == null && items.parent_id == null) {
+            if (items.sib == 1 && items.plan_passation_marche_id == null && items.gdenature_id == 7 && 
+             items.parent_id == null) {
               return items;
             }
           } else if (this.libelle_typemarche == "PPM" && this.libelle_typemarche != 0) {
-              if (items.sib == 1 && items.plan_passation_marche_id != null && items.parent_id == null) {
+              if (items.sib == 1 && items.plan_passation_marche_id != null && items.gdenature_id == 7 && 
+              items.parent_id == null) {
                 return items;
               }
           } else {
-              if (items.sib == 1 && items.parent_id == null) {
+              if (items.sib == 1 && items.parent_id == null  && items.gdenature_id == 7) {
                 return items;
               }
           }
@@ -1019,7 +1070,7 @@ export default {
             (items) =>
               items.sib == 1 &&
               items.plan_passation_marche_id == null &&
-              items.parent_id == null
+              items.parent_id == null && items.gdenature_id == 7
           );
         }
         else if(this.libelle_typemarche == "PPM" && this.libelle_typemarche != 0){
@@ -1027,14 +1078,14 @@ export default {
             (items) =>
               items.sib == 1 &&
               items.plan_passation_marche_id != null &&
-              items.parent_id == null
+              items.parent_id == null && items.gdenature_id == 7
           );
         }
         else {
           return this.marcheHorSibFiltre1.filter(
             (items) =>
               items.sib == 1 &&
-              items.parent_id == null
+              items.parent_id == null && items.gdenature_id == 7
           );
         }
       }

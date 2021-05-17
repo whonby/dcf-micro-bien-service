@@ -335,8 +335,8 @@ ajouterMandate
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab8975">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tab5896">Lot</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab78458">Lettre d'invitation CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab78458">Lettre d'invitation CF && Mandaté</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab1235">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab1041">PV d'ouverture</a></li>
@@ -378,18 +378,24 @@ ajouterMandate
                                 <!-- <div class="span4" align="right">
                                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
-
+                                    
+                      
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
-                         </div>
- <div id="tab21230" class="tab-pane">
+                              <div id="" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
+                              
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
+                         </div>
+ <!-- <div id="tab21230" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                              
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div> -->
                           <div id="tab1235" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -493,8 +499,8 @@ ajouterMandate
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab001">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tab0015">Lot</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0864">Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF && Mandaté </a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab0864">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab051">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#0124041">PV d'ouverture</a></li>
@@ -535,17 +541,24 @@ ajouterMandate
                                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
+                    
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
-                         </div>
- <div id="tab0864" class="tab-pane">
+
+                       <div id="" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
+                          
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
+                         </div>
+ <!-- <div id="tab0864" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                          
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div> -->
                           <div id="tab051" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -661,8 +674,8 @@ ajouterMandate
                                  <li class="active"><a data-toggle="tab" href="#tab4562139" title="L'offres">L'Offre</a></li>
                               <li class=""><a data-toggle="tab" href="#lot3" title="Lot">Lots</a></li>
 
-                              <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab04" title="">Mandaté</a></li>
+                              <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I && Mandaté</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab04" title="">Mandaté</a></li> -->
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#4120620">Ouverture</a></li>
@@ -742,18 +755,25 @@ ajouterMandate
                                 <!-- <div class="span4" align="right">
                                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div> -->
 
+                      
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
-                         </div>
 
-                         <div id="tab04" class="tab-pane">
+                       <div id="" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
+                            
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
+                         </div>
+
+                         <!-- <div id="tab04" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                            
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div> -->
 
 
 
@@ -946,8 +966,8 @@ ajouterMandate
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tabAMI">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tabLotAMI">Lot</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabLettreAMI">Lettre d'invitation CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabMandateAMI">Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabLettreAMI">Lettre d'invitation CF && Mandaté</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabMandateAMI">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionAMI">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Ouverture</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
@@ -990,16 +1010,23 @@ ajouterMandate
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
-                         </div>
- <div id="tabMandateAMI" class="tab-pane">
+
+                        <div id="" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
+                              
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
+                         </div>
+ <!-- <div id="tabMandateAMI" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                              
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div> -->
+
                           <div id="tabReceptionAMI" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -1106,8 +1133,8 @@ ajouterMandate
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tabDP">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tabLotDP">Lot</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabLettrDP">Lettre d'invitation CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabMandateDP">Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabLettrDP">Lettre d'invitation CF && Mandaté</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabMandateDP">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionDP">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabOuvertureDP">Ouverture</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
@@ -1142,24 +1169,33 @@ ajouterMandate
                          </div>
 
 
-                <div id="tabLettreDP" class="tab-pane">
+                <div id="tabLettrDP" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <!-- <div class="span4" align="right">
                                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
+
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
-                         </div>
- <div id="tabMandateDP" class="tab-pane">
+
+                      
+                                <div id="" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
+                               
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
+                         </div>
+ <!-- <div id="tabMandateDP" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                               
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div> -->
+
                           <div id="tabReceptionDP" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
