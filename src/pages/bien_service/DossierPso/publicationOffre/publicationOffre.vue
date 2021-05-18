@@ -143,7 +143,7 @@
 
                                <td colspan="2">
              <div class="control-group">
-            <label class="control-label">Mode Passation</label>
+            <label class="control-label">Mode Passation  </label>
             <div class="controls">
             
                <select v-model="formData.mode_passation_id" class="span" >
@@ -154,11 +154,13 @@
             </div>
           </div>
                    </td> 
+                   
                            
                             </tr>
                             
                             <tr>
-                             <td>
+                             <td v-if="affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='GAG'  || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='CONV' 
+                            || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='ED' || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='AOR' || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='LCVM' ">
                         <div class="control-group">
                             <div class="controls">
                                 <label>Numéro d'autorisation <code></code></label>
@@ -166,7 +168,22 @@
                             </div>
                         </div>
                             </td>
-                                <td colspan="2">
+                             <td colspan=""  v-if="affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='GAG'  || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='CONV' 
+                            || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='ED' || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='AOR' || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='LCVM' ">
+             <div class="control-group" >
+            <label class="control-label">Motif de derogation</label>
+            <div class="controls">
+            
+               <select v-model="formData.motif_derogation_id" class="span">
+               <option v-for="plans in motif_passation" :key="plans.id" 
+               :value="plans.id"> {{plans.code}} =>{{plans.libelle}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                             </td>
+
+                                <td colspan="">
                         <div class="control-group">
                             <div class="controls">
                                 <label> Réference  de DAO<code>*</code></label>
@@ -218,7 +235,8 @@
                         </tr>
                         <tr>
 
-                            <td>
+                            <td v-if="affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='GAG'  || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='CONV' 
+                            || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='ED' || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='AOR' || affichageConditionnelDesMotifsDerogation(formData.mode_passation_id)=='LCVM' ">
 
                                 <div class="control-group">
                                     <label class="control-label">Date d'autorisation :</label>
@@ -527,7 +545,7 @@ date_facture_proformat:"",
           
         formData:{
               ref_appel:"",
-              
+              motif_derogation_id:"",
               numero_autorisation:"",
               mode_passation_id:"",
                     type_appel:"",
@@ -573,7 +591,7 @@ date_facture_proformat:"",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
-
+              ...mapGetters('parametreGenerauxFonctionnelle', ['motif_passation']),
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
@@ -703,6 +721,20 @@ typeProcedureLibelle() {
 
      afficherListeModePassation(){
     return this.procedurePassations.filter(item => item.code!="R3CV")
+},
+
+affichageConditionnelDesMotifsDerogation(){
+
+ return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
 },
 
     // recuperation de 

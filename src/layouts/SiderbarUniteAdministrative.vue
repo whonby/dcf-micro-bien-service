@@ -38,7 +38,7 @@
             <span>PARAMETRES GENERAUX</span>
           </a>
         </li> -->
-        <li @click.prevent="navigateToUniteAdministrative12" >
+        <li @click.prevent="navigateToUniteAdministrative12" :class="{active: active_el == 15 }">
           <a  title="" href="#">
             <i class="icon-home"></i>
             <span>UNITE ADMINISTRATIVE</span>

@@ -2,6 +2,8 @@
 <template>
     <div>
 
+        <h4 align="left">Liste des mandatés</h4>
+
                  <div align="right" style="cursor: pointer">
           <button
             class="btn btn-success"
@@ -11,6 +13,7 @@
             <i class="icon icon-plus"> AJOUTER </i>
           </button>
         </div>
+      
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
