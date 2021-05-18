@@ -151,6 +151,7 @@ export const getPersonnaliseBudgetGeneral = (
     return element;
   });
 
+  
 export const afficheBienEtService = state =>
   state.budgetGeneral.filter(
     affichenaturedep => affichenaturedep.gdenature_id == 5 && affichenaturedep.actived==1
@@ -167,6 +168,10 @@ export const groupgranNature = (state, getters) => {
   return groupBy(getters.getPersonnaliseBudgetGeneralParBienService, "gdenature_id");
 };
 
+// groupe par section 
+export const groupeParSection =(state, getters) =>{
+  return groupBy(getters.budgetGeneral, "section_id");
+}
 
 export const getPersonnaliseBudgetGeneralParBienService = (
   state,

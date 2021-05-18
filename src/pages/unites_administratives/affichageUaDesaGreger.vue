@@ -11,20 +11,19 @@
             <div class="collapse in accordion-body" id="collapseGOne">
               <div class="widget-content"> 
                   
-                    <table class="table table-bordered table-striped" id="Nature_section">
+                    <table class="table table-bordered table-striped" id="">
              
               <thead>
-                
                 <tr>
                   
                   <th>Libellé</th>
                    <th>Action</th>
                 </tr>
               </thead>
-              
+            
               <tbody>
                 <tr class="odd gradeX" v-for="nature_section in filtre_unite_admin" :key="nature_section.id">
-                  <td @dblclick="afficherModalModifierTitre(nature_section.id)">{{afficherLibelle(nature_section.section_id) || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTitre(nature_section.id)">{{afficherLibelle(nature_section[0].section_id) || 'Non renseigné'}}</td>
                 
                   <td>
 
@@ -65,8 +64,8 @@
               </thead>
               
               <tbody>
-                <tr class="odd gradeX" v-for="prog in filtre_unite_admin" :key="prog.id">
-                  <td @dblclick="afficherModalModifierTitre(prog.id)">{{afficherLibellePrograme(prog.program_id) || 'Non renseigné'}}</td>
+                <tr class="odd gradeX" v-for="prog in filtre_unite_adminPrograme" :key="prog.id">
+                  <td @dblclick="afficherModalModifierTitre(prog.id)">{{afficherLibellePrograme(prog[0].program_id) || 'Non renseigné'}}</td>
                 
                   <td>
 
@@ -102,14 +101,14 @@
                 
                 <tr>
                   
-                  <th>Libellé</th>
+                  <th>Libellé </th>
                    <th>Action</th>
                 </tr>
               </thead>
               
               <tbody>
-                <tr class="odd gradeX" v-for="progUa in filtre_unite_admin" :key="progUa.id">
-                  <td @dblclick="afficherModalModifierTitre(progUa.id)">{{afficherLibelleUa(progUa.ua_id) || 'Non renseigné'}}</td>
+                <tr class="odd gradeX" v-for="progUa in filtre_unite_admin_Ua" :key="progUa.id">
+                  <td @dblclick="afficherModalModifierTitre(progUa.id)">{{afficherLibelleUa(progUa[0].ua_id) || 'Non renseigné'}}</td>
                 
                   <td>
 
@@ -163,8 +162,11 @@ export default {
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetEclate",
+      "groupUa",
       "getPersonnaliseBudgetGeneral",
-       "budgetGeneral"
+       "budgetGeneral",
+       "groupeParSection",
+       "groupeBudgetbyProgramme"
       // "chapitres",
       // "sections"
     ]),
@@ -214,12 +216,32 @@ export default {
       dcf:dcf,
         cf:cf,
         noDCfNoAdmin:noDCfNoAdmin,
+        
       filtre_unite_admin() {
         
         if(this.noDCfNoAdmin){
             let colect=[];
             
-            this.getPersonnaliseBudgetGeneral.filter(item=>{
+            this.groupeParSection.filter(item=>{
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect
+        }
+        return this.groupeParSection
+
+    },
+
+
+      filtre_unite_adminPrograme() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.groupeBudgetbyProgramme.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
                     colect.push(item)
@@ -228,7 +250,25 @@ export default {
             })
             return colect
         }
-        return this.getPersonnaliseBudgetGeneral
+        return this.groupeBudgetbyProgramme
+
+    },
+
+      filtre_unite_admin_Ua() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.groupUa.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect
+        }
+        return this.groupUa
 
     },
     },
