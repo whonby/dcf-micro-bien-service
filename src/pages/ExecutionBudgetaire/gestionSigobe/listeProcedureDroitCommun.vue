@@ -31,7 +31,7 @@
 
                                     
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des Procedures Droit Communs</h5>
+            <h5>Liste Procedures de dépenses </h5>
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Pas de Procedure Droit Commnu enregistré </h6>
+                <h6 style="color:red;">Pas de Procedures de dépenses enregistré </h6>
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Procedure Droit Commnu</h3>
+                <h3>Ajouter Procedures de dépenses</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -144,7 +144,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Procedure Droit Commnu</h3>
+                <h3>Modifier Procedures de dépenses</h3>
               </div>
               <div class="modal-body">
                <table class="table table-bordered table-striped">

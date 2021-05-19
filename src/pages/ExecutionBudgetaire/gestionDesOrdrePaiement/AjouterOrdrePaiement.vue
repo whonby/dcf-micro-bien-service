@@ -1,4 +1,4 @@
-RecuperereTaux
+listePieceJustificative1
 <template>
   <div class="container-fluid">
     {{RechercheNumeroOP}}
@@ -3093,7 +3093,7 @@ affichePersoUA() {
           );
 
           if (qtereel) {
-            return qtereel.dotation_nouvelle;
+            return qtereel.dotation;
           }
           return 0;
         }
@@ -3109,7 +3109,7 @@ affichePersoUA() {
           );
 
           if (qtereel) {
-            return qtereel.dotation_nouvelle;
+            return qtereel.dotation;
           }
           return 0;
         }
