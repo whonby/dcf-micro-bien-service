@@ -1,6 +1,6 @@
 import axios from '../../../../request/bienService'
 
-import urlFile from '../../../../request/serviceImage'
+import urlFile from '../../../../request/imageRequest'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall = require('housecall')

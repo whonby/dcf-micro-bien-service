@@ -67,8 +67,8 @@
                                                <label class="control-label">Type de modification</label>
                                                <select v-model="type_modification">
                                                    <option></option>
-                                                   <option value="OUI">SOMME NULL</option>
-                                                   <option value="NON">SOMME NON NULL</option>
+                                                   <option value="OUI">Reamenagement</option>
+                                                   <option value="NON">Rallonge </option>
                                                </select>
                                            </div>
 
@@ -105,16 +105,16 @@
                                                        <input type="file"   @change="OnchangeFichier" />
                                                    </div>
                                                </td>
- <td>
-                                                   <div class="control-group">
+     <td>
+               <div class="control-group">
                   <label class="control-label">signataire de l’acte </label>
                   <div class="controls">
                     <select  class="span">
                       <option></option>
                     </select>
                   </div>
-                </div>
-                                               </td>
+               </div>
+     </td>
                                                <td>
                                                    <label>Ministère</label>
                                                    <model-list-select style="background-color: #fff;"
@@ -364,65 +364,9 @@
                                 </div>
                             </div>
                           </div>
-                          <td>
 
-                          <div class="control-group">
-                            <label class="control-label">Dotation CP</label>
-                            <div class="controls">
-                              <money
-                                :value="
-                                  ligneDotationInitialCP(
-                                    ua_id,
-                                    formData.activite_id,
-                                    formData.economique_id
-                                  )
-                                "
-                                readOnly
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Varition AE </label>
-                            <div class="controls">
-                              <money v-model="variation_ae"></money>
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label">Variation CP </label>
-                            <div class="controls">
-                              <money v-model="variation_cp"></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Dotation Finale AE
-                            </label>
-                            <div class="controls">
-                              <money :value="dotationFinalAE" readOnly></money>
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Dotation Finale CP
-                            </label>
-                            <div class="controls">
-                              <money :value="dotationFinalCP" readOnly></money>
-                            </div>
-                          </div>
-                        </td>
                      
-                    <div align="center">
-                      <button
-                        class="btn btn-danger"
-                        @click="modificationBudget"
-                      >
-                        Valider la modification
-                      </button>
-                    </div>
+
                   </div>
                 </div>
               </div>

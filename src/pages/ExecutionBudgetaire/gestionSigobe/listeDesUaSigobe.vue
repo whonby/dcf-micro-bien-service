@@ -18,7 +18,19 @@
               </button>
             </div>
           </td>
-              
+              <td style="width: 0px">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-primary"
+                @click.prevent="ajouterOpSysteme"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus">
+                  AJOUTER OP SYSTEME</i
+                >
+              </button>
+            </div>
+          </td>
             </tr>
           </table>
           
@@ -277,6 +289,9 @@ arrayExerciceDecompteBienService() {
             },
    ajouterDemandeEngage(){
                 this.$router.push({ name: 'AjouterDemandeEngagement' })
+            },
+            ajouterOpSysteme(){
+                this.$router.push({ name: 'AjouterOrdrePaiement' })
             },
   }
 };

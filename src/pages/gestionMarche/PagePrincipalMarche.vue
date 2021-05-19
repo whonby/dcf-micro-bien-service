@@ -14,6 +14,14 @@
                         <a data-toggle="tab" href="#MANDATEMENT">LISTES DES MARCHES</a>
                     
                       </li>
+                       <li class="tab-pane">
+                        <a data-toggle="tab" href="#BIES">LISTES DES MARCHES BIENS SERVICES</a>
+                    
+                      </li>
+                       <li class="tab-pane">
+                        <a data-toggle="tab" href="#TRAVAUX">LISTES DES MARCHES TRAVAUX</a>
+                    
+                      </li>
                        <!-- <li class="">
                         
                         <a data-toggle="tab" href="#MANDATEMENT1">LISTES DES AUTRES DEPENSES</a>
@@ -66,10 +74,14 @@
                        </div>
                       </div> -->
           </div>
-                <!-- <div id="MANDATEMENT1" class="tab-pane">
-
-                   <GestionAutresDepense></GestionAutresDepense>
-                </div> -->
+                <div id="BIES" class="tab-pane">
+                        <marcheHorsppmHorsSibBienService></marcheHorsppmHorsSibBienService>
+                   <!-- <GestionAutresDepense></GestionAutresDepense> -->
+                </div>
+                <div id="TRAVAUX" class="tab-pane">
+             <marcheHorsppmHorsSibInvestissement></marcheHorsppmHorsSibInvestissement>
+                   <!-- <GestionAutresDepense></GestionAutresDepense> -->
+                </div>
 
                        
 
@@ -87,6 +99,8 @@
   
 <script>
 import marcheHorsppmHorsSib from "./marcheHorsppmHorsSib.vue"
+import marcheHorsppmHorsSibBienService from "./marcheHorsppmHorsSibBienService.vue"
+import marcheHorsppmHorsSibInvestissement from "./marcheHorsppmHorsSibInvestissement.vue"
 //import GestionAutresDepense from "./GestionAutresDepense.vue"
 // import MandatDifferer from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatDifferer.vue"
 // import MandatRejetter from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatRejetter.vue"
@@ -98,6 +112,8 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   components:{
       marcheHorsppmHorsSib,
+      marcheHorsppmHorsSibBienService,
+      marcheHorsppmHorsSibInvestissement
      // GestionAutresDepense
 //     MandatViseAvecObservation,
 //     MandatVise,

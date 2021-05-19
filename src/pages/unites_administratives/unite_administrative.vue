@@ -370,7 +370,7 @@
  <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des unités administratives </h5>
+                    <h5>Liste des unités administratives</h5>
                 </div>
                 <div class="span6">
                     <div align="right">
@@ -420,7 +420,7 @@
                     <th title="unite administrative">UA</th>
                     <th>Date création</th>
 
-                    <th>Action</th>
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -450,7 +450,19 @@
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) || 'Non renseigné'}}</td>
                   
-                  </template> -->
+                  </template>   -->
+                   <td>
+                      <router-link
+                        :to="{
+                          name: 'detailUA_Acteur',
+                          params: { id: uniteadministrative.id },
+                        }"
+                        class="btn btn-success"
+                        title="Voir Acteur de UA"
+                      >
+                        <span class=""><i class="icon-group"> Voir Acteur(s)</i></span>
+                      </router-link>
+                    </td>
                     <td>
                       <button
                         class="btn btn-danger"

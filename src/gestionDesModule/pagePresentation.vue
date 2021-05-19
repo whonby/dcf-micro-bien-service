@@ -243,7 +243,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>CARTOGRAPHIES DU BUDGETS ET DES MARCHES</h5>
+                                                  <h5>CARTOGRAPHIES DES BUDGETS ET DES MARCHES</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-globe"></i>
                                                   </div>

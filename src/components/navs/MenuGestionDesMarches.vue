@@ -83,7 +83,7 @@
 
 
            <li>
-        <router-link :to="{ name: 'GroupeMarcheExecutionParUa' }" tag="a">
+        <router-link :to="{ name: 'GroupeMarcheExecutionSigobe' }" tag="a">
           EXECUTION DES MARCHES
         </router-link>
       </li>

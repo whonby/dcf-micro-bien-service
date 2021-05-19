@@ -16,6 +16,7 @@ import GestionMarcheHorsib from "../../pages/Hors_sib/marche_hors_sib/GestionMar
 import marcheHorSibInvestissement from "../../pages/Hors_sib/marche_hors_sib_investissement/marcheHorSibInvestissement.vue"
 import tableauDeBorde from "../../pages/Hors_sib/marche_hors_sib_investissement/tableauDeBorde.vue";
 import GroupeMarcheExecutionParUa from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/GroupeMarcheExecutionParUa.vue";
+import GroupeMarcheExecutionSigobe from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/GroupeMarcheExecutionSigobe.vue";
 import listeMarcheInvestissementHS from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/listeMarcheInvestissementExecutionHS.vue";
 import listeMarcheBienEtServiceHS from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/listeMarcheBienEtServiceExecutionHS.vue";
 import listeSousBudgetMarcheExecution from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/MarcheSousBudgetExecution/listeSousBudgetMarcheExecution.vue";
@@ -245,12 +246,19 @@ const marcheHorSibRoutes =[
         path:"/listeMarcheBienEtServiceHS/:id",
         name:"listeMarcheBienEtServiceHS",
         component:listeMarcheBienEtServiceHS
-    },
+    },//
     {
         path:"/GroupeMarcheExecutionParUa",
         name:"GroupeMarcheExecutionParUa",
         component:GroupeMarcheExecutionParUa
     },
+
+    {
+        path:"/GroupeMarcheExecutionSigobe",
+        name:"GroupeMarcheExecutionSigobe",
+        component:GroupeMarcheExecutionSigobe
+    },
+
     {
         path:"/listeMarcheInvestissementHS",
         name:"listeMarcheInvestissementHS",
