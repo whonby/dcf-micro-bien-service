@@ -156,7 +156,7 @@ import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdr
 import AjouterDecomptePrecedant from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePrecedant.vue"
 import AjouterDecompteActuelle from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecompteActuelle.vue"
 import AjouterDecomptePreced from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/Decompte/AjouterDecomptePreced.vue"
-import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
+//import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/importationBudgetEclate.vue"
 import listeDesUaSigobe from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesUaSigobe.vue"
 import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesProcedureDerogatoire.vue"
 import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
@@ -213,11 +213,11 @@ const BienServiceRoutes = [
         name: "PagePrincipalMarcheSigobe",
         component: PagePrincipalMarcheSigobe
     },
-    {
-        path: "/importationBudgetEclate",
-        name: "importationBudgetEclate",
-        component: importationBudgetEclate
-    },
+    // {
+    //     path: "/importationBudgetEclate",
+    //     name: "importationBudgetEclate",
+    //     component: importationBudgetEclate
+    // },
     {
         path: "/VoirOrdrePaiementSousBudget/:id",
         name: "VoirOrdrePaiementSousBudget",

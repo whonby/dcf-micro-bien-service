@@ -148,7 +148,7 @@ export default {
           icon: "add"
         }
       ],dropzoneOptions: {
-                url: process.env.VUE_APP_BIEN_SERVICE_URL+"/image_marche2",
+                url: process.env.VUE_APP_SERVEUR_IMAGE+"/image_marche2",
                 addRemoveLinks: true,
                 maxFiles: 1
             },
@@ -240,7 +240,7 @@ AffichePhoto() {
         if (fichier != null && fichier != "") {
 
 
-   let url=process.env.VUE_APP_BIEN_SERVICE_URL
+   let url=process.env.VUE_APP_SERVEUR_IMAGE
         return url+'/imagemarches/'+fichier;
      // return "Pas d'image "
         }

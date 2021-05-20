@@ -25,21 +25,19 @@
        </li>
        
        
-        <li  @click.prevent="navigateToTableauBord" :class="{active: active_el == 1035}">
+        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
           </a>
         </li>
 
-        <!-- <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==46}">
+        <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==46}">
               <a href="#">
                   <i class="icon-truck"></i>
                   <span>TABLEAU DE BORD DE MARCHE</span>
               </a>
-          </li> -->
-
-
+          </li>
         <!-- <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon-cogs"></i>
@@ -59,30 +57,24 @@
             <span class="label label-important"></span>
           </a>
         </li>
-
-
          <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==22}">
           <a title="GESTION MARCHE" href="#">
             <i class="icon-shopping-cart"></i>
-            <span>GESTION DES MARCHES</span>
+            <span>GESTION MARCHE</span>
             <span class="label label-important"></span>
           </a>
         </li>
-
-
         <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
         </li>
-
-
-        <!-- <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
-          </a> -->
+          </a>
 
        <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
@@ -92,32 +84,20 @@
         </li> -->
 
 
-        <!-- <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
+        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>INVESTISSEMENT</span>
            
           </a>
-        </li> -->
-
-
+        </li>
         <li @click.prevent="ExecutionBudgetaire" :class="{active: active_el ==100}">
-          <a title="CONTROLE DE L'EXECUTION" href="#">
+          <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
-            <span>CONTROLE EXECUTION</span>
+            <span>EXECUTION BUDGETAIRE</span>
            
           </a>
         </li>
-
-        <!-- <li @click.prevent="navigateToAutredepense" >
-          <a title="INVESTISSEMENT" href="#">
-            <i class="icon-truck"></i>
-            <span>GESTION AUTRE DEPENSE</span>
-           
-          </a>
-        </li> -->
-
-
         <li @click.prevent="navigateRetourAuMenu" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-globe"></i>
@@ -247,14 +227,9 @@ return objJson.id
 navigateToGestionMarche(){
         this.activate(22)
         this.$router.push({
-          name: 'groupeMarcheParUaSIgobe'
-         // name: 'listeMarche'
+          name: 'listeMarche'
         })
       },
-
-
-
-      
 
 
 
@@ -272,7 +247,7 @@ navigateToGestionMarche(){
         })
       },
  navigateToTableauBord(){
-        this.activate(1035)
+        this.activate(11)
         this.$router.push({
           name: 'TableauBordGestionSibSimple'
         })
@@ -303,14 +278,6 @@ navigateToGestionMarche(){
           name:'ListeUaExecutionBudgetaire'
         })
       },
-
-       navigateToAutredepense(){
-        this.activate(15)
-        this.$router.push({
-          name:'GroupeUaDesAutresDepense'
-        })
-      },
-
       navigateToInvestissement(){
         this.activate(4)
         this.$router.push({

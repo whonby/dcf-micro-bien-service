@@ -3111,7 +3111,7 @@ export const SUPPRIMER_PROCEDURE_DROIT_COMMUN = (state, id)=> {
 
 export const GET_ALL_BUDGET_IMPORTER = (state, tableau_document) => {
     state.budgetEclateImport = tableau_document
-
+}
 
 export const GET_ALL_PROCEDURE_DEROGATOIRE= (state, tableau_document) =>{
     state.ProcedureDerogatoires = tableau_document
@@ -3121,6 +3121,7 @@ export const GET_ALL_PROCEDURE_DEROGATOIRE= (state, tableau_document) =>{
 
 export const AJOUTER_BUDGET_IMPORTER = (state, elementAjouter) => {
     state.budgetEclateImport.unshift(elementAjouter)
+}
 export const AJOUTER_PROCEDURE_DEROGATOIRE = (state, elementAjouter) => {
     state.ProcedureDerogatoires.unshift(elementAjouter)
 }
