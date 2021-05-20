@@ -4,7 +4,10 @@
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                    <th style="font-size:14px;font-weight:bold">Execice</th>
                  <th style="font-size:14px;font-weight:bold">N°demande</th>
+                 <th style="font-size:14px;font-weight:bold">N°Liquidation</th>
+                 <th style="font-size:14px;font-weight:bold">N°Mandat</th>
                    <th style="font-size:14px;font-weight:bold">Type de procedure</th>
                    <th style="font-size:14px;font-weight:bold">Type d'engagement</th>
                     <th style="font-size:14px;font-weight:bold">Objet de la depense</th>
@@ -14,7 +17,10 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in listeDemandeParUa(macheid)" :key="type.id">
-                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.numero_demande || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.demande_engagement_id || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.demande_engagement_id || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.demande_engagement_id || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.numero_mandat || 'Non renseigné'}}</td>
                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.type_procedure_id || 'Non renseigné'}}</td>
                      <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.type_engagement_id || 'Non renseigné'}}</td>
                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.objet_depense || 'Non renseigné'}}</td>
@@ -65,7 +71,7 @@ props:["macheid"],
      listeDemandeParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDemandeEngagement.filter(qtreel => qtreel.ua_id == id);
+           return this.gettersDossierMandat.filter(qtreel => qtreel.ua_id == id);
 
         }
       };

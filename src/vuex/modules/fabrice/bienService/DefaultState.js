@@ -125,7 +125,9 @@ budgetEclateImporter:[],
     ProblemeMarche: [],
     ProcedureDroitCommuns: [],
     ProcedureDerogatoires: [],
-
+    ProcedureTypeDepenses: [],
+    BonCommandes: [],
+    BailleurDmdEngagements: [],
 }
 
 export default defaultState;

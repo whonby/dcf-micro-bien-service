@@ -364,6 +364,49 @@
           <div align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>
+           <div class="row-fluid"  style="margin-top: -20px">
+      <div class="span1"></div>
+      <div class="span10" style="background-color: transparent; !important;">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td colspan="">
+                <br />
+                <!-- <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
+    
+        </div>  -->
+
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdministrative_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+              </td>
+             
+              
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination alternate">
+                    <ul>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
+                        <li  v-for="(titre, index) in partition(ListeDEsEntreprise,size).length" :key="index" :class="{ active : active_el == index }">
+                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                        <li :class="{ disabled : page == partition(ListeDEsEntreprise,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                    </ul>
+           </div>
+      </div>
+    </div>
           <div class="widget-box">
             <div class="widget-title">
                 <div class="span6">
@@ -390,7 +433,8 @@
                         <button>ok</button>-->
                     </div>
                 </div>
-                <div class="span4">
+                
+                <!-- <div class="span4">
                     <br>
                     Afficher
                     <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -400,7 +444,7 @@
                         <option value="100">100</option>
                     </select>
                     Entrer
-                </div>
+                </div> -->
 
             </div>
 
@@ -426,7 +470,7 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="uniteadministrative in partition(filtre_unite_admin,size)[page]"
+                    v-for="uniteadministrative in partition(ListeDEsEntreprise,size)[page]"
                     :key="uniteadministrative.id"
                   >
                    
@@ -483,15 +527,7 @@
               <p style="text-align:center;font-size:20px;color:red;">Aucune Unité Administrative</p>
             </div>
           </div>
-           <div class="pagination alternate">
-                    <ul>
-                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
-                        <li  v-for="(titre, index) in partition(filtre_unite_admin,size).length" :key="index" :class="{ active : active_el == index }">
-                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                        <li :class="{ disabled : page == partition(filtre_unite_admin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
-
-                    </ul>
-           </div>
+           
         </div>
       </div>
     </div>
@@ -510,13 +546,13 @@ import moment from "moment";
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import {partition} from "../../Repositories/Repository"
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 import {admin,dcf,cf,noDCfNoAdmin} from "../../Repositories/Auth"
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
+  components: {
+    ModelListSelect
+  },
   data() {
     return {
       fabActions: [
@@ -526,7 +562,7 @@ export default {
         }
       ],
         page:0,
-        size:10,
+        size:1000,
         active_el:0,
       formData: {
         code: "",
@@ -539,6 +575,7 @@ export default {
         servicegest_id:"",
         nature_section_id:""
       },
+       uniteAdministrative_id: 0,
       editUniteAdministrative: {
         code: "",
         libelle: "",
@@ -596,6 +633,29 @@ created() {
         noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
+
+ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.filtre_unite_admin;
+
+      //retourne la section selectionner
+
+      if (this.uniteAdministrative_id != 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.id == vM.uniteAdministrative_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      return objet;
+    } ,
+
+
+
+
+
+
    recupererDernierNiveauServiceGestionnaire() {
       return id => {
         if (id != null && id != "") {

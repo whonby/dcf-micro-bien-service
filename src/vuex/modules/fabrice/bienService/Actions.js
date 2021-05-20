@@ -1,6 +1,6 @@
 import axios from '../../../../request/bienService'
 
-import urlFile from '../../../../request/serviceImage'
+import urlFile from '../../../../request/imageRequest'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall = require('housecall')
@@ -6093,4 +6093,199 @@ export function ajoutergetBudgetEclateImporter({ commit }, objetAjoute, config) 
     }
 
   }).catch(error => console.log(error))
+}
+
+
+export function getProcedureTypeDepense({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/TypeDepense")
+      .then(response => {
+        commit("GET_ALL_TYPE_DEPENSE_S", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterProcedureTypeDepenses({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/TypeDepense", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_TYPE_DEPENSE_S", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+
+
+export function modifierProcedureTypeDepenses({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/TypeDepense/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_TYPE_DEPENSE_S", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerProcedureTypeDepenses({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_TYPE_DEPENSE_S", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/TypeDepense/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+export function getBonCommande({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/BonCommande")
+      .then(response => {
+        commit("GET_ALL_BON_COMMANDE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBonCommandes({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/BonCommande", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BON_COMMANDE", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+
+
+export function modifierBonCommandes({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/BonCommande/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_BON_COMMANDE", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerBonCommandes({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_BON_COMMANDE", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/BonCommande/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+export function getBailleurDmdEngagement({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/BailleurDmdEngagement") 
+      .then(response => {
+        commit("GET_ALL_BAILLEUR_DMD", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBailleurDmdEngagements({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/BailleurDmdEngagement", nouveau))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BAILLEUR_DMD", response.data);
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+      this.$app.$loading(true)
+      this.$app.$notify({
+        title: 'Erreur',
+        text: "ce Numero existe déja",
+        type: "error"
+      });
+    })
+}
+
+
+export function modifierBailleurDmdEngagements({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/BailleurDmdEngagement/" + nouveau.id, nouveau))
+    .then(response => {
+      commit("MODIFIER_BAILLEUR_DMD", response.data);
+
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerBailleurDmdEngagements({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_BAILLEUR_DMD", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/BailleurDmdEngagement/" + id).then(() => dialog.close());
+    });
 }

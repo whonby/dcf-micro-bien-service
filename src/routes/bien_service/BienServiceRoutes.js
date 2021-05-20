@@ -160,6 +160,7 @@ import importationBudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclat
 import listeDesUaSigobe from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesUaSigobe.vue"
 import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestionSigobe/listeDesProcedureDerogatoire.vue"
 import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
+import ListeProcedureTypeDepense from "../../pages/ExecutionBudgetaire/gestionSigobe/ListeProcedureTypeDepense.vue"
 import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
@@ -167,6 +168,11 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [
+    {
+        path: "/ListeProcedureTypeDepense",
+        name: "ListeProcedureTypeDepense",
+        component: ListeProcedureTypeDepense
+    },
     {
         path: "/listeDesProcedureDerogatoire",
         name: "listeDesProcedureDerogatoire",
