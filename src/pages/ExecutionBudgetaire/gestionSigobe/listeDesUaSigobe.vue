@@ -18,7 +18,7 @@
               </button>
             </div>
           </td>
-              <td style="width: 0px">
+              <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-primary"
@@ -30,7 +30,7 @@
                 >
               </button>
             </div>
-          </td>
+          </td> -->
             </tr>
           </table>
           

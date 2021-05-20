@@ -4,10 +4,14 @@
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                  <th style="font-size:14px;font-weight:bold">Execice</th>
                  <th style="font-size:14px;font-weight:bold">N°demande</th>
                    <!-- <th style="font-size:14px;font-weight:bold">Type de procedure</th> -->
-                   <th style="font-size:14px;font-weight:bold">Procédures dérogatoires </th>
+                   <th style="font-size:14px;font-weight:bold">Type Engagement </th>
                     <th style="font-size:14px;font-weight:bold">Objet de la depense</th>
+                    <th style="font-size:14px;font-weight:bold">Tresor</th>
+                    <th style="font-size:14px;font-weight:bold">Don</th>
+                    <th style="font-size:14px;font-weight:bold">Emprunt</th>
                      <th style="font-size:14px;font-weight:bold">Montant Engagé</th>
                      <th style="font-size:14px;font-weight:bold">Decision CF</th>
                      <th style="font-size:14px;font-weight:bold">Action</th>
@@ -15,11 +19,15 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in listeDemandeParUa(macheid)" :key="type.id">
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.exercice || 'Non renseigné'}}</td>
                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.numero_demande || 'Non renseigné'}}</td>
                     <!-- <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.type_procedure_id || 'Non renseigné'}}</td> -->
                      <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.type_engagement_id || 'Non renseigné'}}</td>
                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.objet_depense || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(type.total_general)) || 'Non renseigné'}}</td>
+                     <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(type.montant_tresor)) || 'Non renseigné'}}</td>
+                      <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(type.montant_don)) || 'Non renseigné'}}</td>
+                       <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(type.montant_emprunt ))|| 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(type.total_general)) || 'Non renseigné'}}</td>
                   <td >
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success" >                        
                      

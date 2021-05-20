@@ -8,7 +8,7 @@
         <br>
          <br>
         <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
-            <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION {{idUniteAdministrative(marcheid)}}</h5>
+            <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
             </a> </div>
 
         <div class="widget-box collapsible">
@@ -27,7 +27,7 @@
              <div class="collapse" id="ENGAGEMENTDIRECT">
 <div class="widget-box collapsible">
     <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
-            <h5 style="color:#FFF!important;font-size:15px;">DEMANDE ENGAGAMENT </h5>
+            <h5 style="color:#FFF!important;font-size:15px;">DEMANDE</h5>
             </a> 
             
             </div>
