@@ -94,12 +94,12 @@
 <script>
 import { mapGetters,mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
-import { ModelListSelect } from "vue-search-select";
-import "vue-search-select/dist/VueSearchSelect.css";
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-   components: {
-    ModelListSelect
-  },
+  //  components: {
+  //   ModelListSelect
+  // },
   name:'',
   data() {
     return {
