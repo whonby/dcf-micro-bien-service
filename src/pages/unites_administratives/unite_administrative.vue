@@ -372,11 +372,6 @@
             <tr>
               <td colspan="">
                 <br />
-                <!-- <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
-    
-        </div>  -->
-
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
                   >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
                 </label>

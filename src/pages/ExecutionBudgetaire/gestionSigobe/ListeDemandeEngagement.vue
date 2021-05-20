@@ -1,6 +1,23 @@
 
 <template>
   <div>
+    <br>
+    
+        
+                
+                  <div class="controls span6">
+                    <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdministrative_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+                  </div>
+                
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -77,7 +94,12 @@
 <script>
 import { mapGetters,mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
+   components: {
+    ModelListSelect
+  },
   name:'',
   data() {
     return {
@@ -96,13 +118,16 @@ export default {
   },
 props:["macheid"],
   computed: {
-    ...mapGetters("uniteadministrative", ["typeTextes"]),
+    ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
 
  ...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ 
+
+
  
      listeDemandeParUa() {
       return id => {
