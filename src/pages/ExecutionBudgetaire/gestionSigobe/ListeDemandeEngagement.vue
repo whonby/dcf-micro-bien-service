@@ -5,7 +5,7 @@
     
         
                 
-                  <div class="controls span6">
+                  <!-- <div class="controls span6">
                     <model-list-select
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
@@ -16,7 +16,7 @@
                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
                 >
                 </model-list-select>
-                  </div>
+                  </div> -->
                 
     <table class="table table-bordered table-striped">
                 <thead>
