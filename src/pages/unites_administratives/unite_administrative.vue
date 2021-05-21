@@ -9,148 +9,166 @@
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-         
-            <tr>
-              <td>
-                
-                <div class="control-group">
-                  <label class="control-label">Type d'unité administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.type_ua_id" class="span5">
-                      <option
-                        v-for="typeUniteA in type_Unite_admins"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Type d'unité administrative</label>
+                <div class="controls">
+                  <select v-model="formData.type_ua_id" class="span5">
+                    <option
+                      v-for="typeUniteA in type_Unite_admins"
+                      :key="typeUniteA.id"
+                      :value="typeUniteA.id"
+                    >
+                      {{ typeUniteA.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Nature de section</label>
-                  <div class="controls">
-                    <select v-model="formData.nature_section_id" class="span5">
-                      <option
-                        v-for="natsection in natures_sections"
-                        :key="natsection.id"
-                        :value="natsection.id"
-                      >{{natsection.code}}-{{natsection.libelle}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Nature de section</label>
+                <div class="controls">
+                  <select v-model="formData.nature_section_id" class="span5">
+                    <option
+                      v-for="natsection in natures_sections"
+                      :key="natsection.id"
+                      :value="natsection.id"
+                    >
+                      {{ natsection.code }}-{{ natsection.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Section</label>
-                  <div class="controls">
-                    <select v-model="formData.section_id" class="span5">
-                      <option
-                        v-for="sect in sectionDynamiques(formData.nature_section_id)"
-                        :key="sect.id"
-                        :value="sect.id"
-                      >{{sect.code}}-{{sect.nom_section}}</option>
-                    </select>
-                  </div>
-                    <!-- <input
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Section</label>
+                <div class="controls">
+                  <select v-model="formData.section_id" class="span5">
+                    <option
+                      v-for="sect in sectionDynamiques(
+                        formData.nature_section_id
+                      )"
+                      :key="sect.id"
+                      :value="sect.id"
+                    >
+                      {{ sect.code }}-{{ sect.nom_section }}
+                    </option>
+                  </select>
+                </div>
+                <!-- <input
                       type="text"
                      :value="codeSectionNature"
                       class="span"
                       placeholder="Saisir le code"
                       readonly
                     /> -->
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Service gestionnaire de crédit</label
+                >
+                <div class="controls">
+                  <select v-model="formData.servicegest_id" class="span5">
+                    <option
+                      v-for="servicegest in recupererDernierNiveauServiceGestionnaire(
+                        calculerTaillerStructureAdministrative
+                      )"
+                      :key="servicegest.id"
+                      :value="servicegest.id"
+                    >
+                      {{ servicegest.code }}-{{ servicegest.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Service gestionnaire de crédit</label>
-                  <div class="controls">
-                    <select v-model="formData.servicegest_id" class="span5">
-                      <option
-                        v-for="servicegest in recupererDernierNiveauServiceGestionnaire(calculerTaillerStructureAdministrative)"
-                        :key="servicegest.id"
-                        :value="servicegest.id"
-                      >{{servicegest.code}}-{{servicegest.libelle}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Localisation géographique</label>
+                <div class="controls">
+                  <select v-model="formData.localisationgeo_id" class="span5">
+                    <option
+                      v-for="localgeo in recupererDernierLocalisationGeographique(
+                        calculerTaillerStructureLocalisation
+                      )"
+                      :key="localgeo.id"
+                      :value="localgeo.id"
+                    >
+                      {{ localgeo.code }}-{{ localgeo.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-              <td>
-                 <div class="control-group">
-                  <label class="control-label">Localisation géographique</label>
-                  <div class="controls">
-                    <select v-model="formData.localisationgeo_id" class="span5">
-                      <option
-                        v-for="localgeo in recupererDernierLocalisationGeographique(calculerTaillerStructureLocalisation)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Date de création:</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData.date_creation"
+                    class="span5"
+                  />
                 </div>
-              </td>
-               <td>
-                  <div class="control-group">
-                  <label class="control-label">Date de création:</label>
-                  <div class="controls">
-                    <input type="date" v-model="formData.date_creation" class="span5" />
-                  </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Code de l'unité administrative:</label
+                >
+
+                <div class="controls">
+                  <input
+                    type="text"
+                    :value="codeuniteadministrative"
+                    class="span5"
+                    placeholder="Saisir le code"
+                    readonly
+                  />
                 </div>
-              </td>
-              
-            </tr>
-            <tr>
-             
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Code de l'unité administrative:</label>
-                
-                  <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeuniteadministrative"
-                      class="span5"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
-                  </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Nom de l'unité administrative:</label>
-                    
-               
-                  <div class="controls">
-                    <input
-                      type="text"
-                      v-model="formData.libelle"
-                      class="span5"
-                      placeholder="Saisir le nom de l'unité administrative"
-                     
-                    />
-               </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Nom de l'unité administrative:</label
+                >
+
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="formData.libelle"
+                    class="span5"
+                    placeholder="Saisir le nom de l'unité administrative"
+                  />
                 </div>
-              </td>
-               <td>
-                <div class="control-group">
-                  <!-- <label class="control-label">Code</label> -->
-                
-                  <div class="controls">
-                    <input
-                      type="hidden"
-                     :value="codeuniteadministrative2"
-                      class="span"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
-                  </div>
-                   <!-- <model-list-select style="background-color: rgb(255,255,255);"
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <!-- <label class="control-label">Code</label> -->
+
+                <div class="controls">
+                  <input
+                    type="hidden"
+                    :value="codeuniteadministrative2"
+                    class="span"
+                    placeholder="Saisir le code"
+                    readonly
+                  />
+                </div>
+              </div>
+              <!-- <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
                                            :list="budgetEclate"
                                            v-model="formData.ua_id"
@@ -161,20 +179,19 @@
                         >
 
                         </model-list-select> -->
-              </td>
-            </tr>
+            </td>
+          </tr>
           <tr>
             <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Acteur</label>
-                  <div class="controls">
-                    <select  class="span5">
-                      <option></option>
-                    </select>
-                  </div>
+              <div class="control-group">
+                <label class="control-label">Acteur</label>
+                <div class="controls">
+                  <select class="span5">
+                    <option></option>
+                  </select>
                 </div>
-              </td>
+              </div>
+            </td>
           </tr>
         </table>
       </div>
@@ -183,8 +200,8 @@
           @click.prevent="ajouterUniteAdministrativeLocal(formData)"
           class="btn btn-primary"
           href="#"
-         
-        >Valider</a>
+          >Valider</a
+        >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -197,148 +214,184 @@
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          
-            <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Type l'unité administrative</label>
-                  <div class="controls">
-                    <select v-model="editUniteAdministrative.type_ua_id" class="span5">
-                      <option
-                        v-for="typeUniteA in type_Unite_admins"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Type l'unité administrative</label>
+                <div class="controls">
+                  <select
+                    v-model="editUniteAdministrative.type_ua_id"
+                    class="span5"
+                  >
+                    <option
+                      v-for="typeUniteA in type_Unite_admins"
+                      :key="typeUniteA.id"
+                      :value="typeUniteA.id"
+                    >
+                      {{ typeUniteA.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Nature de section</label>
-                  <div class="controls">
-                    <select v-model="editUniteAdministrative.nature_section_id" class="span5">
-                      <option
-                        v-for="natsection in natures_sections"
-                        :key="natsection.id"
-                        :value="natsection.id"
-                      >{{natsection.code}}-{{natsection.libelle}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Nature de section</label>
+                <div class="controls">
+                  <select
+                    v-model="editUniteAdministrative.nature_section_id"
+                    class="span5"
+                  >
+                    <option
+                      v-for="natsection in natures_sections"
+                      :key="natsection.id"
+                      :value="natsection.id"
+                    >
+                      {{ natsection.code }}-{{ natsection.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-             <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Section</label>
-                  <div class="controls">
-                    <select v-model="editUniteAdministrative.section_id" class="span5">
-                      <option
-                        v-for="sect in sectionDynamiques(editUniteAdministrative.nature_section_id)"
-                        :key="sect.id"
-                        :value="sect.id"
-                      >{{sect.code}}-{{sect.nom_section}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Section</label>
+                <div class="controls">
+                  <select
+                    v-model="editUniteAdministrative.section_id"
+                    class="span5"
+                  >
+                    <option
+                      v-for="sect in sectionDynamiques(
+                        editUniteAdministrative.nature_section_id
+                      )"
+                      :key="sect.id"
+                      :value="sect.id"
+                    >
+                      {{ sect.code }}-{{ sect.nom_section }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-              
-            </tr>
-            <tr>
-               <td>
-                 <div class="control-group">
-                  <label class="control-label">Service gestionnaire de crédit</label>
-                  <div class="controls">
-                    <select v-model="editUniteAdministrative.servicegest_id" class="span5">
-                      <option
-                        v-for="servicegest in recupererDernierNiveauServiceGestionnaire(calculerTaillerStructureAdministrative)"
-                        :key="servicegest.id"
-                        :value="servicegest.id"
-                      >{{servicegest.code}}-{{servicegest.libelle}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Service gestionnaire de crédit</label
+                >
+                <div class="controls">
+                  <select
+                    v-model="editUniteAdministrative.servicegest_id"
+                    class="span5"
+                  >
+                    <option
+                      v-for="servicegest in recupererDernierNiveauServiceGestionnaire(
+                        calculerTaillerStructureAdministrative
+                      )"
+                      :key="servicegest.id"
+                      :value="servicegest.id"
+                    >
+                      {{ servicegest.code }}-{{ servicegest.libelle }}
+                    </option>
+                  </select>
                 </div>
-               
-              </td>
-              <td>
-                  <div class="control-group">
-                  <label class="control-label">Localisation géographique</label>
-                  <div class="controls">
-                    <select v-model="editUniteAdministrative.localisationgeo_id" class="span5">
-                      <option
-                        v-for="localgeo in recupererDernierLocalisationGeographique(calculerTaillerStructureLocalisation)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
-                    </select>
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Localisation géographique</label>
+                <div class="controls">
+                  <select
+                    v-model="editUniteAdministrative.localisationgeo_id"
+                    class="span5"
+                  >
+                    <option
+                      v-for="localgeo in recupererDernierLocalisationGeographique(
+                        calculerTaillerStructureLocalisation
+                      )"
+                      :key="localgeo.id"
+                      :value="localgeo.id"
+                    >
+                      {{ localgeo.code }}-{{ localgeo.libelle }}
+                    </option>
+                  </select>
                 </div>
-              </td>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Date création:</label>
-                  <div class="controls">
-                    <input type="date" v-model="editUniteAdministrative.date_creation" class="span5" />
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Date création:</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="editUniteAdministrative.date_creation"
+                    class="span5"
+                  />
                 </div>
-              </td>
-              
-            </tr>
-            <tr>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Code d'unité administrative:</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeuniteadministrativeModifier"
-                      class="span5"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Code d'unité administrative:</label
+                >
+                <div class="controls">
+                  <input
+                    type="text"
+                    :value="codeuniteadministrativeModifier"
+                    class="span5"
+                    placeholder="Saisir le code"
+                    readonly
+                  />
                 </div>
-              </td>
-              <td>
-               <div class="control-group">
-                  <label class="control-label">Nom de l'unité administrative:</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                      v-model="editUniteAdministrative.libelle"
-                      class="span5"
-                      placeholder="Saisir le nom de l'unité administrative"
-                     
-                    />
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Nom de l'unité administrative:</label
+                >
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="editUniteAdministrative.libelle"
+                    class="span5"
+                    placeholder="Saisir le nom de l'unité administrative"
+                  />
                 </div>
-              </td>
-             
-                <td>
-                <div class="control-group">
-                  <!-- <label class="control-label">Code</label> -->
-                  <div class="controls">
-                    <input
-                      type="hidden"
-                     :value="codeuniteadministrativeModifier2"
-                      class="span"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="control-group">
+                <!-- <label class="control-label">Code</label> -->
+                <div class="controls">
+                  <input
+                    type="hidden"
+                    :value="codeuniteadministrativeModifier2"
+                    class="span"
+                    placeholder="Saisir le code"
+                    readonly
+                  />
                 </div>
-              </td>
-            </tr>
-         
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierUniteAdministrativeLocal(editUniteAdministrative)"
+          @click.prevent="
+            modifierUniteAdministrativeLocal(editUniteAdministrative)
+          "
           class="btn btn-primary"
           href="#"
-         
-        >Modifier</a>
+          >Modifier</a
+        >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -351,76 +404,101 @@
         <div class="span12">
           <download-excel
             class="btn btn-success pull-right"
-            style="cursor:pointer;"
+            style="cursor: pointer"
             :fields="json_fields"
             title="Liste Unites administratives"
             :data="jointureUaChapitreSection"
             name="Liste Unites administratives"
             worksheet="Liste Unites administratives"
           >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-         
+            <i title="Exporter en excel" ref="excel" class="icon-table"
+              >&nbsp;&nbsp;Exporter en excel</i
+            >
           </download-excel>
-          <div align="right" style="cursor:pointer;">
-           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          <div align="right" style="cursor: pointer">
+            <button class="btn btn-info" @click.prevent="genererEnPdf()">
+              Exporter en PDF
+            </button>
           </div>
-           <div class="row-fluid"  style="margin-top: -20px">
-      <div class="span1"></div>
-      <div class="span10" style="background-color: transparent; !important;">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td colspan="">
-                <br />
-                <!-- <div  align="right" style="cursor:pointer;">
+          <div class="row-fluid" style="margin-top: -20px">
+            <div class="span1"></div>
+            <div
+              class="span10"
+              style="background-color: transparent; !important;"
+            >
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td colspan="">
+                      <br />
+                      <!-- <div  align="right" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
     
         </div>  -->
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="uniteAdministratives"
-                  v-model="uniteAdministrative_id"
-                  option-value="id"
-                  option-text="libelle"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
-                >
-                </model-list-select>
-              </td>
-             
-              
-            </tr>
-          </tbody>
-        </table>
-        <div class="pagination alternate">
-                    <ul>
-                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précédent</a></li>
-                        <li  v-for="(titre, index) in partition(ListeDEsEntreprise,size).length" :key="index" :class="{ active : active_el == index }">
-                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                        <li :class="{ disabled : page == partition(ListeDEsEntreprise,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
-
-                    </ul>
-           </div>
-      </div>
-    </div>
+                      <label
+                        style="
+                          color: #000;
+                          font-size: 14px;
+                          font-weight: bolder;
+                        "
+                        >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                      </label>
+                      <model-list-select
+                        style="background-color: #fff; border: 2px solid #000"
+                        class="wide"
+                        :list="uniteAdministratives"
+                        v-model="uniteAdministrative_id"
+                        option-value="id"
+                        option-text="libelle"
+                        placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                      >
+                      </model-list-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pagination alternate">
+                <ul>
+                  <li :class="{ disabled: page == 0 }">
+                    <a @click.prevent="precedent()" href="#">Précédent</a>
+                  </li>
+                  <li
+                    v-for="(titre, index) in partition(ListeDEsEntreprise, size)
+                      .length"
+                    :key="index"
+                    :class="{ active: active_el == index }"
+                  >
+                    <a @click.prevent="getDataPaginate(index)" href="#">{{
+                      index + 1
+                    }}</a>
+                  </li>
+                  <li
+                    :class="{
+                      disabled:
+                        page == partition(ListeDEsEntreprise, size).length - 1,
+                    }"
+                  >
+                    <a @click.prevent="suivant()" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="widget-box">
             <div class="widget-title">
-                <div class="span6">
- <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-                    <h5>Liste des unités administratives</h5>
-                </div>
-                <div class="span6">
-                    <div align="right">
-                        <!-- Recherche:
+              <div class="span6">
+                <span class="icon">
+                  <i class="icon-th"></i>
+                </span>
+                <h5>Liste des unités administratives</h5>
+              </div>
+              <div class="span6">
+                <div align="right">
+                  <!-- Recherche:
                         <input type="search" placeholder="" v-model="search" /> -->
 
-                        <!-- <div class="span3">
+                  <!-- <div class="span3">
                           <model-list-select
                             v-model="formData.test"
                             style="background-color: rgb(222, 222, 222);"
@@ -431,10 +509,10 @@
                           ></model-list-select>
                         </div>
                         <button>ok</button>-->
-                    </div>
                 </div>
-                
-                <!-- <div class="span4">
+              </div>
+
+              <!-- <div class="span4">
                     <br>
                     Afficher
                     <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -445,21 +523,27 @@
                     </select>
                     Entrer
                 </div> -->
-
             </div>
 
             <div
               class="widget-content nopadding"
-              v-if="type_Unite_admins.length && sections.length && chapitres.length"
+              v-if="
+                type_Unite_admins.length && sections.length && chapitres.length
+              "
             >
-              <table class="table table-bordered table-striped" id="Nature_section">
+              <table
+                class="table table-bordered table-striped"
+                id="Nature_section"
+              >
                 <thead>
                   <tr>
                     <th title="type unite administrative">Type UA</th>
                     <th>Nature Section</th>
                     <th>Section</th>
                     <th title="service gestionnaire">Service Gestionnaire</th>
-                     <th title="localisation geographique">Localisation géographique</th>
+                    <th title="localisation geographique">
+                      Localisation géographique
+                    </th>
                     <th>Code</th>
                     <th title="unite administrative">UA</th>
                     <th>Date création</th>
@@ -470,22 +554,100 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="uniteadministrative in partition(ListeDEsEntreprise,size)[page]"
+                    v-for="uniteadministrative in partition(
+                      ListeDEsEntreprise,
+                      size
+                    )[page]"
                     :key="uniteadministrative.id"
                   >
-                   
-                   <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleUa(uniteadministrative.type_ua_id)}}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleNatureSection(uniteadministrative.nature_section_id) }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleSection(uniteadministrative.section_id)}}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleServiceGestionnaire(uniteadministrative.servicegest_id) }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleLocalGeographie(uniteadministrative.localisationgeo_id) }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{uniteadministrative.code }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{uniteadministrative.libelle }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
-                
-                  <!-- </template> -->
-                   <!-- <template v-else>
+                    <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{ libelleUa(uniteadministrative.type_ua_id) }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{
+                        libelleNatureSection(
+                          uniteadministrative.nature_section_id
+                        )
+                      }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{ libelleSection(uniteadministrative.section_id) }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{
+                        libelleServiceGestionnaire(
+                          uniteadministrative.servicegest_id
+                        )
+                      }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{
+                        libelleLocalGeographie(
+                          uniteadministrative.localisationgeo_id
+                        )
+                      }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{ uniteadministrative.code }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{ uniteadministrative.libelle }}
+                    </td>
+                    <td
+                      @dblclick="
+                        afficherModalModifierUniteAdministrative(
+                          uniteadministrative.id
+                        )
+                      "
+                    >
+                      {{ formaterDate(uniteadministrative.date_creation) }}
+                    </td>
+
+                    <!-- </template> -->
+                    <!-- <template v-else>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.chpitr.libelle || 'Non renseigné'}}</td>
@@ -495,7 +657,7 @@
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) || 'Non renseigné'}}</td>
                   
                   </template>   -->
-                   <td>
+                    <td>
                       <router-link
                         :to="{
                           name: 'detailUA_Acteur',
@@ -504,13 +666,17 @@
                         class="btn btn-success"
                         title="Voir Acteur de UA"
                       >
-                        <span class=""><i class="icon-group"> Voir Acteur(s)</i></span>
+                        <span class=""
+                          ><i class="icon-group"> Voir Acteur(s)</i></span
+                        >
                       </router-link>
                     </td>
                     <td>
                       <button
                         class="btn btn-danger"
-                        @click="supprimerUniteAdministrative(uniteadministrative.id)"
+                        @click="
+                          supprimerUniteAdministrative(uniteadministrative.id)
+                        "
                       >
                         <span>
                           <i class="icon icon-trash"></i>
@@ -521,49 +687,65 @@
                   </tr>
                 </tbody>
               </table>
-               
             </div>
             <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Aucune Unité Administrative</p>
+              <p style="text-align: center; font-size: 20px; color: red">
+                Aucune Unité Administrative
+              </p>
             </div>
           </div>
-           
         </div>
       </div>
     </div>
-    
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterUniteAdministrative" main-icon="apps" bg-color="green"></fab>
-        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterUniteAdministrative()">Open</button>
-  <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-  <notifications  />
+    <fab
+      :actions="fabActions"
+      @cache="afficherModalAjouterUniteAdministrative"
+      main-icon="apps"
+      bg-color="green"
+    ></fab>
+    <button
+      style="display: none"
+      v-shortkey.once="['ctrl', 'f']"
+      @shortkey="afficherModalAjouterUniteAdministrative()"
+    >
+      Open
+    </button>
+    <button
+      style="display: none"
+      v-shortkey.once="['ctrl', 'e']"
+      @shortkey="ExporterEnExel()"
+    >
+      Open
+    </button>
+    <notifications />
   </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
-import {partition} from "../../Repositories/Repository"
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { partition } from "../../Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
-import {admin,dcf,cf,noDCfNoAdmin} from "../../Repositories/Auth"
+import { admin, dcf, cf, noDCfNoAdmin } from "../../Repositories/Auth";
 export default {
   components: {
-    ModelListSelect
+    ModelListSelect,
   },
   data() {
     return {
       fabActions: [
         {
           name: "cache",
-          icon: "add"
-        }
+          icon: "add",
+        },
       ],
-        page:0,
-        size:1000,
-        active_el:0,
+      page: 0,
+      size: 1000,
+      active_el: 0,
       formData: {
         code: "",
         libelle: "",
@@ -571,11 +753,11 @@ export default {
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-       
-        servicegest_id:"",
-        nature_section_id:""
+
+        servicegest_id: "",
+        nature_section_id: "",
       },
-       uniteAdministrative_id: 0,
+      uniteAdministrative_id: 0,
       editUniteAdministrative: {
         code: "",
         libelle: "",
@@ -583,8 +765,8 @@ export default {
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-        servicegest_id:"",
-        nature_section_id:""
+        servicegest_id: "",
+        nature_section_id: "",
       },
       json_fields: {
         TYPE_UNIT_ADMINISTRATIVE: "typeua.libelle",
@@ -593,21 +775,19 @@ export default {
         LOCALISATION_GEO: "localgeo.libelle",
         CODE: "code",
         LIBELLE: "libelle",
-        DATE_CREATION: "date_creation"
+        DATE_CREATION: "date_creation",
       },
-      search: ""
+      search: "",
     };
   },
-  
-created() {
 
-},
-    computed: {
+  created() {},
+  computed: {
     ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetEclate",
-      
+
       // "chapitres",
       // "sections"
     ]),
@@ -621,24 +801,24 @@ created() {
       "afficheServiceGestionnaireNiveau4",
       "afficheLocalisationGeoNiveau5",
       "natures_sections",
-      "structures_geographiques"
+      "structures_geographiques",
     ]),
-    ...mapGetters("parametreGenerauxFonctionnelle", [
-      "plans_fonctionnels"
-     
+    ...mapGetters("parametreGenerauxFonctionnelle", ["plans_fonctionnels"]),
+    admin: admin,
+    dcf: dcf,
+    cf: cf,
+    noDCfNoAdmin: noDCfNoAdmin,
+    ...mapGetters("Utilisateurs", [
+      "getterUtilisateur",
+      "getterAffectation",
+      "getterUniteAdministrativeByUser",
     ]),
-      admin:admin,
-      dcf:dcf,
-        cf:cf,
-        noDCfNoAdmin:noDCfNoAdmin,
-      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-   
 
-ListeDEsEntreprise() {
+    ListeDEsEntreprise() {
       let vM = this;
       let objet = this.filtre_unite_admin;
 
-      //retourne la section selectionner
+      //filtre sur les Unités Administratives
 
       if (this.uniteAdministrative_id != 0) {
         objet = this.filtre_unite_admin.filter((item) => {
@@ -649,275 +829,323 @@ ListeDEsEntreprise() {
         return objet;
       }
       return objet;
-    } ,
+    },
 
-
-
-
-
-
-   recupererDernierNiveauServiceGestionnaire() {
-      return id => {
+    recupererDernierNiveauServiceGestionnaire() {
+      return (id) => {
         if (id != null && id != "") {
-           return this.services_gestionnaires.filter(qtreel => this.RecupererNiveauStructureAdministrative(qtreel.structure_administrative_id) == id);
-      
+          return this.services_gestionnaires.filter(
+            (qtreel) =>
+              this.RecupererNiveauStructureAdministrative(
+                qtreel.structure_administrative_id
+              ) == id
+          );
         }
       };
     },
-   
-   RecupererNiveauStructureAdministrative() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.structures_administratives.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.niveau;
-      }
-      return 0
+    RecupererNiveauStructureAdministrative() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.structures_administratives.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.niveau;
+          }
+          return 0;
         }
       };
     },
-  //  test() {
-  //     return id => {
-  //       if (id != null && id != "") {
-  //          const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+    //  test() {
+    //     return id => {
+    //       if (id != null && id != "") {
+    //          const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
-  //     if (qtereel) {
-  //       return qtereel.libelle;
-  //     }
-  //     return 0
-  //       }
-  //     };
-  //   },
-   calculerTaillerStructureAdministrative(){
-     return this.structures_administratives.length
-   },
-   
-   recupererDernierLocalisationGeographique() {
-      return id => {
+    //     if (qtereel) {
+    //       return qtereel.libelle;
+    //     }
+    //     return 0
+    //       }
+    //     };
+    //   },
+    calculerTaillerStructureAdministrative() {
+      return this.structures_administratives.length;
+    },
+
+    recupererDernierLocalisationGeographique() {
+      return (id) => {
         if (id != null && id != "") {
-           return this.localisations_geographiques.filter(qtreel => this.RecupererNiveauStructureLocalisation(qtreel.structure_localisation_geographique_id) == id);
-      
+          return this.localisations_geographiques.filter(
+            (qtreel) =>
+              this.RecupererNiveauStructureLocalisation(
+                qtreel.structure_localisation_geographique_id
+              ) == id
+          );
         }
       };
     },
-   
-   RecupererNiveauStructureLocalisation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.structures_geographiques.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.niveau;
-      }
-      return 0
+    RecupererNiveauStructureLocalisation() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.structures_geographiques.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.niveau;
+          }
+          return 0;
         }
       };
     },
-   
-   calculerTaillerStructureLocalisation(){
-     return this.structures_geographiques.length
-   },
-   
-   
-   libelleLocalGeographie() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.localisations_geographiques.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
+    calculerTaillerStructureLocalisation() {
+      return this.structures_geographiques.length;
+    },
+
+    libelleLocalGeographie() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.localisations_geographiques.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
         }
       };
     },
     libelleServiceGestionnaire() {
-      return id => {
+      return (id) => {
         if (id != null && id != "") {
-           const qtereel = this.services_gestionnaires.find(qtreel => qtreel.id == id);
+          const qtereel = this.services_gestionnaires.find(
+            (qtreel) => qtreel.id == id
+          );
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
         }
       };
     },
     libelleUa() {
-      return id => {
+      return (id) => {
         if (id != null && id != "") {
-           const qtereel = this.type_Unite_admins.find(qtreel => qtreel.id == id);
+          const qtereel = this.type_Unite_admins.find(
+            (qtreel) => qtreel.id == id
+          );
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
         }
       };
     },
-     libelleSection() {
-      return id => {
+    libelleSection() {
+      return (id) => {
         if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+          const qtereel = this.sections.find((qtreel) => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.nom_section;
-      }
-      return 0
+          if (qtereel) {
+            return qtereel.nom_section;
+          }
+          return 0;
         }
       };
     },
-     libelleNatureSection() {
-      return id => {
+    libelleNatureSection() {
+      return (id) => {
         if (id != null && id != "") {
-           const qtereel = this.natures_sections.find(qtreel => qtreel.id == id);
+          const qtereel = this.natures_sections.find(
+            (qtreel) => qtreel.id == id
+          );
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
         }
       };
     },
-    
+
     filtre_unite_admin() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.jointureUaChapitreSection.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect
-        }
-        return this.jointureUaChapitreSection
+      if (this.noDCfNoAdmin) {
+        let colect = [];
 
+        this.jointureUaChapitreSection.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect;
+      }
+      return this.jointureUaChapitreSection;
     },
-   
+
     sectionDynamiques() {
-      return id => {
+      return (id) => {
         if (id != null && id != "") {
-          return this.sections.filter(element => element.naturesection_id == id);
+          return this.sections.filter(
+            (element) => element.naturesection_id == id
+          );
         }
       };
     },
 
+    // codeSectionNature(){
+    //       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+    //       const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.natsection_id)
+    //      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
 
-// codeSectionNature(){
-//       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-//       const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.natsection_id)
-//      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
-    
-//      if(natsect && secti){
-//        return natsect.code + secti.code 
-//      }
+    //      if(natsect && secti){
+    //        return natsect.code + secti.code
+    //      }
 
-//      return null
-//    },
+    //      return null
+    //    },
 
-
-
-codeuniteadministrative2(){
+    codeuniteadministrative2() {
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-    
-    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
- const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
-     if(servgest && localisageo){
-       return servgest.code + localisageo.code
-     }
 
-     return null
-   },
+      const servgest = this.services_gestionnaires.find(
+        (serviceg) => serviceg.id == this.formData.servicegest_id
+      );
+      const localisageo = this.localisations_geographiques.find(
+        (chap) => chap.id == this.formData.localisationgeo_id
+      );
+      if (servgest && localisageo) {
+        return servgest.code + localisageo.code;
+      }
 
+      return null;
+    },
 
- codeuniteadministrativeModifier2(){
+    codeuniteadministrativeModifier2() {
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-    
-    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
- const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
-     if(servgest && localisageo){
-       return servgest.code + localisageo.code
-     }
 
-     return null
-   },
+      const servgest = this.services_gestionnaires.find(
+        (serviceg) => serviceg.id == this.editUniteAdministrative.servicegest_id
+      );
+      const localisageo = this.localisations_geographiques.find(
+        (chap) => chap.id == this.editUniteAdministrative.localisationgeo_id
+      );
+      if (servgest && localisageo) {
+        return servgest.code + localisageo.code;
+      }
 
-    codeuniteadministrative(){
+      return null;
+    },
+
+    codeuniteadministrative() {
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-      const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.nature_section_id)
-     const secti = this.sections.find(sect => sect.id == this.formData.section_id)
-    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
- const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
-     if(natsect && secti && servgest && localisageo){
-       return natsect.code + secti.code + "-"+ servgest.code + "-"+ localisageo.code
-     }
+      const natsect = this.natures_sections.find(
+        (natsect) => natsect.id == this.formData.nature_section_id
+      );
+      const secti = this.sections.find(
+        (sect) => sect.id == this.formData.section_id
+      );
+      const servgest = this.services_gestionnaires.find(
+        (serviceg) => serviceg.id == this.formData.servicegest_id
+      );
+      const localisageo = this.localisations_geographiques.find(
+        (chap) => chap.id == this.formData.localisationgeo_id
+      );
+      if (natsect && secti && servgest && localisageo) {
+        return (
+          natsect.code +
+          secti.code +
+          "-" +
+          servgest.code +
+          "-" +
+          localisageo.code
+        );
+      }
 
-     return null
-   },
-   codeuniteadministrativeModifier(){
+      return null;
+    },
+    codeuniteadministrativeModifier() {
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-     const natsect = this.natures_sections.find(natsect => natsect.id == this.editUniteAdministrative.nature_section_id)
-     const secti = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
- const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
-     if(natsect && secti && servgest && localisageo){
-       return natsect.code  + secti.code + "-" + servgest.code + "-" + localisageo.code
-     }
+      const natsect = this.natures_sections.find(
+        (natsect) =>
+          natsect.id == this.editUniteAdministrative.nature_section_id
+      );
+      const secti = this.sections.find(
+        (sect) => sect.id == this.editUniteAdministrative.section_id
+      );
+      const servgest = this.services_gestionnaires.find(
+        (serviceg) => serviceg.id == this.editUniteAdministrative.servicegest_id
+      );
+      const localisageo = this.localisations_geographiques.find(
+        (chap) => chap.id == this.editUniteAdministrative.localisationgeo_id
+      );
+      if (natsect && secti && servgest && localisageo) {
+        return (
+          natsect.code +
+          secti.code +
+          "-" +
+          servgest.code +
+          "-" +
+          localisageo.code
+        );
+      }
 
-     return null
-   },
+      return null;
+    },
   },
   methods: {
     ...mapActions("uniteadministrative", [
       "getAllUniteAdministrative",
       "ajouterUniteAdministrative",
       "modifierUniteAdministrative",
-      "supprimerUniteAdministrative"
+      "supprimerUniteAdministrative",
     ]),
 
-genererEnPdf(){
-  var doc = new jsPDF('landscape')
-  // doc.autoTable({ html: this.natures_sections })
-   doc.setFontSize(8)
-  doc.text(115,10,"LISTE DES UNITES ADMINISTRATIVES")
-  doc.autoTable({ html: '#Nature_section'}),
-  
-doc.save('UniteAdministrative.pdf')
-return 0
-},
+    genererEnPdf() {
+      var doc = new jsPDF("landscape");
+      // doc.autoTable({ html: this.natures_sections })
+      doc.setFontSize(8);
+      doc.text(115, 10, "LISTE DES UNITES ADMINISTRATIVES");
+      doc.autoTable({ html: "#Nature_section" }),
+        doc.save("UniteAdministrative.pdf");
+      return 0;
+    },
 
-      partition:partition,
-      getDataPaginate(index){
-          this.active_el = index;
-          this.page=index
-      },
-      precedent(){
-          this.active_el--
-          this.page --
-      },
-      suivant(){
-          this.active_el++
-          this.page ++
-      },
+    partition: partition,
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
     afficherModalAjouterUniteAdministrative() {
       this.$("#exampleModal").modal({
         backdrop: "static",
-        keyboard: false
+        keyboard: false,
       });
     },
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
-      
       var nouvelObjet = {
         ...this.formData,
         code: this.codeuniteadministrative,
-         code_ua: this.codeuniteadministrative2
-       
+        code_ua: this.codeuniteadministrative2,
       };
       this.ajouterUniteAdministrative(nouvelObjet);
 
@@ -928,19 +1156,18 @@ return 0
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-         code_ua: ""
+        code_ua: "",
       };
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
-         var nouvelObjet = {
+      var nouvelObjet = {
         ...this.editUniteAdministrative,
         code: this.codeuniteadministrativeModifier,
-        code_ua: this.codeuniteadministrativeModifier2
-        
+        code_ua: this.codeuniteadministrativeModifier2,
       };
       this.modifierUniteAdministrative(nouvelObjet);
-this.$("#modificationModal").modal('hide');
+      this.$("#modificationModal").modal("hide");
       // this.editUniteAdministrative = {
       //   code: "",
       //   libelle: "",
@@ -952,10 +1179,12 @@ this.$("#modificationModal").modal('hide');
     afficherModalModifierUniteAdministrative(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
-        keyboard: false
+        keyboard: false,
       });
 
-      this.editUniteAdministrative = this.jointureUaChapitreSection.find(items=>items.id==id);
+      this.editUniteAdministrative = this.jointureUaChapitreSection.find(
+        (items) => items.id == id
+      );
     },
     alert() {
       console.log("ok");
@@ -964,17 +1193,15 @@ this.$("#modificationModal").modal('hide');
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
-    ExporterEnExel(){
-      this.$refs.excel.click()
-    }
-  }
+    ExporterEnExel() {
+      this.$refs.excel.click();
+    },
+  },
 };
 </script>
 <style>
-
-.tailgrand{
+.tailgrand {
   width: 88%;
   margin: 0 -42%;
 }
-
 </style>
