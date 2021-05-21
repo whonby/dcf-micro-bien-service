@@ -20,7 +20,7 @@
           <div class="collapse in" id="collapseOne">
               
         <div class="widget-box collapsible">
-       <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:30px"> <a href="#ENGAGEMENTDIRECT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" ></i></span>
+       <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px;"> <a href="#ENGAGEMENTDIRECT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" ></i></span>
             <h5 style="background-color: #fff!important;color:#000!important;font-size:15px;">ENGAGEMENT DIRECT </h5>
             </a> 
             
@@ -58,43 +58,44 @@
 
              </div>
               <br>
-          <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:30px"> <a href="#ENGAGEMENTBONCOMMANDE" data-toggle="collapse"> <span class="icon"><i class=" icon-arrow-down" ></i></span>
+          <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px"> <a href="#ENGAGEMENTBONCOMMANDE" data-toggle="collapse"> <span class="icon"><i class=" icon-arrow-down" ></i></span>
             <h5 style="background-color: #fff!important;color:#000!important;font-size:15px;">ENGAGEMENT PAR BON DE COMMANDE</h5>
             </a> 
             
             </div>
-            <div class="collapse" id="ENGAGEMENTBONCOMMANDE" style="background-color: coral;color:#fff!important;font-size:15px; margin-left:70px">
+            <div class="collapse" id="ENGAGEMENTBONCOMMANDE" style="color:#fff!important;font-size:15px; margin-left:80px">
 <div class="widget-box collapsible">
-    <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENTBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
-            <h5 style="color:#FFF!important;font-size:15px;">DEMANDE ENGAGAMENT </h5>
+    <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px;"> <a href="#DEMANDEENGAGAMENTBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <h5 style="color:#FFF!important;font-size:15px;">DEMANDE</h5>
             </a> 
             
             </div>
             
-            <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px"><ListeDemandeEngagement :macheid="marcheid"></ListeDemandeEngagement></div>
+            <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:30px"><ListeDemandeEngagementBonCommande :macheid="marcheid"></ListeDemandeEngagementBonCommande></div>
             <br>
- <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+ <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px;"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
             <h5 style="color:#FFF!important;font-size:15px;">BON DE COMMANDE </h5>
             </a> 
             
             </div>
             
             
-             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
+             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:30px"><ListeBonCommande :macheid="marcheid"></ListeBonCommande></div>
              <!-- DEBUT MANDAT -->
              <br>
  <!-- DEBUT LIQUIDATION -->
-            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px;"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
             <h5 style="color:#FFF!important;font-size:15px;">LIQUIDATION </h5>
             </a> 
             
             </div>
             
             
-             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
+            
+             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:30px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
              <!-- DEBUT MANDAT -->
              <br>
-            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#MANDATBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px;"> <a href="#MANDATBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
             <h5 style="color:#FFF!important;font-size:15px;">MANDAT </h5>
             </a> 
             
@@ -121,9 +122,11 @@
 </template>
   
 <script>
-import ListeDemandeEngagement from "./ListeDemandeEngagement"
-import ListeDesLiquidation from "./ListeDesLiquidation"
-import ListeMandat from "./ListeMandat"
+import ListeDemandeEngagement from "./DossierEgagementDirect/ListeDemandeEngagement"
+import ListeDesLiquidation from "./DossierEgagementDirect/ListeDesLiquidation"
+import ListeMandat from "./DossierEgagementDirect/ListeMandat"
+import ListeDemandeEngagementBonCommande from "./DossierEgagementBonCommande/ListeDemandeEngagementBonCommande"
+import ListeBonCommande from "./DossierEgagementBonCommande/ListeBonCommande"
 // import MandatDifferer from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatDifferer.vue"
 // import MandatRejetter from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatRejetter.vue"
 // import MandatVise from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatVise.vue"
@@ -136,6 +139,8 @@ export default {
   ListeDemandeEngagement,
   ListeMandat,
   ListeDesLiquidation,
+  ListeDemandeEngagementBonCommande,
+  ListeBonCommande
     // MandatVise,
     // MandatRejetter,
     // MandatDifferer,

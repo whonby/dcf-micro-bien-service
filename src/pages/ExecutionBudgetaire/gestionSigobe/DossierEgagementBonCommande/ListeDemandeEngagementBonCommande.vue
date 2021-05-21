@@ -147,7 +147,7 @@ recupererLibelleTypeDepense() {
      listeDemandeParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDemandeEngagement.filter(qtreel => qtreel.ua_id == id);
+           return this.gettersDemandeEngagement.filter(qtreel => qtreel.ua_id == id && qtreel.type_procedure_id==7);
 
         }
       };
