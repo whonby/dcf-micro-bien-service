@@ -148,14 +148,14 @@
 
        <div class="widget-content nopadding" style="margin: 25px">
         <table class="table table-bordered">
-          <thead style="background-color: #87ceeb">
+          <thead style="background-color: #FC762F">
             <tr>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 LIGNE BUDGETAIRE
@@ -165,7 +165,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 TYPE ORDRE PAIEMENT
@@ -176,7 +176,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 N°ORDRE PAIEMENT
@@ -186,7 +186,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 BAILLEUR
@@ -196,7 +196,7 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 OBJET
@@ -207,7 +207,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 MONTANT (FCFA)
@@ -218,7 +218,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #87ceeb;
+                  background-color: #FC762F;
                 "
               >
                 VISA CF

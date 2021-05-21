@@ -151,14 +151,23 @@
 
 
             <table class="table table-bordered">
+<<<<<<< HEAD
+              <thead style="background-color: #FC762F !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+=======
               <thead style="background-color: 	#FFA500 !important;" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 <tr>
                   <th
                     style="
                       font-size: 14px;
+                      color: #000;
                       font-weight: bold;
                       text-align: center;
+<<<<<<< HEAD
+                      background-color: #FC762F !important;
+=======
                       background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                     "
                   >
                     LIGNE BUDGETAIRE
@@ -168,7 +177,12 @@
                       font-size: 14px;
                       font-weight: bold;
                       text-align: center;
+<<<<<<< HEAD
+                      color: #000;
+                      background-color: #FC762F !important;
+=======
                       background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                     "
                   >
                     Budget Actuel
@@ -179,7 +193,11 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
+<<<<<<< HEAD
+                      background-color: #FC762F !important;
+=======
                       background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                     "
                   >
                     Montant Exécuté
@@ -188,8 +206,13 @@
                     style="
                       font-size: 14px;
                       font-weight: bold;
+                      color: #000;
                       text-align: center;
+<<<<<<< HEAD
+                      background-color: #FC762F !important;
+=======
                       background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                     "
                   >
                     Montant Provisoire
@@ -198,8 +221,13 @@
                     style="
                       font-size: 14px;
                       font-weight: bold;
+                      color: #000;
                       text-align: center;
+<<<<<<< HEAD
+                      background-color: #FC762F !important;
+=======
                       background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                     "
                   >
                     Taux En Exécution (%)
@@ -210,7 +238,11 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
+<<<<<<< HEAD
+                      background-color: #FC762F !important;
+=======
                       background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                     "
                   >
                     Disponible

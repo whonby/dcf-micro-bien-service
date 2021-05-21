@@ -65,11 +65,6 @@ export const DELETE_EXECUTION_MARCHE = (state, id)=> {
 }
 
 
-
-
-
-
-
 // mutation pour le motif de decision
 
 
