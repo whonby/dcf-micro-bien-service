@@ -28,10 +28,10 @@ modifierTypeTexteLocal
             </td>
               <td>
                     <div class="control-group">
-                            <label class="control-label">Famille de Motif </label>
+                            <label class="control-label">Famille de Motif</label>
                             <div class="controls">
                                <select v-model="editMandat.famille_motif_cf" class="span4" >
-                                 <option value=""></option>
+                                 <option value="0"></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
@@ -44,7 +44,7 @@ modifierTypeTexteLocal
                             <label class="control-label">Motif</label>
                             <div class="controls">
                                <select v-model="editMandat.motif_cf" class="span4" >
-                                 <option value=""></option>
+                                 <option value="0"></option>
                                 <option v-for="varText in AffichierElementEnfant(editMandat.famille_motif_cf)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
@@ -210,7 +210,10 @@ export default {
         LIBELLE: "libelle"
       },
       search: "",
-      editMandat:{}
+      editMandat:{
+        motif_cf : 0,
+        famille_motif_cf : 0
+      }
     };
   },
 props:["macheid"],
@@ -345,10 +348,22 @@ RecupererNiveau3StructureDecision() {
         }
       };
     },
+     AfficheTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_procedure_id;
+      }
+      return 0
+        }
+      };
+    },
      listeDemandeParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierMandat.filter(qtreel => qtreel.ua_id == id);
+           return this.gettersDossierMandat.filter(qtreel => qtreel.ua_id == id && this.AfficheTypeProcedure(qtreel.demande_engagement_id)==1);
 
         }
       };

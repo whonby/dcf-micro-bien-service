@@ -114,12 +114,23 @@ props:["macheid"],
      listeLiquidationParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => this.idUa(qtreel.dmd_engagement_id) == id);
+           return this.gettersDossierLiquidation.filter(qtreel => this.idUa(qtreel.dmd_engagement_id) == id &&  this.AfficheTypeProcedure(qtreel.demande_engagement_id)==1);
 
         }
       };
     },
- 
+      AfficheTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_procedure_id;
+      }
+      return 0
+        }
+      };
+    },
     idUa() {
       return id => {
         if (id != null && id != "") {
