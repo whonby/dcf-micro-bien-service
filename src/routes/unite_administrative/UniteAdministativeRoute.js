@@ -1,6 +1,7 @@
 import uniteadministrative from "../../pages/unites_administratives/unite_administrative.vue";
-
+ import detailUA_Acteur from "../../pages/unites_administratives/detailUA_Acteur.vue"
 //import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
+import affichageUaDesaGreger from "../../pages/unites_administratives/affichageUaDesaGreger.vue";
 import tableaudebord from "../../pages/unites_administratives/tableau_de_bord.vue";
 import typetext from "../../pages/unites_administratives/type_texte.vue";
 import archivagedocument from "../../pages/unites_administratives/archivage_document.vue";
@@ -80,6 +81,16 @@ const UniteAdministativeRoutes = [
     path: "/ObservationServiceRealiteFait/:id",
     name: "ObservationServiceRealiteFait",
     component: ObservationServiceRealiteFait
+},
+{
+  path:"/detail-ua-acteur/:id",
+  name:"detailUA_Acteur",
+  component:detailUA_Acteur
+},
+{
+  path:"/ua-desagreger",
+  name:"affichageUaDesaGreger",
+  component:affichageUaDesaGreger
 },
   {
     path: "/ModificationDecompteAnterieur/:id",

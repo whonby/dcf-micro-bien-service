@@ -149,29 +149,29 @@
             </router-link>
           </li> -->
 
- <li v-if="admin() || dcf()">
-                    <router-link :to="{name: 'ImportBudget'}" tag="a">
-                        IMPORTATION DU BUDGET
+ <!-- <li v-if="admin() || dcf()">
+                    <router-link :to="{name: 'uniteadministrative'}" tag="a">
+                        UNITE ADMISTRATIVE
                     </router-link>
                 </li>
                 <li v-if="admin() || dcf()">
-                    <router-link :to="{name: 'ModificationBudget'}" tag="a">
-                        MODIFICATION BUDGET
+                    <router-link :to="{name: 'affichageUaDesaGreger'}" tag="a">
+                        desagreger les UA
                     </router-link>
-                </li>
-           <li>
+                </li> -->
+           <!-- <li>
             <router-link :to="{name: 'BudgetParUa'}" tag="a">
               DETAIL DU BUDGET PAR UA
             </router-link>
           </li>
-          <li class="divider"></li>
+          <li class="divider"></li> -->
            <!-- <li>
             <router-link :to="{name: 'DetailbudgetGeneralsNew'}" tag="a">
               DETAIL DE BUDGET PAR UA new
             </router-link>
           </li> -->
            
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
            <li v-if="admin() || dcf()">
             <router-link :to="{name: 'Synthesebudg'}" tag="a">
               SYNTHESE DU BUDGET
@@ -182,19 +182,7 @@
             <router-link :to="{name: 'listeDesUaBudget'}" tag="a">
               REPORTING DU BUDGET PAR UA
             </router-link>
-          </li>
- <li class="divider"></li>
-           <li>
-            <router-link :to="{name: 'affichageUaDesaGreger'}" tag="a">
-              DESAGREGATION BUDGETAIRE DES UA
-            </router-link>
-          </li>
-
-          <li >
-            <router-link :to="{name: 'listeDesUaParProgramme'}" tag="a">
-              UA PAR PROGRAMME
-            </router-link>
-          </li>
+          </li> -->
 
     </ul>
   </div>

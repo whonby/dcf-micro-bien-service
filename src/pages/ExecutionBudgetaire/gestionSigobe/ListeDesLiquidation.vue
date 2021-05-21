@@ -1,13 +1,15 @@
 
 <template>
   <div>
+  
+    
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                  <th style="font-size:14px;font-weight:bold">Année budgétaire</th>
                  <th style="font-size:14px;font-weight:bold">N°demande</th>
                  <th style="font-size:14px;font-weight:bold">N°Liquidation</th>
-                   <!-- <th style="font-size:14px;font-weight:bold">Type de procedure</th> -->
-                   <th style="font-size:14px;font-weight:bold">Procédures dérogatoires </th>
+                   <th style="font-size:14px;font-weight:bold">Type Engagement </th>
                     <th style="font-size:14px;font-weight:bold">Objet de la depense</th>
                     <th style="font-size:14px;font-weight:bold">Montant Liquidé</th>
                      <th style="font-size:14px;font-weight:bold">Decision CF</th>
@@ -16,12 +18,13 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in listeLiquidationParUa(macheid)" :key="type.id">
-                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.dmd_engagement_id || 'Non renseigné'}}</td>
+                                      <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheExeciceBudgetaire(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheNumeroDemande(type.dmd_engagement_id) || 'Non renseigné'}}</td>
                               <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.numero_liquidation || 'Non renseigné'}}</td>
                     <!-- <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.type_procedure_id || 'Non renseigné'}}</td> -->
-                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.dmd_engagement_id || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.dmd_engagement_id || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.dmd_engagement_id || 'Non renseigné'}}</td>
+                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheTypeEngagement(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheObjet(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(AfficheMontantEngage(type.dmd_engagement_id))) || 'Non renseigné'}}</td>
                   <td >
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success" >                        
                      
@@ -126,6 +129,66 @@ props:["macheid"],
 
       if (qtereel) {
         return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheExeciceBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exercice;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheNumeroDemande() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_demande;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheTypeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheObjet() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_depense;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheMontantEngage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
       }
       return 0
         }
