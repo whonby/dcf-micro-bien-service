@@ -5,7 +5,7 @@ getSecteurActivite
             <div align="right" style="cursor: pointer">
           <button
             class="btn btn-success"
-            @click.prevent="ajouterEntreS"
+            
             style="font-weight: bolder; color: #fff"
           >
             <i class="icon icon-plus"> AJOUTER </i>
@@ -78,20 +78,6 @@ getSecteurActivite
     </div>
         <div class="container-fluid">
             <hr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="widget-box">
                 <div class="widget-title">
                     <ul class="nav nav-tabs">
@@ -202,7 +188,7 @@ getSecteurActivite
                                     class="btn btn-default " title="Detail entreprise ">
                                    <span class=""><i class="icon-folder-open"> Détail EN/SE</i></span>
                                          </router-link> 
-                                                        <button href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="ajouterEntreS"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></button>
+                                                        <button href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="addSanctionner(item.id)"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></button>
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"> Supprimer</i></span></button>
 
@@ -297,7 +283,8 @@ getSecteurActivite
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
                                             <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
-                                           <td v-if="item.active == 1" style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS</td>
+                                           <td v-if="item.active ==1" style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS</td>
+                                           <td v-else style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ES</td>
                                                  
                                             <td>
                                                 <div class="btn-group">
@@ -381,10 +368,8 @@ getSecteurActivite
                                                 <th>Email </th>
                                                 <th>Téléphone</th>
                                                <th>Statut</th>
-                                               <th>Date début</th>
-                                               <th>Date fin</th>
-                                               <th>Motif</th>
-                                                <th colspan="3">Action</th>
+                                              
+                                               <th colspan="3">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -399,14 +384,12 @@ getSecteurActivite
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
                                                 <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
-                                                <td v-if="item.active == 0" style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>
-                                                <td>Date debut</td>
-                                                <td>Date fin</td>
-                                                <td>Motif</td>
+                                                <td v-if="item.active === 0" style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>
+                                                
         <td>
-  <a href="#exampleModal" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-eye-open" title="Voir la Cause"> Voir la cause</i></a>
+  <a href="#myModal3" data-toggle="modal" class="btn btn-info" @click.prevent="annulEntre(item.id)"><i class="icon-eye-open" title="Voir la Cause">Voir La cause</i></a>
 </td>
-<td> <button @click.prevent="modifierModalActeEffetFinancierLocal2(item.id)"  class="btn btn-info"  title="Retirer la sanction">Rtirer la sanction
+<td> <button @click.prevent="modifierModalActeEffetFinancierLocal2(item.id)"  class="btn btn-info"  title="Retirer la sanction">Rétirer la sanction
                 <span class=""><i class="icon-unlock" ></i></span></button> </td>
                                                 <td>
                                                     <div class="btn-group">
@@ -449,13 +432,13 @@ getSecteurActivite
              bg-color="green"
         ></fab>
 
-        <!----- ajouter modal   ---->
+        <!----- ajouter modal de sanction d'une entreprise   ---->
         <div id="myModal2" class="modal hide" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Formulaire de sanction pour {{entrepriseSetect.raison_sociale}}</h3>
             </div>
-            <form @submit.prevent="addSanctionner" enctype="multipart/form-data" class="form-horizontal">
+            <form   enctype="multipart/form-data" class="form-horizontal">
             <div class="modal-body">
 
                     <div class="control-group">
@@ -477,8 +460,6 @@ getSecteurActivite
                         <textarea   placeholder="Saisir le motif" v-model="sanction.motif" class="span2.5"></textarea>
                         </div>
                     </div>
-
-
                     <div class="control-group">
                         <label class="control-label">Degré sanction</label>
                         <div class="controls">
@@ -487,12 +468,54 @@ getSecteurActivite
                         </div>
                     </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" @click.prevent="addSanctionner(entrepriseSetect.id)"  class="btn btn-success" >Valider la sanction</button>
+                <button type="button"  data-dismiss="modal"  class="btn btn-inverse" >Cancel</button>
+                <!-- <a data-dismiss="modal" class="btn btn-inverse" >Cancel</a> -->
+                 </div> 
+            </form>
+        </div>
+        <!----- ajouter modal d'annulation sanction d'une entreprise   ---->
+        <div id="myModal3" class="modal hide" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3 style="color:#000; font-size:25px;" class="text-center"> Motif de la sanction</h3>
+            </div>
+            <form   enctype="multipart/form-data" class="form-horizontal">
+            <div class="modal-body">
 
+                     
+                    <div class="control-group">
+                        <label style="color:#000; font-size:15px;" class="control-label">Le début de la sanction :</label>
+                        <div class="controls">
+                            <input :value="entrepriseSanct.debut_sanction" type="date" readonly>
+                        </div>
+                    </div>
+                     <div class="control-group">
+                        <label style="color:#000; font-size:15px;" class="control-label">La fin de la sanction :</label>
+                        <div class="controls">
+                            <input type="date" :value="entrepriseSanct.fin_sanction" readonly>
+                        </div>
+                    </div>
+                      <div class="control-group">
+                        <label style="color:#000; font-size:15px;" class="control-label">Le Motif de sanction:</label>
+                        <div class="controls">
+                        <textarea   :value="entrepriseSanct.motif"  class="span2.5" readonly></textarea>
+                        </div>
+                    </div>
+                    <!-- <div class="control-group">
+                        <label class="control-label">Degré sanction</label>
+                        <div class="controls">
+                            <input  type="file" @change="OnchangeFichier" >
+                            <code v-if="info_pdf">Le fichier doit etre un pdf</code>
+                        </div>
+                    </div> -->
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success" >Valider la sanction</button>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a> </div>
+                <!-- <button type="button" @click.prevent="addSanctionner"  class="btn btn-success" >Valider la sanction</button> -->
+                <a data-dismiss="modal" class="btn btn-inverse" >Cancel</a> </div>
             </form>
         </div>
 
@@ -556,7 +579,9 @@ historiqueEntreprise
                     motif:""
                 },
                 entrepriseSetect:'',
-                entrepre:""
+                entrepre:"",
+                entrepriseSanct:""
+              
                 
             };
         },
@@ -566,7 +591,10 @@ historiqueEntreprise
             //  console.log(this.fonctions)
             // console.log(this.getFonction)
     console.log("hello")
-    console.log(this.entreprises)
+    console.log(this.filtrer)
+    console.log(this.silva1.id)
+    console.log("bisssssssss")
+    console.log(this.sanctions)
     this.getEntreprise()
         },
         computed: {
@@ -612,20 +640,24 @@ historiqueEntreprise
             sanctionner() {
                 const searchTerm = this.search2.toLowerCase();
                 let ObjetEntreprise=this.entreprises.filter((idm)=>idm.active===0)
+                // let EntrepriseSanct = this.sanctions.find(rech => rech.entreprise_id)
                 return ObjetEntreprise.filter((item) => {
                         return item.raison_sociale.toLowerCase().includes(searchTerm)
                             || item.numero_rc.toLowerCase().includes(searchTerm)
-                            || item.numero_cc.toLowerCase().includes(searchTerm)
-                           
+                            || item.numero_cc.toLowerCase().includes(searchTerm)         
                             || item.telephone.toLowerCase().includes(searchTerm)
                             || item.email.toLowerCase().includes(searchTerm)
                             || item.banque.toLowerCase().includes(searchTerm)
-
-
                     }
                 )
-
             },
+            filtrer(){
+                
+                let silva1 = this.sanctions.find(filt=>filt.entreprise_id)
+               return   this.entreprises.filter((tem) => tem.id === silva1.id)
+              
+            },
+    
 nbreEntrepriseSanctionner(){
 return this.sanctionner.length;
 },
@@ -676,7 +708,7 @@ getDateFinSanction() {
 
 
 
-             getSecteurActivite() {
+    getSecteurActivite() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.secteur_activites.find(qtreel => qtreel.id == id);
@@ -712,18 +744,35 @@ getDateFinSanction() {
         }
       };
     },
+    
         },
         methods: {
             // methode pour notre action
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
            
            
-ajouterEntreS() {
-      this.$("#myModal2").modal({
+AjouterEntres(id) {
+     if(id !='' && id != null)
+     {
+        this.$("#myModal2").modal({
         backdrop: "static",
         keyboard: false,
       });
+     
+     }
     },
+annulEntre(id) {
+    if(id !='' && id != null){
+    this.entrepriseSanct = this.sanctions.find(req => req.entreprise_id == id)
+        this.$("#myModal3").modal({
+          backdrop: "static",
+          keyboard: false,
+        });
+        console.log('yessssss')
+        console.log(this.entrepriseSanct.id)
+    }
+    },
+    
            
                 
            // pagination
@@ -771,9 +820,6 @@ getColumns() {
        
        
 
-
-
-       
            
            afficherModalAjouterTitre(){
                 this.$router.push({ name: 'AjouterEntreprise' })
@@ -795,7 +841,7 @@ getColumns() {
                 //this.getFonctions()
             },
             showEntreprise(id){
-                this.entrepriseSetect=this.entreprises.find(entre=>entre.id===id);
+                this.entrepriseSetect=this.entreprises.find(entre=>entre.id==id);
             },
             OnchangeFichier(e) {
                 const files = e.target.files;
@@ -819,21 +865,33 @@ getColumns() {
                 reader.readAsDataURL(file);
             },
 
-            addSanctionner(){
-                const formData = new FormData();
-                formData.append('file', this.selectedFile, this.selectedFile.name);
-                formData.append('entreprise_id', this.entrepriseSetect.id);
-                formData.append('debut_sanction', this.sanction.debut_sanction);
-                formData.append('fin_sanction', this.sanction.fin_sanction);
-                formData.append('motif', this.sanction.motif);
+            addSanctionner(id){
+                if(id !='' && id != null)
+                    {
+                        this.$("#myModal2").modal({
+                        backdrop: "static",
+                        keyboard: false,
+                        });
+                    this.entrepriseSetect=this.entreprises.find(tls =>tls.id==id);
+                    console.log(this.entrepriseSetect.id);
+                    const formData = new FormData();
+                    formData.append('file', this.selectedFile, this.selectedFile.name);
+                    formData.append('entreprise_id',  this.entrepriseSetect.id);
+                    formData.append('debut_sanction', this.sanction.debut_sanction);
+                    formData.append('fin_sanction', this.sanction.fin_sanction);
+                    formData.append('motif', this.sanction.motif);
 
-                let config = {
+                     let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
+                var obj1={
+                    id:this.entrepriseSetect.id,
+                    active:0
+                }
                 this.ajouterSanction(formData,config)
-                
+                 this.modifierEntreprise(obj1)
                 this.sanction= {
                     entreprise_id: "",
                         debut_sanction: "",
@@ -841,18 +899,27 @@ getColumns() {
                         motif:""
                 }
                 this.getEntreprise()
+                    
+                }
+                return 0
+               
+                
+
+               
+                
 
             },
             modifierModalActeEffetFinancierLocal2(id){
    
     if ( confirm( "voulez-vous retirer la sanction ?") ) {
 // this.entrepriseSetect=this.entreprises.find(entre=>entre.id===id);
-this.entrepriseSetect=this.sanctionner.find(entre=>entre.id===id);
+this.entrepriseSetect=this.sanctionner.find(entre=>entre.id==id);
       let decisionEntreprise = this.entreprises.find(marche=>marche.id==this.entrepriseSetect.id)
          decisionEntreprise.active = 1
 
     this.modifierEntreprise(decisionEntreprise)
      this.getEntreprise()
+     
     }
 else{
  // Code à éxécuter si l'utilisateur clique sur "Annuler" 
