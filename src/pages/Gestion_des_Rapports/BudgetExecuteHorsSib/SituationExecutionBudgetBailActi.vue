@@ -194,7 +194,7 @@
                 background-color: 	#FFA500 !important;
               "
             >
-              Taux(%)
+              Taux d'Exécution (%)
             </th>
             <th
               style="

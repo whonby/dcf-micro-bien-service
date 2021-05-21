@@ -143,14 +143,19 @@
 
          <div class="widget-content nopadding" style="margin: 25px">
         <table class="table table-bordered">
-          <thead style="background-color: #87ceeb">
+          <thead style="background-color: #FC762F !important">
             <tr>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
+<<<<<<< HEAD
+                  background-color: #FC762F !important;
+=======
                   background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
               <b>Activités</b>
@@ -161,7 +166,12 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
+<<<<<<< HEAD
+                  color: #000;
+                  background-color: #FC762F !important;
+=======
                   background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
               <b>Budget Actuel</b>
@@ -173,7 +183,11 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
+<<<<<<< HEAD
+                  background-color: #FC762F !important;
+=======
                   background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 <b>Montant Exécuté</b>
@@ -185,7 +199,11 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
+<<<<<<< HEAD
+                  background-color: #FC762F !important;
+=======
                   background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Montant Provisoire
@@ -195,17 +213,27 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
+<<<<<<< HEAD
+                  color: #000;
+                  background-color: #FC762F !important;
+=======
                   background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
-                <b>Taux En Exécution (%)</b>
+                <b>Taux d'Exécution (%)</b>
               </th>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
+<<<<<<< HEAD
+                  background-color: #FC762F !important;
+=======
                   background-color: 	#FFA500 !important;
+>>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                <b> Disponible</b>

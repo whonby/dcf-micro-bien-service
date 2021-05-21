@@ -156,6 +156,7 @@
                   <th
                     style="
                       font-size: 14px;
+                      color: #000;
                       font-weight: bold;
                       text-align: center;
                       background-color: 	#FFA500 !important;
@@ -188,6 +189,7 @@
                     style="
                       font-size: 14px;
                       font-weight: bold;
+                      color: #000;
                       text-align: center;
                       background-color: 	#FFA500 !important;
                     "
@@ -198,6 +200,7 @@
                     style="
                       font-size: 14px;
                       font-weight: bold;
+                      color: #000;
                       text-align: center;
                       background-color: 	#FFA500 !important;
                     "
