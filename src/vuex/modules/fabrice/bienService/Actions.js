@@ -6289,3 +6289,19 @@ export function supprimerBailleurDmdEngagements({ commit }, id) {
       axios.delete("/BailleurDmdEngagement/" + id).then(() => dialog.close());
     });
 }
+
+
+export function modifierDecisionMandat({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifdecision/" + nouveau.id, nouveau))
+    .then(response => {
+      if(response.status===201){
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Modification Effectué avec Succès!',
+          type: "success"
+        })
+      }
+      commit("MODIFIER_DECISION", response.data);
+    });
+}

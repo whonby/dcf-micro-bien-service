@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    
     <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
     
@@ -12,9 +13,9 @@
             </a> </div>
 
         <div class="widget-box collapsible">
-          <div class="widget-title" style="background-color: coral;color:#fff !important;font-size:15px"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-sitemap" ></i></span>
+          <!-- <div class="widget-title" style="background-color: coral;color:#fff !important;font-size:15px"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-sitemap" ></i></span>
             <h5 style="color:#fff !important;font-size:20px">PROCEDURES DE DROIT COMMUN </h5>
-            </a> </div>
+            </a> </div> -->
             <br>
           <div class="collapse in" id="collapseOne">
               
@@ -26,7 +27,7 @@
             </div>
              <div class="collapse" id="ENGAGEMENTDIRECT">
 <div class="widget-box collapsible">
-    <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+    <div class="widget-title" style="background-color: #ff7f00;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
             <h5 style="color:#FFF!important;font-size:15px;">DEMANDE</h5>
             </a> 
             
@@ -35,7 +36,7 @@
             <div class="collapse" id="DEMANDEENGAGAMENT" style="font-size:15px; margin-left:110px"><ListeDemandeEngagement :macheid="marcheid"></ListeDemandeEngagement></div>
             <br>
             <!-- DEBUT LIQUIDATION -->
-            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <div class="widget-title" style="background-color: #ff7f00;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
             <h5 style="color:#FFF!important;font-size:15px;">LIQUIDATION </h5>
             </a> 
             
@@ -45,13 +46,13 @@
              <div class="collapse" id="LIQUIDATION" style="font-size:15px; margin-left:110px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
              <!-- DEBUT MANDAT -->
              <br>
-            <div class="widget-title" style="background-color: #228B22;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#MANDAT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
+            <div class="widget-title" style="background-color: #ff7f00;color:#fff!important;font-size:15px; margin-left:80px"> <a href="#MANDAT1" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#FFF!important;"></i></span>
             <h5 style="color:#FFF!important;font-size:15px;">MANDAT </h5>
             </a> 
             
             </div>
             
-              <div class="collapse" id="MANDAT" style="font-size:15px; margin-left:110px"><ListeMandat :macheid="marcheid"></ListeMandat></div>
+              <div class="collapse" id="MANDAT1" style="font-size:15px; margin-left:110px"><ListeMandat :macheid="marcheid"></ListeMandat></div>
     <br>
     </div>
 

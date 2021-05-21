@@ -1,4 +1,4 @@
-
+FonctionDon
 <template>
   <div class="container-fluid">
     
@@ -3281,6 +3281,7 @@ afficheProcedureDepense() {
         }
       };
     },
+    
 afficheModaliteExecution() {
       return id => {
         if (id != null && id != "") {
@@ -3290,7 +3291,18 @@ afficheModaliteExecution() {
         }
       };
     },
+recupereridTypeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureTypeDepense.find(qtreel => qtreel.code_depense == id);
 
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -3869,7 +3881,30 @@ return this.recupererProcedureDroitCommunDansDemandeEngagement(this.formData123.
         }
       };
     },
+ FonctionIdEntreprise(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
 
+return this.recupererIdEntreprise(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id
+      }
+      return 0
+        }
+      };
+    },
      FonctionCodeActivite(){
         if(this.formData123.typeDossier1==1){
           return ""
@@ -4878,7 +4913,8 @@ ajouterBudgetaireLocal () {
           autre_depense_id: this.idAutreDepense(
             this.formData2.reference_autre_depense
           ),
-         objet_depense:this.afficheObjetDeLaDepense
+         objet_depense:this.afficheObjetDeLaDepense,
+         type_engagement_id:this.recupereridTypeDepense(this.formData.type_engagement_id)
         };
         this.ajouterDemandeEngagement(nouvelObjet1);
       } else if (this.formData123.typeDossier1 == "Lquidation") {
@@ -4893,13 +4929,13 @@ ajouterBudgetaireLocal () {
       } else if (this.formData123.typeDossier1 == "Mandat") {
        var nouvelObjet2 = {
         
-        demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
+        demande_engagement_id: this.formData123.dmd_engagement_id,
         numero_mandat:this.formData1122.numero,
         date_mandat:this.formData1122.date,
         total_general:this.FonctionMontantTotal,
          exercice_budget:this.anneeAmort,
         ua_id:this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),
-        entreprise_id:this.entrepriseid(this.formData5.numeroDemande),
+        	entreprise_id:this.FonctionIdEntreprise,
         grd_nature_id:this.recupererGrandeNatureDansDemandeEngagement(this.formData123.dmd_engagement_id)
         
       };

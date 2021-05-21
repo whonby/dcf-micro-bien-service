@@ -6,24 +6,26 @@
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                  <th style="font-size:14px;font-weight:bold">Année budgétaire</th>
-                 <th style="font-size:14px;font-weight:bold">N°demande</th>
-                 <th style="font-size:14px;font-weight:bold">N°Liquidation</th>
-                   <th style="font-size:14px;font-weight:bold">Type Engagement </th>
-                    <th style="font-size:14px;font-weight:bold">Objet de la depense</th>
-                    <th style="font-size:14px;font-weight:bold">Montant Liquidé</th>
-                     <th style="font-size:14px;font-weight:bold">Decision CF</th>
-                     <th style="font-size:14px;font-weight:bold">Action</th>
+                  <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Année budgétaire</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°demande</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Liquidation</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Date Liquidation</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Type Engagement </th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Objet de la depense</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Montant Liquidé</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Decision CF</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in listeLiquidationParUa(macheid)" :key="type.id">
                                       <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheExeciceBudgetaire(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                                       
                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheNumeroDemande(type.dmd_engagement_id) || 'Non renseigné'}}</td>
                               <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.numero_liquidation || 'Non renseigné'}}</td>
-                    <!-- <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.type_procedure_id || 'Non renseigné'}}</td> -->
-                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheTypeEngagement(type.dmd_engagement_id) || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheObjet(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formaterDate(type.date_liquidation) || 'Non renseigné'}}</td>
+                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{recupererLibelleTypeDepense(AfficheTypeEngagement(type.dmd_engagement_id)) || 'Non renseigné'}}</td>
+                   <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheLibelleEngagement(type.dmd_engagement_id) || 'Non renseigné'}}</td>
                     <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(AfficheMontantEngage(type.dmd_engagement_id))) || 'Non renseigné'}}</td>
                   <td >
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success" >                        
@@ -58,6 +60,13 @@
                     
                       </button>
                     </td>
+                    <td>
+                      <router-link :to="{ name: 'VoirModaliteExecution', params: { id: type }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Detail</i></span>
+                   </router-link> 
+                    </td>
+                   
                    <td>
                       <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
                         <span>
@@ -74,6 +83,7 @@
 <script>
 import { mapGetters,mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
+import moment from "moment";
 export default {
   name:'',
   data() {
@@ -95,7 +105,7 @@ props:["macheid"],
   computed: {
     ...mapGetters("uniteadministrative", ["typeTextes"]),
 
- ...mapGetters("bienService", ["gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+ ...mapGetters("bienService", ["gettersProcedureTypeDepense","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -158,6 +168,20 @@ props:["macheid"],
         }
       };
     },
+    
+recupererLibelleTypeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureTypeDepense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle_depense
+      }
+      return 0
+        }
+      };
+    },
+
     AfficheTypeEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -165,6 +189,18 @@ props:["macheid"],
 
       if (qtereel) {
         return qtereel.type_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheLibelleEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_depense;
       }
       return 0
         }
@@ -209,7 +245,9 @@ props:["macheid"],
       this.$refs.excel.click()
     },
     formatageSomme:formatageSomme,
-   
+     formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
     afficherModalModifierTypeTexte(id) {
 
       this.$router.push({
