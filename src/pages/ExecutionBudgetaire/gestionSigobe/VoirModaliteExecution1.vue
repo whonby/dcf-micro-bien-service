@@ -91,6 +91,7 @@
             </div>
             
             
+            
              <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:30px"><ListeDesLiquidation :macheid="marcheid"></ListeDesLiquidation></div>
              <!-- DEBUT MANDAT -->
              <br>
