@@ -162,6 +162,7 @@ import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestio
 import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
 import ListeProcedureTypeDepense from "../../pages/ExecutionBudgetaire/gestionSigobe/ListeProcedureTypeDepense.vue"
 import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution1.vue"
+import Detailexecution from "../../pages/ExecutionBudgetaire/gestionSigobe/Detailexecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
@@ -187,6 +188,12 @@ const BienServiceRoutes = [
         path: "/VoirModaliteExecution/:id",
         name: "VoirModaliteExecution",
         component: VoirModaliteExecution
+    },
+
+    {
+        path: "/Detailexecution/:id",
+        name: "Detailexecution",
+        component: Detailexecution
     },
     {
         path: "/listeDesUaSigobe",
