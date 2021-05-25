@@ -114,7 +114,7 @@ props:["macheid"],
      listeLiquidationParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => this.idUa(qtreel.dmd_engagement_id) == id &&  this.AfficheTypeProcedure(qtreel.demande_engagement_id)==1);
+           return this.gettersDossierLiquidation.filter(qtreel => this.idUa(qtreel.dmd_engagement_id) == id &&  this.AfficheTypeProcedure(qtreel.dmd_engagement_id) == 1 && qtreel.decision_cf==2);
 
         }
       };

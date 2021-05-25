@@ -1,10 +1,10 @@
-modifierTypeTexteLocal
+
 <template>
   <div>
-     <div id="demandeVise" class="modal hide tailgrand">
+   <div id="demandeVise1" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>Decision CF{{editBonCommande.dmd_engagement_id}}</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -13,7 +13,7 @@ modifierTypeTexteLocal
               <div class="control-group">
                             <label class="control-label">Décision CF</label>
                             <div class="controls">
-                              <select v-model="editMandat.decision_cf" class="span4">
+                              <select v-model="editBonCommande.decision_cf" class="span4">
                                 <option value=""></option>
                               <option value="8">Visé</option>
                               <option value="9">Visé avec Observation</option>
@@ -30,7 +30,7 @@ modifierTypeTexteLocal
                     <div class="control-group">
                             <label class="control-label">Famille de Motif</label>
                             <div class="controls">
-                               <select v-model="editMandat.famille_motif_cf" class="span4" >
+                               <select v-model="editBonCommande.famille_motif_cf" class="span4" >
                                  <option value="0"></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
@@ -43,9 +43,9 @@ modifierTypeTexteLocal
                     <div class="control-group">
                             <label class="control-label">Motif</label>
                             <div class="controls">
-                               <select v-model="editMandat.motif_cf" class="span4" >
+                               <select v-model="editBonCommande.motif_cf" class="span4" >
                                  <option value="0"></option>
-                                <option v-for="varText in AffichierElementEnfant(editMandat.famille_motif_cf)" :key="varText.id"
+                                <option v-for="varText in AffichierElementEnfant(editBonCommande.famille_motif_cf)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
@@ -58,7 +58,7 @@ modifierTypeTexteLocal
                         <div class="control-group">
                             <label class="control-label">Autres Motif</label>
                             <div class="controls">
-                              <textarea  class="span8" row = "6" v-model="editMandat.autre_motif_cf" :readonly="griserAutreMotif" >
+                              <textarea  class="span8" row = "6" v-model="editBonCommande.autre_motif_cf" :readonly="griserAutreMotif" >
                               </textarea>
                             </div>
                           </div>
@@ -68,7 +68,7 @@ modifierTypeTexteLocal
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
                              
-                               <input type="date" class="span4"  v-model="editMandat.date_motif" />
+                               <input type="date" class="span4"  v-model="editBonCommande.date_motif" />
                               
                             </div>
                           </div>
@@ -79,7 +79,7 @@ modifierTypeTexteLocal
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span8" row = "6" v-model="editMandat.observation" :readonly="griserObservation">
+                              <textarea  class="span8" row = "6" v-model="editBonCommande.observation" :readonly="griserObservation">
                               </textarea>
                             </div>
                           </div>
@@ -111,59 +111,57 @@ modifierTypeTexteLocal
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
+    
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Execice</th>
+                  <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Execice</th>
                  <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°demande</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Liquidation</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Mandat</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Date Mandat</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Type d'engagement</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Bon Commande</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Date Bon Commande</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Type Engagement </th>
                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Objet de la depense</th>
-                    
-                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Montant Engagé</th>
-                                       <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Decision CF</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Montant Liquidé</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Decision CF</th>
                      <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listeDemandeParUa(macheid)" :key="type.id">
-                    <td style="color:#000 !important;font-weight:bold !important">{{AfficheExeciceBudgetaire(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important">{{AfficheNumeroDemande(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important">{{AfficheNumeroLiquidation(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important">{{type.numero_mandat || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important">{{formaterDate(type.date_mandat) || 'Non renseigné'}}</td>
-                     <td style="color:#000 !important;font-weight:bold !important">{{recupererLibelleTypeDepense(AfficheTypeEngagement(type.demande_engagement_id)) || 'Non renseigné'}}</td>
-                    <td style="color:#000 !important;font-weight:bold !important">{{AfficheLibelleEngagement(type.demande_engagement_id) || 'Non renseigné'}}</td>
-<td style="color:#000 !important;font-weight:bold !important;text-align:center">{{formatageSomme(parseFloat(AfficheMontantEngage(type.demande_engagement_id))) || 'Non renseigné'}}</td>
-                 
-                    <td >
-                        <button v-if="type.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(type.id)" >                        
+                  <tr class="odd gradeX" v-for="(type) in listeBonCommandeParUa(macheid)" :key="type.id">
+                                      <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheExeciceBudgetaire(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                                       
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheNumeroDemande(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                              <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{type.numero_liquidation || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formaterDate(type.date_liquidation) || 'Non renseigné'}}</td>
+                     <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{recupererLibelleTypeDepense(AfficheTypeEngagement(type.dmd_engagement_id)) || 'Non renseigné'}}</td>
+                   <td style="color:#000 !important;font-weight:bold !important" @dblclick="afficherModalModifierTypeTexte(type.id)">{{AfficheLibelleEngagement(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    <td style="color:#000 !important;font-weight:bold !important;text-align:center" @dblclick="afficherModalModifierTypeTexte(type.id)">{{formatageSomme(parseFloat(AfficheMontantEngage(type.dmd_engagement_id))) || 'Non renseigné'}}</td>
+                  <td >
+                        <button v-if="type.decision_cf == 8" @click="afficheDecisionCf(type.id)" class="btn  btn-success" >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning" @click="afficheDecisionCf(type.id)" >                        
+                       <button v-else-if="type.decision_cf == 2" @click="afficheDecisionCf(type.id)" class="btn  btn-warning" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger" @click="afficheDecisionCf(type.id)" >                        
+                        <button v-else-if="type.decision_cf == 3" @click="afficheDecisionCf(type.id)" class="btn  btn-danger" >                        
                      
                       
                        <span  >Réjeté</span>
                       
                     
                       </button>
-                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success" @click="afficheDecisionCf(type.id)">                        
+                       <button v-else-if="type.decision_cf == 9" @click="afficheDecisionCf(type.id)" class="btn  btn-success" >                        
                      
                       <span>Visé avec observation</span>
                       
                       </button>
-                     <button v-else class="btn  btn-info" @click="afficheDecisionCf(type.id)">                        
+                     <button v-else class="btn btn-info" @click="afficheDecisionCf(type.id)">                        
                      
                       
                        <span>Attente</span>
@@ -171,12 +169,13 @@ modifierTypeTexteLocal
                     
                       </button>
                     </td>
-                     <td>
+                    <td>
                       <router-link :to="{ name: 'VoirModaliteExecution', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Detail</i></span>
                    </router-link> 
                     </td>
+                   
                    <td>
                       <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
                         <span>
@@ -187,7 +186,6 @@ modifierTypeTexteLocal
                   </tr>
                 </tbody>
               </table>
-              <notifications  />
   </div>
 </template>
   
@@ -210,31 +208,27 @@ export default {
         LIBELLE: "libelle"
       },
       search: "",
-      editMandat:{
-        motif_cf : 0,
-        famille_motif_cf : 0
-      }
+      editBonCommande:{}
     };
   },
 props:["macheid"],
   computed: {
     ...mapGetters("uniteadministrative", ["typeTextes"]),
-
-     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+ ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
- ...mapGetters("bienService", ["gettersProcedureTypeDepense","gettersDossierLiquidation","gettersDossierMandat","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+ ...mapGetters("bienService", ["gettersBonCommande","gettersProcedureTypeDepense","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-          griserObservation(){
-  return this.editMandat.decision_cf != 9
+  griserObservation(){
+  return this.editBonCommande.decision_cf != 9
 },
     griserFamilleEtMotif(){
-  return this.editMandat.decision_cf != 3 && this.editMandat.decision_cf != 2
+  return this.editBonCommande.decision_cf != 3 && this.editBonCommande.decision_cf != 2
 },
 griserAutreMotif(){
-  return this.editMandat.motif != 237 
+  return this.editBonCommande.motif != 237 
 },
       AffichierElementEnfant() {
       
@@ -263,92 +257,15 @@ RecupererNiveau3StructureDecision() {
           return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
       
     },
-      AfficheMontantEngage() {
+     listeBonCommandeParUa() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+           return this.gettersBonCommande.filter(qtreel => this.idUa(qtreel.dmd_engagement_id) == id &&  this.AfficheTypeProcedure(qtreel.dmd_engagement_id)==7 && qtreel.decision_cf == 9);
 
-      if (qtereel) {
-        return qtereel.total_general;
-      }
-      return 0
         }
       };
     },
-     AfficheLibelleEngagement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.objet_depense;
-      }
-      return 0
-        }
-      };
-    },
- AfficheTypeEngagement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.type_engagement_id;
-      }
-      return 0
-        }
-      };
-    },
- recupererLibelleTypeDepense() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersProcedureTypeDepense.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle_depense
-      }
-      return 0
-        }
-      };
-    },
- AfficheNumeroLiquidation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
-
-      if (qtereel) {
-        return qtereel.numero_liquidation;
-      }
-      return 0
-        }
-      };
-    },
- 
- AfficheNumeroDemande() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.numero_demande;
-      }
-      return 0
-        }
-      };
-    },
- AfficheExeciceBudgetaire() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.exercice;
-      }
-      return 0
-        }
-      };
-    },
-     AfficheTypeProcedure() {
+      AfficheTypeProcedure() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
@@ -360,82 +277,161 @@ RecupererNiveau3StructureDecision() {
         }
       };
     },
-     listeDemandeParUa() {
+    idUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierMandat.filter(qtreel => qtreel.ua_id == id && this.AfficheTypeProcedure(qtreel.demande_engagement_id)==1);
-
-        }
-      };
-    },
-    AfficheidLiquidation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.id;
+        return qtereel.ua_id;
       }
       return 0
         }
       };
     },
- 
+    numeroDemande() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheExeciceBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exercice;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheNumeroDemande() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_demande;
+      }
+      return 0
+        }
+      };
+    },
+    
+recupererLibelleTypeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureTypeDepense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle_depense
+      }
+      return 0
+        }
+      };
+    },
+
+    AfficheTypeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheLibelleEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_depense;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheObjet() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_depense;
+      }
+      return 0
+        }
+      };
+    },
+    AfficheMontantEngage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
  },
   methods: {
    ...mapActions("bienService", [
-     "modifierDossierMandat",
-     "modifierDossierLiquidation",
-      "modifierDemandeEngagement",
-      "modifierDecisionMandat"
- 
+      "modifierBonCommandes",
+      "modifierPieceJustificative",
+     
+      "modifierDemandeEngagement"
      
     ]),
-        afficheDecisionCf(id) {
-      this.$("#demandeVise").modal({
+     modifierTypeTexteLocal() {
+      var BonCommande ={
+        
+        id:this.editBonCommande.id,
+        decision_cf:this.editBonCommande.decision_cf,
+        famille_motif_cf:this.editBonCommande.famille_motif_cf,
+        autre_motif_cf:this.editBonCommande.autre_motif_cf,
+        motif_cf:this.editBonCommande.motif_cf,
+        date_motif:this.editBonCommande.date_motif,
+        observation:this.editBonCommande.observation
+      }
+       
+       var Demande ={
+        
+        id:this.editBonCommande.dmd_engagement_id,
+        decision_cf:this.editBonCommande.decision_cf,
+        famille_motif_cf:this.editBonCommande.famille_motif_cf,
+        autre_motif_cf:this.editBonCommande.autre_motif_cf,
+        motif_cf:this.editBonCommande.motif_cf,
+        date_motif:this.editBonCommande.date_motif,
+        observation:this.editBonCommande.observation
+      }
+      this.modifierBonCommandes(BonCommande);
+      
+      this.modifierDemandeEngagement(Demande);
+this.$("#demandeVise1").modal('hide');
+     
+       
+    },
+     afficheDecisionCf(id) {
+      this.$("#demandeVise1").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.editMandat = this.listeDemandeParUa(this.macheid).find(item=>item.id==id);
-    },
-    modifierTypeTexteLocal() {
-      var Mandat ={
-        
-        id:this.editMandat.id,
-        decision_cf:this.editMandat.decision_cf,
-        famille_motif_cf:this.editMandat.famille_motif_cf,
-        autre_motif_cf:this.editMandat.autre_motif_cf,
-        motif_cf:this.editMandat.motif_cf,
-        date_motif:this.editMandat.date_motif,
-        observation:this.editMandat.observation
-      }
-       var Liquidation ={
-       
-        id:this.AfficheidLiquidation(this.editMandat.demande_engagement_id),
-        decision_cf:this.editMandat.decision_cf,
-        famille_motif_cf:this.editMandat.famille_motif_cf,
-        autre_motif_cf:this.editMandat.autre_motif_cf,
-        motif_cf:this.editMandat.motif_cf,
-        date_motif:this.editMandat.date_motif,
-        observation:this.editMandat.observation
-      }
-       var Demande ={
-        
-        id:this.editMandat.demande_engagement_id,
-        decision_cf:this.editMandat.decision_cf,
-        famille_motif_cf:this.editMandat.famille_motif_cf,
-        autre_motif_cf:this.editMandat.autre_motif_cf,
-        motif_cf:this.editMandat.motif_cf,
-        date_motif:this.editMandat.date_motif,
-        observation:this.editMandat.observation
-      }
-      this.modifierDossierMandat(Mandat);
-      this.modifierDossierLiquidation(Liquidation);
-      this.modifierDemandeEngagement(Demande);
-this.$("#demandeVise").modal('hide');
-     
-       
+       this.editBonCommande = this.listeBonCommandeParUa(this.macheid).find(item=>item.id==id);
     },
     ExporterEnExel(){
       this.$refs.excel.click()
@@ -454,6 +450,7 @@ this.$("#demandeVise").modal('hide');
   }
 };
 </script>
+
 
 <style scoped>
 
