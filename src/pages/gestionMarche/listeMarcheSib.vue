@@ -348,6 +348,7 @@ reference_marche
                         v-if="marche.attribue == 2"
                         class="btn btn-warning annimB"
                       >
+                      
                         <span title="MARCHE EN EXERCUTION" style="">EX</span>
                       </button>
                       <button
