@@ -9,7 +9,7 @@
         <br>
          <br>
         <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
-            <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
+            <h5 style="text-align: center;font-size:15px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
             </a> </div>
   
         <div class="widget-box collapsible">
@@ -36,7 +36,7 @@
              <div class="collapse" id="ENGAGEMENTDIRECT">
 <div class="widget-box collapsible">
     <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">DEMANDE </h5>
+            <h5 style="color:#000!important;font-size:15px;">DEMANDE </h5>
             </a> 
             
              <!-- <button   class="btn  btn-info" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente ({{NombreDemandeEnAttenteEd(marcheid)}})</span></button>
@@ -54,7 +54,7 @@
             <br>
             <!-- DEBUT LIQUIDATION -->
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">LIQUIDATION</h5>
+            <h5 style="color:#000!important;font-size:15px;">LIQUIDATION</h5>
             </a> 
             <!-- <button   class="btn  btn-info" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente ({{NombreDemandeEnAttenteEd(marcheid)}})</span></button>
                <button   class="btn  btn-warning" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonDiffere()"> <span  style="font-size:20px;"  >Différé ({{NombreDemandeDiffereEd(marcheid)}})</span></button> 
@@ -74,7 +74,7 @@
              <!-- DEBUT MANDAT -->
              <br>
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#MANDAT1" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">MANDAT</h5>
+            <h5 style="color:#000!important;font-size:15px;">MANDAT</h5>
             </a> 
            
             <!-- <button   class="btn  btn-info" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente ({{NombreLiquidationEnAttenteEd(marcheid)}})</span></button>
@@ -109,7 +109,7 @@
             <div class="collapse" id="ENGAGEMENTBONCOMMANDE" style="color:#fff!important;font-size:15px; margin-left:80px">
 <div class="widget-box collapsible">
     <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px;"> <a href="#DEMANDEENGAGAMENTBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">DEMANDE</h5>
+            <h5 style="color:#000!important;font-size:15px;">DEMANDE</h5>
             </a> 
             
             </div>
@@ -121,7 +121,7 @@
                 <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==5"><ListeDemandeEngagementBonCommandeViseObservation :macheid="marcheid"></ListeDemandeEngagementBonCommandeViseObservation></div>
             <br>
  <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px;"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">BON DE COMMANDE </h5>
+            <h5 style="color:#000!important;font-size:15px;">BON DE COMMANDE </h5>
             </a> 
             
             </div>
@@ -136,7 +136,7 @@
              <br>
  <!-- DEBUT LIQUIDATION -->
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px;"> <a href="#LIQUIDATIONBON1" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">LIQUIDATION </h5>
+            <h5 style="color:#000!important;font-size:15px;">LIQUIDATION </h5>
             </a> 
             
             </div>
@@ -153,7 +153,7 @@
              <!-- DEBUT MANDAT -->
              <br>
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px;"> <a href="#MANDATBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:25px;">MANDAT </h5>
+            <h5 style="color:#000!important;font-size:15px;">MANDAT </h5>
             </a> 
             
             </div>

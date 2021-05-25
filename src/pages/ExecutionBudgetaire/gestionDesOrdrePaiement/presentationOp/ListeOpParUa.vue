@@ -97,7 +97,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
                    
                    <td v-if="idUaBudgetEclate(type) == 0">
-                      <router-link :to="{ name: 'VoirOrdrePaiement', params: { id: type }}"
+                      <router-link :to="{ name: 'PagePrincipalExecutionHorsSig', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 

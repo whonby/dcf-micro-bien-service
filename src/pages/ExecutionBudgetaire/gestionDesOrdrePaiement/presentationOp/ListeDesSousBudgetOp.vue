@@ -57,7 +57,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'VoirOrdrePaiementSousBudget', params: { id: type }}"
+                      <router-link :to="{ name: 'PagePrincipalExecutionHorsSig', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
