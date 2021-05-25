@@ -142,11 +142,7 @@
                   font-size: 14px;
                   color:#000;
                   font-weight: bold;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: #FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Ligne Budgétaire
@@ -156,11 +152,7 @@
                   font-size: 14px;
                    color:#000;
                   font-weight: bold;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: 	#FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Type
@@ -170,11 +162,7 @@
                   font-size: 14px;
                    color:#000;
                   font-weight: bold;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: 	#FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 N°OP
@@ -184,11 +172,7 @@
                   font-size: 14px;
                    color:#000;
                   font-weight: bold;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: 	#FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Bailleur
@@ -197,12 +181,8 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-<<<<<<< HEAD
                    color:#000;
                   background-color: #FC762F !important;
-=======
-                  background-color: 	#FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Objet
@@ -213,11 +193,7 @@
                   font-size: 14px;
                    color:#000;
                   font-weight: bold;
-<<<<<<< HEAD
                   background-color: #FC762F !important;
-=======
-                  background-color: 	#FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Montant
@@ -226,12 +202,8 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
-<<<<<<< HEAD
                    color:#000;
                   background-color: #FC762F !important;
-=======
-                  background-color: 	#FFA500 !important;
->>>>>>> ff071241dd2603fbcf01cf0ea0d1f24fff93bfdd
                 "
               >
                 Visa Cf
