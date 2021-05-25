@@ -397,13 +397,20 @@
           <li>
             <router-link :to="{name: 'listeProcedureDroitCommun'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Procédure Droit Commun
+           Procédures de dépenses 
             </router-link>
           </li>
-            <li>
+           <li>
             <router-link :to="{name: 'listeDesProcedureDerogatoire'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Procédure Dérogatoire
+           Modalités d’exécution
+            </router-link>
+          </li>
+          
+           <li>
+            <router-link :to="{name: 'ListeProcedureTypeDepense'}" tag="a">
+              <i class="icon-bar-chart"></i>
+          Type de depense
             </router-link>
           </li>
            <!-- <li>

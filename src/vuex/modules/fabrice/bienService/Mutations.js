@@ -3134,3 +3134,88 @@ export const MODIFIER_PROCEDURE_DEROGATOIRE = (state, elementModif)=>{
 export const SUPPRIMER_PROCEDURE_DEROGATOIRE = (state, id)=> {
     state.ProcedureDerogatoires = state.ProcedureDerogatoires.filter(prest => prest.id !=id)
 }
+
+
+export const GET_ALL_TYPE_DEPENSE_S= (state, tableau_document) =>{
+    state.ProcedureTypeDepenses = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_TYPE_DEPENSE_S = (state, elementAjouter) => {
+    state.ProcedureTypeDepenses.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_TYPE_DEPENSE_S = (state, elementModif)=>{
+    state.ProcedureTypeDepenses = state.ProcedureTypeDepenses.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_TYPE_DEPENSE_S = (state, id)=> {
+    state.ProcedureTypeDepenses = state.ProcedureTypeDepenses.filter(prest => prest.id !=id)
+}
+
+
+
+
+export const GET_ALL_BON_COMMANDE= (state, tableau_document) =>{
+    state.BonCommandes = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_BON_COMMANDE = (state, elementAjouter) => {
+    state.BonCommandes.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_BON_COMMANDE = (state, elementModif)=>{
+    state.BonCommandes = state.BonCommandes.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_BON_COMMANDE = (state, id)=> {
+    state.BonCommandes = state.BonCommandes.filter(prest => prest.id !=id)
+}
+
+
+
+export const GET_ALL_BAILLEUR_DMD= (state, tableau_document) =>{
+    state.BailleurDmdEngagements = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_BAILLEUR_DMD = (state, elementAjouter) => {
+    state.BailleurDmdEngagements.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_BAILLEUR_DMD = (state, elementModif)=>{
+    state.BailleurDmdEngagements = state.BailleurDmdEngagements.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_BAILLEUR_DMD = (state, id)=> {
+    state.BailleurDmdEngagements = state.BailleurDmdEngagements.filter(prest => prest.id !=id)
+}
+
+export const MODIFIER_DECISION = (state, elementModif)=>{
+    state.MandatOp = state.MandatOp.map(elementModif)
+}
+
+
+

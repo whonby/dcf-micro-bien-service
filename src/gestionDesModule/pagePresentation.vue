@@ -367,6 +367,9 @@ this.getHistoriqueDecisionOp()
 this.getBudgetEclateImporter()
 this.getProcedureDroitCommun()
 this.getProcedureDerogatoire()
+this.getBonCommande()
+this.getBailleurDmdEngagement()
+this.getProcedureTypeDepense()
 this.getDossierAutreDepense()
 this.getGestionOrdrePaiement()
 this.getFormeJuridiques()
@@ -831,9 +834,9 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ['getBonCommande',"getProcedureTypeDepense","getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense','getProblemeMarche', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
-         'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
+         'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches','getBailleurDmdEngagement',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure','getReserveCf',

@@ -2110,7 +2110,7 @@ afficherModalModifierTitre(id) {
         famille_motif: this.editMandat.famille_motif,
         motif: this.editMandat.motif,
         date_decision_cf: this.editMandat.date_decision_cf,
-        diff_op: 0,
+        // diff_op: 0,
         id: this.editMandat.id,
       };
       this.ajouterHistoriqueDecisionOp(nouveauObjet);

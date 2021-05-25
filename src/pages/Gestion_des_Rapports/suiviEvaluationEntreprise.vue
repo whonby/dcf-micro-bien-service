@@ -94,6 +94,7 @@
 <thead>
                   <tr >
                     <!-- <th style="background: coral;font-weight:bolder;color:#000;text-align:center;font-size:12px">N°ORDRE</th> -->
+                   <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">NUMERO DE COMPTE CONTRIBUABLE</th>
                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">NOM DE L'ENTREPRISE</th>
                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="2">NOMBRE DE MARCHES OBTENUS</th>
                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3">MARCHES NON DEMARRES</th>
@@ -106,6 +107,7 @@
                  <!-- <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="" title="AVENANT">Détail</th> -->
                   </tr>
                   <tr>
+                  
                    <th colspan="1"></th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Nombre</th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Montant</th>
@@ -143,6 +145,7 @@
                     :key="service.id"
                   >
                   <!-- <td style="width:10%">{{service[0].entreprise_id || 'Non renseigné'}}</td> -->
+                  <td style="width:10%">{{CompteContribuableEntreprise(service.entreprise_id)}}</td>
                   <td style="width:10%">{{RaisonSocialEntreprise(service.entreprise_id) || 'Non renseigné'}}</td>
                   <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheRecu(service.entreprise_id) || 'Non renseigné'}}</td>
                     <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantMarcheObtenu(service.entreprise_id)))}}</td>
@@ -550,6 +553,19 @@ MontantMarcheNonDemarre() {
 
       if (qtereel) {
         return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+ CompteContribuableEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const numContr = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (numContr) {
+        console.log(numContr.numero_cc)
+        return numContr.numero_cc;
       }
       return 0
         }

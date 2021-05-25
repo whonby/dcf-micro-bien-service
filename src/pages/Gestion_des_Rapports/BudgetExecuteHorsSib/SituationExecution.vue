@@ -134,6 +134,7 @@
         style="
           margin-left: 30px;
           font-size: 14px;
+          color: #000;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -141,17 +142,20 @@
         EXERCICE: {{ anneeAmort }}
       </p>
 
-      <div class="widget-content nopadding" style="margin: 25px">
-        <table class="table table-bordered">
-          <thead style="background-color: #ffa500 !important">
+      
+
+       <div class="widget-content nopadding" style="margin: 25px"  >
+      <table class="table table-bordered">
+          <thead style="background-color: #FC762F !important">
             <tr>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
-                  background-color: #ffa500 !important;
-                  width: 800px;
+                  background-color: #FC762F !important;
+                  width: 800px
                 "
               >
                 Bailleurs
@@ -160,8 +164,9 @@
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
-                  background-color: #ffa500 !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Budget Actuel
@@ -172,7 +177,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #ffa500 !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Montant Exécuté
@@ -184,7 +189,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #ffa500 !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Montant Provisoire
@@ -194,17 +199,19 @@
                   font-size: 14px;
                   font-weight: bold;
                   text-align: center;
-                  background-color: #ffa500 !important;
+                  color: #000;
+                  background-color: #FC762F !important;
                 "
               >
-                Taux En Exécution (%)
+                Taux d' Exécution (%)
               </th>
               <th
                 style="
                   font-size: 14px;
                   font-weight: bold;
+                  color: #000;
                   text-align: center;
-                  background-color: #ffa500 !important;
+                  background-color: #FC762F !important;
                 "
               >
                 Disponible
