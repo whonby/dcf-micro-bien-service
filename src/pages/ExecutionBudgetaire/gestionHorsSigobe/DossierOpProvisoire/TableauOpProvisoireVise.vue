@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <notifications/>
    <div id="validationOpDefinitif12" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -41,6 +42,9 @@
                 </div>
               </div>
             </td>
+            
+          </tr>
+          <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Motif</label>
@@ -60,14 +64,12 @@
                 </div>
               </div>
             </td>
-          </tr>
-          <tr>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Autres Motif</label>
                 <div class="controls">
                   <textarea
-                    class="span10"
+                    class="span5"
                     row="6"
                     v-model="editMandat.autre_motif"
                     :readonly="griserAutreMotif"
@@ -76,9 +78,12 @@
                 </div>
               </div>
             </td>
+            
+          </tr>
+          <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">Date Decision CF :</label>
+                <label class="control-label">Date Decision CF</label>
                 <div class="controls">
                   <input
                     type="date"
@@ -89,14 +94,12 @@
                 </div>
               </div>
             </td>
-          </tr>
-          <tr>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Observation CF</label>
                 <div class="controls">
                   <textarea
-                    class="span10"
+                    class="span5"
                     row="6"
                     v-model="editMandat.observation"
                   >
@@ -104,7 +107,10 @@
                 </div>
               </div>
             </td>
-            <td colspan="">
+            
+          </tr>
+          <tr>
+            <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Nom du CF</label>
                 <div class="controls">
@@ -440,7 +446,7 @@
                   </tr>
                 </tbody>
               </table>
-               <div class="pagination alternate">
+               <!-- <div class="pagination alternate">
             <ul>
               <li :class="{ disabled: page == 0 }">
                 <a @click.prevent="precedent()" href="#">Précedent</a>
@@ -464,7 +470,7 @@
                 <a @click.prevent="suivant()" href="#">Suivant</a>
               </li>
             </ul>
-          </div>
+          </div> -->
   </div>
 </template>
   
@@ -649,7 +655,18 @@ created() {
       "plans_Decision",
     ]),
 
-   
+   listeOpdiffere() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettershistoriqueDecisionCfOP.filter(
+            (qtreel) =>
+              qtreel.id_op == id &&
+              qtreel.diff_decision == 0 &&
+              qtreel.decision_cf == 2
+          );
+        }
+      };
+    },
     EurreurCorrige() {
       return (id) => {
         if (id != null && id != "") {
@@ -922,21 +939,80 @@ afficherModalModifierTitre(id) {
       this.page++;
     },
 
-    DetacheMotif(id) {
+   DetacheMotif(id) {
       this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
         (item) => item.id == id
       );
       this.ModifierMotif();
     },
-    
-    ModalOpAnnulation(id) {
-      this.$("#decisionAnnulation").modal({
-        backdrop: "static",
-        keyboard: false,
-      });
-      this.EditAnulation = this.gettersgestionOrdrePaiement.find(
+    DetacheMotifAttache(id) {
+      this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
         (item) => item.id == id
       );
+
+      this.ModifierMotifAttche();
+    },
+
+    ModifierMotif() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 1,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    ModifierMotifAttche() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    AfficheBoutonAjouter() {
+      this.affiche_filtre1 = !this.affiche_filtre1;
+    },
+    filter() {
+      this.affiche_filtre = !this.affiche_filtre;
+    },
+    ajouterLiquidation() {
+      this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });
+    },
+    modifierTypeTexteLocal() {
+      var nouveauObjet = {
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision: this.editMandat.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.editMandat.id,
+      };
+        var nouveauObjet1 = {
+          ...this.editMandat,
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision_cf: this.editMandat.date_decision_cf,
+        // diff_op: 0,
+        id: this.editMandat.id,
+      };
+      this.ajouterHistoriqueDecisionOp(nouveauObjet);
+      this.modifierGestionOrdrePaiement(nouveauObjet1);
+      this.$("#validationOpDefinitif12").modal("hide");
+    },
+    modifierDecisionFinal() {
+      this.modifierGestionOrdrePaiement(this.editDecisionFinal);
+      this.$("#validationOpDefinitif12").modal("hide");
     },
     apercuFacture0(id) {
       this.$("#validationOpDefinitif12").modal({
@@ -989,7 +1065,7 @@ afficherModalModifierTitre(id) {
 
 <style scoped>
 .tailgrand {
-  width: 65%;
+  width: 54%;
   margin: 0 -30%;
   height: 50%;
 }

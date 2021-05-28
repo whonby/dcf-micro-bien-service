@@ -1,10 +1,282 @@
 
 <template>
   <div>
-  
+    <notifications/>
+   <div id="validationOpDefinitifopDirectAttent" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Décision CF </label>
+                <div class="controls">
+                  <select v-model="opDirectAttent.decision_cf" class="span5">
+                    <option value=""></option>
+                    <option value="8">Visé</option>
+                    <option value="9">Visé avec Observation</option>
+                    <option value="2">Différé</option>
+                    <option value="3">Réjeté</option>
+                    <option value="0">Attente</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Famille de Motif</label>
+                <div class="controls">
+                  <select v-model="opDirectAttent.famille_motif" class="span5">
+                    <option value="0"></option>
+                    <option
+                      v-for="varText in AffichierElementParent"
+                      :key="varText.id"
+                      :value="varText.id"
+                    >
+                      {{ varText.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Motif</label>
+                <div class="controls">
+                  <select v-model="opDirectAttent.motif" class="span5">
+                    <option value="0"></option>
+                    <option
+                      v-for="varText in AffichierElementEnfant(
+                        opDirectAttent.famille_motif
+                      )"
+                      :key="varText.id"
+                      :value="varText.id"
+                    >
+                      {{ varText.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Autres Motif</label>
+                <div class="controls">
+                  <textarea
+                    class="span5"
+                    row="6"
+                    v-model="opDirectAttent.autre_motif"
+                    :readonly="griserAutreMotif"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Date Decision CF</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    class="span5"
+                    v-model="opDirectAttent.date_decision_cf"
+                  />
+                  <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                </div>
+              </div>
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Observation CF</label>
+                <div class="controls">
+                  <textarea
+                    class="span5"
+                    row="6"
+                    v-model="opDirectAttent.observation"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Nom du CF</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    class="span5"
+                    :value="
+                      recupererNomDuControleurF(
+                        recupererIdUser(
+                          recupererIdServiceCF(
+                            opDirectAttent.unite_administrative_id
+                          )
+                        )
+                      )
+                    "
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <table
+          class="table table-bordered table-striped"
+          v-if="opDirectAttent.decision_cf == 2"
+        >
+          <div class="row-fluid">
+            <div class="span6">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon"> <i class="icon-eye-open"></i> </span>
+                  <h5>Motif à Corrigé</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <templete v-if="verifier(opDirectAttent.id) == opDirectAttent.id">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="type in listeOpdiffere(opDirectAttent.id)"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{
+                              MotifLibelle(type.famille_motif) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{ MotifLibelle(type.motif) || "Non renseigné" }}
+                          </td>
+
+                          <td>
+                            <button
+                              class="btn btn-danger"
+                              @click="DetacheMotif(type.id)"
+                            >
+                              <span>
+                                <i class="icon-external-link"></i>Détaché
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </templete>
+                  <templete v-else>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </templete>
+                </div>
+              </div>
+            </div>
+            <div class="span6">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <span class="icon"> <i class="icon-arrow-right"></i> </span>
+                  <h5>Motif Corrige</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <templete v-if="verifier(opDirectAttent.id) == opDirectAttent.id">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="type in EurreurCorrige(opDirectAttent.id)"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{
+                              MotifLibelle(type.famille_motif) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td @dblclick="afficherModalModifierTypeTexte(index)">
+                            {{ MotifLibelle(type.motif) || "Non renseigné" }}
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-info"
+                              @click="DetacheMotifAttache(type.id)"
+                            >
+                              <span>
+                                <i class="icon-external-link"></i>Attaché
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </templete>
+                  <templete v-else>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Famille Motif</th>
+                          <th>Motif</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </templete>
+                </div>
+              </div>
+            </div>
+          </div>
+        </table>
+        <br />
+      </div>
+
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal()"
+          class="btn btn-primary"
+          href="#"
+          >Valider</a
+        >
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
+                   <tr>
                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Execice</th>
                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°Ordre paiement</th>
                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Objet ordre de paiement </th>
@@ -73,12 +345,12 @@
                         }"
                         class="btn btn"
                         title="Editer Fiche"
-                        style="width: 80%"
+                        style="width: 50%"
                       >
                         <span
                           class=""
                           style="
-                            font-size: 20px;
+                            font-size: 15px;
                             font-weight: bold;
                             color: #000;
                           "
@@ -174,7 +446,7 @@
                   </tr>
                 </tbody>
               </table>
-               <div class="pagination alternate">
+               <!-- <div class="pagination alternate">
             <ul>
               <li :class="{ disabled: page == 0 }">
                 <a @click.prevent="precedent()" href="#">Précedent</a>
@@ -198,7 +470,7 @@
                 <a @click.prevent="suivant()" href="#">Suivant</a>
               </li>
             </ul>
-          </div>
+          </div> -->
   </div>
 </template>
   
@@ -240,7 +512,7 @@ export default {
       NumeroOp: 0,
       uniteAdministrative_id: 0,
 
-      editMandat: {},
+      opDirectAttent: {},
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
@@ -383,7 +655,18 @@ created() {
       "plans_Decision",
     ]),
 
-   
+   listeOpdiffere() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettershistoriqueDecisionCfOP.filter(
+            (qtreel) =>
+              qtreel.id_op == id &&
+              qtreel.diff_decision == 0 &&
+              qtreel.decision_cf == 2
+          );
+        }
+      };
+    },
     EurreurCorrige() {
       return (id) => {
         if (id != null && id != "") {
@@ -489,7 +772,7 @@ created() {
     },
 
     griserAutreMotif() {
-      return this.editMandat.motif != 237;
+      return this.opDirectAttent.motif != 237;
     },
     AffichierElementParent() {
       // return id => {
@@ -620,7 +903,7 @@ created() {
     },
     listeordrepaiementProvisoire() {
       return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op == null  && qtreel.unite_administrative_id == this.marcheid && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==0
+        (qtreel) => qtreel.diff_op == null  && qtreel.unite_administrative_id == this.marcheid && qtreel.type_ordre_paiement==1 && qtreel.decision_cf == 0
       );
     },
     
@@ -656,28 +939,87 @@ afficherModalModifierTitre(id) {
       this.page++;
     },
 
-    DetacheMotif(id) {
+   DetacheMotif(id) {
       this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
         (item) => item.id == id
       );
       this.ModifierMotif();
     },
-    
-    ModalOpAnnulation(id) {
-      this.$("#decisionAnnulation").modal({
-        backdrop: "static",
-        keyboard: false,
-      });
-      this.EditAnulation = this.gettersgestionOrdrePaiement.find(
+    DetacheMotifAttache(id) {
+      this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
         (item) => item.id == id
       );
+
+      this.ModifierMotifAttche();
+    },
+
+    ModifierMotif() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 1,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    ModifierMotifAttche() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    AfficheBoutonAjouter() {
+      this.affiche_filtre1 = !this.affiche_filtre1;
+    },
+    filter() {
+      this.affiche_filtre = !this.affiche_filtre;
+    },
+    ajouterLiquidation() {
+      this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });
+    },
+    modifierTypeTexteLocal() {
+      var nouveauObjet = {
+        decision_cf: this.opDirectAttent.decision_cf,
+        famille_motif: this.opDirectAttent.famille_motif,
+        motif: this.opDirectAttent.motif,
+        date_decision: this.opDirectAttent.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.opDirectAttent.id,
+      };
+        var nouveauObjet1 = {
+          ...this.opDirectAttent,
+        decision_cf: this.opDirectAttent.decision_cf,
+        famille_motif: this.opDirectAttent.famille_motif,
+        motif: this.opDirectAttent.motif,
+        date_decision_cf: this.opDirectAttent.date_decision_cf,
+        // diff_op: 0,
+        id: this.opDirectAttent.id,
+      };
+      this.ajouterHistoriqueDecisionOp(nouveauObjet);
+      this.modifierGestionOrdrePaiement(nouveauObjet1);
+      this.$("#validationOpDefinitifopDirectAttent").modal("hide");
+    },
+    modifierDecisionFinal() {
+      this.modifierGestionOrdrePaiement(this.editDecisionFinal);
+      this.$("#validationOpDefinitifopDirectAttent").modal("hide");
     },
     apercuFacture0(id) {
-      this.$("#validationOpDefinitif1").modal({
+      this.$("#validationOpDefinitifopDirectAttent").modal({
         backdrop: "static",
         keyboard: false,
       });
-      this.editMandat = this.gettersgestionOrdrePaiement.find(
+      this.opDirectAttent = this.gettersgestionOrdrePaiement.find(
         (item) => item.id == id
       );
     },
@@ -723,7 +1065,7 @@ afficherModalModifierTitre(id) {
 
 <style scoped>
 .tailgrand {
-  width: 65%;
+  width: 54%;
   margin: 0 -30%;
   height: 50%;
 }

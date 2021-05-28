@@ -903,7 +903,7 @@ listeOpdiffere() {
     },
     listeordrepaiementProvisoire() {
       return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op == null  && qtreel.unite_administrative_id == this.marcheid && qtreel.type_ordre_paiement==4 && qtreel.decision_cf == 0
+        (qtreel) => qtreel.diff_op == null  && qtreel.sous_budget_id == this.marcheid && qtreel.type_ordre_paiement==4 && qtreel.decision_cf == 0
       );
     },
     

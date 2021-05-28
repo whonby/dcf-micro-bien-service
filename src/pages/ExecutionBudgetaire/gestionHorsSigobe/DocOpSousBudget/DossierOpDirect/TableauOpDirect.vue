@@ -2,7 +2,7 @@
 <template>
   <div>
     <notifications/>
-   <div id="validationOpDefinitif121" class="modal hide tailgrand">
+   <div id="validationOpDefinitifopDirectAttent" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -14,7 +14,7 @@
               <div class="control-group">
                 <label class="control-label">Décision CF </label>
                 <div class="controls">
-                  <select v-model="editMandatdif.decision_cf" class="span5">
+                  <select v-model="opDirectAttent.decision_cf" class="span5">
                     <option value=""></option>
                     <option value="8">Visé</option>
                     <option value="9">Visé avec Observation</option>
@@ -29,7 +29,7 @@
               <div class="control-group">
                 <label class="control-label">Famille de Motif</label>
                 <div class="controls">
-                  <select v-model="editMandatdif.famille_motif" class="span5">
+                  <select v-model="opDirectAttent.famille_motif" class="span5">
                     <option value="0"></option>
                     <option
                       v-for="varText in AffichierElementParent"
@@ -49,11 +49,11 @@
               <div class="control-group">
                 <label class="control-label">Motif</label>
                 <div class="controls">
-                  <select v-model="editMandatdif.motif" class="span5">
+                  <select v-model="opDirectAttent.motif" class="span5">
                     <option value="0"></option>
                     <option
                       v-for="varText in AffichierElementEnfant(
-                        editMandatdif.famille_motif
+                        opDirectAttent.famille_motif
                       )"
                       :key="varText.id"
                       :value="varText.id"
@@ -71,7 +71,7 @@
                   <textarea
                     class="span5"
                     row="6"
-                    v-model="editMandatdif.autre_motif"
+                    v-model="opDirectAttent.autre_motif"
                     :readonly="griserAutreMotif"
                   >
                   </textarea>
@@ -88,7 +88,7 @@
                   <input
                     type="date"
                     class="span5"
-                    v-model="editMandatdif.date_decision_cf"
+                    v-model="opDirectAttent.date_decision_cf"
                   />
                   <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                 </div>
@@ -101,7 +101,7 @@
                   <textarea
                     class="span5"
                     row="6"
-                    v-model="editMandatdif.observation"
+                    v-model="opDirectAttent.observation"
                   >
                   </textarea>
                 </div>
@@ -121,7 +121,7 @@
                       recupererNomDuControleurF(
                         recupererIdUser(
                           recupererIdServiceCF(
-                            editMandatdif.unite_administrative_id
+                            opDirectAttent.unite_administrative_id
                           )
                         )
                       )
@@ -136,7 +136,7 @@
 
         <table
           class="table table-bordered table-striped"
-          v-if="editMandatdif.decision_cf == 2"
+          v-if="opDirectAttent.decision_cf == 2"
         >
           <div class="row-fluid">
             <div class="span6">
@@ -146,7 +146,7 @@
                   <h5>Motif à Corrigé</h5>
                 </div>
                 <div class="widget-content nopadding">
-                  <templete v-if="verifier(editMandatdif.id) == editMandatdif.id">
+                  <templete v-if="verifier(opDirectAttent.id) == opDirectAttent.id">
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -159,7 +159,7 @@
                       <tbody>
                         <tr
                           class="odd gradeX"
-                          v-for="type in listeOpdiffere(editMandatdif.id)"
+                          v-for="type in listeOpdiffere(opDirectAttent.id)"
                           :key="type.id"
                         >
                           <td @dblclick="afficherModalModifierTypeTexte(index)">
@@ -207,7 +207,7 @@
                   <h5>Motif Corrige</h5>
                 </div>
                 <div class="widget-content nopadding">
-                  <templete v-if="verifier(editMandatdif.id) == editMandatdif.id">
+                  <templete v-if="verifier(opDirectAttent.id) == opDirectAttent.id">
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -220,7 +220,7 @@
                       <tbody>
                         <tr
                           class="odd gradeX"
-                          v-for="type in EurreurCorrige(editMandatdif.id)"
+                          v-for="type in EurreurCorrige(opDirectAttent.id)"
                           :key="type.id"
                         >
                           <td @dblclick="afficherModalModifierTypeTexte(index)">
@@ -512,7 +512,7 @@ export default {
       NumeroOp: 0,
       uniteAdministrative_id: 0,
 
-      editMandatdif: {},
+      opDirectAttent: {},
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
@@ -654,7 +654,8 @@ created() {
       "structuresDecision",
       "plans_Decision",
     ]),
-listeOpdiffere() {
+
+   listeOpdiffere() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettershistoriqueDecisionCfOP.filter(
@@ -666,7 +667,6 @@ listeOpdiffere() {
         }
       };
     },
-   
     EurreurCorrige() {
       return (id) => {
         if (id != null && id != "") {
@@ -772,7 +772,7 @@ listeOpdiffere() {
     },
 
     griserAutreMotif() {
-      return this.editMandatdif.motif != 237;
+      return this.opDirectAttent.motif != 237;
     },
     AffichierElementParent() {
       // return id => {
@@ -903,7 +903,7 @@ listeOpdiffere() {
     },
     listeordrepaiementProvisoire() {
       return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op == null  && qtreel.unite_administrative_id == this.marcheid && qtreel.type_ordre_paiement==4 && qtreel.decision_cf == 0
+        (qtreel) => qtreel.diff_op == null  && qtreel.sous_budget_id == this.marcheid && qtreel.type_ordre_paiement==1 && qtreel.decision_cf == 0
       );
     },
     
@@ -990,36 +990,36 @@ afficherModalModifierTitre(id) {
     },
     modifierTypeTexteLocal() {
       var nouveauObjet = {
-        decision_cf: this.editMandatdif.decision_cf,
-        famille_motif: this.editMandatdif.famille_motif,
-        motif: this.editMandatdif.motif,
-        date_decision: this.editMandatdif.date_decision_cf,
+        decision_cf: this.opDirectAttent.decision_cf,
+        famille_motif: this.opDirectAttent.famille_motif,
+        motif: this.opDirectAttent.motif,
+        date_decision: this.opDirectAttent.date_decision_cf,
         diff_decision: 0,
-        id_op: this.editMandatdif.id,
+        id_op: this.opDirectAttent.id,
       };
         var nouveauObjet1 = {
-          ...this.editMandatdif,
-        decision_cf: this.editMandatdif.decision_cf,
-        famille_motif: this.editMandatdif.famille_motif,
-        motif: this.editMandatdif.motif,
-        date_decision_cf: this.editMandatdif.date_decision_cf,
+          ...this.opDirectAttent,
+        decision_cf: this.opDirectAttent.decision_cf,
+        famille_motif: this.opDirectAttent.famille_motif,
+        motif: this.opDirectAttent.motif,
+        date_decision_cf: this.opDirectAttent.date_decision_cf,
         // diff_op: 0,
-        id: this.editMandatdif.id,
+        id: this.opDirectAttent.id,
       };
-       this.ajouterHistoriqueDecisionOp(nouveauObjet);
+      this.ajouterHistoriqueDecisionOp(nouveauObjet);
       this.modifierGestionOrdrePaiement(nouveauObjet1);
-      this.$("#validationOpDefinitif121").modal("hide");
+      this.$("#validationOpDefinitifopDirectAttent").modal("hide");
     },
     modifierDecisionFinal() {
       this.modifierGestionOrdrePaiement(this.editDecisionFinal);
-      this.$("#validationOpDefinitif121").modal("hide");
+      this.$("#validationOpDefinitifopDirectAttent").modal("hide");
     },
     apercuFacture0(id) {
-      this.$("#validationOpDefinitif121").modal({
+      this.$("#validationOpDefinitifopDirectAttent").modal({
         backdrop: "static",
         keyboard: false,
       });
-      this.editMandatdif = this.gettersgestionOrdrePaiement.find(
+      this.opDirectAttent = this.gettersgestionOrdrePaiement.find(
         (item) => item.id == id
       );
     },

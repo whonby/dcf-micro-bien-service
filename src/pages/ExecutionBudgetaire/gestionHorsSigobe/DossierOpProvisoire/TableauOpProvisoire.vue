@@ -1,205 +1,8 @@
-AffichierElementEnfant
+
 <template>
   <div>
-  
-    <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                  <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Execice</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°Ordre paiement</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Objet ordre de paiement </th>
-                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Engagement actuel (FCFA)</th>
-                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Voir Détail</th>
-                   
-                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Decision CF</th>
-                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000" colspan="2">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                   <tr
-                    class="odd gradeX"
-                    v-for="type in partition(listeordrepaiementProvisoire, size)[page]"
-                    :key="type.id"
-                  >
-                    <td @dblclick="afficherModalModifierTitre(type.id)"
-                      style="
-                        font-size: 14px;
-                        font-weight: bold;
-                        text-align: center;
-                      "
-                    >
-                      {{ type.exercice || "Non renseigné" }}
-                    </td>
-                    
-
-                    <td @dblclick="afficherModalModifierTitre(type.id)"
-                      style="
-                        font-size: 14px;
-                        font-weight: bold;
-                        text-align: center;
-                        color: green;
-                      "
-                    >
-                      {{ type.numero_ordre_paiement || "Non renseigné" }}
-                    </td>
-
-                    <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
-                      {{ type.odjet_autre_depense || "Non renseigné" }}
-                    </td>
-                    <!-- <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
-                      {{
-                        libelleUa(type.unite_administrative_id) ||
-                        "Non renseigné"
-                      }}
-                    </td> -->
-                    <td @dblclick="afficherModalModifierTitre(type.id)"
-                      style="
-                        font-size: 14px;
-                        font-weight: bold;
-                        text-align: center;
-                      "
-                    >
-                      {{
-                        formatageSommeSansFCFA(
-                          parseFloat(type.montant_ordre_paiement)
-                        ) || "Non renseigné"
-                      }}
-                    </td>
-                    <td @dblclick="afficherModalModifierTitre(type.id)">
-                      <router-link
-                        :to="{
-                          name: 'VoirDetailAutreFiche',
-                          params: { id: type.id },
-                        }"
-                        class="btn btn"
-                        title="Editer Fiche"
-                        style="width: 80%"
-                      >
-                        <span
-                          class=""
-                          style="
-                            font-size: 20px;
-                            font-weight: bold;
-                            color: #000;
-                          "
-                          ><i class="icon-eye-open"></i> Voir</span
-                        >
-                      </router-link>
-                    </td>
-
-                    
-                    <td >
-                      <button
-                        v-if="type.decision_cf == 8"
-                        class="btn btn-success tailBtn"
-                        @click="apercuFacture0(type.id)"
-                      >
-                        <span
-                          style="
-                            font-weight: bolder;
-                            color: #fff;
-                            font-size: 18px;
-                          "
-                          >Visé</span
-                        >
-                      </button>
-                      <button
-                        v-else-if="type.decision_cf == 2"
-                        class="btn btn-warning tailBtn"
-                        @click="apercuFacture0(type.id)"
-                      >
-                        <span
-                          style="
-                            font-weight: bolder;
-                            color: #fff;
-                            font-size: 18px;
-                          "
-                          >Différé</span
-                        >
-                      </button>
-                      <button
-                        v-else-if="type.decision_cf == 3"
-                        class="btn btn-danger tailBtn"
-                        @click="apercuFacture0(type.id)"
-                      >
-                        <span
-                          style="
-                            font-weight: bolder;
-                            color: #fff;
-                            font-size: 18px;
-                          "
-                          >Réjeté</span
-                        >
-                      </button>
-                      <button
-                        v-else-if="type.decision_cf == 9"
-                        class="btn btn-success tailBtn"
-                        @click="apercuFacture0(type.id)"
-                      >
-                        <span
-                          title="Visé avec observation"
-                          style="
-                            font-weight: bolder;
-                            color: #fff;
-                            font-size: 18px;
-                          "
-                          >Visé O</span
-                        >
-                      </button>
-                      <button
-                        v-else
-                        class="btn btn-info tailBtn"
-                        @click="apercuFacture0(type.id)"
-                      >
-                        <span
-                          style="
-                            font-weight: bolder;
-                            color: #fff;
-                            font-size: 18px;
-                          "
-                          >Attente</span
-                        >
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        class="btn btn-danger"
-                        @click="supprimerGestionOrdrePaiement(type.id)"
-                      >
-                        <span>
-                          <i class="icon icon-trash"> Supprimer</i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-               <div class="pagination alternate">
-            <ul>
-              <li :class="{ disabled: page == 0 }">
-                <a @click.prevent="precedent()" href="#">Précedent</a>
-              </li>
-              <li
-                v-for="(titre, index) in partition(listeordrepaiementProvisoire, size)
-                  .length"
-                :key="index"
-                :class="{ active: active_el == index }"
-              >
-                <a @click.prevent="getDataPaginate(index)" href="#">{{
-                  index + 1
-                }}</a>
-              </li>
-              <li
-                :class="{
-                  disabled:
-                    page == partition(listeordrepaiementProvisoire, size).length - 1,
-                }"
-              >
-                <a @click.prevent="suivant()" href="#">Suivant</a>
-              </li>
-            </ul>
-          </div>
-           <div id="validationOpDefinitif1" class="modal hide tailgrand">
+    <notifications/>
+   <div id="validationOpDefinitif12" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -239,6 +42,9 @@ AffichierElementEnfant
                 </div>
               </div>
             </td>
+            
+          </tr>
+          <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Motif</label>
@@ -258,14 +64,12 @@ AffichierElementEnfant
                 </div>
               </div>
             </td>
-          </tr>
-          <tr>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Autres Motif</label>
                 <div class="controls">
                   <textarea
-                    class="span10"
+                    class="span5"
                     row="6"
                     v-model="editMandat.autre_motif"
                     :readonly="griserAutreMotif"
@@ -274,9 +78,12 @@ AffichierElementEnfant
                 </div>
               </div>
             </td>
+            
+          </tr>
+          <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">Date Decision CF :</label>
+                <label class="control-label">Date Decision CF</label>
                 <div class="controls">
                   <input
                     type="date"
@@ -287,14 +94,12 @@ AffichierElementEnfant
                 </div>
               </div>
             </td>
-          </tr>
-          <tr>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Observation CF</label>
                 <div class="controls">
                   <textarea
-                    class="span10"
+                    class="span5"
                     row="6"
                     v-model="editMandat.observation"
                   >
@@ -302,7 +107,10 @@ AffichierElementEnfant
                 </div>
               </div>
             </td>
-            <td colspan="">
+            
+          </tr>
+          <tr>
+            <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Nom du CF</label>
                 <div class="controls">
@@ -466,6 +274,203 @@ AffichierElementEnfant
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+    <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                  <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Execice</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°Ordre paiement</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Objet ordre de paiement </th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Montant Engagé(FCFA)</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Détail</th>
+                   
+                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Decision CF</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000" colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <tr
+                    class="odd gradeX"
+                    v-for="type in partition(listeordrepaiementProvisoire, size)[page]"
+                    :key="type.id"
+                  >
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
+                      style="
+                        font-size: 14px;
+                        font-weight: bold;
+                        text-align: center;
+                      "
+                    >
+                      {{ type.exercice || "Non renseigné" }}
+                    </td>
+                    
+
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
+                      style="
+                        font-size: 14px;
+                        font-weight: bold;
+                        text-align: center;
+                        color: green;
+                      "
+                    >
+                      {{ type.numero_ordre_paiement || "Non renseigné" }}
+                    </td>
+
+                    <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
+                      {{ type.odjet_autre_depense || "Non renseigné" }}
+                    </td>
+                    <!-- <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
+                      {{
+                        libelleUa(type.unite_administrative_id) ||
+                        "Non renseigné"
+                      }}
+                    </td> -->
+                    <td @dblclick="afficherModalModifierTitre(type.id)"
+                      style="
+                        font-size: 14px;
+                        font-weight: bold;
+                        text-align: center;
+                      "
+                    >
+                      {{
+                        formatageSommeSansFCFA(
+                          parseFloat(type.montant_ordre_paiement)
+                        ) || "Non renseigné"
+                      }}
+                    </td>
+                    <td @dblclick="afficherModalModifierTitre(type.id)">
+                      <router-link
+                        :to="{
+                          name: 'VoirDetailAutreFiche',
+                          params: { id: type.id },
+                        }"
+                        class="btn btn"
+                        title="Editer Fiche"
+                        style="width: 50%"
+                      >
+                        <span
+                          class=""
+                          style="
+                            font-size: 15px;
+                            font-weight: bold;
+                            color: #000;
+                          "
+                          ><i class="icon-eye-open"></i> Voir</span
+                        >
+                      </router-link>
+                    </td>
+
+                    
+                    <td >
+                      <button
+                        v-if="type.decision_cf == 8"
+                        class="btn btn-success tailBtn"
+                        @click="apercuFacture0(type.id)"
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Visé</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="type.decision_cf == 2"
+                        class="btn btn-warning tailBtn"
+                        @click="apercuFacture0(type.id)"
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Différé</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="type.decision_cf == 3"
+                        class="btn btn-danger tailBtn"
+                        @click="apercuFacture0(type.id)"
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Réjeté</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="type.decision_cf == 9"
+                        class="btn btn-success tailBtn"
+                        @click="apercuFacture0(type.id)"
+                      >
+                        <span
+                          title="Visé avec observation"
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Visé O</span
+                        >
+                      </button>
+                      <button
+                        v-else
+                        class="btn btn-info tailBtn"
+                        @click="apercuFacture0(type.id)"
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Attente</span
+                        >
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-danger"
+                        @click="supprimerGestionOrdrePaiement(type.id)"
+                      >
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+               <!-- <div class="pagination alternate">
+            <ul>
+              <li :class="{ disabled: page == 0 }">
+                <a @click.prevent="precedent()" href="#">Précedent</a>
+              </li>
+              <li
+                v-for="(titre, index) in partition(listeordrepaiementProvisoire, size)
+                  .length"
+                :key="index"
+                :class="{ active: active_el == index }"
+              >
+                <a @click.prevent="getDataPaginate(index)" href="#">{{
+                  index + 1
+                }}</a>
+              </li>
+              <li
+                :class="{
+                  disabled:
+                    page == partition(listeordrepaiementProvisoire, size).length - 1,
+                }"
+              >
+                <a @click.prevent="suivant()" href="#">Suivant</a>
+              </li>
+            </ul>
+          </div> -->
   </div>
 </template>
   
@@ -649,8 +654,8 @@ created() {
       "structuresDecision",
       "plans_Decision",
     ]),
-   
-listeOpdiffere() {
+
+   listeOpdiffere() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettershistoriqueDecisionCfOP.filter(
@@ -662,8 +667,6 @@ listeOpdiffere() {
         }
       };
     },
-   
-   
     EurreurCorrige() {
       return (id) => {
         if (id != null && id != "") {
@@ -900,7 +903,7 @@ listeOpdiffere() {
     },
     listeordrepaiementProvisoire() {
       return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op == null  && qtreel.unite_administrative_id == this.marcheid && qtreel.type_ordre_paiement==2 && qtreel.decision_cf==0
+        (qtreel) => qtreel.diff_op == null  && qtreel.unite_administrative_id == this.marcheid && qtreel.type_ordre_paiement==2 && qtreel.decision_cf == 0
       );
     },
     
@@ -936,24 +939,83 @@ afficherModalModifierTitre(id) {
       this.page++;
     },
 
-    DetacheMotif(id) {
+   DetacheMotif(id) {
       this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
         (item) => item.id == id
       );
       this.ModifierMotif();
     },
-    
-    ModalOpAnnulation(id) {
-      this.$("#decisionAnnulation").modal({
-        backdrop: "static",
-        keyboard: false,
-      });
-      this.EditAnulation = this.gettersgestionOrdrePaiement.find(
+    DetacheMotifAttache(id) {
+      this.EditDetache = this.gettershistoriqueDecisionCfOP.find(
         (item) => item.id == id
       );
+
+      this.ModifierMotifAttche();
+    },
+
+    ModifierMotif() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 1,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    ModifierMotifAttche() {
+      var objet = {
+        id: this.EditDetache.id,
+        decision_cf: this.EditDetache.decision_cf,
+        famille_motif: this.EditDetache.famille_motif,
+        motif: this.EditDetache.motif,
+        date_decision: this.EditDetache.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.EditDetache.id_op,
+      };
+      this.modifierHistoriqueDecisionOp(objet);
+    },
+
+    AfficheBoutonAjouter() {
+      this.affiche_filtre1 = !this.affiche_filtre1;
+    },
+    filter() {
+      this.affiche_filtre = !this.affiche_filtre;
+    },
+    ajouterLiquidation() {
+      this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });
+    },
+    modifierTypeTexteLocal() {
+      var nouveauObjet = {
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision: this.editMandat.date_decision_cf,
+        diff_decision: 0,
+        id_op: this.editMandat.id,
+      };
+        var nouveauObjet1 = {
+          ...this.editMandat,
+        decision_cf: this.editMandat.decision_cf,
+        famille_motif: this.editMandat.famille_motif,
+        motif: this.editMandat.motif,
+        date_decision_cf: this.editMandat.date_decision_cf,
+        // diff_op: 0,
+        id: this.editMandat.id,
+      };
+      this.ajouterHistoriqueDecisionOp(nouveauObjet);
+      this.modifierGestionOrdrePaiement(nouveauObjet1);
+      this.$("#validationOpDefinitif12").modal("hide");
+    },
+    modifierDecisionFinal() {
+      this.modifierGestionOrdrePaiement(this.editDecisionFinal);
+      this.$("#validationOpDefinitif12").modal("hide");
     },
     apercuFacture0(id) {
-      this.$("#validationOpDefinitif1").modal({
+      this.$("#validationOpDefinitif12").modal({
         backdrop: "static",
         keyboard: false,
       });
@@ -1003,7 +1065,7 @@ afficherModalModifierTitre(id) {
 
 <style scoped>
 .tailgrand {
-  width: 65%;
+  width: 54%;
   margin: 0 -30%;
   height: 50%;
 }
