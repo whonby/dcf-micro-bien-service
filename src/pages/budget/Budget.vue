@@ -130,7 +130,7 @@
                                         <td>{{data["UA"]}}</td>
                                         <td>{{data["ZONE"]}}</td>
                                         <td>{{data["ACTION"]}}</td>
-                                        <td>{{data["ACTION"]}}</td>
+                                        <td>{{data["ACTIVITE"]}}</td>
                                         <td>{{data["TYPE FINANCEMENT"]}}</td>
                                         <td>{{data["SOURCE FINANCEMENT"]}}</td>
                                         <td>{{data["LIGNE"]}}</td>
