@@ -52,14 +52,14 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th style="width:90%">OBJET</th>
+                    <th>OBJET</th>
                    
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                       <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService" :key="type">
-<td style="font-size:16px;color:#000;text-align:center">{{libelleAutreDepense(type)  || 'Non renseigné'}}</td>
+<td style="font-size:16px;color:#000;">{{libelleAutreDepense(type)  || 'Non renseigné'}}</td>
  <td >
       <button
                        

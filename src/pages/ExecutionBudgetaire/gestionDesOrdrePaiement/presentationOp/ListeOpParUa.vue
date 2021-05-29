@@ -8,17 +8,9 @@
     <table class="table table-bordered table-striped">
           <td style="width: 15%"></td>
           <td style="width: 0%; font-weight: bolder; color: #000">
-            <div align="right" style="cursor: pointer">
-              <button
-                class="btn btn-success"
-                @click.prevent="ajouterOpSysteme"
-                style="font-weight: bolder; color: #fff; font-size: 20px"
-              >
-                <i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i>
-              </button>
-            </div>
+            
           </td>
-          <td style="width: 0px">
+          <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-danger"
@@ -30,8 +22,8 @@
                 >
               </button>
             </div>
-          </td>
-          <td style="width: 0px">
+          </td> -->
+          <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-primary"
@@ -43,8 +35,18 @@
                 >
               </button>
             </div>
+          </td> -->
+          <td style="width: 25%">
+<div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="ajouterOpSysteme"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i>
+              </button>
+            </div>
           </td>
-          <td style="width: 25%"></td>
         </table>
           
     <div class="container-fluid">
@@ -304,7 +306,7 @@ idUaBudgetEclate() {
                 window.history.back()
             },
     ajouterOpSysteme() {
-      this.$router.push({ name: "AjoutOrdrePaiement" });
+      this.$router.push({ name: "formulaireAjoutOp" });
     },
     ajouterOpAnnulation() {
       this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });

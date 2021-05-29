@@ -15,7 +15,7 @@ Ajouter Facture
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Ajouter Ordre Paiement Direct</h5>
+            <h5>Ajouter OP Provisoire</h5>
              
             <!-- <div align="right">
                 Search:
@@ -38,15 +38,36 @@ Ajouter Facture
                   </div>
                 </div>
               </td>
-             
-              <td>
+              <!-- <td>
                 <div class="control-group">
-                  <label
-                    class="control-label"
-                    
-                    >Numéro OP
+                  <label class="control-label"
+                    >Type Ordre paiement
                     <code style="color: red; font-size: 16px">*</code></label
                   >
+                  <div class="controls">
+                    <select
+                      v-model="formData.type_ordre_paiement"
+                      class="span"
+                      style="border: 1px solid #000"
+                    >
+                      <option></option>
+                      <option value="1">ORDRE DE PAIEMENT DIRECT</option>
+                      <option value="2">ORDRE DE PAIEMENT PROVISOIRE</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </td> -->
+              <td>
+                <div class="control-group">
+                  
+                  <label
+                    class="control-label"
+                   
+                    >Numéro OP Provisoire
+                    <code style="color: red; font-size: 16px">*</code></label
+                  >
+                 
                   <div class="controls">
                     <input
                       type="text"
@@ -694,12 +715,7 @@ Ajouter Facture
                             <label class="control-label">Compte Fournisseur</label>
 
                             <div class="controls">
-                              <!-- <input
-                                :value="Numero_adresse_Entreprise(formData45.nom_autre_depense)"
-                                type="text"
-                                style="border: 1px solid #000"
-                                class="span"
-                              /> -->
+                             
                               <select
                                 v-model="formData45.compte_autre_depense"
                                 class="span"
@@ -716,6 +732,37 @@ Ajouter Facture
                             </div>
                           </div>
                         </td>
+
+                        <!-- <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >COMPTE CONTRIBUABLE</label
+                            >
+
+                            <div class="controls">
+                              <input
+                                v-model="formData45.compte_autre_depense"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td> -->
+                        <!-- <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">ADRESSE</label>
+
+                            <div class="controls">
+                              <input
+                                v-model="formData45.adresse"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td> -->
 
                         <!-- <td colspan="">
                           <div class="control-group">
@@ -1996,17 +2043,15 @@ Ajouter Facture
               <div class="control-group">
                 <label class="control-label">Numéro ordre</label>
                 <div class="controls">
-                 
                   <input
-                    
+                   
                     type="text"
-                    :value="
-                      numeroOrdreDefinitive(formData.numero_ordre_paiement)
-                    "
+                    :value="numeroOrdre(formData.numero_ordre_paiement)"
                     class="span"
-                    placeholder="Saisir le libellé"
+                    placeholder=""
                     readonly
                   />
+                 
                 </div>
               </div>
             </td>
@@ -2096,7 +2141,17 @@ Ajouter Facture
                 </div>
               </div>
             </td>
-           
+            <!-- <td>
+              <div class="control-group">
+                <label class="control-label">Exonéré</label>
+                <div class="controls">
+                  <select v-model="formData9.exonere" class="span">
+                    <option value="0">Oui</option>
+                    <option value="1">Non</option>
+                  </select>
+                </div>
+              </div>
+            </td> -->
           </tr>
         </table>
       </div>
@@ -2232,7 +2287,7 @@ Ajouter Facture
                   <!-- <input
                     type="number"
                     v-model="FormDataFacture.quantite"
-                    class="span"
+                    class="span4"
                   /> -->
                    <money
                      v-model="FormDataFacture.quantite"
@@ -2249,7 +2304,7 @@ Ajouter Facture
                   <!-- <input
                 type="number"
                 v-model="FormDataFacture.prix_unitaire"
-                class="span"
+                class="span4"
                 
               /> -->
                   <money
@@ -2321,7 +2376,7 @@ Ajouter Facture
                   <!-- <input
                 type="text"
                 :value="MontantFactureHt"
-                class="span"
+                class="span4"
                 readonly
               /> -->
                   <money
@@ -2384,7 +2439,7 @@ Ajouter Facture
                   <!-- <input
                     type="number"
                     v-model="FormDataFacture.quantite"
-                    class="span"
+                    class="span4"
                   /> -->
                    <money
                      v-model="editFacture.quantite"
@@ -2610,7 +2665,7 @@ export default {
       decision_cf: "",
     };
   },
-props:["macheid"],
+
   created() {},
   computed: {
     admin: admin,
@@ -2751,8 +2806,6 @@ props:["macheid"],
       "sources_financements",
       "types_financements",
     ]),
-
-
 AfficheBanqueEntreprise() {
       return (id) => {
         if (id != null && id != "") {
@@ -4218,7 +4271,33 @@ afficherModalModifierFacture(id) {
      
       this.editFacture= this.listeFacturePiece(this.formData.numero_ordre_paiement).find(item=>item.id==id);
     },
-   
+    // RecupdateActeEffetFinancier(){
+    //   //let vm =this;
+    //     if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
+    //       const qtreel = this.acteEffetFinanciers.find(
+    //       (qtreel)=> qtreel.marche_id == this.formData2.marche_id
+    //     );
+    //    // vm.editMarcheDate==
+
+    //      if(qtreel.date_debut_exectuion_definitif ==null ){
+    //   //     return this.$("#exampleModalligneEco").modal({
+    //   //    backdrop: "static",
+    //   //     keyboard: false
+    //   //  });
+    //   alert('ok')
+
+    //      }
+
+    //     else{
+
+    //        alert('ok')
+    //     }
+
+    //     }else{
+    //       return 0;
+    //     }
+
+    //   },
 
     ValiderDateUpdate() {
 
@@ -4279,22 +4358,20 @@ afficherModalModifierFacture(id) {
       // };
     },
     AjoutePieceJustific() {
-   
-        // this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
-        var nouvelObjetdefinitive = {
-          numero_ordre: this.numeroOrdreDefinitive(
-            this.formData.numero_ordre_paiement
-          ),
-          //numero_ordrepaiement:this.formData.numero_ordre_paiement,
+     
+        //this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
+        var nouvelObjetProforma = {
+          numero_ordre: this.numeroOrdre(this.formData.numero_ordre_paiement),
+          // numero_ordrepaiement:this.formData.numero_ordre_paiement,
           //numero_ordre_paiement_combine:this.intitule,
           libelle: this.formData1.libelle,
           reference: this.formData1.reference,
           date_piece: this.formData1.date_piece,
-          etat_piece: "definitive",
+          etat_piece: "proforma",
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
         };
 
-        this.ajouterPieceJustificative(nouvelObjetdefinitive);
+        this.ajouterPieceJustificative(nouvelObjetProforma);
         this.ajouterFichierJoin();
         this.$("#exampleModal").modal("hide");
         this.formData1 = {
@@ -4307,25 +4384,78 @@ afficherModalModifierFacture(id) {
       
     },
 
+    rechercheListeMarche() {
+      // console.log(this.formMandater.matricule_m)
+
+      let objetMandater = this.acteEffetFinanciers.filter(
+        (item) =>
+          item.numero_marche == this.formData2.numeromarche &&
+          item.ua_id == this.formData.unite_administrative_id &&
+          this.afficherAttributMarche(item.marche_id) == 2
+      );
+      // console.log(objetMandater)
+      if (objetMandater != undefined) {
+        if (objetMandater.length == 1) {
+          let acteur = this.acteEffetFinanciers.find(
+            (item) => item.numero_marche == this.formData2.numeromarche
+          );
+          (this.formData2.nom_entreprise_id = acteur.entreprise_id),
+            (this.formData2.compte_entreprise_id = acteur.entreprise_id),
+            (this.formData2.adresse_entreprise_id = acteur.entreprise_id),
+            (this.formData2.banque_entreprise_id = acteur.banq_id),
+            (this.formData2.marche_id = acteur.marche_id),
+            (this.formData2.livrable_id = acteur.marche_id),
+            (this.formData2.beneficiaire_id = acteur.unite_administrative_id),
+            (this.formData2.geo_id = acteur.marche_id),
+            (this.formData2.dure_realisation = acteur.duree),
+            (this.formData7.Montant_Marche = acteur.montant_act);
+          this.message_mandater = " ";
+        } else {
+          this.message_mandater = "Numero du marche n'existe pas";
+          this.formData2.numero_cc_fournisseur_nom = "";
+          (this.formData2.nom_entreprise_id = ""),
+            (this.formData2.compte_entreprise_id = ""),
+            (this.formData2.adresse_entreprise_id = ""),
+            (this.formData2.banque_entreprise_id = ""),
+            (this.formData2.marche_id = ""),
+            (this.formData2.livrable_id = ""),
+            (this.formData2.beneficiaire_id = ""),
+            (this.formData2.geo_id = ""),
+            (this.formData2.dure_realisation = ""),
+            (this.formData7.Montant_Marche = "");
+        }
+      }
+      if (this.formData2.numero_marche == "") {
+        (this.formData2.nom_entreprise_id = ""),
+          (this.formData2.compte_entreprise_id = ""),
+          (this.formData2.adresse_entreprise_id = ""),
+          (this.formData2.banque_entreprise_id = ""),
+          (this.formData2.marche_id = ""),
+          (this.formData2.livrable_id = ""),
+          (this.formData2.beneficiaire_id = ""),
+          (this.formData2.geo_id = ""),
+          (this.formData2.dure_realisation = ""),
+          (this.formData7.Montant_Marche = "");
+      }
+    },
 
     ajouterFichierJoin() {
-   
+     
         const formData = new FormData();
-        this.intitule =
-          this.anneeAmort + "" + this.formData.numero_ordre_paiement;
-        formData.append("fichier", this.selectedFile, this.selectedFile.name);
+        //this.intitule = this.anneeAmort + "" + this.formData.numero_ordre_paiement
+        formData.append("budgeteclateimport", this.selectedFile, this.selectedFile.name);
 
-        // formData.append('numero_ordre_paiement_combine', this.intitule);
+        //formData.append('numero_ordre_paiement_combine', this.intitule);
         // formData.append('numero_ordrepaiement', this.formData.numero_ordre_paiement);
+        formData.append(
+          "numero_fichier",
+          this.numeroOrdre(this.formData.numero_ordre_paiement)
+        );
         formData.append(
           "numero_op_hors_sib",
           this.formData.numero_ordre_paiement
         ),
-          formData.append(
-            "numero_fichier",
-            this.numeroOrdre(this.formData.numero_ordre_paiement)
-          );
-        formData.append("etat_piece", "definitive");
+          formData.append("etat_piece", "proforma");
         let config = {
           header: {
             "Content-Type": "multipart/form-data",
@@ -4336,45 +4466,41 @@ afficherModalModifierFacture(id) {
     },
 
     ajouterFacture() {
-   
-        //this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
-        var nouvelObjetdefinitive = {
+    
+        var nouvelObjetproforma = {
           ...this.FormDataFacture,
           total_facture_ht: this.MontantFactureHt,
-          //	numero_ordre_paiement_engagement:this.intitule,
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
-          etat_acticle: "definitive",
-           montant_ttc:this.MontantFactureTTC,
+          etat_acticle: "proforma",
+          montant_ttc:this.MontantFactureTTC,
           taux:this.afficherEnorere,
           exonere:this.FormDataFacture.exonere
         };
 
-        this.ajouterDossierFacture(nouvelObjetdefinitive);
+        this.ajouterDossierFacture(nouvelObjetproforma);
         this.FormDataFacture = {
           designation: "",
           quantite: "0",
           prix_unitaire: "0",
           total_facture_ht: "0",
         };
-      
+       
     },
 
  FonctionModifierFacture() {
-  
-        //this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
-        var nouvelObjetdefinitive = {
+    
+        var nouvelObjetproforma = {
           ...this.editFacture,
           total_facture_ht: this.MontantFactureHtModifier,
-           numero_ordrepaiement: this.formData.numero_ordre_paiement,
-         
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
-          etat_acticle: "definitive",
-           montant_ttc:this.MontantFactureTTCModifier,
+          numero_ordrepaiement: this.formData.numero_ordre_paiement,
+          etat_acticle: "proforma",
+          montant_ttc:this.MontantFactureTTCModifier,
           taux:this.afficherEnorereModifeir,
           exonere:this.editFacture.exonere
         };
 
-        this.modifierDossierFacture(nouvelObjetdefinitive);
+        this.modifierDossierFacture(nouvelObjetproforma);
         this.$("#modificationModal").modal('hide');
         this.FormDataFacture = {
           designation: "",
@@ -4382,9 +4508,9 @@ afficherModalModifierFacture(id) {
           prix_unitaire: "0",
           total_facture_ht: "0",
         };
-      
+     
     },
-    AjouterOrdrePaiement() {
+AjouterOrdrePaiement() {
     
         if (this.formData.typedepense == "Marche") {
         if(this.ResteAPayeSurMarche == 0 ){
@@ -4400,7 +4526,7 @@ afficherModalModifierFacture(id) {
             this.formData12.objet_decompte;
           var nouvelObjetOrdrePaiement123 = {
             exercice: this.anneeAmort,
-            type_ordre_paiement:1,
+            type_ordre_paiement:2,
             numero_ordre_paiement: this.intitule,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             section_id: this.idSection(
@@ -4504,7 +4630,7 @@ this.$notify({
           var nouvelObjetOrdrePaiement = {
             exercice: this.anneeAmort,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            type_ordre_paiement: 1,
+            type_ordre_paiement: 2,
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
@@ -4598,7 +4724,7 @@ this.$notify({
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             diff_op_personnel:this.formData.diff_op_personnel,
              mois_paiement: this.formData.mois_paiement,
-            type_ordre_paiement: 1,
+            type_ordre_paiement: 2,
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
@@ -4710,7 +4836,7 @@ this.$notify({
             
           var nouvelObjetOrdrePaiement1 = {
             exercice: this.anneeAmort,
-            type_ordre_paiement: 1,
+            type_ordre_paiement: 2,
             numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(

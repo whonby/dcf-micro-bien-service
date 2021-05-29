@@ -148,7 +148,7 @@ import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegi
 import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
-
+import formulaireAjoutOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOp.vue"
 import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
 import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
@@ -173,6 +173,11 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [ 
+    {
+        path: "/formulaireAjoutOp",
+        name: "formulaireAjoutOp",
+        component: formulaireAjoutOp
+    },
     {
         path: "/ListeProcedureTypeDepense",
         name: "ListeProcedureTypeDepense",

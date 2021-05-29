@@ -2,11 +2,11 @@
 <template>
   <div class="container-fluid">
     <hr />
-    <div align="left" style="cursor: pointer">
+    <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
         Page Précédente
       </button>
-    </div>
+    </div> -->
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -102,7 +102,7 @@
                     <input
                       type="date"
                       style="border: 1px solid #000; font-size: 15px"
-                       v-model="formData.date_op_definitif"
+                       v-model="formData.date_op"
                       class="span"
                     />
                   </div>
