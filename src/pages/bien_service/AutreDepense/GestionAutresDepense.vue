@@ -62,10 +62,8 @@
 <td style="font-size:16px;color:#000;">{{libelleAutreDepense(type)  || 'Non renseigné'}}</td>
  <td >
       <button
-                       
                         class="btn btn-danger tailBtn"
                         @click="afficherModalModifierTypeTexte(type)"
-                        
                       >
                         <span
                           style="
