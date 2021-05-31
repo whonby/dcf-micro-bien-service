@@ -247,7 +247,7 @@ created() {
 NombreOpDefinitifEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -255,7 +255,7 @@ NombreOpDefinitifEnAttente() {
     NombreOpDefinitifDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -263,7 +263,7 @@ NombreOpDefinitifEnAttente() {
      NombreOpDefinitifRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -271,7 +271,7 @@ NombreOpDefinitifEnAttente() {
      NombreOpDefinitifVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -279,7 +279,7 @@ NombreOpDefinitifEnAttente() {
      NombreOpDefinitifViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -289,7 +289,7 @@ NombreOpDefinitifEnAttente() {
 NombreOpDirectEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -297,7 +297,7 @@ NombreOpDirectEnAttente() {
     NombreOpDirectDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -305,7 +305,7 @@ NombreOpDirectEnAttente() {
      NombreOpDirectRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -313,7 +313,7 @@ NombreOpDirectEnAttente() {
      NombreOpDirectVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -321,7 +321,7 @@ NombreOpDirectEnAttente() {
      NombreOpDirectViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -335,7 +335,7 @@ NombreOpDirectEnAttente() {
  NombreOpAnnulationEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -343,7 +343,7 @@ NombreOpDirectEnAttente() {
     NombreOpAnnulationDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -351,7 +351,7 @@ NombreOpDirectEnAttente() {
      NombreOpAnnulationRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -359,7 +359,7 @@ NombreOpDirectEnAttente() {
      NombreOpAnnulationVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -367,7 +367,7 @@ NombreOpDirectEnAttente() {
      NombreOpAnnulationViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -403,7 +403,7 @@ NombreOpDirectEnAttente() {
     NombreOpProvisoireEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -411,7 +411,7 @@ NombreOpDirectEnAttente() {
     NombreOpProvisoireDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -419,7 +419,7 @@ NombreOpDirectEnAttente() {
      NombreOpProvisoireRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -427,7 +427,7 @@ NombreOpDirectEnAttente() {
      NombreOpProvisoireVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -435,7 +435,7 @@ NombreOpDirectEnAttente() {
      NombreOpProvisoireViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op != null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -443,8 +443,8 @@ NombreOpDirectEnAttente() {
       NombreDemandeEnAttenteOpProvisoire() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==2 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -453,8 +453,8 @@ NombreOpDirectEnAttente() {
         NombreDemandeEnAttenteOpAnnulation() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==3 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -462,8 +462,8 @@ NombreOpDirectEnAttente() {
         NombreDemandeEnAttenteOpDirect() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==1 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -471,8 +471,8 @@ NombreOpDirectEnAttente() {
         NombreDemandeEnAttenteOpDefinitif() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==4 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -480,8 +480,8 @@ NombreOpDirectEnAttente() {
      NombreDemandeEnAttenteEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==0 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.decision_cf==0 ).length;
 
         }
       };
@@ -489,8 +489,8 @@ NombreOpDirectEnAttente() {
          NombreDemandeDiffereEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==2 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.decision_cf==2 ).length;
 
         }
       };
@@ -498,8 +498,8 @@ NombreOpDirectEnAttente() {
  NombreDemandeRejeteEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==3 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.decision_cf==3 ).length;
 
         }
       };
@@ -507,8 +507,8 @@ NombreOpDirectEnAttente() {
    NombreDemandeViseEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==8 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.decision_cf==8 ).length;
 
         }
       };
@@ -516,8 +516,8 @@ NombreOpDirectEnAttente() {
     NombreDemandeViseObservationEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==9).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op != null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op != null &&  qtreel.decision_cf==9).length;
 
         }
       };
