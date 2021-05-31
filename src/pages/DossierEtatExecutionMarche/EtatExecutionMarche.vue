@@ -1151,6 +1151,7 @@ AfficheLogODCF() {
   }
 }
 </script>
+
 <style scoped>
   table{
     border-collapse: collapse

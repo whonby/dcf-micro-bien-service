@@ -148,7 +148,7 @@ import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegi
 import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
-
+import formulaireAjoutOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOp.vue"
 import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
 import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
@@ -162,13 +162,22 @@ import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestio
 import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
 import ListeProcedureTypeDepense from "../../pages/ExecutionBudgetaire/gestionSigobe/ListeProcedureTypeDepense.vue"
 import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution1.vue"
+import PagePrincipalExecutionHorsSig from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/PagePrincipalExecutionHorsSig.vue"
+import principalExecutionSousBudget from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DocOpSousBudget/principalExecutionSousBudget.vue"
+
+
 import Detailexecution from "../../pages/ExecutionBudgetaire/gestionSigobe/Detailexecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
-const BienServiceRoutes = [
+const BienServiceRoutes = [ 
+    {
+        path: "/formulaireAjoutOp",
+        name: "formulaireAjoutOp",
+        component: formulaireAjoutOp
+    },
     {
         path: "/ListeProcedureTypeDepense",
         name: "ListeProcedureTypeDepense",
@@ -183,6 +192,16 @@ const BienServiceRoutes = [
         path: "/listeProcedureDroitCommun",
         name: "listeProcedureDroitCommun",
         component: listeProcedureDroitCommun
+    },
+    {
+        path: "/PagePrincipalExecutionHorsSig/:id",
+        name: "PagePrincipalExecutionHorsSig",
+        component: PagePrincipalExecutionHorsSig
+    },
+    {
+        path: "/principalExecutionSousBudget/:id",
+        name: "principalExecutionSousBudget",
+        component: principalExecutionSousBudget
     },
     {
         path: "/VoirModaliteExecution/:id",

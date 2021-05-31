@@ -2,11 +2,11 @@
 <template>
   <div class="container-fluid">
     <hr />
-    <div align="left" style="cursor: pointer">
+    <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
         Page Précédente
       </button>
-    </div>
+    </div> -->
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -70,7 +70,7 @@
                           </model-list-select>
                          
                         </td>
-              <td>
+              <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Type Ordre de paiement</label>
 
@@ -84,11 +84,11 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
               <td>
                 <div class="control-group">
                   <label class="control-label"
-                    >Numéro Ordre paiement D'Annulation<code
+                    >Numéro OP Annulation<code
                       style="color: red; font-size: 16px"
                       >*</code
                     ></label
@@ -107,7 +107,7 @@
               <td>
                 <div class="control-group">
                   <label class="control-label"
-                    >Date Ordre paiement D'Annulation<code
+                    >Date OP Annulation<code
                       style="color: red; font-size: 16px"
                       >*</code
                     ></label
@@ -117,7 +117,7 @@
                     <input
                       type="date"
                       style="border: 1px solid #000; font-size: 15px"
-                      v-model="formData.date_op_annulation"
+                      v-model="formData.date_op"
                       class="span"
                     />
                   </div>
@@ -2568,7 +2568,7 @@ numeroOp() {
           const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.numero_op_prov_definitive;
+            return qtereel.numero_ordre_paiement;
           }
           return 0;
         }
@@ -4288,7 +4288,7 @@ afficherModalAjouterFacture() {
           // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
           numero_ordre_paiement: this.intitule,
           type_ordre_paiement: 3,
-          date_op_annulation: this.formData.date_op_annulation,
+          date_op: this.formData.date_op,
           id_op_definitif: this.detailOpProvisoire.numero_ordre_paiement,
           section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
           programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
@@ -4384,7 +4384,7 @@ id:this.detailOpProvisoire.numero_ordre_paiement,
           // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
           numero_ordre_paiement: this.intitule,
           type_ordre_paiement: 3,
-          date_op_annulation: this.formData.date_op_annulation,
+          date_op: this.formData.date_op,
           id_op_definitif: this.detailOpProvisoire.numero_ordre_paiement,
           section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
           programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),

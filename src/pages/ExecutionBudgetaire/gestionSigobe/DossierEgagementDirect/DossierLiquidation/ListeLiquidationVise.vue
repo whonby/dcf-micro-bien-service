@@ -61,7 +61,7 @@
                       </button>
                     </td>
                     <td>
-                      <router-link :to="{ name: 'VoirModaliteExecution', params: { id: type }}"
+                      <router-link :to="{ name: 'Detailexecution', params: { id: type, id1:2}}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Detail</i></span>
                    </router-link> 
