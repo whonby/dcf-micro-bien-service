@@ -338,9 +338,49 @@ reference_marche
                     </td>
 
                     <td>
+                      <span v-if="marche.plan_passation_marche_id == null">
+
                       <button
                         v-if="marche.attribue == 2"
-                        class="btn btn-warning"
+                        class="btn btn-warning annimB"
+                      >
+                        <span title="MARCHE EN EXERCUTION" style="">EX</span>
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 1"
+                        class="btn btn-success annimB"
+                      >
+                        <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
+                          >CT</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 3"
+                        class="btn btn-info annimB"
+                      >
+                        <span title="MARCHE RESILIE">RE</span>
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 5"
+                        class="btn btn-inverse annimB"
+                      >
+                        <span title="MARCHE TERMINE">TE</span>
+                      </button>
+                      <button v-else-if="marche.attribue == 7" class="btn btn annimB">
+                        <span title="MARCHE SUSPENDU">SU</span>
+                      </button>
+                      <button v-else class="btn btn-danger annimB">
+                        <span title="MARCHE EN PLANIFICATION">PL</span>
+                      </button>
+
+                      </span>
+
+
+                       <span v-else>
+
+                      <button
+                        v-if="marche.attribue == 2"
+                        class="btn btn-warning "
                       >
                         <span title="MARCHE EN EXERCUTION" style="">EX</span>
                       </button>
@@ -370,6 +410,8 @@ reference_marche
                       <button v-else class="btn btn-danger">
                         <span title="MARCHE EN PLANIFICATION">PL</span>
                       </button>
+
+                      </span>
                     </td>
                     <td>
                       <span v-if="marche.plan_passation_marche_id == null"
@@ -2063,4 +2105,32 @@ export default {
   margin: 0 -530px;
   height: 550px;
 }
+
+
+
+.annimB{
+    font-weight: bold;
+    color:red;
+    animation:blinkButton 1s infinite;
+    
+}
+@keyframes blinkButton {
+    0%{opacity:0.1;}
+    50%{opacity:1; box-shadow: 1px 0px 30px yellow;}
+    100%{
+        opacity:0.1;
+    }
+    
+}
+.annimT{
+        color:yellow;
+        animation:blinkText 1s  infinite;
+    }
+    @keyframes blinkText {
+        0%{opacity:0.1;}
+    50%{opacity:1; text-shadow: 1px 0px 30px yellow;}
+    100%{
+        opacity:0.1;
+    }
+    }
 </style>

@@ -216,7 +216,6 @@ const SUPPRIMER_STRUCTURE_ADMINISTRATIVE = (state, id) =>{
 
 // get all plan programme
 const GET_PLAN_PROGRAMME = (state , tableau_plan_programme) => {
-
     state.plans_programmes = tableau_plan_programme
 }
 
@@ -229,6 +228,7 @@ const AJOUTER_PLAN_PROGRAMME = (state , objetAjout) =>{
 const IMPORT_PLAN_PROGRAMME = (state , objetAjout) =>{
     state.plans_programmes.unshift(objetAjout)
 }
+
 // modifier plan programme
 const MODIFIER_PLAN_PROGRAMME = (state, nouveau_objet) =>{
     state.plans_programmes = state.plans_programmes.map( plan_programme => {

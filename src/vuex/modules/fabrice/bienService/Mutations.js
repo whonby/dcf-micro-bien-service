@@ -3212,3 +3212,10 @@ export const MODIFIER_BAILLEUR_DMD = (state, elementModif)=>{
 export const SUPPRIMER_BAILLEUR_DMD = (state, id)=> {
     state.BailleurDmdEngagements = state.BailleurDmdEngagements.filter(prest => prest.id !=id)
 }
+
+export const MODIFIER_DECISION = (state, elementModif)=>{
+    state.MandatOp = state.MandatOp.map(elementModif)
+}
+
+
+
