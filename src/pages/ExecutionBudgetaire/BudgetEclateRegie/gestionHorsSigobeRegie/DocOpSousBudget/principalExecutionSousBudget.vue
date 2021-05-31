@@ -9,7 +9,7 @@
         <br>
          <br>
         <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
-            <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
+            <h5 style="text-align: center;font-size:15px">CONTROLE D'EXECUTION : {{LibelleSousBudget(marcheid)}}</h5>
             </a> </div>
   
         <div class="widget-box collapsible">
@@ -42,7 +42,7 @@
              <div>
 <div class="widget-box collapsible">
     <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#PROVISOIRE" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP PROVISOIRE ({{NombreDemandeEnAttenteOpProvisoire(marcheid)}}) :</h5>             <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpProvisoireEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpProvisoireDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpProvisoireRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpProvisoireVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpProvisoireViseO(marcheid)}})</h5>
+            <h5 style="color:#000!important;font-size:15px;">OP PROVISOIRE ({{NombreDemandeEnAttenteOpProvisoire(marcheid)}}) :</h5>             <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpProvisoireEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpProvisoireDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpProvisoireRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpProvisoireVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpProvisoireViseO(marcheid)}})</h5>
             </a> 
             </div>
             <br>
@@ -55,7 +55,7 @@
            
             <!-- DEBUT LIQUIDATION -->
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#ANNULATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP ANNULATION ({{NombreDemandeEnAttenteOpAnnulation(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpAnnulationEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpAnnulationDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpAnnulationRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpAnnulationVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpAnnulationViseO(marcheid)}})</h5>
+            <h5 style="color:#000!important;font-size:15px;">OP ANNULATION ({{NombreDemandeEnAttenteOpAnnulation(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpAnnulationEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpAnnulationDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpAnnulationRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpAnnulationVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpAnnulationViseO(marcheid)}})</h5>
             </a> 
             </div>
             <br>
@@ -72,7 +72,7 @@
              <!-- DEBUT MANDAT -->
              
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#DEFINITIF" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP DEFINITIF ({{NombreDemandeEnAttenteOpDefinitif(marcheid)}}):</h5><h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDefinitifEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDefinitifDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDefinitifRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDefinitifVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDefinitifViseO(marcheid)}})</h5>
+            <h5 style="color:#000!important;font-size:15px;">OP DEFINITIF ({{NombreDemandeEnAttenteOpDefinitif(marcheid)}}):</h5><h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDefinitifEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDefinitifDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDefinitifRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDefinitifVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDefinitifViseO(marcheid)}})</h5>
             </a> 
            
             
@@ -89,7 +89,7 @@
              
     
          <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#OPDIRECT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP DIRECT ({{NombreDemandeEnAttenteOpDirect(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDirectEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDirectDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDirectRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDirectVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDirectViseO(marcheid)}})</h5>
+            <h5 style="color:#000!important;font-size:15px;">OP DIRECT ({{NombreDemandeEnAttenteOpDirect(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDirectEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDirectDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDirectRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDirectVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDirectViseO(marcheid)}})</h5>
             </a> 
             </div>
             <br>
@@ -240,14 +240,15 @@ created() {
       "GroupeUaReceptrice",
       "transferts",
       "groupeUniteAdministrativeBudgetEclate",
-      "groupeUaSousBudget"
+      "groupeUaSousBudget",
+      "getSousBudget"
       // "chapitres",
       // "sections"
     ]),
 NombreOpDefinitifEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -255,7 +256,7 @@ NombreOpDefinitifEnAttente() {
     NombreOpDefinitifDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -263,7 +264,7 @@ NombreOpDefinitifEnAttente() {
      NombreOpDefinitifRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -271,7 +272,7 @@ NombreOpDefinitifEnAttente() {
      NombreOpDefinitifVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -279,7 +280,7 @@ NombreOpDefinitifEnAttente() {
      NombreOpDefinitifViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==4 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -289,7 +290,7 @@ NombreOpDefinitifEnAttente() {
 NombreOpDirectEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -297,7 +298,7 @@ NombreOpDirectEnAttente() {
     NombreOpDirectDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -305,7 +306,7 @@ NombreOpDirectEnAttente() {
      NombreOpDirectRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -313,7 +314,7 @@ NombreOpDirectEnAttente() {
      NombreOpDirectVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -321,7 +322,7 @@ NombreOpDirectEnAttente() {
      NombreOpDirectViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==1 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -335,7 +336,7 @@ NombreOpDirectEnAttente() {
  NombreOpAnnulationEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -343,7 +344,7 @@ NombreOpDirectEnAttente() {
     NombreOpAnnulationDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -351,7 +352,7 @@ NombreOpDirectEnAttente() {
      NombreOpAnnulationRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -359,7 +360,7 @@ NombreOpDirectEnAttente() {
      NombreOpAnnulationVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -367,7 +368,7 @@ NombreOpDirectEnAttente() {
      NombreOpAnnulationViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==3 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -388,13 +389,13 @@ NombreOpDirectEnAttente() {
 
 
 
-     idUniteAdministrative() {
+     LibelleSousBudget() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle
+        return qtereel.activite_enfant
       }
       return 0
         }
@@ -403,7 +404,7 @@ NombreOpDirectEnAttente() {
     NombreOpProvisoireEnAttente() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -411,7 +412,7 @@ NombreOpDirectEnAttente() {
     NombreOpProvisoireDifere() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -419,7 +420,7 @@ NombreOpDirectEnAttente() {
      NombreOpProvisoireRejete() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -427,7 +428,7 @@ NombreOpDirectEnAttente() {
      NombreOpProvisoireVise() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -435,7 +436,7 @@ NombreOpDirectEnAttente() {
      NombreOpProvisoireViseO() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==2 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.sous_budget_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9 &&  qtreel1.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -443,8 +444,8 @@ NombreOpDirectEnAttente() {
       NombreDemandeEnAttenteOpProvisoire() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==2 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==2 ).length;
 
         }
       };
@@ -453,8 +454,8 @@ NombreOpDirectEnAttente() {
         NombreDemandeEnAttenteOpAnnulation() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==3 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==3 ).length;
 
         }
       };
@@ -462,8 +463,8 @@ NombreOpDirectEnAttente() {
         NombreDemandeEnAttenteOpDirect() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==1 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==1 ).length;
 
         }
       };
@@ -471,8 +472,8 @@ NombreOpDirectEnAttente() {
         NombreDemandeEnAttenteOpDefinitif() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==4 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.type_ordre_paiement==4 ).length;
 
         }
       };
@@ -480,8 +481,8 @@ NombreOpDirectEnAttente() {
      NombreDemandeEnAttenteEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==0 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==0 ).length;
 
         }
       };
@@ -489,8 +490,8 @@ NombreOpDirectEnAttente() {
          NombreDemandeDiffereEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==2 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==2 ).length;
 
         }
       };
@@ -498,8 +499,8 @@ NombreOpDirectEnAttente() {
  NombreDemandeRejeteEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==3 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==3 ).length;
 
         }
       };
@@ -507,8 +508,8 @@ NombreOpDirectEnAttente() {
    NombreDemandeViseEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==8 ).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==8 ).length;
 
         }
       };
@@ -516,8 +517,8 @@ NombreOpDirectEnAttente() {
     NombreDemandeViseObservationEd() {
       return id => {
         if (id != null && id != "") {
-    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.unite_administrative_id == id  && qtreel1.decision_cf==0 ).length;
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==9).length;
+    //        return this.gettersgestionOrdrePaiement.filter(qtreel1.diff_op == null  && qtreel1.sous_budget_id == id  && qtreel1.decision_cf==0 ).length;
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.diff_op == null &&  qtreel.decision_cf==9).length;
 
         }
       };

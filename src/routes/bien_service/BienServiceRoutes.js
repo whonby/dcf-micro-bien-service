@@ -144,8 +144,10 @@ import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gest
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
 import listeDesUaDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/listeDesUaDesRegie.vue"
 import VoirOrdrePaiementDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/VoirOrdrePaiementDesRegie.vue"
+import PagePrincipalExecutionHorsSigRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/gestionHorsSigobeRegie/PagePrincipalExecutionHorsSigRegie.vue"
+
 import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
-import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
+import RecupererToutAjoutOP from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/RecupererToutAjoutOP.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
 import formulaireAjoutOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOp.vue"
@@ -228,6 +230,12 @@ const BienServiceRoutes = [
         path: "/GestionAutresDepense/:id",
         name: "GestionAutresDepense",
         component: GestionAutresDepense
+    },
+    
+    {
+        path: "/PagePrincipalExecutionHorsSigRegie/:id",
+        name: "PagePrincipalExecutionHorsSigRegie",
+        component: PagePrincipalExecutionHorsSigRegie
     },
     {
         path: "/VoirOrdrePaiementDesRegie/:id",
@@ -361,9 +369,9 @@ const BienServiceRoutes = [
     },
     //ajout ordre de paiement 
     {
-        path: "/AjoutOrdrePaiementRegie",
-        name: "AjoutOrdrePaiementRegie",
-        component: AjoutOrdrePaiementRegie
+        path: "/RecupererToutAjoutOP",
+        name: "RecupererToutAjoutOP",
+        component: RecupererToutAjoutOP
     },
     //ajout ordre de paiement annulation
     {

@@ -18,7 +18,7 @@
               </button>
             </div>
           </td>
-          <td style="width: 0px">
+          <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-danger"
@@ -43,7 +43,7 @@
                 >
               </button>
             </div>
-          </td>
+          </td> -->
           <td style="width: 25%"></td>
         </table>
           
@@ -97,7 +97,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'VoirOrdrePaiementDesRegie', params: { id: type }}"
+                      <router-link :to="{ name: 'PagePrincipalExecutionHorsSigRegie', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
@@ -299,7 +299,7 @@ idUaBudgetEclate() {
                 window.history.back()
             },
     ajouterOpSysteme() {
-      this.$router.push({ name: "AjoutOrdrePaiement" });
+      this.$router.push({ name: "RecupererToutAjoutOP" });
     },
     ajouterOpAnnulation() {
       this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });
