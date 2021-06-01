@@ -55,7 +55,7 @@
                           </model-list-select>
                          
                         </td>
-              <td>
+              <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Type Ordre de paiement</label>
 
@@ -69,7 +69,7 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
               <td>
                 <div class="control-group">
                   <label class="control-label"

@@ -1,4 +1,4 @@
-Ajouter Facture
+
 <template>
   <div class="container-fluid">
     {{RechercheNumeroOP}}
@@ -2648,7 +2648,7 @@ props:["macheid"],
       "affichePersonnelRecuActeNormination",
     ]),
     ...mapGetters("uniteadministrative", [
-      "budgetEclate",
+      "BudgetEclateRegie",
       "groupeParBAILLER",
       "groupeLigneEconomiqueBudget",
       "getSousBudget",
@@ -2986,7 +2986,7 @@ affichePersoUA() {
     GrandeNatureId() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.budgetEclate.find(
+          const qtereel = this.BudgetEclateRegie.find(
             (qtreel) => qtreel.ligneeconomique_id == id
           );
 
@@ -3112,7 +3112,7 @@ affichePersoUA() {
     CreditAutoriseSousBudget() {
      return (id, id1, id2, id3) => {
     if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
-          const qtereel = this.budgetEclate.find(
+          const qtereel = this.BudgetEclateRegie.find(
             (qtreel) =>
               qtreel.sous_budget_id == id &&  qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
           );
@@ -3127,7 +3127,7 @@ affichePersoUA() {
     CreditAutorise() {
       return (id, id1, id2, id3) => {
         if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
-          const qtereel = this.budgetEclate.find(
+          const qtereel = this.BudgetEclateRegie.find(
             (qtreel) =>
               qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
               
@@ -3143,7 +3143,7 @@ affichePersoUA() {
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id == 0 && budget.budget_active==1);
+        let objet = this.BudgetEclateRegie.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id == 0 && budget.budget_active==1);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -3163,7 +3163,7 @@ arrayExerciceDecompteBienService() {
     LigneEconomiqueSousBudget() {
       //return (id) => {
         
-        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id  && budget.budget_active==1);
+        let objet = this.BudgetEclateRegie.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id  && budget.budget_active==1);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -3183,7 +3183,7 @@ arrayExerciceDecompteBienService() {
     RecupererlibelleLigneEconomique() {
       return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate.filter(
+          return this.BudgetEclateRegie.filter(
             (qtreel) =>
               qtreel.uniteadministrative_id == id &&
               qtreel.activite_id == id1 &&
@@ -3195,7 +3195,7 @@ arrayExerciceDecompteBienService() {
     libelleLigneEconomiqueParent() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.budgetEclate.find(
+          const qtereel = this.BudgetEclateRegie.find(
             (qtreel) => qtreel.activite_id == id
           );
 
@@ -3223,7 +3223,7 @@ arrayExerciceDecompteBienService() {
     afficheLesSousBudgetLigneBudgetaire() {
       return (id1, id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-          return this.budgetEclate.filter(
+          return this.BudgetEclateRegie.filter(
             (qtreel) => qtreel.activite_id == id1 && qtreel.sous_budget_id == id
           );
         }
@@ -4401,6 +4401,8 @@ afficherModalModifierFacture(id) {
           var nouvelObjetOrdrePaiement123 = {
             exercice: this.anneeAmort,
             type_ordre_paiement:1,
+             sous_budget_id: this.formData.sous_budget_id,
+            diff_op: 1,
             numero_ordre_paiement: this.intitule,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             section_id: this.idSection(
@@ -4419,7 +4421,7 @@ afficherModalModifierFacture(id) {
                 this.formData.activite_id
               )
             ),
-            sous_budget_id: this.formData.sous_budget_id,
+            // sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
             entreprise_id: this.idEntreprise(this.formData2.marche_id),
@@ -4522,7 +4524,9 @@ this.$notify({
                 this.formData.activite_id
               )
             ),
-            sous_budget_id: this.formData.sous_budget_id,
+             sous_budget_id: this.formData.sous_budget_id,
+            diff_op: 1,
+            // sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
             entreprise_id: this.idEntreprise(this.formData2.marche_id),
@@ -4616,7 +4620,9 @@ this.$notify({
                 this.formData.activite_id
               )
             ),
-            sous_budget_id: this.formData.sous_budget_id,
+             sous_budget_id: this.formData.sous_budget_id,
+            diff_op: 1,
+            //sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
             // entreprise_id:this.idEntreprise(this.formData2.marche_id),

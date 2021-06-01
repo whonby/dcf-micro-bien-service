@@ -2007,7 +2007,7 @@ Ajouter Facture
                   <div class="controls">
                     <div data-toggle="buttons-checkbox" class="btn-group">
                       <a
-                       :readOnly="RechercheNumeroOP" 
+                      
                         class="btn btn-primary"
                         @click.prevent="AjouterOrdrePaiement"
                         >Valider</a
@@ -4228,9 +4228,9 @@ this.$notify({
              })
   }
   else{
-    return this.formData.numero_ordre_paiement
+    return ""
   }
-  return 0
+  return ""
 },
     VerificationNumeroOp() {
       return (id) => {

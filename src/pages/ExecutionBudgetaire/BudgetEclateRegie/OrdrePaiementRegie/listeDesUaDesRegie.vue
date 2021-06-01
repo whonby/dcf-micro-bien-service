@@ -44,7 +44,7 @@
               </button>
             </div>
           </td> -->
-          <td style="width: 25%"></td>
+          <!-- <td style="width: 25%"></td> -->
         </table>
           
     <div class="container-fluid">
