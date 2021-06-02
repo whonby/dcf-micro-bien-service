@@ -9,7 +9,7 @@
         <br>
          <br>
         <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
-            <h5 style="text-align: center;font-size:15px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
+            <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
             </a> </div>
   
         <div class="widget-box collapsible">
@@ -42,7 +42,7 @@
              <div>
 <div class="widget-box collapsible">
     <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#PROVISOIRE" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:15px;">OP PROVISOIRE ({{NombreDemandeEnAttenteOpProvisoire(marcheid)}}) :</h5>             <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpProvisoireEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpProvisoireDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpProvisoireRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpProvisoireVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpProvisoireViseO(marcheid)}})</h5>
+            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP PROVISOIRE ({{NombreDemandeEnAttenteOpProvisoire(marcheid)}}) :</h5>             <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpProvisoireEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpProvisoireDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpProvisoireRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpProvisoireVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpProvisoireViseO(marcheid)}})</h5>
             </a> 
             </div>
             <br>
@@ -55,7 +55,7 @@
            
             <!-- DEBUT LIQUIDATION -->
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#ANNULATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:15px;">OP ANNULATION ({{NombreDemandeEnAttenteOpAnnulation(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpAnnulationEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpAnnulationDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpAnnulationRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpAnnulationVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpAnnulationViseO(marcheid)}})</h5>
+            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP ANNULATION ({{NombreDemandeEnAttenteOpAnnulation(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">EN ATTENTE ({{NombreOpAnnulationEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpAnnulationDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpAnnulationRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpAnnulationVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpAnnulationViseO(marcheid)}})</h5>
             </a> 
             </div>
             <br>
@@ -72,7 +72,7 @@
              <!-- DEBUT MANDAT -->
              
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#DEFINITIF" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:15px;">OP DEFINITIF ({{NombreDemandeEnAttenteOpDefinitif(marcheid)}}):</h5><h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDefinitifEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDefinitifDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDefinitifRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDefinitifVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDefinitifViseO(marcheid)}})</h5>
+            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP DEFINITIF ({{NombreDemandeEnAttenteOpDefinitif(marcheid)}}):</h5><h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDefinitifEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDefinitifDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDefinitifRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDefinitifVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDefinitifViseO(marcheid)}})</h5>
             </a> 
            
             
@@ -89,7 +89,7 @@
              
     
          <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#OPDIRECT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:15px;">OP DIRECT ({{NombreDemandeEnAttenteOpDirect(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDirectEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDirectDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDirectRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDirectVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDirectViseO(marcheid)}})</h5>
+            <h5 style="color:#fff!important;font-size:15px;background-color: #537ea1;">OP DIRECT ({{NombreDemandeEnAttenteOpDirect(marcheid)}}) :</h5> <h5 style="color:#000!important;font-size:15px;margin-left:12%">EN ATTENTE ({{NombreOpDirectEnAttente(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">DIFFERE ({{NombreOpDirectDifere(marcheid)}})</h5>            <h5 style="color:#000!important;font-size:15px;margin-left:10%">REJETE ({{NombreOpDirectRejete(marcheid)}})</h5>  <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE({{NombreOpDirectVise(marcheid)}})</h5> <h5 style="color:#000!important;font-size:15px;margin-left:10%">VISE OB ({{NombreOpDirectViseO(marcheid)}})</h5>
             </a> 
             </div>
             <br>

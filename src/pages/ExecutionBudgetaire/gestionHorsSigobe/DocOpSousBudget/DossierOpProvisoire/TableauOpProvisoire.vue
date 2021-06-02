@@ -446,7 +446,7 @@
                   </tr>
                 </tbody>
               </table>
-               <!-- <div class="pagination alternate">
+               <div class="pagination alternate">
             <ul>
               <li :class="{ disabled: page == 0 }">
                 <a @click.prevent="precedent()" href="#">Précedent</a>
@@ -470,7 +470,7 @@
                 <a @click.prevent="suivant()" href="#">Suivant</a>
               </li>
             </ul>
-          </div> -->
+          </div>
   </div>
 </template>
   

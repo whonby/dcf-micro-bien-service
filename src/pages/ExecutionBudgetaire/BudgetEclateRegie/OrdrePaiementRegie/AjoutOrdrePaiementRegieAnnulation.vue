@@ -2,11 +2,11 @@
 <template>
   <div class="container-fluid">
     <hr />
-    <div align="left" style="cursor: pointer">
+    <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
         Page Précédente
       </button>
-    </div>
+    </div> -->
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -70,7 +70,7 @@
                           </model-list-select>
                          
                         </td>
-              <td>
+              <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Type Ordre de paiement</label>
 
@@ -84,11 +84,11 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
               <td>
                 <div class="control-group">
                   <label class="control-label"
-                    >Numéro Ordre paiement D'Annulation<code
+                    >Numéro OP Annulation<code
                       style="color: red; font-size: 16px"
                       >*</code
                     ></label
@@ -107,7 +107,7 @@
               <td>
                 <div class="control-group">
                   <label class="control-label"
-                    >Date Ordre paiement D'Annulation<code
+                    >Date OP Annulation<code
                       style="color: red; font-size: 16px"
                       >*</code
                     ></label
@@ -117,7 +117,7 @@
                     <input
                       type="date"
                       style="border: 1px solid #000; font-size: 15px"
-                      v-model="formData.date_op_annulation"
+                      v-model="formData.date_op"
                       class="span"
                     />
                   </div>
@@ -2568,7 +2568,7 @@ numeroOp() {
           const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.numero_op_prov_definitive;
+            return qtereel.numero_ordre_paiement;
           }
           return 0;
         }
@@ -2599,7 +2599,7 @@ numeroOp() {
       };
     },
 afficheNumeroopProvisoire(){
-  return this.gettersgestionOrdrePaiement.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==8 && item.diff_op != null || item.type_ordre_paiement==1 && item.decision_cf==9 && item.diff_op != null || item.type_ordre_paiement==2 &&  item.decision_cf==8 && item.diff_op != null || item.type_ordre_paiement==2 &&  item.decision_cf==9 && item.diff_op != null || item.type_ordre_paiement==4 &&  item.decision_cf==8 && item.diff_op != null || item.type_ordre_paiement==4 &&  item.decision_cf==9 && item.diff_op != null)
+  return this.gettersgestionOrdrePaiement.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==8 || item.type_ordre_paiement==1 && item.decision_cf==9 || item.type_ordre_paiement==2 &&  item.decision_cf==8 || item.type_ordre_paiement==2 &&  item.decision_cf==9 || item.type_ordre_paiement==4 &&  item.decision_cf==8 || item.type_ordre_paiement==4 &&  item.decision_cf==9)
 },
   RecupererDecisionCf() {
       return (id) => {
@@ -4288,14 +4288,13 @@ afficherModalAjouterFacture() {
           // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
           numero_ordre_paiement: this.intitule,
           type_ordre_paiement: 3,
-          date_op_annulation: this.formData.date_op_annulation,
+          date_op: this.formData.date_op,
           id_op_definitif: this.detailOpProvisoire.numero_ordre_paiement,
           section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
           programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
           unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
           action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
-          sous_budget_id: -1,
-          diff_op: 1,
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
           activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
           ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
           typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),
@@ -4338,8 +4337,7 @@ id:this.detailOpProvisoire.numero_ordre_paiement,
           programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
           unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
           action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
-          sous_budget_id: -1,
-          diff_op: 1,
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
           activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
           ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
           typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),
@@ -4349,7 +4347,7 @@ id:this.detailOpProvisoire.numero_ordre_paiement,
           marche_id: this.RecupererIdMarche(this.detailOpProvisoire.numero_ordre_paiement),
           type_financement_id: this.RecupererIdTypeFinancement(this.detailOpProvisoire.numero_ordre_paiement),
           source_financement_id: this.RecupererIdSousFinancement(this.detailOpProvisoire.numero_ordre_paiement),
-          montant_ordre_paiement: this.SoustratMontantEngage,
+          montant_ordre_paiement: 0,
 
           gestionnaire_credit_non: this.RecupererNomGestionnaire(this.detailOpProvisoire.numero_ordre_paiement),
           gestionnaire_credit_date: this.RecupererDateBenef(this.detailOpProvisoire.numero_ordre_paiement),
@@ -4386,15 +4384,13 @@ id:this.detailOpProvisoire.numero_ordre_paiement,
           // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
           numero_ordre_paiement: this.intitule,
           type_ordre_paiement: 3,
-          date_op_annulation: this.formData.date_op_annulation,
+          date_op: this.formData.date_op,
           id_op_definitif: this.detailOpProvisoire.numero_ordre_paiement,
           section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
           programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
           unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
           action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
-          // sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
-           sous_budget_id: -1,
-          diff_op: 1,
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
           activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
           ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
           typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),

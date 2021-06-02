@@ -39,14 +39,14 @@
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
                
-                            
+                            <h1 style="text-align:center">{{idUniteAdministrative(detailOp.uniteadministrative_id)}}</h1>
                             
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Des Sous Budgets du :{{marcheid}}</h5>
+                            <h5>Listes Des Sous Budgets</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -59,8 +59,8 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Libelle Sous Budget</th>
+                     <!-- <th style="width:20%;font-size:12px" >Code S/Budget</th> -->
+                    <th style="width:80%;font-size:12px" >Libelle Sous Budget</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
                    
@@ -69,8 +69,8 @@
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td>
+                      <!-- <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type[0].sous_budget_id) || 'Non renseigné'}}</td> -->
+                   <td style="font-size:14px;color:#000;font-weight:bold;">{{conversionMajiscule(libelleSOusBudget(type[0].sous_budget_id)) || 'Non renseigné'}}</td>
                    
                    <td >
                       <router-link :to="{ name: 'ListeBudgetEclateParSousBudget', params: { id: type[0].sous_budget_id }}"
@@ -203,7 +203,12 @@ created() {
  ...mapGetters('personnelUA', ['all_acteur_depense']),
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-   
+   conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
+    },
 afficheGroupeUaParMarche(){
     return this.groupeParUniteZone.filter(item=>item[0].uniteadministrative_id == this.detailOp.uniteadministrative_id)
 },

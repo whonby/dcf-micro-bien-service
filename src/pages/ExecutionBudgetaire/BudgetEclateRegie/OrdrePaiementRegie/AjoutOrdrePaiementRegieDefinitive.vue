@@ -2,11 +2,11 @@
 <template>
   <div class="container-fluid">
     <hr />
-    <div align="left" style="cursor: pointer">
+    <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
         Page Précédente
       </button>
-    </div>
+    </div> -->
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -55,7 +55,7 @@
                           </model-list-select>
                          
                         </td>
-              <td>
+              <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Type Ordre de paiement</label>
 
@@ -69,7 +69,7 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
               <td>
                 <div class="control-group">
                   <label class="control-label"
@@ -102,7 +102,7 @@
                     <input
                       type="date"
                       style="border: 1px solid #000; font-size: 15px"
-                       v-model="formData.date_op_definitif"
+                       v-model="formData.date_op"
                       class="span"
                     />
                   </div>
@@ -2891,7 +2891,7 @@ numeroOp() {
       };
     },
 afficheNumeroopProvisoire(){
-  return this.gettersgestionOrdrePaiement.filter(item=>item.type_ordre_paiement==2 && item.decision_cf==8 && item.diff_op != null || item.type_ordre_paiement==2 && item.decision_cf==9 && item.diff_op != null)
+  return this.gettersgestionOrdrePaiement.filter(item=>item.type_ordre_paiement==2 && item.decision_cf==8 || item.type_ordre_paiement==2 && item.decision_cf==9)
 },
   RecupererDecisionCf() {
       return (id) => {
@@ -4604,9 +4604,7 @@ afficherModalAjouterFacture() {
           programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
           unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
           action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
-          // sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
-           sous_budget_id: -1,
-          diff_op: 1,
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
           activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
           ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
           typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),
