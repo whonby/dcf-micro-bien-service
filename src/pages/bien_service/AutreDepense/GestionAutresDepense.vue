@@ -52,9 +52,9 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>OBJET</th>
+                    <th style="width:90%">OBJET</th>
                    
-                    <th>Action</th>
+                    <th >Action</th>
                   </tr>
                 </thead>
                 <tbody>

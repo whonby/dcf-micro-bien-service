@@ -23,7 +23,7 @@ export const HistoriqueDecompteFactures = state => state.historiqueDecomptefactu
 export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>
-  state.uniteAdministratives.sort((a, b) => (a.code > b.code ? 1 : -1));
+  state.uniteAdministratives;
   getPersonnaliseBudgetGeneralParPersonnel
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;

@@ -109,6 +109,7 @@
                   <tr>
                   
                    <th colspan="1"></th>
+                   <th colspan="1"></th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Nombre</th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Montant</th>
                    

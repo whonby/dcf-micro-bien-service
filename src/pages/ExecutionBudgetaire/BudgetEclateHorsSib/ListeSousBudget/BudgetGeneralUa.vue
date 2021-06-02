@@ -31,7 +31,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>VENTILATION DU BUDGET</h5>
+              <h5 style="font-size:12px;color:#000;font-weight:bold;">VENTILATION DU BUDGET</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -42,17 +42,17 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th style="font-size:14px">Ligne Budgetaire</th>
-                    <th style="font-size:14px">Tresor(FCFA)</th>
-                    <th style="font-size:14px">Don(FCFA)</th>
-                     <th style="font-size:14px">Emprunt(FCFA)</th>
-                      <th style="font-size:14px">Total(FCFA)</th>
+                    <th style="font-size:14px;color:#000;font-weight:bold;">Ligne Budgetaire</th>
+                    <th style="font-size:14px;color:#000;font-weight:bold;">Tresor(FCFA)</th>
+                    <th style="font-size:14px;color:#000;font-weight:bold;">Don(FCFA)</th>
+                     <th style="font-size:14px;color:#000;font-weight:bold;">Emprunt(FCFA)</th>
+                      <th style="font-size:14px;color:#000;font-weight:bold;">Total(FCFA)</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompte(detail_marche.uniteadministrative_id)" :key="type.id">
                     <td
-                     
+                     style="font-size:12px;color:#000;font-weight:bold;"
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
                      <td
                      style="font-size:14px;color:#000;text-align:center;font-weight:bold;"
@@ -76,8 +76,8 @@
                     
                   </tr>
                   <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService(detail_marche.uniteadministrative_id)" :key="type.id">
-                    <td
-                     
+                   <td
+                     style="font-size:12px;color:#000;font-weight:bold;"
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
                      <td
                      style="font-size:14px;color:#000;text-align:center;font-weight:bold;"
@@ -101,8 +101,8 @@
                     
                   </tr>
                   <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteInvertissement(detail_marche.uniteadministrative_id)" :key="type.id">
-                    <td
-                     
+                   <td
+                     style="font-size:12px;color:#000;font-weight:bold;"
                     >{{LIGNEbUDGETAIRE(type) || 'Non renseigné'}}</td>
                      <td
                      style="font-size:14px;color:#000;text-align:center;font-weight:bold;"
