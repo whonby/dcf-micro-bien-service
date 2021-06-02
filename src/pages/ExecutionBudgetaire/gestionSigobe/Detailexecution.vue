@@ -5,7 +5,10 @@ modifierTypeTexteLocal
       <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
-
+        <div style="margin-left:15px;">
+         <i style="font-size: 55px !important;" class="icon-folder-close"></i>
+         <p>sanat</p>
+            </div>
         <br>
 
            <h3 style="text-align:center; text-decoration:underline">Détail Modalité Exécution</h3>

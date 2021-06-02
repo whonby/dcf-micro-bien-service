@@ -172,6 +172,10 @@ import principalExecutionSousBudget from "../../pages/ExecutionBudgetaire/gestio
 
 import Detailexecution from "../../pages/ExecutionBudgetaire/gestionSigobe/Detailexecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
+import ListeUaImage from "../../pages/ImageMarche/ListeUaImage.vue"
+import ListeMarcheUa from "../../pages/ImageMarche/ListeMarcheUa.vue" 
+import ListeIMageExercice from "../../pages/ImageMarche/ListeIMageExercice.vue"
+import ListeImageMois from "../../pages/ImageMarche/ListeImageMois.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
@@ -294,6 +298,30 @@ const BienServiceRoutes = [
         path: "/dossier-image-ministere",
         name: "ImageParMinistere",
         component: ImageParMinistere
+    },
+
+    {
+        path: "/ListeUaImage/:id",
+        name: "ListeUaImage",
+        component: ListeUaImage
+    },
+
+    {
+        path: "/ListeIMageExercice/:id",
+        name: "ListeIMageExercice",
+        component: ListeIMageExercice
+    },
+
+    {
+        path: "/ListeImageMois/:id",
+        name: "ListeImageMois",
+        component: ListeImageMois
+    },
+
+    {
+        path: "/ListeMarcheUa/:id",
+        name: "ListeMarcheUa",
+        component: ListeMarcheUa
     },
     {
         path: "/dossier-image-ua",

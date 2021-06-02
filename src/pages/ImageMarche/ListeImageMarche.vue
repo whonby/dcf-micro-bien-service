@@ -6,8 +6,7 @@
     <div class="main-body">
 
          <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="PagePrecedent">Page Précédente</button>
-
+    <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div>
 
           <!-- Breadcrumb -->
@@ -296,6 +295,9 @@ getterImageParMarche() {
 
 
     ]),
+    afficherModalListePersonnel(){
+                window.history.back();
+            },
     PagePrecedent(){
         this.$router.push('/images')
     },
