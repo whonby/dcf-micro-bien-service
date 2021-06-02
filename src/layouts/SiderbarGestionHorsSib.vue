@@ -283,7 +283,7 @@ return objJson.id
         this.activate(1200)
         this.$router.push({
         //  name:'TableauBordOp'
-          name:'ListeOpParUa'
+          name:'GroupeOpParAnnee'
         })
       },
        navigateToRapport(){

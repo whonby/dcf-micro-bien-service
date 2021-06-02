@@ -1,7 +1,7 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
 
-VoirModaliteExecution
+formulaireAjoutOp
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -135,6 +135,7 @@ import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePa
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
+import GroupeOpParAnnee from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/GroupeOpParAnnee.vue"
 import ListeDesSousBudgetOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeDesSousBudgetOp.vue"
 import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
 import VoirOrdrePaiementSousBudget from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiementSousBudget.vue"
@@ -151,6 +152,7 @@ import RecupererToutAjoutOP from "../../pages/ExecutionBudgetaire/BudgetEclateRe
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
 import formulaireAjoutOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOp.vue"
+import formulaireAjoutOpAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOpAnterieur.vue"
 import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
 import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
@@ -179,6 +181,11 @@ const BienServiceRoutes = [
         path: "/formulaireAjoutOp",
         name: "formulaireAjoutOp",
         component: formulaireAjoutOp
+    },
+    {
+        path: "/Ajout-OrdrePaiement-Anterieur",
+        name: "formulaireAjoutOpAnterieur",
+        component: formulaireAjoutOpAnterieur
     },
     {
         path: "/ListeProcedureTypeDepense",
@@ -274,7 +281,12 @@ const BienServiceRoutes = [
         component: VoirOrdrePaiement
     },
     {
-        path: "/ListeOpParUa",
+        path: "/GroupeOpParAnnee",
+        name: "GroupeOpParAnnee",
+        component: GroupeOpParAnnee
+    },
+    {
+        path: "/ListeOpParUa/:id",
         name: "ListeOpParUa",
         component: ListeOpParUa
     },

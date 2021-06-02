@@ -1,7 +1,6 @@
 
 <template>
   <div>
-    {{idUaBudgetEclate(85)}}
  <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
@@ -84,7 +83,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Unites administratives des Projets</h5>
+                            <h5>VOIR  OP PAR ANNEE BUDGETAIRE</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -97,31 +96,30 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Unité Administrative</th>
-                    <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
-                    <th style="width:10%;" colspan="" >Action</th>
+                     <th style="width:80%;font-size:15px" >Année</th>
+                 
+                    <th style="width:10%;font-size:15px" colspan="" >Action</th>
                    
                   </tr>
                 </thead>
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
+                      <td style="font-size:25px;color:#000;text-align:center;font-weight: bold;">{{type || 'Non renseigné'}}</td>
+                  
                    
-                   <td v-if="idUaBudgetEclate(type) == 0">
-                      <router-link :to="{ name: 'PagePrincipalExecutionHorsSig', params: { id: type }}"
+                   <td>
+                      <router-link :to="{ name: 'ListeOpParUa', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-size:20px;color:#000;text-align:center;font-weight: bold;"> Voir Unites administratives</i></span>
                    </router-link> 
                     </td>
-                    <td v-else-if="idUaBudgetEclate(type) != 0 || idUaBudgetEclate(type) != -1">
+                    <!-- <td v-else-if="idUaBudgetEclate(type) != 0 || idUaBudgetEclate(type) != -1">
                       <router-link :to="{ name: 'ListeDesSousBudgetOp', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-reorder" style="font-weight: bold;"> Voir Sous Budget</i></span>
                    </router-link> 
-                    </td>
+                    </td> -->
                     
                   </tr>
                   
@@ -179,12 +177,7 @@ export default {
       search: ""
     };
   },
-created() {
-    this.marcheid = this.$route.params.id;
-    this.detailOp1 = this.gettersgestionOrdrePaiement.find(
-      (idmarche) => idmarche.id == this.$route.params.id
-    );
-  },
+
   computed: {
         ...mapGetters("uniteadministrative", [
       "directions",
@@ -244,12 +237,12 @@ afficheGroupeUaParMarche(){
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.diff_op == null && item.exercice == this.marcheid);
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.diff_op == null);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.unite_administrative_id);
+            array_exercie.push(val.exercice);
           });
           let unique = [...new Set(array_exercie)];
           console.log(unique);
