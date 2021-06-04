@@ -5888,14 +5888,6 @@ export function ajouterHistoriqueDecisionOp({ commit }, nouveau) {
           type: "success"
         })
       }
-    }).catch(error => {
-      console.log(error)
-      this.$app.$loading(true)
-      this.$app.$notify({
-        title: 'Erreur',
-        text: "ce Numero existe déja",
-        type: "error"
-      });
     })
 }
 

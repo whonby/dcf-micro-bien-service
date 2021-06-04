@@ -7,7 +7,18 @@
         </div>
     <table class="table table-bordered table-striped">
             <tr>
-               <td style="width: 0%; font-weight: bolder; color: #000">
+               <!-- <td style="width: 0%; font-weight: bolder; color: #000">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="ajouterFormulaireAjoutSigobe"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus"> AJOUTER DOSSIER</i>
+              </button>
+            </div>
+          </td> -->
+            <td style="width: 0%; font-weight: bolder; color: #000">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-success"
@@ -18,6 +29,17 @@
               </button>
             </div>
           </td>
+           <!-- <td style="width: 0%; font-weight: bolder; color: #000">
+            <div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-success"
+                @click.prevent="ajouterFormulaireAjoutSigobe"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus"> AJOUTER DOSSIER</i>
+              </button>
+            </div>
+          </td> -->
               <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button
@@ -285,7 +307,9 @@ arrayExerciceDecompteBienService() {
       // "ajouterHistoriqueBudgetGeneral"
     ]),
     pagePrecedent(){
-                window.history.back()
+                window.history.back()},
+            ajouterFormulaireAjoutSigobe(){
+                this.$router.push({ name: 'FormulaireAjoutSigobe' })
             },
    ajouterDemandeEngage(){
                 this.$router.push({ name: 'AjouterDemandeEngagement' })

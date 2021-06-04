@@ -1,7 +1,7 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
 
-formulaireAjoutOp
+
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -113,6 +113,8 @@ import PagePrincipalMarche from '../../pages/gestionMarche/PagePrincipalMarche.v
 import PagePrincipalMarcheSigobe from '../../pages/gestionMarche/PagePrincipalMarcheSigobe.vue';
 import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
+import AjouterDemandeEngagement12 from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement12.vue"
+import FormulaireAjoutSigobe from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/FormulaireAjoutSigobe.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
 import AjouterMantdatement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterMantdatement.vue"
 import AjouterOrdrePaiement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterOrdrePaiement.vue"
@@ -515,6 +517,16 @@ const BienServiceRoutes = [
         path: "/executionBudgetaire/:id",
         name: "executionBudgetaire",
         component: executionBudgetaire
+    },
+    {
+        path: "/AjouterDemandeEngagement12",
+        name: "AjouterDemandeEngagement12",
+        component: AjouterDemandeEngagement12
+    },
+    {
+        path: "/FormulaireAjoutSigobe",
+        name: "FormulaireAjoutSigobe",
+        component: FormulaireAjoutSigobe
     },
     {
         path: "/AjouterDemandeEngagement",
