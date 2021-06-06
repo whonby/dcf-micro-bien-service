@@ -2,7 +2,7 @@ import axios from '../../../../request/bienService'
 
 import urlFile from '../../../../request/imageRequest'
 import { asyncLoading } from 'vuejs-loading-plugin'
-
+ajouterDemandeEngagement
 var housecall = require('housecall')
 var queue = housecall({ concurrency: 2, cooldown: 1000 })
 
@@ -5245,13 +5245,14 @@ export function getDemandeEngagement({ commit }) {
 }
 
 // ajouter type texte
-export function ajouterDemandeEngagement({ commit }, nouveau) {
+export function ajouterDemandeEngagement({ commit,dispatch }, nouveau) {
   asyncLoading(axios
     .post("/DemandeEngagement", nouveau))
     .then(response => {
       if (response.status == 201) {
         commit("AJOUTER_DEMANDE_ENGAGEMENT", response.data);
-
+        dispatch('getDemandeEngagement')
+        dispatch('getDemandeEngagement')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',

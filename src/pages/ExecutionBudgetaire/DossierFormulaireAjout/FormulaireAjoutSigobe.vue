@@ -15,7 +15,7 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Ajouter Ordre Paiement</h5>
+            <h5>DOSSIER CONTROLE D'EXECUTION SIGOBE</h5>
             
             <!-- <div align="right">
                 Search:
@@ -51,10 +51,11 @@
                       style="border: 1px solid #000"
                     >
                      <option></option>
-                      <option value="1">OP DIRECT</option>
-                      <option value="2">OP PROVISOIRE</option>
-                      <option value="4">OP DEFINITIF</option>
-                      <option value="3">OP ANNULATION</option>
+                      <option value="1">DOSSIER DEMANDE </option>
+                      <option value="2">DOSSIER BON COMMANDE</option>
+                      <option value="3">DOSSIER LIQUIDATION</option>
+                      <option value="4">DOSSIER MANDAT</option>
+                      <option value="5">DOSSIER OP SYSTEME</option>
                     </select>
                   </div>
                 </div>
@@ -68,28 +69,28 @@
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                    
-                     <li class="active" v-if="formData.type_ordre_paiement==2 || formData.type_ordre_paiement==0">
-                      <a data-toggle="tab" href="#PROVISOIRE"
+                     <li class="active" v-if="formData.type_ordre_paiement==1 || formData.type_ordre_paiement==0">
+                      <a data-toggle="tab" href="#DEMANDE"
                         >DOSSIER DEMANDE </a
                       >
                     </li>
-                     <li class="active" v-if="formData.type_ordre_paiement==3">
-                      <a data-toggle="tab" href="#ANNULATION"
+                     <li class="active" v-if="formData.type_ordre_paiement==2">
+                      <a data-toggle="tab" href="#COMMANDE"
                         >DOSSIER BON COMMANDE</a
                       >
                     </li>
-                     <li class="active" v-if="formData.type_ordre_paiement==4">
-                      <a data-toggle="tab" href="#DEFINITIF"
+                     <li class="active" v-if="formData.type_ordre_paiement==3">
+                      <a data-toggle="tab" href="#LIQUIDATION"
                         >DOSSIER LIQUIDATION</a
                       >
                     </li>
-                     <li class="active" v-if="formData.type_ordre_paiement==1">
-                      <a data-toggle="tab" href="#DIRECT"
+                     <li class="active" v-if="formData.type_ordre_paiement==4">
+                      <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER MANDAT</a
                       >
                     </li>
-                    <li class="active" v-if="formData.type_ordre_paiement==1">
-                      <a data-toggle="tab" href="#DIRECT"
+                    <li class="active" v-if="formData.type_ordre_paiement==5">
+                      <a data-toggle="tab" href="#SYSTEME"
                         >DOSSIER OP SYSTEME</a
                       >
                     </li>
@@ -98,18 +99,21 @@
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
                  
-                  <div id="PROVISOIRE" class="tab-pane active" v-if="formData.type_ordre_paiement==2 || formData.type_ordre_paiement==0">
-                 45
+                  <div id="DEMANDE" class="tab-pane active" v-if="formData.type_ordre_paiement==1 || formData.type_ordre_paiement==0">
+                 <AjouterDemandeEngagement12 ></AjouterDemandeEngagement12>
                   </div>
-                  <div id="ANNULATION" class="tab-pane active" v-if="formData.type_ordre_paiement==3">
+                  <div id="COMMANDE" class="tab-pane active" v-if="formData.type_ordre_paiement==2">
+                  <AjouterBonCommande></AjouterBonCommande>
                   
-                  78
                   </div>
-                  <div id="DEFINITIF" class="tab-pane active" v-if="formData.type_ordre_paiement==4">
+                  <div id="LIQUIDATION" class="tab-pane active" v-if="formData.type_ordre_paiement==3">
                 
-                  96
+                 <AjouterLiquidation ></AjouterLiquidation>
                   </div>
-                   <div id="DIRECT" class="tab-pane active" v-if="formData.type_ordre_paiement==1">
+                   <div id="MANDAT" class="tab-pane active" v-if="formData.type_ordre_paiement==4">
+                 <AjouterMantdatement ></AjouterMantdatement>
+                  </div>
+                   <div id="SYSTEME" class="tab-pane active" v-if="formData.type_ordre_paiement==5">
              23
                   </div>
                 </div>
@@ -131,7 +135,10 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
-// import AjouterOrdrePaiement from "../AjouterOrdrePaiement"
+ import AjouterDemandeEngagement12 from "./AjouterDemandeEngagement12"
+  import AjouterLiquidation from "./AjouterLiquidation"
+  import AjouterBonCommande from "./AjouterBonCommande"
+    import AjouterMantdatement from "./AjouterMantdatement"
 // import AjouterOrdrePaiementProvisoire from "../AjouterOrdrePaiementProvisoire"
 // import AjouterOrdrePaiementAnnulation from "../AjouterOrdrePaiementAnnulation"
 // import AjouterOrdrePaiementDefinitive from "../AjouterOrdrePaiementDefinitive"
@@ -142,8 +149,10 @@ import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    //   AjouterOrdrePaiement,
-    //   AjouterOrdrePaiementProvisoire,
+       AjouterDemandeEngagement12,
+       AjouterLiquidation,
+       AjouterBonCommande,
+       AjouterMantdatement
     //   AjouterOrdrePaiementAnnulation,
     //   AjouterOrdrePaiementDefinitive
    // ModelListSelect,

@@ -1,12 +1,389 @@
-numeroOrdre
+
 <template>
   <div class="container-fluid">
+    
+    <div id="Bailleurdemande" class="modal hide">
+              <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter Bailleur</h3>
+              </div>
+              <div class="modal-body">
+                <table class="table table-bordered table-striped">
+                 
+       <tr>
+            <td>
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Type Financement 
+                             </label
+                            >
+                            <div class="controls">
+                             
+                             <!-- <model-list-select
+                                style="border: 1px solid #000"
+                                class="wide"
+                                :list="types_financements"
+                                v-model="BailleurDmd.type_financement"
+                                option-value="id"
+                                option-text="libelle"
+                                placeholder=""
+                               
+                              >
+                              </model-list-select> -->
+                              <select
+                    v-model="BailleurDmd.type_financement"
+                    class="span"
+                    style="border: 1px solid #000"
+                  >
+                    <option></option>
+                    <option
+                      v-for="typeFact in BailleurLierLien"
+                      :key="typeFact"
+                      :value="typeFact"
+                    >
+                      {{ libelleTypeFinancement(typeFact) }}
+                    </option>
+                  </select>
+                            </div>
+                          </div>
+                        </td>
+                  
+            </tr>
+            <tr>
+              <td>
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Source Financement
+                             </label
+                            >
+                            <div class="controls">
+                             
+                     <select
+                    v-model="BailleurDmd.type_financement"
+                    class="span"
+                    style="border: 1px solid #000"
+                  >
+                    <option></option>
+                    <option
+                      v-for="typeFact in BailleurSource"
+                      :key="typeFact"
+                      :value="typeFact"
+                    >
+                      {{libelleSourceFinancement(typeFact)}}
+                    </option>
+                  </select>
+                           
+                            
+                            </div>
+                          </div>
+                        </td>
+            </tr>
+            
+          </table>              
+          </div>
+           <div class="modal-footer"> 
+             <button 
+              @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
+              href="#">Valider</button>
+              <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
+            </div>
+    <div id="exampleModal1" class="modal hide tailles">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <!-- <input
+                    type="text"
+                    v-model="FormDataFacture.designation"
+                    class="span12"
+                  /> -->
+                  <textarea
+                style="border:1px solid #000"
+                  v-model="FormDataFacture.designation"
+                  class="span12"
+                  rows="2"
+                  placeholder="Saisir le texte"
+                ></textarea>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Quantite</label>
+                <div class="controls">
+                  <!-- <input
+                    type="number"
+                    v-model="FormDataFacture.quantite"
+                    class="span"
+                  /> -->
+                   <money
+                     v-model="FormDataFacture.quantite"
+                    style="text-align: left; color: red"
+                    class="span"
+                  ></money>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix Unitaire</label>
+                <div class="controls">
+                  <!-- <input
+                type="number"
+                v-model="FormDataFacture.prix_unitaire"
+                class="span"
+                
+              /> -->
+                  <money
+                    v-model="FormDataFacture.prix_unitaire"
+                    style="text-align: left; color: red"
+                    class="span"
+                  ></money>
+                </div>
+              </div>
+            </td>
+             <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="FormDataFacture.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
+           
+          </tr>
+          <tr>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Montant Ht</label>
+                <div class="controls">
+                 
+                  <money
+                    :value="MontantFactureHt"
+                    style="text-align: left; color: red"
+                    class="span"
+                  ></money>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Taux</label>
+                <div class="controls">
+ <input type="text" 
+                         class="span"
+                        :value="afficherEnorere"
+                         readonly
+                  />
+
+                </div>
+              </div>
+            </td>
+              <td >
+              <div class="control-group">
+                <label class="control-label" >Montant Tva</label>
+                <div class="controls">
+                 
+<money :value="montantTva"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          <tr>
+          <td>
+              <div class="control-group">
+                <label class="control-label">Montant TTC</label>
+                <div class="controls">
+                  <!-- <input
+                type="text"
+                :value="MontantFactureHt"
+                class="span"
+                readonly
+              /> -->
+                  <money
+                    :value="MontantFactureTTC"
+                    style="text-align: left; color: red"
+                    class="span"
+                  ></money>
+                </div>
+              </div>
+            </td>
+            </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a @click.prevent="ajouterFacture()" class="btn btn-primary" href="#"
+          >Valider</a
+        >
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+    <div id="exampleModal" class="modal hide taille">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter pièces justificatives</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Numéro ordre</label>
+                <div class="controls">
+                  <input
+                   
+                    type="text"
+                    :value="numeroOrdre(formData.numero_demande)"
+                    class="span"
+                    placeholder="Saisir le libellé"
+                    readonly
+                  />
+                 
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Nature de la pièce
+                  <code style="color: red; font-size: 16px">*</code></label
+                >
+                <div class="controls">
+                  <select
+                    v-model="formData1.libelle"
+                    class="span"
+                    style="border: 1px solid #000"
+                  >
+                    <option></option>
+                    <option
+                      v-for="typeFact in typeFactures"
+                      :key="typeFact.id"
+                      :value="typeFact.id"
+                    >
+                      {{ typeFact.libelle }}
+                    </option>
+                  </select>
+                  <code
+                    style="color: red; font-size: 12px"
+                    v-if="formData1.libelle.length > 0"
+                    >Veuillez renseigner ce champ</code
+                  >
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Reference de la pièce
+                  <code style="color: red; font-size: 16px">*</code></label
+                >
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="formData1.reference"
+                    class="span"
+                    placeholder="Saisir la reference"
+                  />
+                  <code
+                    style="color: red; font-size: 12px"
+                    v-if="formData1.reference == ''"
+                    >Veuillez renseigner ce champ</code
+                  >
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label"
+                  >Date de la pièce
+                  <code style="color: red; font-size: 16px">*</code></label
+                >
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_piece"
+                    class="span"
+                  />
+                  <code
+                    style="color: red; font-size: 12px"
+                    v-if="formData1.date_piece == ''"
+                    >Veuillez renseigner ce champ</code
+                  >
+                </div>
+              </div>
+            </td>
+            
+            <!-- <td>
+              <div class="control-group">
+                <label class="control-label">Exonéré</label>
+                <div class="controls">
+                  <select v-model="formData9.exonere" class="span">
+                    <option value="0">Oui</option>
+                    <option value="1">Non</option>
+                  </select>
+                </div>
+              </div>
+            </td> -->
+          </tr>
+          <tr>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Pièces justificatives </label>
+                <div class="controls">
+                  <input
+                    type="file"
+                    style="border: 1px solid #000"
+                    @change="OnchangeFichier"
+                    class="span"
+                  />
+                  <code v-if="info_pdf">Le fichier doit etre un pdf</code>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <div class="modal-footer">
+          <a
+            class="btn btn-primary"
+            @click.prevent="AjoutePieceJustific"
+            
+            >Valider</a
+          >
+
+          <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+        </div>
+        
+      </div>
+    </div>
+
     <hr />
-    <div align="left" style="cursor: pointer">
+    <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
         Page Précédente
       </button>
-    </div>
+    </div> -->
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -38,6 +415,20 @@ numeroOrdre
                   <div id="INFORMATIONUA" class="tab-pane active">
                     <table class="table table-bordered table-striped">
                       <tr>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Exercice</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000; font-size: 15px"
+                                :value="anneeAmort"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
                         <td>
                           <div class="control-group">
                             <label class="control-label">Mode</label>
@@ -58,20 +449,24 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <td colspan="2">
-                          <div class="control-group">
+                     
+             
+                        <td colspan="">
+                          <div class="control-group" >
                             <label class="control-label"
                               >Numéro Démande
                               <code style="color: red; font-size: 16px"
                                 >*</code
                               ></label
                             >
+                           
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
                                 v-model="formData.numero_demande"
                                 class="span"
+                                
                               />
                               <code
                                 style="color: red; font-size: 12px"
@@ -81,21 +476,22 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <td>
+                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice</label>
+                            <label class="control-label">Date demande</label>
                             <div class="controls">
                               <input
-                                type="text"
+                                type="date"
                                 style="border: 1px solid #000; font-size: 15px"
-                                :value="anneeAmort"
+                                v-model="formData.date_demande"
                                 class="span"
-                                readonly
-                              />
+                                   />
                             </div>
                           </div>
                         </td>
+                       
                       </tr>
+                     
                       <tr>
                         <td>
                           <div class="control-group">
@@ -106,11 +502,7 @@ numeroOrdre
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="
-                                  libelleSection(
-                                    idSection(formData.activite_id)
-                                  )
-                                "
+                                :value="libelleSection(idSection(formData.activite_id))"
                                 class="span"
                                 readonly
                               />
@@ -126,11 +518,7 @@ numeroOrdre
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="
-                                  libelleProgramme(
-                                    idProgramme(formData.activite_id)
-                                  )
-                                "
+                                :value="libelleProgramme(idProgramme(formData.activite_id))"
                                 class="span"
                                 readonly
                               />
@@ -144,11 +532,9 @@ numeroOrdre
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="
-                                  libelleAction(
-                                    idAction(formData.activite_id)
-                                  )
-                                "
+                                :value="libelleAction(idAction(formData.activite_id))"
+                                 
+                                
                                 class="span"
                                 readonly
                               />
@@ -217,11 +603,12 @@ numeroOrdre
               
                      </td>
                       </tr>
+                         
                       <tr>
  <td>
                           <div class="control-group">
                             <label class="control-label"
-                              >Grande nature de dépense
+                              >Nature de dépense
                               <code style="color: red; font-size: 16px"
                                 >*</code
                               ></label
@@ -248,7 +635,7 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="3">
                           <div class="control-group">
                             <label class="control-label"
                               >Ligne économique
@@ -277,40 +664,18 @@ numeroOrdre
                                   }}
                                 </option>
                               </select>
-                              <code
+                              <!-- <code
                                 style="color: red; font-size: 12px"
                                 v-if="formData.ligne_economique_id == ''"
                                 >Veuillez renseigner ce champ</code
-                              >
+                              > -->
+                               
                             </div>
                           </div>
                         </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Procédures de Droit Commun 
-                              <code style="color: red; font-size: 16px"
-                                >*</code
-                              ></label
-                            >
-                            <div class="controls">
-                              <select
-                                v-model="formData.type_procedure_id"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option></option>
-                                <option value="Engagement par Bon de Commande">
-                                  Engagement par Bon de Commande
-                                </option>
-                                <option value="Engagement direct">
-                                  Engagement direct
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
+                     
                       </tr>
+                     
                     </table>
                   </div>
                 </div>
@@ -318,7 +683,7 @@ numeroOrdre
                   <ul class="nav nav-tabs">
                     <li class="active">
                       <a data-toggle="tab" href="#ENGAGEMENT"
-                        >TYPE D'ENGAGEMENT</a
+                        >INFORMATIONS SUR L'ENGAGEMENT</a
                       >
                     </li>
                   </ul>
@@ -327,11 +692,64 @@ numeroOrdre
                   <!--ongle identification-->
                   <div id="ENGAGEMENT" class="tab-pane active">
                     <table class="table table-bordered table-striped">
-                      <tr>
+<tr>
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >Procédures Dérogatoires </label
+                              >Procédures de Dépense </label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.Procedures_depenses_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+
+                                <option value=""></option>
+                                 <option
+                                  v-for="gdenature in gettersProcedureDroitCommuns"
+                                  :key="gdenature.id"
+                                  :value="gdenature.id"
+                                >
+                                  {{ gdenature.libelle }}
+                                </option>
+                                
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+
+                        
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Type Procedures </label
+                            >
+                            <div class="controls">
+                              <select
+                                v-model="formData.type_procedure_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+
+                                <option value=""></option>
+                                 <option
+                                  v-for="gdenature in AfficheParDroitCommun"
+                                  :key="gdenature.id"
+                                  :value="gdenature"
+                                >
+                                  {{ libelleTypeProcedure(gdenature) }}
+                                </option>
+                                
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                         
+                       <td colspan="2">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Type d'engagement </label
                             >
                             <div class="controls">
                               <select
@@ -339,193 +757,143 @@ numeroOrdre
                                 class="span"
                                 style="border: 1px solid #000"
                               >
+
                                 <option value=""></option>
-                                <option value="Marche">Marche</option>
-                                <option
-                                  value="Régie davances-reservation des crédit"
+                                 <option
+                                  v-for="gdenature in afficheProcedureDepense(formData.Procedures_depenses_id,formData.type_procedure_id)"
+                                  :key="gdenature.id"
+                                  :value="gdenature.code_depense"
                                 >
-                                  Régie d'avances-reservation des crédit
+                                  {{gdenature.libelle_depense}}
                                 </option>
-                                <option
-                                  value="Régularisation dordre de paiement"
-                                >
-                                  Régularisation d'ordre de paiement(Op)
-                                </option>
-                                <option
-                                  value="Régularisation avances de trésorerie"
-                                >
-                                  Régularisation avances de trésorerie(AT)
-                                </option>
-                                <option
-                                  value="lettre d’avances"
-                                >
-                                  Lettre d’avances
-                                </option>
-                                <option value="Autre">Autre</option>
+                                
                               </select>
                             </div>
                           </div>
                         </td>
+                      </tr>
 
-                        <td colspan="">
+                      
+                      <tr v-if=" formData.type_engagement_id =='M'">
+                      
+
+                        
+                        <td colspan="2">
+                       <div class="control-group">
+                <label class="control-label">Numéro du Marché</label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="acteEffetFinanciers"
+                                                   v-model="formData2.numero_marche"
+                                                   option-value="marche_id"
+                                                   option-text="numero_marche"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >Numéro du Marché</label
+                              >Montant Avenant</label
                             >
-                            <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Référence Autre Depense</label>
-                   <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Numéro op systéme</label> -->
+                           
                             <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData2.numero_marche"
+                             
+                              <money
+                               :value="MontantAvenant(formData2.numero_marche)"
+                                readOnly
+                                style="text-align: left; color: red"
                                 class="span"
-                                v-on:keyup="rechercheListeMarche()"
-                                placeholder="Saisir le numero du marché"
-                              />
-                              <!-- <input
-                  v-if="formData.type_engagement_id=='Autre'"
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.reference_autre_depense"
-                    class="span"
-                   
-                    v-on:keyup="rechercheAUtreDepense()"
-                    placeholder="Saisir la Référence Autre Depense"
-                  /> -->
-                              <!-- <input
-                  v-if="formData.type_engagement_id=='Régularisation dordre de paiement'"
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.numero_systeme"
-                    class="span"
-                   
-                    v-on:keyup="rechercheOpSysteme()"
-                    placeholder="Saisir Numéro Op Systeme"
-                  /> -->
+                              ></money>
+                             
                             </div>
                           </div>
                         </td>
                          <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >Montant du marché</label
+                              >Montant de base du marché</label
                             >
-                            <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Montant Autre Depense</label>
-                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Montant Reservé</label> -->
+                            
                             <div class="controls">
                              
                               <money
-                                v-model="formData2.montant_marché"
+                                :value="montantMarche(formData2.numero_marche)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                              <!-- <money v-model="formData2.montant_autre_depense" v-if="formData.type_engagement_id=='Autre'" readOnly  style="text-align:left;color:red"  class="span"></money>
-                    <money v-model="formData2.montant_Reserve" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'" readOnly  style="text-align:left;color:red"  class="span"></money> -->
+                            
                             </div>
                           </div>
                         </td>
-                        <!-- <td>
-                          <div class="control-group">
+                      </tr>
+                     
+                      <tr>
+                         <td colspan="" class="control-group" v-if="formData.type_engagement_id =='M'">
+                          <div >
                             <label class="control-label"
-                              >Unité administrative</label
+                              >Montant global Marche(Av+Mont marché)</label
                             >
+                            
                             <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="libelleUa(formData2.ua)"
+                             
+                              <money
+                                :value="MontantGlobal"
+                                readOnly
+                                style="text-align: left; color: red"
                                 class="span"
-                                readonly
-                              />
-                              <code
-                                style="color: red; font-size: 12px"
-                                v-if="formData.ua_id != formData2.ua"
-                                >Veuillez vérifier unite administrative</code
-                              >
+                              ></money>
+                             
                             </div>
                           </div>
-                        </td> -->
-                      </tr>
-                      <tr>
-                        <td colspan="3">
+                        </td>
+                        <td colspan="2" v-if="formData.type_engagement_id =='AD'">
+                       <div class="control-group">
+                <label class="control-label">Autres Dépense</label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="gettersDossierAutreDepense"
+                                                   v-model="formData2.autre_depense_id"
+                                                   option-value="id"
+                                                   option-text="objet"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                                    
+                        <td colspan="3" v-if="formData.type_engagement_id =='M'">
                           <div class="control-group">
-                            <label class="control-label">Objet de marché</label>
-                            <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Objet Autres depense</label> -->
-                            <!-- <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Objet</label> -->
+                            <label class="control-label">Objet de la depense</label>
+                           
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="libelleMarche(formData2.objet_marche)"
+                                :value="objetMarche(formData2.numero_marche)"
                                 class="span"
                                 readonly
                               />
-                              <!-- <input
-                  v-if="formData.type_engagement_id=='Autre'"
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.objet_autre_depense"
-                    class="span"
-                    readonly
-                  /> -->
-                              <!-- <input
-                  v-if="formData.type_engagement_id=='Régularisation dordre de paiement'"
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.objet_Reservation"
-                    class="span"
-                    readonly
-                  /> -->
+                       
                             </div>
                           </div>
                         </td>
                        
                       </tr>
-                      <tr>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Réf.Engagement juridique</label
-                            >
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData.ref_juridique"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">N°OP/AT</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData.numero_op_at"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">Autre</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData.autre_type_engagement"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                      
+                      
                     </table>
                   </div>
                 </div>
@@ -551,6 +919,7 @@ numeroOrdre
                                 v-model="formData.mode_paiement_id"
                                 class="span"
                                 style="border: 1px solid #000"
+                              
                               >
                                 <option
                                   v-for="typeFact in modepaiements"
@@ -560,10 +929,12 @@ numeroOrdre
                                   {{ typeFact.libelle }}
                                 </option>
                               </select>
+                              
                             </div>
                           </div>
                         </td>
-                        <td colspan="">
+                        
+                        <td colspan="2">
                           <div class="control-group">
                             <label class="control-label"
                               >Référence bancaires du fournissuer ou poste
@@ -571,13 +942,13 @@ numeroOrdre
                             >
                             <div class="controls">
                               <input
-                                v-if="formData.type_engagement_id != 'Autre'"
+                                v-if="formData.type_engagement_id != 'AD'"
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
                                   recupereLeNumeroCompte(
                                     recupereLeNumeroCompteid(
-                                      formData2.numero_cc_fournisseur_nom
+                                      formData2.numero_marche
                                     )
                                   )
                                 "
@@ -585,35 +956,18 @@ numeroOrdre
                                 readonly
                               />
                               <input
-                                v-if="formData.type_engagement_id == 'Autre'"
+                                v-if="formData.type_engagement_id == 'AD'"
                                 type="text"
                                 style="border: 1px solid #000"
                                 v-model="formData2.compte_bancaire"
                                 class="span"
                                 readonly
                               />
+                             
                             </div>
                           </div>
                         </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Auteur(Bénéficiaire ou fournisseur)</label
-                            >
-                            <div class="controls">
-                              <select
-                                v-model="formData5.Auteur_id"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option value="2">Fournisseur</option>
-                                <option value="3">Unite administrative</option>
-                                <option value="5">Personnel</option>
-                                <option value="4">Autre</option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
+                       
                       </tr>
                     </table>
                   </div>
@@ -632,39 +986,7 @@ numeroOrdre
                   <div id="tab1" class="tab-pane active">
                     <table class="table table-bordered table-striped">
                       <tr>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">Numéro CC</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="
-                                  Numero_CC(formData2.Numéro_cc_fournisseur)
-                                "
-                                class="span"
-                                v-if="formData5.Auteur_id == 2"
-                                readonly
-                                placeholder="Saisir le numero cc"
-                              />
-
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData2.numero_cc_autre1"
-                                class="span"
-                                v-if="formData5.Auteur_id == 3"
-                              />
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData2.numero_cc_autre"
-                                class="span"
-                                v-if="formData5.Auteur_id == 4"
-                              />
-                            </div>
-                          </div>
-                        </td>
+                        
                         <td colspan="2">
                           <div class="control-group">
                             <label class="control-label">Nom</label>
@@ -674,38 +996,54 @@ numeroOrdre
                                 style="border: 1px solid #000"
                                 :value="
                                   Numero_Nom_Entreprise(
-                                    formData2.numero_cc_fournisseur_nom
+                                    recupereIdEntreprise(formData2.numero_marche)
                                   )
                                 "
                                 class="span"
-                                v-if="formData5.Auteur_id == 2"
+                                v-if="formData.type_engagement_id != 'AD'"
                                 readonly
                               />
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.numero_ordre"
-                    class="span"
-                     v-if="formData2.Auteur_id==3"
-                  /> -->
+                      
                               <model-list-select
                                 style="border: 1px solid #000"
                                 class="wide"
-                                :list="listeDesUa"
-                                v-model="formData2.uaBeneficiaire_id"
+                                :list="entreprises"
+                                v-model="formData2.nom_autre"
                                 option-value="id"
-                                option-text="libelle"
+                                option-text="raison_sociale"
                                 placeholder=""
-                                v-if="formData5.Auteur_id == 3"
+                                v-if="formData.type_engagement_id == 'AD'"
                               >
                               </model-list-select>
+                           
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label" >Numéro CC</label>
+                            <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                v-model="formData2.nom_autre"
+                                :value="
+                                  Numero_CC(recupereIdEntreprise(formData2.numero_marche))
+                                "
                                 class="span"
-                                v-if="formData5.Auteur_id == 4"
+                                v-if="formData.type_engagement_id != 'AD'"
+                                readonly
+                                placeholder="Saisir le numero cc"
                               />
+
+                             
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                v-model="formData2.numero_cc_autre"
+                                class="span"
+                                v-if="formData.type_engagement_id == 'AD'"
+                              />
+                             
                             </div>
                           </div>
                         </td>
@@ -718,27 +1056,22 @@ numeroOrdre
                                 style="border: 1px solid #000"
                                 :value="
                                   Numero_adresse_Entreprise(
-                                    formData2.numero_cc_fournisseur_adresse
+                                    recupereIdEntreprise(formData2.numero_marche)
                                   )
                                 "
                                 class="span"
-                                v-if="formData5.Auteur_id == 2"
+                                  v-if="formData.type_engagement_id != 'AD'"
                                 readonly
                               />
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData2.numero_cc_ua_adresse"
-                                class="span"
-                                v-if="formData5.Auteur_id == 3"
-                              />
+                              
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
                                 v-model="formData2.numero_cc_autre_adresse"
                                 class="span"
-                                v-if="formData5.Auteur_id == 4"
+                                 v-if="formData.type_engagement_id == 'AD'"
                               />
+                             
                             </div>
                           </div>
                         </td>
@@ -746,22 +1079,20 @@ numeroOrdre
                       <tr>
                         <td colspan="">
                           <div class="control-group">
-                            <label class="control-label">Total général</label>
+                            <label class="control-label" >Montant Engagé</label>
+                          
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                             
+                  
                               <money
+                            
                                 :value="TotalGeneralDemandeEngagement"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                              <code style="color: red; font-size: 12px"
+                              
+                              <code style="color: red; font-size: 12px" 
                                 >MONTANT A PAYE:
                                 {{
                                   parseFloat(formData2.montant_marché) -
@@ -770,17 +1101,7 @@ numeroOrdre
                                   )
                                 }}</code
                               ><br /><br />
-                              <code
-                                style="color: red; font-size: 12px"
-                                v-if="
-                                  parseFloat(formData2.montant_marché) -
-                                    parseFloat(
-                                      cumulMarche(formData2.numero_marche)
-                                    ) <
-                                  TotalGeneralDemandeEngagement
-                                "
-                                >Vérifier le montant général
-                              </code>
+                             
                             </div>
                           </div>
                         </td>
@@ -788,14 +1109,9 @@ numeroOrdre
                           <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                              
                               <money
+                              
                                 v-model="formData.montant_tresor"
                                 style="text-align: left; color: red"
                                 class="span"
@@ -814,7 +1130,9 @@ numeroOrdre
                     class="span"
                     
                   /> -->
+                   
                               <money
+                            
                                 v-model="formData.montant_don"
                                 style="text-align: left; color: red"
                                 class="span"
@@ -826,14 +1144,9 @@ numeroOrdre
                           <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                            
                               <money
+                             
                                 v-model="formData.montant_emprunt"
                                 style="text-align: left; color: red"
                                 class="span"
@@ -843,7 +1156,7 @@ numeroOrdre
                         </td>
                       </tr>
                       <tr>
-                        <td colspan="3">
+                        <td colspan="4">
                           <div class="control-group">
                             <label class="control-label"
                               >Objet de la dépense</label
@@ -858,67 +1171,347 @@ numeroOrdre
                             </div>
                           </div>
                         </td>
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            
-                             <select v-model="formData.bailler_id" class="span">
-                                <option
-                                  v-for="fam in sources_financements"
-                                  :key="fam.id"
-                                  :value="fam.id"
-                                >{{fam.libelle}}</option>
-                              </select>
-                          </div>
-                        </td>  -->
-                        <td>
-                          <label>Bailleur </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="sources_financements"
-                            v-model="formData.bailler_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                        </td>
+                        
                       </tr>
-                      <h6>PIECES JUSTIFICATIVES</h6>
-                      <tr>
-                        <!-- <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Pièces justificatives </label>
-                <div class="controls">
-                  <input
-                    type="file"
-                    style="border:1px solid #000"
-                   @change="OnchangeFichier"
-                    class="span"
-                    
-                  />
-                  <code v-if="info_pdf">Le fichier doit etre un pdf</code>
+                      
+                    </table>
+                  </div>
                 </div>
-              </div>
-              
-            </td> -->
-                        <td colspan="4">
-                          <div class="" align="right">
+<table class="table table-bordered table-striped">
+  
+    <tr>
+       <label
+                            class="control-label"
+                            style="
+                              font-size: 14px;
+                              font-weight: bold;
+                              text-align: center;
+                            "
+                            
+                            >VOIR FACTURE</label
+                          >
+                           <div
+                            class=""
+                            align="right"
+                            
+                          >
                             <button
-                              @click.prevent="afficherModalAjouterService"
+                              @click.prevent="afficherModalAjouterFacture"
                               class="btn btn-success"
                             >
-                              <span style="font-size: 14px; font-weight: bold">
+                              <span>
                                 <i class="icon icon-plus-sign"
-                                  >Ajouter Nature de la pièces</i
+                                  >AJOUTER FACTURE </i
                                 ></span
                               >
                             </button>
                           </div>
-                          <br />
-                          <table class="table table-bordered table-striped">
+                         
+                           <table 
+                            class="table table-bordered table-striped"
+                           
+                          >
+                          <thead>
+                             <tr>
+                          <th>Designation</th>
+                          <th>Quantité</th>
+                          <th>Prix unitaire</th>
+                          <th>Total</th>
+                          <th style="width: 10px">Supprimer</th>
+                        </tr>
+                            </thead>
+ <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="(type) in listeFacturePiece(
+                            formData.numero_demande
+                          )"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierFacture(type.id)">
+                            {{ type.designation || "Non renseigné" }}
+                          </td>
+                          <td
+                            style="text-align: center; font-weight: bold"
+                            @dblclick="afficherModalModifierFacture(type.id)"
+                          >
+                            {{ type.quantite || "Non renseigné" }}
+                          </td>
+                          <td
+                            style="text-align: center; font-weight: bold"
+                            @dblclick="afficherModalModifierFacture(type.id)"
+                          >
+                            {{
+                              formatageSomme(parseFloat(type.prix_unitaire)) ||
+                              "Non renseigné"
+                            }}
+                          </td>
+                          <td
+                            style="text-align: center; font-weight: bold"
+                            @dblclick="afficherModalModifierFacture(type.id)"
+                          >
+                            {{
+                              formatageSomme(
+                                parseFloat(type.total_facture_ht)
+                              ) || "Non renseigné"
+                            }}
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-danger"
+                              @click="supprimerDossierFacture(type.id)"
+                            >
+                              <span>
+                                <i class="icon icon-trash"></i>
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                            Montant Ht
+                          </td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                            {{
+                              formatageSomme(
+                                parseFloat(
+                                  SommeDesDmdParBonCommande(
+                                    formData.numero_demande
+                                  )
+                                )
+                              )
+                            }}
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                            Taux
+                          </td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                                    
+                            {{ RecuperereTaux(formData.numero_demande) }}
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                            TVA
+                          </td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                                    
+                            {{parseFloat(SommeDesDmdParBonCommande(formData.numero_demande))*parseFloat(RecuperereTaux(formData.numero_demande)) }}
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                            Montant Ttc
+                          </td>
+                          <td
+                            style="
+                              color: red;
+                              font-size: 14px;
+                              text-align: center;
+                              font-weight: bold;
+                            "
+                          >
+                            {{
+                              formatageSomme(
+                                parseFloat(
+                                  parseFloat(
+                                    parseFloat(SommeDesDmdParBonCommande(formData.numero_demande))*parseFloat(RecuperereTaux(formData.numero_demande))
+                                  ) +
+                                    parseFloat(
+                                       parseFloat(
+                                  SommeDesDmdParBonCommande(
+                                    formData.numero_demande
+                                  )
+                                )
+                                    )
+                                )
+                              )
+                            }}
+                          </td>
+                          <td></td>
+                        </tr>
+                        </tbody>
+                            </table>
+
+    </tr>
+  </table>
+  <table class="table table-bordered table-striped" >
+  
+    <tr>
+       <label
+                            class="control-label"
+                            style="
+                              font-size: 14px;
+                              font-weight: bold;
+                              text-align: center;
+                            "
+                            
+                            >Liste des Bailleurs</label
+                          >
+                           <div
+                            class=""
+                            align="right"
+                            
+                          >
+                            <button
+                              @click.prevent="afficherModalAjouteBailleurDemANDE"
+                              class="btn btn-success"
+                            >
+                              <span>
+                                <i class="icon icon-plus-sign"
+                                  >AJOUTER BAILLEUR </i
+                                ></span
+                              >
+                            </button>
+                          </div>
+                         
+                           <table
+                            class="table table-bordered table-striped"
+                           
+                          >
+                          <thead>
+                             <tr>
+                          <th>Type financement</th>
+                          <th>Sous Financement</th>
+                        
+                          <th style="width: 10px">Supprimer</th>
+                        </tr>
+                            </thead>
+ <tbody>
+                        <tr
+                          class="odd gradeX"
+                          v-for="(type) in BailleurDmdEngagements(
+                            formData.numero_demande
+                          )"
+                          :key="type.id"
+                        >
+                          <td @dblclick="afficherModalModifierFacture(type.id)">
+                            {{libelleTypeFinancement(type.type_financement) || "Non renseigné" }}
+                          </td>
+                          <td
+                            style="text-align: center; font-weight: bold"
+                            @dblclick="afficherModalModifierFacture(type.id)"
+                          >
+                            {{libelleSourceFinancement(type.source_financement) || "Non renseigné" }}
+                          </td>
+                         
+                          
+                          <td>
+                            <button
+                              class="btn btn-danger"
+                              @click="supprimerBailleurDmdEngagements(type.id)"
+                            >
+                              <span>
+                                <i class="icon icon-trash"></i>
+                              </span>
+                            </button>
+                          </td>
+                        </tr>
+
+                        </tbody>
+                            </table>
+    </tr>
+  </table>
+   <table class="table table-bordered table-striped">
+                      <tr>
+                        <td colspan="">
+                         
+                          <label
+                            class="control-label"
+                            style="
+                              font-size: 14px;
+                              font-weight: bold;
+                              text-align: center;
+                            "
+                            
+                            >LISTE DES PIECES </label
+                          >
+
+                          <div
+                            class=""
+                            align="right"
+                            
+                          >
+                            <button
+                              @click.prevent="afficherModalAjouterService"
+                              class="btn btn-success"
+                            >
+                              <span>
+                                <i class="icon icon-plus-sign"
+                                  >AJOUTER PIECE</i
+                                ></span
+                              >
+                            </button>
+                          </div>
+
+           <table 
+                            class="table table-bordered table-striped"
+                            
+                          >
                             <thead>
+                              <tr></tr>
                               <tr>
                                 <th style="font-size: 14px; font-weight: bold">
                                   Numero Ordre
@@ -932,29 +1525,21 @@ numeroOrdre
                                 <th style="font-size: 14px; font-weight: bold">
                                   Date de la pièce
                                 </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Fichier joint
-                                </th>
-                                <th style="font-size: 14px; font-weight: bold">
-                                  Action
+                                 <th style="font-size: 14px; font-weight: bold">
+                                 Action
                                 </th>
                               </tr>
                             </thead>
-                            <tbody
-                              v-if="
-                                this.formData.type_procedure_id ==
-                                'Engagement par Bon de Commande'
-                              "
-                            >
+                            <tbody>
                               <tr
                                 class="odd gradeX"
-                                v-for="type in listePieceJustificative(
+                                v-for="type in listePieceJustificative1(
                                   formData.numero_demande
                                 )"
                                 :key="type.id"
                               >
                                 <td
-                                  style="width: 20%"
+                                  style="width:20%,text-align:center"
                                   @dblclick="
                                     afficherModalModifierTypeTexte(type.id)
                                   "
@@ -991,193 +1576,22 @@ numeroOrdre
                                     "Non renseigné"
                                   }}
                                 </td>
-                                <td>
-                                  <a
-                                    v-if="
-                                      afficheFichierJoint(
-                                        type.numero_demande_engagement,
-                                        type.numero_ordre
-                                      )
-                                    "
-                                    :href="
-                                      afficheFichierJoint(
-                                        type.numero_demande_engagement,
-                                        type.numero_ordre
-                                      )
-                                    "
-                                    class="btn btn-default"
-                                    target="_blank"
-                                  >
-                                    <span class=""
-                                      ><i class="icon-book"></i>
-                                    </span>
-                                  </a>
-                                </td>
-                                <td style="width: 15%">
-                                  <button
-                                    class="btn btn-danger"
-                                    @click="
-                                      supprimerPieceJustificative(type.id)
-                                    "
-                                  >
-                                    <span>
-                                      <i class="icon icon-trash"> Supprimer</i>
-                                    </span>
-                                  </button>
-                                </td>
-                              </tr>
-                            </tbody>
-                            <tbody
-                              v-if="
-                                this.formData.type_procedure_id ==
-                                'Engagement direct'
-                              "
+                                 <td>
+                            <button
+                              class="btn btn-danger"
+                              @click="supprimerPieceJustificative(type.id)"
                             >
-                              <tr
-                                class="odd gradeX"
-                                v-for="type in listePieceJustificativeDefinitive(
-                                  formData.numero_demande
-                                )"
-                                :key="type.id"
-                              >
-                                <td
-                                  style="width: 20%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.numero_ordre || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 30%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    listePieceJustifica(type.libelle) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                                <td
-                                  style="width: 20%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{ type.reference || "Non renseigné" }}
-                                </td>
-                                <td
-                                  style="width: 15%"
-                                  @dblclick="
-                                    afficherModalModifierTypeTexte(type.id)
-                                  "
-                                >
-                                  {{
-                                    formaterDate(type.date_piece) ||
-                                    "Non renseigné"
-                                  }}
-                                </td>
-                                <td>
-                                  <a
-                                    v-if="
-                                      afficheFichierJoint(
-                                        type.numero_demande_engagement,
-                                        type.numero_ordre
-                                      )
-                                    "
-                                    :href="
-                                      afficheFichierJoint(
-                                        type.numero_demande_engagement,
-                                        type.numero_ordre
-                                      )
-                                    "
-                                    class="btn btn-default"
-                                    target="_blank"
-                                  >
-                                    <span class=""
-                                      ><i class="icon-book"></i>
-                                    </span>
-                                  </a>
-                                </td>
-                                <td style="width: 15%">
-                                  <button
-                                    class="btn btn-danger"
-                                    @click="
-                                      supprimerPieceJustificative(type.id)
-                                    "
-                                  >
-                                    <span>
-                                      <i class="icon icon-trash"> Supprimer</i>
-                                    </span>
-                                  </button>
-                                </td>
+                              <span>
+                                <i class="icon icon-trash"></i>
+                              </span>
+                            </button>
+                          </td>
                               </tr>
                             </tbody>
                           </table>
                         </td>
                       </tr>
-                      <!-- <h6>TACHES PREVUES</h6>
-                     <tr>
-                       <td colspan="4">
-               <div class="" align="right">
-                   <button  
-                        @click.prevent="afficherModalAjouterService"
-                       class="btn  btn-success">
-                <span style="font-size:14px;font-weight:bold">  <i class="icon icon-plus-sign" >Ajouter Nature de la pièces</i></span>
-       
-                </button>
-
-                   </div><br>
-           <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
-                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
-                   <th style="font-size:14px;font-weight:bold">Reference</th>
-                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
-                   <th style="font-size:14px;font-weight:bold">Fichier joint</th>
-                    <th style="font-size:14px;font-weight:bold">Action</th>
-                  </tr>
-                </thead> -->
-                      <!-- <tbody > -->
-                      <!-- <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_demande)" :key="type.id">
-                    <td style="width:20%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.numero_ordre || 'Non renseigné'}}</td>
-                    <td style="width:30%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
-                    <td style="width:20%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.reference || 'Non renseigné'}}</td>
-                    <td style="width:15%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formaterDate(type.date_piece) || 'Non renseigné'}}</td>
-<td>
-  <a v-if="afficheFichierJoint(type.numero_demande_engagement,type.numero_ordre)" :href="afficheFichierJoint(type.numero_demande_engagement,type.numero_ordre)" class="btn btn-default" target="_blank">
-                                <span class=""><i class="icon-book"></i>
-                                </span>
-                            </a>
-</td>
-                    <td  style="width:15%">
-                      <button class="btn btn-danger" @click="supprimerPieceJustificative(type.id)">
-                        <span>
-                          <i class="icon icon-trash"> Supprimer</i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody> -->
-
-                      <!-- </table>
-        
-            </td>
-                     </tr> -->
                     </table>
-                  </div>
-                </div>
-
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                     <li class="active">
@@ -1191,30 +1605,35 @@ numeroOrdre
                   <!--ongle identification-->
                   <div id="tab1" class="tab-pane active">
                     <table class="table table-bordered table-striped">
-                      <tr>
+                    
+                       <tr>
                         <td colspan="3">
                           <div class="control-group">
                             <label class="control-label">Activité</label>
                             <div class="controls">
-                              <input
+                             
+                              <input 
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleActivite(
-                                    idActivite(formData.activite_id)
+                                    formData.activite_id
                                   )
                                 "
                                 class="span"
                                 readonly
                               />
+                              
                             </div>
                           </div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="3">
                           <div class="control-group">
-                            <label class="control-label">Ligne</label>
+                            <label class="control-label">Ligne Economique</label>
                             <div class="controls">
-                              <input
+                             
+                              <input 
+                             
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
@@ -1234,14 +1653,9 @@ numeroOrdre
                           <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                             
                               <money
+                             
                                 :value="TotalGeneralDemandeEngagement"
                                 readOnly
                                 style="text-align: left; color: red"
@@ -1254,19 +1668,14 @@ numeroOrdre
                           <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                             
                               <money
+                             
                                 v-model="formData.montant_tresor"
-                                readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                            
                             </div>
                           </div>
                         </td>
@@ -1274,19 +1683,14 @@ numeroOrdre
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                             
                               <money
+                            
                                 v-model="formData.montant_don"
-                                readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                             
                             </div>
                           </div>
                         </td>
@@ -1294,19 +1698,19 @@ numeroOrdre
                           <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                            
                               <money
+                            
+                                v-model="formData.montant_emprunt"
+                                style="text-align: left; color: red"
+                                class="span"
+                              ></money>
+                              <!-- <money
                                 v-model="formData.montant_emprunt"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
-                              ></money>
+                              ></money> -->
                             </div>
                           </div>
                         </td>
@@ -1336,199 +1740,154 @@ numeroOrdre
                             <label class="control-label">Disponible</label>
                           </div>
                         </td>
-                        <td colspan="">
+                        
+                        <td colspan="" >
                           <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                              
                               <money
-                                :value="
-                                  CreditAutorise(formData.ligne_economique_id)
-                                "
+                            
+                                :value="CreditAutorise(formData.ua_id,formData.ligne_economique_id)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                               
                               <money
+                            
                                 :value="calculCumul"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                               
                               <money
                                 :value="MontantDisponible"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
+                                
                               ></money>
 
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                               
                             </div>
                           </div>
                         </td>
-                        <td colspan="">
+                        
+                        <td colspan="" >
                           <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                            
                               <money
+                            
                                 :value="
-                                  CreditAutoriseTresor(
-                                    formData.ligne_economique_id
-                                  )
-                                "
+                                  CreditAutoriseTresor(formData.ua_id,formData.ligne_economique_id)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                              
                               <money
+                              
                                 v-model="formData.montant_tresor"
                                 style="text-align: left; color: red"
                                 class="span"
+                                readOnly
                               ></money>
-                              <money
+                              
+                               <money
+                              
                                 :value="calculCumultresor"
                                 style="text-align: left; color: red"
                                 class="span"
+                                  readOnly
                               ></money>
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  />
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                              
                             </div>
                           </div>
                         </td>
+                        
+                              
+                              
+                             
+                      
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                             
                               <money
+                              
                                 :value="
                                   CreditAutoriseDon(
-                                    formData.ligne_economique_id
+                                    formData.ua_id,formData.ligne_economique_id
                                   )
                                 "
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
+                                  
                               ></money>
                               <money
+                            
                                 v-model="formData2.montant_don"
                                 style="text-align: left; color: red"
                                 class="span"
+                                  readOnly
                               ></money>
+                             
                               <money
+                            
                                 v-model="formData2.montant_don3"
                                 style="text-align: left; color: red"
                                 class="span"
+                                  readOnly
                               ></money>
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  />
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                            
                             </div>
                           </div>
                         </td>
-                        <td colspan="">
+                        <td colspan="" >
                           <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                             
+                              
                               <money
+                            
                                 :value="
                                   CreditAutoriseEmprunt(
-                                    formData.ligne_economique_id
+                                    formData.ua_id,formData.ligne_economique_id
                                   )
                                 "
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                             
+                              
                               <money
+                            
                                 v-model="formData2.montant_emprunt2"
                                 style="text-align: left; color: red"
                                 class="span"
+                                readOnly
                               ></money>
                               <money
+                            
                                 v-model="formData2.montant_emprunt3"
                                 style="text-align: left; color: red"
                                 class="span"
+                                readOnly
                               ></money>
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
-                              <!-- <input
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData.numero_ordre"
-                    class="span"
-                    
-                  /> -->
+                              
                             </div>
+
                           </div>
                         </td>
+                       
                       </tr>
                     </table>
                   </div>
@@ -1597,26 +1956,7 @@ numeroOrdre
                       <a
                         class="btn btn-primary"
                         @click.prevent="ajouterFonctionGroupe"
-                        v-if="
-                          (formData.numero_demande != '' &&
-                            formData.ua_id != '' &&
-                            formData.grd_nature_id != '' &&
-                            formData.ligne_economique_id != '' &&
-                            parseFloat(formData2.montant_marché) -
-                              parseFloat(
-                                cumulMarche(formData2.numero_marche)
-                              ) !=
-                              0) ||
-                          (formData.numero_demande != '' &&
-                            formData.ua_id != '' &&
-                            formData.grd_nature_id != '' &&
-                            formData.ligne_economique_id != '' &&
-                            parseFloat(formData2.montant_marché) -
-                              parseFloat(
-                                cumulReservation(formData2.numero_marche)
-                              ) !=
-                              0)
-                        "
+                       
                         >Valider</a
                       >
                       <a
@@ -1638,993 +1978,10 @@ numeroOrdre
     </div>
     <notifications />
 
-    <div id="exampleModal" class="modal hide taille">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter pièces justificatives</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Numéro ordre</label>
-                <div class="controls">
-                  <input
-                    v-if="
-                      formData.type_procedure_id ==
-                      'Engagement par Bon de Commande'
-                    "
-                    type="text"
-                    :value="numeroOrdre(formData.numero_demande)"
-                    class="span5"
-                    placeholder="Saisir le libellé"
-                    readonly
-                  />
-                  <input
-                    v-if="formData.type_procedure_id == 'Engagement direct'"
-                    type="text"
-                    :value="numeroOrdreDefinitive(formData.numero_demande)"
-                    class="span5"
-                    placeholder="Saisir le libellé"
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label"
-                  >Nature de la pièce
-                  <code style="color: red; font-size: 16px">*</code></label
-                >
-                <div class="controls">
-                  <select
-                    v-model="formData1.libelle"
-                    class="span5"
-                    style="border: 1px solid #000"
-                  >
-                    <option></option>
-                    <option
-                      v-for="typeFact in typeFactures"
-                      :key="typeFact.id"
-                      :value="typeFact.id"
-                    >
-                      {{ typeFact.libelle }}
-                    </option>
-                  </select>
-                  <code
-                    style="color: red; font-size: 12px"
-                    v-if="formData1.libelle.length > 0"
-                    >Veuillez renseigner ce champ</code
-                  >
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label"
-                  >Reference de la pièce
-                  <code style="color: red; font-size: 16px">*</code></label
-                >
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="formData1.reference"
-                    class="span5"
-                    placeholder="Saisir la reference"
-                  />
-                  <code
-                    style="color: red; font-size: 12px"
-                    v-if="formData1.reference == ''"
-                    >Veuillez renseigner ce champ</code
-                  >
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label"
-                  >Date de la pièce
-                  <code style="color: red; font-size: 16px">*</code></label
-                >
-                <div class="controls">
-                  <input
-                    type="date"
-                    v-model="formData1.date_piece"
-                    class="span5"
-                  />
-                  <code
-                    style="color: red; font-size: 12px"
-                    v-if="formData1.date_piece == ''"
-                    >Veuillez renseigner ce champ</code
-                  >
-                </div>
-              </div>
-            </td>
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Pièces justificatives </label>
-                <div class="controls">
-                  <input
-                    type="file"
-                    style="border: 1px solid #000"
-                    @change="OnchangeFichier"
-                    class="span"
-                  />
-                  <code v-if="info_pdf">Le fichier doit etre un pdf</code>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Exonéré</label>
-                <div class="controls">
-                  <select v-model="formData9.exonere" class="span5">
-                    <option value="0">Oui</option>
-                    <option value="1">Non</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
+    
 
-      <div>
-        <div class="modal-footer">
-          <a
-            class="btn btn-primary"
-            @click.prevent="AjoutePieceJustific"
-            v-if="formData1.reference != '' && formData1.date_piece != ''"
-            >Valider</a
-          >
+    
 
-          <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-        </div>
-        <div align="left">
-          <button class="btn btn-info" @click.prevent="apercuFacture">
-            Aperçu de la facture
-          </button>
-        </div>
-
-        <table class="table table-bordered table-striped">
-          <div class="widget-box">
-            <div class="widget-title">
-              <ul class="nav nav-tabs">
-                <li class="active">
-                  <a
-                    data-toggle="tab"
-                    href="#BONCOMMANDE"
-                    v-if="
-                      formData1.libelle == 8 &&
-                      formData.type_procedure_id ==
-                        'Engagement par Bon de Commande'
-                    "
-                  >
-                    Facture Proforma</a
-                  >
-                </li>
-                <li class="active">
-                  <a
-                    data-toggle="tab"
-                    href="#FACTUREDEFINITIVE"
-                    v-if="
-                      formData1.libelle == 1 &&
-                      formData.type_procedure_id == 'Engagement direct'
-                    "
-                  >
-                    Facture Definitive</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="widget-content tab-content">
-              <!--ongle identification-->
-              <div id="FACTUREDEFINITIVE" class="tab-pane active">
-                <div class="widget-content nopadding">
-                  <div
-                    class=""
-                    align="right"
-                    v-if="
-                      formData1.libelle == 1 &&
-                      formData.type_procedure_id == 'Engagement direct'
-                    "
-                  >
-                    <button
-                      @click.prevent="afficherModalAjouterFacture"
-                      class="btn btn-success"
-                    >
-                      <span>
-                        <i class="icon icon-plus-sign">Ajouter Facture</i></span
-                      >
-                    </button>
-                  </div>
-                  <div id="printMe">
-                    <table
-                      class="table table-bordered table-striped"
-                      v-if="
-                        formData1.libelle == 1 &&
-                        formData.type_procedure_id == 'Engagement direct'
-                      "
-                    >
-                      <thead>
-                        <tr>
-                          <th>Designation</th>
-                          <th>Quantité</th>
-                          <th>Prix unitaire</th>
-                          <th>Total</th>
-                          <th style="width: 10px">Supprimer</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          class="odd gradeX"
-                          v-for="(type, index) in listeFacturePiece(
-                            formData.numero_demande
-                          )"
-                          :key="type.id"
-                        >
-                          <td @dblclick="afficherModalModifierTypeTexte(index)">
-                            {{ type.designation || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{ type.quantite || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(parseFloat(type.prix_unitaire)) ||
-                              "Non renseigné"
-                            }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(type.total_facture_ht)
-                              ) || "Non renseigné"
-                            }}
-                          </td>
-                          <td>
-                            <button
-                              class="btn btn-danger"
-                              @click="supprimerDossierFacture(type.id)"
-                            >
-                              <span>
-                                <i class="icon icon-trash"></i>
-                              </span>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ht
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  SommeDesDmdParBonCommande(
-                                    formData.numero_demande
-                                  )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Taux
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{ afficherEnorere }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Tva
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_demande
-                                    )
-                                  ) * afficherEnorere
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ttc
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_demande
-                                    )
-                                  ) +
-                                    parseFloat(
-                                      SommeDesDmdParBonCommande(
-                                        formData.numero_demande
-                                      ) * afficherEnorere
-                                    )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div id="BONCOMMANDE" class="tab-pane active">
-                <div class="widget-content nopadding">
-                  <div
-                    class=""
-                    align="right"
-                    v-if="
-                      formData1.libelle == 8 &&
-                      formData.type_procedure_id ==
-                        'Engagement par Bon de Commande'
-                    "
-                  >
-                    <button
-                      @click.prevent="afficherModalAjouterFacture"
-                      class="btn btn-success"
-                    >
-                      <span>
-                        <i class="icon icon-plus-sign">Ajouter Facture</i></span
-                      >
-                    </button>
-                  </div>
-                  <div id="printMe">
-                    <table
-                      class="table table-bordered table-striped"
-                      v-if="
-                        formData1.libelle == 8 &&
-                        formData.type_procedure_id ==
-                          'Engagement par Bon de Commande'
-                      "
-                    >
-                      <thead>
-                        <tr>
-                          <th>Designation</th>
-                          <th>Quantité</th>
-                          <th>Prix unitaire</th>
-                          <th>Total</th>
-                          <th style="width: 10px">Supprimer</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          class="odd gradeX"
-                          v-for="(type, index) in listeFacturePiece(
-                            formData.numero_demande
-                          )"
-                          :key="type.id"
-                        >
-                          <td @dblclick="afficherModalModifierTypeTexte(index)">
-                            {{ type.designation || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{ type.quantite || "Non renseigné" }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(parseFloat(type.prix_unitaire)) ||
-                              "Non renseigné"
-                            }}
-                          </td>
-                          <td
-                            style="text-align: center; font-weight: bold"
-                            @dblclick="afficherModalModifierTypeTexte(index)"
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(type.total_facture_ht)
-                              ) || "Non renseigné"
-                            }}
-                          </td>
-                          <td>
-                            <button
-                              class="btn btn-danger"
-                              @click="supprimerDossierFacture(type.id)"
-                            >
-                              <span>
-                                <i class="icon icon-trash"></i>
-                              </span>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ht
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  SommeDesDmdParBonCommande(
-                                    formData.numero_demande
-                                  )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Taux
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{ afficherEnorere }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Tva
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_demande
-                                    )
-                                  ) * afficherEnorere
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            Montant Ttc
-                          </td>
-                          <td
-                            style="
-                              color: red;
-                              font-size: 14px;
-                              text-align: center;
-                              font-weight: bold;
-                            "
-                          >
-                            {{
-                              formatageSomme(
-                                parseFloat(
-                                  parseFloat(
-                                    SommeDesDmdParBonCommande(
-                                      formData.numero_demande
-                                    )
-                                  ) +
-                                    parseFloat(
-                                      SommeDesDmdParBonCommande(
-                                        formData.numero_demande
-                                      ) * afficherEnorere
-                                    )
-                                )
-                              )
-                            }}
-                          </td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </table>
-      </div>
-    </div>
-
-    <div id="ModifierexampleModal" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier pièces justificatives</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Numéro ordre</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editpiece.numero_ordre"
-                    class="span5"
-                    placeholder="Saisir le libellé"
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Nature de la pièce</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editpiece.libelle"
-                    class="span5"
-                    placeholder="Saisir le libellé"
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Reference de la pièce</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editpiece.reference"
-                    class="span5"
-                    placeholder="Saisir la reference"
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date de la pièce</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    v-model="editpiece.date_piece"
-                    class="span5"
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          class="btn btn-primary"
-          href="#"
-          @click.prevent="modifierTypeTexteLocal"
-          >Valider</a
-        >
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-    <div id="exampleModal1" class="modal hide tailles">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Facture</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="FormDataFacture.designation"
-                    class="span12"
-                  />
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Quantite</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="FormDataFacture.quantite"
-                    class="span4"
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix Unitaire</label>
-                <div class="controls">
-                  <!-- <input
-                type="number"
-                v-model="FormDataFacture.prix_unitaire"
-                class="span4"
-                
-              /> -->
-                  <money
-                    v-model="FormDataFacture.prix_unitaire"
-                    style="text-align: left; color: red"
-                    class="span4"
-                  ></money>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <!-- <input
-                type="text"
-                :value="MontantFactureHt"
-                class="span4"
-                readonly
-              /> -->
-                  <money
-                    :value="MontantFactureHt"
-                    style="text-align: left; color: red"
-                    class="span4"
-                  ></money>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a @click.prevent="ajouterFacture()" class="btn btn-primary" href="#"
-          >Valider</a
-        >
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-    <!-- apercu facture -->
-
-    <div id="ApercuFacture" class="modal hide ApercuFacture1">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Aperçu Facture</h3>
-      </div>
-      <div>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Designation</th>
-              <th>Quantité</th>
-              <th>Prix unitaire</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              class="odd gradeX"
-              v-for="(type, index) in listeFacturePiece(
-                formData.numero_demande
-              )"
-              :key="type.id"
-            >
-              <td @dblclick="afficherModalModifierTypeTexte(index)">
-                {{ type.designation || "Non renseigné" }}
-              </td>
-              <td
-                style="text-align: center; font-weight: bold"
-                @dblclick="afficherModalModifierTypeTexte(index)"
-              >
-                {{ type.quantite || "Non renseigné" }}
-              </td>
-              <td
-                style="text-align: center; font-weight: bold"
-                @dblclick="afficherModalModifierTypeTexte(index)"
-              >
-                {{
-                  formatageSomme(parseFloat(type.prix_unitaire)) ||
-                  "Non renseigné"
-                }}
-              </td>
-              <td
-                style="text-align: center; font-weight: bold"
-                @dblclick="afficherModalModifierTypeTexte(index)"
-              >
-                {{
-                  formatageSomme(parseFloat(type.total_facture_ht)) ||
-                  "Non renseigné"
-                }}
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                Montant Ht
-              </td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                {{
-                  formatageSomme(
-                    parseFloat(
-                      SommeDesDmdParBonCommande(formData.numero_demande)
-                    )
-                  )
-                }}
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                Taux
-              </td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                {{ afficherEnorere }}
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                Tva
-              </td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                {{
-                  formatageSomme(
-                    parseFloat(
-                      parseFloat(
-                        SommeDesDmdParBonCommande(formData.numero_demande)
-                      ) * afficherEnorere
-                    )
-                  )
-                }}
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                Montant Ttc
-              </td>
-              <td
-                style="
-                  color: red;
-                  font-size: 14px;
-                  text-align: center;
-                  font-weight: bold;
-                "
-              >
-                {{
-                  formatageSomme(
-                    parseFloat(
-                      parseFloat(
-                        SommeDesDmdParBonCommande(formData.numero_demande)
-                      ) +
-                        parseFloat(
-                          SommeDesDmdParBonCommande(formData.numero_demande) *
-                            afficherEnorere
-                        )
-                    )
-                  )
-                }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -2650,17 +2007,29 @@ export default {
         },
       ],
       liste: [],
-
+ options2: [
+    { id: "0", libelle: " " },
+        { id: "1", libelle: " DEMANDE ENGAGEMENT" },
+        { id: " Lquidation", libelle: "LIQUIDATION" },
+        { id: "Bon DE Commande", libelle: "BON DE COMMANDE" },
+        { id: "Mandat", libelle: "MANDAT" },
+      ],
+     
       info_pdf: false,
+      BailleurDmd:{},
+      formData1122:{},
       formData: {
         numero_demande: "",
         ligne_economique_id: "",
         ua_id: "",
         grd_nature_id: "",
-        type_engagement_id: "Marche",
+       
       },
-
+formData123:{
+  typeDossier1:0
+},
       editpiece: {},
+      formData100:{},
       formData5: {
         Auteur_id: "2",
       },
@@ -2729,6 +2098,12 @@ export default {
     ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters("bienService", [
+      "gettersBailleurDmdEngagements",
+      "gettersProcedureTypeDepense",
+      "avenants",
+      "gettersProcedureDroitCommuns",
+      "gettersProcedureDerogatoires",
+      "gettersDossierLiquidation",
       "gettersDossierAutreDepense",
       "gettersDossierMandat",
       "gettersDossierFacturePiece",
@@ -2736,6 +2111,7 @@ export default {
       "gettersDemandeEngagement",
       "gettersnomPieceJustificative",
       "modepaiements",
+      
       "gettersCotationPersonnaliser",
       "typeCandidat",
       "acteDepense",
@@ -2807,8 +2183,924 @@ export default {
       "afficheLocalisationGeoNiveau5",
     ]),
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
-      "sources_financements",
+      "sources_financements","types_financements"
     ]),
+    
+     BailleurSource() {
+      //return (id) => {
+  
+        let objet = this.budgetGeneral.filter((qtreel) => qtreel.ua_id == this.formData.ua_id && qtreel.ligne_economique_id == this.formData.typefinancement_id && qtreel.actived == 1 );
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.sourcefinancement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+    // };
+    },
+    // BailleurSource() {
+    
+    //    return (id,id1) => {
+    //     if (id != null && id != "" && id1 != null && id1 != "") {
+    //       return this.budgetGeneral.filter((qtreel) => qtreel.ua_id == id && qtreel.typefinancement_id == id1 && qtreel.actived == 1 );
+
+    //     }
+    //   };
+    // },
+// BailleurLierLien() {
+//       return (id,id1) => {
+//         if (id != null && id != "" && id1 != null && id1 != "") {
+//           return this.budgetGeneral.filter((qtreel) => qtreel.ua_id == id && qtreel.economique_id == id1 && qtreel.actived == 1 );
+
+//         }
+//       };
+//     },,
+    BailleurLierLien() {
+      //return (id) => {
+        
+        let objet = this.budgetGeneral.filter((qtreel) => qtreel.ua_id == this.formData.ua_id && qtreel.economique_id == this.formData.ligne_economique_id && qtreel.actived == 1 );
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.typefinancement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+    // };
+    },
+afficheObjetDeLaDepense(){
+  if(this.formData2.numero_marche!=""){
+    return this.objetMarche(this.formData2.numero_marche)
+  }
+  else if(this.formData2.autre_depense_id !=""){
+    return this.objetAutreDepense(this.formData2.autre_depense_id)
+  }
+  else{
+    return ""
+  }
+},
+objetAutreDepense() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierAutreDepense.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.objet;
+          }
+          return 0;
+        }
+      };
+    },
+    recuperationNumeroDemande() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDemandeEngagement.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.numero_demande;
+          }
+          return 0;
+        }
+      };
+    },
+libelleTypeFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.types_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+    libelleSourceFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+BailleurDmdEngagements(){
+  return (id) => {
+        if (id != null && id != "") {
+          return this.gettersBailleurDmdEngagements.filter(
+            (qtreel) =>
+              qtreel.numero_dmd_engag == id 
+          );
+        }
+      };
+},
+
+listePieceJustificative13() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersnomPieceJustificative.filter(
+            (qtreel) =>
+              qtreel.numero_demande_engagement == id 
+          );
+        }
+      };
+    },
+
+    listePieceJustificative1() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersnomPieceJustificative.filter(
+            (qtreel) =>
+              qtreel.numero_demande_engagement == id 
+          );
+        }
+      };
+    },
+    RecuperereTaux() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierFacturePiece.find((qtreel) => qtreel.numero_dmd == id);
+
+          if (qtereel) {
+            return qtereel.taux;
+          }
+          return 0;
+        }
+      };
+    },
+afficheListePersonne(){
+
+return this.acte_personnels.filter(item=>item.unite_administrative_id==this.formData.ua_id)
+ 
+ 
+},
+conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
+    },
+libelleTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureDerogatoires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+libelleTypeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureTypeDepense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle_depense
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+AfficheParDroitCommun() {
+      //return (id) => {
+        
+        let objet = this.gettersProcedureTypeDepense.filter(item=>item.Procedures_depenses_id==this.formData.Procedures_depenses_id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.modalites_execution_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+    // };
+    },
+afficheProcedureDepense() {
+      return (id,id2) => {
+        if (id != null && id != "" && id2 != null && id2 != "") {
+          return this.gettersProcedureTypeDepense.filter(qtreel => qtreel.Procedures_depenses_id == id && qtreel.modalites_execution_id == id2);
+
+  
+        }
+      };
+    },
+    
+afficheModaliteExecution() {
+      return id => {
+        if (id != null && id != "") {
+          return this.gettersProcedureTypeDepense.filter(qtreel => qtreel.Procedures_depenses_id == id);
+
+  
+        }
+      };
+    },
+recupereridTypeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureTypeDepense.find(qtreel => qtreel.code_depense == id);
+
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+    NumeroLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_liquidation
+      }
+      return 0
+        }
+      };
+    },
+     MontantGlobal1(){
+      return parseFloat(this.FonctionmontantMarche)+parseFloat(this.FonctionMontantAvenant)
+    },
+     MontantGlobal(){
+      return parseFloat(this.montantMarche(this.formData2.numero_marche))+parseFloat(this.MontantAvenant(this.formData2.numero_marche))
+    },
+    MontantGlobalAutres(){
+      return parseFloat(this.FonctionmontantMarche)+parseFloat(this.MontantAvenant(this.formData2.numero_marche))
+    },
+     montantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act
+      }
+      return 0
+        }
+      };
+    },
+    // ObjetMarche() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.objet
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+    MontantAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_avenant),
+              0
+            )
+            .toFixed(0);
+
+        }
+      };
+    },
+    fonctionSection(){
+        
+          return this.libelleSection(this.idSection(this.formData.activite_id))
+      
+    },
+   
+    ProgrammeDotation(){
+       
+          return this.libelleProgramme(this.idProgramme(this.formData.activite_id))
+       
+    },
+   
+    FonctionAction(){
+      
+          return this.libelleAction(this.idAction(this.formData.activite_id))
+       
+    },
+    libelleGrandNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    FonctionUniteAdministrative(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelleUa(this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    FonctionGrandeNature(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelleGrandNature(this.recupererGrandeNatureDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    FonctionProcedureDepense(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.conversionMajiscule(this.libelleProcedureDepense(this.recupererProcedureDepenseDansDemandeEngagement(this.formData123.dmd_engagement_id)))
+        }
+    },
+    libelleProcedureDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureDroitCommuns.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    recupererProcedureDepenseDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.Procedures_depenses_id
+      }
+      return 0
+        }
+      };
+    },
+
+
+FonctionTypeEngagement(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.conversionMajiscule(this.libelleTypeDepense(this.recupererTypeEngagementDansDemandeEngagement(this.formData123.dmd_engagement_id)))
+        }
+    },
+   
+    recupererTypeEngagementDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_engagement_id
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+FonctiontypeProcedure(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelletypeProcedure(this.recuperertypeProcedureDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    libelletypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersProcedureDerogatoires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    recuperertypeProcedureDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_procedure_id
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+    recupererGrandeNatureDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.grd_nature_id
+      }
+      return 0
+        }
+      };
+    },
+
+
+ FonctionLigneEconomique(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelleLigneEconomique(this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    recupererObjetDepenseDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_depense
+      }
+      return 0
+        }
+      };
+    },
+    FonctionObjetDepense(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererObjetDepenseDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+     FonctionModePaiement(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererLibelleModePaiement(this.recupererIdModePaiementDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    FonctionEntreprise(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererIdEntrepriseDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+    FonctionMontantTotal(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererMontantTotalDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererMontantTotalDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.total_general
+      }
+      return 0
+        }
+      };
+    },
+     FonctionTresor(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererTresorDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererTresorDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_tresor
+      }
+      return 0
+        }
+      };
+    },
+     FonctionEmprunt(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererEmpruntDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererEmpruntDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_emprunt
+      }
+      return 0
+        }
+      };
+    },
+     FonctionDon(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererDonDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererDonDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_don
+      }
+      return 0
+        }
+      };
+    },
+    recupererLibelleModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdEntrepriseDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdModePaiementDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.mode_paiement_id
+      }
+      return 0
+        }
+      };
+    },
+     FonctionIdMarche(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererNumeroMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+     recupererNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche
+      }
+      return 0
+        }
+      };
+    },
+    FonctionMontantAvenant(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.MontantAvenant(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+     FonctionmontantMarche(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.montantMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    recupererMarcheDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.marche_id
+      }
+      return 0
+        }
+      };
+    },
+    FonctionLibelleEconomique(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelleEconomique(this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+    libelleEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat("  ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+    recupererLigneEconomiqueDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ligne_economique_id
+      }
+      return 0
+        }
+      };
+    },
+
+ FonctionProcedureDroitCommun(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererProcedureDroitCommunDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererProcedureDroitCommunDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_procedure_id
+      }
+      return 0
+        }
+      };
+    },
+ FonctionIdEntreprise(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.recupererIdEntreprise(this.formData123.dmd_engagement_id)
+        }
+    },
+    recupererIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id
+      }
+      return 0
+        }
+      };
+    },
+     FonctionCodeActivite(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelleActivite(this.recupererCodeActiviteDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
+     recupererCodeActiviteDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id
+      }
+      return 0
+        }
+      };
+    },
+      recupererUniteAdministrativeDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id
+      }
+      return 0
+        }
+      };
+    },
+    recupererActionDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.action_id
+      }
+      return 0
+        }
+      };
+    },
+     recupererProgrammeDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.programme_id
+      }
+      return 0
+        }
+      };
+    },
+      recupererIdSectionDansDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.section_id
+      }
+      return 0
+        }
+      };
+    },
+     veifEquipementExist() {
+      return this.formData123.typeDossier1 != 1;
+    },
 recuppererLeDernierNiveau() {
       
            return this.plans_budgetaires.filter(qtreel => this.recupererStructure(qtreel.structure_budgetaire_id) == 6 );
@@ -2859,11 +3151,25 @@ recupererStructure() {
         }
       };
     },
+    recupereIdEntreprise() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.acteEffetFinanciers.find(
+            (qtreel) => qtreel.marche_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.entreprise_id;
+          }
+          return "";
+        }
+      };
+    },
     recupereLeNumeroCompteid() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.entreprise_id == id
+            (qtreel) => qtreel.marche_id == id
           );
 
           if (qtereel) {
@@ -2999,10 +3305,20 @@ recupererStructure() {
       }
       return 0;
     },
+MontantFactureTTC() {
+      const val =
+        parseFloat(this.MontantFactureHt) +
+        parseFloat(this.montantTva);
 
+      if (val) {
+        return parseInt(val).toFixed(0);
+      }
+
+      return 0;
+    },
     montantTva() {
       const val =
-        parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
+        parseFloat(this.FormDataFacture.prix_unitaire) * parseFloat(this.afficherEnorere);
 
       if (val) {
         return parseInt(val).toFixed(0);
@@ -3011,12 +3327,14 @@ recupererStructure() {
       return 0;
     },
     afficherEnorere() {
-      if (this.formData9.exonere == 0) {
+      if (this.FormDataFacture.exonere == 0) {
         return 0;
       } else {
         return this.tauxArrondit;
       }
     },
+    
+
     SommeDesDmdParBonCommande() {
       return (id) => {
         if (id != null && id != "") {
@@ -3040,6 +3358,27 @@ recupererStructure() {
         }
       };
     },
+     listeFacturePiece12() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersDossierFacturePiece.filter(
+            (qtreel) => qtreel.numero_dmd == id
+          );
+        }
+      };
+    },
+    BailleurDmdEngagements12(){
+  return (id) => {
+        if (id != null && id != "") {
+          return this.gettersBailleurDmdEngagements.filter(
+            (qtreel) =>
+              qtreel.numero_dmd_engag == id 
+          );
+        }
+      };
+},
+ 
+    
     MontantFactureHt() {
       const val =
         parseFloat(this.FormDataFacture.prix_unitaire) *
@@ -3079,37 +3418,62 @@ recupererStructure() {
         }
       };
     },
+    calculCumultresorAutre() {
+      const val =
+        parseFloat(
+          this.CreditAutoriseTresor(this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        ) - parseFloat(this.FonctionTresor);
+      return parseFloat(val).toFixed(0);
+    },
+    
     calculCumultresor() {
       const val =
         parseFloat(
-          this.CreditAutoriseTresor(this.formData.ligne_economique_id)
+          this.CreditAutoriseTresor(this.formData.ua_id,this.formData.ligne_economique_id)
         ) - parseFloat(this.formData.montant_tresor);
       return parseFloat(val).toFixed(0);
     },
-
+calculCumulDon() {
+      const val =
+        parseFloat(
+          this.CreditAutoriseDon(this.formData.ua_id,this.formData.ligne_economique_id)
+        ) - parseFloat(this.formData.montant_tresor);
+      return parseFloat(val).toFixed(0);
+    },
     calculCumul() {
       const val =
         parseFloat(this.TotalGeneralDemandeEngagement) +
-        parseFloat(this.CumulDemande(this.formData.ligne_economique_id));
+        parseFloat(this.CumulDemande(this.formData.ua_id,this.formData.ligne_economique_id));
       return parseFloat(val).toFixed(0);
     },
-
+calculCumulAUtres78() {
+      const val =
+        parseFloat(this.FonctionMontantTotal) +
+        parseFloat(this.CumulDemande(this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id)));
+      return parseFloat(val).toFixed(0);
+    },
+    MontantDisponible45() {
+      const val =
+        parseFloat(this.CreditAutorise(this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id))) -
+        parseFloat(this.calculCumulAUtres78);
+      return parseFloat(val).toFixed(0);
+    },
     MontantDisponible() {
       const val =
-        parseFloat(this.CreditAutorise(this.formData.ligne_economique_id)) -
+        parseFloat(this.CreditAutorise(this.formData.ua_id,this.formData.ligne_economique_id)) -
         parseFloat(this.calculCumul);
       return parseFloat(val).toFixed(0);
     },
     CumulDemande: function () {
-      return (id) => {
-        if (id != "") {
+      return (id,id1) => {
+        if (id != "",id1 != "") {
           let valInite = 0;
           return this.gettersDemandeEngagement
             .filter(
               (normeEquipe) =>
-                (normeEquipe.ligne_economique_id == id &&
+                (normeEquipe.ua_id == id && normeEquipe.ligne_economique_id == id1 &&
                   normeEquipe.decision_cf == 8) ||
-                (normeEquipe.ligne_economique_id == id &&
+                (normeEquipe.ua_id == id && normeEquipe.ligne_economique_id == id1 &&
                   normeEquipe.decision_cf == 9)
             )
             .reduce(function (total, currentVal) {
@@ -3119,10 +3483,10 @@ recupererStructure() {
       };
     },
     CreditAutorise() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.economique_id == id && qtreel.actived == 1
+            (qtreel) => qtreel.ua_id == id  && qtreel.economique_id == id1 && qtreel.actived == 1 
           );
 
           if (qtereel) {
@@ -3133,11 +3497,11 @@ recupererStructure() {
       };
     },
     CreditAutoriseTresor() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) =>
-              qtreel.economique_id == id &&
+            (qtreel) =>qtreel.ua_id == id &&
+              qtreel.economique_id == id1 &&
               qtreel.actived == 1 &&
               qtreel.typefinancement_id == 14
           );
@@ -3150,11 +3514,11 @@ recupererStructure() {
       };
     },
     CreditAutoriseDon() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) =>
-              qtreel.economique_id == id &&
+            (qtreel) =>qtreel.ua_id == id &&
+              qtreel.economique_id == id1 &&
               qtreel.actived == 1 &&
               qtreel.typefinancement_id == 13
           );
@@ -3167,11 +3531,11 @@ recupererStructure() {
       };
     },
     CreditAutoriseEmprunt() {
-      return (id) => {
-        if (id != null && id != "") {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) =>
-              qtreel.economique_id == id &&
+            (qtreel) =>qtreel.ua_id == id &&
+              qtreel.economique_id == id1 &&
               qtreel.actived == 1 &&
               qtreel.typefinancement_id == 15
           );
@@ -3253,7 +3617,7 @@ recupererStructure() {
           const qtereel = this.marches.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.numero_marche.concat("  ", qtereel.objet);
+            return qtereel.objet;
           }
           return 0;
         }
@@ -3321,7 +3685,7 @@ recupererStructure() {
           const qtereel = this.marches.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.libelle;
+            return qtereel.objet;
           }
           return 0;
         }
@@ -3575,9 +3939,29 @@ recupererStructure() {
       "ajouterDossierFacture",
       "modifierDossierFacture",
       "supprimerDossierFacture",
+     "ajouterBonCommandes",
+     "ajouterDossierMandat",
+     "ajouterDossierLiquidation",
+      "ModifierDateEffetFinancier",
+      "modifierMarche2",
+      "ajouterBailleurDmdEngagements",
+      "modifierBailleurDmdEngagements",
+      "supprimerBailleurDmdEngagements"
     ]),
     ...mapActions("personnelUA", ["ajouterFichierJointDmd"]),
+ajouterBudgetaireLocal () {
+  var objet={
+    ...this.BailleurDmd,
+    numero_dmd_engag:this.formData.numero_demande
+  }
+      this.ajouterBailleurDmdEngagements(objet)
 
+        this.BailleurDmd = {
+              
+             
+            
+        }
+    },
     pagePrecedent() {
       window.history.back();
     },
@@ -3629,8 +4013,38 @@ recupererStructure() {
       //   libelle: ""
       // };
     },
+    AjouterDemandeEngagement() {
+      this.intitule = this.anneeAmort + "" + this.formData.numero_demande;
+    
+        var nouvelObjet1 = {
+          ...this.formData,
+          numero_dmd_combine: this.intitule,
+          programme_id: this.idProgramme(this.formData.activite_id),
+          action_id: this.idAction(this.formData.activite_id),
+          activite_id: this.formData.activite_id,
+          nom_autre: this.Numero_Nom_Entreprise(this.recupereIdEntreprise(this.formData2.numero_marche)),
+          adresse: this.Numero_adresse_Entreprise(this.recupereIdEntreprise(this.formData2.numero_marche)),
+          numero_cc_autre: this.Numero_CC(this.recupereIdEntreprise(this.formData2.numero_marche)),
+          total_general: this.TotalGeneralDemandeEngagement,
+          exercice: this.anneeAmort,
+          section_id:this.idSection(this.formData.activite_id),
+          marche_id:this.formData2.numero_marche,
+          entreprise_id: this.recupereIdEntreprise(this.formData2.numero_marche),
+          numero_marche: this.formData2.numero_marche,
+          autre_depense_id: this.idAutreDepense(
+            this.formData2.reference_autre_depense
+          ),
+         objet_depense:this.afficheObjetDeLaDepense,
+         type_engagement_id:this.recupereridTypeDepense(this.formData.type_engagement_id)
+        
+        };
+        this.ajouterDemandeEngagement(nouvelObjet1);
+     
+      
+      
+    },
     AjoutePieceJustific() {
-      if (this.formData.type_procedure_id == "Engagement par Bon de Commande") {
+      if (this.formData.type_procedure_id == 7) {
         this.intitule = this.anneeAmort + "" + this.formData.numero_demande;
         var nouvelObjetProforma = {
           numero_ordre: this.numeroOrdre(this.formData.numero_demande),
@@ -3679,142 +4093,9 @@ recupererStructure() {
       }
     },
 
-    rechercheOpSysteme() {
-      // console.log(this.formMandater.matricule_m)
-
-      let objetMandater = this.gettersDossierMandat.filter(
-        (item) =>
-          item.numero_op_systeme == this.formData2.numero_systeme &&
-          item.decision_cf == 8
-      );
-      // console.log(objetMandater)
-      if (objetMandater != undefined) {
-        if (objetMandater.length == 1) {
-          let acteur = this.gettersDossierMandat.find(
-            (item) => item.numero_op_systeme == this.formData2.numero_systeme
-          );
-          (this.formData2.ua = this.ua_DemandeEngaement(
-            acteur.demande_engagement_id
-          )),
-            (this.formData2.objet_Reservation = this.Objet_DemandeEngaement(
-              acteur.demande_engagement_id
-            )),
-            (this.formData2.montant_Reserve = acteur.montant_engage),
-            //  this.formData2.compte_bancaire=acteur.compte_bancaire,
-
-            (this.message_mandater = " ");
-        } else {
-          this.message_mandater =
-            "Ce Numero cc  n'existe pas dans notre base de donnée ";
-          this.formData2.objet_autre_depense = "";
-        }
-      }
-      if (this.formData2.reference_autre_depense == "") {
-        this.formData2.ua == "";
-        this.formData2.objet_Reservation == "";
-        this.formData2.montant_Reserve == "";
-
-        this.message_mandater = " ";
-      }
-    },
-
-    rechercheAUtreDepense() {
-      // console.log(this.formMandater.matricule_m)
-
-      let objetMandater = this.gettersDossierAutreDepense.filter(
-        (item) => item.reference == this.formData2.reference_autre_depense
-      );
-      // console.log(objetMandater)
-      if (objetMandater != undefined) {
-        if (objetMandater.length == 1) {
-          let acteur = this.gettersDossierAutreDepense.find(
-            (item) => item.reference == this.formData2.reference_autre_depense
-          );
-          (this.formData2.objet_autre_depense = acteur.objet),
-            (this.formData2.beneficiaire = acteur.beneficiaire),
-            (this.formData2.montant_autre_depense = acteur.montant),
-            (this.formData2.compte_bancaire = acteur.compte_bancaire),
-            (this.message_mandater = " ");
-        } else {
-          this.message_mandater =
-            "Ce Numero cc  n'existe pas dans notre base de donnée ";
-          this.formData2.objet_autre_depense = "";
-        }
-      }
-      if (this.formData2.reference_autre_depense == "") {
-        this.formData2.objet_autre_depense == "";
-        this.formData2.beneficiaire == "";
-        this.formData2.montant_autre_depense == "";
-        this.formData2.objet_marche == "", this.formData2.compte_bancaire == "";
-        this.message_mandater = " ";
-      }
-    },
-
-    rechercheListeMarche() {
-      // console.log(this.formMandater.matricule_m)
-
-      let objetMandater = this.acteEffetFinanciers.filter(
-        (item) => item.numero_marche == this.formData2.numero_marche
-      );
-      // console.log(objetMandater)
-      if (objetMandater != undefined) {
-        if (objetMandater.length == 1) {
-          let acteur = this.acteEffetFinanciers.find(
-            (item) => item.numero_marche == this.formData2.numero_marche
-          );
-          (this.formData2.numero_cc_fournisseur_nom = acteur.entreprise_id),
-            (this.formData2.numero_cc_fournisseur_adresse =
-              acteur.entreprise_id),
-            (this.formData2.Numéro_cc_fournisseur = acteur.entreprise_id),
-            (this.formData2.objet_marche = acteur.marche_id),
-            (this.formData2.ua = acteur.ua_id),
-            (this.formData2.montant_marché = acteur.montant_act);
-          this.message_mandater = " ";
-        } else {
-          this.message_mandater =
-            "Ce Numero cc  n'existe pas dans notre base de donnée ";
-          this.formData2.numero_cc_fournisseur_nom = "";
-        }
-      }
-      if (this.formData2.numero_marche == "") {
-        this.formData2.numero_cc_fournisseur_nom == "";
-        this.formData2.numero_cc_fournisseur_adresse == "";
-        this.formData2.Numéro_cc_fournisseur == "";
-        this.formData2.objet_marche == "", this.formData2.ua == "";
-        this.message_mandater = " ";
-      }
-    },
-
-    rechercheMembreCojo() {
-      // console.log(this.formMandater.matricule_m)
-
-      let objetMandater = this.entreprises.filter(
-        (item) => item.numero_cc == this.formData2.Numéro_cc_fournisseur
-      );
-      // console.log(objetMandater)
-      if (objetMandater != undefined) {
-        if (objetMandater.length == 1) {
-          let acteur = this.entreprises.find(
-            (item) => item.numero_cc == this.formData2.Numéro_cc_fournisseur
-          );
-          (this.formData2.numero_cc_fournisseur_nom = acteur.raison_sociale),
-            (this.formData2.numero_cc_fournisseur_adresse = acteur.adresse),
-            (this.formData2.entrprise_id = acteur.id),
-            (this.message_mandater = " ");
-        } else {
-          this.message_mandater =
-            "Ce Numero cc  n'existe pas dans notre base de donnée ";
-          this.formData2.numero_cc_fournisseur_nom = "";
-        }
-      }
-      if (this.formData2.Numéro_cc_fournisseur == "") {
-        this.formData2.numero_cc_fournisseur_nom = "";
-        this.message_mandater = " ";
-      }
-    },
-
+    
     ajouterFichierJoin() {
-      if (this.formData.type_procedure_id == "Engagement par Bon de Commande") {
+      if (this.formData.type_procedure_id == 7) {
         const formData = new FormData();
         this.intitule = this.anneeAmort + "" + this.formData.numero_demande;
         formData.append("fichier", this.selectedFile, this.selectedFile.name);
@@ -3860,7 +4141,7 @@ recupererStructure() {
     },
 
     ajouterFacture() {
-      if (this.formData.type_procedure_id == "Engagement par Bon de Commande") {
+      if (this.formData.type_procedure_id == 7) {
         this.intitule = this.anneeAmort + "" + this.formData.numero_demande;
         var nouvelObjetproforma = {
           ...this.FormDataFacture,
@@ -3868,6 +4149,8 @@ recupererStructure() {
           numero_dmd_engagement: this.intitule,
           numero_dmd: this.formData.numero_demande,
           etat_acticle: "proforma",
+           taux:this.afficherEnorere,
+            montant_ttc:this.MontantFactureTTC,
         };
 
         this.ajouterDossierFacture(nouvelObjetproforma);
@@ -3885,6 +4168,9 @@ recupererStructure() {
           numero_dmd_engagement: this.intitule,
           numero_dmd: this.formData.numero_demande,
           etat_acticle: "definitive",
+           taux:this.afficherEnorere,
+           exonere:this.FormDataFacture.exonere,
+             montant_ttc:this.MontantFactureTTC,
         };
 
         this.ajouterDossierFacture(nouvelObjetdefinitive);
@@ -3896,83 +4182,7 @@ recupererStructure() {
         };
       }
     },
-    AjouterDemandeEngagement() {
-      this.intitule = this.anneeAmort + "" + this.formData.numero_demande;
-      if (this.formData5.Auteur_id == 2) {
-        var nouvelObjet1 = {
-          ...this.formData,
-          numero_dmd_combine: this.intitule,
-          programme_id: this.idProgramme(this.formData.activite_id),
-          action_id: this.idAction(this.formData.activite_id),
-          activite_id: this.formData.activite_id,
-          nom_autre: this.Numero_Nom_Entreprise(
-            this.formData2.numero_cc_fournisseur_nom
-          ),
-          adresse: this.Numero_adresse_Entreprise(
-            this.formData2.numero_cc_fournisseur_nom
-          ),
-          numero_cc_autre: this.Numero_CC(
-            this.formData2.numero_cc_fournisseur_nom
-          ),
-          total_general: this.TotalGeneralDemandeEngagement,
-          exercice: this.anneeAmort,
-          section_id: this.idSection(this.formData.activite_id),
-          uaBeneficiaire_id: this.formData.uaBeneficiaire_id,
-          entreprise_id: this.idEntreprise(this.formData2.numero_marche),
-          numero_marche: this.formData2.numero_marche,
-          autre_depense_id: this.idAutreDepense(
-            this.formData2.reference_autre_depense
-          ),
-          numero_op_systeme: this.formData2.numero_systeme,
-        };
-
-        this.ajouterDemandeEngagement(nouvelObjet1);
-      } else if (this.formData5.Auteur_id == 3) {
-        var nouvelObjet2 = {
-          ...this.formData,
-          numero_dmd_combine: this.intitule,
-          programme_id: this.idProgramme(this.formData.activite_id),
-          action_id: this.idAction(this.formData.activite_id),
-          activite_id: this.formData.activite_id,
-          nom_autre: this.libelleUniteAdministrative(
-            this.formData2.uaBeneficiaire_id
-          ),
-          total_general: this.TotalGeneralDemandeEngagement,
-          exercice: this.anneeAmort,
-          section_id: this.idSection(this.formData.activite_id),
-          uaBeneficiaire_id: this.formData.uaBeneficiaire_id,
-          entreprise_id: this.formData2.entrprise_id,
-          autre_depense_id: this.idAutreDepense(
-            this.formData2.reference_autre_depense
-          ),
-          numero_op_systeme: this.formData2.numero_systeme,
-        };
-
-        this.ajouterDemandeEngagement(nouvelObjet2);
-      } else if (this.formData5.Auteur_id == 4) {
-        var nouvelObjet3 = {
-          ...this.formData,
-          numero_dmd_combine: this.intitule,
-          programme_id: this.idProgramme(this.formData.activite_id),
-          action_id: this.idAction(this.formData.activite_id),
-          activite_id: this.formData.activite_id,
-          nom_autre: this.formData2.nom_autre,
-          adresse: this.formData2.numero_cc_autre_adresse,
-          numero_cc_autre: this.formData2.numero_cc_autre,
-          total_general: this.TotalGeneralDemandeEngagement,
-          exercice: this.anneeAmort,
-          section_id: this.idSection(this.formData.activite_id),
-          uaBeneficiaire_id: this.formData.uaBeneficiaire_id,
-          entreprise_id: this.formData2.entrprise_id,
-          autre_depense_id: this.idAutreDepense(
-            this.formData2.reference_autre_depense
-          ),
-          numero_op_systeme: this.formData2.numero_systeme,
-        };
-
-        this.ajouterDemandeEngagement(nouvelObjet3);
-      }
-    },
+  
 
     ajouterFonctionGroupe() {
       //  this.ajouterFichierJoin()
@@ -4001,6 +4211,12 @@ recupererStructure() {
       };
     },
 
+ afficherModalAjouteBailleurDemANDE() {
+      this.$("#Bailleurdemande").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+    },
     afficherModalAjouterFacture() {
       this.$("#exampleModal1").modal({
         backdrop: "static",
@@ -4033,7 +4249,7 @@ recupererStructure() {
 
 <style scoped>
 .taille {
-  width: 80%;
+  width: 60%;
   margin: 0 -40%;
   height: 50%;
 }
