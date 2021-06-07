@@ -127,6 +127,7 @@
                      <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff" colspan="2">Action</th>
                   </tr>
                 </thead>
+                
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in listeDemandeParUa(macheid)" :key="type.id">
                     <td style="color:#000 !important;font-weight:bold !important">{{AfficheExeciceBudgetaire(type.demande_engagement_id) || 'Non renseigné'}}</td>
