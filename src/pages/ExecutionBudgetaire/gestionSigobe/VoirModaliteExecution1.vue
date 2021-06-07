@@ -36,7 +36,7 @@
              <div class="collapse" id="ENGAGEMENTDIRECT">
 <div class="widget-box collapsible">
     <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#DEMANDEENGAGAMENT" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
-            <h5 style="color:#000!important;font-size:15px;">DEMANDE </h5>
+            <h5 style="color:#000!important;font-size:15px;">DEMANDE</h5>
             </a> 
             
              <!-- <button   class="btn  btn-info" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente ({{NombreDemandeEnAttenteEd(marcheid)}})</span></button>

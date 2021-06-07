@@ -1,7 +1,7 @@
-Ajouter Facture
+CreditAutorise
+cumulAnterieurUa
 <template>
   <div class="container-fluid">
-    {{RechercheNumeroOP}}
     <hr />
     <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
@@ -15,8 +15,7 @@ Ajouter Facture
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Modification de OP</h5>
-             
+            <h5>Ajouter Ordre Paiement Annulation</h5>
             <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -26,55 +25,106 @@ Ajouter Facture
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Exercice</label>
+                  <label class="control-label"
+                    >Année Budgetaire
+                    <code style="color: red; font-size: 16px">*</code></label
+                  >
                   <div class="controls">
-                    <input
-                      type="text"
-                      style="border: 1px solid #000; font-size: 15px"
-                      :value="anneeAmort"
-                      class="span"
-                      readonly
-                    />
+                    <select
+                                v-model="formData.exercice"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                               <option></option>
+                                <option
+                                  v-for="typeFact in exercices_budgetaires"
+                                  :key="typeFact.id"
+                                  :value="typeFact.annee - 1"
+                                >
+                                  {{ typeFact.annee - 1 }}
+                                </option>
+                              </select>
                   </div>
                 </div>
               </td>
               <!-- <td>
                 <div class="control-group">
+                  <label class="control-label">Exercice</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                      style="border: 1px solid #000; font-size: 15px"
+                      :value="formData.exercice"
+                      class="span"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td> -->
+              <!-- <td>
+                <div class="control-group">
                   <label class="control-label"
-                    >Type Ordre paiement
-                    <code style="color: red; font-size: 16px">*</code></label
+                    >N° Ordre paiement Provisoire ou definitif</label
                   >
                   <div class="controls">
-                    <select
-                      v-model="formData.type_ordre_paiement"
+                    <input
+                      type="text"
+                      style="border: 1px solid #000; font-size: 15px"
+                      v-model="detailOpProvisoire.numero_ordre_paiement"
+                      v-on:keyup="rechercheMembreCojo()"
                       class="span"
-                      style="border: 1px solid #000"
-                    >
-                      <option></option>
-                      <option value="1">ORDRE DE PAIEMENT DIRECT</option>
-                      <option value="2">ORDRE DE PAIEMENT PROVISOIRE</option>
-                      
-                    </select>
+                    />
+                  </div>
+                </div>
+              </td> -->
+                  <td>
+                          <label
+                            >N° Ordre paiement Provisoire ou definitif
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="afficheNumeroopProvisoire"
+                            v-model="detailOpProvisoire.numero_ordre_paiement"
+                            option-value="id"
+                            option-text="numero_ordre_paiement"
+                          
+                            placeholder=""
+                          >
+                          </model-list-select>
+                         
+                        </td>
+              <!-- <td>
+                <div class="control-group">
+                  <label class="control-label">Type Ordre de paiement</label>
+
+                  <div class="controls">
+                    <input
+                      type="text"
+                      style="border: 1px solid #000; font-size: 15px"
+                      v-model="formData78.typeOp"
+                      class="span"
+                      readonly
+                    />
                   </div>
                 </div>
               </td> -->
               <td>
                 <div class="control-group">
-                  
-                  <label
-                    class="control-label"
-                   
-                    >Numéro OP Provisoire
-                    <code style="color: red; font-size: 16px">*</code></label
+                  <label class="control-label"
+                    >Numéro OP Annulation<code
+                      style="color: red; font-size: 16px"
+                      >*</code
+                    ></label
                   >
-                 
+
                   <div class="controls">
                     <input
                       type="text"
                       style="border: 1px solid #000; font-size: 15px"
-                     v-model="formData.numero_ordre_paiement"
+                      v-model="formData.numero_ordre_paiement"
                       class="span"
-                      
                     />
                   </div>
                 </div>
@@ -82,7 +132,7 @@ Ajouter Facture
               <td>
                 <div class="control-group">
                   <label class="control-label"
-                    >Date OP <code
+                    >Date OP Annulation<code
                       style="color: red; font-size: 16px"
                       >*</code
                     ></label
@@ -92,7 +142,7 @@ Ajouter Facture
                     <input
                       type="date"
                       style="border: 1px solid #000; font-size: 15px"
-                       v-model="formData.date_op"
+                      v-model="formData.date_op"
                       class="span"
                     />
                   </div>
@@ -119,23 +169,13 @@ Ajouter Facture
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Section
-                                      
-                                       
-                                     
-                                    </label>
+                            <label class="control-label">Section</label>
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
-                                  libelleSection(
-                                    idSection(
-                                      libelleLigneEconomiqueParent(
-                                        formData.activite_id
-                                      )
-                                    )
-                                  )
+                                  libelleSection(RecupererIdSection(detailOpProvisoire.numero_ordre_paiement))
                                 "
                                 class="span"
                                 readonly
@@ -154,11 +194,7 @@ Ajouter Facture
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleProgramme(
-                                    idProgramme(
-                                      libelleLigneEconomiqueParent(
-                                        formData.activite_id
-                                      )
-                                    )
+                                    RecupererIdProgramme(detailOpProvisoire.numero_ordre_paiement)
                                   )
                                 "
                                 class="span"
@@ -175,13 +211,7 @@ Ajouter Facture
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
-                                  libelleAction(
-                                    idAction(
-                                      libelleLigneEconomiqueParent(
-                                        formData.activite_id
-                                      )
-                                    )
-                                  )
+                                  libelleAction(RecupererIdAction(detailOpProvisoire.numero_ordre_paiement))
                                 "
                                 class="span"
                                 readonly
@@ -191,57 +221,43 @@ Ajouter Facture
                         </td>
                       </tr>
                       <tr>
-                        <td>
-                          <label
-                            >Unité Administrative
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="listeDesUa"
-                            v-model="formData.unite_administrative_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                          <code
-                            style="color: red; font-size: 12px"
-                            v-if="formData.unite_administrative_id == ''"
-                            >Veuillez renseigner ce champ</code
-                          >
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Unite administrative</label
+                            >
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  libelleUniteAdministrative(
+                                    RecupererIdUa(detailOpProvisoire.numero_ordre_paiement)
+                                  )
+                                "
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
                         </td>
-
                         <td>
                           <div class="control-group">
                             <label class="control-label"
-                              >Activité
-                              <code style="color: red; font-size: 16px"
+                              >Activité <code style="color: red; font-size: 16px"
                                 >*</code
                               ></label
                             >
                             <div class="controls">
-                              <select
-                                v-model="formData.activite_id"
-                                class="span"
+                              <input
+                                type="text"
                                 style="border: 1px solid #000"
-                              >
-                                <option
-                                  v-for="typeFact in filtrerActivite(
-                                    formData.unite_administrative_id
-                                  )"
-                                  :key="typeFact[0].id"
-                                  :value="typeFact[0].activite_id"
-                                >
-                                  {{ NomActivite(typeFact[0].activite_id) }}
-                                </option>
-                              </select>
-                              <code
-                                style="color: red; font-size: 12px"
-                                v-if="formData.activite_id == ''"
-                                >Veuillez renseigner ce champ</code
-                              >
+                                :value="
+                                  NomActivite(RecupererIdActivite(detailOpProvisoire.numero_ordre_paiement))
+                                "
+                                class="span"
+                                readonly
+                              />
                             </div>
                           </div>
                         </td>
@@ -249,223 +265,44 @@ Ajouter Facture
                           <div class="control-group">
                             <label class="control-label">Sous Bugdet</label>
                             <div class="controls">
-                              <select
-                                v-model="formData.sous_budget_id"
-                                class="span"
+                              <input
+                                type="text"
                                 style="border: 1px solid #000"
-                              >
-                                <option></option>
-                                <option
-                                  v-for="gdenature in RecupererSousBudget(
-                                    formData.unite_administrative_id,
-                                    formData.activite_id
-                                  )"
-                                  :key="gdenature.id"
-                                  :value="gdenature.id"
-                                >
-                                  {{ gdenature.activite_enfant }}
-                                </option>
-                              </select>
+                                :value="
+                                  libelleSousBudget(
+                                    RecupererIdSousBudget(detailOpProvisoire.numero_ordre_paiement)
+                                  )
+                                "
+                                class="span"
+                                readonly
+                              />
                             </div>
                           </div>
                         </td>
                         <td>
-                          <template
-                            v-if="
-                              comparaison(this.formData.activite_id) ==
-                              this.formData.activite_id
-                            "
-                          >
-                            <div class="control-group">
-                              <label class="control-label"
-                                >Classification Economique</label
-                              >
-                              <div class="controls">
-                                <select
-                                  v-model="formData.ligne_economique_id"
-                                  class="span"
-                                  style="border: 1px solid #000"
-                                >
-                                  <option></option>
-                                  <option
-                                    v-for="typeFact in LigneEconomiqueSousBudget"
-                                    :key="typeFact.id"
-                                    :value="typeFact"
-                                  >
-                                  
-                                    {{
-                                      libelleLigneEconomique(
-                                        typeFact
-                                      )
-                                    }}
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                          </template>
-                          <template v-else>
-                            <div class="control-group">
-                              <label class="control-label"
-                                >Classification Economique</label
-                              >
-                              <div class="controls">
-                                <select
-                                  v-model="formData.ligne_economique_id"
-                                  class="span"
-                                  style="border: 1px solid #000"
-                                >
-                                  <option></option>
-                                  <option
-                                    v-for="typeFact in arrayExerciceDecompteBienService"
-                                    :key="typeFact"
-                                    :value="typeFact"
-                                  >
-                                    {{
-                                      libelleLigneEconomique(
-                                        typeFact
-                                      )
-                                    }}
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                          </template>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-                <table class="table table-bordered table-striped">
-                  <tr>
-                    <td>
-                      <div class="control-group">
-                        <label class="control-label">Type de depense</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.typedepense"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="Marche">Marché</option>
-                             <option value="Personnel">Personnel</option>
-                            <option value="Autres">Autres</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
-
-                     <td>
-                       <div class="control-group">
-                        <label class="control-label">Rattacher une Personne</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.RattacherPers"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="Non">Non</option>
-                            <option value="Oui">Oui</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                       <div class="control-group">
-                        <label class="control-label">Interim Sur Op</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.imterim_op"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="Non">Non</option>
-                            <option value="Oui">Oui</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-
-                <!-- test******** -->
-                <div v-if="formData.imterim_op=='Oui'">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#ENGAGEMENT"
-                    >VISA CONTRÔLEUR FINANCIER</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                    
-                    <div id="ENGAGEMENT" class="tab-pane active">
-                      <table
-                        class="table table-bordered table-striped">
-                      <tr>
-                        <td colspan="">
-                           <div class="control-group">
-                            <label class="control-label">Date</label>
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Classification Economique</label
+                            >
                             <div class="controls">
                               <input
-                                type="date"
-                                 v-model="formData.date_interim"
-                                style="border: 1px solid #000"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        
-
-                       <td>
-                          <label
-                            >Nom
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="getterUtilisateur"
-                            v-model="formData.user_id_interim"
-                            option-value="id"
-                            option-text="name"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                          <code
-                            style="color: red; font-size: 12px"
-                            v-if="formData.user_id_interim == ''"
-                            >Veuillez renseigner ce champ</code
-                          >
-                        </td>
-
-
-                        <td colspan="">
-                           <div class="control-group">
-                            <label class="control-label">Visa</label>
-                            <div class="controls">
-                              <input
-                               v-model="formData.visa_interim"
                                 type="text"
                                 style="border: 1px solid #000"
+                                :value="
+                                  libelleLigneEconomique(
+                                    RecupererIdEconomique(detailOpProvisoire.numero_ordre_paiement)
+                                  )
+                                "
                                 class="span"
+                                readonly
                               />
                             </div>
                           </div>
                         </td>
                       </tr>
                     </table>
-
-                    </div>
-                    </div>
+                  </div>
                 </div>
-                <!-- ********lega --> 
-
-
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                     <li class="active">
@@ -480,186 +317,7 @@ Ajouter Facture
                   <div id="ENGAGEMENT" class="tab-pane active">
                     <table
                       class="table table-bordered table-striped"
-                      v-if="formData.typedepense == 'Personnel'"
-                    >
-                   <tr>
-                        
-                        <td v-if="formData.RattacherPers=='Non'">
-                      <div class="control-group">
-                        <label class="control-label">Béneficiaire</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.auteur_perso_id"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="0"></option>
-                            <option v-for="depense in PersonnelParUA(this.formData.unite_administrative_id)" :key="depense.id" 
-               :value="depense.id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
-
-                     <td v-if="formData.RattacherPers=='Oui'">
-                      <div class="control-group">
-                        <label class="control-label">Béneficiaire</label>
-                        <div class="controls">
-                          <select
-                            v-model="formData.auteur_perso_id"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                            <option value="0"></option>
-                            <option v-for="depense in PersonnelRattacher(this.formData.unite_administrative_id)" :key="depense.id" 
-               :value="depense.id"> {{Personnelmatricule(depense.personne_rattacher)}} =>{{Personnelnom(depense.personne_rattacher)}} {{Personnelprenom(depense.personne_rattacher)}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">Banque</label>
-
-                            <div class="controls">
-                              <input
-                                :value="libelleBanque(Recup_Banque(formData.auteur_perso_id))"
-                                type="text"
-                                style="border: 1px solid #000"
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">Compte Bancaires</label>
-
-                            <div class="controls">
-                              <input
-                              :value="Recup_Numero_cOMPTE(formData.auteur_perso_id)"
-                                type="text"
-                                style="border: 1px solid #000"
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <label
-                            >Mois Paiement
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                           <select
-                            v-model="formData.mois_paiement"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                          <option value="0"></option>
-                            <option value="Janvier">Janvier</option>
-                           <option value="Février">Février</option>
-                           <option value="Mars">Mars</option>
-                           <option value="Avril">Avril</option>
-                           <option value="Mai">Mai</option>
-                           <option value="Juin">Juin</option>
-                           <option value="Juillet">Juillet</option>
-                           <option value="Août">Août</option>
-                           <option value="Septembre">Septembre</option>
-                           <option value="Octobre">Octobre</option>
-                           <option value="Novembre">Novembre</option>
-                           <option value="Decembre">Decembre</option>
-                          </select>
-                         
-                        </td>
-                   </tr>
-                   <tr>
-                     <td colspan="4">
-                          <div class="control-group">
-                            <label class="control-label">Objet </label>
-
-                            <div class="controls">
-                              <input
-                                v-model="formData02.odjet_autre_depense"
-                                type="text"
-                                style="border: 1px solid #000"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        
-                   </tr>
-                   <tr>
-                      <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">MONTANT ENGAGE</label>
-                            <div class="controls">
-                              <!-- <input
-                  
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
-                    class="span"
-                    readonly
-                  /> -->
-                              <money
-                                v-model="formData.montant_engage"
-                                style="text-align: left; color: red"
-                                class="span"
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                         <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Type d'objet</label
-                            >
-                            <div class="controls">
-                              <select
-                                v-model="formData.diff_op_personnel"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option> </option>
-                                   <option value="mission">Mission</option>
-                                    <option value="salaire">Salaire </option>
-                                
-                                 
-                               
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="2">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >MODE DE REGLEMENT</label
-                            >
-                            <div class="controls">
-                              <select
-                                v-model="formData.mode_paiement_id"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option
-                                  v-for="typeFact in modepaiements"
-                                  :key="typeFact.id"
-                                  :value="typeFact.id"
-                                >
-                                  {{ typeFact.libelle }}
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-                   </tr>
-                    </table>
-                    <table
-                      class="table table-bordered table-striped"
-                      v-if="formData.typedepense == 'Autres'"
+                      v-if="RecupererTypeDepense(detailOpProvisoire.numero_ordre_paiement) == 2"
                     >
                       <tr>
                         <td colspan="">
@@ -667,73 +325,16 @@ Ajouter Facture
                             <label class="control-label">NOM</label>
 
                             <div class="controls">
-                              <!-- <input
+                              <input
                                 v-model="formData45.nom_autre_depense"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
-                              /> -->
-                               <model-list-select
-                                style="border: 1px solid #000"
-                                class="wide span"
-                                :list="entreprises"
-                                v-model="formData45.nom_autre_depense"
-                                option-value="id"
-                                option-text="raison_sociale"
-                                placeholder=""
-                               
-                              >
-                              </model-list-select>
+                              />
                             </div>
                           </div>
                         </td>
                         <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Banque</label
-                            >
-
-                            <div class="controls">
-                              <select
-                                v-model="formData45.reference_autre_depense"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option
-                                  v-for="typeFact in AfficheBanqueEntreprise(formData45.nom_autre_depense)"
-                                  :key="typeFact.id"
-                                  :value="typeFact.banq_id"
-                                >
-                                  {{ libelleBanque(typeFact.banq_id) }}
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">Compte Fournisseur</label>
-
-                            <div class="controls">
-                             
-                              <select
-                                v-model="formData45.compte_autre_depense"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option
-                                  v-for="typeFact in AfficheCompteEntreprise(formData45.nom_autre_depense,formData45.reference_autre_depense)"
-                                  :key="typeFact.id"
-                                  :value="typeFact.id"
-                                >
-                                  {{typeFact.rib }}
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-
-                        <!-- <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
                               >COMPTE CONTRIBUABLE</label
@@ -748,8 +349,8 @@ Ajouter Facture
                               />
                             </div>
                           </div>
-                        </td> -->
-                        <!-- <td colspan="">
+                        </td>
+                        <td colspan="">
                           <div class="control-group">
                             <label class="control-label">ADRESSE</label>
 
@@ -762,9 +363,9 @@ Ajouter Facture
                               />
                             </div>
                           </div>
-                        </td> -->
+                        </td>
 
-                        <!-- <td colspan="">
+                        <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
                               >REFERENCES BANCAIRES</label
@@ -779,12 +380,120 @@ Ajouter Facture
                               />
                             </div>
                           </div>
-                        </td> -->
+                        </td>
+                      </tr>
+                    </table>
+                    <table class="table table-bordered table-striped">
+                      <tr>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Type de depense</label>
+                            <div class="controls">
+                              <input
+                                :value="recupererNomTypeDepense"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                              <!-- <select v-model="detailOpProvisoire.typedepense" class="span" style="border:1px solid #000" >
+                    <option value="1">Marché</option>
+                     <option value="2">Autres</option>
+
+                  </select> -->
+                            </div>
+                          </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     </table>
                     <table
                       class="table table-bordered table-striped"
-                      v-if="formData.typedepense == 'Marche'"
+                      v-if="RecupererTypeDepense(detailOpProvisoire.numero_ordre_paiement) == 'Autres'"
+                    >
+                      <tr>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">NOM</label>
+
+                            <div class="controls">
+                              <input
+                                readonly
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="RecupererNom(detailOpProvisoire.numero_ordre_paiement)"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >COMPTE CONTRIBUABLE</label
+                            >
+
+                            <div class="controls">
+                              <input
+                                :value="
+                                  RecupererCOMPTE(detailOpProvisoire.numero_ordre_paiement)
+                                "
+                                readonly
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">ADRESSE</label>
+
+                            <div class="controls">
+                              <input
+                                readonly
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="RecupererADRESSE(detailOpProvisoire.numero_ordre_paiement)"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >REFERENCES BANCAIRES</label
+                            >
+
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  RecupererBANCAIRES(detailOpProvisoire.numero_ordre_paiement)
+                                "
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <table
+                      class="table table-bordered table-striped"
+                      v-else-if="RecupererTypeDepense(detailOpProvisoire.numero_ordre_paiement) == 'Marche'"
                     >
                       <tr>
                         <td colspan="">
@@ -797,8 +506,7 @@ Ajouter Facture
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
-                                  Numero_Nom_Entreprise(
-                                    idEntreprise(formData.marche_id)
+                                  Numero_Nom_Entreprise(RecupererEntreprise(detailOpProvisoire.numero_ordre_paiement)                                 
                                   )
                                 "
                                 class="span"
@@ -818,7 +526,7 @@ Ajouter Facture
                                 type="text"
                                 style="border: 1px solid #000"
                                 :value="
-                                  Numero_CC(idEntreprise(formData.marche_id))
+                                  Numero_CC(RecupererEntreprise(detailOpProvisoire.numero_ordre_paiement))
                                 "
                                 class="span"
                               />
@@ -836,7 +544,7 @@ Ajouter Facture
                                 style="border: 1px solid #000"
                                 :value="
                                   Numero_adresse_Entreprise(
-                                    idEntreprise(formData.marche_id)
+                                    RecupererEntreprise(detailOpProvisoire.numero_ordre_paiement)
                                   )
                                 "
                                 class="span"
@@ -857,8 +565,81 @@ Ajouter Facture
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleBanque(
-                                    idbanque(idEntreprise(formData.marche_id))
+                                    RecupererEntreprise(detailOpProvisoire.numero_ordre_paiement)
                                   )
+                                "
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <table class="table table-bordered table-striped" v-else>
+                     <tr>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">NOM</label>
+
+                            <div class="controls">
+                              <input
+                                readonly
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="RecupererNom(detailOpProvisoire.numero_ordre_paiement)"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >COMPTE CONTRIBUABLE</label
+                            >
+
+                            <div class="controls">
+                              <input
+                                :value="
+                                  RecupererCOMPTE(detailOpProvisoire.numero_ordre_paiement)
+                                "
+                                readonly
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">ADRESSE</label>
+
+                            <div class="controls">
+                              <input
+                                readonly
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="RecupererADRESSE(detailOpProvisoire.numero_ordre_paiement)"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >REFERENCES BANCAIRES</label
+                            >
+
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  RecupererBANCAIRES(detailOpProvisoire.numero_ordre_paiement)
                                 "
                                 class="span"
                                 readonly
@@ -884,67 +665,24 @@ Ajouter Facture
                   <div id="tab1" class="tab-pane active">
                     <table
                       class="table table-bordered table-striped"
-                      v-if="formData.typedepense == 'Autres'"
+                      v-if="RecupererTypeDepense(detailOpProvisoire.numero_ordre_paiement) == 'Autres'"
                     >
                       <tr>
-                        <!-- <td colspan="3">
+                        <td colspan="3">
                           <div class="control-group">
                             <label class="control-label"
-                              >OBJET DE LA DEPENSE2</label
+                              >OBJET DE LA DEPENSE</label
                             >
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                v-model="formData45.odjet_autre_depense"
+                                :value="RecupererObjet(detailOpProvisoire.numero_ordre_paiement)"
+                                
                                 class="span"
                               />
                             </div>
                           </div>
-                        </td> -->
-                         <td colspan="2">
-                          <label
-                            >Autres Depense
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="gettersDossierAutreDepense"
-                            v-model="formData.autre_depense_id"
-                            option-value="id"
-                            option-text="objet"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                         
-                          
-                        </td>
-                         <td>
-                          <label
-                            >Mois Paiement
-                            
-                          </label>
-                           <select
-                            v-model="formData.mois_paiement"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                          <option value="0"></option>
-                            <option value="Janvier">Janvier</option>
-                           <option value="Février">Février</option>
-                           <option value="Mars">Mars</option>
-                           <option value="Avril">Avril</option>
-                           <option value="Mai">Mai</option>
-                           <option value="Juin">Juin</option>
-                           <option value="Juillet">Juillet</option>
-                           <option value="Août">Août</option>
-                           <option value="Septembre">Septembre</option>
-                           <option value="Octobre">Octobre</option>
-                           <option value="Novembre">Novembre</option>
-                           <option value="Dcembre">Dcembre</option>
-                          </select>
-                         
                         </td>
                       </tr>
                       <tr>
@@ -953,7 +691,8 @@ Ajouter Facture
                             <label class="control-label">LIVRABLES</label>
                             <div class="controls">
                               <input
-                                v-model="formData45.livrable_autre_depense"
+                               
+                                :value="RecupererLivrable(detailOpProvisoire.numero_ordre_paiement)"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -966,7 +705,7 @@ Ajouter Facture
                             <label class="control-label">BENEFICIAIRES</label>
                             <div class="controls">
                               <input
-                                v-model="formData45.beneficiaire_autre_depense"
+                                :value="RecupererBeneficiaire(detailOpProvisoire.numero_ordre_paiement)"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -979,7 +718,7 @@ Ajouter Facture
                             <label class="control-label">GEOLOCALISATION</label>
                             <div class="controls">
                               <input
-                                v-model="formData45.geo_autre_depense"
+                                
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -996,7 +735,8 @@ Ajouter Facture
                             >
                             <div class="controls">
                               <input
-                                v-model="formData45.dure_autre_depense"
+                              :value="RecupererDure(detailOpProvisoire.numero_ordre_paiement)"
+                                
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -1019,7 +759,8 @@ Ajouter Facture
                     readonly
                   /> -->
                               <money
-                                v-model="formData2.montant_engage"
+                                
+                                :value="RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
@@ -1032,7 +773,14 @@ Ajouter Facture
                               >MODE DE REGLEMENT</label
                             >
                             <div class="controls">
-                              <select
+                               <input
+                              :value="recupererLibelleModePaiement(RecupererModePaiement(detailOpProvisoire.numero_ordre_paiement))"
+                                
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                              <!-- <select
                                 v-model="formData.mode_paiement_id"
                                 class="span"
                                 style="border: 1px solid #000"
@@ -1044,7 +792,7 @@ Ajouter Facture
                                 >
                                   {{ typeFact.libelle }}
                                 </option>
-                              </select>
+                              </select> -->
                             </div>
                           </div>
                         </td>
@@ -1052,50 +800,27 @@ Ajouter Facture
                     </table>
                     <table
                       class="table table-bordered table-striped"
-                      v-if="formData.typedepense == 'Marche'"
+                      v-else-if="RecupererTypeDepense(detailOpProvisoire.numero_ordre_paiement) == 'Marche'"
                     >
                       <tr>
                         <td>
-                          <label
-                            >Numero Marche
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="RecuppererMarcheAttribuer"
-                            v-model="formData.marche_id"
-                            option-value="id"
-                            option-text="numero_marche"
-                            placeholder=""
-                            @change="RecupdateActeEffetFinancier"
-                           
-                          >
-                          </model-list-select>
-                          <code
-                            style="color: red; font-size: 12px"
-                            v-if="formData.marche_id == ''"
-                            >Veuillez renseigner ce champ</code
-                          >
-                        </td>
-                        <!-- <td>
-                         <div class="control-group">
+                          <div class="control-group">
                             <label class="control-label">Numero Marche</label>
                             <div class="controls">
-                              
-                      <input
-               
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.numeromarche"
-                    class="span"
-                    
-                    v-on:keyup="rechercheListeMarche()"
-                  />
-                  <code v-if="message_mandater" style="font-size:25px">{{message_mandater}}</code>
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  AfficheNumeroMarche(RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement)
+                                    
+                                  )
+                                "
+                                class="span"
+                                readonly
+                              />
                             </div>
                           </div>
-                        </td> -->
+                        </td>
                         <td colspan="3">
                           <div class="control-group">
                             <label class="control-label"
@@ -1105,52 +830,8 @@ Ajouter Facture
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="objetMarche(formData.marche_id)"
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                          <div class="control-group">
-                            <label class="control-label">Numéro de décompte</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                v-model="formData12.objet_decompte"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">LIVRABLES</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                 v-model="formData.livrable_autre_depense"
-                                class="span"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">BENEFICIAIRES</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
                                 :value="
-                                  libelleUniteAdministrative(
-                                    formData.unite_administrative_id
-                                  )
+                                  objetMarche(RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement))
                                 "
                                 class="span"
                                 readonly
@@ -1160,8 +841,40 @@ Ajouter Facture
                         </td>
                       </tr>
                       <tr>
-                        
-                        
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">LIVRABLES</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  livrable(RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement))
+                                "
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <div class="control-group">
+                            <label class="control-label">BENEFICIAIRES</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  libelleUniteAdministrative(
+                                    RecupererIdUa(detailOpProvisoire.numero_ordre_paiement)
+                                  )
+                                "
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label">GEOLOCALISATION</label>
@@ -1169,48 +882,34 @@ Ajouter Facture
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="geolocalisation(formData.marche_id)"
+                                :value="
+                                  geolocalisation(RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement))
+                                "
                                 class="span"
                                 readonly
                               />
                             </div>
                           </div>
                         </td>
+                      </tr>
+                      <tr>
                         <td>
                           <div class="control-group">
                             <label class="control-label"
-                              >DUREE DE REALISATION(en jours)</label
+                              >DUREE DE REALISATION (en jours)</label
                             >
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="dureeMarche(formData.marche_id)"
+                                :value="
+                                  recupererDureMarche(
+                                    RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement)
+                                  )
+                                "
                                 class="span"
                                 readonly
                               />
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >MODE DE REGLEMENT</label
-                            >
-                            <div class="controls">
-                              <select
-                                v-model="formData.mode_paiement_id"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option
-                                  v-for="typeFact in modepaiements"
-                                  :key="typeFact.id"
-                                  :value="typeFact.id"
-                                >
-                                  {{ typeFact.libelle }}
-                                </option>
-                              </select>
                             </div>
                           </div>
                         </td>
@@ -1219,69 +918,6 @@ Ajouter Facture
                             <label class="control-label"
                               >MONTANT DU MARCHE</label
                             >
-                            <div class="controls">
-                              
-                              <money
-                                :value="MontantReelMarche(this.formData.marche_id)"
-                                readOnly
-                                style="text-align: left; color: red;border: 1px solid #000"
-                                class="span"
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        
-                        
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >MONTANT AVENANT</label
-                            >
-                            <div class="controls">
-                         
-                              <money
-                                :value="MontantAvenant(this.formData.marche_id)"
-                                readOnly
-                                
-                                style="text-align: left; color: red;border: 1px solid #000"
-                                class="span"
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                         <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">MONTANT DE BASE</label>
-                            <div class="controls">
-                           
-                              <money
-                               :value="MontantDeBase"
-                               readOnly
-                                style="text-align: left; color: red;border: 1px solid #000"
-                                class="span"
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                         <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">RESTE A PAYE</label>
-                            <div class="controls">
-                           
-                              <money
-                               :value="ResteAPayeSurMarche"
-                               readOnly
-                                style="text-align: left; color: red;border: 1px solid #000"
-                                class="span"
-                              ></money>
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">MONTANT ENGAGE</label>
                             <div class="controls">
                               <!-- <input
                   
@@ -1292,18 +928,285 @@ Ajouter Facture
                     readonly
                   /> -->
                               <money
-                                v-model="formData.montant_ordre_paiement"
-                                style="text-align: left; color: red;border: 1px solid #000"
+                                :value="
+                                  montantMarche(RecupererIdMarche(detailOpProvisoire.numero_ordre_paiement))
+                                "
+                                
+                                style="text-align: left; color: red"
+                                readOnly
                                 class="span"
                               ></money>
                             </div>
                           </div>
                         </td>
-                        
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">MONTANT ENGAGE</label>
+                            <div class="controls">
+                               <money
+                                
+                                :value="RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)"
+                                style="text-align: left; color: red"
+                                readOnly
+                                class="span"
+                              ></money>
+                             
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MODE DE REGLEMENT</label
+                            >
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  recupererLibelleModePaiement(
+                                    RecupererModePaiement(detailOpProvisoire.numero_ordre_paiement)
+                                  )
+                                "
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- <tr>
+                          <td colspan="3"> 
+<div class="control-group">
+                <label class="control-label">MONTANT EN LETTRES</label>
+                <div class="controls">
+                  <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+                          </td>
+                          </tr> -->
+                      
+                    </table>
+
+                    <table class="table table-bordered table-striped" v-else>
+                                           <tr>
+                        <td colspan="3">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >OBJET DE LA DEPENSE</label
+                            >
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="RecupererObjet(detailOpProvisoire.numero_ordre_paiement)"
+                                
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">LIVRABLES</label>
+                            <div class="controls">
+                              <input
+                               
+                                :value="RecupererLivrable(detailOpProvisoire.numero_ordre_paiement)"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">BENEFICIAIRES</label>
+                            <div class="controls">
+                              <input
+                                :value="RecupererBeneficiaire(detailOpProvisoire.numero_ordre_paiement)"
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label">GEOLOCALISATION</label>
+                            <div class="controls">
+                              <input
+                                
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label"
+                              >DUREE DE REALISATION</label
+                            >
+                            <div class="controls">
+                              <input
+                              :value="RecupererDure(detailOpProvisoire.numero_ordre_paiement)"
+                                
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MONTANT ENGAGE</label
+                            >
+                            <div class="controls">
+                              <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                              <money
+                                readonly
+                                :value="RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)"
+                                style="text-align: left; color: red"
+                                class="span"
+                              ></money>
+                            </div>
+                          </div>
+                        </td>
+                        <td colspan="">
+                          <div class="control-group">
+                            <label class="control-label"
+                              >MODE DE REGLEMENT</label
+                            >
+                            <div class="controls">
+                               <input
+                              :value="recupererLibelleModePaiement(RecupererModePaiement(detailOpProvisoire.numero_ordre_paiement))"
+                                
+                                type="text"
+                                style="border: 1px solid #000"
+                                class="span"
+                              />
+                              <!-- <select
+                                v-model="formData.mode_paiement_id"
+                                class="span"
+                                style="border: 1px solid #000"
+                              >
+                                <option
+                                  v-for="typeFact in modepaiements"
+                                  :key="typeFact.id"
+                                  :value="typeFact.id"
+                                >
+                                  {{ typeFact.libelle }}
+                                </option>
+                              </select> -->
+                            </div>
+                          </div>
+                        </td>
                       </tr>
                     </table>
-                    
-  <table class="table table-bordered table-striped">
+                  </div>
+                </div>
+                <div class="widget-title">
+                  <ul class="nav nav-tabs">
+                    <li class="active">
+                      <a data-toggle="tab" href="#tab1"
+                        >Source de Financement</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="widget-content tab-content">
+                  <!--ongle identification-->
+                  <div id="tab1" class="tab-pane active">
+                    <table class="table table-bordered table-striped">
+                      <tr>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label"
+                              >Type de Financement
+                              <code style="color: red; font-size: 16px"
+                                >*</code
+                              ></label
+                            >
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                :value="
+                                  AfficheTypeFinancement(RecupererIdTypeFinancement(detailOpProvisoire.numero_ordre_paiement))
+                                  
+                                "
+                                class="span"
+                                readonly
+                              />
+                              <!-- <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="types_financements"
+                                                   v-model="formData.type_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select> -->
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>Bailleur </label>
+                          <!-- <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="sources_financements"
+                                                   v-model="formData.bailler_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select> -->
+                          <input
+                            type="text"
+                            style="border: 1px solid #000"
+                            :value="
+                             
+                              AfficheSourceFinancement(RecupererIdSousFinancement(detailOpProvisoire.numero_ordre_paiement))
+                                  
+                            "
+                            class="span"
+                            readonly
+                          />
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+<table class="table table-bordered table-striped">
   
     <tr>
        <label
@@ -1314,14 +1217,14 @@ Ajouter Facture
                               text-align: center;
                             "
                             
-                            >VOIR FACTURE</label
+                            >Facture</label
                           >
                            <div
                             class=""
                             align="right"
                             
                           >
-                            <button
+                            <!-- <button
                               @click.prevent="afficherModalAjouterFacture"
                               class="btn btn-success"
                             >
@@ -1330,26 +1233,25 @@ Ajouter Facture
                                   >AJOUTER FACTURE </i
                                 ></span
                               >
-                            </button>
+                            </button> -->
                           </div>
                            <table
                             class="table table-bordered table-striped"
                            
                           >
                           <thead>
-                          <tr>
+                             <tr>
                           <th>Designation</th>
                           <th>Quantité</th>
                           <th>Prix unitaire</th>
                           <th>Total</th>
-                          <th style="width: 10px; color:#000">Supprimer</th>
+                          <th style="width: 10px">Supprimer</th>
                         </tr>
                             </thead>
  <tbody>
                         <tr
                           class="odd gradeX"
-                          v-for=" type in listeFacturePiece(
-                            formData.numero_ordre_paiement
+                          v-for="(type) in listeFacturePiece(numeroOp(detailOpProvisoire.numero_ordre_paiement)                    
                           )"
                           :key="type.id"
                         >
@@ -1417,13 +1319,13 @@ Ajouter Facture
                               formatageSomme(
                                 parseFloat(
                                   SommeDesDmdParBonCommande(
-                                    formData.numero_ordre_paiement
+                                    numeroOp(detailOpProvisoire.numero_ordre_paiement)
                                   )
                                 )
                               )
                             }}
                           </td>
-                          <td></td>
+                           <td></td>
                         </tr>
                         <tr>
                           <td></td>
@@ -1447,9 +1349,9 @@ Ajouter Facture
                             "
                           >
                                     
-                            {{ RecuperereTaux(formData.numero_ordre_paiement) }}
+                            {{ RecuperereTaux(numeroOp(detailOpProvisoire.numero_ordre_paiement)) }}
                           </td>
-                          <td></td>
+                           <td></td>
                         </tr>
                         <tr>
                           <td></td>
@@ -1473,7 +1375,7 @@ Ajouter Facture
                             "
                           >
                                     
-                            {{parseFloat(SommeDesDmdParBonCommande(formData.numero_ordre_paiement))*parseFloat(RecuperereTaux(formData.numero_ordre_paiement)) }}
+                            {{parseFloat(SommeDesDmdParBonCommande(numeroOp(detailOpProvisoire.numero_ordre_paiement)))*parseFloat(RecuperereTaux(numeroOp(detailOpProvisoire.numero_ordre_paiement))) }}
                           </td>
                           <td></td>
                         </tr>
@@ -1502,12 +1404,12 @@ Ajouter Facture
                               formatageSomme(
                                 parseFloat(
                                   parseFloat(
-                                    parseFloat(SommeDesDmdParBonCommande(formData.numero_ordre_paiement))*parseFloat(RecuperereTaux(formData.numero_ordre_paiement))
+                                    parseFloat(SommeDesDmdParBonCommande(numeroOp(detailOpProvisoire.numero_ordre_paiement)))*parseFloat(RecuperereTaux(numeroOp(detailOpProvisoire.numero_ordre_paiement)))
                                   ) +
                                     parseFloat(
                                        parseFloat(
                                   SommeDesDmdParBonCommande(
-                                    formData.numero_ordre_paiement
+                                    numeroOp(detailOpProvisoire.numero_ordre_paiement)
                                   )
                                 )
                                     )
@@ -1515,35 +1417,18 @@ Ajouter Facture
                               )
                             }}
                           </td>
-                          <td></td>
+                        <td></td>
                         </tr>
                         </tbody>
                             </table>
-
-    </tr>
-  </table>
-                 
-                    <table class="table table-bordered table-striped">
-                      <tr>
-                        <td colspan="">
-                         
-                          <label
-                            class="control-label"
-                            style="
-                              font-size: 14px;
-                              font-weight: bold;
-                              text-align: center;
-                            "
-                            
-                            >LISTE DES PIECES </label
-                          >
-
-                          <div
+ </tr>
+ <table class="table table-bordered table-striped">
+   <div
                             class=""
                             align="right"
                             
                           >
-                            <button
+                            <!-- <button
                               @click.prevent="afficherModalAjouterService"
                               class="btn btn-success"
                             >
@@ -1552,15 +1437,29 @@ Ajouter Facture
                                   >AJOUTER PIECE</i
                                 ></span
                               >
-                            </button>
+                            </button> -->
                           </div>
+ <tr>
+                        <td colspan="4">
+                          
+                          <label
+                            class="control-label"
+                            style="
+                              font-size: 14px;
+                              font-weight: bold;
+                              text-align: center;
+                            "
+                           
+                            >Pièce Justificative</label
+                          >
+
 
                           <table
                             class="table table-bordered table-striped"
                             
                           >
                             <thead>
-                              <tr></tr>
+                             
                               <tr>
                                 <th style="font-size: 14px; font-weight: bold">
                                   Numero Ordre
@@ -1579,8 +1478,8 @@ Ajouter Facture
                             <tbody>
                               <tr
                                 class="odd gradeX"
-                                v-for="type in listePieceJustificative1(
-                                  formData.numero_ordre_paiement
+                                v-for="type in listePieceJustificativeOpDefinitive(
+                                  numeroOp(detailOpProvisoire.numero_ordre_paiement)
                                 )"
                                 :key="type.id"
                               >
@@ -1627,90 +1526,8 @@ Ajouter Facture
                           </table>
                         </td>
                       </tr>
-                    </table>
-                  </div>
-                </div>
-                <div class="widget-title">
-                  <ul class="nav nav-tabs">
-                    <li class="active">
-                      <a data-toggle="tab" href="#tab1"
-                        >Source de Financement</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <div class="widget-content tab-content">
-                  <!--ongle identification-->
-                  <div id="tab1" class="tab-pane active">
-                    <table class="table table-bordered table-striped">
-                      <tr>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Type de Financement
-                              <code style="color: red; font-size: 16px"
-                                >*</code
-                              ></label
-                            >
-                            <div class="controls">
-                              <model-list-select
-                                style="border: 1px solid #000"
-                                class="wide"
-                                :list="types_financements"
-                                v-model="formData.type_financement_id"
-                                option-value="id"
-                                option-text="libelle"
-                                placeholder=""
-                              >
-                              </model-list-select>
-                            </div>
-                          </div>
-                          <code
-                            style="color: red; font-size: 12px"
-                            v-if="formData.type_financement_id == ''"
-                            >Veuillez renseigner ce champ</code
-                          >
-                        </td>
-
-                      <!-- <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Bailleur</label
-                            >
-                            <div class="controls">
-                              <select
-                                v-model="formData.bailler_id"
-                                class="span"
-                                style="border: 1px solid #000"
-                              >
-                                <option
-                                  v-for="typeFact in AfficheSouSFinancement(formData.unite_administrative_id,formData.type_financement_id)"
-                                  :key="typeFact.id"
-                                  :value="typeFact.sous_financement_id"
-                                >
-                                  {{ SousFinancement(typeFact.sous_financement_id)}}
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </td> -->
-                        <td>
-                          <label>Bailleur </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="sources_financements"
-                            v-model="formData.bailler_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
+  </table>
+  </table>
 
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
@@ -1744,11 +1561,11 @@ Ajouter Facture
                         <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
-                              >Engagements antérieurs(B)</label
+                              >Engagements antérieurs (B)</label
                             >
                             <div class="controls">
                               <money
-                                :value="cumulBudgetEnterieure"
+                                :value="Engagementsantérieurs"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -1763,8 +1580,9 @@ Ajouter Facture
                             >
                             <div class="controls">
                               <money
-                                v-model="formData.montant_engage"
-                                readOnly
+                                :value="
+                                  RecupererMontantEngage(detailOpProvisoire.numero_ordre_paiement)
+                                "
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
@@ -1835,7 +1653,8 @@ Ajouter Facture
                               <input
                                 type="date"
                                 style="border: 1px solid #000"
-                                v-model="formData.gestionnaire_credit_date"
+                                :value="RecupererDateBenef(detailOpProvisoire.numero_ordre_paiement)"
+                               
                                 class="span"
                               />
                             </div>
@@ -1846,25 +1665,24 @@ Ajouter Facture
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                v-model="formData.gestionnaire_credit_non"
+                                 :value="RecupererNomGestionnaire(detailOpProvisoire.numero_ordre_paiement)"
+                               
                                 class="span"
                               />
                             </div>
                           </div>
-<!--                           
                           <div class="control-group">
                             <label class="control-label">Fonction</label>
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                v-model="formData.gestionnaire_credit_fonction"
+                                 :value="RecupererFonction(detailOpProvisoire.numero_ordre_paiement)"
+                               
                                 class="span"
                               />
                             </div>
-                          </div> -->
-
-
+                          </div>
                         </td>
                         <td colspan="2">
                           <div class="widget-title">
@@ -1883,7 +1701,8 @@ Ajouter Facture
                                 type="date"
                                 style="border: 1px solid #000"
                                 class="span"
-                                readonly
+                                 :value="RecupererDateViseCf(detailOpProvisoire.numero_ordre_paiement)"
+                               
                               />
                             </div>
                           </div>
@@ -1897,7 +1716,7 @@ Ajouter Facture
                                   recupererNomDuControleurF(
                                     recupererIdUser(
                                       recupererIdServiceCF(
-                                        formData.unite_administrative_id
+                                        detailOpProvisoire.unite_administrative_id
                                       )
                                     )
                                   )
@@ -1913,7 +1732,7 @@ Ajouter Facture
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
-                                readonly
+                                :value="afficheDecisionCf"
                               />
                             </div>
                           </div>
@@ -2008,17 +1827,18 @@ Ajouter Facture
                   <div class="controls">
                     <div data-toggle="buttons-checkbox" class="btn-group">
                       <a
-                       :readOnly="RechercheNumeroOP" 
                         class="btn btn-primary"
-                        @click.prevent="AjouterOrdrePaiement"
+                        @click.prevent="AjouterOrdrePaiementAnulation"
                         >Valider</a
                       >
-                      <a
-                        @click.prevent="afficherModalListePersonnel()"
+                       <a
+                        @click.prevent="pagePrecedent()"
                         class="btn"
                         href="#"
                         >Fermer</a
                       >
+                      
+                     
                     </div>
                   </div>
                 </div>
@@ -2045,14 +1865,23 @@ Ajouter Facture
                 <label class="control-label">Numéro ordre</label>
                 <div class="controls">
                   <input
-                   
+                    v-if="formData.type_ordre_paiement == '2'"
                     type="text"
                     :value="numeroOrdre(formData.numero_ordre_paiement)"
-                    class="span"
-                    placeholder=""
+                    class="span5"
+                    placeholder="Saisir le libellé"
                     readonly
                   />
-                 
+                  <input
+                    v-if="formData.type_ordre_paiement == '1'"
+                    type="text"
+                    :value="
+                      numeroOrdreDefinitive(formData.numero_ordre_paiement)
+                    "
+                    class="span5"
+                    placeholder="Saisir le libellé"
+                    readonly
+                  />
                 </div>
               </div>
             </td>
@@ -2065,7 +1894,7 @@ Ajouter Facture
                 <div class="controls">
                   <select
                     v-model="formData1.libelle"
-                    class="span"
+                    class="span5"
                     style="border: 1px solid #000"
                   >
                     <option></option>
@@ -2095,7 +1924,7 @@ Ajouter Facture
                   <input
                     type="text"
                     v-model="formData1.reference"
-                    class="span"
+                    class="span5"
                     placeholder="Saisir la reference"
                   />
                   <code
@@ -2118,7 +1947,7 @@ Ajouter Facture
                   <input
                     type="date"
                     v-model="formData1.date_piece"
-                    class="span"
+                    class="span5"
                   />
                   <code
                     style="color: red; font-size: 12px"
@@ -2142,17 +1971,7 @@ Ajouter Facture
                 </div>
               </div>
             </td>
-            <!-- <td>
-              <div class="control-group">
-                <label class="control-label">Exonéré</label>
-                <div class="controls">
-                  <select v-model="formData9.exonere" class="span">
-                    <option value="0">Oui</option>
-                    <option value="1">Non</option>
-                  </select>
-                </div>
-              </div>
-            </td> -->
+          
           </tr>
         </table>
       </div>
@@ -2168,6 +1987,8 @@ Ajouter Facture
 
           <a data-dismiss="modal" class="btn" href="#">Fermer</a>
         </div>
+       
+
         
       </div>
     </div>
@@ -2187,7 +2008,7 @@ Ajouter Facture
                   <input
                     type="text"
                     v-model="editpiece.numero_ordre"
-                    class="span"
+                    class="span5"
                     placeholder="Saisir le libellé"
                     readonly
                   />
@@ -2203,7 +2024,7 @@ Ajouter Facture
                   <input
                     type="text"
                     v-model="editpiece.libelle"
-                    class="span"
+                    class="span5"
                     placeholder="Saisir le libellé"
                   />
                 </div>
@@ -2218,7 +2039,7 @@ Ajouter Facture
                   <input
                     type="text"
                     v-model="editpiece.reference"
-                    class="span"
+                    class="span5"
                     placeholder="Saisir la reference"
                   />
                 </div>
@@ -2233,7 +2054,7 @@ Ajouter Facture
                   <input
                     type="date"
                     v-model="editpiece.date_piece"
-                    class="span"
+                    class="span5"
                   />
                 </div>
               </div>
@@ -2252,7 +2073,7 @@ Ajouter Facture
       </div>
     </div>
 
-    <div id="exampleModal1" class="modal hide tailles">
+    <div id="exampleModal11" class="modal hide tailles">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Facture</h3>
@@ -2293,7 +2114,7 @@ Ajouter Facture
                    <money
                      v-model="FormDataFacture.quantite"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2311,7 +2132,7 @@ Ajouter Facture
                   <money
                     v-model="FormDataFacture.prix_unitaire"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2320,7 +2141,7 @@ Ajouter Facture
                 <div class="control-group">
                 <label class="control-label">exonéré</label>
                 <div class="controls">
-                  <select v-model="FormDataFacture.exonere" class="span">
+                  <select v-model="FormDataFacture.exonere" class="span4">
                   
                     <option value="0">Oui</option>
                      <option value="1">Non</option>
@@ -2340,7 +2161,7 @@ Ajouter Facture
                   <money
                     :value="MontantFactureHt"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2350,7 +2171,7 @@ Ajouter Facture
                 <label class="control-label">Taux</label>
                 <div class="controls">
  <input type="text" 
-                         class="span"
+                         class="span4"
                         :value="afficherEnorere"
                          readonly
                   />
@@ -2363,7 +2184,7 @@ Ajouter Facture
                 <label class="control-label" >Montant Tva</label>
                 <div class="controls">
                  
-<money :value="montantTva"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+<money :value="montantTva"  readonly  style="text-align:left;color:red;font-size:16px"  class="span4"></money>
                 </div>
               </div>
             </td>
@@ -2383,7 +2204,7 @@ Ajouter Facture
                   <money
                     :value="MontantFactureTTC"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2445,7 +2266,7 @@ Ajouter Facture
                    <money
                      v-model="editFacture.quantite"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2457,13 +2278,13 @@ Ajouter Facture
                   <!-- <input
                 type="number"
                 v-model="FormDataFacture.prix_unitaire"
-                class="span"
+                class="span4"
                 
               /> -->
                   <money
                     v-model="editFacture.prix_unitaire"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2472,7 +2293,7 @@ Ajouter Facture
                 <div class="control-group">
                 <label class="control-label">exonéré</label>
                 <div class="controls">
-                  <select v-model="editFacture.exonere" class="span">
+                  <select v-model="editFacture.exonere" class="span4">
                   
                     <option value="0">Oui</option>
                      <option value="1">Non</option>
@@ -2492,7 +2313,7 @@ Ajouter Facture
                   <money
                     :value="MontantFactureHtModifier"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2502,7 +2323,7 @@ Ajouter Facture
                 <label class="control-label">Taux</label>
                 <div class="controls">
  <input type="text" 
-                         class="span"
+                         class="span4"
                         :value="afficherEnorereModifeir"
                          readonly
                   />
@@ -2515,7 +2336,7 @@ Ajouter Facture
                 <label class="control-label" >Montant Tva</label>
                 <div class="controls">
                  
-<money :value="montantTvaModifier"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+<money :value="montantTvaModifier"  readonly  style="text-align:left;color:red;font-size:16px"  class="span4"></money>
                 </div>
               </div>
             </td>
@@ -2529,13 +2350,13 @@ Ajouter Facture
                   <!-- <input
                 type="text"
                 :value="MontantFactureHt"
-                class="span"
+                class="span4"
                 readonly
               /> -->
                   <money
                     :value="MontantFactureTTCModifier"
                     style="text-align: left; color: red"
-                    class="span"
+                    class="span4"
                   ></money>
                 </div>
               </div>
@@ -2553,58 +2374,20 @@ Ajouter Facture
 
 
 
-
-
-
-    <div id="exampleModalligneEco" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier la Date de Acte D'effet Financier</h3>
-      </div>
-      <div class="modal-body">
-     
-        <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">Date:</label>
-            <div class="controls">
-              <input
-                type="date"
-                class="span"
-                placeholder=""
-                v-model="editMarcheDate.date_debut_exectuion_definitif"
-              />
-              <input type="hidden" name="" id="" v-model="editMarcheDate.id" />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-primary" href="#" @click="ValiderDateUpdate"
-          >Valider</a
-        >
-        <!-- <a data-dismiss="modal" class="btn" href="#">Fermer</a> -->
-        <a
-                        @click.prevent="pagePrecedent()"
-                        class="btn"
-                        href="#"
-                        >Fermer</a
-                      >
-      </div>
-    </div>
+    
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
-
-import { ModelListSelect } from "vue-search-select";
+ import {  ModelListSelect } from 'vue-search-select'
 import moment from "moment";
 // import facture from '../Facture/facture.vue'
 import { formatageSomme } from "@/Repositories/Repository";
-import "vue-search-select/dist/VueSearchSelect.css";
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
   components: {
-    ModelListSelect,
+     ModelListSelect,
     //  facture
   },
   data() {
@@ -2618,21 +2401,14 @@ export default {
       liste: [],
 
       info_pdf: false,
-      editFacture:{},
       formData: {
         unite_administrative_id: "",
-        signataire:"",
         activite_id: "",
         ligne_economique_id: "",
-        typedepense: "Marche",
-        numero_ordre_paiement: "",
-        type_ordre_paiement: "",
-        imterim_op:"Non",
-        RattacherPers:"Non",
-        marche_idd:""
-      
       },
-
+      formData78: {
+        typeOp: "OP Annulation",
+      },
       editpiece: {},
       formData5: {
         Auteur_id: "2",
@@ -2640,48 +2416,32 @@ export default {
       formData9: {
         exonere: 1,
       },
-    
-      formData45: {},
-      formData12: {
-        objet_decompte: "",
-      },
-      formData7: {},
       formData1: {
         date_piece: "",
         reference: "",
         libelle: "",
       },
+      detailOpProvisoire: {
+        activite_id: "",
+        typedepense: "",
+      },
       formData8: {},
-      formData02:{},
       formData2: {
         numeromarche: "",
-        marche_id: "",
       },
-      FormDataFacture: {
+     FormDataFacture: {
         exonere: 0,
       },
-      editMarcheDate:{},
-     // editMarcdate:"",
+      editFacture:{},
       message_mandater: "",
-      decision_cf_definitif: "",
-      decision_cf: "",
-      
     };
   },
 
-  created() {
-        
-            this.formData=this.gettersgestionOrdrePaiement.find(item=>item.id==this.$route.params.id)
+  // created() {
 
-            this.formData.marche_idd = this.formData.marche_id
-            console.log(this.formData)
-            console.log(this.libelleBanque(this.idbanque(this.idEntreprise(this.formData.marche_id))))
-            console.log(this.formData)
-            console.log(this.idEntreprise(this.formData.marche_id))
-            console.log(this.listeFacturePiece(this.formData.numero_ordre_paiement))
-            console.log(this.gettersnomPieceJustificative)
-            
-        },
+  //     this.detailOpProvisoire=this.gettersgestionOrdrePaiement.find(item=>item.id==this.$route.params.id  )
+
+  // },
   computed: {
     admin: admin,
     dcf: dcf,
@@ -2696,7 +2456,6 @@ export default {
       "FichierJoinDmdEngagement",
       "salairesActeur",
       "personnaliseActeurDepense",
-      "getterPersonneRattacher",
       "personnaFonction",
       "afficheNombrePersonnelRecuActeNormination",
       "fonctionBudgetaire",
@@ -2719,10 +2478,9 @@ export default {
     ]),
     ...mapGetters("uniteadministrative", [
       "budgetEclate",
-      "groupeParBAILLER",
       "groupeLigneEconomiqueBudget",
       "getSousBudget",
-      "groupeActiviteBudgetEclate",
+      "groupeActiviteBudget",
       "budgetGeneral",
       "fonctionsua",
       "servicesua",
@@ -2730,15 +2488,12 @@ export default {
       "uniteZones",
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
-      "getterUniteAdministrativeBailleur"
     ]),
     // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
     ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
     ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters("bienService", [
-      
-      "avenants",
       "gettersgestionOrdrePaiement",
       "gettersDossierAutreDepense",
       "gettersDossierMandat",
@@ -2821,273 +2576,208 @@ export default {
       "sources_financements",
       "types_financements",
     ]),
-AfficheBanqueEntreprise() {
+
+ 
+SoustratMontantEngage(){
+  if(this.RecupererTypeOp(this.detailOpProvisoire.numero_ordre_paiement)==1){
+    return -this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement)
+  }
+  else{
+    return this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement)
+  }
+},
+
+numeroOp() {
       return (id) => {
         if (id != null && id != "") {
-          return this.getCompte.filter(
-            (qtreel) =>
-              qtreel.entrepse_id == id 
-          );
-        }
-      };
-    },
-AfficheCompteEntreprise() {
-      return (id,id1) => {
-        if (id != null && id != "",id1 != null && id1 != "") {
-          return this.getCompte.filter(
-            (qtreel) =>
-              qtreel.entrepse_id == id  && qtreel.banq_id == id1 
-          );
-        }
-      };
-    },
- MontantDeBase(){
-      return parseFloat(
-        this.MontantReelMarche(this.formData.marche_id))+
-          parseFloat(this.MontantAvenant(this.formData.marche_id))
-  },
-  ResteAPayeSurMarche(){
-return (parseFloat(this.MontantDeBase)-parseFloat(this.MontantPayeMarche(this.formData.marche_id))-parseFloat(this.formData.montant_ordre_paiement))
-  },
-  MontantPayeMarche() {
-      return id => {
-        if (id != null && id != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.marche_id == id).reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-
-     
-      }
-      }
-  },
-MontantAvenant() {
-      return id => {
-        if (id != null && id != "") {
-           return this.avenants.filter(qtreel => qtreel.marche_id == id).reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ht),
-              0
-            )
-            .toFixed(0);
-
-     
-      }
-      }
-  },
-
-    RecupdateActeEffetFinancier(){
-      let vm =this;
-        if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
-          const qtreel = this.acteEffetFinanciers.find(
-          (qtreel)=> qtreel.marche_id == this.formData2.marche_id
-        );
-       
-
-         if(qtreel.date_debut_exectuion_definitif ==null ){
-           
-           vm.editMarcheDate=qtreel;
-          return this.$("#exampleModalligneEco").modal({
-         backdrop: "static",
-          keyboard: false
-       });
-          
-         }
-
-        else{
-
-           return console.log('**lega**');
-        }
-
-        }else{
-          return 0;
-        }
-
-      },
-
-    Recup_Banque() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.getCompte.find(
-            (qtreel) => qtreel.acteur_depense_id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.banq_id;
+            return qtereel.numero_ordre_paiement;
           }
           return 0;
         }
       };
     },
-    idCompte() {
+    RecupererTypeOp() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.getCompte.find(
-            (qtreel) => qtreel.rib == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.id;
+            return qtereel.type_ordre_paiement;
           }
           return 0;
         }
       };
     },
-Recup_Numero_cOMPTE() {
+     RecupererNumeroOp() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.getCompte.find(
-            (qtreel) => qtreel.acteur_depense_id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.rib;
+            return qtereel.numero_ordre_paiement;
           }
           return 0;
         }
       };
     },
-// affichePersoUA(){
-//   if(this.formData.unite_administrative_id!=""){
-//     return this.PersonnelParUA(this.formData.unite_administrative_id)
-//   }
-//   else{
-//     return ""
-//   }
-// },
-affichePersoUA() {
-      if (this.noDCfNoAdmin) {
-        let colect = [];
-        this.PersonnelParUA(this.formData.unite_administrative_id).filter((item) => {
-        
-        
-            colect.push(item);
-           
-        });
-        return colect;
-      }
-
-      return "";
-    },
-    videChamps(){
-      if(this.formData.typedepense == 'Personnel'){
-        return this.PersonnelParUA(this.formData.unite_administrative_id)
-      }
-      else{
-        return this.formData.auteur_perso_id == ""
-      }
-    },
-    PersonnelParUA() {
+afficheNumeroopProvisoire(){
+  return this.gettersgestionOrdrePaiement.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==8 || item.type_ordre_paiement==1 && item.decision_cf==9 || item.type_ordre_paiement==2 &&  item.decision_cf==8 || item.type_ordre_paiement==2 &&  item.decision_cf==9 || item.type_ordre_paiement==4 &&  item.decision_cf==8 || item.type_ordre_paiement==4 &&  item.decision_cf==9)
+},
+  RecupererDecisionCf() {
       return (id) => {
         if (id != null && id != "") {
-          return this.personnaliseActeurDepense.filter(
-            (qtreel) =>
-              qtreel.unite_administrative_id == id 
-          );
-        }
-      };
-    },
-
-      PersonnelRattacher() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.getterPersonneRattacher.filter(
-            (qtreel) =>
-              qtreel.ua_rattacheur == id 
-          );
-        }
-      };
-    },
-
-
-
-    Personnelnom() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.personnaliseActeurDepense.find(
-            (qtreel) => qtreel.id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.nom;
+            return qtereel.decision_cf;
           }
           return 0;
         }
       };
     },
-
-    Personnelmatricule() {
+     RecupererDateViseCf() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.personnaliseActeurDepense.find(
-            (qtreel) => qtreel.id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.matricule;
+            return qtereel.date_decision_cf;
           }
           return 0;
         }
       };
     },
-
-    Personnelprenom() {
+    RecupererDateBenef() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.personnaliseActeurDepense.find(
-            (qtreel) => qtreel.id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.prenom;
+            return qtereel.gestionnaire_credit_date;
           }
           return 0;
         }
       };
     },
-
-
-
-
-
-
-    GrandeNatureId() {
+     RecupererNomGestionnaire() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.ligneeconomique_id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.grandenature_id;
+            return qtereel.gestionnaire_credit_non;
           }
           return 0;
         }
       };
     },
-
-    idbanque() {
+    RecupererIdTypeFinancement() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.marche_id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.banq_id;
+            return qtereel.type_financement_id;
           }
           return 0;
         }
       };
     },
-    idEntreprise() {
+     RecupererIdSousFinancement() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.marche_id == id
-          );
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.source_financement_id;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererFonction() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.gestionnaire_credit_fonction;
+          }
+          return 0;
+        }
+      };
+    },
+afficheDecisionCf(){
+  if(this.RecupererDecisionCf(this.detailOpProvisoire.numero_ordre_paiement)==8)
+  {
+    return 'Vise'
+  }
+  else if(this.RecupererDecisionCf(this.detailOpProvisoire.numero_ordre_paiement)==9){
+    return 'Vise avec Observation'
+  }
+ else{
+   return ''
+ }
+ 
+},
+
+
+
+       RecupererNom() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.nom_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+      RecupererCOMPTE() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.compte_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererADRESSE() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.adresse;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererBANCAIRES() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.reference_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererEntreprise() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
             return qtereel.entreprise_id;
@@ -3096,15 +2786,313 @@ affichePersoUA() {
         }
       };
     },
+    RecupererObjet() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.odjet_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererLivrable() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.livrable_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererBeneficiaire() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.beneficiaire_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+   
+       RecupererDure() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.dure_autre_depense;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererMontantEngage() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.montant_ordre_paiement;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererModePaiement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.mode_paiement_id;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererIdMarche() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.marche_id;
+          }
+          return 0;
+        }
+      };
+    },
+ RecupererIdSection() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.section_id;
+          }
+          return 0;
+        }
+      };
+    },
+     
+      RecupererIdProgramme() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.programme_id;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererIdAction() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.action_id;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererTypeDepense() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.typedepense;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererIdActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.activite_id;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererIdEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.ligne_economique_id;
+          }
+          return 0;
+        }
+      };
+    },
+     RecupererIdSousBudget() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.sous_budget_id;
+          }
+          return 0;
+        }
+      };
+    },
+    RecupererIdUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.unite_administrative_id;
+          }
+          return 0;
+        }
+      };
+    },
+ RecuperereTaux() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierFacturePiece.find((qtreel) => qtreel.numero_op_hors_sib == id);
+
+          if (qtereel) {
+            return qtereel.taux;
+          }
+          return 0;
+        }
+      };
+    },
+
     tailleOpEnregistrer() {
       return this.gettersgestionOrdrePaiement.length + 1;
     },
-    listePieceJustificativeOpDefinitive() {
+    libelleSousBudget() {
       return (id) => {
         if (id != null && id != "") {
-          return this.gettersnomPieceJustificative.filter(
-            (qtreel) => qtreel.numero_op_hors_sib == id
+          const qtereel = this.getSousBudget.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.activite_enfant;
+          }
+          return 0;
+        }
+      };
+    },
+    recupererDureMarche() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.acteEffetFinanciers.find(
+            (qtreel) => qtreel.marche_id == id
           );
+
+          if (qtereel) {
+            return qtereel.duree;
+          }
+          return 0;
+        }
+      };
+    },
+    recupererLibelleModePaiement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.modepaiements.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+    recupererNomTypeDepense() {
+      if (this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement) == "Autres") {
+        return "Autres";
+      } else if (this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement) == "Marche") {
+        return "Marche";
+      } else {
+        return "";
+      }
+    },
+
+    Engagementsantérieurs() {
+      if (
+        this.comparaison(this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement)) ==
+        this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement)
+      ) {
+        return (
+          parseFloat(
+            this.EngagementsantérieursSousBudget(
+              this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
+              this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement)
+            )
+          ) - parseFloat(this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement))
+        );
+      } else {
+        return (
+          parseFloat(
+            this.EngagementsantérieursUa(
+              this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
+              this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement)
+            )
+          ) - parseFloat(this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement))
+        );
+      }
+    },
+    EngagementsantérieursUa() {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id &&
+                qtreel.ligne_economique_id == id1 &&
+                qtreel.decision_cf == 8 && 
+                qtreel.exercice == this.formData.exercice &&
+                qtreel.diff_op == null
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+    EngagementsantérieursSousBudget() {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.sous_budget_id == id &&
+                qtreel.ligne_economique_id == id1 &&
+                qtreel.decision_cf == 8
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
         }
       };
     },
@@ -3114,13 +3102,82 @@ affichePersoUA() {
         parseFloat(this.Cumulengagements);
       return parseFloat(val).toFixed(0);
     },
+
     Cumulengagements() {
       const val =
-        parseFloat(this.cumulBudgetEnterieure) +
-        parseFloat(this.formData.montant_engage);
+        parseFloat(this.Engagementsantérieurs) +
+        parseFloat(this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement));
       return parseFloat(val).toFixed(0);
     },
 
+    CumulEngagement() {
+      const val =
+        parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
+
+      if (val) {
+        return parseInt(val).toFixed(0);
+      }
+
+      return 0;
+    },
+
+    montantMarche() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.acteEffetFinanciers.find(
+            (qtreel) => qtreel.marche_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.montant_act;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheNumeroMarche() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.acteEffetFinanciers.find(
+            (qtreel) => qtreel.marche_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.numero_marche;
+          }
+          return 0;
+        }
+      };
+    },
+    AfficheTypeFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.types_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+    AfficheSourceFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
     recupererNomDuControleurF() {
       return (id) => {
         if (id != null && id != "") {
@@ -3165,28 +3222,28 @@ affichePersoUA() {
       };
     },
 
-    fonctionPourVideLeChamp(){
+    fonctionPourVideLeChamp() {
       if (
-        this.comparaison(this.formData.activite_id) == this.formData.activite_id
+        this.comparaison(this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement)) ==
+        this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement)
       ) {
-       
-         return this.CreditAutoriseSousBudget(
-                                      this.formData.sous_budget_id,
-                                      this.formData.ligne_economique_id,
-                                      this.formData.type_financement_id,
-                                      this.formData.source_financement_id);
+        return this.CreditAutoriseSousBudget(
+          this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
+          this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement)
+        );
       } else {
         return this.CreditAutorise(
-                                  this.formData.unite_administrative_id,
-                                  this.formData.ligne_economique_id,this.formData.type_financement_id,this.formData.source_financement_id);
+          this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
+          this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement)
+        );
       }
     },
     CreditAutoriseSousBudget() {
-     return (id, id1, id2, id3) => {
-    if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.sous_budget_id == id &&  qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
+              qtreel.sous_budget_id == id && qtreel.ligneeconomique_id == id1
           );
 
           if (qtereel) {
@@ -3197,12 +3254,13 @@ affichePersoUA() {
       };
     },
     CreditAutorise() {
-      return (id, id1, id2, id3) => {
-        if (id != null && id != "" && id1 != null && id1 != ""&& id2 != null && id2 != "" && id3 != null && id3 != "") {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           const qtereel = this.budgetEclate.find(
             (qtreel) =>
-              qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id==id2 && qtreel.source_financement_id==id3 
-              
+              qtreel.uniteadministrative_id == id &&
+              qtreel.ligneeconomique_id == id1 && 
+              qtreel.annebudgetaire == this.formData.exercice
           );
 
           if (qtereel) {
@@ -3212,46 +3270,7 @@ affichePersoUA() {
         }
       };
     },
-arrayExerciceDecompteBienService() {
-      //return (id) => {
-        
-        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id == 0 && budget.budget_active==1);
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-      }
-        return [];
-  //  };
-    },
-    LigneEconomiqueSousBudget() {
-      //return (id) => {
-        
-        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id  && budget.budget_active==1);
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-      }
-        return [];
-  //  };
-    },
+
     RecupererlibelleLigneEconomique() {
       return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
@@ -3268,11 +3287,11 @@ arrayExerciceDecompteBienService() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.activite_id == id
+            (qtreel) => qtreel.ligneeconomique_id == id
           );
 
           if (qtereel) {
-            return qtereel.activite_id;
+            return qtereel.ligne_budgetaire_parent_id;
           }
           return 0;
         }
@@ -3322,7 +3341,7 @@ arrayExerciceDecompteBienService() {
             (qtreel) =>
               qtreel.unite_administrative_id == id &&
               qtreel.activite_parent_id == id1 &&
-              qtreel.execice == this.anneeAmort
+              qtreel.execice == this.formData.exercice
           );
         }
       };
@@ -3331,10 +3350,11 @@ arrayExerciceDecompteBienService() {
     filtrerActivite() {
       return (id) => {
         if (id != null && id != "") {
-          return this.groupeActiviteBudgetEclate.filter(
+          return this.groupeActiviteBudget.filter(
             (qtreel) =>
-              qtreel[0].uniteadministrative_id == id &&
-              qtreel[0].annebudgetaire == this.anneeAmort
+              qtreel[0].ua_id == id &&
+              qtreel[0].actived == 1 &&
+              qtreel[0].exercicebudget_id == this.formData.exercice
           );
         }
       };
@@ -3377,20 +3397,7 @@ arrayExerciceDecompteBienService() {
 
       return 0;
     },
-SousFinancement() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.sources_financements.find(
-            (qtreel) => qtreel.id == id
-          );
 
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return "";
-        }
-      };
-    },
     cumulReservation() {
       return (id) => {
         if (id != null && id != "") {
@@ -3453,48 +3460,11 @@ SousFinancement() {
         }
       };
     },
-    dureeMarche() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.marche_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.duree;
-          }
-          return "";
-        }
-      };
-    },
-    MontantReelMarche() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.acteEffetFinanciers.find(
-            (qtreel) => qtreel.marche_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.montant_act;
-          }
-          return "";
-        }
-      };
-    },
     ListeDesMarcheAtribuer() {
       return (id) => {
         if (id != null && id != "") {
           return this.listedesMarcheUa.filter(
             (qtreel) => qtreel.unite_administrative_id == id
-          );
-        }
-      };
-    },
-     AfficheSouSFinancement() {
-      return (id,id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.getterUniteAdministrativeBailleur.filter(
-            (qtreel) => qtreel.ua_id == id && qtreel.type_financement_id == id1
           );
         }
       };
@@ -3517,6 +3487,16 @@ SousFinancement() {
       return this.acteEffetFinanciers;
     },
 
+    ListeDesMarcheAttribuer() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.acteEffetFinanciers.filter(
+            (qtreel) => qtreel.unite_administrative_id == id
+          );
+        }
+      };
+    },
+
     affcherTauxEnCours() {
       const norme = this.taux.find((normeEquipe) => normeEquipe.encours == 1);
 
@@ -3534,17 +3514,7 @@ SousFinancement() {
       return 0;
     },
 
-montantTvaModifier() {
-      const val =
-        parseFloat(this.editFacture.prix_unitaire) * parseFloat(this.afficherEnorereModifeir);
-
-      if (val) {
-        return parseInt(val).toFixed(0);
-      }
-
-      return 0;
-    },
-    montantTva() {
+   montantTva() {
       const val =
         parseFloat(this.FormDataFacture.prix_unitaire) * parseFloat(this.afficherEnorere);
 
@@ -3554,7 +3524,17 @@ montantTvaModifier() {
 
       return 0;
     },
-      afficherEnorereModifeir() {
+    montantTvaModifier() {
+      const val =
+        parseFloat(this.editFacture.prix_unitaire) * parseFloat(this.afficherEnorereModifeir);
+
+      if (val) {
+        return parseInt(val).toFixed(0);
+      }
+
+      return 0;
+    },
+    afficherEnorereModifeir() {
       if (this.editFacture.exonere == 0) {
         return 0;
       } else {
@@ -3568,18 +3548,7 @@ montantTvaModifier() {
         return this.tauxArrondit;
       }
     },
-       RecuperereTaux() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.gettersDossierFacturePiece.find((qtreel) => qtreel.numero_op_hors_sib == id);
-
-          if (qtereel) {
-            return qtereel.taux;
-          }
-          return 0;
-        }
-      };
-    },
+    
     SommeDesDmdParBonCommande() {
       return (id) => {
         if (id != null && id != "") {
@@ -3594,15 +3563,7 @@ montantTvaModifier() {
         }
       };
     },
-    listeFacturePiece() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersDossierFacturePiece.filter((tem) => tem.numero_op_hors_sib == id);
-          
-        }
-      };
-    },
-    MontantFactureTTCModifier() {
+     MontantFactureTTCModifier() {
       const val =
         parseFloat(this.MontantFactureHtModifier) +
         parseFloat(this.montantTvaModifier);
@@ -3624,16 +3585,14 @@ montantTvaModifier() {
 
       return 0;
     },
-    MontantFactureHtModifier() {
-      const val =
-        parseFloat(this.editFacture.prix_unitaire) *
-        parseFloat(this.editFacture.quantite);
-
-      if (val) {
-        return parseInt(val).toFixed(0);
-      }
-
-      return 0;
+    listeFacturePiece() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersDossierFacturePiece.filter(
+            (qtreel) => qtreel.numero_op_hors_sib == id
+          );
+        }
+      };
     },
     MontantFactureHt() {
       const val =
@@ -3675,8 +3634,9 @@ montantTvaModifier() {
     },
     calculCumultresor() {
       const val =
-        parseFloat(this.cumulAnterieur(this.formData.ligne_economique_id)) -
-        parseFloat(this.formData.montant_tresor);
+        parseFloat(
+          this.CreditAutoriseTresor(this.formData.ligne_economique_id)
+        ) - parseFloat(this.formData.montant_tresor);
       return parseFloat(val).toFixed(0);
     },
 
@@ -3724,68 +3684,22 @@ montantTvaModifier() {
     //     }
     //   };
     // },
-    cumulAnterieurUa() {
-      return (id, id1,id2, id3) => {
-        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-                qtreel.unite_administrative_id == id &&
-                qtreel.type_financement_id == id1 &&
-                qtreel.source_financement_id == id2 &&
-                qtreel.ligne_economique_id == id3 &&
-                qtreel.diff_op == null
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
+    CreditAutoriseTresor() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetGeneral.find(
+            (qtreel) =>
+              qtreel.economique_id == id &&
+              qtreel.actived == 1 &&
+              qtreel.typefinancement_id == 14
+          );
+
+          if (qtereel) {
+            return qtereel.Dotation_Initiale;
+          }
+          return 0;
         }
       };
-    },
-    cumulAnterieurSousBudget() {
-      return (id, id1,id2, id3) => {
-        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               
-                qtreel.sous_budget_id == id &&
-                qtreel.type_financement_id == id1 &&
-                qtreel.source_financement_id == id2 &&
-                qtreel.ligne_economique_id == id3 &&
-                qtreel.diff_op != null
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-        }
-      };
-    },
-    cumulBudgetEnterieure() {
-      if (
-        this.comparaison(this.formData.activite_id) != this.formData.activite_id
-      ) {
-        return this.cumulAnterieurUa(
-          this.formData.unite_administrative_id,
-          this.formData.type_financement_id,
-          this.formData.source_financement_id,
-          this.formData.ligne_economique_id
-        );
-      } else {
-        return this.cumulAnterieurSousBudget(
-          
-          this.formData.sous_budget_id,
-          this.formData.type_financement_id,
-          this.formData.source_financement_id,
-          this.formData.ligne_economique_id
-        );
-      }
     },
     CreditAutoriseDon() {
       return (id) => {
@@ -3821,16 +3735,16 @@ montantTvaModifier() {
         }
       };
     },
-    anneeAmort() {
-      const norme = this.exercices_budgetaires.find(
-        (normeEquipe) => normeEquipe.encours == 1
-      );
+    // formData.exercice() {
+    //   const norme = this.exercices_budgetaires.find(
+    //     (normeEquipe) => normeEquipe.encours == 1
+    //   );
 
-      if (norme) {
-        return norme.annee;
-      }
-      return 0;
-    },
+    //   if (norme) {
+    //     return norme.annee;
+    //   }
+    //   return 0;
+    // },
     libelleAction() {
       return (id) => {
         if (id != null && id != "") {
@@ -3903,13 +3817,12 @@ montantTvaModifier() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.activite_id == id
+            (qtreel) => qtreel.economique_id == id
           );
 
           if (qtereel) {
             return qtereel.section_id;
           }
-          
           return 0;
         }
       };
@@ -3918,7 +3831,7 @@ montantTvaModifier() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.activite_id == id
+            (qtreel) => qtreel.economique_id == id
           );
 
           if (qtereel) {
@@ -3932,7 +3845,7 @@ montantTvaModifier() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.activite_id == id
+            (qtreel) => qtreel.economique_id == id
           );
 
           if (qtereel) {
@@ -3946,18 +3859,6 @@ montantTvaModifier() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.marches.find((qtreel) => qtreel.id == id);
-
-          if (qtereel) {
-            return qtereel.objet;
-          }
-          return "Non renseigné";
-        }
-      };
-    },
-        objetAutreDepense() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.gettersDossierAutreDepense.find((qtreel) => qtreel.id == id);
 
           if (qtereel) {
             return qtereel.objet;
@@ -4043,7 +3944,7 @@ montantTvaModifier() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetGeneral.find(
-            (qtreel) => qtreel.activite_id == id
+            (qtreel) => qtreel.economique_id == id
           );
 
           if (qtereel) {
@@ -4067,28 +3968,6 @@ montantTvaModifier() {
         }
       };
     },
-    RecuppererMarcheAttribuer() {
-      if (this.noDCfNoAdmin) {
-        let colect = [];
-        this.marches.filter((item) => {
-          let val = this.uniteAdministratives.find(
-            (row) => row.id == item.unite_administrative_id
-          );
-          if (val != undefined) {
-            colect.push(item);
-            return item;
-          }
-        });
-
-        return this.colect.filter(
-          (qtreel) => qtreel.numero_marche != null && qtreel.attribue == 2
-        );
-      }
-
-      return this.marches.filter(
-        (qtreel) => qtreel.numero_marche != null && qtreel.attribue == 2
-      );
-    },
 
     listeDesUa() {
       if (this.noDCfNoAdmin) {
@@ -4107,7 +3986,6 @@ montantTvaModifier() {
 
       return this.uniteAdministratives;
     },
-
     TotalGeneralDemandeEngagement() {
       const val =
         parseFloat(this.formData.montant_tresor) +
@@ -4134,7 +4012,7 @@ montantTvaModifier() {
           return (
             this.gettersnomPieceJustificative.filter(
               (qtreel) =>
-                qtreel.numero_op_hors_sib == id &&
+                qtreel.numero_ordrepaiement == id &&
                 qtreel.etat_piece == "proforma"
             ).length + 1
           );
@@ -4147,19 +4025,9 @@ montantTvaModifier() {
           return (
             this.gettersnomPieceJustificative.filter(
               (qtreel) =>
-                qtreel.numero_op_hors_sib == id &&
+                qtreel.numero_ordrepaiement == id &&
                 qtreel.etat_piece == "definitive"
             ).length + 1
-          );
-        }
-      };
-    },
-    listePieceJustificative1() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersnomPieceJustificative.filter(
-            (qtreel) =>
-              qtreel.numero_op_hors_sib == id 
           );
         }
       };
@@ -4174,26 +4042,30 @@ montantTvaModifier() {
         }
       };
     },
-    // listePieceJustificativeOpDefinitive() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_hors_sib == id );
+    listePieceJustificativeOpDefinitive() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersnomPieceJustificative.filter(
+            (qtreel) =>
+              qtreel.numero_op_hors_sib == id 
+          );
+        }
+      };
+    },
+    idEntreprise() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.acteEffetFinanciers.find(
+            (qtreel) => qtreel.numero_marche == id
+          );
 
-    //     }
-    //   };
-    // },
-    // idEntreprise() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.numero_marche == id);
-
-    //   if (qtereel) {
-    //     return qtereel.entreprise_id
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
+          if (qtereel) {
+            return qtereel.entreprise_id;
+          }
+          return 0;
+        }
+      };
+    },
 
     idAutreDepense() {
       return (id) => {
@@ -4236,34 +4108,6 @@ montantTvaModifier() {
         }
       };
     },
-RechercheNumeroOP(){
-  if(this.VerificationNumeroOp(this.formData.numero_ordre_paiement) == this.formData.numero_ordre_paiement){
-    
-this.$notify({
-                 title: 'ERROR',
-                 text: "Numero Op Déja Enregistrer",
-                 type:"error"
-             })
-  }
-  else{
-    return this.formData.numero_ordre_paiement
-  }
-  return 0
-},
-    VerificationNumeroOp() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.gettersgestionOrdrePaiement.find(
-            (qtreel) => qtreel.numero_op_prov_definitive == id
-          );
-
-          if (qtereel) {
-            return qtereel.numero_op_prov_definitive;
-          }
-          return 0;
-        }
-      };
-    },
   },
 
   methods: {
@@ -4276,53 +4120,15 @@ this.$notify({
       "modifierDossierFacture",
       "supprimerDossierFacture",
       "ajouterGestionOrdrePaiement",
-      "ModifierDateEffetFinancier",
-      "modifierMarche2"
+      "modifierGestionOrdrePaiement"
     ]),
     ...mapActions("personnelUA", ["ajouterFichierJointDmd"]),
-afficherModalModifierFacture(id) {
-      this.$("#modificationModal").modal({
+afficherModalAjouterFacture() {
+      this.$("#exampleModal11").modal({
         backdrop: "static",
-        keyboard: false
+        keyboard: false,
       });
-
-     
-      this.editFacture= this.listeFacturePiece(this.formData.numero_ordre_paiement).find(item=>item.id==id);
     },
-    // RecupdateActeEffetFinancier(){
-    //   //let vm =this;
-    //     if(this.formData2.marche_id !=null && this.formData2.marche_id !=""){
-    //       const qtreel = this.acteEffetFinanciers.find(
-    //       (qtreel)=> qtreel.marche_id == this.formData2.marche_id
-    //     );
-    //    // vm.editMarcheDate==
-
-    //      if(qtreel.date_debut_exectuion_definitif ==null ){
-    //   //     return this.$("#exampleModalligneEco").modal({
-    //   //    backdrop: "static",
-    //   //     keyboard: false
-    //   //  });
-    //   alert('ok')
-
-    //      }
-
-    //     else{
-
-    //        alert('ok')
-    //     }
-
-    //     }else{
-    //       return 0;
-    //     }
-
-    //   },
-
-    ValiderDateUpdate() {
-
-      this.ModifierDateEffetFinancier(this.editMarcheDate);
-      this.$("#exampleModalligneEco").modal("hide");
-    },
-
     pagePrecedent() {
       window.history.back();
     },
@@ -4330,9 +4136,7 @@ afficherModalModifierFacture(id) {
       this.$htmlToPaper("printMe");
     },
 
-    afficherModalListePersonnel() {
-        window.history.back();
-    },
+    
 
     OnchangeFichier(e) {
       const files = e.target.files;
@@ -4355,7 +4159,6 @@ afficherModalModifierFacture(id) {
       };
       reader.readAsDataURL(file);
     },
-
     afficherModalModifierTypeTexte(id) {
       this.$("#ModifierexampleModal").modal({
         backdrop: "static",
@@ -4376,17 +4179,17 @@ afficherModalModifierFacture(id) {
       // };
     },
     AjoutePieceJustific() {
-     
-        //this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
+       
+        this.intitule =
+          this.formData.exercice + "" + this.formData.numero_ordre_paiement;
         var nouvelObjetProforma = {
           numero_ordre: this.numeroOrdre(this.formData.numero_ordre_paiement),
-          // numero_ordrepaiement:this.formData.numero_ordre_paiement,
-          //numero_ordre_paiement_combine:this.intitule,
+          numero_ordrepaiement: this.formData.numero_ordre_paiement,
+          numero_ordre_paiement_combine: this.intitule,
           libelle: this.formData1.libelle,
           reference: this.formData1.reference,
           date_piece: this.formData1.date_piece,
           etat_piece: "proforma",
-          numero_op_hors_sib: this.formData.numero_ordre_paiement,
         };
 
         this.ajouterPieceJustificative(nouvelObjetProforma);
@@ -4398,98 +4201,93 @@ afficherModalModifierFacture(id) {
           libelle: "",
           reference: "",
           date_piece: "",
-        };
-      
-    },
+          }
+        },
+      // } else {
+      //   this.intitule =
+      //     this.formData.exercice + "" + this.formData.numero_ordre_paiement;
+      //   var nouvelObjetdefinitive = {
+      //     numero_ordre: this.numeroOrdreDefinitive(
+      //       this.formData.numero_ordre_paiement
+      //     ),
+      //     numero_ordrepaiement: this.formData.numero_ordre_paiement,
+      //     numero_ordre_paiement_combine: this.intitule,
+      //     libelle: this.formData1.libelle,
+      //     reference: this.formData1.reference,
+      //     date_piece: this.formData1.date_piece,
+      //     etat_piece: "definitive",
+      //   };
 
-    rechercheListeMarche() {
-      // console.log(this.formMandater.matricule_m)
-
-      let objetMandater = this.acteEffetFinanciers.filter(
-        (item) =>
-          item.numero_marche == this.formData2.numeromarche &&
-          item.ua_id == this.formData.unite_administrative_id &&
-          this.afficherAttributMarche(item.marche_id) == 2
-      );
-      // console.log(objetMandater)
-      if (objetMandater != undefined) {
-        if (objetMandater.length == 1) {
-          let acteur = this.acteEffetFinanciers.find(
-            (item) => item.numero_marche == this.formData2.numeromarche
-          );
-          (this.formData2.nom_entreprise_id = acteur.entreprise_id),
-            (this.formData2.compte_entreprise_id = acteur.entreprise_id),
-            (this.formData2.adresse_entreprise_id = acteur.entreprise_id),
-            (this.formData2.banque_entreprise_id = acteur.banq_id),
-            (this.formData2.marche_id = acteur.marche_id),
-            (this.formData2.livrable_id = acteur.marche_id),
-            (this.formData2.beneficiaire_id = acteur.unite_administrative_id),
-            (this.formData2.geo_id = acteur.marche_id),
-            (this.formData2.dure_realisation = acteur.duree),
-            (this.formData7.Montant_Marche = acteur.montant_act);
-          this.message_mandater = " ";
-        } else {
-          this.message_mandater = "Numero du marche n'existe pas";
-          this.formData2.numero_cc_fournisseur_nom = "";
-          (this.formData2.nom_entreprise_id = ""),
-            (this.formData2.compte_entreprise_id = ""),
-            (this.formData2.adresse_entreprise_id = ""),
-            (this.formData2.banque_entreprise_id = ""),
-            (this.formData2.marche_id = ""),
-            (this.formData2.livrable_id = ""),
-            (this.formData2.beneficiaire_id = ""),
-            (this.formData2.geo_id = ""),
-            (this.formData2.dure_realisation = ""),
-            (this.formData7.Montant_Marche = "");
-        }
-      }
-      if (this.formData2.numero_marche == "") {
-        (this.formData2.nom_entreprise_id = ""),
-          (this.formData2.compte_entreprise_id = ""),
-          (this.formData2.adresse_entreprise_id = ""),
-          (this.formData2.banque_entreprise_id = ""),
-          (this.formData2.marche_id = ""),
-          (this.formData2.livrable_id = ""),
-          (this.formData2.beneficiaire_id = ""),
-          (this.formData2.geo_id = ""),
-          (this.formData2.dure_realisation = ""),
-          (this.formData7.Montant_Marche = "");
-      }
-    },
+      //   this.ajouterPieceJustificative(nouvelObjetdefinitive);
+      //   this.ajouterFichierJoin();
+      //   this.$("#exampleModal").modal("hide");
+      //   this.formData1 = {
+      //     numero_ordrepaiement: "",
+      //     numero_ordre_paiement_combine: "",
+      //     libelle: "",
+      //     reference: "",
+      //     date_piece: "",
+      //   };
+      // }
+    // },
 
     ajouterFichierJoin() {
-     
+      if (this.formData.type_procedure_id == "Engagement par Bon de Commande") {
         const formData = new FormData();
-        //this.intitule = this.anneeAmort + "" + this.formData.numero_ordre_paiement
-        formData.append("budgeteclateimport", this.selectedFile, this.selectedFile.name);
+        this.intitule =
+          this.formData.exercice + "" + this.formData.numero_ordre_paiement;
+        formData.append("fichier", this.selectedFile, this.selectedFile.name);
 
-        //formData.append('numero_ordre_paiement_combine', this.intitule);
-        // formData.append('numero_ordrepaiement', this.formData.numero_ordre_paiement);
+        formData.append("numero_ordre_paiement_combine", this.intitule);
+        formData.append(
+          "numero_ordrepaiement",
+          this.formData.numero_ordre_paiement
+        );
         formData.append(
           "numero_fichier",
           this.numeroOrdre(this.formData.numero_ordre_paiement)
         );
-        formData.append(
-          "numero_op_hors_sib",
-          this.formData.numero_ordre_paiement
-        ),
-          formData.append("etat_piece", "proforma");
+        formData.append("etat_piece", "proforma");
         let config = {
           header: {
             "Content-Type": "multipart/form-data",
           },
         };
         this.ajouterFichierJointDmd(formData, config);
-      
+      } else {
+        const formData = new FormData();
+        this.intitule =
+          this.formData.exercice + "" + this.formData.numero_ordre_paiement;
+        formData.append("fichier", this.selectedFile, this.selectedFile.name);
+
+        formData.append("numero_ordre_paiement_combine", this.intitule);
+        formData.append(
+          "numero_ordrepaiement",
+          this.formData.numero_ordre_paiement
+        );
+        formData.append(
+          "numero_fichier",
+          this.numeroOrdre(this.formData.numero_ordre_paiement)
+        );
+        formData.append("etat_piece", "definitive");
+        let config = {
+          header: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        this.ajouterFichierJointDmd(formData, config);
+      }
     },
 
+
     ajouterFacture() {
-    
+      
+       
         var nouvelObjetproforma = {
           ...this.FormDataFacture,
-          total_facture_ht: this.MontantFactureHt,
+           total_facture_ht: this.MontantFactureHt,
           numero_op_hors_sib: this.formData.numero_ordre_paiement,
-          etat_acticle: "proforma",
+          etat_acticle: "definitive",
           montant_ttc:this.MontantFactureTTC,
           taux:this.afficherEnorere,
           exonere:this.FormDataFacture.exonere
@@ -4502,466 +4300,163 @@ afficherModalModifierFacture(id) {
           prix_unitaire: "0",
           total_facture_ht: "0",
         };
-       
+      
     },
 
- FonctionModifierFacture() {
-    
-        var nouvelObjetproforma = {
-          ...this.editFacture,
-          total_facture_ht: this.MontantFactureHtModifier,
-          numero_op_hors_sib: this.formData.numero_ordre_paiement,
-          numero_ordrepaiement: this.formData.numero_ordre_paiement,
-          etat_acticle: "proforma",
-          montant_ttc:this.MontantFactureTTCModifier,
-          taux:this.afficherEnorereModifeir,
-          exonere:this.editFacture.exonere
+    AjouterOrdrePaiementAnulation() {
+      if (this.RecupererTypeOp(this.detailOpProvisoire.numero_ordre_paiement)== 1 || this.RecupererTypeOp(this.detailOpProvisoire.numero_ordre_paiement)== 4) {
+        this.intitule =
+          this.formData.exercice +
+          "-" +
+          this.tailleOpEnregistrer +
+          "-" +
+          this.formData.numero_ordre_paiement;
+        var nouvelObjetOrdrePaiement1 = {
+          exercice: this.formData.exercice,
+          // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+          numero_ordre_paiement: this.intitule,
+          type_ordre_paiement: 3,
+          date_op: this.formData.date_op,
+          id_op_definitif: this.detailOpProvisoire.numero_ordre_paiement,
+          section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
+          programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
+          unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
+          action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
+          activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
+          ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
+          typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),
+
+          mode_paiement_id: this.RecupererModePaiement(this.detailOpProvisoire.numero_ordre_paiement),
+          entreprise_id: this.RecupererEntreprise(this.detailOpProvisoire.numero_ordre_paiement),
+          marche_id: this.RecupererIdMarche(this.detailOpProvisoire.numero_ordre_paiement),
+          type_financement_id: this.RecupererIdTypeFinancement(this.detailOpProvisoire.numero_ordre_paiement),
+          source_financement_id: this.RecupererIdSousFinancement(this.detailOpProvisoire.numero_ordre_paiement),
+          montant_ordre_paiement: this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement),
+
+          gestionnaire_credit_non: this.RecupererNomGestionnaire(this.detailOpProvisoire.numero_ordre_paiement),
+          gestionnaire_credit_date: this.RecupererDateBenef(this.detailOpProvisoire.numero_ordre_paiement),
+          gestionnaire_credit_fonction: this.RecupererFonction(this.detailOpProvisoire.numero_ordre_paiement),
+
+          controleur_financier_id: this.recupererIdUser(
+            this.recupererIdServiceCF(
+              this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement)
+            )
+          ),
+          nom_autre_depense: this.RecupererNom(this.detailOpProvisoire.numero_ordre_paiement),
+          compte_autre_depense: this.RecupererCOMPTE(this.detailOpProvisoire.numero_ordre_paiement),
+          adresse: this.RecupererADRESSE(this.detailOpProvisoire.numero_ordre_paiement),
+          reference_autre_depense: this.RecupererBANCAIRES(this.detailOpProvisoire.numero_ordre_paiement),
+          odjet_autre_depense: this.RecupererObjet(this.detailOpProvisoire.numero_ordre_paiement),
+          livrable_autre_depense: this.RecupererLivrable(this.detailOpProvisoire.numero_ordre_paiement),
+          beneficiaire_autre_depense: this.RecupererBeneficiaire(this.detailOpProvisoire.numero_ordre_paiement),
+          geo_autre_depense: 0,
+          dure_autre_depense: this.RecupererDure(this.detailOpProvisoire.numero_ordre_paiement),
+        };
+        
+var objetModification = {
+id:this.detailOpProvisoire.numero_ordre_paiement,
+ exercice: this.formData.exercice,
+          // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+          numero_ordre_paiement: this.RecupererNumeroOp(this.detailOpProvisoire.numero_ordre_paiement),
+          type_ordre_paiement: this.RecupererTypeOp(this.detailOpProvisoire.numero_ordre_paiement),
+         
+          section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
+          programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
+          unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
+          action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
+          activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
+          ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
+          typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),
+
+          mode_paiement_id: this.RecupererModePaiement(this.detailOpProvisoire.numero_ordre_paiement),
+          entreprise_id: this.RecupererEntreprise(this.detailOpProvisoire.numero_ordre_paiement),
+          marche_id: this.RecupererIdMarche(this.detailOpProvisoire.numero_ordre_paiement),
+          type_financement_id: this.RecupererIdTypeFinancement(this.detailOpProvisoire.numero_ordre_paiement),
+          source_financement_id: this.RecupererIdSousFinancement(this.detailOpProvisoire.numero_ordre_paiement),
+          montant_ordre_paiement: 0,
+
+          gestionnaire_credit_non: this.RecupererNomGestionnaire(this.detailOpProvisoire.numero_ordre_paiement),
+          gestionnaire_credit_date: this.RecupererDateBenef(this.detailOpProvisoire.numero_ordre_paiement),
+          gestionnaire_credit_fonction: this.RecupererFonction(this.detailOpProvisoire.numero_ordre_paiement),
+
+          controleur_financier_id: this.recupererIdUser(
+            this.recupererIdServiceCF(
+              this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement)
+            )
+          ),
+          nom_autre_depense: this.RecupererNom(this.detailOpProvisoire.numero_ordre_paiement),
+          compte_autre_depense: this.RecupererCOMPTE(this.detailOpProvisoire.numero_ordre_paiement),
+          adresse: this.RecupererADRESSE(this.detailOpProvisoire.numero_ordre_paiement),
+          reference_autre_depense: this.RecupererBANCAIRES(this.detailOpProvisoire.numero_ordre_paiement),
+          odjet_autre_depense: this.RecupererObjet(this.detailOpProvisoire.numero_ordre_paiement),
+          livrable_autre_depense: this.RecupererLivrable(this.detailOpProvisoire.numero_ordre_paiement),
+          beneficiaire_autre_depense: this.RecupererBeneficiaire(this.detailOpProvisoire.numero_ordre_paiement),
+          geo_autre_depense: 0,
+          dure_autre_depense: this.RecupererDure(this.detailOpProvisoire.numero_ordre_paiement),
+}
+        this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
+        this.modifierGestionOrdrePaiement(objetModification)
+        this.pagePrecedent();
+        this.formData = {};
+      } else {
+        this.intitule =
+          this.formData.exercice +
+          "-" +
+          this.tailleOpEnregistrer +
+          "-" +
+          this.formData.numero_ordre_paiement;
+        var nouvelObjetOrdrePaiement2 = {
+              exercice: this.formData.exercice,
+          // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+          numero_ordre_paiement: this.intitule,
+          type_ordre_paiement: 3,
+          date_op: this.formData.date_op,
+          id_op_definitif: this.detailOpProvisoire.numero_ordre_paiement,
+          section_id: this.RecupererIdSection(this.detailOpProvisoire.numero_ordre_paiement),
+          programme_id: this.RecupererIdProgramme(this.detailOpProvisoire.numero_ordre_paiement),
+          unite_administrative_id: this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement),
+          action_id: this.RecupererIdAction(this.detailOpProvisoire.numero_ordre_paiement),
+          sous_budget_id: this.RecupererIdSousBudget(this.detailOpProvisoire.numero_ordre_paiement),
+          activite_id: this.RecupererIdActivite(this.detailOpProvisoire.numero_ordre_paiement),
+          ligne_economique_id: this.RecupererIdEconomique(this.detailOpProvisoire.numero_ordre_paiement),
+          typedepense: this.RecupererTypeDepense(this.detailOpProvisoire.numero_ordre_paiement),
+
+          mode_paiement_id: this.RecupererModePaiement(this.detailOpProvisoire.numero_ordre_paiement),
+          entreprise_id: this.RecupererEntreprise(this.detailOpProvisoire.numero_ordre_paiement),
+          marche_id: this.RecupererIdMarche(this.detailOpProvisoire.numero_ordre_paiement),
+          type_financement_id: this.RecupererIdTypeFinancement(this.detailOpProvisoire.numero_ordre_paiement),
+          source_financement_id: this.RecupererIdSousFinancement(this.detailOpProvisoire.numero_ordre_paiement),
+          montant_ordre_paiement: this.RecupererMontantEngage(this.detailOpProvisoire.numero_ordre_paiement),
+
+          gestionnaire_credit_non: this.RecupererNomGestionnaire(this.detailOpProvisoire.numero_ordre_paiement),
+          gestionnaire_credit_date: this.RecupererDateBenef(this.detailOpProvisoire.numero_ordre_paiement),
+          gestionnaire_credit_fonction: this.RecupererFonction(this.detailOpProvisoire.numero_ordre_paiement),
+
+          controleur_financier_id: this.recupererIdUser(
+            this.recupererIdServiceCF(
+              this.RecupererIdUa(this.detailOpProvisoire.numero_ordre_paiement)
+            )
+          ),
+          nom_autre_depense: this.RecupererNom(this.detailOpProvisoire.numero_ordre_paiement),
+          compte_autre_depense: this.RecupererCOMPTE(this.detailOpProvisoire.numero_ordre_paiement),
+          adresse: this.RecupererADRESSE(this.detailOpProvisoire.numero_ordre_paiement),
+          reference_autre_depense: this.RecupererBANCAIRES(this.detailOpProvisoire.numero_ordre_paiement),
+          odjet_autre_depense: this.RecupererObjet(this.detailOpProvisoire.numero_ordre_paiement),
+          livrable_autre_depense: this.RecupererLivrable(this.detailOpProvisoire.numero_ordre_paiement),
+          beneficiaire_autre_depense: this.RecupererBeneficiaire(this.detailOpProvisoire.numero_ordre_paiement),
+          geo_autre_depense: 0,
+          dure_autre_depense: this.RecupererDure(this.detailOpProvisoire.numero_ordre_paiement),
         };
 
-        this.modifierDossierFacture(nouvelObjetproforma);
-        this.$("#modificationModal").modal('hide');
-        this.FormDataFacture = {
-          designation: "",
-          quantite: "0",
-          prix_unitaire: "0",
-          total_facture_ht: "0",
-        };
-     
-    },
-AjouterOrdrePaiement() {
-    
-        if (this.formData.typedepense == "Marche") {
-        if(this.ResteAPayeSurMarche == 0 ){
-  this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
-          this.intitule2 =
-            this.objetMarche(this.formData2.marche_id) +
-            "-" +
-            this.formData12.objet_decompte;
-          var nouvelObjetOrdrePaiement123 = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement:2,
-            numero_ordre_paiement: this.intitule,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            entreprise_id: this.idEntreprise(this.formData2.marche_id),
-            marche_id: this.formData2.marche_id,
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
-
-            mode_paiement_id: this.formData.mode_paiement_id,
-
-            date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
-
-
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
-
-            odjet_autre_depense: this.intitule2,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-let marcheObjet78=this.marches.find(marche=>marche.id==this.formData2.marche_id)
-      marcheObjet78.attribue = 5
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement123);
-          this.modifierMarche2(marcheObjet78)
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-            visa_interim:'',
-            user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
-
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-        }
-        else if(this.ResteAPayeSurMarche < 0){
-this.$notify({
-                 title: 'ERROR',
-                 text: "Marche Apuré",
-                 type:"error"
-             })
-        }
-        else{
-            this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
-          this.intitule2 =
-            this.objetMarche(this.formData2.marche_id) +
-            "-" +
-            this.formData12.objet_decompte;
-          var nouvelObjetOrdrePaiement = {
-            exercice: this.anneeAmort,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            type_ordre_paiement: 2,
-            numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            entreprise_id: this.idEntreprise(this.formData2.marche_id),
-            marche_id: this.formData2.marche_id,
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
-
-            mode_paiement_id: this.formData.mode_paiement_id,
-
-            date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
-
-
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
-
-            odjet_autre_depense: this.intitule2,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement);
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-            visa_interim:'',
-            user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
-
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-        }
-        } 
-        else if(this.formData.typedepense == "Personnel")  {
-          this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
-           
-          var nouvelObjetOrdrePaiement78 = {
-            exercice: this.anneeAmort,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            diff_op_personnel:this.formData.diff_op_personnel,
-             mois_paiement: this.formData.mois_paiement,
-            type_ordre_paiement: 2,
-            numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
-
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
-
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
-            mode_paiement_id: this.formData.mode_paiement_id,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
-
-            date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
-
-
-
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            auteur_perso_id: this.formData.auteur_perso_id,
-            banque_perso: this.Recup_Banque(this.formData.auteur_perso_id),
-            compte_perso: this.idCompte(this.Recup_Numero_cOMPTE(this.formData.auteur_perso_id)),
-            // reference_autre_depense: this.formData45.reference_autre_depense,
-            odjet_autre_depense: this.formData02.odjet_autre_depense,
-            // livrable_autre_depense: this.formData45.livrable_autre_depense,
-            // beneficiaire_autre_depense: this.formData45
-              // .beneficiaire_autre_depense,
-            geo_autre_depense: this.formData45.geo_autre_depense,
-            dure_autre_depense: this.formData45.dure_autre_depense,
-          };
-
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement78);
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-          visa_interim:'',
-          user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
-
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            nom_autre_depense: "",
-            compte_autre_depense: "",
-            adresse: "",
-            reference_autre_depense: "",
-            odjet_autre_depense: "",
-            livrable_autre_depense: "",
-            beneficiaire_autre_depense: "",
-            geo_autre_depense: "",
-            dure_autre_depense: "",
-          };
-        }
-        
-        
-        else  {
-          this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
-            
-            
-          var nouvelObjetOrdrePaiement1 = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: 2,
-            numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
-
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
-
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
-            mode_paiement_id: this.formData.mode_paiement_id,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData
-              .gestionnaire_credit_fonction,
-
-                date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
-
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            nom_autre_depense: this.formData45.nom_autre_depense,
-            compte_autre_depense: this.formData45.compte_autre_depense,
-            adresse: this.formData45.adresse,
-            reference_autre_depense: this.formData45.reference_autre_depense,
-            autre_depense_id:this.formData.autre_depense_id,
-            odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
-            livrable_autre_depense: this.formData45.livrable_autre_depense,
-            beneficiaire_autre_depense: this.formData45.beneficiaire_autre_depense,
-            geo_autre_depense: this.formData45.geo_autre_depense,
-            dure_autre_depense: this.formData45.dure_autre_depense,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-          };
-
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-          visa_interim:'',
-          user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
-
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            nom_autre_depense: "",
-            compte_autre_depense: "",
-            adresse: "",
-            reference_autre_depense: "",
-            odjet_autre_depense: "",
-            livrable_autre_depense: "",
-            beneficiaire_autre_depense: "",
-            geo_autre_depense: "",
-            dure_autre_depense: "",
-          };
-        }
-     
+        this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement2);
+        this.pagePrecedent();
+        this.formData = {};
+      }
     },
 
-    afficherModalAjouterFacture() {
-      this.$("#exampleModal1").modal({
-        backdrop: "static",
-        keyboard: false,
-      });
-    },
+ 
     afficherModalAjouterService() {
       this.$("#exampleModal").modal({
         backdrop: "static",
@@ -4988,10 +4483,10 @@ this.$notify({
 .taille {
   width: 70%;
   margin: 0 -40%;
-  
+
 }
 .tailles {
-  width: 60%;
+  width: 55%;
   margin: 0 -30%;
 }
 .ApercuFacture1 {

@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    {{idUaBudgetEclate(85)}}
  <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
@@ -36,14 +37,25 @@
               </button>
             </div>
           </td> -->
-          <td style="width: 25%">
+          <td style="width: 15%">
+<div align="right" style="cursor: pointer">
+              <button
+                class="btn btn-info"
+                @click.prevent="ajouterOpAnterieur"
+                style="font-weight: bolder; color: #fff; font-size: 20px"
+              >
+                <i class="icon icon-plus"> AJOUTER OP ANTERIEUR</i>
+              </button>
+            </div>
+          </td>
+             <td style="width: 15%">
 <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-success"
                 @click.prevent="ajouterOpSysteme"
                 style="font-weight: bolder; color: #fff; font-size: 20px"
               >
-                <i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i>
+                <i class="icon icon-plus"> AJOUTER OP EN COURS</i>
               </button>
             </div>
           </td>
@@ -167,7 +179,12 @@ export default {
       search: ""
     };
   },
-
+created() {
+    this.marcheid = this.$route.params.id;
+    this.detailOp1 = this.gettersgestionOrdrePaiement.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
   computed: {
         ...mapGetters("uniteadministrative", [
       "directions",
@@ -227,7 +244,7 @@ afficheGroupeUaParMarche(){
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.diff_op == null);
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.diff_op == null && item.exercice == this.marcheid);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -307,6 +324,9 @@ idUaBudgetEclate() {
             },
     ajouterOpSysteme() {
       this.$router.push({ name: "formulaireAjoutOp" });
+    },
+    ajouterOpAnterieur() {
+      this.$router.push({ name: "formulaireAjoutOpAnterieur" });
     },
     ajouterOpAnnulation() {
       this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });

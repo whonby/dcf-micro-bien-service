@@ -7,10 +7,176 @@
     
         </div> 
         <br>
-         <br>
+        <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
+          <th style="text-align: center; font-size: 20px; color: #000">
+            Unité administrative
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            Total DOSSIER
+          </th>
+          
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER EN ATTENTE
+          </th>
+
+          
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER DIFFERE
+          </th>
+
+         
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER REJETE
+          </th>
+
+         
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER VISE
+          </th>
+<th
+            style="text-align: center; font-size: 20px; color: #000"
+            title="DOSSIER VISE AVEC OBSERVATION"
+          >
+            DOSSIER VISE AVEC OB
+          </th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- <td style="text-align:center;font-size:20px;color:#000">
+{{anneeAmort}}
+            </td> -->
+          <td style="text-align: center; font-size: 20px; color: #000">
+            {{ idUniteAdministrative(marcheid) }}
+          </td>
+          <td>
+            <button
+              class="btn btn"
+              style="
+                font-weight: bolder;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; font-size: 18px">{{
+               OpGlobalUa(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-info tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+              v-on:click="clickBoutonEnAttente()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                
+                ToutOpEnAttente(marcheid)
+              }}</span>
+            </button>
+            
+          </td>
+          <td>
+            <button
+              class="btn btn-warning tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+              v-on:click="clickBoutonDiffere()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpDifere(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+              v-on:click="clickBoutonRejete()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpRejete(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+                
+              "
+              v-on:click="clickBoutonVisé()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpVise(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+                
+              "
+              v-on:click="clickBoutonViséObservation()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpViseO(marcheid)
+              }}</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
         <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
-            <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
-            </a> </div>
+            <!-- <h5 style="text-align: center;font-size:25px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>-->
+            </a> </div> 
   
         <div class="widget-box collapsible">
          
@@ -30,12 +196,12 @@
       <button   class="btn  btn-success" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonVisé()"> <span  style="font-size:20px;"  >Visé ({{NombreDemandeViseEd(marcheid)}})</span></button>
       <button   class="btn  btn-success" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonViséObservation()"> <span  style="font-size:20px;"  >Visé avec Observation ({{NombreDemandeViseObservationEd(marcheid)}})</span></button> 
      -->
-     <button   class="btn  btn-info" style="font-size:15px; margin-left:15%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente </span></button>
+     <!-- <button   class="btn  btn-info" style="font-size:15px; margin-left:15%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente </span></button>
          <button   class="btn  btn-warning" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonDiffere()"> <span  style="font-size:20px;"  >Différé</span></button>
        <button   class="btn  btn-danger" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonRejete()"> <span   style="font-size:20px;" >Réjeté </span></button>
       <button   class="btn  btn-success" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonVisé()"> <span  style="font-size:20px;"  >Visé </span></button>
       <button   class="btn  btn-success" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonViséObservation()"> <span  style="font-size:20px;"  >Visé avec Observation</span></button> 
-    
+     -->
             </div>
               <br>
             <br>
@@ -244,6 +410,54 @@ created() {
       // "chapitres",
       // "sections"
     ]),
+     ToutOpEnAttente() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==0).length;
+
+        }
+      };
+    },
+    ToutOpDifere() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==2).length;
+
+        }
+      };
+    },
+      ToutOpRejete() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==3).length;
+
+        }
+      };
+    },
+      ToutOpVise() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==8).length;
+
+        }
+      };
+    },
+      ToutOpViseO() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null && qtreel1.decision_cf==9).length;
+
+        }
+      };
+    },
+    OpGlobalUa() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel1 =>qtreel1.unite_administrative_id == id && qtreel1.diff_op == null).length;
+
+        }
+      };
+    },
 NombreOpDefinitifEnAttente() {
       return id => {
         if (id != null && id != "") {
