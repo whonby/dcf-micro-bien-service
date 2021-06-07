@@ -41,7 +41,7 @@
               <td>
                 <div class="control-group">
                   <label class="control-label"
-                    >Type Ordre paiement
+                    >Type Dossier
                     <code style="color: red; font-size: 16px">*</code></label
                   >
                   <div class="controls">
@@ -114,7 +114,7 @@
                  <AjouterMantdatement ></AjouterMantdatement>
                   </div>
                    <div id="SYSTEME" class="tab-pane active" v-if="formData.type_ordre_paiement==5">
-             23
+             <AjouterOrdrePaiement ></AjouterOrdrePaiement>
                   </div>
                 </div>
             
@@ -139,6 +139,7 @@ import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
   import AjouterLiquidation from "./AjouterLiquidation"
   import AjouterBonCommande from "./AjouterBonCommande"
     import AjouterMantdatement from "./AjouterMantdatement"
+    import AjouterOrdrePaiement from "./AjouterOrdrePaiement"
 // import AjouterOrdrePaiementProvisoire from "../AjouterOrdrePaiementProvisoire"
 // import AjouterOrdrePaiementAnnulation from "../AjouterOrdrePaiementAnnulation"
 // import AjouterOrdrePaiementDefinitive from "../AjouterOrdrePaiementDefinitive"
@@ -152,7 +153,8 @@ export default {
        AjouterDemandeEngagement12,
        AjouterLiquidation,
        AjouterBonCommande,
-       AjouterMantdatement
+       AjouterMantdatement,
+       AjouterOrdrePaiement
     //   AjouterOrdrePaiementAnnulation,
     //   AjouterOrdrePaiementDefinitive
    // ModelListSelect,
