@@ -391,7 +391,7 @@ FonctionDon
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Ajouter Dossier Liquidation</h5>
+            <h5>Ajouter Dossier Bon Commande</h5>
             <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -474,12 +474,12 @@ FonctionDon
                         
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Numéro Liquidation</label>
+                            <label class="control-label">Numéro Bon Commande</label>
                             <div class="controls">
                               <input
                                 type="text"
                                 style="border: 1px solid #000; font-size: 15px"
-                                v-model="formData1122.numero"
+                                v-model="formData1122.numero_bon_commande"
                                 class="span"
                                 
                               />
@@ -493,7 +493,7 @@ FonctionDon
                               <input
                                 type="date"
                                 style="border: 1px solid #000; font-size: 15px"
-                                v-model="formData1122.date"
+                                v-model="formData1122.date_bon_commande"
                                 class="span"
                                 
 
@@ -3881,10 +3881,10 @@ ajouterBudgetaireLocal () {
      
         var nouvelObjet = {
         
-        dmd_engagement_id: this.formData123.dmd_engagement_id,
+        	dmd_engagement_id: this.formData123.dmd_engagement_id,
         
-        numero_liquidation:this.formData1122.numero,
-        date_liquidation:this.formData1122.date
+        numero_bon_commande:this.formData1122.numero_bon_commande,
+        date_bon_commande:this.formData1122.date_bon_commande
       };
       this.ajouterDossierLiquidation(nouvelObjet);
     

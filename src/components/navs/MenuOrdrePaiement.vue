@@ -14,7 +14,7 @@
       </li> -->
 
       <li>
-        <router-link :to="{ name: 'ListeOpParUa' }" tag="a">
+        <router-link :to="{ name: 'GroupeOpParAnnee' }" tag="a">
           ORDRE PAIEMENT DES PROJETS
         </router-link>
       </li>

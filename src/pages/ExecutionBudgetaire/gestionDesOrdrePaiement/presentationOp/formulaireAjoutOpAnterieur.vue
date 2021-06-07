@@ -24,7 +24,7 @@
           </div>
           <table class="table table-bordered table-striped">
             <tr>
-              <td>
+              <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Exercice</label>
                   <div class="controls">
@@ -37,7 +37,7 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
               <td>
                 <div class="control-group">
                   <label class="control-label"
@@ -94,18 +94,18 @@
                   <!--ongle identification-->
                  
                   <div id="PROVISOIRE" class="tab-pane active" v-if="formData.type_ordre_paiement==2 || formData.type_ordre_paiement==0">
-                  <AjouterOrdrePaiementProvisoire :macheid="marcheid"></AjouterOrdrePaiementProvisoire>
+                  <AjouterOrdrePaiementProvisoireAnterieur :macheid="marcheid"></AjouterOrdrePaiementProvisoireAnterieur>
                   </div>
                   <div id="ANNULATION" class="tab-pane active" v-if="formData.type_ordre_paiement==3">
                   
-                  <AjouterOrdrePaiementAnnulation :macheid="marcheid"></AjouterOrdrePaiementAnnulation>
+                  <AjouterOrdrePaiementAnnulationAnterieur :macheid="marcheid"></AjouterOrdrePaiementAnnulationAnterieur>
                   </div>
                   <div id="DEFINITIF" class="tab-pane active" v-if="formData.type_ordre_paiement==4">
                 
-                  <AjouterOrdrePaiementDefinitive :macheid="marcheid"></AjouterOrdrePaiementDefinitive>
+                  <AjouterOrdrePaiementDefinitiveAnterieur :macheid="marcheid"></AjouterOrdrePaiementDefinitiveAnterieur>
                   </div>
                    <div id="DIRECT" class="tab-pane active" v-if="formData.type_ordre_paiement==1">
-                <AjouterOrdrePaiement :macheid="marcheid"></AjouterOrdrePaiement>
+                <AjouterOrdrePaiementAnterieur :macheid="marcheid"></AjouterOrdrePaiementAnterieur>
                   </div>
                 </div>
             
@@ -126,10 +126,10 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
-import AjouterOrdrePaiement from "../AjouterOrdrePaiement"
-import AjouterOrdrePaiementProvisoire from "../AjouterOrdrePaiementProvisoire"
-import AjouterOrdrePaiementAnnulation from "../AjouterOrdrePaiementAnnulation"
-import AjouterOrdrePaiementDefinitive from "../AjouterOrdrePaiementDefinitive"
+import AjouterOrdrePaiementAnterieur from "../OpAnneeAnterieur/AjouterOrdrePaiementAnterieur"
+import AjouterOrdrePaiementProvisoireAnterieur from "../OpAnneeAnterieur/AjouterOrdrePaiementProvisoireAnterieur"
+import AjouterOrdrePaiementAnnulationAnterieur from "../OpAnneeAnterieur/AjouterOrdrePaiementAnnulationAnterieur"
+import AjouterOrdrePaiementDefinitiveAnterieur from "../OpAnneeAnterieur/AjouterOrdrePaiementDefinitiveAnterieur"
 // import { ModelListSelect } from "vue-search-select";
 //import moment from "moment";
 // import facture from '../Facture/facture.vue'
@@ -137,10 +137,10 @@ import AjouterOrdrePaiementDefinitive from "../AjouterOrdrePaiementDefinitive"
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-      AjouterOrdrePaiement,
-      AjouterOrdrePaiementProvisoire,
-      AjouterOrdrePaiementAnnulation,
-      AjouterOrdrePaiementDefinitive
+      AjouterOrdrePaiementAnterieur,
+      AjouterOrdrePaiementProvisoireAnterieur,
+      AjouterOrdrePaiementAnnulationAnterieur,
+      AjouterOrdrePaiementDefinitiveAnterieur
    // ModelListSelect,
     //  facture
   },

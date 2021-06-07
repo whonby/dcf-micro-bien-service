@@ -1,4 +1,4 @@
-FonctionDon
+
 <template>
   <div class="container-fluid">
     
@@ -391,7 +391,7 @@ FonctionDon
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Ajouter Dossier Liquidation</h5>
+            <h5>Ajouter Demande d'engagement</h5>
             <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -414,7 +414,21 @@ FonctionDon
                   <!--ongle identification-->
                   <div id="INFORMATIONUA" class="tab-pane active">
                     <table class="table table-bordered table-striped">
-                      <!-- <tr>
+                      <tr>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Exercice</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                style="border: 1px solid #000; font-size: 15px"
+                                :value="anneeAmort"
+                                class="span"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
                         <td>
                           <div class="control-group">
                             <label class="control-label">Mode</label>
@@ -436,72 +450,48 @@ FonctionDon
                           </div>
                         </td>
                      
-                       
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Exercice</label>
+             
+                        <td colspan="">
+                          <div class="control-group" >
+                            <label class="control-label"
+                              >Numéro Démande
+                              <code style="color: red; font-size: 16px"
+                                >*</code
+                              ></label
+                            >
+                           
                             <div class="controls">
                               <input
                                 type="text"
-                                style="border: 1px solid #000; font-size: 15px"
-                                :value="anneeAmort"
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr> -->
-                      <tr>
-                         <td colspan="">
-                          <label
-                            >Numero de la Demande
-                            <code style="color: red; font-size: 16px">*</code>
-                          </label>
-                          <model-list-select
-                            style="border: 1px solid #000"
-                            class="wide"
-                            :list="gettersDemandeEngagement"
-                            v-model="formData123.dmd_engagement_id"
-                            option-value="id"
-                            option-text="numero_demande"
-                            placeholder=""
-                          >
-                          </model-list-select>
-                         
-                          
-                        </td>
-                        
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Numéro Liquidation</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000; font-size: 15px"
-                                v-model="formData1122.numero"
+                                style="border: 1px solid #000"
+                                v-model="formData.numero_demande"
                                 class="span"
                                 
                               />
+                              <code
+                                style="color: red; font-size: 12px"
+                                v-if="formData.numero_demande == ''"
+                                >Veuillez renseigner ce champ</code
+                              >
                             </div>
                           </div>
                         </td>
-                        <td>
+                         <td>
                           <div class="control-group">
-                            <label class="control-label">Date Liquidation</label>
+                            <label class="control-label">Date demande</label>
                             <div class="controls">
                               <input
                                 type="date"
                                 style="border: 1px solid #000; font-size: 15px"
-                                v-model="formData1122.date"
+                                v-model="formData.date_demande"
                                 class="span"
-                                
-
-                              />
+                                   />
                             </div>
                           </div>
                         </td>
+                       
                       </tr>
+                     
                       <tr>
                         <td>
                           <div class="control-group">
@@ -512,7 +502,7 @@ FonctionDon
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="libelleSection(recupererIdSectionDansDemandeEngagement(formData123.dmd_engagement_id))"
+                                :value="libelleSection(idSection(formData.activite_id))"
                                 class="span"
                                 readonly
                               />
@@ -528,7 +518,7 @@ FonctionDon
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="libelleProgramme(recupererProgrammeDansDemandeEngagement(formData123.dmd_engagement_id))"
+                                :value="libelleProgramme(idProgramme(formData.activite_id))"
                                 class="span"
                                 readonly
                               />
@@ -542,7 +532,7 @@ FonctionDon
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="libelleAction(recupererActionDansDemandeEngagement(formData123.dmd_engagement_id))"
+                                :value="libelleAction(idAction(formData.activite_id))"
                                  
                                 
                                 class="span"
@@ -553,79 +543,139 @@ FonctionDon
                         </td>
                        
                       </tr>
-                      
-                           <tr>
-                        <td >
+                      <tr>
+                        <td>
+                          <label
+                            >Unité Administrative
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="listeDesUa"
+                            v-model="formData.ua_id"
+                            option-value="id"
+                            option-text="libelle"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                          <code
+                            style="color: red; font-size: 12px"
+                            v-if="formData.ua_id == ''"
+                            >Veuillez renseigner ce champ</code
+                          >
+                        </td>
+
+                       <td>
+                       <div class="control-group">
+                <label class="control-label">Code Activite <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="recuppererLeDernierNiveauActivite"
+                                                   v-model="formData.activite_id"
+                                                   option-value="id"
+                                                   option-text="code"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                  
+                   <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Libelle Activité</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="libelleActivite(formData.activite_id)"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+              
+                     </td>
+                      </tr>
+                         
+                      <tr>
+ <td>
                           <div class="control-group">
                             <label class="control-label"
-                              >Unite administrative</label
+                              >Nature de dépense
+                              <code style="color: red; font-size: 16px"
+                                >*</code
+                              ></label
                             >
                             <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="libelleUa(recupererUniteAdministrativeDansDemandeEngagement(formData123.dmd_engagement_id))"
+                              <select
+                                v-model="formData.grd_nature_id"
                                 class="span"
-                                readonly
-                              />
+                                style="border: 1px solid #000"
+                              >
+                                <option
+                                  v-for="gdenature in grandes_natures"
+                                  :key="gdenature.id"
+                                  :value="gdenature.id"
+                                >
+                                  {{ gdenature.libelle }}
+                                </option>
+                              </select>
+                              <code
+                                style="color: red; font-size: 12px"
+                                v-if="formData.grd_nature_id == ''"
+                                >Veuillez renseigner ce champ</code
+                              >
                             </div>
                           </div>
                         </td>
-                       
                         <td colspan="3">
                           <div class="control-group">
-                            <label class="control-label">Libelle Activite</label>
+                            <label class="control-label"
+                              >Ligne économique
+                              <code style="color: red; font-size: 16px"
+                                >*</code
+                              ></label
+                            >
                             <div class="controls">
-                              <input
-                                type="text"
+                              <select
+                                v-model="formData.ligne_economique_id"
+                                class="span"
                                 style="border: 1px solid #000"
-                                :value="libelleActivite(recupererCodeActiviteDansDemandeEngagement(formData123.dmd_engagement_id))"
-                        
-                                                        class="span"
-                                readonly
-                              />
+                              >
+                                <option
+                                  v-for="ligneeco in ligneEconomique(
+                                    formData.ua_id,
+                                    formData.grd_nature_id
+                                  )"
+                                  :key="ligneeco.id"
+                                  :value="ligneeco.economique_id"
+                                >
+                                  {{
+                                    libelleLigneEconomique(
+                                      ligneeco.economique_id
+                                    )
+                                  }}
+                                </option>
+                              </select>
+                              <!-- <code
+                                style="color: red; font-size: 12px"
+                                v-if="formData.ligne_economique_id == ''"
+                                >Veuillez renseigner ce champ</code
+                              > -->
+                               
                             </div>
                           </div>
                         </td>
-                       
+                     
                       </tr>
                      
-                      <tr>
-                        <td >
-                          <div class="control-group">
-                            <label class="control-label"
-                              >Grande nature de dépense</label
-                            >
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="libelleGrandNature(recupererGrandeNatureDansDemandeEngagement(formData123.dmd_engagement_id))"
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                       
-                        <td colspan="3">
-                          <div class="control-group">
-                            <label class="control-label">Ligne économique</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="libelleEconomique(recupererLigneEconomiqueDansDemandeEngagement(formData123.dmd_engagement_id))"
-                                 
-                                
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                       
-                      </tr>
                     </table>
                   </div>
                 </div>
@@ -642,83 +692,111 @@ FonctionDon
                   <!--ongle identification-->
                   <div id="ENGAGEMENT" class="tab-pane active">
                     <table class="table table-bordered table-striped">
-
 <tr>
-                        
- <td >
+                        <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
                               >Procédures de Dépense </label
                             >
                             <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="conversionMajiscule(libelleProcedureDepense(recupererProcedureDepenseDansDemandeEngagement(formData123.dmd_engagement_id)))"
+                              <select
+                                v-model="formData.Procedures_depenses_id"
                                 class="span"
-                                readonly
-                              />
+                                style="border: 1px solid #000"
+                              >
+
+                                <option value=""></option>
+                                 <option
+                                  v-for="gdenature in gettersProcedureDroitCommuns"
+                                  :key="gdenature.id"
+                                  :value="gdenature.id"
+                                >
+                                  {{ gdenature.libelle }}
+                                </option>
+                                
+                              </select>
                             </div>
                           </div>
                         </td>
+
                         
-                        
-                         <td >
+                        <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
                               >Type Procedures </label
                             >
                             <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="libelletypeProcedure(recuperertypeProcedureDansDemandeEngagement(formData123.dmd_engagement_id))"
+                              <select
+                                v-model="formData.type_procedure_id"
                                 class="span"
-                                readonly
-                              />
+                                style="border: 1px solid #000"
+                              >
+
+                                <option value=""></option>
+                                 <option
+                                  v-for="gdenature in AfficheParDroitCommun"
+                                  :key="gdenature.id"
+                                  :value="gdenature"
+                                >
+                                  {{ libelleTypeProcedure(gdenature) }}
+                                </option>
+                                
+                              </select>
                             </div>
                           </div>
                         </td>
-                      
-                        <td colspan="2" >
+                         
+                       <td colspan="2">
                           <div class="control-group">
                             <label class="control-label"
-                              >Type d'engagement  </label
+                              >Type d'engagement </label
                             >
                             <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="conversionMajiscule(libelleTypeDepense(recupererTypeEngagementDansDemandeEngagement(formData123.dmd_engagement_id)))"
+                              <select
+                                v-model="formData.type_engagement_id"
                                 class="span"
-                                readonly
-                              />
+                                style="border: 1px solid #000"
+                              >
+
+                                <option value=""></option>
+                                 <option
+                                  v-for="gdenature in afficheProcedureDepense(formData.Procedures_depenses_id,formData.type_procedure_id)"
+                                  :key="gdenature.id"
+                                  :value="gdenature.code_depense"
+                                >
+                                  {{gdenature.libelle_depense}}
+                                </option>
+                                
+                              </select>
                             </div>
                           </div>
                         </td>
                       </tr>
+
                       
+                      <tr v-if=" formData.type_engagement_id =='M'">
                       
-                      <tr >
+
                         
-                       
-                        <td colspan="">
-                          <div class="control-group">
-                            <label class="control-label">Numéro du Marché</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="recupererNumeroMarche(recupererMarcheDansDemandeEngagement(formData123.dmd_engagement_id))"
-                                 
-                                
-                                class="span"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                       
+                        <td colspan="2">
+                       <div class="control-group">
+                <label class="control-label">Numéro du Marché</label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="acteEffetFinanciers"
+                                                   v-model="formData2.numero_marche"
+                                                   option-value="marche_id"
+                                                   option-text="numero_marche"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
                          <td colspan="">
                           <div class="control-group">
                             <label class="control-label"
@@ -728,7 +806,7 @@ FonctionDon
                             <div class="controls">
                              
                               <money
-                               :value="MontantAvenant(recupererMarcheDansDemandeEngagement(formData123.dmd_engagement_id))"
+                               :value="MontantAvenant(formData2.numero_marche)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -742,21 +820,24 @@ FonctionDon
                             <label class="control-label"
                               >Montant de base du marché</label
                             >
-                          
+                            
                             <div class="controls">
                              
                               <money
-                                :value="montantMarche(recupererMarcheDansDemandeEngagement(formData123.dmd_engagement_id))"
+                                :value="montantMarche(formData2.numero_marche)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                             
+                            
                             </div>
                           </div>
                         </td>
-                        <td colspan="">
-                          <div class="control-group">
+                      </tr>
+                     
+                      <tr>
+                         <td colspan="" class="control-group" v-if="formData.type_engagement_id =='M'">
+                          <div >
                             <label class="control-label"
                               >Montant global Marche(Av+Mont marché)</label
                             >
@@ -764,7 +845,7 @@ FonctionDon
                             <div class="controls">
                              
                               <money
-                                :value="MontantGlobal1"
+                                :value="MontantGlobal"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
@@ -773,11 +854,27 @@ FonctionDon
                             </div>
                           </div>
                         </td>
-                      </tr>
-                     
-                       <tr>
+                        <td colspan="2" v-if="formData.type_engagement_id =='AD'">
+                       <div class="control-group">
+                <label class="control-label">Autres Dépense</label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="gettersDossierAutreDepense"
+                                                   v-model="formData2.autre_depense_id"
+                                                   option-value="id"
+                                                   option-text="objet"
+                                                   
+                                                   placeholder=""
+                                >
 
-                        <td colspan="4">
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+                                    
+                        <td colspan="3" v-if="formData.type_engagement_id =='M'">
                           <div class="control-group">
                             <label class="control-label">Objet de la depense</label>
                            
@@ -785,7 +882,7 @@ FonctionDon
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="recupererObjetDepenseDansDemandeEngagement(formData123.dmd_engagement_id)"
+                                :value="objetMarche(formData2.numero_marche)"
                                 class="span"
                                 readonly
                               />
@@ -795,6 +892,7 @@ FonctionDon
                         </td>
                        
                       </tr>
+                      
                       
                     </table>
                   </div>
@@ -817,15 +915,21 @@ FonctionDon
                               >Mode de paiement</label
                             >
                             <div class="controls">
-                             
-                               <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="recupererLibelleModePaiement(recupererIdModePaiementDansDemandeEngagement(formData123.dmd_engagement_id))"
-                                
+                              <select
+                                v-model="formData.mode_paiement_id"
                                 class="span"
-                                readonly
-                              />
+                                style="border: 1px solid #000"
+                              
+                              >
+                                <option
+                                  v-for="typeFact in modepaiements"
+                                  :key="typeFact.id"
+                                  :value="typeFact.id"
+                                >
+                                  {{ typeFact.libelle }}
+                                </option>
+                              </select>
+                              
                             </div>
                           </div>
                         </td>
@@ -859,15 +963,7 @@ FonctionDon
                                 class="span"
                                 readonly
                               />
-                              <!-- <input
-                                type="text"
-                                style="border: 1px solid #000"
-                                :value="FonctionEntreprise"
-                                 v-if="formData123.typeDossier1 != 0"
-                                
-                                class="span"
-                                readonly
-                              /> -->
+                             
                             </div>
                           </div>
                         </td>
@@ -895,15 +991,31 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Nom</label>
                             <div class="controls">
-                           
-                            <input
+                              <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="recupererIdEntrepriseDansDemandeEngagement(this.formData123.dmd_engagement_id)"
-                                 
+                                :value="
+                                  Numero_Nom_Entreprise(
+                                    recupereIdEntreprise(formData2.numero_marche)
+                                  )
+                                "
                                 class="span"
+                                v-if="formData.type_engagement_id != 'AD'"
                                 readonly
                               />
+                      
+                              <model-list-select
+                                style="border: 1px solid #000"
+                                class="wide"
+                                :list="entreprises"
+                                v-model="formData2.nom_autre"
+                                option-value="id"
+                                option-text="raison_sociale"
+                                placeholder=""
+                                v-if="formData.type_engagement_id == 'AD'"
+                              >
+                              </model-list-select>
+                           
                             </div>
                           </div>
                         </td>
@@ -911,15 +1023,27 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label" >Numéro CC</label>
                             <div class="controls">
-                            
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="FonctionEntreprise"
-                                
+                                :value="
+                                  Numero_CC(recupereIdEntreprise(formData2.numero_marche))
+                                "
                                 class="span"
+                                v-if="formData.type_engagement_id != 'AD'"
                                 readonly
+                                placeholder="Saisir le numero cc"
                               />
+
+                             
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                v-model="formData2.numero_cc_autre"
+                                class="span"
+                                v-if="formData.type_engagement_id == 'AD'"
+                              />
+                             
                             </div>
                           </div>
                         </td>
@@ -927,17 +1051,27 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Adresse</label>
                             <div class="controls">
-                             
-                              
-                             
                               <input
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="FonctionEntreprise"
-                                
+                                :value="
+                                  Numero_adresse_Entreprise(
+                                    recupereIdEntreprise(formData2.numero_marche)
+                                  )
+                                "
                                 class="span"
+                                  v-if="formData.type_engagement_id != 'AD'"
                                 readonly
                               />
+                              
+                              <input
+                                type="text"
+                                style="border: 1px solid #000"
+                                v-model="formData2.numero_cc_autre_adresse"
+                                class="span"
+                                 v-if="formData.type_engagement_id == 'AD'"
+                              />
+                             
                             </div>
                           </div>
                         </td>
@@ -945,20 +1079,20 @@ FonctionDon
                       <tr>
                         <td colspan="">
                           <div class="control-group">
-                            <label class="control-label">Montant Engagé</label>
-
+                            <label class="control-label" >Montant Engagé</label>
+                          
                             <div class="controls">
                              
-                  <money
                   
-                                :value="recupererMontantTotalDansDemandeEngagement(formData123.dmd_engagement_id)"
+                              <money
+                            
+                                :value="TotalGeneralDemandeEngagement"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                             
                               
-                              <code style="color: red; font-size: 12px"
+                              <code style="color: red; font-size: 12px" 
                                 >MONTANT A PAYE:
                                 {{
                                   parseFloat(formData2.montant_marché) -
@@ -975,14 +1109,13 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
+                              
                               <money
-                  
-                                :value="recupererTresorDansDemandeEngagement(formData123.dmd_engagement_id)"
-                                readOnly
+                              
+                                v-model="formData.montant_tresor"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                             
                             </div>
                           </div>
                         </td>
@@ -990,15 +1123,20 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                             
-                    <money
-                 
-                                :value="recupererDonDansDemandeEngagement(this.formData123.dmd_engagement_id)"
-                                readOnly
+                              <!-- <input
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData.numero_ordre"
+                    class="span"
+                    
+                  /> -->
+                   
+                              <money
+                            
+                                v-model="formData.montant_don"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                            
                             </div>
                           </div>
                         </td>
@@ -1006,14 +1144,13 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
+                            
                               <money
-                  
-                                :value="recupererEmpruntDansDemandeEngagement(this.formData123.dmd_engagement_id)"
-                                readOnly
+                             
+                                v-model="formData.montant_emprunt"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                            
                             </div>
                           </div>
                         </td>
@@ -1069,7 +1206,8 @@ FonctionDon
                               >
                             </button>
                           </div>
-                          <table 
+                         
+                           <table 
                             class="table table-bordered table-striped"
                            
                           >
@@ -1085,9 +1223,9 @@ FonctionDon
  <tbody>
                         <tr
                           class="odd gradeX"
-                          v-for="(type) in listeFacturePiece12(recuperationNumeroDemande(
-                            formData123.dmd_engagement_id
-                          ))"
+                          v-for="(type) in listeFacturePiece(
+                            formData.numero_demande
+                          )"
                           :key="type.id"
                         >
                           <td @dblclick="afficherModalModifierFacture(type.id)">
@@ -1256,7 +1394,6 @@ FonctionDon
                         </tr>
                         </tbody>
                             </table>
-                         
 
     </tr>
   </table>
@@ -1289,7 +1426,8 @@ FonctionDon
                               >
                             </button>
                           </div>
-                          <table 
+                         
+                           <table
                             class="table table-bordered table-striped"
                            
                           >
@@ -1304,7 +1442,9 @@ FonctionDon
  <tbody>
                         <tr
                           class="odd gradeX"
-                          v-for="(type) in BailleurDmdEngagements12(recuperationNumeroDemande(formData123.dmd_engagement_id))"
+                          v-for="(type) in BailleurDmdEngagements(
+                            formData.numero_demande
+                          )"
                           :key="type.id"
                         >
                           <td @dblclick="afficherModalModifierFacture(type.id)">
@@ -1332,7 +1472,6 @@ FonctionDon
 
                         </tbody>
                             </table>
-                          
     </tr>
   </table>
    <table class="table table-bordered table-striped">
@@ -1367,7 +1506,7 @@ FonctionDon
                             </button>
                           </div>
 
- <table 
+           <table 
                             class="table table-bordered table-striped"
                             
                           >
@@ -1394,7 +1533,9 @@ FonctionDon
                             <tbody>
                               <tr
                                 class="odd gradeX"
-                                v-for="type in listePieceJustificative13(recuperationNumeroDemande(formData123.dmd_engagement_id))"
+                                v-for="type in listePieceJustificative1(
+                                  formData.numero_demande
+                                )"
                                 :key="type.id"
                               >
                                 <td
@@ -1448,7 +1589,6 @@ FonctionDon
                               </tr>
                             </tbody>
                           </table>
-                         
                         </td>
                       </tr>
                     </table>
@@ -1471,14 +1611,18 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Activité</label>
                             <div class="controls">
+                             
                               <input 
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="libelleActivite(recupererCodeActiviteDansDemandeEngagement(formData123.dmd_engagement_id))"
+                                :value="
+                                  libelleActivite(
+                                    formData.activite_id
+                                  )
+                                "
                                 class="span"
                                 readonly
                               />
-                             
                               
                             </div>
                           </div>
@@ -1487,14 +1631,19 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Ligne Economique</label>
                             <div class="controls">
+                             
                               <input 
+                             
                                 type="text"
                                 style="border: 1px solid #000"
-                                :value="libelleEconomique(recupererLigneEconomiqueDansDemandeEngagement(formData123.dmd_engagement_id))"
-                                class="span"
+                                :value="
+                                  libelleLigneEconomique(
+                                    formData.ligne_economique_id
+                                  )
+                                "
                                 readonly
+                                class="span"
                               />
-                             
                             </div>
                           </div>
                         </td>
@@ -1504,13 +1653,14 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <money   
-                                :value="recupererMontantTotalDansDemandeEngagement(formData123.dmd_engagement_id)"
+                             
+                              <money
+                             
+                                :value="TotalGeneralDemandeEngagement"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                              
                             </div>
                           </div>
                         </td>
@@ -1518,14 +1668,13 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
+                             
                               <money
-                 
-                                :value="recupererTresorDansDemandeEngagement(formData123.dmd_engagement_id)"
-                                readOnly
+                             
+                                v-model="formData.montant_tresor"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                              
                             
                             </div>
                           </div>
@@ -1534,14 +1683,13 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
+                             
                               <money
-                 
-                                :value="recupererDonDansDemandeEngagement(formData123.dmd_engagement_id)"
-                                readOnly
+                            
+                                v-model="formData.montant_don"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                             
                              
                             </div>
                           </div>
@@ -1550,14 +1698,13 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
+                            
                               <money
-                
-                                :value="recupererEmpruntDansDemandeEngagement(formData123.dmd_engagement_id)"
-                                readOnly
+                            
+                                v-model="formData.montant_emprunt"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                             
                               <!-- <money
                                 v-model="formData.montant_emprunt"
                                 readOnly
@@ -1599,31 +1746,31 @@ FonctionDon
                             <label class="control-label">Total général</label>
                             <div class="controls">
                               
-                              
-                               <money
-            
-                                :value="CreditAutorise(recupererUniteAdministrativeDansDemandeEngagement(formData123.dmd_engagement_id),recupererLigneEconomiqueDansDemandeEngagement(formData123.dmd_engagement_id))"
+                              <money
+                            
+                                :value="CreditAutorise(formData.ua_id,formData.ligne_economique_id)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
-                              
-                               <money
-                              
-                                :value="calculCumulAUtres78"
-                                readOnly
-                                style="text-align: left; color: red"
-                                class="span"
-                              ></money>
-                              
-
-                               <money
                                
-                                :value="MontantDisponible45"
+                              <money
+                            
+                                :value="calculCumul"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
+                               
+                              <money
+                                :value="MontantDisponible"
+                                readOnly
+                                style="text-align: left; color: red"
+                                class="span"
+                                
+                              ></money>
+
+                               
                             </div>
                           </div>
                         </td>
@@ -1633,34 +1780,31 @@ FonctionDon
                             <label class="control-label">Trésor</label>
                             <div class="controls">
                             
-                             
-                               <money
-                             
+                              <money
+                            
                                 :value="
-                                  CreditAutoriseTresor(
-                                    recupererUniteAdministrativeDansDemandeEngagement(formData123.dmd_engagement_id),recupererLigneEconomiqueDansDemandeEngagement(formData123.dmd_engagement_id)
-                                  )
-                                "
+                                  CreditAutoriseTresor(formData.ua_id,formData.ligne_economique_id)"
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
-                              ></money>
-                             
-                               <money
-                               
-                                :value="recupererTresorDansDemandeEngagement(this.formData123.dmd_engagement_id)"
-                                style="text-align: left; color: red"
-                                class="span"
-                                readOnly
                               ></money>
                               
                               <money
                               
-                                :value="calculCumultresorAutre"
+                                v-model="formData.montant_tresor"
+                                style="text-align: left; color: red"
+                                class="span"
+                                readOnly
+                              ></money>
+                              
+                               <money
+                              
+                                :value="calculCumultresor"
                                 style="text-align: left; color: red"
                                 class="span"
                                   readOnly
                               ></money>
+                              
                             </div>
                           </div>
                         </td>
@@ -1673,35 +1817,35 @@ FonctionDon
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                             <money
-                            
+                             
+                              <money
+                              
                                 :value="
                                   CreditAutoriseDon(
-                                   recupererUniteAdministrativeDansDemandeEngagement(formData123.dmd_engagement_id),recupererLigneEconomiqueDansDemandeEngagement(formData123.dmd_engagement_id)
+                                    formData.ua_id,formData.ligne_economique_id
                                   )
                                 "
                                 readOnly
                                 style="text-align: left; color: red"
                                 class="span"
+                                  
                               ></money>
-                             
-                             
                               <money
-                             
-                                :value="recupererDonDansDemandeEngagement(formData123.dmd_engagement_id)"
+                            
+                                v-model="formData2.montant_don"
                                 style="text-align: left; color: red"
                                 class="span"
                                   readOnly
                               ></money>
-                              
-                             <money
-                           
                              
+                              <money
+                            
                                 v-model="formData2.montant_don3"
                                 style="text-align: left; color: red"
                                 class="span"
                                   readOnly
                               ></money>
+                            
                             </div>
                           </div>
                         </td>
@@ -1710,11 +1854,12 @@ FonctionDon
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
                              
+                              
                               <money
-                             
+                            
                                 :value="
                                   CreditAutoriseEmprunt(
-                                    this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id)
+                                    formData.ua_id,formData.ligne_economique_id
                                   )
                                 "
                                 readOnly
@@ -1722,24 +1867,22 @@ FonctionDon
                                 class="span"
                               ></money>
                              
+                              
                               <money
-                             
+                            
                                 v-model="formData2.montant_emprunt2"
                                 style="text-align: left; color: red"
                                 class="span"
                                 readOnly
                               ></money>
-                              
-                              
-                             
-                              
                               <money
-                              
+                            
                                 v-model="formData2.montant_emprunt3"
                                 style="text-align: left; color: red"
                                 class="span"
                                 readOnly
                               ></money>
+                              
                             </div>
 
                           </div>
@@ -2316,13 +2459,13 @@ recupereridTypeDepense() {
       };
     },
      MontantGlobal1(){
-      return parseFloat(this.montantMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id)))+parseFloat(this.MontantAvenant(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id)))
+      return parseFloat(this.FonctionmontantMarche)+parseFloat(this.FonctionMontantAvenant)
     },
      MontantGlobal(){
       return parseFloat(this.montantMarche(this.formData2.numero_marche))+parseFloat(this.MontantAvenant(this.formData2.numero_marche))
     },
     MontantGlobalAutres(){
-      return parseFloat(this.montantMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id)))+parseFloat(this.MontantAvenant(this.formData2.numero_marche))
+      return parseFloat(this.FonctionmontantMarche)+parseFloat(this.MontantAvenant(this.formData2.numero_marche))
     },
      montantMarche() {
       return id => {
@@ -2361,39 +2504,21 @@ recupereridTypeDepense() {
       };
     },
     fonctionSection(){
-        if(this.formData123.typeDossier1==1){
+        
           return this.libelleSection(this.idSection(this.formData.activite_id))
-        }
-        else if(this.formData123.typeDossier1==0){
-          return ""
-        }
-        else{
-return this.libelleSection(this.recupererIdSectionDansDemandeEngagement(this.formData123.dmd_engagement_id))
-        }
+      
     },
    
     ProgrammeDotation(){
-        if(this.formData123.typeDossier1==1){
+       
           return this.libelleProgramme(this.idProgramme(this.formData.activite_id))
-        }
-        else if(this.formData123.typeDossier1==0){
-          return ""
-        }
-        else{
-return this.libelleProgramme(this.recupererProgrammeDansDemandeEngagement(this.formData123.dmd_engagement_id))
-        }
+       
     },
    
     FonctionAction(){
-        if(this.formData123.typeDossier1==1){
+      
           return this.libelleAction(this.idAction(this.formData.activite_id))
-        }
-        else if(this.formData123.typeDossier1==0){
-          return ""
-        }
-        else{
-return this.libelleAction(this.recupererActionDansDemandeEngagement(this.formData123.dmd_engagement_id))
-        }
+       
     },
     libelleGrandNature() {
       return id => {
@@ -2622,18 +2747,18 @@ return this.recupererLibelleModePaiement(this.recupererIdModePaiementDansDemande
 return this.recupererIdEntrepriseDansDemandeEngagement(this.formData123.dmd_engagement_id)
         }
     },
-//     recupererMontantTotalDansDemandeEngagement(this.formData123.dmd_engagement_id)(){
-//         if(this.formData123.typeDossier1==1){
-//           return ""
-//         }
-//         else if(this.formData123.typeDossier1==0){
-//           return ""
-//         }
-//         else{
+    FonctionMontantTotal(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
 
-// return this.recupererMontantTotalDansDemandeEngagement(this.formData123.dmd_engagement_id)
-//         }
-//     },
+return this.recupererMontantTotalDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
     recupererMontantTotalDansDemandeEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -2646,18 +2771,18 @@ return this.recupererIdEntrepriseDansDemandeEngagement(this.formData123.dmd_enga
         }
       };
     },
-//      recupererTresorDansDemandeEngagement(this.formData123.dmd_engagement_id)(){
-//         if(this.formData123.typeDossier1==1){
-//           return ""
-//         }
-//         else if(this.formData123.typeDossier1==0){
-//           return ""
-//         }
-//         else{
+     FonctionTresor(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
 
-// return this.recupererTresorDansDemandeEngagement(this.formData123.dmd_engagement_id)
-//         }
-//     },
+return this.recupererTresorDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
     recupererTresorDansDemandeEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -2694,18 +2819,18 @@ return this.recupererEmpruntDansDemandeEngagement(this.formData123.dmd_engagemen
         }
       };
     },
-//      FonctionDon(){
-//         if(this.formData123.typeDossier1==1){
-//           return ""
-//         }
-//         else if(this.formData123.typeDossier1==0){
-//           return ""
-//         }
-//         else{
+     FonctionDon(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
 
-// return this.recupererDonDansDemandeEngagement(this.formData123.dmd_engagement_id)
-//         }
-//     },
+return this.recupererDonDansDemandeEngagement(this.formData123.dmd_engagement_id)
+        }
+    },
     recupererDonDansDemandeEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -2790,18 +2915,18 @@ return this.recupererNumeroMarche(this.recupererMarcheDansDemandeEngagement(this
 return this.MontantAvenant(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))
         }
     },
-//      montantMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))(){
-//         if(this.formData123.typeDossier1==1){
-//           return ""
-//         }
-//         else if(this.formData123.typeDossier1==0){
-//           return ""
-//         }
-//         else{
+     FonctionmontantMarche(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
 
-// return this.montantMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))
-//         }
-//     },
+return this.montantMarche(this.recupererMarcheDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
     recupererMarcheDansDemandeEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -2901,7 +3026,18 @@ return this.recupererIdEntreprise(this.formData123.dmd_engagement_id)
         }
       };
     },
-    
+     FonctionCodeActivite(){
+        if(this.formData123.typeDossier1==1){
+          return ""
+        }
+        else if(this.formData123.typeDossier1==0){
+          return ""
+        }
+        else{
+
+return this.libelleActivite(this.recupererCodeActiviteDansDemandeEngagement(this.formData123.dmd_engagement_id))
+        }
+    },
      recupererCodeActiviteDansDemandeEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -3286,7 +3422,7 @@ MontantFactureTTC() {
       const val =
         parseFloat(
           this.CreditAutoriseTresor(this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id))
-        ) - parseFloat(this.recupererTresorDansDemandeEngagement(this.formData123.dmd_engagement_id));
+        ) - parseFloat(this.FonctionTresor);
       return parseFloat(val).toFixed(0);
     },
     
@@ -3312,7 +3448,7 @@ calculCumulDon() {
     },
 calculCumulAUtres78() {
       const val =
-        parseFloat(this.recupererMontantTotalDansDemandeEngagement(this.formData123.dmd_engagement_id)) +
+        parseFloat(this.FonctionMontantTotal) +
         parseFloat(this.CumulDemande(this.recupererUniteAdministrativeDansDemandeEngagement(this.formData123.dmd_engagement_id),this.recupererLigneEconomiqueDansDemandeEngagement(this.formData123.dmd_engagement_id)));
       return parseFloat(val).toFixed(0);
     },
@@ -3878,18 +4014,34 @@ ajouterBudgetaireLocal () {
       // };
     },
     AjouterDemandeEngagement() {
-     
-        var nouvelObjet = {
-        
-        dmd_engagement_id: this.formData123.dmd_engagement_id,
-        
-        numero_liquidation:this.formData1122.numero,
-        date_liquidation:this.formData1122.date
-      };
-      this.ajouterDossierLiquidation(nouvelObjet);
+      this.intitule = this.anneeAmort + "" + this.formData.numero_demande;
     
-      
+        var nouvelObjet1 = {
+          ...this.formData,
+          numero_dmd_combine: this.intitule,
+          programme_id: this.idProgramme(this.formData.activite_id),
+          action_id: this.idAction(this.formData.activite_id),
+          activite_id: this.formData.activite_id,
+          nom_autre: this.Numero_Nom_Entreprise(this.recupereIdEntreprise(this.formData2.numero_marche)),
+          adresse: this.Numero_adresse_Entreprise(this.recupereIdEntreprise(this.formData2.numero_marche)),
+          numero_cc_autre: this.Numero_CC(this.recupereIdEntreprise(this.formData2.numero_marche)),
+          total_general: this.TotalGeneralDemandeEngagement,
+          exercice: this.anneeAmort,
+          section_id:this.idSection(this.formData.activite_id),
+          marche_id:this.formData2.numero_marche,
+          entreprise_id: this.recupereIdEntreprise(this.formData2.numero_marche),
+          numero_marche: this.formData2.numero_marche,
+          autre_depense_id: this.idAutreDepense(
+            this.formData2.reference_autre_depense
+          ),
+         objet_depense:this.afficheObjetDeLaDepense,
+         type_engagement_id:this.recupereridTypeDepense(this.formData.type_engagement_id)
+        
+        };
+        this.ajouterDemandeEngagement(nouvelObjet1);
      
+      
+      
     },
     AjoutePieceJustific() {
       if (this.formData.type_procedure_id == 7) {

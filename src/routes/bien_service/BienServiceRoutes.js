@@ -1,7 +1,7 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
 
-VoirModaliteExecution
+
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -113,6 +113,8 @@ import PagePrincipalMarche from '../../pages/gestionMarche/PagePrincipalMarche.v
 import PagePrincipalMarcheSigobe from '../../pages/gestionMarche/PagePrincipalMarcheSigobe.vue';
 import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
+import AjouterDemandeEngagement12 from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement12.vue"
+import FormulaireAjoutSigobe from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/FormulaireAjoutSigobe.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
 import AjouterMantdatement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterMantdatement.vue"
 import AjouterOrdrePaiement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterOrdrePaiement.vue"
@@ -135,6 +137,7 @@ import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePa
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
+import GroupeOpParAnnee from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/GroupeOpParAnnee.vue"
 import ListeDesSousBudgetOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeDesSousBudgetOp.vue"
 import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
 import VoirOrdrePaiementSousBudget from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiementSousBudget.vue"
@@ -151,6 +154,7 @@ import RecupererToutAjoutOP from "../../pages/ExecutionBudgetaire/BudgetEclateRe
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
 import formulaireAjoutOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOp.vue"
+import formulaireAjoutOpAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOpAnterieur.vue"
 import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
 import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
@@ -170,6 +174,10 @@ import principalExecutionSousBudget from "../../pages/ExecutionBudgetaire/gestio
 
 import Detailexecution from "../../pages/ExecutionBudgetaire/gestionSigobe/Detailexecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
+import ListeUaImage from "../../pages/ImageMarche/ListeUaImage.vue"
+import ListeMarcheUa from "../../pages/ImageMarche/ListeMarcheUa.vue" 
+import ListeIMageExercice from "../../pages/ImageMarche/ListeIMageExercice.vue"
+import ListeImageMois from "../../pages/ImageMarche/ListeImageMois.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
@@ -179,6 +187,11 @@ const BienServiceRoutes = [
         path: "/formulaireAjoutOp",
         name: "formulaireAjoutOp",
         component: formulaireAjoutOp
+    },
+    {
+        path: "/Ajout-OrdrePaiement-Anterieur",
+        name: "formulaireAjoutOpAnterieur",
+        component: formulaireAjoutOpAnterieur
     },
     {
         path: "/ListeProcedureTypeDepense",
@@ -274,7 +287,12 @@ const BienServiceRoutes = [
         component: VoirOrdrePaiement
     },
     {
-        path: "/ListeOpParUa",
+        path: "/GroupeOpParAnnee",
+        name: "GroupeOpParAnnee",
+        component: GroupeOpParAnnee
+    },
+    {
+        path: "/ListeOpParUa/:id",
         name: "ListeOpParUa",
         component: ListeOpParUa
     },
@@ -282,6 +300,30 @@ const BienServiceRoutes = [
         path: "/dossier-image-ministere",
         name: "ImageParMinistere",
         component: ImageParMinistere
+    },
+
+    {
+        path: "/ListeUaImage/:id",
+        name: "ListeUaImage",
+        component: ListeUaImage
+    },
+
+    {
+        path: "/ListeIMageExercice/:id",
+        name: "ListeIMageExercice",
+        component: ListeIMageExercice
+    },
+
+    {
+        path: "/ListeImageMois/:id",
+        name: "ListeImageMois",
+        component: ListeImageMois
+    },
+
+    {
+        path: "/ListeMarcheUa/:id",
+        name: "ListeMarcheUa",
+        component: ListeMarcheUa
     },
     {
         path: "/dossier-image-ua",
@@ -475,6 +517,16 @@ const BienServiceRoutes = [
         path: "/executionBudgetaire/:id",
         name: "executionBudgetaire",
         component: executionBudgetaire
+    },
+    {
+        path: "/AjouterDemandeEngagement12",
+        name: "AjouterDemandeEngagement12",
+        component: AjouterDemandeEngagement12
+    },
+    {
+        path: "/FormulaireAjoutSigobe",
+        name: "FormulaireAjoutSigobe",
+        component: FormulaireAjoutSigobe
     },
     {
         path: "/AjouterDemandeEngagement",
