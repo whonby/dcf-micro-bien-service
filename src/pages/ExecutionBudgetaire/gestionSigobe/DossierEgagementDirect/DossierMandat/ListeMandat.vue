@@ -114,17 +114,17 @@
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Execice</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°demande</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Liquidation</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Mandat</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Date Mandat</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Type d'engagement</th>
-                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Objet de la depense</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Execice</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°demande</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°Liquidation</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°Mandat</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Date Mandat</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Type d'engagement</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Objet de la depense</th>
                     
-                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Montant Engagé</th>
-                                       <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Decision CF</th>
-                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff" colspan="2">Action</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Montant Engagé</th>
+                                       <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Decision CF</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000" colspan="2">Action</th>
                   </tr>
                 </thead>
                 
@@ -364,7 +364,7 @@ RecupererNiveau3StructureDecision() {
      listeDemandeParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierMandat.filter(qtreel => this.idUa(qtreel.demande_engagement_id) == id && this.AfficheTypeProcedure(qtreel.demande_engagement_id)==1 && qtreel.decision_cf == 0);
+           return this.gettersDossierMandat.filter(qtreel => this.idUa(qtreel.demande_engagement_id) == id && this.AfficheTypeProcedure(qtreel.demande_engagement_id)==1 && qtreel.decision_cf == 0 && qtreel.numero_mandat != null);
 
         }
       };
