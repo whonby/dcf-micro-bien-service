@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    {{idUaBudgetEclate(85)}}
+    <!-- {{idUaBudgetEclate(85)}} -->
  <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     

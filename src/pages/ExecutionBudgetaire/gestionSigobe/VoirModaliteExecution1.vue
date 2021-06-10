@@ -341,11 +341,11 @@
             </div>
             
               <!-- <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px"><ListeMandatEngagementBonCommande :macheid="marcheid"></ListeMandatEngagementBonCommande></div> -->
-    <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==0" v-on:click="clickBoutonEnAttente2()"><ListeMandatEngagementBonCommande :macheid="marcheid"></ListeMandatEngagementBonCommande></div>
-             <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==2" v-on:click="clickBoutonDiffere2()"><ListeMandatEngagementBonCommandeDifere :macheid="marcheid"></ListeMandatEngagementBonCommandeDifere></div>
-              <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==3" v-on:click="clickBoutonRejete2()"><ListeMandatEngagementBonCommandeRejete :macheid="marcheid"></ListeMandatEngagementBonCommandeRejete></div>
-               <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==4" v-on:click="clickBoutonVisé2()"><ListeMandatEngagementBonCommandeVise :macheid="marcheid"></ListeMandatEngagementBonCommandeVise></div>
-                <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==5" v-on:click="clickBoutonViséObservation2()"><ListeMandatEngagementBonCommandeViseObservation :macheid="marcheid"></ListeMandatEngagementBonCommandeViseObservation></div>
+    <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==0" v-on:click="clickBoutonEnAttente2()"><ListeMandatEngagementBonCommande :macheid="marcheid"></ListeMandatEngagementBonCommande></div>
+             <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==2" v-on:click="clickBoutonDiffere2()"><ListeMandatEngagementBonCommandeDifere :macheid="marcheid"></ListeMandatEngagementBonCommandeDifere></div>
+              <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3" v-on:click="clickBoutonRejete2()"><ListeMandatEngagementBonCommandeRejete :macheid="marcheid"></ListeMandatEngagementBonCommandeRejete></div>
+               <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4" v-on:click="clickBoutonVisé2()"><ListeMandatEngagementBonCommandeVise :macheid="marcheid"></ListeMandatEngagementBonCommandeVise></div>
+                <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5" v-on:click="clickBoutonViséObservation2()"><ListeMandatEngagementBonCommandeViseObservation :macheid="marcheid"></ListeMandatEngagementBonCommandeViseObservation></div>
             
     <br>
  </div>

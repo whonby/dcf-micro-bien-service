@@ -423,29 +423,29 @@ RecupererNiveau3StructureDecision() {
         date_motif:this.editMandat.date_motif,
         observation:this.editMandat.observation
       }
-       var Liquidation ={
+      //  var Liquidation ={
        
-        id:this.AfficheidLiquidation(this.editMandat.demande_engagement_id),
-        decision_cf:this.editMandat.decision_cf,
-        famille_motif_cf:this.editMandat.famille_motif_cf,
-        autre_motif_cf:this.editMandat.autre_motif_cf,
-        motif_cf:this.editMandat.motif_cf,
-        date_motif:this.editMandat.date_motif,
-        observation:this.editMandat.observation
-      }
-       var Demande ={
+      //   id:this.AfficheidLiquidation(this.editMandat.demande_engagement_id),
+      //   decision_cf:this.editMandat.decision_cf,
+      //   famille_motif_cf:this.editMandat.famille_motif_cf,
+      //   autre_motif_cf:this.editMandat.autre_motif_cf,
+      //   motif_cf:this.editMandat.motif_cf,
+      //   date_motif:this.editMandat.date_motif,
+      //   observation:this.editMandat.observation
+      // }
+      //  var Demande ={
         
-        id:this.editMandat.demande_engagement_id,
-        decision_cf:this.editMandat.decision_cf,
-        famille_motif_cf:this.editMandat.famille_motif_cf,
-        autre_motif_cf:this.editMandat.autre_motif_cf,
-        motif_cf:this.editMandat.motif_cf,
-        date_motif:this.editMandat.date_motif,
-        observation:this.editMandat.observation
-      }
+      //   id:this.editMandat.demande_engagement_id,
+      //   decision_cf:this.editMandat.decision_cf,
+      //   famille_motif_cf:this.editMandat.famille_motif_cf,
+      //   autre_motif_cf:this.editMandat.autre_motif_cf,
+      //   motif_cf:this.editMandat.motif_cf,
+      //   date_motif:this.editMandat.date_motif,
+      //   observation:this.editMandat.observation
+      // }
       this.modifierDossierMandat(Mandat);
-      this.modifierDossierLiquidation(Liquidation);
-      this.modifierDemandeEngagement(Demande);
+      // this.modifierDossierLiquidation(Liquidation);
+      // this.modifierDemandeEngagement(Demande);
 this.$("#demandeVise").modal('hide');
      
        

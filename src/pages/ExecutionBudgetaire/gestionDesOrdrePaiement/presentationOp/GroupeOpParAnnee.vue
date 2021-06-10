@@ -6,10 +6,8 @@
     
         </div>
     <table class="table table-bordered table-striped">
-          <td style="width: 15%"></td>
-          <td style="width: 0%; font-weight: bolder; color: #000">
-            
-          </td>
+          <td style="width: 70%"></td>
+        
           <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button

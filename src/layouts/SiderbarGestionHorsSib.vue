@@ -283,7 +283,7 @@ return objJson.id
         this.activate(1200)
         this.$router.push({
         //  name:'TableauBordOp'
-          name:'GroupeOpParAnnee'
+          name:'TableauBordExecutionHorsSigobe'
         })
       },
        navigateToRapport(){
@@ -310,7 +310,7 @@ navigateToGestionMarche(){
           this.activate(780)
           this.$router.push({
              // name: 'TableauBordDuBudgetEclate'
-              name: 'BudgetEclate'
+              name: 'TableauBordBudgetEclate'
           })
       },
       navigateTableBordBord(){
