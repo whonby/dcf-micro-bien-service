@@ -10,16 +10,16 @@
         <div class="container-fluid display: inline-block;" style="height: 100em;">
 
  <br> 
-             <table class="card">
+             <table class="" style="margin-left: 200px;">
                      <tbody>
                                 <tr v-if="anneeAmort!=0" style="display: inline-block;">
                                     <router-link :to="{ name: 'ListeImageMois', params: { id: this.marcheid}}">
-                                        <div class="card" :title="anneeAmort">
+                                        <div class="" :title="anneeAmort">
                                             <td>
                                                     <!-- <li class="icon-folder-close" style="font-size: 55px !important;margin-right:35px;margin-left:35px;"></li> -->
-                                                    <img :src="url" alt="" sizes="5px;" srcset="" style="width:200px; height:200px; margin-left: 30px; margin-right:30px;">
+                                                   <img :src="url_nvide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
                                                   <br>
-                                                  <p :title="anneeAmort" style="margin-left:35px;margin-right:35px;">{{anneeAmort}}</p>  
+                                                  <p :title="anneeAmort" style="font-size:20px; margin-left:30px;">{{anneeAmort}}</p>  
                                                          <br>
                                                        <br>
                                              </td>
@@ -50,6 +50,8 @@
 
     import 'vue-search-select/dist/VueSearchSelect.css'
     // import DraggableDiv from '../../components/DraggableDiv/DraggableDiv'
+    import img1 from "../../assets/folder_nvide.jpg";
+    import img2 from "../../assets/folder_vide.png";
     export default {
         name: "Images",
         components: {
@@ -57,9 +59,8 @@
         },
         data() {
             return{
-                 url:'https://img.pngio.com/free-folder-icon-for-windows-236555-download-folder-icon-for-png-folder-windows-7-200_200.jpg',
-                //url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJi8L-m3hgnw8xbMY93159m81pP9bvjWLINQ&usqp=CAU',
-            
+               url_nvide:img1,
+                url_vide:img2,
                 isLoading: false,
                 fullPage: false,
                 search:"",
