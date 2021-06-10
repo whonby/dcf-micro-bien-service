@@ -1,7 +1,7 @@
 Ajouter Facture
 <template>
   <div class="container-fluid">
-    {{RechercheNumeroOP}}
+  
     <hr />
     <!-- <div align="left" style="cursor: pointer">
       <button class="btn btn-danger" @click.prevent="pagePrecedent">
@@ -553,24 +553,22 @@ Ajouter Facture
                             <code style="color: red; font-size: 16px">*</code>
                           </label>
                            <select
-                            v-model="formData.mois_paiement"
-                            class="span"
-                            style="border: 1px solid #000"
-                          >
-                          <option value="0"></option>
-                            <option value="Janvier">Janvier</option>
-                           <option value="Février">Février</option>
-                           <option value="Mars">Mars</option>
-                           <option value="Avril">Avril</option>
-                           <option value="Mai">Mai</option>
-                           <option value="Juin">Juin</option>
-                           <option value="Juillet">Juillet</option>
-                           <option value="Août">Août</option>
-                           <option value="Septembre">Septembre</option>
-                           <option value="Octobre">Octobre</option>
-                           <option value="Novembre">Novembre</option>
-                           <option value="Decembre">Decembre</option>
-                          </select>
+                              v-model="formData.mois_paiement"
+                              class="span"
+                              style="border: 1px solid #000">
+                              <option value="Janvier">Janvier</option>
+                              <option value="Février">Février</option>
+                              <option value="Mars">Mars</option>
+                              <option value="Avril">Avril</option>
+                              <option value="Mai">Mai</option>
+                              <option value="Juin">Juin</option>
+                              <option value="Juillet">Juillet</option>
+                              <option value="Août">Août</option>
+                              <option value="Septembre">Septembre</option>
+                              <option value="Octobre">Octobre</option>
+                              <option value="Novembre">Novembre</option>
+                              <option value="Decembre">Decembre</option>
+                            </select>
                          
                         </td>
                    </tr>
@@ -677,7 +675,7 @@ Ajouter Facture
                                 style="border: 1px solid #000"
                                 class="wide span"
                                 :list="entreprises"
-                                v-model="formData45.nom_autre_depense"
+                                v-model="formData.entreprise_id"
                                 option-value="id"
                                 option-text="raison_sociale"
                                 placeholder=""
@@ -695,16 +693,16 @@ Ajouter Facture
 
                             <div class="controls">
                               <select
-                                v-model="formData45.reference_autre_depense"
+                                v-model="formData.autre_depense_id"
                                 class="span"
                                 style="border: 1px solid #000"
                               >
                                 <option
-                                  v-for="typeFact in AfficheBanqueEntreprise(formData45.nom_autre_depense)"
+                                  v-for="typeFact in AfficheBanqueEntreprise(formData.autre_depense_id)"
                                   :key="typeFact.id"
-                                  :value="typeFact.banq_id"
+                                  :value="typeFact.entrepse_id"
                                 >
-                                  {{ libelleBanque(typeFact.banq_id) }}
+                                  {{ libelleBanque(formData.autre_depense_id) }}
                                 </option>
                               </select>
                             </div>
@@ -717,14 +715,14 @@ Ajouter Facture
                             <div class="controls">
                              
                               <select
-                                v-model="formData45.compte_autre_depense"
+                                :value="ribCompte(formData.autre_depense_id,formData.entreprise_id)"
                                 class="span"
                                 style="border: 1px solid #000"
                               >
                                 <option
-                                  v-for="typeFact in AfficheCompteEntreprise(formData45.nom_autre_depense,formData45.reference_autre_depense)"
-                                  :key="typeFact.id"
-                                  :value="typeFact.id"
+                                  v-for="typeFact in AfficheCompteEntreprise(formData.autre_depense_id,formData.entreprise_id)"
+                                  :key="typeFact.banq_id"
+                                  
                                 >
                                   {{typeFact.rib }}
                                 </option>
@@ -910,8 +908,8 @@ Ajouter Facture
                           <model-list-select
                             style="border: 1px solid #000"
                             class="wide"
+                            v-model="gettersDossierAutreDepense.id"
                             :list="gettersDossierAutreDepense"
-                            v-model="formData.autre_depense_id"
                             option-value="id"
                             option-text="objet"
                             placeholder=""
@@ -926,23 +924,23 @@ Ajouter Facture
                             
                           </label>
                            <select
-                            v-model="formData.mois_paiement"
                             class="span"
                             style="border: 1px solid #000"
-                          >
-                          <option value="0"></option>
+                            v-model="formData.mois_paiement"
+                            >
+
                             <option value="Janvier">Janvier</option>
-                           <option value="Février">Février</option>
-                           <option value="Mars">Mars</option>
-                           <option value="Avril">Avril</option>
-                           <option value="Mai">Mai</option>
-                           <option value="Juin">Juin</option>
-                           <option value="Juillet">Juillet</option>
-                           <option value="Août">Août</option>
-                           <option value="Septembre">Septembre</option>
-                           <option value="Octobre">Octobre</option>
-                           <option value="Novembre">Novembre</option>
-                           <option value="Dcembre">Dcembre</option>
+                            <option value="Février">Février</option>
+                            <option value="Mars">Mars</option>
+                            <option value="Avril">Avril</option>
+                            <option value="Mai">Mai</option>
+                            <option value="Juin">Juin</option>
+                            <option value="Juillet">Juillet</option>
+                            <option value="Août">Août</option>
+                            <option value="Septembre">Septembre</option>
+                            <option value="Octobre">Octobre</option>
+                            <option value="Novembre">Novembre</option>
+                            <option value="Dcembre">Dcembre</option>
                           </select>
                          
                         </td>
@@ -953,7 +951,7 @@ Ajouter Facture
                             <label class="control-label">LIVRABLES</label>
                             <div class="controls">
                               <input
-                                v-model="formData45.livrable_autre_depense"
+                                v-model="formData.livrable_autre_depense"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -966,7 +964,7 @@ Ajouter Facture
                             <label class="control-label">BENEFICIAIRES</label>
                             <div class="controls">
                               <input
-                                v-model="formData45.beneficiaire_autre_depense"
+                                v-model="formData.beneficiaire_autre_depense"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -979,7 +977,7 @@ Ajouter Facture
                             <label class="control-label">GEOLOCALISATION</label>
                             <div class="controls">
                               <input
-                                v-model="formData45.geo_autre_depense"
+                                v-model="formData.geo_autre_depense"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -996,7 +994,7 @@ Ajouter Facture
                             >
                             <div class="controls">
                               <input
-                                v-model="formData45.dure_autre_depense"
+                                v-model="formData.dure_autre_depense"
                                 type="text"
                                 style="border: 1px solid #000"
                                 class="span"
@@ -1012,14 +1010,14 @@ Ajouter Facture
                             <div class="controls">
                               <!-- <input
                   
-                    type="text"
-                    style="border:1px solid #000"
-                   v-model="formData2.montant_engage"
-                    class="span"
-                    readonly
-                  /> -->
+                              type="text"
+                              style="border:1px solid #000"
+                            v-model="formData2.montant_engage"
+                              class="span"
+                              readonly
+                            /> -->
                               <money
-                                v-model="formData2.montant_engage"
+                                v-model="formData.montant_engage"
                                 style="text-align: left; color: red"
                                 class="span"
                               ></money>
@@ -1123,6 +1121,7 @@ Ajouter Facture
                                 style="border: 1px solid #000"
                                 v-model="formData12.objet_decompte"
                                 class="span"
+                                readonly
                               />
                             </div>
                           </div>
@@ -2008,10 +2007,10 @@ Ajouter Facture
                   <div class="controls">
                     <div data-toggle="buttons-checkbox" class="btn-group">
                       <a
-                       :readOnly="RechercheNumeroOP" 
-                        class="btn btn-primary"
-                        @click.prevent="AjouterOrdrePaiement"
-                        >Valider</a
+                       
+                        class="btn btn-success"
+                        @click.prevent="testModification"
+                        >Modifier</a
                       >
                       <a
                         @click.prevent="afficherModalListePersonnel()"
@@ -2501,7 +2500,7 @@ Ajouter Facture
               <div class="control-group">
                 <label class="control-label">Taux</label>
                 <div class="controls">
- <input type="text" 
+      <input type="text" 
                          class="span"
                         :value="afficherEnorereModifeir"
                          readonly
@@ -2515,7 +2514,7 @@ Ajouter Facture
                 <label class="control-label" >Montant Tva</label>
                 <div class="controls">
                  
-<money :value="montantTvaModifier"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+      <money :value="montantTvaModifier"  readonly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                 </div>
               </div>
             </td>
@@ -2591,6 +2590,7 @@ Ajouter Facture
                       >
       </div>
     </div>
+    <!-- <button type="button" @click="testModification" class="btn btn-success">Modifier L'OP</button> -->
   </div>
 </template>
 <script>
@@ -2623,12 +2623,15 @@ export default {
         unite_administrative_id: "",
         signataire:"",
         activite_id: "",
+        date_interim:"",
         ligne_economique_id: "",
         typedepense: "Marche",
         numero_ordre_paiement: "",
         type_ordre_paiement: "",
         imterim_op:"Non",
         RattacherPers:"Non",
+        autre_depense_id:"",
+        
         marche_idd:""
       
       },
@@ -2673,14 +2676,8 @@ export default {
         
             this.formData=this.gettersgestionOrdrePaiement.find(item=>item.id==this.$route.params.id)
 
-            this.formData.marche_idd = this.formData.marche_id
-            console.log(this.formData)
-            console.log(this.libelleBanque(this.idbanque(this.idEntreprise(this.formData.marche_id))))
-            console.log(this.formData)
-            console.log(this.idEntreprise(this.formData.marche_id))
-            console.log(this.listeFacturePiece(this.formData.numero_ordre_paiement))
-            console.log(this.gettersnomPieceJustificative)
-            
+           console.log(this.formData)
+            console.log(this.ribCompte(this.formData.autre_depense_id,this.formData.entreprise_id))
         },
   computed: {
     admin: admin,
@@ -2828,6 +2825,17 @@ AfficheBanqueEntreprise() {
             (qtreel) =>
               qtreel.entrepse_id == id 
           );
+        }
+      };
+    },
+    ribCompte(){
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          const tem= this.getCompte.filter((qtreel) =>qtreel.entrepse_id == id  && qtreel.banq_id == id1);
+          if(tem){
+            return tem.rib;
+          }
+          return 0;
         }
       };
     },
@@ -4240,9 +4248,9 @@ RechercheNumeroOP(){
   if(this.VerificationNumeroOp(this.formData.numero_ordre_paiement) == this.formData.numero_ordre_paiement){
     
 this.$notify({
-                 title: 'ERROR',
-                 text: "Numero Op Déja Enregistrer",
-                 type:"error"
+              title: 'ERROR',
+              text: "Numero Op Déja Enregistrer",
+              type:"error"
              })
   }
   else{
@@ -4276,6 +4284,7 @@ this.$notify({
       "modifierDossierFacture",
       "supprimerDossierFacture",
       "ajouterGestionOrdrePaiement",
+      "modifierGestionOrdrePaiement",
       "ModifierDateEffetFinancier",
       "modifierMarche2"
     ]),
@@ -4528,113 +4537,8 @@ afficherModalModifierFacture(id) {
         };
      
     },
-AjouterOrdrePaiement() {
-    
-        if (this.formData.typedepense == "Marche") {
-        if(this.ResteAPayeSurMarche == 0 ){
-  this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
-          this.intitule2 =
-            this.objetMarche(this.formData2.marche_id) +
-            "-" +
-            this.formData12.objet_decompte;
-          var nouvelObjetOrdrePaiement123 = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement:2,
-            numero_ordre_paiement: this.intitule,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            entreprise_id: this.idEntreprise(this.formData2.marche_id),
-            marche_id: this.formData2.marche_id,
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
 
-            mode_paiement_id: this.formData.mode_paiement_id,
-
-            date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
-
-
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
-
-            odjet_autre_depense: this.intitule2,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-let marcheObjet78=this.marches.find(marche=>marche.id==this.formData2.marche_id)
-      marcheObjet78.attribue = 5
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement123);
-          this.modifierMarche2(marcheObjet78)
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-            visa_interim:'',
-            user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
-
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-        }
-        else if(this.ResteAPayeSurMarche < 0){
-this.$notify({
-                 title: 'ERROR',
-                 text: "Marche Apuré",
-                 type:"error"
-             })
-        }
-        else{
+testModification(){
             this.intitule =
             this.anneeAmort +
             "-" +
@@ -4642,14 +4546,17 @@ this.$notify({
             "-" +
             this.formData.numero_ordre_paiement;
           this.intitule2 =
-            this.objetMarche(this.formData2.marche_id) +
+            this.objetMarche(this.formData.marche_id) +
             "-" +
             this.formData12.objet_decompte;
-          var nouvelObjetOrdrePaiement = {
+          var nouvelObjetOrdrePaiement1231 = {
+          
+            id:this.formData.id,
+            date_op:this.formData.date_op,
             exercice: this.anneeAmort,
+            type_ordre_paiement:this.formData.type_ordre_paiement,
+            numero_ordre_paiement: this.formData.numero_ordre_paiement,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            type_ordre_paiement: 2,
-            numero_ordre_paiement: this.intitule,
             section_id: this.idSection(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
@@ -4669,11 +4576,11 @@ this.$notify({
             sous_budget_id: this.formData.sous_budget_id,
             activite_id: this.formData.activite_id,
             ligne_economique_id: this.formData.ligne_economique_id,
-            entreprise_id: this.idEntreprise(this.formData2.marche_id),
-            marche_id: this.formData2.marche_id,
+            entreprise_id: this.idEntreprise(this.formData.marche_id),
+            marche_id: this.formData.marche_id,
             type_financement_id: this.formData.type_financement_id,
             typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
+            source_financement_id: this.formData.source_financement_id,
             montant_ordre_paiement: this.formData.montant_engage,
 
             mode_paiement_id: this.formData.mode_paiement_id,
@@ -4689,7 +4596,7 @@ this.$notify({
               this.formData.ligne_economique_id
             ),
 
-            odjet_autre_depense: this.intitule2,
+            odjet_autre_depense: this.numero_ordre_paiement,
             gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
             gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
             gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
@@ -4697,264 +4604,493 @@ this.$notify({
               this.recupererIdServiceCF(this.formData.unite_administrative_id)
             ),
           };
+           this.modifierGestionOrdrePaiement(nouvelObjetOrdrePaiement1231);
+},
 
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement);
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-            visa_interim:'',
-            user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
 
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-          };
-        }
-        } 
-        else if(this.formData.typedepense == "Personnel")  {
-          this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
+
+    //   AjouterOrdrePaiement() {
+    
+    //     if (this.formData.typedepense == "Marche") {
+    //     if(this.ResteAPayeSurMarche == 0 ){
+    //   this.intitule =
+    //         this.anneeAmort +
+    //         "-" +
+    //         this.tailleOpEnregistrer +
+    //         "-" +
+    //         this.formData.numero_ordre_paiement;
+    //       this.intitule2 =
+    //         this.objetMarche(this.formData.marche_id) +
+    //         "-" +
+    //         this.formData12.objet_decompte;
+    //       var nouvelObjetOrdrePaiement123 = {
+    //         id:this.formData.id,
+    //         exercice: this.anneeAmort,
+    //         type_ordre_paiement:this.formData.type_ordre_paiement,
+    //         numero_ordre_paiement: this.formData.numero_ordre_paiement,
+    //         numero_op_prov_definitive:this.formData.numero_ordre_paiement,
+    //         section_id: this.idSection(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         programme_id: this.idProgramme(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         unite_administrative_id: this.formData.unite_administrative_id,
+    //         action_id: this.idAction(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         sous_budget_id: this.formData.sous_budget_id,
+    //         activite_id: this.formData.activite_id,
+    //         ligne_economique_id: this.formData.ligne_economique_id,
+    //         entreprise_id: this.idEntreprise(this.formData.marche_id),
+    //         marche_id: this.formData.marche_id,
+    //         type_financement_id: this.formData.type_financement_id,
+    //         typedepense: this.formData.typedepense,
+    //         source_financement_id: this.formData.source_financement_id,
+    //         montant_ordre_paiement: this.formData.montant_engage,
+
+    //         mode_paiement_id: this.formData.mode_paiement_id,
+
+    //         date_interim: this.formData.date_interim,
+    //         visa_interim: this.formData.visa_interim,
+    //         user_id_interim: this.formData.user_id_interim,
+    //         imterim_op: this.formData.imterim_op,
+    //         personne_rattacher: this.formData.RattacherPers,
+
+
+    //         grand_nature_id: this.GrandeNatureId(
+    //           this.formData.ligne_economique_id
+    //         ),
+
+    //         odjet_autre_depense: this.numero_ordre_paiement,
+    //         gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+    //         gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+    //         gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //       };
+          
+    //     let marcheObjet78=this.marches.find(marche=>marche.id==this.formData.marche_id)
+    //     marcheObjet78.attribue = 5
+    //       this.modifierGestionOrdrePaiement(nouvelObjetOrdrePaiement123);
+    //       this.modifierMarche2(marcheObjet78)
+    //       this.formData = {
+    //         exercice: this.anneeAmort,
+    //         type_ordre_paiement: "",
+    //         numero_ordre_paiement: "",
+    //         date_interim:'',
+    //         visa_interim:'',
+    //         user_id_interim:'',
+    //         section_id: "",
+    //         programme_id: "",
+    //         unite_administrative_id: "",
+    //         action_id: "",
+    //         sous_budget_id: "",
+    //         activite_id: "",
+    //         ligne_economique_id: "",
+    //         entreprise_id: "",
+    //         marche_id: "",
+    //         type_financement_id: "",
+    //         source_financement_id: "",
+    //         montant_ordre_paiement: "",
+    //         mode_paiement_id: "",
+    //         gestionnaire_credit_non: "",
+    //         gestionnaire_credit_date: "",
+    //         gestionnaire_credit_fonction: "",
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //       };
+    //       this.modifierGestionOrdrePaiement(nouvelObjetOrdrePaiement123);
+    //       this.modifierMarche2(marcheObjet78)
+    //     }
+    //     else if(this.ResteAPayeSurMarche < 0){
+    //     this.$notify({
+    //              title: 'ERROR',
+    //              text: "Marche Apuré",
+    //              type:"error"
+    //          })
+    //     }
+    //     else{
+    //         this.intitule =
+    //         this.anneeAmort +
+    //         "-" +
+    //         this.tailleOpEnregistrer +
+    //         "-" +
+    //         this.formData.numero_ordre_paiement;
+    //       this.intitule2 =
+    //         this.objetMarche(this.formData.marche_id) +
+    //         "-" +
+    //         this.formData12.objet_decompte;
+    //       var nouvelObjetOrdrePaiement = {
+    //         exercice: this.anneeAmort,
+    //         numero_op_prov_definitive:this.formData.numero_ordre_paiement,
+    //         type_ordre_paiement: 2,
+    //         numero_ordre_paiement: this.intitule,
+    //         section_id: this.idSection(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         programme_id: this.idProgramme(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         unite_administrative_id: this.formData.unite_administrative_id,
+    //         action_id: this.idAction(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         sous_budget_id: this.formData.sous_budget_id,
+    //         activite_id: this.formData.activite_id,
+    //         ligne_economique_id: this.formData.ligne_economique_id,
+    //         entreprise_id: this.idEntreprise(this.formData2.marche_id),
+    //         marche_id: this.formData2.marche_id,
+    //         type_financement_id: this.formData.type_financement_id,
+    //         typedepense: this.formData.typedepense,
+    //         source_financement_id: this.formData.bailler_id,
+    //         montant_ordre_paiement: this.formData.montant_engage,
+
+    //         mode_paiement_id: this.formData.mode_paiement_id,
+
+    //         date_interim: this.formData.date_interim,
+    //         visa_interim: this.formData.visa_interim,
+    //         user_id_interim: this.formData.user_id_interim,
+    //         imterim_op: this.formData.imterim_op,
+    //         personne_rattacher: this.formData.RattacherPers,
+
+
+    //         grand_nature_id: this.GrandeNatureId(
+    //           this.formData.ligne_economique_id
+    //         ),
+
+    //         odjet_autre_depense: this.intitule2,
+    //         gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+    //         gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+    //         gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //       };
+    //       // var nouvelObjetOrdrePaiement = {
+    //       //   id:this.formData.id,
+    //       //   exercice: this.anneeAmort,
+    //       //   type_ordre_paiement: this.formData.type_ordre_paiement,
+    //       //   numero_ordre_paiement: this.intitule,
+    //       //   section_id: this.idSection(
+    //       //     this.libelleLigneEconomiqueParent(
+    //       //       this.formData.activite_id
+    //       //     )
+    //       //   ),
+    //       //   programme_id: this.idProgramme(
+    //       //     this.libelleLigneEconomiqueParent(
+    //       //       this.formData.activite_id
+    //       //     )
+    //       //   ),
+    //       //   unite_administrative_id: this.formData.unite_administrative_id,
+    //       //   action_id: this.idAction(
+    //       //     this.libelleLigneEconomiqueParent(
+    //       //       this.formData.activite_id
+    //       //     )
+    //       //   ),
+    //       //   sous_budget_id: this.formData.sous_budget_id,
+    //       //   activite_id: this.formData.activite_id,
+    //       //   ligne_economique_id: this.formData.ligne_economique_id,
+    //       //   entreprise_id: this.idEntreprise(this.formData.marche_id),
+    //       //   marche_id: this.formData.marche_id,
+    //       //   type_financement_id: this.formData.type_financement_id,
+    //       //   typedepense: this.formData.typedepense,
+    //       //   source_financement_id: this.formData.source_financement_id,
+    //       //   montant_ordre_paiement: this.formData.montant_ordre_paiement,
+
+    //       //   mode_paiement_id: this.formData.mode_paiement_id,
+
+    //       //   date_interim: this.formData.date_interim,
+    //       //   visa_interim: this.formData.visa_interim,
+    //       //   user_id_interim: this.formData.user_id_interim,
+    //       //   imterim_op: this.formData.imterim_op,
+    //       //   personne_rattacher: this.formData.RattacherPers,
+
+
+    //       //   grand_nature_id: this.GrandeNatureId(
+    //       //     this.formData.ligne_economique_id
+    //       //   ),
+
+    //       //   odjet_autre_depense: this.intitule2,
+    //       //   gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+    //       //   gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+    //       //   gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
+    //       //   controleur_financier_id: this.recupererIdUser(
+    //       //     this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //       //   ),
+    //       // };
+    //       this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement);
            
-          var nouvelObjetOrdrePaiement78 = {
-            exercice: this.anneeAmort,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            diff_op_personnel:this.formData.diff_op_personnel,
-             mois_paiement: this.formData.mois_paiement,
-            type_ordre_paiement: 2,
-            numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
+    //       this.formData = {
+    //         exercice: this.anneeAmort,
+    //         type_ordre_paiement: "",
+    //         numero_ordre_paiement: "",
+    //         date_interim:'',
+    //         visa_interim:'',
+    //         user_id_interim:'',
+    //         section_id: "",
+    //         programme_id: "",
+    //         unite_administrative_id: "",
+    //         action_id: "",
+    //         sous_budget_id: "",
+    //         activite_id: "",
+    //         ligne_economique_id: "",
+    //         entreprise_id: "",
+    //         marche_id: "",
+    //         type_financement_id: "",
 
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
+    //         source_financement_id: "",
+    //         montant_ordre_paiement: "",
+    //         mode_paiement_id: "",
+    //         gestionnaire_credit_non: "",
+    //         gestionnaire_credit_date: "",
+    //         gestionnaire_credit_fonction: "",
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //       };
+    //     }
+    //     } 
+    //     else if(this.formData.typedepense == "Personnel")  {
+    //       this.intitule =
+    //         this.anneeAmort +
+    //         "-" +
+    //         this.tailleOpEnregistrer +
+    //         "-" +
+    //         this.formData.numero_ordre_paiement;
+           
+    //       var nouvelObjetOrdrePaiement78 = {
+    //         exercice: this.anneeAmort,
+    //         numero_op_prov_definitive:this.formData.numero_ordre_paiement,
+    //         diff_op_personnel:this.formData.diff_op_personnel,
+    //          mois_paiement: this.formData.mois_paiement,
+    //         type_ordre_paiement: this.formData.type_ordre_paiement,
+    //         numero_ordre_paiement: this.intitule,
+    //         section_id: this.idSection(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         programme_id: this.idProgramme(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         unite_administrative_id: this.formData.unite_administrative_id,
+    //         action_id: this.idAction(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         sous_budget_id: this.formData.sous_budget_id,
+    //         activite_id: this.formData.activite_id,
+    //         ligne_economique_id: this.formData.ligne_economique_id,
+    //         // entreprise_id:this.idEntreprise(this.formData2.marche_id),
+    //         // marche_id:this.formData2.marche_id,
 
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
-            mode_paiement_id: this.formData.mode_paiement_id,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
+    //         grand_nature_id: this.GrandeNatureId(
+    //           this.formData.ligne_economique_id
+    //         ),
 
-            date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
+    //         type_financement_id: this.formData.type_financement_id,
+    //         typedepense: this.formData.typedepense,
+    //         source_financement_id: this.formData.bailler_id,
+    //         montant_ordre_paiement: this.formData.montant_engage,
+    //         mode_paiement_id: this.formData.mode_paiement_id,
+    //         gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+    //         gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+    //         gestionnaire_credit_fonction: this.formData.gestionnaire_credit_fonction,
+
+    //         date_interim: this.formData.date_interim,
+    //         visa_interim: this.formData.visa_interim,
+    //         user_id_interim: this.formData.user_id_interim,
+    //         imterim_op: this.formData.imterim_op,
+    //         personne_rattacher: this.formData.RattacherPers,
 
 
 
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            auteur_perso_id: this.formData.auteur_perso_id,
-            banque_perso: this.Recup_Banque(this.formData.auteur_perso_id),
-            compte_perso: this.idCompte(this.Recup_Numero_cOMPTE(this.formData.auteur_perso_id)),
-            // reference_autre_depense: this.formData45.reference_autre_depense,
-            odjet_autre_depense: this.formData02.odjet_autre_depense,
-            // livrable_autre_depense: this.formData45.livrable_autre_depense,
-            // beneficiaire_autre_depense: this.formData45
-              // .beneficiaire_autre_depense,
-            geo_autre_depense: this.formData45.geo_autre_depense,
-            dure_autre_depense: this.formData45.dure_autre_depense,
-          };
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //         auteur_perso_id: this.formData.auteur_perso_id,
+    //         banque_perso: this.Recup_Banque(this.formData.auteur_perso_id),
+    //         compte_perso: this.idCompte(this.Recup_Numero_cOMPTE(this.formData.auteur_perso_id)),
+    //         // reference_autre_depense: this.formData45.reference_autre_depense,
+    //         odjet_autre_depense: this.formData02.odjet_autre_depense,
+    //         // livrable_autre_depense: this.formData45.livrable_autre_depense,
+    //         // beneficiaire_autre_depense: this.formData45
+    //           // .beneficiaire_autre_depense,
+    //         geo_autre_depense: this.formData45.geo_autre_depense,
+    //         dure_autre_depense: this.formData45.dure_autre_depense,
+    //       };
 
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement78);
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-          visa_interim:'',
-          user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
+    //       this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement78);
+    //       this.formData = {
+    //         exercice: this.anneeAmort,
+    //         type_ordre_paiement: "",
+    //         numero_ordre_paiement: "",
+    //         date_interim:'',
+    //       visa_interim:'',
+    //       user_id_interim:'',
+    //         section_id: "",
+    //         programme_id: "",
+    //         unite_administrative_id: "",
+    //         action_id: "",
+    //         sous_budget_id: "",
+    //         activite_id: "",
+    //         ligne_economique_id: "",
+    //         entreprise_id: "",
+    //         marche_id: "",
+    //         type_financement_id: "",
 
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            nom_autre_depense: "",
-            compte_autre_depense: "",
-            adresse: "",
-            reference_autre_depense: "",
-            odjet_autre_depense: "",
-            livrable_autre_depense: "",
-            beneficiaire_autre_depense: "",
-            geo_autre_depense: "",
-            dure_autre_depense: "",
-          };
-        }
+    //         source_financement_id: "",
+    //         montant_ordre_paiement: "",
+    //         mode_paiement_id: "",
+    //         gestionnaire_credit_non: "",
+    //         gestionnaire_credit_date: "",
+    //         gestionnaire_credit_fonction: "",
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //         nom_autre_depense: "",
+    //         compte_autre_depense: "",
+    //         adresse: "",
+    //         reference_autre_depense: "",
+    //         odjet_autre_depense: "",
+    //         livrable_autre_depense: "",
+    //         beneficiaire_autre_depense: "",
+    //         geo_autre_depense: "",
+    //         dure_autre_depense: "",
+    //       };
+    //     }
         
         
-        else  {
-          this.intitule =
-            this.anneeAmort +
-            "-" +
-            this.tailleOpEnregistrer +
-            "-" +
-            this.formData.numero_ordre_paiement;
+    //     else  {
+    //       this.intitule =
+    //         this.anneeAmort +
+    //         "-" +
+    //         this.tailleOpEnregistrer +
+    //         "-" +
+    //         this.formData.numero_ordre_paiement;
             
             
-          var nouvelObjetOrdrePaiement1 = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: 2,
-            numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            programme_id: this.idProgramme(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            unite_administrative_id: this.formData.unite_administrative_id,
-            action_id: this.idAction(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
-            sous_budget_id: this.formData.sous_budget_id,
-            activite_id: this.formData.activite_id,
-            ligne_economique_id: this.formData.ligne_economique_id,
-            // entreprise_id:this.idEntreprise(this.formData2.marche_id),
-            // marche_id:this.formData2.marche_id,
+    //       var nouvelObjetOrdrePaiement1 = {
+    //         exercice: this.anneeAmort,
+    //         type_ordre_paiement: 2,
+    //         numero_ordre_paiement: this.intitule,
+    //         section_id: this.idSection(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         programme_id: this.idProgramme(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         unite_administrative_id: this.formData.unite_administrative_id,
+    //         action_id: this.idAction(
+    //           this.libelleLigneEconomiqueParent(
+    //             this.formData.activite_id
+    //           )
+    //         ),
+    //         sous_budget_id: this.formData.sous_budget_id,
+    //         activite_id: this.formData.activite_id,
+    //         ligne_economique_id: this.formData.ligne_economique_id,
+    //         // entreprise_id:this.idEntreprise(this.formData2.marche_id),
+    //         // marche_id:this.formData2.marche_id,
 
-            grand_nature_id: this.GrandeNatureId(
-              this.formData.ligne_economique_id
-            ),
+    //         grand_nature_id: this.GrandeNatureId(
+    //           this.formData.ligne_economique_id
+    //         ),
 
-            type_financement_id: this.formData.type_financement_id,
-            typedepense: this.formData.typedepense,
-            source_financement_id: this.formData.bailler_id,
-            montant_ordre_paiement: this.formData.montant_engage,
-            mode_paiement_id: this.formData.mode_paiement_id,
-            gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
-            gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
-            gestionnaire_credit_fonction: this.formData
-              .gestionnaire_credit_fonction,
+    //         type_financement_id: this.formData.type_financement_id,
+    //         typedepense: this.formData.typedepense,
+    //         source_financement_id: this.formData.bailler_id,
+    //         montant_ordre_paiement: this.formData.montant_engage,
+    //         mode_paiement_id: this.formData.mode_paiement_id,
+    //         gestionnaire_credit_non: this.formData.gestionnaire_credit_non,
+    //         gestionnaire_credit_date: this.formData.gestionnaire_credit_date,
+    //         gestionnaire_credit_fonction: this.formData
+    //           .gestionnaire_credit_fonction,
 
-                date_interim: this.formData.date_interim,
-            visa_interim: this.formData.visa_interim,
-            user_id_interim: this.formData.user_id_interim,
-            imterim_op: this.formData.imterim_op,
-            personne_rattacher: this.formData.RattacherPers,
+    //             date_interim: this.formData.date_interim,
+    //         visa_interim: this.formData.visa_interim,
+    //         user_id_interim: this.formData.user_id_interim,
+    //         imterim_op: this.formData.imterim_op,
+    //         personne_rattacher: this.formData.RattacherPers,
 
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            nom_autre_depense: this.formData45.nom_autre_depense,
-            compte_autre_depense: this.formData45.compte_autre_depense,
-            adresse: this.formData45.adresse,
-            reference_autre_depense: this.formData45.reference_autre_depense,
-            autre_depense_id:this.formData.autre_depense_id,
-            odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
-            livrable_autre_depense: this.formData45.livrable_autre_depense,
-            beneficiaire_autre_depense: this.formData45.beneficiaire_autre_depense,
-            geo_autre_depense: this.formData45.geo_autre_depense,
-            dure_autre_depense: this.formData45.dure_autre_depense,
-            numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-          };
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //         nom_autre_depense: this.formData45.nom_autre_depense,
+    //         compte_autre_depense: this.formData45.compte_autre_depense,
+    //         adresse: this.formData45.adresse,
+    //         reference_autre_depense: this.formData45.reference_autre_depense,
+    //         autre_depense_id:this.formData.autre_depense_id,
+    //         odjet_autre_depense: this.objetAutreDepense(this.formData.autre_depense_id),
+    //         livrable_autre_depense: this.formData45.livrable_autre_depense,
+    //         beneficiaire_autre_depense: this.formData45.beneficiaire_autre_depense,
+    //         geo_autre_depense: this.formData45.geo_autre_depense,
+    //         dure_autre_depense: this.formData45.dure_autre_depense,
+    //         numero_op_prov_definitive:this.formData.numero_ordre_paiement,
+    //       };
 
-          this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
-          this.formData = {
-            exercice: this.anneeAmort,
-            type_ordre_paiement: "",
-            numero_ordre_paiement: "",
-            date_interim:'',
-          visa_interim:'',
-          user_id_interim:'',
-            section_id: "",
-            programme_id: "",
-            unite_administrative_id: "",
-            action_id: "",
-            sous_budget_id: "",
-            activite_id: "",
-            ligne_economique_id: "",
-            entreprise_id: "",
-            marche_id: "",
-            type_financement_id: "",
+    //       this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
+    //       this.formData = {
+    //         exercice: this.anneeAmort,
+    //         type_ordre_paiement: "",
+    //         numero_ordre_paiement: "",
+    //         date_interim:'',
+    //       visa_interim:'',
+    //       user_id_interim:'',
+    //         section_id: "",
+    //         programme_id: "",
+    //         unite_administrative_id: "",
+    //         action_id: "",
+    //         sous_budget_id: "",
+    //         activite_id: "",
+    //         ligne_economique_id: "",
+    //         entreprise_id: "",
+    //         marche_id: "",
+    //         type_financement_id: "",
 
-            source_financement_id: "",
-            montant_ordre_paiement: "",
-            mode_paiement_id: "",
-            gestionnaire_credit_non: "",
-            gestionnaire_credit_date: "",
-            gestionnaire_credit_fonction: "",
-            controleur_financier_id: this.recupererIdUser(
-              this.recupererIdServiceCF(this.formData.unite_administrative_id)
-            ),
-            nom_autre_depense: "",
-            compte_autre_depense: "",
-            adresse: "",
-            reference_autre_depense: "",
-            odjet_autre_depense: "",
-            livrable_autre_depense: "",
-            beneficiaire_autre_depense: "",
-            geo_autre_depense: "",
-            dure_autre_depense: "",
-          };
-        }
+    //         source_financement_id: "",
+    //         montant_ordre_paiement: "",
+    //         mode_paiement_id: "",
+    //         gestionnaire_credit_non: "",
+    //         gestionnaire_credit_date: "",
+    //         gestionnaire_credit_fonction: "",
+    //         controleur_financier_id: this.recupererIdUser(
+    //           this.recupererIdServiceCF(this.formData.unite_administrative_id)
+    //         ),
+    //         nom_autre_depense: "",
+    //         compte_autre_depense: "",
+    //         adresse: "",
+    //         reference_autre_depense: "",
+    //         odjet_autre_depense: "",
+    //         livrable_autre_depense: "",
+    //         beneficiaire_autre_depense: "",
+    //         geo_autre_depense: "",
+    //         dure_autre_depense: "",
+    //       };
+    //     }
      
-    },
+    // },
 
     afficherModalAjouterFacture() {
       this.$("#exampleModal1").modal({
