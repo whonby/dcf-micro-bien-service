@@ -605,6 +605,7 @@
                               </div>
                   </div>
                    <div id="MANDAT" class="tab-pane active" v-if="editMandat.test==4" >
+                       <h3 style="text-align:center">DETAIL OP DIRECT</h3>
       <div class="single-timeline-area">
 
                                   <div class="row-fluid">
