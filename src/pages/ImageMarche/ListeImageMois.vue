@@ -10,7 +10,7 @@
         <div class="container-fluid" style="height: 100em;">
 
  <br>
-             <table class="" style="margin-left: 200px;">
+             <table class="card" style="margin-left: 200px;">
                      <tbody>
                                 <tr style="display: inline-block;">
                                     

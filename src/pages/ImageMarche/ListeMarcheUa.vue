@@ -7,29 +7,54 @@
 
       
        <h2 style="text-align:center;">Liste  Marché de l'Unité Administrative :<b style="text-decoration:underline;">{{LibelleUa(this.uaid)}} </b></h2>
-        <div class="container-fluid" style="height: 100em;">
+        <div class="container-fluid" style="height:100em;">
 
  <br>
-             <table class="" style="margin-left: 200px;">
+
+   <div>
+      <div style="width:200px;height:800px;margin-right:15px;" id="menu">
+  <ul  v-for="marchebyua in ListeUniteAdminBySectionmenu" :key="marchebyua.id">
+      
+      <li @click.prevent="alertme(marchebyua.id)">
+
+      <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
+        <input  v-text="marchebyua.id"  v-model="recup_id_ua">
+        <p :title="marchebyua.libelle">{{marchebyua.libelle.substr(0, 30)+'...'}}</p>  
+  
+  <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
+ </li>
+
+  </ul>      
+      </div>
+      
+         
+         
+            <table class="" >
                      <tbody>
                                 <tr  v-for="marchebyua in ListeMarcheByUa" :key="marchebyua.id" style="display: inline-block;">
                                     
-                                    <td v-if="test(marchebyua.id)==1">
-                                        <router-link :to="{ name: 'ListeIMageExercice', params: { id: marchebyua.id}}">
-                                        <div class="" :title="marchebyua.objet" >
+                                    <td>
+                                       
+                                        <div v-if="test(marchebyua.id)==1" :title="marchebyua.objet">
+                                             <router-link :to="{ name: 'ListeIMageExercice', params: { id: marchebyua.id}}">
                                             <!-- <li class="icon-folder-close" style="font-size: 55px !important;margin-right:35px;margin-left:35px;"></li> -->
                                             <img :src="url_nvide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
                                             <br>
                                             <p :title="marchebyua.objet" style="margin-left:35px;font-size:20px;">{{marchebyua.objet.substr(0, 30)+'...'}}</p>  
                                             <br>
                                             <br>
-                                        </div>
-                                             
-                                       </router-link> 
+                                            </router-link> 
+                                        </div>  
+                                        
+                                       
                                     </td>  
+                                    
                                 </tr>
                          </tbody>
-                </table> 
+                </table>   
+    
+   </div>
+             
 
                        
     </div>
@@ -53,6 +78,7 @@
     // import DraggableDiv from '../../components/DraggableDiv/DraggableDiv'
     import img1 from "../../assets/folder_nvide.jpg";
     import img2 from "../../assets/folder_vide.png";
+    import Menu from "../../assets/menu.png";
     export default {
         name: "Images",
         components: {
@@ -62,6 +88,7 @@
             return{
                 url_nvide:img1,
                 url_vide:img2,
+                menu:Menu,
                 isLoading: false,
                 fullPage: false,
                 search:"",
@@ -71,6 +98,7 @@
                 infrastructure:"",
                 type_marche:"",
                 region:"",
+                recup_id_ua:'',
                 info_status_marche:"",
                 tableMarcheStatue:"",
                 listeDesMarchePasStatus:'',
@@ -95,7 +123,9 @@
         },
         
             created() {
-            this.uaid=this.$route.params.id     
+            this.uaid=this.$route.params.id;
+            this.section_menu_id=this.$route.params.id_section;
+               
               
             },
           
@@ -161,6 +191,21 @@
                 }
             },
 
+            retourne_id(){
+                return this.section_menu_id;
+            },
+
+            alertme(){
+               return id=>{
+                    if(id!=""){
+                       
+                        return id;
+                    }
+                    return "";
+                }
+            },
+           
+
            
 
              test(){
@@ -186,93 +231,23 @@
             },
 
             ListeMarcheByUa(){
-                 return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid
+                if(this.alertme!=""){
+                     return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.alertme
+                    && qtreel.exo_id==this.anneeAmort);
+                }else{
+                     return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid
                  && qtreel.exo_id==this.anneeAmort);
-            },
-
-            regions(){
-                // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
-                return this.localisations_geographiques.filter(item=>{
-                    if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
-                        return item
-                    }
-                });
-            },
-            nombreImageParMarche(){
-              return id=>{
-                  let objet=this.getterImageMarche.filter(item=>item.marche_id==id)
-                  return objet.length
-              }
-            },
-            selectionnerUniteAdministrative(){
-               return id=>{
-                   let objet=this.uniteAdministratives.find(item=>item.id=id)
-                   return objet.libelle
-               }
-            },
-
-            selectionnerInfrastructure(){
-              return id=>{
-                 // console.log(id)
-                  let objet=this.getterInfrastrucure.find(item=>item.id==id)
-                //  console.log(objet)
-                  if(objet==undefined)
-                      return null
-                  return objet.libelle
-              }
-            },
-            selectionLocationGeographique(){
-                return id=>{
-                    let objet=this.localisations_geographiques.find(item=>item.id==id)
-                    if(objet==undefined)
-                        return null
-                    return objet.libelle
                 }
-            },
-            filtre_unite_admin() {
-                if(this.noDCfNoAdmin){
-                    let colect=[];
-                    let vM=this
-                    this.uniteAdministratives.filter(item=>{
-                        if(vM.getterUniteAdministrativeByUser.length>0){
-                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                            if (val!=undefined){
-                                colect.push(item)
-                                return item
-                            }
-                        }
-
-                    })
-                    return colect
-                }
-                return this.uniteAdministratives
-            },
-            listeMarcheUniteAdmin(){
-                let colect=[]
-                let vM=this;
-                this.filtre_unite_admin.forEach(function (value) {
-                    let objet=vM.marches.filter(item=>{
-                            if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
-                                //  console.log(item.parent_id)
-                                return item
-                            }
-                        }
-                    )
-                    if(objet!=undefined){
-                        objet.forEach(function (val) {
-                           let objet=   colect.find(item=>item.id==val.id)
-                            if(objet==undefined){
-                                colect.push(val)
-                            }
-
-                        })
-                    }
-
-                })
-                return colect
+               
             },
 
-              anneeAmort() {
+            ListeUniteAdminBySectionmenu(){
+                 return this.uniteAdministratives.filter(qtreel => qtreel.section_id == this.section_menu_id); 
+            },
+
+
+
+             anneeAmort() {
       
                 const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
@@ -282,160 +257,7 @@
                 return 0
              },
 
-            objetMarchePasUniteOuRegion(){
-
-                let vM=this;
-                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
-
-                //retourne les marches d'une region selectionner
-                if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-
-                }
-
-                //retourne les marches d'une unite administrative selectionner
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourne les marches d'une une infrastucture selectionner
-                if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type de marché selectionner
-                if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourne les marches de region et unite adminstrative selectionner
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'une infrastructure et unite adminstrative selectionner
-
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type marche et unite adminstrative selectionner
-
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'une region et infrastructure selectionner
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourne les marches d'une infrasture et type marche selectionner
-                if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type marche et regions selectionner
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marches d'une UA, REGION et INFRASTRUCTURE
-
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourn les marches d'une UA, REGION et TYPE MARCHE
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marches d'une UA, INFRA et TYPE MARCHE
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marche INFRA, REGIONS,TYPE MARCHE
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-                return objet
-            },
-
-
+            
 
             nombreTotalMarche(){
                 return this.objetMarchePasUniteOuRegion.length
@@ -550,6 +372,8 @@
                     params: { id: id }
                 })
             },
+
+             
 
             videUniteAdmin(){
                 this.unite_administrative_id=""
@@ -882,6 +706,12 @@
         height: 550px;
 
     }
+    #menu {
+        float: left;
+        background: white;
+        overflow: scroll;
+        
+        }
     .tailgrand{
         width: 50%;
         margin: 0 -25%;
@@ -890,24 +720,7 @@
         width: 75%;
         margin: 0 -40%;
     }
-    .avatar1 {
-
-        width: 50%;
-        height: 50%;
-
-    }
-
-
-
-
-    .center_image {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-        height: 250px;
-    }
-
+    
 
 
     .main-body {
@@ -934,79 +747,6 @@
         min-height: 1px;
         padding: 1rem;
     }
-
-    .gutters-sm {
-        margin-right: -8px;
-        margin-left: -8px;
-    }
-
-    .gutters-sm>.col, .gutters-sm>[class*=col-] {
-        padding-right: 8px;
-        padding-left: 8px;
-    }
-    .mb-3, .my-3 {
-        margin-bottom: 1rem!important;
-    }
-
-    .bg-gray-300 {
-        background-color: #e2e8f0;
-    }
-    .h-100 {
-        height: 100%!important;
-    }
-    .shadow-none {
-        box-shadow: none!important;
-    }
-
-
-    .JesterBox div {
-        visibility: hidden;
-        position: fixed;
-        top: 5%;
-        right: 5%;
-        bottom: 5%;
-        left: 5%;
-        z-index: 75;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .JesterBox div:before {
-        content: '';
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 74;
-        background-color: rgba(0, 0, 0, 0);
-        transition: all 0.5s ease-out;
-    }
-
-    .JesterBox div img {
-        position: relative;
-        z-index: 77;
-        max-width: 100%;
-        max-height: 100%;
-        margin-left: -9999px;
-        opacity: 0;
-        transition-property: all, opacity;
-        transition-duration: 0.5s, 0.2s;
-        transition-timing-function: ease-in-out, ease-out;
-    }
-
-    .JesterBox div:target { visibility: visible; }
-
-    .JesterBox div:target:before { background-color: rgba(0, 0, 0, 0.7); }
-
-    .JesterBox div:target img {
-        margin-left: 0px;
-        opacity: 1;
-    }
-
-
 
     .card-box {
         position: relative;
@@ -1079,85 +819,8 @@
     .card-box:hover .card-box-footer {
         background: rgba(0, 0, 0, 0.3);
     }
-    .bg-prevision{
-
-        background-color: #3a373b !important;
-    }
-    .bg-blue {
-        background-color: #00c0ef !important;
-    }
-    .bg-green {
-        background-color: #00a65a !important;
-    }
-    .bg-orange {
-        background-color: #f39c12 !important;
-    }
-    .bg-red {
-        background-color: #d9534f !important;
-    }
-    .bg-base {
-        background-color: #a62f59 !important;
-    }
-    .bg-taux {
-        background-color: #ba7024 !important;
-    }
-    .bg-restant {
-        background-color: #154282 !important;
-    }
-
-
-    .bg-attente-contratualisation-hors-alert {
-
-        background-color: #8ea9db !important;
-    }
-    .bg-attente-contratualisation-avec-alert {
-        background-color: #f4b084 !important;
-    }
-    .bg-en-contratualisation {
-        background-color: #92d050 !important;
-    }
-
-    .bg-en-contratualisation-hort-delais {
-        background-color: #652b92 !important;
-    }
-    .bg-en-execution {
-        background-color: #d7b755 !important;
-    }
-
-    .bg-en-execution-horts-delais {
-        background-color: #d36f2b !important;
-    }
-
-    .bg-acheve-hors-delais {
-        background-color: #00b04f !important;
-    }
-
-    .bg-en-souffrance {
-        background-color: red !important;
-    }
-    .bg-en-avenant{
-        background-color: #ff6c1d !important;
-    }
-    .bg-acheve-delais {
-        background-color: #757171 !important;
-    }
-    .bg-horts-ppm{
-        background-color: #ffb62f !important;
-    }
-
-    .red {
-        color: #fff !important;
-        background-color: #892e6a !important;
-    }
-
-    .red_type_marche {
-        color: #fff !important;
-        background-color: #892e6a !important;
-    }
-
-
-
-
+    
+    
 
 
 

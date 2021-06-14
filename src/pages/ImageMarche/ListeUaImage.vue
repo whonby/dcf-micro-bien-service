@@ -6,7 +6,7 @@
        
 
       
-       <h2 style="text-align:center;">Liste Unité Administrative de la section :<b style="text-decoration:underline;">{{NomSection(this.sectionid)}} </b></h2>
+       <h2 style="text-align:center;">Liste Unité Administrative de la section :<b style="text-decoration:underline;">{{NomSection(this.sectionid)+' '+retourne_id}} </b></h2>
         <div class="container-fluid" style="height: 100em;">
 
  <br>
@@ -15,7 +15,7 @@
                                 <tr  v-for="uabysection in ListeUniteAdminBySection" :key="uabysection.id" style="display: inline-block;">
                                     
                                             <td v-if="RecupUavide(uabysection.id)==1">
-                                                <router-link :to="{ name: 'ListeMarcheUa', params: { id: uabysection.id}}" >
+                                                <router-link :to="{ name: 'ListeMarcheUa', params: { id: uabysection.id, id_section:retourne_id }}" >
                                         <div class="" :title="uabysection.libelle" >
                                                     <!-- <li class="icon-folder-close" style="font-size: 55px !important;margin-right:35px;margin-left:35px;">{{nombremarcheByua(uabysection.id)}}</li> -->
                                                     <img :src="url_nvide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
@@ -29,7 +29,7 @@
                                              </td>
 
                                              <td v-else>
-                                                <router-link :to="{ name: 'ListeMarcheUa', params: { id: uabysection.id}}" >
+                                                <router-link :to="{ name: 'ListeMarcheUa', params: { id: uabysection.id, id_section:retourne_id }}" >
                                         <div class="" :title="uabysection.libelle" >
                                                     <!-- <li class="icon-folder-close" style="font-size: 55px !important;margin-right:35px;margin-left:35px;">{{nombremarcheByua(uabysection.id)}}</li> -->
                                                     <img :src="url_vide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
@@ -43,13 +43,9 @@
                                              </td>   
                                     </tr>
                          </tbody>
-                </table> 
-                 <br>
-                  <br>
-
+                </table>
                        
     </div>
-
 
     </div>
 </template>
@@ -175,6 +171,10 @@
                     }
                     return ""
                 }
+            },
+
+            retourne_id(){
+                return this.sectionid;
             },
 
               RecupUavide(){
