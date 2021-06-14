@@ -6,8 +6,8 @@
     
         </div>
     <table class="table table-bordered table-striped">
-          <td style="width: 15%"></td>
-          <td style="width: 0%; font-weight: bolder; color: #000">
+          <td style="width: 75%"></td>
+          <td style="width: 15%; font-weight: bolder; color: #000">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-success"
@@ -83,7 +83,7 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
+                     <!-- <th style="width:20%;font-size:12px" >Code UA</th> -->
                     <th style="width:50%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
@@ -93,7 +93,7 @@
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td>
+                      <!-- <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td> -->
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
                    
                    <td>

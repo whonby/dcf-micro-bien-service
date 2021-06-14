@@ -7,12 +7,174 @@
     
         </div> 
         <br>
-         <br>
-        <div class="widget-title" style="color:#fff!important;font-size:15px"> <a href="#" data-toggle="collapse"> <span class="icon"><i class="icon-home" ></i></span>
-            <h5 style="text-align: center;font-size:15px">CONTROLE D'EXECUTION : {{idUniteAdministrative(marcheid)}}</h5>
-            </a> </div>
-  
-        <div class="widget-box collapsible">
+        <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <!-- <th style="text-align:center;font-size:20px;color:#000">Execice en cours</th> -->
+          <th style="text-align: center; font-size: 20px; color: #000">
+            Unité administrative
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            TOTAL DOSSIER
+          </th>
+          
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER EN ATTENTE
+          </th>
+
+          
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER DIFFERE
+          </th>
+
+         
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER REJETE
+          </th>
+
+         
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+            
+          >
+            DOSSIER VISE
+          </th>
+<th
+            style="text-align: center; font-size: 20px; color: #000"
+            title="DOSSIER VISE AVEC OBSERVATION"
+          >
+            DOSSIER VISE AVEC OB
+          </th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- <td style="text-align:center;font-size:20px;color:#000">
+{{anneeAmort}}
+            </td> -->
+          <td style="text-align: center; font-size: 20px; color: #000">
+            {{ idUniteAdministrative(marcheid) }}
+          </td>
+          <td>
+            <button
+              class="btn btn"
+              style="
+                font-weight: bolder;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; font-size: 18px">{{
+               OpGlobalUa(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-info tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+              v-on:click="clickBoutonEnAttente()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                
+                ToutOpEnAttente(marcheid)
+              }}</span>
+            </button>
+            
+          </td>
+          <td>
+            <button
+              class="btn btn-warning tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+              v-on:click="clickBoutonDiffere()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpDifere(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+              v-on:click="clickBoutonRejete()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpRejete(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+                
+              "
+              v-on:click="clickBoutonVisé()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpVise(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+                
+              "
+              v-on:click="clickBoutonViséObservation()"
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                  ToutOpViseO(marcheid)
+              }}</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+         <div class="widget-box collapsible">
           <!-- <div class="widget-title" style="background-color: coral;color:#fff !important;font-size:15px"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-sitemap" ></i></span>
             <h5 style="color:#fff !important;font-size:20px">PROCEDURES DE DROIT COMMUN </h5>
             </a> </div> -->
@@ -51,6 +213,8 @@
               <div class="collapse" id="DEMANDEENGAGAMENT" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3"><ListeDemandeEngagementRejete :macheid="marcheid"></ListeDemandeEngagementRejete></div>
                <div class="collapse" id="DEMANDEENGAGAMENT" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4"><ListeDemandeEngagementVise :macheid="marcheid"></ListeDemandeEngagementVise></div>
                 <div class="collapse" id="DEMANDEENGAGAMENT" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5"><ListeDemandeEngagementViseObservation :macheid="marcheid"></ListeDemandeEngagementViseObservation></div>
+           
+           
             <br>
             <!-- DEBUT LIQUIDATION -->
             <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#LIQUIDATION" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
@@ -92,6 +256,24 @@
                 <div class="collapse" id="MANDAT1" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5"><ListeMandatViseObservation :macheid="marcheid"></ListeMandatViseObservation></div>
     
     <br>
+
+    <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px; margin-left:80px"> <a href="#OPSYSTEME" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
+            <h5 style="color:#000!important;font-size:15px;">OP SYSTEME</h5>
+            </a> 
+           
+            <!-- <button   class="btn  btn-info" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonEnAttente()"> <span  style="font-size:20px;"  >En Attente ({{NombreLiquidationEnAttenteEd(marcheid)}})</span></button>
+               <button   class="btn  btn-warning" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonDiffere()"> <span  style="font-size:20px;"  >Différé ({{NombreLiquidationDiffereEd(marcheid)}})</span></button> 
+                 <button   class="btn  btn-danger" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonRejete()"> <span   style="font-size:20px;" >Réjeté ({{NombreLiquidationRejeteEd(marcheid)}})</span></button> 
+                   <button   class="btn  btn-success" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonVisé()"> <span  style="font-size:20px;"  >Visé ({{NombreLiquidationViseEd(marcheid)}})</span></button> 
+                     <button   class="btn  btn-success" style="font-size:15px; margin-left:7%" v-on:click="clickBoutonViséObservation()"> <span  style="font-size:20px;"  >Visé avec Observation ({{NombreLiquidationViseObservationEd(marcheid)}})</span></button>   -->
+            </div>
+             <div class="collapse" id="OPSYSTEME" style="font-size:15px; margin-left:110px" v-if="editMandat.test==0"><ListeOpSysteme :macheid="marcheid"></ListeOpSysteme></div>
+
+             <div class="collapse" id="OPSYSTEME" style="font-size:15px; margin-left:110px" v-if="editMandat.test==2"><ListeOpSystemeDifere :macheid="marcheid"></ListeOpSystemeDifere></div>
+              <div class="collapse" id="OPSYSTEME" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3"><ListeOpSystemeRejete :macheid="marcheid"></ListeOpSystemeRejete></div>
+               <div class="collapse" id="OPSYSTEME" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4"><ListeOpSystemeVise :macheid="marcheid"></ListeOpSystemeVise></div>
+                <div class="collapse" id="OPSYSTEME" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5"><ListeOpSystemeViseObservation :macheid="marcheid"></ListeOpSystemeViseObservation></div>
+    
     </div>
 
              </div>
@@ -114,11 +296,11 @@
             
             </div>
             
-            <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==0"><ListeDemandeEngagementBonCommande :macheid="marcheid"></ListeDemandeEngagementBonCommande></div>
-             <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==2"><ListeDemandeEngagementBonCommandeDifere :macheid="marcheid"></ListeDemandeEngagementBonCommandeDifere></div>
-              <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==3"><ListeDemandeEngagementBonCommandeRejete :macheid="marcheid"></ListeDemandeEngagementBonCommandeRejete></div>
-               <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==4"><ListeDemandeEngagementBonCommandeVise :macheid="marcheid"></ListeDemandeEngagementBonCommandeVise></div>
-                <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==5"><ListeDemandeEngagementBonCommandeViseObservation :macheid="marcheid"></ListeDemandeEngagementBonCommandeViseObservation></div>
+            <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==0" v-on:click="clickBoutonEnAttente2()"><ListeDemandeEngagementBonCommande :macheid="marcheid"></ListeDemandeEngagementBonCommande></div>
+             <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==2" v-on:click="clickBoutonDiffere2()"><ListeDemandeEngagementBonCommandeDifere :macheid="marcheid"></ListeDemandeEngagementBonCommandeDifere></div>
+              <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3" v-on:click="clickBoutonRejete2()"><ListeDemandeEngagementBonCommandeRejete :macheid="marcheid"></ListeDemandeEngagementBonCommandeRejete></div>
+               <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4" v-on:click="clickBoutonVisé2()"><ListeDemandeEngagementBonCommandeVise :macheid="marcheid"></ListeDemandeEngagementBonCommandeVise></div>
+                <div class="collapse" id="DEMANDEENGAGAMENTBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5" v-on:click="clickBoutonViséObservation2()"><ListeDemandeEngagementBonCommandeViseObservation :macheid="marcheid"></ListeDemandeEngagementBonCommandeViseObservation></div>
             <br>
  <div class="widget-title" style="background-color: #fff;color:#000!important;font-size:15px;"> <a href="#LIQUIDATIONBON" data-toggle="collapse"> <span class="icon"><i class=" icon-chevron-down" style="color:#000!important;"></i></span>
             <h5 style="color:#000!important;font-size:15px;">BON DE COMMANDE </h5>
@@ -126,11 +308,11 @@
             
             </div>
             
-             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==0"><ListeBonCommande :macheid="marcheid"></ListeBonCommande></div>
-             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==2"><ListeBonCommandeDifere :macheid="marcheid"></ListeBonCommandeDifere></div>
-              <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==3"><ListeBonCommandeRejete :macheid="marcheid"></ListeBonCommandeRejete></div>
-               <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==4"><ListeBonCommandeVise :macheid="marcheid"></ListeBonCommandeVise></div>
-                <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==5"><ListeBonCommandeViseObservation :macheid="marcheid"></ListeBonCommandeViseObservation></div>
+             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==0" v-on:click="clickBoutonEnAttente2()"><ListeBonCommande :macheid="marcheid"></ListeBonCommande></div>
+             <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==2" v-on:click="clickBoutonDiffere2()"><ListeBonCommandeDifere :macheid="marcheid"></ListeBonCommandeDifere></div>
+              <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3" v-on:click="clickBoutonRejete2()"><ListeBonCommandeRejete :macheid="marcheid"></ListeBonCommandeRejete></div>
+               <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4" v-on:click="clickBoutonVisé2()"><ListeBonCommandeVise :macheid="marcheid"></ListeBonCommandeVise></div>
+                <div class="collapse" id="LIQUIDATIONBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5" v-on:click="clickBoutonViséObservation2()"><ListeBonCommandeViseObservation :macheid="marcheid"></ListeBonCommandeViseObservation></div>
             
              <!-- DEBUT MANDAT -->
              <br>
@@ -141,11 +323,11 @@
             
             </div>
             
-<div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==0"><ListeDesLiquidationEngagementBonCommande :macheid="marcheid"></ListeDesLiquidationEngagementBonCommande></div>
-             <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==2"><ListeDesLiquidationEngagementBonCommandeDifere :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeDifere></div>
-              <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==3"><ListeDesLiquidationEngagementBonCommandeRejete :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeRejete></div>
-               <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==4"><ListeDesLiquidationEngagementBonCommandeVise :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeVise></div>
-                <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==5"><ListeDesLiquidationEngagementBonCommandeViseObservation :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeViseObservation></div>
+<div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test==0" v-on:click="clickBoutonEnAttente2()"><ListeDesLiquidationEngagementBonCommande :macheid="marcheid"></ListeDesLiquidationEngagementBonCommande></div>
+             <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test==2" v-on:click="clickBoutonDiffere2()"><ListeDesLiquidationEngagementBonCommandeDifere :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeDifere></div>
+              <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3" v-on:click="clickBoutonRejete2()"><ListeDesLiquidationEngagementBonCommandeRejete :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeRejete></div>
+               <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4" v-on:click="clickBoutonVisé2()"> <ListeDesLiquidationEngagementBonCommandeVise :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeVise></div>
+                <div class="collapse" id="LIQUIDATIONBON1" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5" v-on:click="clickBoutonViséObservation2()"><ListeDesLiquidationEngagementBonCommandeViseObservation :macheid="marcheid"></ListeDesLiquidationEngagementBonCommandeViseObservation></div>
             
             
             
@@ -159,11 +341,11 @@
             </div>
             
               <!-- <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px"><ListeMandatEngagementBonCommande :macheid="marcheid"></ListeMandatEngagementBonCommande></div> -->
-    <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==0"><ListeMandatEngagementBonCommande :macheid="marcheid"></ListeMandatEngagementBonCommande></div>
-             <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==2"><ListeMandatEngagementBonCommandeDifere :macheid="marcheid"></ListeMandatEngagementBonCommandeDifere></div>
-              <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==3"><ListeMandatEngagementBonCommandeRejete :macheid="marcheid"></ListeMandatEngagementBonCommandeRejete></div>
-               <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==4"><ListeMandatEngagementBonCommandeVise :macheid="marcheid"></ListeMandatEngagementBonCommandeVise></div>
-                <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test1==5"><ListeMandatEngagementBonCommandeViseObservation :macheid="marcheid"></ListeMandatEngagementBonCommandeViseObservation></div>
+    <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==0" v-on:click="clickBoutonEnAttente2()"><ListeMandatEngagementBonCommande :macheid="marcheid"></ListeMandatEngagementBonCommande></div>
+             <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==2" v-on:click="clickBoutonDiffere2()"><ListeMandatEngagementBonCommandeDifere :macheid="marcheid"></ListeMandatEngagementBonCommandeDifere></div>
+              <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==3" v-on:click="clickBoutonRejete2()"><ListeMandatEngagementBonCommandeRejete :macheid="marcheid"></ListeMandatEngagementBonCommandeRejete></div>
+               <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==4" v-on:click="clickBoutonVisé2()"><ListeMandatEngagementBonCommandeVise :macheid="marcheid"></ListeMandatEngagementBonCommandeVise></div>
+                <div class="collapse" id="MANDATBON" style="font-size:15px; margin-left:110px" v-if="editMandat.test==5" v-on:click="clickBoutonViséObservation2()"><ListeMandatEngagementBonCommandeViseObservation :macheid="marcheid"></ListeMandatEngagementBonCommandeViseObservation></div>
             
     <br>
  </div>
@@ -241,6 +423,16 @@ import ListeMandatEngagementBonCommandeRejete from "./DossierEgagementBonCommand
 import ListeMandatEngagementBonCommandeVise from "./DossierEgagementBonCommande/DossierMandat/ListeMandatEngagementBonCommandeVise"
 import ListeMandatEngagementBonCommandeViseObservation from "./DossierEgagementBonCommande/DossierMandat/ListeMandatEngagementBonCommandeViseObservation"
 
+
+
+
+
+import ListeOpSysteme from "./DossierEgagementDirect/DossierOpSysteme/ListeOpSysteme"
+import ListeOpSystemeDifere from "./DossierEgagementDirect/DossierOpSysteme/ListeOpSystemeDifere"
+import ListeOpSystemeRejete from "./DossierEgagementDirect/DossierOpSysteme/ListeOpSystemeRejete"
+import ListeOpSystemeVise from "./DossierEgagementDirect/DossierOpSysteme/ListeOpSystemeVise"
+import ListeOpSystemeViseObservation from "./DossierEgagementDirect/DossierOpSysteme/ListeOpSystemeViseObservation"
+
 //import ListeBonCommande from "./DossierEgagementBonCommande/ListeBonCommande"
 
 //import ListeDesLiquidationEngagementBonCommande from "./DossierEgagementBonCommande/ListeDesLiquidationEngagementBonCommande"
@@ -276,7 +468,12 @@ ListeMandat,
     ListeMandatVise,
     ListeMandatViseObservation,
 
-  
+  ListeOpSysteme,
+ ListeOpSystemeDifere,
+    ListeOpSystemeRejete,
+    ListeOpSystemeVise,
+    ListeOpSystemeViseObservation,
+
    
 // Demande engagement Par bon de commande
 ListeDemandeEngagementBonCommande,
@@ -342,7 +539,7 @@ created() {
          
 },
   computed: {
-   ...mapGetters("bienService", ["gettersBonCommande","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+   ...mapGetters("bienService", ["gettersgestionOrdrePaiement","gettersBonCommande","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -365,7 +562,54 @@ created() {
       // "chapitres",
       // "sections"
     ]),
-     
+      ToutOpEnAttente() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel1 =>qtreel1.ua_id == id  && qtreel1.decision_cf==0).length;
+
+        }
+      };
+    },
+    ToutOpDifere() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel1 =>qtreel1.ua_id == id  && qtreel1.decision_cf==2).length;
+
+        }
+      };
+    },
+      ToutOpRejete() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel1 =>qtreel1.ua_id == id  && qtreel1.decision_cf==3).length;
+
+        }
+      };
+    },
+      ToutOpVise() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel1 =>qtreel1.ua_id == id  && qtreel1.decision_cf==8).length;
+
+        }
+      };
+    },
+      ToutOpViseO() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel1 =>qtreel1.ua_id == id  && qtreel1.decision_cf==9).length;
+
+        }
+      };
+    },
+    OpGlobalUa() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel1 =>qtreel1.ua_id == id).length;
+
+        }
+      };
+    },
      idUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
