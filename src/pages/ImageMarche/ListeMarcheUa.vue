@@ -231,13 +231,14 @@
             },
 
             ListeMarcheByUa(){
-                if(this.alertme!=""){
-                     return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.alertme
-                    && qtreel.exo_id==this.anneeAmort);
-                }else{
-                     return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid
+                return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid
                  && qtreel.exo_id==this.anneeAmort);
-                }
+                // if(this.alertme!=""){
+                //      return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.alertme
+                //     && qtreel.exo_id==this.anneeAmort);
+                // }else{
+                     
+               //}
                
             },
 
