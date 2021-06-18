@@ -2,10 +2,10 @@
 <template>
   <div>
  <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    <button class="btn btn-danger" @click.prevent="pagePrecedent"> Précédente</button>
     
         </div>
-        <h2 style="text-align:center;font-size:25px">VOIR LES AUTRES DEPENSES PAR UNITE ADMINISTRATIVE</h2>
+        <h2 style="text-align:center;font-size:25px"> cc VOIR LES AUTRES DEPENSES PAR UNITE ADMINISTRATIVE</h2>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -16,7 +16,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                            <h5>Listes Unites administratives</h5>
+                <h5>Liste Unites administratives</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -26,6 +26,7 @@
             <div class="widget-content nopadding">
               
               <table class="table table-bordered table-striped">
+
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
