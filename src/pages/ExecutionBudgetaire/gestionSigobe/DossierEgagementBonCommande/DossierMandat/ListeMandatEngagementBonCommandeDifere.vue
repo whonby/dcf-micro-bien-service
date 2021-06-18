@@ -114,17 +114,17 @@ modifierTypeTexteLocal
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Execice</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°demande</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Liquidation</th>
-                 <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">N°Mandat</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Date Mandat</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Type d'engagement</th>
-                    <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Objet de la depense</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Execice</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">N°demande</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">N°Liquidation</th>
+                 <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">N°Mandat</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Date Mandat</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Type d'engagement</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Objet de la depense</th>
                     
-                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Montant Engagé</th>
-                                       <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff">Decision CF</th>
-                     <th style="font-size:14px;font-weight:bold;background-color: #228B22;color:#fff" colspan="2">Action</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Montant Engagé</th>
+                                       <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Decision CF</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>

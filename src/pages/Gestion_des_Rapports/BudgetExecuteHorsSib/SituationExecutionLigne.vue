@@ -151,7 +151,7 @@
 
 
             <table class="table table-bordered">
-              <thead style="background-color: 	#FFA500 !important;" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+              <thead style="background-color: #FC762F !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                 <tr>
                   <th
                     style="
@@ -159,7 +159,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: 	#FFA500 !important;
+                      background-color: #FC762F !important;
                     "
                   >
                     LIGNE BUDGETAIRE
@@ -169,7 +169,8 @@
                       font-size: 14px;
                       font-weight: bold;
                       text-align: center;
-                      background-color: 	#FFA500 !important;
+                      color: #000;
+                      background-color: #FC762F !important;
                     "
                   >
                     Budget Actuel
@@ -180,7 +181,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: 	#FFA500 !important;
+                      background-color: #FC762F !important;
                     "
                   >
                     Montant Exécuté
@@ -191,7 +192,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: 	#FFA500 !important;
+                      background-color: #FC762F !important;
                     "
                   >
                     Montant Provisoire
@@ -202,7 +203,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: 	#FFA500 !important;
+                      background-color: #FC762F !important;
                     "
                   >
                     Taux En Exécution (%)
@@ -213,7 +214,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: 	#FFA500 !important;
+                      background-color: #FC762F !important;
                     "
                   >
                     Disponible

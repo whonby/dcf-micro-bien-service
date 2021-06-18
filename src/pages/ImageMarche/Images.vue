@@ -110,73 +110,64 @@
 
                             </div>
                         </div>
+                        
+
+             <h2 style="text-align:center; text-decoration:underline;">Ministère(s)</h2>
+                <br>
 
 
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Année</th>
-                                <th>UA</th>
-                                <th>Numero Marche</th>
-                                <th>Objet du marché</th>
-                                <th>Type de marché</th>
-                                <th>Infrastructure</th>
-                                <th>Regions</th>
-                                <!--                                <th>Statut</th>-->
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="item in listeMarchStatueExecuteAcheve" :key="'MARCHE012'+item.id">
-                                <td>{{item.exo_id}}</td>
-                                <td>{{nomUniteAdmin(item.unite_administrative_id)}}</td>
-                                <td>{{item.numero_marche}}</td>
-                                <td>{{item.objet}}</td>
-                                <td>{{item.type_marche.libelle}}</td>
-                                <td>{{selectionnerInfrastructure(item.infrastructure_id)}}</td>
-                                <td>{{selectionLocationGeographique(item.localisation_geographie_id)}}</td>
-                                <!--                                <td></td>-->
-                                <td>
-                                    <router-link :to="{ name: 'ListeImageMarche', params: { id: item.id }}"
-                                                 class="btn btn-primary" title="Liste des images">
-                                        voir image({{nombreImageParMarche(item.id)}})
-                                    </router-link>
-                                </td>
-                            </tr>
-                            </tbody>
+    <div>
+         <div style="width:200px;height:1000px;margin-right:15px;" id="menu">
+                <ul  v-for="marchebyua in sections" :key="marchebyua.id">
+                    <router-link :to="{ name: 'ListeUaImage', params: { id: marchebyua.id}}" :title="marchebyua.nom_section">
+                    <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
+                
+                    <p :title="marchebyua.nom_section" style="font-weight:bold;">{{marchebyua.nom_section.substr(0, 30)+'...'}}</p>  
+  
+                     <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
+                </router-link> 
+                </ul>      
+            </div>
+                <table class="" style="margin-left: 200px;">
+                    <tbody>
+                        <tr  v-for="sect in sections" :key="sect.id" style="display: inline-block;">
+                           
+                            <td v-if="test(sect.id)==1">
+                                <router-link :to="{ name: 'ListeUaImage', params: { id: sect.id}}">
+                                   <div class="" :title="sect.nom_section">
+                                        <img src="folder_nvide.jpg" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
+                                        <!-- <li class="icon-folder-close" style="font-size: 55px !important; margin-left:35px;"></li> -->
+                                        <br>
+                                        <p :title="sect.nom_section" style="font-size:20px; margin-left: 30px;"> <b>{{sect.nom_section.substr(0, 25)+'...'}} </b> </p> 
+                                        <br>
+                                        <br>
+                                     </div>             
+                               </router-link> 
+                            </td>          
 
-                        </table>
-
+                            <td v-else>
+                                <router-link :to="{ name: 'ListeUaImage', params: { id: sect.id}}">
+                                   <div class="" :title="sect.nom_section">
+                                        <img src="folder_vide.png" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
+                                        <!-- <li class="icon-folder-close" style="font-size: 55px !important; margin-left:35px;"></li> -->
+                                        <br>
+                                        <p :title="sect.nom_section" style="font-size:20px; margin-left: 30px;"> <b>{{sect.nom_section.substr(0, 25)+'...'}} </b> </p> 
+                                        <br>
+                                        <br>
+                                     </div>             
+                               </router-link>
+                            </td>                 
+                        </tr>
+                    </tbody>
+                </table>
                     </div>
-
-
+                    </div>
                 </div>
-                <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
-
                 </div>
 
 
             </div>
         </div>
-
-
-
-        <fab v-if="affiche_boutton_filtre"
-             :position="position"
-             :bg-color="bgColor"
-             :actions="fabActions"
-             main-icon="format_indent_decrease"
-             @cache="filter"
-
-        ></fab>
-        <fab v-if="!affiche_boutton_filtre"
-             :position="position"
-             :bg-color="bgColor"
-             :actions="fabActions"
-             main-icon="ballot"
-             @cache="filter"
-
-        ></fab>
 
 
 
@@ -194,7 +185,8 @@
     import {noDCfNoAdmin,dcf} from "../../Repositories/Auth"
     import {formatageSomme} from '../../Repositories/Repository'
     import {  ModelListSelect } from 'vue-search-select'
-    import 'vue-search-select/dist/VueSearchSelect.css'
+    import 'vue-search-select/dist/VueSearchSelect.css';
+    import Menu from "../../assets/menu.png";
     // import DraggableDiv from '../../components/DraggableDiv/DraggableDiv'
     export default {
         name: "Images",
@@ -204,7 +196,13 @@
         },
         data() {
             return{
+                // url_test_plein:'https://img.pngio.com/free-folder-icon-for-windows-236555-download-folder-icon-for-png-folder-windows-7-200_200.jpg',
+                // url_test_vide:'data:image/jpeg;base64,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',
+
+                // url:'https://static.vecteezy.com/system/resources/thumbnails/000/439/792/small/Basic_Ui__28178_29.jpg',
+                // url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJi8L-m3hgnw8xbMY93159m81pP9bvjWLINQ&usqp=CAU',
                 isLoading: false,
+                menu:Menu,
                 fullPage: false,
                 search:"",
                 controlleur_fin:"",
@@ -248,17 +246,38 @@
                 "getterBudgeCharge",
                 "decomptefactures"
             ]),
-            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-            ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
-                'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure","exercices_budgetaires","sections",
-                "type_Unite_admins",
-                "plans_programmes",
-                "natures_sections",
-                "grandes_natures"]),
+            ...mapGetters("Utilisateurs",
+             ["getterUtilisateur",
+             "getterAffectation",
+             "getterUniteAdministrativeByUser"]),
+           
+           ...mapGetters('parametreGenerauxAdministratif',
+            ['structures_geographiques',
+            'localisations_geographiques',
+            "getterLocalisationGeoAll",
+            "getterInfrastrucure",
+            "exercices_budgetaires",
+            "sections",
+            "type_Unite_admins",
+            "plans_programmes",
+            "natures_sections",
+            "grandes_natures"]),
 
-            ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
-                "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants","getterImageMarche"]),
-            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
+            ...mapGetters("bienService",
+             ['marches',
+             "engagements",
+             "getMandatPersonnaliserVise",
+             "getterImageMarche","acteEffetFinanciers",
+             "getActeEffetFinancierPersonnaliser45",
+             "typeMarches",
+             "avenants",
+             "getterImageMarche"]),
+
+            ...mapGetters("Utilisateurs",
+             ["getterUtilisateur",
+             "getterRoles"]),
+
+
             listeCF(){
                 return this.getterUtilisateur.filter(item=>{
                     if(item.user_role){
@@ -270,6 +289,20 @@
             },
             noDCfNoAdmin:noDCfNoAdmin,
             dcf:dcf,
+
+              test(){
+                  return id=>{
+                    if(id!="" && id!=null){
+                         const qtreel= this.uniteAdministratives.find(item=>item.section_id==id);
+                         if(qtreel){
+                        return "1"
+                             }
+                              return "0"
+                    }
+                }
+
+           },
+
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
                 return this.localisations_geographiques.filter(item=>{
@@ -959,364 +992,21 @@
         width: 1200px;
         margin: 0 -530px;
         height: 550px;
-
     }
-    .tailgrand{
-        width: 50%;
-        margin: 0 -25%;
-    }
-    .tailAvenant{
-        width: 75%;
-        margin: 0 -40%;
-    }
-    .avatar1 {
-
-        width: 50%;
-        height: 50%;
-
-    }
+     #menu {
+        float: left;
+        background: white;
+        overflow: scroll;
+        
+        }
 
 
 
+   
 
-    .center_image {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-        height: 250px;
-    }
+    
 
-
-
-    .main-body {
-        padding: 15px;
-    }
-    .card {
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-    }
-
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: 0 solid rgba(0,0,0,.125);
-        border-radius: .25rem;
-    }
-
-    .card-body {
-        flex: 1 1 auto;
-        min-height: 1px;
-        padding: 1rem;
-    }
-
-    .gutters-sm {
-        margin-right: -8px;
-        margin-left: -8px;
-    }
-
-    .gutters-sm>.col, .gutters-sm>[class*=col-] {
-        padding-right: 8px;
-        padding-left: 8px;
-    }
-    .mb-3, .my-3 {
-        margin-bottom: 1rem!important;
-    }
-
-    .bg-gray-300 {
-        background-color: #e2e8f0;
-    }
-    .h-100 {
-        height: 100%!important;
-    }
-    .shadow-none {
-        box-shadow: none!important;
-    }
-
-
-    .JesterBox div {
-        visibility: hidden;
-        position: fixed;
-        top: 5%;
-        right: 5%;
-        bottom: 5%;
-        left: 5%;
-        z-index: 75;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .JesterBox div:before {
-        content: '';
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 74;
-        background-color: rgba(0, 0, 0, 0);
-        transition: all 0.5s ease-out;
-    }
-
-    .JesterBox div img {
-        position: relative;
-        z-index: 77;
-        max-width: 100%;
-        max-height: 100%;
-        margin-left: -9999px;
-        opacity: 0;
-        transition-property: all, opacity;
-        transition-duration: 0.5s, 0.2s;
-        transition-timing-function: ease-in-out, ease-out;
-    }
-
-    .JesterBox div:target { visibility: visible; }
-
-    .JesterBox div:target:before { background-color: rgba(0, 0, 0, 0.7); }
-
-    .JesterBox div:target img {
-        margin-left: 0px;
-        opacity: 1;
-    }
-
-
-
-    .card-box {
-        position: relative;
-        color: #fff;
-        padding: 10px 10px 30px;
-        margin: 10px 0px;
-        height: 55px !important;
-        font-size: 13px !important;
-    }
-    .card-box:hover {
-        text-decoration: none;
-        color: #f1f1f1;
-    }
-
-    .card-box .inner {
-        padding: 5px 10px 0 10px;
-        font-size: 5em !important;
-    }
-    .card-box h3 {
-        font-size: 12px;
-        font-weight: bold;
-        margin: 0 0 8px 0;
-        white-space: nowrap;
-
-        text-align: left;
-    }
-    .card-box p {
-        font-size: 14px;
-    }
-    .card-box .icon {
-        position: absolute;
-        top: auto;
-        bottom: 3px;
-        right: 3px;
-        z-index: 0;
-        font-size: 50px;
-        color: rgba(0, 0, 0, 0.15);
-    }
-    .card-box .icon3 {
-        position: absolute;
-        top: auto;
-        bottom: 35px;
-        right: 3px;
-        z-index: 0;
-        font-size: 13px;
-        color: #f2f2f2;
-    }
-
-    .card-box .icon2 {
-        position: absolute;
-        top: auto;
-        bottom: 5px;
-        right: 3px;
-        z-index: 0;
-        font-size: 10px;
-        color: #f2f2f2;
-    }
-
-    .card-box .card-box-footer {
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
-        text-align: center;
-        padding: 3px 0;
-        color: rgba(255, 255, 255, 0.8);
-        background: rgba(0, 0, 0, 0.1);
-        width: 100%;
-        text-decoration: none;
-    }
-    .card-box:hover .card-box-footer {
-        background: rgba(0, 0, 0, 0.3);
-    }
-    .bg-prevision{
-
-        background-color: #3a373b !important;
-    }
-    .bg-blue {
-        background-color: #00c0ef !important;
-    }
-    .bg-green {
-        background-color: #00a65a !important;
-    }
-    .bg-orange {
-        background-color: #f39c12 !important;
-    }
-    .bg-red {
-        background-color: #d9534f !important;
-    }
-    .bg-base {
-        background-color: #a62f59 !important;
-    }
-    .bg-taux {
-        background-color: #ba7024 !important;
-    }
-    .bg-restant {
-        background-color: #154282 !important;
-    }
-
-
-    .bg-attente-contratualisation-hors-alert {
-
-        background-color: #8ea9db !important;
-    }
-    .bg-attente-contratualisation-avec-alert {
-        background-color: #f4b084 !important;
-    }
-    .bg-en-contratualisation {
-        background-color: #92d050 !important;
-    }
-
-    .bg-en-contratualisation-hort-delais {
-        background-color: #652b92 !important;
-    }
-    .bg-en-execution {
-        background-color: #d7b755 !important;
-    }
-
-    .bg-en-execution-horts-delais {
-        background-color: #d36f2b !important;
-    }
-
-    .bg-acheve-hors-delais {
-        background-color: #00b04f !important;
-    }
-
-    .bg-en-souffrance {
-        background-color: red !important;
-    }
-    .bg-en-avenant{
-        background-color: #ff6c1d !important;
-    }
-    .bg-acheve-delais {
-        background-color: #757171 !important;
-    }
-    .bg-horts-ppm{
-        background-color: #ffb62f !important;
-    }
-
-    .red {
-        color: #fff !important;
-        background-color: #892e6a !important;
-    }
-
-    .red_type_marche {
-        color: #fff !important;
-        background-color: #892e6a !important;
-    }
-
-
-
-
-
-
-
-
-
-
-    .card {
-        background-color: #fff;
-        border-radius: 10px;
-        border: none;
-        position: relative;
-        margin-bottom: 30px;
-        box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
-    }
-    .l-bg-cherry {
-        background: linear-gradient(to right, #493240, #f09) !important;
-        color: #fff;
-    }
-
-    .l-bg-blue-dark {
-        background: linear-gradient(to right, #373b44, #4286f4) !important;
-        color: #fff;
-    }
-
-    .l-bg-green-dark {
-        background: linear-gradient(to right, #0a504a, #38ef7d) !important;
-        color: #fff;
-    }
-
-    .l-bg-orange-dark {
-        background: linear-gradient(to right, #a86008, #ffba56) !important;
-        color: #fff;
-    }
-
-    .card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
-        font-size: 110px;
-    }
-
-    .card .card-statistic-3 .card-icon {
-        text-align: center;
-        line-height: 50px;
-        margin-left: 15px;
-        color: #000;
-        position: absolute;
-        right: -5px;
-        top: 20px;
-        opacity: 0.1;
-    }
-
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
-
-    .l-bg-green {
-        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
-        color: #fff;
-    }
-
-    .l-bg-orange {
-        background: linear-gradient(to right, #f9900e, #ffba56) !important;
-        color: #fff;
-    }
-
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
-
-
-
-
-
-    #footer {
-        position:relative;
-        height:20px;
-        width:100%;
-        background:transparent;
-
-    }
+    
 
 
 

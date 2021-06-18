@@ -57,7 +57,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'VoirOrdrePaiementSousBudget', params: { id: type }}"
+                      <router-link :to="{ name: 'principalExecutionSousBudget', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
@@ -193,7 +193,7 @@ created() {
 arrayExerciceDecompteBienService() {
       //return (id) => {
         
-        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.sous_budget_id == this.marcheid);
+        let objet = this.gettersgestionOrdrePaiement.filter(item=>item.unite_administrative_id == this.marcheid);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

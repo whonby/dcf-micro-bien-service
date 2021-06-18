@@ -6,8 +6,8 @@
     
         </div>
     <table class="table table-bordered table-striped">
-          <td style="width: 15%"></td>
-          <td style="width: 0%; font-weight: bolder; color: #000">
+          <td style="width: 75%"></td>
+          <td style="width: 15%; font-weight: bolder; color: #000">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-success"
@@ -18,7 +18,7 @@
               </button>
             </div>
           </td>
-          <td style="width: 0px">
+          <!-- <td style="width: 0px">
             <div align="right" style="cursor: pointer">
               <button
                 class="btn btn-danger"
@@ -43,8 +43,8 @@
                 >
               </button>
             </div>
-          </td>
-          <td style="width: 25%"></td>
+          </td> -->
+          <!-- <td style="width: 25%"></td> -->
         </table>
           
     <div class="container-fluid">
@@ -83,7 +83,7 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
+                     <!-- <th style="width:20%;font-size:12px" >Code UA</th> -->
                     <th style="width:50%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
                     <th style="width:10%;" colspan="" >Action</th>
@@ -93,11 +93,11 @@
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in arrayExerciceDecompteBienService" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td>
+                      <!-- <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type)) || 'Non renseigné'}}</td> -->
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'VoirOrdrePaiementDesRegie', params: { id: type }}"
+                      <router-link :to="{ name: 'PagePrincipalExecutionHorsSigRegie', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Ordre Paiement</i></span>
                    </router-link> 
@@ -299,7 +299,7 @@ idUaBudgetEclate() {
                 window.history.back()
             },
     ajouterOpSysteme() {
-      this.$router.push({ name: "AjoutOrdrePaiement" });
+      this.$router.push({ name: "RecupererToutAjoutOP" });
     },
     ajouterOpAnnulation() {
       this.$router.push({ name: "AjouterOrdrePaiementAnnulation" });

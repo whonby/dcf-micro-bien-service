@@ -8,7 +8,7 @@
 
             <div class="widget-box">
 
-                <div class="widget-content">
+              <div class="widget-content">
                     <div class="widget-content nopadding">
                         <div class="row-fluid" v-if="detail_marche">
                             <div class="span4">
@@ -79,12 +79,12 @@
             </div>
         <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
             <div class="widget-title">
-            <ul class="nav nav-tabs">
-               <li class="active"><a data-toggle="tab" href="#lot0000">Lots</a></li>
-             <li class=""><a data-toggle="tab" href="#tab0074">Attribution</a></li>
-             <li class=""><a data-toggle="tab" href="#tab0021403">Bailleur</a></li>
-        </ul>
-          </div>
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#lot0000">Lots</a></li>
+                <li class=""><a data-toggle="tab" href="#tab0074">Attribution</a></li>
+                <li class=""><a data-toggle="tab" href="#tab0021403">Bailleur</a></li>
+              </ul>
+           </div>
     <div class="widget-content tab-content">
       
       <div id="lot0000" class="tab-pane active">
@@ -104,12 +104,12 @@
                 </div> -->
                 <componentBailleur :macheid="detail_marche.id"></componentBailleur>
                 </div>
-    </div>
+          </div>
 
         </template>
 
         <template v-else>
-<h4 style="text-align:center;" v-if="affcicheEtapeProcedure(10000000,['PSC-SC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</h4>
+            <h4 style="text-align:center;" v-if="affcicheEtapeProcedure(10000000,['PSC-SC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure (30000000,['PSC-AC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(60000000, ['PSL'], detail_marche.id)">Procédure Simplifiée à compétition Limitée(PSL)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">Procédure Simplifiée à compétition Ouverte(PSO)</h4>
@@ -228,7 +228,7 @@
 
 
                     <template v-else-if="affcicheEtapeProcedure (30000000,['PSC-AC'],detail_marche.id)">
-<div class="widget-box">
+              <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab01145">l'offre</a></li>
@@ -1480,7 +1480,7 @@
 
       </div> -->
         </div>
-
+      
 
 </div>
 
@@ -1604,6 +1604,11 @@ created() {
    this.detail_marche = this.getPersonnaliserMarchehorSib.find(
        idmarche => idmarche.id == this.$route.params.id
    )
+   console.log("silvato")
+   console.log(this.affMarche)
+   console.log(this.detail_marche)
+   console.log(this.marcheid)
+   console.log("bayyy")
 
 },
         computed: {
@@ -1637,6 +1642,9 @@ created() {
       // "chapitres",
       // "sections"
     ]),
+    affMarche(){
+        return this.getPersonnaliserMarchehorSib.find(tem => tem.parent_id==564)
+    },
      CodeExempte() {
       return id => {
         if (id != null && id != "") {

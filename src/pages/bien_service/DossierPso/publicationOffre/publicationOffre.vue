@@ -59,6 +59,7 @@
                 <table class="table table-bordered table-striped" v-if="macheid" >
                      <thead>
                              <tr>
+                                    
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
                                         <th> Numéro autorisation</th>
@@ -73,13 +74,14 @@
                                         <!-- <th>Numéro d'autorisation</th> -->
                                         <th>Date d'autorisation </th>
                                         <th>Heure limites</th>
-                                       
+                                        <th>Nombre de lot</th>
                                         <th>Action</th>
                                     </tr>
                     </thead>
                     <tbody>
                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeAppelOffre(macheid)"
                                         :key="appelOffre.id">
+                                       
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.ref_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
@@ -103,7 +105,7 @@
                                             {{formaterDate(appelOffre.date_numero_autorisation) || 'Non renseigné'}}</td>
                                              <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.heure || 'Non renseigné'}}</td>
-                                        
+                                         <td > {{NmbreDeLot || "1"}}</td>
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
@@ -579,7 +581,10 @@ date_facture_proformat:"",
         }
     },
     props:["macheid"],
-    created(){},
+    created(){
+        console.log(this.NmbreDeLot)
+        console.log("coool")
+    },
 
        computed: {
 
@@ -636,7 +641,18 @@ listeAppelOffre() {
 //     ret 
 //     return this.procedurePassations.filter(item => item.type_procedure_id==8);
 // },
+NmbreDeLot(id){
+    if(id !='' && id != null){
 
+        return this.getLotMarche.length;
+    }
+    return 0;
+},
+ getLotMarche() {
+      return this.getMarchePersonnaliser.filter(
+        (item) => item.parent_id == this.macheid
+      );
+    },
 
 affichierObjetMarche() {
       return id => {

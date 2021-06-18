@@ -228,7 +228,7 @@ return objJson.id
 navigateTobudgethorssib(){
         this.activate(102)
         this.$router.push({
-          name: 'TableauBordGeneralBugdetHs'
+          name: 'TableauBordBudgetEclate'
         })
       },
 

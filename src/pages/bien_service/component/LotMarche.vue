@@ -162,6 +162,15 @@
                 </div>
               </div>
             </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Sous Lot</label>
+                <select name="" id="">
+                  <option value="">Oui</option>
+                  <option value="">Non</option>
+                </select>
+              </div>
+            </td>
             <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Objet du lot</label>

@@ -69,7 +69,7 @@ export const typeTypeProcedures = state => state.typeTypeProcedures
 export const procedurePassations = state => state.procedurePassations
 export const typeMarches = state => state.typeMarches
 export const modePassations = state => state.modePassations
-export const marches = state => state.marches.sort((a, b) => (a.numero_lot > b.numero_lot) ? 1 : -1)
+export const marches = state => state.marches
 export const engagements = state => state.engagements
 export const motifDecisions = state => state.motifDecisions
 export const documentProcedures = state => state.documentProcedures

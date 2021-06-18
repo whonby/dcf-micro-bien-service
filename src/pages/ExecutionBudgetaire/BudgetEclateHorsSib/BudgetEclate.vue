@@ -91,18 +91,18 @@
                 <thead>
                  <tr>
                    <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
-                     <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Unité Administrative</th>
+                     <th style="width:10%;font-size:12px" >Code UA</th>
+                    <th style="width:75%;font-size:12px" >Unité Administrative</th>
                     <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
-                    <th style="width:10%;" colspan="" >Action</th>
+                    <th style="width:11%;" colspan="" >Action</th>
                    
                   </tr>
                 </thead>
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBudgetEclate" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                      <td style="font-size:12px;color:#000;text-align:center;font-weight:bold;">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
+                   <td style="font-size:14px;color:#000;font-weight:bold;">{{conversionMajiscule(idUniteAdministrative(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
                    
                    <td v-if="type[0].sous_budget_id==0">
                       <router-link :to="{ name: 'listeDesBudgetVentille', params: { id: type[0].id }}"
@@ -232,7 +232,12 @@ export default {
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
-
+conversionMajiscule() {
+      return (libelle) => {
+        if (!libelle) return null;
+        return libelle.toLocaleUpperCase();
+      };
+    },
     idUniteAdministrative() {
       return id => {
         if (id != null && id != "") {

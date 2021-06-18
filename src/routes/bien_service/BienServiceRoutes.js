@@ -1,7 +1,12 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
+<<<<<<< HEAD
 //import pre_selectionnerEntreprise from '../../pages/bien_service/component/DossierPre_selection/pre_selectionnerEntreprise.vue'
 VoirModaliteExecution
+=======
+
+
+>>>>>>> b7bcb4173f5a752dd18997e866ec01a88c0fb851
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -113,6 +118,8 @@ import PagePrincipalMarche from '../../pages/gestionMarche/PagePrincipalMarche.v
 import PagePrincipalMarcheSigobe from '../../pages/gestionMarche/PagePrincipalMarcheSigobe.vue';
 import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
+import AjouterDemandeEngagement12 from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement12.vue"
+import FormulaireAjoutSigobe from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/FormulaireAjoutSigobe.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
 import AjouterMantdatement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterMantdatement.vue"
 import AjouterOrdrePaiement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterOrdrePaiement.vue"
@@ -135,6 +142,7 @@ import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePa
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
+import GroupeOpParAnnee from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/GroupeOpParAnnee.vue"
 import ListeDesSousBudgetOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeDesSousBudgetOp.vue"
 import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
 import VoirOrdrePaiementSousBudget from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiementSousBudget.vue"
@@ -144,11 +152,14 @@ import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gest
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
 import listeDesUaDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/listeDesUaDesRegie.vue"
 import VoirOrdrePaiementDesRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/VoirOrdrePaiementDesRegie.vue"
+import PagePrincipalExecutionHorsSigRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/gestionHorsSigobeRegie/PagePrincipalExecutionHorsSigRegie.vue"
+
 import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
-import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
+import RecupererToutAjoutOP from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/RecupererToutAjoutOP.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
-
+import formulaireAjoutOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOp.vue"
+import formulaireAjoutOpAnterieur from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/formulaireAjoutOpAnterieur.vue"
 import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
 import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
@@ -162,13 +173,190 @@ import listeDesProcedureDerogatoire from "../../pages/ExecutionBudgetaire/gestio
 import listeProcedureDroitCommun from "../../pages/ExecutionBudgetaire/gestionSigobe/listeProcedureDroitCommun.vue"
 import ListeProcedureTypeDepense from "../../pages/ExecutionBudgetaire/gestionSigobe/ListeProcedureTypeDepense.vue"
 import VoirModaliteExecution from "../../pages/ExecutionBudgetaire/gestionSigobe/VoirModaliteExecution1.vue"
+import PagePrincipalExecutionHorsSig from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/PagePrincipalExecutionHorsSig.vue"
+import principalExecutionSousBudget from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DocOpSousBudget/principalExecutionSousBudget.vue"
+
+import TableauOpProvisoire from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpProvisoire/TableauOpProvisoire.vue"
+import TableauOpProvisoireDiffere from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpProvisoire/TableauOpProvisoireDiffere.vue"
+import TableauOpProvisoireRejete from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpProvisoire/TableauOpProvisoireRejete.vue"
+import TableauOpProvisoireVise from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpProvisoire/TableauOpProvisoireVise.vue"
+import TableauOpProvisoireViseO from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpProvisoire/TableauOpProvisoireViseO.vue"
+
+
+
+
+
+import TableauOpAnnulation from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpAnnulation/TableauOpAnnulation.vue"
+import TableauOpAnnulationDiffere from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpAnnulation/TableauOpAnnulationDiffere.vue"
+import TableauOpAnnulationRejete from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpAnnulation/TableauOpAnnulationRejete.vue"
+import TableauOpAnnulationVise from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpAnnulation/TableauOpAnnulationVise.vue"
+import TableauOpAnnulationViseO from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpAnnulation/TableauOpAnnulationViseO.vue"
+
+
+
+
+import TableauOpDefinitif from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDefinitif/TableauOpDefinitive.vue"
+import TableauOpDefinitifDiffere from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveDiffere.vue"
+import TableauOpDefinitifRejete from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveRejete.vue"
+import TableauOpDefinitifVise from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveVise.vue"
+import TableauOpDefinitifViseO from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveViseO.vue"
+
+
+
+
+
+import TableauOpDirect from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDirect/TableauOpDirect.vue"
+import TableauOpDirectDiffere from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDirect/TableauOpDirectDiffere.vue"
+import TableauOpDirectRejete from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDirect/TableauOpDirectRejete.vue"
+import TableauOpDirectVise from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDirect/TableauOpDirectVise.vue"
+import TableauOpDirectViseO from "../../pages/ExecutionBudgetaire/gestionHorsSigobe/DossierOpDirect/TableauOpDirectViseO.vue"
+
+
+
+
+
+
 import Detailexecution from "../../pages/ExecutionBudgetaire/gestionSigobe/Detailexecution.vue"
 import ImageParMinistere from "../../pages/ImageMarche/ImageParMinistere.vue"
+import ListeUaImage from "../../pages/ImageMarche/ListeUaImage.vue"
+import ListeMarcheUa from "../../pages/ImageMarche/ListeMarcheUa.vue" 
+import ListeIMageExercice from "../../pages/ImageMarche/ListeIMageExercice.vue"
+import ListeImageMois from "../../pages/ImageMarche/ListeImageMois.vue"
 import DossierImageUa from "../../pages/ImageMarche/DossierImageUa.vue"
 import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche.vue"
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
-const BienServiceRoutes = [
+const BienServiceRoutes = [ 
+
+
+    {
+        path: "/TableauOpDirectViseO/:id",
+        name: "TableauOpDirectViseO",
+        component: TableauOpDirectViseO
+    },
+    {
+        path: "/TableauOpDirectVise/:id",
+        name: "TableauOpDirectVise",
+        component: TableauOpDirectVise
+    },
+    {
+        path: "/TableauOpDirectRejete/:id",
+        name: "TableauOpDirectRejete",
+        component: TableauOpDirectRejete
+    },
+    {
+        path: "/TableauOpDirectDiffere/:id",
+        name: "TableauOpDirectDiffere",
+        component: TableauOpDirectDiffere
+    },
+    {
+        path: "/TableauOpDirect/:id",
+        name: "TableauOpDirect",
+        component: TableauOpDirect
+    },
+
+
+
+    {
+        path: "/TableauOpDefinitifViseO/:id",
+        name: "TableauOpDefinitifViseO",
+        component: TableauOpDefinitifViseO
+    },
+    {
+        path: "/TableauOpDefinitifVise/:id",
+        name: "TableauOpDefinitifVise",
+        component: TableauOpDefinitifVise
+    },
+    {
+        path: "/TableauOpDefinitifRejete/:id",
+        name: "TableauOpDefinitifRejete",
+        component: TableauOpDefinitifRejete
+    },
+    {
+        path: "/TableauOpDefinitifDiffere/:id",
+        name: "TableauOpDefinitifDiffere",
+        component: TableauOpDefinitifDiffere
+    },
+    {
+        path: "/TableauOpDefinitif/:id",
+        name: "TableauOpDefinitif",
+        component: TableauOpDefinitif
+    },
+
+
+
+
+
+    {
+        path: "/TableauOpAnnulationViseO/:id",
+        name: "TableauOpAnnulationViseO",
+        component: TableauOpAnnulationViseO
+    },
+    {
+        path: "/TableauOpAnnulationVise/:id",
+        name: "TableauOpAnnulationVise",
+        component: TableauOpAnnulationVise
+    },
+    {
+        path: "/TableauOpAnnulationRejete/:id",
+        name: "TableauOpAnnulationRejete",
+        component: TableauOpAnnulationRejete
+    },
+    {
+        path: "/TableauOpAnnulationDiffere/:id",
+        name: "TableauOpAnnulationDiffere",
+        component: TableauOpAnnulationDiffere
+    },
+    {
+        path: "/TableauOpAnnulation/:id",
+        name: "TableauOpAnnulation",
+        component: TableauOpAnnulation
+    },
+
+
+
+
+
+
+
+
+
+
+    {
+        path: "/TableauOpProvisoireViseO/:id",
+        name: "TableauOpProvisoireViseO",
+        component: TableauOpProvisoireViseO
+    },
+    {
+        path: "/TableauOpProvisoireVise/:id",
+        name: "TableauOpProvisoireVise",
+        component: TableauOpProvisoireVise
+    },
+    {
+        path: "/TableauOpProvisoireRejete/:id",
+        name: "TableauOpProvisoireRejete",
+        component: TableauOpProvisoireRejete
+    },
+    {
+        path: "/TableauOpProvisoireDiffere/:id",
+        name: "TableauOpProvisoireDiffere",
+        component: TableauOpProvisoireDiffere
+    },
+    {
+        path: "/TableauOpProvisoire/:id",
+        name: "TableauOpProvisoire",
+        component: TableauOpProvisoire
+    },
+    {
+        path: "/formulaireAjoutOp",
+        name: "formulaireAjoutOp",
+        component: formulaireAjoutOp
+    },
+    {
+        path: "/Ajout-OrdrePaiement-Anterieur",
+        name: "formulaireAjoutOpAnterieur",
+        component: formulaireAjoutOpAnterieur
+    },
     {
         path: "/ListeProcedureTypeDepense",
         name: "ListeProcedureTypeDepense",
@@ -188,6 +376,16 @@ const BienServiceRoutes = [
         path: "/listeProcedureDroitCommun",
         name: "listeProcedureDroitCommun",
         component: listeProcedureDroitCommun
+    },
+    {
+        path: "/PagePrincipalExecutionHorsSig/:id",
+        name: "PagePrincipalExecutionHorsSig",
+        component: PagePrincipalExecutionHorsSig
+    },
+    {
+        path: "/principalExecutionSousBudget/:id",
+        name: "principalExecutionSousBudget",
+        component: principalExecutionSousBudget
     },
     {
         path: "/VoirModaliteExecution/:id",
@@ -214,6 +412,12 @@ const BienServiceRoutes = [
         path: "/GestionAutresDepense/:id",
         name: "GestionAutresDepense",
         component: GestionAutresDepense
+    },
+    
+    {
+        path: "/PagePrincipalExecutionHorsSigRegie/:id",
+        name: "PagePrincipalExecutionHorsSigRegie",
+        component: PagePrincipalExecutionHorsSigRegie
     },
     {
         path: "/VoirOrdrePaiementDesRegie/:id",
@@ -252,7 +456,12 @@ const BienServiceRoutes = [
         component: VoirOrdrePaiement
     },
     {
-        path: "/ListeOpParUa",
+        path: "/GroupeOpParAnnee",
+        name: "GroupeOpParAnnee",
+        component: GroupeOpParAnnee
+    },
+    {
+        path: "/ListeOpParUa/:id",
         name: "ListeOpParUa",
         component: ListeOpParUa
     },
@@ -260,6 +469,30 @@ const BienServiceRoutes = [
         path: "/dossier-image-ministere",
         name: "ImageParMinistere",
         component: ImageParMinistere
+    },
+
+    {
+        path: "/ListeUaImage/:id",
+        name: "ListeUaImage",
+        component: ListeUaImage
+    },
+
+    {
+        path: "/ListeIMageExercice/:id",
+        name: "ListeIMageExercice",
+        component: ListeIMageExercice
+    },
+
+    {
+        path: "/ListeImageMois/:id",
+        name: "ListeImageMois",
+        component: ListeImageMois
+    },
+
+    {
+        path: "/ListeMarcheUa/:id",
+        name: "ListeMarcheUa",
+        component: ListeMarcheUa
     },
     {
         path: "/dossier-image-ua",
@@ -347,9 +580,9 @@ const BienServiceRoutes = [
     },
     //ajout ordre de paiement 
     {
-        path: "/AjoutOrdrePaiementRegie",
-        name: "AjoutOrdrePaiementRegie",
-        component: AjoutOrdrePaiementRegie
+        path: "/RecupererToutAjoutOP",
+        name: "RecupererToutAjoutOP",
+        component: RecupererToutAjoutOP
     },
     //ajout ordre de paiement annulation
     {
@@ -453,6 +686,16 @@ const BienServiceRoutes = [
         path: "/executionBudgetaire/:id",
         name: "executionBudgetaire",
         component: executionBudgetaire
+    },
+    {
+        path: "/AjouterDemandeEngagement12",
+        name: "AjouterDemandeEngagement12",
+        component: AjouterDemandeEngagement12
+    },
+    {
+        path: "/FormulaireAjoutSigobe",
+        name: "FormulaireAjoutSigobe",
+        component: FormulaireAjoutSigobe
     },
     {
         path: "/AjouterDemandeEngagement",

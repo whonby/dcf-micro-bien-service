@@ -118,7 +118,7 @@
            <li @click.prevent="navigateurOrdrePaiement" :class="{active: active_el ==1200}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>
-                  <span>CONTROLE DE L'EXECUTION</span>
+                  <span>CONTROLE EXECUTION</span>
 
               </a>
           </li>
@@ -283,7 +283,7 @@ return objJson.id
         this.activate(1200)
         this.$router.push({
         //  name:'TableauBordOp'
-          name:'ListeOpParUa'
+          name:'TableauBordExecutionHorsSigobe'
         })
       },
        navigateToRapport(){
@@ -310,7 +310,7 @@ navigateToGestionMarche(){
           this.activate(780)
           this.$router.push({
              // name: 'TableauBordDuBudgetEclate'
-              name: 'BudgetEclate'
+              name: 'TableauBordBudgetEclate'
           })
       },
       navigateTableBordBord(){

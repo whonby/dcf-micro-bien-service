@@ -204,7 +204,13 @@ created() {
        idmarche => idmarche.id == this.$route.params.id
    )
    console.log(this.detail_marche);
+   console.log("bonnn")
+   
  
+},
+mounted(){
+  console.log("silvato")
+   console.log(this.AffichageMarche.parent_id)
 },
         computed: {
 
@@ -278,7 +284,9 @@ return "Appel d'Offre Ouvert(AON ou AOI)"
 
 },
 
-
+AffichageMarche(){
+  return this.marches.find(itm =>itm.parent_id)
+},
 
 listeAvisAnoBailleur(){
        return id =>{
