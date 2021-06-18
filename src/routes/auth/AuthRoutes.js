@@ -110,6 +110,7 @@ const AuthRoutes = [
         name:"liste_affectation",
         component:listeAutorisation
     },
+    
     {
         path:"/affectation-groupe",
         name:"affectation",

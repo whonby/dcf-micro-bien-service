@@ -1139,7 +1139,7 @@ export const getterInfoTableauBordFiltre = state => state.infoFiltreTableauBord
 
 export const getterEntrepriseSousTraitance = state => state.entreprise_soustraitant
 
-
+export const gettersEntreprisePreselectionner = state => state.Entreprise_preselctionner
 
 
 // export const GroupeEntreprise = (state, getters) => {

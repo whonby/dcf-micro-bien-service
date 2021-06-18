@@ -1,6 +1,6 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
-
+//import pre_selectionnerEntreprise from '../../pages/bien_service/component/DossierPre_selection/pre_selectionnerEntreprise.vue'
 VoirModaliteExecution
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
@@ -174,6 +174,11 @@ const BienServiceRoutes = [
         name: "ListeProcedureTypeDepense",
         component: ListeProcedureTypeDepense
     },
+    // {
+    //     path:"/pre-selection",
+    //     name:"pre_selectionnerEntreprise",
+    //     component:pre_selectionnerEntreprise
+    // },
     {
         path: "/listeDesProcedureDerogatoire",
         name: "listeDesProcedureDerogatoire",
