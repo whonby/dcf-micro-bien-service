@@ -975,21 +975,21 @@
                                 <li class=""><a data-toggle="tab" href="#tabLettreAMI">Lettre d'invitation CF && Mandaté</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabMandateAMI">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionAMI">Reception</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
-                              <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
-                                <!-- <li class=""><a data-toggle="tab" href="#tabAnalyseAMI"> Analyse </a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab7884">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabAnalyseAMI"> Analyse </a></li>
                                 <li class=""><a data-toggle="tab" href="#tabReserveAMI">Reserves CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabPVJugementAMI">PV Jugement</a></li>
-                               <li class=""><a data-toggle="tab" href="#tabAttribuAMI">Pré-selection</a></li> -->
+                               <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li>
+                                <li class=" con-file "><router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}" data-toggle="tab" href="#" v-if="afficherButtonDPEnfonctionAMI">Continuer l'Etape DP</router-link></li>
 
-
-                                 <div class="span3">
+                                 <!-- <div class="span3">
                                    <router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}"
                                              class="btn btn-primary" >
-                                    <span class=""><i class="icon-file"></i>detail DP </span>
+                                    <span class="btn " ><i class="icon-file"></i>Continuer l'Etape DP </span>
                                 </router-link>
-                                    </div>                    
+                                    </div>                     -->
                                 <!-- <li class=""><a data-toggle="tab" href="#tabBailleurAMI">bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabARNPAMI">ANRMP</a></li> -->
 
@@ -1068,23 +1068,23 @@
 
 
 
-                <!-- <div id="tabPVAMI" class="tab-pane">
-                      <div align="right">
+                <div id="tabPVAMI" class="tab-pane">
+                      <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
-                </div> -->
+                </div>
 
-                 <!-- <div id="tab7884" class="tab-pane">
+                 <div id="tab7884" class="tab-pane">
 
 
-                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
-                </div> -->
+                   <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
+                </div>
                   <div id="tabAnalyseAMI" class="tab-pane">
 
                     <JugementSansFin :macheid="detail_marche.id"></JugementSansFin>
@@ -1615,7 +1615,7 @@ created() {
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
-               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur"
+               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur","gettersEntreprisePreselectionner"
               ]),
  ...mapGetters("horSib", ["gettersMarcheHorsib","getPersonnaliserMarchehorSib"]),
 
@@ -1642,6 +1642,13 @@ created() {
       // "chapitres",
       // "sections"
     ]),
+
+
+
+    // affichage conditionnelle
+    afficherButtonDPEnfonctionAMI(){
+      return this.gettersEntreprisePreselectionner.find(item=>item.entreprise_id!=null);
+    },
     affMarche(){
         return this.getPersonnaliserMarchehorSib.find(tem => tem.parent_id==564)
     },

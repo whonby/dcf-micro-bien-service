@@ -6,7 +6,7 @@
                     <tr>
                       
                         
-                        <th>Entreprise   {{attribue}} </th>
+                        <th>Entreprise  </th>
                        <div class="span5" align="right" >
 
                  <button data-toggle="modal" class="btn btn-primary" v-show="attribue.length >0"  @click.prevent="affectationLocal">Valider</button></div>
@@ -36,11 +36,15 @@
                              
                              
                                 <div v-if="verificationTacheExiste(appelOffre.id)" >
+                                  	<td style="text-align:cent">
+									     <input type="checkbox" v-model="attribue" :value="appelOffre.id"  checked  disabled="disabled" />
+									     </td>
 
-                                             <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.id">
+                                             <!-- <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.id">
                                              <img slot="extra" class="image" src="../../../../assets/004.png">
                                              <p style="color: red"></p>
-                                                </p-check>
+                                                </p-check> -->
+
                     
                      <!-- <span>{{item.name || 'Non renseigné'}} </span>
                      <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" checked disabled  ../../assets/002.png />
@@ -48,11 +52,14 @@
                       <label for="jack"></label> -->
                         </div>
 
-                        <div v-else>
-                            <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.id">
+                          <div v-else>
+                          	<td style="text-align:cent" >
+								         	<input type="checkbox" v-model="attribue"  :value="appelOffre.id"/>
+									       </td>
+                            <!-- <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.id">
                             <img slot="extra" class="image" src="../../../../assets/001.png">
                             <p style=""></p>
-                             </p-check>
+                             </p-check> -->
                         <!-- <span>{{item.name || 'Non renseigné'}} </span>  
                          <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" />
                       
@@ -85,17 +92,18 @@ export default {
     attribue:[],
 
     formAffectation:{
-
+     entreprise_id:""
     }
         }
         
     },
     created(){
 
+
     },
     computed:{
    ...mapGetters("bienService",['gettersEntreprisePreselectionner',
-   'gettersPersonnaliserRapportJugement','gettersCotationPersonnaliser']),
+   'gettersPersonnaliserRapportJugement','gettersCotationPersonnaliser','gettersEntreprisePreselectionner']),
  ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
    
   listeCotation () {
@@ -107,11 +115,13 @@ export default {
              }
             },
 
+           
+
             verificationTacheExiste(){
 						return id => {
 						if(id){
-						let objet = this.gettersCotationPersonnaliser.find(item =>{
-						if(item.marche_id == id){
+						let objet = this.gettersEntreprisePreselectionner.find(item =>{
+						if(item.entreprise_id == id){
 						return item
 						}
 						})
@@ -134,33 +144,34 @@ export default {
         }
       };
     },
-         afficherCandidatSelectionnerAtrribue() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersPersonnaliserRapportJugement.find(qtreel => qtreel.id == id);
+    //      afficherCandidatSelectionnerAtrribue() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.gettersPersonnaliserRapportJugement.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.attribue;
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.attribue;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
     },
     methods:{
-    ...mapActions("",[""]),
+    ...mapActions("bienService",["ajouterEntreSelectionner"]),
 
  affectationLocal(){
 
           	this.formAffectation={
-						groupe_id:this.recuperationIDGroupe,
+						marche_id:this.macheid,
 						attribue:this.attribue
                         }
-                        this.ajouterAffectationMultiple(this.formAffectation)
-                         this.getAffectationGroupeUser();
+                        this.ajouterEntreSelectionner(this.formAffectation)
+                        // this.getAffectationGroupeUser();
                         this.formAffectation={
-                            user_id:"",
-                              groupe_id:""
+                            // user_id:"",
+                            entreprise_id:""
+                            //   groupe_id:""
                         }
       }
     }

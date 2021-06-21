@@ -568,6 +568,23 @@ export function ajouterDocumentProcedure({ commit }, formData) {
   }).catch(error => console.log(error))
 }
 
+///
+export function ajouterEntreSelectionner({ commit }, formData) {
+  asyncLoading(axios.post('/selectionEnt', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_ENTREPRISE_SELECTIONNER', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
 // action pour modifier motif de decision
 
 

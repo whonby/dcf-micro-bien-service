@@ -1,12 +1,6 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
-<<<<<<< HEAD
-//import pre_selectionnerEntreprise from '../../pages/bien_service/component/DossierPre_selection/pre_selectionnerEntreprise.vue'
-VoirModaliteExecution
-=======
 
-
->>>>>>> b7bcb4173f5a752dd18997e866ec01a88c0fb851
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";

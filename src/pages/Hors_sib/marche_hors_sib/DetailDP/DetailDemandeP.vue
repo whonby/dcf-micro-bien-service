@@ -77,12 +77,12 @@
              <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab78965">ETAPE TECHNIQUE</a>
+                        <a data-toggle="tab" href="#tab78965">ETAPE DP</a>
                       </li>
                        
-                      <li>
+                      <!-- <li>
                         <a data-toggle="tab" href="#tab45632">ETAPE FINANCIERE</a>
-                      </li>
+                      </li> -->
                     
                       <!-- <li>
                         <a data-toggle="tab" href="#tab12365">Autres Information</a>
@@ -267,9 +267,9 @@
                      </template>
                     </div>
 
-                     <div id="tab45632" class="tab-pane">
+                     <!-- <div id="tab45632" class="tab-pane">
                      <h2>mp</h2>
-                    </div>
+                    </div> -->
 
                     </div>
                </div>

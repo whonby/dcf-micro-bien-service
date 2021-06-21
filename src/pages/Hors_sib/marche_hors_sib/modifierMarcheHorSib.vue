@@ -11,12 +11,21 @@
             <div class="control-group">
               <label class="control-label">Année Budgétaire </label>
               <div class="controls">
-                <input
+                <select v-model="editMarcheHorSib.exo_id" class="span4">
+                  <option
+                    v-for="plans in exercices_budgetaires"
+                    :key="plans.id"
+                    :value="plans.exo_id"
+                  >
+                    {{ plans.annee }}
+                  </option>
+                </select>
+                <!-- <input
                   type="text"
                   :value="anneeBugetaireModifier"
                   class="span4"
                   readonly
-                />
+                /> -->
               </div>
             </div>
           </td>
@@ -517,6 +526,8 @@ import { admin, dcf, noDCfNoAdmin } from "../../../Repositories/Auth";
 //import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
   name: "type facture",
+
+
 
   components: {
     // bailleurAjouter,
