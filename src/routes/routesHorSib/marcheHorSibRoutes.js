@@ -60,7 +60,16 @@ import ListeMarcheHorsSibParSousBudget from "../../pages/Hors_sib/biens_service/
 
 import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
 import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
+import DetailDemandeP from "../../pages/Hors_sib/marche_hors_sib/DetailDP/DetailDemandeP.vue"
+
 const marcheHorSibRoutes =[
+
+
+    {
+        path:"/detail-dp/:id",
+        name:"DetailDemandeP",
+        component:DetailDemandeP
+    },
     {
         path: "/ListeMarcheHorsSibParSousBudget/:id",
         name: "ListeMarcheHorsSibParSousBudget",

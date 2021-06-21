@@ -128,6 +128,7 @@ budgetEclateImporter:[],
     ProcedureTypeDepenses: [],
     BonCommandes: [],
     BailleurDmdEngagements: [],
+    Entreprise_preselctionner:[]
 }
 
 export default defaultState;

@@ -242,7 +242,7 @@ export default {
       if (qtereel) {
         return qtereel.fichier;
       }
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+      return "https://personnel.agosoftprojet.com/savephotoprofil/1_!1595119277.jpg "
         }
       };
     },
@@ -283,7 +283,7 @@ return objJson.id
         this.activate(1200)
         this.$router.push({
         //  name:'TableauBordOp'
-          name:'TableauBordExecutionHorsSigobe'
+          name:'PresentationTableauBordControleExecution'
         })
       },
        navigateToRapport(){
@@ -310,7 +310,7 @@ navigateToGestionMarche(){
           this.activate(780)
           this.$router.push({
              // name: 'TableauBordDuBudgetEclate'
-              name: 'TableauBordBudgetEclate'
+              name: 'presentationTableau'
           })
       },
       navigateTableBordBord(){
