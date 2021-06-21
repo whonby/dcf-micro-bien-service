@@ -1,7 +1,7 @@
 
 <template>
   <div>
-      <div  align="left" style="cursor:pointer;">
+        <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
     
         </div> 
@@ -279,26 +279,94 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+    <div align="right">
+
+      <button class="btn btn-info" @click="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
+     <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+ <label
+                            >Section
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="sections"
+                            v-model="sections_id"
+                            option-value="id"
+                            option-text="nom_section"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                         
+                </td>
+                    <td>
+ <label
+                            >Nature depense
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="grandes_natures"
+                            v-model="grandes_nature_id"
+                            option-value="id"
+                            option-text="libelle"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                         
+                </td>
+                    <td>
+                          <label
+                            >Unité Administrative
+                            <code style="color: red; font-size: 16px">*</code>
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="listeDesUa"
+                            v-model="uniteAdministrative_id"
+                            option-value="id"
+                            option-text="libelle"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                          
+                        </td>
+
+             
+            </tr>
+        </table>
+        <div id="printMe3">
+          <h1 style="text-align:center;text-decoration: underline overline #000;">LISTES DES OP PROVISOIRES EN ATTENTES</h1>
+        
     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                  <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Execice</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">N°Ordre paiement</th>
-                   <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Objet ordre de paiement </th>
-                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Montant Engagé(FCFA)</th>
-                    <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Détail</th>
+                  <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Execice</th>
+                       <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Ua</th>
+                       <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Grande Nature</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">N°Ordre paiement</th>
+                   <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Objet ordre de paiement </th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Montant Engagé(FCFA)</th>
+                    <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Détail</th>
                    
-                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000">Decision CF</th>
-                     <th style="font-size:14px;font-weight:bold;background-color: #73aff6;color:#000" colspan="2">Action</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000">Decision CF</th>
+                     <th style="font-size:14px;font-weight:bold;background-color: #e6b637;color:#000" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                    <tr
                     class="odd gradeX"
-                    v-for="type in partition(listeordrepaiementProvisoire, size)[page]"
+                    v-for="type in partition(ListeDEsEntreprise, size)[page]"
                     :key="type.id"
                   >
-                    <td @dblclick="afficherModalModifierTitre(type.id)"
+                  <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
                         font-weight: bold;
@@ -307,8 +375,14 @@
                     >
                       {{ type.exercice || "Non renseigné" }}
                     </td>
+                   
                     
-
+                     <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
+                      {{ libelleUa(type.unite_administrative_id) || "Non renseigné" }}
+                    </td>
+<td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
+                      {{ NatureDepense(type.grand_nature_id) || "Non renseigné" }}
+                    </td>
                     <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
@@ -323,12 +397,7 @@
                     <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
                       {{ type.odjet_autre_depense || "Non renseigné" }}
                     </td>
-                    <!-- <td style="font-size: 14px; font-weight: bold" @dblclick="afficherModalModifierTitre(type.id)">
-                      {{
-                        libelleUa(type.unite_administrative_id) ||
-                        "Non renseigné"
-                      }}
-                    </td> -->
+                   
                     <td @dblclick="afficherModalModifierTitre(type.id)"
                       style="
                         font-size: 14px;
@@ -449,15 +518,28 @@
                       </button>
                     </td>
                   </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                                        <td></td>
+                    <td style="font-size:14px;font-weight:bold;color:#000;text-align:center">TOTAL</td>
+                    <td style="font-size:14px;font-weight:bold;color:#000;text-align:center">{{formatageSomme(parseFloat(MontantOpProvisoireVise))}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                  </tr>
                 </tbody>
               </table>
+              </div>
                <div class="pagination alternate">
             <ul>
               <li :class="{ disabled: page == 0 }">
                 <a @click.prevent="precedent()" href="#">Précedent</a>
               </li>
               <li
-                v-for="(titre, index) in partition(listeordrepaiementProvisoire, size)
+                v-for="(titre, index) in partition(ListeDEsEntreprise, size)
                   .length"
                 :key="index"
                 :class="{ active: active_el == index }"
@@ -469,7 +551,7 @@
               <li
                 :class="{
                   disabled:
-                    page == partition(listeordrepaiementProvisoire, size).length - 1,
+                    page == partition(ListeDEsEntreprise, size).length - 1,
                 }"
               >
                 <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -481,19 +563,21 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+import { formatageSommeSansFCFA,formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
+
 export default {
   components: {
-    //ModelListSelect,
+    ModelListSelect,
   },
   name: "typetext",
   data() {
     return {
       page: 0,
-      size: 20,
+      size: 10,
       active_el: 0,
       fabActions: [
         {
@@ -509,14 +593,14 @@ export default {
       },
      
       formData: {
-        code: "",
-        libelle: "",
+        
       },
       EditDetache: {},
       typeop_id: 0,
-      NumeroOp: 0,
+    
       uniteAdministrative_id: 0,
-
+      sections_id:0,
+grandes_nature_id:0,
       editMandat: {},
       EditAnulation: {},
       editDecisionFinal: {},
@@ -530,6 +614,9 @@ created() {
     );
   },
   computed: {
+    admin:admin,
+      dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("parametreGenerauxAdministratif", [
       "taux",
       "sections",
@@ -659,6 +746,115 @@ created() {
       "structuresDecision",
       "plans_Decision",
     ]),
+    NatureDepense() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.grandes_natures.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+      ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.filtre_unite_admin;
+
+      //retourne la section selectionner
+
+      if (this.sections_id != 0 && this.grandes_nature_id == 0 && this.uniteAdministrative_id == 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.section_id == vM.sections_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      if (this.sections_id == 0 && this.grandes_nature_id != 0 && this.uniteAdministrative_id == 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.grand_nature_id == vM.grandes_nature_id) {
+            return item;
+          }
+        });
+          return objet;
+      }
+   if (this.sections_id == 0 && this.grandes_nature_id == 0 && this.uniteAdministrative_id != 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.unite_administrative_id == vM.uniteAdministrative_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+       if (this.sections_id != 0 && this.grandes_nature_id != 0 && this.uniteAdministrative_id == 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (
+            item.section_id == vM.sections_id &&
+            item.grand_nature_id == vM.grandes_nature_id
+          ) {
+            return item;
+          }
+        });
+        return objet;
+      }
+       if (this.grandes_nature_id != 0 && this.uniteAdministrative_id != 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (
+            
+            item.grand_nature_id == vM.grandes_nature_id && item.unite_administrative_id == vM.uniteAdministrative_id 
+          ) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      return this.filtre_unite_admin;
+    },
+     listeDesUa() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+        this.uniteAdministratives.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect;
+      }
+
+      return this.uniteAdministratives;
+    },
+MontantOpProvisoireVise() {
+       return this.ListeDEsEntreprise.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+  
+    },
+    
+ filtre_unite_admin() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.listeordrepaiementProvisoire.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.unite_administrative_id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect;
+      }
+      return this.listeordrepaiementProvisoire;
+    },
+
+
 
    listeOpdiffere() {
       return (id) => {
@@ -759,6 +955,16 @@ created() {
           return 0;
         }
       };
+    },
+    anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
     },
     recupererIdServiceCF() {
       return (id) => {
@@ -908,20 +1114,11 @@ created() {
     },
     listeordrepaiementProvisoire() {
       return this.gettersgestionOrdrePaiement.filter(
-        (qtreel) => qtreel.diff_op == null  && qtreel.type_ordre_paiement==2 && qtreel.decision_cf == 0 && qtreel.exercice==this.anneeAmort
+        (qtreel) => qtreel.diff_op == null  &&  qtreel.type_ordre_paiement==2 && qtreel.decision_cf == 0  && qtreel.exercice==this.anneeAmort
       );
     },
-    anneeAmort() {
-      const norme = this.exercices_budgetaires.find(
-        (normeEquipe) => normeEquipe.encours == 1
-      );
-
-      if (norme) {
-        return norme.annee;
-      }
-      return 0;
-    },
-      
+    
+     
       
   },
   methods: {
@@ -932,9 +1129,11 @@ created() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
-     afficherModalListePersonnel(){
+ 
+    afficherModalListePersonnel(){
                 window.history.back()
             },
+              
 afficherModalModifierTitre(id) {
 
       this.$router.push({
@@ -1053,7 +1252,7 @@ afficherModalModifierTitre(id) {
       );
     },
     formatageSommeSansFCFA: formatageSommeSansFCFA,
-   
+   formatageSomme:formatageSomme,
     //afiicher modal ajouter
   
     // fonction pour vider l'input ajouter
@@ -1076,6 +1275,9 @@ afficherModalModifierTitre(id) {
     ExporterEnExel() {
       this.$refs.excel.click();
     },
+     async genererEnPdf(){
+  await this.$htmlToPaper('printMe3');
+},
   },
 };
 </script>
