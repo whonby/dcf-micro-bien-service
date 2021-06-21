@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer;">
+         <div  align="left" style="cursor:pointer; margin-left:5px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
@@ -9,7 +9,18 @@
 
         <div class="container-fluid" style="height: 100em;">
 
- <br>
+  <div>
+        <div style="width:200px;height:800px;margin-right:15px;" id="menu">
+                    <ul  v-for="marchebyua in ListeMarcheUA" :key="marchebyua.id">
+                            <li>
+                                <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
+                                <!-- <input  v-text="marchebyua.id"  v-model="recup_id_ua"> -->
+                                    <p :title="marchebyua.objet">{{marchebyua.objet.substr(0, 30)+'...'}}</p>
+        <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
+                            </li>
+
+                        </ul>      
+            </div>
              <table class="card" style="margin-left: 200px;">
                      <tbody>
                                 <tr style="display: inline-block;">
@@ -83,6 +94,7 @@
                                              
                                                 </router-link> 
                                             </td>
+                                            
 
                                              <td v-if="Juin!=0">
                                                 <router-link :to="{ name: 'ListeImageMarche', params: { id: this.marcheid}}">
@@ -192,8 +204,7 @@
                          </tbody>
                 </table> 
 
-                                 <br>
-                                 <br>
+        </div>
 
                        
     </div>
@@ -366,6 +377,14 @@
       };
     },
     //fin
+
+
+     ListeMarcheUA(){
+                //  return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uniteAd_id
+                //  && qtreel.exo_id==this.anneeAmort);
+
+                  return this.marches.filter(qtreel =>qtreel.exo_id==this.anneeAmort);
+             },
 
 
     //pour janvier

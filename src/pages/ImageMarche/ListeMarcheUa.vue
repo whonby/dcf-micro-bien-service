@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer;">
+         <div  align="left" style="cursor:pointer; margin-left:5px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
@@ -15,10 +15,10 @@
       <div style="width:200px;height:800px;margin-right:15px;" id="menu">
   <ul  v-for="marchebyua in ListeUniteAdminBySectionmenu" :key="marchebyua.id">
       
-      <li @click.prevent="alertme(marchebyua.id)">
+      <li >
 
       <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
-        <input  v-text="marchebyua.id"  v-model="recup_id_ua">
+        <!-- <input  v-text="marchebyua.id"  v-model="recup_id_ua"> -->
         <p :title="marchebyua.libelle">{{marchebyua.libelle.substr(0, 30)+'...'}}</p>  
   
   <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
@@ -36,7 +36,7 @@
                                     <td>
                                        
                                         <div v-if="test(marchebyua.id)==1" :title="marchebyua.objet">
-                                             <router-link :to="{ name: 'ListeIMageExercice', params: { id: marchebyua.id}}">
+                                             <router-link :to="{ name: 'ListeIMageExercice', params: { id: marchebyua.id, id_ua:retourne_id}}">
                                             <!-- <li class="icon-folder-close" style="font-size: 55px !important;margin-right:35px;margin-left:35px;"></li> -->
                                             <img :src="url_nvide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
                                             <br>
@@ -192,7 +192,7 @@
             },
 
             retourne_id(){
-                return this.section_menu_id;
+                return this.uaid;
             },
 
             alertme(){
