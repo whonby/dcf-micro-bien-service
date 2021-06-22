@@ -1,9 +1,8 @@
 
 <template>
   <div>
-      <h1 style="text-align:center">TABLEAU DE BORD DU BUDGET HORS SIGOBE</h1>
-      <br/>
-       <br/>
+      <!-- <h1 style="text-align:center">TABLEAU DE BORD DU BUDGET HORS SIGOBE</h1> -->
+    
         <table class="table table-bordered table-striped">
             <tr>
                 <!-- <td>

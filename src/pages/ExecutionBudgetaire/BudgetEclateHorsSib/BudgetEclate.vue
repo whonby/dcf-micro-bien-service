@@ -25,7 +25,7 @@
           >sousBudget
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" v-if="!noDCfNoAdmin">
             <tr>
               <td>
                 <!-- <div align="right">
@@ -99,7 +99,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBudgetEclate" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in filtre_unite_admin" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
                       <td style="font-size:12px;color:#000;text-align:center;font-weight:bold;">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
                    <td style="font-size:14px;color:#000;font-weight:bold;">{{conversionMajiscule(idUniteAdministrative(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
@@ -118,7 +118,7 @@
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
                     <!-- <td>
-                      <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">
+                      <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0][0].id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -130,6 +130,31 @@
               </table>
              
             </div>
+               <div class="pagination alternate">
+            <ul>
+              <li :class="{ disabled: page == 0 }">
+                <a @click.prevent="precedent()" href="#">Précedent</a>
+              </li>
+              <li
+                v-for="(titre, index) in partition(filtre_unite_admin, size)
+                  .length"
+                :key="index"
+                :class="{ active: active_el == index }"
+              >
+                <a @click.prevent="getDataPaginate(index)" href="#">{{
+                  index + 1
+                }}</a>
+              </li>
+              <li
+                :class="{
+                  disabled:
+                    page == partition(filtre_unite_admin, size).length - 1,
+                }"
+              >
+                <a @click.prevent="suivant()" href="#">Suivant</a>
+              </li>
+            </ul>
+          </div>
           </div>
         </div>
       </div>
@@ -147,7 +172,8 @@
 
 import { mapGetters, mapActions } from "vuex";
 
-// import {admin,dcf,cf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
+import {noDCfNoAdmin} from "@/Repositories/Auth"
+import { partition } from "@/Repositories/Repository";
   // import {  ModelListSelect } from 'vue-search-select'
   //   import 'vue-search-select/dist/VueSearchSelect.css'
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -156,6 +182,9 @@ export default {
   name:'typetext',
   data() {
     return {
+       page: 0,
+      size: 10,
+      active_el: 0,
       fabActions: [
         {
           name: "cache",
@@ -182,6 +211,7 @@ export default {
   },
 
   computed: {
+    noDCfNoAdmin:noDCfNoAdmin,
         ...mapGetters("uniteadministrative", [
       "directions",
       "servicesua",
@@ -231,7 +261,23 @@ export default {
  ...mapGetters('personnelUA', ['all_acteur_depense']),
  
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-   
+    filtre_unite_admin() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.groupeUniteAdministrativeBudgetEclate.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item[0].uniteadministrative_id
+          );
+          if (val != undefined) {
+            colect.push(item[0]);
+            return item[0];
+          }
+        });
+        return colect;
+      }
+      return this.groupeUniteAdministrativeBudgetEclate;
+    },
 conversionMajiscule() {
       return (libelle) => {
         if (!libelle) return null;
@@ -284,6 +330,21 @@ conversionMajiscule() {
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
+    partition: partition,
+
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
+
     ModificationBudgetaire(){
                 this.$router.push({ name: 'ModificationBudgetaire' })
             },

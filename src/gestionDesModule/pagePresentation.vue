@@ -693,7 +693,7 @@ afficherModule1() {
       if (qtereel) {
         return qtereel.fichier;
       }
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+      return "http://https://personnel.agosoftprojet.com/savephotoprofil/1_!1595119277.jpg "
         }
       };
     },
