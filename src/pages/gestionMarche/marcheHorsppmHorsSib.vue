@@ -12,6 +12,7 @@ reference_marche
         v-model="libelle_typemarche"
         option-value="libelle"
         option-text="libelle"
+
       >
       </model-list-select>
     </div>
@@ -1705,6 +1706,19 @@ export default {
 
           if (qtereel) {
             return qtereel.code_type_marche;
+          }
+          return 0;
+        }
+      };
+    },
+
+      afficheExoBudgetaire() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.exercices_budgetaires.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.annee;
           }
           return 0;
         }

@@ -976,13 +976,17 @@
                                 <!-- <li class=""><a data-toggle="tab" href="#tabMandateAMI">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionAMI">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li>
+                                
                                <li class=""><a data-toggle="tab" href="#tab7884">Ouverture</a></li>
+                               <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabAnalyseAMI"> Analyse </a></li>
                                 <li class=""><a data-toggle="tab" href="#tabReserveAMI">Reserves CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabPVJugementAMI">PV Jugement</a></li>
+                                 <li class=""><a data-toggle="tab" href="#DMPAMI" title="demande ANO/DMP">D.DMP</a></li>
+                                   <li class=""><a data-toggle="tab" href="#DMPBAILLEURAMI" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                                 <li class=""><a data-toggle="tab" href="#tabARNPAMI">ANRMP</a></li>
                                <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li>
-                                <li class=" con-file "><router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}" data-toggle="tab" href="#" v-if="afficherButtonDPEnfonctionAMI">Continuer l'Etape DP</router-link></li>
+                                <li class=" con-file "><router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}" data-toggle="tab" href="#" v-if="afficherButtonDPEnfonctionAMI">Etape DP</router-link></li>
 
                                  <!-- <div class="span3">
                                    <router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}"
@@ -1107,6 +1111,18 @@
 <!--                </div>-->
 <!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
                    <PvJugement  :macheid="detail_marche.id"></PvJugement>
+                </div>
+
+                 <div id="DMPAMI" class="tab-pane">
+
+                    <AnoDMP :macheid="detail_marche.id"></AnoDMP>
+<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
+
+                </div>
+                <div id="DMPBAILLEURAMI" class="tab-pane">
+
+                    <AnoBailleur :macheid="detail_marche.id"></AnoBailleur>
+
                 </div>
                  <!-- <div id="tabAttribuAMI" class="tab-pane">
 
