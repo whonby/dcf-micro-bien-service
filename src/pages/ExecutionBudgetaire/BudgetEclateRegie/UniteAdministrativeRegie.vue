@@ -25,7 +25,7 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" v-if="!noDCfNoAdmin">
             <tr>
             <td>
                 <!-- <div align="right">
@@ -125,7 +125,7 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex";
-
+import {noDCfNoAdmin} from "@/Repositories/Auth"
 // import {admin,dcf,cf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
   // import {  ModelListSelect } from 'vue-search-select'
   //   import 'vue-search-select/dist/VueSearchSelect.css'
@@ -161,6 +161,7 @@ export default {
   },
 
   computed: {
+    noDCfNoAdmin:noDCfNoAdmin,
         ...mapGetters("uniteadministrative", [
       "directions",
       "servicesua",

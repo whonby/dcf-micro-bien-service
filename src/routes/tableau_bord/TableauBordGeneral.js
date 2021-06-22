@@ -76,7 +76,31 @@ import TableauOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/
 
 import presentationTableau from "../../pages/TableauBord/TableauBordHorsSigobe/presentationTableau.vue"
 import PresentationTableauBordControleExecution from "../../pages/TableauBord/TableauBordHorsSigobe/PresentationTableauBordControleExecution.vue"
+import DetailTableauBordProvisoire from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordProvisoire"
+import DetailTableauBordAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordAnnulation"
+import DetailTableauBordDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDefinitif"
+import DetailTableauBordDirect from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDirect"
 const TableauBordGeneral =[
+    {
+        path: "/DetailTableauBordAnnulation/:id",
+        name: "DetailTableauBordAnnulation",
+        component: DetailTableauBordAnnulation
+    },
+    {
+        path: "/DetailTableauBordDefinitif/:id",
+        name: "DetailTableauBordDefinitif",
+        component: DetailTableauBordDefinitif
+    },
+    {
+        path: "/DetailTableauBordDirect/:id",
+        name: "DetailTableauBordDirect",
+        component: DetailTableauBordDirect
+    },
+    {
+        path: "/DetailTableauBordProvisoire/:id",
+        name: "DetailTableauBordProvisoire",
+        component: DetailTableauBordProvisoire
+    },
     {
         path: "/PresentationTableauBordControleExecution",
         name: "PresentationTableauBordControleExecution",

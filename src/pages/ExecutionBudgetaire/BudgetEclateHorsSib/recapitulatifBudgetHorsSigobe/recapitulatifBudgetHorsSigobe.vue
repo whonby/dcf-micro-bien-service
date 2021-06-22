@@ -103,11 +103,11 @@
              
               </tr>
 <tr>
-  <td style="font-weight:bold;font-size:12px;">TOTAL</td>
-  <td style="font-weight:bold;font-size:12px;text-align:center">{{formatageSomme(parseFloat(SommeBudgetInitial))}}</td>
-  <td style="font-weight:bold;font-size:12px;text-align:center">{{formatageSomme(parseFloat(SommeBudgetConsomme))}}</td>
-  <td style="font-weight:bold;font-size:12px;text-align:center">{{formatageSomme(parseFloat(SommeBudgetInitial)-parseFloat(SommeBudgetConsomme))}}</td>
-  <td style="font-weight:bold;font-size:12px;text-align:center">{{TauxExecution}}%</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">TOTAL</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{formatageSomme(parseFloat(SommeBudgetInitial))}}</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{formatageSomme(parseFloat(SommeBudgetConsomme))}}</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{formatageSomme(parseFloat(SommeBudgetInitial)-parseFloat(SommeBudgetConsomme))}}</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{TauxExecution}}%</td>
 </tr>
             </tbody>
           </table>
