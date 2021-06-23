@@ -16,7 +16,7 @@
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                    
-                     <li class="active" >
+                     <li class="active" style="font-size:20px">
                       <a data-toggle="tab" href="#DEMANDE"
                         >TABLEAU DE BORD GENERAL </a
                       >
@@ -26,7 +26,21 @@
                         >CONSULTATION DE L'EXECUTION BUDGETAIRE</a
                       >
                     </li> -->
-                     <li class="" >
+
+                      <li class=""  style="font-size:20px">
+                      <a data-toggle="tab" href="#TABLEAUBORD1"
+                        >TABLEAU DE BORD 1</a
+                      >
+                    </li>
+
+                    <li class="" style="font-size:20px">
+                      <a data-toggle="tab" href="#TABLEAUBORD2"
+                        >TABLEAU DE BORD 2</a
+                      >
+                    </li>
+
+
+                     <li class="" style="font-size:20px">
                       <a data-toggle="tab" href="#LIQUIDATION"
                         >SYSTHESE DU BUDGET PAR UA</a
                       >
@@ -55,6 +69,14 @@
                    <RechercheExecutionBudgetaire></RechercheExecutionBudgetaire>
                   
                   </div> -->
+                   <div id="TABLEAUBORD1" class="tab-pane ">
+                     <TableausuiviBudgets></TableausuiviBudgets>
+                  </div>
+
+                  <div id="TABLEAUBORD2" class="tab-pane ">
+                     <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
+                  </div>
+
                   <div id="LIQUIDATION" class="tab-pane ">
                      <recapitulatifBudgetHorsSigobe></recapitulatifBudgetHorsSigobe>
                
@@ -87,6 +109,8 @@ import { mapGetters, mapActions } from "vuex";
 // import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
 import { formatageSomme } from "@/Repositories/Repository";
 import TableauBordBudgetEclate from "./TableauBordBudgetEclate"
+import TableausuiviBudgets from "./TableauSuiviBudgets"
+import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
@@ -95,6 +119,8 @@ export default {
      components: {
    // ModelListSelect,
     TableauBordBudgetEclate,
+    TableausuiviBudgets,
+    StituationExecutionBudgetActiviteLigne,
     // RechercheExecutionBudgetaire,
     recapitulatifBudgetHorsSigobe
   },

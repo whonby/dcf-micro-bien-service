@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer; margin-left:5px;">
+         <div  align="left" style="cursor:pointer; margin-left:20px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
@@ -94,7 +94,7 @@
                                              
                                                 </router-link> 
                                             </td>
-                                            
+
 
                                              <td v-if="Juin!=0">
                                                 <router-link :to="{ name: 'ListeImageMarche', params: { id: this.marcheid}}">

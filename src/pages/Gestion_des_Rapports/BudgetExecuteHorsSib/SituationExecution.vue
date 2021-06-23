@@ -702,6 +702,7 @@ export default {
     ]),
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
+      "types_financements"
     ]),
 
     nombreJourTraitementCalucle() {

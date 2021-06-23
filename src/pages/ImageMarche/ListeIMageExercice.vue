@@ -1,15 +1,17 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer; margin-left:5px;">
+         <div  align="left" style="cursor:pointer; margin-left:20px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
 
       
        <h2 style="text-align:center;">Marché:<b style="text-decoration:underline;">{{LibelleMarche(this.marcheid)}} </b></h2>
+      
         <div class="container-fluid display: inline-block;" style="height: 100em;">
 
- <br> 
+        <br> 
+        <br> 
 
       <div>
              <div style="width:200px;height:800px;margin-right:15px;" id="menu">
@@ -18,7 +20,7 @@
                             <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
                             <!-- <input  v-text="marchebyua.id"  v-model="recup_id_ua"> -->
                                 <p :title="marchebyua.objet">{{marchebyua.objet.substr(0, 30)+'...'}}</p>
-    <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
+                <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
                         </li>
 
                      </ul>      
