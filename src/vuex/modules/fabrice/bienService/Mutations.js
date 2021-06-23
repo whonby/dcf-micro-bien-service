@@ -9,6 +9,10 @@
 // }
 
 
+
+export const AJOUTER_ENTREPRISE_SELECTIONNER = (state, elementAjouter) => {
+    state.Entreprise_preselctionner.unshift(elementAjouter)
+}
 // export const MODIFIER_DECOMPTE = (state,elementModif) => {
 //     state.decomptes = state.decomptes.map(response =>{
 //         if(response.id == elementModif.id){

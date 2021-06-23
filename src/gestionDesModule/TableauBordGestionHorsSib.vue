@@ -16,7 +16,7 @@
 
 <script>
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions,mapState } from "vuex";
 import {formatageSomme} from '../../src/Repositories/Repository';
 import {noDCfNoAdmin} from '../../src/Repositories/Auth';
 export default {
@@ -30,6 +30,10 @@ export default {
 
    
   computed:{
+
+       ...mapState('parametrageMenu', {
+     active_el: state => state.active_el
+  }),
  ...mapGetters("uniteadministrative", [
                 "acteCreations",
                 "typeTextes",

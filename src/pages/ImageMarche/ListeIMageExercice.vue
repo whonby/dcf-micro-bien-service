@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer;">
+         <div  align="left" style="cursor:pointer; margin-left:5px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
@@ -10,6 +10,19 @@
         <div class="container-fluid display: inline-block;" style="height: 100em;">
 
  <br> 
+
+      <div>
+             <div style="width:200px;height:800px;margin-right:15px;" id="menu">
+                 <ul  v-for="marchebyua in ListeMarcheUA" :key="marchebyua.id">
+                        <li>
+                            <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
+                            <!-- <input  v-text="marchebyua.id"  v-model="recup_id_ua"> -->
+                                <p :title="marchebyua.objet">{{marchebyua.objet.substr(0, 30)+'...'}}</p>
+    <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
+                        </li>
+
+                     </ul>      
+               </div>
              <table class="" style="margin-left: 200px;">
                      <tbody>
                                 <tr v-if="anneeAmort!=0" style="display: inline-block;">
@@ -33,6 +46,7 @@
                                     </tr>
                          </tbody>
                 </table> 
+        </div>
     </div>
     </div>
 </template>
@@ -52,6 +66,7 @@
     // import DraggableDiv from '../../components/DraggableDiv/DraggableDiv'
     import img1 from "../../assets/folder_nvide.jpg";
     import img2 from "../../assets/folder_vide.png";
+    import Menu from "../../assets/menu.png";
     export default {
         name: "Images",
         components: {
@@ -61,6 +76,7 @@
             return{
                url_nvide:img1,
                 url_vide:img2,
+                menu:Menu,
                 isLoading: false,
                 fullPage: false,
                 search:"",
@@ -94,7 +110,8 @@
         },
         
             created() {
-            this.marcheid=this.$route.params.id    
+            this.marcheid=this.$route.params.id;
+            this.uniteAd_id=this.$route.params.id_ua;
               
             },
           
@@ -183,13 +200,13 @@
                     return 0
                     }
                     return ""
-                
              },
 
+             ListeMarcheUA(){
+                 return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uniteAd_id
+                 && qtreel.exo_id==this.anneeAmort);
+             },
 
-            ListeMarcheByUa(){
-                 return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid);
-            },
 
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
@@ -199,6 +216,7 @@
                     }
                 });
             },
+
             nombreImageParMarche(){
               return id=>{
                   let objet=this.getterImageMarche.filter(item=>item.marche_id==id)
@@ -875,6 +893,12 @@
         height: 550px;
 
     }
+     #menu {
+        float: left;
+        background: white;
+        overflow: scroll;
+        
+        }
     .tailgrand{
         width: 50%;
         margin: 0 -25%;

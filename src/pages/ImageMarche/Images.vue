@@ -117,7 +117,7 @@
 
 
     <div>
-         <div style="width:200px;height:1000px;margin-right:15px;" id="menu">
+         <div style="width:200px;height:900px;margin-right:15px;" id="menu">
                 <ul  v-for="marchebyua in sections" :key="marchebyua.id">
                     <router-link :to="{ name: 'ListeUaImage', params: { id: marchebyua.id}}" :title="marchebyua.nom_section">
                     <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
@@ -128,7 +128,7 @@
                 </router-link> 
                 </ul>      
             </div>
-                <table class="" style="margin-left: 200px;">
+                <table class="" style="margin-left: 200px;"> 
                     <tbody>
                         <tr  v-for="sect in sections" :key="sect.id" style="display: inline-block;">
                            

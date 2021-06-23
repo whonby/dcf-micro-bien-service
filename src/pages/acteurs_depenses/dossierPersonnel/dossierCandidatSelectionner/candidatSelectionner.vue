@@ -10,7 +10,6 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                       
                       
                         <th>Nom candidat </th>
                          <th>Note candidat</th>

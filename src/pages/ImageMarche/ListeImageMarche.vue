@@ -5,7 +5,7 @@
 
     <div class="main-body">
 
-         <div  align="left" style="cursor:pointer;">
+         <div  align="left" style="cursor:pointer; margin-left:5px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div>
 
@@ -128,6 +128,7 @@ import {mapGetters, mapActions} from 'vuex';
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 //import ModifieImage from './ModifieImage'
+
 
 
 import VueGallerySlideshow from 'vue-gallery-slideshow'
