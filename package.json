@@ -55,6 +55,7 @@
     "pretty-checkbox-vue": "^1.1.9",
     "pusher-js": "^7.0.0",
     "save": "^2.4.0",
+    "v-datatable-light": "^0.8.2",
     "v-money": "^0.8.1",
     "view-design": "^4.4.0",
     "vue": "^2.6.10",
@@ -95,7 +96,6 @@
     "vuex": "^3.5.1",
     "xlsx": "^0.15.5"
   },
-  
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
