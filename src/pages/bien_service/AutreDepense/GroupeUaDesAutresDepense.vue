@@ -108,7 +108,7 @@
                    <td >
                    <router-link :to="{ name: 'GestionAutresDepense', params: { id: type }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;">Voire Autres Depenses</i></span>
+                  <span class=""><i class="   icon-eye-open" style="font-weight: bold;">Voir Autres Depenses</i></span>
                    </router-link> 
                     </td>
                   </tr>     
@@ -259,13 +259,11 @@ libelleModePaiement() {
 
   ListeDEsuniteAdministrative() {
     return (id)=>{
-      if(id != ''&& id != null){
-        if(this.uniteAdministrative_id != 0){
+      if(id != ''&& id != null){   
             const affich = this.uniteAdministratives.find(tem => tem.id == id)
             if(affich){
               return affich.libelle;
-            }
-          }
+            } 
       }
      }
       // let vM = this;

@@ -154,7 +154,7 @@
                            
                             </tr>
                               <tr>
-                            <td colspan="4" width="">
+                            <td colspan="4" width="20">
                         <div class="control-group">
                             <label class="span2">Objet  offre :</label>
                             <div class="controls">
@@ -173,11 +173,20 @@
                             </div>
                         </div>
                             </td>
-                                <td colspan="2">
+                                <td colspan="">
                         <div class="control-group">
                             <div class="controls">
-                                <label> Réference  de DAO<code>*</code></label>
+                                <label> Réference  de DP<code>*</code></label>
                                   <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                                
+                            </div>
+                        </div>
+                                </td>
+                                 <td colspan="">
+                        <div class="control-group">
+                            <div class="controls">
+                                <label> Réference de AMI<code>*</code></label>
+                                  <input type="text" class="span" placeholder="Reference d'appel"  :value="afficherRefAMI(macheid)" readonly>
                                 
                             </div>
                         </div>
@@ -664,6 +673,19 @@ affichierObjetMarche() {
       return 0
         }
       };
+    },
+
+    afficherRefAMI(){
+        return id=>{
+            if(id!=null && id!=""){
+                let refAmi= this.appelOffres.find(item => item.marche_id==61)
+                if(refAmi){
+                    return refAmi.ref_appel
+                }
+                return 0
+
+            }
+        }
     },
 
 

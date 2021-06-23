@@ -1,4 +1,4 @@
-ajouterMandate
+
 <template>
 
 <div>
@@ -17,7 +17,7 @@ ajouterMandate
 
                             </div>
                             </div>
-                            <div class="span4">
+                            <div class="span4">       
 
                             </div>
                             <div class="span4" align="right">
@@ -975,15 +975,27 @@ ajouterMandate
                                 <li class=""><a data-toggle="tab" href="#tabLettreAMI">Lettre d'invitation CF && Mandaté</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabMandateAMI">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionAMI">Reception</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
-                              <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
+                                <!-- <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li> -->
+                                
+                               <li class=""><a data-toggle="tab" href="#tab7884">Ouverture</a></li>
+                               <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabAnalyseAMI"> Analyse </a></li>
                                 <li class=""><a data-toggle="tab" href="#tabReserveAMI">Reserves CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tabPVJugementAMI">PV Jugement</a></li>
-                               <li class=""><a data-toggle="tab" href="#tabAttribuAMI">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabBailleurAMI">bailleur</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabARNPAMI">ANRMP</a></li>
+                                 <li class=""><a data-toggle="tab" href="#DMPAMI" title="demande ANO/DMP">D.DMP</a></li>
+                                   <li class=""><a data-toggle="tab" href="#DMPBAILLEURAMI" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                                 <li class=""><a data-toggle="tab" href="#tabARNPAMI">ANRMP</a></li>
+                               <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li>
+                                <li class=" con-file "><router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}" data-toggle="tab" href="#" v-if="afficherButtonDPEnfonctionAMI">Etape DP</router-link></li>
+
+                                 <!-- <div class="span3">
+                                   <router-link :to="{ name: 'DetailDemandeP', params: { id: detail_marche.id }}"
+                                             class="btn btn-primary" >
+                                    <span class="btn " ><i class="icon-file"></i>Continuer l'Etape DP </span>
+                                </router-link>
+                                    </div>                     -->
+                                <!-- <li class=""><a data-toggle="tab" href="#tabBailleurAMI">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabARNPAMI">ANRMP</a></li> -->
 
 
                             </ul>
@@ -1054,29 +1066,29 @@ ajouterMandate
                           <div id="tabOuvertureAMI" class="tab-pane">
                             <!-- <ouverture-offre :macheid="detail_marche.id"></ouverture-offre> -->
 
-                  <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
+                  <preSelectionnerEntreprise :macheid="detail_marche.id"></preSelectionnerEntreprise>
                   <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre> -->
                 </div>
 
 
 
-                <!-- <div id="tabPVAMI" class="tab-pane">
-                      <div align="right">
+                <div id="tabPVAMI" class="tab-pane">
+                      <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
-                </div> -->
+                </div>
 
-                 <!-- <div id="tab7884" class="tab-pane">
+                 <div id="tab7884" class="tab-pane">
 
 
-                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
-                </div> -->
+                   <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
+                </div>
                   <div id="tabAnalyseAMI" class="tab-pane">
 
                     <JugementSansFin :macheid="detail_marche.id"></JugementSansFin>
@@ -1099,6 +1111,18 @@ ajouterMandate
 <!--                </div>-->
 <!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
                    <PvJugement  :macheid="detail_marche.id"></PvJugement>
+                </div>
+
+                 <div id="DMPAMI" class="tab-pane">
+
+                    <AnoDMP :macheid="detail_marche.id"></AnoDMP>
+<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
+
+                </div>
+                <div id="DMPBAILLEURAMI" class="tab-pane">
+
+                    <AnoBailleur :macheid="detail_marche.id"></AnoBailleur>
+
                 </div>
                  <!-- <div id="tabAttribuAMI" class="tab-pane">
 
@@ -1295,175 +1319,7 @@ ajouterMandate
                     </div>
 
                      </template>
-                       <template v-else-if="affcicheEtapeProcedure(100000000, ['DP'], detail_marche.id)">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tabDP">Offre</a></li>
-                                <li ><a data-toggle="tab" href="#tabLotDP">Lot</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabLettrDP">Lettre d'invitation CF && Mandaté</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tabMandateDP">Mandaté</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tabReceptionDP">Reception</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabOuvertureDP">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
-                              <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tabAnalyseDP"> Analyse </a></li>
-                                <li class=""><a data-toggle="tab" href="#tabReserveDP">Reserves CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabPVJugementDP">PV Jugement</a></li>
-                               <li class=""><a data-toggle="tab" href="#tabAttribuDP">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabBailleurDP">bailleur</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabARNPDP">ANRMP</a></li>
-
-
-                            </ul>
-                        </div>
-
-
-                         <div class="widget-content tab-content">
-
-                         <div id="tabDP" class="tab-pane active">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                               
-                                <!-- <h4>Publication de l'offre</h4> -->
-
-                      <publicationOffreDP :macheid="detail_marche.id"></publicationOffreDP>
-                         </div>
-
-                    <div id="tabLotDP" class="tab-pane">
-
-                      <lot-marche :macheid="detail_marche.id"></lot-marche>
-                     <!-- <add-Lot :macheid="detail_marche.id"></add-Lot>-->
-                         </div>
-
-
-                <div id="tabLettrDP" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
-
-
-                      <invitationCf :macheid="detail_marche.id"></invitationCf>
-
                       
-                                <div id="" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                               
-
-                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
-                         </div>
-                         </div>
- <!-- <div id="tabMandateDP" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                               
-
-                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
-                         </div> -->
-
-                          <div id="tabReceptionDP" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
-
-                      <component-cotation :macheid="detail_marche"></component-cotation>
-                         </div>
-                             <!-- <div id="tab444" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <h4>Publication de l'offre</h4>
-
-                      <component-cotation :macheid="detail_marche"></component-cotation>
-                         </div> -->
-                          <div id="tabOuvertureDP" class="tab-pane">
-                            <!-- <ouverture-offre :macheid="detail_marche.id"></ouverture-offre> -->
-
-                  <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
-                  <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre> -->
-                </div>
-
-
-
-                <!-- <div id="tabPVAMI" class="tab-pane">
-                      <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
-                    </div>
-
-
-                </div>
-                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
-
-                </div> -->
-
-                 <!-- <div id="tab7884" class="tab-pane">
-
-
-                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
-                </div> -->
-                  <div id="tabAnalyseDP" class="tab-pane">
-
-                    <JugementSansFin :macheid="detail_marche.id"></JugementSansFin>
-
-<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
-                </div>
-                   <div id="tabReserveDP" class="tab-pane">
-
-                    <reserveCf :macheid="detail_marche.id"></reserveCf>
-
-<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
-                </div>
-                 <div id="tabPVJugementDP" class="tab-pane">
-<!--                 <div align="right">-->
-<!--                    <div class="widget-content">-->
-<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
-<!--                    </div>-->
-
-
-<!--                </div>-->
-<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
-                   <PvJugement  :macheid="detail_marche.id"></PvJugement>
-                </div>
-                 <!-- <div id="tabAttribuAMI" class="tab-pane">
-
-                   <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
-                </div> -->
-                    <div id="tabAttribuDP" class="tab-pane">
-                    <ActeEffetFinancier1 :macheid="detail_marche.id"></ActeEffetFinancier1>
-<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
-
-                </div>
-
-                   <div id="tabBailleurDP" class="tab-pane">
-                <!-- <div align="right">
-                    <div class="widget-content">
-                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div> -->
-                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
-
-                </div>
-                 <div id="tabARNPDP" class="tab-pane">
-
-               <Arnmp :macheid="detail_marche.id"></Arnmp>
-
-                </div>
-                         </div>
-
-
-
-                    </div>
-
-                     </template>
 
       <template v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id )">
 
@@ -1657,7 +1513,7 @@ ajouterMandate
  //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
     import publicationOffreLCV from '../../bien_service/DossierPso/publicationOffre/publicationOffreLCV';
-    import publicationOffreDP from "../../bien_service/DossierPso/publicationOffre/publicationOffreDP"
+    //import publicationOffreDP from "../../bien_service/DossierPso/publicationOffre/publicationOffreDP"
     import publicationOffreAMI from "../../bien_service/DossierPso/publicationOffre/publicationOffreAMI"
    // import addLot from '../dossierLot/addLot';
 
@@ -1684,6 +1540,7 @@ import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSim
 import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
 import OuvertureOffreSansFin from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFin"
+import preSelectionnerEntreprise from "../../bien_service/component/DossierPre_selection/preSelectionnerEntreprise.vue"
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -1699,6 +1556,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         components:{
           ActEffeFinanciere,
           ActeEffetFinancier1,
+          preSelectionnerEntreprise,
           AnoBailleur,
           AnoBailleurLCV,
           ActeEffetFinancierLCV,
@@ -1710,7 +1568,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           JugementSansFin,
           OuvertureOffre,
           componentCotation,
-          publicationOffreDP,
+          //publicationOffreDP,
           publicationOffreAMI,
           LotMarche,
           componentBailleur1,
@@ -1773,7 +1631,7 @@ created() {
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
-               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur"
+               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur","gettersEntreprisePreselectionner"
               ]),
  ...mapGetters("horSib", ["gettersMarcheHorsib","getPersonnaliserMarchehorSib"]),
 
@@ -1800,6 +1658,13 @@ created() {
       // "chapitres",
       // "sections"
     ]),
+
+
+
+    // affichage conditionnelle
+    afficherButtonDPEnfonctionAMI(){
+      return this.gettersEntreprisePreselectionner.find(item=>item.entreprise_id!=null);
+    },
     affMarche(){
         return this.getPersonnaliserMarchehorSib.find(tem => tem.parent_id==564)
     },
@@ -2111,11 +1976,7 @@ const val = parseFloat(this.afficherLaDotationIntial1(this.detail_marche.economi
                 window.history.back()
             },
 
-      retourpass(){
-      this.$router.push({
-              name: "groupeMarcheParUa",
-            });
-      },
+     
                   
 
 isFormulaireDossierCand(){

@@ -33,7 +33,208 @@ import ToutLesOpDirectVise from "../../pages/TableauBord/TableauBordHorsSigobe/T
 import ToutLesOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDirect/ToutLesOpDirectViseO.vue";
 
 
+
+
+
+
+
+import TableauOpProvisoire from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoire.vue"
+import TableauOpProvisoireDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireDiffere.vue"
+import TableauOpProvisoireRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireRejete.vue"
+import TableauOpProvisoireVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireVise.vue"
+import TableauOpProvisoireViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireViseO.vue"
+
+
+
+
+
+import TableauOpAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulation.vue"
+import TableauOpAnnulationDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationDiffere.vue"
+import TableauOpAnnulationRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationRejete.vue"
+import TableauOpAnnulationVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationVise.vue"
+import TableauOpAnnulationViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationViseO.vue"
+
+
+
+
+import TableauOpDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitive.vue"
+import TableauOpDefinitifDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveDiffere.vue"
+import TableauOpDefinitifRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveRejete.vue"
+import TableauOpDefinitifVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveVise.vue"
+import TableauOpDefinitifViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveViseO.vue"
+
+
+
+
+
+import TableauOpDirect from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirect.vue"
+import TableauOpDirectDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectDiffere.vue"
+import TableauOpDirectRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectRejete.vue"
+import TableauOpDirectVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectVise.vue"
+import TableauOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectViseO.vue"
+
+
+import presentationTableau from "../../pages/TableauBord/TableauBordHorsSigobe/presentationTableau.vue"
+import PresentationTableauBordControleExecution from "../../pages/TableauBord/TableauBordHorsSigobe/PresentationTableauBordControleExecution.vue"
+import DetailTableauBordProvisoire from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordProvisoire"
+import DetailTableauBordAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordAnnulation"
+import DetailTableauBordDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDefinitif"
+import DetailTableauBordDirect from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDirect"
 const TableauBordGeneral =[
+    {
+        path: "/DetailTableauBordAnnulation/:id",
+        name: "DetailTableauBordAnnulation",
+        component: DetailTableauBordAnnulation
+    },
+    {
+        path: "/DetailTableauBordDefinitif/:id",
+        name: "DetailTableauBordDefinitif",
+        component: DetailTableauBordDefinitif
+    },
+    {
+        path: "/DetailTableauBordDirect/:id",
+        name: "DetailTableauBordDirect",
+        component: DetailTableauBordDirect
+    },
+    {
+        path: "/DetailTableauBordProvisoire/:id",
+        name: "DetailTableauBordProvisoire",
+        component: DetailTableauBordProvisoire
+    },
+    {
+        path: "/PresentationTableauBordControleExecution",
+        name: "PresentationTableauBordControleExecution",
+        component: PresentationTableauBordControleExecution
+    },
+    {
+        path: "/presentationTableau",
+        name: "presentationTableau",
+        component: presentationTableau
+    },
+
+    {
+        path: "/TableauOpDirectViseO/:id",
+        name: "TableauOpDirectViseO",
+        component: TableauOpDirectViseO
+    },
+    {
+        path: "/TableauOpDirectVise/:id",
+        name: "TableauOpDirectVise",
+        component: TableauOpDirectVise
+    },
+    {
+        path: "/TableauOpDirectRejete/:id",
+        name: "TableauOpDirectRejete",
+        component: TableauOpDirectRejete
+    },
+    {
+        path: "/TableauOpDirectDiffere/:id",
+        name: "TableauOpDirectDiffere",
+        component: TableauOpDirectDiffere
+    },
+    {
+        path: "/TableauOpDirect/:id",
+        name: "TableauOpDirect",
+        component: TableauOpDirect
+    },
+
+
+
+    {
+        path: "/TableauOpDefinitifViseO/:id",
+        name: "TableauOpDefinitifViseO",
+        component: TableauOpDefinitifViseO
+    },
+    {
+        path: "/TableauOpDefinitifVise/:id",
+        name: "TableauOpDefinitifVise",
+        component: TableauOpDefinitifVise
+    },
+    {
+        path: "/TableauOpDefinitifRejete/:id",
+        name: "TableauOpDefinitifRejete",
+        component: TableauOpDefinitifRejete
+    },
+    {
+        path: "/TableauOpDefinitifDiffere/:id",
+        name: "TableauOpDefinitifDiffere",
+        component: TableauOpDefinitifDiffere
+    },
+    {
+        path: "/TableauOpDefinitif/:id",
+        name: "TableauOpDefinitif",
+        component: TableauOpDefinitif
+    },
+
+
+
+
+
+    {
+        path: "/TableauOpAnnulationViseO/:id",
+        name: "TableauOpAnnulationViseO",
+        component: TableauOpAnnulationViseO
+    },
+    {
+        path: "/TableauOpAnnulationVise/:id",
+        name: "TableauOpAnnulationVise",
+        component: TableauOpAnnulationVise
+    },
+    {
+        path: "/TableauOpAnnulationRejete/:id",
+        name: "TableauOpAnnulationRejete",
+        component: TableauOpAnnulationRejete
+    },
+    {
+        path: "/TableauOpAnnulationDiffere/:id",
+        name: "TableauOpAnnulationDiffere",
+        component: TableauOpAnnulationDiffere
+    },
+    {
+        path: "/TableauOpAnnulation/:id",
+        name: "TableauOpAnnulation",
+        component: TableauOpAnnulation
+    },
+
+
+
+
+
+
+
+
+
+
+    {
+        path: "/TableauOpProvisoireViseO/:id",
+        name: "TableauOpProvisoireViseO",
+        component: TableauOpProvisoireViseO
+    },
+    {
+        path: "/TableauOpProvisoireVise/:id",
+        name: "TableauOpProvisoireVise",
+        component: TableauOpProvisoireVise
+    },
+    {
+        path: "/TableauOpProvisoireRejete/:id",
+        name: "TableauOpProvisoireRejete",
+        component: TableauOpProvisoireRejete
+    },
+    {
+        path: "/TableauOpProvisoireDiffere/:id",
+        name: "TableauOpProvisoireDiffere",
+        component: TableauOpProvisoireDiffere
+    },
+    {
+        path: "/TableauOpProvisoire/:id",
+        name: "TableauOpProvisoire",
+        component: TableauOpProvisoire
+    },
+
+
+
+
+
 
 
     {

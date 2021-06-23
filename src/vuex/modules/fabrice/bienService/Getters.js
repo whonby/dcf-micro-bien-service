@@ -1121,7 +1121,8 @@ export const groupeEntreprise = (state) => {
 export const getterLoadinMarche = state => state.loading_marche
 
 
-export const getterImageMarche = state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
+export const getterImageMarche = state => state.image_marche
+// export const getterImageMarche = state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
 
 
 
@@ -1139,7 +1140,7 @@ export const getterInfoTableauBordFiltre = state => state.infoFiltreTableauBord
 
 export const getterEntrepriseSousTraitance = state => state.entreprise_soustraitant
 
-
+export const gettersEntreprisePreselectionner = state => state.Entreprise_preselctionner
 
 
 // export const GroupeEntreprise = (state, getters) => {

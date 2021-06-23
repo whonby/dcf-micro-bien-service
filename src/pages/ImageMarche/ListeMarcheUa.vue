@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer;">
+         <div  align="left" style="cursor:pointer; margin-left:5px;">
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
@@ -15,10 +15,10 @@
       <div style="width:200px;height:800px;margin-right:15px;" id="menu">
   <ul  v-for="marchebyua in ListeUniteAdminBySectionmenu" :key="marchebyua.id">
       
-      <li @click.prevent="alertme(marchebyua.id)">
+      <li >
 
       <img :src="menu" alt="" sizes="5px;" srcset="" style="width:100px; height:100px;">
-        <input  v-text="marchebyua.id"  v-model="recup_id_ua">
+        <!-- <input  v-text="marchebyua.id"  v-model="recup_id_ua"> -->
         <p :title="marchebyua.libelle">{{marchebyua.libelle.substr(0, 30)+'...'}}</p>  
   
   <!-- <li class="icon-folder-close" style="font-size: 30px !important;"></li>  -->
@@ -29,39 +29,34 @@
       
          
          
-            <table class="" >
-                     <tbody>
-                                <tr  v-for="marchebyua in ListeMarcheByUa" :key="marchebyua.id" style="display: inline-block;">
+     <table class="" >
+         <tbody>
+             <tr  v-for="marchebyua in ListeMarcheByUa" :key="marchebyua.id" style="display: inline-block;">
                                     
-                                    <td>
-                                       
-                                        <div v-if="test(marchebyua.id)==1" :title="marchebyua.objet">
-                                             <router-link :to="{ name: 'ListeIMageExercice', params: { id: marchebyua.id}}">
+                                     
+                 <td>
+                    <!-- <p>{{test(marchebyua.id)}}</p> -->
+                    <div :title="marchebyua.objet"  v-if="testverif(marchebyua.id)==1">
+                            <router-link :to="{ name: 'ListeIMageExercice', params: { id:marchebyua.id, id_ua:retourne_id }}">
                                             <!-- <li class="icon-folder-close" style="font-size: 55px !important;margin-right:35px;margin-left:35px;"></li> -->
-                                            <img :src="url_nvide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
-                                            <br>
-                                            <p :title="marchebyua.objet" style="margin-left:35px;font-size:20px;">{{marchebyua.objet.substr(0, 30)+'...'}}</p>  
-                                            <br>
-                                            <br>
-                                            </router-link> 
-                                        </div>  
-                                        
-                                       
-                                    </td>  
+                                <img :src="url_nvide" alt="" sizes="5px;" srcset="" style="width:100px; height:100px; margin-left: 30px;">
+                                <br>
+                                <p :title="marchebyua.objet" style="margin-left:35px;font-size:20px;">{{marchebyua.objet.substr(0, 30)+'...'}}</p>  
+                                <br>
+                            </router-link> 
+                        </div>                  
+                 </td> 
                                     
-                                </tr>
-                         </tbody>
-                </table>   
+             </tr>
+            </tbody>
+     </table>   
     
    </div>
-             
-
-                       
+                               
     </div>
-
-
     </div>
 </template>
+
 
 <script>
     import {partition} from "../../Repositories/Repository"
@@ -192,23 +187,13 @@
             },
 
             retourne_id(){
-                return this.section_menu_id;
-            },
-
-            alertme(){
-               return id=>{
-                    if(id!=""){
-                       
-                        return id;
-                    }
-                    return "";
-                }
+                return this.uaid;
             },
            
 
            
 
-             test(){
+             testverif(){
                   return id=>{
                     if(id!="" && id!=null){
                          const qtreel= this.getterImageMarche.find(item=>item.marche_id==id);
@@ -217,6 +202,7 @@
                              }
                               return "0"
                     }
+                    return ""
                 }
 
            },
@@ -231,14 +217,7 @@
             },
 
             ListeMarcheByUa(){
-                return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid
-                 && qtreel.exo_id==this.anneeAmort);
-                // if(this.alertme!=""){
-                //      return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.alertme
-                //     && qtreel.exo_id==this.anneeAmort);
-                // }else{
-                     
-               //}
+                return this.marches.filter(qtreel => qtreel.unite_administrative_id == this.uaid && qtreel.exo_id==this.anneeAmort);
                
             },
 

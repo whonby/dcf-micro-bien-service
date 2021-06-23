@@ -1,7 +1,7 @@
 <template>
     <div>
-         <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
+         <div  align="left" style="cursor:pointer; margin-left:5px;">
+            <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
         </div> 
        
 

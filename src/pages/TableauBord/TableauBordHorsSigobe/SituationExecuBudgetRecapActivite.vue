@@ -1,0 +1,1176 @@
+
+<template>
+  <div>
+    <div class="row-fluid" style="margin-top: -20px">
+      <div class="span1"></div>
+      
+          <br>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+
+                 <td>
+            <label>EXERCICE </label>
+            <model-list-select
+              style="border: 1px solid #000"
+              class="wide"
+              :list="exercices_budgetaires"
+              v-model="exercices_budgetaires_id"
+              option-value="annee"
+              option-text="annee"
+              placeholder=""
+            >
+            </model-list-select>
+          </td>
+
+              <td>
+
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >ACTIVITE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="plans_activites"
+                  v-model="activite_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES ACTIVITES"
+                >
+                </model-list-select>
+              </td>
+
+               <td>
+                <div class="control-group">
+                  <label
+                    class="control-label"
+                    style="color: #000; font-size: 14px; font-weight: bolder"
+                    >Date debut</label
+                  >
+                  <div class="controls">
+                    <input
+                      type="date"
+                      v-model="formData.date_debut"
+                      class="span"
+                      style="background-color: #fff; border: 2px solid #000"
+                    />
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div class="control-group">
+                  <label
+                    class="control-label"
+                    style="color: #000; font-size: 14px; font-weight: bolder"
+                    >Date Fin</label
+                  >
+                  <div class="controls">
+                    <input
+                      type="date"
+                      v-model="formData.date_fin"
+                      class="span"
+                      style="background-color: #fff; border: 2px solid #000"
+                    />
+                  </div>
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      
+    </div>
+
+
+    <div class="span4">
+          <br />
+          Afficher
+          <select name="pets" id="pet-select" v-model="size" class="span3">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="80">80</option>
+            <option value="100">100</option>
+          </select>
+          Entrer
+        </div>
+
+    <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div>
+    
+    <div class="widget-content nopadding" id="printpdf">
+      <h2
+        style="
+          font-size: 25px;
+          font-weight: bold;
+          color: #000;
+          text-align: center;
+        "
+        v-if="formData.date_debut == '' && formData.date_fin == ''"
+      >
+        SITUATION D'EXECUTION BUDGETAIRE RECAPITULATIVE PAR ACTIVITE
+        {{ formData.date_debut }}
+        {{ formData.date_fin }}
+      </h2>
+
+      <h2
+        style="
+          font-size: 25px;
+          font-weight: bold;
+          color: #000;
+          text-align: center;
+        "
+        v-if="formData.date_debut != '' && formData.date_fin != ''"
+      >
+        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
+        {{ formaterDate(formData.date_debut) }} AU
+        {{ formaterDate(formData.date_fin) }}
+      </h2>
+      <p
+        style="
+          margin-left: 30px;
+          font-size: 14px;
+          font-weight: bold;
+          text-decoration: underline;
+        "
+      >
+        EXERCICE: {{ afficheAnnee }}
+      </p>
+
+            <table class="table table-bordered">
+              <thead style="background-color: #FC762F !important">
+                <tr>
+                    <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    ACTIVITES
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    BUDGET VOTE
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    REAMENAGEMENT BUDGETAIRE
+                  </th>
+                   
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    Budget Actuel
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    Montant Exécuté
+                  </th>
+                 
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    TAUX
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #FC762F !important;
+                    "
+                  >
+                    Disponible
+                  </th>
+                </tr>
+              </thead>
+         <tbody>
+                
+                 <tr
+              class="odd gradeX"
+              v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
+              :key="GroupeOrdrePaiementByActivit.id"
+            >
+              <td style="font-size: 16px">
+                {{
+                  LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) ||
+                  "Non renseigné"
+                }}
+              </td>
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)
+                    )
+                  )
+                }}
+              </td>
+
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)
+                    )
+                  )
+                }}
+              </td>
+
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)
+                    )
+                  )
+                }}
+              </td>
+
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)
+                    )
+                  ) || "Non renseigné"
+                }}
+              </td>
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
+                {{
+                 
+                    EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
+                }}
+              </td>
+              <td style="font-size: 14px; font-weight: bold; text-align:right">
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(MontantDisponible(GroupeOrdrePaiementByActivit[0].activite_id)))||
+                  "Non renseigné"
+                }}
+              </td>
+            </tr>
+              
+              </tbody>
+            </table>
+    </div>
+
+     <div class="pagination alternate">
+      <ul>
+        <li :class="{ disabled: page == 0 }">
+          <a @click.prevent="precedent()" href="#">Précedent</a>
+        </li>
+        <li
+          v-for="(titre, index) in partition(afficheUa, size).length"
+          :key="index"
+          :class="{ active: active_el == index }"
+        >
+          <a @click.prevent="getDataPaginate(index)" href="#">{{
+            index + 1
+          }}</a>
+        </li>
+        <li
+          :class="{ disabled: page == partition(afficheUa, size).length - 1 }"
+        >
+          <a @click.prevent="suivant()" href="#">Suivant</a>
+        </li>
+      </ul>
+    </div>
+
+
+        
+    <!-- <fab
+      :actions="fabActions"
+      @searchMe="filter"
+      main-icon="apps"
+      bg-color="green"
+    ></fab> -->
+  </div>
+</template>
+  
+<script>
+import { mapGetters, mapActions } from "vuex";
+import moment from "moment";
+import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+import { partition } from "@/Repositories/Repository";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
+export default {
+  components: {
+    ModelListSelect,
+  },
+  name: "typetext",
+  data() {
+    return {
+      page: 0,
+      size: 5,
+      active_el: 0,
+      fabActions: [
+        {
+          name: "searchMe",
+          icon: "search",
+        },
+      ],
+
+      options2: [
+        { id: "1", libelle: "OP Direct" },
+        { id: "2", libelle: "OP Provisoire" },
+        { id: "3", libelle: "OP Annulation" },
+        { id: "4", libelle: "OP Définitif" },
+      ],
+      json_fields: {
+        CODE: "code",
+        LIBELLE: "libelle",
+      },
+      affiche_filtre1: false,
+      affiche_filtre: false,
+      affiche_boutton_filtre: true,
+      formData: {
+        code: "",
+        libelle: "",
+        date_debut: "",
+        date_fin: "",
+      },
+      EditDetache: {},
+      typeop_id: 0,
+      NumeroOp: 0,
+      activite_id: 0,
+      exercices_budgetaires_id:0,
+
+      editMandat: {},
+      EditAnulation: {},
+      editDecisionFinal: {},
+      search: "",
+  
+    };
+  },
+  mounted(){
+    
+    console.log(this.MontantBudgetActuel())
+    console.log(this.MontantBudgetExecuté())
+  },
+
+  computed: {
+    ...mapGetters("Utilisateurs", [
+      "getterAffectionServiceCF",
+      "getterUtilisateur",
+      "getterAffectation",
+      "getterUniteAdministrativeByUser",
+    ]),
+
+    ...mapGetters("parametreGenerauxAdministratif", [
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "exercices_budgetaires",
+      "sections",
+    ]),
+    ...mapGetters("personnelUA", [
+      "salairesActeur",
+      "personnaliseActeurDepense",
+      "personnaFonction",
+      "afficheNombrePersonnelRecuActeNormination",
+      "fonctionBudgetaire",
+      "type_salaries",
+      "type_contrats",
+      "acte_personnels",
+      "type_acte_personnels",
+      "fonctions",
+      "grades",
+      "niveau_etudes",
+      "nbr_acteur_actredite_taux",
+      "all_acteur_depense",
+      "personnaliseActeurFinContrat",
+      "totalActeurEnctivite",
+      "totalActeurDepense",
+      "totalActeurAccredite",
+      "tauxActeurAccredite",
+      "totalActeurNonAccredite",
+      "affichePersonnelRecuActeNormination",
+    ]),
+    ...mapGetters("bienService", [
+      "gettershistoriqueDecisionCfOP",
+      "typeMarches",
+      "gettersgestionOrdrePaiementAnnulation",
+      "gettersgestionOrdrePaiement",
+      "gettersDossierAutreDepense",
+      "gettersDossierMandat",
+      "gettersDossierFacturePiece",
+      "typeFactures",
+      "gettersDemandeEngagement",
+      "gettersnomPieceJustificative",
+      "modepaiements",
+      "gettersCotationPersonnaliser",
+      "typeCandidat",
+      "acteDepense",
+      "getMarchePersonnaliser",
+      "appelOffres",
+      "lots",
+      "villes",
+      "communes",
+      "pays",
+      "modePassations",
+      "procedurePassations",
+      "getterDossierCandidats",
+      "marches",
+      "gettersPersonnaliserRapportJugement",
+      "getterOffreFinanciers",
+      "gettersOffreTechniques",
+      "getterLettreInvitation",
+      "getterMandate",
+      "getterCojos",
+      "conditions",
+      "getterAnalyseDossiers",
+      "typeAnalyses",
+      "getterDemandeAno",
+      "documentProcedures",
+      "getterAnalyseDMP",
+      "getterAnoDMPBailleur",
+      "getterObseravtionBailleurs",
+      "obseravtionBailleurs",
+      "typeActeEffetFinanciers",
+      "analyseDossiers",
+      "text_juridiques",
+      "livrables",
+      "selectionner_candidats",
+      "getActeEffetFinancierPersonnaliserContrat",
+      "acteEffetFinanciers",
+      "personnaliseGetterMarcheBailleur",
+      "getterMembreCojo",
+      "getterProceVerballe",
+      "GroupeOrdrePaiementByActivite",
+      "GroupeOrdrePaiementByGrandeNature",
+    ]),
+    ...mapGetters("gestionMarche", [
+      "groupeVille",
+      "entreprises",
+      "banques",
+      "comptes",
+      "getCompte",
+      "getEntreptise",
+      "getPersonnaliseAgence",
+      "agenceBanques",
+    ]),
+    ...mapGetters("parametreGenerauxFonctionnelle", [
+      "structureActe",
+      "planActe",
+    ]),
+    ...mapGetters("parametreGenerauxActivite", [
+      "structures_activites",
+      "plans_activites",
+      "afficheNiveauAction",
+      "afficheNiveauActivite",
+    ]),
+    ...mapGetters("gestionMarche", ["entreprises"]),
+
+    ...mapGetters("uniteadministrative", [
+      "budgetEclate",
+      "groupeLigneEconomiqueBudget",
+      "getSousBudget",
+      "groupeActiviteBudget",
+      "budgetGeneral",
+      "fonctionsua",
+      "servicesua",
+      "directions",
+      "uniteZones",
+      "uniteAdministratives",
+      "getPersonnaliseBudgetGeneralParPersonnel",
+      "groupeByActivite",
+      "groupeByBailleur"
+    ]),
+    ...mapGetters("parametreGenerauxFonctionnelle", [
+      "structuresDecision",
+      "plans_Decision",
+    ]),
+    ...mapGetters("parametreGenerauxBudgetaire", [
+      "plans_budgetaires",
+      "derniereNivoPlanBudgetaire",
+    ]),
+    ...mapGetters("parametreGenerauxSourceDeFinancement", [
+      "sources_financements",
+    ]),
+   
+
+    verifActiviteId() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.activite_id == id
+            &&  qtreel.exercice == this.afficheAnnee
+          );
+
+          if (qtereel) {
+            return 1;
+          }
+          return 0;
+        }
+      };
+    },
+
+    // ListeGroupByActivite() {
+    //   if (this.activite_id!=0) {
+    //     return this.groupeByActivite.filter(
+    //       (qtreel) =>
+    //         qtreel[0].annebudgetaire == this.afficheAnnee
+    //         && qtreel[0].activite_id==this.activite_id
+    //     );
+    //   } else {
+    //     return this.groupeByActivite
+    //     .filter(
+    //       (qtreel) =>
+    //         (qtreel[0].annebudgetaire == this.afficheAnnee
+    //          )
+
+    //     );
+    //   }
+    // },
+
+// new function 
+    ListeGroupByActivite() {
+      if (this.formData.date_debut != "" && this.formData.date_fin != "" && this.activite_id !=0) {
+        return this.GroupeOrdrePaiementByActivite.filter(
+          (qtreel) =>
+            (qtreel[0].decision_cf == 8 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].exercice == this.afficheAnnee &&
+              qtreel[0].activite_id == this.activite_id &&
+              (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin)) ||
+              
+            (qtreel[0].decision_cf == 9 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].exercice == this.afficheAnnee &&
+              qtreel[0].activite_id == this.activite_id &&(
+              qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin))
+        );
+      } else if(this.formData.date_debut == "" && this.formData.date_fin == "" && this.activite_id !=0){
+
+            return this.GroupeOrdrePaiementByActivite.filter(
+          (qtreel) =>
+            (qtreel[0].decision_cf == 8 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].exercice == this.afficheAnnee &&
+              qtreel[0].activite_id == this.activite_id )
+               ||
+              
+            (qtreel[0].decision_cf == 9 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].exercice == this.afficheAnnee &&
+              qtreel[0].activite_id == this.activite_id
+             )
+        );
+      } else if(this.formData.date_debut != "" && this.formData.date_fin != "" && this.activite_id ==0){
+          return this.GroupeOrdrePaiementByActivite.filter(
+          (qtreel) =>
+            (qtreel[0].decision_cf == 8 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].exercice == this.afficheAnnee &&
+              (qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin)) ||
+              
+            (qtreel[0].decision_cf == 9 &&
+              qtreel[0].diff_op == null &&
+              qtreel[0].exercice == this.afficheAnnee &&(
+              qtreel[0].date_decision_cf >= this.formData.date_debut &&
+              qtreel[0].date_decision_cf <= this.formData.date_fin))
+        );
+      }
+      
+      
+      else {
+        return this.GroupeOrdrePaiementByActivite.filter((qtreel) =>
+         (qtreel[0].decision_cf == 8 
+         && qtreel[0].diff_op == null 
+         && qtreel[0].exercice == this.afficheAnnee) 
+         ||
+        (qtreel[0].decision_cf == 9 
+        && qtreel[0].diff_op == null
+         && qtreel[0].exercice == this.afficheAnnee)
+        );
+      }
+    },
+
+
+     LibelleActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_activites.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat(" ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+
+      MontantBudgetActuel() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+     MontantBudgetExecuté() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.activite_id == id
+                &&qtreel.decision_cf==9)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.activite_id == id
+                &&qtreel.decision_cf==8)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.activite_id == id
+                &&qtreel.decision_cf==9)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.activite_id == id
+                &&qtreel.decision_cf==8)   
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+      MontantbudgetVote(){
+        return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+    MontantReamenagement(){
+        return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+    afficheUa() {
+       return this.ListeGroupByActivite;
+    },
+
+
+
+//fin new function
+
+
+
+
+    
+
+    afficheAnnee() {
+      if (this.exercices_budgetaires_id == 0) {
+        return this.anneeAmort;
+      } else {
+        return this.exercices_budgetaires_id;
+      }
+    },
+
+    ListeGroupByNature() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.GroupeOrdrePaiementByGrandeNature.filter(
+            (qtreel) => qtreel.grand_nature_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.grand_nature_id;
+          }
+          return 0;
+        }
+      };
+    },
+
+
+
+
+
+    MontantBudgetActuelActivite() {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.ligneeconomique_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.activite_id == id1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+    MontantBudgetExecutéActivite() {
+      return (id,id1) => {
+        if (id != null && id != ""&& id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.ligne_economique_id == id
+                && qtreel.activite_id == id1
+               && qtreel.exercice == this.afficheAnnee 
+               && qtreel.type_ordre_paiement == 1
+               && qtreel.decision_cf==8)
+               ||
+                (qtreel.ligne_economique_id == id
+                && qtreel.activite_id == id1
+               && qtreel.exercice == this.afficheAnnee 
+               && qtreel.type_ordre_paiement == 1
+               && qtreel.decision_cf==9)
+               ||
+               (qtreel.ligne_economique_id == id
+               && qtreel.activite_id == id1
+               && qtreel.exercice == this.afficheAnnee 
+               && qtreel.type_ordre_paiement == 4
+               && qtreel.decision_cf==8)
+               ||
+                (qtreel.ligne_economique_id == id
+                && qtreel.activite_id == id1
+               && qtreel.exercice == this.afficheAnnee 
+               && qtreel.type_ordre_paiement == 4
+               && qtreel.decision_cf==9)
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+    MontantBudgetExecutéProvisoireActivite() {
+      return (id,id1) => {
+        if (id != null && id != ""&& id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.ligne_economique_id == id &&
+                qtreel.activite_id == id1 &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 2
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+   
+    libelleBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    libelleLigneEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat("    ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+
+
+
+    LibelleGrandeNature() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.grandes_natures.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat(" "), qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    listeordrepaiements() {
+      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.grand_nature_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.date_decision_cf >= this.formData.date_debut &&
+                  qtreel.date_decision_cf <= this.formData.date_fin) ||
+                (qtreel.grand_nature_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.date_decision_cf >= this.formData.date_debut &&
+                  qtreel.date_decision_cf <= this.formData.date_fin)
+            );
+          }
+        };
+      } else {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.grand_nature_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8) ||
+                (qtreel.grand_nature_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9)
+            );
+          }
+        };
+      }
+    },
+
+    anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
+    },
+
+    AfficheLogODCF() {
+      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/log3.png";
+    },
+    AfficheAmoirie() {
+      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
+    },
+
+    listeordrepaiementLigne() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            (qtreel) => qtreel.activite_id == id
+          );
+        }
+      };
+    },
+
+    arrayExerciceDecompte() {
+      return (idactivite) => {
+        console.log(idactivite);
+        if(idactivite !=null && idactivite!=""){
+           let objet = this.listeordrepaiementLigne(idactivite);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.grandenature_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+      }
+
+      }
+       
+    },
+
+    
+
+
+    recupBudget() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            (qtreel) =>
+              qtreel.grandenature_id == id &&
+              qtreel.annebudgetaire == this.anneeAmort
+          );
+        }
+      };
+    },
+
+    sommeLigneGrandeNature() {
+      return (grande_nature_id) => {
+        console.log(grande_nature_id)
+        if (grande_nature_id == "") return 0;
+        let _objet = this.recupBudget(grande_nature_id);
+        if (_objet == undefined) return 0;
+        let montant = _objet.reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+          0
+        );
+        return montant;
+      };
+    },
+
+    listeordrepaiementLigne2() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            (qtreel) => qtreel.activite_id == id
+          );
+        }
+      };
+    },
+   
+    arrayExerciceDecompte2() {
+      return (idactivite) => {
+        console.log(idactivite);
+        if(idactivite!=null && idactivite !=0 && idactivite !=""){
+          let objet = this.listeordrepaiementLigne2(idactivite);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+
+    
+
+    libelleUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.uniteAdministratives.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+  },
+  methods: {
+    ...mapActions("bienService", [
+      "modifierGestionOrdrePaiement",
+      "modifierGestionOrdrePaiementAnnulat",
+      "supprimerGestionOrdrePaiement",
+      "ajouterHistoriqueDecisionOp",
+      "modifierHistoriqueDecisionOp",
+    ]),
+
+     EviteNaN(id) {
+      if (
+        this.MontantBudgetExecuté(id) == 0 &&
+        this.MontantBudgetActuel(id) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseFloat(this.MontantBudgetExecuté(id)) /
+            parseFloat(this.MontantBudgetActuel(id))) *
+          100
+        ).toFixed(2);
+      }
+    },
+
+    MontantDisponible(id){
+        return (this.MontantBudgetActuel(id) -  this.MontantBudgetExecuté(id));
+    },
+    genererEnPdf() {
+      this.$htmlToPaper("printpdf");
+    },
+
+    formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+
+    partition: partition,
+
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
+
+    // apercuFacture(id) {
+    //   this.$("#validationOpDefinitif").modal({
+    //     backdrop: "static",
+    //     keyboard: false
+    //   });
+    //    this.editMandat = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
+    // },
+
+    formatageSommeSansFCFA: formatageSommeSansFCFA,
+
+    ExporterEnExel() {
+      this.$refs.excel.click();
+    },
+  },
+};
+</script>
+
+<style scoped>
+.tailgrand {
+  width: 65%;
+  margin: 0 -30%;
+  height: 50%;
+}
+.tailBtn {
+  width: 100%;
+}
+.modal-body {
+  max-height: 85%;
+}
+</style>

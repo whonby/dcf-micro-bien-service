@@ -8,7 +8,13 @@
 //     state.decomptes.unshift(elementAjouter)
 // }
 
+export const GET_ALL_ENTREPRISE_SELECTIONNER = (state, tableau_entreprise_preselectionner) => {
+    state.Entreprise_preselctionner = tableau_entreprise_preselectionner
+}
 
+export const AJOUTER_ENTREPRISE_SELECTIONNER = (state, elementAjouter) => {
+    state.Entreprise_preselctionner.unshift(elementAjouter)
+}
 // export const MODIFIER_DECOMPTE = (state,elementModif) => {
 //     state.decomptes = state.decomptes.map(response =>{
 //         if(response.id == elementModif.id){

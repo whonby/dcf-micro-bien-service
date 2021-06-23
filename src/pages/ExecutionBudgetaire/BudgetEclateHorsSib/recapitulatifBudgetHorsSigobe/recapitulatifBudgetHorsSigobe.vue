@@ -1,13 +1,30 @@
 <template>
   <div>
-       <!-- <table class="table table-striped">
+       <table class="table table-striped">
           <tbody>
             <tr>
+               <td>
+ <label
+                            >EXERCICE
+                           
+                          </label>
+                          <model-list-select
+                            style="border: 1px solid #000"
+                            class="wide"
+                            :list="exercices_budgetaires"
+                            v-model="exercices_budgetaires_id"
+                            option-value="annee"
+                            option-text="annee"
+                            placeholder=""
+                          >
+                          </model-list-select>
+                         
+                </td>
               <td colspan="">
-                <br />
               
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE{{uniteAdmin_id}}<a href="#" style="color: red"></a>
+              
+                <label 
+                  >UNITE ADMINISTRATIVE
                 </label>
                 <model-list-select
                   style="background-color: #fff; border: 2px solid #000"
@@ -24,7 +41,7 @@
              
             </tr>
           </tbody>
-        </table> -->
+        </table>
         <h2 style="text-align:center;font-size:25px">Tableau Récapitulatif Budget des Projets</h2>
     <div class="container-fluid">
       <notifications />
@@ -52,52 +69,46 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr style="">
-                <th style="font-size:15px;">Unité administrative</th>
+                <th style="font-size:15px; color:#000">UNITE ADMINISTRATIVE</th>
                 <!-- <th style="font-size:15px;" title="Budget du personnel">Personnels (FCFA)</th>
 
                 <th style="font-size:15px;" title="Budget de bien et service">Biens et Services (FCFA)</th>
                 <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements (FCFA)</th> -->
                 <!-- <th style="font-size:15px;" title="Budget en transfert">Transferts</th> -->
 
-                <th style="font-size:15px;background: blue; color:#fff">Total (FCFA)</th>
-                <th style="font-size:15px;background: forestgreen; color:#fff">Consommés (FCFA)</th>
-                <th style="font-size:15px;background: red;color:#fff">Disponibles (FCFA)</th>
-                <th style="font-size:15px;background:deepskyblue;color:#fff">Taux Exécution (%)</th>
+                <th style="font-size:15px; color:#000">BUDGET INITIAL (FCFA){{afficheAnnee}}</th>
+                <th style="font-size:15px; color:#000">BUDGET CONSOMME (FCFA) {{afficheAnnee}}</th>
+                <th style="font-size:15px;color:#000">BUDGET DISPONIBLE (FCFA) {{afficheAnnee}}</th>
+                <th style="font-size:15px;color:#000">TAUX EXECUTION (%) {{afficheAnnee}}</th>
                   <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr v-for="unite in partition(uniteAdmin,size)[page]" :key="unite.id">
+              <tr v-for="unite in partition(afficheUa,size)[page]" :key="unite.id">
                 
-                <td style="font-weight:bold;font-size:12px;">{{libelleUniteAdministrative(unite)}}</td>
-                <!-- <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSommeSansFCFA(parseFloat(budgetPersonnel(unite)))}}</td>
+                <td style="font-weight:bold;font-size:12px;">{{libelleUniteAdministrative(unite.id)}}</td>
+                
                 <td
                   style="font-weight:bold;font-size:12px;;text-align:center"
-                >{{formatageSommeSansFCFA(parseFloat(budgetBienService(unite)))}}</td>
-                <td
-                  style="font-weight:bold;font-size:12px;;text-align:center"
-                >{{formatageSommeSansFCFA(parseFloat(budgetInverstisement(unite)))}}</td> -->
-                <!-- <td
-                  style="font-weight:bold;font-size:12px;"
-                >{{formatageSommeSansFCFA(parseFloat(budgetTranfert(unite)))}}</td> -->
-
-                <td
-                  style="font-weight:bold;font-size:12px;;text-align:center"
-                >{{formatageSommeSansFCFA(parseFloat(MontantTotalPargdeNature(unite)))}}</td>
+                >{{formatageSommeSansFCFA(parseFloat(AfficheMontantBudgetInitial(unite.id)))}}</td>
                 <td style="font-weight:bold;font-size:12px;;text-align:center"
-                >{{formatageSommeSansFCFA(parseFloat(ComsommationBudgetaire(unite)))}}</td>
+                >{{formatageSommeSansFCFA(parseFloat(AfficheMontantBudgetConsomme(unite.id)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;;text-align:center"
             
-                >{{formatageSommeSansFCFA(parseFloat(MontantTotalPargdeNature(unite)) - (parseFloat(ComsommationBudgetaire(unite))))}}</td>
+                >{{formatageSommeSansFCFA(parseFloat(AfficheMontantBudgetInitial(unite.id)) - (parseFloat(AfficheMontantBudgetConsomme(unite.id))))}}</td>
                 
-                <td style="font-weight:bold;font-size:12px;;text-align:center">{{((parseFloat(ComsommationBudgetaire(unite))/parseFloat(MontantTotalPargdeNature(unite)))*100).toFixed(2)|| 0}}%</td>
+                <td style="font-weight:bold;font-size:12px;text-align:center">{{EviteNaN(unite.id)}}%</td>
           
              
               </tr>
-
+<tr>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">TOTAL</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{formatageSomme(parseFloat(SommeBudgetInitial))}}</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{formatageSomme(parseFloat(SommeBudgetConsomme))}}</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{formatageSomme(parseFloat(SommeBudgetInitial)-parseFloat(SommeBudgetConsomme))}}</td>
+  <td style="text-align:center;font-size:14px;font-weight:bold;color:#000;background-color: #e6b637;">{{TauxExecution}}%</td>
+</tr>
             </tbody>
           </table>
          
@@ -108,9 +119,9 @@
     <div class="pagination alternate">
               <ul>
                 <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                   <li  v-for="(titre, index) in partition(uniteAdmin,size).length" :key="index" :class="{ active : active_el == index }">
+                   <li  v-for="(titre, index) in partition(afficheUa,size).length" :key="index" :class="{ active : active_el == index }">
                    <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                <li :class="{ disabled : page == partition(uniteAdmin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                <li :class="{ disabled : page == partition(afficheUa,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
               </ul>
            </div>
@@ -121,16 +132,16 @@
 <script>
 
     import { mapGetters, mapActions } from "vuex";
-    import { formatageSommeSansFCFA,partition } from "@/Repositories/Repository";
+    import { formatageSommeSansFCFA,partition,formatageSomme } from "@/Repositories/Repository";
     import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
-//     import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+    import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
         components:{
             //ProgressBar
-            //ModelListSelect
+            ModelListSelect
         },
         data() {
             return {
@@ -144,7 +155,8 @@
                     }
 
                 ],
-                uniteAdmin_id:"",
+                exercices_budgetaires_id:0,
+                uniteAdmin_id:0,
                 editUniteAdministrative:{},
                 detailBudget:"",
                 budgetGeneralCharge:"",
@@ -209,6 +221,18 @@
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+
+afficheAnnee(){
+  if(this.exercices_budgetaires_id==0){
+    return this.anneeAmort
+  }
+  else{
+    return this.exercices_budgetaires_id
+  }
+},
+
+
+
 libelleUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -243,31 +267,26 @@ groupeParUa() {
         return [];
      //};
     },
-    ListeDEsEntreprise() {
-      let vM = this;
-      let objet = this.uniteAdmin;
+    // ListeDEsEntreprise() {
+    //   let vM = this;
+    //   let objet = this.uniteAdmin;
 
-      //retourne la section selectionner
+    //   //retourne la section selectionner
 
-      if (this.uniteAdmin_id != "") {
-        objet = this.uniteAdmin.filter((item) => {
-            console.log(this.uniteAdmin)
-          if (item.uniteadministrative_id == vM.uniteAdmin_id) {
-            return item;
-          }
-        });
-        return objet;
-      }
-     
-   
-      
-      
-      return objet;
-    },
+    //   if (this.uniteAdmin_id != "") {
+    //     objet = this.uniteAdmin.filter((item) => {
+    //         console.log(this.uniteAdmin)
+    //       if (item.uniteadministrative_id == vM.uniteAdmin_id) {
+    //         return item;
+    //       }
+    //     });
+    //     return objet;
+    //   }
+
+    //   return objet;
+    // },
 uniteAdmin() {
       
- 
-
         if (this.noDCfNoAdmin){
             let colect=[];
             this.groupeParUa.filter(item=>{
@@ -283,8 +302,105 @@ uniteAdmin() {
 
 return this.groupeParUa
 
-       
+    },
+    ListeDEsEntreprise() {
+      let vM = this;
+      let objet = this.filtre_unite_admin;
 
+      //retourne la section selectionner
+
+      if (this.sections_id != 0 && this.grandes_nature_id == 0 && this.uniteAdministrative_id == 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.section_id == vM.sections_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      if (this.sections_id == 0 && this.grandes_nature_id != 0 && this.uniteAdministrative_id == 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.grand_nature_id == vM.grandes_nature_id) {
+            return item;
+          }
+        });
+          return objet;
+      }
+   if (this.sections_id == 0 && this.grandes_nature_id == 0 && this.uniteAdministrative_id != 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (item.unite_administrative_id == vM.uniteAdministrative_id) {
+            return item;
+          }
+        });
+        return objet;
+      }
+       if (this.sections_id != 0 && this.grandes_nature_id != 0 && this.uniteAdministrative_id == 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (
+            item.section_id == vM.sections_id &&
+            item.grand_nature_id == vM.grandes_nature_id
+          ) {
+            return item;
+          }
+        });
+        return objet;
+      }
+       if (this.grandes_nature_id != 0 && this.uniteAdministrative_id != 0) {
+        objet = this.filtre_unite_admin.filter((item) => {
+          if (
+            
+            item.grand_nature_id == vM.grandes_nature_id && item.unite_administrative_id == vM.uniteAdministrative_id 
+          ) {
+            return item;
+          }
+        });
+        return objet;
+      }
+      return this.filtre_unite_admin;
+    },
+    filtrerUaParTypeProj(){
+return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
+    },
+    afficheUa(){
+  if(this.uniteAdmin_id==0){
+    return this.filtre_unite_admin
+  }
+  else{
+    return this.filtre_unite
+  }
+},
+     filtre_unite() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter(item2=>item2.id==this.uniteAdmin_id);
+      }
+      return this.filtrerUaParTypeProj.filter(item2=>item2.id==this.uniteAdmin_id);
+    },
+    filtre_unite_admin() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect;
+      }
+      return this.filtrerUaParTypeProj;
     },
  filtre_type_teste() {
       return id2 => {
@@ -404,14 +520,30 @@ afficherTotalBudgetModuleTransfert() {
     },
 
 
+
+
+
 MontantTotalPargdeNature() {
       return id => {
         if (id != null && id != "") {
-           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.exercices_budgetaires_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
      
         }
+         return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 25).toFixed(0);
+
       };
+      
+    },
+    anneeAmort() {
+      const norme = this.exercices_budgetaires.find(
+        (normeEquipe) => normeEquipe.encours == 1
+      );
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0;
     },
 budgetPersonnel() {
       return id => {
@@ -902,8 +1034,31 @@ budgetConsommerBienService() {
       return activeBudget;
     },
 
-     
+     SommeBudgetInitial(){
+if(this.exercices_budgetaires_id==0){
+ return  this.budgetEclate.filter(qtreel =>qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+   
+}
+else{
+           return  this.budgetEclate.filter(qtreel =>  qtreel.annebudgetaire==this.exercices_budgetaires_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           
+}
+},
+SommeBudgetConsomme(){
+if(this.exercices_budgetaires_id==0){
+ return  this.gettersgestionOrdrePaiement.filter(qtreel =>  qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && qtreel.exercice==this.anneeAmort ||  qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9 && qtreel.exercice==this.anneeAmort||  qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==8 && qtreel.exercice==this.anneeAmort||  qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==9 && qtreel.exercice==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
 
+}
+else{
+         return  this.gettersgestionOrdrePaiement.filter(qtreel =>  qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && qtreel.exercice==this.exercices_budgetaires_id ||  qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9 && qtreel.exercice==this.exercices_budgetaires_id ||  qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==8 && qtreel.exercice==this.exercices_budgetaires_id ||  qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==9 && qtreel.exercice==this.exercices_budgetaires_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+ 
+}
+},
+         TauxExecution(){
+               
+                  return ((parseFloat(this.SommeBudgetConsomme)/parseFloat(this.SommeBudgetInitial))*100).toFixed(2)
+               
+        },
         },
         methods: {
             ...mapActions("uniteadministrative", [
@@ -920,7 +1075,34 @@ budgetConsommerBienService() {
                 "getAllHistoriqueBudgetGeneral",
                 "modifierLigneExempter",
             ]),
+            EviteNaN(id){
+                if(this.AfficheMontantBudgetConsomme(id)==0 && this.AfficheMontantBudgetInitial(id)==0){
+                  return 0.00
+                }
+                else{
+                  return ((parseFloat(this.AfficheMontantBudgetConsomme(id))/parseFloat(this.AfficheMontantBudgetInitial(id)))*100).toFixed(2)
+                }
+            },
+AfficheMontantBudgetConsomme(id){
+if(this.exercices_budgetaires_id==0){
+ return  this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && qtreel.exercice==this.anneeAmort || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9 && qtreel.exercice==this.anneeAmort|| qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==8 && qtreel.exercice==this.anneeAmort|| qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==9 && qtreel.exercice==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
 
+}
+else{
+         return  this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && qtreel.exercice==this.exercices_budgetaires_id || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9 && qtreel.exercice==this.exercices_budgetaires_id || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==8 && qtreel.exercice==this.exercices_budgetaires_id || qtreel.unite_administrative_id == id && qtreel.type_ordre_paiement == 4 && qtreel.decision_cf==9 && qtreel.exercice==this.exercices_budgetaires_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+ 
+}
+},
+AfficheMontantBudgetInitial(id){
+if(this.exercices_budgetaires_id==0){
+ return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+   
+}
+else{
+           return  this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.exercices_budgetaires_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+           
+}
+},
 
 partition:partition,
 
@@ -948,7 +1130,7 @@ getDataPaginate(index){
 
 
 
-
+formatageSomme:formatageSomme,
             formatageSommeSansFCFA: formatageSommeSansFCFA,
             OnchangeFichier(e) {
                 const files = e.target.files;

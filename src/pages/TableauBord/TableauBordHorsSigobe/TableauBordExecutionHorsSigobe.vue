@@ -1,7 +1,7 @@
 
 <template>
   <div>
-      <h1 style="text-align:center">TABLEAU DE BORD D'EXECUTION HORS SIGOBE</h1>
+      <h1 style="text-align:center">TABLEAU DE BORD GENERAL HORS SIGOBE</h1>
       <br/>
        <br/>
         <table class="table table-bordered table-striped">
@@ -57,7 +57,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft; border: 5px solid green!important;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text">
-                                                  <h5 style="font-size:25px;text-align:left;">OP PROVISOIRE</h5>
+                                                  <h5 style="font-size:25px;text-align:left;">OP PROVISOIRE {{anneeAmort}}</h5>
                                                   <div>
                                                       <!-- <i style="font-size: 35px !important;" class="icon-cogs"></i> -->
                                                       
@@ -76,7 +76,7 @@
                                           <div  class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;  border: 5px solid green!important;">
 
                                                <div class="timeline-text">
-                                                  <h5 style="font-size:25px;text-align:left;">OP ANNULATION</h5>
+                                                  <h5 style="font-size:25px;text-align:left;">OP ANNULATION {{anneeAmort}}</h5>
                                                   <div>
                                                       <!-- <i style="font-size: 35px !important;" class="icon-cogs"></i> -->
                                                      
@@ -97,7 +97,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft; border: 5px solid green!important;">
 
                                              <div class="timeline-text">
-                                                  <h5 style="font-size:25px;text-align:left;">OP DEFINITIF</h5>
+                                                  <h5 style="font-size:25px;text-align:left;">OP DEFINITIF {{anneeAmort}}</h5>
                                                   <div>
                                                       <!-- <i style="font-size: 35px !important;" class="icon-cogs"></i> -->
                                                     
@@ -114,7 +114,7 @@
                                       <div class="span3"  >
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft; border: 5px solid green!important;">
                                             <div class="timeline-text">
-                                                  <h5 style="font-size:25px;text-align:left;">OP DIRECT</h5>
+                                                  <h5 style="font-size:25px;text-align:left;">OP DIRECT {{anneeAmort}}</h5>
                                                   <div>
                                                       <!-- <i style="font-size: 35px !important;" class="icon-cogs"></i> -->
                                                       

@@ -25,39 +25,19 @@
 		</center>
        </li>
        
-       
+      <!-- <li style="background: #fff !important;">
+          <a title="TABLEAU DE BORD" href="#">
+            <i class="icon-dashboard"></i>
+            <span style="color:#000 !important;font-size:15px;font-weight:bold;">MENU G-HORS SIGOBE</span>
+          </a>
+        </li> -->
         <li :class="{active: active_el == 1034 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
           </a>
         </li>
-        <!-- <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
-          <a title="PARAMETRES GENERAUX" href="#">
-            <i class="icon-cogs"></i>
-            <span>PARAMETRES GENERAUX</span>
-          </a>
-        </li> -->
-        <!-- <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
-          <a  title="" href="#">
-            <i class="icon-home"></i>
-            <span>UNITE ADMINISTRATIVE</span>
-          </a>
-        </li> -->
-         <!-- <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
-          <a title="TRANSFERT" href="#">
-            <i class="icon-money"></i>
-            <span>BUDGET</span>
-            <span class="label label-important"></span>
-          </a>
-        </li> -->
-         <!-- <li @click.prevent="navigateToTransfert">
-          <a title="BUDGET ECLATE" href="#">
-            <i class="icon-money"></i>
-            <span>BUDGET ECLATE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li> -->
+     
 
         <li @click.prevent="navigateTableBordBordBudgetEclate" :class="{active: active_el ==780}">
            <a href="#">
@@ -65,12 +45,7 @@
                   <span>GESTION DU BUDGET</span>
               </a>
         </li>
-          <!-- <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==45}">
-              <a href="#">
-                  <i class="icon-truck"></i>
-                  <span>TABLEAU DE BORD DE MARCHE</span>
-              </a>
-          </li> -->
+         
 
          <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==25}">
           <a href="#">
@@ -78,34 +53,7 @@
             <span>GESTION DES MARCHES</span>
           </a>
         </li>
-        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 31 }">
-          <a href="#">
-            <i class="icon-group"></i>
-            <span>PERSONNEL</span>
-          </a>
-        </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==7}">
-          <a href="#">
-            <i class="icon-truck"></i>
-            <span>BIENS ET SERVICES</span>
-          </a>
-        </li> -->
-
-       <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class=" icon-camera"></i>
-            <span>COMPTA DES MATIERES</span>
-          </a>
-        </li> -->
-
-
-        <!-- <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==20}">
-          <a title="INVESTISSEMENT" href="#">
-            <i class="icon-truck"></i>
-            <span>INVESTISSEMENT</span>
-           
-          </a>
-        </li> -->
+     
 
         <li @click.prevent="navigateToAutredepense" >
           <a title="INVESTISSEMENT" href="#">
@@ -129,11 +77,57 @@
 
               </a>
           </li>
+ <!-- <li style="background: #fff !important;">
+          <a title="TABLEAU DE BORD" href="#">
+            <i class="icon-dashboard"></i>
+            <span style="color:#000 !important;font-size:15px;font-weight:bold;">AUTRES MODULES</span>
+          </a>
+        </li>
+         
+ <li  title="UNITES ADMINISTRATIVES">
+    <router-link
+                  :to="{ name: 'TableauDeBordG', params: { id: 2 } }"        >
+        
+                  
+                  <span>UNITES ADMINISTRATIVES</span>
 
-         <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class=" icon-camera"></i>
-            <span>COMPTA DES MATIERES</span>
+            
+               </router-link>
+          </li>
+
+<li  >
+              <a title="GESTION DU PERSONNEL" href="#">
+                  <i class=""></i>
+                  <span>GESTION DU PERSONNEL</span>
+
+              </a>
+          </li>
+          <li @click="goToModule(3)" >
+              <a title="GESTION SIGOBE" href="#">
+                  <i class=""></i>
+                  <span>GESTION SIGOBE</span>
+
+              </a>
+          </li>
+ <li @click="goToModule(8)" >
+              <a title="COMPTABILITE DES MATIERES" href="#">
+                  <i class=""></i>
+                  <span>COMPTA DES MATIERES</span>
+
+              </a>
+          </li>
+<li @click="goToModule(5)" >
+              <a title="CARTOGRAPHIES DES BUDGETS ET DES MARCHES" href="#">
+                  <i class=""></i>
+                  <span>CARTOGRAPHIES</span>
+
+              </a>
+          </li>
+
+          <li style="background: #fff !important;">
+          <a title="TABLEAU DE BORD" href="#">
+            <i class="icon-dashboard"></i>
+            <span style="color:#000 !important;font-size:15px;font-weight:bold;"></span>
           </a>
         </li> -->
          <li @click.prevent="navigateRetourAuMenu" >
@@ -143,64 +137,7 @@
             <span class="label label-important"></span>
           </a>
         </li>
-         <!-- <li >
-           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
-         
-            <i class="icon-arrow-left"></i>
-            <span>RETOUR AU MENU</span>
-           
-          </router-link>
-        </li> -->
-         <!-- <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==7}">
-          <a title="GESTION MARCHE" href="#">
-            <i class="icon-shopping-cart"></i>
-            <span>GESTION MARCHE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
-          <a href="#">
-            <i class="icon-group"></i>
-            <span>PERSONNEL</span>
-          </a>
-        </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
-          <a href="#">
-            <i class="icon-truck"></i>
-            <span>BIENS ET SERVICES</span>
-          </a>
-
-       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class=" icon-camera"></i>
-            <span>COMPTA DES MATIERES</span>
-          </a>
-        </li>
-
-
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
-          <a title="INVESTISSEMENT" href="#">
-            <i class="icon-truck"></i>
-            <span>INVESTISSEMENT</span>
-           
-          </a>
-        </li>
-        
-        
        
-     
-          <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
-          <a title="CARTOGRAPHIE" href="#">
-            <i class=" icon-globe"></i>
-            <span>CARTOGRAPHIE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-        <li v-if="cf() || dcf()" @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
-          <a href="#">
-            <i class="icon icon-user"></i> <span>MON EQUIPE</span>
-          </a>
-          </li> -->
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
@@ -242,7 +179,7 @@ export default {
       if (qtereel) {
         return qtereel.fichier;
       }
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+      return "https://personnel.agosoftprojet.com/savephotoprofil/1_!1595119277.jpg "
         }
       };
     },
@@ -269,10 +206,26 @@ return objJson.id
   methods: {
    
       ...mapMutations('parametrageMenu', ['activate']),
-      ...mapActions('Utilisateurs', ['logoutUser']),
+    
+      ...mapActions('Utilisateurs', ["logoutUser",'getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
+    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
     admin:admin,
     dcf:dcf,
     cf:cf,
+    goToModule(id){
+     console.log(id)
+     if (id==6){
+         this.$router.push({
+             name: 'liste_ua_compta'
+         })
+     }else{
+
+         this.$router.push({
+             name: 'TableauDeBordG',
+             params:{id:id}
+         })
+     }
+      },
  navigateToCatographieBudgetaire(){
         this.activate(8)
         this.$router.push({
@@ -283,7 +236,7 @@ return objJson.id
         this.activate(1200)
         this.$router.push({
         //  name:'TableauBordOp'
-          name:'TableauBordExecutionHorsSigobe'
+          name:'PresentationTableauBordControleExecution'
         })
       },
        navigateToRapport(){
@@ -310,7 +263,7 @@ navigateToGestionMarche(){
           this.activate(780)
           this.$router.push({
              // name: 'TableauBordDuBudgetEclate'
-              name: 'TableauBordBudgetEclate'
+              name: 'presentationTableau'
           })
       },
       navigateTableBordBord(){

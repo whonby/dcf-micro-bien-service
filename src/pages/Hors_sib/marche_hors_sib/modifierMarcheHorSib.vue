@@ -11,12 +11,21 @@
             <div class="control-group">
               <label class="control-label">Année Budgétaire </label>
               <div class="controls">
-                <input
+                <select v-model="editMarcheHorSib.exo_id" class="span4">
+                  <option
+                    v-for="plans in exercices_budgetaires"
+                    :key="plans.id"
+                    :value="plans.annee"
+                  >
+                    {{ plans.annee }}
+                  </option>
+                </select>
+                <!-- <input
                   type="text"
                   :value="anneeBugetaireModifier"
                   class="span4"
                   readonly
-                />
+                /> -->
               </div>
             </div>
           </td>
@@ -518,6 +527,8 @@ import { admin, dcf, noDCfNoAdmin } from "../../../Repositories/Auth";
 export default {
   name: "type facture",
 
+
+
   components: {
     // bailleurAjouter,
     //  ModelListSelect,
@@ -882,8 +893,8 @@ export default {
       return 0;
     },
   },
-  methods: {
-    ...mapActions("horSib", ["modifierMarcheHorSib", "getMarcheHorSib"]),
+  methods: { 
+    ...mapActions("horSib", ["modifierMarcheHorSib"]),
     // allerPageMarcheHorsib() {
     //   this.$router.push({
     //     name: "marcheHorsib",
@@ -915,10 +926,11 @@ export default {
     modifierMarcheHorSibLocal() {
       var nouvelObjet = {
         ...this.editMarcheHorSib,
-        exo_id: this.anneeBugetaireModifier,
+       // exo_id: this.anneeBugetaireModifier,
         imputation: this.ImputationBudget(this.editMarcheHorSib.economique_id),
       };
       this.modifierMarcheHorSib(nouvelObjet);
+     // this.getMarcheHorSib();
       this.editMarcheHorSib = {
         //latitude:"",
         // longitude:"",
@@ -944,8 +956,9 @@ export default {
         sib: 1,
       };
 
+
       this.$router.push({
-        name: "GestionMarcheHorSib",
+        name: "groupeMarcheParUa",
       });
     },
   },

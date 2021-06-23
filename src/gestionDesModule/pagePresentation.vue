@@ -643,6 +643,8 @@ this.getMembreCojo()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
 this.getTousActivite()
+
+this.getEntreprisePreselectionner()
         },
 
   computed:{
@@ -693,7 +695,7 @@ afficherModule1() {
       if (qtereel) {
         return qtereel.fichier;
       }
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+      return "https://personnel.agosoftprojet.com/savephotoprofil/1_!1595119277.jpg "
         }
       };
     },
@@ -847,7 +849,7 @@ return objJson.id
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
           "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",
-          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel']),
+          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel','getEntreprisePreselectionner']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)
