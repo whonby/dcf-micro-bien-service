@@ -380,7 +380,7 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
-
+    
 
  //FONCTION LEGA
    MontantBudgetVote() {
@@ -946,6 +946,9 @@ export default {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+
+    
+
     EviteNaN(id) {
       if (
         this.MontantBudgetExecuté(id) == 0 &&
