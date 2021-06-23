@@ -1,8 +1,8 @@
 
 <template>
   <div>
-      <h3 style="text-align:center">TABLEAU DE BORD DU BUDGET HORS SIGOBE</h3>
-    
+      <!-- <h3 style="text-align:center">TABLEAU DE BORD DU BUDGET HORS SIGOBE</h3>
+     -->
   
         <!-- <div style="text-align:center;border:4px solid blue;font-weight:bold"> <h3 style="text-align:center">TABLEAU DE BORD UA PROJETS (ANNEE EN COURS)</h3></div>
           <h3 style="text-align:center">{{AffichLibelle(formData.unite_administrative_id)}}</h3> -->
@@ -17,18 +17,18 @@
                   <ul class="nav nav-tabs">
                    
                      <li class="active" >
-                      <a data-toggle="tab" href="#DEMANDE"
-                        >TABLEAU DE BORD GENERAL </a
+                      <a data-toggle="tab" href="#DEMANDE" style="font-size:16px"
+                        >TABLEAU DE BORD 1 </a
                       >
                     </li>
                      <li class=""  >
-                      <a data-toggle="tab" href="#COMMANDE"
-                        >TABLEAU DE SUIVI DES TYPES D’OP PAR EXERCICE</a
+                      <a data-toggle="tab" href="#COMMANDE" style="font-size:16px"
+                        >TABLEAU DE BORD 2</a
                       >
                     </li>
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#LIQUIDATION"
-                        >SYSTHESE DU BUDGET PAR UA</a
+                        >TABLEAU DE BORD 3</a
                       >
                     </li> -->
                      <!-- <li class="" >
@@ -54,11 +54,11 @@
                   <div id="COMMANDE" class="tab-pane">
                   <TableauSuiviTypesOpExercice></TableauSuiviTypesOpExercice>
                   </div>
-                  <!-- <div id="LIQUIDATION" class="tab-pane ">
-                     <recapitulatifBudgetHorsSigobe></recapitulatifBudgetHorsSigobe>
+                  <div id="LIQUIDATION" class="tab-pane ">
+                     <TableauSuiviOPStatut></TableauSuiviOPStatut>
                
                   </div>
-                   <div id="MANDAT" class="tab-pane ">
+                  <!--  <div id="MANDAT" class="tab-pane ">
                        <h3 style="text-align:center">DETAIL OP DIRECT</h3>
      
                               
@@ -87,6 +87,7 @@ import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
 import TableauBordExecutionHorsSigobe from "./TableauBordExecutionHorsSigobe"
 import TableauSuiviTypesOpExercice from "./RapportControleExecution/TableauSuiviTypesOpExercice"
+import TableauSuiviOPStatut from "./RapportControleExecution/TableauSuiviOPStatut"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 //import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
@@ -95,7 +96,8 @@ export default {
      components: {
    // ModelListSelect,
     TableauBordExecutionHorsSigobe,
-    TableauSuiviTypesOpExercice
+    TableauSuiviTypesOpExercice,
+    TableauSuiviOPStatut
     // RechercheExecutionBudgetaire,
    // recapitulatifBudgetHorsSigobe
   },

@@ -1,7 +1,7 @@
 
 <template>
   <div>
-      <h1 style="text-align:center">TABLEAU DE BORD D'EXECUTION HORS SIGOBE</h1>
+      <h1 style="text-align:center">TABLEAU DE BORD GENERAL HORS SIGOBE</h1>
       <br/>
        <br/>
         <table class="table table-bordered table-striped">
