@@ -154,7 +154,7 @@
                            
                             </tr>
                               <tr>
-                            <td colspan="4" width="">
+                            <td colspan="4" width="20">
                         <div class="control-group">
                             <label class="span2">Objet  offre :</label>
                             <div class="controls">
@@ -678,7 +678,7 @@ affichierObjetMarche() {
     afficherRefAMI(){
         return id=>{
             if(id!=null && id!=""){
-                let refAmi= this.appelOffres.find(item => item.marche_id==731)
+                let refAmi= this.appelOffres.find(item => item.marche_id==61)
                 if(refAmi){
                     return refAmi.ref_appel
                 }

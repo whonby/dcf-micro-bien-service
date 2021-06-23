@@ -15,7 +15,7 @@
                   <option
                     v-for="plans in exercices_budgetaires"
                     :key="plans.id"
-                    :value="plans.exo_id"
+                    :value="plans.annee"
                   >
                     {{ plans.annee }}
                   </option>
@@ -893,8 +893,8 @@ export default {
       return 0;
     },
   },
-  methods: {
-    ...mapActions("horSib", ["modifierMarcheHorSib", "getMarcheHorSib"]),
+  methods: { 
+    ...mapActions("horSib", ["modifierMarcheHorSib"]),
     // allerPageMarcheHorsib() {
     //   this.$router.push({
     //     name: "marcheHorsib",
@@ -926,10 +926,11 @@ export default {
     modifierMarcheHorSibLocal() {
       var nouvelObjet = {
         ...this.editMarcheHorSib,
-        exo_id: this.anneeBugetaireModifier,
+       // exo_id: this.anneeBugetaireModifier,
         imputation: this.ImputationBudget(this.editMarcheHorSib.economique_id),
       };
       this.modifierMarcheHorSib(nouvelObjet);
+     // this.getMarcheHorSib();
       this.editMarcheHorSib = {
         //latitude:"",
         // longitude:"",
@@ -955,8 +956,9 @@ export default {
         sib: 1,
       };
 
+
       this.$router.push({
-        name: "GestionMarcheHorSib",
+        name: "groupeMarcheParUa",
       });
     },
   },

@@ -1,6 +1,6 @@
 <template>
     <div>
-  <h4>Liste des entreprises Restreint</h4>
+  <h4>Liste des entreprises Restreint </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
@@ -13,12 +13,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeCotation(macheid)"
+                    <tr class="odd gradeX" v-for="appelOffre in listeCotation(macheid)"
                         :key="appelOffre.id">
                          
                              
                           
-                        <td @click="afficherCandidatSelectionner(index)">
+                        <td> 
                             {{afficherLibelleEntreprise(appelOffre.entreprise_id) || 'Non renseigné'}}</td>
                        
                           <!-- <td @click="afficherCandidatSelectionner(index)">
@@ -32,34 +32,29 @@
                         </td>-->   
                 
 
-                            <div class="btn-group">
-                             
+                            <div class="btn-group"> 
+                           
                              
                                 <div v-if="verificationTacheExiste(appelOffre.id)" >
-                                  	<td style="text-align:cent">
-									     <input type="checkbox" v-model="attribue" :value="appelOffre.id"  checked  disabled="disabled" />
-									     </td>
+                                  	<!-- <td style="text-align:cent">
+									     <input type="checkbox" v-model="attribue" :value="appelOffre.id"  checked  disabled  />
+									     </td> -->
 
-                                             <!-- <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.id">
+                                             <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.entreprise_id">
                                              <img slot="extra" class="image" src="../../../../assets/004.png">
                                              <p style="color: red"></p>
-                                                </p-check> -->
+                                                </p-check>
 
-                    
-                     <!-- <span>{{item.name || 'Non renseigné'}} </span>
-                     <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" checked disabled  ../../assets/002.png />
-                        
-                      <label for="jack"></label> -->
                         </div>
 
                           <div v-else>
-                          	<td style="text-align:cent" >
-								         	<input type="checkbox" v-model="attribue"  :value="appelOffre.id"/>
-									       </td>
-                            <!-- <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.id">
+                          	<!-- <td style="text-align:cent" >
+								         	<input type="checkbox" v-model="attribue"  :value="afficherLibelleEntreprise(appelOffre.entreprise_id)"/>
+									       </td> -->
+                            <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.entreprise_id">
                             <img slot="extra" class="image" src="../../../../assets/001.png">
                             <p style=""></p>
-                             </p-check> -->
+                             </p-check>
                         <!-- <span>{{item.name || 'Non renseigné'}} </span>  
                          <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" />
                       
@@ -70,7 +65,7 @@
 
 
                         <!-- <td @click="afficherCandidatSelectionner(index)">
-
+afficherCandidatSelectionner
                             {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td> -->
                         
 
@@ -92,7 +87,8 @@ export default {
     attribue:[],
 
     formAffectation:{
-     entreprise_id:""
+     entreprise_id:"",
+     marche_id:""
     }
         }
         
@@ -103,7 +99,7 @@ export default {
     },
     computed:{
    ...mapGetters("bienService",['gettersEntreprisePreselectionner',
-   'gettersPersonnaliserRapportJugement','gettersCotationPersonnaliser','gettersEntreprisePreselectionner']),
+   'gettersPersonnaliserRapportJugement','gettersCotationPersonnaliser',]),
  ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
    
   listeCotation () {
@@ -120,7 +116,7 @@ export default {
             verificationTacheExiste(){
 						return id => {
 						if(id){
-						let objet = this.gettersEntreprisePreselectionner.find(item =>{
+						let objet = this.gettersCotationPersonnaliser.find(item =>{
 						if(item.entreprise_id == id){
 						return item
 						}
@@ -169,7 +165,7 @@ export default {
                         this.ajouterEntreSelectionner(this.formAffectation)
                         // this.getAffectationGroupeUser();
                         this.formAffectation={
-                            // user_id:"",
+                             marche_id:"",
                             entreprise_id:""
                             //   groupe_id:""
                         }

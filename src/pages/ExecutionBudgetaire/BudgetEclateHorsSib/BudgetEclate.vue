@@ -35,7 +35,7 @@
 
                             </div>
               </td> -->
-              <td style="width:5%;">
+              <td style="width:5%;" v-if="!noDCfNoAdmin">
                 <div align="right">
 
       <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
@@ -43,7 +43,7 @@
 
                             </div>
               </td>
-              <td style="width:10%;" >
+              <td style="width:10%;" v-if="!noDCfNoAdmin">
                 
                 <div align="right">
 
@@ -52,7 +52,7 @@
 
                             </div>
               </td>
-              <td style="width:12%;">
+              <td style="width:12%;" v-if="!noDCfNoAdmin">
                 <div align="right">
 
       <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE UA </button>
@@ -60,7 +60,7 @@
 
                             </div>
               </td>
-               <td style="width:15%;">
+               <td style="width:15%;" v-if="!noDCfNoAdmin">
                 <div align="right">
 
       <button class="btn btn-danger"  @click.prevent="ModificationBudgetaireSousBudget">MODIFICATION BUDGETAIRE SOUS BUDGET </button>

@@ -31,6 +31,7 @@ export  function  getMarcheHorSib({commit}) {
     asyncLoading( axios.put('/marche_hors_sib/'+ element_modifie.id, element_modifie))
      .then(response => {
           commit('MODIFIER_MARCHE_HORS_SIB',response.data)
+         // dispatch('getMarcheHorSib')
  
            this.$app.$notify({
              title: 'success ',

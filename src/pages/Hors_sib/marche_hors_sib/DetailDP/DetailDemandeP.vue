@@ -172,7 +172,7 @@
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
-                      <component-cotation :macheid="detail_marche"></component-cotation>
+                      <componentCotationDp :macheid="detail_marche"></componentCotationDp>
                          </div>
                              <!-- <div id="tab444" class="tab-pane">
                                 <div class="span4"></div>
@@ -277,6 +277,7 @@
 
                   </div>
     
+
 </template>
 <script>
 import {mapGetters} from 'vuex'
@@ -290,7 +291,8 @@ import { formatageSomme } from "../../../../Repositories/Repository"
     import LotMarche from "@/pages/bien_service/component/LotMarche";
       import publicationOffreDP from "../../../bien_service/DossierPso/publicationOffre/publicationOffreDP"
          import OuvertureOffreSansFin from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFin"
-         import componentCotation from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
+         import componentCotationDp from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotationDp.vue';
+         // componentCotationDp import componentCotation from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
         import invitationCf from '../../../bien_service/DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../../../bien_service/DossierPso/mandaté/mandateBs';
 export default {
@@ -299,7 +301,8 @@ export default {
         componentBailleur1,
         ActeEffetFinancier1,
         OuvertureOffreSansFin,
-        componentCotation,
+        //componentCotationDp,
+        componentCotationDp,
         PvJugement,
         reserveCf,
         LotMarche,
