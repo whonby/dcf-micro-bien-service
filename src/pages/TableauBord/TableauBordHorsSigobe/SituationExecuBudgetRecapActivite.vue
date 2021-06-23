@@ -235,7 +235,7 @@
             >
               <td style="font-size: 16px">
                 {{
-                  LibelleActivite(GroupeOrdrePaiementByActivit.activite_id) ||
+                  LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) ||
                   "Non renseigné"
                 }}
               </td>
@@ -243,7 +243,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantbudgetVote(GroupeOrdrePaiementByActivit.activite_id)
+                      MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)
                     )
                   )
                 }}
@@ -253,7 +253,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantbudgetVote(GroupeOrdrePaiementByActivit.activite_id)
+                      MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)
                     )
                   )
                 }}
@@ -263,7 +263,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantBudgetActuel(GroupeOrdrePaiementByActivit.activite_id)
+                      MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)
                     )
                   )
                 }}
@@ -273,7 +273,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantBudgetExecuté(GroupeOrdrePaiementByActivit.activite_id)
+                      MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)
                     )
                   ) || "Non renseigné"
                 }}
@@ -281,13 +281,13 @@
               <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
                  
-                    EviteNaN(GroupeOrdrePaiementByActivit.activite_id) || "Non renseigné"
+                    EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
                 }}
               </td>
               <td style="font-size: 14px; font-weight: bold; text-align:right">
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(MontantDisponible(GroupeOrdrePaiementByActivit.activite_id)))||
+                    parseFloat(MontantDisponible(GroupeOrdrePaiementByActivit[0].activite_id)))||
                   "Non renseigné"
                 }}
               </td>

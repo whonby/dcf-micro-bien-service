@@ -101,7 +101,7 @@
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
       </button>
-    </div>
+    </div> -->
     
     <div class="widget-content nopadding" id="printpdf">
       <h2
