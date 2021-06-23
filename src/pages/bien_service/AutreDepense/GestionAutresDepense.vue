@@ -27,20 +27,20 @@
                 </thead>
                 <tbody>
                       <tr class="odd gradeX" v-for="(type) in afficheDetailAutreDepense" :key="type">
-<td style="font-size:16px;color:#000;text-align:center">{{type.nom_autre_depense  || 'Non renseigné'}}</td>
- <td style="font-size:16px;color:#000;text-align:center">{{type.reference_autre_depense  || 'Non renseigné'}}</td>
- <td style="font-size:16px;color:#000;text-align:center">{{type.compte_autre_depense  || 'Non renseigné'}}</td>
- <td style="font-size:16px;color:#000;text-align:center">{{type.mois_paiement || 'Non renseigné'}}</td>
- <td style="font-size:16px;color:#000;text-align:center">{{libelleModePaiement(type.mode_paiement_id)  || 'Non renseigné'}}</td>
- <td style="font-size:16px;color:#000;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.montant_ordre_paiement))  || 'Non renseigné'}}</td>
+            <td style="font-size:16px;color:#000;text-align:center">{{type.nom_autre_depense  || 'Non renseigné'}}</td>
+            <td style="font-size:16px;color:#000;text-align:center">{{type.reference_autre_depense  || 'Non renseigné'}}</td>
+            <td style="font-size:16px;color:#000;text-align:center">{{type.compte_autre_depense  || 'Non renseigné'}}</td>
+            <td style="font-size:16px;color:#000;text-align:center">{{type.mois_paiement || 'Non renseigné'}}</td>
+            <td style="font-size:16px;color:#000;text-align:center">{{libelleModePaiement(type.mode_paiement_id)  || 'Non renseigné'}}</td>
+            <td style="font-size:16px;color:#000;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.montant_ordre_paiement))  || 'Non renseigné'}}</td>
                           </tr>
                           <tr>
-<td style="font-size:16px;color:#000;text-align:center"></td>
- <td style="font-size:16px;color:#000;text-align:center"></td>
- <td style="font-size:16px;color:#000;text-align:center"></td>
- <td style="font-size:16px;color:#000;text-align:center"></td>
- <td style="font-size:16px;color:#000;text-align:center;font-weight: bold">TOTAL</td>
- <td style="text-align: center; color: red; font-weight: bold">{{formatageSommeSansFCFA(parseFloat(SommeAutreDepense))}}</td>
+          <td style="font-size:16px;color:#000;text-align:center"></td>
+          <td style="font-size:16px;color:#000;text-align:center"></td>
+          <td style="font-size:16px;color:#000;text-align:center"></td>
+          <td style="font-size:16px;color:#000;text-align:center"></td>
+          <td style="font-size:16px;color:#000;text-align:center;font-weight: bold">TOTAL</td>
+          <td style="text-align: center; color: red; font-weight: bold">{{formatageSommeSansFCFA(parseFloat(SommeAutreDepense))}}</td>
                           </tr>
                  
                 </tbody>
@@ -109,7 +109,7 @@ created() {
    this.detail_marche = this.marches.find(
        idmarche => idmarche.id == this.$route.params.id
          )
-        
+      console.log(this.afficheDetailAutreDepense)
 },
   computed: {
     ...mapGetters("bienService", [
