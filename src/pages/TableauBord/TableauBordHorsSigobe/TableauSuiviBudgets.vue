@@ -1,5 +1,119 @@
 <template>
   <div>
+    <div id="validationOpDefinitif1" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3 style="font-size:14px;font-weight: bold;">UNITE ADMINISTRATIVE : {{libelleUniteAdministrative(editMandat.id)}}</h3>
+      </div>
+      <div class="modal-body">
+        <h5>Detail Réamenagement Budgétaire</h5>
+        <table class="table table-bordered table-striped">
+          <thead>
+              <tr style="">
+                 <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">LIGNE ECONOMIQUE</th>
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">
+                  BUDGET VOTE (FCFA)</th>
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">
+                  VARIATION</th>
+
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">
+                  BUDGET ACTUEL (FCFA)</th>
+
+                
+               
+              
+              </tr>
+            </thead>
+            <tbody>
+             <tr  v-for="unite in afficheDetailReamenagement" :key="unite.id">
+               <td>{{libelleLigneEconomique(unite)}}</td>
+               <td style="font-weight: bold;font-size: 18px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)-(variation(unite))))}}</td>
+               <td style="font-weight: bold;font-size: 18px;text-align:center">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
+               <td style="font-weight: bold;font-size: 18px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantActuelParLigne(editMandat.id,unite)))}}</td>
+               
+              <!-- <td style="font-weight: bold; font-size: 12px; text-align: center">{{ formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite)))}}</td>
+                  <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite) - MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
+            
+               <td style="font-weight: bold; font-size: 12px; text-align: center"> {{ EviteNaNTypeFinancement(editMandat.id,unite) }}%</td> -->
+             </tr>
+              <tr>
+                <td style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                ">TOTAL</td>
+
+               
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;"
+                
+                >
+                  {{formatageSommeSansFCFA(parseFloat(montantVoteToralParLigne(editMandat.id)-(TotalVariation(editMandat.id))))}}
+                </td>
+                
+
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                "
+                >
+                  {{ formatageSomme(parseFloat(TotalVariation(editMandat.id))) }}
+                </td>
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                "
+                >
+                   {{ formatageSomme(parseFloat(montantActuelParReamenagement(editMandat.id))) }}
+                </td>
+
+               
+                
+              </tr>
+            </tbody>
+        </table>
+<div class="modal-footer">
+       
+        <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+      </div>
+      </div>
+
+    </div>
     <div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -42,7 +156,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">TAUX EXECUTION</th>
+                  background-color: #FC762F !important;">TAUX D'EXECUTION</th>
                   
                 <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
               </tr>
@@ -117,7 +231,10 @@
               </tr>
             </tbody>
         </table>
-
+<div class="modal-footer">
+       
+        <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+      </div>
       </div>
 
     </div>
@@ -243,7 +360,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">TAUX</th>
+                  background-color: #FC762F !important;">TAUX D'EXECUTION</th>
                    <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -275,6 +392,7 @@
                 </td>
                 <td
                   style="font-weight: bold; font-size: 12px; text-align: center"
+                   @click="percuFacture(unite.id)"
                 >
                   {{ TotalMontantReamenagement(unite.id) }}
                 </td>
@@ -317,7 +435,7 @@
                             color: #fff;
                             font-size: 18px;
                           "
-                          >Voir</span
+                          >{{arrayExerciceDecompteBienService(unite.id).length}}</span
                         >
                       </button>
                 </td>
@@ -527,6 +645,7 @@ export default {
       "afficheNiveauPlanProg",
       "exercices_budgetaires",
     ]),
+     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
@@ -535,6 +654,156 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+    TotalVariation() {
+      return (id2) => {
+        if (id2 != null && id2 != "") {
+          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+      libelleLigneEconomique(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.plans_budgetaires.find(item => item.id==id)
+          if(objet) return objet.code.concat("    ", objet.libelle)
+        }
+        return null
+      }
+},
+    variation(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.budgetEclate.find(item => item.uniteadministrative_id==this.editMandat.id && item.ligneeconomique_id==id)
+          if(objet) return objet.variation_budget
+        }
+        return null
+      }
+},
+montantVoteToralParLigne(){
+    return (id) => {
+        if (id != null && id != "" ) {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == id 
+                && qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+},
+montantVoteParLigne(){
+    return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == id &&
+                qtreel.ligneeconomique_id == id1 
+                && qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+},
+montantActuelParReamenagement(){
+    return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == id 
+               
+                && qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+},
+montantActuelParLigne(){
+    return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == id &&
+                qtreel.ligneeconomique_id == id1 
+                && qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+},
+MontantExecute(){
+  return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+               (qtreel.unite_administrative_id == this.editMandat.id
+              && qtreel.ligne_economique_id==id 
+                && qtreel.exercice == this.afficheAnnee
+                && qtreel.type_ordre_paiement == 1
+                && qtreel.decision_cf == 8
+                && qtreel.diff_op ==null) 
+                ||
+                 (qtreel.unite_administrative_id == id
+                && qtreel.exercice == this.afficheAnnee
+                && qtreel.type_ordre_paiement == 1
+                && qtreel.decision_cf == 9
+                && qtreel.diff_op ==null) 
+                ||
+                 (qtreel.unite_administrative_id == id
+                && qtreel.exercice == this.afficheAnnee
+                && qtreel.type_ordre_paiement == 4
+                && qtreel.decision_cf == 8
+                && qtreel.diff_op ==null) 
+                ||
+                (qtreel.unite_administrative_id == id
+                && qtreel.exercice == this.afficheAnnee
+                && qtreel.type_ordre_paiement == 4
+                && qtreel.decision_cf == 9
+                && qtreel.diff_op ==null)
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+},
     libelleTypeFinancement() {
       return (id) => {
         if (id != null && id != "") {
@@ -548,6 +817,32 @@ export default {
           return 0;
         }
       };
+    },
+    afficheDetailReamenagement(){
+     // return this.budgetEclate.filter(item=>item.uniteadministrative_id == this.editMandat.id && item.variation_budget!=0)
+   
+  //  return (id) => {
+        
+        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id == this.editMandat.id && item.variation_budget!=0)
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+    //  };
+   
+   
+   
+   
     },
 arrayExerciceDecompteBienService() {
       return (id) => {
@@ -1255,6 +1550,15 @@ totalComsommeYtpeFinancement(){
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+    percuFacture(id) {
+      this.$("#validationOpDefinitif1").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+      this.editMandat = this.afficheUa.find(
+        (item) => item.id == id
+      );
+    },
     apercuFacture(id) {
       this.$("#validationOpDefinitif").modal({
         backdrop: "static",

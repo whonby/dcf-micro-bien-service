@@ -29,13 +29,13 @@
 
                       <li class="active"  style="font-size:20px">
                       <a data-toggle="tab" href="#TABLEAUBORD1"
-                        >TABLEAU DE BORD 1</a
+                        >TB1 :SUIVI DU BUDGET </a
                       >
                     </li>
 
                     <li class="" style="font-size:20px">
                       <a data-toggle="tab" href="#TABLEAUBORD2"
-                        >TABLEAU DE BORD 2</a
+                        >TB2:EXECUTION DU BUDGET</a
                       >
                     </li>
 
