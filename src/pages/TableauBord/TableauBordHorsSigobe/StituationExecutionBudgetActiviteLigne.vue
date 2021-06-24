@@ -239,13 +239,12 @@
          <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
                 :key="GroupeOrdrePaiementByActivit.id">
                 <tr>
-                  <!-- <td>{{ sommeLigneGrandeNature(listeLigne) }}</td> -->
 
-                  <td style="background-color: #83F747 !important; width: 500px" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
-                    <b>ACTIVITE:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
+                  <td style="background-color: #83F747 !important; width: 500px" >
+                    <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right">
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -253,7 +252,7 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right">
                    <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -261,14 +260,14 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right">
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right">
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -276,7 +275,7 @@
                      }}
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -288,14 +287,14 @@
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #83F747 !important; text-align: right">
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
@@ -310,8 +309,9 @@
                -->
                 </tr>
 
-                  <tr
-                  class="odd gradeX"
+
+                  
+                   <tr class="odd gradeX" 
                   v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
                   :key="listeLigneeco"
                 >
@@ -434,7 +434,7 @@
                     }}
                   </td>
                 </tr>
-
+              
               
               </tbody>
             </table>
@@ -526,6 +526,7 @@ export default {
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
+      verifShome:0
   
     };
   },
@@ -675,6 +676,15 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+    ShowMe(){
+       return (id) => {
+        if (id != null && id != "") {
+           return this.verifShome==id;
+        }
+        return 0;
+      };
+    },
    
 
     verifActiviteId() {

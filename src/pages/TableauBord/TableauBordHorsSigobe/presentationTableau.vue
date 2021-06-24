@@ -38,10 +38,17 @@
                         >TB2 : EXECUTION DU BUDGET</a
                       >
                     </li>
+                    
 
                     <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD3"
                         >TB3 : EXECUTION PAR ACTIVITE</a
+                      >
+                    </li>
+
+                    <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TestDatatable1"
+                        >Test Datatable</a
                       >
                     </li>
 
@@ -87,6 +94,10 @@
                      <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
                   </div>
 
+                   <div id="TestDatatable1" class="tab-pane">
+                     <TestDatatable></TestDatatable>
+                  </div>
+
                   <div id="LIQUIDATION" class="tab-pane ">
                      <recapitulatifBudgetHorsSigobe></recapitulatifBudgetHorsSigobe>
                
@@ -122,6 +133,7 @@ import TableauBordBudgetEclate from "./TableauBordBudgetEclate"
 import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
+import TestDatatable from "./TestDatatable"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
@@ -133,6 +145,7 @@ export default {
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
     SituationExecuBudgetRecapActivite,
+    TestDatatable,
     // RechercheExecutionBudgetaire,
     recapitulatifBudgetHorsSigobe
   },
