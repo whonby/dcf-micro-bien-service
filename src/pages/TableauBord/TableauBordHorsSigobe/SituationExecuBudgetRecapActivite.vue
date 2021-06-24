@@ -12,13 +12,13 @@
                  <td>
             <label>EXERCICE </label>
             <model-list-select
-              style="border: 1px solid #000"
+              style="border: 1px solid #000; font-size:15px"
               class="wide"
               :list="exercices_budgetaires"
               v-model="exercices_budgetaires_id"
               option-value="annee"
               option-text="annee"
-              placeholder=""
+              placeholder="2021"
             >
             </model-list-select>
           </td>
@@ -94,7 +94,7 @@
             <option value="80">80</option>
             <option value="100">100</option>
           </select>
-          Entrer
+    
         </div>
 
     <div align="right">

@@ -343,7 +343,7 @@
     <table class="table table-striped">
       <tbody>
         <tr>
-          <td>
+          <td class="span5">
             <label>EXERCICE </label>
             <model-list-select
               style="border: 1px solid #000"
@@ -356,7 +356,7 @@
             >
             </model-list-select>
           </td>
-          <td colspan="">
+          <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
             <model-list-select
               style="background-color: #fff; border: 2px solid #000"
@@ -370,7 +370,7 @@
             </model-list-select>
           </td>
 
-          <td colspan="">
+          <!-- <td colspan="">
             <label>TYPE FINANCEMENT </label>
             <model-list-select
               style="background-color: #fff; border: 2px solid #000"
@@ -382,7 +382,7 @@
               placeholder="TOUS LES TYPES FINANCEMENT"
             >
             </model-list-select>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -409,7 +409,7 @@
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
-          Entrer
+          
         </div>
 
         <div class="widget-content nopadding">
