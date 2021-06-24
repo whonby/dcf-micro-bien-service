@@ -99,7 +99,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in filtre_unite_admin" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBudgetEclate" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
                       <td style="font-size:12px;color:#000;text-align:center;font-weight:bold;">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
                    <td style="font-size:14px;color:#000;font-weight:bold;">{{conversionMajiscule(idUniteAdministrative(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
@@ -136,7 +136,7 @@
                 <a @click.prevent="precedent()" href="#">Précedent</a>
               </li>
               <li
-                v-for="(titre, index) in partition(filtre_unite_admin, size)
+                v-for="(titre, index) in partition(groupeUniteAdministrativeBudgetEclate, size)
                   .length"
                 :key="index"
                 :class="{ active: active_el == index }"
@@ -148,7 +148,7 @@
               <li
                 :class="{
                   disabled:
-                    page == partition(filtre_unite_admin, size).length - 1,
+                    page == partition(groupeUniteAdministrativeBudgetEclate, size).length - 1,
                 }"
               >
                 <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -183,7 +183,7 @@ export default {
   data() {
     return {
        page: 0,
-      size: 10,
+      size: 15,
       active_el: 0,
       fabActions: [
         {
@@ -267,11 +267,11 @@ export default {
 
         this.groupeUniteAdministrativeBudgetEclate.filter((item) => {
           let val = this.getterUniteAdministrativeByUser.find(
-            (row) => row.unite_administrative_id == item[0].uniteadministrative_id
+            (row) => row.unite_administrative_id == item.uniteadministrative_id
           );
           if (val != undefined) {
-            colect.push(item[0]);
-            return item[0];
+            colect.push(item);
+            return item;
           }
         });
         return colect;

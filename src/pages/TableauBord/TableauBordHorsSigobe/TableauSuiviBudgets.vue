@@ -1,5 +1,126 @@
 <template>
   <div>
+    <div id="validationOpDefinitif" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3 style="font-size:14px;font-weight: bold;">UNITE ADMINISTRATIVE : {{libelleUniteAdministrative(editMandat.id)}}</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+              <tr style="">
+                 <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">TYPE FINANCEMENT</th>
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">
+                  BUDGET VOTE (FCFA)</th>
+
+                
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">
+                  BUDGET ACTUEL (FCFA)</th>
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">
+                  MONTANTS EXECUTES (FCFA)</th>
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">TAUX EXECUTION</th>
+                  
+                <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
+              </tr>
+            </thead>
+            <tbody>
+             <tr  v-for="unite in arrayExerciceDecompteBienService(editMandat.id)"    :key="unite.id">
+               <td>{{libelleTypeFinancement(unite)}}</td>
+              <td style="font-weight: bold; font-size: 12px; text-align: center">{{ formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite)))}}</td>
+                  <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite) - MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
+            
+               <td style="font-weight: bold; font-size: 12px; text-align: center"> {{ EviteNaNTypeFinancement(editMandat.id,unite) }}%</td>
+             </tr>
+              <tr>
+                <td style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                ">TOTAL</td>
+
+               
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;"
+                
+                >
+                  {{ formatageSomme(parseFloat(TotalVoteParTypeFinancement)) }}
+                </td>
+                
+
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                "
+                >
+                  {{ formatageSomme(parseFloat(TotalVoteParTypeFinancement - totalComsommeYtpeFinancement)) }}
+                </td>
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                "
+                >
+                   {{ formatageSomme(parseFloat(totalComsommeYtpeFinancement)) }}
+                </td>
+
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  color:#000;
+                  text-align:center,
+                  background-color: #FC762F !important;
+                "
+                >
+                  {{ TauxExecutionTypeFinancement }}%
+                </td>
+                
+              </tr>
+            </tbody>
+        </table>
+
+      </div>
+
+    </div>
     <table class="table table-striped">
       <tbody>
         <tr>
@@ -123,6 +244,11 @@
                   color: #000;
                   text-align: center;
                   background-color: #FC762F !important;">TAUX</th>
+                   <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FC762F !important;">TYPE FINANCEMENT</th>
                 <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
               </tr>
             </thead>
@@ -176,6 +302,24 @@
                   style="font-weight: bold; font-size: 12px; text-align: center"
                 >
                   {{ EviteNaN(unite.id) }}%
+                </td>
+                <td
+                 style="font-weight: bold; font-size: 12px; text-align: center"
+                >
+               <button
+                        
+                        class="btn btn-info tailBtn"
+                        @click="apercuFacture(unite.id)"
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Voir</span
+                        >
+                      </button>
                 </td>
               </tr>
               <tr>
@@ -241,6 +385,15 @@
                 >
                   {{ TauxExecution }}%
                 </td>
+                <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  background-color: #83f747 !important;
+                "
+                >
+                  
+                </td>
               </tr>
             </tbody>
           </table>
@@ -300,6 +453,7 @@ export default {
           icon: "add",
         },
       ],
+      editMandat:{},
       exercices_budgetaires_id: 0,
       typefinancement:0,
       uniteAdmin_id: 0,
@@ -349,6 +503,7 @@ export default {
       "budgetGeneral",
       "transferts",
       "budgetEclate",
+      "groupeParTypeFinancementBudgetEclate"
     ]),
 
     ...mapGetters("bienService", [
@@ -380,8 +535,149 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+    libelleTypeFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.types_financements.find(
+            (qtreel) => qtreel.id == id
+          );
 
-
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+arrayExerciceDecompteBienService() {
+      return (id) => {
+        
+        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.type_financement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     };
+    },
+    MontantExecuteParTypeFinancement(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+               (qtreel.unite_administrative_id == id 
+                && qtreel.type_financement_id == id1
+                && qtreel.type_ordre_paiement == 1
+                && qtreel.decision_cf == 8
+                && qtreel.diff_op ==null) 
+                ||
+                 (qtreel.unite_administrative_id == id
+                && qtreel.type_financement_id == id1
+                && qtreel.type_ordre_paiement == 1
+                && qtreel.decision_cf == 9
+                && qtreel.diff_op ==null) 
+                ||
+                 (qtreel.unite_administrative_id == id
+                && qtreel.type_financement_id == id1
+                && qtreel.type_ordre_paiement == 4
+                && qtreel.decision_cf == 8
+                && qtreel.diff_op ==null) 
+                ||
+                (qtreel.unite_administrative_id == id
+                && qtreel.type_financement_id == id1
+                && qtreel.type_ordre_paiement == 4
+                && qtreel.decision_cf == 9
+                && qtreel.diff_op ==null)
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+    },
+MontantVoteParTypeFinancement(){
+    return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == id &&
+                qtreel.type_financement_id == id1 
+                && qtreel.budget_actif_def==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+},
+TotalVoteParTypeFinancement(){
+  return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == this.editMandat.id
+                && qtreel.budget_actif_def==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+},
+totalComsommeYtpeFinancement(){
+ return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+               (
+                qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
+                && qtreel.type_ordre_paiement == 1
+                && qtreel.decision_cf == 8
+                && qtreel.diff_op ==null) 
+                ||
+                 (
+                 qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
+                && qtreel.type_ordre_paiement == 1
+                && qtreel.decision_cf == 9
+                && qtreel.diff_op ==null) 
+                ||
+                 (
+                 qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
+                && qtreel.type_ordre_paiement == 4
+                && qtreel.decision_cf == 8
+                && qtreel.diff_op ==null) 
+                ||
+                (
+                 qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
+                && qtreel.type_ordre_paiement == 4
+                && qtreel.decision_cf == 9
+                && qtreel.diff_op ==null)
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+},
  //FONCTION LEGA
    MontantBudgetVote() {
      if(this.typefinancement==0){
@@ -913,6 +1209,19 @@ export default {
     },
 
     
+    TauxExecutionTypeFinancement() {
+
+      if(this.totalComsommeYtpeFinancement==0 && this.TotalVoteParTypeFinancement==0){
+        return 0.0;
+      }else{
+          return (
+        (parseFloat(this.totalComsommeYtpeFinancement) /
+          parseFloat(this.TotalVoteParTypeFinancement)) *
+        100
+      ).toFixed(2);
+      }
+      
+    },
     TauxExecution() {
 
       if(this.SommeBudgetConsomme==0 && this.SommeBudgetInitial==0){
@@ -946,6 +1255,16 @@ export default {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+    apercuFacture(id) {
+      this.$("#validationOpDefinitif").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+      this.editMandat = this.afficheUa.find(
+        (item) => item.id == id
+      );
+    },
+    
     EviteNaN(id) {
       if (
         this.MontantBudgetExecuté(id) == 0 &&
@@ -960,7 +1279,20 @@ export default {
         ).toFixed(2);
       }
     },
-
+EviteNaNTypeFinancement(id,id1) {
+      if (
+        this.MontantExecuteParTypeFinancement(id,id1) == 0 &&
+        this.MontantVoteParTypeFinancement(id,id1) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseFloat(this.MontantExecuteParTypeFinancement(id,id1)) /
+            parseFloat(this.MontantVoteParTypeFinancement(id,id1))) *
+          100
+        ).toFixed(2);
+      }
+    },
 
      TotalMontantReamenagement(id){
       return formatageSommeSansFCFA(

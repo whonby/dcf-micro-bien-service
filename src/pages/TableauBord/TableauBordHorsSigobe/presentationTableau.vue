@@ -16,18 +16,18 @@
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                    
-                     <li class="active" style="font-size:20px">
+                     <!-- <li class="active" style="font-size:20px">
                       <a data-toggle="tab" href="#DEMANDE"
                         >TABLEAU DE BORD GENERAL </a
                       >
-                    </li>
+                    </li> -->
                      <!-- <li class=""  >
                       <a data-toggle="tab" href="#COMMANDE"
                         >CONSULTATION DE L'EXECUTION BUDGETAIRE</a
                       >
                     </li> -->
 
-                      <li class=""  style="font-size:20px">
+                      <li class="active"  style="font-size:20px">
                       <a data-toggle="tab" href="#TABLEAUBORD1"
                         >TABLEAU DE BORD 1</a
                       >
@@ -40,11 +40,11 @@
                     </li>
 
 
-                     <li class="" style="font-size:20px">
+                     <!-- <li class="" style="font-size:20px">
                       <a data-toggle="tab" href="#LIQUIDATION"
                         >SYSTHESE DU BUDGET PAR UA</a
                       >
-                    </li>
+                    </li> -->
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -60,7 +60,7 @@
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
                  
-                  <div id="DEMANDE" class="tab-pane active" >
+                  <div id="DEMANDE" class="tab-pane " >
                     <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
                 <TableauBordBudgetEclate></TableauBordBudgetEclate>
                          
@@ -69,7 +69,7 @@
                    <RechercheExecutionBudgetaire></RechercheExecutionBudgetaire>
                   
                   </div> -->
-                   <div id="TABLEAUBORD1" class="tab-pane ">
+                   <div id="TABLEAUBORD1" class="tab-pane active">
                      <TableausuiviBudgets></TableausuiviBudgets>
                   </div>
 
