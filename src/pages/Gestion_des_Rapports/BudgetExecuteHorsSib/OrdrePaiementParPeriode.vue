@@ -82,10 +82,10 @@
               DIRECTION DU CONTRÔLE FINANCIER <br />
               -------------------------
             </p>
-            <img :src="AfficheLogODCF" />
+            <img :src="logo3" width="80px;" />
           </td>
           <td style="text-align: center">
-            <img :src="AfficheAmoirie" />
+            <img :src="amoirie"  width="70px;" />
           </td>
           <td style="text-align: center">
             <p>
@@ -350,6 +350,8 @@ import { formatageSommeSansFCFA } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
+import amoirie from "../../../../public/amoirie.png";
+import logo3 from "../../../../public/log3.png"
 export default {
   components: {
     ModelListSelect,
@@ -360,6 +362,8 @@ export default {
       page: 0,
       size: 10,
       active_el: 0,
+      amoirie:amoirie,
+      logo3:logo3,
       fabActions: [
         {
           name: "searchMe",
@@ -763,12 +767,12 @@ return objJson.name
       return 0;
     },
 
-    AfficheLogODCF() {
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/log3.png";
-    },
-    AfficheAmoirie() {
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
-    },
+    // logo3() {
+    //   return "https://dcf-personnel-ua.agosoftprojet.com/savephotoprofil/log3.png";
+    // },
+    // AfficheAmoirie() {
+    //   return "https://dcf-personnel-ua.agosoftprojet.com/savephotoprofil/amoirie.png";
+    // },
 
     // listeordrepaiements() {
     //   if (this.uniteAdministrative_id != 0) {

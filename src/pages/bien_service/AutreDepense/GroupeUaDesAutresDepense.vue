@@ -132,7 +132,7 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex";
-import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+// import { formatageSommeSansFCFA } from "@/Repositories/Repository";
 import {noDCfNoAdmin} from "@/Repositories/Auth"
 import { partition } from "@/Repositories/Repository";
   import {  ModelListSelect } from 'vue-search-select'
@@ -381,7 +381,7 @@ arrayExerciceDecompteBienService() {
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
-    formatageSommeSansFCFA:formatageSommeSansFCFA,
+    // formatageSommeSansFCFA:formatageSommeSansFCFA,
     partition: partition,
     getDataPaginate(index) {
       this.active_el = index;
