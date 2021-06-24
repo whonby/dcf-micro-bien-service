@@ -569,6 +569,12 @@ export function ajouterDocumentProcedure({ commit }, formData) {
 }
 
 ///
+
+export function getEntreprisePreselectionner({ commit }) {
+  queue.push(() => axios.get('/selectionEnt').then(tony => {
+    commit('GET_ALL_ENTREPRISE_SELECTIONNER', tony.data)
+  }).catch(error => console.log(error)))
+}
 export function ajouterEntreSelectionner({ commit }, formData) {
   asyncLoading(axios.post('/selectionEnt', formData)).then(response => {
     if (response.status == 201) {
