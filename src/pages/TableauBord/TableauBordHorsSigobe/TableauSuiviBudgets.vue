@@ -10,6 +10,7 @@
       </div>
       <div class="modal-body">
         <h5>Detail Réamenagement Budgétaire</h5>
+
         <table class="table table-bordered table-striped">
           <thead>
             <tr style="">
@@ -62,41 +63,7 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="unite in afficheDetailReamenagement" :key="unite.id">
-              <td>{{ libelleLigneEconomique(unite) }}</td>
-
-              <td
-                style="font-weight: bold; font-size: 18px; text-align: center"
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      montantVoteParLigne(editMandat.id, unite) -
-                        variation(unite)
-                    )
-                  )
-                }}
-              </td>
-              <td
-                style="font-weight: bold; font-size: 18px; text-align: center"
-              >
-                {{ formatageSommeSansFCFA(parseFloat(variation(unite))) }}
-              </td>
-              <td
-                style="font-weight: bold; font-size: 18px; text-align: center"
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(montantActuelParLigne(editMandat.id, unite))
-                  )
-                }}
-              </td>
-
-                
-               
-              
-              </tr>
+          
             
             <tbody>
              <tr  v-for="unite in afficheDetailReamenagement" :key="unite.id">
@@ -171,6 +138,8 @@
             </tr>
           </tbody>
         </table>
+
+
         <div class="modal-footer">
           <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
         </div>
@@ -369,6 +338,8 @@
         </div>
       </div>
     </div>
+
+
     <table class="table table-striped">
       <tbody>
         <tr>
