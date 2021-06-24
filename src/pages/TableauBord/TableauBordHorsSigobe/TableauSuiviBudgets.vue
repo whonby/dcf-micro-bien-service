@@ -554,14 +554,19 @@
                 <td style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
-                ">TOTAL</td>
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
+                  
+                ">TOTAL4</td>
 
                 <td
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   TOTAL
@@ -571,7 +576,11 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;"
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
+                  "
+                  
                 
                 >
                   {{ formatageSomme(parseFloat(SommeBudgetInitial)) }}
@@ -580,7 +589,9 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   {{ formatageSomme(parseFloat(TotalReamenagement)) }}
@@ -590,7 +601,9 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   {{
@@ -603,7 +616,9 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                    {{ formatageSomme(parseFloat(SommeBudgetConsomme)) }}
@@ -612,16 +627,20 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
-                  {{ formatageSomme(parseFloat(SommeBudgetConsomme)) }}
+                   {{ formatageSomme(parseFloat(SommeBudgetInitial - SommeBudgetConsomme)-parseFloat(SommeBudgetConsomme)) }}
                 </td>
                 <td
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   {{ TauxExecution }}%
@@ -630,7 +649,9 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   
@@ -639,7 +660,9 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   
@@ -648,7 +671,9 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #FFA100 !important;
+                  background-color: #009246 !important;
+                  color:#000;
+                  text-align:center
                 "
                 >
                   

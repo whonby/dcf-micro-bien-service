@@ -40,7 +40,7 @@
                 </model-list-select>
               </td>
 
-               <td>
+               <!-- <td>
                 <div class="control-group">
                   <label
                     class="control-label"
@@ -74,13 +74,15 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
 
             </tr>
           </tbody>
         </table>
+        
       
     </div>
+
 
 
     <div class="span4">
@@ -256,7 +258,8 @@
                 <tr>
                   <td>
                     <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].activite_id)">
-                      show
+                     <i class="icon-eye-open"></i> 
+                      
                     </button>
                   </td>
 
