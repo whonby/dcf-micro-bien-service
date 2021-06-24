@@ -27,22 +27,28 @@
                       >
                     </li> -->
 
-                      <li class="active"  style="font-size:20px">
+                      <li class="active"  style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD1"
-                        >TB1 :SUIVI DU BUDGET </a
+                        >TB1 : SUIVI DU BUDGET </a
                       >
                     </li>
 
-                    <li class="" style="font-size:20px">
+                    <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD2"
-                        >TB2:EXECUTION DU BUDGET</a
+                        >TB2 : EXECUTION DU BUDGET</a
+                      >
+                    </li>
+
+                    <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD3"
+                        >TB3 : EXECUTION PAR ACTIVITE</a
                       >
                     </li>
 
 
                      <!-- <li class="" style="font-size:20px">
                       <a data-toggle="tab" href="#LIQUIDATION"
-                        >SYSTHESE DU BUDGET PAR UA</a
+                        >SYNSTHESE DU BUDGET PAR UA</a
                       >
                     </li> -->
                      <!-- <li class="" >
@@ -75,6 +81,10 @@
 
                   <div id="TABLEAUBORD2" class="tab-pane ">
                      <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
+                  </div>
+
+                  <div id="TABLEAUBORD3" class="tab-pane ">
+                     <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
                   </div>
 
                   <div id="LIQUIDATION" class="tab-pane ">
@@ -111,6 +121,7 @@ import { formatageSomme } from "@/Repositories/Repository";
 import TableauBordBudgetEclate from "./TableauBordBudgetEclate"
 import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
+import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
@@ -121,6 +132,7 @@ export default {
     TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
+    SituationExecuBudgetRecapActivite,
     // RechercheExecutionBudgetaire,
     recapitulatifBudgetHorsSigobe
   },

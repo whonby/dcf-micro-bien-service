@@ -973,6 +973,8 @@ totalComsommeYtpeFinancement(){
             )
             .toFixed(0);
 },
+    
+
  //FONCTION LEGA
    MontantBudgetVote() {
      if(this.typefinancement==0){
@@ -1569,6 +1571,9 @@ totalComsommeYtpeFinancement(){
       );
     },
     
+
+    
+
     EviteNaN(id) {
       if (
         this.MontantBudgetExecuté(id) == 0 &&
