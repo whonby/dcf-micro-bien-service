@@ -155,6 +155,18 @@
                       background-color: #FFA100 !important;
                     "
                   >
+                    
+                  </th>
+
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #FFA100 !important;
+                    "
+                  >
                     LIGNE BUDGETAIRE
                   </th>
                   <th
@@ -235,11 +247,18 @@
                   >
                     DISPONIBLE {{afficheAnnee}}
                   </th>
+
+                  
                 </tr>
               </thead>
          <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
                 :key="GroupeOrdrePaiementByActivit.id">
                 <tr>
+                  <td>
+                    <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].activite_id)">
+                      show
+                    </button>
+                  </td>
 
                   <td style="background-color: #009246 !important; width: 500px;color:#000" >
                     <b>ACTIVITE:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
@@ -313,10 +332,15 @@
 
 
                   
-                   <tr class="odd gradeX" 
+                   <tr class="odd gradeX" v-show="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id"
                   v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
                   :key="listeLigneeco"
                 >
+                  <td style="width:;color:#000" >
+                   
+
+                  </td>
+
                   <td style="width: 500px;color:#000" >
                    
                     {{ libelleLigneEconomique(listeLigneeco) }}
@@ -474,7 +498,7 @@ export default {
   data() {
     return {
       page: 0,
-      size:1,
+      size:5,
       active_el: 0,
       fabActions: [
         {
@@ -512,7 +536,8 @@ export default {
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
-      verifShome:0
+      verifShome:0,
+      recupereIDactivite:"",
   
     };
   },
@@ -1182,6 +1207,10 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    ShowMyLigne(id){
+        this.recupereIDactivite=id;
+    },
 
      EviteNaN(id) {
       if (
