@@ -18,7 +18,7 @@
               v-model="exercices_budgetaires_id"
               option-value="annee"
               option-text="annee"
-              placeholder=""
+              placeholder="2021"
             >
             </model-list-select>
           </td>
@@ -32,7 +32,7 @@
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
                   :list="plans_activites"
-                  v-model="activite_id"
+                  v-model="Activite_id"
                   option-value="id"
                   option-text="libelle"
                   placeholder="TOUTES LES ACTIVITES"
@@ -40,7 +40,7 @@
                 </model-list-select>
               </td>
 
-               <td>
+               <!-- <td>
                 <div class="control-group">
                   <label
                     class="control-label"
@@ -74,13 +74,15 @@
                     />
                   </div>
                 </div>
-              </td>
+              </td> -->
 
             </tr>
           </tbody>
         </table>
+        
       
     </div>
+
 
 
     <div class="span4">
@@ -94,14 +96,14 @@
             <option value="80">80</option>
             <option value="100">100</option>
           </select>
-          Entrer
+         
         </div>
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
       </button>
-    </div> -->
+    </div> 
     
     <div class="widget-content nopadding" id="printpdf">
       <h2
@@ -143,15 +145,28 @@
       </p>
 
             <table class="table table-bordered">
-              <thead style="background-color: #FC762F !important">
+              <thead style="background-color: #FFA100 !important">
                 <tr>
-                    <th
+
+                   <th
                     style="
                       font-size: 14px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
+                    "
+                  >
+                    
+                  </th>
+
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #FFA100 !important;
                     "
                   >
                     LIGNE BUDGETAIRE
@@ -162,10 +177,10 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    BUDGET VOTE
+                    BUDGET INITIAL {{afficheAnnee}}
                   </th>
                    <th
                     style="
@@ -173,10 +188,10 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    REAMENAGEMENT BUDGETAIRE
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
                   </th>
                    
                   <th
@@ -185,10 +200,10 @@
                       font-weight: bold;
                       text-align: center;
                       color: #000;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Budget Actuel
+                 BUDGET ACTUEL {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -196,10 +211,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Montant Exécuté
+                  MONTANT EXECUTE {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -207,10 +222,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Montant Provisoire
+                    MONTANT PROVISOIRE {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -218,10 +233,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    TAUX
+                    TAUX D'EXECUTION {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -229,23 +244,31 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Disponible
+                    DISPONIBLE {{afficheAnnee}}
                   </th>
+
+                  
                 </tr>
               </thead>
          <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
                 :key="GroupeOrdrePaiementByActivit.id">
                 <tr>
-                  <!-- <td>{{ sommeLigneGrandeNature(listeLigne) }}</td> -->
+                  <td>
+                    <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].activite_id)">
+                     <i class="icon-eye-open"></i> 
+                      
+                    </button>
+                  </td>
 
-                  <td style="background-color: #83F747 !important; width: 500px" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
-                    <b>ACTIVITE:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
+                  <td style="background-color: #009246 !important; width: 500px;color:#000" >
+                    <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -253,7 +276,7 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                    <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -261,14 +284,14 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -276,7 +299,7 @@
                      }}
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -288,14 +311,14 @@
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #83F747 !important; text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                  <td style="background-color: #009246 !important; text-align: right;color:#000" >
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
@@ -306,24 +329,27 @@
                     <!-- </b> -->
                   </td>
 
-                  <!-- <td style="background-color:#83F747 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
+                  <!-- <td style="background-color:#009246 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
                -->
                 </tr>
 
-                  <tr
-                  class="odd gradeX"
+
+                  
+                   <tr class="odd gradeX" v-show="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id"
                   v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
                   :key="listeLigneeco"
                 >
-                  <td style="width: 500px" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="width:;color:#000" >
+                   
+
+                  </td>
+
+                  <td style="width: 500px;color:#000" >
                    
                     {{ libelleLigneEconomique(listeLigneeco) }}
 
                   </td>
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(
-                        parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000" >
                   
                   
                     {{
@@ -339,8 +365,7 @@
 
                   </td>
 
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000" >
                    
                     {{
                       formatageSommeSansFCFA(
@@ -353,10 +378,7 @@
                     }}
                   </td>
 
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000" >
 
 
                     {{
@@ -371,10 +393,7 @@
 
 
                   </td>
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000">
 
 
                     {{
@@ -387,9 +406,7 @@
 
 
                   </td>
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(
-                        parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000" >
 
 
                     {{
@@ -403,9 +420,7 @@
 
 
                   </td>
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(
-                        parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000">
 
 
                     {{
@@ -420,9 +435,7 @@
 
 
                   </td>
-                  <td style="text-align: right" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
-                  (formatageSommeSansFCFA(
-                        parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
+                  <td style="text-align: right;color:#000">
 
 
                     {{
@@ -434,7 +447,7 @@
                     }}
                   </td>
                 </tr>
-
+              
               
               </tbody>
             </table>
@@ -488,7 +501,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 5,
+      size:5,
       active_el: 0,
       fabActions: [
         {
@@ -519,13 +532,15 @@ export default {
       EditDetache: {},
       typeop_id: 0,
       NumeroOp: 0,
-      activite_id: 0,
+      Activite_id: 0,
       exercices_budgetaires_id:0,
 
       editMandat: {},
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
+      verifShome:0,
+      recupereIDactivite:"",
   
     };
   },
@@ -675,6 +690,15 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+    ShowMe(){
+       return (id) => {
+        if (id != null && id != "") {
+           return this.verifShome==id;
+        }
+        return 0;
+      };
+    },
    
 
     verifActiviteId() {
@@ -694,11 +718,11 @@ export default {
     },
 
     ListeGroupByActivite() {
-      if (this.activite_id!=0) {
+      if (this.Activite_id!=0) {
         return this.groupeByActivite.filter(
           (qtreel) =>
             qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].activite_id==this.activite_id
+            && qtreel[0].activite_id==this.Activite_id
         );
       } else {
         return this.groupeByActivite
@@ -1186,6 +1210,19 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    ShowMyLigne(id){
+      if(this.recupereIDactivite==""){
+         this.recupereIDactivite=id;
+      }else if(this.recupereIDactivite!="" && this.recupereIDactivite !=id){
+        this.recupereIDactivite="";
+        this.recupereIDactivite=id;
+      }
+      else{
+         this.recupereIDactivite="";
+      }
+       
+    },
 
      EviteNaN(id) {
       if (

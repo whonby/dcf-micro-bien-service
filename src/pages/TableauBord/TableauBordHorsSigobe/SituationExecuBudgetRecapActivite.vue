@@ -12,13 +12,13 @@
                  <td>
             <label>EXERCICE </label>
             <model-list-select
-              style="border: 1px solid #000"
+              style="border: 1px solid #000; font-size:15px"
               class="wide"
               :list="exercices_budgetaires"
               v-model="exercices_budgetaires_id"
               option-value="annee"
               option-text="annee"
-              placeholder=""
+              placeholder="2021"
             >
             </model-list-select>
           </td>
@@ -94,7 +94,7 @@
             <option value="80">80</option>
             <option value="100">100</option>
           </select>
-          Entrer
+    
         </div>
 
     <div align="right">
@@ -143,7 +143,7 @@
       </p>
 
             <table class="table table-bordered">
-              <thead style="background-color: #FC762F !important">
+              <thead style="background-color: #FFA100 !important">
                 <tr>
                     <th
                     style="
@@ -151,7 +151,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
                     ACTIVITES
@@ -162,10 +162,10 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    BUDGET VOTE
+                   BUDGET INITIAL {{afficheAnnee}}
                   </th>
                    <th
                     style="
@@ -173,10 +173,10 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    REAMENAGEMENT BUDGETAIRE
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
                   </th>
                    
                   <th
@@ -185,10 +185,10 @@
                       font-weight: bold;
                       text-align: center;
                       color: #000;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Budget Actuel
+                    BUDGET ACTUEL {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -196,10 +196,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Montant Exécuté
+                    MONTANT EXECUTE {{afficheAnnee}}
                   </th>
                  
                   <th
@@ -208,10 +208,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    TAUX
+                    TAUX D'EXECUTION {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -219,10 +219,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FC762F !important;
+                      background-color: #FFA100 !important;
                     "
                   >
-                    Disponible
+                   DISPONIBLE {{afficheAnnee}}
                   </th>
                 </tr>
               </thead>

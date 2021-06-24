@@ -38,19 +38,20 @@
                         >TB2 : EXECUTION DU BUDGET</a
                       >
                     </li>
+                    
 
                     <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD3"
                         >TB3 : EXECUTION PAR ACTIVITE</a
                       >
                     </li>
-
-
-                     <!-- <li class="" style="font-size:20px">
-                      <a data-toggle="tab" href="#LIQUIDATION"
-                        >SYNSTHESE DU BUDGET PAR UA</a
+ <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD4"
+                        >TB4 : D'EXECUTION PAR ACTIVITE ET BAILLEUR</a
                       >
-                    </li> -->
+                    </li>
+
+                     
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -86,7 +87,9 @@
                   <div id="TABLEAUBORD3" class="tab-pane ">
                      <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
                   </div>
-
+ <div id="TABLEAUBORD4" class="tab-pane ">
+                     <SituationExecutionActivitéBailleur></SituationExecutionActivitéBailleur>
+                  </div>
                   <div id="LIQUIDATION" class="tab-pane ">
                      <recapitulatifBudgetHorsSigobe></recapitulatifBudgetHorsSigobe>
                
@@ -122,6 +125,7 @@ import TableauBordBudgetEclate from "./TableauBordBudgetEclate"
 import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
+import SituationExecutionActivitéBailleur from "./ToutTableauBordBudget/SituationExécutionActivitéBailleur"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
@@ -133,8 +137,10 @@ export default {
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
     SituationExecuBudgetRecapActivite,
+    
     // RechercheExecutionBudgetaire,
-    recapitulatifBudgetHorsSigobe
+    recapitulatifBudgetHorsSigobe,
+    SituationExecutionActivitéBailleur
   },
   name:'',
   data() {
