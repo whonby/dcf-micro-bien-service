@@ -344,7 +344,7 @@
     <table class="table table-striped">
       <tbody>
         <tr>
-          <td class="span5">
+          <td class="span4">
             <label>EXERCICE </label>
             <model-list-select
               style="border: 1px solid #000"
@@ -357,7 +357,10 @@
             >
             </model-list-select>
           </td>
-          <td colspan="" class="span10">
+          <td>
+            
+          </td>
+          <!-- <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
             <model-list-select
               style="border: 2px solid #000"
@@ -369,7 +372,7 @@
               placeholder="TOUTES LES UNITES ADMINISTRATIVES"
             >
             </model-list-select>
-          </td>
+          </td> -->
 
           <!-- <td colspan="">
             <label>TYPE FINANCEMENT </label>
@@ -1484,10 +1487,14 @@ arrayExerciceDecompteBienService() {
     },
 
     afficheUa() {
-      if (this.uniteAdmin_id == 0) {
-        return this.filtre_unite_admin;
-      } else {
+      if (this.inputLigneCode1 != 0 && this.inputLigneLibelle1==0) {
         return this.filtre_unite;
+      } else if(this.inputLigneCode1==0 && this.inputLigneLibelle1 != 0){
+        return this.filtre_unitelibelle
+      }else if(this.inputLigneCode1!=0 && this.inputLigneLibelle1 != 0){
+        return this.filtre_unitelibelle_code;
+      }else {
+        return this.filtre_unite_admin;
       }
     },
 
@@ -1506,7 +1513,49 @@ arrayExerciceDecompteBienService() {
     },
 
     // fin test de tri
+    //filtre_unitelibelle_code;
 
+//filtre par libelle
+      filtre_unitelibelle() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => item2.id == this.inputLigneLibelle1);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => item2.id == this.inputLigneLibelle1
+      );
+    },
+
+//filtre des ua par libelle et code
+   filtre_unitelibelle_code() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => item2.id == this.inputLigneLibelle1 && item2.id==this.inputLigneCode1);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => item2.id == this.inputLigneLibelle1 && item2.id==this.inputLigneCode1
+      );
+    },
 
 
     filtre_unite() {
@@ -1522,10 +1571,10 @@ arrayExerciceDecompteBienService() {
             return item;
           }
         });
-        return colect.filter((item2) => item2.id == this.uniteAdmin_id);
+        return colect.filter((item2) => item2.id == this.inputLigneCode1);
       }
       return this.filtrerUaParTypeProj.filter(
-        (item2) => item2.id == this.uniteAdmin_id
+        (item2) => item2.id == this.inputLigneCode1
       );
     },
 
