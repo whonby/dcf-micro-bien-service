@@ -283,7 +283,7 @@
                       background-color: #FFA100 !important;
                     "
                   >
-                    VARIATION DU TAUX
+                    VARIATION DU TAUX {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -366,22 +366,22 @@
                     </b>
                   </td>
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) < 25">
+                  <button class="btn btn-danger taille" v-if="EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) < 50">
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 50">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) < 75">
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 75">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) < 100">
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 100">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>

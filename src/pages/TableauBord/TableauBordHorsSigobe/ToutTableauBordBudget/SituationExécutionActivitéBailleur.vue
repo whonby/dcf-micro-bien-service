@@ -235,6 +235,18 @@
                   MONTANT EXECUTE {{afficheAnnee}}
                 </th>
 
+                 <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #FFA100 !important;
+                    "
+                  >
+                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                  </th>
+
                 <!-- <th
                   style="
                     font-size: 14px;
@@ -256,6 +268,18 @@
                 >
                   TAUX D'EXECUTION(%) {{afficheAnnee}}
                 </th>
+
+                 <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #FFA100 !important;
+                    "
+                  >
+                    VARIATION DU TAUX
+                  </th>
                 <th
                   style="
                     font-size: 14px;
@@ -337,6 +361,20 @@
                   }}
                 </td>
 
+                <td
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                >
+                  {{
+                    formatageSommeSansFCFA(
+                      parseFloat(
+                        MontantBudgetExecutéProvisoire(
+                          GroupeOrdrePaiementByActivit[0].activite_id
+                        )
+                      )
+                    )
+                  }}
+                </td>
+
                 <!-- <td
                   style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important"
                 >
@@ -357,6 +395,29 @@
                     EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
                   }}
                 </td>
+
+                <td style=" text-align: right;color:#000;background-color:#3CB371 !important;" >
+                  <button class="btn btn-danger taille" v-if="EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{ EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) }}
+                        </span>
+                      </button>
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 50">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 75">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 100">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                  </td>
 
                 <td
                   style="font-weight: bold; font-size:15px; text-align: right;; background-color:#3CB371 !important;color:#000"
@@ -388,13 +449,13 @@
               <td>
 
               </td>
-                <td style="font-size: 14px">
+                <td style="font-size: 14px;font-weight: bold;color:#000">
                   {{
                     libelleLigneEconomique(ListepaimentBailleur) ||
                     "Non renseigné"
                   }}
                 </td>
-                <td style="widht: 25px; font-weight: bold; text-align: right">
+                <td style="widht: 25px; font-weight: bold;color:#000; text-align: right">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -403,7 +464,7 @@
                     )
                   }}
                 </td>
-                <td style="widht: 25px; font-weight: bold; text-align: right">
+                <td style="widht: 25px; font-weight: bold; text-align: right; color:#000;">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -412,7 +473,7 @@
                     )
                   }}
                 </td>
-                <td style="widht: 25px; font-weight: bold; text-align: right">
+                <td style="widht: 25px; font-weight: bold; text-align: right;color:#000">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
@@ -423,7 +484,7 @@
                 </td>
 
                 <td
-                  style="font-size: 14px; font-weight: bold; text-align: right"
+                  style="font-size: 14px; font-weight: bold; text-align: right;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -434,30 +495,47 @@
                   }}
                 </td>
 
-                <!-- <td style="font-size: 14px; text-align: right">
+                 <td
+                  style="font-size: 14px; font-weight: bold; text-align: right;color:#000"
+                >
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(
-                        MontantBudgetExecutéProvisoireBailleur(
-                          ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id
-                        )
+                        MontantBudgetExecutéProvisoireBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
                       )
                     ) || "Non renseigné"
                   }}
-                </td> -->
-                <td
-                  style="font-size: 14px; font-weight: bold; text-align: right"
-                >
-                  {{
-                    
-                      ((MontantBudgetExecuté1Bailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)/
-                        MontantBudgetActuelBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id))*
-                      100
-                    ).toFixed(2) || "Non renseigné"
-                  }}
                 </td>
+
+                <td style="font-size: 14px; font-weight: bold; text-align: right;color:#000">
+                    {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                </td>
+
+
+                  <td style=" text-align: right;color:#000" >
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id) < 50">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id) < 75">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id) < 100">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                  </td>
                 <td
-                  style="font-size: 14px; font-weight: bold; text-align: right"
+                  style="font-size: 14px; font-weight: bold; text-align: right;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -473,24 +551,28 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td> </td>
-                  <td>TOTAL ACTIVITE </td>
+                  <td style="text-align: right;color:#000;font-weight: bold;">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: right;color:#000; font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
-                  <!-- <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td> -->
+                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
                  
-                 <td style="text-align: right;color:#000">
-                   {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }}
+                 <td style="text-align: right;color:#000;font-weight: bold;">
+                   {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel)*100).toFixed(2) }}
+                 </td>
+
+                  <td style="text-align: right;color:#000;font-weight: bold;">
+                   {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel)*100).toFixed(2) }}
                  </td>
                  
-                  <td style="text-align: right;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
@@ -1280,6 +1362,7 @@ afficheUa() {
       };
     },
 
+
     MontantBudgetExecutéProvisoireBailleur() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
@@ -1318,19 +1401,19 @@ afficheUa() {
                 (qtreel.source_financement_id == id
                 && qtreel.exercice == this.afficheAnnee
                 && qtreel.type_ordre_paiement == 1
-                && qtreel.activite_id == id
+                && qtreel.activite_id == id1
                 &&qtreel.decision_cf==8)
                 ||
                  (qtreel.source_financement_id == id
                 && qtreel.exercice == this.afficheAnnee
                 && qtreel.type_ordre_paiement == 4
-                && qtreel.activite_id == id
+                && qtreel.activite_id == id1
                 &&qtreel.decision_cf==8)
                 ||
                  (qtreel.source_financement_id == id
                 && qtreel.exercice == this.afficheAnnee
                 && qtreel.type_ordre_paiement == 4
-                && qtreel.activite_id == id
+                && qtreel.activite_id == id1
                 &&qtreel.decision_cf==8)).reduce((prec, cur) =>
                 parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
         } else {
@@ -1521,6 +1604,21 @@ afficheUa() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+      EviteNaNBailleur(id,id1) {
+      if (
+        this.MontantBudgetExecuté1Bailleur(id,id1) == 0 &&
+        this.MontantBudgetActuelBailleur(id,id1) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseFloat(this.MontantBudgetExecuté1Bailleur(id,id1)) /
+            parseFloat(this.MontantBudgetActuelBailleur(id,id1))) *
+          100
+        ).toFixed(2);
+      }
+    },
 
    ActiveInputLigne(){
       if(this.inputLigne == false){
