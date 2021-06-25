@@ -187,7 +187,8 @@
                       background-color: #FFA100 !important;
                     "
                   >
-                   ACTIVITE/LIGNE BUDGETAIRE   <button @click="ActiveInputLigne">
+                   ACTIVITE/LIGNE BUDGETAIRE  
+                   <button @click="ActiveInputLigne">
                      <i class=" icon-search"></i> 
                       
                     </button>
@@ -199,7 +200,7 @@
                   v-model="inputLigne1"
                   option-value="id"
                   option-text="code"
-                  placeholder="TOUTES LES ACTIVITES"
+                  placeholder="CODE ACTIVITE"
                 >
                 </model-list-select>
                 

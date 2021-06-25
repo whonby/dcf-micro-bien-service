@@ -19,7 +19,7 @@
             </model-list-select>
           </td>
 
-              <td>
+              <!-- <td>
 
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
                   >CODE ACTIVITE<a href="#" style="color: red"></a>
@@ -34,7 +34,7 @@
                   placeholder="CODE"
                 >
                 </model-list-select>
-              </td>
+              </td> -->
 
 
                <td>
@@ -177,6 +177,21 @@
                   "
                 >
                   ACTIVITE/BAILLEUR {{afficheAnnee}}
+                   <button @click="ActiveInputLigne">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                     <model-list-select v-show="inputLigne == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="plans_activites"
+                  v-model="inputLigne1"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="CODE ACTIVITE"
+                >
+                </model-list-select>
                 </th>
 
                  <th
@@ -561,6 +576,8 @@ export default {
       exercices_budgetaires_id:0,
       Activite_code:0,
       Activite_id:0,
+      inputLigne1:0,
+      inputLigne:false,
 
       editMandat: {},
       EditAnulation: {},
@@ -713,7 +730,20 @@ export default {
 
     //****************gestion des totaux *********//
       TotalMontantbudgetVote(){
-        if(this.Activite_id!=0){
+        if(this.Activite_id!=0 && this.inputLigne1!=0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+                && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }else if(this.Activite_id==0 && this.inputLigne1!=0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }else if(this.Activite_id!=0 && this.inputLigne1==0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
@@ -722,14 +752,27 @@ export default {
         }else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
     },
 
     TotalMontantReamenagement(){
-        if(this.Activite_id!=0){
+       if(this.Activite_id!=0 && this.inputLigne1!=0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+                && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }else if(this.Activite_id==0 && this.inputLigne1!=0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }else if(this.Activite_id!=0 && this.inputLigne1==0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
@@ -738,14 +781,27 @@ export default {
         }else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
     },
 
        TotalMontantBudgetActuel() {
-     if(this.Activite_id!=0){
+     if(this.Activite_id!=0 && this.inputLigne1!=0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+                && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }else if(this.Activite_id==0 && this.inputLigne1!=0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }else if(this.Activite_id!=0 && this.inputLigne1==0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
@@ -754,60 +810,116 @@ export default {
         }else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
     },
 
      TotalMontantBudgetExecuté() {
-        if (this.Activite_id!=0) {
+        if (this.Activite_id!=0 && this.inputLigne1!=0) {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
                 qtreel.activite_id == this.Activite_id
-                &&qtreel.decision_cf==9)
+                && qtreel.activite_id == this.inputLigne1
+                && qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
                 qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==8)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
                 qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
                 qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==8)   
             )
             .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+        }   else if (this.Activite_id==0 && this.inputLigne1!=0) {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1
+                && qtreel.activite_id == this.inputLigne1
+                && qtreel.decision_cf==9)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1
+                && qtreel.activite_id == this.inputLigne1
+                &&qtreel.decision_cf==8)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4
+                && qtreel.activite_id == this.inputLigne1
+                &&qtreel.decision_cf==9)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4
+                && qtreel.activite_id == this.inputLigne1
+                &&qtreel.decision_cf==8)   
             )
-            .toFixed(0);
+            .reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+        }  else if (this.Activite_id!=0 && this.inputLigne1==0) {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1
+                && qtreel.activite_id == this.Activite_id
+                && qtreel.decision_cf==9)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1
+                && qtreel.activite_id == this.Activite_id
+                &&qtreel.decision_cf==8)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4
+                && qtreel.activite_id == this.Activite_id
+                &&qtreel.decision_cf==9)
+                ||
+                (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4
+                && qtreel.activite_id == this.Activite_id
+                &&qtreel.decision_cf==8)   
+            )
+            .reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
         } else {
               return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1
+                && qtreel.activite_id !=null
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1
+                && qtreel.activite_id !=null
                 &&qtreel.decision_cf==8)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4
+                && qtreel.activite_id !=null
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4
+                && qtreel.activite_id !=null
                 &&qtreel.decision_cf==8)   
             )
             .reduce(
@@ -821,26 +933,44 @@ export default {
 
 
        TotalMontantBudgetExecutéProvisoire() {
-        if (this.Activite_id!=0) {
+        if (this.Activite_id!=0 && this.inputLigne1!=0) {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 2 &&
                 qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
             )
             .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+        }else if (this.Activite_id==0 && this.inputLigne1!=0) {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 2
+                && qtreel.activite_id == this.inputLigne1
             )
-            .toFixed(0);
+            .reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+        }if (this.Activite_id!=0 && this.inputLigne1==0) {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 2
+                && qtreel.activite_id == this.Activite_id
+            )
+            .reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
         } else {
              return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 2 
+                qtreel.type_ordre_paiement == 2
+                && qtreel.activite_id !=null
             )
             .reduce(
               (prec, cur) =>
@@ -904,13 +1034,26 @@ afficheUa() {
     },
 
     ListeGroupByActivite2() {
-      if (this.Activite_id!=0) {
+      if (this.Activite_id!=0 && this.inputLigne1 !=0) {
+        return this.groupeByActivite.filter(
+          (qtreel) =>
+            qtreel[0].annebudgetaire == this.afficheAnnee
+            && qtreel[0].activite_id==this.Activite_id
+            && qtreel[0].activite_id==this.inputLigne1
+        );
+      }else if (this.Activite_id==0 && this.inputLigne1 !=0) {
+        return this.groupeByActivite.filter(
+          (qtreel) =>
+            qtreel[0].annebudgetaire == this.afficheAnnee
+            && qtreel[0].activite_id==this.inputLigne1
+        );
+        }else if (this.Activite_id!=0 && this.inputLigne1 ==0) {
         return this.groupeByActivite.filter(
           (qtreel) =>
             qtreel[0].annebudgetaire == this.afficheAnnee
             && qtreel[0].activite_id==this.Activite_id
         );
-      } else {
+        } else {
         return this.groupeByActivite
         .filter(
           (qtreel) =>
@@ -1378,6 +1521,15 @@ afficheUa() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+   ActiveInputLigne(){
+      if(this.inputLigne == false){
+        this.inputLigne = true
+      }else{
+        this.inputLigne = false
+      }
+
+ },
 
     ShowMyLigne(id){
       if(this.recupereIDactivite==""){
