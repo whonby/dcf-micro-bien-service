@@ -145,6 +145,7 @@
         </div>
       </div>
     </div>
+
     <div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -359,7 +360,7 @@
           <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
             <model-list-select
-              style="background-color: #000; border: 2px solid #000"
+              style="border: 2px solid #000"
               class="wide"
               :list="uniteAdministratives"
               v-model="uniteAdmin_id"
@@ -422,20 +423,55 @@
                   color: #000;
                   text-align: center;
                   background-color: #FFA100 !important;">
+
                  </th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
-                  CODE UA</th>
+                  background-color: #FFA100 !important;" class="span4">
+                  CODE UA
+                  {{afficheAnnee}}
+                   <button @click="ActiveInputLigne">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                     <model-list-select v-show="inputLigneCode == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="inputLigneCode1"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="CODE UA"
+                >
+                </model-list-select>
+                  </th>
 
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #FFA100 !important;">
-                  LIBELLE UA</th>
+                  LIBELLE UA
+                    {{afficheAnnee}}
+                   <button @click="ActiveInputLigne1">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                     <model-list-select v-show="inputLigneLibelle == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="inputLigneLibelle1"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="LIBELLE UA"
+                >
+                </model-list-select>
+                  </th>
 
                 <th style=" font-size: 14px;
                   font-weight: bold;
@@ -761,6 +797,10 @@ export default {
 
       search: "",
       uniteadministrative_id: "",
+      inputLigneCode1:0,
+      inputLigneCode:false,
+      inputLigneLibelle:false,
+      inputLigneLibelle1:0,
     };
   },
   created() {
@@ -1779,6 +1819,25 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+
+     ActiveInputLigne(){
+      if(this.inputLigneCode == false){
+        this.inputLigneCode = true
+      }else{
+        this.inputLigneCode = false
+      }
+
+ },
+
+  ActiveInputLigne1(){
+      if(this.inputLigneLibelle == false){
+        this.inputLigneLibelle = true
+      }else{
+        this.inputLigneLibelle = false
+      }
+
+ },
+
     ShowMyLigne(id){
       if(this.recupereIDactivite==""){
          this.recupereIDactivite=id;

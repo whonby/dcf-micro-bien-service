@@ -396,7 +396,7 @@
                   }}
                 </td>
 
-                <td style=" text-align: right;color:#000;background-color:#3CB371 !important;" >
+                <td style=" text-align: right;color:#000; !important;" >
                   <button class="btn btn-danger taille" v-if="EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{ EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) }}
