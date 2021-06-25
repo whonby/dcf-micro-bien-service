@@ -154,7 +154,7 @@
                       background-color: #FC762F !important;
                     "
                   >
-                    LIGNE BUDGETAIRE
+                    ACTIVITE
                   </th>
                   <th
                     style="
