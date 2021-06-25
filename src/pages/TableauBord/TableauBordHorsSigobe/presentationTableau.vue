@@ -38,6 +38,7 @@
                         >TB2 : EXECUTION DU BUDGET</a
                       >
                     </li>
+                    
 
                     <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD3"
@@ -136,6 +137,7 @@ export default {
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
     SituationExecuBudgetRecapActivite,
+    
     // RechercheExecutionBudgetaire,
     recapitulatifBudgetHorsSigobe,
     SituationExecutionActivitéBailleur

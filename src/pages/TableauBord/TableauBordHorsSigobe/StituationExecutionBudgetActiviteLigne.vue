@@ -329,7 +329,7 @@
 
 
 
-                  <tr v-show="recupereIdActivite == GroupeOrdrePaiementByActivit[0].activite_id"
+                  <tr v-show="this.recupereIdActivite == this.GroupeOrdrePaiementByActivit[0].activite_id"
                   class="odd gradeX"
                   v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
                   :key="listeLigneeco"

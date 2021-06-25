@@ -1,48 +1,70 @@
 <template>
   <div>
+
     <div id="validationOpDefinitif1" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3 style="font-size:14px;font-weight: bold;">UNITE ADMINISTRATIVE : {{libelleUniteAdministrative(editMandat.id)}}</h3>
+        <h3 style="font-size: 14px; font-weight: bold">
+          UNITE ADMINISTRATIVE : {{ libelleUniteAdministrative(editMandat.id) }}
+        </h3>
       </div>
       <div class="modal-body">
         <h5>Detail Réamenagement Budgétaire</h5>
+
         <table class="table table-bordered table-striped">
           <thead>
-              <tr style="">
-                 <th style=" font-size: 14px;
+            <tr style="">
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">LIGNE ECONOMIQUE</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                LIGNE ECONOMIQUE
+              </th>
 
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">
-                  BUDGET VOTE (FCFA)</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                BUDGET VOTE (FCFA)
+              </th>
 
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">
-                  VARIATION</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                VARIATION
+              </th>
 
-
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">
-                  BUDGET ACTUEL (FCFA)</th>
-
-                
-               
-              
-              </tr>
-            </thead>
+                  background-color: #fc762f !important;
+                "
+              >
+                BUDGET ACTUEL (FCFA)
+              </th>
+            </tr>
+          </thead>
+          
+            
             <tbody>
              <tr  v-for="unite in afficheDetailReamenagement" :key="unite.id">
                <td>{{libelleLigneEconomique(unite)}}</td>
@@ -55,189 +77,268 @@
                <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
             
                <td style="font-weight: bold; font-size: 12px; text-align: center"> {{ EviteNaNTypeFinancement(editMandat.id,unite) }}%</td> -->
-             </tr>
-              <tr>
-                <td style="font-weight: bold;
+            </tr>
+            <tr>
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
-                ">TOTAL</td>
+                "
+              >
+                TOTAL
+              </td>
 
-               
-                <td
-                  style="font-weight: bold;
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;"
-                
-                >
-                  {{formatageSommeSansFCFA(parseFloat(montantVoteToralParLigne(editMandat.id)-(TotalVariation(editMandat.id))))}}
-                </td>
-                
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      montantVoteToralParLigne(editMandat.id) -
+                        TotalVariation(editMandat.id)
+                    )
+                  )
+                }}
+              </td>
 
-                <td
-                  style="font-weight: bold;
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
                 "
-                >
-                  {{ formatageSomme(parseFloat(TotalVariation(editMandat.id))) }}
-                </td>
-                <td
-                  style="font-weight: bold;
+              >
+                {{ formatageSomme(parseFloat(TotalVariation(editMandat.id))) }}
+              </td>
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
                 "
-                >
-                   {{ formatageSomme(parseFloat(montantActuelParReamenagement(editMandat.id))) }}
-                </td>
-
-               
-                
-              </tr>
-            </tbody>
+              >
+                {{
+                  formatageSomme(
+                    parseFloat(montantActuelParReamenagement(editMandat.id))
+                  )
+                }}
+              </td>
+            </tr>
+          </tbody>
         </table>
-<div class="modal-footer">
-       
-        <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-      </div>
-      </div>
 
+
+        <div class="modal-footer">
+          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        </div>
+      </div>
     </div>
     <div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3 style="font-size:14px;font-weight: bold;">UNITE ADMINISTRATIVE : {{libelleUniteAdministrative(editMandat.id)}}</h3>
+        <h3 style="font-size: 14px; font-weight: bold">
+          UNITE ADMINISTRATIVE : {{ libelleUniteAdministrative(editMandat.id) }}
+        </h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <thead>
-              <tr style="">
-                 <th style=" font-size: 14px;
+            <tr style="">
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">TYPE FINANCEMENT</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                TYPE FINANCEMENT
+              </th>
 
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">
-                  BUDGET VOTE (FCFA)</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                BUDGET VOTE (FCFA)
+              </th>
 
-                
-
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">
-                  BUDGET ACTUEL (FCFA)</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                BUDGET ACTUEL (FCFA)
+              </th>
 
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">
-                  MONTANTS EXECUTES (FCFA)</th>
+                  background-color: #fc762f !important;
+                "
+              >
+                MONTANTS EXECUTES (FCFA)
+              </th>
 
-                <th style=" font-size: 14px;
+              <th
+                style="
+                  font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FC762F !important;">TAUX D'EXECUTION</th>
-                  
-                <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
-              </tr>
-            </thead>
-            <tbody>
-             <tr  v-for="unite in arrayExerciceDecompteBienService(editMandat.id)"    :key="unite.id">
-               <td>{{libelleTypeFinancement(unite)}}</td>
-              <td style="font-weight: bold; font-size: 12px; text-align: center">{{ formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite)))}}</td>
-                  <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite) - MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
-               <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
-            
-               <td style="font-weight: bold; font-size: 12px; text-align: center"> {{ EviteNaNTypeFinancement(editMandat.id,unite) }}%</td>
-             </tr>
-              <tr>
-                <td style="font-weight: bold;
+                  background-color: #fc762f !important;
+                "
+              >
+                TAUX D'EXECUTION
+              </th>
+
+              <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="unite in arrayExerciceDecompteBienService(editMandat.id)"
+              :key="unite.id"
+            >
+              <td>{{ libelleTypeFinancement(unite) }}</td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantVoteParTypeFinancement(editMandat.id, unite)
+                    )
+                  )
+                }}
+              </td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantVoteParTypeFinancement(editMandat.id, unite) -
+                        MontantExecuteParTypeFinancement(editMandat.id, unite)
+                    )
+                  )
+                }}
+              </td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantExecuteParTypeFinancement(editMandat.id, unite)
+                    )
+                  )
+                }}
+              </td>
+
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center"
+              >
+                {{ EviteNaNTypeFinancement(editMandat.id, unite) }}%
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
-                ">TOTAL</td>
+                "
+              >
+                TOTAL
+              </td>
 
-               
-                <td
-                  style="font-weight: bold;
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;"
-                
-                >
-                  {{ formatageSomme(parseFloat(TotalVoteParTypeFinancement)) }}
-                </td>
-                
+              >
+                {{ formatageSomme(parseFloat(TotalVoteParTypeFinancement)) }}
+              </td>
 
-                <td
-                  style="font-weight: bold;
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
                 "
-                >
-                  {{ formatageSomme(parseFloat(TotalVoteParTypeFinancement - totalComsommeYtpeFinancement)) }}
-                </td>
-                <td
-                  style="font-weight: bold;
+              >
+                {{
+                  formatageSomme(
+                    parseFloat(
+                      TotalVoteParTypeFinancement - totalComsommeYtpeFinancement
+                    )
+                  )
+                }}
+              </td>
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
                 "
-                >
-                   {{ formatageSomme(parseFloat(totalComsommeYtpeFinancement)) }}
-                </td>
+              >
+                {{ formatageSomme(parseFloat(totalComsommeYtpeFinancement)) }}
+              </td>
 
-                <td
-                  style="font-weight: bold;
+              <td
+                style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
                   color:#000;
                   text-align:center,
                   background-color: #FC762F !important;
                 "
-                >
-                  {{ TauxExecutionTypeFinancement }}%
-                </td>
-                
-              </tr>
-            </tbody>
+              >
+                {{ TauxExecutionTypeFinancement }}%
+              </td>
+            </tr>
+          </tbody>
         </table>
-<div class="modal-footer">
-       
-        <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        <div class="modal-footer">
+          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        </div>
       </div>
-      </div>
-
     </div>
+
 
     <table class="table table-striped">
       <tbody>
@@ -269,7 +370,7 @@
             </model-list-select>
           </td>
 
-           <td colspan="">
+          <td colspan="">
             <label>TYPE FINANCEMENT </label>
             <model-list-select
               style="background-color: #fff; border: 2px solid #000"
@@ -387,7 +488,9 @@
                 </td>
                 
                 <td style="font-weight: bold; font-size: 12px">
-                  {{ libelleUniteAdministrative(unite.id) || "Auncun résultat" }}
+                  {{
+                    libelleUniteAdministrative(unite.id) || "Auncun résultat"
+                  }}
                 </td>
 
                 <td
@@ -401,7 +504,7 @@
                 </td>
                 <td
                   style="font-weight: bold; font-size: 12px; text-align: center"
-                   @click="percuFacture(unite.id)"
+                  @click="percuFacture(unite.id)"
                 >
                   {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
@@ -466,8 +569,9 @@
                   text-align:center
                 "
                 >
-                  
+                  TOTAL
                 </td>
+
                 <td
                   style="font-weight: bold;
                   font-size: 18px;
@@ -490,7 +594,7 @@
                   text-align:center
                 "
                 >
-                 {{ formatageSomme(parseFloat(TotalReamenagement)) }}
+                  {{ formatageSomme(parseFloat(TotalReamenagement)) }}
                 </td>
 
                 <td
@@ -502,7 +606,11 @@
                   text-align:center
                 "
                 >
-                  {{ formatageSomme(parseFloat(SommeBudgetInitial - SommeBudgetConsomme)) }}
+                  {{
+                    formatageSomme(
+                      parseFloat(SommeBudgetInitial - SommeBudgetConsomme)
+                    )
+                  }}
                 </td>
                 <td
                   style="font-weight: bold;
@@ -632,9 +740,9 @@ export default {
           icon: "add",
         },
       ],
-      editMandat:{},
+      editMandat: {},
       exercices_budgetaires_id: 0,
-      typefinancement:0,
+      typefinancement: 0,
       uniteAdmin_id: 0,
       editUniteAdministrative: {},
       detailBudget: "",
@@ -667,7 +775,7 @@ export default {
     };
   },
   created() {
-    //  this.detailBudget=this.getterBudgeCharge.find(item=>item.id== this.$route.params.id)
+    console.log(this.affichageUniteAdminstrative);
     this.budgetGeneralCharge = this.budgetGeneral.filter(
       (item) => item.actived == 1
     );
@@ -682,7 +790,7 @@ export default {
       "budgetGeneral",
       "transferts",
       "budgetEclate",
-      "groupeParTypeFinancementBudgetEclate"
+      "groupeParTypeFinancementBudgetEclate",
     ]),
 
     ...mapGetters("bienService", [
@@ -694,7 +802,7 @@ export default {
 
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
-      "types_financements"
+      "types_financements",
     ]),
 
     ...mapGetters("parametreGenerauxAdministratif", [
@@ -706,7 +814,10 @@ export default {
       "afficheNiveauPlanProg",
       "exercices_budgetaires",
     ]),
-     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+    ...mapGetters("parametreGenerauxBudgetaire", [
+      "plans_budgetaires",
+      "derniereNivoPlanBudgetaire",
+    ]),
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
@@ -719,28 +830,35 @@ export default {
     TotalVariation() {
       return (id2) => {
         if (id2 != null && id2 != "") {
-          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2).reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+          return this.budgetEclate
+            .filter((prod) => prod.uniteadministrative_id == id2)
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
             .toFixed(0);
         }
       };
     },
-      libelleLigneEconomique(){
-  return id =>{
-        if(id!=null && id!=""){
-          const objet = this.plans_budgetaires.find(item => item.id==id)
-          if(objet) return objet.code.concat("    ", objet.libelle)
+    libelleLigneEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const objet = this.plans_budgetaires.find((item) => item.id == id);
+          if (objet) return objet.code.concat("    ", objet.libelle);
         }
-        return null
-      }
-},
-    variation(){
-  return id =>{
-        if(id!=null && id!=""){
-          const objet = this.budgetEclate.find(item => item.uniteadministrative_id==this.editMandat.id && item.ligneeconomique_id==id)
-          if(objet) return objet.variation_budget
+        return null;
+      };
+    },
+    variation() {
+      return (id) => {
+        if (id != null && id != "") {
+          const objet = this.budgetEclate.find(
+            (item) =>
+              item.uniteadministrative_id == this.editMandat.id &&
+              item.ligneeconomique_id == id
+          );
+          if (objet) return objet.variation_budget;
         }
         return null
       }
@@ -762,8 +880,7 @@ montantVoteToralParLigne(){
           return this.budgetEclate
             .filter(
               (qtreel) =>
-                qtreel.uniteadministrative_id == id 
-                && qtreel.budget_active==1
+                qtreel.uniteadministrative_id == id && qtreel.budget_active == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -773,17 +890,17 @@ montantVoteToralParLigne(){
         } else {
           return 0;
         }
-      }
-},
-montantVoteParLigne(){
-    return (id,id1) => {
+      };
+    },
+    montantVoteParLigne() {
+      return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
                 qtreel.uniteadministrative_id == id &&
-                qtreel.ligneeconomique_id == id1 
-                && qtreel.budget_active==1
+                qtreel.ligneeconomique_id == id1 &&
+                qtreel.budget_active == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -793,17 +910,15 @@ montantVoteParLigne(){
         } else {
           return 0;
         }
-      }
-},
-montantActuelParReamenagement(){
-    return (id) => {
+      };
+    },
+    montantActuelParReamenagement() {
+      return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
-                qtreel.uniteadministrative_id == id 
-               
-                && qtreel.budget_active==1
+                qtreel.uniteadministrative_id == id && qtreel.budget_active == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -813,17 +928,17 @@ montantActuelParReamenagement(){
         } else {
           return 0;
         }
-      }
-},
-montantActuelParLigne(){
-    return (id,id1) => {
+      };
+    },
+    montantActuelParLigne() {
+      return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
                 qtreel.uniteadministrative_id == id &&
-                qtreel.ligneeconomique_id == id1 
-                && qtreel.budget_active==1
+                qtreel.ligneeconomique_id == id1 &&
+                qtreel.budget_active == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -833,38 +948,35 @@ montantActuelParLigne(){
         } else {
           return 0;
         }
-      }
-},
-MontantExecute(){
-  return (id) => {
+      };
+    },
+    MontantExecute() {
+      return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-               (qtreel.unite_administrative_id == this.editMandat.id
-              && qtreel.ligne_economique_id==id 
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
+                (qtreel.unite_administrative_id == this.editMandat.id &&
+                  qtreel.ligne_economique_id == id &&
+                  qtreel.exercice == this.afficheAnnee &&
+                  qtreel.type_ordre_paiement == 1 &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.diff_op == null) ||
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.exercice == this.afficheAnnee &&
+                  qtreel.type_ordre_paiement == 1 &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.diff_op == null) ||
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.exercice == this.afficheAnnee &&
+                  qtreel.type_ordre_paiement == 4 &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.diff_op == null) ||
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.exercice == this.afficheAnnee &&
+                  qtreel.type_ordre_paiement == 4 &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.diff_op == null)
             )
             .reduce(
               (prec, cur) =>
@@ -875,8 +987,8 @@ MontantExecute(){
         } else {
           return 0;
         }
-      }
-},
+      };
+    },
     libelleTypeFinancement() {
       return (id) => {
         if (id != null && id != "") {
@@ -891,31 +1003,31 @@ MontantExecute(){
         }
       };
     },
-    afficheDetailReamenagement(){
-     // return this.budgetEclate.filter(item=>item.uniteadministrative_id == this.editMandat.id && item.variation_budget!=0)
-   
-  //  return (id) => {
-        
-        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id == this.editMandat.id && item.variation_budget!=0)
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
+    afficheDetailReamenagement() {
+      // return this.budgetEclate.filter(item=>item.uniteadministrative_id == this.editMandat.id && item.variation_budget!=0)
+
+      //  return (id) => {
+
+      let objet = this.budgetEclate.filter(
+        (item) =>
+          item.uniteadministrative_id == this.editMandat.id &&
+          item.variation_budget != 0
+      );
+      //  let vm=this
+      let array_exercie = [];
+      if (objet.length > 0) {
+        objet.forEach(function (val) {
+          array_exercie.push(val.ligneeconomique_id);
+        });
+        let unique = [...new Set(array_exercie)];
+        console.log(unique);
+        if (unique.length == 0) {
+          return [];
         }
-        return [];
-    //  };
-   
-   
-   
-   
+        return unique;
+      }
+      return [];
+      //  };
     },
     
     arrayExerciceDecompteBienServiceTresor() {
@@ -980,8 +1092,9 @@ MontantExecute(){
     },
 arrayExerciceDecompteBienService() {
       return (id) => {
-        
-        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id);
+        let objet = this.budgetEclate.filter(
+          (item) => item.uniteadministrative_id == id
+        );
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -996,37 +1109,34 @@ arrayExerciceDecompteBienService() {
           return unique;
         }
         return [];
-     };
+      };
     },
-    MontantExecuteParTypeFinancement(){
-        return (id,id1) => {
+    MontantExecuteParTypeFinancement() {
+      return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-               (qtreel.unite_administrative_id == id 
-                && qtreel.type_financement_id == id1
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.type_financement_id == id1
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.type_financement_id == id1
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (qtreel.unite_administrative_id == id
-                && qtreel.type_financement_id == id1
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.type_financement_id == id1 &&
+                  qtreel.type_ordre_paiement == 1 &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.diff_op == null) ||
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.type_financement_id == id1 &&
+                  qtreel.type_ordre_paiement == 1 &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.diff_op == null) ||
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.type_financement_id == id1 &&
+                  qtreel.type_ordre_paiement == 4 &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.diff_op == null) ||
+                (qtreel.unite_administrative_id == id &&
+                  qtreel.type_financement_id == id1 &&
+                  qtreel.type_ordre_paiement == 4 &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.diff_op == null)
             )
             .reduce(
               (prec, cur) =>
@@ -1037,109 +1147,17 @@ arrayExerciceDecompteBienService() {
         } else {
           return 0;
         }
-      }
+      };
     },
-MontantVoteParTypeFinancement(){
-    return (id,id1) => {
+    MontantVoteParTypeFinancement() {
+      return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
                 qtreel.uniteadministrative_id == id &&
-                qtreel.type_financement_id == id1 
-                && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      }
-},
-TotalVoteParTypeFinancement(){
-  return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == this.editMandat.id
-                && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-},
-totalComsommeYtpeFinancement(){
- return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               (
-                qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (
-                 qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (
-                 qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (
-                 qtreel.exercice == this.afficheAnnee &&  qtreel.unite_administrative_id == this.editMandat.id
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-},
-    
-
- //FONCTION LEGA
-   MontantBudgetVote() {
-     if(this.typefinancement==0){
-        return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee
-                && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      }
-     }else{
-        return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id 
-                && qtreel.annebudgetaire == this.afficheAnnee
-                && qtreel.budget_actif_def==1
-                && qtreel.type_financement_id==this.typefinancement
+                qtreel.type_financement_id == id1 &&
+                qtreel.budget_actif_def == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1150,103 +1168,179 @@ totalComsommeYtpeFinancement(){
           return 0;
         }
       };
-     }
+    },
+    TotalVoteParTypeFinancement() {
+      return this.budgetEclate
+        .filter(
+          (qtreel) =>
+            qtreel.uniteadministrative_id == this.editMandat.id &&
+            qtreel.budget_actif_def == 1
+        )
+        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+        .toFixed(0);
+    },
+    totalComsommeYtpeFinancement() {
+      return this.gettersgestionOrdrePaiement
+        .filter(
+          (qtreel) =>
+            (qtreel.exercice == this.afficheAnnee &&
+              qtreel.unite_administrative_id == this.editMandat.id &&
+              qtreel.type_ordre_paiement == 1 &&
+              qtreel.decision_cf == 8 &&
+              qtreel.diff_op == null) ||
+            (qtreel.exercice == this.afficheAnnee &&
+              qtreel.unite_administrative_id == this.editMandat.id &&
+              qtreel.type_ordre_paiement == 1 &&
+              qtreel.decision_cf == 9 &&
+              qtreel.diff_op == null) ||
+            (qtreel.exercice == this.afficheAnnee &&
+              qtreel.unite_administrative_id == this.editMandat.id &&
+              qtreel.type_ordre_paiement == 4 &&
+              qtreel.decision_cf == 8 &&
+              qtreel.diff_op == null) ||
+            (qtreel.exercice == this.afficheAnnee &&
+              qtreel.unite_administrative_id == this.editMandat.id &&
+              qtreel.type_ordre_paiement == 4 &&
+              qtreel.decision_cf == 9 &&
+              qtreel.diff_op == null)
+        )
+        .reduce(
+          (prec, cur) =>
+            parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+          0
+        )
+        .toFixed(0);
     },
 
+    //FONCTION LEGA
+    MontantBudgetVote() {
+      if (this.typefinancement == 0) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.budgetEclate
+              .filter(
+                (qtreel) =>
+                  qtreel.uniteadministrative_id == id &&
+                  qtreel.annebudgetaire == this.afficheAnnee &&
+                  qtreel.budget_actif_def == 1
+              )
+              .reduce(
+                (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+                0
+              )
+              .toFixed(0);
+          } else {
+            return 0;
+          }
+        };
+      } else {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.budgetEclate
+              .filter(
+                (qtreel) =>
+                  qtreel.uniteadministrative_id == id &&
+                  qtreel.annebudgetaire == this.afficheAnnee &&
+                  qtreel.budget_actif_def == 1 &&
+                  qtreel.type_financement_id == this.typefinancement
+              )
+              .reduce(
+                (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+                0
+              )
+              .toFixed(0);
+          } else {
+            return 0;
+          }
+        };
+      }
+    },
 
     //** montant executé */
 
-   
-
-  MontantBudgetExecuté() {
-    if(this.typefinancement==0){
+    MontantBudgetExecuté() {
+      if (this.typefinancement == 0) {
         return (id) => {
-        if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      }
-    }else{
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_ordre_paiement == 1 &&
+                    qtreel.decision_cf == 8 &&
+                    qtreel.diff_op == null) ||
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_ordre_paiement == 1 &&
+                    qtreel.decision_cf == 9 &&
+                    qtreel.diff_op == null) ||
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_ordre_paiement == 4 &&
+                    qtreel.decision_cf == 8 &&
+                    qtreel.diff_op == null) ||
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_ordre_paiement == 4 &&
+                    qtreel.decision_cf == 9 &&
+                    qtreel.diff_op == null)
+              )
+              .reduce(
+                (prec, cur) =>
+                  parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+                0
+              )
+              .toFixed(0);
+          } else {
+            return 0;
+          }
+        };
+      } else {
         return (id) => {
-        if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-                (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_financement_id==this.typefinancement
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op!=null)
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_financement_id==this.typefinancement
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op!=null)
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_financement_id==this.typefinancement
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op!=null)
-                ||
-                 (qtreel.unite_administrative_id == id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_financement_id==this.typefinancement
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op!=null))
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_financement_id == this.typefinancement &&
+                    qtreel.type_ordre_paiement == 1 &&
+                    qtreel.decision_cf == 8 &&
+                    qtreel.diff_op != null) ||
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_financement_id == this.typefinancement &&
+                    qtreel.type_ordre_paiement == 1 &&
+                    qtreel.decision_cf == 9 &&
+                    qtreel.diff_op != null) ||
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_financement_id == this.typefinancement &&
+                    qtreel.type_ordre_paiement == 4 &&
+                    qtreel.decision_cf == 8 &&
+                    qtreel.diff_op != null) ||
+                  (qtreel.unite_administrative_id == id &&
+                    qtreel.exercice == this.afficheAnnee &&
+                    qtreel.type_financement_id == this.typefinancement &&
+                    qtreel.type_ordre_paiement == 4 &&
+                    qtreel.decision_cf == 9 &&
+                    qtreel.diff_op != null)
+              )
+              .reduce(
+                (prec, cur) =>
+                  parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+                0
+              )
+              .toFixed(0);
+          } else {
+            return 0;
+          }
+        };
       }
-    }
-      
     },
 
- //FIN FONCTION LEGA
+    //FIN FONCTION LEGA
     afficheAnnee() {
       if (this.exercices_budgetaires_id == 0) {
         return this.anneeAmort;
@@ -1305,7 +1399,6 @@ totalComsommeYtpeFinancement(){
       return [];
       //};
     },
-  
 
     uniteAdmin() {
       if (this.noDCfNoAdmin) {
@@ -1325,7 +1418,6 @@ totalComsommeYtpeFinancement(){
       return this.groupeParUa;
     },
 
-    
     filtrerUaParTypeProj() {
       return this.uniteAdministratives.filter((item) => item.type_ua_id == 7);
     },
@@ -1337,6 +1429,25 @@ totalComsommeYtpeFinancement(){
         return this.filtre_unite;
       }
     },
+
+    
+    //test de tri
+    affichageUniteAdminstrative() {
+        let vm=this
+      return this.afficheUa.map(function (value) {
+        let objet = {
+          code: value.code,
+          libelle: value.libelle,
+          MontantVote:vm.MontantBudgetVote(value.id),
+        };
+        return objet;
+      });
+    },
+
+    // fin test de tri
+
+
+
     filtre_unite() {
       if (this.noDCfNoAdmin) {
         let colect = [];
@@ -1374,6 +1485,7 @@ totalComsommeYtpeFinancement(){
       }
       return this.filtrerUaParTypeProj;
     },
+
     filtre_type_teste() {
       return (id2) => {
         if (id2 != null && id2 != "") {
@@ -1410,10 +1522,6 @@ totalComsommeYtpeFinancement(){
         }
       };
     },
-  
-
-    
-    
 
     anneeAmort() {
       const norme = this.exercices_budgetaires.find(
@@ -1425,8 +1533,6 @@ totalComsommeYtpeFinancement(){
       }
       return 0;
     },
- 
-
 
     affichebudgetActive() {
       var activeBudget = this.budgetGeneral.filter(
@@ -1437,238 +1543,204 @@ totalComsommeYtpeFinancement(){
     },
 
     SommeBudgetInitial() {
-      if (this.uniteAdmin_id == 0 && this.typefinancement==0) {
-
+      if (this.uniteAdmin_id == 0 && this.typefinancement == 0) {
         return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.annebudgetaire == this.afficheAnnee
-                && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-      } else if(this.uniteAdmin_id != 0 && this.typefinancement==0){
-           return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.annebudgetaire == this.afficheAnnee
-                && qtreel.budget_actif_def==1
-                && qtreel.uniteadministrative_id==this.uniteAdmin_id
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-      }
-      else if(this.uniteAdmin_id == 0 && this.typefinancement!=0){
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.annebudgetaire == this.afficheAnnee
-                && qtreel.budget_actif_def==1
-                && qtreel.type_financement_id==this.typefinancement
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-      }
-      
-      else {
+          .filter(
+            (qtreel) =>
+              qtreel.annebudgetaire == this.afficheAnnee &&
+              qtreel.budget_actif_def == 1
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .toFixed(0);
+      } else if (this.uniteAdmin_id != 0 && this.typefinancement == 0) {
         return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.annebudgetaire == this.afficheAnnee
-                && qtreel.budget_actif_def==1
-                && qtreel.uniteadministrative_id==this.uniteAdmin_id
-                && qtreel.type_financement_id==this.typefinancement
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
+          .filter(
+            (qtreel) =>
+              qtreel.annebudgetaire == this.afficheAnnee &&
+              qtreel.budget_actif_def == 1 &&
+              qtreel.uniteadministrative_id == this.uniteAdmin_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .toFixed(0);
+      } else if (this.uniteAdmin_id == 0 && this.typefinancement != 0) {
+        return this.budgetEclate
+          .filter(
+            (qtreel) =>
+              qtreel.annebudgetaire == this.afficheAnnee &&
+              qtreel.budget_actif_def == 1 &&
+              qtreel.type_financement_id == this.typefinancement
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .toFixed(0);
+      } else {
+        return this.budgetEclate
+          .filter(
+            (qtreel) =>
+              qtreel.annebudgetaire == this.afficheAnnee &&
+              qtreel.budget_actif_def == 1 &&
+              qtreel.uniteadministrative_id == this.uniteAdmin_id &&
+              qtreel.type_financement_id == this.typefinancement
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .toFixed(0);
       }
     },
     SommeBudgetConsomme() {
-      if (this.uniteAdmin_id == 0 && this.typefinancement==0) {
+      if (this.uniteAdmin_id == 0 && this.typefinancement == 0) {
         return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               (
-                qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (
-                 qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (
-                 qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (
-                 qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-      } else if(this.uniteAdmin_id == 0 && this.typefinancement!=0){
-                return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               ( qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-      }else if(this.uniteAdmin_id != 0 && this.typefinancement==0){
-                return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               ( qtreel.unite_administrative_id==this.uniteAdmin_id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id==this.uniteAdmin_id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id==this.uniteAdmin_id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (qtreel.unite_administrative_id==this.uniteAdmin_id
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
+          .filter(
+            (qtreel) =>
+              (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null) ||
+              (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null)
+          )
+          .reduce(
+            (prec, cur) =>
+              parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+            0
+          )
+          .toFixed(0);
+      } else if (this.uniteAdmin_id == 0 && this.typefinancement != 0) {
+        return this.gettersgestionOrdrePaiement
+          .filter(
+            (qtreel) =>
+              (qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null) ||
+              (qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null)
+          )
+          .reduce(
+            (prec, cur) =>
+              parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+            0
+          )
+          .toFixed(0);
+      } else if (this.uniteAdmin_id != 0 && this.typefinancement == 0) {
+        return this.gettersgestionOrdrePaiement
+          .filter(
+            (qtreel) =>
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null) ||
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null)
+          )
+          .reduce(
+            (prec, cur) =>
+              parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+            0
+          )
+          .toFixed(0);
       } else {
-         return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-               ( qtreel.unite_administrative_id==this.uniteAdmin_id
-                && qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id==this.uniteAdmin_id
-                 && qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null) 
-                ||
-                 (qtreel.unite_administrative_id==this.uniteAdmin_id
-                 && qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 8
-                && qtreel.diff_op ==null) 
-                ||
-                (qtreel.unite_administrative_id==this.uniteAdmin_id
-                && qtreel.type_financement_id==this.typefinancement
-                && qtreel.exercice == this.afficheAnnee
-                && qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf == 9
-                && qtreel.diff_op ==null)
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
+        return this.gettersgestionOrdrePaiement
+          .filter(
+            (qtreel) =>
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null) ||
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 8 &&
+                qtreel.diff_op == null) ||
+              (qtreel.unite_administrative_id == this.uniteAdmin_id &&
+                qtreel.type_financement_id == this.typefinancement &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf == 9 &&
+                qtreel.diff_op == null)
+          )
+          .reduce(
+            (prec, cur) =>
+              parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+            0
+          )
+          .toFixed(0);
       }
     },
 
-    
     TauxExecutionTypeFinancement() {
-
-      if(this.totalComsommeYtpeFinancement==0 && this.TotalVoteParTypeFinancement==0){
+      if (
+        this.totalComsommeYtpeFinancement == 0 &&
+        this.TotalVoteParTypeFinancement == 0
+      ) {
         return 0.0;
-      }else{
-          return (
-        (parseFloat(this.totalComsommeYtpeFinancement) /
-          parseFloat(this.TotalVoteParTypeFinancement)) *
-        100
-      ).toFixed(2);
+      } else {
+        return (
+          (parseFloat(this.totalComsommeYtpeFinancement) /
+            parseFloat(this.TotalVoteParTypeFinancement)) *
+          100
+        ).toFixed(2);
       }
-      
     },
     TauxExecution() {
-
-      if(this.SommeBudgetConsomme==0 && this.SommeBudgetInitial==0){
+      if (this.SommeBudgetConsomme == 0 && this.SommeBudgetInitial == 0) {
         return 0.0;
-      }else{
-          return (
-        (parseFloat(this.SommeBudgetConsomme) /
-          parseFloat(this.SommeBudgetInitial)) *
-        100
-      ).toFixed(2);
+      } else {
+        return (
+          (parseFloat(this.SommeBudgetConsomme) /
+            parseFloat(this.SommeBudgetInitial)) *
+          100
+        ).toFixed(2);
       }
-      
     },
 
-     TotalReamenagement() {
-      return (this.SommeBudgetInitial - this.SommeBudgetConsomme);
+    TotalReamenagement() {
+      return this.SommeBudgetInitial - this.SommeBudgetConsomme;
     },
   },
   methods: {
@@ -1691,22 +1763,15 @@ totalComsommeYtpeFinancement(){
         backdrop: "static",
         keyboard: false,
       });
-      this.editMandat = this.afficheUa.find(
-        (item) => item.id == id
-      );
+      this.editMandat = this.afficheUa.find((item) => item.id == id);
     },
     apercuFacture(id) {
       this.$("#validationOpDefinitif").modal({
         backdrop: "static",
         keyboard: false,
       });
-      this.editMandat = this.afficheUa.find(
-        (item) => item.id == id
-      );
+      this.editMandat = this.afficheUa.find((item) => item.id == id);
     },
-    
-
-    
 
     EviteNaN(id) {
       if (
@@ -1722,26 +1787,32 @@ totalComsommeYtpeFinancement(){
         ).toFixed(2);
       }
     },
-EviteNaNTypeFinancement(id,id1) {
+    EviteNaNTypeFinancement(id, id1) {
       if (
-        this.MontantExecuteParTypeFinancement(id,id1) == 0 &&
-        this.MontantVoteParTypeFinancement(id,id1) == 0
+        this.MontantExecuteParTypeFinancement(id, id1) == 0 &&
+        this.MontantVoteParTypeFinancement(id, id1) == 0
       ) {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.MontantExecuteParTypeFinancement(id,id1)) /
-            parseFloat(this.MontantVoteParTypeFinancement(id,id1))) *
+          (parseFloat(this.MontantExecuteParTypeFinancement(id, id1)) /
+            parseFloat(this.MontantVoteParTypeFinancement(id, id1))) *
           100
         ).toFixed(2);
       }
     },
 
-     TotalMontantReamenagement(id){
+    TotalMontantReamenagement(id) {
       return formatageSommeSansFCFA(
-                      parseFloat(this.MontantBudgetVote(id) -this.MontantBudgetExecuté(id)))
+        parseFloat(this.MontantBudgetVote(id) - this.MontantBudgetExecuté(id))
+      );
     },
-  
+
+    TotalBudgetActuel(id) {
+      return formatageSommeSansFCFA(
+        parseFloat(this.MontantBudgetVote(id) - this.MontantBudgetExecuté(id))
+      );
+    },
 
     AfficheMontantBudgetInitial(id) {
       if (this.exercices_budgetaires_id == 0) {
