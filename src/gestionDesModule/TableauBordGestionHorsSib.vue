@@ -1,14 +1,293 @@
 <template>
     <div>
-    
-
-       
-        <div>
-         <div style="text-align:center;font-size:50px;color:#000;margin-top:15%;" :class="{active: active_el ==780}">
-          TABLEAU DE BORD HORS SIGOBE EN COURS... <br/>
-          <button></button>
+      <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+         
+          <div class="widget-content">
+            <h3>SUIVI DES OP PROVISOIRES</h3>
+            <div class="">
+      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
+        <div class="text-center" style="color:#FFF"><h4>TOTAL</h4></div>
+         <div class="card bg-primary  text-center">
+           <h4 style="color:#000"> Total des OP provisoires</h4>
+          
+            <div class="card-body">
+              <table class="noborder" >
+                <tr>
+                  <th style="color:#000"> Nombre de dossiers :</th>
+                  <td style="color:#000">0</td>
+                </tr>
+                <tr>
+                  <th style="color:#000">Taux :</th>
+                  <td style="color:#000">0</td>
+                </tr>
+                <tr>
+                  <th style="color:#000">Montant :</th>
+                  <td style="color:#000">0</td>
+                </tr>
+              </table>
+              <br>
+         
+     
+            </div>
+             <a href="#" style="color:#000" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
-     </div>
+         
+      </div>
+      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
+        <div class="text-center"><h4>A</h4></div>
+         <div class="card bg-secondary mb-3 text-center">
+             <h4>-Total des OP provisoires
+en cours de traitement</h4>
+          
+            <div class="card-body">
+              <table class="noborder" >
+                <tr>
+                  <th>Nombre de dossiers :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Taux :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Montant :</th>
+                  <td>0</td>
+                </tr>
+              </table>
+              <br>
+         
+     
+            </div>
+             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+      </div>
+      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
+         <div class="text-center"><h4>B</h4></div>
+         <div class="card bg-success mb-3 text-center">
+           <h4>OP Provisoires régularisés</h4>
+          
+            <div class="card-body">
+              <table class="noborder" >
+                <tr>
+                  <th>Nombre de dossiers :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Taux :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Montant :</th>
+                  <td>0</td>
+                </tr>
+              </table>
+              <br>
+            </div>
+             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+      </div>
+      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
+       <div class="text-center"><h4>C</h4></div>
+         <div class="card bg-info mb-3 text-center">
+           <h4>OP Provisoires non régularisés</h4>
+          
+            <div class="card-body">
+              <table class="noborder" >
+                <tr>
+                  <th>Nombre de dossiers :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Taux :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Montant :</th>
+                  <td>0</td>
+                </tr>
+              </table>
+              <br>
+            </div>
+             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+      </div>
+     
+     <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
+          <div class="text-center"><h4>D</h4></div>
+         <div class="card bg-warning mb-3 text-center">
+           <h4>OP Provisoires hots délai d'un mois</h4>
+          
+            <div class="card-body">
+              <table class="noborder" >
+                <tr>
+                  <th>Nombre de dossiers :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Taux :</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Montant :</th>
+                  <td>0</td>
+                </tr>
+              </table>
+              <br>
+            </div>
+             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+      </div>
+
+
+    </div> 
+    <hr>
+
+<div class="row-fluid">
+<div class="span4"  >
+<div class=" shadow1" >
+ <div id="chart" style="border: 2px dotted #ffffff;">
+        <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+      </div>
+  
+</div>
+</div>
+<div class="span8">
+<div class="card shadow1" >
+ <!-- <h5>Shadow with 2 properties</h5>-->
+<div class="custom ">
+  <div id="front_videos">
+    <div class="large-2">
+      
+      <table class="table table-bordered table-striped force-overflow">
+  <thead>
+    <tr>
+      <th>Expéditeur</th>
+      <th>Montant OP</th>
+      <th>Bénéficiaires</th>
+      <th>Nature économiques</th>
+      <th>Date de visa CF</th>
+      <th>No OP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+       <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+       <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+       <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+       <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+ 
+</table>
+
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+   </div>
+        </div>
+      </div>
+    </div>
+      
     </div>
 
 </template>
@@ -19,11 +298,36 @@
 import { mapGetters, mapActions,mapState } from "vuex";
 import {formatageSomme} from '../../src/Repositories/Repository';
 import {noDCfNoAdmin} from '../../src/Repositories/Auth';
+//import { GChart } from 'vue-google-charts'
+ import VueApexCharts from 'vue-apexcharts'
 export default {
+   components: {
+    apexchart: VueApexCharts,
+  },
   data(){
     return{
 
-      budgetGeneralCharge:""
+      budgetGeneralCharge:"",
+       series: [44, 55, 13, 43],
+          chartOptions: {
+            chart: {
+              width: 380,
+              type: 'pie',
+            },
+            labels: ['A', 'B', 'C', 'D'],
+            colors:['#00a9e6', '#f67de2', '#f3993e',"#ff0000"],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          },
 
     }
   },
@@ -382,41 +686,187 @@ created() {
 }
 </script>
 <style>
-.flex{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  position: relative;
-}
-.square{
-  width: 50px;
-  height: 50px;
+.centreVerticalement {
+ display: inline-block;
+ vertical-align: middle;
+ float: none;
  
-  color: #FAFAFA;
-  text-align: center;
-  margin-right: 5px;
-  cursor: pointer;
-  line-height: 50px;
+  padding: 0.5em;
 }
-.square:hover{
-  opacity: 0.8;
+.card:not([class*=card-outline-]) {
+    border: 0;
 }
-.S{
-  background-color:orange;
+.card {
+    height: 100%;
+    border:1px solid black !important;
 }
-.I{
-  background-color:orange;
+.blockquote {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
 }
-.D{
-  background-color:white;
-  color: black;
+
+blockquote {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    
 }
-.C{
-  background-color:green;
-  color: white;
+blockquote {
+    margin: 0 0 1rem;
 }
-.F{
- background-color:green;
-  color: white;
+
+.noborder{
+  border-collapse: collapse;
+  text-align: left !important;
+}
+.blockquote-ul ul {
+  list-style: none;
+}
+
+.blockquote-ul li {
+  position: relative;
+  font-family:Arial;
+  font-size:20px;
+  margin:10px;
+}
+
+
+
+
+
+.blockquote p {
+    font-size: 1.1rem;
+}
+
+/* Backgrounds */
+
+.bg-primary {
+    color: #000 !important;
+    background-color: #FFFFFF !important;
+}
+
+.bg-secondary {
+    color: #FFFFFF;
+    background-color: #00a9e6 !important;
+}
+
+.bg-success {
+    color: #FFFFFF;
+    background-color: #f67de2 !important;
+}
+
+.bg-info {
+    color: #FFFFFF;
+    background-color: #f3993e !important;
+}
+
+.bg-warning {
+    color: #FFFFFF !important;
+    background-color: #ff0000 !important;
+}
+
+.bg-danger {
+    color: #FFFFFF;
+    background-color: #f43a59 !important;
+}
+
+.bg-dark {
+    background-color: #122f3b !important;
+}
+
+.bg-light {
+    background-color: #F7F7FA !important;
+}
+
+.bg-tranparent {
+    background-color: transparent !important;
+}
+
+.bg-dark *,
+.bg-danger *,
+.bg-warning *,
+.bg-info *,
+.bg-success *,
+.bg-secondary *,
+.bg-primary *,
+.bg-dark .batch-icon,
+.bg-danger .batch-icon,
+.bg-warning .batch-icon,
+.bg-info .batch-icon,
+.bg-success .batch-icon,
+.bg-secondary .batch-icon,
+.bg-primary .batch-icon {
+    color: #FFFFFF;
+}
+
+.bg-gradient [class^="card-"],
+.bg-gradient [class^="card-"] * {
+    color: #FFFFFF !important;
+}
+
+
+/* Highlight Colors - Bottom Border */
+.card .card-box-footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+    padding: 3px 0;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-decoration: none;
+}
+.card:hover .card-box-footer {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+
+.card1 {
+  padding: 40px;
+  background: #fff;
+  max-width: 360px;
+  border-radius: 20px;
+  margin: 60px auto;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #294;
+}
+
+.shadow1 { 
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+}
+
+
+
+
+.large-2 {
+  
+  height: 350px;
+  overflow-y: scroll;
+  width:100%;
+  background: #ccc;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
+
+.large-2::-webkit-scrollbar-track {
+  border: 1px solid #000;
+  padding: 2px 0;
+  background-color: #404040;
+}
+
+.large-2::-webkit-scrollbar {
+  width: 10px;
+}
+
+.large-2::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #737272;
+  border: 1px solid #000;
 }
 </style>
