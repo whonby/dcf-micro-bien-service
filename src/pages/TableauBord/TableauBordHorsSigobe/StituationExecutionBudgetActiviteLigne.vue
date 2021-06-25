@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    {{ListeDEsEntreprise}}
     <div class="row-fluid" style="margin-top: -20px">
       <div class="span1"></div>
       
@@ -146,8 +147,8 @@
 
             <table class="table table-bordered">
               <thead style="background-color: #FFA100 !important">
-                <tr>
-
+                
+<tr>
                    <th
                     style="
                       font-size: 14px;
@@ -169,7 +170,22 @@
                       background-color: #FFA100 !important;
                     "
                   >
-                    LIGNE BUDGETAIRE
+                    LIGNE BUDGETAIRE{{editMandat.inputLigne1}}   <button @click="ActiveInputLigne">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                     <model-list-select v-show="inputLigne == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="plans_activites"
+                  v-model="editMandat.inputLigne1"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="TOUTES LES ACTIVITES"
+                >
+                </model-list-select>
+                
                   </th>
                   <th
                     style="
@@ -181,6 +197,7 @@
                     "
                   >
                     BUDGET INITIAL {{afficheAnnee}}
+                    
                   </th>
                    <th
                     style="
@@ -520,6 +537,10 @@ export default {
         CODE: "code",
         LIBELLE: "libelle",
       },
+
+
+inputLigne:false,
+
       affiche_filtre1: false,
       affiche_filtre: false,
       affiche_boutton_filtre: true,
@@ -535,7 +556,9 @@ export default {
       Activite_id: 0,
       exercices_budgetaires_id:0,
 
-      editMandat: {},
+      editMandat: {
+        inputLigne1:""
+      },
       EditAnulation: {},
       editDecisionFinal: {},
       search: "",
@@ -690,7 +713,41 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+  
+// ListeDEsEntreprise(){
+// if(this.inputLigne1!=''){
+//   return this.ListeGroupByActivite.
+// }
+                // let vM=this;
+                // let objet=this.ListeGroupByActivite
 
+              
+              
+                // if(vM.inputLigne1!="" ){
+                  
+                //   objet = vM.objet.filter(item=>{
+                //         if(item[0].activite_id == vM.afficheIdActiviteDansPlanActuvite(vM.inputLigne1)){
+                //             return item[0];
+                //         }
+                //     })
+                //  return objet
+                // }
+            
+                // return objet
+           
+afficheIdActiviteDansPlanActuvite() {
+      
+          const qtereel = this.plans_activites.find(
+            (qtreel) => qtreel.code == this.editMandat.inputLigne1
+           
+          );
+
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0;
+      
+    },
     ShowMe(){
        return (id) => {
         if (id != null && id != "") {
@@ -699,8 +756,7 @@ export default {
         return 0;
       };
     },
-   
-
+ 
     verifActiviteId() {
       return (id) => {
         if (id != null && id != "") {
@@ -718,13 +774,27 @@ export default {
     },
 
     ListeGroupByActivite() {
-      if (this.Activite_id!=0) {
+    if(this.inputLigne1!=0 && this.Activite_id==0){
+      return this.groupeByActivite.filter(
+          (qtreel) =>
+            qtreel[0].annebudgetaire == this.afficheAnnee
+            && qtreel[0].activite_id==this.afficheIdActiviteDansPlanActuvite(this.inputLigne1)
+        );
+    }else if(this.Activite_id!=0 && this.inputLigne1==0){
         return this.groupeByActivite.filter(
           (qtreel) =>
             qtreel[0].annebudgetaire == this.afficheAnnee
             && qtreel[0].activite_id==this.Activite_id
         );
-      } else {
+    }else if(this.Activite_id!=0 && this.inputLigne1!=0){
+        return this.groupeByActivite.filter(
+          (qtreel) =>
+            qtreel[0].annebudgetaire == this.afficheAnnee
+            && qtreel[0].activite_id==this.Activite_id
+            && qtreel[0].activite_id==this.inputLigne1
+        );
+    }
+      else {
         return this.groupeByActivite
         .filter(
           (qtreel) =>
@@ -1200,8 +1270,11 @@ export default {
           return 0;
         }
       };
-    },
   },
+
+
+  },
+
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
@@ -1210,7 +1283,14 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+ActiveInputLigne(){
+  if(this.inputLigne == false){
+    this.inputLigne = true
+  }else{
+    this.inputLigne = false
+  }
 
+},
     ShowMyLigne(id){
       if(this.recupereIDactivite==""){
          this.recupereIDactivite=id;
