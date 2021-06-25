@@ -2051,12 +2051,12 @@ export default {
 #Mycss {
   font-weight: bold;
   font-size: 15px;
-  background-color: #a7e556 !important;
+  background-color: palegreen !important;
   color: #000;
 }
 
 .whitebg {
-  background: #aac7a3 !important;
+  background: #98FB98 !important;
   font-weight: bold;
   color: black;
   font-size: 15px;

@@ -1773,17 +1773,18 @@ formatageSomme:formatageSomme,
 width: 95%;
 }
 
-.whitebg{
-    background:#a7e556 !important;
-    font-weight: bold;
-    font-size:15px;
-    }
- .graybg{
-    background:green !important;
-    color:white;
-    font-size:15px;
-    font-weight: bold;
- }
+.whitebg {
+  background: #98FB98 !important;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+.graybg {
+  background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
 .tailgrand {
   width: 65%;
   margin: 0 -30%;
