@@ -125,7 +125,12 @@
     </div> 
     
     <div class="widget-content nopadding" id="printpdf">
-      <h2
+       <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE</h2>
+          </tr>
+        </table>
+      <!-- <h2
         style="
           font-size: 25px;
           font-weight: bold;
@@ -151,7 +156,7 @@
         SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
-      </h2>
+      </h2> -->
       <p
         style="
           margin-left: 30px;
@@ -164,7 +169,7 @@
       </p>
 
             <table class="table table-bordered">
-              <thead style="background-color: #FFA100 !important">
+              <thead style="background-color: #ff9c1a !important">
                 
 <tr>
                    <th
@@ -173,7 +178,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     
@@ -185,7 +190,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                    ACTIVITE/LIGNE BUDGETAIRE  
@@ -212,7 +217,8 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
+                      width :8%
                     "
                   >
                     BUDGET INITIAL {{afficheAnnee}}
@@ -224,7 +230,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
@@ -236,7 +242,8 @@
                       font-weight: bold;
                       text-align: center;
                       color: #000;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
+                      width :8%
                     "
                   >
                  BUDGET ACTUEL {{afficheAnnee}}
@@ -247,7 +254,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                   MONTANT EXECUTE {{afficheAnnee}}
@@ -258,10 +265,22 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                  </th>
+
+                     <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -269,7 +288,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     TAUX D'EXECUTION {{afficheAnnee}}
@@ -280,10 +299,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
-                    VARIATION DU TAUX {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -291,7 +310,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     DISPONIBLE {{afficheAnnee}}
@@ -310,12 +329,12 @@
                     </button>
                   </td>
 
-                  <td style="background-color: #3CB371 !important; width: 500px;color:#000" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
 
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -323,7 +342,7 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -331,14 +350,14 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
                     </b>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -346,7 +365,7 @@
                      }}
                     </b>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -358,7 +377,14 @@
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+
+                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+                      0
+                    }}
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
@@ -387,7 +413,7 @@
                         </span>
                       </button>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: center;color:#000;font-weight: bold;" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
@@ -413,12 +439,12 @@
 
                   </td>
 
-                  <td style="width: 500px;color:#000;font-weight: bold" >
+                  <td style="width: 500px;color:#000;" >
                    
                     {{ libelleLigneEconomique(listeLigneeco) }}
 
                   </td>
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
                   
                   
                     {{
@@ -434,7 +460,7 @@
 
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
                    
                     {{
                       formatageSommeSansFCFA(
@@ -447,7 +473,7 @@
                     }}
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
 
 
                     {{
@@ -462,65 +488,55 @@
 
 
                   </td>
-                  <td style="text-align: right;color:#000;font-weight: bold">
 
-
+                  <td style="text-align: right;color:#000;">
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)
-                        )
-                      )
+                          MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
-
-
                   </td>
-                  <td style="text-align: right;color:#000;font-weight: bold" >
 
-
+                  <td style="text-align: right;color:#000;" >
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id
-                          )
-                        )
-                      )
+                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
-
-
                   </td>
-                  <td style="text-align: right;color:#000;font-weight: bold">
 
-
-                    {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné"
-                    }}
-
-
+                  <td style="text-align: right;color:#000;" >
+                    {{ 0 }}
                   </td>
+
+                  <td style="text-align: right;color:#000;">
+                    {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
+                  </td>
+
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-warning taille" v-else-if="25 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                        <button class="btn btn-success taille" v-else-if="50 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-success taille" v-else-if="75 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 100">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                   </td>
                  
-                  <td style="text-align: right;color:#000;font-weight: bold">
+                  <td style="text-align: right;color:#000;">
 
 
                     {{
@@ -536,30 +552,33 @@
               
               </tbody>
               <tfoot>
-                <tr style="margin-left:25px">
-                  <td> </td>
-                  <td>TOTAL ACTIVITE </td>
+                <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+
+                  <td style="text-align: right;color:#000">{{ 0 }}</td>
                   <td style="text-align: right;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
-                   {{ TotalEviteNaN }}
+                   {{ TotalEviteNaN }}%
                  </td>
-                 <td style="text-align: right;color:#000">
-                   <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   <!-- 
+                     {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                 
                  </td>
                  
-                  <td style="text-align: right;color:#000">
+                  <td style="width :9%;text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
@@ -603,7 +622,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+import { formatageSommeSansFCFA,formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
@@ -938,6 +957,9 @@ inputLigne:false,
         ).toFixed(2);
       }
     },
+
+
+    
 
       TotalMontantbudgetVote(){
         if(this.Activite_id!=0 && this.inputLigne1!=0){
@@ -1632,7 +1654,8 @@ inputLigne:false,
   if(this.inputLigne == false){
     this.inputLigne = true
   }else{
-    this.inputLigne = false
+    this.inputLigne = false;
+    this.inputLigne1=0;
   }
 
 },
@@ -1737,7 +1760,7 @@ inputLigne:false,
     // },
 
     formatageSommeSansFCFA: formatageSommeSansFCFA,
-
+formatageSomme:formatageSomme,
     ExporterEnExel() {
       this.$refs.excel.click();
     },
@@ -1748,6 +1771,19 @@ inputLigne:false,
 <style scoped>
 .taille{
 width: 95%;
+}
+
+.whitebg {
+  background: #98FB98 !important;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+.graybg {
+  background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
 .tailgrand {
   width: 65%;
