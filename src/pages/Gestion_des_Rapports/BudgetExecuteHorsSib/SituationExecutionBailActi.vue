@@ -87,10 +87,10 @@
               DIRECTION DU CONTRÔLE FINANCIER <br />
               -------------------------
             </p>
-            <img :src="logo3dcf" />
+            <img :src="logo3dcf" width="70px;" />
           </td>
           <td style="text-align: center">
-            <img :src="amoirie" />
+            <img :src="amoirie" width="70px;" />
           </td>
           <td style="text-align: center">
             <p>

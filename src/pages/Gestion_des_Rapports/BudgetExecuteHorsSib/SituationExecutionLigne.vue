@@ -675,16 +675,47 @@ export default {
       };
     },
 
+    // ListeGroupByActivite() {
+    //   if (this.activite_id!=0) {
+    //     return this.groupeByActivite.filter(
+    //       (qtreel) =>
+    //         qtreel[0].annebudgetaire == this.anneeAmort
+    //         && qtreel[0].activite_id==this.activite_id
+    //     );
+    //   } else {
+    //     return this.groupeByActivite
+    //     .filter(
+    //       (qtreel) =>
+    //         (qtreel[0].annebudgetaire == this.anneeAmort
+    //          )
+
+    //     );
+    //   }
+    // },
+
     ListeGroupByActivite() {
-      if (this.activite_id!=0) {
+      if (this.activite_id != 0) {
+        return this.groupeByActivite.filter(
+          (qtreel =>
+              qtreel[0].annebudgetaire == this.anneeAmort
+           && qtreel[0].activite_id==this.activite_id
+        ));
+      } else if (
+        this.activite_id != 0 &&
+        this.formData.date_debut != "" &&
+        this.formData.date_fin != ""
+      ) {
         return this.groupeByActivite.filter(
           (qtreel) =>
-            qtreel[0].annebudgetaire == this.anneeAmort
-            && qtreel[0].activite_id==this.activite_id
+             qtreel[0].annebudgetaire == this.anneeAmort && 
+             qtreel[0].activite_id == this.activite_id     &&
+             qtreel[0].date_decision_cf >= this.formData.date_debut && 
+             qtreel[0].date_decision_cf <= this.formData.date_fin
         );
-      } else {
-        return this.groupeByActivite
-        .filter(
+      }
+
+      else {
+         return this.groupeByActivite.filter(
           (qtreel) =>
             (qtreel[0].annebudgetaire == this.anneeAmort
              )
@@ -692,30 +723,7 @@ export default {
         );
       }
     },
-
-    // ListeGroupByNature() {
-    //   if (this.activite_id != 0) {
-    //     return this.GroupeOrdrePaiementByGrandeNature.filter(
-    //       (qtreel) =>
-    //         qtreel[0].activite_id == this.activite_id
-    //     );
-    //   } else if (
-    //     this.activite_id != 0 &&
-    //     this.formData.date_debut != "" &&
-    //     this.formData.date_fin != ""
-    //   ) {
-    //     return this.GroupeOrdrePaiementByGrandeNature.filter(
-    //       (qtreel) =>
-    //         qtreel[0].date_decision_cf >= this.formData.date_debut &&
-    //         qtreel[0].date_decision_cf <= this.formData.date_fin
-    //     );
-    //   }
-
-    //   else {
-    //      return this.GroupeOrdrePaiementByGrandeNature;
-    //   }
-    // },
-
+  
     ListeGroupByNature() {
       return (id) => {
         if (id != null && id != "") {
