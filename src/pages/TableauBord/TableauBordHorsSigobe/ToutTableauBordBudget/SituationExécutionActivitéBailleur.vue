@@ -60,50 +60,50 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
-                  Activité/Bailleurs
+                  ACTIVITE/BAILLEUR
                 </th>
                  <th
                   style="
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
-                  Budget Voté
+                  BUDGET INITIAL
                 </th>
                  <th
                   style="
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
-                  Réaménagement budgétaire
+                 REAMENAGEMENT BUDGETAIRE
                 </th>
                 <th
                   style="
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
-                  Budget Actuel
+                  BUDGET ACTUEL
                 </th>
                 <th
                   style="
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
-                  Montant Exécuté
+                  MONTANT EXECUTE
                 </th>
 
                 <!-- <th
@@ -112,7 +112,7 @@
                     font-weight: bold;
                     color: #000;
                     text-align: center;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
                   Montant Provisoire
@@ -122,33 +122,33 @@
                     font-size: 14px;
                     font-weight: bold;
                     color: #000;
-                    background-color:  #FC762F !important;
+                    background-color:  #FFA100 !important;
                   "
                 >
-                  Taux d'Exécution (%)
+                  TAUX D'EXECUTION (%)
                 </th>
                 <th
                   style="
                     font-size: 14px;
                     font-weight: bold;
                     color: #000;
-                    background-color: #FC762F !important;
+                    background-color: #FFA100 !important;
                   "
                 >
-                  Disponible
+                  DISPONIBLE
                 </th>
               </tr>
             </thead>
             <tbody  v-for="GroupeOrdrePaiementByActivit in ListeGroupByActivite2"
         :key="GroupeOrdrePaiementByActivit[0].id">
               <tr>
-                <td style="font-weight: bold; font-size: 18px; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
+                <td style="font-weight: bold; font-size: 18px; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                   {{
                     LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -161,7 +161,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -174,7 +174,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -187,7 +187,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -201,7 +201,7 @@
                 </td>
 
                 <!-- <td
-                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#009246 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -214,7 +214,7 @@
                   }}
                 </td> -->
                 <td
-                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     (
@@ -230,7 +230,7 @@
                 </td>
 
                 <td
-                  style="font-weight: bold; font-size: 18px; text-align: right;; background-color:#83F747 !important" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
+                  style="font-weight: bold; font-size: 18px; text-align: right;; background-color:#009246 !important;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
                 >
                   {{
                     formatageSommeSansFCFA(

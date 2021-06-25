@@ -285,7 +285,7 @@
         </tr>
       </tbody>
     </table>
-    
+     <div>
     <h2 style="text-align: center; font-size: 25px">
       Suivi du budget projet par UA et type Financement
     </h2>
@@ -451,14 +451,14 @@
                 <td style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 ">TOTAL</td>
 
                 <td
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 "
                 >
                   
@@ -467,7 +467,7 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;"
+                  background-color: #FFA100 !important;"
                 
                 >
                   {{ formatageSomme(parseFloat(SommeBudgetInitial)) }}
@@ -476,7 +476,7 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 "
                 >
                  {{ formatageSomme(parseFloat(TotalReamenagement)) }}
@@ -486,7 +486,7 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 "
                 >
                   {{ formatageSomme(parseFloat(SommeBudgetInitial - SommeBudgetConsomme)) }}
@@ -495,17 +495,25 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 "
                 >
                    {{ formatageSomme(parseFloat(SommeBudgetConsomme)) }}
                 </td>
-
+ <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  background-color: #FFA100 !important;
+                "
+                >
+                   {{ formatageSomme(parseFloat(SommeBudgetConsomme)) }}
+                </td>
                 <td
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 "
                 >
                   {{ TauxExecution }}%
@@ -514,17 +522,38 @@
                   style="font-weight: bold;
                   font-size: 18px;
                   width: 800px;
-                  background-color: #83f747 !important;
+                  background-color: #FFA100 !important;
                 "
                 >
                   
                 </td>
+               <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  background-color: #FFA100 !important;
+                "
+                >
+                  
+                </td>
+                 <td
+                  style="font-weight: bold;
+                  font-size: 18px;
+                  width: 800px;
+                  background-color: #FFA100 !important;
+                "
+                >
+                  
+                </td>
+                 
+                 
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+  </div>
     <div class="pagination alternate">
       <ul>
         <li :class="{ disabled: page == 0 }">
