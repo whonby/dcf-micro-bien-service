@@ -343,8 +343,8 @@
     <table class="table table-striped">
       <tbody>
         <tr>
-          <td>
-            <label>EXERCICE {{recupereIDactivite}}</label>
+          <td class="span5">
+            <label>EXERCICE </label>
             <model-list-select
               style="border: 1px solid #000"
               class="wide"
@@ -356,7 +356,7 @@
             >
             </model-list-select>
           </td>
-          <td colspan="">
+          <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
             <model-list-select
               style="background-color: #fff; border: 2px solid #000"
@@ -370,7 +370,7 @@
             </model-list-select>
           </td>
 
-          <td colspan="">
+          <!-- <td colspan="">
             <label>TYPE FINANCEMENT </label>
             <model-list-select
               style="background-color: #fff; border: 2px solid #000"
@@ -382,7 +382,7 @@
               placeholder="TOUS LES TYPES FINANCEMENT"
             >
             </model-list-select>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -409,7 +409,7 @@
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
-          Entrer
+          
         </div>
 
         <div class="widget-content nopadding">
@@ -492,18 +492,18 @@
                       
                     </button>
                 </td>
-                <td style="background-color: #009246 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
+                <td style="background-color: #3CB371 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{ CodeUniteAdministrative(unite.id) || "Auncun résultat" }}
                 </td>
                 
-                <td style="background-color: #009246 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
+                <td style="background-color: #3CB371 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{
                     libelleUniteAdministrative(unite.id) || "Auncun résultat"
                   }}
                 </td>
 
                 <td
-                 style="text-align:center;background-color: #009246 !important; color:#000;font-weight: bold; font-size: 12px"
+                 style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -512,19 +512,19 @@
                   }}
                 </td>
                 <td
-                  style="text-align:center;background-color: #009246 !important; color:#000;font-weight: bold; font-size: 12px"
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                   @click="percuFacture(unite.id)"
                 >
                   {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
                 <td
-                  style="text-align:center;background-color: #009246 !important; color:#000;font-weight: bold; font-size: 12px"
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                    {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
 
                 <td
-                  style="text-align:center;background-color: #009246 !important; color:#000;font-weight: bold; font-size: 12px"
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -533,12 +533,12 @@
                   }}
                 </td>
  <td
-                 style="text-align:center;background-color: #009246 !important; color:#000;font-weight: bold; font-size: 12px"
+                 style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
                 </td>
                 <td
-                 style="text-align:center;background-color: #009246 !important;color:#000;font-weight: bold; font-size: 12px"
+                 style="text-align:center;background-color: #3CB371 !important;color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ EviteNaN(unite.id) }}%
                 </td>

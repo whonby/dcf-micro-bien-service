@@ -85,10 +85,10 @@
               DIRECTION DU CONTRÔLE FINANCIER <br />
               -------------------------
             </p>
-            <img :src="AfficheLogODCF" />
+            <img :src="logo3dcf" width="70px;" />
           </td>
           <td style="text-align: center">
-            <img :src="AfficheAmoirie" />
+            <img :src="amoirie" width="70px;" />
           </td>
           <td style="text-align: center">
             <p>
@@ -459,6 +459,8 @@ import { formatageSommeSansFCFA } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
+import amoirie from "../../../../public/amoirie.png";
+import logo3 from "../../../../public/log3.png";
 export default {
   components: {
     ModelListSelect,
@@ -466,6 +468,8 @@ export default {
   name: "typetext",
   data() {
     return {
+       amoirie:amoirie,
+      logo3dcf:logo3,
       page: 0,
       size: 10,
       active_el: 0,
@@ -978,12 +982,12 @@ export default {
       return 0;
     },
 
-    AfficheLogODCF() {
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/log3.png";
-    },
-    AfficheAmoirie() {
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
-    },
+    // AfficheLogODCF() {
+    //   return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/log3.png";
+    // },
+    // AfficheAmoirie() {
+    //   return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
+    // },
 
     listeordrepaiementLigne() {
       return (id) => {
