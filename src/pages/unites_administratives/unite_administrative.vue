@@ -425,16 +425,16 @@
             <div
               class="span10"
               style="background-color: transparent; !important;"
-            >
+              >
               <table class="table table-striped">
                 <tbody>
                   <tr>
                     <td colspan="">
                       <br />
                       <!-- <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
+                <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
     
-        </div>  -->
+                </div>  -->
 
                       <label
                         style="
