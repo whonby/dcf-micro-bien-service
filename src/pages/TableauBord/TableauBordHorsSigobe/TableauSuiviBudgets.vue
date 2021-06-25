@@ -392,7 +392,7 @@
     </table>
      <div>
     <h2 style="text-align: center; font-size: 25px">
-      Suivi du budget projet par UA et type Financement
+      SUIVI DU BUDGET PROJET PAR UA ET PAR TYPE DE FINANCEMENT
     </h2>
     <div class="container-fluid">
       <notifications />
@@ -401,7 +401,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Detail budget</h5>
+          <h5>Détail budget</h5>
         </div>
 
         <div class="span4">
@@ -503,7 +503,17 @@
                   text-align: center;
                   background-color: #FFA100 !important;">
                   MONTANTS EXECUTES {{afficheAnnee}}</th>
- <th style=" font-size: 14px;
+
+
+                  <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FFA100 !important;">
+                  NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
+
+
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -571,7 +581,15 @@
                     )
                   }}
                 </td>
- <td
+
+                 <td
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{
+                    0
+                  }}
+                </td>
+                  <td
                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
@@ -659,6 +677,14 @@
                       MontantExecuteParTypeFinancement(unite.id, unite1)
                     )
                   )
+                }}
+              </td>
+
+               <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  0
                 }}
               </td>
  <td

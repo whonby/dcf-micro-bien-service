@@ -263,6 +263,18 @@
                   >
                     MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
                   </th>
+
+                     <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #FFA100 !important;
+                    "
+                  >
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -355,6 +367,13 @@
                           )
                         )
                       )
+                    }}
+                    </b>
+                  </td>
+
+                   <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                    <b>{{
+                      0
                     }}
                     </b>
                   </td>
@@ -462,41 +481,31 @@
 
 
                   </td>
+
                   <td style="text-align: right;color:#000;font-weight: bold">
-
-
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)
-                        )
-                      )
+                          MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
-
-
                   </td>
+
                   <td style="text-align: right;color:#000;font-weight: bold" >
-
-
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id
-                          )
-                        )
-                      )
+                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
-
-
                   </td>
+
+                  <td style="text-align: right;color:#000;font-weight: bold" >
+                    {{ 0 }}
+                  </td>
+
                   <td style="text-align: right;color:#000;font-weight: bold">
-
-
-                    {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné"
-                    }}
-
-
+                    {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
                   </td>
+
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
@@ -550,6 +559,8 @@
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+
+                  <td style="text-align: right;color:#000">{{ 0 }}</td>
                   <td style="text-align: right;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                    {{ TotalEviteNaN }}
