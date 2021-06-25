@@ -99,8 +99,12 @@
       </button>
     </div>
     <div class="widget-content nopadding" id="printpdf">
-   
-      <h2
+    <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR</h2>
+          </tr>
+        </table>
+      <!-- <h2
         style="
           font-size: 25px;
           font-weight: bold;
@@ -109,11 +113,11 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET PAR BAILLEUR
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
-      </h2>
+      </h2> -->
 
       <h2
         style="
@@ -124,7 +128,7 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR DU
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET PAR BAILLEUR DU
 
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
@@ -162,7 +166,7 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                  
@@ -173,7 +177,7 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                   ACTIVITE/BAILLEUR {{afficheAnnee}}
@@ -199,7 +203,7 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                   BUDGET INITIAL {{afficheAnnee}}
@@ -209,7 +213,7 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                  REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
@@ -219,7 +223,7 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                   BUDGET ACTUEL {{afficheAnnee}}
@@ -229,7 +233,7 @@
                     font-size: 14px;
                     color: #000;
                     font-weight: bold;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                   MONTANT EXECUTE {{afficheAnnee}}
@@ -241,10 +245,22 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                  </th>
+
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
                   </th>
 
                 <!-- <th
@@ -253,7 +269,7 @@
                     font-weight: bold;
                     color: #000;
                     text-align: center;
-                    background-color:  #FFA100 !important;
+                    background-color:  #ff9c1a !important;
                   "
                 >
                   Montant Provisoire
@@ -263,7 +279,7 @@
                     font-size: 14px;
                     font-weight: bold;
                     color: #000;
-                    background-color:  #FFA100 !important;
+                    background-color:  #fbb203 !important;
                   "
                 >
                   TAUX D'EXECUTION(%) {{afficheAnnee}}
@@ -275,17 +291,17 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
-                    VARIATION DU TAUX
+                   EVOLUTION DU TAUX D’EXECUTION
                   </th>
                 <th
                   style="
                     font-size: 14px;
                     font-weight: bold;
                     color: #000;
-                    background-color: #FFA100 !important;
+                    background-color: #fbb203 !important;
                   "
                 >
                   DISPONIBLE {{afficheAnnee}}
@@ -303,13 +319,13 @@
                     </button>
                   </td>
 
-                <td style="font-weight: bold; font-size:15px; background-color:#3CB371 !important;color:#000">
+                <td style="font-weight: bold; font-size:15px; background-color:#a7e556 !important;color:#000">
                   {{
                     LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                  style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -322,7 +338,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                  style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -335,7 +351,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                  style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -348,7 +364,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                  style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -361,8 +377,10 @@
                   }}
                 </td>
 
+                
+
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                  style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -375,8 +393,16 @@
                   }}
                 </td>
 
+                  <td
+                  style="font-weight: bold; font-size:15px; text-align: center; background-color:#a7e556 !important;color:#000"
+                >
+                  {{
+                    0
+                  }}
+                </td>
+
                 <!-- <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -389,7 +415,7 @@
                   }}
                 </td> -->
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
+                  style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
                   {{
                     EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
@@ -420,7 +446,7 @@
                   </td>
 
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right;; background-color:#3CB371 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right;; background-color:#a7e556 !important;color:#000"
                 >
                   {{
 
@@ -507,6 +533,14 @@
                   }}
                 </td>
 
+                <td
+                  style="font-size: 14px; font-weight: bold; text-align: right;color:#000"
+                >
+                  {{
+                    0|| "Non renseigné"
+                  }}
+                </td>
+
                 <td style="font-size: 14px; font-weight: bold; text-align: right;color:#000">
                     {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
                 </td>
@@ -551,28 +585,30 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td> </td>
-                  <td style="text-align: right;color:#000;font-weight: bold;">TOTAL ACTIVITE </td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: right;color:#000; font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 0 }}</td>
                  
-                 <td style="text-align: right;color:#000;font-weight: bold;">
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel)*100).toFixed(2) }}
                  </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold;">
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel)*100).toFixed(2) }}
                  </td>
                  
-                  <td style="text-align: right;color:#000;font-weight: bold;">
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
@@ -1699,6 +1735,9 @@ afficheUa() {
 </script>
 
 <style scoped>
+.taille{
+width: 100%;
+}
 .tailgrand {
   width: 65%;
   margin: 0 -30%;
