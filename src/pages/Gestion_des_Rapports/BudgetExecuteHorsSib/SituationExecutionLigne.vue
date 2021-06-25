@@ -25,7 +25,7 @@
                 </model-list-select>
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>
                 <div class="control-group">
                   <label
@@ -60,7 +60,7 @@
                   </div>
                 </div>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
