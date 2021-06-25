@@ -344,7 +344,7 @@
     <table class="table table-striped">
       <tbody>
         <tr>
-          <td class="span4">
+          <td class="span5">
             <label>EXERCICE </label>
             <model-list-select
               style="border: 1px solid #000"
@@ -358,7 +358,7 @@
             </model-list-select>
           </td>
           <td>
-            
+
           </td>
           <!-- <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
