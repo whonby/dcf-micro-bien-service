@@ -279,13 +279,13 @@
                     </button>
                   </td>
 
-                <td style="font-weight: bold; font-size:15px; background-color:#009246 !important;color:#000">
+                <td style="font-weight: bold; font-size:15px; background-color:#3CB371 !important;color:#000">
                   {{
                     LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id)
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#009246 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -298,7 +298,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#009246 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -311,7 +311,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#009246 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -324,7 +324,7 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#009246 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -338,7 +338,7 @@
                 </td>
 
                 <!-- <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#009246 !important"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -351,7 +351,7 @@
                   }}
                 </td> -->
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#009246 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right; background-color:#3CB371 !important;color:#000"
                 >
                   {{
                     EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
@@ -359,7 +359,7 @@
                 </td>
 
                 <td
-                  style="font-weight: bold; font-size:15px; text-align: right;; background-color:#009246 !important;color:#000"
+                  style="font-weight: bold; font-size:15px; text-align: right;; background-color:#3CB371 !important;color:#000"
                 >
                   {{
 

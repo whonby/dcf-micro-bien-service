@@ -219,11 +219,11 @@
               <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
             </tr>
           </thead>
-          <tbody>
-            <tr
-              v-for="unite in arrayExerciceDecompteBienService(editMandat.id)"
-              :key="unite.id"
+          <tbody >
+            <tr v-for="unite in AfficheTypeFinancement(editMandat.id)" :key="unite.id"
+              
             >
+            <td></td>
               <td>{{ libelleTypeFinancement(unite) }}</td>
               <td
                 style="font-weight: bold; font-size: 12px; text-align: center"
@@ -417,6 +417,12 @@
             <thead>
            
               <tr style="">
+                 <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #FFA100 !important;">
+                 </th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -469,32 +475,35 @@
                   color: #000;
                   text-align: center;
                   background-color: #FFA100 !important;">TAUX D'EXECUTION {{afficheAnnee}}</th>
-                   <th style=" font-size: 14px;
+                   <!-- <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;" colspan="3">TYPE FINANCEMENT </th>
-        
+                  background-color: #FFA100 !important;" colspan="3">TYPE DE FINANCEMENT </th>
+         -->
         
               </tr> 
             </thead>
-            <tbody>
-              <tr
-                v-for="unite in partition(afficheUa, size)[page]"
-                :key="unite.id"
-              >
-                <td style="font-weight: bold; font-size: 12px">
+            <tbody v-for="unite in partition(afficheUa, size)[page]" :key="unite.id">
+              <tr>
+                <td>
+                   <button @click="ShowMyLigne(unite.id)">
+                     <i class="icon-eye-open"></i> 
+                      
+                    </button>
+                </td>
+                <td style="background-color: #3CB371 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{ CodeUniteAdministrative(unite.id) || "Auncun résultat" }}
                 </td>
                 
-                <td style="font-weight: bold; font-size: 12px">
+                <td style="background-color: #3CB371 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{
                     libelleUniteAdministrative(unite.id) || "Auncun résultat"
                   }}
                 </td>
 
                 <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
+                 style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -503,19 +512,19 @@
                   }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                   @click="percuFacture(unite.id)"
                 >
                   {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                    {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
 
                 <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
+                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -524,170 +533,86 @@
                   }}
                 </td>
  <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
+                 style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
                 </td>
                 <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
+                 style="text-align:center;background-color: #3CB371 !important;color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ EviteNaN(unite.id) }}%
                 </td>
-                <td
+                <!-- <td
                   style="font-weight: bold; font-size: 12px; text-align: center"
+                  @click="apercuFacture(unite.id)"
                 >
                   {{ libelleTypeFinancement(arrayExerciceDecompteBienServiceTresor(unite.id)) }}
                 </td>
-                <td
+                <td @click="apercuFacture(unite.id)"
                   style="font-weight: bold; font-size: 12px; text-align: center"
                 >
                   {{ libelleTypeFinancement(arrayExerciceDecompteBienServiceDon(unite.id)) }}
                 </td>
-                <td
+                <td @click="apercuFacture(unite.id)"
                   style="font-weight: bold; font-size: 12px; text-align: center"
                 >
                   {{ libelleTypeFinancement(arrayExerciceDecompteBienServiceEmprunt(unite.id)) }}
-                </td>
+                </td> -->
                
               </tr>
-              <tr>
-                <td style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                  
-                ">TOTAL4</td>
-
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  TOTAL
-                </td>
-
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                  "
-                  
-                
-                >
-                  {{ formatageSomme(parseFloat(SommeBudgetInitial)) }}
-                </td>
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  {{ formatageSomme(parseFloat(TotalReamenagement)) }}
-                </td>
-
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  {{
-                    formatageSomme(
-                      parseFloat(SommeBudgetInitial - SommeBudgetConsomme)
+               <tr v-for="unite1 in AfficheTypeFinancement(unite.id)" :key="unite1.id" v-show="recupereIDactivite==unite.id" style="margin-left:50px">
+            <td colspan="2"></td>
+           
+              <td style="font-weight: bold; font-size: 12px; text-align: center;color:#000">{{ libelleTypeFinancement(unite1) }}</td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantVoteParTypeFinancement(unite.id, unite1)
                     )
-                  }}
-                </td>
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                   {{ formatageSomme(parseFloat(SommeBudgetConsomme)) }}
-                </td>
- <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                   {{ formatageSomme(parseFloat(SommeBudgetInitial - SommeBudgetConsomme)-parseFloat(SommeBudgetConsomme)) }}
-                </td>
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  {{ TauxExecution }}%
-                </td>
-                <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  
-                </td>
-               <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  
-                </td>
-                 <td
-                  style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  background-color: #009246 !important;
-                  color:#000;
-                  text-align:center
-                "
-                >
-                  
-                </td>
-                 
-                 
-              </tr>
+                  )
+                }}
+              </td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantVoteParTypeFinancement(unite.id, unite1) -
+                        MontantExecuteParTypeFinancement(unite.id, unite1)
+                    )
+                  )
+                }}
+              </td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantExecuteParTypeFinancement(unite.id, unite1)
+                    )
+                  )
+                }}
+              </td>
+
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center"
+              >
+                {{ EviteNaNTypeFinancement(unite.id, unite1) }}%
+              </td>
+              <td></td>
+              
+<td></td>
+            </tr>
+              
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
-  </div>
-    <div class="pagination alternate">
+         <div class="pagination alternate">
       <ul>
         <li :class="{ disabled: page == 0 }">
           <a @click.prevent="precedent()" href="#">Précedent</a>
@@ -708,6 +633,11 @@
         </li>
       </ul>
     </div>
+      </div>
+    </div>
+    
+  </div>
+   
   </div>
 </template>
 
@@ -732,7 +662,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 20,
+      size: 10,
       active_el: 0,
       fabActions: [
         {
@@ -756,6 +686,7 @@ export default {
       isOffreTechniqueFinancier: false,
       namePDF: "",
       uploadPercentage: 0,
+      recupereIDactivite:"",
       fichierPDF: "",
       imagePDF: "",
       selectedFile: "",
@@ -1034,6 +965,27 @@ montantVoteToralParLigne(){
       return (id) => {
         
         let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id && item.type_financement_id == 14);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.type_financement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+     };
+    },
+    
+    AfficheTypeFinancement() {
+      return (id) => {
+        
+        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id && item.type_financement_id == 14 || item.uniteadministrative_id==id && item.type_financement_id == 13 || item.uniteadministrative_id==id && item.type_financement_id == 15);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -1758,6 +1710,25 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+    ShowMyLigne(id){
+      if(this.recupereIDactivite==""){
+         this.recupereIDactivite=id;
+      }else if(this.recupereIDactivite!="" && this.recupereIDactivite !=id){
+        this.recupereIDactivite="";
+        this.recupereIDactivite=id;
+      }
+      else{
+         this.recupereIDactivite="";
+      }
+       
+    },
+    afficheTableauTresor(id) {
+      this.$("#validationOpDefinitif1").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+      this.editMandat = this.afficheUa.find((item) => item.id == id);
+    },
     percuFacture(id) {
       this.$("#validationOpDefinitif1").modal({
         backdrop: "static",
