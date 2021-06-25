@@ -440,7 +440,6 @@
                    
 
                   </td>
- <td style="width:;color:#000" >
                    
 
                   <td style="width: 500px;color:#000;" >
