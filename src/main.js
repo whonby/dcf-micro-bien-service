@@ -27,7 +27,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // import jsPDF from 'jspdf'
 //  vue.component('')
-
+import VueGoogleCharts from 'vue-google-charts'
+ 
+Vue.use(VueGoogleCharts)
 import FullCalendar from 'vue-full-calendar'
 import "fullcalendar-scheduler";
 //import 'fullcalendar/dist/fullcalendar';
