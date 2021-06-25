@@ -139,12 +139,26 @@
           text-decoration: underline;
         "
       >
-        EXERCICE: {{ afficheAnnee }}
+        EXERCICE: {{ afficheAnnee }}{{recupereIdActivite}}
       </p>
 
             <table class="table table-bordered">
               <thead style="background-color: #FFA100 !important">
                 <tr>
+
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #FFA100 !important;
+                    "
+                  >
+                    
+                  </th>
+
+                  
                     <th
                     style="
                       font-size: 14px;
@@ -236,11 +250,14 @@
                   </th>
                 </tr>
               </thead>
-         <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
+         <tbody  v-for="GroupeOrdrePaiementByActivit in afficheUa"
                 :key="GroupeOrdrePaiementByActivit.id">
                 <tr>
                   <!-- <td>{{ sommeLigneGrandeNature(listeLigne) }}</td> -->
-
+                  <td>
+                    <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].activite_id)">ok</button>
+                  </td>
+               
                   <td style="background-color: #009246 !important; width: 500px;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1">
                     <b>ACTIVITE:{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
@@ -310,11 +327,16 @@
                -->
                 </tr>
 
-                  <tr
+
+
+                  <tr v-show="recupereIdActivite == GroupeOrdrePaiementByActivit[0].activite_id"
                   class="odd gradeX"
                   v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
                   :key="listeLigneeco"
                 >
+                <td>
+
+                </td>
                   <td style="width: 500px;color:#000" v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1 && 
                   (formatageSommeSansFCFA(parseFloat(MontantBudgetActuelActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))) != 0">
                    
@@ -440,7 +462,7 @@
             </table>
     </div>
 
-     <div class="pagination alternate">
+     <!-- <div class="pagination alternate">
       <ul>
         <li :class="{ disabled: page == 0 }">
           <a @click.prevent="precedent()" href="#">Précedent</a>
@@ -460,7 +482,7 @@
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
       </ul>
-    </div>
+    </div> -->
 
 
         
@@ -521,6 +543,8 @@ export default {
       NumeroOp: 0,
       activite_id: 0,
       exercices_budgetaires_id:0,
+      testligne:0,
+      recupereIdActivite:"",
 
       editMandat: {},
       EditAnulation: {},
@@ -1186,6 +1210,10 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    ShowMyLigne(id){
+     this.recupereIdActivite = id
+    },
 
      EviteNaN(id) {
       if (
