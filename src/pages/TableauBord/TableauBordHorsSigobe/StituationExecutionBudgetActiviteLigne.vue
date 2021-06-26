@@ -105,7 +105,7 @@
 
 
 
-    <div class="span4">
+    <!-- <div class="span4">
           <br />
           Afficher
           <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -117,7 +117,7 @@
             <option value="100">100</option>
           </select>
          
-        </div>
+        </div> -->
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -181,7 +181,7 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
-                    colspan="2"
+                    colspan=""
                   >
                     
                   </th>
@@ -330,13 +330,13 @@
                       
                     </button>
                   </td>
-<td>
+<!-- <td>
                    <button @click="apercuFacture(GroupeOrdrePaiementByActivit[0].activite_id)">
                      <i class=" icon-print"></i> 
                       
                     </button>
                     
-                </td>
+                </td> -->
                   <td style="background-color: #a7e556 !important; width: 500px;color:#000" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
@@ -564,7 +564,7 @@
               </tbody>
               <tfoot>
                 <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                  <!-- <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td> -->
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
