@@ -357,7 +357,10 @@
             >
             </model-list-select>
           </td>
-          <td colspan="" class="span10">
+          <td>
+
+          </td>
+          <!-- <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
             <model-list-select
               style="border: 2px solid #000"
@@ -369,7 +372,7 @@
               placeholder="TOUTES LES UNITES ADMINISTRATIVES"
             >
             </model-list-select>
-          </td>
+          </td> -->
 
           <!-- <td colspan="">
             <label>TYPE FINANCEMENT </label>
@@ -503,7 +506,17 @@
                   text-align: center;
                   background-color: #fbb203 !important;">
                   MONTANTS EXECUTES {{afficheAnnee}}</th>
- <th style=" font-size: 14px;
+
+
+                  <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
+
+
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -571,7 +584,15 @@
                     )
                   }}
                 </td>
- <td
+
+                 <td
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{
+                    0
+                  }}
+                </td>
+                  <td
                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
@@ -655,6 +676,14 @@
                   )
                 }}
               </td>
+
+               <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  0
+                }}
+              </td>
  <td
                 style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
@@ -701,24 +730,24 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td> </td>
-                  <td style="text-align: center;color:#000;font-weight: bold;">TOTAL ACTIVITE </td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 5 }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 5 }}</td>
 
-                  <td style="text-align: center;color:#000; font-weight: bold;">{{ 8 }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 8 }}</td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 9 }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 9 }}</td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 7 }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 7 }}</td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 8 }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 8 }}</td>
                  
-                 <td style="text-align: center;color:#000;font-weight: bold;">
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ 0 }}
                  </td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ 1 }}
                  </td>
                  
@@ -1507,10 +1536,14 @@ arrayExerciceDecompteBienService() {
     },
 
     afficheUa() {
-      if (this.uniteAdmin_id == 0) {
-        return this.filtre_unite_admin;
-      } else {
+      if (this.inputLigneCode1 != 0 && this.inputLigneLibelle1==0) {
         return this.filtre_unite;
+      } else if(this.inputLigneCode1==0 && this.inputLigneLibelle1 != 0){
+        return this.filtre_unitelibelle
+      }else if(this.inputLigneCode1!=0 && this.inputLigneLibelle1 != 0){
+        return this.filtre_unitelibelle_code;
+      }else {
+        return this.filtre_unite_admin;
       }
     },
 
@@ -1529,7 +1562,49 @@ arrayExerciceDecompteBienService() {
     },
 
     // fin test de tri
+    //filtre_unitelibelle_code;
 
+//filtre par libelle
+      filtre_unitelibelle() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => item2.id == this.inputLigneLibelle1);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => item2.id == this.inputLigneLibelle1
+      );
+    },
+
+//filtre des ua par libelle et code
+   filtre_unitelibelle_code() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => item2.id == this.inputLigneLibelle1 && item2.id==this.inputLigneCode1);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => item2.id == this.inputLigneLibelle1 && item2.id==this.inputLigneCode1
+      );
+    },
 
 
     filtre_unite() {
@@ -1545,10 +1620,10 @@ arrayExerciceDecompteBienService() {
             return item;
           }
         });
-        return colect.filter((item2) => item2.id == this.uniteAdmin_id);
+        return colect.filter((item2) => item2.id == this.inputLigneCode1);
       }
       return this.filtrerUaParTypeProj.filter(
-        (item2) => item2.id == this.uniteAdmin_id
+        (item2) => item2.id == this.inputLigneCode1
       );
     },
 

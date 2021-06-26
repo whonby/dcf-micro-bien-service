@@ -113,7 +113,7 @@
         "
         v-if="formData.date_debut == '' && formData.date_fin == ''"
       >
-        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET PAR BAILLEUR
 
         {{ formData.date_debut }}
         {{ formData.date_fin }}
@@ -128,7 +128,7 @@
         "
         v-if="formData.date_debut != '' && formData.date_fin != ''"
       >
-        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR DU
+        SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET PAR BAILLEUR DU
 
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
@@ -251,6 +251,18 @@
                     MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
                   </th>
 
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  </th>
+
                 <!-- <th
                   style="
                     font-size: 14px;
@@ -365,6 +377,8 @@
                   }}
                 </td>
 
+                
+
                 <td
                   style="text-align:center;font-weight: bold; font-size:15px; text-align: right; background-color:#a7e556 !important;color:#000"
                 >
@@ -376,6 +390,14 @@
                         )
                       )
                     )
+                  }}
+                </td>
+
+                  <td
+                  style="font-weight: bold; font-size:15px; text-align: center; background-color:#a7e556 !important;color:#000"
+                >
+                  {{
+                    0
                   }}
                 </td>
 
@@ -511,6 +533,14 @@
                   }}
                 </td>
 
+                <td
+                  style="font-size: 14px; font-weight: bold; text-align: right;color:#000"
+                >
+                  {{
+                    0|| "Non renseigné"
+                  }}
+                </td>
+
                 <td style="font-size: 14px; font-weight: bold; text-align: right;color:#000">
                     {{EviteNaNBailleur(ListepaimentBailleur, GroupeOrdrePaiementByActivit[0].activite_id)}}
                 </td>
@@ -555,28 +585,30 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td> </td>
-                  <td style="text-align: center;color:#000;font-weight: bold;">TOTAL ACTIVITE </td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: center;color:#000; font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ 0 }}</td>
                  
-                 <td style="text-align: center;color:#000;font-weight: bold;">
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel)*100).toFixed(2) }}
                  </td>
 
-                  <td style="text-align: center;color:#000;font-weight: bold;">
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel)*100).toFixed(2) }}
                  </td>
                  
-                  <td style="text-align: center;color:#000;font-weight: bold;">
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
