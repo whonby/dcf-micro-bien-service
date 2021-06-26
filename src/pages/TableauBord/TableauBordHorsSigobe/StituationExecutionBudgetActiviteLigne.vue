@@ -330,19 +330,13 @@
                       
                     </button>
                   </td>
-<!-- <td>
-                   <button @click="apercuFacture(GroupeOrdrePaiementByActivit[0].activite_id)">
-                     <i class=" icon-print"></i> 
-                      
-                    </button>
-                    
-                </td> -->
-                  <td style="background-color: #a7e556 !important; width: 500px;color:#000" >
+
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
 
-                  <td style="background-color: #a7e556 !important; text-align: right;color:#000" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -350,7 +344,7 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -358,14 +352,14 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
                     </b>
                   </td>
-                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -373,7 +367,7 @@
                      }}
                     </b>
                   </td>
-                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -386,13 +380,13 @@
                     </b>
                   </td>
 
-                   <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
+                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
                       0
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
@@ -421,7 +415,7 @@
                         </span>
                       </button>
                   </td>
-                  <td style="background-color: #a7e556 !important; text-align: center;color:#000;font-weight: bold;" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
@@ -449,13 +443,12 @@
  <td style="width:;color:#000" >
                    
 
-                  </td>
-                  <td style="width: 500px;color:#000;font-weight: bold" >
+                  <td style="width: 500px;color:#000;" >
                    
                     {{ libelleLigneEconomique(listeLigneeco) }}
 
                   </td>
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
                   
                   
                     {{
@@ -471,7 +464,7 @@
 
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
                    
                     {{
                       formatageSommeSansFCFA(
@@ -484,7 +477,7 @@
                     }}
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
 
 
                     {{
@@ -500,7 +493,7 @@
 
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold">
+                  <td style="text-align: right;color:#000;">
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -508,7 +501,7 @@
                     }}
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -516,38 +509,38 @@
                     }}
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold" >
+                  <td style="text-align: right;color:#000;" >
                     {{ 0 }}
                   </td>
 
-                  <td style="text-align: right;color:#000;font-weight: bold">
+                  <td style="text-align: right;color:#000;">
                     {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
                   </td>
 
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-warning taille" v-else-if="25 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                        <button class="btn btn-success taille" v-else-if="50 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-success taille" v-else-if="75 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 100">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                   </td>
                  
-                  <td style="text-align: right;color:#000;font-weight: bold">
+                  <td style="text-align: right;color:#000;">
 
 
                     {{
@@ -1148,6 +1141,9 @@ inputLigne:false,
         ).toFixed(2);
       }
     },
+
+
+    
 
       TotalMontantbudgetVote(){
         if(this.Activite_id!=0 && this.inputLigne1!=0){
@@ -1842,7 +1838,8 @@ inputLigne:false,
   if(this.inputLigne == false){
     this.inputLigne = true
   }else{
-    this.inputLigne = false
+    this.inputLigne = false;
+    this.inputLigne1=0;
   }
 
 },
@@ -1961,6 +1958,19 @@ formatageSomme:formatageSomme,
 <style scoped>
 .taille{
 width: 95%;
+}
+
+.whitebg {
+  background: #98FB98 !important;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+.graybg {
+  background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
 .tailgrand {
   width: 90%;

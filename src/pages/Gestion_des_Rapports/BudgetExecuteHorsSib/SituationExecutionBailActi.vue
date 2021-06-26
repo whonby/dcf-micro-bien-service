@@ -8,26 +8,26 @@
           <tbody>
             <br />
             <br />
-            <!-- <tr>
+            <tr>
               <td colspan="2">
                 <br />
 
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                  >ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
-                  :list="uniteAdministratives"
-                  v-model="uniteAdministrative_id"
+                  :list="plans_activites"
+                  v-model="activite_id"
                   option-value="id"
                   option-text="libelle"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                  placeholder="TOUTES LES ACTIVITES"
                 >
                 </model-list-select>
               </td>
-            </tr> -->
-            <tr>
+            </tr>
+            <!-- <tr>
               <td>
                 <div class="control-group">
                   <label
@@ -62,7 +62,7 @@
                   </div>
                 </div>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -87,10 +87,10 @@
               DIRECTION DU CONTRÔLE FINANCIER <br />
               -------------------------
             </p>
-            <img :src="logo3dcf" />
+            <img :src="logo3dcf" width="70px;" />
           </td>
           <td style="text-align: center">
-            <img :src="amoirie" />
+            <img :src="amoirie" width="70px;" />
           </td>
           <td style="text-align: center">
             <p>
@@ -376,17 +376,18 @@ import moment from "moment";
 import { formatageSommeSansFCFA } from "@/Repositories/Repository";
 //import { formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-//import { ModelListSelect } from "vue-search-select";
+import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 import amoirie from "../../../../public/amoirie.png";
 import logo3 from "../../../../public/log3.png";
 export default {
   components: {
-    // ModelListSelect,
+    ModelListSelect,
   },
   name: "typetext",
   data() {
     return {
+      activite_id:0,
       amoirie:amoirie,
       logo3dcf:logo3,
       page: 0,
@@ -572,10 +573,11 @@ export default {
 
     
     ListeGroupByActivite2() {
-      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+      if (this.activite_id != 0) {
         return this.groupeByActivite.filter(
           (qtreel) =>
-            qtreel[0].annebudgetaire == this.anneeAmort
+            qtreel[0].annebudgetaire == this.anneeAmort &&
+            qtreel[0].activite_id == this.activite_id
         );
       } else {
         return this.groupeByActivite
