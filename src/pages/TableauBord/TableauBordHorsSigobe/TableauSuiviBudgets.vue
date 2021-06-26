@@ -243,8 +243,8 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantVoteParTypeFinancement(editMandat.id, unite) -
-                        MontantExecuteParTypeFinancement(editMandat.id, unite)
+                      MontantVoteParTypeFinancement(editMandat.id, unite)) -
+                        parseFloat(MontantExecuteParTypeFinancement(editMandat.id, unite)
                     )
                   )
                 }}
@@ -431,7 +431,7 @@
                   text-align: center;
                   background-color: #FFA100 !important;" class="span4">
                   CODE UA
-                  {{afficheAnnee}}
+                  
                    <button @click="ActiveInputLigne">
                      <i class=" icon-search"></i> 
                       
@@ -455,7 +455,7 @@
                   text-align: center;
                   background-color: #FFA100 !important;">
                   LIBELLE UA
-                    {{afficheAnnee}}
+                   
                    <button @click="ActiveInputLigne1">
                      <i class=" icon-search"></i> 
                       
@@ -627,12 +627,9 @@
                 style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantVoteParTypeFinancement(unite.id, unite1) +
-                        AfficheVariationBudgetParTypeFinancement(unite.id, unite1)
-                    )
-                  )
+                 formatageSommeSansFCFA(
+                    parseFloat( TotalMontantReamenagement(unite.id, unite1)))
+                    
                 }}
               </td>
               <td
@@ -640,11 +637,8 @@
               >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantVoteParTypeFinancement(unite.id, unite1) +
-                        AfficheVariationBudgetParTypeFinancement(unite.id, unite1)
-                    )
-                  )
+                    parseFloat( TotalMontantReamenagement(unite.id, unite1)))
+                    
                 }}
               </td>
               <td
@@ -662,12 +656,9 @@
                 style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{
-                  formatageSommeSansFCFA( parseFloat(
-                      MontantVoteParTypeFinancement(unite.id, unite1) +
-                        AfficheVariationBudgetParTypeFinancement(unite.id, unite1)
-                    )-
+                 formatageSommeSansFCFA(
                     parseFloat(
-                      MontantExecuteParTypeFinancement(unite.id, unite1)
+                      TotalMontantReamenagement(unite.id, unite1) - MontantExecuteParTypeFinancement(unite.id, unite1)
                     )
                   )
                 }}
@@ -1902,12 +1893,13 @@ arrayExerciceDecompteBienService() {
       }
     },
 
-    TotalMontantReamenagement(id) {
-      return formatageSommeSansFCFA(
-        parseFloat(this.MontantBudgetVote(id) - this.MontantBudgetExecuté(id))
+    TotalMontantReamenagement(id,id1) {
+      return  (parseFloat(this.MontantVoteParTypeFinancement(id,id1)) + parseFloat(this.AfficheVariationBudgetParTypeFinancement(id,id))
       );
     },
-
+TotalDisponibleTypeFinancement(id,id1){
+  return formatageSommeSansFCFA(parseFloat(parseFloat(this.TotalMontantReamenagement(id,id1))-parseFloat(this.MontantExecuteParTypeFinancement(id,id1))))
+},
     TotalBudgetActuel(id) {
       return formatageSommeSansFCFA(
         parseFloat(this.MontantBudgetVote(id) - this.MontantBudgetExecuté(id))
