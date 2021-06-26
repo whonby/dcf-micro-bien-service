@@ -1,7 +1,8 @@
 
 <template>
   <div>
-    {{ListeDEsEntreprise}}
+    
+   
     <div class="row-fluid" style="margin-top: -20px">
       <div class="span1"></div>
       
@@ -180,6 +181,7 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
+                    colspan="2"
                   >
                     
                   </th>
@@ -328,7 +330,13 @@
                       
                     </button>
                   </td>
-
+<td>
+                   <button @click="apercuFacture(GroupeOrdrePaiementByActivit[0].activite_id)">
+                     <i class=" icon-print"></i> 
+                      
+                    </button>
+                    
+                </td>
                   <td style="background-color: #a7e556 !important; width: 500px;color:#000" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
@@ -438,7 +446,10 @@
                    
 
                   </td>
+ <td style="width:;color:#000" >
+                   
 
+                  </td>
                   <td style="width: 500px;color:#000;font-weight: bold" >
                    
                     {{ libelleLigneEconomique(listeLigneeco) }}
@@ -554,6 +565,7 @@
               <tfoot>
                 <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
@@ -616,6 +628,185 @@
       main-icon="apps"
       bg-color="green"
     ></fab> -->
+
+    <div id="validationOpDefinitif2" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3 style="font-size: 14px; font-weight: bold">
+          UNITE ADMINISTRATIVE : 
+        </h3>
+      </div>
+      <!-- <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div>  -->
+      <div class="modal-body" id="printpdf">
+          <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
+          </tr>
+        </table>
+        <table class="table table-bordered table-striped">
+          <thead style="background-color: #ff9c1a !important">
+                
+<tr>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    
+                  </th>
+<th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                   ACTIVITE/LIGNE BUDGETAIRE  
+                   
+                
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                      width :8%
+                    "
+                  >
+                    BUDGET INITIAL {{afficheAnnee}}
+                    
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
+                  </th>
+                   
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                      width :8%
+                    "
+                  >
+                 BUDGET ACTUEL {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  MONTANT EXECUTE {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                  </th>
+
+                     <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    TAUX D'EXECUTION {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    {{editMandat1.activite_id}}DISPONIBLE {{afficheAnnee}}
+                  </th>
+
+                  
+                </tr>
+              </thead>
+            <br>
+          <tbody >
+            <tr>
+              {{editMandat1.activite_id}}
+            </tr>
+              
+          </tbody>
+        </table>
+        <!-- <div class="modal-footer">
+          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        </div> -->
+      </div>
+    </div>
   </div>
 </template>
   
@@ -675,7 +866,7 @@ inputLigne:false,
       inputLigne1:0,
       
 
-      editMandat: {
+      editMandat1: {
        
       },
       EditAnulation: {},
@@ -1747,13 +1938,16 @@ inputLigne:false,
       this.page++;
     },
 
-    // apercuFacture(id) {
-    //   this.$("#validationOpDefinitif").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
-    //    this.editMandat = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
-    // },
+    apercuFacture(id) {
+     
+      //this.$("#validationOpDefinitif2").modal({
+      //   backdrop: "static",
+      //   keyboard: false,
+      // });
+       this.editMandat1 = this.afficheUa.find((item) => item[0].activite_id == id);
+      return alert(id);
+    
+    },
 
     formatageSommeSansFCFA: formatageSommeSansFCFA,
 formatageSomme:formatageSomme,
@@ -1769,8 +1963,8 @@ formatageSomme:formatageSomme,
 width: 95%;
 }
 .tailgrand {
-  width: 65%;
-  margin: 0 -30%;
+  width: 90%;
+  margin: 0 -45%;
   height: 50%;
 }
 .tailBtn {

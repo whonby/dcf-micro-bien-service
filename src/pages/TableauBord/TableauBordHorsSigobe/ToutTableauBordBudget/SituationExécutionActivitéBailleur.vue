@@ -101,7 +101,7 @@
     <div class="widget-content nopadding" id="printpdf">
     <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION RECAPITULATIVE PAR ACTIVITE ET BAILLEUR</h2>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION DU BUDGET PAR ACTIVITE ET PAR BAILLEUR</h2>
           </tr>
         </table>
       <!-- <h2
@@ -214,6 +214,7 @@
                     color: #000;
                     font-weight: bold;
                     background-color:  #fbb203 !important;
+                  
                   "
                 >
                  REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
@@ -659,7 +660,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 10,
+      size: 5,
       active_el: 0,
       fabActions: [
         {

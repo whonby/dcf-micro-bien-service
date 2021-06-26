@@ -3,20 +3,29 @@
 
     <div id="validationOpDefinitif1" class="modal hide tailgrand">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
+         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
         <h3 style="font-size: 14px; font-weight: bold">
           UNITE ADMINISTRATIVE : {{ libelleUniteAdministrative(editMandat.id) }}
         </h3>
       </div>
-      <div class="modal-body">
-        <h5>Detail Réamenagement Budgétaire</h5>
-
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+        Exporter en PDF
+      </button>
+    </div> 
+      <div class="modal-body" id="printpdf1">
+      
+ <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Detail Réamenagement Budgétaire</h2>
+          </tr>
+        </table>
         <table class="table table-bordered table-striped">
           <thead>
             <tr style="">
               <th
                 style="
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -28,7 +37,7 @@
 
               <th
                 style="
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -40,7 +49,7 @@
 
               <th
                 style="
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -52,7 +61,7 @@
 
               <th
                 style="
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -68,9 +77,9 @@
             <tbody>
              <tr  v-for="unite in afficheDetailReamenagement" :key="unite.id">
                <td>{{libelleLigneEconomique(unite)}}</td>
-               <td style="font-weight: bold;font-size: 18px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)+(variation(unite))))}}</td>
-               <td style="font-weight: bold;font-size: 18px;text-align:center">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
-               <td style="font-weight: bold;font-size: 18px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantActuelParLigne(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)+(variation(unite))))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantActuelParLigne(editMandat.id,unite)))}}</td>
                
               <!-- <td style="font-weight: bold; font-size: 12px; text-align: center">{{ formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite)))}}</td>
                   <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite) - MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
@@ -81,7 +90,7 @@
             <tr>
               <td
                 style="font-weight: bold;
-                  font-size: 18px;
+                  font-size: 12px;
                   width: 800px;
                   color:#000;
                   text-align:center,
@@ -93,10 +102,10 @@
 
               <td
                 style="font-weight: bold;
-                  font-size: 18px;
+                  font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center,
+                  text-align:center;
                   background-color: #FC762F !important;"
               >
                 {{
@@ -111,10 +120,10 @@
 
               <td
                 style="font-weight: bold;
-                  font-size: 18px;
+                  font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center,
+                  text-align:center;
                   background-color: #FC762F !important;
                 "
               >
@@ -122,10 +131,10 @@
               </td>
               <td
                 style="font-weight: bold;
-                  font-size: 18px;
+                  font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center,
+                  text-align:center;
                   background-color: #FC762F !important;
                 "
               >
@@ -140,203 +149,247 @@
         </table>
 
 
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
+      <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
         <h3 style="font-size: 14px; font-weight: bold">
           UNITE ADMINISTRATIVE : {{ libelleUniteAdministrative(editMandat.id) }}
         </h3>
       </div>
-      <div class="modal-body">
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div> 
+      <div class="modal-body" id="printpdf">
+          <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et par type de Financement</h2>
+          </tr>
+        </table>
         <table class="table table-bordered table-striped">
-          <thead>
-            <tr style="">
-              <th
-                style="
-                  font-size: 14px;
+         <thead>
+           
+              <tr style="">
+                 
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
-                "
-              >
-                TYPE FINANCEMENT
-              </th>
+                  background-color: #fbb203 !important;" class="span">
+                  CODE 
+                  
+                  </th>
 
-              <th
-                style="
-                  font-size: 14px;
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
-                "
-              >
-                BUDGET VOTE (FCFA)
-              </th>
+                  background-color: #fbb203 !important;">
+                  LIBELLE
+                  
+                  </th>
 
-              <th
-                style="
-                  font-size: 14px;
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
-                "
-              >
-                BUDGET ACTUEL (FCFA)
-              </th>
+                  background-color: #fbb203 !important;">
+                  BUDGET INITIAL {{afficheAnnee}}</th>
 
-              <th
-                style="
-                  font-size: 14px;
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
-                "
-              >
-                MONTANTS EXECUTES (FCFA)
-              </th>
+                  background-color: #fbb203 !important;">
+                  REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}</th>
 
-              <th
-                style="
-                  font-size: 14px;
+                <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
-                "
-              >
-                TAUX D'EXECUTION
-              </th>
+                  background-color: #fbb203 !important;">
+                  BUDGET ACTUEL {{afficheAnnee}}</th>
 
-              <!-- <th style="font-size:15px;background: default;color:#000">Action</th> -->
-            </tr>
-          </thead>
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  MONTANTS EXECUTES {{afficheAnnee}}</th>
+
+
+                  <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
+
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  DISPONIBLE {{afficheAnnee}}</th>
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">TAUX D'EXECUTION {{afficheAnnee}}</th>
+                  
+        
+              </tr> 
+            </thead>
+            <br>
           <tbody >
-            <tr v-for="unite in AfficheTypeFinancement(editMandat.id)" :key="unite.id"
-              
-            >
-            <td></td>
-              <td>{{ libelleTypeFinancement(unite) }}</td>
-              <td
-                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantVoteParTypeFinancement(editMandat.id, unite)
-                    )
-                  )
-                }}
-              </td>
-              <td
-                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantVoteParTypeFinancement(editMandat.id, unite)) -
-                        parseFloat(MontantExecuteParTypeFinancement(editMandat.id, unite)
-                    )
-                  )
-                }}
-              </td>
-              <td
-                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantExecuteParTypeFinancement(editMandat.id, unite)
-                    )
-                  )
-                }}
-              </td>
-
-              <td
-                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
-              >
-                {{ EviteNaNTypeFinancement(editMandat.id, unite) }}%
-              </td>
-            </tr>
             <tr>
-              <td
-                style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  color:#000;
-                  text-align:center,
-                  background-color: #FC762F !important;
-                "
-              >
-                TOTAL
-              </td>
+              <td style="background-color: #a7e556 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
+                  {{ CodeUniteAdministrative(editMandat.id) || "Auncun résultat" }}
+                </td>
+                
+                <td style="background-color: #a7e556 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
+                  {{
+                    libelleUniteAdministrative(editMandat.id) || "Auncun résultat"
+                  }} 
+                </td>
 
-              <td
-                style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  color:#000;
-                  text-align:center,
-                  background-color: #FC762F !important;"
-              >
-                {{ formatageSomme(parseFloat(TotalVoteParTypeFinancement)) }}
-              </td>
+                <td
+                 style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{
+                    formatageSommeSansFCFA(
+                      parseFloat(MontantBudgetVote(editMandat.id))
+                    )
+                  }}
+                </td>
+                <td
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                  @click="percuFacture(editMandat.id)"
+                >
+                  {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(editMandat.id)) + parseFloat(AfficheVariationBudget(editMandat.id))) }}
+                </td>
+                <td
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                   {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(editMandat.id)) + parseFloat(AfficheVariationBudget(editMandat.id))) }}
+                </td>
 
+                <td
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{
+                    formatageSommeSansFCFA(
+                      parseFloat(MontantBudgetExecuté(editMandat.id))
+                    )
+                  }}
+                </td>
+
+                 <td
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{
+                    0
+                  }}
+                </td>
+                  <td
+                 style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(editMandat.id)) + parseFloat(AfficheVariationBudget(editMandat.id)))-parseFloat(MontantBudgetExecuté(editMandat.id))) }}
+                </td>
+                <td
+                 style="text-align:center;background-color: #a7e556 !important;color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{ EviteNaN(editMandat.id) }}%
+                </td>
+            </tr>
+               <tr v-for="unite1 in AfficheTypeFinancement(editMandat.id)" :key="unite1.id"  style="margin-left:50px">
+           
+             
+           <td>
+                   
+                </td>
+              <td style=" font-size: 12px; color:#000">{{ libelleTypeFinancement(unite1) }}</td>
               <td
-                style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  color:#000;
-                  text-align:center,
-                  background-color: #FC762F !important;
-                "
+                style=" font-size: 12px; text-align: center;color:#000"
               >
                 {{
-                  formatageSomme(
+                  formatageSommeSansFCFA(
                     parseFloat(
-                      TotalVoteParTypeFinancement - totalComsommeYtpeFinancement
+                      MontantVoteParTypeFinancement(editMandat.id, unite1)
                     )
                   )
                 }}
               </td>
               <td
-                style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  color:#000;
-                  text-align:center,
-                  background-color: #FC762F !important;
-                "
+                style=" font-size: 12px; text-align: center;color:#000"
               >
-                {{ formatageSomme(parseFloat(totalComsommeYtpeFinancement)) }}
+                {{
+                 formatageSommeSansFCFA(
+                    parseFloat( TotalMontantReamenagement(editMandat.id, unite1)))
+                    
+                }}
+              </td>
+              <td
+                style=" font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat( TotalMontantReamenagement(editMandat.id, unite1)))
+                    
+                }}
+              </td>
+              <td
+                style=" font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantExecuteParTypeFinancement(editMandat.id, unite1)
+                    )
+                  )
+                }}
               </td>
 
-              <td
-                style="font-weight: bold;
-                  font-size: 18px;
-                  width: 800px;
-                  color:#000;
-                  text-align:center,
-                  background-color: #FC762F !important;
-                "
+               <td
+                style=" font-size: 12px; text-align: center;color:#000"
               >
-                {{ TauxExecutionTypeFinancement }}%
+                {{
+                  0
+                }}
               </td>
+ <td
+                style=" font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                 formatageSommeSansFCFA(
+                    parseFloat(
+                      TotalMontantReamenagement(editMandat.id, unite1) - MontantExecuteParTypeFinancement(editMandat.id, unite1)
+                    )
+                  )
+                }}
+              </td>
+              <td
+                style=" font-size: 12px; text-align: center;color:#000"
+              >
+                {{ EviteNaNTypeFinancement(editMandat.id, unite1) }}%
+              </td>
+              
+              
+
             </tr>
           </tbody>
         </table>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -391,6 +444,7 @@
       </tbody>
     </table>
      <div>
+       
         <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
@@ -424,11 +478,11 @@
             <thead>
            
               <tr style="">
-                 <th style=" font-size: 14px;
+                 <th style=" font-size: 14px; 
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fbb203 !important;">
+                  background-color: #fbb203 !important;" colspan="2">
 
                  </th>
                 <th style=" font-size: 14px;
@@ -460,7 +514,7 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                  LIBELLE UA
+                  LIBELLE
                    
                    <button @click="ActiveInputLigne1">
                      <i class=" icon-search"></i> 
@@ -543,6 +597,14 @@
                      <i class="icon-eye-open"></i> 
                       
                     </button>
+                    
+                </td>
+                <td>
+                   <button @click="apercuFacture(unite.id)">
+                     <i class=" icon-print"></i> 
+                      
+                    </button>
+                    
                 </td>
                 <td style="background-color: #a7e556 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{ CodeUniteAdministrative(unite.id) || "Auncun résultat" }}
@@ -551,7 +613,7 @@
                 <td style="background-color: #a7e556 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{
                     libelleUniteAdministrative(unite.id) || "Auncun résultat"
-                  }}
+                  }} 
                 </td>
 
                 <td
@@ -629,6 +691,9 @@
             <td colspan="">
                
             </td>
+             <td>
+                   
+                </td>
            <td>
                    <button>
                      <i class=" icon-arrow-right"></i> 
@@ -730,6 +795,7 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td> </td>
+                   <td> </td>
                   <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
@@ -751,7 +817,7 @@
                    {{ 1 }}
                  </td>
                  
-                  <td style="text-align: center;color:#000;font-weight: bold;">
+                  <td style="text-align: center;color:#000;font-weight: bold;background-color: #f55e25 !important;">
                     {{ 4 }}
                   </td>
                 </tr>
@@ -808,7 +874,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 10,
+      size: 5,
       active_el: 0,
       fabActions: [
         {
@@ -1917,7 +1983,12 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
-
+    genererEnPdfDetailReamenagement() {
+      this.$htmlToPaper("printpdf1");
+    },
+genererEnPdf() {
+      this.$htmlToPaper("printpdf");
+    },
      ActiveInputLigne(){
       if(this.inputLigneCode == false){
         this.inputLigneCode = true
@@ -1948,13 +2019,13 @@ arrayExerciceDecompteBienService() {
       }
        
     },
-    afficheTableauTresor(id) {
-      this.$("#validationOpDefinitif1").modal({
-        backdrop: "static",
-        keyboard: false,
-      });
-      this.editMandat = this.afficheUa.find((item) => item.id == id);
-    },
+    // afficheTableauTresor(id) {
+    //   this.$("#validationOpDefinitif1").modal({
+    //     backdrop: "static",
+    //     keyboard: false,
+    //   });
+    //   this.editMandat = this.afficheUa.find((item) => item.id == id);
+    // },
     percuFacture(id) {
       this.$("#validationOpDefinitif1").modal({
         backdrop: "static",
