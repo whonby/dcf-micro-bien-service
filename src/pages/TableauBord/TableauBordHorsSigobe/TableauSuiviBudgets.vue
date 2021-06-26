@@ -216,7 +216,7 @@
                 TAUX D'EXECUTION
               </th>
 
-              <!-- <th style="font-size:15px;background: default;color:#fff">Action</th> -->
+              <!-- <th style="font-size:15px;background: default;color:#000">Action</th> -->
             </tr>
           </thead>
           <tbody >
@@ -226,7 +226,7 @@
             <td></td>
               <td>{{ libelleTypeFinancement(unite) }}</td>
               <td
-                style="font-weight: bold; font-size: 12px; text-align: center"
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -237,7 +237,7 @@
                 }}
               </td>
               <td
-                style="font-weight: bold; font-size: 12px; text-align: center"
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -249,7 +249,7 @@
                 }}
               </td>
               <td
-                style="font-weight: bold; font-size: 12px; text-align: center"
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -261,7 +261,7 @@
               </td>
 
               <td
-                style="font-weight: bold; font-size: 12px; text-align: center"
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{ EviteNaNTypeFinancement(editMandat.id, unite) }}%
               </td>
@@ -359,7 +359,7 @@
           <td colspan="" class="span10">
             <label>UNITE ADMINISTRATIVE </label>
             <model-list-select
-              style="background-color: #fff; border: 2px solid #000"
+              style="background-color: #000; border: 2px solid #000"
               class="wide"
               :list="uniteAdministratives"
               v-model="uniteAdmin_id"
@@ -373,7 +373,7 @@
           <!-- <td colspan="">
             <label>TYPE FINANCEMENT </label>
             <model-list-select
-              style="background-color: #fff; border: 2px solid #000"
+              style="background-color: #000; border: 2px solid #000"
               class="wide"
               :list="types_financements"
               v-model="typefinancement"
@@ -475,12 +475,12 @@
                   color: #000;
                   text-align: center;
                   background-color: #FFA100 !important;">TAUX D'EXECUTION {{afficheAnnee}}</th>
-                   <!-- <th style=" font-size: 14px;
+                   <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;" colspan="3">TYPE DE FINANCEMENT </th>
-         -->
+                  background-color: #FFA100 !important;" colspan=""> EVOLUTION DU TAUX D’EXECUTION  </th>
+        
         
               </tr> 
             </thead>
@@ -542,28 +542,40 @@
                 >
                   {{ EviteNaN(unite.id) }}%
                 </td>
-                <!-- <td
-                  style="font-weight: bold; font-size: 12px; text-align: center"
-                  @click="apercuFacture(unite.id)"
-                >
-                  {{ libelleTypeFinancement(arrayExerciceDecompteBienServiceTresor(unite.id)) }}
-                </td>
-                <td @click="apercuFacture(unite.id)"
-                  style="font-weight: bold; font-size: 12px; text-align: center"
-                >
-                  {{ libelleTypeFinancement(arrayExerciceDecompteBienServiceDon(unite.id)) }}
-                </td>
-                <td @click="apercuFacture(unite.id)"
-                  style="font-weight: bold; font-size: 12px; text-align: center"
-                >
-                  {{ libelleTypeFinancement(arrayExerciceDecompteBienServiceEmprunt(unite.id)) }}
-                </td> -->
-               
+                <td style=" text-align: right;color:#000" >
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(unite.id) <= 25">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(unite.id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(unite.id) <= 50">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(unite.id)}}
+                        </span>
+                      </button>
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(unite.id) <= 75">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(unite.id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(unite.id) <= 100">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(unite.id)}}
+                        </span>
+                      </button>
+                  </td>
               </tr>
                <tr v-for="unite1 in AfficheTypeFinancement(unite.id)" :key="unite1.id" v-show="recupereIDactivite==unite.id" style="margin-left:50px">
-            <td colspan="2"></td>
-           
-              <td style="font-weight: bold; font-size: 12px; text-align: center;color:#000">{{ libelleTypeFinancement(unite1) }}</td>
+            <td colspan="">
+               
+            </td>
+           <td>
+                   <button>
+                     <i class=" icon-arrow-right"></i> 
+                      
+                    </button>
+                </td>
+              <td style="font-weight: bold; font-size: 12px; color:#000">{{ libelleTypeFinancement(unite1) }}</td>
               <td
                 style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
@@ -581,8 +593,20 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantVoteParTypeFinancement(unite.id, unite1) -
-                        MontantExecuteParTypeFinancement(unite.id, unite1)
+                      MontantVoteParTypeFinancement(unite.id, unite1) +
+                        AfficheVariationBudgetParTypeFinancement(unite.id, unite1)
+                    )
+                  )
+                }}
+              </td>
+              <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA(
+                    parseFloat(
+                      MontantVoteParTypeFinancement(unite.id, unite1) +
+                        AfficheVariationBudgetParTypeFinancement(unite.id, unite1)
                     )
                   )
                 }}
@@ -598,15 +622,49 @@
                   )
                 }}
               </td>
-
+ <td
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
+              >
+                {{
+                  formatageSommeSansFCFA( parseFloat(
+                      MontantVoteParTypeFinancement(unite.id, unite1) +
+                        AfficheVariationBudgetParTypeFinancement(unite.id, unite1)
+                    )-
+                    parseFloat(
+                      MontantExecuteParTypeFinancement(unite.id, unite1)
+                    )
+                  )
+                }}
+              </td>
               <td
-                style="font-weight: bold; font-size: 12px; text-align: center"
+                style="font-weight: bold; font-size: 12px; text-align: center;color:#000"
               >
                 {{ EviteNaNTypeFinancement(unite.id, unite1) }}%
               </td>
-              <td></td>
+              <td style=" text-align: right;color:#000" >
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaNTypeFinancement(unite.id, unite1) <= 25">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNTypeFinancement(unite.id, unite1) <= 50">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
+                        </span>
+                      </button>
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNTypeFinancement(unite.id, unite1) <= 75">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNTypeFinancement(unite.id, unite1) <= 100">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
+                        </span>
+                      </button>
+                  </td>
               
-<td></td>
+
             </tr>
               
             </tbody>
@@ -798,6 +856,17 @@ AfficheVariationBudget() {
       return (id2) => {
         if (id2 != null && id2 != "") {
           return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.annebudgetaire==this.anneeAmort ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+    AfficheVariationBudgetParTypeFinancement() {
+      return (id2,id1) => {
+        if (id2 != null && id2 != "" && id1 != null && id1 != "") {
+          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.type_financement_id == id1 && prod.annebudgetaire==this.anneeAmort ).reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
@@ -1767,7 +1836,8 @@ arrayExerciceDecompteBienService() {
       } else {
         return (
           (parseFloat(this.MontantExecuteParTypeFinancement(id, id1)) /
-            parseFloat(this.MontantVoteParTypeFinancement(id, id1))) *
+            parseFloat(this.MontantVoteParTypeFinancement(id, id1) +
+                        this.AfficheVariationBudgetParTypeFinancement(id, id1))) *
           100
         ).toFixed(2);
       }
@@ -1886,6 +1956,9 @@ arrayExerciceDecompteBienService() {
 };
 </script>
 <style scoped>
+.taille{
+width: 100%;
+}
 .taillemodal {
   width: 800px;
   margin: 0 -380px;
