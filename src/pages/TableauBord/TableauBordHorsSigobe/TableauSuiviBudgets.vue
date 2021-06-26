@@ -20,7 +20,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
+                  background-color: #fbb203 !important;
                 "
               >
                 LIGNE ECONOMIQUE
@@ -32,7 +32,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
+                  background-color: #fbb203 !important;
                 "
               >
                 BUDGET VOTE (FCFA)
@@ -44,7 +44,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
+                  background-color: #fbb203 !important;
                 "
               >
                 VARIATION
@@ -56,7 +56,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fc762f !important;
+                  background-color: #fbb203 !important;
                 "
               >
                 BUDGET ACTUEL (FCFA)
@@ -388,9 +388,12 @@
       </tbody>
     </table>
      <div>
-    <h2 style="text-align: center; font-size: 25px">
-      Suivi du budget projet par UA et type Financement
-    </h2>
+        <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
+          </tr>
+        </table>
+   
     <div class="container-fluid">
       <notifications />
       <div class="widget-box">
@@ -398,7 +401,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Detail budget</h5>
+          <h5>Suivi du budget</h5>
         </div>
 
         <div class="span4">
@@ -422,14 +425,14 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
 
                  </th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;" class="span4">
+                  background-color: #fbb203 !important;" class="span4">
                   CODE UA
                   
                    <button @click="ActiveInputLigne">
@@ -453,7 +456,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
                   LIBELLE UA
                    
                    <button @click="ActiveInputLigne1">
@@ -477,45 +480,45 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
                   BUDGET INITIAL {{afficheAnnee}}</th>
 
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
                   REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}</th>
 
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
                   BUDGET ACTUEL {{afficheAnnee}}</th>
 
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
                   MONTANTS EXECUTES {{afficheAnnee}}</th>
  <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">
+                  background-color: #fbb203 !important;">
                   DISPONIBLE {{afficheAnnee}}</th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;">TAUX D'EXECUTION {{afficheAnnee}}</th>
+                  background-color: #fbb203 !important;">TAUX D'EXECUTION {{afficheAnnee}}</th>
                    <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #FFA100 !important;" colspan=""> EVOLUTION DU TAUX D’EXECUTION  </th>
+                  background-color: #fbb203 !important;" colspan=""> EVOLUTION DU TAUX D’EXECUTION  {{afficheAnnee}}</th>
         
         
               </tr> 
@@ -528,18 +531,18 @@
                       
                     </button>
                 </td>
-                <td style="background-color: #3CB371 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
+                <td style="background-color: #a7e556 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{ CodeUniteAdministrative(unite.id) || "Auncun résultat" }}
                 </td>
                 
-                <td style="background-color: #3CB371 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
+                <td style="background-color: #a7e556 !important; text-align: left;color:#000;font-weight: bold; font-size: 12px">
                   {{
                     libelleUniteAdministrative(unite.id) || "Auncun résultat"
                   }}
                 </td>
 
                 <td
-                 style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
+                 style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -548,19 +551,19 @@
                   }}
                 </td>
                 <td
-                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
                   @click="percuFacture(unite.id)"
                 >
                   {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
                 <td
-                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                    {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
 
                 <td
-                  style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
+                  style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -569,12 +572,12 @@
                   }}
                 </td>
  <td
-                 style="text-align:center;background-color: #3CB371 !important; color:#000;font-weight: bold; font-size: 12px"
+                 style="text-align:center;background-color: #a7e556 !important; color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
                 </td>
                 <td
-                 style="text-align:center;background-color: #3CB371 !important;color:#000;font-weight: bold; font-size: 12px"
+                 style="text-align:center;background-color: #a7e556 !important;color:#000;font-weight: bold; font-size: 12px"
                 >
                   {{ EviteNaN(unite.id) }}%
                 </td>
@@ -695,6 +698,35 @@
             </tr>
               
             </tbody>
+             <tfoot>
+                <tr style="margin-left:25px">
+                  <td> </td>
+                  <td style="text-align: center;color:#000;font-weight: bold;">TOTAL ACTIVITE </td>
+                      
+
+                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 5 }}</td>
+
+                  <td style="text-align: center;color:#000; font-weight: bold;">{{ 8 }}</td>
+
+                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 9 }}</td>
+
+                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 7 }}</td>
+
+                  <td style="text-align: center;color:#000;font-weight: bold;">{{ 8 }}</td>
+                 
+                 <td style="text-align: center;color:#000;font-weight: bold;">
+                   {{ 0 }}
+                 </td>
+
+                  <td style="text-align: center;color:#000;font-weight: bold;">
+                   {{ 1 }}
+                 </td>
+                 
+                  <td style="text-align: center;color:#000;font-weight: bold;">
+                    {{ 4 }}
+                  </td>
+                </tr>
+              </tfoot>
           </table>
         </div>
          <div class="pagination alternate">

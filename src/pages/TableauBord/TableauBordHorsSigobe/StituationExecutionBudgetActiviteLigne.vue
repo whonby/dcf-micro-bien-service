@@ -125,7 +125,12 @@
     </div> 
     
     <div class="widget-content nopadding" id="printpdf">
-      <h2
+       <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE</h2>
+          </tr>
+        </table>
+      <!-- <h2
         style="
           font-size: 25px;
           font-weight: bold;
@@ -151,7 +156,7 @@
         SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
         {{ formaterDate(formData.date_debut) }} AU
         {{ formaterDate(formData.date_fin) }}
-      </h2>
+      </h2> -->
       <p
         style="
           margin-left: 30px;
@@ -164,7 +169,7 @@
       </p>
 
             <table class="table table-bordered">
-              <thead style="background-color: #FFA100 !important">
+              <thead style="background-color: #ff9c1a !important">
                 
 <tr>
                    <th
@@ -173,7 +178,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     
@@ -185,7 +190,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                    ACTIVITE/LIGNE BUDGETAIRE  
@@ -212,7 +217,8 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
+                      width :8%
                     "
                   >
                     BUDGET INITIAL {{afficheAnnee}}
@@ -224,7 +230,7 @@
                       color: #000;
                       font-weight: bold;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
@@ -236,7 +242,8 @@
                       font-weight: bold;
                       text-align: center;
                       color: #000;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
+                      width :8%
                     "
                   >
                  BUDGET ACTUEL {{afficheAnnee}}
@@ -247,7 +254,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                   MONTANT EXECUTE {{afficheAnnee}}
@@ -258,7 +265,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
@@ -269,7 +276,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     TAUX D'EXECUTION {{afficheAnnee}}
@@ -280,10 +287,10 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
-                    VARIATION DU TAUX {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -291,7 +298,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #FFA100 !important;
+                      background-color: #fbb203 !important;
                     "
                   >
                     DISPONIBLE {{afficheAnnee}}
@@ -310,12 +317,12 @@
                     </button>
                   </td>
 
-                  <td style="background-color: #3CB371 !important; width: 500px;color:#000" >
+                  <td style="background-color: #a7e556 !important; width: 500px;color:#000" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
 
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000" >
+                  <td style="background-color: #a7e556 !important; text-align: right;color:#000" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -323,7 +330,7 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
                    <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -331,14 +338,14 @@
                     </b>
                   </td>
 
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
                     </b>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -346,7 +353,7 @@
                      }}
                     </b>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -358,7 +365,7 @@
                     }}
                     </b>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: right;color:#000;text-align:center" >
+                  <td style="background-color: #a7e556 !important; text-align: right;color:#000;text-align:center" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
@@ -387,7 +394,7 @@
                         </span>
                       </button>
                   </td>
-                  <td style="background-color: #3CB371 !important; text-align: center;color:#000;font-weight: bold;" >
+                  <td style="background-color: #a7e556 !important; text-align: center;color:#000;font-weight: bold;" >
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
@@ -536,31 +543,31 @@
               
               </tbody>
               <tfoot>
-                <tr style="margin-left:25px">
-                  <td> </td>
-                  <td>TOTAL ACTIVITE </td>
+                <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
-                  <td style="text-align: right;color:#000">
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
-                   {{ TotalEviteNaN }}
+                   {{ TotalEviteNaN }}%
                  </td>
-                 <td style="text-align: right;color:#000">
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                 
                  </td>
                  
-                  <td style="text-align: right;color:#000">
-                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
+                  <td style="width :9%;text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                    {{ formatageSomme(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
               </tfoot>
@@ -603,7 +610,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import { formatageSommeSansFCFA } from "@/Repositories/Repository";
+import { formatageSommeSansFCFA,formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
@@ -1737,7 +1744,7 @@ inputLigne:false,
     // },
 
     formatageSommeSansFCFA: formatageSommeSansFCFA,
-
+formatageSomme:formatageSomme,
     ExporterEnExel() {
       this.$refs.excel.click();
     },
