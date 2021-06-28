@@ -4635,9 +4635,12 @@ afficherModalAjouterFacture() {
           geo_autre_depense: 0,
           dure_autre_depense: this.RecupererDure(this.detailOpProvisoire.numero_ordre_paiement),
         };
-        
+        var objetEtatOpreg = {
+          id:this.detailOpProvisoire.numero_ordre_paiement,
+          diff_reg_op:1
+        }
         this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1);
-       
+       this.modifierGestionOrdrePaiement(objetEtatOpreg)
         this.pagePrecedent();
         this.formData = {};
       
