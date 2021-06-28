@@ -105,8 +105,8 @@
 
 
 
-    <!-- <div class="span4">
-          <br />
+    <div class="span4">
+       
           Afficher
           <select name="pets" id="pet-select" v-model="size" class="span3">
             <option value="5" selected>5</option>
@@ -117,7 +117,7 @@
             <option value="100">100</option>
           </select>
          
-        </div> -->
+        </div>
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -246,7 +246,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
+                    MODIFICATION BUDGETAIRE {{afficheAnnee}}
                   </th>
                    
                   <th

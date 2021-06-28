@@ -462,7 +462,6 @@
         </div>
 
         <div class="span4">
-          <br />
           Afficher
           <select name="pets" id="pet-select" v-model="size" class="span3">
             <option value="10">10</option>
@@ -545,7 +544,7 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                  REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}</th>
+                  MODIFICATION BUDGETAIRE {{afficheAnnee}}</th>
 
                 <th style=" font-size: 14px;
                   font-weight: bold;

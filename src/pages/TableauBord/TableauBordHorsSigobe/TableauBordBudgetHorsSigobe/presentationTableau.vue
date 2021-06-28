@@ -110,7 +110,7 @@
                   <div id="test1" class="tab-pane ">
                      <testLega></testLega>
                   </div> -->
- <div id="TABLEAUBORD4" class="tab-pane ">
+                 <div id="TABLEAUBORD4" class="tab-pane ">
                      <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
                   </div>
                   <div id="TABLEAUBORD3" class="tab-pane ">
@@ -121,6 +121,10 @@
                      <SituationExecutionBudgetaireParSection></SituationExecutionBudgetaireParSection>
                
                   </div>
+
+                   <div id="test1" class="tab-pane ">
+                     <testLega></testLega>
+                  </div> 
 
 
                    <div id="MANDAT" class="tab-pane ">

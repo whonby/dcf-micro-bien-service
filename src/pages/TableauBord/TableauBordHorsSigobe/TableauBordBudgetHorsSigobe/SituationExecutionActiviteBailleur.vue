@@ -209,7 +209,7 @@
                   background-color: #fbb203 !important;
                 "
               >
-                REAMENAGEMENT BUDGETAIRE {{ afficheAnnee }}
+                MODIFICATION BUDGETAIRE {{ afficheAnnee }}
               </th>
               <th
                 style="
