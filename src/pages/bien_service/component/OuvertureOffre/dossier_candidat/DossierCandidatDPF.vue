@@ -1,7 +1,6 @@
 <template>
   <div>
 
-
     <div align="right">
       <div class="widget-content">
         <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success" >Ajouter</a>
@@ -12,9 +11,10 @@
       <table class="table table-bordered table-striped" v-if="marcheid">
         <thead>
         <tr>
+
           <th>Numéro dossier</th>
           <th>Type candidat</th>
-          <th>Raison sociale </th>
+          <th>Raison sociale </th>  
           <th>Téléphone</th>
           <th>Adresse</th>
           <th>Email</th>
@@ -43,11 +43,11 @@
             {{appelOffre.appel_offre.objet_appel || 'Non renseigné'}}</td>
           <td @click="afficheBouttonTechFin(index)">
             {{appelOffre.procdure_passation.libelle || 'Non renseigné'}}</td>
-          <td @click="afficheBouttonTechFin(index)" style="background: green;color:#fff" v-if="etatEnregistreOffreTechnique(appelOffre.id)">
+          <!-- <td @click="afficheBouttonTechFin(index)" style="background: green;color:#fff" v-if="etatEnregistreOffreTechnique(appelOffre.id)">
            Dossier Complet
-            </td>
-          <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" >
-           Dossier Incomplet, Veuillez enregistrer l'offre technique 
+            </td> -->
+          <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" v-if="!etatEnregistreOffreTechnique(appelOffre.id)">
+           Dossier complet, Veuillez enregistrer l'offre  financière
           </td>
           <div class="btn-group">
             <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
@@ -236,7 +236,7 @@
         </tr>
       </table>
       <div class="span12"  v-if="formDossierCadidature.accord_group=='oui'">
-        <h6>VEILLEZ RENSEIGNE LES ENTREPRISES</h6>
+        <h6>VEILLEZ RENSEIGNER LES ENTREPRISES</h6>
         <table class="table">
           <tbody>
           <tr>
@@ -485,61 +485,39 @@
       </div>
 
 
-      <Candidat :detail_dossier_candidature="detail_dossier_candidature"></Candidat>
+      <CandidatDP :detail_dossier_candidature="detail_dossier_candidature"></CandidatDP>
 
       <div class="widget-title">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#offre_tech">OFFRE TECHNIQUE</a></li>
-          <li class=""><a data-toggle="tab" href="#offre_fin">OFFRE FINANCIERE</a></li>
+          <li class="active"><a data-toggle="tab" href="#offre_tech">OFFRE FINANCIERE</a></li>
+          <!-- <li class=""><a data-toggle="tab" href="#offre_fin">OFFRE FINANCIERE</a></li> -->
         </ul>
       </div>
 
-
       <div class="widget-content tab-content">
-        <div id="offre_tech" class="tab-pane active">
-          <!--Offre technique-->
-          <OffreTechnique :dossier_candidature="detail_dossier_candidature"></OffreTechnique>
-        </div>
-        <div id="offre_fin" class="tab-pane ">
-          <!--Offre financiere-->
-          <OffreFinanciere :dossier_candidature="detail_dossier_candidature"></OffreFinanciere>
+        <!-- <div id="offre_tech" class="tab-pane active">
+         
+          <OffreTechniqueDP :dossier_candidature="detail_dossier_candidature"></OffreTechniqueDP>
+        </div> -->
+        <div id="offre_fin" class="tab-pane active">
+         
+          <OffreFinanciereDP :dossier_candidature="detail_dossier_candidature"></OffreFinanciereDP>
         </div>
 
       </div>
 
 
-
+ 
     </div>
 
     <div id="modificationDossierCandidatModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification dossier candidat</h3>
+        <h3>Modification dossier candidatnnnn</h3> 
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tbody>
-          <!-- <tr class="odd gradeX" >
-          <td width="">
-            <div align="left" >
-              <div class="control-group">
-                <label class="control-label">Entreprise.</label>
-                <div class="controls">
-                  <select v-model="editDossierCadidature.entreprise_id">
-                    <option value=""></option>
-                    <option v-for="varText in afficherCandidatSelectionner(marcheid)" :key="varText.id"
-                            :value="varText.entreprise_id">{{afficheNomEntreprise(varText.entreprise_id)}}</option>
-                  </select>
-
-                </div>
-              </div>
-              <hr>
-             
-            </div>
-          </td>
-
-        </tr> -->
-
           <tr class="odd gradeX">
 
             <td>
@@ -655,7 +633,7 @@
               </div>
             </td>
 
-            <td>
+            <td> 
               <div class="control-group">
                 <label class="control-label">Pouvoir de signature</label>
                 <div class="controls">
@@ -666,54 +644,9 @@
 
 
           </tr>
-              <div class="span18"  v-if="editDossierCadidature.accord_group=='oui'">
-        <h6>VEILLEZ MODIFIER LES ENTREPRISES</h6>
-        <table class="table">
-          <tbody>
-          <tr>
-            <td colspan="2">
-              <label>ENTREPRISE </label>
-              <model-list-select style="background-color: #fff;"
-                                 class="wide"
-                                 :list="entreprises"
-                                 v-model="editDossierCadidature.nom_structure"
-                                 option-value="id"
-                                 option-text="raison_sociale"
-                                 placeholder="Entreprise"
-              >
-
-              </model-list-select>
-
-            </td>
-
-            <td>
-              <hr>
-              <button class="btn btn-danger" @click.prevent="addStructure()">
-                Ajouter
-              </button>
-            </td>
-          </tr>
-          <tr class="odd gradeX" v-for="appelOffre in structure"
-              :key="'APM'+appelOffre">
-
-            <td>
-              {{appelOffre.raison_sociale || 'Non renseigné'}}
-            </td>
-            <div class="btn-group">
-              <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
-                <span class=""><i class="icon-trash"></i></span>
-              </button>
-
-            </div>
-
-          </tr>
-          </tbody>
-        </table>
-
-      </div>
 
 
-          <!-- <tr class="odd gradeX">
+          <tr class="odd gradeX">
 
             <td>
               <div class="control-group">
@@ -749,10 +682,10 @@
                 </div>
               </div>
             </td>
-          </tr> -->
+          </tr>
 
 
-          <!-- <tr class="odd gradeX">
+          <tr class="odd gradeX">
             <td>
               <div class="control-group">
                 <label class="control-label">Fiche rsgnt nombre groupe</label>
@@ -788,9 +721,9 @@
               </div>
             </td>
 
-          </tr> -->
+          </tr>
 
-          <!-- <tr class="odd gradeX">
+          <tr class="odd gradeX">
 
             <td>
               <label>Procédure de passation</label>
@@ -861,13 +794,58 @@
                 </div>
               </div>
             </td>
-          </tr> -->
-
-
-
+          </tr>
+       
           </tbody>
+      
         </table>
       </div>
+         <div class="span12"  v-if="editDossierCadidature.accord_group=='oui'">
+
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>
+              <label>ENTREPRISE </label>
+              <model-list-select style="background-color: #fff;"
+                                 class="wide"
+                                 :list="entreprises"
+                                 v-model="editDossierCadidature.nom_structure"
+                                 option-value="id"
+                                 option-text="raison_sociale"
+                                 placeholder="Entreprise"
+              >
+
+              </model-list-select>
+
+            </td>
+
+            <td>
+              <hr>
+              <button class="btn btn-danger" @click.prevent="addStructure1()">
+                Ajouter
+              </button>
+            </td>
+          </tr>
+          <tr class="odd gradeX" v-for="appelOffre in structure"
+              :key="'APM'+appelOffre">
+
+            <td>
+              {{appelOffre.raison_sociale || 'Non renseigné'}}
+            </td>
+            <div class="btn-group">
+              <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                <span class=""><i class="icon-trash"></i></span>
+              </button>
+         
+            </div>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      
 
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
@@ -882,18 +860,21 @@
 import {mapActions, mapGetters} from "vuex";
 import {formatageSomme} from "@/Repositories/Repository";
 import moment from "moment";
-import Candidat from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/Candidat";
-import OffreFinanciere from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreFinanciere";
-import OffreTechnique from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreTechnique";
+//import CandidatDP from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/CandidatDP";
+import OffreFinanciereDP from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreFinanciereDP";
+ import CandidatDP from "../../../component/OuvertureOffre/dossier_candidat/CandidatDP"
+//import OffreTechnique from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreTechnique";
+//import OffreTechniqueDP from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreTechniqueDP";
 import {  ModelListSelect } from 'vue-search-select'
 import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
 name: "DossierCandidat",
   props:["macheid"],
   components:{
-    Candidat,
-    OffreFinanciere,
-    OffreTechnique,
+    CandidatDP,
+    OffreFinanciereDP,
+    //OffreTechnique,
+   // OffreTechniqueDP,
     ModelListSelect
   },
   data() {
@@ -942,7 +923,7 @@ name: "DossierCandidat",
         libelle_lot:"",
         montant_lot:"",
         marche_id:"",
-        appel_offre_id:"",
+        appel_offre_id:"", 
         // mode_passation_id:""
       }
       ,
@@ -1008,6 +989,8 @@ name: "DossierCandidat",
         type_candidat_id:"",
         numero_cc:"",
         type_candidat:"",
+        diff:1,
+        dif_fin:0,
         nom_cand:"",
         prenom_cand:"",
         marche_id:"",
@@ -1044,7 +1027,7 @@ name: "DossierCandidat",
         secteur_activite_id:"",
         type_candidat_id:"",
         numero_cc:"",
-        type_candidat:"",
+        type_candidat:"", 
         nom_cand:"",
         prenom_cand:"",
         date_nais_cand:"",
@@ -1300,7 +1283,7 @@ name: "DossierCandidat",
   },
   computed: {
     ...mapGetters("bienService", ["gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-      "modePassations", "procedurePassations","getterDossierCandidats","marches",
+      "modePassations", "procedurePassations","getterDossierCandidats","marches","gettersEntreprisePreselectionner",
       "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
       "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
       "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
@@ -1313,12 +1296,13 @@ name: "DossierCandidat",
 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
 
+
     afficherCandidatSelectionner() {
       return id => {
         if (id != null && id != "") {
           let vm=this
           let collection=[]
-        let  objet_personnel=  this.gettersCotationPersonnaliser.filter(qtreel => qtreel.marche_id == id);
+        let  objet_personnel=this.gettersEntreprisePreselectionner.filter(qtreel => qtreel.marche_id == id);
 
 
 
@@ -1757,8 +1741,8 @@ name: "DossierCandidat",
     dossierCandidature: function () {
       return marcheid => {
         if (marcheid != "") {
-         
-          return this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == marcheid && idmarche.diff==null)
+          console.log("Guei Roland")
+          return this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == marcheid && idmarche.diff==1 && idmarche.dif_fin==0)
         }
       }
     },
@@ -1963,9 +1947,9 @@ name: "DossierCandidat",
     etatEnregistreOffreTechnique(){
       return id=>{
         let nbr=this.gettersOffreTechniques.filter(item=>item.dossier_candidat_id==id).length
-       // let nbr_offre_fin=this.getterOffreFinanciers.filter(item=>item.dossier_candidat_id==id).length
+        let nbr_offre_fin=this.getterOffreFinanciers.filter(item=>item.dossier_candidat_id==id).length
        // console.log(this.gettersOffreTechniques)
-        if(nbr!=0 ){
+        if(nbr!=0 && nbr_offre_fin!=0){
           return true
         }
         return false
@@ -2361,6 +2345,8 @@ name: "DossierCandidat",
         numero_cc:"",
         nom_cand:"",
         prenom_cand:"",
+        diff:1,
+        dif_fin:0,
         date_nais_cand:"",
         telephone_cand:"",
         adresse_post:"",
@@ -2890,7 +2876,7 @@ name: "DossierCandidat",
       this.getAnalyseDMP()
       this.getAnoDMPBailleur()
       this.$('#modifDemandeAno').modal('hide');
-    },
+    }, 
     ajouterAnoDMPBailleurLocal(){
       const formData = new FormData();
       formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -2917,7 +2903,7 @@ name: "DossierCandidat",
         analyse_dmp_id:""
       }
     },
-    addStructure1(){
+     addStructure1(){
       if(this.editDossierCadidature.nom_structure=="")
         return ""
       let isStructureExist=this.structure.find(item=>item.id==this.editDossierCadidature.nom_structure)
@@ -2927,7 +2913,7 @@ name: "DossierCandidat",
       this.structure_id.unshift(objet.id)
       this.structure.unshift(objet)
       console.log(this.structure)
-      this.editDossierCadidature.nom_structure="" 
+      this.nom_structure=""
 
       //this.formDossierCadidature.nom_cand
     },

@@ -651,7 +651,7 @@
                   v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
                 >
                   {{
-                    0
+                   NombreOPNonRegu(unite.id)
                   }}
                 </td>
                   <td
@@ -990,15 +990,15 @@ export default {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.uniteadministrative_id == id
+                qtreel.uniteadministrative_id == id && qtreel.diff_reg_op == 0
             )
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.diff_reg_op),
               0
             )
-            .toFixed(0);
+            
         } else {
-          return 0;
+          return 78;
         }
       };
     },

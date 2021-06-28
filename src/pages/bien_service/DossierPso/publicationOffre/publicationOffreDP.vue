@@ -573,6 +573,7 @@ date_facture_proformat:"",
               
               numero_autorisation:"",
               mode_passation_id:"",
+              diff:1,
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -636,7 +637,8 @@ listeAppelOffre() {
      return id => {
         if (id != null && id != "") {
           return this.appelOffres.filter(
-            element => element.marche_id == this.macheid && element.note_techn!=null && element.ref_sigva==null
+            element => element.marche_id == this.macheid && element.note_techn!=null && 
+            element.ref_sigva==null && element.diff==1
           );
         }
       };
@@ -830,7 +832,7 @@ ajouterOffre22() {
                     imputation:"",
                     marche_id:"",
                     numero_autorisation:"",
-
+                        diff:1,
                     procedure_passation_id:"",
 
           heure:"",

@@ -1,6 +1,6 @@
 <template>
     <div>
-  <h4>Liste des entreprises Restreint </h4>
+  <h4>Liste des entreprises Restreintes </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
@@ -9,7 +9,7 @@
                         <th>Entreprise  </th>
                        <div class="span5" align="right" >
 
-                 <button data-toggle="modal" class="btn btn-primary" v-show="attribue.length >0"  @click.prevent="affectationLocal">Valider</button></div>
+                 <button data-toggle="modal" class="btn btn-primary" v-show="attribue.length >0"  @click.prevent="affectationLocal" >Valider</button></div>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,7 +40,7 @@
 									     <input type="checkbox" v-model="attribue" :value="appelOffre.id"  checked  disabled  />
 									     </td> -->
 
-                                             <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.entreprise_id">
+                                             <p-check class="pretty p-image p-plain "     checked disabled="disabled" style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="appelOffre.entreprise_id">
                                              <img slot="extra" class="image" src="../../../../assets/004.png">
                                              <p style="color: red"></p>
                                                 </p-check>

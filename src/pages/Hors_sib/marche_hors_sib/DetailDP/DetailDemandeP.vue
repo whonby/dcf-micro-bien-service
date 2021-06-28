@@ -24,6 +24,7 @@
 
 
 
+
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
@@ -102,20 +103,29 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tabDP">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tabLotDP">Lot</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabLettrDP">Lettre d'invitation CF && Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabLettrDP" title="lettre d'invitation">Lttre I && Mandaté</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabMandateDP">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionDP">Reception</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabOuvertureDP">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabOuvertureDP">Etape Technique</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
                               <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tabAnalyseDP"> Analyse </a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabAnalyseDP"> Analyse </a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReserveDP">Reserves CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabPVJugementDP">PV Jugement</a></li>
-                               <li class=""><a data-toggle="tab" href="#tabAttribuDP">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabBailleurDP">bailleur</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabARNPDP">ANRMP</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabPVJugementDP">PV Jugement</a></li> -->
+                               <!-- <li class=""><a data-toggle="tab" href="#tabAttribuDP">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabBailleurDP">bailleur</a></li> -->
+                                             <li class=""><a data-toggle="tab" href="#DMPDP" title="demande ANO/DMP">D.DMP</a></li>
+                                   <li class=""><a data-toggle="tab" href="#DMPBAILLEURDP" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                               
+                                                    <li class=""><a data-toggle="tab" href="#tabOuvertureDPFin">Etape financière</a></li>
 
-
+                                                     <li class=""><a data-toggle="tab" href="#DMPDPF" title="demande ANO/DMP">D.DMP</a></li>
+                                   <li class=""><a data-toggle="tab" href="#DMPBAILLEURDPF" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                                  <li class=""><a data-toggle="tab" href="#tabReserveDPF">Reserves CF</a></li>
+                                   <li class=""><a data-toggle="tab" href="#tabAttribuDPF">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabBailleurDPF">bailleur</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tabARNPDP">ARNP</a></li>
+                               
                             </ul>
                         </div>
 
@@ -146,7 +156,7 @@
                                 <!-- <h4>Publication de l'offre</h4> -->
 
 
-                      <invitationCf :macheid="detail_marche.id"></invitationCf>
+                      <invitationCfDP :macheid="detail_marche.id"></invitationCfDP>
 
                       
                                 <div id="" class="tab-pane">
@@ -154,7 +164,7 @@
                                 <div class="span4"></div>
                                
 
-                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                      <mandateDP :macheid="detail_marche.id"></mandateDP>
                          </div>
                          </div>
  <!-- <div id="tabMandateDP" class="tab-pane">
@@ -186,11 +196,15 @@
                           <div id="tabOuvertureDP" class="tab-pane">
                             <!-- <ouverture-offre :macheid="detail_marche.id"></ouverture-offre> -->
 
-                  <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
-                  <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre> -->
+                  <OuvertureOffreSansFinDP :macheid="detail_marche.id"></OuvertureOffreSansFinDP>
+                  
                 </div>
 
+      <div id="tabOuvertureDPFin" class="tab-pane">
 
+<OuvertureOffreSansFinDPF :macheid="detail_marche.id"></OuvertureOffreSansFinDPF>
+                  
+                </div>
 
                 <!-- <div id="tabPVAMI" class="tab-pane">
                       <div align="right">
@@ -209,34 +223,35 @@
 
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div> -->
-                  <div id="tabAnalyseDP" class="tab-pane">
+                  <!-- <div id="analyseComb" class="tab-pane">
 
                     <JugementSansFin :macheid="detail_marche.id"></JugementSansFin>
 
-<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
-                </div>
+
+                </div> -->
                    <div id="tabReserveDP" class="tab-pane">
 
-                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+                    <reserveCfDP :macheid="detail_marche.id"></reserveCfDP>
 
-<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
-                 <div id="tabPVJugementDP" class="tab-pane">
-<!--                 <div align="right">-->
-<!--                    <div class="widget-content">-->
-<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
-<!--                    </div>-->
+                  <div id="DMPDP" class="tab-pane">
 
+                    <AnoDMP :macheid="detail_marche.id"></AnoDMP>
+                </div>
+                <div id="DMPBAILLEURDP" class="tab-pane">
 
-<!--                </div>-->
-<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
+                    <AnoBailleur :macheid="detail_marche.id"></AnoBailleur>
+
+                </div>
+                 <!-- <div id="tabPVJugementDP" class="tab-pane">
+
                    <PvJugement  :macheid="detail_marche.id"></PvJugement>
-                </div>
+                </div> -->
                  <!-- <div id="tabAttribuAMI" class="tab-pane">
 
                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div> -->
-                    <div id="tabAttribuDP" class="tab-pane">
+                    <div id="tabAttribuDPF" class="tab-pane">
                     <ActeEffetFinancier1 :macheid="detail_marche.id"></ActeEffetFinancier1>
 <!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
@@ -255,7 +270,7 @@
                 </div>
                  <div id="tabARNPDP" class="tab-pane">
 
-               <Arnmp :macheid="detail_marche.id"></Arnmp>
+               <ArnmpDP :macheid="detail_marche.id"></ArnmpDP>
 
                 </div>
                          </div>
@@ -275,41 +290,50 @@
                </div>
             </table>
 
-                  </div>
+           </div>
     
 
 </template>
 <script>
 import {mapGetters} from 'vuex'
 import { formatageSomme } from "../../../../Repositories/Repository"
- import Arnmp from '../../../bien_service/dossierArnmp/Arnmp';
+ import ArnmpDP from '../../../bien_service/dossierArnmp/ArnmpDP';
  import componentBailleur1 from '../../../bien_service/component/bailleurMarche';
   import ActeEffetFinancier1 from "../../../bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
-  import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
-    import reserveCf from '../../../bien_service/dossierReserveCF/reserveCf';
-    import JugementSansFin from "@/pages/bien_service/component/JugementSansAnalyseFinanciere/JugementSansFin"
+  //import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
+    import reserveCfDP from '../../../bien_service/dossierReserveCF/reserveCfDP.vue';
+    //import JugementSansFin from "@/pages/bien_service/component/JugementSansAnalyseFinanciere/JugementSansFin"
     import LotMarche from "@/pages/bien_service/component/LotMarche";
       import publicationOffreDP from "../../../bien_service/DossierPso/publicationOffre/publicationOffreDP"
-         import OuvertureOffreSansFin from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFin"
+         //import OuvertureOffreSansFin from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFin"
+          import OuvertureOffreSansFinDP from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFinDP"
+          import OuvertureOffreSansFinDPF from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFinDPF"
          import componentCotationDp from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotationDp.vue';
-         // componentCotationDp import componentCotation from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
-        import invitationCf from '../../../bien_service/DossierPso/lettreInvitation/invitationCf';
- import mandateBs from '../../../bien_service/DossierPso/mandaté/mandateBs';
+         // OuvertureOffreSansFinDP componentCotationDp import componentCotation from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
+        import invitationCfDP from '../../../bien_service/DossierPso/lettreInvitation/invitationCfDP';
+ import mandateDP from '../../../bien_service/DossierPso/mandaté/mandateDP';
+  import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
+  import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
 export default {
+  
     components:{
-        Arnmp,
+        ArnmpDP,
         componentBailleur1,
         ActeEffetFinancier1,
-        OuvertureOffreSansFin,
+        OuvertureOffreSansFinDP,
+        OuvertureOffreSansFinDPF,
+        //OuvertureOffreSansFin,
         //componentCotationDp,
         componentCotationDp,
-        PvJugement,
-        reserveCf,
+        //PvJugement,
+        AnoDMP,
+        AnoBailleur,
+        reserveCfDP,
         LotMarche,
         publicationOffreDP,
-        invitationCf,
-        mandateBs,
-        JugementSansFin
+        invitationCfDP,
+        mandateDP,
+       // JugementSansFin
     },
     data() {
         return{

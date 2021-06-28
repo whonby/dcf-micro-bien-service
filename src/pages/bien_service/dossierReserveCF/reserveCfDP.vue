@@ -195,6 +195,7 @@ export default {
     data(){
         return{
   formeReserve:{
+    diff:1,
 date:"",
 lot_id:"",
 objet_reserve:""
@@ -226,7 +227,7 @@ afficherListeReseveCf() {
       return id => {
         if (id != null && id != "") {
           return this.gettersReserveCf.filter(
-            element => element.marche_id == this.macheid && element.diff==null
+            element => element.marche_id == this.macheid && element.diff==1
           );
         }
       };
@@ -323,6 +324,7 @@ ajouterOffre245222101() {
      this.ajouterReserveCf(nouvelObjet)
      this.formeReserve={
          date:"",
+         diff:1,
          objet_reserve:""
      }
 

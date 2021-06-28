@@ -976,12 +976,12 @@
                                 <!-- <li class=""><a data-toggle="tab" href="#tabMandateAMI">Mandaté</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReceptionAMI">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tabOuvertureAMI">Pré-selection</a></li> -->
-                                
+                               
                                <li class=""><a data-toggle="tab" href="#tab7884">Ouverture</a></li>
-                               <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabAnalyseAMI"> Analyse </a></li>
+                               <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
+                                <!-- <li class=""><a data-toggle="tab" href="#tabAnalyseAMI"> Analyse </a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tabReserveAMI">Reserves CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tabPVJugementAMI">PV Jugement</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabPVJugementAMI">PV Jugement</a></li> -->
                                  <li class=""><a data-toggle="tab" href="#DMPAMI" title="demande ANO/DMP">D.DMP</a></li>
                                    <li class=""><a data-toggle="tab" href="#DMPBAILLEURAMI" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                  <li class=""><a data-toggle="tab" href="#tabARNPAMI">ANRMP</a></li>
@@ -1064,60 +1064,44 @@
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
                           <div id="tabOuvertureAMI" class="tab-pane">
-                            <!-- <ouverture-offre :macheid="detail_marche.id"></ouverture-offre> -->
+                           
 
                   <preSelectionnerEntreprise :macheid="detail_marche.id"></preSelectionnerEntreprise>
-                  <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre> -->
+                  
                 </div>
 
 
 
-                <div id="tabPVAMI" class="tab-pane">
-                      <!-- <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
-                    </div>
-
-
-                </div> -->
+                <!-- <div id="tabPVAMI" class="tab-pane">
+                    
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
-                </div>
+                </div> -->
 
                  <div id="tab7884" class="tab-pane">
 
 
-                   <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
+                   <OuvertureOffreSansFinAMI :macheid="detail_marche.id"></OuvertureOffreSansFinAMI>
                 </div>
-                  <div id="tabAnalyseAMI" class="tab-pane">
+                  <!-- <div id="tabAnalyseAMI" class="tab-pane">
 
                     <JugementSansFin :macheid="detail_marche.id"></JugementSansFin>
 
-<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
-                </div>
+                </div> -->
                    <div id="tabReserveAMI" class="tab-pane">
 
                     <reserveCf :macheid="detail_marche.id"></reserveCf>
 
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
-                 <div id="tabPVJugementAMI" class="tab-pane">
-<!--                 <div align="right">-->
-<!--                    <div class="widget-content">-->
-<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
-<!--                    </div>-->
+                 <!-- <div id="tabPVJugementAMI" class="tab-pane">
 
-
-<!--                </div>-->
-<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
                    <PvJugement  :macheid="detail_marche.id"></PvJugement>
-                </div>
+                </div> -->
 
                  <div id="DMPAMI" class="tab-pane">
 
                     <AnoDMP :macheid="detail_marche.id"></AnoDMP>
-<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
-
                 </div>
                 <div id="DMPBAILLEURAMI" class="tab-pane">
 
@@ -1540,6 +1524,7 @@ import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSim
 import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
 import OuvertureOffreSansFin from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFin"
+import OuvertureOffreSansFinAMI from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/OuvertureOffreSansFinAMI"
 import preSelectionnerEntreprise from "../../bien_service/component/DossierPre_selection/preSelectionnerEntreprise.vue"
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -1561,6 +1546,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           AnoBailleurLCV,
           ActeEffetFinancierLCV,
           OuvertureOffreSansFin,
+          OuvertureOffreSansFinAMI,
           AnoDMP,
           AnoDMPLCV,
           PvJugement,
