@@ -8,26 +8,26 @@
           <tbody>
             <br />
             <br />
-            <!-- <tr>
+            <tr>
               <td colspan="2">
                 <br />
 
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                  >ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
-                  :list="uniteAdministratives"
-                  v-model="uniteAdministrative_id"
+                  :list="plans_activites"
+                   v-model="activite_id"
                   option-value="id"
                   option-text="libelle"
-                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                  placeholder="TOUTES LES ACTIVITES"
                 >
                 </model-list-select>
               </td>
-            </tr> -->
-            <tr>
+            </tr>
+            <!-- <tr>
               <td>
                 <div class="control-group">
                   <label
@@ -62,13 +62,14 @@
                   </div>
                 </div>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
-    </div>
+    </div> 
 
     <div align="right">
+      <br/>
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
         Exporter en PDF
       </button>
@@ -87,10 +88,10 @@
               DIRECTION DU CONTRÔLE FINANCIER <br />
               -------------------------
             </p>
-            <img :src="AfficheLogODCF" />
+            <img :src="logo3dcf" width="80px;"/>
           </td>
           <td style="text-align: center">
-            <img :src="AfficheAmoirie" />
+            <img :src="amoirie" width="70px;" />
           </td>
           <td style="text-align: center">
             <p>
@@ -499,7 +500,7 @@
                 Système de Gestion des Ordres de Paiement hors SIB
               </td>
               <td colspan="2" style="border: solid white !important">
-                généré le {{ nombreJourTraitementCalucle }} à 08:52 par
+                généré le {{ nombreJourTraitementCalucle }} par
                 {{ afficheNomUtilisateur }}
               </td>
             </tr>
@@ -516,15 +517,20 @@ import moment from "moment";
 import { formatageSommeSansFCFA } from "@/Repositories/Repository";
 //import { formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-//import { ModelListSelect } from "vue-search-select";
+import { ModelListSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
+import amoirie from "../../../../public/amoirie.png";
+import logo3 from "../../../../public/log3.png";
 export default {
   components: {
-    // ModelListSelect,
+    ModelListSelect,
   },
   name: "typetext",
   data() {
     return {
+      activite_id:0,
+      amoirie:amoirie,
+      logo3dcf:logo3,
       page: 0,
       size: 10,
       active_el: 0,
@@ -739,9 +745,10 @@ export default {
     },
 
     ListeGroupByActivite3() {
-      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+      if (this.activite_id !=0) {
         return this.groupeByActivite.filter(
-          (qtreel) => qtreel[0].annebudgetaire == this.anneeAmort
+          (qtreel) => qtreel[0].annebudgetaire == this.anneeAmort &&
+          qtreel[0].activite_id == this.activite_id
         );
       } else {
         return this.groupeByActivite.filter(
@@ -993,12 +1000,12 @@ export default {
       return 0;
     },
 
-    AfficheLogODCF() {
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/log3.png";
-    },
-    AfficheAmoirie() {
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
-    },
+    // AfficheLogODCF() {
+    //   return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/log3.png";
+    // },
+    // AfficheAmoirie() {
+    //   return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
+    // },
 
     // listeordrepaiements() {
     //   if (this.uniteAdministrative_id != 0) {

@@ -16,35 +16,42 @@
                 <div class="widget-title">
                   <ul class="nav nav-tabs">
                    
-                     <li class="active" style="font-size:20px">
+                     <!-- <li class="active" style="font-size:20px">
                       <a data-toggle="tab" href="#DEMANDE"
                         >TABLEAU DE BORD GENERAL </a
                       >
-                    </li>
+                    </li> -->
                      <!-- <li class=""  >
                       <a data-toggle="tab" href="#COMMANDE"
                         >CONSULTATION DE L'EXECUTION BUDGETAIRE</a
                       >
                     </li> -->
 
-                      <li class=""  style="font-size:20px">
+                      <li class="active"  style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD1"
-                        >TABLEAU DE BORD 1</a
+                        >TB1 : SUIVI DU BUDGET </a
                       >
                     </li>
 
-                    <li class="" style="font-size:20px">
+                    <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD2"
-                        >TABLEAU DE BORD 2</a
+                        >TB2 : EXECUTION DU BUDGET</a
+                      >
+                    </li>
+                    
+
+                    <!-- <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD3"
+                        >TB3 : EXECUTION PAR ACTIVITE</a
+                      >
+                    </li> -->
+ <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD4"
+                        >TB3 : D'EXECUTION PAR ACTIVITE ET BAILLEUR</a
                       >
                     </li>
 
-
-                     <li class="" style="font-size:20px">
-                      <a data-toggle="tab" href="#LIQUIDATION"
-                        >SYSTHESE DU BUDGET PAR UA</a
-                      >
-                    </li>
+                     
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -60,7 +67,7 @@
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
                  
-                  <div id="DEMANDE" class="tab-pane active" >
+                  <div id="DEMANDE" class="tab-pane " >
                     <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
                 <TableauBordBudgetEclate></TableauBordBudgetEclate>
                          
@@ -69,7 +76,7 @@
                    <RechercheExecutionBudgetaire></RechercheExecutionBudgetaire>
                   
                   </div> -->
-                   <div id="TABLEAUBORD1" class="tab-pane ">
+                   <div id="TABLEAUBORD1" class="tab-pane active">
                      <TableausuiviBudgets></TableausuiviBudgets>
                   </div>
 
@@ -77,6 +84,12 @@
                      <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
                   </div>
 
+                  <div id="TABLEAUBORD3" class="tab-pane ">
+                     <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
+                  </div>
+ <div id="TABLEAUBORD4" class="tab-pane ">
+                     <SituationExecutionActivitéBailleur></SituationExecutionActivitéBailleur>
+                  </div>
                   <div id="LIQUIDATION" class="tab-pane ">
                      <recapitulatifBudgetHorsSigobe></recapitulatifBudgetHorsSigobe>
                
@@ -111,6 +124,8 @@ import { formatageSomme } from "@/Repositories/Repository";
 import TableauBordBudgetEclate from "./TableauBordBudgetEclate"
 import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
+import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
+import SituationExecutionActivitéBailleur from "./ToutTableauBordBudget/SituationExécutionActivitéBailleur"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
@@ -121,8 +136,11 @@ export default {
     TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
+    SituationExecuBudgetRecapActivite,
+    
     // RechercheExecutionBudgetaire,
-    recapitulatifBudgetHorsSigobe
+    recapitulatifBudgetHorsSigobe,
+    SituationExecutionActivitéBailleur
   },
   name:'',
   data() {

@@ -12,11 +12,11 @@
           BUDGET ECLATE DES REGIES
         </router-link>
       </li>
-      <li>
+      <!-- <li>
         <router-link :to="{name: 'recapitulatifBudgetHorsSigobe'}" tag="a">
           SYSTHESE DU BUDGET PAR UA
         </router-link>
-      </li>
+      </li> -->
        <!-- <li>
         <router-link :to="{name: 'importationBudgetEclate'}" tag="a">
           IMPORTATION BUDGET

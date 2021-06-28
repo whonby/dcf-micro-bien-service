@@ -1200,7 +1200,8 @@ methods: {
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           variation_budget:this.formData1.variation_budget,
-          sous_budget_id:this.formData10.sous_budget_id
+          sous_budget_id:this.formData10.sous_budget_id,
+          budget_actif_def:0
       };
      
     var decisionBudget11452 = {
@@ -1229,7 +1230,8 @@ type_financement_id:""
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           variation_budget:this.formData1.variation_budget,
-          sous_budget_id:this.formData10.sous_budget_id
+          sous_budget_id:this.formData10.sous_budget_id,
+          budget_actif_def:0
       };
       var decisionBudget1123 = {
                	id: this.recupererId(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id,this.formData.grandenature_id),
@@ -1258,7 +1260,8 @@ report:"",
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
            variation_budget:this.formData1.variation_budget,
-          sous_budget_id:this.formData10.sous_budget_id
+          sous_budget_id:this.formData10.sous_budget_id,
+          budget_actif_def:0
          
       };
       var decisionBudget119 = {
