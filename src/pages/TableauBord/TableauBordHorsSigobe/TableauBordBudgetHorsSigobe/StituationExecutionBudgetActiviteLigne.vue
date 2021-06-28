@@ -185,7 +185,18 @@
                   >
                     
                   </th>
-
+ <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                    colspan=""
+                  >
+                    
+                  </th>
                    <th
                     style="
                       font-size: 14px;
@@ -330,7 +341,13 @@
                       
                     </button>
                   </td>
-
+<td>
+                   <button >
+                     <i class=" icon-print"></i> 
+                      
+                    </button>
+                    
+                </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
@@ -557,6 +574,7 @@
               <tfoot>
                 <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
                   <!-- <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td> -->
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
@@ -1934,14 +1952,15 @@ inputLigne:false,
       this.page++;
     },
 
-    apercuFacture(id) {
+    apercuFacture1(id) {
      
-      //this.$("#validationOpDefinitif2").modal({
+      // this.$("#validationOpDefinitif2").modal({
       //   backdrop: "static",
       //   keyboard: false,
       // });
-       this.editMandat1 = this.afficheUa.find((item) => item[0].activite_id == id);
-      return alert(id);
+       this.editMandat1 = this.groupeByActivite.find((item) => item[0].activite_id == id);
+       console.log(this.editMandat1)
+      return alert(this.editMandat1.activite_id);
     
     },
 

@@ -1,81 +1,82 @@
+
 import TableauBordGeneralBugdet from "../../gestionDesModule/TableauBordGeneral";
 import TableauBordDuBudgetEclate from "../../gestionDesModule/TableauBordDuBudgetEclate";
 import TableauBordOp from "../../gestionDesModule/TableauBordOp";
 import TableauBordGeneralBugdetHs from "../../gestionDesModule/TableauBordGeneralHS";
 import TableauBordGeneralMarche from "../../pages/TableauBord/TableauBordGeneral/TableauBordMarche";
 import TableauBordBudgetEclate from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordBudgetEclate";
-import TableauBordExecutionHorsSigobe from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordExecutionHorsSigobe.vue";
-import ToutLesOpProvisoireEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireEnAttente.vue";
-import ToutLesOpProvisoireDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireDiferer.vue";
-import ToutLesOpProvisoireRejete from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireRejete.vue";
-import ToutLesOpProvisoireVise from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireVise.vue";
-import ToutLesOpProvisoireViseO from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireViseO.vue";
+import TableauBordExecutionHorsSigobe from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/TableauBordExecutionHorsSigobe.vue";
+import ToutLesOpProvisoireEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireEnAttente.vue";
+import ToutLesOpProvisoireDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireDiferer.vue";
+import ToutLesOpProvisoireRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireRejete.vue";
+import ToutLesOpProvisoireVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireVise.vue";
+import ToutLesOpProvisoireViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementProvisoire/ToutLesOpProvisoireViseO.vue";
 
 
-import ToutLesOpAnnulationEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationEnAttente.vue";
-import ToutLesOpAnnulationDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationDiferer.vue";
-import ToutLesOpAnnulationRejete from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationRejete.vue";
-import ToutLesOpAnnulationVise from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationVise.vue";
-import ToutLesOpAnnulationViseO from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationViseO.vue";
+import ToutLesOpAnnulationEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationEnAttente.vue";
+import ToutLesOpAnnulationDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationDiferer.vue";
+import ToutLesOpAnnulationRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationRejete.vue";
+import ToutLesOpAnnulationVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationVise.vue";
+import ToutLesOpAnnulationViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementAnnulation/ToutLesOpAnnulationViseO.vue";
 
 
-import ToutLesOpDefinitifEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifEnAttente.vue";
-import ToutLesOpDefinitifDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifDiferer.vue";
-import ToutLesOpDefinitifRejete from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifRejete.vue";
-import ToutLesOpDefinitifVise from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifVise.vue";
-import ToutLesOpDefinitifViseO from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifViseO.vue";
+import ToutLesOpDefinitifEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifEnAttente.vue";
+import ToutLesOpDefinitifDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifDiferer.vue";
+import ToutLesOpDefinitifRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifRejete.vue";
+import ToutLesOpDefinitifVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifVise.vue";
+import ToutLesOpDefinitifViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDefinitif/ToutLesOpDefinitifViseO.vue";
 
 
-import ToutLesOpDirectEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDirect/ToutLesOpDirectEnAttente.vue";
-import ToutLesOpDirectDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDirect/ToutLesOpDirectDiferer.vue";
-import ToutLesOpDirectRejete from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDirect/ToutLesOpDirectRejete.vue";
-import ToutLesOpDirectVise from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDirect/ToutLesOpDirectVise.vue";
-import ToutLesOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/ToutLesOrdresPaiementDirect/ToutLesOpDirectViseO.vue";
-
-
-
-
-
-
-
-import TableauOpProvisoire from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoire.vue"
-import TableauOpProvisoireDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireDiffere.vue"
-import TableauOpProvisoireRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireRejete.vue"
-import TableauOpProvisoireVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireVise.vue"
-import TableauOpProvisoireViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpProvisoire/TableauOpProvisoireViseO.vue"
+import ToutLesOpDirectEnAttente from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDirect/ToutLesOpDirectEnAttente.vue";
+import ToutLesOpDirectDiferer from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDirect/ToutLesOpDirectDiferer.vue";
+import ToutLesOpDirectRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDirect/ToutLesOpDirectRejete.vue";
+import ToutLesOpDirectVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDirect/ToutLesOpDirectVise.vue";
+import ToutLesOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/ToutLesOrdresPaiementDirect/ToutLesOpDirectViseO.vue";
 
 
 
 
 
-import TableauOpAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulation.vue"
-import TableauOpAnnulationDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationDiffere.vue"
-import TableauOpAnnulationRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationRejete.vue"
-import TableauOpAnnulationVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationVise.vue"
-import TableauOpAnnulationViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpAnnulation/TableauOpAnnulationViseO.vue"
 
 
-
-
-import TableauOpDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitive.vue"
-import TableauOpDefinitifDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveDiffere.vue"
-import TableauOpDefinitifRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveRejete.vue"
-import TableauOpDefinitifVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveVise.vue"
-import TableauOpDefinitifViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDefinitif/TableauOpDefinitiveViseO.vue"
+import TableauOpProvisoire from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpProvisoire/TableauOpProvisoire.vue"
+import TableauOpProvisoireDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpProvisoire/TableauOpProvisoireDiffere.vue"
+import TableauOpProvisoireRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpProvisoire/TableauOpProvisoireRejete.vue"
+import TableauOpProvisoireVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpProvisoire/TableauOpProvisoireVise.vue"
+import TableauOpProvisoireViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpProvisoire/TableauOpProvisoireViseO.vue"
 
 
 
 
 
-import TableauOpDirect from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirect.vue"
-import TableauOpDirectDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectDiffere.vue"
-import TableauOpDirectRejete from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectRejete.vue"
-import TableauOpDirectVise from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectVise.vue"
-import TableauOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/DossierOpDirect/TableauOpDirectViseO.vue"
+import TableauOpAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpAnnulation/TableauOpAnnulation.vue"
+import TableauOpAnnulationDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpAnnulation/TableauOpAnnulationDiffere.vue"
+import TableauOpAnnulationRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpAnnulation/TableauOpAnnulationRejete.vue"
+import TableauOpAnnulationVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpAnnulation/TableauOpAnnulationVise.vue"
+import TableauOpAnnulationViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpAnnulation/TableauOpAnnulationViseO.vue"
 
 
-import presentationTableau from "../../pages/TableauBord/TableauBordHorsSigobe/presentationTableau.vue"
-import PresentationTableauBordControleExecution from "../../pages/TableauBord/TableauBordHorsSigobe/PresentationTableauBordControleExecution.vue"
+
+
+import TableauOpDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDefinitif/TableauOpDefinitive.vue"
+import TableauOpDefinitifDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDefinitif/TableauOpDefinitiveDiffere.vue"
+import TableauOpDefinitifRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDefinitif/TableauOpDefinitiveRejete.vue"
+import TableauOpDefinitifVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDefinitif/TableauOpDefinitiveVise.vue"
+import TableauOpDefinitifViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDefinitif/TableauOpDefinitiveViseO.vue"
+
+
+
+
+
+import TableauOpDirect from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirect.vue"
+import TableauOpDirectDiffere from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirectDiffere.vue"
+import TableauOpDirectRejete from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirectRejete.vue"
+import TableauOpDirectVise from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirectVise.vue"
+import TableauOpDirectViseO from "../../pages/TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirectViseO.vue"
+
+
+import presentationTableau from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordBudgetHorsSigobe/presentationTableau.vue"
+import PresentationTableauBordControleExecution from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/PresentationTableauBordControleExecution.vue"
 import DetailTableauBordProvisoire from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordProvisoire"
 import DetailTableauBordAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordAnnulation"
 import DetailTableauBordDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDefinitif"
