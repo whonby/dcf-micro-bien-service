@@ -57,6 +57,16 @@
                     </li>
 
                      
+<li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD3"
+                        >TB4 : SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</a
+                      >
+                    </li>
+                     <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD5"
+                        >TB5 : SITUATION D'EXECUTION BUDGETAIRE PAR SECTION</a
+                      >
+                    </li>
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -89,7 +99,7 @@
                      <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
                   </div>
 
-                  <div id="TABLEAUBORD3" class="tab-pane ">
+                  <!-- <div id="TABLEAUBORD3" class="tab-pane ">
                      <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
                   </div>
 
@@ -99,6 +109,16 @@
 
                   <div id="test1" class="tab-pane ">
                      <testLega></testLega>
+                  </div> -->
+ <div id="TABLEAUBORD4" class="tab-pane ">
+                     <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
+                  </div>
+                  <div id="TABLEAUBORD3" class="tab-pane ">
+                     <SituationExecutionBudgetaireParBailleur></SituationExecutionBudgetaireParBailleur>
+               
+                  </div>
+                   <div id="TABLEAUBORD5" class="tab-pane ">
+                     <SituationExecutionBudgetaireParSection></SituationExecutionBudgetaireParSection>
                
                   </div>
 
@@ -135,12 +155,17 @@ import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 // import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
 import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBailleur"
- import testLega from "./testLega"
+import testLega from "./testLega"
+import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
+import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
+// import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 // import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       SituationExecutionBudgetaireParBailleur,
+       SituationExecutionBudgetaireParSection,
    // ModelListSelect,
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
