@@ -321,6 +321,7 @@ export default {
         
           formLettre: {
                     appel_offre_id:"",
+                    diff:1,
                     objet_lettre:"",
                     date_lettre:"",
                     ref_lettre:"",
@@ -356,7 +357,7 @@ lettreInvitationAMarche: function () {
                 return macheid => {
                     if (macheid != "") {
                         //console.log("Marche lettre inviation marche")
-                        return this.getterLettreInvitation.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==null)
+                        return this.getterLettreInvitation.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1)
                     }
                 }
             },
@@ -504,6 +505,7 @@ typeProcedureLibelle() {
                 formData.append('date_lettre', this.formLettre.date_lettre);
                 formData.append('date_cojo', this.formLettre.date_cojo);
                 formData.append('marche_id', this.macheid);
+                //formData.append('diff', this.formLettre.diff=1);
                 formData.append('objet_contrat',this.affichierObjetMarche(this.macheid));
                 let config = {
                     header : {
@@ -516,6 +518,7 @@ typeProcedureLibelle() {
                     fichier_joint:"",
                     date_lettre:"",
                     ref_lettre:"",
+                    diff:1,
                     destination:"",
                     date_cojo:""
                 }
