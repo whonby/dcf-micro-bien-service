@@ -794,7 +794,8 @@
             </tbody>
              <tfoot>
                 <tr style="margin-left:25px">
-                  <td> </td>
+                  <td  style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                   <td  style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td colspan="2" style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE : </td>
                       
 
@@ -983,7 +984,24 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
-    
+    NombreOPNonRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.uniteadministrative_id == id
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
     TotalVariation() {
       return (id2) => {
         if (id2 != null && id2 != "") {
