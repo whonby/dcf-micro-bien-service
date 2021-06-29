@@ -266,6 +266,21 @@
                     {{ Libellesection(GroupeSection[0].section_id) }}
                     
                   </td>
+
+                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    {{ Libellesection(GroupeSection[0].section_id) }}
+                    
+                  </td>
+
+                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    {{ Libellesection(GroupeSection[0].section_id) }}
+                    
+                  </td>
+
+                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    {{ MontantbudgetVote(GroupeSection[0].section_id) }}
+                    
+                  </td>
                  
                   
                 </tr>
@@ -548,6 +563,26 @@ export default {
           if (qtereel) {
             return qtereel.nom_section;
           }
+          return 0;
+        }
+      };
+    },
+
+       MontantbudgetVote(){
+        return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.section_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
           return 0;
         }
       };
@@ -871,25 +906,8 @@ export default {
 
     //*************fin gestion des totaux*************/
 
-    MontantbudgetVote(){
-        return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.source_financement_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
+ 
+
     MontantReamenagement(){
         return (id) => {
         if (id != null && id != "") {
