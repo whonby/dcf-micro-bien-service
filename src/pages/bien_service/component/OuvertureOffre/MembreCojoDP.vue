@@ -316,6 +316,7 @@ name: "MembreCojo",
       formDataMembreCojo:{
         matricule:"",
         type_appel:"",
+        diff:1,
         nom_prenom:"",
         role_membre_cojo_id:"",
         cojo_id:"",
@@ -338,7 +339,7 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
     listeMembreCojo: function (){
       let vM=this;
       if( vM.macheid!=""){
-        return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.macheid && idmem.diff==null);
+        return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.macheid && idmem.diff==1);
       }
       return [];
     },
@@ -520,6 +521,7 @@ AjouterMembreCojo23() {
       this.formDataMembreCojo= {
         matricule:"",
         type_appel:"",
+        diff:1,
         nom_prenom:"",
         role_membre_cojo_id:"",
         cojo_id:"",

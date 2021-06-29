@@ -380,6 +380,7 @@ export default {
                     date_cotation:"",
                     ref_offre:"",
                    marche_id:"",
+                   diff:1,
                    	heure_limite:"",
                        email:""
 
@@ -451,7 +452,7 @@ afficherIdEntreprise() {
                 return id => {
                     if (id != "") {
                         // console.log("Marche lettre inviation marche")
-                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
+                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id && idmarche.diff==1)
                      }
              }
             },

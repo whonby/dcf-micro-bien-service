@@ -560,6 +560,7 @@ export default {
       ],
       formData: {
         objet: "",
+        diff:1,
         montant_marche: 0,
         type_marche_id: "",
         unite_administrative_id: "",
@@ -726,7 +727,7 @@ export default {
 
     getLotMarche() {
       return this.getMarchePersonnaliser.filter(
-        (item) => item.parent_id == this.macheid
+        (item) => item.parent_id == this.macheid && item.diff==1
       );
     },
 
@@ -849,6 +850,7 @@ export default {
       let intitule = this.detail_marche.objet + " / " + this.formData.objet;
       this.formData = {
         objet: intitule,
+        diff:1,
         localisation_geographie_id: this.formData.localisation_geographie_id,
         departement_id: this.formData.departement_id,
         sous_prefecture_id: this.formData.sous_prefecture_id,
