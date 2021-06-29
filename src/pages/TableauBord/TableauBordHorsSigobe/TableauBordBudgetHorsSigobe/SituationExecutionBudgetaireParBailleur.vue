@@ -122,6 +122,10 @@
                 </model-list-select>
                 
                   </th>
+                   <th  
+                  >
+                    
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -133,6 +137,10 @@
                     "
                   >
                     SECTION {{afficheAnnee}}
+                    
+                  </th>
+                    <th  
+                  >
                     
                   </th>
                    <th>
@@ -253,60 +261,123 @@
                     </button>
                     
                 </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" colspan="">
+                    <b>{{libelleSourceFinancement(GroupeOrdrePaiementByActivit[0].source_financement_id) }}</b>
                     
                   </td>
 <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
+                    
+                  </td>
+                 <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                    <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
-                    <b>{{GroupeOrdrePaiementByActivit[0].source_financement_id }}</b>
+                 <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                    <b></b>
                     
                   </td>
-                  
+                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                    <b></b>
+                    
+                  </td>
                 </tr>
-
+           
+ <tr class="odd gradeX"  v-show="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id"
+                  v-for="section in AfficheSectionGroupe(GroupeOrdrePaiementByActivit[0].source_financement_id)"
+                  :key="section"
+                >
+               <td ></td>
+               <td></td>
+               <td></td>
+                     <td>
+                    <button @click="ShowMySection(section)">
+                     <i class="icon-eye-open"></i> 
+                      
+                    </button>
+                  </td>
+               <td >{{libelleSection(section)}}</td>
+                <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+              
+ </tr>
 
                   
-                 
+                 <tr class="odd gradeX"  v-show="idSourceFinancement(recupereIDSection)==GroupeOrdrePaiementByActivit[0].source_financement_id"
+                  v-for="ua in AfficheUaGroupe(recupereIDSection)"
+                  :key="ua"
+                >
+               <td ></td>
+               <td></td>
+               <td></td>
+                     <td>
+                   
+                  </td>
+                   <td></td>
+                  <td>
+                     <button >
+                     <i class="icon-eye-open"></i> 
+                      
+                    </button>
+                  </td>
+               <td >{{libelleUa(ua)}}</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+              
+              
+ </tr>
               
               
               </tbody>
@@ -326,152 +397,7 @@
       bg-color="green"
     ></fab> -->
 
-    <div id="validationOpDefinitif2" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3 style="font-size: 14px; font-weight: bold">
-          UNITE ADMINISTRATIVE : 
-        </h3>
-      </div>
-      <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
-    </div>  -->
-      <div class="modal-body" id="printpdf">
-          <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
-          </tr>
-        </table>
-        <table class="table table-bordered table-striped">
-          <thead style="background-color: #ff9c1a !important">
-                
-<tr>
-                   <th>
-                    
-                  </th>
-<th>
-                    
-                  </th>
-                   <th>
-                   ACTIVITE/LIGNE BUDGETAIRE  
-                   
-                
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                      width :8%
-                    "
-                  >
-                    BUDGET INITIAL {{afficheAnnee}}
-                    
-                  </th>
-                   <th>
-                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
-                  </th>
-                   
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #fbb203 !important;
-                      width :8%
-                    "
-                  >
-                 BUDGET ACTUEL {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  MONTANT EXECUTE {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
-                  </th>
-
-                     <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TAUX D'EXECUTION {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                   DISPONIBLE {{afficheAnnee}}
-                  </th>
-
-                  
-                </tr>
-              </thead>
-            <br>
-          <tbody >
-            <tr>
-              
-            </tr>
-              
-          </tbody>
-        </table>
-        <!-- <div class="modal-footer">
-          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        </div> -->
-      </div>
-    </div>
+    
   </div>
 </template>
   
@@ -514,6 +440,7 @@ inputLigne:false,
       search: "",
       verifShome:0,
       recupereIDactivite:"",
+       recupereIDSection:"",
   source_financement_id1:0
     };
   },
@@ -650,7 +577,8 @@ inputLigne:false,
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
       "groupeByActivite",
-      "groupeByBailleur"
+      "groupeByBailleur",
+      "groupeParSectionBudgetEclate"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -689,6 +617,20 @@ inputLigne:false,
       };
     },
 
+afficheSectionGroupe(){
+     
+      return (id) => {
+        if (id != null && id != "") {
+          return this.groupeParSectionBudgetEclate.filter(
+            (qtreel) => qtreel[0].source_financement_id == id
+          );
+
+        
+         
+        }
+         return 0;
+      };
+},
     //&& this.inputLigne1!=0
     ListeGroupByActivite() {
       if (this.source_financement_id1!=0) {
@@ -724,15 +666,30 @@ inputLigne:false,
       }
     },
 
-    ListeGroupByNature() {
+    libelleSourceFinancement() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.GroupeOrdrePaiementByGrandeNature.filter(
-            (qtreel) => qtreel.grand_nature_id == id
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
           );
 
           if (qtereel) {
-            return qtereel.grand_nature_id;
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+   
+    libelleSection() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.sections.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.nom_section;
           }
           return 0;
         }
@@ -1354,7 +1311,20 @@ inputLigne:false,
        
     },
 
-    
+    idSourceFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.section_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.source_financement_id;
+          }
+          return 0;
+        }
+      };
+    },
 
 
     recupBudget() {
@@ -1383,7 +1353,7 @@ inputLigne:false,
       };
     },
 
-    listeordrepaiementLigne2() {
+    listeSectionParUa() {
       return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate.filter(
@@ -1393,16 +1363,16 @@ inputLigne:false,
       };
     },
    
-    arrayExerciceDecompte2() {
-      return (idactivite) => {
-        console.log(idactivite);
-        if(idactivite!=null && idactivite !=0 && idactivite !=""){
-          let objet = this.listeordrepaiementLigne2(idactivite);
+    AfficheSectionGroupe() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.listeSectionParUa(id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
+            array_exercie.push(val.section_id);
           });
           let unique = [...new Set(array_exercie)];
           console.log(unique);
@@ -1417,7 +1387,39 @@ inputLigne:false,
         
       };
     },
-
+    listeParUaGroupe() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            (qtreel) => qtreel.section_id == id 
+          );
+        }
+      };
+    },
+AfficheUaGroupe() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.listeParUaGroupe(id);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.uniteadministrative_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
     
 
     libelleUa() {
@@ -1456,6 +1458,18 @@ inputLigne:false,
   }
 
 },
+ShowMySection(id){
+      if(this.recupereIDSection==""){
+         this.recupereIDSection=id;
+      }else if(this.recupereIDSection!="" && this.recupereIDSection !=id){
+        this.recupereIDSection="";
+        this.recupereIDSection=id;
+      }
+      else{
+         this.recupereIDSection="";
+      }
+       
+    },
     ShowMyLigne(id){
       if(this.recupereIDactivite==""){
          this.recupereIDactivite=id;
@@ -1571,7 +1585,18 @@ width: 95%;
   margin: 0 -45%;
   height: 50%;
 }
-
+.whitebg {
+  background: #98FB98 !important;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+.graybg {
+  background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
 .modal-body {
   max-height: 85%;
 }
