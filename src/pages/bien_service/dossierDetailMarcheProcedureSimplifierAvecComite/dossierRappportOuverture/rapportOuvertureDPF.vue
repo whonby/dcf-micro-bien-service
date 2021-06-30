@@ -143,6 +143,7 @@ export default {
 
             formRapport:{
                  date_rapport_ouverture:"",
+                 diff:0,
                  attribue:"0",
                  fichier:"",
                 difference_personnel_bienService:"bienservice",
@@ -153,6 +154,7 @@ export default {
             editRapport:{
               date_rapport_ouverture:"",
               attribue:"0",
+              diff:0,
               fichier:"",
               difference_personnel_bienService:"bienservice",
               marche_id:""
@@ -196,11 +198,10 @@ export default {
 //             },
 
 
-
  listeRapport:function() {
       return macheid => {
         if (macheid != null && macheid != "") {
-          return this.rapportDocuments.filter(element => element.marche_id == macheid  && element.date_rapport_jugement==null && element.diff==null );
+          return this.rapportDocuments.filter(element => element.marche_id == macheid  && element.date_rapport_jugement==null && element.diff==0 );
         }
       };
     },
@@ -262,7 +263,8 @@ export default {
                this.ajouterRapportJugement(formData, config)
                this.formRapport ={
                  difference_personnel_bienService:"personnel",
-                 date_rapport_ouverture:""
+                 date_rapport_ouverture:"",
+                 diff:0
                }
               
               

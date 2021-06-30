@@ -473,7 +473,7 @@ LibelleDecision() {
       return macheid => {
         if (macheid != "") {
           //  console.log("Marche dmp bailleur")
-          let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.marche_id == macheid)
+          let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==null)
           //console.log("Marche dmp bailleru 7474")
           return objet
         }

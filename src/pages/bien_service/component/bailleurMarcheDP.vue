@@ -537,7 +537,9 @@ name: "ActEffeFinanciere",
   data(){
     return{
       lot:"",
-      formBailleur:{},
+      formBailleur:{
+          diff:1,
+      },
       editBailleur:"",
       formEffetFinancier:{
         
@@ -811,7 +813,7 @@ affichieridMarcheGlobal() {
       return macheid => {
         if (macheid != "") {
           // console.log("Marche leste acte effect finnancier")
-          return this.personnaliseGetterMarcheBailleur.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==null)
+          return this.personnaliseGetterMarcheBailleur.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1 )
         }
       }
     },
@@ -889,6 +891,7 @@ var nouvelObjet = {
                       type_finnancement_id:"",
                         montant:0,
                         marche_id:"",
+                        diff:1,
                         bailleur_id:"",
                 }
             

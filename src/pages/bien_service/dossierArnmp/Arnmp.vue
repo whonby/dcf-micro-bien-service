@@ -389,7 +389,7 @@ objet_recours:"",
       return id => {
         if (id != null && id != "") {
           return this.gettersArnmp.filter(
-            element => element.marche_id == this.macheid
+            element => element.marche_id == this.macheid && element.diff==null
           );
         }
       };

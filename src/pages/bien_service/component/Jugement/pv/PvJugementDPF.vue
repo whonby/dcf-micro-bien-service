@@ -43,12 +43,9 @@
       </td>
       <div class="btn-group">
         <td>
-          <button href="#infoPV"   @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
-            <span  
-            @click.prevent="ajouterInfoPV"
-            style="font-weight: bolder; color: #fff" title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></button>
+          <button href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
+            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></button>
         </td>
-
         <td>
           <button @click.prevent="supprimerProceVerbal(rapport.id)"  class="btn btn-danger " title="Supprimer">
             <span class=""><i class="icon-trash"></i>Supprimer</span></button>
@@ -263,6 +260,7 @@ name: "PvJugement",
       formJugement:{
         date_rapport_jugement:"",
         attribue:"1",
+        diff:0,
         appel_offre_id:"",
         fichier:"",
         difference_personnel_bienService:"bienservice",
@@ -275,6 +273,7 @@ name: "PvJugement",
       editRapport:{
         date_rapport_jugement:"",
         attribue:"1",
+        diff:0,
         appel_offre_id:"",
         fichier:"",
         difference_personnel_bienService:"bienservice",
@@ -344,7 +343,7 @@ name: "PvJugement",
     listePV(){
       return macheid=>{
         if(macheid!=""){
-          let objet=this.getterProceVerballe.filter(item=>item.marche_id==macheid && item.diff==null);
+          let objet=this.getterProceVerballe.filter(item=>item.marche_id==macheid && item.diff==0);
           // console.log("PV est en cour10")
           return objet
         }
@@ -493,14 +492,6 @@ name: "PvJugement",
         keyboard: false,
       });
     },
-    ajouterInfoPV(){
-this.$("#infoPV").modal({
-        backdrop: "static",
-        keyboard: false,
-      });
-    },
-
-    
     OnchangeFichier(e) {
       const files = e.target.files;
       this.selectedFile = event.target.files[0];
@@ -546,7 +537,8 @@ this.$("#infoPV").modal({
       this.getProceVerbal()
       this.formJugement ={
         // difference_personnel_bienService:"",
-        date_rapport_jugement:""
+        date_rapport_jugement:"",
+        diff:0,
       }
 
 
