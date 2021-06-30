@@ -909,3 +909,8 @@ export const groupeParTypeFinancementBudgetEclate = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "type_financement_id");
 };
+
+export const groupeParSectionBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "section_id");
+};
