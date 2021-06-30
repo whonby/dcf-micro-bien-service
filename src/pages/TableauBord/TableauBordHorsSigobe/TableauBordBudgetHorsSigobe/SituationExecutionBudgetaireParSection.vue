@@ -106,17 +106,14 @@
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-            <table class="table table-bordered">
+      <div v-for="GroupeSection in afficheUa" :key="GroupeSection.id">
+           <table class="table table-bordered">
               <thead style="background-color: #ff9c1a !important">
                 
                  <tr>
-                   <th>
-                    
-                  </th>
+                   <th></th>
 
-                   <th>
-                    
-                  </th>
+                   <th></th>
 
                    <th>
                    SECTION  
@@ -236,7 +233,7 @@
                   >
                     NBRE D’OP PROVISOIRE NON REGULARISES {{afficheAnnee}}
                   </th>
- <th
+                <th
                     style="
                       font-size: 14px;
                       font-weight: bold;
@@ -255,9 +252,7 @@
                   
                 </tr>
               </thead>
-       <tbody  v-for="GroupeSection in partition(afficheUa, size)[page]"
-                :key="GroupeSection.id">
-
+       <tbody>
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSection[0].section_id)">
@@ -273,17 +268,17 @@
                   <td></td>
 
                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    {{ Libellesection(GroupeSection[0].section_id) }}
+                    {{  }}
                     
                   </td>
 
                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    {{ Libellesection(GroupeSection[0].section_id) }}
+                    {{  }}
                     
                   </td>
 
                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    {{ MontantbudgetVote(GroupeSection[0].section_id) }}
+                    {{  }}
                     
                   </td>
                   <td>0</td>
@@ -297,60 +292,78 @@
                  
                   
                 </tr>
-                <tr v-show="recupereIDactivite==GroupeSection[0].section_id"
-                v-for="listeua in AfficheUaGroupe(GroupeSection[0].section_id)" :key="listeua">
-                  
+              </tbody>  
+
+               <tbody v-show="recupereIDactivite==GroupeSection[0].section_id"
+               v-for="GroupeUa in AfficheUaGroupe(GroupeSection[0].section_id)" :key="GroupeUa">
+
+                <tr>
                   <td></td>
                   <td></td>
                   <td></td>
+
                   <td>
-                    <button @click="ShowMyLigne(listeua)">
+                    <button @click="ShowMyLigne(GroupeUa)">
                      <i class="icon-eye-open"></i> </button>
                   </td>
-            
-                  <td>{{ libelleUa(listeua) }}</td>
-
-                  <td>{{ libelleUa(listeua) }}</td>
-
-                  <td>{{ libelleUa(listeua) }}</td>
                   
+                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" >
+                    {{ libelleUa(GroupeUa) }}</td>
+ 
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td> 
+                  <td>0</td> 
+                  <td>0</td> 
+        
                 </tr>
-
-                <tr class="odd gradeX"  v-show="IdSection(recupereIDSection)==GroupeSection[0].section_id"
-                  v-for="ligne in AfficheLigneGroupe(recupereIDSection)"
-                  :key="ligne"
-                >
-                 <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td> </td>
-                  <td>{{ libelleLigneEconomique(ligne) }}</td>
-                </tr>
-
-                
-
-
                   
-                 
-              
-              
+                <tr v-show="recupereIDSection==GroupeUa"
+                v-for="GroupeLigne in AfficheLigneGroupe(GroupeUa)" :key="GroupeLigne">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+
+                  <td></td>
+                  
+                  <td></td>
+ 
+                  <td>{{ libelleLigneEconomique(GroupeLigne) }}</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td> 
+                  <td>0</td> 
+                  <td>0</td> 
+                </tr>
               </tbody>
+            </table>
+
+              <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSection[0].section_id">
+              
+      
+              
 
             
-            </table>
+            </table> -->
+      </div>
+       
+          
     </div>
 
     
 
 
         
-    <!-- <fab
-      :actions="fabActions"
-      @searchMe="filter"
-      main-icon="apps"
-      bg-color="green"
-    ></fab> -->
+    
   </div>
 </template>
   
@@ -564,6 +577,21 @@ export default {
 
           if (qtereel) {
             return 1;
+          }
+          return 0;
+        }
+      };
+    },
+
+     iduaverif() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.uniteadministrative_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.uniteadministrative_id;
           }
           return 0;
         }
@@ -1599,6 +1627,19 @@ width: 95%;
 }
 .graybg {
   background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.whitebg1 {
+  background: #829ed3 !important;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+.graybg1 {
+  background: rgb(28, 13, 158) !important;
   color: white;
   font-size: 15px;
   font-weight: bold;
