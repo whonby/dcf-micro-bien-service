@@ -1,71 +1,6 @@
 
 <template>
   <div>
-    
-   
-    <div class="row-fluid" style="margin-top: -20px">
-      <div class="span1"></div>
-      
-          <br>
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-
-                 <td>
-            <label>EXERCICE </label>
-            <model-list-select
-              style="border: 1px solid #000"
-              class="wide"
-              :list="exercices_budgetaires"
-              v-model="exercices_budgetaires_id"
-              option-value="annee"
-              option-text="annee"
-              placeholder="2021"
-            >
-            </model-list-select>
-          </td>
-
-
-           <!-- <td>
-
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >CODE ACTIVITE<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="plans_activites"
-                  v-model="inputLigne1"
-                  option-value="id"
-                  option-text="code"
-                  placeholder="CODE"
-                >
-                </model-list-select>
-              </td> -->
-
-              <td>
-
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >SOURCE DE FINANCEMENT<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="sources_financements"
-                  v-model="source_financement_id1"
-                  option-value="id"
-                  option-text="libelle"
-                  placeholder="LIBELLE"
-                >
-                </model-list-select>
-              </td>
-
-            </tr>
-          </tbody>
-        </table>
-        
-      
-    </div>
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -103,29 +38,8 @@
                   >
                     
                   </th>
-                   <th>
-                   BAILLEURS  
-                   <button @click="ActiveInputLigne">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
-                     <model-list-select v-show="inputLigne == true"
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="plans_activites"
-                  v-model="inputLigne1"
-                  option-value="id"
-                  option-text="code"
-                  placeholder="CODE ACTIVITE"
-                >
-                </model-list-select>
-                
-                  </th>
-                   <th  
-                  >
-                    
-                  </th>
+                  
+                  
                   <th
                     style="
                       font-size: 14px;
@@ -146,7 +60,31 @@
                    <th>
                     UA {{afficheAnnee}}
                   </th>
-                   
+                 
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                      width :8%
+                    "
+                  >
+                 LIGNE ECONOMIQUE {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                      width :8%
+                    "
+                  >
+                 BAILLEUR {{afficheAnnee}}
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -245,14 +183,15 @@
                   
                 </tr>
               </thead>
-       <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
-                :key="GroupeOrdrePaiementByActivit.id">
-                <tr>
+      <tbody  v-for="groupeSection in AfficheSectionGroupeUa"
+                :key="groupeSection">
+<tr>
                   <td>
-                    <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].source_financement_id)">
+                   
+                    <button @click="ShowMyLigne(groupeSection)">
                      <i class="icon-eye-open"></i> 
                       
-                    </button>
+                    </button> 
                   </td>
 <td>
                    <button >
@@ -261,113 +200,87 @@
                     </button>
                     
                 </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" colspan="">
-                    <b>{{libelleSourceFinancement(GroupeOrdrePaiementByActivit[0].source_financement_id) }}</b>
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
+                    <b>{{libelleSection(groupeSection) }}{{groupeSection}}</b>
                     
                   </td>
-<td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+<td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                  
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                   <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                   <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                   <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                  
+                 
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                 <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                 <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                  <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                 <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                 <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
-                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id ? 'graybg' : 'whitebg'" >
+                   <td v-bind:class="recupereIDactivite==groupeSection ? 'graybg' : 'whitebg'" >
                     <b></b>
                     
                   </td>
                 </tr>
-           
- <tr class="odd gradeX"  v-show="recupereIDactivite==GroupeOrdrePaiementByActivit[0].source_financement_id"
-                  v-for="section in AfficheSectionGroupe(GroupeOrdrePaiementByActivit[0].source_financement_id)"
-                  :key="section"
-                >
-               <td ></td>
-               <td></td>
-               <td></td>
-                     <td>
-                    <button @click="ShowMySection(section)">
-                     <i class="icon-eye-open"></i> 
-                      
-                    </button>
-                  </td>
-               <td >{{libelleSection(section)}}</td>
-                <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-              
- </tr>
-
-                  
-                 <tr class="odd gradeX"  v-show="idSourceFinancement(recupereIDSection)==GroupeOrdrePaiementByActivit[0].source_financement_id"
-                  v-for="ua in AfficheUaGroupe(recupereIDSection)"
+                 <tr class="odd gradeX"  v-show="recupereIDactivite==groupeSection"
+                            v-for="ua in AfficheUaGroupe(groupeSection)"
                   :key="ua"
                 >
-               <td ></td>
-               <td></td>
-               <td></td>
-                     <td>
+              
+               <td colspan="3"></td>
+              
                    
-                  </td>
-                   <td></td>
                   <td>
-                     <button >
+                   
+                    <button @click="ShowMyUniteAdministrative(ua)">
                      <i class="icon-eye-open"></i> 
                       
-                    </button>
+                    </button> 
                   </td>
-               <td >{{libelleUa(ua)}}</td>
+               <td >{{libelleUa(ua)}}{{recupereIDUniteAdministrative}}</td>
                <td></td>
-               <td></td>
+              
+              <td></td>
+              <td></td>
+              <td></td>
                <td></td>
                <td></td>
                <td></td>
@@ -378,9 +291,40 @@
               
               
  </tr>
+ 
+ 
+    <tr class="odd gradeX"  v-show="idSourceFinancement(recupereIDUniteAdministrative) == groupeSection" 
+                            v-for="ligenBailleur in AfficheLigneParBailleur(recupereIDUniteAdministrative)"
+                  :key="ligenBailleur"
+                >
               
               
-              </tbody>
+                 
+                  <td colspan="4"></td>
+                   
+                      <td>
+                   
+                   
+                  </td>
+                   <td>{{ligenBailleur}}</td>
+                  <!-- <td> <button @click="ShowMyua(ligenBailleur)">
+                     <i class="icon-eye-open"></i> 
+                      
+                    </button> </td> -->
+                  <td>{{ligenBailleur}}</td>
+                 <td>{{ligenBailleur}}</td>
+               <td>{{ligenBailleur}}</td>
+                <td>{{ligenBailleur}}</td>
+                 <td>{{ligenBailleur}}</td>
+                  <td>{{ligenBailleur}}</td>
+                   <td>{{ligenBailleur}}</td>
+                    <td>{{ligenBailleur}}</td>
+                     <td>{{ligenBailleur}}</td>
+                      <td>{{ligenBailleur}}</td>
+                
+ </tr>
+ 
+      </tbody>
 
             
             </table>
@@ -406,11 +350,11 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSommeSansFCFA,formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-import { ModelListSelect } from "vue-search-select";
-import "vue-search-select/dist/VueSearchSelect.css";
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    ModelListSelect,
+    //ModelListSelect,
   },
   name: "typetext",
   data() {
@@ -440,7 +384,8 @@ inputLigne:false,
       search: "",
       verifShome:0,
       recupereIDactivite:"",
-       recupereIDSection:"",
+       recupereIDUniteAdministrative:0,
+    recupereIDBailleur:0,
   source_financement_id1:0
     };
   },
@@ -592,6 +537,64 @@ inputLigne:false,
       "sources_financements",
     ]),
   
+
+AfficheLigneGroupeOp() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.budgetEclate.filter((qtreel) => qtreel.uniteadministrative_id == id);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.source_financement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+
+    AfficheLigneParBailleur() {
+      return (id,id1) => {
+      
+        if(id !=0 && id !="",id1 !=0 && id1 !=""){
+          let objet = this.budgetEclate.filter((qtreel) => qtreel.uniteadministrative_id == id);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+
+
+
+
+
+
+
+
     ShowMe(){
        return (id) => {
         if (id != null && id != "") {
@@ -1310,16 +1313,29 @@ afficheSectionGroupe(){
       }
        
     },
+AfficheSourceFinancement() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.source_financement_id == id
+          );
 
+          if (qtereel) {
+            return qtereel.section_id;
+          }
+          return 0;
+        }
+      };
+    },
     idSourceFinancement() {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.section_id == id
+            (qtreel) => qtreel.uniteadministrative_id == id
           );
 
           if (qtereel) {
-            return qtereel.source_financement_id;
+            return qtereel.section_id;
           }
           return 0;
         }
@@ -1363,11 +1379,11 @@ afficheSectionGroupe(){
       };
     },
    
-    AfficheSectionGroupe() {
-      return (id) => {
+    AfficheSectionGroupeUa() {
+      // return (id) => {
       
-        if(id !=0 && id !=""){
-          let objet = this.listeSectionParUa(id);
+      //   if(id !=0 && id !=""){
+          let objet = this.budgetEclate;
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -1382,10 +1398,10 @@ afficheSectionGroupe(){
           return unique;
         }
         return [];
-        }
+      //   }
         
         
-      };
+      // };
     },
     listeParUaGroupe() {
       return (id) => {
@@ -1400,7 +1416,7 @@ AfficheUaGroupe() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.listeParUaGroupe(id);
+          let objet = this.budgetEclate.filter((qtreel) => qtreel.section_id == id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -1458,15 +1474,27 @@ AfficheUaGroupe() {
   }
 
 },
-ShowMySection(id){
-      if(this.recupereIDSection==""){
-         this.recupereIDSection=id;
-      }else if(this.recupereIDSection!="" && this.recupereIDSection !=id){
-        this.recupereIDSection="";
-        this.recupereIDSection=id;
+ShowMyBailleur(id){
+      if(this.recupereIDBailleur==0){
+         this.recupereIDBailleur=id;
+      }else if(this.recupereIDBailleur!=0 && this.recupereIDBailleur !=id){
+        this.recupereIDBailleur=0;
+        this.recupereIDBailleur=id;
       }
       else{
-         this.recupereIDSection="";
+         this.recupereIDBailleur=0;
+      }
+       
+    },
+ShowMyUniteAdministrative(id){
+      if(this.recupereIDUniteAdministrative==0){
+         this.recupereIDUniteAdministrative=id;
+      }else if(this.recupereIDUniteAdministrative!=0 && this.recupereIDUniteAdministrative !=id){
+        this.recupereIDUniteAdministrative=0;
+        this.recupereIDUniteAdministrative=id;
+      }
+      else{
+         this.recupereIDUniteAdministrative=0;
       }
        
     },
@@ -1516,9 +1544,9 @@ ShowMySection(id){
 
     //  {{
     //                   (
-    //                     (MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].source_financement_id) /
+    //                     (MontantBudgetExecutéActivite(listeLigneeco,groupeSection) /
     //                       MontantBudgetActuelActivite(listeLigneeco,
-    //                         GroupeOrdrePaiementByActivit[0].source_financement_id
+    //                         groupeSection
     //                       )) *
     //                     100
     //                   ).toFixed(3)
