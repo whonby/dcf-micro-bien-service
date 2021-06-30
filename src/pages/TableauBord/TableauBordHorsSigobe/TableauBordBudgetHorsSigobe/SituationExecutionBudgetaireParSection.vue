@@ -137,6 +137,9 @@
                 </model-list-select>
                 
                   </th>
+
+                  <th></th>
+
                   <th
                     style="
                       font-size: 14px;
@@ -254,9 +257,10 @@
               </thead>
        <tbody  v-for="GroupeSection in partition(afficheUa, size)[page]"
                 :key="GroupeSection.id">
+
                 <tr>
                   <td>
-                    <button @click="ShowMyLigne(GroupeSection[0].section_id)">
+                    <button @click="ShowMyUa(GroupeSection[0].section_id)">
                      <i class="icon-eye-open"></i> </button>
                   </td>
                   
@@ -266,6 +270,7 @@
                     {{ Libellesection(GroupeSection[0].section_id) }}
                     
                   </td>
+                  <td></td>
 
                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
                     {{ Libellesection(GroupeSection[0].section_id) }}
@@ -281,9 +286,49 @@
                     {{ MontantbudgetVote(GroupeSection[0].section_id) }}
                     
                   </td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
                  
                   
                 </tr>
+                <tr v-show="recupereIDactivite==GroupeSection[0].section_id"
+                v-for="listeua in AfficheUaGroupe(GroupeSection[0].section_id)" :key="listeua">
+                  
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button @click="ShowMyLigne(listeua)">
+                     <i class="icon-eye-open"></i> </button>
+                  </td>
+            
+                  <td>{{ libelleUa(listeua) }}</td>
+
+                  <td>{{ libelleUa(listeua) }}</td>
+
+                  <td>{{ libelleUa(listeua) }}</td>
+                  
+                </tr>
+
+                <tr class="odd gradeX"  v-show="IdSection(recupereIDSection)==GroupeSection[0].section_id"
+                  v-for="ligne in AfficheLigneGroupe(recupereIDSection)"
+                  :key="ligne"
+                >
+                 <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td> </td>
+                  <td>{{ libelleLigneEconomique(ligne) }}</td>
+                </tr>
+
+                
 
 
                   
@@ -348,6 +393,7 @@ export default {
       search: "",
       verifShome:0,
       recupereIDactivite:"",
+      recupereIDSection:"",
       source_financement_id1:0
     };
   },
@@ -524,7 +570,123 @@ export default {
       };
     },
 
+    IdSection() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.uniteadministrative_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.section_id;
+          }
+          return 0;
+        }
+      };
+    },
+
     // ******   les vrai in fos de ce fichier lega ************
+          //**groupe ua by section ***
+        listeParUaGroupe() {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.budgetEclate.filter(
+              (qtreel) => qtreel.section_id == id 
+            );
+          }
+        };
+      },
+AfficheUaGroupe() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.listeParUaGroupe(id);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.uniteadministrative_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+
+        //****groupe ligne by ua */
+
+        listeParLigneGroupe() {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.budgetEclate.filter(
+              (qtreel) => qtreel.uniteadministrative_id == id 
+            );
+          }
+        };
+      },
+AfficheLigneGroupe() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.listeParLigneGroupe(id);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+
+    libelleLigneEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat("    ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+
+
+    libelleUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.uniteAdministratives.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+  },
 
      afficheUa() {
        return this.ListeGroupeSection;
@@ -1113,20 +1275,7 @@ export default {
       };
     },
 
-    libelleLigneEconomique() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.plans_budgetaires.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.code.concat("    ", qtereel.libelle);
-          }
-          return 0;
-        }
-      };
-    },
+    
 
     LibelleActivite() {
       return (id) => {
@@ -1298,20 +1447,7 @@ export default {
 
     
 
-    libelleUa() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.uniteAdministratives.find(
-            (qtreel) => qtreel.id == id
-          );
 
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-  },
 
 
   },
@@ -1334,7 +1470,7 @@ export default {
   }
 
 },
-    ShowMyLigne(id){
+    ShowMyUa(id){
       if(this.recupereIDactivite==""){
          this.recupereIDactivite=id;
       }else if(this.recupereIDactivite!="" && this.recupereIDactivite !=id){
@@ -1343,6 +1479,19 @@ export default {
       }
       else{
          this.recupereIDactivite="";
+      }
+       
+    },
+
+    ShowMyLigne(id){
+      if(this.recupereIDSection==""){
+         this.recupereIDSection=id;
+      }else if(this.recupereIDSection!="" && this.recupereIDSection !=id){
+        this.recupereIDSection="";
+        this.recupereIDSection=id;
+      }
+      else{
+         this.recupereIDSection="";
       }
        
     },
@@ -1440,6 +1589,19 @@ formatageSomme:formatageSomme,
 <style scoped>
 .taille{
 width: 95%;
+}
+
+.whitebg {
+  background: #98FB98 !important;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+.graybg {
+  background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 
