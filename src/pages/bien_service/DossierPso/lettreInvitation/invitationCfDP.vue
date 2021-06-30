@@ -2,7 +2,7 @@
 <template>
     <div>
 
-                <h4>Liste Lettres Invitations</h4>
+                <h4>Liste Lettres Invitations </h4>
                 <!-- <h4>Liste des offres</h4> -->
                 <div align="right" style="cursor: pointer">
           <button
@@ -414,8 +414,6 @@ affichierObjetMarche() {
 
 
 
-
-
   procedurePassation_id() {
       return id => {
         if (id != null && id != "") {
@@ -504,6 +502,7 @@ typeProcedureLibelle() {
                 formData.append('ref_lettre', this.formLettre.ref_lettre);
                 formData.append('date_lettre', this.formLettre.date_lettre);
                 formData.append('date_cojo', this.formLettre.date_cojo);
+                formData.append('diff', this.formLettre.diff);
                 formData.append('marche_id', this.macheid);
                 //formData.append('diff', this.formLettre.diff=1);
                 formData.append('objet_contrat',this.affichierObjetMarche(this.macheid));
@@ -559,6 +558,7 @@ typeProcedureLibelle() {
                 formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
                 formData.append('objet_contrat', this.affichierObjetMarche(this.macheid));
                 formData.append('marche_id', this.macheid);
+                formData.append('diff', this.formLettre.diff);
                 formData.append('id',this.edite_Lettre_invitation.id);
                
                 console.log(formData)

@@ -841,10 +841,10 @@ ajouterOffre22() {
                 taux_tech:""
 
                 }
-    let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
-    marcheObjet.attribue=1
-      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
-     this.modifierMarche(marcheObjet)
+    // let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    // marcheObjet.attribue=1
+    //   //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+    //  this.modifierMarche(marcheObjet)
      
             },     
 

@@ -46,7 +46,7 @@
           <td @click="afficheBouttonTechFin(index)" style="background: green;color:#fff" v-if="etatEnregistreOffreTechnique(appelOffre.id)">
            Dossier Complet
             </td>
-          <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" >
+          <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" v-if="!etatEnregistreOffreTechnique(appelOffre.id)" >
            Dossier Incomplet, Veuillez enregistrer l'offre technique 
           </td>
           <div class="btn-group">

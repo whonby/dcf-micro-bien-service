@@ -11,8 +11,6 @@
 
       <div class="span8"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
       </h5> </div>
-
-     
           
 <!--      <div class="span2"><button @click.prevent="supprimerAnalyseDossierMultiple(item.id)"  class="btn btn-danger " title="Supprimer">-->
 <!--        <span class=""><i class="icon-trash"></i></span></button></div>-->
@@ -605,6 +603,7 @@ name: "ActEffeFinanciere",
         }
       }
     },
+
       afficherNumeroDuLot(){
           return id =>{
               if(id!=null && id!=""){
@@ -614,6 +613,7 @@ name: "ActEffeFinanciere",
               return null
           }
       },
+
 Erreursdecalcul() {
       const val = parseFloat(this.EditOffreFinanciere.montant_total_ttc) - parseFloat(this.EditOffreFinanciere.hist_montant_ttc);
       return parseFloat(val).toFixed(0);
@@ -622,7 +622,7 @@ Erreursdecalcul() {
       return (macheid) => {
         if (macheid != "") {
           // console.log("Marche leste acte effect finnancier")
-          return this.getterOffreFinanciers.filter(idmarche => idmarche.marche_id == macheid)
+          return this.getterOffreFinanciers.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1)
         }
       }
     },

@@ -290,7 +290,7 @@ name: "InfoCojo",
 
       formDataCojo:{
         date_ouverture:"",
-        diff:1,
+        diff:0,
         date_composition:"",
         num_dossier_appel_offre:"",
         nbr_participant:"",
@@ -350,7 +350,7 @@ name: "InfoCojo",
           //     if(Objet!=undefined){
           //         vM.idcojo=Objet.id
           //     }
-          return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1)
+          return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==0)
         }
       }
     },
@@ -484,7 +484,7 @@ name: "InfoCojo",
       this.ajouterCojo(nouvelObjet)
       this.formDataCojo={
         appel_offre_id:"",
-          diff:1,
+          diff:0,
         date_ouverture:"",
         date_composition:"",
         num_dossier_appel_offre:"",

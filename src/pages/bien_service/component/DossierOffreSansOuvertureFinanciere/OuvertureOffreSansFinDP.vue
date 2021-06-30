@@ -28,8 +28,7 @@
           </div>
 
             <div id="PVDP" class="tab-pane ">
-              <rapportOuverture :macheid="macheid"></rapportOuverture>
-            <!-- <dossier-candidat :macheid="macheid"></dossier-candidat> -->
+              <rapportOuvertureDP :macheid="macheid"></rapportOuvertureDP>            <!-- <dossier-candidat :macheid="macheid"></dossier-candidat> -->
           </div>
                 <div id="tabAnalyseDP" class="tab-pane">
 
@@ -39,7 +38,7 @@
                 </div>
                 <div id="tabPVJugementDP" class="tab-pane">
 
-                   <PvJugement  :macheid="macheid"></PvJugement>
+                   <PvJugementDP  :macheid="macheid"></PvJugementDP>
                 </div>
            <div id="membre_evalu" class="tab-pane ">
             <membre-evalu :macheid="macheid"></membre-evalu>
@@ -49,11 +48,11 @@
 
       </div>
 
-
     </div>
   </div>
 </div>
 </template>
+
 
 <script>
 //import InfoCojo from "@/pages/bien_service/component/OuvertureOffre/InfoCojo";
@@ -64,9 +63,9 @@ import MembreCojoDP from "@/pages/bien_service/component/OuvertureOffre/MembreCo
 import MembreEvalu from "@/pages/bien_service/component/OuvertureOffre/MembreEvalu";
 //import DossierCandidat from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/DossierCandidat";
 import DossierCandidatDP from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/DossierCandidatDP";
-import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
+import PvJugementDP from "@/pages/bien_service/component/Jugement/pv/PvJugementDP";
 //import DossierCandidatDP from "@/pages/bien_service/component/DossierOffreSansOuvertureFinanciere/dossier_candidat/DossierCandidatDP"
-import rapportOuverture from '@/pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+import rapportOuvertureDP from '@/pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuvertureDP'
 import JugementSansFinDP from "@/pages/bien_service/component/JugementSansAnalyseFinanciere/JugementSansFinDP"
 //import JugementSansFin from "@/pages/bien_service/component/JugementSansAnalyseFinanciere/JugementSansFin"
 
@@ -81,11 +80,11 @@ name: "OuvertureOffre",
     MembreEvalu,
    // DossierCandidat,
    DossierCandidatDP,
-    PvJugement,
+    PvJugementDP,
     //JugementSansFin,
     JugementSansFinDP,
-    rapportOuverture
-  },
+    rapportOuvertureDP
+ },
   
   data(){
     return{

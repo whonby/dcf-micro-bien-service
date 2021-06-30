@@ -8,13 +8,13 @@
 <div align="right" style="cursor: pointer">
           <button
             class="btn btn-success"
-            @click.prevent="ajouterOffre24521"
+            @click.prevent="ajouterRapportDP"
             style="font-weight: bolder; color: #fff"
           >
             <i class="icon icon-plus"> AJOUTER </i>
           </button>
         </div>
-
+                   <h3>Liste des rapports d'ouverture</h3>
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
@@ -48,7 +48,7 @@
                                             </tbody>
                                         </table>
 
-                 <div id="ajouterRapportOuvertureB" class="modal hide grdtaill">
+                 <div id="ajouterRapportOuvertureDP" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter le rapport d'ouverture</h3>
@@ -131,7 +131,7 @@
  </div>
     
 </template>
-
+     
 <script>
 import {mapActions, mapGetters} from 'vuex';
 import moment from 'moment';
@@ -146,8 +146,8 @@ export default {
                  attribue:"0",
                  fichier:"",
                 difference_personnel_bienService:"bienservice",
-                marche_id:""
-
+                marche_id:"",
+                diff:1
                 },
             
             editRapport:{
@@ -155,7 +155,8 @@ export default {
               attribue:"0",
               fichier:"",
               difference_personnel_bienService:"bienservice",
-              marche_id:""
+              marche_id:"",
+              diff:1
             },
 
             imagePDF:"",
@@ -200,7 +201,7 @@ export default {
  listeRapport:function() {
       return macheid => {
         if (macheid != null && macheid != "") {
-          return this.rapportDocuments.filter(element => element.marche_id == macheid  && element.date_rapport_jugement==null && element.diff==null );
+          return this.rapportDocuments.filter(element => element.marche_id == macheid  && element.date_rapport_jugement==null && element.diff==1 );
         }
       };
     },
@@ -212,8 +213,8 @@ export default {
         'ajouterRapportJugement','modifierRapportJugement','getRapportJugement']),
 
 
-  ajouterOffre24521() {
-      this.$("#ajouterRapportOuvertureB").modal({
+  ajouterRapportDP() {
+      this.$("#ajouterRapportOuvertureDP").modal({
         backdrop: "static",
         keyboard: false,
       });
@@ -252,6 +253,7 @@ export default {
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_ouverture', this.formRapport.date_rapport_ouverture);
                formData.append('marche_id', this.macheid);
+               formData.append('diff', this.formRapport.diff);
                formData.append('attribue', this.formRapport.attribue);
                formData.append('difference_personnel_bienService',this.formRapport.difference_personnel_bienService)
                 let config = {
@@ -262,7 +264,9 @@ export default {
                this.ajouterRapportJugement(formData, config)
                this.formRapport ={
                  difference_personnel_bienService:"personnel",
-                 date_rapport_ouverture:""
+                 date_rapport_ouverture:"",
+                 diff:1
+                 
                }
               
               
@@ -275,6 +279,7 @@ export default {
                  formData.append('date_rapport_ouverture', this.editRapport.date_rapport_ouverture);
                  formData.append('marche_id', this.macheid);
                  formData.append('attribue', this.editRapport.attribue);
+                 formData.append('diff', this.editRapport.diff);
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                

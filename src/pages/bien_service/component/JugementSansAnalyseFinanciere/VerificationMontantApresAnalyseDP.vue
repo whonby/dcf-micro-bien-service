@@ -590,11 +590,12 @@ name: "ActEffeFinanciere",
         }
       }
     },
+
     listeOffreTechniqueLotCandidat(){
       return (id,macheid)=>{
         if(id!=""){
           return this.gettersOffreTechniques.filter(item=>{
-            if(item.dossier_candidat_id==id && item.marche_id == macheid){
+            if(item.dossier_candidat_id==id && item.marche_id == macheid && item.diff==1){
               return item
             }
           })
