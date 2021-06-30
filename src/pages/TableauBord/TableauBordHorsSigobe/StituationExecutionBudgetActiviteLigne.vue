@@ -105,8 +105,8 @@
 
 
 
-    <div class="span4">
-       
+    <!-- <div class="span4">
+          <br />
           Afficher
           <select name="pets" id="pet-select" v-model="size" class="span3">
             <option value="5" selected>5</option>
@@ -117,7 +117,7 @@
             <option value="100">100</option>
           </select>
          
-        </div>
+        </div> -->
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -185,18 +185,7 @@
                   >
                     
                   </th>
- <th
-                    style="
-                      font-size: 14px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    colspan=""
-                  >
-                    
-                  </th>
+
                    <th
                     style="
                       font-size: 14px;
@@ -246,7 +235,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MODIFICATION BUDGETAIRE {{afficheAnnee}}
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
                   </th>
                    
                   <th
@@ -306,7 +295,7 @@
                   >
                     TAUX D'EXECUTION {{afficheAnnee}}
                   </th>
-                  <!-- <th
+                  <th
                     style="
                       font-size: 14px;
                       font-weight: bold;
@@ -316,7 +305,7 @@
                     "
                   >
                     EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
-                  </th> -->
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -341,20 +330,13 @@
                       
                     </button>
                   </td>
-<td>
-                   <button >
-                     <i class=" icon-print"></i> 
-                      
-                    </button>
-                    
-                </td>
+
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                    style="text-align: right">
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -362,27 +344,22 @@
                     </b>
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" 
-                    style="text-align: right">
-                   
-                    {{
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
-                 
+                    </b>
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    
-                    {{
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
-
+                    </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -390,8 +367,7 @@
                      }}
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -410,13 +386,13 @@
                     }}
                     </b>
                   </td>
-                  <!-- <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
                     }}
                     </b>
-                  </td> -->
+                  </td>
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
@@ -439,20 +415,18 @@
                         </span>
                       </button>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    <!-- <b> -->
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                 
                       {{
                       formatageSommeSansFCFA(
                         parseFloat(
                           MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id) -
                             MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
-                    <!-- </b> -->
+                 
                   </td>
 
-                  <!-- <td style="background-color:#009246 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
-               -->
+                 
                 </tr>
 
 
@@ -465,10 +439,7 @@
                    
 
                   </td>
-                   <td style="width:;color:#000" >
                    
-
-                  </td>
 
                   <td style="width: 500px;color:#000;" >
                    
@@ -540,9 +511,9 @@
                     {{ 0 }}
                   </td>
 
-                  <!-- <td style="text-align: right;color:#000;">
+                  <td style="text-align: right;color:#000;">
                     {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
-                  </td> -->
+                  </td>
 
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
@@ -585,18 +556,17 @@
               <tfoot>
                 <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
                   <!-- <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td> -->
-                  <td colspan="2" style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
-                  
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
 
@@ -605,12 +575,13 @@
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                    {{ TotalEviteNaN }}%
                  </td>
-                 <!-- <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                  
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   <!-- 
+                     {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                 
-                 </td> -->
+                 </td>
                  
-                  <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="width :9%;text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
@@ -1962,15 +1933,14 @@ inputLigne:false,
       this.page++;
     },
 
-    apercuFacture1(id) {
+    apercuFacture(id) {
      
-      // this.$("#validationOpDefinitif2").modal({
+      //this.$("#validationOpDefinitif2").modal({
       //   backdrop: "static",
       //   keyboard: false,
       // });
-       this.editMandat1 = this.groupeByActivite.find((item) => item[0].activite_id == id);
-       console.log(this.editMandat1)
-      return alert(this.editMandat1.activite_id);
+       this.editMandat1 = this.afficheUa.find((item) => item[0].activite_id == id);
+      return alert(id);
     
     },
 
@@ -1992,12 +1962,12 @@ width: 95%;
   background: #98FB98 !important;
   font-weight: bold;
   color: black;
-  font-size: 13px;
+  font-size: 15px;
 }
 .graybg {
   background: rgb(6, 184, 6) !important;
   color: white;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
 }
 .tailgrand {

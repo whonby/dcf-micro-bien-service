@@ -81,6 +81,8 @@ import DetailTableauBordProvisoire from "../../pages/TableauBord/TableauBordHors
 import DetailTableauBordAnnulation from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordAnnulation"
 import DetailTableauBordDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDefinitif"
 import DetailTableauBordDirect from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDirect"
+
+
 const TableauBordGeneral =[
     {
         path: "/DetailTableauBordAnnulation/:id",
