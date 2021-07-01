@@ -10,8 +10,8 @@
         <table class="table table-bordered table-striped" v-if="macheid">
             <thead>
             <tr>
-                <th>Nom structure DAO</th>
-                <th>Action</th>
+                <th>Nom structure DAO </th>
+                <th> Action </th>
             </tr>
             </thead>
             <tbody>
@@ -187,7 +187,7 @@
             return{
 
                 formDataCojo:{
-
+               
                 },
 
                 edite_cojo:"",
@@ -216,7 +216,7 @@
                 return macheid => {
                     if (macheid != "") {
 
-                        return  this.getterStructureDao.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==null)
+                        return  this.getterStructureDao.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1)
                     }
                     return []
                 }

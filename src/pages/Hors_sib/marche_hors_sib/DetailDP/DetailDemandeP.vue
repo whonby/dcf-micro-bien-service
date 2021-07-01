@@ -234,15 +234,33 @@
                     <reserveCfDP :macheid="detail_marche.id"></reserveCfDP>
 
                 </div>
+                 <div id="tabReserveDPF" class="tab-pane">
+
+                    <reserveCfDPF :macheid="detail_marche.id"></reserveCfDPF>
+
+                </div>
+                
                   <div id="DMPDP" class="tab-pane">
 
-                    <AnoDMP :macheid="detail_marche.id"></AnoDMP>
+                    <AnoDMPDP :macheid="detail_marche.id"></AnoDMPDP>
                 </div>
+                 <div id="DMPDPF" class="tab-pane">
+
+                    <AnoDMPDPF :macheid="detail_marche.id"></AnoDMPDPF>
+                </div>
+                
                 <div id="DMPBAILLEURDP" class="tab-pane">
 
-                    <AnoBailleur :macheid="detail_marche.id"></AnoBailleur>
+                    <AnoBailleurDP :macheid="detail_marche.id"></AnoBailleurDP>
 
                 </div>
+                <div id="DMPBAILLEURDPF" class="tab-pane">
+
+                    <AnoBailleurDPF :macheid="detail_marche.id"></AnoBailleurDPF>
+
+                </div>
+                
+
                  <!-- <div id="tabPVJugementDP" class="tab-pane">
 
                    <PvJugement  :macheid="detail_marche.id"></PvJugement>
@@ -273,6 +291,12 @@
                <ArnmpDP :macheid="detail_marche.id"></ArnmpDP>
 
                 </div>
+                   <div id="tabBailleurDPF" class="tab-pane">
+
+               <bailleurMarcheDP :macheid="detail_marche.id"></bailleurMarcheDP>
+
+                </div>
+                
                          </div>
 
 
@@ -293,6 +317,7 @@
            </div>
     
 
+
 </template>
 <script>
 import {mapGetters} from 'vuex'
@@ -302,6 +327,7 @@ import { formatageSomme } from "../../../../Repositories/Repository"
   import ActeEffetFinancier1 from "../../../bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
   //import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import reserveCfDP from '../../../bien_service/dossierReserveCF/reserveCfDP.vue';
+    import reserveCfDPF from "@/pages/bien_service/dossierReserveCF/reserveCfDPF";
     //import JugementSansFin from "@/pages/bien_service/component/JugementSansAnalyseFinanciere/JugementSansFin"
     import LotMarche from "@/pages/bien_service/component/LotMarche";
       import publicationOffreDP from "../../../bien_service/DossierPso/publicationOffre/publicationOffreDP"
@@ -312,8 +338,11 @@ import { formatageSomme } from "../../../../Repositories/Repository"
          // OuvertureOffreSansFinDP componentCotationDp import componentCotation from '../../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
         import invitationCfDP from '../../../bien_service/DossierPso/lettreInvitation/invitationCfDP';
  import mandateDP from '../../../bien_service/DossierPso/mandaté/mandateDP';
-  import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
-  import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
+  import AnoDMPDP from "@/pages/bien_service/component/AnoDMP/AnoDMPDP";
+  import AnoDMPDPF from "@/pages/bien_service/component/AnoDMP/AnoDMPDPF";
+  import AnoBailleurDP from "@/pages/bien_service/component/AnoBailleur/AnoBailleurDP";
+  import AnoBailleurDPF from "@/pages/bien_service/component/AnoBailleur/AnoBailleurDPF"
+  import bailleurMarcheDP from "@/pages/bien_service/component/bailleurMarcheDP"
 export default {
   
     components:{
@@ -324,11 +353,15 @@ export default {
         OuvertureOffreSansFinDPF,
         //OuvertureOffreSansFin,
         //componentCotationDp,
+        bailleurMarcheDP,
         componentCotationDp,
         //PvJugement,
-        AnoDMP,
-        AnoBailleur,
+        AnoDMPDP,
+        AnoDMPDPF,
+        AnoBailleurDP,
+        AnoBailleurDPF,
         reserveCfDP,
+        reserveCfDPF,
         LotMarche,
         publicationOffreDP,
         invitationCfDP,

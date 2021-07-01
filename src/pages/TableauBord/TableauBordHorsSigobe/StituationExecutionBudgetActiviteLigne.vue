@@ -46,19 +46,55 @@
               <td>
 
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
-                  >SOURCE DE FINANCEMENT<a href="#" style="color: red"></a>
+                  >LIBELLE ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
-                  :list="sources_financements"
-                  v-model="source_financement_id1"
+                  :list="plans_activites"
+                  v-model="Activite_id"
                   option-value="id"
                   option-text="libelle"
                   placeholder="LIBELLE"
                 >
                 </model-list-select>
               </td>
+
+               <!-- <td>
+                <div class="control-group">
+                  <label
+                    class="control-label"
+                    style="color: #000; font-size: 14px; font-weight: bolder"
+                    >Date debut</label
+                  >
+                  <div class="controls">
+                    <input
+                      type="date"
+                      v-model="formData.date_debut"
+                      class="span"
+                      style="background-color: #fff; border: 2px solid #000"
+                    />
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div class="control-group">
+                  <label
+                    class="control-label"
+                    style="color: #000; font-size: 14px; font-weight: bolder"
+                    >Date Fin</label
+                  >
+                  <div class="controls">
+                    <input
+                      type="date"
+                      v-model="formData.date_fin"
+                      class="span"
+                      style="background-color: #fff; border: 2px solid #000"
+                    />
+                  </div>
+                </div>
+              </td> -->
 
             </tr>
           </tbody>
@@ -67,21 +103,10 @@
       
     </div>
 
-    <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
-    </div> 
-    
-    <div class="widget-content nopadding" id="printpdf">
-       <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
-                 SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</h2>
-          </tr>
 
-           <div class="span4">
-       
+
+    <!-- <div class="span4">
+          <br />
           Afficher
           <select name="pets" id="pet-select" v-model="size" class="span3">
             <option value="5" selected>5</option>
@@ -92,9 +117,47 @@
             <option value="100">100</option>
           </select>
          
-        </div>
-        </table>
+        </div> -->
+
+    <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div> 
     
+    <div class="widget-content nopadding" id="printpdf">
+       <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE</h2>
+          </tr>
+        </table>
+      <!-- <h2
+        style="
+          font-size: 25px;
+          font-weight: bold;
+          color: #000;
+          text-align: center;
+        "
+        v-if="formData.date_debut == '' && formData.date_fin == ''"
+      >
+        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE
+        {{ formData.date_debut }}
+        {{ formData.date_fin }}
+      </h2>
+
+      <h2
+        style="
+          font-size: 25px;
+          font-weight: bold;
+          color: #000;
+          text-align: center;
+        "
+        v-if="formData.date_debut != '' && formData.date_fin != ''"
+      >
+        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
+        {{ formaterDate(formData.date_debut) }} AU
+        {{ formaterDate(formData.date_fin) }}
+      </h2> -->
       <p
         style="
           margin-left: 30px;
@@ -106,17 +169,33 @@
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-      <div v-for="GroupeSection in afficheUa" :key="GroupeSection.id">
-           <table class="table table-bordered">
+            <table class="table table-bordered">
               <thead style="background-color: #ff9c1a !important">
                 
-                 <tr>
-                   <th></th>
+<tr>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                    colspan=""
+                  >
+                    
+                  </th>
 
-                   <th></th>
-
-                   <th>
-                   SECTION  
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                   ACTIVITE/LIGNE BUDGETAIRE  
                    <button @click="ActiveInputLigne">
                      <i class=" icon-search"></i> 
                       
@@ -134,9 +213,6 @@
                 </model-list-select>
                 
                   </th>
-
-                  <th></th>
-
                   <th
                     style="
                       font-size: 14px;
@@ -147,11 +223,19 @@
                       width :8%
                     "
                   >
-                    UA {{afficheAnnee}}
+                    BUDGET INITIAL {{afficheAnnee}}
                     
                   </th>
-                   <th>
-                    LIGNE {{afficheAnnee}}
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
                   </th>
                    
                   <th
@@ -164,7 +248,7 @@
                       width :8%
                     "
                   >
-                 BUDGET INITIAL {{afficheAnnee}}
+                 BUDGET ACTUEL {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -175,7 +259,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
+                  MONTANT EXECUTE {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -186,7 +270,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE REAMENAGEMENT {{afficheAnnee}}
+                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
                   </th>
 
                      <th
@@ -198,7 +282,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE MARCHES EN EXECUTION  {{afficheAnnee}}
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -209,7 +293,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    BUDGET ACTUEL  {{afficheAnnee}}
+                    TAUX D'EXECUTION {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -220,20 +304,9 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANTS EXECUTES {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
                   </th>
                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRE D’OP PROVISOIRE NON REGULARISES {{afficheAnnee}}
-                  </th>
-                <th
                     style="
                       font-size: 14px;
                       font-weight: bold;
@@ -244,126 +317,487 @@
                   >
                     DISPONIBLE {{afficheAnnee}}
                   </th>
-                  <th
-                    
-                  >
-                    TAUX D’EXECUTION {{afficheAnnee}}
-                  </th>
+
                   
                 </tr>
               </thead>
-       <tbody>
+         <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
+                :key="GroupeOrdrePaiementByActivit.id">
                 <tr>
                   <td>
-                    <button @click="ShowMyUa(GroupeSection[0].section_id)">
-                     <i class="icon-eye-open"></i> </button>
+                    <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].activite_id)">
+                     <i class="icon-eye-open"></i> 
+                      
+                    </button>
                   </td>
-                  
-                  <td> <button ><i class=" icon-print"></i> </button></td>
 
-                <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    {{ Libellesection(GroupeSection[0].section_id) }}
-                    
-                  </td>
-                  <td></td>
-
-                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    
-                    
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
+                      formatageSommeSansFCFA(
+                        parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
+                     }} 
+                    </b>
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    
-                    
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
+                     formatageSommeSansFCFA(
+                        parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
+                     }} 
+                    </b>
                   </td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
+
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
+                      formatageSommeSansFCFA(
+                        parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
+                     }} 
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
+                     }}
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetExecutéProvisoire(
+                            GroupeOrdrePaiementByActivit[0].activite_id
+                          )
+                        )
+                      )
+                    }}
+                    </b>
+                  </td>
+
+                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+                      0
+                    }}
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+
+                        EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
+                    }}
+                    </b>
+                  </td>
+                  <td style=" text-align: right;color:#000" >
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 50">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 75">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 100">
+                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                  
-                  
-                </tr>
-              </tbody>  
-
-               <tbody v-show="recupereIDactivite==GroupeSection[0].section_id"
-               v-for="GroupeUa in AfficheUaGroupe(GroupeSection[0].section_id)" :key="GroupeUa">
-
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-
-                  <td>
-                    <button @click="ShowMyLigne(GroupeUa)">
-                     <i class="icon-eye-open"></i> </button>
+                      {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id) -
+                            MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
+                    }}
+                 
                   </td>
-                  
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" >
-                    {{ libelleUa(GroupeUa) }}</td>
- 
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td> 
-                  <td>0</td> 
-                  <td>0</td> 
-        
-                </tr>
-                  
-                <tr v-show="recupereIDSection==GroupeUa"
-                v-for="GroupeLigne in AfficheLigneGroupe(GroupeUa)" :key="GroupeLigne">
-                  <td></td>
-                  <td></td>
-                  <td></td>
 
-                  <td></td>
-                  
-                  <td></td>
- 
-                  <td>{{ libelleLigneEconomique(GroupeLigne) }}</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td> 
-                  <td>0</td> 
-                  <td>0</td> 
+                 
                 </tr>
+
+
+                  
+                   <tr class="odd gradeX" v-show="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id"
+                  v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
+                  :key="listeLigneeco"
+                >
+                  <td style="width:;color:#000" >
+                   
+
+                  </td>
+                   
+
+                  <td style="width: 500px;color:#000;" >
+                   
+                    {{ libelleLigneEconomique(listeLigneeco) }}
+
+                  </td>
+                  <td style="text-align: right;color:#000;" >
+                  
+                  
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetActuelActivite(listeLigneeco,
+                            GroupeOrdrePaiementByActivit[0].activite_id
+                          )
+                        )
+                      )
+                    }}
+
+
+                  </td>
+
+                  <td style="text-align: right;color:#000;" >
+                   
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetActuelActivite(listeLigneeco,
+                            GroupeOrdrePaiementByActivit[0].activite_id
+                          )
+                        )
+                      )
+                    }}
+                  </td>
+
+                  <td style="text-align: right;color:#000;" >
+
+
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetActuelActivite(listeLigneeco,
+                            GroupeOrdrePaiementByActivit[0].activite_id
+                          )
+                        )
+                      )
+                    }}
+
+
+                  </td>
+
+                  <td style="text-align: right;color:#000;">
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
+                    }}
+                  </td>
+
+                  <td style="text-align: right;color:#000;" >
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
+                    }}
+                  </td>
+
+                  <td style="text-align: right;color:#000;" >
+                    {{ 0 }}
+                  </td>
+
+                  <td style="text-align: right;color:#000;">
+                    {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
+                  </td>
+
+                  <td style=" text-align: right;color:#000" >
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
+                        <span style="color:#fff;font-size: 14px;">
+                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 50">
+                        <span style="color:#fff;font-size: 14px;">
+                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 75">
+                        <span style="color:#fff;font-size: 14px;">
+                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 100">
+                        <span style="color:#fff;font-size: 14px;">
+                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                        </span>
+                      </button>
+                  </td>
+                 
+                  <td style="text-align: right;color:#000;">
+
+
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetActuelActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)
+                           -
+                            MontantBudgetExecutéActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)))
+                    }}
+                  </td>
+                </tr>
+              
+              
               </tbody>
+              <tfoot>
+                <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <!-- <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td> -->
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
+                      
+
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+
+                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+
+                  <td style="text-align: right;color:#000">{{ 0 }}</td>
+                  <td style="text-align: right;color:#000">
+                   <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
+                   {{ TotalEviteNaN }}%
+                 </td>
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   <!-- 
+                     {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
+                
+                 </td>
+                 
+                  <td style="width :9%;text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
+                  </td>
+                </tr>
+              </tfoot>
             </table>
-
-              <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSection[0].section_id">
-              
-      
-              
-
-            
-            </table> -->
-      </div>
-       
-          
     </div>
 
-    
+     <div class="pagination alternate">
+      <ul>
+        <li :class="{ disabled: page == 0 }">
+          <a @click.prevent="precedent()" href="#">Précedent</a>
+        </li>
+        <li
+          v-for="(titre, index) in partition(afficheUa, size).length"
+          :key="index"
+          :class="{ active: active_el == index }"
+        >
+          <a @click.prevent="getDataPaginate(index)" href="#">{{
+            index + 1
+          }}</a>
+        </li>
+        <li
+          :class="{ disabled: page == partition(afficheUa, size).length - 1 }"
+        >
+          <a @click.prevent="suivant()" href="#">Suivant</a>
+        </li>
+      </ul>
+    </div>
 
 
         
-    
+    <!-- <fab
+      :actions="fabActions"
+      @searchMe="filter"
+      main-icon="apps"
+      bg-color="green"
+    ></fab> -->
+
+    <div id="validationOpDefinitif2" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3 style="font-size: 14px; font-weight: bold">
+          UNITE ADMINISTRATIVE : 
+        </h3>
+      </div>
+      <!-- <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div>  -->
+      <div class="modal-body" id="printpdf">
+          <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
+          </tr>
+        </table>
+        <table class="table table-bordered table-striped">
+          <thead style="background-color: #ff9c1a !important">
+                
+<tr>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    
+                  </th>
+<th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                   ACTIVITE/LIGNE BUDGETAIRE  
+                   
+                
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                      width :8%
+                    "
+                  >
+                    BUDGET INITIAL {{afficheAnnee}}
+                    
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
+                  </th>
+                   
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                      width :8%
+                    "
+                  >
+                 BUDGET ACTUEL {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  MONTANT EXECUTE {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                  </th>
+
+                     <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    TAUX D'EXECUTION {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    {{editMandat1.activite_id}}DISPONIBLE {{afficheAnnee}}
+                  </th>
+
+                  
+                </tr>
+              </thead>
+            <br>
+          <tbody >
+            <tr>
+              {{editMandat1.activite_id}}
+            </tr>
+              
+          </tbody>
+        </table>
+        <!-- <div class="modal-footer">
+          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        </div> -->
+      </div>
+    </div>
   </div>
 </template>
   
@@ -391,23 +825,47 @@ export default {
         },
       ],
 
+      options2: [
+        { id: "1", libelle: "OP Direct" },
+        { id: "2", libelle: "OP Provisoire" },
+        { id: "3", libelle: "OP Annulation" },
+        { id: "4", libelle: "OP Définitif" },
+      ],
       json_fields: {
         CODE: "code",
         LIBELLE: "libelle",
       },
 
 
-    inputLigne:false,
+inputLigne:false,
 
- 
+      affiche_filtre1: false,
+      affiche_filtre: false,
+      affiche_boutton_filtre: true,
+      formData: {
+        code: "",
+        libelle: "",
+        date_debut: "",
+        date_fin: "",
+      },
+      EditDetache: {},
+      typeop_id: 0,
+      NumeroOp: 0,
+      Activite_id: 0,
+      Activite_code:0,
       exercices_budgetaires_id:0,
       inputLigne1:0,
-    
+      
+
+      editMandat1: {
+       
+      },
+      EditAnulation: {},
+      editDecisionFinal: {},
       search: "",
       verifShome:0,
       recupereIDactivite:"",
-      recupereIDSection:"",
-      source_financement_id1:0
+  
     };
   },
   mounted(){
@@ -543,8 +1001,7 @@ export default {
       "uniteAdministratives",
       "getPersonnaliseBudgetGeneralParPersonnel",
       "groupeByActivite",
-      "groupeByBailleur",
-      "groupeBySection"
+      "groupeByBailleur"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -558,6 +1015,28 @@ export default {
       "sources_financements",
     ]),
   
+// ListeDEsEntreprise(){
+// if(this.inputLigne1!=''){
+//   return this.ListeGroupByActivite.
+// }
+                // let vM=this;
+                // let objet=this.ListeGroupByActivite
+
+              
+              
+                // if(vM.inputLigne1!="" ){
+                  
+                //   objet = vM.objet.filter(item=>{
+                //         if(item[0].activite_id == vM.afficheIdActiviteDansPlanActuvite(vM.inputLigne1)){
+                //             return item[0];
+                //         }
+                //     })
+                //  return objet
+                // }
+            
+                // return objet
+           
+
     ShowMe(){
        return (id) => {
         if (id != null && id != "") {
@@ -571,7 +1050,7 @@ export default {
       return (id) => {
         if (id != null && id != "") {
           const qtereel = this.gettersgestionOrdrePaiement.find(
-            (qtreel) => qtreel.source_financement_id == id
+            (qtreel) => qtreel.activite_id == id
             &&  qtreel.exercice == this.afficheAnnee
           );
 
@@ -583,222 +1062,43 @@ export default {
       };
     },
 
-     iduaverif() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.uniteadministrative_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.uniteadministrative_id;
-          }
-          return 0;
-        }
-      };
-    },
-
-    IdSection() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.uniteadministrative_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.section_id;
-          }
-          return 0;
-        }
-      };
-    },
-
-    // ******   les vrai in fos de ce fichier lega ************
-          //**groupe ua by section ***
-        listeParUaGroupe() {
-        return (id) => {
-          if (id != null && id != "") {
-            return this.budgetEclate.filter(
-              (qtreel) => qtreel.section_id == id 
-            );
-          }
-        };
-      },
-AfficheUaGroupe() {
-      return (id) => {
-      
-        if(id !=0 && id !=""){
-          let objet = this.listeParUaGroupe(id);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.uniteadministrative_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-        }
-        
-        
-      };
-    },
-
-        //****groupe ligne by ua */
-
-        listeParLigneGroupe() {
-        return (id) => {
-          if (id != null && id != "") {
-            return this.budgetEclate.filter(
-              (qtreel) => qtreel.uniteadministrative_id == id 
-            );
-          }
-        };
-      },
-AfficheLigneGroupe() {
-      return (id) => {
-      
-        if(id !=0 && id !=""){
-          let objet = this.listeParLigneGroupe(id);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-        }
-        
-        
-      };
-    },
-
-    libelleLigneEconomique() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.plans_budgetaires.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.code.concat("    ", qtereel.libelle);
-          }
-          return 0;
-        }
-      };
-    },
-
-
-    libelleUa() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.uniteAdministratives.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-  },
-
-     afficheUa() {
-       return this.ListeGroupeSection;
-    },
-
-        ListeGroupeSection(){
-        if(this.exercices_budgetaires_id!=0){
-                return this.groupeBySection
-        .filter(
-          (qtreel) =>
-            (qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].section_id!=null
-             )
-
-        );
-        }else{
-                return this.groupeBySection
-        .filter(
-          (qtreel) =>
-            (qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].section_id!=null
-             )
-
-        );
-        }
-        },
-
-
-    Libellesection() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.sections.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.nom_section;
-          }
-          return 0;
-        }
-      };
-    },
-
-       MontantbudgetVote(){
-        return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.section_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-    //**************fin ******* */
-
     //&& this.inputLigne1!=0
     ListeGroupByActivite() {
-      if (this.source_financement_id1!=0) {
-        return this.groupeByBailleur.filter(
+      if (this.Activite_id!=0  && this.inputLigne1!=0) {
+        return this.groupeByActivite.filter(
           (qtreel) =>
             qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].source_financement_id==this.source_financement_id1
-            
+            && qtreel[0].activite_id==this.Activite_id
+            && qtreel[0].activite_id==this.inputLigne1
         );
-      } 
+      } else if(this.Activite_id!=0 &&  this.inputLigne1==0){
+        return this.groupeByActivite.filter(
+          (qtreel) =>
+            qtreel[0].annebudgetaire == this.afficheAnnee
+            && qtreel[0].activite_id==this.Activite_id
+        );
+      }else if(this.Activite_id==0 && this.inputLigne1!=0){
+          return this.groupeByActivite.filter(
+          (qtreel) =>
+            qtreel[0].annebudgetaire == this.afficheAnnee
+            && qtreel[0].activite_id==this.inputLigne1
+        );
+      }
       else {
-        return this.groupeByBailleur
+        return this.groupeByActivite
         .filter(
           (qtreel) =>
             (qtreel[0].annebudgetaire == this.afficheAnnee
-           
+            && qtreel[0].activite_id!=null
              )
 
         );
       }
+    },
+
+
+    afficheUa() {
+       return this.ListeGroupByActivite;
     },
 
     afficheAnnee() {
@@ -844,120 +1144,120 @@ AfficheLigneGroupe() {
     
 
       TotalMontantbudgetVote(){
-        if(this.source_financement_id!=0 && this.inputLigne1!=0){
+        if(this.Activite_id!=0 && this.inputLigne1!=0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id
-              && qtreel.source_financement_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+              && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1==0){
+        }else if(this.Activite_id!=0 && this.inputLigne1==0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id==0 && this.inputLigne1!=0){
+        }else if(this.Activite_id==0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id!=null))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
     },
 
     TotalMontantReamenagement(){
-        if(this.source_financement_id!=0 && this.inputLigne1==0){
+        if(this.Activite_id!=0 && this.inputLigne1==0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1!=0){
+        }else if(this.Activite_id!=0 && this.inputLigne1!=0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id
-              && qtreel.source_financement_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+              && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id==0 && this.inputLigne1!=0){
+        }else if(this.Activite_id==0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
              (qtreel.annebudgetaire == this.afficheAnnee
-                 && qtreel.source_financement_id!=null))
+                 && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
     },
 
        TotalMontantBudgetActuel() {
-     if(this.source_financement_id!=0 && this.inputLigne1==0){
+     if(this.Activite_id!=0 && this.inputLigne1==0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
 
-        } else if(this.source_financement_id!=0 && this.inputLigne1!=0){
+        } else if(this.Activite_id!=0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id
-                 && qtreel.source_financement_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+                 && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
-        else if(this.source_financement_id==0 && this.inputLigne1!=0){
+        else if(this.Activite_id==0 && this.inputLigne1!=0){
               return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id!=null))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
     },
 
      TotalMontantBudgetExecuté() {
-        if (this.source_financement_id!=0 && this.inputLigne1==0) {
+        if (this.Activite_id!=0 && this.inputLigne1==0) {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == this.source_financement_id
+                qtreel.activite_id == this.Activite_id
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == this.source_financement_id
+                qtreel.activite_id == this.Activite_id
                 &&qtreel.decision_cf==8)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == this.source_financement_id
+                qtreel.activite_id == this.Activite_id
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == this.source_financement_id
+                qtreel.activite_id == this.Activite_id
                 &&qtreel.decision_cf==8)   
             )
             .reduce(
@@ -966,57 +1266,57 @@ AfficheLigneGroupe() {
               0
             )
             .toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1!=0){
+        }else if(this.Activite_id!=0 && this.inputLigne1!=0){
                return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == this.source_financement_id
-                && qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1
-                && qtreel.source_financement_id == this.source_financement_id
-                && qtreel.source_financement_id == this.inputLigne1
+                && qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 && qtreel.decision_cf==8)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == this.source_financement_id
-                && qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == this.source_financement_id
-                && qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==8)   
             ).reduce((prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
 
-        }else if (this.source_financement_id==0 && this.inputLigne1!=0) {
+        }else if (this.Activite_id==0 && this.inputLigne1!=0) {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==8)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.inputLigne1
                 &&qtreel.decision_cf==8)   
             )
             .reduce(
@@ -1028,19 +1328,19 @@ AfficheLigneGroupe() {
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf==9 && qtreel.source_financement_id!=null)
+                && qtreel.decision_cf==9 && qtreel.activite_id!=null)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1
-                && qtreel.decision_cf==8 && qtreel.source_financement_id!=null)
+                && qtreel.decision_cf==8 && qtreel.activite_id!=null)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf==9 && qtreel.source_financement_id!=null)
+                && qtreel.decision_cf==9 && qtreel.activite_id!=null)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4
-                && qtreel.decision_cf==8 && qtreel.source_financement_id!=null)   
+                && qtreel.decision_cf==8 && qtreel.activite_id!=null)   
             )
             .reduce(
               (prec, cur) =>
@@ -1053,37 +1353,37 @@ AfficheLigneGroupe() {
 
 
        TotalMontantBudgetExecutéProvisoire() {
-        if (this.source_financement_id==0 && this.inputLigne1!=0) {
+        if (this.Activite_id==0 && this.inputLigne1!=0) {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 2 &&
-                qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.inputLigne1
             ).reduce((prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1!=0){
+        }else if(this.Activite_id!=0 && this.inputLigne1!=0){
             return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 2 &&
-                qtreel.source_financement_id == this.source_financement_id
-                && qtreel.source_financement_id == this.inputLigne1
+                qtreel.activite_id == this.Activite_id
+                && qtreel.activite_id == this.inputLigne1
             ).reduce((prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1==0){
+        }else if(this.Activite_id!=0 && this.inputLigne1==0){
             return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 2 &&
-                qtreel.source_financement_id == this.source_financement_id
+                qtreel.activite_id == this.Activite_id
             ).reduce((prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
         }else {
              return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 2 && qtreel.source_financement_id!=null
+                qtreel.type_ordre_paiement == 2 && qtreel.activite_id!=null
             )
             .reduce(
               (prec, cur) =>
@@ -1096,15 +1396,32 @@ AfficheLigneGroupe() {
 
     //*************fin gestion des totaux*************/
 
- 
-
+    MontantbudgetVote(){
+        return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
     MontantReamenagement(){
         return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate
             .filter(
               (qtreel) =>
-                qtreel.source_financement_id == id &&
+                qtreel.activite_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee
             )
             .reduce(
@@ -1124,7 +1441,7 @@ AfficheLigneGroupe() {
           return this.budgetEclate
             .filter(
               (qtreel) =>
-                qtreel.source_financement_id == id &&
+                qtreel.activite_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee
             )
             .reduce(
@@ -1146,22 +1463,22 @@ AfficheLigneGroupe() {
               (qtreel) =>
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == id
+                qtreel.activite_id == id
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 1 &&
-                qtreel.source_financement_id == id
+                qtreel.activite_id == id
                 &&qtreel.decision_cf==8)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == id
+                qtreel.activite_id == id
                 &&qtreel.decision_cf==9)
                 ||
                 (qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 4 &&
-                qtreel.source_financement_id == id
+                qtreel.activite_id == id
                 &&qtreel.decision_cf==8)   
             )
             .reduce(
@@ -1185,7 +1502,7 @@ AfficheLigneGroupe() {
               (qtreel) =>
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 2 &&
-                qtreel.source_financement_id == id
+                qtreel.activite_id == id
             )
             .reduce(
               (prec, cur) =>
@@ -1209,7 +1526,7 @@ AfficheLigneGroupe() {
               (qtreel) =>
                 qtreel.ligneeconomique_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.source_financement_id == id1
+                qtreel.activite_id == id1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1230,25 +1547,25 @@ AfficheLigneGroupe() {
             .filter(
               (qtreel) =>
                 (qtreel.ligne_economique_id == id
-                && qtreel.source_financement_id == id1
+                && qtreel.activite_id == id1
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 1
                && qtreel.decision_cf==8)
                ||
                 (qtreel.ligne_economique_id == id
-                && qtreel.source_financement_id == id1
+                && qtreel.activite_id == id1
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 1
                && qtreel.decision_cf==9)
                ||
                (qtreel.ligne_economique_id == id
-               && qtreel.source_financement_id == id1
+               && qtreel.activite_id == id1
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 4
                && qtreel.decision_cf==8)
                ||
                 (qtreel.ligne_economique_id == id
-                && qtreel.source_financement_id == id1
+                && qtreel.activite_id == id1
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 4
                && qtreel.decision_cf==9)
@@ -1272,7 +1589,7 @@ AfficheLigneGroupe() {
             .filter(
               (qtreel) =>
                 qtreel.ligne_economique_id == id &&
-                qtreel.source_financement_id == id1 &&
+                qtreel.activite_id == id1 &&
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.type_ordre_paiement == 2
             )
@@ -1303,7 +1620,20 @@ AfficheLigneGroupe() {
       };
     },
 
-    
+    libelleLigneEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.code.concat("    ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
 
     LibelleActivite() {
       return (id) => {
@@ -1378,7 +1708,7 @@ AfficheLigneGroupe() {
       return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate.filter(
-            (qtreel) => qtreel.source_financement_id == id
+            (qtreel) => qtreel.activite_id == id
           );
         }
       };
@@ -1442,7 +1772,7 @@ AfficheLigneGroupe() {
       return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate.filter(
-            (qtreel) => qtreel.source_financement_id == id
+            (qtreel) => qtreel.activite_id == id
           );
         }
       };
@@ -1475,7 +1805,20 @@ AfficheLigneGroupe() {
 
     
 
+    libelleUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.uniteAdministratives.find(
+            (qtreel) => qtreel.id == id
+          );
 
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+  },
 
 
   },
@@ -1498,7 +1841,7 @@ AfficheLigneGroupe() {
   }
 
 },
-    ShowMyUa(id){
+    ShowMyLigne(id){
       if(this.recupereIDactivite==""){
          this.recupereIDactivite=id;
       }else if(this.recupereIDactivite!="" && this.recupereIDactivite !=id){
@@ -1507,19 +1850,6 @@ AfficheLigneGroupe() {
       }
       else{
          this.recupereIDactivite="";
-      }
-       
-    },
-
-    ShowMyLigne(id){
-      if(this.recupereIDSection==""){
-         this.recupereIDSection=id;
-      }else if(this.recupereIDSection!="" && this.recupereIDSection !=id){
-        this.recupereIDSection="";
-        this.recupereIDSection=id;
-      }
-      else{
-         this.recupereIDSection="";
       }
        
     },
@@ -1557,9 +1887,9 @@ AfficheLigneGroupe() {
 
     //  {{
     //                   (
-    //                     (MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].source_financement_id) /
+    //                     (MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) /
     //                       MontantBudgetActuelActivite(listeLigneeco,
-    //                         GroupeOrdrePaiementByActivit[0].source_financement_id
+    //                         GroupeOrdrePaiementByActivit[0].activite_id
     //                       )) *
     //                     100
     //                   ).toFixed(3)
@@ -1603,7 +1933,16 @@ AfficheLigneGroupe() {
       this.page++;
     },
 
+    apercuFacture(id) {
+     
+      //this.$("#validationOpDefinitif2").modal({
+      //   backdrop: "static",
+      //   keyboard: false,
+      // });
+       this.editMandat1 = this.afficheUa.find((item) => item[0].activite_id == id);
+      return alert(id);
     
+    },
 
     formatageSommeSansFCFA: formatageSommeSansFCFA,
 formatageSomme:formatageSomme,
@@ -1631,36 +1970,15 @@ width: 95%;
   font-size: 15px;
   font-weight: bold;
 }
-
-.whitebg1 {
-  background: #829ed3 !important;
-  font-weight: bold;
-  color: black;
-  font-size: 15px;
-}
-.graybg1 {
-  background: rgb(28, 13, 158) !important;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-
-
 .tailgrand {
   width: 90%;
   margin: 0 -45%;
   height: 50%;
 }
-
+.tailBtn {
+  width: 100%;
+}
 .modal-body {
   max-height: 85%;
-}
-th{
-font-size: 13px !important;
-                      font-weight: bold !important;
-                      color: #000 !important;
-                      text-align: center !important;
-                      background-color: #fbb203 !important;
 }
 </style>

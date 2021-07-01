@@ -46,8 +46,8 @@
           <td @click="afficheBouttonTechFin(index)" style="background: green;color:#fff" v-if="etatEnregistreOffreTechnique(appelOffre.id)">
            Dossier Complet
             </td>
-          <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" v-if="!etatEnregistreOffreTechnique(appelOffre.id)">
-           Dossier Incomplet, Veuillez enregistrer l'offre technique et financière
+          <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" >
+           Veuillez enregistrer l'offre technique
           </td>
           <div class="btn-group">
             <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
@@ -88,7 +88,7 @@
                 <div class="controls">
                   <select v-model="formDossierCadidature.entreprise_id">
                     <option value=""></option>
-                    <option v-for="varText in afficherCandidatSelectionner(marcheid)" :key="varText.id"
+                    <option v-for="varText in gettersEntreprisePreselectionner" :key="varText.id"
                             :value="varText.entreprise_id">{{afficheNomEntreprise(varText.entreprise_id)}}</option>
                   </select>
 
@@ -1296,30 +1296,31 @@ name: "DossierCandidat",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
 
 
-    afficherCandidatSelectionner() {
-      return id => {
-        if (id != null && id != "") {
-          let vm=this
-          let collection=[]
-        let  objet_personnel=this.gettersEntreprisePreselectionner.filter(qtreel => qtreel.marche_id == id);
+
+    // afficherCandidatSelectionner() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //       let vm=this
+    //       let collection=[]
+    //     let  objet_personnel=this.gettersEntreprisePreselectionner.filter(qtreel => qtreel.marche_id == id);
 
 
 
-          objet_personnel.forEach(function (value) {
-            let objet_candidat=vm.getterDossierCandidats.find(item=>{
-              if(item.entreprise_id==value.entreprise_id && item.marche_id == value.marche_id){
-                return item
-              }
-            })
+    //       objet_personnel.forEach(function (value) {
+    //         let objet_candidat=vm.getterDossierCandidats.find(item=>{
+    //           if(item.entreprise_id==value.entreprise_id && item.marche_id == value.marche_id){
+    //             return item
+    //           }
+    //         })
 
-           if(objet_candidat==undefined){
-             collection.push(value)
-           }
-          })
-           return collection
-        }
-      };
-    },
+    //        if(objet_candidat==undefined){
+    //          collection.push(value)
+    //        }
+    //       })
+    //        return collection
+    //     }
+    //   };
+    // },
     afficheNomEntreprise() {
       return id => {
         if (id != null && id != "") {

@@ -30,7 +30,7 @@
   <table class="table table-bordered table-striped">
     <thead>
     <tr>
-      <th>Référence de l'offre</th>
+      <th>Référence de l'offre </th>
       <th>Soumissionnaire</th>
       <th> Montant de l'Offre technique</th>
       <!-- <th>Type d'analyse</th> -->
@@ -313,6 +313,7 @@ export default {
       candidat_selectionner:"",
       formAnalyseDossier:{
         date_analyse:"",
+        diff:1,
         // appel_offre_id:"",
         rang_analyse:"",
         appel_offre_id:"",
@@ -404,7 +405,7 @@ console.log(offreT)
    },
     analyseByLot(){
      return id=>{
-       let objet=this.getterAnalyseDossiers.filter(item=>item.marche_id==id)
+       let objet=this.getterAnalyseDossiers.filter(item=>item.marche_id==id && item.diff==1)
         objet=objet.sort(function (a, b) {
          return a.note_analyse - b.note_analyse;
        });
@@ -584,6 +585,7 @@ AjouterJugement() {
         date_analyse:"",
         //appel_offre_id:"",
         rang_analyse:"",
+        diff:1,
         appel_offre_id:"",
         difference_personnel_bienService:"bienservice",
         note_analyse:"",

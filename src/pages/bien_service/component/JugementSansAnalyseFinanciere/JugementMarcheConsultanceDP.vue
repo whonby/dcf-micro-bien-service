@@ -349,6 +349,7 @@ export default {
     return{
       formAnalyseDossier:{
         date_analyse:"",
+        diff:1,
         // appel_offre_id:"",
         rang_analyse:"",
         appel_offre_id:"",
@@ -385,7 +386,7 @@ export default {
       return macheid => {
         if (macheid != "") {
 
-          return this.getterAnalyseDossiers.filter(idmarche => idmarche.marche_id == macheid).sort((a,b)=>(a.note_analyse>b.note_analyse)? 1:-1)
+          return this.getterAnalyseDossiers.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1).sort((a,b)=>(a.note_analyse>b.note_analyse)? 1:-1)
         }
       }
     },
@@ -555,6 +556,7 @@ export default {
       this.formAnalyseDossier={
         date_analyse:"",
         //appel_offre_id:"",
+        diff:1,
         rang_analyse:"",
         appel_offre_id:"",
         difference_personnel_bienService:"bienservice",

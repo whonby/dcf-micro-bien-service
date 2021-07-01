@@ -209,7 +209,7 @@
                   background-color: #fbb203 !important;
                 "
               >
-                REAMENAGEMENT BUDGETAIRE {{ afficheAnnee }}
+                MODIFICATION BUDGETAIRE {{ afficheAnnee }}
               </th>
               <th
                 style="
@@ -277,7 +277,7 @@
               >
                 TAUX D'EXECUTION(%) {{ afficheAnnee }}
               </th>
-
+<!-- 
               <th
                 style="
                   font-size: 14px;
@@ -288,7 +288,7 @@
                 "
               >
                 EVOLUTION DU TAUX D’EXECUTION
-              </th>
+              </th> -->
               <th
                 style="
                   font-size: 14px;
@@ -331,12 +331,9 @@
                 }}
               </td>
               <td
-                v-bind:class="
-                  recupereIDactivite ==
-                  GroupeOrdrePaiementByActivit[0].activite_id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
+                 v-bind:class=" recupereIDactivite ==
+                  GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg': 'whitebg'"
+                   style="text-align: right"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -349,12 +346,9 @@
                 }}
               </td>
               <td
-                v-bind:class="
-                  recupereIDactivite ==
-                  GroupeOrdrePaiementByActivit[0].activite_id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
+                 v-bind:class=" recupereIDactivite ==
+                  GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg': 'whitebg'"
+                   style="text-align: right"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -367,12 +361,9 @@
                 }}
               </td>
               <td
-                v-bind:class="
-                  recupereIDactivite ==
-                  GroupeOrdrePaiementByActivit[0].activite_id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
+                v-bind:class=" recupereIDactivite ==
+                  GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg': 'whitebg'"
+                   style="text-align: right"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -385,12 +376,9 @@
                 }}
               </td>
               <td
-                v-bind:class="
-                  recupereIDactivite ==
-                  GroupeOrdrePaiementByActivit[0].activite_id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
+                v-bind:class="recupereIDactivite ==
+                  GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg': 'whitebg'"
+                   style="text-align: right"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -409,7 +397,7 @@
                   GroupeOrdrePaiementByActivit[0].activite_id
                     ? 'graybg'
                     : 'whitebg'
-                "
+                " style="text-align: right"
               >
                 {{
                   formatageSommeSansFCFA(
@@ -428,7 +416,7 @@
                   GroupeOrdrePaiementByActivit[0].activite_id
                     ? 'graybg'
                     : 'whitebg'
-                "
+                " style="text-align: right"
               >
                 {{ 0 }}
               </td>
@@ -446,7 +434,7 @@
                     )
                   }}
                 </td> -->
-              <td
+              <!-- <td
                 v-bind:class="
                   recupereIDactivite ==
                   GroupeOrdrePaiementByActivit[0].activite_id
@@ -458,7 +446,7 @@
                   EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) ||
                   "Non renseigné"
                 }}
-              </td>
+              </td> -->
 
               <td style=" text-align: right;color:#000; !important;">
                 <button
@@ -503,20 +491,15 @@
                     100
                   "
                 >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
+                  <span style="color: #fff; font-size: 14px; font-weight: bold;">
                     {{ EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) }}
                   </span>
                 </button>
               </td>
 
               <td
-                v-bind:class="
-                  recupereIDactivite ==
-                  GroupeOrdrePaiementByActivit[0].activite_id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-              >
+                v-bind:class=" recupereIDactivite ==
+                  GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg': 'whitebg'" style="text-align: right">
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
@@ -621,14 +604,14 @@
                 {{ 0 || "Non renseigné" }}
               </td>
 
-              <td style="font-size: 14px; text-align: right; color: #000">
+              <!-- <td style="font-size: 14px; text-align: right; color: #000">
                 {{
                   EviteNaNBailleur(
                     ListepaimentBailleur,
                     GroupeOrdrePaiementByActivit[0].activite_id
                   )
                 }}
-              </td>
+              </td> -->
 
               <td style="text-align: right; color: #000">
                 <button
@@ -759,7 +742,7 @@
 
               <td
                 style="
-                  text-align: center;
+                  text-align: right;
                   color: #000;
                   background-color: #f55e25 !important;
                   font-weight: bold;
@@ -773,7 +756,7 @@
 
               <td
                 style="
-                  text-align: center;
+                  text-align: right;
                   color: #000;
                   background-color: #f55e25 !important;
                   font-weight: bold;
@@ -787,7 +770,7 @@
 
               <td
                 style="
-                  text-align: center;
+                  text-align: right;
                   color: #000;
                   background-color: #f55e25 !important;
                   font-weight: bold;
@@ -801,7 +784,7 @@
 
               <td
                 style="
-                  text-align: center;
+                  text-align: right;
                   color: #000;
                   background-color: #f55e25 !important;
                   font-weight: bold;
@@ -817,7 +800,7 @@
 
               <td
                 style="
-                  text-align: center;
+                   text-align: right;
                   color: #000;
                   background-color: #f55e25 !important;
                   font-weight: bold;
@@ -844,7 +827,7 @@
                 }}
               </td>
 
-              <td
+              <!-- <td
                 style="
                   text-align: center;
                   color: #000;
@@ -852,11 +835,11 @@
                   font-weight: bold;
                   color: #000;
                 "
-              ></td>
+              ></td> -->
 
               <td
                 style="
-                  text-align: center;
+                  text-align: right;
                   color: #000;
                   background-color: #f55e25 !important;
                   font-weight: bold;
@@ -2050,12 +2033,12 @@ export default {
   background: #98FB98 !important;
   font-weight: bold;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
 }
 .graybg {
   background: rgb(6, 184, 6) !important;
   color: white;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
 }
 

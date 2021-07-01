@@ -773,6 +773,11 @@ export const groupeByBailleur = (state, getters) => {
   return groupBy(getters.budgetEclate, "source_financement_id");
 };
 
+export const groupeBySection = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "section_id");
+};
+
 export {
   // typeTextes,
   uniteAdministratives,

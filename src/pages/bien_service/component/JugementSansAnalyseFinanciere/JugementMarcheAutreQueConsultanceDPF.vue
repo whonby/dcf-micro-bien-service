@@ -314,6 +314,7 @@ export default {
       formAnalyseDossier:{
         date_analyse:"",
         // appel_offre_id:"",
+        diff:0,
         rang_analyse:"",
         appel_offre_id:"",
         marche_parent_id:"",
@@ -353,6 +354,7 @@ export default {
         //  offreT.observation
       }
     },
+
    getSoumissionaireByLot(){
       return marche_id=>{
         let seft=this;
@@ -404,7 +406,7 @@ console.log(offreT)
    },
     analyseByLot(){
      return id=>{
-       let objet=this.getterAnalyseDossiers.filter(item=>item.marche_id==id)
+       let objet=this.getterAnalyseDossiers.filter(item=>item.marche_id==id && item.diff==0)
         objet=objet.sort(function (a, b) {
          return a.note_analyse - b.note_analyse;
        });
