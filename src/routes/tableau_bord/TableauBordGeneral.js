@@ -85,7 +85,14 @@ import DetailTableauBordDirect from "../../pages/TableauBord/TableauBordHorsSigo
 import DetailLigneExecutionParUa from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordBudgetHorsSigobe/DetailLigneExecutionParUa/DetailLigneExecutionParUa"
 
 
+import PresentationTableauMarche from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordMarcheHorsSigobe/PresentationTableauMarche.vue"
+
 const TableauBordGeneral =[
+    {
+        path: "/PresentationTableauMarche",
+        name: "PresentationTableauMarche",
+        component: PresentationTableauMarche
+    },
     {
         path: "/DetailLigneExecutionParUa/:id",
         name: "DetailLigneExecutionParUa",

@@ -42,6 +42,7 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;
+                  width : 50%
                 "
               >
                 BUDGET VOTE (FCFA)
@@ -77,9 +78,9 @@
             <tbody>
              <tr  v-for="unite in afficheDetailReamenagement" :key="unite.id">
                <td>{{libelleLigneEconomique(unite)}}</td>
-               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)+(variation(unite))))}}</td>
-               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
-               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantActuelParLigne(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:right">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:right">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:right">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite))+parseFloat(variation(unite)))}}</td>
                
               <!-- <td style="font-weight: bold; font-size: 12px; text-align: center">{{ formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite)))}}</td>
                   <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite) - MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
@@ -105,7 +106,7 @@
                   font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center;
+                  text-align:right;
                   background-color: #FC762F !important;"
               >
                 {{
@@ -123,7 +124,7 @@
                   font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center;
+                  text-align:right;
                   background-color: #FC762F !important;
                 "
               >
@@ -134,7 +135,7 @@
                   font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center;
+                  text-align:right;
                   background-color: #FC762F !important;
                 "
               >
@@ -560,7 +561,12 @@
                   background-color: #fbb203 !important;">
                   MONTANTS EXECUTES {{afficheAnnee}}</th>
 
-
+ <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" title="TOTAL OP PROVISOIRE">
+                  TOTAL OP PROVISOIRE{{afficheAnnee}}</th>
                   <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -568,7 +574,12 @@
                   background-color: #fbb203 !important;">
                   NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
 
-
+ <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  TAUX OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -627,10 +638,16 @@
                   }}
                 </td>
                 <td
-                  v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
-                  @click="percuFacture(unite.id)"
+                  
+                 
                 >
-                  {{ formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(unite.id))) }}
+                  
+
+                  <button class="btn btn-success taille"  @click="percuFacture(unite.id)">
+                        <span style="color:#fff;font-size: 15px;">
+                          {{ formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(unite.id))) }}
+                        </span>
+                      </button>
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
@@ -645,12 +662,24 @@
                     )
                   }}
                 </td>
-
+ <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                >
+                  {{
+                  TotalOPRegu(unite.id)
+                  }}
+                </td>
                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
                   {{
                    NombreOPNonRegu(unite.id)
                   }}
+                </td>
+                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                >
+                  {{
+                    TauxOPProvisoireNonRegularis(unite.id)
+                   
+                  }} %
                 </td>
                   <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
@@ -715,7 +744,7 @@
               >
                 {{
                  formatageSommeSansFCFA(
-                    parseFloat( TotalMontantReamenagement(unite.id, unite1)))
+                    parseFloat( AfficheVariationBudgetParTypeFinancement(unite.id, unite1)))
                     
                 }}
               </td>
@@ -739,13 +768,26 @@
                   )
                 }}
               </td>
-
+ <td
+                style="font-size: 15px; text-align: right;color:#000"
+              >
+                {{
+               TotalOPNonReguTypeFinancement(unite.id, unite1)
+                }}
+              </td>
                <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
-                  0
+                NombreOPNonReguTypeFinancement(unite.id, unite1)
                 }}
+              </td>
+               <td
+                style="font-size: 15px; text-align: right;color:#000"
+              >
+                {{
+                TauxOPProvisoireNonRegularisTypeFinancement(unite.id, unite1)
+                }} %
               </td>
  <td
                 style="font-size: 15px; text-align: right;color:#000"
@@ -811,11 +853,15 @@
 
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{  formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté ))  }}</td>
-                 
+                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   {{ 0 }}
+                 </td>
                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ 0 }}
                  </td>
-
+ <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   {{ 0 }}
+                 </td>
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantDisponible)) }}
                  </td>
@@ -982,13 +1028,58 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+    TotalOPRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id  && qtreel.type_ordre_paiement==1 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
     NombreOPNonRegu() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.unite_administrative_id == id && qtreel.diff_reg_op == 0
+                qtreel.unite_administrative_id == id && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+    TotalOPNonReguTypeFinancement() {
+      return (id,id1) => {
+          if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                 qtreel.unite_administrative_id == id && qtreel.type_financement_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+     NombreOPNonReguTypeFinancement() {
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.type_financement_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1 && qtreel.exercice==this.afficheAnnee
             ).length
             
             
@@ -1026,7 +1117,7 @@ export default {
           const objet = this.budgetEclate.find(
             (item) =>
               item.uniteadministrative_id == this.editMandat.id &&
-              item.ligneeconomique_id == id
+              item.ligneeconomique_id == id && item.annebudgetaire == this.afficheAnnee && item.budget_active==1
           );
           if (objet) return objet.variation_budget;
         }
@@ -1036,7 +1127,7 @@ export default {
 AfficheVariationBudget() {
       return (id2) => {
         if (id2 != null && id2 != "") {
-          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.annebudgetaire==this.anneeAmort ).reduce(
+          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.annebudgetaire==this.anneeAmort && prod.budget_active==1).reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
@@ -1047,7 +1138,7 @@ AfficheVariationBudget() {
     AfficheVariationBudgetParTypeFinancement() {
       return (id2,id1) => {
         if (id2 != null && id2 != "" && id1 != null && id1 != "") {
-          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.type_financement_id == id1 && prod.annebudgetaire==this.anneeAmort ).reduce(
+          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.type_financement_id == id1 && prod.annebudgetaire==this.anneeAmort && prod.budget_active==1).reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
@@ -1081,7 +1172,7 @@ montantVoteToralParLigne(){
               (qtreel) =>
                 qtreel.uniteadministrative_id == id &&
                 qtreel.ligneeconomique_id == id1 &&
-                qtreel.budget_active == 1
+                qtreel.budget_actif_def == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -2269,6 +2360,37 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+
+TauxOPProvisoireNonRegularisTypeFinancement(id,id1) {
+      if (
+        this.NombreOPNonReguTypeFinancement(id,id1) == 0 &&
+        this.TotalOPNonReguTypeFinancement(id,id1) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          ((parseFloat(this.NombreOPNonReguTypeFinancement(id,id1)) /
+            parseFloat(this.TotalOPNonReguTypeFinancement(id,id1)))*100
+        ).toFixed(2));
+      }
+    },
+TauxOPProvisoireNonRegularis(id) {
+      if (
+        this.NombreOPNonRegu(id) == 0 &&
+        this.TotalOPRegu(id) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          ((parseFloat(this.NombreOPNonRegu(id)) /
+            parseFloat(this.TotalOPRegu(id)))*100
+        ).toFixed(2));
+      }
+    },
+
+
+
+
     genererEnPdfDetailReamenagement() {
       this.$htmlToPaper("printpdf1");
     },
@@ -2360,7 +2482,7 @@ genererEnPdf() {
     },
 
     TotalMontantReamenagement(id,id1) {
-      return  (parseFloat(this.MontantVoteParTypeFinancement(id,id1)) + parseFloat(this.AfficheVariationBudgetParTypeFinancement(id,id))
+      return  (parseFloat(this.MontantVoteParTypeFinancement(id,id1)) + parseFloat(this.AfficheVariationBudgetParTypeFinancement(id,id1))
       );
     },
 TotalDisponibleTypeFinancement(id,id1){

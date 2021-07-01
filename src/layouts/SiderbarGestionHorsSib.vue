@@ -256,7 +256,7 @@ navigateToGestionMarche(){
     this.activate(25)
     this.$router.push({
       //  name: 'TableauBordGestionMarche'
-        name: 'groupeMarcheParUa'
+        name: 'PresentationTableauMarche'
     })
       },
        navigateTableBordBordBudgetEclate(){

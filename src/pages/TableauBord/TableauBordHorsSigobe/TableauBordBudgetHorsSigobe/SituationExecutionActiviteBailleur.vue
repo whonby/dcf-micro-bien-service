@@ -1293,7 +1293,7 @@ export default {
               qtreel.exercice == this.afficheAnnee &&
               qtreel.activite_id == this.Activite_id &&
               qtreel.activite_id == this.inputLigne1 &&
-              qtreel.diff_reg_op==0
+              qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
           ).length
       } else if (this.Activite_id == 0 && this.inputLigne1 != 0) {
         return this.gettersgestionOrdrePaiement
@@ -1301,7 +1301,7 @@ export default {
             (qtreel) =>
               qtreel.exercice == this.afficheAnnee &&
               qtreel.activite_id == this.inputLigne1 &&
-              qtreel.diff_reg_op==0
+              qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
           ).length
       }
       else if (this.Activite_id != 0 && this.inputLigne1 == 0) {
@@ -1310,7 +1310,7 @@ export default {
             (qtreel) =>
               qtreel.exercice == this.afficheAnnee &&
               qtreel.activite_id == this.Activite_id && 
-              qtreel.diff_reg_op==0
+              qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
           ).length
       } else {
         return this.gettersgestionOrdrePaiement
@@ -1318,7 +1318,7 @@ export default {
             (qtreel) =>
               qtreel.exercice == this.afficheAnnee &&
               qtreel.activite_id != null &&
-              qtreel.diff_reg_op==0
+              qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
           ).length
       }
     },
@@ -1654,7 +1654,7 @@ export default {
               (qtreel) =>
                 qtreel.activite_id == id &&
                 qtreel.exercice == this.afficheAnnee &&
-             qtreel.diff_reg_op==0
+             qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
             ).length
         } else {
           return 0;
@@ -1731,7 +1731,7 @@ export default {
                 qtreel.source_financement_id == id &&
                 qtreel.exercice == this.afficheAnnee &&
                 qtreel.activite_id == id1
-                && qtreel.diff_reg_op==0
+                && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
             ).length
         } else {
           return 0;

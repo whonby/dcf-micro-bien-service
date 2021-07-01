@@ -283,7 +283,17 @@
                   >
                     MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
                   </th>
-
+ <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    TOTAL OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  </th>
                      <th
                     style="
                       font-size: 14px;
@@ -295,6 +305,29 @@
                   >
                     NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
                   </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    TAUX OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    DISPONIBLE {{afficheAnnee}}
+                  </th>
+
                   <th
                     style="
                       font-size: 14px;
@@ -317,18 +350,7 @@
                   >
                     EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
                   </th> -->
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    DISPONIBLE {{afficheAnnee}}
-                  </th>
-
+                 
                   
                 </tr>
               </thead>
@@ -403,12 +425,34 @@
                     }}
                     </b>
                   </td>
-
+ <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+                     TotalOPNonRegu(GroupeOrdrePaiementByActivit[0].activite_id)
+                    }}
+                    </b>
+                  </td>
                    <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
                       NombreOPNonRegu(GroupeOrdrePaiementByActivit[0].activite_id)
                     }}
                     </b>
+                  </td>
+                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+                      TauxOPProvisoireNonRegularisActivite(GroupeOrdrePaiementByActivit[0].activite_id)
+                    }} %
+                    </b>
+                  </td>
+                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  style="text-align: right" >
+                    <!-- <b> -->
+                      {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
+                            MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
+                    }}
+                    <!-- </b> -->
                   </td>
                   <!-- <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
@@ -439,17 +483,7 @@
                         </span>
                       </button>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    <!-- <b> -->
-                      {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
-                            MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
-                    }}
-                    <!-- </b> -->
-                  </td>
+                 
 
                   <!-- <td style="background-color:#009246 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
                -->
@@ -535,11 +569,26 @@
                           MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
                   </td>
-
+ <td style="text-align: right;color:#000;" >
+                   {{ToTalOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
+                  </td>
                   <td style="text-align: right;color:#000;" >
                     {{ NombreOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
                   </td>
+                   <td style="text-align: right;color:#000;" >
+              {{  TauxOPProvisoireNonRegularisLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
+                  </td>
+  <td style="text-align: right;color:#000;">
 
+
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetActuelActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)
+                           -
+                            MontantBudgetExecutéActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)))
+                    }}
+                  </td>
                   <!-- <td style="text-align: right;color:#000;">
                     {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
                   </td> -->
@@ -567,17 +616,7 @@
                       </button>
                   </td>
                  
-                  <td style="text-align: right;color:#000;">
-
-
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)
-                           -
-                            MontantBudgetExecutéActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)))
-                    }}
-                  </td>
+                
                 </tr>
               
               
@@ -599,7 +638,8 @@
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
-
+<td style="text-align: right;color:#000">{{ 0 }}</td>
+<td style="text-align: right;color:#000">{{ 0 }}</td>
                   <td style="text-align: right;color:#000">{{ 0 }}</td>
                   <td style="text-align: right;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
@@ -1049,7 +1089,22 @@ inputLigne:false,
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.ligne_economique_id == id && qtreel.activite_id == id1 && qtreel.diff_reg_op == 0
+                qtreel.ligne_economique_id == id && qtreel.activite_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+     ToTalOPNonReguLigne() {
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.ligne_economique_id == id && qtreel.activite_id == id1  && qtreel.type_ordre_paiement==1
             ).length
             
             
@@ -1064,7 +1119,22 @@ inputLigne:false,
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id && qtreel.diff_reg_op == 0
+                qtreel.activite_id == id && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+     TotalOPNonRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&  qtreel.type_ordre_paiement==1
             ).length
             
             
@@ -1876,7 +1946,32 @@ inputLigne:false,
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
-
+    TauxOPProvisoireNonRegularisLigne(id,id1) {
+      if (
+        this.NombreOPNonRegu(id,id1) == 0 &&
+        this.ToTalOPNonReguLigne(id,id1) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          ((parseFloat(this.NombreOPNonRegu(id,id1)) /
+            parseFloat(this.ToTalOPNonReguLigne(id,id1)))*100
+        ).toFixed(2));
+      }
+    },
+TauxOPProvisoireNonRegularisActivite(id) {
+      if (
+        this.NombreOPNonRegu(id) == 0 &&
+        this.TotalOPNonRegu(id) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          ((parseFloat(this.NombreOPNonRegu(id)) /
+            parseFloat(this.TotalOPNonRegu(id)))*100
+        ).toFixed(2));
+      }
+    },
     ActiveInputLigne(){
   if(this.inputLigne == false){
     this.inputLigne = true

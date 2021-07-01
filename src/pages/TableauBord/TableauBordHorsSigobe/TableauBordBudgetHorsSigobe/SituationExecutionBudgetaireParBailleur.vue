@@ -1,4 +1,4 @@
-
+recupereIDactivite
 <template>
   <div>
     
@@ -219,7 +219,15 @@
                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantbudgetVoteParSection(GroupeSection[0].section_id)))}}</td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantbudgetReamenagementParSection(GroupeSection[0].section_id)))}}</td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombrebudgetReamenagementParSection(GroupeSection[0].section_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td>
+  
+  
+   <button class="btn btn-success taille" >
+                        <span style="color:#fff;font-size: 15px;">
+                         {{nbrebailleurSection(GroupeSection[0].section_id)}}
+                        </span>
+                      </button>
+  </td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheExecutionParSection(GroupeSection[0].section_id)}}</td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantActuelParSection(GroupeSection[0].section_id)))}}</td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSection[0].section_id)))}}</td>
@@ -249,7 +257,15 @@
                 <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantbudgetVoteParUa(GroupeUa)))}}</td>
 <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantbudgetReamenagementParUa(GroupeUa)))}}</td>
 <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombrebudgetReamenagementParUa(GroupeUa)}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+<td >
+  <button class="btn btn-success taille" >
+                        <span style="color:#fff;font-size: 15px;">
+                          {{nbreBailleur(GroupeUa)}}
+                        </span>
+                      </button>
+  
+  
+  </td>
 <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombreMarcheExecutionParUa(GroupeUa)}}</td>
 <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantActuelParUa(GroupeUa)))}}</td>
 <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParUa(GroupeUa)))}}</td>
@@ -278,11 +294,7 @@
                   <td style="text-align:right">{{NombrebudgetReamenagement(GroupeUa,GroupeLigne)}}</td>
                   <td style="text-align:right">
 
-                      <button class="btn btn-success taille">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{TailleurBailleurParLigne(GroupeUa,GroupeLigne).length}}
-                        </span>
-                      </button>
+                    
                   </td>
                                    <td style="text-align:right">{{NombreMarcheExecution(GroupeUa,GroupeLigne)}}</td>
                   <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantActuel(GroupeUa,GroupeLigne)))}}</td> 
@@ -534,7 +546,8 @@ export default {
       "getPersonnaliseBudgetGeneralParPersonnel",
       "groupeByActivite",
       "groupeByBailleur",
-      "groupeBySection"
+      "groupeBySection",
+      "groupeByTypeFinancement"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -547,6 +560,69 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+    bailleurPar() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id == id  && item.budget_active==1);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.source_financement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+    bailleurParSect() {
+      return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.budgetEclate.filter(item=>item.section_id == id && item.budget_active==1);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.source_financement_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
+    // bailleurParUniteA(){
+    //     return (id) => {
+    //     if (id != null && id != "") {
+    //       return this.groupeByTypeFinancement
+    //         .filter(
+    //           (qtreel) =>
+    //             qtreel[0].uniteadministrative_id == id   
+    //         ).length
+            
+            
+    //     } else {
+    //       return 0;
+    //     }
+    //   };
+    // },
      NombreOpReguParUa(){
         return (id) => {
         if (id != null && id != "") {
@@ -554,7 +630,7 @@ export default {
             .filter(
               (qtreel) =>
                 qtreel.uniteadministrative_id == id  &&
-                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0
+                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1 
             ).length
             
             
@@ -633,7 +709,7 @@ export default {
             .filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id && qtreel.ligne_economique_id == id1 &&
-                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0
+                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
             ).length
             
             
@@ -1845,6 +1921,14 @@ MontantbudgetVoteParSection(){
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+  nbrebailleurSection(id){
+    return this.bailleurParSect(id).length
+  },
+nbreBailleur(id){
+
+  return this.bailleurPar(id).length
+},
+
 
 MontantActuelParUa(id){
  return   parseFloat(this.MontantbudgetVoteParUa(id))+parseFloat(this.MontantbudgetReamenagementParUa(id)) 
