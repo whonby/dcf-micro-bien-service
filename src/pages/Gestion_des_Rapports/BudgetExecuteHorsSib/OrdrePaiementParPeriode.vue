@@ -1,15 +1,105 @@
 
 <template>
   <div>
+    <br>
     <div class="row-fluid" style="margin-top: -20px">
       <div class="span1"></div>
       <div class="span10" style="background-color: transparent; !important;">
+        <br><br>
         <table class="table table-striped">
           <tbody>
             <tr>
-              <td colspan="2">
-                <br />
-
+              <td>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >Nature<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="plans_budgetaires"
+                  v-model="plans_budgetaires_id"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="TOUTES LES NATURES"
+                >
+                </model-list-select>
+                <br> <br>
+              </td>
+              <td>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >Ligne Budgétaire<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="plans_budgetaires"
+                  v-model="plans_budgetaire_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTS LES PLANS BUGETAIRES"
+                >
+                </model-list-select>
+                <br> <br>
+              </td>
+               <td>
+                  <div class="control-group">
+                    <label class="control-label">
+                      <span style="font-size:15px;color:#000; font-weight:bold;">Type Ordre de Paiement</span>
+                       </label>
+                    <div class="controls">
+                      <select
+                        v-model="type_ordre_de_paiement"
+                        class="span"
+                        style="border: 1px solid #000; padding:5px; font-size:15px;"
+                      >
+                        <option :value="1">OP Direct</option>
+                        <option :value="2">OP Provisoire</option>
+                        <option :value="3">OP Annulation </option>
+                        <option :value="4">OP Définitif</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              <td>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >Numero Ordre de Paiement<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="gettersgestionOrdrePaiement"
+                  v-model="ordre_paiement"
+                  option-value="id"
+                  option-text="numero_ordre_paiement"
+                  placeholder="TOUTS LES NUMERO ORDRE DE PAIEMENT"
+                >
+                </model-list-select>
+                
+              </td>
+              <td>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >Bailleur<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="sources_financements"
+                  v-model="source_financements_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTS LES BAILLEURS"
+                >
+                </model-list-select>
+                <br> <br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>
                 <label style="color: #000; font-size: 14px; font-weight: bolder"
                   >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
                 </label>
@@ -23,9 +113,9 @@
                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
                 >
                 </model-list-select>
+                <br> <br>
               </td>
-            </tr>
-            <tr>
+           
               <td>
                 <div class="control-group">
                   <label
@@ -333,7 +423,7 @@
                 Système de Gestion des Ordres de Paiement hors SIB
               </td>
               <td colspan="2" style=" border: solid white !important;">
-                généré le {{nombreJourTraitementCalucle}} à 08:52 par {{afficheNomUtilisateur}} 
+                généré le {{nombreJourTraitementCalucle}}  par {{afficheNomUtilisateur}} 
               </td>
             </tr>
           </tfoot>
@@ -359,6 +449,7 @@ export default {
   name: "typetext",
   data() {
     return {
+     
       page: 0,
       size: 10,
       active_el: 0,
@@ -392,8 +483,14 @@ export default {
       },
       EditDetache: {},
       typeop_id: 0,
-      NumeroOp: 0,
+      
+      type_ordre_de_paiement:"",
       uniteAdministrative_id: 0,
+      source_financements_id:0,
+      ordre_paiement:"",
+      plans_budgetaire_id:0,
+      plans_budgetaires_id:0,
+     
 
       editMandat: {},
       EditAnulation: {},
@@ -401,7 +498,10 @@ export default {
       search: "",
     };
   },
-
+  created(){
+    console.log("hello silva")
+    console.log(this.GroupeOrdrePaiementByActivite)
+  },
   computed: {
     ...mapGetters("Utilisateurs", [
       "getterAffectionServiceCF",
@@ -569,7 +669,22 @@ return objJson.name
               && qtreel.diff_op == null  
               && qtreel[0].decision_cf == 9)
         );
-      } else if (
+      } else if (this.ordre_paiement != "") {
+        return this.GroupeOrdrePaiementByActivite.filter(
+          (qtreel) =>
+            (qtreel[0].numero_ordre_paiement == this.ordre_paiement &&
+              qtreel[0].exercice == this.anneeAmort &&
+               qtreel.diff_op == null 
+               
+              && qtreel[0].decision_cf == 8) 
+              ||
+            (qtreel[0].numero_ordre_paiement == this.ordre_paiement &&
+              qtreel[0].exercice == this.anneeAmort
+              && qtreel.diff_op == null  
+              && qtreel[0].decision_cf == 9)
+        );
+      } 
+      else if (
         this.uniteAdministrative_id != 0 &&
         this.formData.date_debut != "" &&
         this.formData.date_fin != ""
@@ -588,7 +703,177 @@ return objJson.name
               qtreel[0].date_decision_cf >= this.formData.date_debut &&
               qtreel[0].date_decision_cf <= this.formData.date_fin)
         );
-      } else {
+      }else if(this.uniteAdministrative_id != 0 && this.plans_budgetaires_id != 0){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].ligne_economique_id==this.plans_budgetaires_id &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].ligne_economique_id==this.plans_budgetaires_id &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.plans_budgetaire_id != 0){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].ligne_economique_id==this.plans_budgetaire_id &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].ligne_economique_id==this.plans_budgetaire_id &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.type_ordre_de_paiement == 1){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement==this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement == this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.type_ordre_de_paiement == 2){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement==this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement == this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.type_ordre_de_paiement == 3){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement==this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement == this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.type_ordre_de_paiement == 4){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement==this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].type_ordre_paiement == this.type_ordre_de_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.ordre_paiement !=""){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].numero_ordre_paiement==this.ordre_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].numero_ordre_paiement == this.ordre_paiement &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }else if(this.uniteAdministrative_id != 0 && this.source_financements_id !=0){
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 8 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].source_financement_id==this.source_financements_id &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+                   ||
+                (qtreel[0].activite_id == id &&
+                  qtreel[0].diff_op == null &&
+                  qtreel[0].decision_cf == 9 &&
+                  qtreel[0].exercice==this.anneeAmort &&
+                  qtreel[0].source_financement_id == this.source_financements_id &&
+                  qtreel[0].unite_administrative_id == this.uniteAdministrative_id)
+            );
+          }
+        };
+      }
+      
+       else {
         return this.GroupeOrdrePaiementByActivite.filter(
           (qtreel) =>
             (qtreel[0].exercice == this.anneeAmort &&
@@ -682,8 +967,7 @@ return objJson.name
       };
 
        }else{
-
-         return (id) => {
+             return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
@@ -703,7 +987,7 @@ return objJson.name
        }
       
     },
-
+ 
     listeordrepaiementstest() {
       return (id) => {
         if (id != null && id != "") {
@@ -715,7 +999,142 @@ return objJson.name
     },
 
     listeordrepaiements() {
-      if (this.formData.date_debut != "" && this.formData.date_fin != "") {
+      if (this.plans_budgetaire_id != 0) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.ligne_economique_id == this.plans_budgetaire_id)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.ligne_economique_id == this.plans_budgetaire_id)
+            );
+          }
+        };
+      }else if(this.plans_budgetaires_id != 0){
+         return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.ligne_economique_id == this.plans_budgetaires_id)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.ligne_economique_id == this.plans_budgetaires_id)
+            );
+          }
+        };
+      }
+       else if (this.type_ordre_de_paiement == 1) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+            );
+          }
+        };
+      } else if (this.type_ordre_de_paiement == 2) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+            );
+          }
+        };
+      }else if (this.type_ordre_de_paiement == 3) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+            );
+          }
+        };
+      }else if (this.type_ordre_de_paiement == 4) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.type_ordre_paiement == this.type_ordre_de_paiement)
+            );
+          }
+        };
+      }
+       else if (this.source_financements_id != 0) {
+        return (id) => {
+          if (id != null && id != "") {
+            return this.gettersgestionOrdrePaiement.filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 8 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.source_financement_id == this.source_financements_id)
+                   ||
+                (qtreel.activite_id == id &&
+                  qtreel.diff_op == null &&
+                  qtreel.decision_cf == 9 &&
+                  qtreel.exercice==this.anneeAmort &&
+                  qtreel.source_financement_id == this.source_financements_id)
+            );
+          }
+        };
+      }else if (this.formData.date_debut != "" && this.formData.date_fin != "") {
         return (id) => {
           if (id != null && id != "") {
             return this.gettersgestionOrdrePaiement.filter(
