@@ -342,10 +342,10 @@
                     </button>
                   </td>
 <td>
-                   <button >
+                   <!-- <button >
                      <i class=" icon-print"></i> 
                       
-                    </button>
+                    </button> -->
                     
                 </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
@@ -406,7 +406,7 @@
 
                    <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
-                      0
+                      NombreOPNonRegu(GroupeOrdrePaiementByActivit[0].activite_id)
                     }}
                     </b>
                   </td>
@@ -418,22 +418,22 @@
                     </b>
                   </td> -->
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.50">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 75">
+                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 100">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
@@ -537,7 +537,7 @@
                   </td>
 
                   <td style="text-align: right;color:#000;" >
-                    {{ 0 }}
+                    {{ NombreOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
                   </td>
 
                   <!-- <td style="text-align: right;color:#000;">
@@ -545,22 +545,22 @@
                   </td> -->
 
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.25">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.50">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 75">
+                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 100">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
@@ -1043,7 +1043,36 @@ inputLigne:false,
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
-  
+     NombreOPNonReguLigne() {
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.ligne_economique_id == id && qtreel.activite_id == id1 && qtreel.diff_reg_op == 0
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+  NombreOPNonRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id && qtreel.diff_reg_op == 0
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
 // ListeDEsEntreprise(){
 // if(this.inputLigne1!=''){
 //   return this.ListeGroupByActivite.
@@ -1879,8 +1908,7 @@ inputLigne:false,
       } else {
         return (
           (parseFloat(this.MontantBudgetExecuté(id)) /
-            parseFloat(this.MontantBudgetActuel(id))) *
-          100
+            parseFloat(this.MontantBudgetActuel(id)))
         ).toFixed(2);
       }
     },
@@ -1895,8 +1923,7 @@ inputLigne:false,
       } else {
         return (
           (parseFloat(this.MontantBudgetExecutéActivite(id,id1)) /
-            parseFloat(this.MontantBudgetActuelActivite(id,id1))) *
-          100
+            parseFloat(this.MontantBudgetActuelActivite(id,id1)))
         ).toFixed(2);
       }
     },
