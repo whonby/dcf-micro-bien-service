@@ -445,7 +445,7 @@
                       {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id) -
+                          MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
                             MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
                     <!-- </b> -->
@@ -481,7 +481,7 @@
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco,
+                          MontantBudgetActuelActiviteInitial(listeLigneeco,
                             GroupeOrdrePaiementByActivit[0].activite_id
                           )
                         )
@@ -496,7 +496,7 @@
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco,
+                          MontantBudgetActuelActiviteReamenager(listeLigneeco,
                             GroupeOrdrePaiementByActivit[0].activite_id
                           )
                         )
@@ -1154,49 +1154,35 @@ inputLigne:false,
     },
     //****************gestion des totaux *********//
 
-     TotalEviteNaN() {
-      if (
-        this.TotalMontantBudgetExecuté == 0 &&
-        this.TotalMontantReamenagement == 0
-      ) {
-        return 0.0;
-      } else {
-        return (
-          (parseFloat(this.TotalMontantBudgetExecuté) /
-            parseFloat(this.TotalMontantReamenagement)) *
-          100
-        ).toFixed(2);
-      }
-    },
-
-
-    
-
       TotalMontantbudgetVote(){
         if(this.Activite_id!=0 && this.inputLigne1!=0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
               (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-              && qtreel.activite_id==this.inputLigne1)
+              && qtreel.activite_id==this.inputLigne1
+              && qtreel.budget_actif_def==1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }else if(this.Activite_id!=0 && this.inputLigne1==0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+              && qtreel.budget_actif_def==1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }else if(this.Activite_id==0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1
+              && qtreel.budget_actif_def==1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null
+             && qtreel.budget_actif_def==1))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
@@ -1207,62 +1193,54 @@ inputLigne:false,
              return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+              && qtreel.budget_active==1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
         }else if(this.Activite_id!=0 && this.inputLigne1!=0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
               (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-              && qtreel.activite_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+              && qtreel.activite_id==this.inputLigne1 && qtreel.budget_active==1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
         }else if(this.Activite_id==0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1
+              && qtreel.budget_active==1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
              (qtreel.annebudgetaire == this.afficheAnnee
-                 && qtreel.activite_id!=null))
-             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+                 && qtreel.activite_id!=null && qtreel.budget_active==1))
+             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
         }
           
     },
 
-       TotalMontantBudgetActuel() {
-     if(this.Activite_id!=0 && this.inputLigne1==0){
-             return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-
-        } else if(this.Activite_id!=0 && this.inputLigne1!=0){
-               return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-                 && qtreel.activite_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
-        else if(this.Activite_id==0 && this.inputLigne1!=0){
-              return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
-        else{
-             return this.budgetEclate
-             .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
-             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
+    TotalMontantBudgetActuel() {
+          return (parseFloat(this.TotalMontantbudgetVote) + parseFloat(this.TotalMontantReamenagement))
     },
+
+      TotalEviteNaN() {
+      if (
+        this.TotalMontantBudgetExecuté == 0 &&
+        this.TotalMontantBudgetActuel == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseFloat(this.TotalMontantBudgetExecuté) /
+            parseFloat(this.TotalMontantBudgetActuel)) *
+          100
+        ).toFixed(2);
+      }
+    },
+
+      
 
      TotalMontantBudgetExecuté() {
         if (this.Activite_id!=0 && this.inputLigne1==0) {
@@ -1432,7 +1410,8 @@ inputLigne:false,
             .filter(
               (qtreel) =>
                 qtreel.activite_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.budget_actif_def==1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1451,10 +1430,11 @@ inputLigne:false,
             .filter(
               (qtreel) =>
                 qtreel.activite_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.budget_active==1
             )
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
             .toFixed(0);
@@ -1464,25 +1444,7 @@ inputLigne:false,
       };
     },
     
-    MontantBudgetActuel() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.activite_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
+   
 
     MontantBudgetExecuté() {
       return (id) => {
@@ -1547,7 +1509,7 @@ inputLigne:false,
 
 
 
-    MontantBudgetActuelActivite() {
+    MontantBudgetActuelActiviteInitial() {
       return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
@@ -1555,7 +1517,8 @@ inputLigne:false,
               (qtreel) =>
                 qtreel.ligneeconomique_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.activite_id == id1
+                qtreel.activite_id == id1 &&
+                qtreel.budget_actif_def==1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1567,6 +1530,30 @@ inputLigne:false,
         }
       };
     },
+
+     MontantBudgetActuelActiviteReamenager() {
+      return (id, id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.ligneeconomique_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.activite_id == id1 &&
+                qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+    
 
 
     MontantBudgetExecutéActivite() {
@@ -1886,13 +1873,13 @@ inputLigne:false,
      EviteNaN(id) {
       if (
         this.MontantBudgetExecuté(id) == 0 &&
-        this.MontantReamenagement(id) == 0
+        this.MontantBudgetActuel(id) == 0
       ) {
         return 0.0;
       } else {
         return (
           (parseFloat(this.MontantBudgetExecuté(id)) /
-            parseFloat(this.MontantReamenagement(id))) *
+            parseFloat(this.MontantBudgetActuel(id))) *
           100
         ).toFixed(2);
       }
@@ -1914,22 +1901,20 @@ inputLigne:false,
       }
     },
 
-    //  {{
-    //                   (
-    //                     (MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) /
-    //                       MontantBudgetActuelActivite(listeLigneeco,
-    //                         GroupeOrdrePaiementByActivit[0].activite_id
-    //                       )) *
-    //                     100
-    //                   ).toFixed(3)
+  
+
+    MontantBudgetActuel(id) {
+          return (parseFloat(this.MontantbudgetVote(id)) + parseFloat(this.MontantReamenagement(id)))
+    },
+
+    MontantBudgetActuelActivite(id,id1) {
+          return (parseFloat(this.MontantBudgetActuelActiviteInitial(id,id1)) + parseFloat(this.MontantBudgetActuelActiviteReamenager(id,id1)))
+    },
+
+    
 
 
-     
-
-
-
-
-
+    
 
      verifValeur(){
       if(this.MontantBudgetActuel() == 0 && this.MontantBudgetExecuté() == 0 && this.MontantBudgetExecutéProvisoire() == 0){
