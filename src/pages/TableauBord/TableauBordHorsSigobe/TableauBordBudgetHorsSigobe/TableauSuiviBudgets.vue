@@ -630,7 +630,7 @@
                   v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                   @click="percuFacture(unite.id)"
                 >
-                  {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
+                  {{ formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
