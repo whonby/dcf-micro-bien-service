@@ -630,7 +630,7 @@
                   v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                   @click="percuFacture(unite.id)"
                 >
-                  {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
+                  {{ formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(unite.id))) }}
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
@@ -663,22 +663,22 @@
                 </td> -->
 
                 <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(unite.id) <= 25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(unite.id)) <= 0.25">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(unite.id) <= 50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(unite.id)) <= 0.5">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(unite.id) <= 75">
+                       <button class="btn btn-success taille" v-else-if=" parseFloat(EviteNaN(unite.id)) <= 0.75">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(unite.id) <= 100">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(unite.id)) <= 1">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
@@ -765,22 +765,22 @@
               </td> -->
 
               <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaNTypeFinancement(unite.id, unite1) <= 25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.25">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNTypeFinancement(unite.id, unite1) <= 50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.50">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNTypeFinancement(unite.id, unite1) <= 75">
+                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.75">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNTypeFinancement(unite.id, unite1) <= 100">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 1">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
@@ -2235,8 +2235,7 @@ arrayExerciceDecompteBienService() {
       } else {
         return (
           (parseFloat(this.totalComsommeYtpeFinancement) /
-            parseFloat(this.TotalVoteParTypeFinancement)) *
-          100
+            parseFloat(this.TotalVoteParTypeFinancement))
         ).toFixed(2);
       }
     },
@@ -2246,8 +2245,7 @@ arrayExerciceDecompteBienService() {
       } else {
         return (
           (parseFloat(this.SommeBudgetConsomme) /
-            parseFloat(this.SommeBudgetInitial)) *
-          100
+            parseFloat(this.SommeBudgetInitial)) 
         ).toFixed(2);
       }
     },
@@ -2341,8 +2339,8 @@ genererEnPdf() {
       } else {
         return (
           (parseFloat(this.MontantBudgetExecuté(id)) /
-            ((parseFloat(this.MontantBudgetVote(id)) + parseFloat(this.AfficheVariationBudget(id)))-parseFloat(this.MontantBudgetExecuté(id)))) *
-          100
+            ((parseFloat(this.MontantBudgetVote(id)) + parseFloat(this.AfficheVariationBudget(id)))-parseFloat(this.MontantBudgetExecuté(id))))
+          
         ).toFixed(2);
       }
     },
@@ -2356,8 +2354,7 @@ genererEnPdf() {
         return (
           (parseFloat(this.MontantExecuteParTypeFinancement(id, id1)) /
             parseFloat(this.MontantVoteParTypeFinancement(id, id1) +
-                        this.AfficheVariationBudgetParTypeFinancement(id, id1))) *
-          100
+                        this.AfficheVariationBudgetParTypeFinancement(id, id1)))
         ).toFixed(2);
       }
     },
