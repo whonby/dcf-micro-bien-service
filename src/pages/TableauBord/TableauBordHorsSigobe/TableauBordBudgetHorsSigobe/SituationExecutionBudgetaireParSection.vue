@@ -1008,23 +1008,7 @@ AfficheLigneGroupe() {
               (qtreel) =>
                 (qtreel.unite_administrative_id == id &&
                 qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 1 &&
-                qtreel.decision_cf==9)
-                ||
-                (qtreel.unite_administrative_id == id &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 1 &&
-                qtreel.decision_cf==8)
-                ||
-                (qtreel.unite_administrative_id == id &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 4 &&
-                qtreel.decision_cf==9)
-                ||
-                (qtreel.unite_administrative_id == id &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 4 &&
-                qtreel.decision_cf==8)
+                qtreel.diff_reg_op==0)
             ).length
         } else {
           return 0;
@@ -1156,23 +1140,7 @@ AfficheLigneGroupe() {
               (qtreel) =>
                 (qtreel.section_id == id &&
                 qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 1 &&
-                qtreel.decision_cf==9)
-                ||
-                (qtreel.section_id == id &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 1 &&
-                qtreel.decision_cf==8)
-                ||
-                (qtreel.section_id == id &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 4 &&
-                qtreel.decision_cf==9)
-                ||
-                (qtreel.section_id == id &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 4 &&
-                qtreel.decision_cf==8)
+                qtreel.diff_reg_op==0)
             ).length
         } else {
           return 0;
@@ -1267,26 +1235,7 @@ AfficheLigneGroupe() {
                 (qtreel.ligne_economique_id == id &&
                 qtreel.unite_administrative_id==id1 &&
                 qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 1 &&
-                qtreel.decision_cf==9)
-                ||
-                (qtreel.ligne_economique_id == id &&
-                qtreel.unite_administrative_id==id1 &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 1 &&
-                qtreel.decision_cf==8)
-                ||
-                (qtreel.ligne_economique_id == id &&
-                qtreel.unite_administrative_id==id1 &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 4 &&
-                qtreel.decision_cf==9)
-                ||
-                (qtreel.ligne_economique_id == id &&
-                qtreel.unite_administrative_id==id1 &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.type_ordre_paiement == 4 &&
-                qtreel.decision_cf==8)
+                qtreel.diff_reg_op==0)
             ).length
         } else {
           return 0;

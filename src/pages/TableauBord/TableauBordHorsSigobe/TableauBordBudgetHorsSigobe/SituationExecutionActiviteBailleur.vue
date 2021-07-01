@@ -338,7 +338,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantBudgetActuel(
+                      MontantBudgetInitial(
                         GroupeOrdrePaiementByActivit[0].activite_id
                       )
                     )
@@ -502,15 +502,7 @@
                   GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg': 'whitebg'" style="text-align: right">
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantBudgetActuel(
-                        GroupeOrdrePaiementByActivit[0].activite_id
-                      ) -
-                        MontantBudgetExecuté(
-                          GroupeOrdrePaiementByActivit[0].activite_id
-                        )
-                    )
-                  )
+                    parseFloat(MontantDisponible(GroupeOrdrePaiementByActivit[0].activite_id) ))
                 }}
               </td>
             </tr>
@@ -537,14 +529,10 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      afficheMontantVoteParActivite(
-                        GroupeOrdrePaiementByActivit[0].activite_id,
-                        ListepaimentBailleur
-                      ) -
-                        variation(
-                          GroupeOrdrePaiementByActivit[0].activite_id,
-                          ListepaimentBailleur
-                        )
+                      afficheMontantVoteParActivite(ListepaimentBailleur,
+                      GroupeOrdrePaiementByActivit[0].activite_id
+
+                      )
                     )
                   )
                 }}
@@ -553,7 +541,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantBudgetActuelBailleur(
+                      MontantReamenagerBailleur(
                         ListepaimentBailleur,
                         GroupeOrdrePaiementByActivit[0].activite_id
                       )
@@ -565,8 +553,7 @@
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(
-                      MontantBudgetActuelBailleur(
-                        ListepaimentBailleur,
+                      MontantBudgetActuelBailleur(ListepaimentBailleur,
                         GroupeOrdrePaiementByActivit[0].activite_id
                       )
                     )
@@ -698,15 +685,7 @@
               <td style="font-size: 14px; text-align: right; color: #000">
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantBudgetActuelBailleur(
-                        ListepaimentBailleur,
-                        GroupeOrdrePaiementByActivit[0].activite_id
-                      ) -
-                        MontantBudgetExecuté1Bailleur(
-                          ListepaimentBailleur,
-                          GroupeOrdrePaiementByActivit[0].activite_id
-                        )
+                    parseFloat(MontantBudgetDisponobleBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit[0].activite_id)
                     )
                   ) || "Non renseigné"
                 }}
@@ -819,12 +798,7 @@
                   color: #000;
                 "
               >
-                {{
-                  (
-                    (TotalMontantBudgetExecuté / TotalMontantBudgetActuel) *
-                    100
-                  ).toFixed(2)
-                }}
+                {{TotalEviteNaN}}
               </td>
 
               <!-- <td
@@ -1093,7 +1067,8 @@ export default {
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
               qtreel.activite_id == this.Activite_id &&
-              qtreel.activite_id == this.inputLigne1
+              qtreel.activite_id == this.inputLigne1 &&
+              qtreel.budget_actif_def==1
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
           .toFixed(0);
@@ -1102,7 +1077,8 @@ export default {
           .filter(
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id == this.inputLigne1
+              qtreel.activite_id == this.inputLigne1 &&
+              qtreel.budget_actif_def==1
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
           .toFixed(0);
@@ -1111,7 +1087,8 @@ export default {
           .filter(
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id == this.Activite_id
+              qtreel.activite_id == this.Activite_id &&
+              qtreel.budget_actif_def==1
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
           .toFixed(0);
@@ -1120,7 +1097,8 @@ export default {
           .filter(
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id != null
+              qtreel.activite_id != null &&
+              qtreel.budget_actif_def==1
           )
           .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
           .toFixed(0);
@@ -1134,78 +1112,60 @@ export default {
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
               qtreel.activite_id == this.Activite_id &&
-              qtreel.activite_id == this.inputLigne1
+              qtreel.activite_id == this.inputLigne1 &&
+              qtreel.budget_active==1
           )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget), 0)
           .toFixed(0);
       } else if (this.Activite_id == 0 && this.inputLigne1 != 0) {
         return this.budgetEclate
           .filter(
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id == this.inputLigne1
+              qtreel.activite_id == this.inputLigne1 &&
+              qtreel.budget_active==1
           )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget), 0)
           .toFixed(0);
       } else if (this.Activite_id != 0 && this.inputLigne1 == 0) {
-        return this.budgetEclate
-          .filter(
-            (qtreel) =>
-              qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id == this.Activite_id
-          )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
-          .toFixed(0);
-      } else {
-        return this.budgetEclate
-          .filter(
-            (qtreel) =>
-              qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id != null
-          )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
-          .toFixed(0);
-      }
-    },
-
-    TotalMontantBudgetActuel() {
-      if (this.Activite_id != 0 && this.inputLigne1 != 0) {
         return this.budgetEclate
           .filter(
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
               qtreel.activite_id == this.Activite_id &&
-              qtreel.activite_id == this.inputLigne1
+              qtreel.budget_active==1
           )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
-          .toFixed(0);
-      } else if (this.Activite_id == 0 && this.inputLigne1 != 0) {
-        return this.budgetEclate
-          .filter(
-            (qtreel) =>
-              qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id == this.inputLigne1
-          )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
-          .toFixed(0);
-      } else if (this.Activite_id != 0 && this.inputLigne1 == 0) {
-        return this.budgetEclate
-          .filter(
-            (qtreel) =>
-              qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id == this.Activite_id
-          )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget), 0)
           .toFixed(0);
       } else {
         return this.budgetEclate
           .filter(
             (qtreel) =>
               qtreel.annebudgetaire == this.afficheAnnee &&
-              qtreel.activite_id != null
+              qtreel.activite_id != null &&
+              qtreel.budget_active==1
           )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation), 0)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget), 0)
           .toFixed(0);
+      }
+    },
+
+    TotalMontantBudgetActuel() {
+      return ( parseFloat(this.TotalMontantReamenagement) + parseFloat(this.TotalMontantbudgetVote));
+    },
+
+     TotalEviteNaN() {
+      if (
+        this.TotalMontantBudgetExecuté == 0 &&
+        this.TotalMontantBudgetActuel == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseFloat(this.TotalMontantBudgetExecuté) /
+            parseFloat(this.TotalMontantBudgetActuel)) *
+          100
+        ).toFixed(2);
       }
     },
 
@@ -1407,14 +1367,36 @@ export default {
       };
     },
 
+    MontantReamenagerBailleur() {
+      return (id, id1) => {
+        if ((id != null && id != "", id1 != null && id1 != "")) {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id1 &&
+                qtreel.source_financement_id == id &&
+                qtreel.annebudgetaire == this.anneeAmort &&
+                qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
     afficheMontantVoteParActivite() {
       return (id, id1) => {
         if ((id != null && id != "", id1 != null && id1 != "")) {
           return this.budgetEclate
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id &&
-                qtreel.source_financement_id == id1 &&
+                qtreel.activite_id == id1 &&
+                qtreel.source_financement_id == id &&
                 qtreel.annebudgetaire == this.anneeAmort &&
                 qtreel.budget_actif_def == 1
             )
@@ -1565,7 +1547,7 @@ export default {
       };
     },
 
-    MontantBudgetActuel() {
+    MontantBudgetInitial() {
       return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate
@@ -1573,6 +1555,7 @@ export default {
               (qtreel) =>
                 qtreel.activite_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee
+                && qtreel.budget_actif_def==1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1584,6 +1567,8 @@ export default {
         }
       };
     },
+
+    
 
     MontantReamenagement() {
       return (id) => {
@@ -1593,9 +1578,10 @@ export default {
               (qtreel) =>
                 qtreel.activite_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee
+                && qtreel.budget_active==1
             )
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
             .toFixed(0);
@@ -1605,26 +1591,7 @@ export default {
       };
     },
 
-    MontantBudgetActuelBailleur() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.source_financement_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.activite_id == id1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
+  
 
     MontantBudgetExecutéProvisoire() {
       return (id) => {
@@ -1966,17 +1933,39 @@ export default {
     EviteNaN(id) {
       if (
         this.MontantBudgetExecuté(id) == 0 &&
-        this.MontantReamenagement(id) == 0
+        this.MontantBudgetActuel(id) == 0
       ) {
         return 0.0;
       } else {
         return (
           (parseFloat(this.MontantBudgetExecuté(id)) /
-            parseFloat(this.MontantReamenagement(id))) *
+            parseFloat(this.MontantBudgetActuel(id))) *
           100
         ).toFixed(2);
       }
     },
+
+    //gestion des actuel
+      MontantBudgetActuel(id){
+          return ( parseFloat(this.MontantBudgetInitial(id)) + parseFloat(this.MontantReamenagement(id)))
+      },
+
+      MontantDisponible(id){
+          return (parseFloat(this.MontantBudgetActuel(id)) - parseFloat(this.MontantBudgetExecuté(id)))
+            
+  },
+
+  MontantBudgetActuelBailleur(id,id1){
+     return (parseFloat(this.afficheMontantVoteParActivite(id,id1)) + parseFloat(this.MontantReamenagerBailleur(id,id1)))
+  },
+
+  MontantBudgetDisponobleBailleur(id,id1){
+     return (parseFloat(this.MontantBudgetActuelBailleur(id,id1)) - parseFloat(this.MontantBudgetExecuté1Bailleur(id,id1)))
+  },
+
+
+
+
 
     genererEnPdf() {
       this.$htmlToPaper("printpdf");
