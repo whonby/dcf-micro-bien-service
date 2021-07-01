@@ -45,13 +45,25 @@
                         >TB3 : EXECUTION PAR ACTIVITE</a
                       >
                     </li> -->
- <li class="" style="font-size:14px">
+                     <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD4"
                         >TB3 : D'EXECUTION PAR ACTIVITE ET BAILLEUR</a
                       >
                     </li>
 
                      
+
+                     
+<li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD3"
+                        >TB4 : SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</a
+                      >
+                    </li>
+                     <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD5"
+                        >TB5 : SITUATION D'EXECUTION BUDGETAIRE PAR SECTION</a
+                      >
+                    </li>
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -84,16 +96,32 @@
                      <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
                   </div>
 
-                  <div id="TABLEAUBORD3" class="tab-pane ">
+                  <!-- <div id="TABLEAUBORD3" class="tab-pane ">
                      <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
                   </div>
- <div id="TABLEAUBORD4" class="tab-pane ">
+
+                  <div id="TABLEAUBORD4" class="tab-pane ">
                      <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
                   </div>
-                  <div id="LIQUIDATION" class="tab-pane ">
-                     <recapitulatifBudgetHorsSigobe></recapitulatifBudgetHorsSigobe>
+
+                  <div id="test1" class="tab-pane ">
+                     <testLega></testLega>
+                  </div> -->
+                 <div id="TABLEAUBORD4" class="tab-pane ">
+                     <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
+                  </div>
+                  <div id="TABLEAUBORD3" class="tab-pane ">
+                     <SituationExecutionBudgetaireParBailleur></SituationExecutionBudgetaireParBailleur>
                
                   </div>
+                   <div id="TABLEAUBORD5" class="tab-pane ">
+                     <SituationExecutionBudgetaireParSection></SituationExecutionBudgetaireParSection>
+               
+                  </div>
+
+                  
+
+
                    <div id="MANDAT" class="tab-pane ">
                        <h3 style="text-align:center">DETAIL OP DIRECT</h3>
      
@@ -126,16 +154,22 @@ import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 // import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
 import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBailleur"
+
+import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
+import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
 // import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       SituationExecutionBudgetaireParBailleur,
+       SituationExecutionBudgetaireParSection,
    // ModelListSelect,
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
+ 
     // SituationExecuBudgetRecapActivite,
     
     // RechercheExecutionBudgetaire,

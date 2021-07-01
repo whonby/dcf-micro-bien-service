@@ -362,7 +362,7 @@
               >
                 <thead>
                   <tr>
-                    <th>N°Lot4</th>
+                    <th>N°Lot</th>
                     <th>Objet marché</th>
                     <th>UA</th>
                     <th>Type marché</th>
@@ -440,6 +440,10 @@
                       class="btn-group"
                       v-if="afficherStatusSib(marche.id) == 0"
                     >
+                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                class="btn btn-success " title="Cycle de vie">
+                  <span class=""><i class="  icon-calendar"></i> Cycle de Vie</span>
+                   </router-link>
                       <router-link
                         :to="{
                           name: 'detailExecution',
@@ -462,6 +466,10 @@
                       class="btn-group"
                       v-if="afficherStatusSib(marche.id) == 1"
                     >
+                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                class="btn btn-success " title="Cycle de vie">
+                  <span class=""><i class="  icon-calendar"></i> Cycle de Vie</span>
+                   </router-link>
                       <router-link
                         :to="{
                           name: 'detailExecutionHorsSib',
@@ -509,14 +517,15 @@
                     </div>
                   </tr>
                   <tr>
+                      <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td style="font-weight: bold">Total</td>
+                    
+                    <td style="font-weight: bold">Total45</td>
                     <td
                       style="text-align: center; color: red; font-weight: bold"
                     >
@@ -529,6 +538,7 @@
                       }}
                     </td>
                     <td></td>
+                    
                   </tr>
                 </tbody>
               </table>
@@ -615,6 +625,10 @@
                       class="btn-group"
                       v-if="afficherStatusSib(marche.id) == 0"
                     >
+                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                class="btn btn-success " title="Cycle de vie">
+                  <span class=""><i class="  icon-calendar"></i> Cycle de Vie</span>
+                   </router-link>
                       <router-link
                         :to="{
                           name: 'detailExecution',
@@ -665,6 +679,10 @@
                       class="btn-group"
                       v-if="afficherStatusSib(marche.id) == 1"
                     >
+                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                class="btn btn-success " title="Cycle de vie">
+                  <span class=""><i class="  icon-calendar"></i> Cycle de Vie</span>
+                   </router-link>
                       <router-link
                         :to="{
                           name: 'detailExecutionHorsSib',
@@ -712,14 +730,14 @@
                     </div>
                   </tr>
                   <tr>
+                      <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight: bold">Total</td>
+                    
+                    <td style="font-weight: bold">Total78</td>
                     <td
                       style="text-align: center; color: red; font-weight: bold"
                     >
@@ -731,6 +749,7 @@
                         )
                       }}
                     </td>
+                    <td></td>
                     <!-- <td></td> -->
                   </tr>
                 </tbody>

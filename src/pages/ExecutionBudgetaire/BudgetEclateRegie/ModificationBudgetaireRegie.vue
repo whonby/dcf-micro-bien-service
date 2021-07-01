@@ -1193,6 +1193,7 @@ methods: {
  var nouvelObjettrsor = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
+          section_id:this.idSection(this.formData.activite_id),
         dotation:this.dotationTotal,
           tresor:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
@@ -1222,6 +1223,7 @@ type_financement_id:""
  var nouvelObjet1 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
+          section_id:this.idSection(this.formData.activite_id),
         dotation:this.dotationTotal,
           don:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
@@ -1251,6 +1253,7 @@ report:"",
  var nouvelObjet3 = {
         ...this.formData,
         	annebudgetaire: this.anneeAmort,
+          section_id:this.idSection(this.formData.activite_id),
         dotation:this.dotationTotal,
           emprunt:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,

@@ -105,8 +105,8 @@
 
 
 
-    <div class="span4">
-       
+    <!-- <div class="span4">
+          <br />
           Afficher
           <select name="pets" id="pet-select" v-model="size" class="span3">
             <option value="5" selected>5</option>
@@ -117,7 +117,7 @@
             <option value="100">100</option>
           </select>
          
-        </div>
+        </div> -->
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -185,18 +185,7 @@
                   >
                     
                   </th>
- <th
-                    style="
-                      font-size: 14px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    colspan=""
-                  >
-                    
-                  </th>
+
                    <th
                     style="
                       font-size: 14px;
@@ -246,7 +235,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MODIFICATION BUDGETAIRE {{afficheAnnee}}
+                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
                   </th>
                    
                   <th
@@ -306,7 +295,7 @@
                   >
                     TAUX D'EXECUTION {{afficheAnnee}}
                   </th>
-                  <!-- <th
+                  <th
                     style="
                       font-size: 14px;
                       font-weight: bold;
@@ -316,7 +305,7 @@
                     "
                   >
                     EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
-                  </th> -->
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -341,20 +330,13 @@
                       
                     </button>
                   </td>
-<td>
-                   <!-- <button >
-                     <i class=" icon-print"></i> 
-                      
-                    </button> -->
-                    
-                </td>
+
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
                     
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                    style="text-align: right">
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
@@ -362,27 +344,22 @@
                     </b>
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" 
-                    style="text-align: right">
-                   
-                    {{
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
                      formatageSommeSansFCFA(
                         parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
-                 
+                    </b>
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    
-                    {{
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }} 
-
+                    </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                    <b> {{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -390,8 +367,7 @@
                      }}
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
                       formatageSommeSansFCFA(
                         parseFloat(
@@ -406,53 +382,51 @@
 
                    <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
-                      NombreOPNonRegu(GroupeOrdrePaiementByActivit[0].activite_id)
+                      0
                     }}
                     </b>
                   </td>
-                  <!-- <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
 
                         EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
                     }}
                     </b>
-                  </td> -->
+                  </td>
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.25">
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.50">
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 50">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 75">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) <= 100">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    <!-- <b> -->
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                 
                       {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
+                          MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id) -
                             MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
-                    <!-- </b> -->
+                 
                   </td>
 
-                  <!-- <td style="background-color:#009246 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
-               -->
+                 
                 </tr>
 
 
@@ -465,10 +439,7 @@
                    
 
                   </td>
-                   <td style="width:;color:#000" >
                    
-
-                  </td>
 
                   <td style="width: 500px;color:#000;" >
                    
@@ -481,7 +452,7 @@
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetActuelActiviteInitial(listeLigneeco,
+                          MontantBudgetActuelActivite(listeLigneeco,
                             GroupeOrdrePaiementByActivit[0].activite_id
                           )
                         )
@@ -496,7 +467,7 @@
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetActuelActiviteReamenager(listeLigneeco,
+                          MontantBudgetActuelActivite(listeLigneeco,
                             GroupeOrdrePaiementByActivit[0].activite_id
                           )
                         )
@@ -537,30 +508,30 @@
                   </td>
 
                   <td style="text-align: right;color:#000;" >
-                    {{ NombreOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
+                    {{ 0 }}
                   </td>
 
-                  <!-- <td style="text-align: right;color:#000;">
+                  <td style="text-align: right;color:#000;">
                     {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
-                  </td> -->
+                  </td>
 
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.25">
+                  <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 25">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.50">
+                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 50">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
+                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 75">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
+                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id) < 100">
                         <span style="color:#fff;font-size: 14px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
@@ -585,18 +556,17 @@
               <tfoot>
                 <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
                   <!-- <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td> -->
-                  <td colspan="2" style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
-                  
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
+                  <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
 
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
 
@@ -605,12 +575,13 @@
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                    {{ TotalEviteNaN }}%
                  </td>
-                 <!-- <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                  
+                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   <!-- 
+                     {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                 
-                 </td> -->
+                 </td>
                  
-                  <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="width :9%;text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
                 </tr>
@@ -1043,36 +1014,7 @@ inputLigne:false,
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
-     NombreOPNonReguLigne() {
-      return (id,id1) => {
-        if (id != null && id != "",id1 != null && id1 != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-                qtreel.ligne_economique_id == id && qtreel.activite_id == id1 && qtreel.diff_reg_op == 0
-            ).length
-            
-            
-        } else {
-          return 78;
-        }
-      };
-    },
-  NombreOPNonRegu() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-                qtreel.activite_id == id && qtreel.diff_reg_op == 0
-            ).length
-            
-            
-        } else {
-          return 78;
-        }
-      };
-    },
+  
 // ListeDEsEntreprise(){
 // if(this.inputLigne1!=''){
 //   return this.ListeGroupByActivite.
@@ -1183,35 +1125,49 @@ inputLigne:false,
     },
     //****************gestion des totaux *********//
 
+     TotalEviteNaN() {
+      if (
+        this.TotalMontantBudgetExecuté == 0 &&
+        this.TotalMontantReamenagement == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseFloat(this.TotalMontantBudgetExecuté) /
+            parseFloat(this.TotalMontantReamenagement)) *
+          100
+        ).toFixed(2);
+      }
+    },
+
+
+    
+
       TotalMontantbudgetVote(){
         if(this.Activite_id!=0 && this.inputLigne1!=0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
               (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-              && qtreel.activite_id==this.inputLigne1
-              && qtreel.budget_actif_def==1)
+              && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }else if(this.Activite_id!=0 && this.inputLigne1==0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-              && qtreel.budget_actif_def==1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }else if(this.Activite_id==0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1
-              && qtreel.budget_actif_def==1)
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
             ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null
-             && qtreel.budget_actif_def==1))
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
              .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
@@ -1222,54 +1178,62 @@ inputLigne:false,
              return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-              && qtreel.budget_active==1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }else if(this.Activite_id!=0 && this.inputLigne1!=0){
              return this.budgetEclate
             .filter(
               (qtreel) =>
               (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
-              && qtreel.activite_id==this.inputLigne1 && qtreel.budget_active==1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
+              && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }else if(this.Activite_id==0 && this.inputLigne1!=0){
                return this.budgetEclate
             .filter(
               (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1
-              && qtreel.budget_active==1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
         else{
              return this.budgetEclate
              .filter((qtreel) =>
              (qtreel.annebudgetaire == this.afficheAnnee
-                 && qtreel.activite_id!=null && qtreel.budget_active==1))
-             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),0).toFixed(0);
+                 && qtreel.activite_id!=null))
+             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
         }
           
     },
 
-    TotalMontantBudgetActuel() {
-          return (parseFloat(this.TotalMontantbudgetVote) + parseFloat(this.TotalMontantReamenagement))
-    },
+       TotalMontantBudgetActuel() {
+     if(this.Activite_id!=0 && this.inputLigne1==0){
+             return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
 
-      TotalEviteNaN() {
-      if (
-        this.TotalMontantBudgetExecuté == 0 &&
-        this.TotalMontantBudgetActuel == 0
-      ) {
-        return 0.0;
-      } else {
-        return (
-          (parseFloat(this.TotalMontantBudgetExecuté) /
-            parseFloat(this.TotalMontantBudgetActuel)) *
-          100
-        ).toFixed(2);
-      }
+        } else if(this.Activite_id!=0 && this.inputLigne1!=0){
+               return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.Activite_id
+                 && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }
+        else if(this.Activite_id==0 && this.inputLigne1!=0){
+              return this.budgetEclate
+            .filter(
+              (qtreel) =>
+              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id==this.inputLigne1)
+            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }
+        else{
+             return this.budgetEclate
+             .filter((qtreel) =>
+             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.activite_id!=null))
+             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
+        }
     },
-
-      
 
      TotalMontantBudgetExecuté() {
         if (this.Activite_id!=0 && this.inputLigne1==0) {
@@ -1439,8 +1403,7 @@ inputLigne:false,
             .filter(
               (qtreel) =>
                 qtreel.activite_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.budget_actif_def==1
+                qtreel.annebudgetaire == this.afficheAnnee
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1459,11 +1422,10 @@ inputLigne:false,
             .filter(
               (qtreel) =>
                 qtreel.activite_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.budget_active==1
+                qtreel.annebudgetaire == this.afficheAnnee
             )
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
               0
             )
             .toFixed(0);
@@ -1473,7 +1435,25 @@ inputLigne:false,
       };
     },
     
-   
+    MontantBudgetActuel() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
 
     MontantBudgetExecuté() {
       return (id) => {
@@ -1538,7 +1518,7 @@ inputLigne:false,
 
 
 
-    MontantBudgetActuelActiviteInitial() {
+    MontantBudgetActuelActivite() {
       return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.budgetEclate
@@ -1546,8 +1526,7 @@ inputLigne:false,
               (qtreel) =>
                 qtreel.ligneeconomique_id == id &&
                 qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.activite_id == id1 &&
-                qtreel.budget_actif_def==1
+                qtreel.activite_id == id1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -1559,30 +1538,6 @@ inputLigne:false,
         }
       };
     },
-
-     MontantBudgetActuelActiviteReamenager() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.ligneeconomique_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee &&
-                qtreel.activite_id == id1 &&
-                qtreel.budget_active==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-
-    
 
 
     MontantBudgetExecutéActivite() {
@@ -1902,13 +1857,14 @@ inputLigne:false,
      EviteNaN(id) {
       if (
         this.MontantBudgetExecuté(id) == 0 &&
-        this.MontantBudgetActuel(id) == 0
+        this.MontantReamenagement(id) == 0
       ) {
         return 0.0;
       } else {
         return (
           (parseFloat(this.MontantBudgetExecuté(id)) /
-            parseFloat(this.MontantBudgetActuel(id)))
+            parseFloat(this.MontantReamenagement(id))) *
+          100
         ).toFixed(2);
       }
     },
@@ -1923,25 +1879,28 @@ inputLigne:false,
       } else {
         return (
           (parseFloat(this.MontantBudgetExecutéActivite(id,id1)) /
-            parseFloat(this.MontantBudgetActuelActivite(id,id1)))
+            parseFloat(this.MontantBudgetActuelActivite(id,id1))) *
+          100
         ).toFixed(2);
       }
     },
 
-  
-
-    MontantBudgetActuel(id) {
-          return (parseFloat(this.MontantbudgetVote(id)) + parseFloat(this.MontantReamenagement(id)))
-    },
-
-    MontantBudgetActuelActivite(id,id1) {
-          return (parseFloat(this.MontantBudgetActuelActiviteInitial(id,id1)) + parseFloat(this.MontantBudgetActuelActiviteReamenager(id,id1)))
-    },
-
-    
+    //  {{
+    //                   (
+    //                     (MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) /
+    //                       MontantBudgetActuelActivite(listeLigneeco,
+    //                         GroupeOrdrePaiementByActivit[0].activite_id
+    //                       )) *
+    //                     100
+    //                   ).toFixed(3)
 
 
-    
+     
+
+
+
+
+
 
      verifValeur(){
       if(this.MontantBudgetActuel() == 0 && this.MontantBudgetExecuté() == 0 && this.MontantBudgetExecutéProvisoire() == 0){
@@ -1974,15 +1933,14 @@ inputLigne:false,
       this.page++;
     },
 
-    apercuFacture1(id) {
+    apercuFacture(id) {
      
-      // this.$("#validationOpDefinitif2").modal({
+      //this.$("#validationOpDefinitif2").modal({
       //   backdrop: "static",
       //   keyboard: false,
       // });
-       this.editMandat1 = this.groupeByActivite.find((item) => item[0].activite_id == id);
-       console.log(this.editMandat1)
-      return alert(this.editMandat1.activite_id);
+       this.editMandat1 = this.afficheUa.find((item) => item[0].activite_id == id);
+      return alert(id);
     
     },
 
@@ -2004,12 +1962,12 @@ width: 95%;
   background: #98FB98 !important;
   font-weight: bold;
   color: black;
-  font-size: 13px;
+  font-size: 15px;
 }
 .graybg {
   background: rgb(6, 184, 6) !important;
   color: white;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
 }
 .tailgrand {

@@ -258,7 +258,7 @@
                 </tr>
             </tbody>
           </table>
-          <br>
+         
       
           <!-- <p v-if="verifActiviteId(GroupeOrdrePaiementByActivit[0].activite_id)==1"
             class="widget-content nopadding" style="margin-left: 30px; font-size: 14px; font-weight: bold; margin: 25px">

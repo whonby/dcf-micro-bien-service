@@ -1,4 +1,4 @@
-
+updateAnoBaileurLocal
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
@@ -7,10 +7,27 @@
       <div class="span8" style="text-align:center"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
       </h5></div>
       <div align="right">
-        <div class="span3"><button @click.prevent="afficheModaleActe(item.id)"
-         class="btn btn-primary" title="Ajouter Bailleur">
+      <!-- <div class="widget-content">
+        
+        <button class="btn btn-primary"  @click.prevent="afficheModaleAnoBailleur(item.id)" data-toggle="modal"  v-if="listeAvisDemandeAno(item.id)==1"  >Ajouter</button>
+        <button class="btn btn-primary"  title="veillez recommencer le jugement , car l'Avis ANO DMP est Objection" disabled v-else  >Ajouter</button>
+      </div> -->
+       <div class="span3">
+         <button @click.prevent="afficheModaleAnoBailleur(item.id)" 
+       v-if="listeAvisDemandeAno(item.id)==0"
+                                     class="btn btn-primary" title="Ajouter Bailleur">
+           <span class=""><i class="icon-edit"></i></span> Ajouter</button>
+           <button  
+       title="veillez recommencer le jugement , car l'Avis ANO DMP est Objection" disabled v-else
+                                     class="btn btn-primary">
+           <span class=""><i class="icon-edit"></i></span> Ajouter</button>
+           </div>
+    </div>
+      <!-- <div align="right">
+        <div class="span3"><button @click.prevent="afficheModaleAnoBailleur(item.id)"
+                                     class="btn btn-primary" title="Ajouter Bailleur">
            <span class=""><i class="icon-edit"></i></span> Ajouter</button></div>
-      </div>
+      </div> -->
           
 <!--      <div class="span2"><button @click.prevent="supprimerAnalyseDossierMultiple(item.id)"  class="btn btn-danger " title="Supprimer">-->
 <!--        <span class=""><i class="icon-trash"></i></span></button></div>-->
@@ -18,58 +35,56 @@
 
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
-       <tr>
-      <th>Numéro courrier</th>
-      <th>Date demande</th>
-      <th>Fichier</th>
-      <th>Avis</th>
-      <th>Observation</th>
-      <th>Date de l'avis</th>
-      <th>Action</th>
-    </tr>
+        <tr>
+        <th>Numéro courrier</th>
+        <th>Date ANO bailleur</th>
+        <th>Fichier</th>
+        <th>Avis</th>
+        <th>Observation</th>
+        <th>Date de l'avis</th>
+        <th>Action</th>
+      </tr>
       </thead>
       <tbody>
-      <tr class="odd gradeX" v-for="demande in demandeAno(item.id)"
-        :key="demande.id" >
-      <td @click="afficheDemandeDAO(demande.id)">
-        {{demande.num_courrier || 'Non renseigné'}}</td>
-     
-      <td @click="afficheDemandeDAO(demande.id)">
-        {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
-
-      <td>
-        <a v-if="demande.fichier" :href="demande.fichier" class="btn btn-default" target="_blank">
+     <tr class="odd gradeX" v-for="anoBailleur in listeAnoDMPBailleur(item.id)"
+          :key="anoBailleur.id" >
+        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+          {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
+        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+          {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
+        <td>
+          <a v-if="anoBailleur.fichier" :href="anoBailleur.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
-        </a>
-      </td>
+          </a>
+        </td>
 
 
-      <td @click="afficherModalDecisionAnocf (demande.id)">
-        <span v-if="demande.avis== 0" class=" btn label label-success"> Non objection </span>
-        <span v-else-if="demande.avis== 1" class=" btn label label-important"> objection </span>
-        <span v-else class=" btn label label-info"> En attente</span>
-      </td>
-<td @click="afficheDemandeDAO(demande.id)">
-        {{LibelleDecision(demande.plan_motif_decision_id) || 'Non renseigné'}}</td>
-      <td @click="afficheDemandeDAO(demande.id)">
-        {{formaterDate(demande.date_avis) || 'Non renseigné'}}</td>
+        <td @click="afficherModalDecisionAnocf (anoBailleur.id)">
+          <span v-if="anoBailleur.avis_bail== 0" class=" btn label label-success"> Non objection </span>
+          <span v-else-if="anoBailleur.avis_bail== 1" class=" btn label label-important"> objection </span>
+          <span v-else class=" btn label label-info"> En attent</span>
+        </td>
+<td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+          {{LibelleDecision(anoBailleur.plan_motif_decision_id) || 'Non renseigné'}}</td>
+        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+          {{formaterDate(anoBailleur.date_avis) || 'Non renseigné'}}</td>
 
-      <div class="btn-group">
-        <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
-          <span class=""><i class="icon-trash"></i>Supprimer</span>
-        </button>
-      </div>
+        <div class="btn-group">
+          <button @click.prevent="supprimerAnoDMPBailleur(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
+            <span class=""><i class="icon-trash"></i>Supprimer</span>
+          </button>
+        </div>
 
 
-    </tr>
+      </tr>
       </tbody>
     </table>
   </div>
 
   <!--Integration ACt-->
 
-  <div id="ajouterAvisDmp" class="modal hide grdirModalActeEffet" >
+  <div id="ajouterAvisBailleur" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -77,7 +92,7 @@
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Information sur ANO DMP</a></li>
+        <li class="active"><a data-toggle="tab" href="#tab8888">Information sur Ano Bailleur</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li> -->
       </ul>
     </div>
@@ -86,7 +101,7 @@
       <div id="tab8888" class="tab-pane active">
 <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Référence PV</label>
+          <label class="control-label">Référence</label>
           <div class="controls">
             <input
                 type="text"
@@ -111,32 +126,33 @@
           </div>
         </div>
 
-        <div class="control-group">
-          <label class="control-label">Numéro du courrier</label>
-          <div class="controls">
-            <input
-                type="text"
-                v-model="formDemande.num_courrier"
-                class="span"
-                placeholder="Saisir le numéro du courrier"
-            />
+        
+
+       <div class="control-group">
+            <label class="control-label">Numéro du courrier</label>
+            <div class="controls">
+              <input
+                  type="text"
+                  v-model="formBailleur.numero_courie"
+                  class="span"
+                  placeholder="Saisir le numéro du courrier"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
+ <div class="control-group">
 
-          <label class="control-label">Date de demande</label>
-          <div class="controls">
-            <input
-                type="date"
-                v-model="formDemande.date_demande"
-                class="span"
-                placeholder="Saisir le libelle_type"
-            />
+            <label class="control-label">Date ANO bailleur</label>
+            <div class="controls">
+              <input
+                  type="date"
+                  v-model="formBailleur.date_ano_dmp"
+                  class="span"
+                  placeholder="Saisir le libelle_type"
+              />
+              <input type="hidden" v-model="formBailleur.difference_personnel_bienService"/>
+            </div>
           </div>
-        </div>
-
-
 
         <div class="control-group">
           <label class="control-label">Fichier joint:</label>
@@ -155,14 +171,9 @@
           @click.prevent="ajouterDemandeAnoLocal()"
           class="btn btn-primary"
           href="#"
-         v-if="pvTraitement"
+         
       >Valider</a>
-      <a
-          @click.prevent="ajouterDemandeAnoLocal()"
-          class="btn btn-primary"
-          href="#"
-          v-if="!pvTraitement" disabled
-      >Valider</a>
+     
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
@@ -170,7 +181,7 @@
 
 
 
-  <div id="modificationAnoDPM" class="modal hide grdirModalActeEffet" >
+  <div id="modificationANBaill" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -185,9 +196,10 @@
     <div class="widget-content tab-content">
 
       <div id="tab8888" class="tab-pane active">
+
         <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Référence PV</label>
+          <label class="control-label">Référence</label>
           <div class="controls">
             <input
                 type="text"
@@ -212,32 +224,33 @@
           </div>
         </div>
 
-        <div class="control-group">
-          <label class="control-label">Numéro du courrier</label>
-          <div class="controls">
-            <input
-                type="text"
-                v-model="edite_demande_dao.num_courrier"
-                class="span"
-                placeholder="Saisir le numéro du courrier"
-            />
+        
+
+       <div class="control-group">
+            <label class="control-label">Numéro du courrier</label>
+            <div class="controls">
+              <input
+                  type="text"
+                  v-model="edit_bailleur.numero_courie"
+                  class="span"
+                  placeholder="Saisir le numéro du courrier"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
+ <div class="control-group">
 
-          <label class="control-label">Date de demande</label>
-          <div class="controls">
-            <input
-                type="date"
-                v-model="edite_demande_dao.date_demande"
-                class="span"
-                placeholder="Saisir le libelle_type"
-            />
+            <label class="control-label">Date ANO bailleur</label>
+            <div class="controls">
+              <input
+                  type="date"
+                  v-model="edit_bailleur.date_ano_dmp"
+                  class="span"
+                  placeholder="Saisir le libelle_type"
+              />
+              <input type="hidden" v-model="edit_bailleur.difference_personnel_bienService"/>
+            </div>
           </div>
-        </div>
-
-
 
         <div class="control-group">
           <label class="control-label">Fichier joint:</label>
@@ -247,7 +260,6 @@
         </div>
 
       </form>
-        
       </div>
 
 
@@ -255,7 +267,7 @@
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ModifierAnoDPMLocal"
+      <a  @click.prevent="updateAnoBaileurLocal"
           class="btn btn-primary"
           href="#"
       >Modifier</a>
@@ -263,10 +275,14 @@
     </div>
   </div>
 
-  <div id="ajouterDecisionAvisCf" class="modal hide">
+
+
+
+
+  <div id="ajouterAnoBailleur" class="modal hide">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Ajouter avis d'ANO DMP sur le DAO</h3>
+      <h3>Ajouter avis d'ANO bailleur{{edit_bailleur.marche_id}}</h3>
     </div>
     <div class="modal-body">
          <table class="table table-bordered table-striped">
@@ -303,54 +319,54 @@
            </tr>
            <tr>
              <td>
-               <div class="control-group">
+              <div class="control-group">
 
-          <label class="control-label">Date d'avis d'ANO</label>
-          <div class="controls">
-            <input
-                type="date"
-                v-model="edite_demande_dao.date_avis"
-                class="span"
-                placeholder="Saisir le libelle_type"
-            />
+            <label class="control-label">Date d'avis d'ANO bailleur</label>
+            <div class="controls">
+              <input
+                  type="date"
+                  v-model="edit_bailleur.date_avis"
+                  class="span"
+                  placeholder="Saisir le libelle_type"
+              />
+            </div>
           </div>
-        </div>
              </td>
              <td>
-                <div class="control-group">
-          <label class="control-label">Avis</label>
-          <div class="controls">
-            <select v-model="edite_demande_dao.avis" class="span">
-              <option value="0"> Non objection</option>
-              <option value="1">Objection </option>
-            </select>
+                 <div class="control-group">
+            <label class="control-label">Avis</label>
+            <div class="controls">
+              <select v-model="edit_bailleur.avis_bail" class="span">
+                <option value="0"> Non objection</option>
+                <option value="1">Objection </option>
+              </select>
+            </div>
           </div>
-        </div>
              </td>
            </tr>
            <tr >
              <td colspan="2" >
 <div class="control-group">
-          <label class="control-label" v-if="edite_demande_dao.avis==1">Motif</label>
+          <label class="control-label" v-if="edit_bailleur.avis_bail==1">Motif</label>
           <div class="controls">
-            <select v-model="edite_demande_dao.DecisionNiveau1" class="span" v-if="edite_demande_dao.avis==1">
+            <select v-model="edit_bailleur.DecisionNiveau1" class="span" v-if="edit_bailleur.avis_bail==1">
              <option></option>
              <option v-for="varText in lesPlansParents" :key="varText.id"
               :value="varText.id">{{varText.libelle}}</option>
             </select>
-            <select v-model="edite_demande_dao.DecisionNiveau2" class="span" :readOnly="verroNiveau2" v-if="edite_demande_dao.avis==1">
+            <select v-model="edit_bailleur.DecisionNiveau2" class="span" :readOnly="verroNiveau5" v-if="edit_bailleur.avis_bail==1">
             <option></option>
-             <option v-for="varText in affichierNiveauDecission(edite_demande_dao.DecisionNiveau1)" :key="varText.id"
+             <option v-for="varText in affichierNiveauDecission(edit_bailleur.DecisionNiveau1)" :key="varText.id"
               :value="varText.id">{{varText.libelle}}</option>
             </select>
-            <select v-model="edite_demande_dao.DecisionNiveau3" class="span" :readOnly="verroNiveau3" v-if="edite_demande_dao.avis==1">
+            <select v-model="edit_bailleur.DecisionNiveau3" class="span" :readOnly="verroNiveau6" v-if="edit_bailleur.avis_bail==1">
             <option></option>
-             <option v-for="varText in affichierNiveauDecission(edite_demande_dao.DecisionNiveau2)" :key="varText.id"
+             <option v-for="varText in affichierNiveauDecission(edit_bailleur.DecisionNiveau2)" :key="varText.id"
               :value="varText.id">{{varText.libelle}}</option>
             </select>
-             <select v-model="edite_demande_dao.plan_motif_decision_id" class="span" :readOnly="verroNiveau4" v-if="edite_demande_dao.avis==1">
+             <select v-model="edit_bailleur.avis_bail" class="span" :readOnly="verroNiveau7" v-if="edit_bailleur.avis_bail==1">
              <option></option>
-             <option v-for="varText in affichierNiveauDecission(edite_demande_dao.DecisionNiveau3)" :key="varText.id"
+             <option v-for="varText in affichierNiveauDecission(edit_bailleur.DecisionNiveau3)" :key="varText.id"
               :value="varText.id">{{varText.libelle}}</option>
             </select>
           </div>
@@ -361,7 +377,7 @@
     </div>
     <div class="modal-footer">
       <a
-          @click.prevent="editDemandeDAO()"
+          @click.prevent="editAnoBailleur()"
           class="btn btn-primary"
           href="#"
 
@@ -384,22 +400,28 @@ name: "ActEffeFinanciere",
   data(){
     return{
       pvencoure:"",
-      formDemande:{
-        date_demande:"",
-        num_courrier:"",
-        proce_verbal_jugement_offre_id:"",
-        appel_offre_id:""
+      formBailleur:{
+        date_ano_dmp:"",
+        diff:1,
+        numero_courie:"",
+        
+        appel_offre_id:"",
+        plan_motif_decision_id:"",
+        difference_personnel_bienService:"bienservice"
       },
 
-      edite_demande_dao:"",
+      edit_bailleur:"",
       imagePDFDemandeAno:"",
       namePDFDemandeAno:"",
       fichierPDFDemandeAno:"",
       selectedFileDemandeAno:"",
+
+      
+      
       reference_pv:"",
       lot:"",
      
-      editAnoBailleur:{},
+      
       nom_candidata:"",
       dossier_candidat_id:"",
      marche_lot:"",
@@ -428,14 +450,60 @@ name: "ActEffeFinanciere",
 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe',"plans_Decision"]),
-     
-proceVerbalMarche(){
-        return this.getterProceVerballe.find(item=>{
-           if(item.marche_id==this.macheid && item.traitement==0){
-               return item
-           }
-        })
-},
+      proceVerbalMarche(){
+          return this.getterProceVerballe.find(item=>{
+              if(item.marche_id==this.macheid && item.traitement==0){
+                  return item
+              }
+          })
+      },
+LibelleDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+ listeAnoDMPBailleur: function () {
+      return macheid => {
+        if (macheid != "") {
+          //  console.log("Marche dmp bailleur")
+          let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==1)
+          //console.log("Marche dmp bailleru 7474")
+          return objet
+        }
+      }
+    },
+//  listeAvisDemandeAno(){
+    
+//    affichierIdMarcheGlobal     return id =>{
+//         if(id!=null && id!=""){
+//           const resultatAvis = this.getterDemandeAno.filter(idDemande =>idDemande.marche_id==id
+//               && idDemande.avis!= 0)
+//           return resultatAvis
+//         }
+//         return null
+//       }
+//     },
+
+listeAvisDemandeAno() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.getterDemandeAno.find(qtreel => qtreel.marche_id == id);
+
+          if (qtereel) {
+            return qtereel.avis;
+          }
+          return 10
+        }
+      };
+    },
 
 affichierProceVerbalJugementOffre() {
       return id => {
@@ -453,16 +521,16 @@ affichierProceVerbalJugementOffre() {
 
 
 
-verroNiveau2(){
-  return this.edite_demande_dao.DecisionNiveau1 == ""
+verroNiveau5(){
+  return this.edit_bailleur.DecisionNiveau1 == ""
   
      
    },
-verroNiveau3(){
-     return this.edite_demande_dao.DecisionNiveau2 == ""
+verroNiveau6(){
+     return this.edit_bailleur.DecisionNiveau2 == ""
    },
-verroNiveau4(){
-     return this.edite_demande_dao.DecisionNiveau3 == ""
+verroNiveau7(){
+     return this.edit_bailleur.DecisionNiveau3 == ""
    },
 
 
@@ -480,6 +548,7 @@ affichierNiveauDecission() {
 
 
 
+
     pvEntraitement(){
       return this.getterProceVerballe.find(item=>{
         if(item.marche_id==this.item.id && item.traitement==1){
@@ -487,21 +556,8 @@ affichierNiveauDecission() {
         }
       })
     },
-
-    LibelleDecision() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
 affichierPvMarche() {
-      return id => { 
+      return id => {
         if (id != null && id != "") {
            const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id);
 
@@ -524,7 +580,6 @@ affichierPvMarche() {
         }
       };
     },
-
     affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
@@ -537,18 +592,18 @@ affichierPvMarche() {
         }
       };
     },
-affichieridMarcheGlobal() {
-      return id => {
-        if (id != null && id != "") {
-          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+// affichieridMarcheGlobal() {
+//       return id => {
+//         if (id != null && id != "") {
+//           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
-          if (qtereel) {
-            return qtereel.parent_id;
-          }
-          return 0
-        }
-      };
-    },
+//           if (qtereel) {
+//             return qtereel.parent_id;
+//           }
+//           return 0
+//         }
+//       };
+//     },
     affichierAppelOffreid() {
       return id => {
         if (id != null && id != "") {
@@ -583,7 +638,7 @@ affichieridMarcheGlobal() {
 demandeAno: function () {
       return macheid => {
         if (macheid != "") {
-          let obje=this.getterDemandeAno.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==null)
+          let obje=this.getterDemandeAno.filter(idmarche => idmarche.marche_id == macheid)
           return obje
         }
       }
@@ -628,45 +683,23 @@ pvTraitement(){
        }
      })
 },
-afficherMotif(){
-  if(this.edite_demande_dao.avis== 0){
-    return 0
-  }
-  else{
-    return this.edite_demande_dao.plan_motif_decision_id
-  }
-}
   },
 
   methods:{
-    ...mapActions('bienService',['supprimerDemandeAno','ajouterDemandeAno',
-      'modifierDemandeAno','getAnoDMPBailleur','getAnalyseDMP',"modificationProceVerbalOffre2"]),
-
-afficheDemandeDAO(index){
-      this.$('#modificationAnoDPM').modal({
-        backdrop: 'static',
-        keyboard: false
-      });
-      this.edite_demande_dao=this.getterDemandeAno.find(
-          demandeAno => demandeAno.id == index
-      )
-      //console.log(this.edite_demande_dao)
-    },
-
-    
+   ...mapActions('bienService',['supprimerAnoDMPBailleur','ajouterAnoDMPBailleur',
+      'modifierAnoDMPBailleur','getAnoDMPBailleur','getAnalyseDMP',"modificationProceVerbalOffre2"]),
 
 
-
-    // afficherModalDecisionAnocf(index){
-    //   this.$('#ajouterDecisionAvisCf').modal({
-    //     backdrop: 'static',
-    //     keyboard: false
-    //   });
-    //   this.edite_demande_dao=this.getterDemandeAno.find(
-    //       demandeAno => demandeAno.id == index
-    //   )
-    //   //console.log(this.edite_demande_dao)
-    // },
+ afficheAnoDPMBailleurModale(index){
+                this.$('#modificationANBaill').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+               // this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+                 this.edit_bailleur=this.getterAnoDMPBailleur.find(items => items.id == index)
+                //this.mode_passation_id=this.edite_appel_offre.mode_passation_id
+                console.log(this.mode_passation_id)
+            },
 
     OnchangeFichierDemandeAno(e) {
       const files = e.target.files;
@@ -686,60 +719,54 @@ afficheDemandeDAO(index){
     },
 
     ajouterDemandeAnoLocal(){
+
       const formData = new FormData();
-          formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
-          formData.append('date_demande', this.formDemande.date_demande);
-          formData.append('marche_id', this.infoLot.id);
-          formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-          formData.append('num_courrier', this.formDemande.num_courrier);
-          formData.append('proce_verbal_jugement_offre_id', this.proceVerbalMarche.id);
+      formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
+      //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
+      formData.append('date_ano_dmp', this.formBailleur.date_ano_dmp);
+      formData.append('marche_id', this.infoLot.id);
+      formData.append('difference_personnel_bienService', this.formBailleur.difference_personnel_bienService);
+      formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+      formData.append('numero_courie', this.formBailleur.numero_courie);
+      formData.append('diff', this.formBailleur.diff);
+        formData.append('proce_verbal_jugement_offre_id', this.proceVerbalMarche.id);
+      //formData.append('proce_verbal_jugement_offre_id', this.affichierProceVerbalJugementOffre(this.affichierPvMarche(this.affichierIdMarcheGlobal(this.infoLot.id))));
+      let config = {
+        header : {
+          'Content-Type' : 'multipart/form-data'
+        }
+      }
+      console.log(formData)
+      this.ajouterAnoDMPBailleur(formData,config)
 
-          let config = {
-            header : {
-              'Content-Type' : 'multipart/form-data'
-            }
-          }
-        //  console.log(formData)
-          this.ajouterDemandeAno(formData,config)
 
-          let objet={
-            id:this.pvencoure.id,
-            traitement:1,
-          }
 
-          this.modificationProceVerbalOffre2(objet)
-          this.formDemande={
-            date_demande:"",
-            appel_offre_id:"",
-            num_courrier:"",
-          }
+      this.formBailleur={
+        date_ano_dmp:"",
+        appel_offre_id:"",
+        numero_courie:"",
 
-       // console.log(this.proceVerbalMarche)
+        // proce_verbal_jugement_offre_id:""
+      }
+
+
     },
 
+ editAnoBailleur(){
 
-
-ModifierAnoDPMLocal(){
-  this.modifierDemandeAno(this.edite_demande_dao)
-  this.edite_demande_dao={
-    num_courrier:"",
-    date_demande:""
-  }
- this.$('#modificationAnoDPM').modal('hide');
-},
-    editDemandeDAO(){
-      //console.log(this.edite_demande_dao)
+      //console.log(this.edit_bailleur)
       const formData = new FormData();
-      // formData.append('proce_verbal_jugement_offre_id', this.edite_demande_dao.proce_verbal_jugement_offre_id);
-      formData.append('date_demande', this.edite_demande_dao.date_demande);
+      // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
+      formData.append('date_ano_dmp', this.edit_bailleur.date_ano_dmp);
       formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-      formData.append('num_courrier', this.edite_demande_dao.num_courrier);
-      formData.append('marche_id',this.edite_demande_dao.marche_id );
-      formData.append('id', this.edite_demande_dao.id);
-      formData.append('plan_motif_decision_id',this.afficherMotif);
-      formData.append('observations',this.edite_demande_dao.observations)
-      formData.append('date_avis',this.edite_demande_dao.date_avis);
-      formData.append('avis',this.edite_demande_dao.avis);
+      formData.append('numero_courie', this.edit_bailleur.numero_courie);
+      formData.append('marche_id',this.edit_bailleur.marche_id);
+      formData.append('id', this.edit_bailleur.id);
+      formData.append('difference_personnel_bienService', this.edit_bailleur.difference_personnel_bienService);
+      formData.append('plan_motif_decision_id',this.edit_bailleur.plan_motif_decision_id);
+      formData.append('observations_bailleur',this.edit_bailleur.observations_bailleur)
+      formData.append('date_avis',this.edit_bailleur.date_avis);
+      formData.append('avis_bail',this.edit_bailleur.avis_bail);
       console.log(formData)
       if ( this.selectedFileDemandeAno!==""){
         formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
@@ -749,32 +776,59 @@ ModifierAnoDPMLocal(){
           'Content-Type' : 'multipart/form-data'
         }
       }
-      this.modifierDemandeAno(formData,config)
+      this.modifierAnoDMPBailleur(formData,config)
+
 
       let objet={
-        id:this.edite_demande_dao.proce_verbal_jugement_offre_id,
-        avies_dmp:this.edite_demande_dao.avis,
+        id:this.pvEntraitement.id,
+        avies_bailleur:this.edit_bailleur.avis_bail,
       }
+      console.log()
 
       this.modificationProceVerbalOffre2(objet)
-
       this.getAnalyseDMP()
       this.getAnoDMPBailleur()
       this.$('#modifDemandeAno').modal('hide');
+
+
+
     },
+
+updateAnoBaileurLocal(){
+  this.modifierAnoDMPBailleur(this.edit_bailleur)
+  this.edit_bailleur={
+    num_courrier:"",
+    date_ano_dmp:""
+  }
+ this.$('#modificationANBaill').modal('hide');
+},
+    // updateAnoBaileurLocal(){
+    //  var nouvelModifi={
+    //     ...this.edit_bailleur,
+    //   //  appel_offre_id:this.affichierReferenceAppelOffre(this.macheid),
+    //   //  proce_verbal_jugement_offre_id:this.affichierPvMarche(this.infoLot.id),
+    //   //  numero_courie:this.edit_bailleur.numero_courie,
+    //   //  date_ano_dmp:this.edit_bailleur.date_ano_dmp
+    //  }
+    //   this.modifierAnoDMPBailleur(nouvelModifi)
+    //   this.$('#modificationANBaill').modal('hide');
+
+    //    this.getAnoDMPBailleur()
+
+    // },
 afficherModalDecisionAnocf(index){
-      this.$('#ajouterDecisionAvisCf').modal({
+      this.$('#ajouterAnoBailleur').modal({
         backdrop: 'static',
         keyboard: false
       });
-      this.edite_demande_dao=this.getterDemandeAno.find(
+      this.edit_bailleur=this.getterAnoDMPBailleur.find(
           demandeAno => demandeAno.id == index
       )
-      //console.log(this.edite_demande_dao)
+      //console.log(this.edit_bailleur)
     },
 
-    afficheModaleActe(index){
-      this.$('#ajouterAvisDmp').modal({
+    afficheModaleAnoBailleur(index){
+      this.$('#ajouterAvisBailleur').modal({
         backdrop: 'static',
         keyboard: false
       });
@@ -789,7 +843,6 @@ afficherModalDecisionAnocf(index){
 formaterDate(date){
       return moment(date,"YYYY-MM-DD").format("DD/MM/YYYY");
     },
-    
     formatageSommeSansFCFA:formatageSommeSansFCFA,
 
   }

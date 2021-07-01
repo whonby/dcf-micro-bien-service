@@ -385,6 +385,7 @@ name: "ActEffeFinanciere",
     return{
       pvencoure:"",
       formDemande:{
+          diff:0,
         date_demande:"",
         num_courrier:"",
         proce_verbal_jugement_offre_id:"",
@@ -583,7 +584,7 @@ affichieridMarcheGlobal() {
 demandeAno: function () {
       return macheid => {
         if (macheid != "") {
-          let obje=this.getterDemandeAno.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==null)
+          let obje=this.getterDemandeAno.filter(idmarche => idmarche.marche_id == macheid && idmarche.diff==0)
           return obje
         }
       }
@@ -690,6 +691,7 @@ afficheDemandeDAO(index){
           formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
           formData.append('date_demande', this.formDemande.date_demande);
           formData.append('marche_id', this.infoLot.id);
+          formData.append('diff', this.formDemande.diff);
           formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
           formData.append('num_courrier', this.formDemande.num_courrier);
           formData.append('proce_verbal_jugement_offre_id', this.proceVerbalMarche.id);
@@ -705,6 +707,7 @@ afficheDemandeDAO(index){
           let objet={
             id:this.pvencoure.id,
             traitement:1,
+            diff:0,
           }
 
           this.modificationProceVerbalOffre2(objet)
@@ -736,6 +739,7 @@ ModifierAnoDPMLocal(){
       formData.append('num_courrier', this.edite_demande_dao.num_courrier);
       formData.append('marche_id',this.edite_demande_dao.marche_id );
       formData.append('id', this.edite_demande_dao.id);
+      formData.append('diff', this.edite_demande_dao.diff);
       formData.append('plan_motif_decision_id',this.afficherMotif);
       formData.append('observations',this.edite_demande_dao.observations)
       formData.append('date_avis',this.edite_demande_dao.date_avis);

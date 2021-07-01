@@ -63,7 +63,10 @@
             </div>
 <div class="btn-group" v-if="afficherStatusSib(marche.id)==1">
 
-               
+               <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                class="btn btn-primary " title="Cycle de vie">
+                  <span class=""><i class="  icon-calendar"></i> Cycle de Vie</span>
+                   </router-link>
 <router-link :to="{ name: 'detailExecutionHorsSib', params: { id: marche.id }}"
                 class="btn btn-primary " title="Detail execution Marche Gestion Hors Sib">
                   <span class=""><i class="  icon-random"></i> Détail exécution</span>

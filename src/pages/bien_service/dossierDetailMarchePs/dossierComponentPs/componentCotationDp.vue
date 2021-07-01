@@ -446,6 +446,14 @@ afficherIdEntreprise() {
     //         item.nom_person.toLowerCase().includes(searchTem)
     //     })
     // }
+    // listeEntrePrisePreselectionner(){
+    //     return id=>{
+    //         if(id!=""){
+    //              return this.gettersEntreprisePreselectionner.filter(item => item.marche_id==this.macheid)
+    //         }
+    //     }
+        
+    // },
 
 
   listeCotation () {

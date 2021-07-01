@@ -773,6 +773,11 @@ export const groupeByBailleur = (state, getters) => {
   return groupBy(getters.budgetEclate, "source_financement_id");
 };
 
+export const groupeBySection = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "section_id");
+};
+
 export {
   // typeTextes,
   uniteAdministratives,
@@ -908,4 +913,9 @@ export const groupeBudgetbyProgramme = (state, getters) => {
 export const groupeParTypeFinancementBudgetEclate = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "type_financement_id");
+};
+
+export const groupeParSectionBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "section_id");
 };
