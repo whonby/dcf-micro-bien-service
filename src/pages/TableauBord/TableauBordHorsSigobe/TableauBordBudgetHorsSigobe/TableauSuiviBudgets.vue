@@ -42,6 +42,7 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;
+                  width : 50%
                 "
               >
                 BUDGET VOTE (FCFA)
@@ -77,9 +78,9 @@
             <tbody>
              <tr  v-for="unite in afficheDetailReamenagement" :key="unite.id">
                <td>{{libelleLigneEconomique(unite)}}</td>
-               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)+(variation(unite))))}}</td>
-               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
-               <td style="font-weight: bold;font-size: 12px;text-align:center">{{formatageSommeSansFCFA(parseFloat(montantActuelParLigne(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:right">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:right">{{formatageSommeSansFCFA(parseFloat(variation(unite)))}}</td>
+               <td style="font-weight: bold;font-size: 12px;text-align:right">{{formatageSommeSansFCFA(parseFloat(montantVoteParLigne(editMandat.id,unite))+parseFloat(variation(unite)))}}</td>
                
               <!-- <td style="font-weight: bold; font-size: 12px; text-align: center">{{ formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite)))}}</td>
                   <td style="font-weight: bold; font-size: 12px; text-align: center">{{formatageSommeSansFCFA(parseFloat(MontantVoteParTypeFinancement(editMandat.id,unite) - MontantExecuteParTypeFinancement(editMandat.id,unite)))}}</td>
@@ -105,7 +106,7 @@
                   font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center;
+                  text-align:right;
                   background-color: #FC762F !important;"
               >
                 {{
@@ -123,7 +124,7 @@
                   font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center;
+                  text-align:right;
                   background-color: #FC762F !important;
                 "
               >
@@ -134,7 +135,7 @@
                   font-size: 12px;
                   width: 800px;
                   color:#000;
-                  text-align:center;
+                  text-align:right;
                   background-color: #FC762F !important;
                 "
               >
@@ -560,7 +561,12 @@
                   background-color: #fbb203 !important;">
                   MONTANTS EXECUTES {{afficheAnnee}}</th>
 
-
+ <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" title="TOTAL OP PROVISOIRE">
+                  TOTAL OP PROVISOIRE{{afficheAnnee}}</th>
                   <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -568,7 +574,18 @@
                   background-color: #fbb203 !important;">
                   NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
 
-
+ <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  TAUX OP PROVISOIRE REGULARISE(S) {{afficheAnnee}}</th>
+                   <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  TAUX OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -627,10 +644,16 @@
                   }}
                 </td>
                 <td
-                  v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
-                  @click="percuFacture(unite.id)"
+                  
+                 
                 >
-                  {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
+                  
+
+                  <button class="btn btn-success taille"  @click="percuFacture(unite.id)">
+                        <span style="color:#fff;font-size: 15px;">
+                          {{ formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(unite.id))) }}
+                        </span>
+                      </button>
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
@@ -645,12 +668,36 @@
                     )
                   }}
                 </td>
-
+ <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                >
+                  {{
+                  TotalOPRegu(unite.id)
+                  }}
+                </td>
+                 <td  style="text-align:right"
+                >
+                 <button class="btn btn-info taille"  @click="ModalOpNonRegulirise(unite.id)">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{ NombreOPNonRegu(unite.id)}}
+                        </span>
+                      </button>
+                 
+                </td>
+                 <td  style="text-align:right"
+                >
+                 <button class="btn btn-primary taille" @click="ModalOpRegulirise(unite.id)">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{ NombreOPRegulirise(unite.id)}}
+                        </span>
+                      </button>
+                 
+                </td>
                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
                   {{
-                   NombreOPNonRegu(unite.id)
-                  }}
+                    TauxOPProvisoireNonRegularis(unite.id)
+                   
+                  }} %
                 </td>
                   <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
@@ -663,22 +710,22 @@
                 </td> -->
 
                 <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaN(unite.id) <= 25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(unite.id)) <= 0.25">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaN(unite.id) <= 50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(unite.id)) <= 0.5">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaN(unite.id) <= 75">
+                       <button class="btn btn-success taille" v-else-if=" parseFloat(EviteNaN(unite.id)) <= 0.75">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaN(unite.id) <= 100">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(unite.id)) <= 1">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{EviteNaN(unite.id)}}
                         </span>
@@ -715,7 +762,7 @@
               >
                 {{
                  formatageSommeSansFCFA(
-                    parseFloat( TotalMontantReamenagement(unite.id, unite1)))
+                    parseFloat( AfficheVariationBudgetParTypeFinancement(unite.id, unite1)))
                     
                 }}
               </td>
@@ -739,13 +786,39 @@
                   )
                 }}
               </td>
-
+ <td
+                style="font-size: 15px; text-align: right;color:#000"
+              >
+                {{
+               TotalOPNonReguTypeFinancement(unite.id, unite1)
+                }}
+              </td>
+               <td
+                style="font-size: 15px; text-align: right;color:#000"
+              >
+              
+                 <button class="btn btn-info taille">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{  NombreOPNonReguTypeFinancement(unite.id, unite1)}}
+                        </span>
+                      </button>
+              </td>
+               <td
+                style="font-size: 15px; text-align: right;color:#000"
+              >
+                
+                 <button class="btn btn-primary taille">
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                          {{  NombreOPReguTypeFinancement(unite.id, unite1)}}
+                        </span>
+                      </button>
+              </td>
                <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
-                  0
-                }}
+                TauxOPProvisoireNonRegularisTypeFinancement(unite.id, unite1)
+                }} %
               </td>
  <td
                 style="font-size: 15px; text-align: right;color:#000"
@@ -765,22 +838,22 @@
               </td> -->
 
               <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaNTypeFinancement(unite.id, unite1) <= 25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.25">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNTypeFinancement(unite.id, unite1) <= 50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.50">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNTypeFinancement(unite.id, unite1) <= 75">
+                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.75">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNTypeFinancement(unite.id, unite1) <= 100">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 1">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
@@ -811,11 +884,18 @@
 
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{  formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté ))  }}</td>
-                 
-                 <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                   {{ 0 }}
+                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   
                  </td>
-
+                 <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   
+                 </td>
+ <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   
+                 </td>
+                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   
+                 </td>
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantDisponible)) }}
                  </td>
@@ -858,7 +938,465 @@
     </div>
     
   </div>
+
+
+
+
+
+
+
+
+  <div id="OpNonRegulirise" class="modal hide tailgrand">
+      <div class="modal-header">
+         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        <h3 style="font-size: 14px; font-weight: bold">
+          UNITE ADMINISTRATIVE : {{ libelleUniteAdministrative(editOpNonRegulirise.id) }}
+        </h3>
+      </div>
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+        Exporter en PDF
+      </button>
+    </div> 
+      <div class="modal-body" id="printpdf1">
+      
+ <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">LISTE DES OP NON REGULIRISE</h2>
+          </tr>
+        </table>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr style="">
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              EXERCICE
+              </th>
+
+              <!-- <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                 
+                "
+              >
+                TYPE OP
+              </th> -->
+
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+                NUMERO OP
+              </th>
+
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              OBJET OP
+              </th>
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              MONTANT OP
+              </th>
+              
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              DECISION
+              </th>
+              <!-- <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              DETAIL OP
+              </th> -->
+            </tr>
+          </thead>
+          
+            
+            <tbody>
+            <tr v-for="item in ListeDesOpNonRegulirise(editOpNonRegulirise.id)" :key="item.id">
+              <td>{{item.exercice}}</td>
+              <!-- <td>{{item.type_ordre_paiement}}</td> -->
+              <td>{{item.numero_ordre_paiement}}</td>
+              <td>{{item.odjet_autre_depense}}</td>
+              <td>{{item.montant_ordre_paiement}}</td>
+              
+               <td >
+                      <button
+                        v-if="item.decision_cf == 8"
+                        class="btn btn-success tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Visé</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="item.decision_cf == 2"
+                        class="btn btn-warning tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Différé</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="item.decision_cf == 3"
+                        class="btn btn-danger tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Réjeté</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="item.decision_cf == 9"
+                        class="btn btn-success tailBtn"
+                        
+                      >
+                        <span
+                          title="Visé avec observation"
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Visé O</span
+                        >
+                      </button>
+                      <button
+                        v-else
+                        class="btn btn-info tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Attente</span
+                        >
+                      </button>
+                    </td>
+              <!-- <td>
+                 <router-link
+                        :to="{
+                          name: 'VoirDetailAutreFiche',
+                          params: { id: item.id },
+                        }"
+                        class="btn btn"
+                        title="Editer Fiche"
+                        style="width: 50%"
+                        @click="fermerModal()"
+                      >
+                        <span
+                          class=""
+                          style="
+                            font-size: 15px;
+                            font-weight: bold;
+                            color: #000;
+                          "
+                          
+                          ><i class="icon-eye-open"></i> Voir</span
+                        >
+                      </router-link>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- <div class="modal-footer">
+          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        </div> -->
+      </div>
+    </div>
    
+
+
+
+
+   
+
+  <div id="OpRegulirise" class="modal hide tailgrand">
+      <div class="modal-header">
+         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        <h3 style="font-size: 14px; font-weight: bold">
+          UNITE ADMINISTRATIVE : {{ libelleUniteAdministrative(editOpRegulirise.id) }}
+        </h3>
+      </div>
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement12()">
+        Exporter en PDF
+      </button>
+    </div> 
+      <div class="modal-body" id="printpdf12">
+      
+ <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Detail Réamenagement Budgétaire</h2>
+          </tr>
+        </table>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr style="">
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              EXERCICE
+              </th>
+
+              <!-- <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                 
+                "
+              >
+                TYPE OP
+              </th> -->
+
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+                NUMERO OP
+              </th>
+
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              OBJET OP
+              </th>
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              MONTANT OP
+              </th>
+              
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              DECISION
+              </th>
+              <!-- <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+              DETAIL OP
+              </th> -->
+            </tr>
+          </thead>
+          
+            
+            <tbody>
+             <tr v-for="item in ListeDesOpRegulirise(editOpRegulirise.id)" :key="item.id">
+              <td>{{item.exercice}}</td>
+              <!-- <td>{{item.type_ordre_paiement}}</td> -->
+              <td>{{item.numero_ordre_paiement}}</td>
+              <td>{{item.odjet_autre_depense}}</td>
+              <td>{{item.montant_ordre_paiement}}</td>
+              
+               <td >
+                      <button
+                        v-if="item.decision_cf == 8"
+                        class="btn btn-success tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Visé</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="item.decision_cf == 2"
+                        class="btn btn-warning tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Différé</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="item.decision_cf == 3"
+                        class="btn btn-danger tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Réjeté</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="item.decision_cf == 9"
+                        class="btn btn-success tailBtn"
+                        
+                      >
+                        <span
+                          title="Visé avec observation"
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Visé O</span
+                        >
+                      </button>
+                      <button
+                        v-else
+                        class="btn btn-info tailBtn"
+                        
+                      >
+                        <span
+                          style="
+                            font-weight: bolder;
+                            color: #fff;
+                            font-size: 18px;
+                          "
+                          >Attente</span
+                        >
+                      </button>
+                    </td>
+              <!-- <td>
+                 <router-link
+                        :to="{
+                          name: 'VoirDetailAutreFiche',
+                          params: { id: item.id },
+                        }"
+                        class="btn btn"
+                        title="Editer Fiche"
+                        style="width: 50%"
+                        @click="fermerModal()"
+                      >
+                        <span
+                          class=""
+                          style="
+                            font-size: 15px;
+                            font-weight: bold;
+                            color: #000;
+                          "
+                          
+                          ><i class="icon-eye-open"></i> Voir</span
+                        >
+                      </router-link>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- <div class="modal-footer">
+          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        </div> -->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -928,6 +1466,8 @@ export default {
       inputLigneCode:false,
       inputLigneLibelle:false,
       inputLigneLibelle1:0,
+      editOpNonRegulirise:{},
+      editOpRegulirise:{}
     };
   },
   created() {
@@ -982,18 +1522,116 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+
+ListeDesOpRegulirise() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement.filter((item) => item.type_ordre_paiement == 2 && item.unite_administrative_id==id && item.diff_reg_op==1 && item.exercice==this.afficheAnnee);
+         
+        }
+       
+      };
+    },
+ListeDesOpNonRegulirise() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement.filter((item) => item.type_ordre_paiement == 2 && item.unite_administrative_id==id && item.diff_reg_op==0 && item.exercice==this.afficheAnnee);
+         
+        }
+       
+      };
+    },
+
+
+
+
+    TotalOPRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id  && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
     NombreOPNonRegu() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.unite_administrative_id == id && qtreel.diff_reg_op == 0
+                qtreel.unite_administrative_id == id && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
             ).length
             
             
         } else {
           return 78;
+        }
+      };
+    },
+     NombreOPRegulirise() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.diff_reg_op == 1 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+    TotalOPNonReguTypeFinancement() {
+      return (id,id1) => {
+          if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                 qtreel.unite_administrative_id == id && qtreel.type_financement_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 78;
+        }
+      };
+    },
+     NombreOPNonReguTypeFinancement() {
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.type_financement_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+      NombreOPReguTypeFinancement() {
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.type_financement_id == id1 && qtreel.diff_reg_op == 1 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).length
+            
+            
+        } else {
+          return 0;
         }
       };
     },
@@ -1026,7 +1664,7 @@ export default {
           const objet = this.budgetEclate.find(
             (item) =>
               item.uniteadministrative_id == this.editMandat.id &&
-              item.ligneeconomique_id == id
+              item.ligneeconomique_id == id && item.annebudgetaire == this.afficheAnnee && item.budget_active==1
           );
           if (objet) return objet.variation_budget;
         }
@@ -1036,7 +1674,7 @@ export default {
 AfficheVariationBudget() {
       return (id2) => {
         if (id2 != null && id2 != "") {
-          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.annebudgetaire==this.anneeAmort ).reduce(
+          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.annebudgetaire==this.anneeAmort && prod.budget_active==1).reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
@@ -1047,7 +1685,7 @@ AfficheVariationBudget() {
     AfficheVariationBudgetParTypeFinancement() {
       return (id2,id1) => {
         if (id2 != null && id2 != "" && id1 != null && id1 != "") {
-          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.type_financement_id == id1 && prod.annebudgetaire==this.anneeAmort ).reduce(
+          return this.budgetEclate.filter((prod) => prod.uniteadministrative_id == id2 && prod.type_financement_id == id1 && prod.annebudgetaire==this.anneeAmort && prod.budget_active==1).reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
               0
             )
@@ -1081,7 +1719,7 @@ montantVoteToralParLigne(){
               (qtreel) =>
                 qtreel.uniteadministrative_id == id &&
                 qtreel.ligneeconomique_id == id1 &&
-                qtreel.budget_active == 1
+                qtreel.budget_actif_def == 1
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
@@ -2235,8 +2873,7 @@ arrayExerciceDecompteBienService() {
       } else {
         return (
           (parseFloat(this.totalComsommeYtpeFinancement) /
-            parseFloat(this.TotalVoteParTypeFinancement)) *
-          100
+            parseFloat(this.TotalVoteParTypeFinancement))
         ).toFixed(2);
       }
     },
@@ -2246,8 +2883,7 @@ arrayExerciceDecompteBienService() {
       } else {
         return (
           (parseFloat(this.SommeBudgetConsomme) /
-            parseFloat(this.SommeBudgetInitial)) *
-          100
+            parseFloat(this.SommeBudgetInitial)) 
         ).toFixed(2);
       }
     },
@@ -2271,6 +2907,39 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+
+TauxOPProvisoireNonRegularisTypeFinancement(id,id1) {
+      if (
+        this.NombreOPNonReguTypeFinancement(id,id1) == 0 &&
+        this.TotalOPNonReguTypeFinancement(id,id1) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          ((parseFloat(this.NombreOPNonReguTypeFinancement(id,id1)) /
+            parseFloat(this.TotalOPNonReguTypeFinancement(id,id1)))*100
+        ).toFixed(2));
+      }
+    },
+TauxOPProvisoireNonRegularis(id) {
+      if (
+        this.NombreOPNonRegu(id) == 0 &&
+        this.TotalOPRegu(id) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          ((parseFloat(this.NombreOPNonRegu(id)) /
+            parseFloat(this.TotalOPRegu(id)))*100
+        ).toFixed(2));
+      }
+    },
+
+
+
+ genererEnPdfDetailReamenagement12() {
+      this.$htmlToPaper("printpdf12");
+    },
     genererEnPdfDetailReamenagement() {
       this.$htmlToPaper("printpdf1");
     },
@@ -2317,6 +2986,23 @@ genererEnPdf() {
     //   });
     //   this.editMandat = this.afficheUa.find((item) => item.id == id);
     // },
+    fermerModal(){
+      this.$("#OpNonRegulirise").modal('hide');
+    },
+     ModalOpNonRegulirise(id) {
+      this.$("#OpNonRegulirise").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+      this.editOpNonRegulirise = this.afficheUa.find((item) => item.id == id);
+    },
+    ModalOpRegulirise(id) {
+      this.$("#OpRegulirise").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+      this.editOpRegulirise = this.afficheUa.find((item) => item.id == id);
+    },
     percuFacture(id) {
       this.$("#validationOpDefinitif1").modal({
         backdrop: "static",
@@ -2341,8 +3027,8 @@ genererEnPdf() {
       } else {
         return (
           (parseFloat(this.MontantBudgetExecuté(id)) /
-            ((parseFloat(this.MontantBudgetVote(id)) + parseFloat(this.AfficheVariationBudget(id)))-parseFloat(this.MontantBudgetExecuté(id)))) *
-          100
+            ((parseFloat(this.MontantBudgetVote(id)) + parseFloat(this.AfficheVariationBudget(id)))-parseFloat(this.MontantBudgetExecuté(id))))
+          
         ).toFixed(2);
       }
     },
@@ -2356,14 +3042,13 @@ genererEnPdf() {
         return (
           (parseFloat(this.MontantExecuteParTypeFinancement(id, id1)) /
             parseFloat(this.MontantVoteParTypeFinancement(id, id1) +
-                        this.AfficheVariationBudgetParTypeFinancement(id, id1))) *
-          100
+                        this.AfficheVariationBudgetParTypeFinancement(id, id1)))
         ).toFixed(2);
       }
     },
 
     TotalMontantReamenagement(id,id1) {
-      return  (parseFloat(this.MontantVoteParTypeFinancement(id,id1)) + parseFloat(this.AfficheVariationBudgetParTypeFinancement(id,id))
+      return  (parseFloat(this.MontantVoteParTypeFinancement(id,id1)) + parseFloat(this.AfficheVariationBudgetParTypeFinancement(id,id1))
       );
     },
 TotalDisponibleTypeFinancement(id,id1){

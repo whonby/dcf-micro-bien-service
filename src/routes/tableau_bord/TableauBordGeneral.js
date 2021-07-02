@@ -82,8 +82,22 @@ import DetailTableauBordAnnulation from "../../pages/TableauBord/TableauBordHors
 import DetailTableauBordDefinitif from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDefinitif"
 import DetailTableauBordDirect from "../../pages/TableauBord/TableauBordHorsSigobe/RapportControleExecution/DetailTableauBord/DetailTableauBordDirect"
 
+import DetailLigneExecutionParUa from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordBudgetHorsSigobe/DetailLigneExecutionParUa/DetailLigneExecutionParUa"
+
+
+import PresentationTableauMarche from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordMarcheHorsSigobe/PresentationTableauMarche.vue"
 
 const TableauBordGeneral =[
+    {
+        path: "/PresentationTableauMarche",
+        name: "PresentationTableauMarche",
+        component: PresentationTableauMarche
+    },
+    {
+        path: "/DetailLigneExecutionParUa/:id",
+        name: "DetailLigneExecutionParUa",
+        component: DetailLigneExecutionParUa
+    },
     {
         path: "/DetailTableauBordAnnulation/:id",
         name: "DetailTableauBordAnnulation",

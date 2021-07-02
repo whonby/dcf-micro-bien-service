@@ -99,9 +99,10 @@
               </td>
             </tr>
           </table>-->
+     <div ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
      <h3 style="margin-left:-200px;">TABLE DU SUIVI DES REALISATIONS ET DES  DELAIS D'EXECUTION <span style="color: red;"></span></h3>
 
-              <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+              <table class="table table-bordered table-striped" id="titre" >
 
                 <thead>
 
@@ -237,7 +238,7 @@
   </table>
 
 
-
+     </div>
 
 
  </div>

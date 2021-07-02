@@ -777,7 +777,10 @@ export const groupeBySection = (state, getters) => {
   
   return groupBy(getters.budgetEclate, "section_id");
 };
-
+export const groupeByTypeFinancement = (state, getters) => {
+  
+  return groupBy(getters.budgetEclate, "type_financement_id");
+};
 export {
   // typeTextes,
   uniteAdministratives,
@@ -907,7 +910,7 @@ export const groupeBudgetbyProgramme = (state, getters) => {
   return groupBy(getters.budgetGeneral, "program_id");
 };
 
-
+groupeByBailleur
 
 
 export const groupeParTypeFinancementBudgetEclate = (state, getters) => {

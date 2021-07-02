@@ -5,283 +5,235 @@
         <div class="widget-box">
          
           <div class="widget-content">
-            <h3>SUIVI DES OP PROVISOIRES</h3>
-            <div class="">
-      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
-        <div class="text-center" style="color:#FFF"><h4>TOTAL</h4></div>
-         <div class="card bg-primary  text-center">
-           <h4 style="color:#000"> Total des OP provisoires</h4>
+            <h3 style="text-align:center;text-decoration:underline;">SUIVI DES OPERATIONS DCF </h3>
+    <div class="">
+
+      <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
+        <div class="text-center" style="color:black"><h4>A</h4></div>
+        
+         <div class="card" style="background-color:#00a9e6;">
+           <h4 style="text-align:center;background-color:#00a9e6;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats</h4>
           
             <div class="card-body">
-              <table class="noborder">
-                <tr>
-                  <th style="color:#000">Nombre de dossiers :</th>
-                  <td style="color:#000">0</td>
-                </tr>
-                <tr>
-                  <th style="color:#000">Taux :</th>
-                  <td style="color:#000">0</td>
-                </tr>
-                <tr>
-                  <th style="color:#000">Montant :</th>
-                  <td style="color:#000">0</td>
-                </tr>
-              </table>
+              
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA: {{ NbreUA }}</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés: {{NbreMarche }}</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total: {{ formatageSommeSansFCFA(parseFloat(MontantTotalMarche1)) }}</p>
+              <br>
               <br>
          
      
             </div>
-             <a href="#" style="color:#000" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
          
       </div>
-      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
-        <div class="text-center"><h4>A</h4></div>
-         <div class="card bg-secondary mb-3 text-center">
-             <h4>-Total des OP provisoires
-en cours de traitement</h4>
+
+    <!-- deuxieme tableau -->
+
+        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
+        <div class="text-center" style="color:black"><h4>B</h4></div>
+        
+         <div class="card" style="background-color:#f18383;">
+           <h4 style="text-align:center;background-color:#f18383;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats Non Exécutés</h4>
           
             <div class="card-body">
-              <table class="noborder" >
-                <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Montant :</th>
-                  <td>0</td>
-                </tr>
-              </table>
+              
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <br>
               <br>
          
      
             </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
+         
       </div>
-      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
-         <div class="text-center"><h4>B</h4></div>
-         <div class="card bg-success mb-3 text-center">
-           <h4>OP Provisoires régularisés</h4>
+
+      <!-- fin 2eme tableau -->
+
+
+      <!-- 3eme tableau -->
+
+        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
+        <div class="text-center" style="color:black"><h4>C</h4></div>
+        
+         <div class="card" style="background-color:#0be525;">
+           <h4 style="text-align:center;background-color:#0be525;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
           
             <div class="card-body">
-              <table class="noborder" >
-                <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Montant :</th>
-                  <td>0</td>
-                </tr>
-              </table>
+              
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
-            </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
-         </div>
-      </div>
-      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
-       <div class="text-center"><h4>C</h4></div>
-         <div class="card bg-info mb-3 text-center">
-           <h4>OP Provisoires non régularisés</h4>
-          
-            <div class="card-body">
-              <table class="noborder" >
-                <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Montant :</th>
-                  <td>0</td>
-                </tr>
-              </table>
               <br>
-            </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
-         </div>
-      </div>
+         
      
-     <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
-          <div class="text-center"><h4>D</h4></div>
-         <div class="card bg-warning mb-3 text-center">
-           <h4>OP Provisoires hots délai d'un mois</h4>
-          
-            <div class="card-body">
-              <table class="noborder" >
-                <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <th>Montant :</th>
-                  <td>0</td>
-                </tr>
-              </table>
-              <br>
             </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
+         
       </div>
 
+      <!-- fin 3eme tableau -->
 
-    </div> 
-    <hr>
+         <!-- 4eme tableau -->
 
+        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
+        <div class="text-center" style="color:black"><h4>D</h4></div>
+        
+         <div class="card" style="background-color:#f9cf7b;">
+           <h4 style="text-align:center;background-color:#f9cf7b;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats en exécution hors délais</h4>
+          
+            <div class="card-body">
+              
+               <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <br>
+              <br>
+         
+     
+            </div>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+         
+      </div>
+
+      <!-- fin 4eme tableau -->
+
+
+      <!-- 5eme tableau -->
+
+        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px"> 
+        <div class="text-center" style="color:black"><h4>E</h4></div>
+        
+         <div class="card" style="background-color:#819e2b;">
+           <h4 style="text-align:center;background-color:#819e2b;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats Achévés</h4>
+          
+            <div class="card-body">
+              
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <br>
+              <br>
+         
+     
+            </div>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+         
+      </div> <br><br><br><br>
+
+      <!-- fin 5eme tableau -->
+
+    
+
+     
+
+
+    </div>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <!-- 6eme tableau -->
+
+        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
+        <div class="text-center" style="color:black"><h4>F</h4></div>
+        
+         <div class="card" style="background-color:#ef85d8;">
+           <h4 style="text-align:center;background-color:#ef85d8;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats en Souffrence</h4>
+          
+            <div class="card-body">
+              
+             <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <br>
+              <br>
+         
+     
+            </div>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+         
+      </div>
+
+      <!-- fin 6eme tableau -->
+                </td>
+
+                <td>
+                     <!-- 7eme tableau -->
+
+        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
+        <div class="text-center" style="color:black"><h4>G</h4></div>
+        
+         <div class="card" style="background-color:#ff0000;">
+           <h4 style="text-align:center;background-color:#ff0000;color:white;font-weight:bold;"> 
+               -Total des Marché/Contrats Résilliés</h4>
+          
+            <div class="card-body">
+              
+             <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <br>
+              <br>
+              
+         
+     
+            </div>
+             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+         </div>
+         
+      </div>
+
+      <!-- fin 7eme tableau -->
+                </td>
+                <td>
+                     <div class="centreVerticalement" style="width:300px;display: inline-block;height:220px"></div>
+                </td>
+
+                <td>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<!-- 
 <div class="row-fluid">
-<div class="span4"  >
+<div class="span6"  >
 <div class=" shadow1" >
- <div id="chart" style="border: 2px dotted #ffffff;">
-        <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+ <div id="chart" style="border: 2px dotted #ffffff;text-align:center;">
+        <apexchart type="pie" width="400" :options="chartOptions" :series="series"></apexchart>
       </div>
   
 </div>
 </div>
-<div class="span8">
-<div class="card shadow1" >
- <!-- <h5>Shadow with 2 properties</h5>-->
-<div class="custom ">
-  <div id="front_videos">
-    <div class="large-2">
-      
-      <table class="table table-bordered table-striped force-overflow">
-  <thead>
-    <tr>
-      <th>Expéditeur</th>
-      <th>Montant OP</th>
-      <th>Bénéficiaires</th>
-      <th>Nature économiques</th>
-      <th>Date de visa CF</th>
-      <th>No OP</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
- 
-</table>
-
-    </div>
-  </div>
-</div>
-
-
-
-</div>
-</div>
-
-</div>
+</div> -->
 
    </div>
         </div>
@@ -296,8 +248,8 @@ en cours de traitement</h4>
 <script>
 
 import { mapGetters, mapActions,mapState } from "vuex";
-import {formatageSomme} from '../../src/Repositories/Repository';
-import {noDCfNoAdmin} from '../../src/Repositories/Auth';
+import {formatageSomme,formatageSommeSansFCFA} from '../../../../Repositories/Repository';
+import {noDCfNoAdmin} from '../../../../Repositories/Auth';
 //import { GChart } from 'vue-google-charts'
  import VueApexCharts from 'vue-apexcharts'
 export default {
@@ -307,15 +259,15 @@ export default {
   data(){
     return{
 
-      budgetGeneralCharge:"",
-       series: [44, 55, 13, 43],
+      budgetGeneralCharge:0,
+       series: [44, 55, 13, 43,55, 13, 43],
           chartOptions: {
             chart: {
               width: 380,
               type: 'pie',
             },
-            labels: ['A', 'B', 'C', 'D'],
-            colors:['#00a9e6', '#f67de2', '#f3993e',"#ff0000"],
+            labels: ['A', 'B', 'C', 'D','E','F','G'],
+            colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
             responsive: [{
               breakpoint: 480,
               options: {
@@ -350,7 +302,9 @@ export default {
 
             ]),
             
-    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise",
+    "getMandatPersonnaliserPersonnel","mandats","acteEffetFinanciers",
+    "GroupeUabyActe","marches"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
@@ -369,15 +323,74 @@ budgetConsommerPersonnel(){
  
     return this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
 },
-affichierBudgetDisponiblePersonnel() {
-      const val = parseFloat(this.afficherBudgetInitialPersonnel) - parseFloat(this.budgetConsommerPersonnel);
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
+ // fonction lega marches
+
+    ReturnSib(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.id == id && qtreel.exo_id==this.anneeAmort
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
     },
+
+      ReturnSibua(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.exo_id==this.anneeAmort
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+
+    NbreUA(){
+             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibua(qtreel[0].ua_id) == 1)).length
+    },
+
+    NbreMarche(){
+        return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSib(qtreel.marche_id) == 1)).length
+    },
+
+
+    MontantTotalMarche1(){
+      return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSib(qtreel.marche_id) == 1)).
+      reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
+        
+         
+    },
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 affichierTauxExecutionPersonnel() {
       const val = (parseFloat(this.budgetConsommerPersonnel) / parseFloat(this.afficherBudgetInitialPersonnel))*100;
       
@@ -680,8 +693,10 @@ created() {
      
     ]),
 
+      
 
- formatageSomme:formatageSomme
+ formatageSommeSansFCFA: formatageSommeSansFCFA,
+formatageSomme:formatageSomme,
   }
 }
 </script>
@@ -714,10 +729,6 @@ blockquote {
     margin: 0 0 1rem;
 }
 
-.noborder{
-  border-collapse: collapse;
-  text-align: left !important;
-}
 .blockquote-ul ul {
   list-style: none;
 }

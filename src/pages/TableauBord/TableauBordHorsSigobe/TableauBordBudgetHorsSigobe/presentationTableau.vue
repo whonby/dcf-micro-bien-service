@@ -51,10 +51,7 @@
                       >
                     </li>
 
-                      <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#test1"
-                        >test lega</a>
-                    </li>
+                     
 
                      
 <li class="" style="font-size:14px">
@@ -122,9 +119,7 @@
                
                   </div>
 
-                   <div id="test1" class="tab-pane ">
-                     <testLega></testLega>
-                  </div> 
+                  
 
 
                    <div id="MANDAT" class="tab-pane ">
@@ -159,7 +154,7 @@ import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 // import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
 import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBailleur"
-import testLega from "./testLega"
+
 import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
 import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
@@ -174,7 +169,7 @@ export default {
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
-    testLega,
+ 
     // SituationExecuBudgetRecapActivite,
     
     // RechercheExecutionBudgetaire,
