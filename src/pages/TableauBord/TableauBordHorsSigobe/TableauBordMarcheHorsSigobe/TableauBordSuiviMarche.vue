@@ -92,7 +92,7 @@
         
          <div class="card" style="background-color:#f9cf7b;">
            <h4 style="text-align:center;background-color:#f9cf7b;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats en exécution hors délais</h4>
           
             <div class="card-body">
               
@@ -120,7 +120,7 @@
         
          <div class="card" style="background-color:#819e2b;">
            <h4 style="text-align:center;background-color:#819e2b;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats Achévés</h4>
           
             <div class="card-body">
               
@@ -158,7 +158,7 @@
         
          <div class="card" style="background-color:#ef85d8;">
            <h4 style="text-align:center;background-color:#ef85d8;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats en Souffrence</h4>
           
             <div class="card-body">
               
@@ -187,7 +187,7 @@
         
          <div class="card" style="background-color:#ff0000;">
            <h4 style="text-align:center;background-color:#ff0000;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats Résilliés</h4>
           
             <div class="card-body">
               
