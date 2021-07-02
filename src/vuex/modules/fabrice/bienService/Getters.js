@@ -1192,3 +1192,9 @@ export const GroupeUniteZoneMarche = (state, getters) => {
     return groupBy(getters.marches, "unite_zone");
     
 };
+
+export const GroupeUabyActe = (state, getters) => {
+
+    return groupBy(getters.acteEffetFinanciers, "ua_id");
+    
+};

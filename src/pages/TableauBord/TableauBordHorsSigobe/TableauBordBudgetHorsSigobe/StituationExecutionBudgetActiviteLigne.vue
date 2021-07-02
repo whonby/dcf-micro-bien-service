@@ -1085,7 +1085,7 @@ inputLigne:false,
     ]),
      NombreOPNonReguLigne() {
       return (id,id1) => {
-        if (id != null && id != "",id1 != null && id1 != "") {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
@@ -1100,7 +1100,7 @@ inputLigne:false,
     },
      ToTalOPNonReguLigne() {
       return (id,id1) => {
-        if (id != null && id != "",id1 != null && id1 != "") {
+        if (id != null && id != ""&& id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
@@ -1109,7 +1109,7 @@ inputLigne:false,
             
             
         } else {
-          return 78;
+          return 0;
         }
       };
     },
@@ -1124,7 +1124,7 @@ inputLigne:false,
             
             
         } else {
-          return 78;
+          return 0;
         }
       };
     },
@@ -1139,7 +1139,7 @@ inputLigne:false,
             
             
         } else {
-          return 78;
+          return 0;
         }
       };
     },
