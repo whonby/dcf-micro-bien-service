@@ -432,7 +432,7 @@
               
    
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa ">Recherche</td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="12" >
 
                    <model-list-select  v-show="recupereIDSection==GroupeUa "
@@ -531,7 +531,7 @@
                         </span>
                       </button>
                     </td> 
-                    <td style="text-align:right">{{GroupeLigne.id}}</td>
+                    <td style="text-align:right">0</td>
                 </tr>
   </tbody>
               
