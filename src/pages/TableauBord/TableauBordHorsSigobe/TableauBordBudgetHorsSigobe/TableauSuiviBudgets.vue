@@ -685,7 +685,7 @@
                 </td>
                  <td  style="text-align:right"
                 >
-                 <button class="btn btn-primary taille" @click="ModalOpNonRegulirise(unite.id)">
+                 <button class="btn btn-primary taille" @click="ModalOpRegulirise(unite.id)">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ NombreOPRegulirise(unite.id)}}
                         </span>
