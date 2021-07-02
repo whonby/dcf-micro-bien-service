@@ -98,13 +98,13 @@
                     </td>
 
                     <td>
-                      <router-link
+                      <!-- <router-link
                         :to="{ name: 'CycleDeVie', params: { id: marche.id } }"
                         class="btn btn-inverse"
                         title="Cycle de vie du marche"
                       >
                         <span class=""><i class="icon-calendar"></i></span>
-                      </router-link>
+                      </router-link> -->
                       <button
                         @click.prevent="supprimerMarche(marche.id)"
                         class="btn btn-danger"
@@ -116,7 +116,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td></td>
+                    
                     <td></td>
                     <td></td>
                     <td></td>

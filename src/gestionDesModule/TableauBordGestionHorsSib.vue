@@ -58,7 +58,7 @@
            <h4 style="color:#000"> Total des OP provisoires</h4>
           
             <div class="card-body">
-              <table class="noborder" >
+              <table class="noborder">
                 <tr>
                   <th style="color:#000"> Nombre de dossiers :</th>
                   <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>

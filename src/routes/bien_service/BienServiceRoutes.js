@@ -119,6 +119,7 @@ import AjouterMantdatement from "../../pages/ExecutionBudgetaire/DossierFormulai
 import AjouterOrdrePaiement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterOrdrePaiement.vue"
 import ModifierDemandeEngagement from "../../pages/ExecutionBudgetaire/ModifierDemandeEngagement.vue"
 import executionBudgetaire from "../../pages/ExecutionBudgetaire/executionBudgetaire.vue"
+import TableauDeBordSyntheseParBailleur from "../../pages/TableauBord/TableauBordHorsSigobe/TableauBordBudgetHorsSigobe/TableauDeBordSyntheseParBailleur.vue"
 
 import procedureParBonCommande from "../../pages/ExecutionBudgetaire/procedureParBonCommande/procedureParBonCommande.vue"
 import procedureEngaementDirect from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/procedureEngaementDirect.vue"
@@ -186,6 +187,12 @@ import DossierImageParMarche from "../../pages/ImageMarche/DossierImageParMarche
 import DossierImg from "../../pages/ImageMarche/DossierImg.vue"
 
 const BienServiceRoutes = [ 
+
+    {
+        path:"/tableau-bord-bailleur",
+        name:"tableau_marheBailleur",
+        component:TableauDeBordSyntheseParBailleur
+    },
 
 
     {
