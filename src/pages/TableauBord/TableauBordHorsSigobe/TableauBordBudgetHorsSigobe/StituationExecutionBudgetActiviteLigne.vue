@@ -292,7 +292,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    TOTAL OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                    TOTAL OP PROVISOIRE  {{afficheAnnee}}
                   </th>
                      <th
                     style="
@@ -573,7 +573,7 @@
                    {{ToTalOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
                   </td>
                   <td style="text-align: right;color:#000;" >
-                    {{ NombreOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
+                    {{ d(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
                   </td>
                    <td style="text-align: right;color:#000;" >
               {{  TauxOPProvisoireNonRegularisLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
@@ -1083,13 +1083,13 @@ inputLigne:false,
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
-     NombreOPNonReguLigne() {
+     d() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.ligne_economique_id == id && qtreel.activite_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1
+                qtreel.ligne_economique_id == id && qtreel.activite_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
             ).length
             
             
@@ -1104,7 +1104,7 @@ inputLigne:false,
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.ligne_economique_id == id && qtreel.activite_id == id1  && qtreel.type_ordre_paiement==1
+                qtreel.ligne_economique_id == id && qtreel.activite_id == id1  && qtreel.type_ordre_paiement==2
             ).length
             
             
@@ -1119,7 +1119,7 @@ inputLigne:false,
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==1
+                qtreel.activite_id == id && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
             ).length
             
             
@@ -1134,7 +1134,7 @@ inputLigne:false,
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.activite_id == id &&  qtreel.type_ordre_paiement==1
+                qtreel.activite_id == id &&  qtreel.type_ordre_paiement==2
             ).length
             
             

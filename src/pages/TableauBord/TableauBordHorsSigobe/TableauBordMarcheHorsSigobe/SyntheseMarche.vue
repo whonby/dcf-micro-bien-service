@@ -17,7 +17,7 @@
       
  <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Detail Réamenagement Budgétaire</h2>
+             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Part Des Bailleurs</h2>
           </tr>
         </table>
         <table class="table table-bordered table-striped">

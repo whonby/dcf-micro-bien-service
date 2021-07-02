@@ -630,7 +630,7 @@ export default {
             .filter(
               (qtreel) =>
                 qtreel.uniteadministrative_id == id  &&
-                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1 
+                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==2
             ).length
             
             
@@ -646,7 +646,7 @@ export default {
             .filter(
               (qtreel) =>
                 qtreel.section_id == id  &&
-                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0
+                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==2
             ).length
             
             
@@ -709,7 +709,7 @@ export default {
             .filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id && qtreel.ligne_economique_id == id1 &&
-                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
+                qtreel.exercice == this.afficheAnnee && qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==2
             ).length
             
             
