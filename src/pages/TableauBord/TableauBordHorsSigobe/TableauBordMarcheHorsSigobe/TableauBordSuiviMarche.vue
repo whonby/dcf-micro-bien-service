@@ -5,7 +5,7 @@
         <div class="widget-box">
          
           <div class="widget-content">
-            <h3 style="text-align:center;text-decoration:underline;">SUIVI DES OPERATIONS DCF {{ NbreUA }} </h3>
+            <h3 style="text-align:center;text-decoration:underline;">SUIVI DES OPERATIONS DCF </h3>
     <div class="">
 
       <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
@@ -41,10 +41,10 @@
           
             <div class="card-body">
               
-              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:2</p>
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
               <br>
          
@@ -69,10 +69,10 @@
           
             <div class="card-body">
               
-              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:2</p>
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
               <br>
          
@@ -92,14 +92,14 @@
         
          <div class="card" style="background-color:#f9cf7b;">
            <h4 style="text-align:center;background-color:#f9cf7b;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats en exécution hors délais</h4>
           
             <div class="card-body">
               
-               <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:2</p>
+               <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
               <br>
          
@@ -120,14 +120,14 @@
         
          <div class="card" style="background-color:#819e2b;">
            <h4 style="text-align:center;background-color:#819e2b;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats Achévés</h4>
           
             <div class="card-body">
               
-              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:2</p>
+              <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
               <br>
          
@@ -158,14 +158,14 @@
         
          <div class="card" style="background-color:#ef85d8;">
            <h4 style="text-align:center;background-color:#ef85d8;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats en Souffrence</h4>
           
             <div class="card-body">
               
-             <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:2</p>
+             <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
               <br>
          
@@ -187,14 +187,14 @@
         
          <div class="card" style="background-color:#ff0000;">
            <h4 style="text-align:center;background-color:#ff0000;color:white;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               -Total des Marché/Contrats Résilliés</h4>
           
             <div class="card-body">
               
-             <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:2</p>
-              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:2</p>
+             <p style="color:white;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Montant Total:0</p>
+              <p  style="color:white;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
               <br>
               
@@ -259,7 +259,7 @@ export default {
   data(){
     return{
 
-      budgetGeneralCharge:"",
+      budgetGeneralCharge:0,
        series: [44, 55, 13, 43,55, 13, 43],
           chartOptions: {
             chart: {
@@ -340,24 +340,40 @@ budgetConsommerPersonnel(){
       };
     },
 
+      ReturnSibua(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.exo_id==this.anneeAmort
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+
     NbreUA(){
-             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSib(qtreel[0].marche_id) == 1)).length
+             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibua(qtreel[0].ua_id) == 1)).length
     },
 
     NbreMarche(){
         return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSib(qtreel.marche_id) == 1)).length
     },
 
+
     MontantTotalMarche1(){
-          let tot= this.acteEffetFinanciers.filter((qtreel) =>
-                this.ReturnSib(qtreel.marche_id) == 1)
-                .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
-                if(tot<=0){
-                    return 0
-                }else{
-                    return tot;
-                }
+      return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSib(qtreel.marche_id) == 1)).
+      reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
+        
+         
     },
+
+
+  
 
 
 
@@ -677,6 +693,7 @@ created() {
      
     ]),
 
+      
 
  formatageSommeSansFCFA: formatageSommeSansFCFA,
 formatageSomme:formatageSomme,
@@ -712,10 +729,6 @@ blockquote {
     margin: 0 0 1rem;
 }
 
-.{
-  border-collapse: collapse;
-  text-align: left !important;
-}
 .blockquote-ul ul {
   list-style: none;
 }
