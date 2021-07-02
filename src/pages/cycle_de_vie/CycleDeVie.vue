@@ -1,4 +1,3 @@
-montant_act_ht
 <template>
     <div >
 
@@ -13,13 +12,11 @@ montant_act_ht
                         <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
 
                         <div class="widget-title">
-                             
-                            
                             <div align="right">
-
                                 <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-
-
+                                <button class="btn btn-default" @click="tableToExcel('table', 'Cycle de vie')">
+                                    Exporte en excel
+                                </button>
                             </div>
                             <span class="icon">
                 <i class="icon-th"></i>
@@ -28,10 +25,10 @@ montant_act_ht
                         </div>
 
      <div id="app">
-         <div  id="pdf" ref="document">
-             <div align="center"> <h2>Cycle de vie du marché ({{detail.objet}})</h2> </div>
+         <div  id="printpdf" ref="table" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+             <div align="center"> <h2>({{detail.objet}})</h2> </div>
              <br>
-             <table class="table table-bordered " id="app1">
+             <table class="table" >
                  <thead>
                  <tr>
                      <th style="width:10%">EXERCICE</th>
@@ -43,11 +40,11 @@ montant_act_ht
                  </tr>
                  <tr>
                      <th style="width:10%">CODE ACTIVITE</th>
-                     <td>{{detail.activite}} </td>
+                     <td>{{activiteBudgetaire(detail.parent_id,detail.activite_id)}} </td>
                  </tr>
                  <tr>
                      <th style="width:10%">LIGNE BUDGETAIRE</th>
-                     <td> {{detail.ligne_budgetaire}} </td>
+                     <td> {{detail.imputation}} </td>
                  </tr>
                  <tr>
                      <th style="width:10%">OBJET</th>
@@ -60,15 +57,13 @@ montant_act_ht
                  </thead>
 
              </table>
-             <div class="html2pdf__page-break"></div>
 
-             <table class="table table-bordered table-striped" id="app2">
+             <table class="table">
                  <thead>
                  <tr>
                      <th style="width:10%">SOURCE (S) DE FINANCEMENTS</th>
                      <td style="width:15%" colspan="1">CONTREPARTIE </td>
-                     <td style="width:15%; text-align: center" colspan="3"> BAILLEURS (B)</td>
-
+                     <td style="width:15%; text-align: center" :colspan="detailBailleur.lenght"> BAILLEURS (B)</td>
                  </tr>
                  <tr>
                      <th style="width:10%">NOM DU BAILLEUR</th>
@@ -102,8 +97,8 @@ montant_act_ht
                  </tr>
                  <tr>
                      <th  style="width:10%">POURCENTAGE (%)</th>
-                     <td style="width:15%" v-if="detailBailEtat">{{detailBailEtat.tva}} </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">{{baill.tva}} </td>
+                     <td style="width:15%" v-if="detailBailEtat">{{detailBailEtat.tauxbailleur}} % </td>
+                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">{{baill.tauxbailleur}} %</td>
                      <!--<td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -150,15 +145,15 @@ montant_act_ht
                  </thead>
 
              </table>
-             <div class="html2pdf__page-break"></div>
+
              <table class="table table-bordered table-striped" id="app3">
                  <thead>
                  <tr>
-                     <th>ETAT DE LA CONTRACTUALISATION:
+                     <td style="text-align: center !important;">ETAT DE LA CONTRACTUALISATION:
                          <span title="MARCHE EN EXERCUTER"  v-if="detail.attribue == 2" style=" color: red; font-size: 15px">ACHEVE</span>
 
                          <span title="MARCHE EN EXERCUTER"  v-else-if="detail.attribue == 1"  style=" color: green; font-size: 15px">En cours</span>
-                     </th>
+                     </td>
                  </tr>
                  </thead>
                  <tbody>
@@ -226,7 +221,7 @@ montant_act_ht
                  <tbody>
                  </tbody>
              </table>
-             <div class="html2pdf__page-break"></div>
+
              <table class="table table-bordered table-striped" id="app5">
                  <thead>
                  <tr>
@@ -236,7 +231,7 @@ montant_act_ht
                  <tr>
                      <th style="width:5%">DATE D'ATTRIBUTION DEFINITIVE</th>
                      <td style="width:15%" colspan="6" v-if="detailActeEffet">
-{{detailActeEffet.date_attributaire}}
+                       {{detailActeEffet.date_attributaire}}
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                       NON APPLICABLE
@@ -337,7 +332,7 @@ montant_act_ht
                  <tbody>
                  </tbody>
              </table>
-             <div class="html2pdf__page-break"></div>
+
              <table class="table table-bordered table-striped" id="app6">
                  <thead>
                  <tr>
@@ -543,7 +538,7 @@ montant_act_ht
                  <tbody>
                  </tbody>
              </table>
-             <div class="html2pdf__page-break"></div>
+
              <table class="table table-bordered table-striped" id="app14">
                  <thead>
                  <tr>
@@ -592,7 +587,7 @@ montant_act_ht
     import { mapGetters, mapActions } from "vuex";
     // import html2canvas from 'html2canvas'
     // import * as JsPDF from 'jspdf'
-    import html2pdf from 'html2pdf.js'
+    //import html2pdf from 'html2pdf.js'
     // import moment from "moment";
     // import { ModelListSelect } from "vue-search-select";
     // import "vue-search-select/dist/VueSearchSelect.css";
@@ -662,11 +657,15 @@ montant_act_ht
                 dernierDemandeAno:"",
                 detailAnoBailleur:"",
                 dernierAnoBaille:"",
+                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) },
             };
         },
         created() {
          this.detail=this.marches.find(item=>item.id== this.$route.params.id)
-
+         
             this.detailBailEtat=this.personnaliseGetterMarcheBailleur.find(item=>{
                 if (item.typeFinnancement.code==1 && item.marche_id==this.$route.params.id ){
                     return item
@@ -684,9 +683,8 @@ montant_act_ht
             this.detailActeEffet=this.getActeEffetFinancierPersonnaliserContrat.find(item=>item.marche_id==this.$route.params.id)
             this.detailAvenant=this.avenants.filter(item=>item.marche_id==this.$route.params.id)
             this.nbrAvenant=this.detailAvenant.length
-            console.log(this.detailAvenant)
-             //console.log(this.detailActeEffet)
-           //console.log(this.getMandatPersonnaliserVise)
+         
+
             this.detailDecompte=this.decomptefactures.filter(item=>item.marche_id==this.$route.params.id).reverse()
             if(this.detailDecompte){
              this.dernierDecompte=this.detailDecompte[0]
@@ -712,7 +710,9 @@ montant_act_ht
                 "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
                 "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
                 "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
-                "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
+                "getActeEffetFinancierPersonnaliserContrat","getterCojos",
+                "getterDemandeAno","getterAnoDMPBailleur",
+      "getterOffreFinanciers","gettersOffreTechniques"]),
             ...mapGetters("uniteadministrative", [
                 "acteCreations",
                 "typeTextes",
@@ -732,7 +732,7 @@ montant_act_ht
 
 
             ]),
-
+ 
             ...mapGetters('parametreGenerauxAdministratif',[
 
                 "sections",
@@ -752,17 +752,65 @@ montant_act_ht
 
             ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
-            ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+            ...mapGetters('parametreGenerauxBudgetaire',["getterTousPlanBudgetaire",
+      "getterTousActivite","plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
 
             afficherListeSalaireEnExecution(){
                 return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
             },
 
+     montantMarche(){
+         return (idMarche,status)=>{
+             if(!status) return ""
+             let objet=this.acteEffetFinanciers.find(items=>items.marche_id==idMarche)
+             if(!objet) return ""
+             let montant=""
+             if(status=="HT"){
+                  montant=objet.montant_act
+             }
+             if(status=="TC"){
+                montant=objet.montant_act_ht 
+             }
+            return montant
+
+         }
+     },
+        activiteBudgetaire(){
+           return (parent_id,activite_id) => {
+                
+                 
+               if(parent_id==null && activite_id){
+                  
+                    let objet_activite=this.getterTousActivite.find(items=>items.id==activite_id)
+                    if(objet_activite==undefined) return ""
+                    return objet_activite.code+" "+objet_activite.libelle
+               }
 
 
+              if(parent_id && activite_id){
+                     let objet_activite=this.getterTousActivite.find(items=>items.id==activite_id)
+                    if(objet_activite==undefined) return ""
+                    return objet_activite.code+" "+objet_activite.libelle
+              }
 
 
+              if(parent_id && activite_id==null){
+                  
+                let objet_marche=this.marches.find(item=>item.id== parent_id)
+               
+               if(objet_marche==undefined) return ""
+               let objet_activite=this.getterTousActivite.find(items=>items.id==objet_marche.activite_id)
+                    if(objet_activite==undefined) return ""
+                    return objet_activite.code+" "+objet_activite.libelle
+
+              }
+              
+              return ""
+               
+           }
+        },
+         
             afficherUa() {
                 return id => {
                     if (id != null && id != "") {
@@ -971,6 +1019,12 @@ AfficheMontantHt() {
                     keyboard: false
                 });
             },
+            tableToExcel(table, name){
+                console.log(this.$refs.table)
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
+            },
             // fonction pour vider l'input ajouter
             ajouterUniteAdministrativeLocal() {
                 var nouvelObjet = {
@@ -1037,14 +1091,12 @@ AfficheMontantHt() {
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
+
+
             genererEnPdf(){
-                html2pdf(this.$refs.document, {
-                    margin: 1,
-                    filename:'Cycle de vie '+this.detail.objet+'.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { dpi: 192, letterRendering: true },
-                    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
-                })
+
+
+                this.$htmlToPaper("printpdf");
               /*  var doc = new JsPDF('landscape')
 
                 doc.text(98,10,"CYCLE DE VIE")*/
