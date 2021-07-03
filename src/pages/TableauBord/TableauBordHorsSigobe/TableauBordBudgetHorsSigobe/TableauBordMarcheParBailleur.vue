@@ -439,46 +439,60 @@
          </tr> 
         </tbody>
       
-          
-           
-             
-               
-            
-           
-
-         
-            
-          
-       
-       
+      
       </table>
+      <br>
+      <br>
     </div>
-      <!-- <div class="row-fluid" style="margin: 55px 2px 100px 4px">
+   
+      <div class="row-fluid" style="margin: 55px 2px 100px 4px">
+         
             <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
               <apexchart
                       type="pie"
-                      width="560"
+                      width="460"
+                      :options="chartOptions"
+                      :series="dataPourcentage"
+              ></apexchart>
+              <h3></h3>
+            </div>
+           
+            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
+              <apexchart
+                      type="pie"
+                      width="460"
                       :options="chartOptions"
                       :series="dataPourcentage"
               ></apexchart>
               <h3></h3>
             </div>
             <hr>
-              <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
+      </div>
+      <div class="row-fluid" style="margin: 55px 2px 100px 4px">
+            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
               <apexchart
                       type="pie"
-                      width="560"
+                      width="460"
                       :options="chartOptions"
                       :series="dataPourcentage"
               ></apexchart>
               <h3></h3>
             </div>
-           </div>  -->
+            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
+              <apexchart
+                      type="pie"
+                      width="460"
+                      :options="chartOptions"
+                      :series="dataPourcentage"
+              ></apexchart>
+              <h3></h3>
+            </div>
+
+      </div>
+            
            
 
-     <div class="pagination alternate">
-     
-    </div>
+   
 
 
         
@@ -493,9 +507,13 @@
   </div>
 </template>
 <script>
+ import VueApexCharts from 'vue-apexcharts'
 import {mapGetters, mapActions} from "vuex"
 import {formatageSommeSansFCFA} from "../../../../Repositories/Repository"
 export default {
+  components:{
+     apexchart: VueApexCharts,
+  },
   props:["macheid"],
     data() {
         return{
