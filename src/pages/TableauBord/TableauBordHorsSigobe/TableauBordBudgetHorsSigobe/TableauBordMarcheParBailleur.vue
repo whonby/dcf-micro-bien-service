@@ -126,6 +126,11 @@
     </div>  -->
     
     <div class="widget-content nopadding" id="printpdf">
+        <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div> 
        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Synthèse par BAILLEUR</h2>
@@ -339,7 +344,7 @@
 
       
        <tbody>
-           <tr v-for="type1 in groupeParSourceFinancement" :key="type1">
+           <tr v-for="type1 in  partition(groupeParSourceFinancement, size)[page]" :key="type1">
          
           <td style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -441,54 +446,83 @@
       
       
       </table>
+
+
+       <div class="pagination alternate">
+      <ul>
+        <li :class="{ disabled: page == 0 }">
+          <a @click.prevent="precedent()" href="#">Précedent</a>
+        </li>
+        <li
+          v-for="(titre, index) in partition(groupeParSourceFinancement, size).length"
+          :key="index"
+          :class="{ active: active_el == index }"
+        >
+          <a @click.prevent="getDataPaginate(index)" href="#">{{
+            index + 1
+          }}</a>
+        </li>
+        <li
+          :class="{ disabled: page == partition(groupeParSourceFinancement, size).length - 1 }"
+        >
+          <a @click.prevent="suivant()" href="#">Suivant</a>
+        </li>
+      </ul>
+    </div>
       <br>
       <br>
     </div>
-   
-      <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-         
-            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
-              <apexchart
-                      type="pie"
-                      width="460"
-                      :options="chartOptions"
-                      :series="dataPourcentage"
-              ></apexchart>
-              <h3></h3>
-            </div>
-           
-            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
-              <apexchart
-                      type="pie"
-                      width="460"
-                      :options="chartOptions"
-                      :series="dataPourcentage"
-              ></apexchart>
-              <h3></h3>
-            </div>
-            <hr>
-      </div>
-      <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
-              <apexchart
-                      type="pie"
-                      width="460"
-                      :options="chartOptions"
-                      :series="dataPourcentage"
-              ></apexchart>
-              <h3></h3>
-            </div>
-            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
-              <apexchart
-                      type="pie"
-                      width="460"
-                      :options="chartOptions"
-                      :series="dataPourcentage"
-              ></apexchart>
-              <h3></h3>
-            </div>
 
-      </div>
+
+    
+
+    <table>
+      <tbody>
+        <tr>
+
+          
+                <td>
+                  <h3>contratualisation</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+
+                  <td>
+                    <h3>Exécution</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+
+                  <td>
+                    <h3>Souffrance</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+
+                  <td>
+                    <h3>Resilier</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+     </tr>
+        </tbody>
+    </table>
             
            
 
@@ -509,6 +543,7 @@
 <script>
  import VueApexCharts from 'vue-apexcharts'
 import {mapGetters, mapActions} from "vuex"
+import { partition } from "@/Repositories/Repository";
 import {formatageSommeSansFCFA} from "../../../../Repositories/Repository"
 export default {
   components:{
@@ -517,39 +552,29 @@ export default {
   props:["macheid"],
     data() {
         return{
-            series: [44, 55, 13, 43, 22],
-            dataPourcentage: [],
-             chartOptions: {
-        chart: {
-          width: 380,
-          type: "pie",
-        },
-        labels: [
-          "En Attente de contractualisation.",
-          "En attente de contractualisation H.D",
-          "En Contractualisation.",
-          "En Contractualisation H.D",
-        ],
-        colors: [
-          "#8ea9db",
-          "#f4b084",
-          "#92d04f",
-          "#632990",
-        ],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: "bottom",
-              },
+           page: 0,
+      size:3,
+      active_el: 0,
+             series: [44, 55, 13, 43,55, 13, 43],
+          chartOptions: {
+            chart: {
+              width: 380,
+              type: 'pie',
             },
+            labels: ['A', 'B', 'C', 'D','E','F','G'],
+            colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
           },
-        ],
-      },
         }
         
     },
@@ -840,6 +865,25 @@ montantAvenantMarcheResilier(){
     },
     methods:{
     ...mapActions("bienService",[""]),
+
+    partition: partition,
+
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
+    
+    genererEnPdf() {
+      this.$htmlToPaper("printpdf");
+    },
 
      afficherTauxMarcheSouffre(id){
       return (this.NombreMarcherEnSouffrance(id) * parseFloat(this.resteAexcuterMarcheSouffrance(id))) /100;
