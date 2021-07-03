@@ -25,8 +25,16 @@
                         >TB2 : SYNTHESE DES MARCHES </a
                       >
                     </li>
-
-                   
+ <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#AVENANT"
+                        >TB3 : SYNTHESE DES MARCHE AVEC AVENANT </a
+                      >
+                    </li>
+                   <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#BAILLEUR"
+                        >TB3 : SYNTHESE DES MARCHE PAR BAILLEUR </a
+                      >
+                    </li>
                   </ul>
                 </div>
                 <div class="widget-content tab-content">
@@ -36,7 +44,12 @@
                    <div id="SYNTHESE" class="tab-pane ">
                      <SyntheseMarche></SyntheseMarche>
                   </div>
-
+ <div id="AVENANT" class="tab-pane ">
+                     <MarcheParAvenant></MarcheParAvenant>
+                  </div>
+<div id="BAILLEUR" class="tab-pane ">
+                     <TableauBordMarcheParBailleur></TableauBordMarcheParBailleur>
+                  </div>
 
             
                 </div>
@@ -60,6 +73,8 @@ import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
  import TableauBordSuiviMarche from "./TableauBordSuiviMarche"
   import SyntheseMarche from "./SyntheseMarche"
+  import MarcheParAvenant from "./MarcheParAvenant"
+  import TableauBordMarcheParBailleur from "../TableauBordBudgetHorsSigobe/TableauBordMarcheParBailleur"
 //import TableausuiviBudgets from "./TableauSuiviBudgets"
 
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
@@ -68,6 +83,8 @@ import { formatageSomme } from "@/Repositories/Repository";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       TableauBordMarcheParBailleur,
+       MarcheParAvenant,
       TableauBordSuiviMarche,
       SyntheseMarche
   },

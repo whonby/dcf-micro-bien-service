@@ -256,7 +256,7 @@ navigateToGestionMarche(){
     this.activate(25)
     this.$router.push({
       //  name: 'groupeMarcheParUa TableauBordGestionMarche '
-        name: 'tableau_marheBailleur'
+        name: 'PresentationTableauMarche'
     })
       },
        navigateTableBordBordBudgetEclate(){

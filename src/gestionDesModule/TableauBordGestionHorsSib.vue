@@ -1,5 +1,50 @@
 <template>
     <div>
+      <div class="row-fluid" style="margin-top: -20px">
+        <br /> 
+      <div class="span1"></div>
+      <div class="span10" style="background-color: transparent; !important;">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <br />
+              <td>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >EXERCICE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000; font-weight:bold"
+                  class="wide"
+                  :list="gettersgestionOrdrePaiement"
+                  v-model="exercice_id"
+                  option-value="id"
+                  option-text="exercice"
+                  placeholder="TOUTES LES ANNEES"
+                >
+                </model-list-select>
+              </td>
+              <td>
+                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >UNITE ADMINISTRATIVE<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="uniteAdministratives_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                >
+                </model-list-select>
+                
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
       <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -15,8 +60,8 @@
             <div class="card-body">
               <table class="noborder">
                 <tr>
-                  <th style="color:#000">Nombre de dossiers :</th>
-                  <td style="color:#000">0</td>
+                  <th style="color:#000"> Nombre de dossiers :</th>
+                  <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>
                 </tr>
                 <tr>
                   <th style="color:#000">Taux :</th>
@@ -24,7 +69,7 @@
                 </tr>
                 <tr>
                   <th style="color:#000">Montant :</th>
-                  <td style="color:#000">0</td>
+                  <td style="color:#000; font-weight:bold">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
                 </tr>
               </table>
               <br>
@@ -72,7 +117,7 @@ en cours de traitement</h4>
               <table class="noborder" >
                 <tr>
                   <th>Nombre de dossiers :</th>
-                  <td>0</td>
+                  <td style="color:#000; font-weight:bold"> {{NbreOpRegulariseLength}} </td>
                 </tr>
                 <tr>
                   <th>Taux :</th>
@@ -80,7 +125,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th>Montant :</th>
-                  <td>0</td>
+                  <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpRegularise))}}</td>
                 </tr>
               </table>
               <br>
@@ -97,15 +142,15 @@ en cours de traitement</h4>
               <table class="noborder" >
                 <tr>
                   <th>Nombre de dossiers :</th>
-                  <td>0</td>
+                  <td style="color:#000; font-weight:bold">{{NbreOpNonRegulariseLength}} </td>
                 </tr>
                 <tr>
                   <th>Taux :</th>
-                  <td>0</td>
+                  <td> 0 </td>
                 </tr>
                 <tr>
                   <th>Montant :</th>
-                  <td>0</td>
+                  <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpNonRegularise))}} </td>
                 </tr>
               </table>
               <br>
@@ -117,7 +162,7 @@ en cours de traitement</h4>
      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
           <div class="text-center"><h4>D</h4></div>
          <div class="card bg-warning mb-3 text-center">
-           <h4>OP Provisoires hots délai d'un mois</h4>
+           <h4>OP Provisoires hors délai d'un mois</h4>
           
             <div class="card-body">
               <table class="noborder" >
@@ -297,16 +342,21 @@ en cours de traitement</h4>
 
 import { mapGetters, mapActions,mapState } from "vuex";
 import {formatageSomme} from '../../src/Repositories/Repository';
+import { formatageSommeSansFCFA } from "@/Repositories/Repository";
 import {noDCfNoAdmin} from '../../src/Repositories/Auth';
 //import { GChart } from 'vue-google-charts'
+import { ModelListSelect } from "vue-search-select";
  import VueApexCharts from 'vue-apexcharts'
 export default {
    components: {
     apexchart: VueApexCharts,
+    ModelListSelect,
   },
   data(){
     return{
-
+      exercice_id:0,
+      uniteAdministratives_id:0,
+      text1:[],
       budgetGeneralCharge:"",
        series: [44, 55, 13, 43],
           chartOptions: {
@@ -331,7 +381,15 @@ export default {
 
     }
   },
-
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.gestionModules.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+   console.log("coucou")
+   this.text1 = this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
+   console.log(this.GroupeOrdrePaiementByActivite)
+},
    
   computed:{
 
@@ -350,7 +408,12 @@ export default {
 
             ]),
             
-    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
+    ...mapGetters("bienService", [
+      "getMandatPersonnaliserVise",
+      "getMandatPersonnaliserPersonnel",
+      "gettersgestionOrdrePaiement",
+      "GroupeOrdrePaiementByActivite",
+      "mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
@@ -416,7 +479,142 @@ affichierTauxExecution() {
     
 //       return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
 // },
+NbreDossierOpProvisoire(){
+  if(this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.exercice == this.anneeAmort)
+  } else if(this.uniteAdministratives_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id)
 
+  }else if(this.uniteAdministratives_id != 0 && this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id &&
+      tem.exercie == this.anneeAmort)
+
+  }
+  else{
+    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
+  }
+},
+lenghtOpProvisoire(){
+  return this.NbreDossierOpProvisoire.length
+},
+NbreOpRegularise(){
+  if(this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.diff_reg_op == 1 && 
+      tem.exercice == this.anneeAmort)
+  }else if(this.uniteAdministratives_id != 0){
+    return this.gettersgestionOrdrePaiement.filter((tem) =>
+      tem.diff_reg_op == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id)
+  }else if(this.uniteAdministratives_id != 0 && this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter((tem) =>
+        tem.diff_reg_op == 1 && 
+        tem.unite_administrative_id == this.uniteAdministratives_id &&
+        tem.exercice == this.anneeAmort)
+  }
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 1)
+},
+NbreOpRegulariseLength(){
+  return this.NbreOpRegularise.length
+},
+
+NbreOpNonRegularise(){
+   if(this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.diff_reg_op == 0 && 
+      tem.exercice == this.anneeAmort)
+  }else if(this.uniteAdministratives_id != 0){
+    return this.gettersgestionOrdrePaiement.filter((tem) =>
+      tem.diff_reg_op == 0 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id)
+  }else if(this.uniteAdministratives_id != 0 && this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter((tem) =>
+        tem.diff_reg_op == 0 && 
+        tem.unite_administrative_id == this.uniteAdministratives_id &&
+        tem.exercice == this.anneeAmort)
+  }
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 0)
+},
+NbreOpNonRegulariseLength(){
+  return this.NbreOpNonRegularise.length
+},
+sommeOpProvisoire(){
+  if(this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.exercice == this.anneeAmort
+      ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0); 
+  }else if(this.uniteAdministratives_id != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id
+      ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0); 
+  }else if(this.uniteAdministratives_id != 0 && this.exercice != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id &&
+      tem.exercice == this.anneeAmort
+      ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0); 
+  }else{
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1).reduce(
+        (prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0); 
+  }
+},
+sommeOpNonRegularise(){
+    if(this.exercice_id != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+        (tem) => 
+        tem.diff_reg_op == 0 && 
+        tem.exercice == this.anneeAmort
+        ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+    } else if(this.uniteAdministratives_id != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+        (tem) => 
+        tem.diff_reg_op == 0 && 
+        tem.unite_administrative_id == this.uniteAdministratives_id
+        ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+    } else if(this.uniteAdministratives_id != 0 && this.exercice != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+        (tem) => 
+        tem.diff_reg_op == 0 && 
+        tem.unite_administrative_id == this.uniteAdministratives_id &&
+        tem.exercice == this.anneeAmort
+        ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+    }
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+},
+sommeOpRegularise(){
+ if(this.exercice_id != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+        (tem) => 
+        tem.diff_reg_op == 1 && 
+        tem.exercice == this.anneeAmort
+        ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+    }else if(this.uniteAdministratives_id != 0){
+      return this.gettersgestionOrdrePaiement.filter(
+        (tem) => 
+        tem.diff_reg_op == 1 && 
+        tem.unite_administrative_id == this.uniteAdministratives_id
+        ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+    }
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+},
 
 afficherBudgetInitialTranferst() {
         
@@ -495,7 +693,7 @@ afficherBudgetInitialB() {
             let colect=[];
             
             this.budgetEclate.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.exercice_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -667,21 +865,16 @@ affichierTauxExecutionInvestissement() {
 
 
   },
-created() {
-            this.marcheid=this.$route.params.id
-   this.detail_marche = this.gestionModules.find(
-       idmarche => idmarche.id == this.$route.params.id
-   )
-  
-},
+
   methods:{
 ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
 
-
- formatageSomme:formatageSomme
+  
+ formatageSomme:formatageSomme,
+ formatageSommeSansFCFA:formatageSommeSansFCFA
   }
 }
 </script>

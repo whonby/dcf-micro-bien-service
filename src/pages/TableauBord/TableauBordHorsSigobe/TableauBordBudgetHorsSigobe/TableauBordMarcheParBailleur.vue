@@ -166,7 +166,7 @@
           text-decoration: underline;
         "
       >
-        EXERCICE: {{  }}
+        
       </p>
 
               <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
