@@ -113,7 +113,7 @@ recupereIDactivite
                       background-color: #fbb203 !important;
                     "
                   >
-                  REAMENAGEMENT BUDGETAIRE (FCFA) {{afficheAnnee}}
+                  MODIFICATION BUDGETAIRE (FCFA) {{afficheAnnee}}
                   </th>
                   <th
                     style="

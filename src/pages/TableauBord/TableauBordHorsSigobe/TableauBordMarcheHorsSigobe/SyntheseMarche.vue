@@ -161,12 +161,7 @@
                   
                    
                  <tr>
-                   <th></th>
-
-                   <th></th>
-<th></th>
-                 
-                 <th></th>
+                   
                    <th>
                    NUMERO D'ORDRE {{afficheAnnee}}
                   </th>
