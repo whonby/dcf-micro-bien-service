@@ -134,11 +134,11 @@ export const personnaliseGetterMarcheBailleur = (state, getters, rootState, root
     });
 
 
-    export const afficherIdTypeFinancement = state => state.marches.filter(item =>item.type_financement==13 || item.type_financement==15)
+    export const afficherIdTypeFinancement = state => state.marches.filter(item =>item.source_financement!=6)
         
     
     export const groupeParSourceFinancement =(state, getters) =>{
-        return groupBy(getters.afficherIdTypeFinancement, "type_financement");
+        return groupBy(getters.afficherIdTypeFinancement, "source_financement");
       }
 export const nombremarchesExecute = getters =>
     getters.marches.filter(

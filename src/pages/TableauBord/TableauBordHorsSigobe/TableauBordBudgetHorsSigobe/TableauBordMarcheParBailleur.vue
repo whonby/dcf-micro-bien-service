@@ -108,7 +108,7 @@
     <div class="span4">
        
           Afficher
-          <select name="pets" id="pet-select"  class="span3">
+          <select name="pets" id="pet-select"  v-model="size" class="span3">
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="20">20</option>
@@ -124,6 +124,7 @@
         Exporter en PDF
       </button>
     </div>  -->
+
     
     <div class="widget-content nopadding" id="printpdf">
         <div align="right">
@@ -136,6 +137,7 @@
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Synthèse par BAILLEUR</h2>
           </tr>
         </table>
+
       <!-- <h2
         style="
           font-size: 25px;
@@ -355,7 +357,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{afficherLibelleTypeFinancement(type1[0].type_financement)}}</td>
+                      background-color: #fbb203 !important;">{{afficherLibelleTypeFinancement(idTypeFinancement(type1[0].source_financement))}}</td>
          <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
@@ -555,14 +557,59 @@ export default {
            page: 0,
       size:3,
       active_el: 0,
+            //   series: [{
+            // name: 'BAD',
+
+            // data: []
+            //   }],
+          //      chartOptions: {
+          //   chart: {
+          //     type: 'pie',
+          //    width: 380,
+          //     stacked: true,
+          //     toolbar: {
+          //       show: true
+          //     },
+          //     zoom: {
+          //       enabled: true
+          //     }
+          //   },
+          //    responsive: [{
+          //     breakpoint: 480,
+          //     options: {
+          //       legend: {
+          //         position: 'bottom',
+          //         offsetX: -10,
+          //         offsetY: 0
+          //       }
+          //     }
+          //   }],
+          //    plotOptions: {
+          //     bar: {
+          //       horizontal: false,
+          //     },
+          //   },
+          //   xaxis: {
+          //     //type: 'datetime',
+          //     categories: [],
+          //   },
+          //   legend: {
+          //     position: 'bottom',
+          //     offsetY: 40
+          //   },
+          //   fill: {
+          //     opacity: 1
+          //   }
+
+          //  }
              series: [44, 55, 13, 43,55, 13, 43],
           chartOptions: {
             chart: {
               width: 380,
               type: 'pie',
             },
-            labels: ['A', 'B', 'C', 'D','E','F','G'],
-            colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
+             labels: ['A', 'B', 'C', 'D','E','F','G'],
+             colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
             responsive: [{
               breakpoint: 480,
               options: {
@@ -592,6 +639,11 @@ export default {
   'types_financements']) ,
 
 
+  // liste(){
+  //   return this.groupeParSourceFinancement.filter(item=> item[0].type_financement!=14)
+  // },
+
+
    afficherLibelleSourFinacement() {
       return id => {
         if (id != null && id != "") {
@@ -618,6 +670,18 @@ export default {
       };
     },
 
+  idTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.source_financement==id);
+
+      if (qtereel) {
+        return qtereel.type_financement;
+      }
+      return 0
+        }
+      };
+    },
 
  afficherMontantTtcDeActeDons() {
       return id => {
@@ -866,6 +930,9 @@ montantAvenantMarcheResilier(){
     methods:{
     ...mapActions("bienService",[""]),
 
+
+
+
     partition: partition,
 
     getDataPaginate(index) {
@@ -918,7 +985,37 @@ resteAexcuterMarcheSouffrance(id){
     return (this.NombreMarcherResilier(id) * parseFloat(this.resteAexcuterMarcheResilier(id)))/ 100
   },
 
-    formatageSommeSansFCFA:formatageSommeSansFCFA  
+    formatageSommeSansFCFA:formatageSommeSansFCFA , 
+
+
+// calcul des differents taux avec les camenber 
+//  testRegion(){
+//    let  objet= this.groupeParSourceFinancement.filter(item=>{
+//      if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null){
+//        return item
+//      }
+//    })
+
+//      if(objet.length>0){
+//        let vm=this;
+//        objet.forEach(function (value) {
+//           // let total=200;
+//          // let affichageTauxParRegion=vm.afficherMontantDeBaseDuMarcheParRegion(this.macheid)
+//           let montantExecute=vm.resultatT;
+//           let montanRestant=100 - montantExecute;
+
+//             let pour_centage_rest=montanRestant
+//             let pour_execu=vm.resultatT
+//               vm.series[0].data.push(pour_centage_rest .toFixed(2))
+//              // console.log(this.pour_execu)
+//               vm.series[1].data.push(pour_execu).toFixed(2)
+//               vm.chartOptions.xaxis.categories.push(value.libelle)
+//        })
+      
+//      }
+
+//     }
+
 
     }
 }
