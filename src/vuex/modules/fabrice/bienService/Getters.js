@@ -1208,3 +1208,9 @@ export const groupeParSousBudgetDansOp = (state, getters) => {
     //delete getters.trieUaImmobilisation.
     return groupBy(getters.gettersgestionOrdrePaiement, "sous_budget_id");
   };
+
+  export const groupeParBailleurDansOp = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+    return groupBy(getters.gettersgestionOrdrePaiement, "source_financement_id");
+  };
+  

@@ -1,6 +1,28 @@
 
 <template>
   <div>
+    <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">UNITE ADMINISTRATIVE</label>
+                <div class="controls">
+                  <model-list-select  
+              style="border: 1px solid #000"
+              class="wide"
+              :list="uniteAdministratives"
+              v-model="uniteAdmin_id"
+              option-value="id"
+              option-text="libelle"
+              placeholder=""
+            >
+            </model-list-select>
+                </div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+        </table>
   <div id="validationOpDefinitif1" class="modal hide tailgrand">
       <div class="modal-header">
          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
@@ -161,7 +183,18 @@
                   
                    
                  <tr>
+                   <th>
                    
+                  </th>
+                  <th>
+                   
+                  </th>
+                  <th>
+                   
+                  </th>
+                  <th>
+                   
+                  </th>
                    <th>
                    NUMERO D'ORDRE {{afficheAnnee}}
                   </th>
@@ -415,7 +448,7 @@
                 <tr>
                   <td></td>
                   <td></td>
-            
+                  <td></td>
                   <td>
                     <button @click="ShowMyLigne(GroupeUa)">
                      <i class="icon-eye-open"></i> </button>
@@ -464,8 +497,8 @@
                   
 
                   <td></td>
-                  
                   <td></td>
+                  
  <td></td>
  <td style="text-align:right">{{NumeroOrdreMarche(GroupeLigne.id)}}</td>
   <td style="text-align:right">{{NumeroMarche(GroupeLigne.id)}}</td>

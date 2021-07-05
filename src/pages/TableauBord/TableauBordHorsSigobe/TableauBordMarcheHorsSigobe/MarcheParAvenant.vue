@@ -1,7 +1,32 @@
 
 <template>
   <div>
- 
+ <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">UNITE ADMINISTRATIVE</label>
+                <div class="controls">
+                  <model-list-select  
+              style="border: 1px solid #000"
+              class="wide"
+              :list="uniteAdministratives"
+              v-model="uniteAdmin_id"
+              option-value="id"
+              option-text="libelle"
+              placeholder=""
+            >
+            </model-list-select>
+                </div>
+              </div>
+            </td>
+               
+           
+            <td></td>
+          </tr>
+
+           
+        </table>
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">

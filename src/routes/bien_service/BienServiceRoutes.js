@@ -138,6 +138,7 @@ import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestion
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
 import NewOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/NouveauDossierOp/NewOrdrePaiement.vue"
+import formulaireDecision from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/NouveauDossierOp/formulaireDecision"
 import GroupeOpParAnnee from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/GroupeOpParAnnee.vue"
 import ListeDesSousBudgetOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeDesSousBudgetOp.vue"
 import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
@@ -313,6 +314,11 @@ const BienServiceRoutes = [
         path: "/NewOrdrePaiement/:id",
         name: "NewOrdrePaiement",
         component: NewOrdrePaiement
+    },
+    {
+        path: "/formulaireDecision/:id",
+        name: "formulaireDecision",
+        component: formulaireDecision
     },
     {
         path: "/ListeOpParUa/:id",
