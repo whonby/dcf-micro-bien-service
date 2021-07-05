@@ -1,7 +1,7 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
 export const gettersgestionOrdrePaiementAnnulation = state => state.gestionOrdrePaiementAnnulation.sort((a, b) => (a.id > b.id) ? 1 : -1)
-export const gettersgestionOrdrePaiement = state => state.gestionOrdrePaiement.sort((a, b) => (a.id < b.id) ? 1 : -1)
+export const gettersgestionOrdrePaiement = state => state.gestionOrdrePaiement.sort((a, b) => (a.type_ordre_paiement > b.type_ordre_paiement) ? 1 : -1)
 export const gettersDemandeEngagement = state => state.DemandeEngagement.sort((a, b) => (a.numero_dmd_combine > b.numero_dmd_combine) ? 1 : -1)
 export const gettersDossierLiquidation = state => state.Liquidation
 export const gettersBailleurDmdEngagements = state => state.BailleurDmdEngagements
@@ -1204,3 +1204,7 @@ export const GroupeUabyActe = (state, getters) => {
     return groupBy(getters.acteEffetFinanciers, "ua_id");
     
 };
+export const groupeParSousBudgetDansOp = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+    return groupBy(getters.gettersgestionOrdrePaiement, "sous_budget_id");
+  };
