@@ -68,22 +68,7 @@ recupereIDactivite
                       width :8%
                     "></th>
 
-                   <th  style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #e6e6e6 !important;
-                      width :8%
-                    "></th>
-<th  style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #e6e6e6 !important;
-                      width :8%
-                    "></th>
+                   
                  <th  style="
                       font-size: 14px;
                       font-weight: bold;
@@ -193,30 +178,8 @@ recupereIDactivite
                       width :8%
                     "></th>
 
-                   <th style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #e6e6e6 !important;
-                      width :8%
-                    "></th>
-<th style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #e6e6e6 !important;
-                      width :8%
-                    "></th>
-                 <th style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #e6e6e6 !important;
-                      width :8%
-                    "></th>
+                   
+                 
                 
                    <th style="
                       font-size: 14px;
@@ -225,7 +188,7 @@ recupereIDactivite
                       color: #000;
                       background-color: #e6e6e6 !important;
                       width :8%
-                    ">
+                    " colspan="2">
                     BAILLEUR/SECTION {{afficheAnnee}}
                   </th>
                    
@@ -418,7 +381,7 @@ recupereIDactivite
                      <i class="icon-eye-open"></i> </button>
                   </td>
                   
-                  <td> </td>
+                  
 
                 <td v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="4">
                     {{LibelleSourceFinancement(GroupeSourceFinancement[0].source_financement_id)  }}
@@ -426,7 +389,7 @@ recupereIDactivite
                   </td>
       
  
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
@@ -466,8 +429,8 @@ recupereIDactivite
 
                 <tr>
                   <td></td>
-                  <td></td>
-                  <td></td>
+                 
+                  
 
                   <td>
                     <button @click="ShowMyLigne(GroupeUa)">
@@ -1348,7 +1311,7 @@ AfficheUaGroupe() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.budgetEclate.filter(item=>item.source_financement_id==id);
+          let objet = this.budgetEclate.filter(item=>item.source_financement_id == id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

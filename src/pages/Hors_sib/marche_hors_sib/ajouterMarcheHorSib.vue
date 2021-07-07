@@ -1,4 +1,4 @@
-libelleUA
+
 <template>
   <div class="container-fluid">
     <hr />
@@ -1043,6 +1043,19 @@ ImputationBudget(){
         }
       };
     },
+    recupererIdSection() {
+      return (id) => {
+        if (id != null && id != "") {
+          let objet = this.uniteAdministratives.find(
+            (item) => item.id == id
+          );
+          if (objet) {
+            return objet.section_id ;
+          }
+          return null;
+        }
+      };
+    },
     // recuperation parent id
     recupererParentId() {
       return (id) => {
@@ -1146,6 +1159,7 @@ ImputationBudget(){
         exo_id: this.anneeBugetaire,
         sib: 1,
         imputation: this.ImputationBudget,
+        section_id:this.recupererIdSection(this.formData.unite_administrative_id)
       };
 
       this.ajouterMarcheHorSib(nouvelObjet);

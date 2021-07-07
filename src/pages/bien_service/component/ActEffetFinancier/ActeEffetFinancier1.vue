@@ -2356,7 +2356,42 @@ export default {
         }
       };
     },
+idSectionMarche() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+          if (qtereel) {
+            return qtereel.section_id;
+          }
+          return 0
+        }
+      };
+    },
+    idSourceFinancement() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.source_financement_id;
+          }
+          return 0
+        }
+      };
+    },
+    idTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.type_financement_id;
+          }
+          return 0
+        }
+      };
+    },
     listeEntreSoustraitance() {
       return (marche) => {
         if (marche) {
@@ -3809,6 +3844,9 @@ export default {
         marche_id: this.marche_lot,
         marchegeneral_id: this.affichieridMarcheGlobal(this.marche_lot),
         sous_traitance_array: this.structure_id,
+         section_id:this.idSectionMarche(this.marche_lot),
+      source_financement_id:this.idSourceFinancement(this.marche_lot),
+      type_financement_id:this.idTypeFinancement(this.marche_lot),
         // banq_id: this.affichierIdBanque(
         //   this.afficherLeCompteEnFonctionDeLaBanque(
         //     this.editActeEffetFinancier.banq_id
@@ -3879,6 +3917,9 @@ export default {
           marche_id: this.marche_lot,
           marchegeneral_id: this.affichieridMarcheGlobal(this.marche_lot),
           sous_traitance_array: this.structure_id,
+           section_id:this.idSectionMarche(this.marche_lot),
+      source_financement_id:this.idSourceFinancement(this.marche_lot),
+      type_financement_id:this.idTypeFinancement(this.marche_lot),
           // banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
           // compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
         };
@@ -3956,6 +3997,9 @@ export default {
           marche_id: this.marche_lot,
           marchegeneral_id: this.affichieridMarcheGlobal(this.marche_lot),
           sous_traitance_array: this.structure_id,
+           section_id:this.idSectionMarche(this.marche_lot),
+      source_financement_id:this.idSourceFinancement(this.marche_lot),
+      type_financement_id:this.idTypeFinancement(this.marche_lot),
           //  banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
           // compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
         };

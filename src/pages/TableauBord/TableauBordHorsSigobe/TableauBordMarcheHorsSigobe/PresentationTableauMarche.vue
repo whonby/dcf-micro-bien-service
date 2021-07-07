@@ -17,27 +17,27 @@
                    
 <li class="active"  style="font-size:14px">
                       <a data-toggle="tab" href="#SUIVIDESMARCHES"
-                        >TB1 : SUIVI DES MARCHES </a
+                        >TABLEAU BORD 1 </a
                       >
                     </li>
                       <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#SYNTHESE"
-                        >TB2 : SYNTHESE DES MARCHES </a
+                        >TABLEAU BORD 2 </a
                       >
                     </li>
  <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#AVENANT"
-                        >TB3 : SYNTHESE DES MARCHE AVEC AVENANT </a
+                        >TABLEAU BORD 3 </a
                       >
                     </li>
                    <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#BAILLEUR"
-                        >TB3 : SYNTHESE DES MARCHE PAR BAILLEUR </a
+                        >TABLEAU BORD 4 </a
                       >
                     </li>
                      <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#BAILLEURSECTION"
-                        >TB4 : SYNTHESE DES MARCHE PAR BAILLEUR ET SECTION </a
+                        >TABLEAU BORD 5 </a
                       >
                     </li>
                   </ul>
