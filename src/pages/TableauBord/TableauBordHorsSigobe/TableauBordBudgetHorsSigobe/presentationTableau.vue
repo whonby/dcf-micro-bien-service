@@ -28,14 +28,20 @@
                     </li> -->
 
                       <li class="active"  style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD1"
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD1"
                         >TB1 : SUIVI DU BUDGET </a
+                      > -->
+                      <a data-toggle="tab" href="#TABLEAUBORD1"
+                        >TB1 </a
                       >
                     </li>
 
                     <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD2"
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD2"
                         >TB2 : EXECUTION DU BUDGET</a
+                      > -->
+                       <a data-toggle="tab" href="#TABLEAUBORD2"
+                        >TB2 </a
                       >
                     </li>
                     
@@ -46,8 +52,11 @@
                       >
                     </li> -->
                      <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD4"
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD4"
                         >TB3 : D'EXECUTION PAR ACTIVITE ET BAILLEUR</a
+                      > -->
+                       <a data-toggle="tab" href="#TABLEAUBORD4"
+                        >TB3</a
                       >
                     </li>
 
@@ -55,13 +64,27 @@
 
                      
 <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD3"
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD3"
                         >TB4 : SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</a
+                      > -->
+                      <a data-toggle="tab" href="#TABLEAUBORD3"
+                        >TB4</a
                       >
                     </li>
                      <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD5"
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD5"
                         >TB5 : SITUATION D'EXECUTION BUDGETAIRE PAR SECTION</a
+                      > -->
+                       <a data-toggle="tab" href="#TABLEAUBORD5"
+                        >TB5</a
+                      >
+                    </li>
+                    <li class="" style="font-size:14px">
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD6"
+                        >TB6 : ETAT EXECUTION PAR BAILLEUR ET SECTION</a
+                      > -->
+                      <a data-toggle="tab" href="#TABLEAUBORD6"
+                        >TB6</a
                       >
                     </li>
                      <!-- <li class="" >
@@ -78,7 +101,11 @@
                 </div>
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
-                 
+                  <div id="TABLEAUBORD6" class="tab-pane " >
+                    <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
+                <EtatExecutionBailleurSection></EtatExecutionBailleurSection>
+                         
+                  </div>
                   <div id="DEMANDE" class="tab-pane " >
                     <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
                 <TableauBordBudgetEclate></TableauBordBudgetEclate>
@@ -149,7 +176,7 @@
 import { mapGetters, mapActions } from "vuex";
 // import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
 import { formatageSomme } from "@/Repositories/Repository";
-// import TableauBordBudgetEclate from "./TableauBordBudgetEclate"
+import EtatExecutionBailleurSection from "./EtatExecutionBailleurSection"
 import TableausuiviBudgets from "./TableauSuiviBudgets"
 import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
 // import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
@@ -163,6 +190,7 @@ import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetai
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       EtatExecutionBailleurSection,
        SituationExecutionBudgetaireParBailleur,
        SituationExecutionBudgetaireParSection,
    // ModelListSelect,

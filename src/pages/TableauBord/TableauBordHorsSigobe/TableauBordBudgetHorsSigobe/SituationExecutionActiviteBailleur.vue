@@ -1654,7 +1654,7 @@ export default {
               (qtreel) =>
                 qtreel.activite_id == id &&
                 qtreel.exercice == this.afficheAnnee &&
-             qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==1
+             qtreel.diff_reg_op==0 && qtreel.type_ordre_paiement==2
             ).length
         } else {
           return 0;

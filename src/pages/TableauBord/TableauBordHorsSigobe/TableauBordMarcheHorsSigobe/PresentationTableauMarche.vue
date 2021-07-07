@@ -25,8 +25,21 @@
                         >TB2 : SYNTHESE DES MARCHES </a
                       >
                     </li>
-
-                   
+ <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#AVENANT"
+                        >TB3 : SYNTHESE DES MARCHE AVEC AVENANT </a
+                      >
+                    </li>
+                   <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#BAILLEUR"
+                        >TB3 : SYNTHESE DES MARCHE PAR BAILLEUR </a
+                      >
+                    </li>
+                     <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#BAILLEURSECTION"
+                        >TB4 : SYNTHESE DES MARCHE PAR BAILLEUR ET SECTION </a
+                      >
+                    </li>
                   </ul>
                 </div>
                 <div class="widget-content tab-content">
@@ -36,8 +49,15 @@
                    <div id="SYNTHESE" class="tab-pane ">
                      <SyntheseMarche></SyntheseMarche>
                   </div>
-
-
+ <div id="AVENANT" class="tab-pane ">
+                     <MarcheParAvenant></MarcheParAvenant>
+                  </div>
+<div id="BAILLEUR" class="tab-pane ">
+                     <TableauBordMarcheParBailleur></TableauBordMarcheParBailleur>
+                  </div>
+<div id="BAILLEURSECTION" class="tab-pane ">
+                     <SyntheseMarcheBailleurSection></SyntheseMarcheBailleurSection>
+                  </div>
             
                 </div>
             
@@ -54,12 +74,16 @@
   </div>
 </template>
   
+  
 <script>
 import { mapGetters, mapActions } from "vuex";
 // import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
 import { formatageSomme } from "@/Repositories/Repository";
  import TableauBordSuiviMarche from "./TableauBordSuiviMarche"
   import SyntheseMarche from "./SyntheseMarche"
+  import MarcheParAvenant from "./MarcheParAvenant"
+    import SyntheseMarcheBailleurSection from "./SyntheseMarcheBailleurSection"
+  import TableauBordMarcheParBailleur from "../TableauBordBudgetHorsSigobe/TableauBordMarcheParBailleur"
 //import TableausuiviBudgets from "./TableauSuiviBudgets"
 
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
@@ -68,6 +92,9 @@ import { formatageSomme } from "@/Repositories/Repository";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       SyntheseMarcheBailleurSection,
+       TableauBordMarcheParBailleur,
+       MarcheParAvenant,
       TableauBordSuiviMarche,
       SyntheseMarche
   },

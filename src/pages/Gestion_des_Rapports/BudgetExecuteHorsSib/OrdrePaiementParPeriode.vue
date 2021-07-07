@@ -483,7 +483,9 @@ export default {
       },
       EditDetache: {},
       typeop_id: 0,
-      
+      test1:[],
+      test2:[],
+      test3:"",
       type_ordre_de_paiement:"",
       uniteAdministrative_id: 0,
       source_financements_id:0,
@@ -500,7 +502,14 @@ export default {
   },
   created(){
     console.log("hello silva")
+    this.test1 = this.plans_budgetaires.filter(tem => tem.code)
+    console.log(this.test1)
+    this.test2 = this.test1.filter(test => test.code)
+    console.log(this.TableauCode)
     console.log(this.GroupeOrdrePaiementByActivite)
+    console.log(this.test3)
+    this.test3 = this.TableauCode.forEach(tem => tem)
+    console.log(this.test3)
   },
   computed: {
     ...mapGetters("Utilisateurs", [
@@ -653,7 +662,25 @@ let objJson = JSON.parse(objLinea);
 return objJson.name
 
 },
-
+TableauCode(){
+    let objet = this.plans_budgetaires.filter(tem => tem.code)
+    let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.code);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+},
+  CodeAndLibelle(){
+      return this.TableauCode
+  },
     ListeGroupByActivite1() {
       if (this.uniteAdministrative_id != 0) {
         return this.GroupeOrdrePaiementByActivite.filter(

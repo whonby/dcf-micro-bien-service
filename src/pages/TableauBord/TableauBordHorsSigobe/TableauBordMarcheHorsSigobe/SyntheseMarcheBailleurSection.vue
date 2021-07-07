@@ -1,29 +1,10 @@
 recupereIDactivite
 <template>
   <div>
-    
-   
-    <!-- <div class="row-fluid" style="margin-top: -20px">
-      <div class="span1"></div>
-      
-          <br>
-        <table class="table table-striped">
+   <table class="table table-striped">
           <tbody>
             <tr>
 
-                 <td>
-            <label>EXERCICE </label>
-            <model-list-select
-              style="border: 1px solid #000"
-              class="wide"
-              :list="exercices_budgetaires"
-              v-model="exercices_budgetaires_id"
-              option-value="annee"
-              option-text="annee"
-              placeholder="2021"
-            >
-            </model-list-select>
-          </td>
 
               <td>
 
@@ -45,9 +26,6 @@ recupereIDactivite
             </tr>
           </tbody>
         </table>
-        
-      
-    </div> -->
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -59,7 +37,7 @@ recupereIDactivite
        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
-                 SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</h2>
+                 SYNTHESE DES MARCHES PAR BAILLEUR ET SECTION</h2>
           </tr>
 
            
@@ -76,20 +54,54 @@ recupereIDactivite
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-      <div v-for="GroupeSection in partition(afficheUa, size)[page]" :key="GroupeSection.id">
+      <div v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
            <table class="table table-bordered">
-              <thead style="background-color: #ff9c1a !important">
+              <thead style="background-color: #e6e6e6 !important;border:2px solid #000">
                   
-                   
-                 <tr>
-                   <th></th>
+                     <tr>
+                   <th  style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
 
-                   <th></th>
-<th></th>
-                 <th></th>
-                 <th></th>
-                   <th>
-                    LIGNE {{afficheAnnee}}
+                   <th  style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+<th  style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+                 <th  style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+                
+                   <th  style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    ">
+                    
                   </th>
                    
                   <th
@@ -98,148 +110,359 @@ recupereIDactivite
                       font-weight: bold;
                       text-align: center;
                       color: #000;
-                      background-color: #fbb203 !important;
+                      background-color: #ddebf7 !important;
                       width :8%
                     "
+                     colspan="2"
                   >
-                 BUDGET INITIAL (FCFA) {{afficheAnnee}}
+                 Planification (Avant Contractualisation) {{afficheAnnee}}
+                 
                   </th>
+                
+                  
                   <th
                     style="
                       font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;
+                      background-color: #fff2cc !important;
                     "
+                     colspan="2"
                   >
-                  MODIFICATION BUDGETAIRE (FCFA) {{afficheAnnee}}
+                    Marchés en Cours de Contractualisation {{afficheAnnee}}
                   </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRE DE REAMENAGEMENT {{afficheAnnee}}
-                  </th>
-
-                     <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRE DE BAILLEUR  {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRE DE MARCHES EN EXECUTION  {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    BUDGET ACTUEL (FCFA)  {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANTS EXECUTES (FCFA) {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRE D’OP PROVISOIRE NON REGULARISES {{afficheAnnee}}
-                  </th>
+                 
+                  
                 <th
                     style="
                       font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;
+                      background-color: #c6e0b4 !important;
                     "
+                     colspan="2"
                   >
-                    DISPONIBLE (FCFA) {{afficheAnnee}}
+                    Marchés Attribués {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fce4d6 !important;
+                    "
+                     colspan="4"
+                  >
+                    Marchés en Cours d'Exécution {{afficheAnnee}}
                   </th>
                   <th
-                    
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #b4c6e7 !important;
+                    "
+                     colspan="3"
                   >
-                    TAUX D’EXECUTION {{afficheAnnee}}
+                    Marchés en Souffrance {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #e6e6e6 !important;
+                    "
+                     colspan="3"
+                  >
+                   Marchés Résiliés {{afficheAnnee}}
+                  </th>
+                </tr>
+                 <tr>
+                   <th style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+
+                   <th style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+<th style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+                 <th style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    "></th>
+                
+                   <th style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #e6e6e6 !important;
+                      width :8%
+                    ">
+                    BAILLEUR/SECTION {{afficheAnnee}}
+                  </th>
+                   
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #ddebf7 !important;
+                      width :8%
+                    "
+                  >
+                 Nombre {{afficheAnnee}}
+                 
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #ddebf7 !important;
+                    "
+                  >
+                  Montant {{afficheAnnee}}
                   </th>
                   
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fff2cc !important;
+                    "
+                  >
+                    Nombres  {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fff2cc !important;
+                    "
+                  >
+                    Montant {{afficheAnnee}}
+                  </th>
+                  
+                <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #c6e0b4 !important;
+                    "
+                  >
+                    Nombre {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #c6e0b4 !important;
+                    "
+                  >
+                    Montant {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fce4d6 !important;
+                    "
+                  >
+                    Nombre {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fce4d6 !important;
+                    "
+                  >
+                    Montant Total Marchés {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fce4d6 !important;
+                    "
+                  >
+                    Montants Exécutés {{afficheAnnee}}
+                  </th>
+                  <th 
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fce4d6 !important;
+                    "
+                  >
+                    Reste à Exécuter {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #b4c6e7 !important;
+                    "
+                  >
+                    Nombre  {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #b4c6e7 !important;
+                    "
+                  >
+                    Reste à Exécuter {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #b4c6e7 !important;
+                    "
+                  >
+                    Taux {{afficheAnnee}}
+                  </th>
+                  <th
+                     style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #e6e6e6 !important;
+                    "
+                  >
+                    Nombre {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #e6e6e6 !important;
+                    "
+                  >
+                    Reste à Exécuter {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #e6e6e6 !important;
+                    "
+                  >
+                    Taux {{afficheAnnee}}
+                  </th>
                 </tr>
               </thead>
        <tbody>
                 <tr>
                   <td>
-                    <button @click="ShowMyUa(GroupeSection[0].section_id)">
+                    <button @click="ShowMyUa(GroupeSourceFinancement[0].source_financement_id)">
                      <i class="icon-eye-open"></i> </button>
                   </td>
                   
                   <td> </td>
 
-                <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="4">
-                    {{ Libellesection(GroupeSection[0].section_id) }}
+                <td v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="4">
+                    {{LibelleSourceFinancement(GroupeSourceFinancement[0].source_financement_id)  }}
                     
                   </td>
       
  
-                 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantbudgetVoteParSection(GroupeSection[0].section_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantbudgetReamenagementParSection(GroupeSection[0].section_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombrebudgetReamenagementParSection(GroupeSection[0].section_id)}}</td>
-<td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan=""></td>
+
+<!-- <td>
   
   
    <button class="btn btn-success taille" >
                         <span style="color:#fff;font-size: 15px;">
-                         {{nbrebailleurSection(GroupeSection[0].section_id)}}
+                         {{nbrebailleurSection(GroupeSourceFinancement[0].section_id)}}
                         </span>
                       </button>
-  </td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheExecutionParSection(GroupeSection[0].section_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantActuelParSection(GroupeSection[0].section_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSection[0].section_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreOpReguParSection(GroupeSection[0].section_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSection(GroupeSection[0].section_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{parseFloat(TauxExecutionParSection(GroupeSection[0].section_id))}} %</td>
- 
+  </td> -->
+<!-- <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheExecutionParSection(GroupeSourceFinancement[0].section_id)}}</td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantActuelParSection(GroupeSourceFinancement[0].section_id)))}}</td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSourceFinancement[0].section_id)))}}</td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreOpReguParSection(GroupeSourceFinancement[0].section_id)}}</td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSection(GroupeSourceFinancement[0].section_id)))}}</td>
+<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{parseFloat(TauxExecutionParSection(GroupeSourceFinancement[0].section_id))}} %</td>
+  -->
                 </tr>
               </tbody>  
 
-               <tbody v-show="recupereIDactivite==GroupeSection[0].section_id"
-               v-for="GroupeUa in AfficheUaGroupe(GroupeSection[0].section_id)" :key="GroupeUa">
+               <tbody v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
+               v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id)" :key="GroupeUa">
 
                 <tr>
                   <td></td>
@@ -248,88 +471,40 @@ recupereIDactivite
 
                   <td>
                     <button @click="ShowMyLigne(GroupeUa)">
-                     <i class="icon-eye-open"></i> </button>
+                     <i class="icon-arrow-right"></i> </button>
                   </td>
                   
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="2">
-                    {{ libelleUa(GroupeUa) }}</td>
-
-                <td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantbudgetVoteParUa(GroupeUa)))}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantbudgetReamenagementParUa(GroupeUa)))}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombrebudgetReamenagementParUa(GroupeUa)}}</td>
-<td >
-  <button class="btn btn-success taille" >
-                        <span style="color:#fff;font-size: 15px;">
-                          {{nbreBailleur(GroupeUa)}}
-                        </span>
-                      </button>
-  
-  
-  </td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombreMarcheExecutionParUa(GroupeUa)}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantActuelParUa(GroupeUa)))}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParUa(GroupeUa)))}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombreOpReguParUa(GroupeUa)}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParUa(GroupeUa)))}}</td>
-<td style="text-align:right"  v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{parseFloat(TauxExecutionParUa(GroupeUa))}} %</td>
-  
-                
+                  <td >
+                    {{Libellesection(GroupeUa)}}</td>
+                <td style="text-align:right" >{{NombreMarchePlanifierParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarchePlanifierParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{NombreMarcheContratualisationParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarcheContratualisationParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(NombreMarcheAttribueParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarcheAttribueParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{NombreMarcheExecutionParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantTotalMarche(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+          
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+            
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             
+              
                 
                 
                 </tr>
                   
-                <tr v-show="recupereIDSection==GroupeUa"
-                v-for="GroupeLigne in AfficheLigneGroupe(GroupeUa)" :key="GroupeLigne">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-
-                  <td></td>
-                  
-                  <td></td>
- 
-                  <td>{{ libelleLigneEconomique(GroupeLigne) }}</td>
-                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantbudgetVote(GroupeUa,GroupeLigne)))}}</td>
-                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantbudgetReamenagement(GroupeUa,GroupeLigne)))}}</td>
-                  <td style="text-align:right">{{NombrebudgetReamenagement(GroupeUa,GroupeLigne)}}</td>
-                  <td style="text-align:right">
-
-                    
-                  </td>
-                                   <td style="text-align:right">{{NombreMarcheExecution(GroupeUa,GroupeLigne)}}</td>
-                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantActuel(GroupeUa,GroupeLigne)))}}</td> 
-
-                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecute(GroupeUa,GroupeLigne)))}}</td>
-                  <td style="text-align:right">{{NombreOpRegu(GroupeUa,GroupeLigne)}}</td>
-                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponible(GroupeUa,GroupeLigne)))}}</td>
-                  <td style="text-align:right">
-                    
-                     <button class="btn btn-danger taille" v-if="parseFloat(TauxExecution(GroupeUa,GroupeLigne)) <= 0.25">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{TauxExecution(GroupeUa,GroupeLigne)}}%
-                        </span>
-                      </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(TauxExecution(GroupeUa,GroupeLigne)) <= 0.5">
-                        <span style="color:#000;font-size: 15px;">
-                          {{TauxExecution(GroupeUa,GroupeLigne)}}%
-                        </span>
-                      </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(TauxExecution(GroupeUa,GroupeLigne)) <= 0.75">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{TauxExecution(GroupeUa,GroupeLigne)}}%
-                        </span>
-                      </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(TauxExecution(GroupeUa,GroupeLigne)) <= 1">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{EviteNaNTypeFinancement(unite.id, unite1)}}%
-                        </span>
-                      </button>
-                    </td> 
-                </tr>
+                
               </tbody>
             </table>
 <br>
-              <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSection[0].section_id">
+              <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSourceFinancement[0].section_id">
               
       
               
@@ -344,7 +519,7 @@ recupereIDactivite
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(afficheUa, size).length"
+          v-for="(titre, index) in partition(ListeDesSourceFinancement, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -353,7 +528,7 @@ recupereIDactivite
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(afficheUa, size).length - 1 }"
+          :class="{ disabled: page == partition(ListeDesSourceFinancement, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -374,17 +549,17 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSommeSansFCFA,formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    //ModelListSelect,
+    ModelListSelect,
   },
   name: "typetext",
   data() {
     return {
       page: 0,
-      size:3,
+      size:5,
       active_el: 0,
       fabActions: [
         {
@@ -458,6 +633,7 @@ export default {
       "affichePersonnelRecuActeNormination",
     ]),
     ...mapGetters("bienService", [
+       "avenants",
       "gettershistoriqueDecisionCfOP",
       "typeMarches",
       "gettersgestionOrdrePaiementAnnulation",
@@ -547,7 +723,8 @@ export default {
       "groupeByActivite",
       "groupeByBailleur",
       "groupeBySection",
-      "groupeByTypeFinancement"
+      "groupeByTypeFinancement",
+       "groupeParSourceFinancementBudgetEclate",
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -560,6 +737,256 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+
+NombreMarchePlanifierParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 0
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+MontantMarchePlanifierParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 0
+            ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
+              0
+            )
+            .toFixed(0);
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+NombreMarcheContratualisationParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 1
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+MontantMarcheContratualisationParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 1
+            ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
+              0
+            )
+            .toFixed(0);
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+
+NombreMarcheAttribueParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 2 && qtreel.id != this.marcheAttribue(qtreel.id)
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+marcheAttribue() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.marche_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.marche_id;
+          }
+          return 0;
+        }
+      };
+    },
+MontantMarcheAttribueParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 2 && qtreel.id != this.marcheAttribue(qtreel.id)
+            ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
+              0
+            )
+            .toFixed(0);
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+NombreMarcheExecutionParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.marche_id != null && qtreel.type_ordre_paiement == 1 || qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.marche_id != null && qtreel.type_ordre_paiement == 4
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+
+
+MontantReelDuMarche(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.acteEffetFinanciers
+            .filter(
+              (qtreel) =>qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 
+               
+            ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),
+              0
+            )
+            .toFixed(0);
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+MontantAvenantMarche(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.avenants
+            .filter(
+              (qtreel) =>qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 
+               
+            ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_avenant),
+              0
+            )
+            .toFixed(0);
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+
+
+
+
+
+    // NOUVELLE FONCTION 
+
+
+
+
+
+
+AfficheVariationBudget() {
+      return (id,id2) => {
+        if (id != null && id != "" && id2 != null && id2 != "") {
+          return this.budgetEclate.filter((prod) =>prod.source_financement_id == id && prod.section_id == id2 && prod.annebudgetaire==this.anneeAmort && prod.budget_active==1).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+MontantInitialParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id == id && qtreel.section_id == id1  && qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_actif_def==1 
+                
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+
+
     bailleurPar() {
       return (id) => {
       
@@ -657,17 +1084,16 @@ export default {
     },
     
     MontantExecuteParSection(){
-        return (id) => {
-        if (id != null && id != "") {
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.section_id == id &&
-                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 ||
-                qtreel.	section_id == id &&
-                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9 || qtreel.	section_id == id &&
-                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==8 || qtreel.	section_id == id &&
-                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==9
+                qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && qtreel.marche_id != null|| qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 && qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9  && qtreel.marche_id != null || qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==8 && qtreel.marche_id != null || qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==9 && qtreel.marche_id != null
             )
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
@@ -734,22 +1160,22 @@ export default {
         }
       };
     },
-    NombreMarcheExecutionParSection(){
-        return (id) => {
-        if (id != null && id != "" ) {
-          return this.gettersgestionOrdrePaiement
-            .filter(
-              (qtreel) =>
-                qtreel.section_id == id &&
-                qtreel.exercice == this.afficheAnnee && qtreel.marche_id!=null
-            ).length
+    // NombreMarcheExecutionParSection(){
+    //     return (id) => {
+    //     if (id != null && id != "" ) {
+    //       return this.gettersgestionOrdrePaiement
+    //         .filter(
+    //           (qtreel) =>
+    //             qtreel.section_id == id &&
+    //             qtreel.exercice == this.afficheAnnee && qtreel.marche_id!=null
+    //         ).length
             
             
-        } else {
-          return 0;
-        }
-      };
-    },
+    //     } else {
+    //       return 0;
+    //     }
+    //   };
+    // },
     NombreMarcheExecution(){
         return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
@@ -822,7 +1248,7 @@ export default {
         return (id) => {
           if (id != null && id != "") {
             return this.budgetEclate.filter(
-              (qtreel) => qtreel.section_id == id 
+              (qtreel) => qtreel.source_financement_id == id 
             );
           }
         };
@@ -831,12 +1257,12 @@ AfficheUaGroupe() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.listeParUaGroupe(id);
+          let objet = this.budgetEclate.filter(item=>item.source_financement_id==id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.uniteadministrative_id);
+            array_exercie.push(val.section_id);
           });
           let unique = [...new Set(array_exercie)];
           console.log(unique);
@@ -1007,29 +1433,31 @@ NombreBailleurParUa() {
   },
 
      afficheUa() {
-       return this.ListeGroupeSection;
+       return this.ListeDesSourceFinancement;
     },
 
-        ListeGroupeSection(){
-        if(this.exercices_budgetaires_id!=0){
-                return this.groupeBySection
+        ListeDesSourceFinancement(){
+       if(this.source_financement_id1!=0){
+ return this.groupeParSourceFinancementBudgetEclate
         .filter(
           (qtreel) =>
-            (qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].section_id!=null
+            (qtreel[0].annebudgetaire == this.afficheAnnee  && qtreel[0].budget_active==1 && qtreel[0].source_financement_id == this.source_financement_id1
+            
              )
 
         );
-        }else{
-                return this.groupeBySection
+       }else{
+         return this.groupeParSourceFinancementBudgetEclate
         .filter(
           (qtreel) =>
-            (qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].section_id!=null
+            (qtreel[0].annebudgetaire == this.afficheAnnee  && qtreel[0].budget_active==1 
+            
              )
 
         );
-        }
+       }
+               
+       
         },
 
 
@@ -1041,171 +1469,22 @@ NombreBailleurParUa() {
           );
 
           if (qtereel) {
-            return qtereel.nom_section;
+            return qtereel.code_section.concat("  ",qtereel.nom_section);
           }
           return 0;
         }
       };
     },
-     MontantbudgetReamenagementParUa(){
-        return (id) => {
-        if (id != null && id != "" ) {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id  &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_active==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-    MontantbudgetReamenagementParSection(){
-        return (id) => {
-        if (id != null && id != "" ) {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.section_id == id  &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_active==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-   
-MontantbudgetVoteParSection(){
-        return (id) => {
+    LibelleSourceFinancement() {
+      return (id) => {
         if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.section_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-    MontantbudgetVoteParUa(){
-        return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-    NombrebudgetReamenagementParUa(){
-        return (id,id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_active==0
-            ).length
-            
-            
-        } else {
-          return 0;
-        }
-      };
-    },
-    NombrebudgetReamenagementParSection(){
-        return (id,id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.section_id == id &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_active==0
-            ).length
-            
-            
-        } else {
-          return 0;
-        }
-      };
-    },
-       MontantbudgetVote(){
-        return (id,id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_actif_def==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-    MontantbudgetReamenagement(){
-        return (id,id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_active==1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
-    NombrebudgetReamenagement(){
-        return (id,id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 &&
-                qtreel.annebudgetaire == this.afficheAnnee && qtreel.budget_active==0
-            ).length
-            
-            
-        } else {
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
           return 0;
         }
       };
@@ -1213,26 +1492,7 @@ MontantbudgetVoteParSection(){
     //**************fin ******* */
 
     //&& this.inputLigne1!=0
-    ListeGroupByActivite() {
-      if (this.source_financement_id1!=0) {
-        return this.groupeByBailleur.filter(
-          (qtreel) =>
-            qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].source_financement_id==this.source_financement_id1
-            
-        );
-      } 
-      else {
-        return this.groupeByBailleur
-        .filter(
-          (qtreel) =>
-            (qtreel[0].annebudgetaire == this.afficheAnnee
-           
-             )
-
-        );
-      }
-    },
+   
 
     afficheAnnee() {
       if (this.exercices_budgetaires_id == 0) {
@@ -1242,101 +1502,15 @@ MontantbudgetVoteParSection(){
       }
     },
 
-    ListeGroupByNature() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.GroupeOrdrePaiementByGrandeNature.filter(
-            (qtreel) => qtreel.grand_nature_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.grand_nature_id;
-          }
-          return 0;
-        }
-      };
-    },
+   
     //****************gestion des totaux *********//
 
-     TotalEviteNaN() {
-      if (
-        this.TotalMontantBudgetExecuté == 0 &&
-        this.TotalMontantReamenagement == 0
-      ) {
-        return 0.0;
-      } else {
-        return (
-          (parseFloat(this.TotalMontantBudgetExecuté) /
-            parseFloat(this.TotalMontantReamenagement)) *
-          100
-        ).toFixed(2);
-      }
-    },
+    
 
 
     
 
-      TotalMontantbudgetVote(){
-        if(this.source_financement_id!=0 && this.inputLigne1!=0){
-             return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id
-              && qtreel.source_financement_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1==0){
-               return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id==0 && this.inputLigne1!=0){
-               return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
-        else{
-             return this.budgetEclate
-             .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id!=null))
-             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
-          
-    },
-
-    TotalMontantReamenagement(){
-        if(this.source_financement_id!=0 && this.inputLigne1==0){
-             return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id!=0 && this.inputLigne1!=0){
-             return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.source_financement_id
-              && qtreel.source_financement_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }else if(this.source_financement_id==0 && this.inputLigne1!=0){
-               return this.budgetEclate
-            .filter(
-              (qtreel) =>
-              (qtreel.annebudgetaire == this.afficheAnnee && qtreel.source_financement_id==this.inputLigne1)
-            ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
-        else{
-             return this.budgetEclate
-             .filter((qtreel) =>
-             (qtreel.annebudgetaire == this.afficheAnnee
-                 && qtreel.source_financement_id!=null))
-             .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),0).toFixed(0);
-        }
-          
-    },
-
+   
        TotalMontantBudgetActuel() {
      if(this.source_financement_id!=0 && this.inputLigne1==0){
              return this.budgetEclate
@@ -1656,32 +1830,32 @@ MontantbudgetVoteParSection(){
     },
 
 
-    MontantBudgetExecutéActivite() {
-      return (id,id1) => {
-        if (id != null && id != ""&& id1 != null && id1 != "") {
+    MontantBudgetExecutéSection() {
+      return (id1,id) => {
+        if (id1 != null && id1 != ""&& id != null && id != "") {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                (qtreel.ligne_economique_id == id
-                && qtreel.source_financement_id == id1
+                (qtreel.source_financement_id == id1 && qtreel.section_id == id
+                
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 1
                && qtreel.decision_cf==8)
                ||
-                (qtreel.ligne_economique_id == id
-                && qtreel.source_financement_id == id1
+                ( qtreel.source_financement_id == id1 && qtreel.section_id == id
+                
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 1
                && qtreel.decision_cf==9)
                ||
-               (qtreel.ligne_economique_id == id
-               && qtreel.source_financement_id == id1
-               && qtreel.exercice == this.afficheAnnee 
+               (qtreel.source_financement_id == id1 && qtreel.section_id == id
+               && 
+               qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 4
                && qtreel.decision_cf==8)
                ||
-                (qtreel.ligne_economique_id == id
-                && qtreel.source_financement_id == id1
+                (qtreel.source_financement_id == id1 && qtreel.section_id == id
+              
                && qtreel.exercice == this.afficheAnnee 
                && qtreel.type_ordre_paiement == 4
                && qtreel.decision_cf==9)
@@ -1921,6 +2095,17 @@ MontantbudgetVoteParSection(){
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+
+MontantTotalMarche(id,id1){
+ return   parseFloat(this.MontantReelDuMarche(id,id1))+parseFloat(this.MontantAvenantMarche(id,id1)) 
+   
+},
+
+
+
+
+    // FONCTION BAILLEUR SECTION
   nbrebailleurSection(id){
     return this.bailleurParSect(id).length
   },
@@ -2041,6 +2226,16 @@ TauxExecution(id,id1){
         ).toFixed(2);
       }
     },
+
+
+MontantActuelleParSection(id,id1){
+  return parseFloat(this.MontantInitialParSection(id,id1))+parseFloat(this.AfficheVariationBudget(id,id1))
+},
+
+MontantDisponibleParSectionB(id,id1){
+  return parseFloat(this.MontantActuelleParSection(id,id1))-parseFloat(this.MontantBudgetExecutéSection(id,id1))
+},
+
 
     //  {{
     //                   (

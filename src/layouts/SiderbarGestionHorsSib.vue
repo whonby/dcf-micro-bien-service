@@ -255,7 +255,7 @@ return objJson.id
 navigateToGestionMarche(){
     this.activate(25)
     this.$router.push({
-      //  name: 'TableauBordGestionMarche'
+      //  name: 'groupeMarcheParUa TableauBordGestionMarche '
         name: 'PresentationTableauMarche'
     })
       },

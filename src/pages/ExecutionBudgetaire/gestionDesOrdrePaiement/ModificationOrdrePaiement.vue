@@ -2855,7 +2855,7 @@ AfficheCompteEntreprise() {
           parseFloat(this.MontantAvenant(this.formData.marche_id))
   },
   ResteAPayeSurMarche(){
-return (parseFloat(this.MontantDeBase)-parseFloat(this.MontantPayeMarche(this.formData.marche_id))-parseFloat(this.formData.montant_ordre_paiement))
+return (parseFloat(this.MontantDeBase)-(parseFloat(this.formData.montant_ordre_paiement)))
   },
   MontantPayeMarche() {
       return id => {
