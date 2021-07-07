@@ -1,6 +1,6 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
-
+ListeOpParUa
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -137,6 +137,8 @@ import PersonneRattacher from "../../pages/ExecutionBudgetaire/gestionDesOrdrePa
 import ListePersonnelRattacherByUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListePersonnelRattacherByUa.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import ListeOpParUa from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeOpParUa.vue"
+import NewOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/NouveauDossierOp/NewOrdrePaiement.vue"
+import formulaireDecision from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/NouveauDossierOp/formulaireDecision"
 import GroupeOpParAnnee from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/GroupeOpParAnnee.vue"
 import ListeDesSousBudgetOp from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/ListeDesSousBudgetOp.vue"
 import VoirOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/presentationOp/VoirOrdrePaiement.vue"
@@ -307,6 +309,16 @@ const BienServiceRoutes = [
         path: "/GroupeOpParAnnee",
         name: "GroupeOpParAnnee",
         component: GroupeOpParAnnee
+    },
+    {
+        path: "/NewOrdrePaiement/:id",
+        name: "NewOrdrePaiement",
+        component: NewOrdrePaiement
+    },
+    {
+        path: "/formulaireDecision/:id",
+        name: "formulaireDecision",
+        component: formulaireDecision
     },
     {
         path: "/ListeOpParUa/:id",

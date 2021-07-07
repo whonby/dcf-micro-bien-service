@@ -910,8 +910,11 @@ export const groupeBudgetbyProgramme = (state, getters) => {
   return groupBy(getters.budgetGeneral, "program_id");
 };
 
-groupeByBailleur
 
+export const groupeParSourceFinancementBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "source_financement_id");
+};
 
 export const groupeParTypeFinancementBudgetEclate = (state, getters) => {
   //delete getters.trieUaImmobilisation.

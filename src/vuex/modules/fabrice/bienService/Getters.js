@@ -1,7 +1,7 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
 export const gettersgestionOrdrePaiementAnnulation = state => state.gestionOrdrePaiementAnnulation.sort((a, b) => (a.id > b.id) ? 1 : -1)
-export const gettersgestionOrdrePaiement = state => state.gestionOrdrePaiement.sort((a, b) => (a.id < b.id) ? 1 : -1)
+export const gettersgestionOrdrePaiement = state => state.gestionOrdrePaiement.sort((a, b) => (a.type_ordre_paiement > b.type_ordre_paiement) ? 1 : -1)
 export const gettersDemandeEngagement = state => state.DemandeEngagement.sort((a, b) => (a.numero_dmd_combine > b.numero_dmd_combine) ? 1 : -1)
 export const gettersDossierLiquidation = state => state.Liquidation
 export const gettersBailleurDmdEngagements = state => state.BailleurDmdEngagements
@@ -134,11 +134,11 @@ export const personnaliseGetterMarcheBailleur = (state, getters, rootState, root
     });
 
 
-    export const afficherIdTypeFinancement = state => state.marches.filter(item =>item.type_financement==13 || item.type_financement==15)
+    export const afficherIdTypeFinancement = state => state.marches.filter(item =>item.source_financement!=6)
         
     
     export const groupeParSourceFinancement =(state, getters) =>{
-        return groupBy(getters.afficherIdTypeFinancement, "type_financement");
+        return groupBy(getters.afficherIdTypeFinancement, "source_financement");
       }
 export const nombremarchesExecute = getters =>
     getters.marches.filter(
@@ -1204,3 +1204,13 @@ export const GroupeUabyActe = (state, getters) => {
     return groupBy(getters.acteEffetFinanciers, "ua_id");
     
 };
+export const groupeParSousBudgetDansOp = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+    return groupBy(getters.gettersgestionOrdrePaiement, "sous_budget_id");
+  };
+
+  export const groupeParBailleurDansOp = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+    return groupBy(getters.gettersgestionOrdrePaiement, "source_financement_id");
+  };
+  

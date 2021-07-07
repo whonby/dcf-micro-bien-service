@@ -108,7 +108,7 @@
     <div class="span4">
        
           Afficher
-          <select name="pets" id="pet-select"  class="span3">
+          <select name="pets" id="pet-select"  v-model="size" class="span3">
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="20">20</option>
@@ -124,13 +124,20 @@
         Exporter en PDF
       </button>
     </div>  -->
+
     
     <div class="widget-content nopadding" id="printpdf">
+        <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">
+        Exporter en PDF
+      </button>
+    </div> 
        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Synthèse par BAILLEUR</h2>
           </tr>
         </table>
+
       <!-- <h2
         style="
           font-size: 25px;
@@ -166,7 +173,7 @@
           text-decoration: underline;
         "
       >
-        EXERCICE: {{  }}
+        
       </p>
 
               <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
@@ -339,7 +346,7 @@
 
       
        <tbody>
-           <tr v-for="type1 in groupeParSourceFinancement" :key="type1">
+           <tr v-for="type1 in  partition(groupeParSourceFinancement, size)[page]" :key="type1">
          
           <td style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -350,7 +357,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{afficherLibelleTypeFinancement(type1[0].type_financement)}}</td>
+                      background-color: #fbb203 !important;">{{afficherLibelleTypeFinancement(idTypeFinancement(type1[0].source_financement))}}</td>
          <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
@@ -439,46 +446,89 @@
          </tr> 
         </tbody>
       
-          
-           
-             
-               
-            
-           
-
-         
-            
-          
-       
-       
+      
       </table>
+
+
+       <div class="pagination alternate">
+      <ul>
+        <li :class="{ disabled: page == 0 }">
+          <a @click.prevent="precedent()" href="#">Précedent</a>
+        </li>
+        <li
+          v-for="(titre, index) in partition(groupeParSourceFinancement, size).length"
+          :key="index"
+          :class="{ active: active_el == index }"
+        >
+          <a @click.prevent="getDataPaginate(index)" href="#">{{
+            index + 1
+          }}</a>
+        </li>
+        <li
+          :class="{ disabled: page == partition(groupeParSourceFinancement, size).length - 1 }"
+        >
+          <a @click.prevent="suivant()" href="#">Suivant</a>
+        </li>
+      </ul>
     </div>
-      <!-- <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-            <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
-              <apexchart
-                      type="pie"
-                      width="560"
-                      :options="chartOptions"
-                      :series="dataPourcentage"
-              ></apexchart>
-              <h3></h3>
-            </div>
-            <hr>
-              <div class="span6"  style="border: 1px solid;padding: 10px;box-shadow: 1px 0px 2px 0px #000;">
-              <apexchart
-                      type="pie"
-                      width="560"
-                      :options="chartOptions"
-                      :series="dataPourcentage"
-              ></apexchart>
-              <h3></h3>
-            </div>
-           </div>  -->
+      <br>
+      <br>
+    </div>
+
+
+    
+
+    <table>
+      <tbody>
+        <tr>
+
+          
+                <td>
+                  <h3>contratualisation</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+
+                  <td>
+                    <h3>Exécution</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+
+                  <td>
+                    <h3>Souffrance</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+
+                  <td>
+                    <h3>Resilier</h3>
+                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
+                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                    
+                   </div>
+                </td>
+     </tr>
+        </tbody>
+    </table>
+            
            
 
-     <div class="pagination alternate">
-     
-    </div>
+   
 
 
         
@@ -493,45 +543,85 @@
   </div>
 </template>
 <script>
+ import VueApexCharts from 'vue-apexcharts'
 import {mapGetters, mapActions} from "vuex"
+import { partition } from "@/Repositories/Repository";
 import {formatageSommeSansFCFA} from "../../../../Repositories/Repository"
 export default {
+  components:{
+     apexchart: VueApexCharts,
+  },
   props:["macheid"],
     data() {
         return{
-            series: [44, 55, 13, 43, 22],
-            dataPourcentage: [],
-             chartOptions: {
-        chart: {
-          width: 380,
-          type: "pie",
-        },
-        labels: [
-          "En Attente de contractualisation.",
-          "En attente de contractualisation H.D",
-          "En Contractualisation.",
-          "En Contractualisation H.D",
-        ],
-        colors: [
-          "#8ea9db",
-          "#f4b084",
-          "#92d04f",
-          "#632990",
-        ],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: "bottom",
-              },
+           page: 0,
+      size:3,
+      active_el: 0,
+            //   series: [{
+            // name: 'BAD',
+
+            // data: []
+            //   }],
+          //      chartOptions: {
+          //   chart: {
+          //     type: 'pie',
+          //    width: 380,
+          //     stacked: true,
+          //     toolbar: {
+          //       show: true
+          //     },
+          //     zoom: {
+          //       enabled: true
+          //     }
+          //   },
+          //    responsive: [{
+          //     breakpoint: 480,
+          //     options: {
+          //       legend: {
+          //         position: 'bottom',
+          //         offsetX: -10,
+          //         offsetY: 0
+          //       }
+          //     }
+          //   }],
+          //    plotOptions: {
+          //     bar: {
+          //       horizontal: false,
+          //     },
+          //   },
+          //   xaxis: {
+          //     //type: 'datetime',
+          //     categories: [],
+          //   },
+          //   legend: {
+          //     position: 'bottom',
+          //     offsetY: 40
+          //   },
+          //   fill: {
+          //     opacity: 1
+          //   }
+
+          //  }
+             series: [44, 55, 13, 43,55, 13, 43],
+          chartOptions: {
+            chart: {
+              width: 380,
+              type: 'pie',
             },
+             labels: ['A', 'B', 'C', 'D','E','F','G'],
+             colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
           },
-        ],
-      },
         }
         
     },
@@ -547,6 +637,11 @@ export default {
  'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
   ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
+
+
+  // liste(){
+  //   return this.groupeParSourceFinancement.filter(item=> item[0].type_financement!=14)
+  // },
 
 
    afficherLibelleSourFinacement() {
@@ -575,6 +670,18 @@ export default {
       };
     },
 
+  idTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.source_financement==id);
+
+      if (qtereel) {
+        return qtereel.type_financement;
+      }
+      return 0
+        }
+      };
+    },
 
  afficherMontantTtcDeActeDons() {
       return id => {
@@ -823,6 +930,28 @@ montantAvenantMarcheResilier(){
     methods:{
     ...mapActions("bienService",[""]),
 
+
+
+
+    partition: partition,
+
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
+    
+    genererEnPdf() {
+      this.$htmlToPaper("printpdf");
+    },
+
      afficherTauxMarcheSouffre(id){
       return (this.NombreMarcherEnSouffrance(id) * parseFloat(this.resteAexcuterMarcheSouffrance(id))) /100;
     },
@@ -856,7 +985,37 @@ resteAexcuterMarcheSouffrance(id){
     return (this.NombreMarcherResilier(id) * parseFloat(this.resteAexcuterMarcheResilier(id)))/ 100
   },
 
-    formatageSommeSansFCFA:formatageSommeSansFCFA  
+    formatageSommeSansFCFA:formatageSommeSansFCFA , 
+
+
+// calcul des differents taux avec les camenber 
+//  testRegion(){
+//    let  objet= this.groupeParSourceFinancement.filter(item=>{
+//      if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null){
+//        return item
+//      }
+//    })
+
+//      if(objet.length>0){
+//        let vm=this;
+//        objet.forEach(function (value) {
+//           // let total=200;
+//          // let affichageTauxParRegion=vm.afficherMontantDeBaseDuMarcheParRegion(this.macheid)
+//           let montantExecute=vm.resultatT;
+//           let montanRestant=100 - montantExecute;
+
+//             let pour_centage_rest=montanRestant
+//             let pour_execu=vm.resultatT
+//               vm.series[0].data.push(pour_centage_rest .toFixed(2))
+//              // console.log(this.pour_execu)
+//               vm.series[1].data.push(pour_execu).toFixed(2)
+//               vm.chartOptions.xaxis.categories.push(value.libelle)
+//        })
+      
+//      }
+
+//     }
+
 
     }
 }

@@ -489,7 +489,7 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fbb203 !important;" class="span4">
+                  background-color: #fbb203 !important;" class="">
                   CODE UA
                   
                    <button @click="ActiveInputLigne">
@@ -514,6 +514,10 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                  <!-- <button @click="filtreTableau">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button> -->
                   LIBELLE
                    
                    <button @click="ActiveInputLigne1">
@@ -571,21 +575,27 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fbb203 !important;">
-                  NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
+                  background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE NON REGULARISE(S)">
+                  NBRE OP NON REGULARISE(S) {{afficheAnnee}}</th>
 
  <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fbb203 !important;">
-                  TAUX OP PROVISOIRE REGULARISE(S) {{afficheAnnee}}</th>
+                  background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE REGULARISE(S)">
+                  NBRE OP REGULARISE(S) {{afficheAnnee}}</th>
                    <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fbb203 !important;">
-                  TAUX OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}</th>
+                  background-color: #fbb203 !important;" title="TAUX OP PROVISOIRE NON REGULARISE(S)">
+                  TAUX OP NON REGULARISE(S) {{afficheAnnee}}</th>
+                  <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" title="TAUX D’OP PROVISOIRE NON REGULARISE HORS DELAI ">
+                  TAUX OP NON REGULARISE HORS DELAI  {{afficheAnnee}}</th>
                 <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -701,6 +711,13 @@
                 </td>
                   <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
+                  {{
+                 0
+                   
+                  }} %
+                </td>
+                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                >
                   {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
                 </td>
                 <!-- <td
@@ -790,7 +807,7 @@
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
-               TotalOPNonReguTypeFinancement(unite.id, unite1)
+               (parseFloat(NombreOPNonReguTypeFinancement(unite.id, unite1))+parseFloat(NombreOPReguTypeFinancement(unite.id, unite1)))
                 }}
               </td>
                <td
@@ -814,6 +831,13 @@
                       </button>
               </td>
                <td
+                style="font-size: 15px; text-align: right;color:#000"
+              >
+                {{
+                TauxOPProvisoireNonRegularisTypeFinancement(unite.id, unite1)
+                }} %
+              </td>
+              <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
@@ -891,6 +915,9 @@
                    
                  </td>
  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                   
+                 </td>
+                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                    
                  </td>
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
@@ -1039,6 +1066,17 @@
               >
               DECISION
               </th>
+              <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+             DATE DECISION CF
+              </th>
               <!-- <th
                 style="
                   font-size: 12px;
@@ -1048,7 +1086,18 @@
                   background-color: #fbb203 !important;
                 "
               >
-              DETAIL OP
+             DATE DU JOURS
+              </th>
+               <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;
+                "
+              >
+            {{ timestamp }} HORS DELAI{{nombreDeJourEntre}}
               </th> -->
             </tr>
           </thead>
@@ -1060,7 +1109,7 @@
               <!-- <td>{{item.type_ordre_paiement}}</td> -->
               <td>{{item.numero_ordre_paiement}}</td>
               <td>{{item.odjet_autre_depense}}</td>
-              <td>{{item.montant_ordre_paiement}}</td>
+              <td>{{formatageSommeSansFCFA(parseFloat(item.montant_ordre_paiement))  }}</td>
               
                <td >
                       <button
@@ -1135,6 +1184,15 @@
                         >
                       </button>
                     </td>
+                    <td>{{item.date_decision_cf }}</td>
+                    <!-- <td>{{timestamp}}</td>
+                    <td>
+                      <button class="btn btn-danger taille" >
+                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                        {{nombreDejourCalcule(item.date_decision_cf,timestamp)}}
+                        </span>
+                      </button>
+                    </td> -->
               <!-- <td>
                  <router-link
                         :to="{
@@ -1191,7 +1249,7 @@
       
  <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Detail Réamenagement Budgétaire</h2>
+              <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">LISTE DES OP REGULIRISE</h2>
           </tr>
         </table>
         <table class="table table-bordered table-striped">
@@ -1467,16 +1525,17 @@ export default {
       inputLigneLibelle:false,
       inputLigneLibelle1:0,
       editOpNonRegulirise:{},
-      editOpRegulirise:{}
+      editOpRegulirise:{},
+      timestamp: ""
     };
   },
-  created() {
-    console.log(this.affichageUniteAdminstrative);
-    this.budgetGeneralCharge = this.budgetGeneral.filter(
-      (item) => item.actived == 1
-    );
-    console.log(this.budgetGeneralCharge);
-  },
+  // created() {
+  //   console.log(this.affichageUniteAdminstrative);
+  //   this.budgetGeneralCharge = this.budgetGeneral.filter(
+  //     (item) => item.actived == 1
+  //   );
+  //   console.log(this.budgetGeneralCharge);
+  // },
   computed: {
     ...mapGetters("uniteadministrative", [
       "acteCreations",
@@ -1523,6 +1582,12 @@ export default {
       "getterUniteAdministrativeByUser",
     ]),
 
+
+
+
+
+
+
 ListeDesOpRegulirise() {
       return (id) => {
         if (id != null && id != "") {
@@ -1566,7 +1631,7 @@ ListeDesOpNonRegulirise() {
           return this.gettersgestionOrdrePaiement
             .filter(
               (qtreel) =>
-                qtreel.unite_administrative_id == id && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+                qtreel.unite_administrative_id == id && qtreel.diff_reg_op != 1 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
             ).length
             
             
@@ -2892,6 +2957,9 @@ arrayExerciceDecompteBienService() {
       return this.SommeBudgetInitial - this.SommeBudgetConsomme;
     },
   },
+  created() {
+                setInterval(this.getNow, 1000);
+            },
   methods: {
     ...mapActions("uniteadministrative", [
       "getAllActeCreation",
@@ -2907,6 +2975,83 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+//     filtreTableau(){
+//       if(this.inputLigneCode == false){
+//       return this.afficheUa.sort((a, b) => a.id > b.id );
+//       }else{
+//         this.inputLigneCode = false
+//         return this.afficheUa.sort((a, b) => a.id > b.id );
+//       }
+
+//  },
+nombreDeJourEntre(){
+  var date1 = new Date("12/12/2020");
+         var date2 = new Date("12/12/2021");
+          // différence des heures
+         var time_diff = date2.getTime() - date1.getTime();
+          // différence de jours
+         var days_Diff = time_diff / (1000 * 3600 * 24);
+         // afficher la différence
+           alert(days_Diff);
+          return  days_Diff;
+},
+getNow: function() {
+                    const today = new Date();
+                    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                   // const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                   // const dateTime = date +' '+ time;
+                    const dateTime = date;
+                    this.timestamp = dateTime;
+                },
+
+
+
+    afficherDateDuJour(){
+let date = new Date();
+        let aaaa = date.getFullYear();
+        let gg = date.getDate();
+        let mm = (date.getMonth() + 1);
+        let moi;
+        let jour;
+        if (gg < 10)
+        {
+            jour = "0" + gg;
+        }else{
+            jour = gg
+        }
+
+
+        if (mm < 10)
+        {
+            moi = "0" + mm;
+        }else{
+            moi=mm;
+        }
+
+
+        let cur_day =  aaaa + "-" + moi + "-" + jour;
+
+        return cur_day
+
+
+    
+   
+   },
+
+nombreDejourCalcule(id,id2){
+     
+    
+      var dateF = new Date(id).getTime()
+      var dateO = new Date(id2).getTime()
+      var resultat =   dateO - dateF
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+   if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      return  diffJour.toFixed(0);
+
+    },
+
 
 TauxOPProvisoireNonRegularisTypeFinancement(id,id1) {
       if (
@@ -2946,6 +3091,7 @@ TauxOPProvisoireNonRegularis(id) {
 genererEnPdf() {
       this.$htmlToPaper("printpdf");
     },
+    
      ActiveInputLigne(){
       if(this.inputLigneCode == false){
         this.inputLigneCode = true

@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <table class="table table-bordered table-striped">
+ <table class="table table-bordered table-striped">
           <tr>
             <td>
               <div class="control-group">
@@ -20,135 +20,13 @@
                 </div>
               </div>
             </td>
+               
+           
             <td></td>
           </tr>
+
+           
         </table>
-  <div id="validationOpDefinitif1" class="modal hide tailgrand">
-      <div class="modal-header">
-         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        <h3 style="font-size: 14px; font-weight: bold">
-          UNITE ADMINISTRATIVE : {{editMandat.id}}
-        </h3>
-      </div>
-      <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
-        Exporter en PDF
-      </button>
-    </div>  -->
-      <div class="modal-body" id="printpdf1">
-      
- <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Part Des Bailleurs</h2>
-          </tr>
-        </table>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr style="">
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                TYPE FINANCEMENT
-              </th>
-
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                 
-                "
-              >
-                BAILLEUR
-              </th>
-
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                MONTANT MARCHE HT
-              </th>
-
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                TAUX
-              </th>
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                MONTANT TVA
-              </th>
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                TAUX BAILLEUR
-              </th>
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                PART BAILLEUR
-              </th>
-            </tr>
-          </thead>
-          
-            
-            <tbody>
-            <tr v-for="item in affichePartBailleur(editMandat.id)" :key="item.id">
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.bailleur_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-            </tr>
-          </tbody>
-        </table>
-
-
-        <!-- <div class="modal-footer">
-          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        </div> -->
-      </div>
-    </div>
 
     <div align="right">
       <button class="btn btn-info" @click.prevent="genererEnPdf()">
@@ -160,7 +38,7 @@
        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
-                 SYNTHESE DES MARCHES HORS SIGOBE</h2>
+                 AVENANT DES MARCHES HORS SIGOBE</h2>
           </tr>
 
            
@@ -183,20 +61,14 @@
                   
                    
                  <tr>
+                   <th></th>
+
+                   <th></th>
+<th></th>
+                 
+                 <th></th>
                    <th>
-                   
-                  </th>
-                  <th>
-                   
-                  </th>
-                  <th>
-                   
-                  </th>
-                  <th>
-                   
-                  </th>
-                   <th>
-                   NUMERO D'ORDRE {{afficheAnnee}}
+                   NUMERO D'AVENANT {{afficheAnnee}}
                   </th>
                    
                   <th
@@ -205,34 +77,25 @@
                       font-weight: bold;
                       text-align: center;
                       color: #000;
+                      background-color: #fbb203 !important;
+                      
+                    "
+                  >
+                OBJET AVENANT  {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
                       background-color: #fbb203 !important;
                       width :8%
                     "
                   >
-                N° MARCHE  {{afficheAnnee}}
+                  DATE AVENANT {{afficheAnnee}}
                   </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  OBJET DU MARCHE {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TITULAIRE {{afficheAnnee}}
-                  </th>
+             
 
                      <th
                     style="
@@ -243,7 +106,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    DUREE CONTRACTUELLE   {{afficheAnnee}}
+                    TAUX AVENANT   {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -254,162 +117,9 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE SOURCE DE FINANCEMENT  {{afficheAnnee}}
+                    MONTANT AVENANT  {{afficheAnnee}}
                   </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  IMPUTATION BUDGETAIRE   {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                   MONTANT BUDGET  (FCFA) {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT DE BASE DU MARCHE {{afficheAnnee}}
-                  </th>
-                <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TAUX FINANCIER AVENANT  {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT TOTAL AVENANT {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRES AVENANT {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT TOTAL AVENANT {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  CUMUL VARIATION DE DELAI (AVENANT) {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT GLOBAL MARCHE {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    DELAI GLOBAL DU MARCHE {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT EXECUTE {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    DISPONIBLE MARCHE {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TAUX D’EXECUTION FINANCIER {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TAUX D’EXECUTION PHYSIQUE {{afficheAnnee}}
-                  </th>
+                 
                 </tr>
               </thead>
        <tbody>
@@ -420,50 +130,12 @@
                   </td>
                   
          
-                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"  colspan="8">{{libelleUniteAdministrative(GroupeSection.id)}}</td>
+                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"  colspan="5">{{libelleUniteAdministrative(GroupeSection.id)}}</td>
                 
                 
                
-                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                          <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"></td>
-                </tr>
-              </tbody>  
-              
-  <tbody v-show="recupereIDactivite==GroupeSection.id"
-               v-for="GroupeUa in GroupeTypeMarcheParUa(GroupeSection.id)" :key="GroupeUa">
-
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <button @click="ShowMyLigne(GroupeUa)">
-                     <i class="icon-eye-open"></i> </button>
-                  </td>
-                  
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="7">
-                    {{ libelleTypeMarche(GroupeUa) }}</td>
-
-              
-   
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa ">Recherche</td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="12" >
-
-                   <model-list-select  v-show="recupereIDSection==GroupeUa "
+                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'" colspan="4">
+                    <model-list-select  v-show="recupereIDactivite==GroupeSection.id "
               style="border: 1px solid #000"
               class="wide"
               :list="marches"
@@ -473,6 +145,33 @@
               placeholder=""
             >
             </model-list-select>
+                </td>
+                         
+                </tr>
+              </tbody>  
+              
+  <tbody v-show="recupereIDactivite==GroupeSection.id"
+               v-for="GroupeUa in GroupeTypeMarcheParUa(GroupeSection.id)" :key="GroupeUa">
+
+                <tr>
+                  <td></td>
+                  <td></td>
+            
+                  <td>
+                    <button @click="ShowMyLigne(GroupeUa)">
+                     <i class="icon-eye-open"></i> </button>
+                  </td>
+                  
+                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="3">
+                    {{ libelleMarche(GroupeUa) }}</td>
+
+              
+   
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa "></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="9" >
+
+                   
                </td>
                <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
@@ -492,74 +191,21 @@
 
                 
                 <tr v-show="recupereIDSection==GroupeUa"
-                v-for="GroupeLigne in ListeMarcheParTypeMarche(GroupeSection.id,GroupeUa)" :key="GroupeLigne.id">
+                v-for="GroupeLigne in listeDesmARCHEpARaVENANT(GroupeUa)" :key="GroupeLigne.id">
                   <td></td>
                   
 
-                  <td></td>
                   <td></td>
                   
  <td></td>
- <td style="text-align:right">{{NumeroOrdreMarche(GroupeLigne.id)}}</td>
-  <td style="text-align:right">{{NumeroMarche(GroupeLigne.id)}}</td>
-                 
-                  
-                  <td >{{LibelleMarche(GroupeLigne.id)}}</td>
-                
-                 <td style="text-align:right">{{LibelleEntreprise(EntrepriseMarche(GroupeLigne.id))}}</td>
-                 <td style="text-align:right">{{DureMarche(GroupeLigne.id)}} Jours</td>
-                 <td style="text-align:right">
-
-                     <button class="btn btn-success taille"   @click="percuFacture(GroupeSection.id,GroupeUa)">
-                        <span style="color:#000;font-size: 15px;">
-                         {{NombreBailler(GroupeLigne.id)}}
-                        </span>
-                      </button>
-                 </td>
-                 <td style="text-align:right">{{ImputationMarche(GroupeLigne.id)}}</td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantBudgetaire(GroupeSection.id,ligneEconomiqueMarche(idParentMarche(GroupeLigne.id)))))}}</td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantReelMarche(GroupeLigne.id)))}}</td>
-                 <td style="text-align:right">{{TauxAvenantParMarche(GroupeLigne.id)}} %</td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(montantAvenantParMarche(GroupeLigne.id)))}}</td>
-                 <td style="text-align:right">
-                      <button class="btn btn-success taille" >
-                        <span style="color:#000;font-size: 15px;">
-                         {{NombreAvenant(GroupeLigne.id)}}
-                        </span>
-                      </button>
-                     </td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(montantAvenantParMarche(GroupeLigne.id)))}}</td>
-                            <td style="text-align:right">{{0}}</td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(AfficheMontantgbobalMarche(GroupeLigne.id)))}}</td>
-                 <td style="text-align:right">{{0}}</td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteMarche(GroupeLigne.id)))}}</td>
-                             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(DisponibleMarche(GroupeLigne.id)))}}</td>
-                 
-                
-                 <td style="text-align:right">
-                    
-                     <button class="btn btn-danger taille" v-if="parseFloat(TauxExecution(GroupeLigne.id)) <= 25">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{TauxExecution(GroupeLigne.id)}} %
-                        </span>
-                      </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(TauxExecution(GroupeLigne.id)) <= 50">
-                        <span style="color:#000;font-size: 15px;">
-                          {{TauxExecution(GroupeLigne.id)}} %
-                        </span>
-                      </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(TauxExecution(GroupeLigne.id)) <= 75">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{TauxExecution(GroupeLigne.id)}} %
-                        </span>
-                      </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(TauxExecution(GroupeLigne.id)) <= 100">
-                        <span style="color:#fff;font-size: 15px;">
-                          {{TauxExecution(GroupeLigne.id)}} %
-                        </span>
-                      </button>
-                    </td> 
-                    <td style="text-align:right">0</td>
+ <td> <button >
+                     <i class="icon-arrow-right"></i> </button></td>
+<td style="text-align:left">{{NumeroAvenant(GroupeLigne.id)}}</td>
+ <td style="text-align:left">{{ObjetAvenant(GroupeLigne.id)}}</td>
+ <td style="text-align:right">{{formaterDate(DateAvenant(GroupeLigne.id))}}</td>
+ <td style="text-align:right">{{TauxAvenant(GroupeLigne.id)}} %</td>
+ 
+ <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MonatntAvenant(GroupeLigne.id)))}}</td>
                 </tr>
   </tbody>
               
@@ -621,7 +267,7 @@ export default {
   data() {
     return {
       page: 0,
-      size:10,
+      size:3,
       active_el: 0,
       fabActions: [
         {
@@ -755,6 +401,84 @@ editMandat:{},
       noDCfNoAdmin:noDCfNoAdmin,
 
 
+NumeroAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_avenant
+      }
+      return 0
+        }
+      };
+    },
+
+
+ObjetAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_avenant
+      }
+      return 0
+        }
+      };
+    },
+    
+
+DateAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.date_avenant
+      }
+      return 0
+        }
+      };
+    },
+    
+TauxAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.taux_avenant
+      }
+      return 0
+        }
+      };
+    },
+    MonatntAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_avenant
+      }
+      return 0
+        }
+      };
+    },
+listeDesmARCHEpARaVENANT(){
+    
+
+          return (id) => {
+        if (id != null && id != "") {
+           return  this.avenants.filter(qtreel => qtreel.marche_id == id  );
+        }  
+      };
+    
+},
+
+
+
 affichePartBailleur() {
       return id => {
         if (id != null && id != "") {
@@ -815,15 +539,16 @@ BailleurParMarche() {
     },
 
 GroupeTypeMarcheParUa() {
-      return (id) => {
+    if(this.marcheLot_id!=0){
+        return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee);
+          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee && item.parent_id != null && item.attribue == 2 && item.id == this.marcheLot_id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.type_marche_id);
+            array_exercie.push(val.id);
           });
           let unique = [...new Set(array_exercie)];
           console.log(unique);
@@ -837,6 +562,31 @@ GroupeTypeMarcheParUa() {
         
         
       };
+    }else{
+         return (id) => {
+      
+        if(id !=0 && id !=""){
+          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee && item.parent_id != null && item.attribue == 2);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    }
+      
     },
 
 ListeMarcheParTypeMarche() {
@@ -879,13 +629,13 @@ ListeMarcheParTypeMarche() {
         return this.exercices_budgetaires_id;
       }
     },
-     libelleTypeMarche() {
+     libelleMarche() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle
+        return qtereel.objet
       }
       return 0
         }
@@ -962,18 +712,7 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
-    LibelleMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.objet
-      }
-      return 0
-        }
-      };
-    },
+   
     DureMarche() {
       return id => {
         if (id != null && id != "") {
