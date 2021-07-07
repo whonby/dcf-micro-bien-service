@@ -261,6 +261,39 @@
                   >
                     DISPONIBLE {{afficheAnnee}}
                   </th>
+                    <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  NATURE DEPENSE {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  PROCEDURE DE MARCHE {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  STATUT DE LA LIGNE {{afficheAnnee}}
+                  </th>
                   <th
                     
                   >
@@ -313,7 +346,15 @@
                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
                     {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleSection(GroupeSection[0].section_id))) }}
                   </td>
-
+<td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    
+                  </td>
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 <  EviteNaNSection(GroupeSection[0].section_id) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
@@ -379,7 +420,16 @@
 
                   <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
                     {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleUa(GroupeUa))) }} </td>
-                
+                <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
+                    
+                  </td>
+                  <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
+                    
+                  </td>
+                  <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
+                    
+                   
+                  </td>
                  <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 <  EviteNaNUa(GroupeUa) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
@@ -433,7 +483,21 @@
                   <td> {{ NbreOpNonRegularisé(GroupeLigne,GroupeUa) }} </td> 
                  
                   <td> {{ formatageSommeSansFCFA(parseFloat(MontantDisponible(GroupeLigne,GroupeUa))) }} </td>
-
+<td style="text-align: left;color:#000;">
+                    {{
+                     lielleGrandeNayure(GrandeNature(GroupeLigne))
+                    }}
+                  </td>
+                  <td style="text-align: left;color:#000;">
+                    {{
+                      afficheLeNomDesProcedure(GroupeLigne,GroupeUa)
+                    }}
+                  </td>
+                  <td style="text-align: left;color:#000;">
+                      <span v-if="GroupeLigne == CodeExempte(GroupeLigne)">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                   
+                  </td>
                    <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(GroupeLigne,GroupeUa) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
@@ -671,7 +735,8 @@ export default {
       "getPersonnaliseBudgetGeneralParPersonnel",
       "groupeByActivite",
       "groupeByBailleur",
-      "groupeBySection"
+      "groupeBySection",
+      "getterligneExempter"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -684,7 +749,32 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
-  
+    CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
+   lielleGrandeNayure() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.grandes_natures.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
     ShowMe(){
        return (id) => {
         if (id != null && id != "") {
@@ -1470,7 +1560,20 @@ AfficheLigneGroupe() {
        
     },
 
-    
+    GrandeNature() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.ligneeconomique_id == id && qtreel.budget_active==1
+          );
+
+          if (qtereel) {
+            return qtereel.grandenature_id;
+          }
+          return 0;
+        }
+      };
+  },
 
 
     recupBudget() {
@@ -1549,7 +1652,37 @@ AfficheLigneGroupe() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+afficheLeNomDesProcedure(id,id1){
 
+    if(this.MontantDisponible(id,id1) < 10000000){
+        return "PSC-SC"
+    }
+    else if( this.MontantDisponible(id,id1) < 30000000 )
+    {
+return "PSC-AC"
+    }
+    else if(this.MontantDisponible(id,id1)<60000000)
+    {
+return "PSL"
+    }
+    else if(this.MontantDisponible(id,id1) < 100000000)
+    {
+return "PSO"
+    }
+
+    // else if(0 < this.MontantDisponible(id,id1))
+    // {
+    //  return "ED"
+    // }
+     else if(100000000 < this.MontantDisponible(id,id1))
+    {
+return "AON ou AOI ou AOR"
+    }
+
+  return null
+
+
+},
     ActiveInputLigne(){
   if(this.inputLigne == false){
     this.inputLigne = true

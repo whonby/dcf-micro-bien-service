@@ -487,13 +487,13 @@ recupereIDactivite
           
              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
             
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantRestantParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{NombreMarcheSuppenduParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantResteMarcheSouffrance(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{MontantTauxMarcheSouffrance(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+             <td style="text-align:right">{{NombreMarcheResilierParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSectionMarcheEnSouffrance(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{TauxMarcheResilier(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
              
               
                 
@@ -940,10 +940,101 @@ MontantAvenantMarche(){
 
 
 
+NombreMarcheSuppenduParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 7
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
 
 
+NombreMarcheResilierParSection(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches
+            .filter(
+              (qtreel) =>qtreel.source_financement == id &&
+                qtreel.section_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee && qtreel.parent_id != null && qtreel.attribue == 3
+            ).length
+            
+            
+        } else {
+          return 0;
+        }
+      };
+    },
+MontantExecuteParSectionMarcheEnSouffrance(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && this.marcheEnSouffrace(qtreel.marche_id) == 3 || qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 && qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9  && this.marcheEnSouffrace(qtreel.marche_id) == 3 || qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==8 && this.marcheEnSouffrace(qtreel.marche_id) == 3 || qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==9 && this.marcheEnSouffrace(qtreel.marche_id) == 3
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
 
 
+MontantExecuteParSectionMarcheResilier(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==8 && this.marcheEnSouffrace(qtreel.marche_id) == 3 || qtreel.source_financement_id == id &&
+                qtreel.section_id == id1 && qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==1 && qtreel.decision_cf==9  && this.marcheEnSouffrace(qtreel.marche_id) == 3 || qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==8 && this.marcheEnSouffrace(qtreel.marche_id) == 3 || qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                qtreel.exercice == this.afficheAnnee && qtreel.type_ordre_paiement==4 && qtreel.decision_cf==9 && this.marcheEnSouffrace(qtreel.marche_id) == 3
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+marcheEnSouffrace() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.attribue;
+          }
+          return 0;
+        }
+      };
+    },
 
     // NOUVELLE FONCTION 
 
@@ -2097,6 +2188,47 @@ NombreBailleurParUa() {
     ]),
 
 
+
+
+
+TauxMarcheResilier(id,id1){
+    if(this.MontantExecuteParSectionMarcheEnSouffrance(id,id1) == 0){
+return 0
+    }
+    else{
+        
+return  ((parseFloat(this.MontantExecuteParSectionMarcheEnSouffrance(id,id1))/parseFloat(this.MontantReelDuMarche(id,id1)))*100).toFixed(2);
+   
+    }
+ 
+},
+
+MontantResteMarcheResilier(id,id1){
+ return   parseFloat(this.MontantReelDuMarche(id,id1))-parseFloat(this.MontantExecuteParSectionMarcheEnSouffrance(id,id1)) 
+   
+},
+
+
+
+
+
+
+MontantTauxMarcheSouffrance(id,id1){
+    if(this.MontantExecuteParSectionMarcheEnSouffrance(id,id1) == 0){
+return 0
+    }
+    else{
+        
+return  ((parseFloat(this.MontantExecuteParSectionMarcheEnSouffrance(id,id1))/parseFloat(this.MontantReelDuMarche(id,id1)))*100).toFixed(2);
+   
+    }
+ 
+},
+
+MontantResteMarcheSouffrance(id,id1){
+ return   parseFloat(this.MontantReelDuMarche(id,id1))-parseFloat(this.MontantExecuteParSectionMarcheEnSouffrance(id,id1)) 
+   
+},
 MontantTotalMarche(id,id1){
  return   parseFloat(this.MontantReelDuMarche(id,id1))+parseFloat(this.MontantAvenantMarche(id,id1)) 
    
@@ -2133,8 +2265,8 @@ MontantActuelParSection(id){
  return   parseFloat(this.MontantbudgetVoteParSection(id))+parseFloat(this.MontantbudgetReamenagementParSection(id)) 
    
 },
-MontantDisponibleParSection(id){
- return  parseFloat(this.MontantActuelParSection(id))-parseFloat(this.MontantExecuteParSection(id))
+MontantRestantParSection(id,id1){
+ return  parseFloat(this.MontantTotalMarche(id,id1))-parseFloat(this.MontantExecuteParSection(id,id1))
    
 },
 TauxExecutionParSection(id){
