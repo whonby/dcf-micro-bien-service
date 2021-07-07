@@ -58,14 +58,14 @@
            <h4 style="color:#000"> Total des OP provisoires</h4>
           
             <div class="card-body">
-              <table class="noborder">
+              <table class="noborder" >
                 <tr>
                   <th style="color:#000"> Nombre de dossiers :</th>
                   <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>
                 </tr>
                 <tr>
                   <th style="color:#000">Taux :</th>
-                  <td style="color:#000">0</td>
+                  <td style="color:#000; font-weight:bold"> {{tauxOpProv}} %</td>
                 </tr>
                 <tr>
                   <th style="color:#000">Montant :</th>
@@ -83,22 +83,22 @@
       <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
         <div class="text-center"><h4>A</h4></div>
          <div class="card bg-secondary mb-3 text-center">
-             <h4>-Total des OP provisoires
+             <h4 style="color:#000">-Total des OP provisoires
 en cours de traitement</h4>
           
             <div class="card-body">
               <table class="noborder" >
                 <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td>0</td>
+                  <th style="color:#000; font-weight:bold">Nombre de dossiers :</th>
+                  <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>
                 </tr>
                 <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
+                  <th style="color:#000; font-weight:bold">Taux :</th>
+                  <td style="color:#000; font-weight:bold">{{tauxOpProv}} %</td>
                 </tr>
                 <tr>
-                  <th>Montant :</th>
-                  <td>0</td>
+                  <th style="color:#000; font-weight:bold">Montant :</th>
+                  <td style="color:#000; font-weight:bold">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
                 </tr>
               </table>
               <br>
@@ -111,20 +111,20 @@ en cours de traitement</h4>
       <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
          <div class="text-center"><h4>B</h4></div>
          <div class="card bg-success mb-3 text-center">
-           <h4>OP Provisoires régularisés</h4>
+           <h4 style="color:#000">OP Provisoires régularisés</h4>
           
             <div class="card-body">
               <table class="noborder" >
                 <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td style="color:#000; font-weight:bold"> {{NbreOpRegulariseLength}} </td>
+                  <th style="color:#000; font-weight:bold">Nombre de dossiers:</th>
+                  <td style="color:#000; font-weight:bold">{{NbreOpRegulariseLength}} </td>
                 </tr>
                 <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
+                  <th style="color:#000; font-weight:bold">Taux :</th>
+                  <td style="color:#000; font-weight:bold"> {{TauxOpRegularise}} %</td>
                 </tr>
                 <tr>
-                  <th>Montant :</th>
+                  <th style="color:#000; font-weight:bold">Montant :</th>
                   <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpRegularise))}}</td>
                 </tr>
               </table>
@@ -136,20 +136,20 @@ en cours de traitement</h4>
       <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
        <div class="text-center"><h4>C</h4></div>
          <div class="card bg-info mb-3 text-center">
-           <h4>OP Provisoires non régularisés</h4>
+           <h4 style="color:#000">OP Provisoires non régularisés</h4>
           
             <div class="card-body">
               <table class="noborder" >
                 <tr>
-                  <th>Nombre de dossiers :</th>
+                  <th style="color:#000; font-weight:bold">Nombre de dossiers :</th>
                   <td style="color:#000; font-weight:bold">{{NbreOpNonRegulariseLength}} </td>
                 </tr>
                 <tr>
-                  <th>Taux :</th>
-                  <td> 0 </td>
+                  <th style="color:#000; font-weight:bold">Taux :</th>
+                  <td style="color:#000; font-weight:bold"> {{TauxOpNonRegularise}} %</td>
                 </tr>
                 <tr>
-                  <th>Montant :</th>
+                  <th style="color:#000; font-weight:bold">Montant :</th>
                   <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpNonRegularise))}} </td>
                 </tr>
               </table>
@@ -162,21 +162,21 @@ en cours de traitement</h4>
      <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
           <div class="text-center"><h4>D</h4></div>
          <div class="card bg-warning mb-3 text-center">
-           <h4>OP Provisoires hors délai d'un mois</h4>
+           <h4 style="color:#000">OP Provisoires hors délai d'un mois</h4>
           
             <div class="card-body">
               <table class="noborder" >
                 <tr>
-                  <th>Nombre de dossiers :</th>
-                  <td>0</td>
-                </tr>
+                  <th style="color:#000; font-weight:bold">Nombre de dossiers :</th>
+                  <td style="color:#000; font-weight:bold"> {{opHorsDelaiLength}} </td>
+                </tr> 
                 <tr>
-                  <th>Taux :</th>
-                  <td>0</td>
-                </tr>
+                  <th style="color:#000; font-weight:bold" >Taux :</th>
+                  <td style="color:#000; font-weight:bold"> {{TauxOpProvisHorsDelai}} %</td>
+                </tr> 
                 <tr>
-                  <th>Montant :</th>
-                  <td>0</td>
+                  <th style="color:#000; font-weight:bold">Montant :</th>
+                  <td style="color:#000; font-weight:bold"> {{MontantOpHorsDelai}}</td>
                 </tr>
               </table>
               <br>
@@ -354,6 +354,9 @@ export default {
   },
   data(){
     return{
+      tauxOpProv: 100,
+      d:'',
+      m:'',
       exercice_id:0,
       uniteAdministratives_id:0,
       text1:[],
@@ -378,7 +381,8 @@ export default {
               }
             }]
           },
-
+        nbre:"",
+        text2:[]
     }
   },
 created() {
@@ -387,8 +391,16 @@ created() {
        idmarche => idmarche.id == this.$route.params.id
    )
    console.log("coucou")
-   this.text1 = this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
+   
+   console.log(this.text1)
+  console.log(this.opHorsDelai)
+  // console.log(this.Silva)
+
    console.log(this.GroupeOrdrePaiementByActivite)
+   console.log(this.OpNonRegularisePaDef.length)
+   
+   
+    
 },
    
   computed:{
@@ -441,6 +453,7 @@ affichierBudgetDisponiblePersonnel() {
       
       return 0
     },
+   
 affichierTauxExecutionPersonnel() {
       const val = (parseFloat(this.budgetConsommerPersonnel) / parseFloat(this.afficherBudgetInitialPersonnel))*100;
       
@@ -500,7 +513,7 @@ NbreDossierOpProvisoire(){
 
   }
   else{
-    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
+    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1 || tem.diff_reg_op == 0)
   }
 },
 lenghtOpProvisoire(){
@@ -544,10 +557,24 @@ NbreOpNonRegularise(){
         tem.unite_administrative_id == this.uniteAdministratives_id &&
         tem.exercice == this.anneeAmort)
   }
-  return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 0)
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 0 || tem.type_ordre_paiement == 1)
 },
 NbreOpNonRegulariseLength(){
   return this.NbreOpNonRegularise.length
+},
+TauxOpNonRegularise(){
+  return ((this.OpNonRegularisePaDef.length / this.NbreOpNonRegulariseLength) * 100).toFixed(2)
+},
+TauxOpRegularise(){
+  return ((this.OpRegulariseDef.length / this.NbreOpNonRegulariseLength) * 100).toFixed(2)
+
+},
+OpNonRegularisePaDef(){
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement != 4 && tem.diff_reg_op == 0)
+},
+OpRegulariseDef(){
+  return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement != 4 && tem.diff_reg_op == 1)
+
 },
 sommeOpProvisoire(){
   if(this.exercice_id != 0){
@@ -862,8 +889,41 @@ affichierTauxExecutionInvestissement() {
                     return 0
                 }
             },
-
-
+  TauxOpProvisHorsDelai(){
+      return ((this.opHorsDelaiLength / this.lenghtOpProvisoire) * 100).toFixed(2)
+  },
+   MontantOpHorsDelai(){
+        return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.date_interim != null
+      ).reduce(
+        (prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0); 
+   },
+    opHorsDelaiLength(){
+        return this.Silva.length
+    },
+  Silva(){
+    let objet = this.gettersgestionOrdrePaiement.filter(item=>item.date_interim != null);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            let d  = new Date(val.date_interim)
+            d.setDate(d.getDate() + 30)
+            if( (d.getTime()) < ((new Date()).getTime())){           
+                array_exercie.push(val.id);      
+              }
+              return true
+          });
+          let unique = [...new Set(array_exercie)];
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+  },
+    
   },
 
   methods:{
@@ -871,7 +931,16 @@ affichierTauxExecutionInvestissement() {
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
-
+ AjouterJ(dat, day){
+      let d = new Date(dat)
+      d.setDate(d.getDate() + day)
+      return d
+    },
+ dayDiff(d1, d2){
+  d1 = d1.getTime() / 86400000;
+  d2 = d2.getTime() / 86400000;
+  return new Number(d2 - d1).toFixed(0);
+},
   
  formatageSomme:formatageSomme,
  formatageSommeSansFCFA:formatageSommeSansFCFA
