@@ -40,6 +40,11 @@
                         >TABLEAU BORD 5 </a
                       >
                     </li>
+                     <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD6"
+                        >TABLEAU BORD 6 </a
+                      >
+                    </li>
                   </ul>
                 </div>
                 <div class="widget-content tab-content">
@@ -57,6 +62,9 @@
                   </div>
 <div id="BAILLEURSECTION" class="tab-pane ">
                      <SyntheseMarcheBailleurSection></SyntheseMarcheBailleurSection>
+                  </div>
+                  <div id="TABLEAUBORD6" class="tab-pane ">
+                     <SyntheseDesMarchesBailleurProjet></SyntheseDesMarchesBailleurProjet>
                   </div>
             
                 </div>
@@ -84,6 +92,7 @@ import { formatageSomme } from "@/Repositories/Repository";
   import MarcheParAvenant from "./MarcheParAvenant"
     import SyntheseMarcheBailleurSection from "./SyntheseMarcheBailleurSection"
   import TableauBordMarcheParBailleur from "../TableauBordBudgetHorsSigobe/TableauBordMarcheParBailleur"
+  import SyntheseDesMarchesBailleurProjet from "./SyntheseDesMarchesBailleurProjet"
 //import TableausuiviBudgets from "./TableauSuiviBudgets"
 
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
@@ -92,6 +101,7 @@ import { formatageSomme } from "@/Repositories/Repository";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       SyntheseDesMarchesBailleurProjet,
        SyntheseMarcheBailleurSection,
        TableauBordMarcheParBailleur,
        MarcheParAvenant,

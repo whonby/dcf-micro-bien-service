@@ -161,7 +161,7 @@
                       font-weight: bold;
                       text-align: center;
                       background-color: #fbb203 !important;
-                      width :8%
+                      width :20%
                     "
                   >
                     UA {{afficheAnnee}}
@@ -190,6 +190,7 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
+                      width :20%
                     "
                   >
                   MODIFICATION BUDGETAIRE {{afficheAnnee}}
@@ -201,6 +202,7 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
+                      width :20%
                     "
                   >
                     NBRE DE REAMENAGEMENT {{afficheAnnee}}
