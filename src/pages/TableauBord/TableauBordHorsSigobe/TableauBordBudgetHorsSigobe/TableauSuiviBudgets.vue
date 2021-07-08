@@ -1,6 +1,16 @@
 <template>
   <div>
-
+<input  type="hidden" :value="triModificationBudgetdata"/>
+<input  type="hidden" :value="triBudgetActuelledata" />
+<input  type="hidden" :value="triBudgetExecutedata" />
+<input  type="hidden" :value="triBudgetDisponibledata" />
+<input  type="hidden" :value="triTotalProvisoiredata" />
+<input  type="hidden" :value="triOpNonRegulirisedata" />
+<input  type="hidden" :value="triOpRegulirisedata" />                
+     <input  type="hidden" :value="triTauxOpRegulirisedata" /> 
+     <input  type="hidden" :value="triTauxExecutiondata" />                
+       <input  type="hidden" :value="tricodedata" />          
+                  
     <div id="validationOpDefinitif1" class="modal hide tailgrand">
       <div class="modal-header">
          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
@@ -459,7 +469,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Suivi du budget {{ tricodedata}}</h5>
+          <h5>Suivi du budget</h5>
         </div>
 
         <div class="span4">
@@ -546,7 +556,7 @@
                      <i class=" icon-filter"></i> 
                       
                     </button>
-                  BUDGET INITIAL {{afficheAnnee}}
+                  BUDGET INITIAL
                  
                   
                    <button @click="ActiveInputMontantInitial">
@@ -567,6 +577,10 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                   <button @click="triModificationBudget()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
                   MODIFICATION BUDGETAIRE
                    <button @click="ActiveInputModificationBudgetaire">
                      <i class=" icon-search"></i> 
@@ -581,6 +595,10 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                  <button @click="triBudgetActuelle()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
                   BUDGET ACTUEL
                    <button @click="ActiveInputMontantActuel">
                      <i class=" icon-search"></i> 
@@ -596,6 +614,10 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                    <button @click="triBudgetExecute()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
                   MONTANTS EXECUTES
                    <button @click="ActiveInputMontant">
                      <i class=" icon-search"></i> 
@@ -611,26 +633,75 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="TOTAL OP PROVISOIRE">
-                  TOTAL OP PROVISOIR</th>
+                   <button @click="triTotalOpProvisoire()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                  TOTAL OP PROVISOIRE
+                  <button @click="ActiveInputTotalOpProvisoire">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   v-model="Total_Op_Provisoire" class="span" v-show="inputTotalOpProvisoire == true"></money>
+                 
+                  </th>
                   <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE NON REGULARISE(S)">
-                  NBRE OP NON REGULARISE(S)</th>
+                   <button @click="triNombreOpNonRegulirise()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                  NBRE OP NON REGULARISE(S)
+                  <button @click="ActiveInputNombreOpNonProvisoireRegulirise">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   v-model="Nombre_Op_Non_Regulirise" class="span" v-show="inputNombreOpNonRegulirise == true"></money>
+                 
+                  </th>
 
  <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE REGULARISE(S)">
-                  NBRE OP REGULARISE(S)</th>
+                  <button @click="triNombreOpRegulirise()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                  NBRE OP REGULARISE(S)
+                   <button @click="ActiveInputnombreRegulirise">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   v-model="Nombre_Op_Regulirise" class="span" v-show="inputnombreOpRegulirise == true"></money>
+                 
+                  </th>
                    <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="TAUX OP PROVISOIRE NON REGULARISE(S)">
-                  TAUX OP NON REGULARISE(S)</th>
+                  <button @click="triTauxOpNonRegulirise()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                  TAUX OP NON REGULARISE(S)
+                  <!-- <button @click="ActiveInputTauxOpNonRegulirise">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                   
+                 <input
+                    type="text"
+                    v-model="Taux_Op_non_Regulirise"
+                    class="span"
+                    v-show="inputTauxOpNonRegulirise == true"
+                  /> -->
+                  </th>
                   <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -642,6 +713,11 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                  
+                  <button @click="triBudgetDispoble()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
                  DISPONIBLE
                    <button @click="ActiveInputMontantDisponble">
                      <i class=" icon-search"></i> 
@@ -655,7 +731,12 @@
                   font-weight: bold;
                   color: #000;
                   text-align: center;
-                  background-color: #fbb203 !important;">TAUX D'EXECUTION</th>
+                  background-color: #fbb203 !important;">
+                  <button @click="triTauxExecution()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                  TAUX D'EXECUTION </th>
                    
                    <!-- <th style=" font-size: 14px;
                   font-weight: bold;
@@ -710,7 +791,7 @@
 
                   <button class="btn btn-success taille"  @click="percuFacture(unite.id)">
                         <span style="color:#fff;font-size: 15px;">
-                          {{ formatageSommeSansFCFA(parseFloat(unite.Variation)) }}
+                          {{ formatageSommeSansFCFA(parseFloat(unite.Variation12)) }}
                         </span>
                       </button>
                 </td>
@@ -770,22 +851,22 @@
                 </td> -->
 
                 <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat( unite.TauxExecution ) <= 0.25">
+                  <button class="btn btn-danger taille" v-if="parseInt( unite.TauxExecution ) <= 25">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat( unite.TauxExecution ) <= 0.5">
+                      <button class="btn btn-warning taille" v-else-if="parseInt( unite.TauxExecution ) <= 50">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if=" parseFloat( unite.TauxExecution ) <= 0.75">
+                       <button class="btn btn-success taille" v-else-if=" parseInt( unite.TauxExecution ) <= 75">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat( unite.TauxExecution ) <= 1">
+                      <button class="btn btn-success taille" v-else-if="parseInt( unite.TauxExecution ) <= 100">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
@@ -1575,11 +1656,28 @@ montant_Actuel:0,
        inputMontantInitial:false,
        inputModificationBudgetaire:false,
        inputMontantActuel:false,
+       inputTotalOpProvisoire:false,
+       inputNombreOpNonRegulirise:false,
+       inputnombreOpRegulirise:false,
+       inputTauxOpNonRegulirise:false,
+       Total_Op_Provisoire:0,
+        Nombre_Op_Non_Regulirise:0,
+        Taux_Op_non_Regulirise:0,
       inputLigneLibelle1:0,
+      Nombre_Op_Regulirise:0,
       editOpNonRegulirise:{},
       editOpRegulirise:{},
       timestamp: "",
       tricodedata:0,
+      triModificationBudgetdata:0,
+      triBudgetActuelledata:0,
+      triBudgetExecutedata:0,
+      triBudgetDisponibledata:0,
+      triTotalProvisoiredata:0,
+      triOpNonRegulirisedata:0,
+      triOpRegulirisedata:0,
+      triTauxOpRegulirisedata:0,
+      triTauxExecutiondata:0
     };
   },
   //  created() {
@@ -1630,7 +1728,45 @@ montant_Actuel:0,
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+    
+    FiltreTauxOpNonProvisoire(){
+   if (this.noDCfNoAdmin) {
+        let colect = [];
 
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => this.TauxOPProvisoireNonRegularis(item2.id) == this.Taux_Op_non_Regulirise);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => this.TauxOPProvisoireNonRegularis(item2.id) == this.Taux_Op_non_Regulirise
+      );
+},
+FiltreTotalOpProvisoire(){
+   if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => this.TotalOPProvisoire(item2.id) == this.Total_Op_Provisoire);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => this.TotalOPProvisoire(item2.id) == this.Total_Op_Provisoire
+      );
+},
 afficheMontantExecute(){
    return (id) => {
           if (id != null && id != "") {
@@ -1689,6 +1825,51 @@ filtre_MoodicationBudgetaire() {
         (item2) => this.AfficheVariationBudget(item2.id) == this.montant_ModifierBudget
       );
     },
+
+
+filtre_NombreOpRegularise() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => this.NombreOPRegulirise(item2.id) == this.Nombre_Op_Regulirise);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => this.NombreOPRegulirise(item2.id) == this.Nombre_Op_Regulirise
+      );
+    },
+filtre_NombreOpNonRegularise() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => this.NombreOPNonRegu(item2.id) == this.Nombre_Op_Non_Regulirise);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => this.NombreOPNonRegu(item2.id) == this.Nombre_Op_Non_Regulirise
+      );
+    },
+
+
+
+
+
 
 filtre_Montant_Actuelle() {
       if (this.noDCfNoAdmin) {
@@ -2924,8 +3105,16 @@ arrayExerciceDecompteBienService() {
       else if(this.montant_ModifierBudget!=0){
           return this.filtre_MoodicationBudgetaire
       }
-      else if(this.montant_Actuel!=0){
+      else if(this.montant_Actuel != 0){
         return this.filtre_Montant_Actuelle
+      }else if(this.Total_Op_Provisoire != 0){
+        return this.FiltreTotalOpProvisoire
+      }else if(this.Nombre_Op_Non_Regulirise){
+        return this.filtre_NombreOpNonRegularise
+      }else if(this.Nombre_Op_Regulirise !=0 ){
+        return this.filtre_NombreOpRegularise
+      }else if(this.Taux_Op_non_Regulirise!=0){
+        return this.FiltreTauxOpNonProvisoire
       }
       else {
         return this.filtre_unite_admin;
@@ -2944,7 +3133,7 @@ arrayExerciceDecompteBienService() {
           code: value.code,
           libelle: value.libelle,
           MontantVote:vm.MontantBudgetVote(value.id),
-          Variation:vm.AfficheVariationBudget(value.id),
+          Variation12:vm.AfficheVariationBudget(value.id),
           Budgetactuel:vm.MontantBudgetActuel(value.id),
           MontantExecute:vm.MontantBudgetExecuté(value.id),
           NombreOpProvisoire:vm.TotalOPProvisoire(value.id),
@@ -3287,8 +3476,8 @@ arrayExerciceDecompteBienService() {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.SommeBudgetConsomme) /
-            parseFloat(this.SommeBudgetInitial)) 
+          ((parseInt(this.SommeBudgetConsomme) /
+            parseInt(this.SommeBudgetInitial))*100) 
         ).toFixed(2);
       }
     },
@@ -3350,8 +3539,108 @@ CalculerMontantDisponible(id){
       }
       
     },
+     triBudgetExecute(){
+      if(this.triBudgetExecutedata==0){
+        this.triBudgetExecutedata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantExecute < b.MontantExecute) ? 1 : -1);
+        
+      }else{
+        this.triBudgetExecutedata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantExecute > b.MontantExecute) ? 1 : -1);
+      }
+      
+    },
+    triBudgetActuelle(){
+      if(this.triBudgetActuelledata==0){
+        this.triBudgetActuelledata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Budgetactuel < b.Budgetactuel) ? 1 : -1);
+        
+      }else{
+        this.triBudgetActuelledata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Budgetactuel > b.Budgetactuel) ? 1 : -1);
+      }
+      
+    },
+  triModificationBudget(){
+      if(this.triModificationBudgetdata==0){
+        this.triModificationBudgetdata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Variation12 < b.Variation12) ? 1 : -1);
+        
+      }else{
+        this.triModificationBudgetdata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Variation12 > b.Variation12) ? 1 : -1);
+      }
+      
+    },
+     triBudgetDispoble(){
+      if(this.triBudgetDisponibledata==0){
+        this.triBudgetDisponibledata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Disponible < b.Disponible) ? 1 : -1);
+        
+      }else{
+        this.triBudgetDisponibledata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Disponible > b.Disponible) ? 1 : -1);
+      }
+      
+    },
+    triTotalOpProvisoire(){
+      if(this.triTotalProvisoiredata==0){
+        this.triTotalProvisoiredata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpProvisoire < b.NombreOpProvisoire) ? 1 : -1);
+        
+      }else{
+        this.triTotalProvisoiredata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpProvisoire > b.NombreOpProvisoire) ? 1 : -1);
+      }
+      
+    },
+      triNombreOpNonRegulirise(){
+      if(this.triOpNonRegulirisedata==0){
+        this.triOpNonRegulirisedata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpNONRegu < b.NombreOpNONRegu) ? 1 : -1);
+        
+      }else{
+        this.triOpNonRegulirisedata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpNONRegu > b.NombreOpNONRegu) ? 1 : -1);
+      }
+      
+    },
+    triNombreOpRegulirise(){
+      if(this.triOpRegulirisedata==0){
+        this.triOpRegulirisedata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpREgularise < b.NombreOpREgularise) ? 1 : -1);
+        
+      }else{
+        this.triOpRegulirisedata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpREgularise > b.NombreOpREgularise) ? 1 : -1);
+      }
+      
+    },
+    
+    triTauxOpNonRegulirise(){
+      if(this.triTauxOpRegulirisedata==0){
+        this.triTauxOpRegulirisedata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxOpNonRegularise < b.TauxOpNonRegularise) ? 1 : -1);
+        
+      }else{
+        this.triTauxOpRegulirisedata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxOpNonRegularise > b.TauxOpNonRegularise) ? 1 : -1);
+      }
+      
+    },
+     triTauxExecution(){
+      if(this.triTauxExecutiondata==0){
+        this.triTauxExecutiondata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxExecution < b.TauxExecution) ? 1 : -1);
+        
+      }else{
+        this.triTauxExecutiondata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxExecution > b.TauxExecution) ? 1 : -1);
+      }
+      
+    },
     MontantBudgetActuel(id){
-      return ( this.MontantBudgetVote(id) + this.AfficheVariationBudget(id));
+      return (parseFloat(this.MontantBudgetVote(id)) + parseFloat(this.AfficheVariationBudget(id)));
     },
 
 
@@ -3446,8 +3735,8 @@ TauxOPProvisoireNonRegularis(id) {
         return 0.0;
       } else {
         return (
-          ((parseFloat(this.NombreOPNonRegu(id)) /
-            parseFloat(this.TotalOPProvisoire(id)))*100
+          ((parseInt(this.NombreOPNonRegu(id)) /
+            parseInt(this.TotalOPProvisoire(id)))*100
         ).toFixed(2));
       }
     },
@@ -3463,6 +3752,42 @@ TauxOPProvisoireNonRegularis(id) {
 genererEnPdf() {
       this.$htmlToPaper("printpdf");
     },
+    ActiveInputTauxOpNonRegulirise(){
+      if(this.inputTauxOpNonRegulirise == false){
+        this.inputTauxOpNonRegulirise = true
+      }else{
+        this.inputTauxOpNonRegulirise = false
+        this.Taux_Op_non_Regulirise = 0;
+      }
+
+ },
+    ActiveInputnombreRegulirise(){
+      if(this.inputnombreOpRegulirise == false){
+        this.inputnombreOpRegulirise = true
+      }else{
+        this.inputnombreOpRegulirise = false
+        this.Nombre_Op_Regulirise = 0;
+      }
+
+ },
+    ActiveInputNombreOpNonProvisoireRegulirise(){
+      if(this.inputNombreOpNonRegulirise == false){
+        this.inputNombreOpNonRegulirise = true
+      }else{
+        this.inputNombreOpNonRegulirise = false
+        this.Nombre_Op_Non_Regulirise = 0;
+      }
+
+ },
+    ActiveInputTotalOpProvisoire(){
+      if(this.inputTotalOpProvisoire == false){
+        this.inputTotalOpProvisoire = true
+      }else{
+        this.inputTotalOpProvisoire = false
+        this.Total_Op_Provisoire = 0;
+      }
+
+ },
     ActiveInputMontantActuel(){
       if(this.inputMontantActuel == false){
         this.inputMontantActuel = true
