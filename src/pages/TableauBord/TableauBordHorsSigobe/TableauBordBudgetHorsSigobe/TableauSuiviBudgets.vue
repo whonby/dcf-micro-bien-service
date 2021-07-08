@@ -179,7 +179,7 @@
            
               <tr style="">
                  
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -188,7 +188,7 @@
                   
                   </th>
 
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -197,28 +197,28 @@
                   
                   </th>
 
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
                   BUDGET INITIAL</th>
 
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
                   REAMENAGEMENT BUDGETAIRE</th>
 
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
                   BUDGET ACTUEL</th>
 
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -226,7 +226,7 @@
                   MONTANTS EXECUTES</th>
 
 
-                  <th style=" font-size: 14px;
+                  <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -234,13 +234,13 @@
                   NB OP PROVISOIRE NON REGULARISE(S)</th>
 
 
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
                   DISPONIBLE</th>
-                <th style=" font-size: 14px;
+                <th style=" font-size: 8px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
