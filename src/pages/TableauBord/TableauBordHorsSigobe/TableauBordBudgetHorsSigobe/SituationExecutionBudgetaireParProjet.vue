@@ -94,7 +94,7 @@
        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
-                 SITUATION D'EXECUTION BUDGETAIRE PAR SECTION</h2>
+                 SITUATION D'EXECUTION BUDGETAIRE PAR PROJET</h2>
           </tr>
 
            <div class="span4">
@@ -123,9 +123,13 @@
         EXERCICE: {{ afficheAnnee }}
       </p>
          
-      <div v-for="GroupeSection in partition(afficheUa, size)[page]" :key="GroupeSection.id">
-           <table class="table table-bordered">
-              <thead style="background-color: #ff9c1a !important">
+      <div v-for="GroupeSourceF in partition(afficheUa, size)[page]" :key="GroupeSourceF.id">
+
+          <!-- premier tableau -->
+
+        <table class="table table-bordered">
+
+             <thead style="background-color: #ff9c1a !important">
                 
                  <tr>
                    <th></th>
@@ -133,7 +137,7 @@
                    <th></th>
 
                    <th>
-                   SECTION  
+                   BAILLEUR  
                    <button @click="ActiveInputLigne">
                      <i class=" icon-search"></i> 
                       
@@ -152,8 +156,6 @@
                 
                   </th>
 
-                  <th></th>
-
                   <th
                     style="
                       font-size: 14px;
@@ -161,15 +163,25 @@
                       font-weight: bold;
                       text-align: center;
                       background-color: #fbb203 !important;
-                      width :20%
                     "
                   >
-                    UA {{afficheAnnee}}
+                    ACTIVITE {{afficheAnnee}}
                     
                   </th>
                    <th>
-                    LIGNE {{afficheAnnee}}
+                    SOURCE DE FINANCEMENT {{afficheAnnee}}
                   </th>
+
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                 LIGNE {{afficheAnnee}}
                    
                   <th
                     style="
@@ -178,7 +190,6 @@
                       text-align: center;
                       color: #000;
                       background-color: #fbb203 !important;
-                      width :8%
                     "
                   >
                  BUDGET INITIAL {{afficheAnnee}}
@@ -190,7 +201,6 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
-                      width :20%
                     "
                   >
                   MODIFICATION BUDGETAIRE {{afficheAnnee}}
@@ -202,33 +212,9 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
-                      width :20%
                     "
                   >
-                    NBRE DE REAMENAGEMENT {{afficheAnnee}}
-                  </th>
-
-                     <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NBRE DE MARCHES EN EXECUTION  {{afficheAnnee}}
-                  </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    BUDGET ACTUEL  {{afficheAnnee}}
+                    BUDGET ACTUEL {{afficheAnnee}}
                   </th>
                   <th
                     style="
@@ -241,6 +227,117 @@
                   >
                     MONTANTS EXECUTES {{afficheAnnee}}
                   </th>
+                <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    DISPONIBLE {{afficheAnnee}}
+                  </th>
+                  <th
+                    
+                  >
+                    TAUX D’EXECUTION {{afficheAnnee}}
+                  </th>
+                  
+                </tr>
+              </thead>
+
+              <tbody>
+                   <td>
+                    <button @click="ShowMyactivite(GroupeSourceF[0].source_financement_id)">
+                     <i class="icon-eye-open"></i> </button>
+                  </td>
+                  
+                  <td> <button ><i class=" icon-print"></i> </button></td>
+                  <td colspan="4"> {{ libelleBailleur(GroupeSourceF[0].source_financement_id) }} </td>
+                  
+                  <td> {{ formatageSommeSansFCFA(parseFloat(
+                      MontantBudgetinitialBailleur(GroupeSourceF[0].source_financement_id))) }} </td>
+
+                  <td> {{ formatageSommeSansFCFA(parseFloat(
+                      MontantBudgetReamenagerSourceF(GroupeSourceF[0].source_financement_id))) }} </td>
+
+                  <td> {{ formatageSommeSansFCFA(parseFloat(
+                      MontantBudgetActuelSourceF(GroupeSourceF[0].source_financement_id))) }} </td>
+
+                  <td> {{ formatageSommeSansFCFA(parseFloat(
+                      MontantExecuteSourceF(GroupeSourceF[0].source_financement_id))) }} </td>
+
+                 <td> {{ formatageSommeSansFCFA(parseFloat(
+                      MontantDisponibleSourceF(GroupeSourceF[0].source_financement_id))) }} </td>
+                  <td></td>
+              </tbody>
+        </table>
+
+
+
+
+
+          <!-- deuxieme tableau -->
+            <div v-if="recupereIDSource==GroupeSourceF[0].source_financement_id">
+           <table class="table table-bordered" >
+               <thead style="background-color: #ff9c1a !important">
+                
+                 <tr>
+
+                   <th style="width:50px"></th>
+                   <th style="width:20px"></th>
+                   <th></th>
+                   <th></th>
+                  
+
+                   <th>
+                   ACTIVITE  
+                   <button @click="ActiveInputLigne">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                     <model-list-select v-show="inputLigne == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="plans_activites"
+                  v-model="inputLigne1"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="CODE ACTIVITE"
+                >
+                </model-list-select>
+                
+                  </th>
+
+                  
+                   <th>
+                    SOURCE DE FINANCEMENT {{afficheAnnee}}
+                  </th>
+
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                 LIGNE {{afficheAnnee}}
+                   
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      text-align: center;
+                      color: #000;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                 BUDGET INITIAL {{afficheAnnee}}
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -250,7 +347,29 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE D’OP PROVISOIRE NON REGULARISES {{afficheAnnee}}
+                  MODIFICATION BUDGETAIRE {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    BUDGET ACTUEL {{afficheAnnee}}
+                  </th>
+                  <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                    MONTANTS EXECUTES {{afficheAnnee}}
                   </th>
                 <th
                     style="
@@ -263,39 +382,6 @@
                   >
                     DISPONIBLE {{afficheAnnee}}
                   </th>
-                    <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  NATURE DEPENSE {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  PROCEDURE DE MARCHE {{afficheAnnee}}
-                  </th>
-                   <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  STATUT DE LA LIGNE {{afficheAnnee}}
-                  </th>
                   <th
                     
                   >
@@ -304,7 +390,7 @@
                   
                 </tr>
               </thead>
-       <tbody>
+                    <tbody>
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSection[0].section_id)">
@@ -348,15 +434,7 @@
                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
                     {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleSection(GroupeSection[0].section_id))) }}
                   </td>
-<td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    
-                  </td>
-                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    
-                  </td>
-                  <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    
-                  </td>
+
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 <  EviteNaNSection(GroupeSection[0].section_id) <= 25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
@@ -382,149 +460,14 @@
                   
                   
                 </tr>
-              </tbody>  
-
-               <tbody v-show="recupereIDactivite==GroupeSection[0].section_id"
-               v-for="GroupeUa in AfficheUaGroupe(GroupeSection[0].section_id)" :key="GroupeUa">
-
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-
-                  <td>
-                    <button @click="ShowMyLigne(GroupeUa)">
-                     <i class="icon-eye-open"></i> </button>
-                  </td>
-                  
-                  <td colspan="2" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" >
-                    {{ libelleUa(GroupeUa) }}</td>
- 
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantBudgetvoteUa(GroupeUa))) }}</td>
-                  
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantBudgetReamenagerUa(GroupeUa))) }}</td>
-                 
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ NbreReamenagerUa(GroupeUa) }} </td>
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ NbreMarcheUa(GroupeUa) }}</td>
-
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantBudgetActuelUa(GroupeUa))) }} </td>
-                 
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantExecuteUa(GroupeUa))) }} </td>
-                  
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ NbreExecuteUa(GroupeUa) }} </td>
-
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleUa(GroupeUa))) }} </td>
-                <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    
-                  </td>
-                  <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    
-                  </td>
-                  <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    
-                   
-                  </td>
-                 <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 <  EviteNaNUa(GroupeUa) <= 25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNUa(GroupeUa) }}
-                        </span>
-                      </button>
-                      <button class="btn btn-warning taille" v-else-if="25 <  EviteNaNUa(GroupeUa) <= 50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNUa(GroupeUa) }}
-                        </span>
-                      </button>
-                       <button class="btn btn-success taille" v-else-if="50 <  EviteNaNUa(GroupeUa) <= 75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNUa(GroupeUa) }}
-                        </span>
-                      </button>
-                      <button class="btn btn-success taille" v-else-if="75 <  EviteNaNUa(GroupeUa) <= 100">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNUa(GroupeUa) }}
-                        </span>
-                      </button>
-                  </td>
-                   
-        
-                </tr>
-                  
-                <tr v-show="recupereIDSection==GroupeUa"
-                v-for="GroupeLigne in AfficheLigneGroupe(GroupeUa)" :key="GroupeLigne">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-
-                  <td></td>
-                  
-                  <td></td>
- 
-                  <td>{{ libelleLigneEconomique(GroupeLigne) }}</td>
-      
-                  <td>{{ formatageSommeSansFCFA(parseFloat(MontantBudgetvoteLigne(GroupeLigne,GroupeUa))) }}</td>
-
-                  <td> {{ formatageSommeSansFCFA(parseFloat(MontantBudgetReamenagerLigne(GroupeLigne,GroupeUa))) }} </td>
-                  
-                  <td> {{ NbreReamenagerLigne(GroupeLigne,GroupeUa)}} </td>
-
-                  <td> {{ NbreMarcheLigne(GroupeLigne,GroupeUa) }}</td>
-
-                  <td> {{ formatageSommeSansFCFA(parseFloat(MontantBudgetActuelLigne(GroupeLigne,GroupeUa))) }}</td>
-
-                  <td> {{ formatageSommeSansFCFA(parseFloat(MontantExecuteLigne(GroupeLigne,GroupeUa))) }} </td>
-                  
-                  <td> {{ NbreOpNonRegularisé(GroupeLigne,GroupeUa) }} </td> 
-                 
-                  <td> {{ formatageSommeSansFCFA(parseFloat(MontantDisponible(GroupeLigne,GroupeUa))) }} </td>
-<td style="text-align: left;color:#000;">
-                    {{
-                     lielleGrandeNayure(GrandeNature(GroupeLigne))
-                    }}
-                  </td>
-                  <td style="text-align: left;color:#000;">
-                    {{
-                      afficheLeNomDesProcedure(GroupeLigne,GroupeUa)
-                    }}
-                  </td>
-                  <td style="text-align: left;color:#000;">
-                      <span v-if="GroupeLigne == CodeExempte(GroupeLigne)">Exemptée procedure</span>
-                         <span v-else>Ligne à marché</span>
-                   
-                  </td>
-                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="0 < EviteNaNLigne(GroupeLigne,GroupeUa) <= 25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNLigne(GroupeLigne,GroupeUa)}}
-                        </span>
-                      </button>
-                      <button class="btn btn-warning taille" v-else-if="25 < EviteNaNLigne(GroupeLigne,GroupeUa) <= 50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNLigne(GroupeLigne,GroupeUa)}}
-                        </span>
-                      </button>
-                       <button class="btn btn-success taille" v-else-if="50 < EviteNaNLigne(GroupeLigne,GroupeUa) <= 75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNLigne(GroupeLigne,GroupeUa)}}
-                        </span>
-                      </button>
-                      <button class="btn btn-success taille" v-else-if="75 < EviteNaNLigne(GroupeLigne,GroupeUa) <= 100">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ EviteNaNLigne(GroupeLigne,GroupeUa)}}
-                        </span>
-                      </button>
-                  </td>
-                </tr>
               </tbody>
-            </table>
+      
+
+
+
+            </table> 
+            </div>
+          
       </div>
 
       <div class="pagination alternate">
@@ -599,15 +542,16 @@ export default {
       search: "",
       verifShome:0,
       recupereIDactivite:"",
+      recupereIDSource:"",
       recupereIDSection:"",
       source_financement_id1:0
     };
   },
   mounted(){
-   // console.log("hello word")
+    console.log("hello word")
     // console.log(this.budgetEclate)
-   // console.log(this.MontantBudgetActuel())
-   // console.log(this.MontantBudgetExecuté())
+    console.log(this.MontantBudgetActuel())
+    console.log(this.MontantBudgetExecuté())
   },
 
   computed: {
@@ -737,8 +681,7 @@ export default {
       "getPersonnaliseBudgetGeneralParPersonnel",
       "groupeByActivite",
       "groupeByBailleur",
-      "groupeBySection",
-      "getterligneExempter"
+      "groupeBySection"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "structuresDecision",
@@ -751,32 +694,7 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
-    CodeExempte() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
-
-      if (qtereel) {
-        return qtereel.economique_id;
-      }
-      return 0
-        }
-      };
-    },
-   lielleGrandeNayure() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.grandes_natures.find(
-            (qtreel) => qtreel.id == id
-          );
-
-          if (qtereel) {
-            return qtereel.libelle;
-          }
-          return 0;
-        }
-      };
-    },
+  
     ShowMe(){
        return (id) => {
         if (id != null && id != "") {
@@ -821,36 +739,36 @@ export default {
 
     // ******   les vrai in fos de ce fichier lega ************
           //**groupe ua by section ***
-        listeParUaGroupe() {
+        listeParActiviteGroupe() {
         return (id) => {
           if (id != null && id != "") {
             return this.budgetEclate.filter(
-              (qtreel) => qtreel.section_id == id 
+              (qtreel) => qtreel.source_financement_id == id 
             );
           }
         };
-      },
+      }, 
+      
 AfficheUaGroupe() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.listeParUaGroupe(id);
+          let objet = this.listeParActiviteGroupe(id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.uniteadministrative_id);
+            array_exercie.push(val.activite_id);
           });
           let unique = [...new Set(array_exercie)];
-         // console.log(unique);
+          console.log(unique);
           if (unique.length == 0) {
             return [];
           }
           return unique;
         }
         return [];
-        }
-        
+        }  
         
       };
     },
@@ -878,7 +796,7 @@ AfficheLigneGroupe() {
             array_exercie.push(val.ligneeconomique_id);
           });
           let unique = [...new Set(array_exercie)];
-         // console.log(unique);
+          console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -923,25 +841,25 @@ AfficheLigneGroupe() {
   },
 
      afficheUa() {
-       return this.ListeGroupeSection;
+       return this.ListeGroupeSourceFinancement;
     },
 
-        ListeGroupeSection(){
+        ListeGroupeSourceFinancement(){
         if(this.exercices_budgetaires_id!=0){
-                return this.groupeBySection
+                return this.groupeByBailleur
         .filter(
           (qtreel) =>
             (qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].section_id!=null
+            && qtreel[0].source_financement_id!=null
              )
 
         );
         }else{
-                return this.groupeBySection
+                return this.groupeByBailleur
         .filter(
           (qtreel) =>
             (qtreel[0].annebudgetaire == this.afficheAnnee
-            && qtreel[0].section_id!=null
+            && qtreel[0].source_financement_id!=null
              )
 
         );
@@ -1128,6 +1046,90 @@ AfficheLigneGroupe() {
 //*** fin des fonction des ua */
 
 //*** debut des fonction des sections */
+
+ MontantBudgetinitialBailleur() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id==id &&
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.budget_actif_def==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+       MontantBudgetReamenagerSourceF() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id==id &&
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.budget_active==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
+     MontantExecuteSourceF() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.source_financement_id == id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf==9)
+                ||
+                (qtreel.source_financement_id == id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 1 &&
+                qtreel.decision_cf==8)
+                ||
+                (qtreel.source_financement_id == id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf==9)
+                ||
+                (qtreel.source_financement_id == id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.type_ordre_paiement == 4 &&
+                qtreel.decision_cf==8)
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+
 
       MontantBudgetvoteSection() {
       return (id) => {
@@ -1539,7 +1541,7 @@ AfficheLigneGroupe() {
 
     arrayExerciceDecompte() {
       return (idactivite) => {
-       // console.log(idactivite);
+        console.log(idactivite);
         if(idactivite !=null && idactivite!=""){
            let objet = this.listeordrepaiementLigne(idactivite);
         //  let vm=this
@@ -1549,7 +1551,7 @@ AfficheLigneGroupe() {
             array_exercie.push(val.grandenature_id);
           });
           let unique = [...new Set(array_exercie)];
-         // console.log(unique);
+          console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1562,20 +1564,7 @@ AfficheLigneGroupe() {
        
     },
 
-    GrandeNature() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.budgetEclate.find(
-            (qtreel) => qtreel.ligneeconomique_id == id && qtreel.budget_active==1
-          );
-
-          if (qtereel) {
-            return qtereel.grandenature_id;
-          }
-          return 0;
-        }
-      };
-  },
+    
 
 
     recupBudget() {
@@ -1592,7 +1581,7 @@ AfficheLigneGroupe() {
 
     sommeLigneGrandeNature() {
       return (grande_nature_id) => {
-       // console.log(grande_nature_id)
+        console.log(grande_nature_id)
         if (grande_nature_id == "") return 0;
         let _objet = this.recupBudget(grande_nature_id);
         if (_objet == undefined) return 0;
@@ -1616,7 +1605,7 @@ AfficheLigneGroupe() {
    
     arrayExerciceDecompte2() {
       return (idactivite) => {
-        //console.log(idactivite);
+        console.log(idactivite);
         if(idactivite!=null && idactivite !=0 && idactivite !=""){
           let objet = this.listeordrepaiementLigne2(idactivite);
           //  let vm=this
@@ -1626,7 +1615,7 @@ AfficheLigneGroupe() {
             array_exercie.push(val.ligneeconomique_id);
           });
           let unique = [...new Set(array_exercie)];
-          //console.log(unique);
+          console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1654,37 +1643,7 @@ AfficheLigneGroupe() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
-afficheLeNomDesProcedure(id,id1){
 
-    if(this.MontantDisponible(id,id1) < 10000000){
-        return "PSC-SC"
-    }
-    else if( this.MontantDisponible(id,id1) < 30000000 )
-    {
-return "PSC-AC"
-    }
-    else if(this.MontantDisponible(id,id1)<60000000)
-    {
-return "PSL"
-    }
-    else if(this.MontantDisponible(id,id1) < 100000000)
-    {
-return "PSO"
-    }
-
-    // else if(0 < this.MontantDisponible(id,id1))
-    // {
-    //  return "ED"
-    // }
-     else if(100000000 < this.MontantDisponible(id,id1))
-    {
-return "AON ou AOI ou AOR"
-    }
-
-  return null
-
-
-},
     ActiveInputLigne(){
   if(this.inputLigne == false){
     this.inputLigne = true
@@ -1703,6 +1662,19 @@ return "AON ou AOI ou AOR"
       }
       else{
          this.recupereIDactivite="";
+      }
+       
+    },
+
+    ShowMyactivite(id){
+      if(this.recupereIDSource==""){
+         this.recupereIDSource=id;
+      }else if(this.recupereIDSource!="" && this.recupereIDSource !=id){
+        this.recupereIDSource="";
+        this.recupereIDSource=id;
+      }
+      else{
+         this.recupereIDSource="";
       }
        
     },
@@ -1788,6 +1760,35 @@ return "AON ou AOI ou AOR"
     },
 
 //***************************fin gestion  des ua**********************
+
+
+
+// ****************gestion des bailleur************************************
+    MontantBudgetActuelSourceF(id) {
+          return (parseFloat(this.MontantBudgetinitialBailleur(id)) + parseFloat(this.MontantBudgetReamenagerSourceF(id)))
+    },
+
+     MontantDisponibleSourceF(id){
+          return (parseFloat(this.MontantBudgetActuelSourceF(id)) - parseFloat(this.MontantExecuteSourceF(id)))
+            
+  },
+
+    EviteNaNSourceF(id) {
+      if (
+        this.MontantExecuteSourceF(id) == 0 &&
+        this.MontantBudgetActuelSourceF(id) == 0
+      ) {
+        return 0.00;
+      } else {
+        return (
+          (parseFloat(this.MontantExecuteSourceF(id)) /
+            parseFloat(this.MontantBudgetActuelSourceF(id))) *
+          100
+        ).toFixed(2);
+      }
+    },
+
+//***************************fin gestion  des bailleur**********************
 
 
 // ****************gestion des section************************************

@@ -6,7 +6,7 @@
 <div id="exampleModalAvenant" class="modal hide tailAvenant">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Avenant</h3>
+        <h3>Ajouter Avenant1</h3>
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
@@ -712,6 +712,54 @@ afficherUniteAdministrative() {
         }
       };
     },
+     id_ua() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.unite_administrative_id;
+          }
+          return 0
+        }
+      };
+    },
+    idSectionMarche() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.section_id;
+          }
+          return 0
+        }
+      };
+    },
+    idSourceFinancement() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.source_financement_id;
+          }
+          return 0
+        }
+      };
+    },
+    idTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.type_financement_id;
+          }
+          return 0
+        }
+      };
+    },
 afficherLibelleService() {
       return id => {
         if (id != null && id != "") {
@@ -765,7 +813,10 @@ else
       marche_id :this.macheid,
    type_acte_financier:4,
    montant_avenant:this.affichierMontantAvenantTTC,
-   
+   section_id:this.idSectionMarche(this.macheid),
+      source_financement_id:this.idSourceFinancement(this.macheid),
+      type_financement_id:this.idTypeFinancement(this.macheid),
+    ua_id:this.id_ua(this.macheid)
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
@@ -793,7 +844,11 @@ else
       ...this.editAvenant,
       marche_id :this.macheid,
    type_acte_financier:4,
-   montant_avenant:this.affichierMontantAvenantTTCModifier
+   montant_avenant:this.affichierMontantAvenantTTCModifier,
+   section_id:this.idSectionMarche(this.macheid),
+      source_financement_id:this.idSourceFinancement(this.macheid),
+      type_financement_id:this.idTypeFinancement(this.macheid),
+      ua_id:this.id_ua(this.macheid)
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');
