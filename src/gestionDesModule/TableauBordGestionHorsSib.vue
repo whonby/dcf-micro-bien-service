@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                   <th style="color:#000">Taux :</th>
-                  <td style="color:#000; font-weight:bold"> {{tauxOpProv}} %</td>
+                  <td style="color:#000; font-weight:bold"> {{tauxOpProvisoire}} %</td>
                 </tr>
                 <tr>
                   <th style="color:#000">Montant :</th>
@@ -94,7 +94,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Taux :</th>
-                  <td style="color:#000; font-weight:bold">{{tauxOpProv}} %</td>
+                  <td style="color:#000; font-weight:bold">{{tauxOpProvisoire}} %</td>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
@@ -354,9 +354,6 @@ export default {
   },
   data(){
     return{
-      tauxOpProv: 100,
-      d:'',
-      m:'',
       exercice_id:0,
       uniteAdministratives_id:0,
       text1:[],
@@ -381,8 +378,7 @@ export default {
               }
             }]
           },
-        nbre:"",
-        text2:[]
+        
     }
   },
 created() {
@@ -393,7 +389,6 @@ created() {
    console.log("coucou")
    
    console.log(this.text1)
-  console.log(this.opHorsDelai)
   // console.log(this.Silva)
 
    console.log(this.GroupeOrdrePaiementByActivite)
@@ -568,6 +563,9 @@ TauxOpNonRegularise(){
 TauxOpRegularise(){
   return ((this.OpRegulariseDef.length / this.NbreOpNonRegulariseLength) * 100).toFixed(2)
 
+},
+tauxOpProvisoire(){
+  return (this.lenghtOpProvisoire / this.lenghtOpProvisoire * 100)
 },
 OpNonRegularisePaDef(){
   return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement != 4 && tem.diff_reg_op == 0)
