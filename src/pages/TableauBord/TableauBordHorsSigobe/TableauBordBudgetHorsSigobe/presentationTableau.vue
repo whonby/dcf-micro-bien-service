@@ -32,7 +32,7 @@
                         >TB1 : SUIVI DU BUDGET </a
                       > -->
                       <a data-toggle="tab" href="#TABLEAUBORD1"
-                        >TB1 </a
+                        >TABLEAU BORD 1 </a
                       >
                     </li>
 
@@ -41,7 +41,7 @@
                         >TB2 : EXECUTION DU BUDGET</a
                       > -->
                        <a data-toggle="tab" href="#TABLEAUBORD2"
-                        >TB2 </a
+                        >TABLEAU BORD 2 </a
                       >
                     </li>
                     
@@ -56,27 +56,27 @@
                         >TB3 : D'EXECUTION PAR ACTIVITE ET BAILLEUR</a
                       > -->
                        <a data-toggle="tab" href="#TABLEAUBORD4"
-                        >TB3</a
+                        >TABLEAU BORD 3</a
                       >
                     </li>
 
                      
 
                      
-<li class="" style="font-size:14px">
+<!-- <li class="" style="font-size:14px"> -->
                       <!-- <a data-toggle="tab" href="#TABLEAUBORD3"
                         >TB4 : SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</a
                       > -->
-                      <a data-toggle="tab" href="#TABLEAUBORD3"
-                        >TB4</a
+                      <!-- <a data-toggle="tab" href="#TABLEAUBORD3"
+                        >TABLEAU BORD 4</a
                       >
-                    </li>
+                    </li> -->
                      <li class="" style="font-size:14px">
                       <!-- <a data-toggle="tab" href="#TABLEAUBORD5"
                         >TB5 : SITUATION D'EXECUTION BUDGETAIRE PAR SECTION</a
                       > -->
                        <a data-toggle="tab" href="#TABLEAUBORD5"
-                        >TB5</a
+                        >TABLEAU BORD 4</a
                       >
                     </li>
                     <li class="" style="font-size:14px">
@@ -84,7 +84,7 @@
                         >TB6 : ETAT EXECUTION PAR BAILLEUR ET SECTION</a
                       > -->
                       <a data-toggle="tab" href="#TABLEAUBORD6"
-                        >TB6</a
+                        >TABLEAU BORD 5</a
                       >
                     </li>
 

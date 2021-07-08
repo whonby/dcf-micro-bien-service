@@ -272,6 +272,39 @@
                   >
                   MONTANT EXECUTE {{afficheAnnee}}
                   </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  NATURE DEPENSE {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  PROCEDURE DE MARCHE {{afficheAnnee}}
+                  </th>
+                   <th
+                    style="
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  STATUT DE LA LIGNE {{afficheAnnee}}
+                  </th>
                   <th
                     style="
                       font-size: 14px;
@@ -410,6 +443,21 @@
                         parseFloat(
                           MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
                      }}
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  style="text-align: right" >
+                   <b> 
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  style="text-align: right" >
+                   <b> 
+                    </b>
+                  </td>
+                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  style="text-align: right" >
+                   <b>
                     </b>
                   </td>
                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
@@ -561,7 +609,21 @@
                           MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
                   </td>
-
+<td style="text-align: left;color:#000;">
+                    {{
+                     lielleGrandeNayure(GrandeNature(listeLigneeco))
+                    }}
+                  </td>
+                  <td style="text-align: left;color:#000;">
+                    {{
+                      afficheLeNomDesProcedure(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)
+                    }}
+                  </td>
+                  <td style="text-align: left;color:#000;">
+                      <span v-if="listeLigneeco == CodeExempte(listeLigneeco)">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                   
+                  </td>
                   <td style="text-align: right;color:#000;" >
                     {{
                       formatageSommeSansFCFA(
@@ -573,7 +635,7 @@
                    {{ToTalOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
                   </td>
                   <td style="text-align: right;color:#000;" >
-                    {{ d(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
+                    {{ afficheOpRegulirise(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
                   </td>
                    <td style="text-align: right;color:#000;" >
               {{  TauxOPProvisoireNonRegularisLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
@@ -583,10 +645,7 @@
 
                     {{
                       formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)
-                           -
-                            MontantBudgetExecutéActivite(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(budgetDisponibleParLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
                     }}
                   </td>
                   <!-- <td style="text-align: right;color:#000;">
@@ -636,7 +695,9 @@
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
-
+<td style="text-align: right;color:#000"></td>
+<td style="text-align: right;color:#000"></td>
+<td style="text-align: right;color:#000"></td>
                   <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
 <td style="text-align: right;color:#000">{{ 0 }}</td>
 <td style="text-align: right;color:#000">{{ 0 }}</td>
@@ -1058,6 +1119,7 @@ inputLigne:false,
     ...mapGetters("gestionMarche", ["entreprises"]),
 
     ...mapGetters("uniteadministrative", [
+       "getterligneExempter",
       "budgetEclate",
       "groupeLigneEconomiqueBudget",
       "getSousBudget",
@@ -1083,7 +1145,19 @@ inputLigne:false,
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
-     d() {
+    CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
+ afficheOpRegulirise() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
@@ -1094,7 +1168,7 @@ inputLigne:false,
             
             
         } else {
-          return 78;
+          return 0;
         }
       };
     },
@@ -1246,6 +1320,20 @@ inputLigne:false,
 
           if (qtereel) {
             return qtereel.grand_nature_id;
+          }
+          return 0;
+        }
+      };
+    },
+    lielleGrandeNayure() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.grandes_natures.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
           }
           return 0;
         }
@@ -1919,7 +2007,20 @@ inputLigne:false,
     },
 
     
+GrandeNature() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.budgetEclate.find(
+            (qtreel) => qtreel.ligneeconomique_id == id && qtreel.budget_active==1
+          );
 
+          if (qtereel) {
+            return qtereel.grandenature_id;
+          }
+          return 0;
+        }
+      };
+  },
     libelleUa() {
       return (id) => {
         if (id != null && id != "") {
@@ -2046,6 +2147,41 @@ TauxOPProvisoireNonRegularisActivite(id) {
       
        
     },
+ 
+budgetDisponibleParLigne(id,id1){
+return (parseFloat(this.MontantBudgetActuelActivite(id,id1)) - parseFloat(this.MontantBudgetExecutéActivite(id,id1)))
+},
+    afficheLeNomDesProcedure(id,id1){
+
+    if(this.budgetDisponibleParLigne(id,id1) < 10000000){
+        return "PSC-SC"
+    }
+    else if( this.budgetDisponibleParLigne(id,id1) < 30000000 )
+    {
+return "PSC-AC"
+    }
+    else if(this.budgetDisponibleParLigne(id,id1)<60000000)
+    {
+return "PSL"
+    }
+    else if(this.budgetDisponibleParLigne(id,id1) < 100000000)
+    {
+return "PSO"
+    }
+
+    // else if(0 < this.budgetDisponibleParLigne(id,id1))
+    // {
+    //  return "ED"
+    // }
+     else if(100000000 < this.budgetDisponibleParLigne(id,id1))
+    {
+return "AON ou AOI ou AOR"
+    }
+
+  return null
+
+
+},
     genererEnPdf() {
       this.$htmlToPaper("printpdf");
     },
