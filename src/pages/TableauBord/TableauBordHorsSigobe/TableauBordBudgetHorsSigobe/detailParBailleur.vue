@@ -1,176 +1,11 @@
 <template>
-  <div>
-    
-   
-    
-    <table>
-      <tbody>
-        <tr>
+    <div>
+ <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
 
+ <tr>
+             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
           
-                <td>
-                  <h3>contratualisation</h3>
-                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
-                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
-                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
-                    </div>
-                    
-                   </div>
-                </td>
-
-                  <td>
-                    <h3>Exécution</h3>
-                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
-                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
-                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
-                    </div>
-                    
-                   </div>
-                </td>
-
-                  <td>
-                    <h3>Souffrance</h3>
-                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
-                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
-                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
-                    </div>
-                    
-                   </div>
-                </td>
-
-                  <td>
-                    <h3>Resilier</h3>
-                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
-                       <div class="" id="chart" style="border: 2px dotted #ffffff;">
-                       <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
-                    </div>
-                    
-                   </div>
-                </td>
-     </tr>
-        </tbody>
-    </table>
-
-
-
-    <div class="span4">
-       
-          Afficher
-          <select name="pets" id="pet-select"  v-model="size" class="span3">
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="40">40</option>
-            <option value="80">80</option>
-            <option value="100">100</option>
-          </select>
-         
-        </div>
-
-    <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
-    </div>  -->
-
-    
-    <div class="widget-content nopadding" id="printpdf">
-        <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
-    </div> 
-       <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Synthèse par BAILLEUR</h2>
-          </tr>
-        </table>
-
-      <!-- <h2
-        style="
-          font-size: 25px;
-          font-weight: bold;
-          color: #000;
-          text-align: center;
-        "
-        v-if="formData.date_debut == '' && formData.date_fin == ''"
-      >
-        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE
-        {{ formData.date_debut }}
-        {{ formData.date_fin }}
-      </h2>
-
-      <h2
-        style="
-          font-size: 25px;
-          font-weight: bold;
-          color: #000;
-          text-align: center;
-        "
-        v-if="formData.date_debut != '' && formData.date_fin != ''"
-      >
-        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
-        {{ formaterDate(formData.date_debut) }} AU
-        {{ formaterDate(formData.date_fin) }}
-      </h2> -->
-      <p
-        style="
-          margin-left: 30px;
-          font-size: 14px;
-          font-weight: bold;
-          text-decoration: underline;
-        "
-      >
-        
-      </p>
-
-              <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
-                
-                <!-- <thead>
-                  <tr>
-                    <th style="width:10%"></th> 
-                    <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                    <td> </td>
-                  </tr>
-                  <tr>
-
-                    <th style="width:10%"></th>
-                      <td> </td>
-                   </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                      <td>  </td>
-                   </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                      <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                    <td> </td>
-                  </tr>
-                </thead>
-                 -->
-                 
-              
-
-              
-            <!-- <tr>
-                     <th style="width:10%">(1)AUTORISATION D'ENGAGEMENT AE  </th>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3" >  </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3"> </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3">  </td>
-        </tr> -->
-       
-           <tr>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-           <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-          <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="2">Planification (Avant contractualisation) </th> 
+          <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="3">Planification (Avant contractualisation) </th> 
          <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="2">Marchés en cours de contractualisation </th>
          <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="2">Marchés attribués </th>
           <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="4">Marchés en cours d'exécution </th> 
@@ -180,34 +15,16 @@
            
        </tr>
            <tr>
-             <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;"></th>
-
-             <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;"></th>
               
                        
-                        <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="">Bailleur </th> 
+                       
 
          
           <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Type de financement </th> 
-
-                       
-
+                      background-color: #fbb203 !important;" colspan="1">Source de financement </th> 
          <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
@@ -218,9 +35,7 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Montant (FCFA) 
-                      
-                      </th>
+                      background-color: #fbb203 !important;" colspan="1">Montant (FCFA) </th>
 
          <th style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -308,232 +123,127 @@
            
        </tr>
 
-      
 
-      
-       <tbody  v-for="type1 in  partition(groupeParSourceFinancement, size)[page]" :key="type1">
-           <tr>
+ <tbody>
+           <tr v-for="type1 in  partition(groupeParSourceFinancement, size)[page]" :key="type1">
 
-              <td>
-                    <button @click="ShowMyUa(type1[0].source_financement)">
-                     <i class="icon-eye-open"></i> </button>
-                  </td>
-                  
-                  <td> <button ><i class=" icon-print"></i> </button></td>
-         
-          <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  " colspan="2" style="" >{{afficherLibelleSourFinacement(type1[0].source_financement)}}
-                     
-                      
-                      </td>
-                      <td> {{ NombreMarcherPartSourceF(type1[0].source_financement) }}</td>
-
-                      <td>
-                          {{ formatageSommeSansFCFA(parseFloat(
-                            afficherNombreMarchePlanifierMontantDonsSourceF(type1[0].source_financement))) }}
-                      </td>
-                      <td>
-                        {{ NombreMarcherEncourDeContratualisationSourceF(type1[0].source_financement) }}
-                      </td>
-
-                      <td>{{ formatageSommeSansFCFA(parseFloat(
-                        afficherNombreMarcheEncourDeContratualisationSourceF(type1[0].source_financement)))}}</td>
-
-                        <td>{{NombreMarcherAttribuerSourceF(type1[0].source_financement)}} </td>
-
-                        <td>{{formatageSommeSansFCFA(parseFloat(
-                          afficherMontantMarcherAttribuerSourceF (type1[0].source_financement)))}} </td>
-
-                        <td>{{NombreMarcherEncourExecutionSourceF(type1[0].source_financement)}} </td>
-
-                        <td>{{afficherMontantTotalSourceF(type1[0].source_financement)}}</td>
-                       
-                        
-                        <td>{{formatageSommeSansFCFA(parseFloat(
-                           marcheEncourExecutionMontantDonsSourceF(type1[0].source_financement)))}} </td>
-
-                           <td>{{ formatageSommeSansFCFA(parseFloat(
-                             resteAexcuterSourceF(type1[0].source_financement)))}}</td>
-
-                             <td> {{NombreMarcherEnSouffranceSourceF(type1[0].source_financement)}} </td>
-
-                             <td>{{ formatageSommeSansFCFA(parseFloat(
-                               resteAexcuterMarcheSouffranceSourceF(type1[0].source_financement)))}} </td>
-
-                              <td> {{afficherTauxMarcheSouffreSourceF(type1[0].source_financement)}} %</td>
-                             
-                              <td>{{NombreMarcherResilierSourceF(type1[0].source_financement)}} </td>
-                             
-                              <td>{{formatageSommeSansFCFA(parseFloat(
-                                resteAexcuterMarcheResilierSourceF(type1[0].source_financement)))}} </td>
-                               
-                                <td>{{afficherTauxMarcheResilierSourceF(type1[0].source_financement)}} %</td>
-        
-                   <!-- <td></td> -->
-                   
-                 
-         </tr> 
-
-         <tr v-show="recupereIDactivite==type1[0].type_financement"
-         v-for="TypeFinance in AfficheUaGroupe(type1[0].type_financement)" :key="TypeFinance">
-          
-          <td></td>
-          <td></td>
-          <td></td>
-          
-          
-
-
-           <td   style="width:10%;font-size: 14px;
+               
+        <td   style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{afficherLibelleTypeFinancement(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{afficherLibelleTypeFinancement(idTypeFinancement(type1[0].source_financement))}}</td>
          <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{NombreMarcherPart(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{NombreMarcherPart(type1[0].type_financement)}}</td>
          <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarchePlanifierMontantDons(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarchePlanifierMontantDons(type1[0].type_financement)))}}</td>
 
          <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{NombreMarcherEncourDeContratualisation(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{NombreMarcherEncourDeContratualisation(type1[0].type_financement)}}</td>
          <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarcheEncourDeContratualisation(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarcheEncourDeContratualisation(type1[0].type_financement)))}}</td>
          
           <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{NombreMarcherAttribuer(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{NombreMarcherAttribuer(type1[0].type_financement)}}</td>
           <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherMontantMarcherAttribuer(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherMontantMarcherAttribuer(type1[0].type_financement)))}}</td>
           <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{NombreMarcherEncourExecution(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{NombreMarcherEncourExecution(type1[0].type_financement)}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherMontantTotal(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(afficherMontantTotal(type1[0].type_financement)))}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(marcheEncourExecutionMontantDons(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(marcheEncourExecutionMontantDons(type1[0].type_financement)))}}</td>
             <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(resteAexcuter(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(resteAexcuter(type1[0].type_financement)))}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{NombreMarcherEnSouffrance(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{NombreMarcherEnSouffrance(type1[0].type_financement)}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheSouffrance(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheSouffrance(type1[0].type_financement)))}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{afficherTauxMarcheSouffre(TypeFinance)}} %</td>
+                      background-color: #fbb203 !important;">{{afficherTauxMarcheSouffre(type1[0].type_financement)}} %</td>
 
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{NombreMarcherResilier(TypeFinance)}}</td>
+                      background-color: #fbb203 !important;">{{NombreMarcherResilier(type1[0].type_financement)}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheResilier(TypeFinance)))}}</td>
+                      background-color: #fbb203 !important;">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheResilier(type1[0].type_financement)))}}</td>
            <td  style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;">{{afficherTauxMarcheResilier(TypeFinance)}} %</td>
-          
+                      background-color: #fbb203 !important;">{{afficherTauxMarcheResilier(type1[0].type_financement)}} %</td>
 
-         </tr>
-
-        </tbody>
-      
-      
-      </table>
+           </tr>
+ </tbody>
 
 
-       <div class="pagination alternate">
-      <ul>
-        <li :class="{ disabled: page == 0 }">
-          <a @click.prevent="precedent()" href="#">Précedent</a>
-        </li>
-        <li
-          v-for="(titre, index) in partition(groupeParSourceFinancement, size).length"
-          :key="index"
-          :class="{ active: active_el == index }"
-        >
-          <a @click.prevent="getDataPaginate(index)" href="#">{{
-            index + 1
-          }}</a>
-        </li>
-        <li
-          :class="{ disabled: page == partition(groupeParSourceFinancement, size).length - 1 }"
-        >
-          <a @click.prevent="suivant()" href="#">Suivant</a>
-        </li>
-      </ul>
+
+
+
+
+
+
+
+
+ </table>
+
+
+
+
     </div>
-      <br>
-      <br>
-    </div>
-
-
-    
-
-            
-           
-
-   
-
-
-        
-    <!-- <fab
-      :actions="fabActions"
-      @searchMe="filter"
-      main-icon="apps"
-      bg-color="green"
-    ></fab> -->
-
-   
-  </div>
 </template>
 <script>
- import VueApexCharts from 'vue-apexcharts'
+ //import VueApexCharts from 'vue-apexcharts'
 import {mapGetters, mapActions} from "vuex"
 import { partition } from "@/Repositories/Repository";
 import {formatageSommeSansFCFA} from "../../../../Repositories/Repository"
 export default {
   components:{
-     apexchart: VueApexCharts,
+     //apexchart: VueApexCharts,
   },
   props:["macheid"],
     data() {
@@ -542,7 +252,8 @@ export default {
       size:3,
       active_el: 0,
 
-      recupereIDactivite:"",
+      detail_marche:"",
+
             //   series: [{
             // name: 'BAD',
 
@@ -588,35 +299,19 @@ export default {
           //   }
 
           //  }
-             series: [44, 55, 13, 43,55, 13, 43],
-             datacontactualisation:[],
-          chartOptions: {
-            chart: {
-              width: 380,
-              type: 'pie',
-            },
-             labels: ['A', 'B', 'C', 'D','E','F','G'],
-             colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
-            responsive: [{
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 200
-                },
-                legend: {
-                  position: 'bottom'
-                }
-              }
-            }]
-          },
+           
         }
         
     },
 
-    created(){
-     
-       // console.log(this.testLega);
-    },
+   created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.groupeParSourceFinancement.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
     computed:{
    ... mapGetters("bienService",["marches","getActeEffetFinancierPersonnaliser","avenants",
    "gettersgestionOrdrePaiement","groupeParSourceFinancement"]),
@@ -669,34 +364,13 @@ export default {
   idTypeFinancement() {
       return id => {
         if (id != null && id != "") {
-           return this.marches.filter(qtreel => qtreel.source_financement==id);
-        }
-      };
-    },
+           const qtereel = this.marches.find(qtreel => qtreel.source_financement==id);
 
-
-    AfficheUaGroupe() {
-      return (id) => {
-      
-        if(id !=0 && id !=""){
-          let objet = this.idTypeFinancement(id);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.type_financement);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
+      if (qtereel) {
+        return qtereel.type_financement;
+      }
+      return 0
         }
-        return [];
-        }
-        
-        
       };
     },
 
@@ -763,34 +437,12 @@ montantAvenantMarcheResilier(){
       };
     },
 
-    NombreMarcherEncourExecutionSourceF() {
-      return id => {
-        if (id != null && id != "") {
-          return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.source_financement_id==id && qtreel.marche_id!=null && qtreel.exercice==this.anneeBugetaire).length;
-        }
-      };
-    },
-
 
  
 
   
 
      marcheEncourExecutionMontantDons(){
-       return id=>{
-         if(id!="" && id!=null){
-        return this.gettersgestionOrdrePaiement.filter(item => this.afficherIdMarch(item.marche_id)==id && 
-  item.type_ordre_paiement==1 && item.decision_cf==8 || item.type_ordre_paiement==4 && item.decision_cf==9
-  || item.type_ordre_paiement==4 && item.decision_cf==8 || item.type_ordre_paiement==4 && item.decision_cf==9
-  
-  ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0);
-         }
-       }
-  
-   },
-
-   
-     marcheEncourExecutionMontantDonsSourceF(){
        return id=>{
          if(id!="" && id!=null){
         return this.gettersgestionOrdrePaiement.filter(item => this.afficherIdMarch(item.marche_id)==id && 
@@ -835,26 +487,10 @@ montantAvenantMarcheResilier(){
       };
     },
 
-     NombreMarcherPartSourceF() {
-      return id => {
-        if (id != null && id != "") {
-          return this.marches.filter(qtreel => qtreel.source_financement==id && qtreel.attribue==0 && qtreel.exo_id==this.anneeBugetaire).length;
-        }
-      };
-    },
-
      NombreMarcherEncourDeContratualisation() {
       return id => {
         if (id != null && id != "") {
           return this.marches.filter(qtreel => qtreel.type_financement==id && qtreel.attribue==1 && qtreel.exo_id==this.anneeBugetaire).length;
-        }
-      };
-    },
-
-     NombreMarcherEncourDeContratualisationSourceF() {
-      return id => {
-        if (id != null && id != "") {
-          return this.marches.filter(qtreel => qtreel.source_financement==id && qtreel.attribue==1 && qtreel.exo_id==this.anneeBugetaire).length;
         }
       };
     },
@@ -867,26 +503,10 @@ montantAvenantMarcheResilier(){
       };
     },
 
-
-   NombreMarcherAttribuerSourceF() {
-      return id => {
-        if (id != null && id != "") {
-          return this.marches.filter(qtreel => qtreel.source_financement==id && qtreel.attribue==2 && qtreel.exo_id==this.anneeBugetaire).length;
-        }
-      };
-    },
      NombreMarcherEnSouffrance() {
       return id => {
         if (id != null && id != "") {
           return this.marches.filter(qtreel => qtreel.type_financement==id && qtreel.attribue==7 && qtreel.exo_id==this.anneeBugetaire).length;
-        }
-      };
-    },
-
-    NombreMarcherEnSouffranceSourceF() {
-      return id => {
-        if (id != null && id != "") {
-          return this.marches.filter(qtreel => qtreel.source_financement==id && qtreel.attribue==7 && qtreel.exo_id==this.anneeBugetaire).length;
         }
       };
     },
@@ -903,29 +523,10 @@ montantAvenantMarcheResilier(){
       };
     },
 
-    
-      NombreMarcherResilierSourceF() {
-      return id => {
-        if (id != null && id != "") {
-          return this.marches.filter(qtreel => qtreel.source_financement==id && qtreel.attribue==3 && qtreel.exo_id==this.anneeBugetaire).length;
-        }
-      };
-    },
-
  afficherNombreMarcheEncourDeContratualisation(){
       return id=>{
         if(id!="" && id!=null){
          return this.marches.filter(item => item.type_financement==id && item.exo_id==this.anneeBugetaire &&
-         item.attribue==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0);
-        }
-      }
- 
-   },
-
-   afficherNombreMarcheEncourDeContratualisationSourceF(){
-      return id=>{
-        if(id!="" && id!=null){
-         return this.marches.filter(item => item.source_financement==id && item.exo_id==this.anneeBugetaire &&
          item.attribue==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0);
         }
       }
@@ -940,16 +541,6 @@ montantAvenantMarcheResilier(){
       return id=>{
         if(id!="" && id!=null){
          return this.marches.filter(item => item.type_financement==id && item.exo_id==this.anneeBugetaire &&
-         item.attribue==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0);
-        }
-      }
- 
-   },
-
-   afficherNombreMarchePlanifierMontantDonsSourceF(){
-      return id=>{
-        if(id!="" && id!=null){
-         return this.marches.filter(item => item.source_financement==id && item.exo_id==this.anneeBugetaire &&
          item.attribue==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0);
         }
       }
@@ -1024,13 +615,6 @@ montantAvenantMarcheResilier(){
       };
     },
 
-   afficherMontantMarcherAttribuerSourceF() {
-      return id => {
-        if (id != null && id != "") {
-           return this.getActeEffetFinancierPersonnaliser.filter(qtreel =>this.afficherIdMarch(qtreel.marche_id)==id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0);
-        }
-      };
-    },
     
  
     },
@@ -1063,17 +647,7 @@ montantAvenantMarcheResilier(){
       return (this.NombreMarcherEnSouffrance(id) * parseFloat(this.resteAexcuterMarcheSouffrance(id))) /100;
     },
 
-    
-
-     afficherTauxMarcheSouffreSourceF(id){
-      return (this.NombreMarcherEnSouffranceSourceF(id) * parseFloat(this.resteAexcuterMarcheSouffranceSourceF(id))) /100;
-    },
-
      afficherMontantTotal(id){
-    return parseFloat(this.afficherMontantMarcherAttribuer(id)) + parseFloat(this.montantAvenant(id))
-  },
-
-     afficherMontantTotalSourceF(id){
     return parseFloat(this.afficherMontantMarcherAttribuer(id)) + parseFloat(this.montantAvenant(id))
   },
 
@@ -1085,27 +659,15 @@ resteAexcuterMarcheSouffrance(id){
   return parseFloat(this.afficherMontantTotalMarcheSouffrance(id) - parseFloat(this.marcheEncourExecutionMontantDons(id)))
 },
 
-resteAexcuterMarcheSouffranceSourceF(id){
-  return parseFloat(this.afficherMontantTotalMarcheSouffrance(id) - parseFloat(this.marcheEncourExecutionMontantDons(id)))
-},
-
-
   resteAexcuter(id){
- return parseFloat(this.afficherMontantTotal(id)) - parseFloat(this.marcheEncourExecutionMontantDons(id))
-  },
-   resteAexcuterSourceF(id){
  return parseFloat(this.afficherMontantTotal(id)) - parseFloat(this.marcheEncourExecutionMontantDons(id))
   },
 
   afficherMotantTotalMarcherResilier(id){
-   return parseFloat(this.afficherMontantMarcherResilier(id) + parseFloat(this.montantAvenantMarcheResilier(id)))
+   return parseFloat(this.montantAvenantMarcheResilier(id) + parseFloat(this.montantAvenantMarcheResilier(id)))
   },
 
   resteAexcuterMarcheResilier(id){
-  return parseFloat(this.afficherMotantTotalMarcherResilier(id) - parseFloat(this.marcheEncourExecutionMontantDons(id)))
-  },
-
-   resteAexcuterMarcheResilierSourceF(id){
   return parseFloat(this.afficherMotantTotalMarcherResilier(id) - parseFloat(this.marcheEncourExecutionMontantDons(id)))
   },
 
@@ -1114,24 +676,7 @@ resteAexcuterMarcheSouffranceSourceF(id){
     return (this.NombreMarcherResilier(id) * parseFloat(this.resteAexcuterMarcheResilier(id)))/ 100
   },
 
-  afficherTauxMarcheResilierSourceF(id){
-    return (this.NombreMarcherResilierSourceF(id) * parseFloat(this.resteAexcuterMarcheResilierSourceF(id)))/ 100
-  },
-
     formatageSommeSansFCFA:formatageSommeSansFCFA , 
-
-     ShowMyUa(id){
-      if(this.recupereIDactivite==""){
-         this.recupereIDactivite=id;
-      }else if(this.recupereIDactivite!="" && this.recupereIDactivite !=id){
-        this.recupereIDactivite="";
-        this.recupereIDactivite=id;
-      }
-      else{
-         this.recupereIDactivite="";
-      }
-       
-    },
 
 
 // calcul des differents taux avec les camenber 
@@ -1166,25 +711,3 @@ resteAexcuterMarcheSouffranceSourceF(id){
     }
 }
 </script>
-
-<style scoped>
-.graybg {
-  background: rgb(6, 184, 6) !important;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.whitebg {
-  background: #98FB98 !important;
-  font-weight: bold;
-  color: black;
-  font-size: 15px;
-}
-.graybg1 {
-  background: rgb(28, 13, 158) !important;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-}
-</style>
