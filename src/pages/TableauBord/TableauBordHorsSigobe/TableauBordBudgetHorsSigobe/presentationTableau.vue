@@ -87,6 +87,12 @@
                         >TABLEAU BORD 5</a
                       >
                     </li>
+
+                     <li class="" style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD7"
+                        >TB7</a
+                      >
+                    </li>
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -141,8 +147,15 @@
                      <SituationExecutionBudgetaireParBailleur></SituationExecutionBudgetaireParBailleur>
                
                   </div>
+
                    <div id="TABLEAUBORD5" class="tab-pane ">
                      <SituationExecutionBudgetaireParSection></SituationExecutionBudgetaireParSection>
+               
+                  </div>
+
+
+                  <div id="TABLEAUBORD7" class="tab-pane ">
+                     <SituationExecutionBudgetaireParProjet></SituationExecutionBudgetaireParProjet>
                
                   </div>
 
@@ -184,10 +197,7 @@ import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBail
 
 import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
 import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
-// import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
-// import recapitulatifBudgetHorsSigobe from "../../ExecutionBudgetaire/BudgetEclateHorsSib/recapitulatifBudgetHorsSigobe/recapitulatifBudgetHorsSigobe"
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+import SituationExecutionBudgetaireParProjet from './SituationExecutionBudgetaireParProjet'
 export default {
      components: {
        EtatExecutionBailleurSection,
@@ -197,6 +207,7 @@ export default {
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
+    SituationExecutionBudgetaireParProjet,
  
     // SituationExecuBudgetRecapActivite,
     
