@@ -17,22 +17,32 @@
                    
 <li class="active"  style="font-size:14px">
                       <a data-toggle="tab" href="#SUIVIDESMARCHES"
-                        >TB1 : SUIVI DES MARCHES </a
+                        >TABLEAU BORD 1 </a
                       >
                     </li>
                       <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#SYNTHESE"
-                        >TB2 : SYNTHESE DES MARCHES </a
+                        >TABLEAU BORD 2 </a
                       >
                     </li>
  <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#AVENANT"
-                        >TB3 : SYNTHESE DES MARCHE AVEC AVENANT </a
+                        >TABLEAU BORD 3 </a
                       >
                     </li>
                    <li class=""  style="font-size:14px">
                       <a data-toggle="tab" href="#BAILLEUR"
-                        >TB3 : SYNTHESE DES MARCHE PAR BAILLEUR </a
+                        >TABLEAU BORD 4 </a
+                      >
+                    </li>
+                     <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#BAILLEURSECTION"
+                        >TABLEAU BORD 5 </a
+                      >
+                    </li>
+                     <li class=""  style="font-size:14px">
+                      <a data-toggle="tab" href="#TABLEAUBORD6"
+                        >TABLEAU BORD 6 </a
                       >
                     </li>
                   </ul>
@@ -50,7 +60,12 @@
 <div id="BAILLEUR" class="tab-pane ">
                      <TableauBordMarcheParBailleur></TableauBordMarcheParBailleur>
                   </div>
-
+<div id="BAILLEURSECTION" class="tab-pane ">
+                     <SyntheseMarcheBailleurSection></SyntheseMarcheBailleurSection>
+                  </div>
+                  <div id="TABLEAUBORD6" class="tab-pane ">
+                     <SyntheseDesMarchesBailleurProjet></SyntheseDesMarchesBailleurProjet>
+                  </div>
             
                 </div>
             
@@ -75,7 +90,9 @@ import { formatageSomme } from "@/Repositories/Repository";
  import TableauBordSuiviMarche from "./TableauBordSuiviMarche"
   import SyntheseMarche from "./SyntheseMarche"
   import MarcheParAvenant from "./MarcheParAvenant"
+    import SyntheseMarcheBailleurSection from "./SyntheseMarcheBailleurSection"
   import TableauBordMarcheParBailleur from "../TableauBordBudgetHorsSigobe/TableauBordMarcheParBailleur"
+  import SyntheseDesMarchesBailleurProjet from "./SyntheseDesMarchesBailleurProjet"
 //import TableausuiviBudgets from "./TableauSuiviBudgets"
 
 // import RechercheExecutionBudgetaire from "./RechercheExecutionBudgetaire"
@@ -84,6 +101,8 @@ import { formatageSomme } from "@/Repositories/Repository";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
      components: {
+       SyntheseDesMarchesBailleurProjet,
+       SyntheseMarcheBailleurSection,
        TableauBordMarcheParBailleur,
        MarcheParAvenant,
       TableauBordSuiviMarche,

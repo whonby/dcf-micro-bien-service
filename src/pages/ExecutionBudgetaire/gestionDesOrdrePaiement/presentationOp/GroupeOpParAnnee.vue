@@ -107,7 +107,7 @@
                   
                    
                    <td>
-                      <router-link :to="{ name: 'ListeOpParUa', params: { id: type }}"
+                      <router-link :to="{ name: 'NewOrdrePaiement', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-size:20px;color:#000;text-align:center;font-weight: bold;"> Voir Unites administratives</i></span>
                    </router-link> 

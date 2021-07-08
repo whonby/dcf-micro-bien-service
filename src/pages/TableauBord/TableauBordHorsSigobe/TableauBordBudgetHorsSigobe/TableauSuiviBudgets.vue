@@ -514,6 +514,10 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                  <!-- <button @click="filtreTableau">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button> -->
                   LIBELLE
                    
                    <button @click="ActiveInputLigne1">
@@ -1577,6 +1581,12 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+
+
+
+
+
+
 
 ListeDesOpRegulirise() {
       return (id) => {
@@ -2965,6 +2975,15 @@ arrayExerciceDecompteBienService() {
       "getAllHistoriqueBudgetGeneral",
       "modifierLigneExempter",
     ]),
+//     filtreTableau(){
+//       if(this.inputLigneCode == false){
+//       return this.afficheUa.sort((a, b) => a.id > b.id );
+//       }else{
+//         this.inputLigneCode = false
+//         return this.afficheUa.sort((a, b) => a.id > b.id );
+//       }
+
+//  },
 nombreDeJourEntre(){
   var date1 = new Date("12/12/2020");
          var date2 = new Date("12/12/2021");
@@ -3072,6 +3091,7 @@ TauxOPProvisoireNonRegularis(id) {
 genererEnPdf() {
       this.$htmlToPaper("printpdf");
     },
+    
      ActiveInputLigne(){
       if(this.inputLigneCode == false){
         this.inputLigneCode = true
