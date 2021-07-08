@@ -23,7 +23,7 @@
                     </router-link>
                 </td>
                 <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">
-                    <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÔLEUR FINANCIER  </P>
+                    <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÔLE FINANCIER  </P>
                     <P>(SID-CF)</P>
                 </td>
 
