@@ -938,10 +938,10 @@ inputLigne:false,
     };
   },
   mounted(){
-    console.log("hello word")
+    //console.log("hello word")
     // console.log(this.budgetEclate)
-    console.log(this.MontantBudgetActuel())
-    console.log(this.MontantBudgetExecuté())
+    //console.log(this.MontantBudgetActuel())
+   // console.log(this.MontantBudgetExecuté())
   },
 
   computed: {
@@ -1831,7 +1831,7 @@ inputLigne:false,
 
     arrayExerciceDecompte() {
       return (idactivite) => {
-        console.log(idactivite);
+      //  console.log(idactivite);
         if(idactivite !=null && idactivite!=""){
            let objet = this.listeordrepaiementLigne(idactivite);
         //  let vm=this
@@ -1841,7 +1841,7 @@ inputLigne:false,
             array_exercie.push(val.grandenature_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1871,7 +1871,7 @@ inputLigne:false,
 
     sommeLigneGrandeNature() {
       return (grande_nature_id) => {
-        console.log(grande_nature_id)
+        //console.log(grande_nature_id)
         if (grande_nature_id == "") return 0;
         let _objet = this.recupBudget(grande_nature_id);
         if (_objet == undefined) return 0;
@@ -1895,7 +1895,7 @@ inputLigne:false,
    
     arrayExerciceDecompte2() {
       return (idactivite) => {
-        console.log(idactivite);
+        //console.log(idactivite);
         if(idactivite!=null && idactivite !=0 && idactivite !=""){
           let objet = this.listeordrepaiementLigne2(idactivite);
           //  let vm=this
@@ -1905,7 +1905,7 @@ inputLigne:false,
             array_exercie.push(val.ligneeconomique_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -2076,7 +2076,7 @@ TauxOPProvisoireNonRegularisActivite(id) {
       //   keyboard: false,
       // });
        this.editMandat1 = this.groupeByActivite.find((item) => item[0].activite_id == id);
-       console.log(this.editMandat1)
+      // console.log(this.editMandat1)
       return alert(this.editMandat1.activite_id);
     
     },

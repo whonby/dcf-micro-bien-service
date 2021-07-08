@@ -413,10 +413,10 @@ export default {
     };
   },
   mounted(){
-    console.log("hello word")
+    //console.log("hello word")
     // console.log(this.budgetEclate)
-    console.log(this.MontantBudgetActuel())
-    console.log(this.MontantBudgetExecuté())
+    //console.log(this.MontantBudgetActuel())
+    //console.log(this.MontantBudgetExecuté())
   },
 
   computed: {
@@ -572,7 +572,7 @@ export default {
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -596,7 +596,7 @@ export default {
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -839,7 +839,7 @@ AfficheUaGroupe() {
             array_exercie.push(val.uniteadministrative_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -875,7 +875,7 @@ AfficheLigneGroupe() {
             array_exercie.push(val.ligneeconomique_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -911,7 +911,7 @@ TailleurBailleurParLigne() {
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -936,7 +936,7 @@ NombreBailleurParSection() {
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -962,7 +962,7 @@ NombreBailleurParUa() {
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1819,7 +1819,7 @@ MontantbudgetVoteParSection(){
 
     arrayExerciceDecompte() {
       return (idactivite) => {
-        console.log(idactivite);
+       // console.log(idactivite);
         if(idactivite !=null && idactivite!=""){
            let objet = this.listeordrepaiementLigne(idactivite);
         //  let vm=this
@@ -1829,7 +1829,7 @@ MontantbudgetVoteParSection(){
             array_exercie.push(val.grandenature_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+        //  console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1859,7 +1859,7 @@ MontantbudgetVoteParSection(){
 
     sommeLigneGrandeNature() {
       return (grande_nature_id) => {
-        console.log(grande_nature_id)
+       // console.log(grande_nature_id)
         if (grande_nature_id == "") return 0;
         let _objet = this.recupBudget(grande_nature_id);
         if (_objet == undefined) return 0;
@@ -1883,7 +1883,7 @@ MontantbudgetVoteParSection(){
    
     arrayExerciceDecompte2() {
       return (idactivite) => {
-        console.log(idactivite);
+       // console.log(idactivite);
         if(idactivite!=null && idactivite !=0 && idactivite !=""){
           let objet = this.listeordrepaiementLigne2(idactivite);
           //  let vm=this
@@ -1893,7 +1893,7 @@ MontantbudgetVoteParSection(){
             array_exercie.push(val.ligneeconomique_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }

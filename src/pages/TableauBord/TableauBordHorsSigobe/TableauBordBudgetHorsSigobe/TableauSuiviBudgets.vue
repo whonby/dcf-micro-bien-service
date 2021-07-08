@@ -459,7 +459,7 @@
           <span class="icon">
             <i class="icon-th"></i>
           </span>
-          <h5>Suivi du budget</h5>
+          <h5>Suivi du budget {{ tricodedata}}</h5>
         </div>
 
         <div class="span4">
@@ -542,6 +542,10 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
                   BUDGET INITIAL {{afficheAnnee}}</th>
 
                 <th style=" font-size: 14px;
@@ -618,7 +622,7 @@
         
               </tr> 
             </thead>
-            <tbody v-for="unite in partition(afficheUa, size)[page]" :key="unite.id">
+            <tbody v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
               <tr>
                 <td>
                    <button @click="ShowMyLigne(unite.id)">
@@ -635,12 +639,12 @@
                     
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'">
-                  {{ CodeUniteAdministrative(unite.id) || "Auncun résultat" }}
+                  {{ unite.code || "Auncun résultat" }}
                 </td>
                 
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'">
                   {{
-                    libelleUniteAdministrative(unite.id) || "Auncun résultat"
+                    unite.libelle || "Auncun résultat"
                   }} 
                 </td>
 
@@ -649,7 +653,7 @@
                 >
                   {{
                     formatageSommeSansFCFA(
-                      parseFloat(MontantBudgetVote(unite.id))
+                      parseFloat(unite.MontantVote)
                     )
                   }}
                 </td>
@@ -661,34 +665,31 @@
 
                   <button class="btn btn-success taille"  @click="percuFacture(unite.id)">
                         <span style="color:#fff;font-size: 15px;">
-                          {{ formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(unite.id))) }}
+                          {{ formatageSommeSansFCFA(parseFloat(unite.Variation)) }}
                         </span>
                       </button>
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
-                   {{ formatageSommeSansFCFA(parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id))) }}
+                   {{ formatageSommeSansFCFA(parseFloat(unite.Budgetactuel)) }}
                 </td>
 
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
                   {{
                     formatageSommeSansFCFA(
-                      parseFloat(MontantBudgetExecuté(unite.id))
-                    )
+                      parseFloat(unite.MontantExecute))
                   }}
                 </td>
  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
-                  {{
-                  TotalOPRegu(unite.id)
-                  }}
+                  {{ unite.NombreOpProvisoire }}
                 </td>
                  <td  style="text-align:right"
                 >
                  <button class="btn btn-info taille"  @click="ModalOpNonRegulirise(unite.id)">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ NombreOPNonRegu(unite.id)}}
+                          {{ unite.NombreOpNONRegu }}
                         </span>
                       </button>
                  
@@ -697,17 +698,14 @@
                 >
                  <button class="btn btn-primary taille" @click="ModalOpRegulirise(unite.id)">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ NombreOPRegulirise(unite.id)}}
+                          {{ unite.NombreOpREgularise}}
                         </span>
                       </button>
                  
                 </td>
                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
-                  {{
-                    TauxOPProvisoireNonRegularis(unite.id)
-                   
-                  }} %
+                  {{ unite.TauxOpNonRegularise }} %
                 </td>
                   <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
@@ -718,7 +716,7 @@
                 </td>
                   <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
-                  {{ formatageSommeSansFCFA((parseFloat(MontantBudgetVote(unite.id)) + parseFloat(AfficheVariationBudget(unite.id)))-parseFloat(MontantBudgetExecuté(unite.id))) }}
+                  {{ formatageSommeSansFCFA(parseFloat(unite.Disponible)) }}
                 </td>
                 <!-- <td
                  v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
@@ -727,24 +725,24 @@
                 </td> -->
 
                 <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(unite.id)) <= 0.25">
+                  <button class="btn btn-danger taille" v-if="parseFloat( unite.TauxExecution ) <= 0.25">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(unite.id)}}
+                          {{ unite.TauxExecution }}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(unite.id)) <= 0.5">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat( unite.TauxExecution ) <= 0.5">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(unite.id)}}
+                          {{ unite.TauxExecution }}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if=" parseFloat(EviteNaN(unite.id)) <= 0.75">
+                       <button class="btn btn-success taille" v-else-if=" parseFloat( unite.TauxExecution ) <= 0.75">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(unite.id)}}
+                          {{ unite.TauxExecution }}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(unite.id)) <= 1">
+                      <button class="btn btn-success taille" v-else-if="parseFloat( unite.TauxExecution ) <= 1">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(unite.id)}}
+                          {{ unite.TauxExecution }}
                         </span>
                       </button>
                   </td>
@@ -1526,16 +1524,13 @@ export default {
       inputLigneLibelle1:0,
       editOpNonRegulirise:{},
       editOpRegulirise:{},
-      timestamp: ""
+      timestamp: "",
+      tricodedata:0,
     };
   },
-  // created() {
-  //   console.log(this.affichageUniteAdminstrative);
-  //   this.budgetGeneralCharge = this.budgetGeneral.filter(
-  //     (item) => item.actived == 1
-  //   );
-  //   console.log(this.budgetGeneralCharge);
-  // },
+  //  created() {
+  //    console.log(this.TriaffichageUniteAdminstrative);
+  //  },
   computed: {
     ...mapGetters("uniteadministrative", [
       "acteCreations",
@@ -1610,7 +1605,7 @@ ListeDesOpNonRegulirise() {
 
 
 
-    TotalOPRegu() {
+    TotalOPProvisoire() {
       return (id) => {
         if (id != null && id != "") {
           return this.gettersgestionOrdrePaiement
@@ -1904,7 +1899,7 @@ montantVoteToralParLigne(){
           array_exercie.push(val.ligneeconomique_id);
         });
         let unique = [...new Set(array_exercie)];
-        console.log(unique);
+        //console.log(unique);
         if (unique.length == 0) {
           return [];
         }
@@ -1925,7 +1920,7 @@ montantVoteToralParLigne(){
             array_exercie.push(val.type_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1946,7 +1941,7 @@ montantVoteToralParLigne(){
             array_exercie.push(val.type_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1966,7 +1961,7 @@ montantVoteToralParLigne(){
             array_exercie.push(val.type_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1986,7 +1981,7 @@ montantVoteToralParLigne(){
             array_exercie.push(val.type_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -2007,7 +2002,7 @@ arrayExerciceDecompteBienService() {
             array_exercie.push(val.type_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -2560,7 +2555,7 @@ arrayExerciceDecompteBienService() {
           array_exercie.push(val.uniteadministrative_id);
         });
         let unique = [...new Set(array_exercie)];
-        console.log(unique);
+       // console.log(unique);
         if (unique.length == 0) {
           return [];
         }
@@ -2604,15 +2599,27 @@ arrayExerciceDecompteBienService() {
       }
     },
 
+  
+
     
     //test de tri
-    affichageUniteAdminstrative() {
+    TriaffichageUniteAdminstrative() {
         let vm=this
       return this.afficheUa.map(function (value) {
         let objet = {
+          id:value.id,
           code: value.code,
           libelle: value.libelle,
           MontantVote:vm.MontantBudgetVote(value.id),
+          Variation:vm.AfficheVariationBudget(value.id),
+          Budgetactuel:vm.MontantBudgetActuel(value.id),
+          MontantExecute:vm.MontantBudgetExecuté(value.id),
+          NombreOpProvisoire:vm.TotalOPProvisoire(value.id),
+          NombreOpNONRegu:vm.NombreOPNonRegu(value.id),
+          NombreOpREgularise:vm.NombreOPRegulirise(value.id),
+          TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
+          Disponible:vm.MontantBudgetVote(value.id)- vm.MontantBudgetExecuté(value.id),
+          TauxExecution:vm.EviteNaN(value.id)
         };
         return objet;
       });
@@ -2959,7 +2966,9 @@ arrayExerciceDecompteBienService() {
   },
   created() {
                 setInterval(this.getNow, 1000);
+                console.log(this.TriaffichageUniteAdminstrative);
             },
+
   methods: {
     ...mapActions("uniteadministrative", [
       "getAllActeCreation",
@@ -2984,6 +2993,24 @@ arrayExerciceDecompteBienService() {
 //       }
 
 //  },
+
+  tricode(){
+      if(this.tricodedata==0){
+        this.tricodedata=1;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantVote < b.MontantVote) ? 1 : -1);
+        
+      }else{
+        this.tricodedata=0;
+        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantVote > b.MontantVote) ? 1 : -1);
+      }
+      
+    },
+    MontantBudgetActuel(id){
+      return ( this.MontantBudgetVote(id) + this.AfficheVariationBudget(id));
+    },
+
+
+
 nombreDeJourEntre(){
   var date1 = new Date("12/12/2020");
          var date2 = new Date("12/12/2021");
@@ -3069,13 +3096,13 @@ TauxOPProvisoireNonRegularisTypeFinancement(id,id1) {
 TauxOPProvisoireNonRegularis(id) {
       if (
         this.NombreOPNonRegu(id) == 0 &&
-        this.TotalOPRegu(id) == 0
+        this.TotalOPProvisoire(id) == 0
       ) {
         return 0.0;
       } else {
         return (
           ((parseFloat(this.NombreOPNonRegu(id)) /
-            parseFloat(this.TotalOPRegu(id)))*100
+            parseFloat(this.TotalOPProvisoire(id)))*100
         ).toFixed(2));
       }
     },
@@ -3172,8 +3199,8 @@ genererEnPdf() {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.MontantBudgetExecuté(id)) /
-            ((parseFloat(this.MontantBudgetVote(id)) + parseFloat(this.AfficheVariationBudget(id)))-parseFloat(this.MontantBudgetExecuté(id))))
+          (parseFloat(this.MontantBudgetExecuté(id))) /
+            (parseFloat(this.MontantBudgetActuel(id)))
           
         ).toFixed(2);
       }
@@ -3259,7 +3286,7 @@ TotalDisponibleTypeFinancement(id,id1){
     OnchangeFichier(e) {
       const files = e.target.files;
       this.selectedFile = event.target.files[0];
-      console.log(this.selectedFile);
+     // console.log(this.selectedFile);
       Array.from(files).forEach((file) => this.addFichier(file));
     },
     addFichier(file) {

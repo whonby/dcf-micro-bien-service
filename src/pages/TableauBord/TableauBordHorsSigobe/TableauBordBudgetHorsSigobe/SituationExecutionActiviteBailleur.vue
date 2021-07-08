@@ -1827,7 +1827,7 @@ export default {
 
     arrayExerciceDecompte() {
       return (idactivite) => {
-        console.log(idactivite);
+       // console.log(idactivite);
 
         if (idactivite != null && idactivite != "") {
           let objet = this.listeordrepaiementstest(idactivite);
@@ -1838,7 +1838,7 @@ export default {
               array_exercie.push(val.source_financement_id);
             });
             let unique = [...new Set(array_exercie)];
-            console.log(unique);
+           // console.log(unique);
             if (unique.length == 0) {
               return [];
             }
