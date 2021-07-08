@@ -384,7 +384,7 @@ recupereIDactivite
                   
 
                 <td v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'" colspan="2">
-                    {{LibelleSourceFinancement(GroupeSourceFinancement[0].source_financement_id)  }}
+                    {{LibelleSourceFinancement(GroupeSourceFinancement[0].source_financement_id)  }}          <span style="font-size:25px">({{AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id).length}})</span>   
                     
                   </td>
                   <td style="text-align:right;" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarchePlanifierGlobalParSection(GroupeSourceFinancement[0].source_financement_id)}}</td>

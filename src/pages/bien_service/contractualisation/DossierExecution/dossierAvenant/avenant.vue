@@ -712,6 +712,18 @@ afficherUniteAdministrative() {
         }
       };
     },
+     id_ua() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.unite_administrative_id;
+          }
+          return 0
+        }
+      };
+    },
     idSectionMarche() {
       return id => {
         if (id != null && id != "") {
@@ -804,7 +816,7 @@ else
    section_id:this.idSectionMarche(this.macheid),
       source_financement_id:this.idSourceFinancement(this.macheid),
       type_financement_id:this.idTypeFinancement(this.macheid),
-   
+    ua_id:this.id_ua(this.macheid)
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
@@ -836,6 +848,7 @@ else
    section_id:this.idSectionMarche(this.macheid),
       source_financement_id:this.idSourceFinancement(this.macheid),
       type_financement_id:this.idTypeFinancement(this.macheid),
+      ua_id:this.id_ua(this.macheid)
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');
