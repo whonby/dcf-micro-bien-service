@@ -3140,7 +3140,7 @@ arrayExerciceDecompteBienService() {
           NombreOpNONRegu:vm.NombreOPNonRegu(value.id),
           NombreOpREgularise:vm.NombreOPRegulirise(value.id),
           TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
-          Disponible:vm.MontantBudgetVote(value.id)- vm.MontantBudgetExecuté(value.id),
+          Disponible:vm.MontantBudgetActuel(value.id)- vm.MontantBudgetExecuté(value.id),
           TauxExecution:vm.EviteNaN(value.id)
         };
         return objet;
@@ -3539,6 +3539,7 @@ CalculerMontantDisponible(id){
       }
       
     },
+    
      triBudgetExecute(){
       if(this.triBudgetExecutedata==0){
         this.triBudgetExecutedata=1;
