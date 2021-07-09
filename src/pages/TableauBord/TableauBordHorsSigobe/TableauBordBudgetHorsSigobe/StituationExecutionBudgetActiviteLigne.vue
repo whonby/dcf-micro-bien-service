@@ -28,7 +28,7 @@
 
            <!-- <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >CODE ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -45,7 +45,7 @@
 
               <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >LIBELLE ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -64,7 +64,7 @@
                 <div class="control-group">
                   <label
                     class="control-label"
-                    style="color: #000; font-size: 14px; font-weight: bolder"
+                    style="color: #000; font-size: 12px; font-weight: bolder"
                     >Date debut</label
                   >
                   <div class="controls">
@@ -82,7 +82,7 @@
                 <div class="control-group">
                   <label
                     class="control-label"
-                    style="color: #000; font-size: 14px; font-weight: bolder"
+                    style="color: #000; font-size: 12px; font-weight: bolder"
                     >Date Fin</label
                   >
                   <div class="controls">
@@ -161,7 +161,7 @@
       <p
         style="
           margin-left: 30px;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -175,7 +175,7 @@
 <tr>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -187,7 +187,7 @@
                   </th>
  <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -199,7 +199,7 @@
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -226,7 +226,7 @@
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -234,24 +234,24 @@
                       width :8%
                     "
                   >
-                    BUDGET INITIAL {{afficheAnnee}}
+                    BUDGET INITIAL 
                     
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MODIFICATION BUDGETAIRE {{afficheAnnee}}
+                    MODIFICATION BUDGETAIRE 
                   </th>
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -259,129 +259,129 @@
                       width :8%
                     "
                   >
-                 BUDGET ACTUEL {{afficheAnnee}}
+                 BUDGET ACTUEL 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  MONTANT EXECUTE {{afficheAnnee}}
+                  MONTANT EXECUTE 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  NATURE DEPENSE {{afficheAnnee}}
+                  NATURE DEPENSE 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  PROCEDURE DE MARCHE {{afficheAnnee}}
+                  PROCEDURE DE MARCHE 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  STATUT DE LA LIGNE {{afficheAnnee}}
+                  STATUT DE LA LIGNE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                    MONTANT OP PROVISOIRE NON REGULARISE 
                   </th>
  <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TOTAL OP PROVISOIRE  {{afficheAnnee}}
+                    TOTAL OP PROVISOIRE  
                   </th>
                      <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                    NB OP PROVISOIRE NON REGULARISE(S) 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                    TAUX OP PROVISOIRE NON REGULARISE(S) 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DISPONIBLE {{afficheAnnee}}
+                    DISPONIBLE 
                   </th>
 
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX D'EXECUTION {{afficheAnnee}}
+                    TAUX D'EXECUTION 
                   </th>
                   <!-- <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION 
                   </th> -->
                  
                   
@@ -511,22 +511,22 @@
                   </td> -->
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                        <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
@@ -654,22 +654,22 @@
 
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.25">
-                        <span style="color:#fff;font-size: 14px;">
+                        <span style="color:#fff;font-size: 12px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.50">
-                        <span style="color:#fff;font-size: 14px;">
+                        <span style="color:#fff;font-size: 12px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                        <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
-                        <span style="color:#fff;font-size: 14px;">
+                        <span style="color:#fff;font-size: 12px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
-                        <span style="color:#fff;font-size: 14px;">
+                        <span style="color:#fff;font-size: 12px;">
                           {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
                         </span>
                       </button>
@@ -753,7 +753,7 @@
     <div id="validationOpDefinitif2" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3 style="font-size: 14px; font-weight: bold">
+        <h3 style="font-size: 12px; font-weight: bold">
           UNITE ADMINISTRATIVE : 
         </h3>
       </div>
@@ -774,7 +774,7 @@
 <tr>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -785,7 +785,7 @@
                   </th>
 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -796,7 +796,7 @@
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -809,7 +809,7 @@
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
@@ -817,24 +817,24 @@
                       width :8%
                     "
                   >
-                    BUDGET INITIAL {{afficheAnnee}}
+                    BUDGET INITIAL 
                     
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
+                    REAMENAGEMENT BUDGETAIRE 
                   </th>
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -842,74 +842,74 @@
                       width :8%
                     "
                   >
-                 BUDGET ACTUEL {{afficheAnnee}}
+                 BUDGET ACTUEL 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  MONTANT EXECUTE {{afficheAnnee}}
+                  MONTANT EXECUTE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                    MONTANT OP PROVISOIRE NON REGULARISE 
                   </th>
 
                      <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                    NB OP PROVISOIRE NON REGULARISE(S) 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX D'EXECUTION {{afficheAnnee}}
+                    TAUX D'EXECUTION 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    {{editMandat1.activite_id}}DISPONIBLE {{afficheAnnee}}
+                    DISPONIBLE 
                   </th>
 
                   

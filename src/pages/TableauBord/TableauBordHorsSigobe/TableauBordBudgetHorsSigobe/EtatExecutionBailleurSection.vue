@@ -8,7 +8,7 @@ recupereIDactivite
 
               <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >SOURCE DE FINANCEMENT<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -46,7 +46,7 @@ recupereIDactivite
       <p
         style="
           margin-left: 30px;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -67,12 +67,12 @@ recupereIDactivite
                  <th></th>
                 
                    <th>
-                    BAILLEUR/SECTION {{afficheAnnee}}
+                    BAILLEUR/SECTION 
                   </th>
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -80,59 +80,59 @@ recupereIDactivite
                       width :8%
                     "
                   >
-                 BUDGET INITIAL (FCFA) {{afficheAnnee}}
+                 BUDGET INITIAL (FCFA) 
                  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  MODIFICATION BUDGETAIRE (FCFA) {{afficheAnnee}}
+                  MODIFICATION BUDGETAIRE (FCFA) 
                   </th>
                   
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    BUDGET ACTUEL (FCFA)  {{afficheAnnee}}
+                    BUDGET ACTUEL (FCFA)  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANTS EXECUTES (FCFA) {{afficheAnnee}}
+                    MONTANTS EXECUTES (FCFA) 
                   </th>
                   
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DISPONIBLE (FCFA) {{afficheAnnee}}
+                    DISPONIBLE (FCFA) 
                   </th>
                   <th
                     
                   >
-                    MARCHE EN COURS {{afficheAnnee}}
+                    MARCHE EN COURS 
                   </th>
                   
                 </tr>
@@ -199,7 +199,7 @@ recupereIDactivite
               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
               <td style="text-align:right">
                 <button class="btn btn-danger taille">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
+                        <span style="color:#000;font-size: 12px;font-weight: bold;">
                           {{MarcheEnCoursParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}
                         </span>
                       </button>

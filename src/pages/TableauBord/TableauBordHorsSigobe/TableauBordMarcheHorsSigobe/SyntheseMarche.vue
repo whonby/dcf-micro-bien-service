@@ -26,7 +26,7 @@
   <div id="validationOpDefinitif1" class="modal hide tailgrand">
       <div class="modal-header">
          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        <h3 style="font-size: 14px; font-weight: bold">
+        <h3 style="font-size: 12px; font-weight: bold">
           UNITE ADMINISTRATIVE : {{editMandat.id}}
         </h3>
       </div>
@@ -39,7 +39,7 @@
       
  <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 14px;text-decoration: underline ;text-transform: uppercase;">Part Des Bailleurs</h2>
+             <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">Part Des Bailleurs</h2>
           </tr>
         </table>
         <table class="table table-bordered table-striped">
@@ -169,7 +169,7 @@
       <p
         style="
           margin-left: 30px;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -196,12 +196,12 @@
                    
                   </th>
                    <th>
-                   NUMERO D'ORDRE {{afficheAnnee}}
+                   NUMERO D'ORDRE 
                   </th>
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -209,206 +209,206 @@
                       width :8%
                     "
                   >
-                N° MARCHE  {{afficheAnnee}}
+                N° MARCHE  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  OBJET DU MARCHE {{afficheAnnee}}
+                  OBJET DU MARCHE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TITULAIRE {{afficheAnnee}}
+                    TITULAIRE 
                   </th>
 
                      <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DUREE CONTRACTUELLE   {{afficheAnnee}}
+                    DUREE CONTRACTUELLE   
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE SOURCE DE FINANCEMENT  {{afficheAnnee}}
+                    NBRE DE SOURCE DE FINANCEMENT  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  IMPUTATION BUDGETAIRE   {{afficheAnnee}}
+                  IMPUTATION BUDGETAIRE   
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                   MONTANT BUDGET  (FCFA) {{afficheAnnee}}
+                   MONTANT BUDGET  (FCFA) 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT DE BASE DU MARCHE {{afficheAnnee}}
+                    MONTANT DE BASE DU MARCHE 
                   </th>
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX FINANCIER AVENANT  {{afficheAnnee}}
+                    TAUX FINANCIER AVENANT  
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT TOTAL AVENANT {{afficheAnnee}}
+                    MONTANT TOTAL AVENANT 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRES AVENANT {{afficheAnnee}}
+                    NBRES AVENANT 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT TOTAL AVENANT {{afficheAnnee}}
+                    MONTANT TOTAL AVENANT 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  CUMUL VARIATION DE DELAI (AVENANT) {{afficheAnnee}}
+                  CUMUL VARIATION DE DELAI (AVENANT) 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT GLOBAL MARCHE {{afficheAnnee}}
+                    MONTANT GLOBAL MARCHE 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DELAI GLOBAL DU MARCHE {{afficheAnnee}}
+                    DELAI GLOBAL DU MARCHE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT EXECUTE {{afficheAnnee}}
+                    MONTANT EXECUTE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DISPONIBLE MARCHE {{afficheAnnee}}
+                    DISPONIBLE MARCHE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX D’EXECUTION FINANCIER {{afficheAnnee}}
+                    TAUX D’EXECUTION FINANCIER 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX D’EXECUTION PHYSIQUE {{afficheAnnee}}
+                    TAUX D’EXECUTION PHYSIQUE 
                   </th>
                 </tr>
               </thead>

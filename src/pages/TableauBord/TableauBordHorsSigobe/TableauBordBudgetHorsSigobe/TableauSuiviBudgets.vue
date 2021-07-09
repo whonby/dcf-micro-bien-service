@@ -181,7 +181,7 @@
       <div class="modal-body" id="printpdf">
           <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et par type de Financement</h2>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">ETAT D'EXECUTION DU BUDGET PAR UA ET TYPE DE FINANCEMENT</h2>
           </tr>
         </table>
         <table class="table table-bordered table-striped">
@@ -483,11 +483,11 @@
           
         </div>
 
-        <div class="widget-content nopadding">
+        <div class="widget-content nopadding" >
           <table class="table table-bordered table-striped">
-            <thead>
+            <thead >
            
-              <tr style="">
+              <tr >
                  <th style=" font-size: 14px; 
                   font-weight: bold;
                   color: #000;
@@ -564,12 +564,8 @@
                       
                     </button>
                      <money style="text-align:left;color:red"   v-model="montant_Initial" class="span" v-show="inputMontantInitial == true"></money>
-                  <!-- <input v-show="inputMontantInitial == true"
-                type="text"
-                v-model="montant_Initial"
-                class="span"
-                placeholder="Saisir Montant Initial"
-              /> -->
+                 
+              
                   </th>
 
                 <th style=" font-size: 14px;
@@ -3140,7 +3136,7 @@ arrayExerciceDecompteBienService() {
           NombreOpNONRegu:vm.NombreOPNonRegu(value.id),
           NombreOpREgularise:vm.NombreOPRegulirise(value.id),
           TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
-          Disponible:vm.MontantBudgetVote(value.id)- vm.MontantBudgetExecuté(value.id),
+          Disponible:vm.MontantBudgetActuel(value.id)- vm.MontantBudgetExecuté(value.id),
           TauxExecution:vm.EviteNaN(value.id)
         };
         return objet;
@@ -3531,88 +3527,88 @@ CalculerMontantDisponible(id){
   tricode(){
       if(this.tricodedata==0){
         this.tricodedata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantVote < b.MontantVote) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantVote-b.MontantVote});
         
       }else{
         this.tricodedata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantVote > b.MontantVote) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantVote-a.MontantVote});
       }
       
     },
      triBudgetExecute(){
       if(this.triBudgetExecutedata==0){
-        this.triBudgetExecutedata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantExecute < b.MontantExecute) ? 1 : -1);
+        this.triBudgetExecutedata=1; 
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantExecute-b.MontantExecute});
         
       }else{
         this.triBudgetExecutedata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.MontantExecute > b.MontantExecute) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantExecute-a.MontantExecute});
       }
       
     },
     triBudgetActuelle(){
       if(this.triBudgetActuelledata==0){
         this.triBudgetActuelledata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Budgetactuel < b.Budgetactuel) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.Budgetactuel-b.Budgetactuel});
         
       }else{
         this.triBudgetActuelledata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Budgetactuel > b.Budgetactuel) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.Budgetactuel-a.Budgetactuel});
       }
       
     },
   triModificationBudget(){
       if(this.triModificationBudgetdata==0){
         this.triModificationBudgetdata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Variation12 < b.Variation12) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.Variation12-b.Variation12});
         
       }else{
         this.triModificationBudgetdata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Variation12 > b.Variation12) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.Variation12-a.Variation12});
       }
       
     },
      triBudgetDispoble(){
       if(this.triBudgetDisponibledata==0){
         this.triBudgetDisponibledata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Disponible < b.Disponible) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return a.Disponible - b.Disponible});
         
       }else{
         this.triBudgetDisponibledata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.Disponible > b.Disponible) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.Disponible - a.Disponible});
       }
       
     },
     triTotalOpProvisoire(){
       if(this.triTotalProvisoiredata==0){
         this.triTotalProvisoiredata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpProvisoire < b.NombreOpProvisoire) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return a.NombreOpProvisoire - b.NombreOpProvisoire});
         
       }else{
         this.triTotalProvisoiredata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpProvisoire > b.NombreOpProvisoire) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.NombreOpProvisoire - a.NombreOpProvisoire});
       }
       
     },
       triNombreOpNonRegulirise(){
       if(this.triOpNonRegulirisedata==0){
         this.triOpNonRegulirisedata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpNONRegu < b.NombreOpNONRegu) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b) {return a.NombreOpNONRegu - b.NombreOpNONRegu});
         
       }else{
         this.triOpNonRegulirisedata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpNONRegu > b.NombreOpNONRegu) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b) {return b.NombreOpNONRegu - a.NombreOpNONRegu});
       }
       
     },
     triNombreOpRegulirise(){
       if(this.triOpRegulirisedata==0){
         this.triOpRegulirisedata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpREgularise < b.NombreOpREgularise) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return a.NombreOpREgularise - b.NombreOpREgularise});
         
       }else{
         this.triOpRegulirisedata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.NombreOpREgularise > b.NombreOpREgularise) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.NombreOpREgularise - a.NombreOpREgularise});
       }
       
     },
@@ -3620,22 +3616,22 @@ CalculerMontantDisponible(id){
     triTauxOpNonRegulirise(){
       if(this.triTauxOpRegulirisedata==0){
         this.triTauxOpRegulirisedata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxOpNonRegularise < b.TauxOpNonRegularise) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return a.TauxOpNonRegularise - b.TauxOpNonRegularise});
         
       }else{
         this.triTauxOpRegulirisedata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxOpNonRegularise > b.TauxOpNonRegularise) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.TauxOpNonRegularise - a.TauxOpNonRegularise});
       }
       
     },
      triTauxExecution(){
       if(this.triTauxExecutiondata==0){
         this.triTauxExecutiondata=1;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxExecution < b.TauxExecution) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b) {return a.TauxExecution - b.TauxExecution});
         
       }else{
         this.triTauxExecutiondata=0;
-        return this.TriaffichageUniteAdminstrative.sort((a, b) => (a.TauxExecution > b.TauxExecution) ? 1 : -1);
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b) {return b.TauxExecution - a.TauxExecution});
       }
       
     },
