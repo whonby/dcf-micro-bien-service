@@ -3539,6 +3539,7 @@ CalculerMontantDisponible(id){
       }
       
     },
+    
      triBudgetExecute(){
       if(this.triBudgetExecutedata==0){
         this.triBudgetExecutedata=1;

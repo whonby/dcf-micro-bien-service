@@ -1,6 +1,17 @@
 
 <template>
   <div>
+
+    <input  type="hidden" :value="tribudgetinitialdata"/>
+    <input  type="hidden" :value="trivariationdata"/>
+    <input  type="hidden" :value="tribudgetactueldata"/>
+    <input  type="hidden" :value="trimontantexecutedata"/>
+    <input  type="hidden" :value="triMontantOpProNonRegudata"/>
+    <input  type="hidden" :value="triNombreOpProdata"/>
+    <input  type="hidden" :value="triNBOpProNonRegudata"/>
+    <input  type="hidden" :value="triTauxOpProNonRegudata"/>
+    <input  type="hidden" :value="triDisponibledata"/>
+    <input  type="hidden" :value="triTauxExecutiondata"/>
     
    
     <div class="row-fluid" style="margin-top: -20px">
@@ -234,7 +245,7 @@
                       width :8%
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="tribudgetinitial()">
                      <i class=" icon-filter"></i>
                       </button>
                     BUDGET INITIAL
@@ -249,7 +260,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="trivariation()">
                      <i class=" icon-filter"></i>
                       </button>
                     MODIFICATION BUDGETAIRE
@@ -265,7 +276,7 @@
                       width :8%
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="tribudgetactuel()">
                      <i class=" icon-filter"></i>
                       </button>
                  BUDGET ACTUEL
@@ -279,7 +290,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="trimontantexecute()">
                      <i class=" icon-filter"></i>
                       </button>
                   MONTANT EXECUTE
@@ -293,9 +304,6 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
-                     <i class=" icon-filter"></i>
-                      </button>
                   NATURE DEPENSE
                   </th>
                    <th
@@ -307,9 +315,6 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
-                     <i class=" icon-filter"></i>
-                      </button>
                   PROCEDURE DE MARCHE
                   </th>
                    <th
@@ -319,11 +324,7 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
-                    "
-                  >
-                  <button @click="tricode()">
-                     <i class=" icon-filter"></i>
-                      </button>
+                    ">
                   STATUT DE LA LIGNE
                   </th>
                   <th
@@ -335,7 +336,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="triMontantOpProNonRegu()">
                      <i class=" icon-filter"></i>
                       </button>
                     MONTANT OP PROVISOIRE NON REGULARISE
@@ -349,7 +350,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="triNombreOpPro()">
                      <i class=" icon-filter"></i>
                       </button>
                     TOTAL OP PROVISOIRE
@@ -363,7 +364,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="triNBOpProNonRegu()">
                      <i class=" icon-filter"></i>
                       </button> 
                     NB OP PROVISOIRE NON REGULARISE(S)
@@ -377,7 +378,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="triTauxOpProNonRegu()">
                      <i class=" icon-filter"></i>
                       </button>
                     TAUX OP PROVISOIRE NON REGULARISE(S)
@@ -391,7 +392,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="triDisponible()">
                      <i class=" icon-filter"></i> 
                       </button>
                     DISPONIBLE
@@ -405,7 +406,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  <button @click="tricode()">
+                  <button @click="triTauxExecution()">
                      <i class=" icon-filter"></i> 
                     </button>
                     TAUX D'EXECUTION
@@ -419,7 +420,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION
                   </th> -->
                  
                   
@@ -849,7 +850,7 @@
                       width :8%
                     "
                   >
-                    BUDGET INITIAL {{afficheAnnee}}
+                    BUDGET INITIAL
                     
                   </th>
                    <th
@@ -861,7 +862,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    REAMENAGEMENT BUDGETAIRE {{afficheAnnee}}
+                    REAMENAGEMENT BUDGETAIRE
                   </th>
                    
                   <th
@@ -874,7 +875,7 @@
                       width :8%
                     "
                   >
-                 BUDGET ACTUEL {{afficheAnnee}}
+                 BUDGET ACTUEL
                   </th>
                   <th
                     style="
@@ -885,7 +886,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  MONTANT EXECUTE {{afficheAnnee}}
+                  MONTANT EXECUTE
                   </th>
                   <th
                     style="
@@ -896,7 +897,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                    MONTANT OP PROVISOIRE NON REGULARISE
                   </th>
 
                      <th
@@ -908,7 +909,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                    NB OP PROVISOIRE NON REGULARISE(S)
                   </th>
                   <th
                     style="
@@ -919,7 +920,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX D'EXECUTION {{afficheAnnee}}
+                    TAUX D'EXECUTION
                   </th>
                   <th
                     style="
@@ -930,7 +931,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    EVOLUTION DU TAUX D’EXECUTION {{afficheAnnee}}
+                    EVOLUTION DU TAUX D’EXECUTION
                   </th>
                   <th
                     style="
@@ -941,7 +942,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    {{editMandat1.activite_id}}DISPONIBLE {{afficheAnnee}}
+                    {{editMandat1.activite_id}}DISPONIBLE
                   </th>
 
                   
@@ -1017,6 +1018,16 @@ inputLigne:false,
       Activite_code:0,
       exercices_budgetaires_id:0,
       inputLigne1:0,
+      tribudgetinitialdata:0,
+      trivariationdata:0,
+      tribudgetactueldata:0,
+      trimontantexecutedata:0,
+      triMontantOpProNonRegudata:0,
+      triNombreOpProdata:0,
+      triNBOpProNonRegudata:0,
+      triTauxOpProNonRegudata:0,
+      triDisponibledata:0,
+      triTauxExecutiondata:0,
       
 
       editMandat1: {
@@ -2128,6 +2139,123 @@ GrandeNature() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+     tribudgetinitial(){
+        if(this.tribudgetinitialdata==0){
+          this.tribudgetinitialdata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantVote-b.MontantVote});
+          
+        }else{
+          this.tribudgetinitialdata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantVote-a.MontantVote});
+        }
+    },
+
+       trivariation(){
+        if(this.trivariationdata==0){
+          this.trivariationdata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.Variation-b.Variation});
+          
+        }else{
+          this.trivariationdata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.Variation-a.Variation});
+        }
+    },
+
+      tribudgetactuel(){
+        if(this.tribudgetactueldata==0){
+          this.tribudgetactueldata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.Budgetactuel-b.Budgetactuel});
+          
+        }else{
+          this.tribudgetactueldata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.Budgetactuel-a.Budgetactuel});
+        }
+    },
+
+     trimontantexecute(){
+        if(this.trimontantexecutedata==0){
+          this.trimontantexecutedata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantExecute-b.MontantExecute});
+          
+        }else{
+          this.trimontantexecutedata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantExecute-a.MontantExecute});
+        }
+    },
+
+    triMontantOpProNonRegu(){
+        if(this.triMontantOpProNonRegudata==0){
+          this.triMontantOpProNonRegudata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantOpProvisoireNonRegu-b.MontantOpProvisoireNonRegu});
+          
+        }else{
+          this.triMontantOpProNonRegudata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantOpProvisoireNonRegu-a.MontantOpProvisoireNonRegu});
+        }
+    },
+
+    
+    triNombreOpPro(){
+        if(this.triNombreOpProdata==0){
+          this.triNombreOpProdata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreOpProvisoire-b.NombreOpProvisoire});
+          
+        }else{
+          this.triNombreOpProdata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreOpProvisoire-a.NombreOpProvisoire});
+        }
+    },
+
+    triNBOpProNonRegu(){
+        if(this.triNBOpProNonRegudata==0){
+          this.triNBOpProNonRegudata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreOpProvisoireNonRegu-b.NombreOpProvisoireNonRegu});
+          
+        }else{
+          this.triNBOpProNonRegudata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreOpProvisoireNonRegu-a.NombreOpProvisoireNonRegu});
+        }
+    },
+
+    
+
+    triTauxOpProNonRegu(){
+        if(this.triTauxOpProNonRegudata==0){
+          this.triTauxOpProNonRegudata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.TauxOpProvisoireNonRegu-b.TauxOpProvisoireNonRegu});
+          
+        }else{
+          this.triTauxOpProNonRegudata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.TauxOpProvisoireNonRegu-a.TauxOpProvisoireNonRegu});
+        }
+    },
+
+
+    triDisponible(){
+        if(this.triDisponibledata==0){
+          this.triDisponibledata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.Disponible-b.Disponible});
+          
+        }else{
+          this.triDisponibledata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.Disponible-a.Disponible});
+        }
+    },
+
+    triTauxExecution(){
+        if(this.triTauxExecutiondata==0){
+          this.triTauxExecutiondata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.TauxExecution-b.TauxExecution});
+          
+        }else{
+          this.triTauxExecutiondata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.TauxExecution-a.TauxExecution});
+        }
+    },
+
+
+
     TauxOPProvisoireNonRegularisLigne(id,id1) {
       if (
         this.NombreOPNonRegu(id,id1) == 0 &&
