@@ -234,7 +234,10 @@
                       width :8%
                     "
                   >
-                    BUDGET INITIAL {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                    BUDGET INITIAL
                     
                   </th>
                    <th
@@ -246,7 +249,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MODIFICATION BUDGETAIRE {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                    MODIFICATION BUDGETAIRE
                   </th>
                    
                   <th
@@ -259,7 +265,10 @@
                       width :8%
                     "
                   >
-                 BUDGET ACTUEL {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                 BUDGET ACTUEL
                   </th>
                   <th
                     style="
@@ -270,7 +279,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  MONTANT EXECUTE {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                  MONTANT EXECUTE
                   </th>
                    <th
                     style="
@@ -281,7 +293,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  NATURE DEPENSE {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                  NATURE DEPENSE
                   </th>
                    <th
                     style="
@@ -292,7 +307,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  PROCEDURE DE MARCHE {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                  PROCEDURE DE MARCHE
                   </th>
                    <th
                     style="
@@ -303,7 +321,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                  STATUT DE LA LIGNE {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                  STATUT DE LA LIGNE
                   </th>
                   <th
                     style="
@@ -314,7 +335,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT OP PROVISOIRE NON REGULARISE {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                    MONTANT OP PROVISOIRE NON REGULARISE
                   </th>
  <th
                     style="
@@ -325,7 +349,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    TOTAL OP PROVISOIRE  {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                    TOTAL OP PROVISOIRE
                   </th>
                      <th
                     style="
@@ -336,7 +363,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    NB OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button> 
+                    NB OP PROVISOIRE NON REGULARISE(S)
                   </th>
                    <th
                     style="
@@ -347,7 +377,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX OP PROVISOIRE NON REGULARISE(S) {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i>
+                      </button>
+                    TAUX OP PROVISOIRE NON REGULARISE(S)
                   </th>
                    <th
                     style="
@@ -358,8 +391,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    DISPONIBLE {{afficheAnnee}}
-                  </th>
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i> 
+                      </button>
+                    DISPONIBLE
 
                   <th
                     style="
@@ -370,7 +405,10 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    TAUX D'EXECUTION {{afficheAnnee}}
+                  <button @click="tricode()">
+                     <i class=" icon-filter"></i> 
+                    </button>
+                    TAUX D'EXECUTION
                   </th>
                   <!-- <th
                     style="
@@ -387,11 +425,11 @@
                   
                 </tr>
               </thead>
-         <tbody  v-for="GroupeOrdrePaiementByActivit in partition(afficheUa, size)[page]"
-                :key="GroupeOrdrePaiementByActivit.id">
+         <tbody  v-for="ListeActivite in partition(TriaffichageUniteAdminstrative, size)[page]"
+                :key="ListeActivite.id">
                 <tr>
                   <td>
-                    <button @click="ShowMyLigne(GroupeOrdrePaiementByActivit[0].activite_id)">
+                    <button @click="ShowMyLigne(ListeActivite.id)">
                      <i class="icon-eye-open"></i> 
                       
                     </button>
@@ -403,105 +441,99 @@
                     </button> -->
                     
                 </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
-                    <b>{{ LibelleActivite(GroupeOrdrePaiementByActivit[0].activite_id) }}</b>
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
+                    <b>{{ ListeActivite.libelle }}</b>
                     
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                     style="text-align: right">
                    <b> {{
                       formatageSommeSansFCFA(
-                        parseFloat(MontantbudgetVote(GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(ListeActivite.MontantVote ))
                      }} 
                     </b>
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" 
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" 
                     style="text-align: right">
                    
                     {{
                      formatageSommeSansFCFA(
-                        parseFloat(MontantReamenagement(GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(ListeActivite.Variation))
                      }} 
                  
                   </td>
 
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                     
                     {{
                       formatageSommeSansFCFA(
-                        parseFloat(MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(ListeActivite.Budgetactuel))
                      }} 
 
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                    <b> {{
                       formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(ListeActivite.MontantExecute))
                      }}
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                    <b> 
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                    <b> 
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                    <b>
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                     <b>{{
                       formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetExecutéProvisoire(
-                            GroupeOrdrePaiementByActivit[0].activite_id
-                          )
+                        parseFloat(ListeActivite.MontantOpProvisoireNonRegu
                         )
                       )
                     }}
                     </b>
                   </td>
- <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+               <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
                     <b>{{
-                     TotalOPNonRegu(GroupeOrdrePaiementByActivit[0].activite_id)
+                     ListeActivite.NombreOpProvisoire
                     }}
                     </b>
                   </td>
-                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
                     <b>{{
-                      NombreOPNonRegu(GroupeOrdrePaiementByActivit[0].activite_id)
+                      ListeActivite.NombreOpProvisoireNonRegu
                     }}
                     </b>
                   </td>
-                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
+                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
                     <b>{{
-                      TauxOPProvisoireNonRegularisActivite(GroupeOrdrePaiementByActivit[0].activite_id)
+                      ListeActivite.TauxOpProvisoireNonRegu
                     }} %
                     </b>
                   </td>
-                   <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'"
+                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                     <!-- <b> -->
                       {{
                       formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuel(GroupeOrdrePaiementByActivit[0].activite_id) -
-                            MontantBudgetExecuté(GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(ListeActivite.Disponible))
                     }}
-                    <!-- </b> -->
-                  </td>
+                   
+                  </td> 
                   <!-- <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
                     <b>{{
 
@@ -510,24 +542,24 @@
                     </b>
                   </td> -->
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(ListeActivite.TauxExecution) <= 0.25">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{ListeActivite.TauxExecution}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(ListeActivite.TauxExecution) <= 0.50">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{ListeActivite.TauxExecution}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
+                       <button class="btn btn-success taille" v-else-if="parseFloat(ListeActivite.TauxExecution) <= 0.75">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{ListeActivite.TauxExecution}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(ListeActivite.TauxExecution) <= 1">
                         <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{ListeActivite.TauxExecution}}
                         </span>
                       </button>
                   </td>
@@ -539,8 +571,8 @@
 
 
                   
-                   <tr class="odd gradeX" v-show="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id"
-                  v-for="listeLigneeco in arrayExerciceDecompte2(GroupeOrdrePaiementByActivit[0].activite_id)"
+                   <tr class="odd gradeX" v-show="recupereIDactivite==ListeActivite.id"
+                  v-for="listeLigneeco in arrayExerciceDecompte2(ListeActivite.id)"
                   :key="listeLigneeco"
                 >
                   <td style="width:;color:#000" >
@@ -564,7 +596,7 @@
                       formatageSommeSansFCFA(
                         parseFloat(
                           MontantBudgetActuelActiviteInitial(listeLigneeco,
-                            GroupeOrdrePaiementByActivit[0].activite_id
+                            ListeActivite.id
                           )
                         )
                       )
@@ -579,7 +611,7 @@
                       formatageSommeSansFCFA(
                         parseFloat(
                           MontantBudgetActuelActiviteReamenager(listeLigneeco,
-                            GroupeOrdrePaiementByActivit[0].activite_id
+                            ListeActivite.id
                           )
                         )
                       )
@@ -593,7 +625,7 @@
                       formatageSommeSansFCFA(
                         parseFloat(
                           MontantBudgetActuelActivite(listeLigneeco,
-                            GroupeOrdrePaiementByActivit[0].activite_id
+                            ListeActivite.id
                           )
                         )
                       )
@@ -606,7 +638,7 @@
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
+                          MontantBudgetExecutéActivite(listeLigneeco,ListeActivite.id)))
                     }}
                   </td>
 <td style="text-align: left;color:#000;">
@@ -616,7 +648,7 @@
                   </td>
                   <td style="text-align: left;color:#000;">
                     {{
-                      afficheLeNomDesProcedure(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)
+                      afficheLeNomDesProcedure(listeLigneeco,ListeActivite.id)
                     }}
                   </td>
                   <td style="text-align: left;color:#000;">
@@ -628,49 +660,49 @@
                     {{
                       formatageSommeSansFCFA(
                         parseFloat(
-                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
+                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,ListeActivite.id)))
                     }}
                   </td>
  <td style="text-align: right;color:#000;" >
-                   {{ToTalOPNonReguLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
+                   {{ToTalOPNonReguLigne(listeLigneeco,ListeActivite.id)}}
                   </td>
                   <td style="text-align: right;color:#000;" >
-                    {{ afficheOpRegulirise(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id) }}
+                    {{ afficheOpRegulirise(listeLigneeco,ListeActivite.id) }}
                   </td>
                    <td style="text-align: right;color:#000;" >
-              {{  TauxOPProvisoireNonRegularisLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)}}
+              {{  TauxOPProvisoireNonRegularisLigne(listeLigneeco,ListeActivite.id)}}
                   </td>
   <td style="text-align: right;color:#000;">
 
 
                     {{
                       formatageSommeSansFCFA(
-                        parseFloat(budgetDisponibleParLigne(listeLigneeco,GroupeOrdrePaiementByActivit[0].activite_id)))
+                        parseFloat(budgetDisponibleParLigne(listeLigneeco,ListeActivite.id)))
                     }}
                   </td>
                   <!-- <td style="text-align: right;color:#000;">
-                    {{ EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)|| "Non renseigné" }}
+                    {{ EviteNaNLigne(listeLigneeco, ListeActivite.id)|| "Non renseigné" }}
                   </td> -->
 
                   <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.25">
+                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <=0.25">
                         <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <=0.50">
+                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <=0.50">
                         <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 0.75">
+                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <= 0.75">
                         <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)) <= 1">
+                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <= 1">
                         <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, GroupeOrdrePaiementByActivit[0].activite_id)}}
+                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
                         </span>
                       </button>
                   </td>
@@ -725,7 +757,7 @@
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(afficheUa, size).length"
+          v-for="(titre, index) in partition(TriaffichageUniteAdminstrative, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -734,7 +766,7 @@
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(afficheUa, size).length - 1 }"
+          :class="{ disabled: page == partition(TriaffichageUniteAdminstrative, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -1299,9 +1331,33 @@ inputLigne:false,
     },
 
 
-    afficheUa() {
-       return this.ListeGroupByActivite;
+    TriaffichageUniteAdminstrative() {
+        let vm=this
+      return this.ListeGroupByActivite.map(function (value) {
+        let objet = {
+           id:value[0].activite_id,
+           libelle:vm.LibelleActivite(value[0].activite_id),
+           MontantVote:vm.MontantReamenagement1(value[0].activite_id),
+           Variation:vm.MontantReamenagement(value[0].activite_id),
+           Budgetactuel:vm.MontantBudgetActuel(value[0].activite_id),
+           MontantExecute:vm.MontantBudgetExecuté(value[0].activite_id),
+           MontantOpProvisoireNonRegu:vm.MontantBudgetExecutéProvisoire(value[0].activite_id),
+           NombreOpProvisoire:vm.TotalOPNonRegu(value[0].activite_id),
+           NombreOpProvisoireNonRegu:vm.NombreOPNonRegu(value[0].activite_id),
+           TauxOpProvisoireNonRegu:vm.TauxOPProvisoireNonRegularisActivite(value[0].activite_id),
+           Disponible:vm.MontantBudgetActuel(value[0].activite_id)- vm.MontantBudgetExecuté(value[0].activite_id),
+           TauxExecution:vm.EviteNaN(value[0].activite_id)
+        };
+        return objet;
+      });
     },
+
+    // fin test de tri
+
+
+    // afficheUa() {
+    //    return this.ListeGroupByActivite;
+    // },
 
     afficheAnnee() {
       if (this.exercices_budgetaires_id == 0) {
@@ -1591,6 +1647,27 @@ inputLigne:false,
     //*************fin gestion des totaux*************/
 
     MontantbudgetVote(){
+        return (id) => {
+        if (id != null && id != "") {
+          return this.budgetEclate
+            .filter(
+              (qtreel) =>
+                qtreel.activite_id == id &&
+                qtreel.annebudgetaire == this.afficheAnnee &&
+                qtreel.budget_actif_def==1
+            )
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
+              0
+            )
+            .toFixed(0);
+        } else {
+          return 0;
+        }
+      };
+    },
+
+     MontantReamenagement1(){
         return (id) => {
         if (id != null && id != "") {
           return this.budgetEclate
@@ -2039,6 +2116,10 @@ GrandeNature() {
 
   },
 
+  created(){
+        console.log(this.TriaffichageUniteAdminstrative)
+        },
+
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
@@ -2127,7 +2208,7 @@ TauxOPProvisoireNonRegularisActivite(id) {
   
 
     MontantBudgetActuel(id) {
-          return (parseFloat(this.MontantbudgetVote(id)) + parseFloat(this.MontantReamenagement(id)))
+          return (parseFloat(this.MontantReamenagement1(id)) + parseFloat(this.MontantReamenagement(id)))
     },
 
     MontantBudgetActuelActivite(id,id1) {
