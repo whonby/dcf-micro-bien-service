@@ -398,9 +398,7 @@
             </tr>
           </tbody>
         </table>
-        <!-- <div class="modal-footer">
-          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        </div> -->
+       
       </div>
     </div>
 
@@ -424,33 +422,7 @@
           <td>
 
           </td>
-          <!-- <td colspan="" class="span10">
-            <label>UNITE ADMINISTRATIVE </label>
-            <model-list-select
-              style="border: 2px solid #000"
-              class="wide"
-              :list="uniteAdministratives"
-              v-model="uniteAdmin_id"
-              option-value="id"
-              option-text="libelle"
-              placeholder="TOUTES LES UNITES ADMINISTRATIVES"
-            >
-            </model-list-select>
-          </td> -->
-
-          <!-- <td colspan="">
-            <label>TYPE FINANCEMENT </label>
-            <model-list-select
-              style="background-color: #000; border: 2px solid #000"
-              class="wide"
-              :list="types_financements"
-              v-model="typefinancement"
-              option-value="id"
-              option-text="libelle"
-              placeholder="TOUS LES TYPES FINANCEMENT"
-            >
-            </model-list-select>
-          </td> -->
+        
         </tr>
       </tbody>
     </table>
@@ -524,17 +496,14 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                  <!-- <button @click="filtreTableau">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button> -->
+                 
                   LIBELLE
                    
                    <button @click="ActiveInputLigne1">
                      <i class=" icon-search"></i> 
                       
                     </button>
-                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                    
                      <model-list-select v-show="inputLigneLibelle == true"
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"

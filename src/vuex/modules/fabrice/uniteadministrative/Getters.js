@@ -734,25 +734,8 @@ export const afficheBudgetActive = state =>
     affichenaturedep => affichenaturedep.actived == 1
   );
   
+ 
 
-
-
-// export const listeTransfertEnAttente = state =>
-//   state.uniteAdministratives.filter(
-//     marcheNonAttribue1 => marcheNonAttribue1.decision_cf == 0
-//   );
-// export const listeTransfertVise = state =>
-//   state.uniteAdministratives.filter(
-//     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 1
-//   );
-// export const listeTransfertDifferer = state =>
-//   state.uniteAdministratives.filter(
-//     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 2
-//   );
-// export const listeTransfertRejete = state =>
-//   state.uniteAdministratives.filter(
-//     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 3
-//   );
 
 export const groupBudgetGeneral = (state, getters) => {
   //delete getters.trieUaImmobilisation.
@@ -845,6 +828,7 @@ export const groupeUniteAdministrativeBudgetEclate = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "uniteadministrative_id");
 };
+
 
 
 export const groupeActiviteBudgetEclate = (state, getters) => {

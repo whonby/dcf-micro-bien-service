@@ -69,7 +69,7 @@ recupereIDactivite
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-      <div v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
+      <div >
            <table class="table table-bordered">
               <thead style="background-color: #e6e6e6 !important;border:2px solid #000">
                   
@@ -204,7 +204,7 @@ recupereIDactivite
                       background-color: #e6e6e6 !important;
                       width :8%
                     " colspan="2">
-                    BAILLEUR/SECTION 
+                    BAILLEUR/PROJET 
                   </th>
                    
                   <th
@@ -389,7 +389,8 @@ recupereIDactivite
                   </th>
                 </tr>
               </thead>
-       <tbody>
+              <br>
+       <tbody v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSourceFinancement[0].source_financement_id)">
@@ -438,12 +439,9 @@ recupereIDactivite
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{parseFloat(TauxExecutionParSection(GroupeSourceFinancement[0].section_id))}} %</td>
   -->
                 </tr>
-              </tbody>  
-
-               <tbody v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
+                <br>
+                 <tr v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
                v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id)" :key="GroupeUa">
-
-                <tr>
                   <td></td>
                  
                   
@@ -478,9 +476,8 @@ recupereIDactivite
                 
                 
                 </tr>
-                  
-                
-              </tbody>
+              </tbody>  
+
             </table>
 <br>
               <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSourceFinancement[0].section_id">

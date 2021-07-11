@@ -54,7 +54,7 @@ recupereIDactivite
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-      <div v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
+      <div >
            <table class="table table-bordered">
               <thead style="background-color: #ff9c1a !important">
                   
@@ -137,7 +137,8 @@ recupereIDactivite
                   
                 </tr>
               </thead>
-       <tbody>
+              <br>
+       <tbody v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSourceFinancement[0].source_financement_id)">
@@ -175,12 +176,9 @@ recupereIDactivite
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{parseFloat(TauxExecutionParSection(GroupeSourceFinancement[0].section_id))}} %</td>
   -->
                 </tr>
-              </tbody>  
-
-               <tbody v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
+                <br>
+                <tr  v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
                v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id)" :key="GroupeUa">
-
-                <tr>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -209,11 +207,11 @@ recupereIDactivite
                 
                 
                 </tr>
-                  
-                
-              </tbody>
+              </tbody>  
+
+               
             </table>
-<br>
+
               <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSourceFinancement[0].section_id">
               
       
