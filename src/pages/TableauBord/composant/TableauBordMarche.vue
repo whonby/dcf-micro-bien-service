@@ -207,7 +207,7 @@
               >
                 <b>TOTAL MARCHES HORS PPM - EXERCICE {{ anneeAmort }}</b>
               </td>
-              <td
+              <td class="annimB"
                 style="
                   background: #b4c6e7;
                   border: 5px solid #fff;
@@ -4090,6 +4090,21 @@ body {
 }
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.annimB{
+    font-weight: bold;
+    color:rgb(221, 30, 30);
+    animation:blinkButton 1s infinite;  
+}
+
+@keyframes blinkButton {
+    10%{opacity:0.1;}
+    50%{opacity:1; box-shadow: 1px 0px 30px rgb(41, 43, 42);}
+    100%{
+        opacity:0.1;
+    }
+    
 }
 .slide-fade-enter, .slide-fade-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */ {

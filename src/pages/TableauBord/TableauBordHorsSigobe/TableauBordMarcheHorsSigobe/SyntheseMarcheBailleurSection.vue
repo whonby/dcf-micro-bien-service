@@ -700,6 +700,28 @@ export default {
       "sources_financements",
     ]),
 
+
+    //new
+
+       TriaffichageUniteAdminstrative() {
+        let vm=this
+      return this.ListeDesSourceFinancement.map(function (value) {
+        let objet = {
+           id:value[0].source_financement_id,
+           libelle:vm.LibelleSourceFinancement(value[0].source_financement_id),
+           MontantVote:vm.BudgetInitial(value[0].source_financement_id),
+           Variation:vm.MontantReamenagerBailleur(value[0].source_financement_id),
+           Budgetactuel:vm.BudgetActuelBailleur(value[0].source_financement_id),
+           MontantExecute:vm.MontantBudgetExecuté1Bailleur(value[0].source_financement_id),
+           Disponible:vm.DisponibleBailleur(value[0].source_financement_id),
+           MarcheEnCours:vm.MarcheEnCoursbailleur(value[0].source_financement_id),
+        };
+        return objet;
+      });
+    },
+
+    //fin new
+
 NombreMarchePlanifierGlobalParSection(){
         return (id) => {
         if (id != null && id != "" ) {

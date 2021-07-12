@@ -343,13 +343,13 @@ reference_marche
 
                       <button
                         v-if="marche.attribue == 2"
-                        class="btn btn-warning annimB"
+                        class="btn btn-warning"
                       >
                         <span title="MARCHE EN EXERCUTION" style="">EX</span>
                       </button>
                       <button
                         v-else-if="marche.attribue == 1"
-                        class="btn btn-success annimB"
+                        class="btn btn-success"
                       >
                         <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
                           >CT</span
@@ -357,20 +357,20 @@ reference_marche
                       </button>
                       <button
                         v-else-if="marche.attribue == 3"
-                        class="btn btn-info annimB"
+                        class="btn btn-info"
                       >
                         <span title="MARCHE RESILIE">RE</span>
                       </button>
                       <button
                         v-else-if="marche.attribue == 5"
-                        class="btn btn-inverse annimB"
+                        class="btn btn-inverse"
                       >
                         <span title="MARCHE TERMINE">TE</span>
                       </button>
-                      <button v-else-if="marche.attribue == 7" class="btn btn annimB">
+                      <button v-else-if="marche.attribue == 7" class="btn btn">
                         <span title="MARCHE SUSPENDU">SU</span>
                       </button>
-                      <button v-else class="btn btn-danger annimB">
+                      <button v-else class="btn btn-danger">
                         <span title="MARCHE EN PLANIFICATION">PL</span>
                       </button>
 
@@ -2122,7 +2122,7 @@ export default {
 
 
 
-.annimB{
+.annimB {
     font-weight: bold;
     color:red;
     animation:blinkButton 1s infinite;
