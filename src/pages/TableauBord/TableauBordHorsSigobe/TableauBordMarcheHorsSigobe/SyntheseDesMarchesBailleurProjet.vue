@@ -6,7 +6,7 @@ recupereIDactivite
             <tr>
 <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >EXERCICE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -23,7 +23,7 @@ recupereIDactivite
 
               <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >SOURCE DE FINANCEMENT<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -61,7 +61,7 @@ recupereIDactivite
       <p
         style="
           margin-left: 30px;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -69,13 +69,13 @@ recupereIDactivite
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-      <div v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
+      <div >
            <table class="table table-bordered">
               <thead style="background-color: #e6e6e6 !important;border:2px solid #000">
                   
                      <tr>
                    <th  style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -85,7 +85,7 @@ recupereIDactivite
 
                    
                  <th  style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -94,7 +94,7 @@ recupereIDactivite
                     "></th>
                 
                    <th  style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -106,7 +106,7 @@ recupereIDactivite
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -115,14 +115,14 @@ recupereIDactivite
                     "
                      colspan="2"
                   >
-                 Planification (Avant Contractualisation) {{afficheAnnee}}
+                 Planification (Avant Contractualisation) 
                  
                   </th>
                 
                   
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -130,13 +130,13 @@ recupereIDactivite
                     "
                      colspan="2"
                   >
-                    Marchés en Cours de Contractualisation {{afficheAnnee}}
+                    Marchés en Cours de Contractualisation 
                   </th>
                  
                   
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -144,11 +144,11 @@ recupereIDactivite
                     "
                      colspan="2"
                   >
-                    Marchés Attribués {{afficheAnnee}}
+                    Marchés Attribués 
                   </th>
                    <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -156,11 +156,11 @@ recupereIDactivite
                     "
                      colspan="4"
                   >
-                    Marchés en Cours d'Exécution {{afficheAnnee}}
+                    Marchés en Cours d'Exécution 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -168,11 +168,11 @@ recupereIDactivite
                     "
                      colspan="3"
                   >
-                    Marchés en Souffrance {{afficheAnnee}}
+                    Marchés en Souffrance 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -180,12 +180,12 @@ recupereIDactivite
                     "
                      colspan="3"
                   >
-                   Marchés Résiliés {{afficheAnnee}}
+                   Marchés Résiliés 
                   </th>
                 </tr>
                  <tr>
                    <th style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -197,19 +197,19 @@ recupereIDactivite
                  
                 
                    <th style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
                       background-color: #e6e6e6 !important;
                       width :8%
                     " colspan="2">
-                    BAILLEUR/SECTION {{afficheAnnee}}
+                    BAILLEUR/PROJET 
                   </th>
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -217,179 +217,180 @@ recupereIDactivite
                       width :8%
                     "
                   >
-                 Nombre {{afficheAnnee}}
+                 Nombre 
                  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #ddebf7 !important;
                     "
                   >
-                  Montant {{afficheAnnee}}
+                  Montant 
                   </th>
                   
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fff2cc !important;
                     "
                   >
-                    Nombres  {{afficheAnnee}}
+                    Nombres  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fff2cc !important;
                     "
                   >
-                    Montant {{afficheAnnee}}
+                    Montant 
                   </th>
                   
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #c6e0b4 !important;
                     "
                   >
-                    Nombre {{afficheAnnee}}
+                    Nombre 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #c6e0b4 !important;
                     "
                   >
-                    Montant {{afficheAnnee}}
+                    Montant 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fce4d6 !important;
                     "
                   >
-                    Nombre {{afficheAnnee}}
+                    Nombre 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fce4d6 !important;
                     "
                   >
-                    Montant Total Marchés {{afficheAnnee}}
+                    Montant Total Marchés 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fce4d6 !important;
                     "
                   >
-                    Montants Exécutés {{afficheAnnee}}
+                    Montants Exécutés 
                   </th>
                   <th 
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fce4d6 !important;
                     "
                   >
-                    Reste à Exécuter {{afficheAnnee}}
+                    Reste à Exécuter 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #b4c6e7 !important;
                     "
                   >
-                    Nombre  {{afficheAnnee}}
+                    Nombre  
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #b4c6e7 !important;
                     "
                   >
-                    Reste à Exécuter {{afficheAnnee}}
+                    Reste à Exécuter 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #b4c6e7 !important;
                     "
                   >
-                    Taux {{afficheAnnee}}
+                    Taux 
                   </th>
                   <th
                      style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #e6e6e6 !important;
                     "
                   >
-                    Nombre {{afficheAnnee}}
+                    Nombre 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #e6e6e6 !important;
                     "
                   >
-                    Reste à Exécuter {{afficheAnnee}}
+                    Reste à Exécuter 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #e6e6e6 !important;
                     "
                   >
-                    Taux {{afficheAnnee}}
+                    Taux 
                   </th>
                 </tr>
               </thead>
-       <tbody>
+              <br>
+       <tbody v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSourceFinancement[0].source_financement_id)">
@@ -438,12 +439,9 @@ recupereIDactivite
 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].section_id ? 'graybg' : 'whitebg'"  colspan="">{{parseFloat(TauxExecutionParSection(GroupeSourceFinancement[0].section_id))}} %</td>
   -->
                 </tr>
-              </tbody>  
-
-               <tbody v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
+                <br>
+                 <tr v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id"
                v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id)" :key="GroupeUa">
-
-                <tr>
                   <td></td>
                  
                   
@@ -478,9 +476,8 @@ recupereIDactivite
                 
                 
                 </tr>
-                  
-                
-              </tbody>
+              </tbody>  
+
             </table>
 <br>
               <!-- <table class="table table-bordered" v-show="recupereIDactivite==GroupeSourceFinancement[0].section_id">

@@ -89,12 +89,12 @@ recupereIDactivite
                  <th></th>
                  <th></th>
                    <th>
-                    LIGNE {{afficheAnnee}}
+                    LIGNE 
                   </th>
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -102,101 +102,101 @@ recupereIDactivite
                       width :8%
                     "
                   >
-                 BUDGET INITIAL (FCFA) {{afficheAnnee}}
+                 BUDGET INITIAL (FCFA) 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  MODIFICATION BUDGETAIRE (FCFA) {{afficheAnnee}}
+                  MODIFICATION BUDGETAIRE (FCFA) 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE REAMENAGEMENT {{afficheAnnee}}
+                    NBRE DE REAMENAGEMENT 
                   </th>
 
                      <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE BAILLEUR  {{afficheAnnee}}
+                    NBRE DE BAILLEUR  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE DE MARCHES EN EXECUTION  {{afficheAnnee}}
+                    NBRE DE MARCHES EN EXECUTION  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    BUDGET ACTUEL (FCFA)  {{afficheAnnee}}
+                    BUDGET ACTUEL (FCFA)  
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANTS EXECUTES (FCFA) {{afficheAnnee}}
+                    MONTANTS EXECUTES (FCFA) 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    NBRE D’OP PROVISOIRE NON REGULARISES {{afficheAnnee}}
+                    NBRE D’OP PROVISOIRE NON REGULARISES 
                   </th>
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DISPONIBLE (FCFA) {{afficheAnnee}}
+                    DISPONIBLE (FCFA) 
                   </th>
                   <th
                     
                   >
-                    TAUX D’EXECUTION {{afficheAnnee}}
+                    TAUX D’EXECUTION 
                   </th>
                   
                 </tr>

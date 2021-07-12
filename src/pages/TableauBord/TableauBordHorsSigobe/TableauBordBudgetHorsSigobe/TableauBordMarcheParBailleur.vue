@@ -50,14 +50,31 @@
      </tr>
         </tbody>
     </table>
-
-
+  <table class="table table-striped">
+          <tbody>
+            <tr>
+  <label style="color: #000; font-size: 14px; font-weight: bolder"
+                  >SOURCE DE FINANCEMENT<a href="#" style="color: red"></a>
+                </label>
+                <model-list-select
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="sources_financements"
+                  v-model="source_financement_id1"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="LIBELLE"
+                >
+                </model-list-select>
+            </tr>
+          </tbody>
+  </table>
 
     <div class="span4">
        
           Afficher
           <select name="pets" id="pet-select"  v-model="size" class="span3">
-            <option value="5" selected>5</option>
+            <!-- <option value="5" selected>5</option> -->
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="40">40</option>
@@ -121,8 +138,8 @@
           text-decoration: underline;
         "
       >
-        
-      </p>
+        EXERCICE:{{anneeBugetaire}}
+      </p> 
 
               <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                 
@@ -166,7 +183,7 @@
         </tr> -->
        
            <tr>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
+             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan=""> </th>
              <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
              <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
            <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
@@ -311,75 +328,78 @@
       
 
       
-       <tbody  v-for="type1 in  partition(groupeParSourceFinancement, size)[page]" :key="type1">
+       <tbody  v-for="type1 in  partition(liste, size)[page]" :key="type1.id">
            <tr>
 
-              <td>
+              <td colspan="2">
                     <button @click="ShowMyUa(type1[0].source_financement)">
                      <i class="icon-eye-open"></i> </button>
                   </td>
                   
-                  <td> <button ><i class=" icon-print"></i> </button></td>
+                  <!-- <td> </td> -->
          
           <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  " colspan="2" style="" >{{afficherLibelleSourFinacement(type1[0].source_financement)}}
                      
                       
                       </td>
-                      <td> {{ NombreMarcherPartSourceF(type1[0].source_financement) }}</td>
+                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  "> {{ NombreMarcherPartSourceF(type1[0].source_financement) }}</td>
 
-                      <td>
+                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">
                           {{ formatageSommeSansFCFA(parseFloat(
                             afficherNombreMarchePlanifierMontantDonsSourceF(type1[0].source_financement))) }}
                       </td>
-                      <td>
+                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">
                         {{ NombreMarcherEncourDeContratualisationSourceF(type1[0].source_financement) }}
                       </td>
 
-                      <td>{{ formatageSommeSansFCFA(parseFloat(
+                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{ formatageSommeSansFCFA(parseFloat(
                         afficherNombreMarcheEncourDeContratualisationSourceF(type1[0].source_financement)))}}</td>
 
-                        <td>{{NombreMarcherAttribuerSourceF(type1[0].source_financement)}} </td>
+                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{NombreMarcherAttribuerSourceF(type1[0].source_financement)}} </td>
 
-                        <td>{{formatageSommeSansFCFA(parseFloat(
+                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{formatageSommeSansFCFA(parseFloat(
                           afficherMontantMarcherAttribuerSourceF (type1[0].source_financement)))}} </td>
 
-                        <td>{{NombreMarcherEncourExecutionSourceF(type1[0].source_financement)}} </td>
+                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{NombreMarcherEncourExecutionSourceF(type1[0].source_financement)}} </td>
 
-                        <td>{{afficherMontantTotalSourceF(type1[0].source_financement)}}</td>
+                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{afficherMontantTotalSourceF(type1[0].source_financement)}}</td>
                        
                         
-                        <td>{{formatageSommeSansFCFA(parseFloat(
+                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{formatageSommeSansFCFA(parseFloat(
                            marcheEncourExecutionMontantDonsSourceF(type1[0].source_financement)))}} </td>
 
-                           <td>{{ formatageSommeSansFCFA(parseFloat(
+                           <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{ formatageSommeSansFCFA(parseFloat(
                              resteAexcuterSourceF(type1[0].source_financement)))}}</td>
 
-                             <td> {{NombreMarcherEnSouffranceSourceF(type1[0].source_financement)}} </td>
+                             <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  "> {{NombreMarcherEnSouffranceSourceF(type1[0].source_financement)}} </td>
 
-                             <td>{{ formatageSommeSansFCFA(parseFloat(
+                             <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{ formatageSommeSansFCFA(parseFloat(
                                resteAexcuterMarcheSouffranceSourceF(type1[0].source_financement)))}} </td>
 
-                              <td> {{afficherTauxMarcheSouffreSourceF(type1[0].source_financement)}} %</td>
+                              <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  "> {{afficherTauxMarcheSouffreSourceF(type1[0].source_financement)}} %</td>
                              
-                              <td>{{NombreMarcherResilierSourceF(type1[0].source_financement)}} </td>
+                              <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{NombreMarcherResilierSourceF(type1[0].source_financement)}} </td>
                              
-                              <td>{{formatageSommeSansFCFA(parseFloat(
+                              <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{formatageSommeSansFCFA(parseFloat(
                                 resteAexcuterMarcheResilierSourceF(type1[0].source_financement)))}} </td>
                                
-                                <td>{{afficherTauxMarcheResilierSourceF(type1[0].source_financement)}} %</td>
+                                <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{afficherTauxMarcheResilierSourceF(type1[0].source_financement)}} %</td>
         
                    <!-- <td></td> -->
                    
                  
          </tr> 
-
+           
          <tr v-show="recupereIDactivite==type1[0].type_financement"
          v-for="TypeFinance in AfficheUaGroupe(type1[0].type_financement)" :key="TypeFinance">
           
           <td></td>
           <td></td>
           <td></td>
-          
+            <!-- <td colspan="2">
+                    <button @click="ShowMyUa(type1[0].source_financement)">
+                     <i class="icon-eye-open"></i> </button>
+                  </td> -->
           
 
 
@@ -487,7 +507,7 @@
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(groupeParSourceFinancement, size).length"
+          v-for="(titre, index) in partition(liste, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -496,7 +516,7 @@
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(groupeParSourceFinancement, size).length - 1 }"
+          :class="{ disabled: page == partition(liste, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -531,15 +551,20 @@
 import {mapGetters, mapActions} from "vuex"
 import { partition } from "@/Repositories/Repository";
 import {formatageSommeSansFCFA} from "../../../../Repositories/Repository"
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components:{
      apexchart: VueApexCharts,
+     ModelListSelect
   },
   props:["macheid"],
     data() {
         return{
+
+          source_financement_id1:0,
            page: 0,
-      size:3,
+      size:10,
       active_el: 0,
 
       recupereIDactivite:"",
@@ -626,9 +651,15 @@ export default {
   'types_financements']) ,
 
 
-  // liste(){
-  //   return this.groupeParSourceFinancement.filter(item=> item[0].type_financement!=14)
-  // },
+  liste(){
+    if(this.source_financement_id1!=0){
+    
+    return this.groupeParSourceFinancement.filter(item=> item[0].source_financement==this.source_financement_id1);
+    } else{
+      return this.groupeParSourceFinancement
+    }
+    
+  },
 
   // dataContrac(){
   //   let vm=this;

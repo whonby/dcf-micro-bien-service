@@ -88,11 +88,11 @@
                       >
                     </li>
 
-                     <li class="" style="font-size:14px">
+                     <!-- <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD7"
                         >TB7</a
                       >
-                    </li>
+                    </li> -->
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a

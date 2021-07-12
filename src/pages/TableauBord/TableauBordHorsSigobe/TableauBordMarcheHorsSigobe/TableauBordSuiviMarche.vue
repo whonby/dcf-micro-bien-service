@@ -5,20 +5,18 @@
         <div class="widget-box">
          
           <div class="widget-content">
-            <h3 style="text-align:center;text-decoration:underline;">SUIVI DES OPERATIONS DCF </h3>
+            <h3 class="card" style="text-align:center;width:600px;margin-left:450px;">SUIVI DES MARCHES ET CONTRATS DCF </h3>
     <div class="">
 
       <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
-        <div class="text-center" style="color:black"><h4>A</h4></div>
         
-         <div class="card" style="background-color:#00a9e6;">
-           <h4 style="text-align:center;background-color:#00a9e6;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats</h4>
+         <div class="card" style="background-color:white;">
+           <h4 style="text-align:center;background-color:white;color:black;font-weight:bold;"> 
+               TOTAL DES MARCHÉS /CONTRATS</h4>
           
             <div class="card-body">
-              
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Total: {{NbreMarche }}</p>
               <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA: {{ NbreUA }}</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés: {{NbreMarche }}</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total: {{ formatageSommeSansFCFA(parseFloat(MontantTotalMarche1)) }}</p>
               <br>
               <br>
@@ -33,16 +31,15 @@
     <!-- deuxieme tableau -->
 
         <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
-        <div class="text-center" style="color:black"><h4>B</h4></div>
         
-         <div class="card" style="background-color:#f18383;">
-           <h4 style="text-align:center;background-color:#f18383;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats Non Exécutés</h4>
+         <div class="card" style="background-color:#f439f7;">
+           <h4 style="text-align:center;background-color:#f439f7;color:black;font-weight:bold;"> 
+                NON EXÉCUTÉS</h4>
           
             <div class="card-body">
               
+              <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
               <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
@@ -61,16 +58,15 @@
       <!-- 3eme tableau -->
 
         <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
-        <div class="text-center" style="color:black"><h4>C</h4></div>
         
          <div class="card" style="background-color:#0be525;">
            <h4 style="text-align:center;background-color:#0be525;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats en bonne exécution dans le délais</h4>
+               EN BONNE EXÉCUTIONS</h4>
           
             <div class="card-body">
               
+              <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
               <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
@@ -88,16 +84,15 @@
          <!-- 4eme tableau -->
 
         <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
-        <div class="text-center" style="color:black"><h4>D</h4></div>
         
-         <div class="card" style="background-color:#f9cf7b;">
-           <h4 style="text-align:center;background-color:#f9cf7b;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats en exécution hors délais</h4>
+         <div class="card" style="background-color:#e4fc0f;">
+           <h4 style="text-align:center;background-color:#e4fc0f;color:black;font-weight:bold;"> 
+               ACHEVÉS</h4>
           
             <div class="card-body">
               
-               <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
@@ -116,16 +111,15 @@
       <!-- 5eme tableau -->
 
         <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px"> 
-        <div class="text-center" style="color:black"><h4>E</h4></div>
         
-         <div class="card" style="background-color:#819e2b;">
-           <h4 style="text-align:center;background-color:#819e2b;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats Achévés</h4>
+         <div class="card" style="background-color:#f20505;">
+           <h4 style="text-align:center;background-color:#f20505;color:black;font-weight:bold;"> 
+               RÉSILLIÉS</h4>
           
             <div class="card-body">
               
+             <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
               <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
@@ -154,16 +148,15 @@
                     <!-- 6eme tableau -->
 
         <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
-        <div class="text-center" style="color:black"><h4>F</h4></div>
         
-         <div class="card" style="background-color:#ef85d8;">
-           <h4 style="text-align:center;background-color:#ef85d8;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats en Souffrence</h4>
+         <div class="card" style="background-color:#f0c505;">
+           <h4 style="text-align:center;background-color:#f0c505;color:black;font-weight:bold;"> 
+               HORS DÉLAI</h4>
           
             <div class="card-body">
               
-             <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
+             <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
               <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
               <br>
@@ -178,44 +171,14 @@
 
       <!-- fin 6eme tableau -->
                 </td>
-
                 <td>
-                     <!-- 7eme tableau -->
-
-        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px">
-        <div class="text-center" style="color:black"><h4>G</h4></div>
-        
-         <div class="card" style="background-color:#ff0000;">
-           <h4 style="text-align:center;background-color:#ff0000;color:black;font-weight:bold;"> 
-               -Total des Marché/Contrats Résilliés</h4>
-          
-            <div class="card-body">
-              
-             <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Nombre des Marchés:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
-              <br>
-              <br>
-              
-         
-     
-            </div>
-             <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
-         </div>
-         
-      </div>
-
-      <!-- fin 7eme tableau -->
-                </td>
-                <td>
-                     <div class="centreVerticalement" style="width:300px;display: inline-block;height:220px"></div>
+                     <div class="centreVerticalement" style="width:500px;display: inline-block;height:220px"></div>
                 </td>
 
                 <td>
-                     <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
+                     <div class="centreVerticalement card12" style="margin-top:1px; width:650px;display: inline-block;height:300px">
                        <div class="" id="chart" style="border: 2px dotted #ffffff;">
-                       <apexchart type="pie" width="380" :options="chartOptions" :series="dataPourcentageBienService1"></apexchart>
+                       <apexchart type="pie" width="500" :options="chartOptions" :series="dataPourcentageBienService1"></apexchart>
                     </div>
                     
                    </div>
@@ -263,16 +226,16 @@ export default {
        dataPourcentageBienService1: [],
           chartOptions: {
             chart: {
-              width: 380,
+              width: 450,
               type: 'pie',
             },
-            labels: ['A', 'B', 'C', 'D','E','F','G'],
-            colors:['#00a9e6', '#f18383', '#0be525',"#f9cf7b","#819e2b","#ef85d8","#ff0000"],
+            labels: ['Non exécutés', 'En bonne exécutions', 'Achevés', 'Résilliés','Hors délai'],
+            colors:['#f439f7', '#0be525', '#e4fc0f',"#f20505","#f0c505"],
             responsive: [{
               breakpoint: 480,
               options: {
                 chart: {
-                  width: 200
+                  width: 300
                 },
                 legend: {
                   position: 'bottom'
@@ -381,12 +344,10 @@ budgetConsommerPersonnel(){
       }
 
       vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
+      vm.dataPourcentageBienService1.push(0);
+      vm.dataPourcentageBienService1.push(0);
+      vm.dataPourcentageBienService1.push(0);
+      vm.dataPourcentageBienService1.push(0);
 
       return "";
     },
@@ -736,6 +697,11 @@ formatageSomme:formatageSomme,
 .card {
     height: 100%;
     border:1px solid black !important;
+}
+
+.card12 {
+    height: 100%;
+    border:1px solid rgb(240, 240, 240) !important;
 }
 .blockquote {
     margin-bottom: 1rem;

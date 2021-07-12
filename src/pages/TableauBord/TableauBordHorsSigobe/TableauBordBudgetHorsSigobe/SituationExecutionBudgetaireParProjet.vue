@@ -28,7 +28,7 @@
 
            <!-- <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >CODE ACTIVITE<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -45,7 +45,7 @@
 
               <!-- <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >CODE SECTION<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -62,7 +62,7 @@
 
               <td>
 
-                <label style="color: #000; font-size: 14px; font-weight: bolder"
+                <label style="color: #000; font-size: 12px; font-weight: bolder"
                   >LIBELLE SECTION<a href="#" style="color: red"></a>
                 </label>
                 <model-list-select
@@ -115,7 +115,7 @@
       <p
         style="
           margin-left: 30px;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: bold;
           text-decoration: underline;
         "
@@ -158,90 +158,90 @@
 
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       color: #000;
                       font-weight: bold;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    ACTIVITE {{afficheAnnee}}
+                    ACTIVITE 
                     
                   </th>
                    <th>
-                    SOURCE DE FINANCEMENT {{afficheAnnee}}
+                    SOURCE DE FINANCEMENT 
                   </th>
 
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
                       background-color: #fbb203 !important;
                     "
                   >
-                 LIGNE {{afficheAnnee}}
+                 LIGNE 
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
                       background-color: #fbb203 !important;
                     "
                   >
-                 BUDGET INITIAL {{afficheAnnee}}
+                 BUDGET INITIAL 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                  MODIFICATION BUDGETAIRE {{afficheAnnee}}
+                  MODIFICATION BUDGETAIRE 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    BUDGET ACTUEL {{afficheAnnee}}
+                    BUDGET ACTUEL 
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANTS EXECUTES {{afficheAnnee}}
+                    MONTANTS EXECUTES 
                   </th>
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
                   >
-                    DISPONIBLE {{afficheAnnee}}
+                    DISPONIBLE 
                   </th>
                   <th
                     
                   >
-                    TAUX D’EXECUTION {{afficheAnnee}}
+                    TAUX D’EXECUTION 
                   </th>
                   
                 </tr>
@@ -318,7 +318,7 @@
 
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -329,7 +329,7 @@
                    
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       text-align: center;
                       color: #000;
@@ -340,7 +340,7 @@
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -351,7 +351,7 @@
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -362,7 +362,7 @@
                   </th>
                   <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -373,7 +373,7 @@
                   </th>
                 <th
                     style="
-                      font-size: 14px;
+                      font-size: 12px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
@@ -437,22 +437,22 @@
 
                   <td style=" text-align: right;color:#000" >
                   <button class="btn btn-danger taille" v-if="0 <  EviteNaNSection(GroupeSection[0].section_id) <= 25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{ EviteNaNSection(GroupeSection[0].section_id) }}
                         </span>
                       </button>
                       <button class="btn btn-warning taille" v-else-if="25 <  EviteNaNSection(GroupeSection[0].section_id) <= 50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{ EviteNaNSection(GroupeSection[0].section_id) }}
                         </span>
                       </button>
                        <button class="btn btn-success taille" v-else-if="50 <  EviteNaNSection(GroupeSection[0].section_id) <= 75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{ EviteNaNSection(GroupeSection[0].section_id) }}
                         </span>
                       </button>
                       <button class="btn btn-success taille" v-else-if="75 <  EviteNaNSection(GroupeSection[0].section_id) <= 100">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
+                        <span style="color:#fff;font-size: 12px;font-weight: bold;">
                           {{ EviteNaNSection(GroupeSection[0].section_id) }}
                         </span>
                       </button>
