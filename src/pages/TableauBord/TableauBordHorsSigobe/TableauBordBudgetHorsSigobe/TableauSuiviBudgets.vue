@@ -1,3 +1,4 @@
+
 <template>
   <div>
 <input  type="hidden" :value="triModificationBudgetdata"/>
@@ -181,7 +182,7 @@
       <div class="modal-body" id="printpdf">
           <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">ETAT D'EXECUTION DU BUDGET PAR UA ET TYPE DE FINANCEMENT</h2>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">ÉTAT D’EXECUTION DU BUDGET PAR UA ET PAR TYPE DE FINANCEMENT </h2>
           </tr>
         </table>
         <table class="table table-bordered table-striped">
@@ -980,7 +981,7 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td colspan="2"  style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
-                  <td colspan="2" style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE : </td>
+                  <td colspan="2" style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL: </td>
                       
 
                   <!-- <td style="text-left: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
