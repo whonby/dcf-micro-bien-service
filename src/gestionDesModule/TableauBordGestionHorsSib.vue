@@ -76,7 +76,7 @@
          
      
             </div>
-             <a href="#" style="color:#000" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a @click="Opprovisoire()"  href="#" style="color:#000" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
          
       </div>
@@ -105,7 +105,7 @@ en cours de traitement</h4>
          
      
             </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a  @click="OpprovisoireEncours()" href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
       </div>
       <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
@@ -130,7 +130,7 @@ en cours de traitement</h4>
               </table>
               <br>
             </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a @click="OpprovisoireRegul()" href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
       </div>
       <div class="centreVerticalement" style="width:250px;display: inline-block;height:200px">
@@ -155,7 +155,7 @@ en cours de traitement</h4>
               </table>
               <br>
             </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a @click="OpprovisoireNonRegul()" href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
       </div>
      
@@ -181,7 +181,7 @@ en cours de traitement</h4>
               </table>
               <br>
             </div>
-             <a href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
+             <a @click="OpprovisoireHorsDel()" href="#" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
       </div>
 
@@ -205,7 +205,7 @@ en cours de traitement</h4>
   <div id="front_videos">
     <div class="large-2">
       
-      <table class="table table-bordered table-striped force-overflow">
+  <table v-if="Opprovisoiredata == 1"  class="table table-bordered table-striped force-overflow">
   <thead>
     <tr>
       <th>Expéditeur</th>
@@ -217,111 +217,109 @@ en cours de traitement</h4>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    <tr v-for="tem in NbreDossierOpProvisoire" :key="tem.id">
+      <td>  </td>
+      <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
+      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
+      <td style="color:#000;"> {{tem.date_interim}} </td>
+      <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
+    </tr>   
   </tbody>
+  </table>
+  <table v-if="OpprovisoireDataRegu == 1"  class="table table-bordered table-striped force-overflow">
+  <thead>
+    <tr>
+      <th>Expéditeur</th>
+      <th>Montant OP</th>
+      <th>Bénéficiaires</th>
+      <th>Nature économiques</th>
+      <th>Date de visa CF</th>
+      <th>No OP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="tem in NbreOpRegularise" :key="tem.id">
+      <td>  </td>
+      <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
+      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
+      <td style="color:#000;"> {{tem.date_interim}} </td>
+      <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
+    </tr>   
+  </tbody>
+  </table>
+  <table v-if="OpprovisoireDataEnCours == 1"  class="table table-bordered table-striped force-overflow">
+  <thead>
+    <tr>
+      <th>Expéditeur</th>
+      <th>Montant OP</th>
+      <th>Bénéficiaires</th>
+      <th>Nature économiques</th>
+      <th>Date de visa CF</th>
+      <th>No OP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="tem in NbreDossierOpProvisoire" :key="tem.id">
+      <td>  </td>
+      <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
+      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
+      <td style="color:#000;"> {{tem.date_interim}} </td>
+      <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
+    </tr>   
+  </tbody>
+  </table>
+  <table v-if="OpprovisoireDataNonRegu == 1"  class="table table-bordered table-striped force-overflow">
+  <thead>
+    <tr>
+      <th>Expéditeur</th>
+      <th>Montant OP</th>
+      <th>Bénéficiaires</th>
+      <th>Nature économiques</th>
+      <th>Date de visa CF</th>
+      <th>No OP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="tem in NbreOpNonRegularise" :key="tem.id">
+      <td>  </td>
+      <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
+      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
+      <td style="color:#000;"> {{tem.date_interim}} </td>
+      <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
+    </tr>   
+  </tbody>
+  </table>
+  <table v-if="OpprovisoireHorsDelai == 1"  class="table table-bordered table-striped force-overflow">
+  <thead>
+    <tr>
+      <th>Expéditeur</th>
+      <th>Montant OP</th>
+      <th>Bénéficiaires</th>
+      <th>Nature économiques</th>
+      <th>Date de visa CF</th>
+      <th>No OP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="tem in DonneHorsDelai" :key="tem.id">
+      <td>  </td>
+      <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
+      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
+      <td style="color:#000;"> {{tem.date_interim}} </td>
+      <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
+    </tr>   
+  </tbody>
+  </table>
  
-</table>
 
     </div>
   </div>
 </div>
-
-
 
 </div>
 </div>
@@ -354,6 +352,11 @@ export default {
   },
   data(){
     return{
+      Opprovisoiredata:0,
+      OpprovisoireDataEnCours:0,
+      OpprovisoireDataRegu:0,
+      OpprovisoireDataNonRegu:0,
+      OpprovisoireHorsDelai:0,
       exercice_id:0,
       uniteAdministratives_id:0,
       text1:[],
@@ -414,7 +417,10 @@ created() {
                 "budgetEclate"
 
             ]),
-            
+             ...mapGetters("parametreGenerauxBudgetaire", [
+            "plans_budgetaires",
+            "derniereNivoPlanBudgetaire",
+          ]),
     ...mapGetters("bienService", [
       "getMandatPersonnaliserVise",
       "getMandatPersonnaliserPersonnel",
@@ -460,9 +466,6 @@ affichierTauxExecutionPersonnel() {
     },
 
 
-
-
-
 affichierBudgetDisponibleTransfert() {
       const val = parseFloat(this.afficherBudgetInitialTranferst) - parseFloat(this.budgetConsommerTransfert);
       
@@ -488,7 +491,9 @@ affichierTauxExecution() {
 //       return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
 // },
 NbreDossierOpProvisoire(){
-  if(this.exercice_id != 0){
+
+  if(this.Opprovisoiredata==1){
+      if(this.exercice_id != 0){
     return this.gettersgestionOrdrePaiement.filter(
       (tem) => 
       tem.type_ordre_paiement == 1 &&
@@ -505,39 +510,72 @@ NbreDossierOpProvisoire(){
       tem.type_ordre_paiement == 1 &&
       tem.unite_administrative_id == this.uniteAdministratives_id &&
       tem.exercie == this.anneeAmort)
-
   }
   else{
-    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1 || tem.diff_reg_op == 0)
+    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
+  }
+  }
+  else if(this.OpprovisoireDataEnCours == 1){
+    if(this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.exercice == this.anneeAmort)
+  } else if(this.uniteAdministratives_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id)
+
+  }else if(this.uniteAdministratives_id != 0 && this.exercice_id != 0){
+    return this.gettersgestionOrdrePaiement.filter(
+      (tem) => 
+      tem.type_ordre_paiement == 1 &&
+      tem.unite_administrative_id == this.uniteAdministratives_id &&
+      tem.exercie == this.anneeAmort)
+  }
+  else{
+    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
+  }
+  }
+  else{
+    return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
   }
 },
 lenghtOpProvisoire(){
   return this.NbreDossierOpProvisoire.length
 },
 NbreOpRegularise(){
-  if(this.exercice_id != 0){
+  if(this.OpprovisoireDataRegu == 1){
+     return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 1)
+  }
+    else if(this.exercice_id != 0){
     return this.gettersgestionOrdrePaiement.filter(
       (tem) => 
       tem.diff_reg_op == 1 && 
       tem.exercice == this.anneeAmort)
-  }else if(this.uniteAdministratives_id != 0){
+    }else if(this.uniteAdministratives_id != 0){
     return this.gettersgestionOrdrePaiement.filter((tem) =>
       tem.diff_reg_op == 1 &&
       tem.unite_administrative_id == this.uniteAdministratives_id)
-  }else if(this.uniteAdministratives_id != 0 && this.exercice_id != 0){
+    }else if(this.uniteAdministratives_id != 0 && this.exercice_id != 0){
     return this.gettersgestionOrdrePaiement.filter((tem) =>
         tem.diff_reg_op == 1 && 
         tem.unite_administrative_id == this.uniteAdministratives_id &&
         tem.exercice == this.anneeAmort)
   }
   return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 1)
-},
+  },
+
 NbreOpRegulariseLength(){
   return this.NbreOpRegularise.length
 },
 
 NbreOpNonRegularise(){
-   if(this.exercice_id != 0){
+  if(this.OpprovisoireDataNonRegu == 1){
+    return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 0)
+  }
+   else if(this.exercice_id != 0){
     return this.gettersgestionOrdrePaiement.filter(
       (tem) => 
       tem.diff_reg_op == 0 && 
@@ -660,7 +698,28 @@ afficherBudgetInitialTranferst() {
     },
 
 
-
+ libelleLigneEconomique() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find((qtreel) => qtreel.id == id);
+          if (qtereel) {
+            return qtereel.code.concat("    ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+ LibelleUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.uniteAdministratives.find((qtreel) => qtreel.id == id);
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
 
 
 // budgetConsommerTransfert(){
@@ -890,8 +949,15 @@ affichierTauxExecutionInvestissement() {
   TauxOpProvisHorsDelai(){
       return ((this.opHorsDelaiLength / this.lenghtOpProvisoire) * 100).toFixed(2)
   },
+  DonneHorsDelai(){
+     if(this.OpprovisoireHorsDelai == 1){
+        return this.gettersgestionOrdrePaiement.filter((tem) => tem.date_interim != null)
+     }
+     return 0
+  },
+ 
    MontantOpHorsDelai(){
-        return this.gettersgestionOrdrePaiement.filter(
+      return this.gettersgestionOrdrePaiement.filter(
       (tem) => 
       tem.date_interim != null
       ).reduce(
@@ -929,6 +995,56 @@ affichierTauxExecutionInvestissement() {
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
+    OpprovisoireEncours(){
+        if(this.OpprovisoireDataEnCours == 0){
+          this.Opprovisoiredata = 0;
+          this.OpprovisoireDataNonRegu=0;
+          this.OpprovisoireDataRegu = 0;
+          this.OpprovisoireHorsDelai=0;
+         return this.OpprovisoireDataEnCours = 1;
+      }
+    },
+    OpprovisoireRegul(){
+        if(this.OpprovisoireDataRegu == 0){
+        this.Opprovisoiredata = 0;
+        this.OpprovisoireDataNonRegu=0;
+         this.OpprovisoireDataEnCours = 0;
+         this.OpprovisoireHorsDelai=0;
+        return  this.OpprovisoireDataRegu = 1;
+      }
+    },
+    OpprovisoireNonRegul(){
+        if(this.OpprovisoireDataNonRegu == 0){
+          this.Opprovisoiredata = 0;
+          this.OpprovisoireDataEnCours=0;
+          this.OpprovisoireHorsDelai=0;
+          this.OpprovisoireDataRegu = 0;
+         return this.OpprovisoireDataNonRegu = 1;
+      }
+    },
+    OpprovisoireHorsDel(){
+        if(this.OpprovisoireHorsDelai == 0){
+          this.Opprovisoiredata = 0;
+          this.OpprovisoireDataEnCours=0
+          this.OpprovisoireDataRegu = 0;
+          this.OpprovisoireDataNonRegu = 0;
+         return this.OpprovisoireHorsDelai = 1;
+      }
+    },
+    Opprovisoire(){
+      if(this.Opprovisoiredata == 0){
+        this.OpprovisoireDataRegu = 0;
+        this.OpprovisoireHorsDelai=0;
+        this.OpprovisoireDataNonRegu=0;
+        this.OpprovisoireDataEnCours =0;
+        this.OpprovisoireHorsDelai=0;
+        return this.Opprovisoiredata = 1;
+      }
+    },
+   
+    
+
+
  AjouterJ(dat, day){
       let d = new Date(dat)
       d.setDate(d.getDate() + day)

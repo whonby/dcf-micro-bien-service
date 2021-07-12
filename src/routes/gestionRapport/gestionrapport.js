@@ -23,8 +23,14 @@ import SituationExecution from "../../pages/Gestion_des_Rapports/BudgetExecuteHo
 import SituationExecutionBailActi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionBailActi.vue";
 import StuationExecutionBudgetByBaillActivi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/StuationExecutionBudgetByBaillActivi.vue";
 import SituationExecutionBudgetRecapByBailActivi from "../../pages/Gestion_des_Rapports/BudgetExecuteHorsSib/SituationExecutionBudgetRecapByBailActivi.vue";
+import ficheSuiviEntreprise from "../../pages/Gestion_des_Rapports/ficheSuiviEntreprise.vue";
 const gestionrapport = [
 
+    {
+        path: "/suivi_des_entreprises",
+        name: "suivi_des_entreprises",
+        component: ficheSuiviEntreprise
+    },
     {
         path: "/SituationExecutionBudgetRecapByBailActivi",
         name: "SituationExecutionBudgetRecapByBailActivi",

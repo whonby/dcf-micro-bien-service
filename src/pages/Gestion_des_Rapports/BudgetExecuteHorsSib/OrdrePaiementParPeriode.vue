@@ -1033,7 +1033,7 @@ TableauCode(){
               (qtreel) =>
                 (qtreel.activite_id == id &&
                   qtreel.diff_op == null &&
-                  qtreel.decision_cf == 8 &&
+                  qtreel.decision_cf == 8 &&  
                   qtreel.exercice==this.anneeAmort &&
                   qtreel.ligne_economique_id == this.plans_budgetaire_id)
                    ||
