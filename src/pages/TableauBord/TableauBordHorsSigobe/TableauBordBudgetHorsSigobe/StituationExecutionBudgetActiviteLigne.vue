@@ -249,6 +249,12 @@
                      <i class=" icon-filter"></i>
                       </button>
                     BUDGET INITIAL
+                     <button @click="InputMontantInitial">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="montant_Initial" class="span" v-show="montantInitialdata == true"></money>
                     
                   </th>
                    <th
@@ -263,7 +269,15 @@
                   <button @click="trivariation()">
                      <i class=" icon-filter"></i>
                       </button>
+
+                        <button @click="InputMontantModif">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="montant_mofification" class="span" 
+                     v-show="montantmodificationdata == true"></money>
                     MODIFICATION BUDGETAIRE
+                    
                   </th>
                    
                   <th
@@ -279,7 +293,16 @@
                   <button @click="tribudgetactuel()">
                      <i class=" icon-filter"></i>
                       </button>
+
+                       <button @click="InputBudgetActuel">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Budget_Actuel" class="span" 
+                     v-show="InputBudgetActueldata == true"></money>
                  BUDGET ACTUEL
+
+                
                   </th>
                   <th
                     style="
@@ -293,7 +316,15 @@
                   <button @click="trimontantexecute()">
                      <i class=" icon-filter"></i>
                       </button>
+
+                      <button @click="InputMontantExecute">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Montant_Execute" class="span" 
+                     v-show="InputMontantExecutedata == true"></money>
                   MONTANT EXECUTE
+                  
                   </th>
                    <th
                     style="
@@ -339,7 +370,16 @@
                   <button @click="triMontantOpProNonRegu()">
                      <i class=" icon-filter"></i>
                       </button>
+
+                       <button @click="InputMontantOpProvNonReg">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Montant_Op_ProvNon_Reg" class="span" 
+                     v-show="InputMontantOpProvNonRegdata == true"></money>
                     MONTANT OP PROVISOIRE NON REGULARISE
+
+                     
                   </th>
  <th
                     style="
@@ -353,7 +393,16 @@
                   <button @click="triNombreOpPro()">
                      <i class=" icon-filter"></i>
                       </button>
+
+                      <button @click="InputTauxOpProvi">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Taux_Op_Provi" class="span" 
+                     v-show="InputTauxOpProvidata == true"></money>
                     TOTAL OP PROVISOIRE
+
+                      
                   </th>
                      <th
                     style="
@@ -367,7 +416,16 @@
                   <button @click="triNBOpProNonRegu()">
                      <i class=" icon-filter"></i>
                       </button> 
+
+                       <button @click="InputNbreOpProvNonREgu">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nbre_OpProvNon_REgu" class="span" 
+                     v-show="InputNbreOpProvNonREgudata == true"></money>
                     NB OP PROVISOIRE NON REGULARISE(S)
+
+                     
                   </th>
                    <th
                     style="
@@ -381,7 +439,16 @@
                   <button @click="triTauxOpProNonRegu()">
                      <i class=" icon-filter"></i>
                       </button>
+
+                       <button @click="InputTauxOpProNonREg">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Taux_OpProNon_REg" class="span" 
+                     v-show="InputTauxOpProNonREgdata == true"></money>
                     TAUX OP PROVISOIRE NON REGULARISE(S)
+
+                     
                   </th>
                    <th
                     style="
@@ -395,7 +462,16 @@
                   <button @click="triDisponible()">
                      <i class=" icon-filter"></i> 
                       </button>
+
+                       <button @click="InputDisponible">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Input_Disponible" class="span" 
+                     v-show="InputDisponibledata == true"></money>
                     DISPONIBLE
+
+                     
 
                   <th
                     style="
@@ -409,7 +485,16 @@
                   <button @click="triTauxExecution()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputTauxExecution">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Taux_Execution" class="span" 
+                     v-show="InputTauxExecutiondata == true"></money>
                     TAUX D'EXECUTION
+
+                     
                   </th>
                   <!-- <th
                     style="
@@ -426,7 +511,7 @@
                   
                 </tr>
               </thead>
-         <tbody  v-for="ListeActivite in partition(TriaffichageUniteAdminstrative, size)[page]"
+         <tbody  v-for="ListeActivite in partition(FiltreLeTableauPrincipal, size)[page]"
                 :key="ListeActivite.id">
                 <tr>
                   <td>
@@ -758,7 +843,7 @@
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(TriaffichageUniteAdminstrative, size).length"
+          v-for="(titre, index) in partition(FiltreLeTableauPrincipal, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -767,7 +852,7 @@
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(TriaffichageUniteAdminstrative, size).length - 1 }"
+          :class="{ disabled: page == partition(FiltreLeTableauPrincipal, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -1028,6 +1113,28 @@ inputLigne:false,
       triTauxOpProNonRegudata:0,
       triDisponibledata:0,
       triTauxExecutiondata:0,
+      montantInitialdata:false,
+      montantmodificationdata:false,
+      InputBudgetActueldata:false,
+      InputMontantExecutedata:false,
+      InputMontantOpProvNonRegdata:false,
+      InputTauxOpProvidata:false,
+      InputNbreOpProvNonREgudata:false,
+      InputTauxOpProNonREgdata:false,
+      InputDisponibledata:false,
+      InputTauxExecutiondata:false,
+
+      Taux_Execution:0,
+      Input_Disponible:0,
+      Taux_OpProNon_REg:0,
+      Nbre_OpProvNon_REgu:0,
+      Taux_Op_Provi:0,
+      Montant_Op_ProvNon_Reg:0,
+      Montant_Execute:0,
+      Budget_Actuel:0,
+      montant_mofification:0,
+      montant_Initial:0,
+
       
 
       editMandat1: {
@@ -1363,6 +1470,38 @@ inputLigne:false,
       });
     },
 
+
+    FiltreLeTableauPrincipal(){
+  if(this.montant_Initial!=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.MontantVote==this.montant_Initial)
+  }else if(this.montant_mofification!=0){
+ return this.TriaffichageUniteAdminstrative.filter(item=>item.Variation==this.montant_mofification)
+  }else if(this.Budget_Actuel!=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.Budgetactuel==this.Budget_Actuel)
+  }else if(this.Montant_Execute !=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.MontantExecute==this.Montant_Execute)
+  }else if(this.Montant_Op_ProvNon_Reg !=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.MontantOpProvisoireNonRegu==this.Montant_Op_ProvNon_Reg)
+
+  }else if(this.Taux_Op_Provi!=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.NombreOpProvisoire==this.Taux_Op_Provi)
+
+  }else if(this.Nbre_OpProvNon_REgu!=0){
+     return this.TriaffichageUniteAdminstrative.filter(item=>item.NombreOpProvisoireNonRegu==this.Nbre_OpProvNon_REgu)
+  }else if(this.Taux_OpProNon_REg!=0){
+     return this.TriaffichageUniteAdminstrative.filter(item=>item.TauxOpProvisoireNonRegu==this.Taux_OpProNon_REg)
+  }
+  else if(this.Input_Disponible!=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.Disponible==this.Input_Disponible)
+  }else if(this.Taux_Execution!=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.TauxExecution==this.Taux_Execution)
+  }
+  
+  else{
+    return this.TriaffichageUniteAdminstrative
+  }
+
+},
     // fin test de tri
 
 
@@ -2139,6 +2278,103 @@ GrandeNature() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    // les recherches
+
+    InputMontantInitial(){
+      if(this.montantInitialdata == false){
+        this.montantInitialdata = true
+      }else{
+        this.montantInitialdata = false;
+        this.montant_Initial = 0;
+      }
+ },
+
+  InputMontantModif(){
+      if(this.montantmodificationdata == false){
+        this.montantmodificationdata = true
+      }else{
+        this.montantmodificationdata = false;
+        this.montant_mofification = 0;
+      }
+ },
+
+ InputBudgetActuel(){
+      if(this.InputBudgetActueldata == false){
+        this.InputBudgetActueldata = true
+      }else{
+        this.InputBudgetActueldata = false;
+        this.Budget_Actuel = 0;
+      }
+ },
+
+ InputMontantExecute(){
+      if(this.InputMontantExecutedata == false){
+        this.InputMontantExecutedata = true
+      }else{
+        this.InputMontantExecutedata = false;
+        this.Montant_Execute = 0;
+      }
+ },
+
+ InputMontantOpProvNonReg(){
+      if(this.InputMontantOpProvNonRegdata == false){
+        this.InputMontantOpProvNonRegdata = true
+      }else{
+        this.InputMontantOpProvNonRegdata = false;
+        this.Montant_Op_ProvNon_Reg = 0;
+      }
+ },
+
+ InputTauxOpProvi(){
+      if(this.InputTauxOpProvidata == false){
+        this.InputTauxOpProvidata = true
+      }else{
+        this.InputTauxOpProvidata = false;
+        this.Taux_Op_Provi = 0;
+      }
+ },
+
+ InputNbreOpProvNonREgu(){
+      if(this.InputNbreOpProvNonREgudata == false){
+        this.InputNbreOpProvNonREgudata = true
+      }else{
+        this.InputNbreOpProvNonREgudata = false;
+        this.Nbre_OpProvNon_REgu = 0;
+      }
+ },
+
+ InputTauxOpProNonREg(){
+      if(this.InputTauxOpProNonREgdata == false){
+        this.InputTauxOpProNonREgdata = true
+      }else{
+        this.InputTauxOpProNonREgdata = false;
+        this.Taux_OpProNon_REg = 0;
+      }
+ },
+
+ InputDisponible(){
+      if(this.InputDisponibledata == false){
+        this.InputDisponibledata = true
+      }else{
+        this.InputDisponibledata = false;
+        this.Input_Disponible = 0;
+      }
+ },
+
+ InputTauxExecution(){
+      if(this.InputTauxExecutiondata == false){
+        this.InputTauxExecutiondata = true
+      }else{
+        this.InputTauxExecutiondata = false;
+        this.Taux_Execution = 0;
+      }
+ },
+
+
+
+
+    //fin des recherches
 
      tribudgetinitial(){
         if(this.tribudgetinitialdata==0){

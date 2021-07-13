@@ -76,9 +76,12 @@
                  <th></th>
                 
                    <th>
-                     <!-- <button @click="trilibelleBailleur()">
-                     <i class=" icon-filter"></i> 
-                    </button> -->
+                      <button @click="InputLibelleBailleur">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Libelle_bailleur" class="span" 
+                     v-show="InputLibelleBailleurdata == true"></money>
                     BAILLEUR/SECTION 
                   </th>
                    
@@ -95,6 +98,13 @@
                   <button @click="triBudgetInitial()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputBudgetInitial">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Budget_Initial" class="span" 
+                     v-show="InputBudgetInitialdata == true"></money>
                  BUDGET INITIAL (FCFA) 
                  
                   </th>
@@ -110,6 +120,13 @@
                   <button @click="trivariation()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                    <button @click="InputVariation">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Input_Variation" class="span" 
+                     v-show="InputVariationdata == true"></money>
                   MODIFICATION BUDGETAIRE (FCFA) 
                   </th>
                   
@@ -125,6 +142,13 @@
                   <button @click="triBudgetActuel()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                    <button @click="InputBudgetActuel">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Budget_Actuel" class="span" 
+                     v-show="InputBudgetActueldata == true"></money>
                     BUDGET ACTUEL (FCFA)  
                   </th>
                   <th
@@ -139,6 +163,13 @@
                   <button @click="triMontantExecution()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputMontantExecute">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Montant_Execute" class="span" 
+                     v-show="InputMontantExecutedata == true"></money>
                     MONTANTS EXECUTES (FCFA) 
                   </th>
                   
@@ -154,6 +185,13 @@
                   <button @click="triDisponible()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputDisponible">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Input_Disponible" class="span" 
+                     v-show="InputDisponibledata == true"></money>
                     DISPONIBLE (FCFA) 
                   </th>
                   <th
@@ -162,12 +200,19 @@
                   <button @click="triMarcheEnCours()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputNbreMarche">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nbre_Marche" class="span" 
+                     v-show="InputNbreMarchedata == true"></money>
                     NOMBRE DE MARCHE EN COURS 
                   </th>
                   
                 </tr>
               </thead>
-            <tbody v-for="GroupeSourceFinancement in partition(TriaffichageUniteAdminstrative, size)[page]" :key="GroupeSourceFinancement.id">
+            <tbody v-for="GroupeSourceFinancement in partition(FiltreLeTableauPrincipal, size)[page]" :key="GroupeSourceFinancement.id">
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSourceFinancement.id)">
@@ -252,7 +297,7 @@
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(TriaffichageUniteAdminstrative, size).length"
+          v-for="(titre, index) in partition(FiltreLeTableauPrincipal, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -261,7 +306,7 @@
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(TriaffichageUniteAdminstrative, size).length - 1 }"
+          :class="{ disabled: page == partition(FiltreLeTableauPrincipal, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -324,7 +369,22 @@ export default {
       triBudgetActueldata:0,
       triMontantExecutiondata:0,
       triDisponibledata:0,
-      triMarcheEnCoursdata:0
+      triMarcheEnCoursdata:0,
+
+      InputLibelleBailleurdata:false,
+      InputBudgetInitialdata:false,
+      InputVariationdata:false,
+      InputBudgetActueldata:false,
+      InputMontantExecutedata:false,
+      InputDisponibledata:false,
+      InputNbreMarchedata:false,
+      Libelle_bailleur:0,
+      Budget_Initial:0,
+      Input_Variation:0,
+      Budget_Actuel:0,
+      Montant_Execute:0,
+      Input_Disponible:0,
+      Nbre_Marche:0,
     };
   },
   mounted(){
@@ -452,6 +512,32 @@ export default {
         return objet;
       });
     },
+
+
+  FiltreLeTableauPrincipal(){
+    if(this.Libelle_bailleur!=0){
+      return this.TriaffichageUniteAdminstrative.filter(item=>item.libelle==this.Libelle_bailleur)
+    }else if(this.Budget_Initial!=0){
+  return this.TriaffichageUniteAdminstrative.filter(item=>item.MontantVote==this.Budget_Initial)
+    }else if(this.Input_Variation!=0){
+      return this.TriaffichageUniteAdminstrative.filter(item=>item.Variation==this.Input_Variation)
+    }else if(this.Budget_Actuel!=0){
+      return this.TriaffichageUniteAdminstrative.filter(item=>item.Budgetactuel==this.Budget_Actuel)
+    }else if(this.Montant_Execute !=0){
+      return this.TriaffichageUniteAdminstrative.filter(item=>item.MontantExecute==this.Montant_Execute)
+
+    }else if(this.Input_Disponible!=0){
+      return this.TriaffichageUniteAdminstrative.filter(item=>item.Disponible==this.Input_Disponible)
+
+    }else if(this.Nbre_Marche!=0){
+      return this.TriaffichageUniteAdminstrative.filter(item=>item.MarcheEnCours==this.Nbre_Marche)
+    }
+    
+    else{
+      return this.TriaffichageUniteAdminstrative
+    }
+
+},
 
 
        BudgetInitial() {
@@ -1478,6 +1564,69 @@ listeParLiNombreBailleurParLigne() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    InputLibelleBailleur(){
+      if(this.InputLibelleBailleurdata == false){
+        this.InputLibelleBailleurdata = true
+      }else{
+        this.InputLibelleBailleurdata = false;
+        this.Libelle_bailleur = 0;
+      }
+ },
+
+ InputBudgetInitial(){
+      if(this.InputBudgetInitialdata == false){
+        this.InputBudgetInitialdata = true
+      }else{
+        this.InputBudgetInitialdata = false;
+        this.Budget_Initial = 0;
+      }
+ },
+
+ InputVariation(){
+      if(this.InputVariationdata == false){
+        this.InputVariationdata = true
+      }else{
+        this.InputVariationdata = false;
+        this.Input_Variation = 0;
+      }
+ },
+
+ InputBudgetActuel(){
+      if(this.InputBudgetActueldata == false){
+        this.InputBudgetActueldata = true
+      }else{
+        this.InputBudgetActueldata = false;
+        this.Budget_Actuel = 0;
+      }
+ },
+
+  InputMontantExecute(){
+      if(this.InputMontantExecutedata == false){
+        this.InputMontantExecutedata = true
+      }else{
+        this.InputMontantExecutedata = false;
+        this.Montant_Execute = 0;
+      }
+ },
+
+ InputDisponible(){
+      if(this.InputDisponibledata == false){
+        this.InputDisponibledata = true
+      }else{
+        this.InputDisponibledata = false;
+        this.Input_Disponible = 0;
+      }
+ },
+
+ InputNbreMarche(){
+      if(this.InputNbreMarchedata == false){
+        this.InputNbreMarchedata = true
+      }else{
+        this.InputNbreMarchedata = false;
+        this.Nbre_Marche = 0;
+      }
+ },
 
 
 
