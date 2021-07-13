@@ -1,6 +1,23 @@
 recupereIDactivite
 <template>
   <div>
+    <input  type="hidden" :value="Tri1data"/>
+    <input  type="hidden" :value="Tri2data"/>
+    <input  type="hidden" :value="Tri3data"/>
+    <input  type="hidden" :value="Tri4data"/>
+    <input  type="hidden" :value="Tri5data"/>
+    <input  type="hidden" :value="Tri6data"/>
+    <input  type="hidden" :value="Tri7data"/>
+    <input  type="hidden" :value="Tri8data"/>
+    <input  type="hidden" :value="Tri9data"/>
+    <input  type="hidden" :value="Tri10data"/>
+    <input  type="hidden" :value="Tri11data"/>
+    <input  type="hidden" :value="Tri12data"/>
+    <input  type="hidden" :value="Tri13data"/>
+    <input  type="hidden" :value="Tri14data"/>
+    <input  type="hidden" :value="Tri15data"/>
+    <input  type="hidden" :value="Tri16data"/>
+
    <table class="table table-striped">
           <tbody>
             <tr>
@@ -202,6 +219,9 @@ recupereIDactivite
                       width :8%
                     "
                   >
+                  <button @click="Tri1()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                  Nombre 
                  
                   </th>
@@ -214,6 +234,9 @@ recupereIDactivite
                       background-color: #ddebf7 !important;
                     "
                   >
+                  <button @click="Tri2()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                   Montant 
                   </th>
                   
@@ -226,6 +249,9 @@ recupereIDactivite
                       background-color: #fff2cc !important;
                     "
                   >
+                  <button @click="Tri3()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Nombres  
                   </th>
                   <th
@@ -237,6 +263,9 @@ recupereIDactivite
                       background-color: #fff2cc !important;
                     "
                   >
+                  <button @click="Tri4()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Montant 
                   </th>
                   
@@ -249,6 +278,9 @@ recupereIDactivite
                       background-color: #c6e0b4 !important;
                     "
                   >
+                  <button @click="Tri5()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Nombre 
                   </th>
                   <th
@@ -260,6 +292,9 @@ recupereIDactivite
                       background-color: #c6e0b4 !important;
                     "
                   >
+                  <button @click="Tri6()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Montant 
                   </th>
                   <th
@@ -271,6 +306,9 @@ recupereIDactivite
                       background-color: #fce4d6 !important;
                     "
                   >
+                  <button @click="Tri7()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Nombre 
                   </th>
                   <th
@@ -282,6 +320,9 @@ recupereIDactivite
                       background-color: #fce4d6 !important;
                     "
                   >
+                  <button @click="Tri8()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Montant Total Marchés 
                   </th>
                   <th
@@ -293,6 +334,9 @@ recupereIDactivite
                       background-color: #fce4d6 !important;
                     "
                   >
+                  <button @click="Tri9()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Montants Exécutés 
                   </th>
                   <th 
@@ -304,6 +348,9 @@ recupereIDactivite
                       background-color: #fce4d6 !important;
                     "
                   >
+                  <button @click="Tri10()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Reste à Exécuter 
                   </th>
                   <th
@@ -315,6 +362,9 @@ recupereIDactivite
                       background-color: #b4c6e7 !important;
                     "
                   >
+                  <button @click="Tri11()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Nombre  
                   </th>
                   <th
@@ -326,6 +376,9 @@ recupereIDactivite
                       background-color: #b4c6e7 !important;
                     "
                   >
+                  <button @click="Tri12()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Reste à Exécuter 
                   </th>
                   <th
@@ -337,6 +390,9 @@ recupereIDactivite
                       background-color: #b4c6e7 !important;
                     "
                   >
+                  <button @click="Tri13()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Taux 
                   </th>
                   <th
@@ -348,6 +404,9 @@ recupereIDactivite
                       background-color: #e6e6e6 !important;
                     "
                   >
+                  <button @click="Tri14()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Nombre 
                   </th>
                   <th
@@ -359,6 +418,9 @@ recupereIDactivite
                       background-color: #e6e6e6 !important;
                     "
                   >
+                  <button @click="Tri15()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Reste à Exécuter 
                   </th>
                   <th
@@ -370,41 +432,89 @@ recupereIDactivite
                       background-color: #e6e6e6 !important;
                     "
                   >
+                  <button @click="Tri16()">
+                     <i class=" icon-filter"></i> 
+                    </button>
                     Taux 
                   </th>
                 </tr>
               </thead>
               <br>
-       <tbody v-for="GroupeSourceFinancement in partition(ListeDesSourceFinancement, size)[page]" :key="GroupeSourceFinancement.id">
+       <tbody v-for="GroupeSourceFinancement1 in TriaffichageUniteAdminstrative" :key="GroupeSourceFinancement1.id">
                 <tr>
                   <td>
-                    <button @click="ShowMyUa(GroupeSourceFinancement[0].source_financement_id)">
+                    <button @click="ShowMyUa(GroupeSourceFinancement1.id)">
                      <i class="icon-eye-open"></i> </button>
                   </td>
                   
                   
 
-                <td v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'" colspan="2">
-                    {{LibelleSourceFinancement(GroupeSourceFinancement[0].source_financement_id)  }}          <span style="font-size:25px">({{AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id).length}})</span>   
+                <td v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'" colspan="2">
+                    {{GroupeSourceFinancement1.libellebailleur}}<span style="font-size:25px">({{AfficheUaGroupe(GroupeSourceFinancement1.id).length}})</span>   
                     
                   </td>
-                  <td style="text-align:right;" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarchePlanifierGlobalParSection(GroupeSourceFinancement[0].source_financement_id)}}</td>
+
+                  <td style="text-align:right;" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.NombrePlani}}
+                  </td>
                  
-                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantMarchePlanifierGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheContratualisationGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantMarcheContratualisationGlobalParSourceFiancement(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheAttribueGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantMarcheAttribueGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheExecutionGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(TotalMarcheGlobal(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantExecuteGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(TotalMarcheGlobal(GroupeSourceFinancement[0].source_financement_id))-(parseFloat(MontantExecuteGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id))))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheSuppenduGlobalParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSourceFinancementMarcheEnSouffrance(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{TauxMarcheSouffranceParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{NombreMarcheResilierParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSourceFinancementMarcheResilier(GroupeSourceFinancement[0].source_financement_id)))}}</td>
-<td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id ? 'graybg' : 'whitebg'"  colspan="">{{TauxMarcheResilierParSourceFinancement(GroupeSourceFinancement[0].source_financement_id)}}</td>
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.MontantPlani))}}
+                    </td>
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.NombreContract}}
+                    </td>
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.MontantContract))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.NombreAttribue}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.MontantAttribue))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.NombreEnCoursExé}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.MontantEnCoursExé))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.MontantExécutéEnCoursExé))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.ResteAPayerEnCoursExé))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.NombreSoufrance}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.ResteAExécutéSoufrance))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.TauxSoufrance}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.NombreResillié}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement1.ResteAExécutéResillié))}}
+                    </td>
+
+                  <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement1.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{GroupeSourceFinancement1.TauxResillié}}
+                    </td>
 
 
 <!-- <td>
@@ -425,7 +535,7 @@ recupereIDactivite
   -->
                 </tr>
                 <br>
-                <tr v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement[0].source_financement_id)" :key="GroupeUa" v-show="recupereIDactivite==GroupeSourceFinancement[0].source_financement_id">
+                <tr v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement1.id)" :key="GroupeUa" v-show="recupereIDactivite==GroupeSourceFinancement1.id">
                   <td></td>
                  
                   
@@ -437,24 +547,24 @@ recupereIDactivite
                   
                   <td >
                     {{Libellesection(GroupeUa)}}</td>
-                <td style="text-align:right" >{{NombreMarchePlanifierParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
-              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarchePlanifierParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-              <td style="text-align:right">{{NombreMarcheContratualisationParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
-              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarcheContratualisationParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(NombreMarcheAttribueParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarcheAttribueParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{NombreMarcheExecutionParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantTotalMarche(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+                <td style="text-align:right" >{{NombreMarchePlanifierParSection(GroupeSourceFinancement1.id,GroupeUa)}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarchePlanifierParSection(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{NombreMarcheContratualisationParSection(GroupeSourceFinancement1.id,GroupeUa)}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarcheContratualisationParSection(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(NombreMarcheAttribueParSection(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantMarcheAttribueParSection(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{NombreMarcheExecutionParSection(GroupeSourceFinancement1.id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantTotalMarche(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
           
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSection(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
             
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantRestantParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{NombreMarcheSuppenduParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSectionMarcheEnSouffrance(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{MontantTauxMarcheSouffrance(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
-             <td style="text-align:right">{{NombreMarcheResilierParSection(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
-             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSectionMarcheResilier(GroupeSourceFinancement[0].source_financement_id,GroupeUa)))}}</td>
-             <td style="text-align:right">{{TauxMarcheResilier(GroupeSourceFinancement[0].source_financement_id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantRestantParSection(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{NombreMarcheSuppenduParSection(GroupeSourceFinancement1.id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSectionMarcheEnSouffrance(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{MontantTauxMarcheSouffrance(GroupeSourceFinancement1.id,GroupeUa)}}</td>
+             <td style="text-align:right">{{NombreMarcheResilierParSection(GroupeSourceFinancement1.id,GroupeUa)}}</td>
+             <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantExecuteParSectionMarcheResilier(GroupeSourceFinancement1.id,GroupeUa)))}}</td>
+             <td style="text-align:right">{{TauxMarcheResilier(GroupeSourceFinancement1.id,GroupeUa)}}</td>
              
               
                 
@@ -474,13 +584,13 @@ recupereIDactivite
             </table> -->
       </div>
        
-          <div class="pagination alternate">
+          <!-- <div class="pagination alternate">
       <ul>
         <li :class="{ disabled: page == 0 }">
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(ListeDesSourceFinancement, size).length"
+          v-for="(titre, index) in partition(TriaffichageUniteAdminstrative, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -489,12 +599,12 @@ recupereIDactivite
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(ListeDesSourceFinancement, size).length - 1 }"
+          :class="{ disabled: page == partition(TriaffichageUniteAdminstrative, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
       </ul>
-    </div>
+    </div> -->
     </div>
 
     
@@ -545,11 +655,27 @@ export default {
       verifShome:0,
       recupereIDactivite:"",
       recupereIDSection:"",
-      source_financement_id1:0
+      source_financement_id1:0,
+      Tri1data:0,
+      Tri2data:0,
+      Tri3data:0,
+      Tri4data:0,
+      Tri5data:0,
+      Tri6data:0,
+      Tri7data:0,
+      Tri8data:0,
+      Tri9data:0,
+      Tri10data:0,
+      Tri11data:0,
+      Tri12data:0,
+      Tri13data:0,
+      Tri14data:0,
+      Tri15data:0,
+      Tri16data:0,
     };
   },
   mounted(){
-    console.log("hello word")
+    //console.log("hello word")
     // console.log(this.budgetEclate)
     console.log(this.MontantBudgetActuel())
     console.log(this.MontantBudgetExecuté())
@@ -708,13 +834,28 @@ export default {
       return this.ListeDesSourceFinancement.map(function (value) {
         let objet = {
            id:value[0].source_financement_id,
-           libelle:vm.LibelleSourceFinancement(value[0].source_financement_id),
-           MontantVote:vm.BudgetInitial(value[0].source_financement_id),
-           Variation:vm.MontantReamenagerBailleur(value[0].source_financement_id),
-           Budgetactuel:vm.BudgetActuelBailleur(value[0].source_financement_id),
-           MontantExecute:vm.MontantBudgetExecuté1Bailleur(value[0].source_financement_id),
-           Disponible:vm.DisponibleBailleur(value[0].source_financement_id),
-           MarcheEnCours:vm.MarcheEnCoursbailleur(value[0].source_financement_id),
+           libellebailleur:vm.LibelleSourceFinancement(value[0].source_financement_id),
+           NombrePlani:vm.NombreMarchePlanifierGlobalParSection(value[0].source_financement_id),
+           MontantPlani:vm.MontantMarchePlanifierGlobalParSourceFinancement(value[0].source_financement_id),
+
+           NombreContract:vm.NombreMarcheContratualisationGlobalParSourceFinancement(value[0].source_financement_id),
+           MontantContract:vm.MontantMarcheContratualisationGlobalParSourceFiancement(value[0].source_financement_id),
+
+           NombreAttribue:vm.NombreMarcheAttribueGlobalParSourceFinancement(value[0].source_financement_id),
+           MontantAttribue:vm.MontantMarcheAttribueGlobalParSourceFinancement(value[0].source_financement_id),
+
+           NombreEnCoursExé:vm.NombreMarcheExecutionGlobalParSourceFinancement(value[0].source_financement_id),
+           MontantEnCoursExé:vm.TotalMarcheGlobal(value[0].source_financement_id),
+           MontantExécutéEnCoursExé:vm.MontantExecuteGlobalParSourceFinancement(value[0].source_financement_id),
+           ResteAPayerEnCoursExé:vm.RestePayerEnCoursExé(value[0].source_financement_id),
+
+           NombreSoufrance:vm.NombreMarcheSuppenduGlobalParSourceFinancement(value[0].source_financement_id),
+           ResteAExécutéSoufrance:vm.MontantExecuteParSourceFinancementMarcheEnSouffrance(value[0].source_financement_id),
+           TauxSoufrance:vm.TauxMarcheSouffranceParSourceFinancement(value[0].source_financement_id),
+
+           NombreResillié:vm.NombreMarcheResilierParSourceFinancement(value[0].source_financement_id),
+           ResteAExécutéResillié:vm.MontantExecuteParSourceFinancementMarcheResilier(value[0].source_financement_id),
+           TauxResillié:vm.TauxMarcheResilierParSourceFinancement(value[0].source_financement_id),
         };
         return objet;
       });
@@ -1307,7 +1448,7 @@ MontantInitialParSection(){
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1331,7 +1472,7 @@ MontantInitialParSection(){
             array_exercie.push(val.source_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+         // console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1594,7 +1735,7 @@ AfficheUaGroupe() {
             array_exercie.push(val.section_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1630,7 +1771,7 @@ AfficheLigneGroupe() {
             array_exercie.push(val.ligneeconomique_id);
           });
           let unique = [...new Set(array_exercie)];
-          console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
             return [];
           }
@@ -1654,81 +1795,9 @@ listeParLiNombreBailleurParLigne() {
           }
         };
       },
-TailleurBailleurParLigne() {
-      return (id,id1) => {
-      
-        if(id !=0 && id !="",id1 !=0 && id1 !=""){
-          let objet = this.listeParLiNombreBailleurParLigne(id,id1);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.source_financement_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-        }
-        
-        
-      };
-    },
-
-NombreBailleurParSection() {
-      return (id) => {
-      
-        if(id !=0 && id !=""){
-          let objet = this.budgetEclate.filter(item=>item.section_id=id && item.budget_active==1);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.source_financement_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-        }
-        
-        
-      };
-    },
 
 
-NombreBailleurParUa() {
-      return (id) => {
-      
-        if(id !=0 && id !=""){
-          let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id=id && item.budget_active==1);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.source_financement_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-        }
-        
-        
-      };
-    },
+
 
     libelleLigneEconomique() {
       return (id) => {
@@ -1761,9 +1830,9 @@ NombreBailleurParUa() {
       };
   },
 
-     afficheUa() {
-       return this.ListeDesSourceFinancement;
-    },
+    //  afficheUa() {
+    //    return this.ListeDesSourceFinancement;
+    // },
 
         ListeDesSourceFinancement(){
        if(this.source_financement_id1!=0){
@@ -2310,40 +2379,6 @@ NombreBailleurParUa() {
       return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/amoirie.png";
     },
 
-    listeordrepaiementLigne() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate.filter(
-            (qtreel) => qtreel.source_financement_id == id
-          );
-        }
-      };
-    },
-
-    arrayExerciceDecompte() {
-      return (idactivite) => {
-        console.log(idactivite);
-        if(idactivite !=null && idactivite!=""){
-           let objet = this.listeordrepaiementLigne(idactivite);
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.grandenature_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-      }
-
-      }
-       
-    },
 
     
 
@@ -2374,42 +2409,7 @@ NombreBailleurParUa() {
       };
     },
 
-    listeordrepaiementLigne2() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.budgetEclate.filter(
-            (qtreel) => qtreel.source_financement_id == id
-          );
-        }
-      };
-    },
    
-    arrayExerciceDecompte2() {
-      return (idactivite) => {
-        console.log(idactivite);
-        if(idactivite!=null && idactivite !=0 && idactivite !=""){
-          let objet = this.listeordrepaiementLigne2(idactivite);
-          //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
-          });
-          let unique = [...new Set(array_exercie)];
-          console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-        }
-        
-        
-      };
-    },
-
-    
 
 
 
@@ -2558,6 +2558,191 @@ TauxExecution(id,id1){
    
 },
 
+// les tris
+
+      Tri1(){
+      if(this.Tri1data==0){
+        this.Tri1data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombrePlani-b.NombrePlani});
+        
+      }else{
+        this.Tri1data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombrePlani-a.NombrePlani});
+      }  
+    },
+
+     Tri2(){
+      if(this.Tri2data==0){
+        this.Tri2data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantPlani-b.MontantPlani});
+        
+      }else{
+        this.Tri2data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantPlani-a.MontantPlani});
+      }  
+    },
+
+     Tri3(){
+      if(this.Tri3data==0){
+        this.Tri3data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreContract-b.NombreContract});
+        
+      }else{
+        this.Tri3data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreContract-a.NombreContract});
+      }  
+    },
+
+      Tri4(){
+      if(this.Tri4data==0){
+        this.Tri4data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantContract-b.MontantContract});
+        
+      }else{
+        this.Tri4data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantContract-a.MontantContract});
+      }  
+    },
+
+     Tri5(){
+      if(this.Tri5data==0){
+        this.Tri5data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreAttribue-b.NombreAttribue});
+        
+      }else{
+        this.Tri5data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreAttribue-a.NombreAttribue});
+      }  
+    },
+
+
+     Tri6(){
+      if(this.Tri6data==0){
+        this.Tri6data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantAttribue-b.MontantAttribue});
+        
+      }else{
+        this.Tri6data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantAttribue-a.MontantAttribue});
+      }  
+    },
+
+    Tri7(){
+      if(this.Tri7data==0){
+        this.Tri7data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreEnCoursExé-b.NombreEnCoursExé});
+        
+      }else{
+        this.Tri7data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreEnCoursExé-a.NombreEnCoursExé});
+      }  
+    },
+
+    Tri8(){
+      if(this.Tri8data==0){
+        this.Tri8data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantEnCoursExé-b.MontantEnCoursExé});
+        
+      }else{
+        this.Tri8data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantEnCoursExé-a.MontantEnCoursExé});
+      }  
+    },
+
+    Tri9(){
+      if(this.Tri9data==0){
+        this.Tri9data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.MontantExécutéEnCoursExé-b.MontantExécutéEnCoursExé});
+        
+      }else{
+        this.Tri9data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.MontantExécutéEnCoursExé-a.MontantExécutéEnCoursExé});
+      }  
+    },
+
+     Tri10(){
+      if(this.Tri10data==0){
+        this.Tri10data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.ResteAPayerEnCoursExé-b.ResteAPayerEnCoursExé});
+        
+      }else{
+        this.Tri10data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.ResteAPayerEnCoursExé-a.ResteAPayerEnCoursExé});
+      }  
+    },
+
+
+    Tri11(){
+      if(this.Tri11data==0){
+        this.Tri11data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreSoufrance-b.NombreSoufrance});
+        
+      }else{
+        this.Tri11data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreSoufrance-a.NombreSoufrance});
+      }  
+    },
+
+
+    Tri12(){
+      if(this.Tri12data==0){
+        this.Tri12data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.ResteAExécutéSoufrance-b.ResteAExécutéSoufrance});
+        
+      }else{
+        this.Tri12data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.ResteAExécutéSoufrance-a.ResteAExécutéSoufrance});
+      }  
+    },
+
+
+    Tri13(){
+      if(this.Tri13data==0){
+        this.Tri13data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.TauxSoufrance-b.TauxSoufrance});
+        
+      }else{
+        this.Tri13data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.TauxSoufrance-a.TauxSoufrance});
+      }  
+    },
+
+
+     Tri14(){
+      if(this.Tri14data==0){
+        this.Tri14data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.NombreResillié-b.NombreResillié});
+        
+      }else{
+        this.Tri14data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreResillié-a.NombreResillié});
+      }  
+    },
+
+     Tri15(){
+      if(this.Tri15data==0){
+        this.Tri15data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.ResteAExécutéResillié-b.ResteAExécutéResillié});
+        
+      }else{
+        this.Tri15data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.ResteAExécutéResillié-a.ResteAExécutéResillié});
+      }  
+    },
+
+     Tri16(){
+      if(this.Tri16data==0){
+        this.Tri16data=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.TauxResillié-b.TauxResillié});
+        
+      }else{
+        this.Tri16data=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.TauxResillié-a.TauxResillié});
+      }  
+    },
+
+//fin des tri
+
     ActiveInputLigne(){
   if(this.inputLigne == false){
     this.inputLigne = true
@@ -2634,29 +2819,9 @@ MontantDisponibleParSectionB(id,id1){
 },
 
 
-    //  {{
-    //                   (
-    //                     (MontantBudgetExecutéActivite(listeLigneeco,GroupeOrdrePaiementByActivit[0].source_financement_id) /
-    //                       MontantBudgetActuelActivite(listeLigneeco,
-    //                         GroupeOrdrePaiementByActivit[0].source_financement_id
-    //                       )) *
-    //                     100
-    //                   ).toFixed(3)
-
-
-     
-
-
-
-
-
-
-     verifValeur(){
-      if(this.MontantBudgetActuel() == 0 && this.MontantBudgetExecuté() == 0 && this.MontantBudgetExecutéProvisoire() == 0){
-        return 1;
-      }
-      return 0;
-      
+RestePayerEnCoursExé(id){
+    return (parseFloat(this.TotalMarcheGlobal(id)) - parseFloat(this.MontantExecuteGlobalParSourceFinancement(id)))
+},
        
     },
     genererEnPdf() {
@@ -2689,7 +2854,7 @@ formatageSomme:formatageSomme,
     ExporterEnExel() {
       this.$refs.excel.click();
     },
-  },
+  
 };
 </script>
 
