@@ -110,7 +110,24 @@
 
       <!-- 5eme tableau -->
 
-        <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px"> 
+        <br><br>
+
+      <!-- fin 5eme tableau -->
+
+    
+
+     
+
+
+    </div>
+
+    <table>
+        <tbody>
+            <tr>
+
+
+              <td>
+                     <div class="centreVerticalement" style="width:330px;display: inline-block;height:230px"> 
         
          <div class="card" style="background-color:#f20505;">
            <h4 style="text-align:center;background-color:#f20505;color:black;font-weight:bold;"> 
@@ -130,20 +147,10 @@
              <a href="#" style="font-size:20px;color:#000;font-weight:bold;" class="card-box-footer">Détail <i class="fa fa-arrow-circle-right"></i></a>
          </div>
          
-      </div> <br><br><br><br>
-
-      <!-- fin 5eme tableau -->
-
-    
-
-     
+      </div>
+              </td>
 
 
-    </div>
-
-    <table>
-        <tbody>
-            <tr>
                 <td>
                     <!-- 6eme tableau -->
 
@@ -170,9 +177,6 @@
       </div>
 
       <!-- fin 6eme tableau -->
-                </td>
-                <td>
-                     <div class="centreVerticalement" style="width:500px;display: inline-block;height:220px"></div>
                 </td>
 
                 <td>
@@ -344,10 +348,10 @@ budgetConsommerPersonnel(){
       }
 
       vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(0);
-      vm.dataPourcentageBienService1.push(0);
-      vm.dataPourcentageBienService1.push(0);
-      vm.dataPourcentageBienService1.push(0);
+      vm.dataPourcentageBienService1.push(10000000000);
+      vm.dataPourcentageBienService1.push(8000000);
+      vm.dataPourcentageBienService1.push(25000000000);
+      vm.dataPourcentageBienService1.push(800000000);
 
       return "";
     },
