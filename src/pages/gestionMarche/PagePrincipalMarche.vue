@@ -37,8 +37,8 @@
                     <!--ongle identification-->
                     <div id="MANDATEMENT" class="tab-pane active">
                        
-                        <div class="widget-title">
-                    <ul class="nav nav-tabs">
+                        <div class="widget-title" >
+                    <ul class="nav nav-tabs" style="color:red">
                       <li class="active">
                         <a data-toggle="tab" href="#marcheHorsPPM">LISTES DES MARCHES HORS PPM</a>
                     

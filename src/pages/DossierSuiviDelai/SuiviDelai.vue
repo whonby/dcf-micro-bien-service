@@ -397,7 +397,7 @@ console.log(this.mandats)
             listeMarcheUniteAdmin(){
                 let colect=[]
                 let vM=this;
-                this.filtre_unite_admin.forEach(function (value) {
+                this.filtre_unite_admin.map(function (value) {
                     let objet=vM.gettersMarcheHorsib.filter(item=>{
                             if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
                                 //  console.log(item.parent_id)
@@ -406,7 +406,7 @@ console.log(this.mandats)
                         }
                     )
                     if(objet!=undefined){
-                        objet.forEach(function (val) {
+                        objet.map(function (val) {
                             let objet=   colect.find(item=>item.id==val.id)
                             if(objet==undefined){
                                 colect.push(val)
@@ -481,7 +481,7 @@ console.log(this.mandats)
                     if(_objet.length>0){
                         let arraymarche=[]
                         let vm=this
-                        _objet.forEach(function (val) {
+                        _objet.map(function (val) {
                             let taux=(vm.totaleSommeRealiseTache(val.id,marche_id) * 100)/vm.totaleBaseARealiseTache(val.id,marche_id)
                             console.log(val)
                             if(taux<100){

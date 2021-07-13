@@ -104,7 +104,9 @@
                     <th>Référence marché</th>
                     <th>Statut</th>
                     <th>Montant prévisionnel</th>
-                    
+                     <th>Statut Marché</th>
+                    <!-- <th title="mouvement du marché">Mouvement du marché</th> -->
+                    <th style="">Suivi du marché</th>
                     <th colspan="2">Action</th>
                   </tr>
                 </thead>
@@ -167,7 +169,109 @@
                         "Non renseigné"
                       }}
                     </td>
+<td>
+                      <span v-if="marche.plan_passation_marche_id == null">
 
+                      <button
+                        v-if="marche.attribue == 2"
+                        class="btn btn-warning"
+                      >
+                        <span title="MARCHE EN EXERCUTION" style="">EX</span>
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 1"
+                        class="btn btn-success"
+                      >
+                        <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
+                          >CT</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 3"
+                        class="btn btn-info"
+                      >
+                        <span title="MARCHE RESILIE">RE</span>
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 5"
+                        class="btn btn-inverse"
+                      >
+                        <span title="MARCHE TERMINE">TE</span>
+                      </button>
+                      <button v-else-if="marche.attribue == 7" class="btn btn">
+                        <span title="MARCHE SUSPENDU">SU</span>
+                      </button>
+                      <button v-else class="btn btn-danger">
+                        <span title="MARCHE EN PLANIFICATION">PL</span>
+                      </button>
+
+                      </span>
+
+
+                       <span v-else>
+
+                      <button
+                        v-if="marche.attribue == 2"
+                        class="btn btn-warning "
+                      >
+                        <span title="MARCHE EN EXERCUTION" style="">EX</span>
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 1"
+                        class="btn btn-success"
+                      >
+                        <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
+                          >CT</span
+                        >
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 3"
+                        class="btn btn-info"
+                      >
+                        <span title="MARCHE RESILIE">RE</span>
+                      </button>
+                      <button
+                        v-else-if="marche.attribue == 5"
+                        class="btn btn-inverse"
+                      >
+                        <span title="MARCHE TERMINE">TE</span>
+                      </button>
+                      <button v-else-if="marche.attribue == 7" class="btn btn">
+                        <span title="MARCHE SUSPENDU">SU</span>
+                      </button>
+                      <button v-else class="btn btn-danger">
+                        <span title="MARCHE EN PLANIFICATION">PL</span>
+                      </button>
+
+                      </span>
+                    </td>
+                    <!-- <td>
+                      <span v-if="marche.plan_passation_marche_id == null"
+                        >Hors PPM</span
+                      >
+                      <span v-else>PPM</span>
+                    </td> -->
+                    <td
+                      v-if="
+                        marche.type_marche_id == 6 ||
+                        marche.type_marche_id == 1 ||
+                        marche.type_marche_id == 5
+                      "
+                    >
+                      <router-link
+                        :to="{
+                          name: 'detail_hors_sib',
+                          params: { id: marche.id },
+                        }"
+                        class="btn btn-default"
+                        title="Detail marche hors sib"
+                      >
+                        <span class=""><i class="icon-folder-open"></i></span>
+                      </router-link>
+
+                    </td>
+                    <td v-else style="background-color: lightblue"></td>
+                 
                     <td>
                       <div class="btn-group">
                         <button
@@ -1667,7 +1771,7 @@ editMarche123:{},
     // },
     BasculerMarcheRegulation(id) {
        
-      if (this.$app.$dialog.confirm("Etes-vous sur de regularisé le marché ?")) {
+      if (confirm("Etes-vous sur de regularisé le marché ?")) {
         
      this.editMarche123 = this.marcheHorSibFiltre.find(item=>item.id==id);
         let marcheObjet = this.marches.find(

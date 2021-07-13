@@ -1,4 +1,4 @@
-
+TriaffichageUniteAdminstrative
 <template>
   <div>
     
@@ -181,7 +181,11 @@
                       width :8%
                     "
                   >
-                 BUDGET INITIAL 
+                   <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                BUDGET INITIAL 
                   </th>
                   <th
                     style="
@@ -525,6 +529,8 @@
                 </tr>
               </tbody>
             </table>
+            <br/>
+             <br/>
       </div>
 
       <div class="pagination alternate">
@@ -751,6 +757,11 @@ export default {
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+      
+    //test de tri
+    
+
+    // fin test de tri
     CodeExempte() {
       return id => {
         if (id != null && id != "") {
@@ -1654,6 +1665,28 @@ AfficheLigneGroupe() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    TriaffichageUniteAdminstrative(id) {
+        let vm=this
+      return this.AfficheLigneGroupe(id).map(function (value) {
+        let objet = {
+          // id:value.id,
+          // code: value.code,
+          libelle: vm.libelleLigneEconomique(value.GroupeLigne),
+          // MontantVote:vm.MontantBudgetVote(value.id),
+          // Variation12:vm.AfficheVariationBudget(value.id),
+          // Budgetactuel:vm.MontantBudgetActuel(value.id),
+          // MontantExecute:vm.MontantBudgetExecuté(value.id),
+          // NombreOpProvisoire:vm.TotalOPProvisoire(value.id),
+          // NombreOpNONRegu:vm.NombreOPNonRegu(value.id),
+          // NombreOpREgularise:vm.NombreOPRegulirise(value.id),
+          // TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
+          // Disponible:vm.MontantBudgetActuel(value.id)- vm.MontantBudgetExecuté(value.id),
+          // TauxExecution:vm.EviteNaN(value.id)
+        };
+        return objet;
+      });
+    },
 afficheLeNomDesProcedure(id,id1){
 
     if(this.MontantDisponible(id,id1) < 10000000){
