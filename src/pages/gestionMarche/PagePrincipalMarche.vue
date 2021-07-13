@@ -36,43 +36,29 @@
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="MANDATEMENT" class="tab-pane active">
-                        <marcheHorsppmHorsSib></marcheHorsppmHorsSib>
-     <!-- <div class="widget-title">
+                       
+                        <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#attentLiquidation">Dossiers En Attentes</a>
+                        <a data-toggle="tab" href="#marcheHorsPPM">LISTES DES MARCHES HORS PPM</a>
+                    
                       </li>
-                       <li>
-                        <a data-toggle="tab" href="#ViséLiquidation">Dossiers Visés</a>
+                       <li class="tab-pane">
+                        <a data-toggle="tab" href="#marchePPM">LISTES DES MARCHES PPM</a>
+                    
                       </li>
-                        <li>
-                        <a data-toggle="tab" href="#ObservationLiquidation">Dossiers Visés avec Observation</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#DiffereLiquidation">Dossiers différés</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#RejettéLiquidation">Dossiers Rejettés</a>
-                      </li>
+                    
                     </ul>
                   </div>
-                  <div class="widget-content tab-content">
-<div id="attentLiquidation" class="tab-pane active">
-                        <MandatEnAttente :macheid="detail_marche.id"></MandatEnAttente>
-                       </div>
-                       <div id="ViséLiquidation" class="tab-pane">
-                        <MandatVise :macheid="detail_marche.id"></MandatVise>
-                       </div>
-                       <div id="DiffereLiquidation" class="tab-pane">
-                        <MandatDifferer :macheid="detail_marche.id"></MandatDifferer>
-                       </div>
-                       <div id="RejettéLiquidation" class="tab-pane">
-                        <MandatRejetter :macheid="detail_marche.id"></MandatRejetter>
-                       </div>
-                       <div id="ObservationLiquidation" class="tab-pane">
-                        <MandatViseAvecObservation :macheid="detail_marche.id"></MandatViseAvecObservation>
-                       </div>
-                      </div> -->
+    <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="marcheHorsPPM" class="tab-pane active">
+                    <MarcheHorsPPMnew></MarcheHorsPPMnew>
+                    </div>
+                     <div id="marchePPM" class="tab-pane ">
+                      <marcheHorsppmHorsSib></marcheHorsppmHorsSib>
+                    </div>
+                    </div>
           </div>
                 <div id="BIES" class="tab-pane">
                         <marcheHorsppmHorsSibBienService></marcheHorsppmHorsSibBienService>
@@ -99,6 +85,7 @@
   
 <script>
 import marcheHorsppmHorsSib from "./marcheHorsppmHorsSib.vue"
+import MarcheHorsPPMnew from "./MarcheHorsPPMnew"
 import marcheHorsppmHorsSibBienService from "./marcheHorsppmHorsSibBienService.vue"
 import marcheHorsppmHorsSibInvestissement from "./marcheHorsppmHorsSibInvestissement.vue"
 //import GestionAutresDepense from "./GestionAutresDepense.vue"
@@ -113,7 +100,8 @@ export default {
   components:{
       marcheHorsppmHorsSib,
       marcheHorsppmHorsSibBienService,
-      marcheHorsppmHorsSibInvestissement
+      marcheHorsppmHorsSibInvestissement,
+      MarcheHorsPPMnew
      // GestionAutresDepense
 //     MandatViseAvecObservation,
 //     MandatVise,
