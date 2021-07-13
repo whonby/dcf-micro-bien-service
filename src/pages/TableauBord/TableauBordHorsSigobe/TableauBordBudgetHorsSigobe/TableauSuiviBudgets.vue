@@ -431,7 +431,7 @@
        
         <table class="table table-bordered table-striped">
           <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">ÉTAT D’EXECUTION DU BUDGET PAR UA ET PAR TYPE DE FINANCEMENT </h2>
           </tr>
         </table>
    

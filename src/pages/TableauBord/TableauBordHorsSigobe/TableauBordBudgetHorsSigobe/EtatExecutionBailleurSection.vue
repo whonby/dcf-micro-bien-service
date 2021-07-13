@@ -162,7 +162,7 @@
                   <button @click="triMarcheEnCours()">
                      <i class=" icon-filter"></i> 
                     </button>
-                    MARCHE EN COURS 
+                    NOMBRE DE MARCHE EN COURS 
                   </th>
                   
                 </tr>

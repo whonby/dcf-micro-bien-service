@@ -329,8 +329,7 @@ reference_marche
                       >
                       <span v-else>Ligne à marché</span>
                     </td>
-                    <!-- <td @dblclick="ModalModifierMarcheHorsPPM(index)">
-                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                 
                     <td style="text-align: center">
                       {{
                         formatageSomme(parseFloat(marche.montant_marche)) ||
@@ -438,38 +437,9 @@ reference_marche
                         <span class=""><i class="icon-folder-open"></i></span>
                       </router-link>
 
-                      <!-- <router-link :to="{ name: 'suivi_marhe', params: { id: marche.id }}"
-                class="btn btn-success " title="">
-                  <span class=""><i class="">Contractualisation</i></span>
-                    </router-link> -->
-
-                      <!-- <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
-                class="btn btn-default " title="historique execution Marche">
-                  <span class=""><i class="  icon-zoom-out"></i></span>
-                   </router-link>  -->
                     </td>
                     <td v-else style="background-color: lightblue"></td>
-                    <!-- </td>
-                   
-                       <td v-else>
-  <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
-                class="btn btn-default " title="Continué le processuce de contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link> 
-                       </td>
-                    <td v-if="marche.attribue == 2">
-                       <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
-        <span class=""><i class=" icon-calendar"></i></span>
-    </router-link>
-                    </td> -->
-                    <!-- <td v-else></td> -->
-                    <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
-                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                                    class="btn btn-inverse " title="Cycle de vie du marche">
-                           <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link></td> -->
-
+                 
                     <td>
                       <div class="btn-group">
                         <button
