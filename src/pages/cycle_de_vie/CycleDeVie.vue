@@ -8,7 +8,7 @@
             <div class="row-fluid" >
                 <div class="span12" >
 
-                    <div class="widget-box">
+                    <div class="">
                         <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
 
                         <div class="widget-title">
@@ -50,8 +50,18 @@
                      <th style="width:10%">OBJET</th>
                      <td>{{detail.objet}} </td>
                  </tr>
+                  <tr>
+                     <th style="width:10%">OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS</th>
+                     <td>
+                         <ul>
+                             <li v-for="livrable in tachePasMarche(detail.id)" :key="livrable.id+'IL'">
+                                - {{livrable.libelle}}
+                             </li>
+                         </ul>
+                    </td>
+                 </tr>
                  <tr>
-                     <th style="width:10%">COMPOSANTE</th>
+                     <th style="width:10%">Type de marché</th>
                      <td>{{detail.type_marche.libelle}} </td>
                  </tr>
                  </thead>
@@ -108,10 +118,11 @@
                      <th  style="width:10%">MONTANT  HT FCFA</th>
                      <td style="width:15%" v-if="detailBailEtat">
 
-                         {{formatageSomme(parseFloat(detailBailEtat.montant_ht)) || 'Non renseigné'}}
+                         {{formatageSomme(parseFloat(detailBailEtat.montant)) || 'Non renseigné'}}
                      </td>
                      <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
-                         {{formatageSomme(parseFloat(baill.montant_ht)) || 'Non renseigné'}}
+                       
+                         {{formatageSomme(parseFloat(baill.montant)) || 'Non renseigné'}}
                      </td>
                     <!-- <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -136,11 +147,7 @@
                      <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
                      <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
                  </tr>
-                 <tr>
-                     <th  style="width:5%">AGENT CF DE SUIVI </th>
-                     <td style="width:15%" colspan="6" v-if="detailCF" > {{detailCF.nom_mandat|| 'Non renseigné'}} {{detailCF.prenom_nom|| 'Non renseigné'}}</td>
-                     <td style="width:15%" colspan="6" v-else > Sans objet</td>
-                 </tr>
+                
 
                  </thead>
 
@@ -183,9 +190,9 @@
 
                  <tr>
                      <th>MONTANT CONFIDENTIEL FCFA</th>
-                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture_ht">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
                      <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
-                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
                      <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
 
                  </tr>
@@ -379,7 +386,7 @@
              <table class="table table-bordered table-striped" id="app8">
                  <thead>
                  <tr>
-                     <th>AVENANT (S) APPROUVE (S) </th>
+                     <th>(NOMBRE total {{nbrAvenant}} ) AVENANT (S) APPROUVE (S)</th>
                  </tr>
                  </thead>
                  <tbody>
@@ -388,13 +395,13 @@
              <table class="table table-bordered table-striped" id="app9">
                  <thead>
                  <tr>
-                     <th style="width:5%">NOMBRE:</th>
-                     <td style="width:15%" colspan="2" v-if="detailAvenant">{{nbrAvenant}} </td>
+                     <th style="width:5%">VARIATION FINANCIERE : </th>
+                     <td style="width:15%" colspan="2" v-if="detailAvenant">0</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
-                     <td style="width:15%" colspan="2" v-if="nbrAvenant">{{detailAvenant.taux}} % </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">0 % </td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="2" v-if="nbrAvenant">
-                         {{formatageSomme(parseFloat(montantHtAvanant(detailAvenant))) || 'Non renseigné'}} HT</td>
+                      HT</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="2" v-if="nbrAvenant">
                          {{formatageSomme(parseFloat(montantTtcAvanant(detailAvenant))) || 'Non renseigné'}} TTC</td>
@@ -408,6 +415,26 @@
                          {{formatageSomme(montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))}}
                          <!--{{formatageSomme(parseFloat(montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act)))}}--> HT </td>
                      <td style="width:15%" colspan="4" v-else>NON APPLICABLE </td>
+                 </tr>
+
+                   <tr>
+                     <th style="width:5%">TOTAL VARIATION DU DELAI: </th>
+                     <td style="width:15%" colspan="2" v-if="detailAvenant">0</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">0 % </td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">
+                      HT</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">
+                         {{formatageSomme(parseFloat(montantTtcAvanant(detailAvenant))) || 'Non renseigné'}} TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                 </tr>
+
+                 <tr>
+                     <th>DUREE TOTAL DU MARCHE APRES AVENANT (S)</th>
+                     <td colspan="12" >  JOUR </td>
+                
                  </tr>
                  </thead>
              </table>
@@ -425,24 +452,25 @@
                  <thead>
 
                  <tr>
-                     <th style="width:5%">DATE</th>
-                     <td style="width:15%" colspan="8" > </td>
+                     <th style="width:5%">DATE DU DERNIER DECOMPTE</th>
+                     <td style="width:15%" colspan="8" v-if="dernierDecompte.date_decompte">{{dernierDecompte.date_decompte}} </td>
+                       <td style="width:15%" colspan="8" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th>DERNIER / NUMERO</th>
                      <td style="width:15%" colspan="2" v-if="dernierDecompte">
-                         {{dernierDecompte.numero_mandat}}
+                         {{detailDecompte.length}}
                      </td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="2" v-if="dernierDecompte">%</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
-                     <td style="width:15%" colspan="2"   v-if="dernierDecompte">HT</td>
+                     <td style="width:15%" colspan="2"   v-if="dernierDecompte">{{formatageSomme(parseFloat(dernierDecompte.montantmarche))}} HT</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
-                     <td style="width:15%" colspan="2" v-if="dernierDecompte">{{formatageSomme(parseFloat(dernierDecompte.total_general))}}</td>
+                     <td style="width:15%" colspan="2" v-if="dernierDecompte">{{formatageSomme(parseFloat(dernierDecompte.netttc))}}</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
-                     <th>CUMUL / NOMBRE</th>
+                     <th>TOTAL DECOMPTE</th>
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{detailDecompte.length}}</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="2" >%</td>
@@ -688,6 +716,7 @@
             this.detailDecompte=this.decomptefactures.filter(item=>item.marche_id==this.$route.params.id).reverse()
             if(this.detailDecompte){
              this.dernierDecompte=this.detailDecompte[0]
+             console.log(this.dernierDecompte)
              //   console.log(this.getterCojos)
             }
             this.detailCojo=this.getterCojos.find(item=>item.marche_id==this.$route.params.id)
@@ -712,7 +741,7 @@
                 "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
                 "getActeEffetFinancierPersonnaliserContrat","getterCojos",
                 "getterDemandeAno","getterAnoDMPBailleur",
-      "getterOffreFinanciers","gettersOffreTechniques"]),
+      "getterOffreFinanciers","gettersOffreTechniques","TacheMarche"]),
             ...mapGetters("uniteadministrative", [
                 "acteCreations",
                 "typeTextes",
@@ -759,7 +788,33 @@
             afficherListeSalaireEnExecution(){
                 return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
             },
+            totalDecompteMarche(){
+         return marche_id=> {
+             if(!marche_id) return 0;
+             let objet=this.decomptefactures.filter(item=>item.marche_id==marche_id)
+             if(objet==undefined) return 0
+             return objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.netttc) ;
+                        }, 0);
+         }
+            },
 
+isNanMontant(){
+    return montant => {
+        if(montant=="NaN") return "Non Applicable"
+        return montant
+    }
+},
+tachePasMarche(){
+              return marche_id=>{
+                  let objet=this.TacheMarche.filter(item=>item.marche_id==marche_id)
+
+                  if(objet.length>0){
+                       return objet
+                  }
+                  return []
+              }
+            },
      montantMarche(){
          return (idMarche,status)=>{
              if(!status) return ""

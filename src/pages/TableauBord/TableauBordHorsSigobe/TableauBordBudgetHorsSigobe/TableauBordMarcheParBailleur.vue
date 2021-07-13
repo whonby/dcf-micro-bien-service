@@ -1,6 +1,33 @@
 <template>
   <div>
-    
+    <input  type="hidden" :value="triParnombreMarcheContratData"/>
+    <input type="hidden" :value="triParNombreMarchePlanifData" />
+    <input type="hidden" :value="triParMontantContratualiData" />
+      <input type="hidden" :value="TriParMontantPlanifData" />
+      <input type="hidden" :value="TriParNombreMarcheAttribueData" />
+      <input type="hidden" :value="TriParMontantMarcheAttribueData" />
+      <input type="hidden" :value="TriParNombreMarcheExcutionData" />
+      <input type="hidden" :value="TriParMontantMarcheData" />
+       <input type="hidden" :value="TriParMontantMarcheExcuteData" />
+       <input type="hidden" :value="TriParMontantMarcheResteData" />
+       <input type="hidden" :value="TriParNombreMarcheSouffranceData" />
+       <input type="hidden" :value="TriParMontantResteMarcheSouffranceData" />
+       <input type="hidden" :value="TriParTauxMarcheSouffranceData" />
+        <input type="hidden" :value="TriParNombreMarcheResilierData" />
+        <input type="hidden" :value="TriParMontantResteExcuteMarcheResilierData" />
+        <input type="hidden" :value="TriParTauxMarcheResilierData" />
+        
+        
+       
+       
+       
+       
+       
+      
+      
+      
+      
+     
    
     
     <table>
@@ -9,7 +36,7 @@
 
           
                 <td>
-                  <h3>contratualisation</h3>
+                  <h3>Contractualisation</h3>
                      <div class="centreVerticalement card" style="margin-top:1px; width:500;display: inline-block;height:270px">
                        <div class="" id="chart" style="border: 2px dotted #ffffff;">
                        <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
@@ -229,179 +256,303 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Nombre </th>
+                      background-color: #fbb203 !important;" colspan="1">
+
+                       <button @click="TriParOrdre()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Nombre
+                       </th>
                       
          <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Montant (FCFA) 
+                      background-color: #fbb203 !important;" colspan="1">
+
+                      <button @click="TriMontantPlanif()">
+                     <i class=" icon-filter"></i> 
                       
+                    </button>
+                      Montant (FCFA) 
+
+                      <button @click="InputMontantInitial">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                      <money style="text-align:left;color:red"   v-model="montant_InitialAb" class="span" v-show="activeMontantInitial == true"></money>
                       </th>
 
          <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Nombre </th>
+                      background-color: #fbb203 !important;" colspan="1">
+                       <button @click="TriNombreParMarchecontrat()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Nombre 
+                      </th>
           <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Montant (FCFA)</th>
+                      background-color: #fbb203 !important;" colspan="1">
+
+                         <button @click="TriParMontantContractuali()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Montant (FCFA)
+                      </th>
 
            <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Nombre </th>
+                      background-color: #fbb203 !important;" colspan="1">
+
+                         <button @click="TriParNombreMarcheAtribue()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Nombre 
+                      </th>
           <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Montant (FCFA)</th>
+                      background-color: #fbb203 !important;" colspan="1">
+                      
+                      <button @click="TriParMontantMarcheAttribue()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Montant (FCFA)
+                      </th>
 
 
                       <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Nombre </th>
+                      background-color: #fbb203 !important;" colspan="1">
+
+                        <button @click="TriParNombreMarcheExecution()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Nombre
+                       </th>
 
                       <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Montant total marchés (FCFA) </th>
+                      background-color: #fbb203 !important;" colspan="1">
+                       
+                        <button @click="TriParMontantTotalMarche()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Montant total marchés (FCFA) 
+                      </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Montants exécutés (FCFA) </th>
+                      background-color: #fbb203 !important;" colspan="1">
+
+                       <button @click="TriParMontantMarcheExcute()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+
+                      Montants exécutés (FCFA)
+                       </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Reste à exécuter </th>
+                      background-color: #fbb203 !important;" colspan="1">
+                        <button @click="TriParMontantMarcheResteExcute()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+
+                      Reste à exécuter
+                       </th>
 
                       <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Nombre </th>
+                      background-color: #fbb203 !important;" colspan="1">
+
+                        <button @click="TriParNombreMarcheSouffrance()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Nombre
+                       </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Reste à exécuter </th>
+                      background-color: #fbb203 !important;" colspan="1">
+                      
+                        <button @click="TriParMontantResteExcuteMarcheSouffrance()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Reste à exécuter </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1"> Taux</th>
+                      background-color: #fbb203 !important;" colspan="1">
+                       <button @click="TriParTauxMarcheSouffrance()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                       Taux
+                       </th>
 
                
                       <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Nombre </th>
+                      background-color: #fbb203 !important;" colspan="1">
+                       <button @click="TriParNombreMarcheResilier()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Nombre </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Reste à exécuter </th>
+                      background-color: #fbb203 !important;" colspan="1">
+                      
+                       <button @click="TriParMontantResteExcuteMarcheResilier()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Reste à exécuter 
+                      
+                      </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="1"> Taux</th>
+                      background-color: #fbb203 !important;" colspan="1"> 
+
+                       <button @click="TriParTauxMarcheResilier()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      Taux
+                      </th>
            
        </tr>
 
       
 
       
-       <tbody  v-for="type1 in  partition(liste, size)[page]" :key="type1.id">
+       <tbody  v-for="type1 in  partition(TrieParSourceFinacement, size)[page]" :key="type1.id">
            <tr>
 
               <td colspan="2">
-                    <button @click="ShowMyUa(type1[0].source_financement)">
-                     <i class="icon-eye-open"></i> </button>
+                    <button @click="showMySourceFinancement(type1.id)">
+                     <i class="icon-eye-open"></i> 
+                     </button>
                   </td>
                   
                   <!-- <td> </td> -->
          
-          <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  " colspan="2" style="" >{{afficherLibelleSourFinacement(type1[0].source_financement)}}
-                     
-                      
-                      </td>
-                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  "> {{ NombreMarcherPartSourceF(type1[0].source_financement) }}</td>
+                          <td v-bind:class="recupereIDactivite==type1.id? 'graybg' : 'whitebg'  " colspan="2" style="" >
+                            {{type1.libelleBailleur}}
+                                    
+                                      
+                                      </td>
+                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
+                                        {{type1.nombreMarchePlanif}}</td>
 
-                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">
-                          {{ formatageSommeSansFCFA(parseFloat(
-                            afficherNombreMarchePlanifierMontantDonsSourceF(type1[0].source_financement))) }}
-                      </td>
-                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">
-                        {{ NombreMarcherEncourDeContratualisationSourceF(type1[0].source_financement) }}
-                      </td>
+                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          {{formatageSommeSansFCFA(parseFloat(type1.montantMarchePlanif)) }}
+                                      </td>
+                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        {{type1.nombreMarcheContra }}
+                                      </td>
 
-                      <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{ formatageSommeSansFCFA(parseFloat(
-                        afficherNombreMarcheEncourDeContratualisationSourceF(type1[0].source_financement)))}}</td>
+                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheContract))}}</td>
 
-                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{NombreMarcherAttribuerSourceF(type1[0].source_financement)}} </td>
+                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          {{type1.nombreMarcheAtribue}} </td>
 
-                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{formatageSommeSansFCFA(parseFloat(
-                          afficherMontantMarcherAttribuerSourceF (type1[0].source_financement)))}} </td>
+                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheAtribue))}} </td>
 
-                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{NombreMarcherEncourExecutionSourceF(type1[0].source_financement)}} </td>
+                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          {{type1.nombreMarcheExcution}} </td>
 
-                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{afficherMontantTotalSourceF(type1[0].source_financement)}}</td>
-                       
+                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          {{type1.montantTotalMarcheExcution}}</td>
+                                      
+                                        
+                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheExcute))}} </td>
+
+                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                            {{ formatageSommeSansFCFA(parseFloat( type1.montantResreExcute))}}</td>
+
+                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
+                                              {{type1.nombreMarcheSouffrance}} </td>
+
+                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                              {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheAExcuteSouffrance))}} </td>
+
+                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                {{type1.tauxMarcheSouffrance}} %</td>
+                                            
+                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                {{type1.nombreMarcheResilier}} </td>
+                                            
+                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheResilierResteExcute))}} </td>
+                                              
+                                                <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                  {{type1.tauxMarcheResilier}} %</td>
                         
-                        <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{formatageSommeSansFCFA(parseFloat(
-                           marcheEncourExecutionMontantDonsSourceF(type1[0].source_financement)))}} </td>
-
-                           <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{ formatageSommeSansFCFA(parseFloat(
-                             resteAexcuterSourceF(type1[0].source_financement)))}}</td>
-
-                             <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  "> {{NombreMarcherEnSouffranceSourceF(type1[0].source_financement)}} </td>
-
-                             <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{ formatageSommeSansFCFA(parseFloat(
-                               resteAexcuterMarcheSouffranceSourceF(type1[0].source_financement)))}} </td>
-
-                              <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  "> {{afficherTauxMarcheSouffreSourceF(type1[0].source_financement)}} %</td>
-                             
-                              <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{NombreMarcherResilierSourceF(type1[0].source_financement)}} </td>
-                             
-                              <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{formatageSommeSansFCFA(parseFloat(
-                                resteAexcuterMarcheResilierSourceF(type1[0].source_financement)))}} </td>
-                               
-                                <td v-bind:class="recupereIDactivite==type1[0].source_financement ? 'graybg' : 'whitebg'  ">{{afficherTauxMarcheResilierSourceF(type1[0].source_financement)}} %</td>
-        
-                   <!-- <td></td> -->
-                   
-                 
-         </tr> 
+                                  <!-- <td></td> -->
+                                  
+                                
+                        </tr> 
            
-         <tr v-show="recupereIDactivite==type1[0].type_financement"
-         v-for="TypeFinance in AfficheUaGroupe(type1[0].type_financement)" :key="TypeFinance">
+         <tr v-show="recupereIDactivite==type1.id"
+         v-for="TypeFinance in AfficheUaGroupe(type1.id)" :key="TypeFinance">
           
           <td></td>
-          <td></td>
-          <td></td>
+            <td>
+                    <button @click="showMySourceFinancement(TypeFinance)">
+                     <i class="icon-arrow-right"></i> </button>
+                  </td>
             <!-- <td colspan="2">
-                    <button @click="ShowMyUa(type1[0].source_financement)">
+                    <button @click="showMySourceFinancement(type1[0].source_financement)">
                      <i class="icon-eye-open"></i> </button>
                   </td> -->
           
-
+                <td></td>
 
            <td   style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -507,7 +658,7 @@
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(liste, size).length"
+          v-for="(titre, index) in partition(TrieParSourceFinacement, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -516,7 +667,7 @@
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(liste, size).length - 1 }"
+          :class="{ disabled: page == partition(TrieParSourceFinacement, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -526,23 +677,12 @@
       <br>
     </div>
 
-
-    
-
-            
-           
-
-   
-
-
-        
     <!-- <fab
       :actions="fabActions"
       @searchMe="filter"
       main-icon="apps"
       bg-color="green"
     ></fab> -->
-
    
   </div>
 </template>
@@ -561,7 +701,31 @@ export default {
   props:["macheid"],
     data() {
         return{
+          //triParnombreMarcheContratData:0,
+          triParMontantContData:0,
+          triParNombreMarcheContrat:0,
 
+       //   triparnombreMarchePlanif:0,
+
+          TriMontantContractdata:0,
+          TriParMontantPlanifData:0,
+          TriParNombreMarcheAttribueData:0,
+          TriParMontantMarcheAttribueData:0,
+          TriParNombreMarcheExcutionData:0,
+          TriParMontantMarcheData:0,
+          TriParMontantMarcheExcuteData:0,
+          TriParMontantMarcheResteData:0,
+          TriParNombreMarcheSouffranceData:0,
+          TriParMontantResteMarcheSouffranceData:0,
+          TriParTauxMarcheSouffranceData:0,
+          TriParNombreMarcheResilierData:0,
+          TriParMontantResteExcuteMarcheResilierData:0,
+          TriParTauxMarcheResilierData:0,
+          triParNombreMarchePlanifData:0,
+          triParnombreMarcheContratData:0,
+          triParMontantContratualiData:0,
+          montant_InitialAb:0,
+          activeMontantInitial:false,
           source_financement_id1:0,
            page: 0,
       size:10,
@@ -661,6 +825,37 @@ export default {
     
   },
 
+   TrieParSourceFinacement(){
+
+        let vm=this
+      return this.liste.map(function (value) {
+        let objet = {
+          id:value[0].source_financement,
+          
+          libelleBailleur:vm.afficherLibelleSourFinacement(value[0].source_financement),
+          nombreMarchePlanif:vm.NombreMarcherPartSourceF(value[0].source_financement),
+          montantMarchePlanif:vm.afficherNombreMarchePlanifierMontantDons(value[0].source_financement),
+          nombreMarcheContra:vm.NombreMarcherEncourDeContratualisation(value[0].source_financement),
+          montantMarcheContract:vm.afficherNombreMarcheEncourDeContratualisation(value[0].source_financement),
+          nombreMarcheAtribue:vm.NombreMarcherAttribuer(value[0].source_financement),
+          montantMarcheAtribue:vm.afficherMontantMarcherAttribuer(value[0].source_financement),
+          nombreMarcheExcution:vm.NombreMarcherEncourExecution(value[0].source_financement),
+          montantTotalMarcheExcution:vm.afficherMontantTotal(value[0].source_financement),
+          montantMarcheExcute:vm.marcheEncourExecutionMontantDons(value[0].source_financement),
+          montantResreExcute:vm.resteAexcuter(value[0].source_financement),
+          nombreMarcheSouffrance:vm.NombreMarcherEnSouffrance(value[0].source_financement),
+          montantMarcheAExcuteSouffrance:vm.resteAexcuterMarcheSouffrance(value[0].source_financement),
+          tauxMarcheSouffrance:vm.afficherTauxMarcheSouffre(value[0].source_financement),
+          nombreMarcheResilier:vm.NombreMarcherResilier(value[0].source_financement),
+          montantMarcheResilierResteExcute:vm.resteAexcuterMarcheResilier(value[0].source_financement),
+          tauxMarcheResilier:vm.afficherTauxMarcheResilier(value[0].source_financement)
+          
+        };
+        return objet;
+      });
+    
+    },
+
   // dataContrac(){
   //   let vm=this;
   //   if(this.datacontactualisation.length>0){
@@ -669,6 +864,8 @@ export default {
   //     vm.datacontactualisation.push()
   //   }
   // },
+
+  
 
 
    afficherLibelleSourFinacement() {
@@ -1068,8 +1265,177 @@ montantAvenantMarcheResilier(){
     methods:{
     ...mapActions("bienService",[""]),
 
+ InputMontantInitial(){
+      if(this.activeMontantInitial == false){
+        this.activeMontantInitial = true
+      }else{
+        this.activeMontantInitial = false;
+        this.montant_InitialAb = 0;
+      }
+ },
+TriMontantPlanif(){
+      if(this.TriParMontantPlanifData==0){
+        this.TriParMontantPlanifData=1;
+        return this.TrieParSourceFinacement.sort(function(a,b){return a.montantMarchePlanif-b.montantMarchePlanif});
+        
+      }else{
+        this.TriParMontantPlanifData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantMarchePlanif-a.montantMarchePlanif});
+      }
+      
+    },
 
+    TriParOrdre(){
+      if(this.triParNombreMarchePlanifData==0){
+        this.triParNombreMarchePlanifData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.nombreMarchePlanif-b.nombreMarchePlanif});
+      }else{
+        this.triParNombreMarchePlanifData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.nombreMarchePlanif-a.nombreMarchePlanif});
+      }
+    },
+TriNombreParMarchecontrat(){
+ if(this.triParnombreMarcheContratData==0){
+        this.triParnombreMarcheContratData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.nombreMarcheContra-b.nombreMarcheContra});
+      }else{
+        this.triParnombreMarcheContratData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.nombreMarcheContra-a.nombreMarcheContra});
+      }
+},
 
+TriParMontantContractuali(){
+ if(this.triParMontantContratualiData==0){
+        this.triParMontantContratualiData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantMarcheContract-b.montantMarcheContract});
+      }else{
+        this.triParMontantContratualiData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantMarcheContract-a.montantMarcheContract});
+      }
+},
+
+TriParNombreMarcheAtribue(){
+
+  if(this.TriParNombreMarcheAttribueData==0){
+        this.TriParNombreMarcheAttribueData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.nombreMarcheAtribue-b.nombreMarcheAtribue});
+      }else{
+        this.TriParNombreMarcheAttribueData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.nombreMarcheAtribue-a.nombreMarcheAtribue});
+      }
+  
+},
+
+TriParMontantMarcheAttribue(){
+  if(this.TriParMontantMarcheAttribueData==0){
+        this.TriParMontantMarcheAttribueData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantMarcheAtribue-b.montantMarcheAtribue});
+      }else{
+        this.TriParMontantMarcheAttribueData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantMarcheAtribue-a.montantMarcheAtribue});
+      }
+
+},
+
+TriParNombreMarcheExecution(){
+  if(this.TriParNombreMarcheExcutionData==0){
+        this.TriParNombreMarcheExcutionData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.nombreMarcheExcution-b.nombreMarcheExcution});
+      }else{
+        this.TriParNombreMarcheExcutionData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.nombreMarcheExcution-a.nombreMarcheExcution});
+      }
+},
+
+TriParMontantTotalMarche(){
+   if(this.TriParMontantMarcheData==0){
+        this.TriParMontantMarcheData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantTotalMarcheExcution-b.montantTotalMarcheExcution});
+      }else{
+        this.TriParMontantMarcheData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantTotalMarcheExcution-a.montantTotalMarcheExcution});
+      }
+},
+
+TriParMontantMarcheExcute(){
+  if(this.TriParMontantMarcheExcuteData==0){
+        this.TriParMontantMarcheExcuteData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantMarcheExcute-b.montantMarcheExcute});
+      }else{
+        this.TriParMontantMarcheExcuteData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantMarcheExcute-a.montantMarcheExcute});
+      }
+},
+
+TriParMontantMarcheResteExcute(){
+  if(this.TriParMontantMarcheResteData==0){
+        this.TriParMontantMarcheResteData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantResreExcute-b.montantResreExcute});
+      }else{
+        this.TriParMontantMarcheResteData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantResreExcute-a.montantResreExcute});
+      }
+},
+
+TriParNombreMarcheSouffrance(){
+  if(this.TriParNombreMarcheSouffranceData==0){
+        this.TriParNombreMarcheSouffranceData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.nombreMarcheSouffrance-b.nombreMarcheSouffrance});
+      }else{
+        this.TriParNombreMarcheSouffranceData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.nombreMarcheSouffrance-a.nombreMarcheSouffrance});
+      }
+},
+
+TriParMontantResteExcuteMarcheSouffrance(){
+  if(this.TriParMontantResteMarcheSouffranceData==0){
+        this.TriParMontantResteMarcheSouffranceData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantMarcheAExcuteSouffrance-b.montantMarcheAExcuteSouffrance});
+      }else{
+        this.TriParMontantResteMarcheSouffranceData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantMarcheAExcuteSouffrance-a.montantMarcheAExcuteSouffrance});
+      }
+},
+
+TriParTauxMarcheSouffrance(){
+  if(this.TriParTauxMarcheSouffranceData==0){
+        this.TriParTauxMarcheSouffranceData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.tauxMarcheSouffrance-b.tauxMarcheSouffrance});
+      }else{
+        this.TriParTauxMarcheSouffranceData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.tauxMarcheSouffrance-a.tauxMarcheSouffrance});
+      }
+},
+TriParNombreMarcheResilier(){
+   if(this.TriParNombreMarcheResilierData==0){
+        this.TriParNombreMarcheResilierData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.nombreMarcheResilier-b.nombreMarcheResilier});
+      }else{
+        this.TriParNombreMarcheResilierData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.nombreMarcheResilier-a.nombreMarcheResilier});
+      }
+},
+
+TriParMontantResteExcuteMarcheResilier(){
+   if(this.TriParMontantResteExcuteMarcheResilierData==0){
+        this.TriParMontantResteExcuteMarcheResilierData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.montantMarcheResilierResteExcute-b.montantMarcheResilierResteExcute});
+      }else{
+        this.TriParMontantResteExcuteMarcheResilierData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.montantMarcheResilierResteExcute-a.montantMarcheResilierResteExcute});
+      }
+},
+   
+
+   TriParTauxMarcheResilier(){
+     if(this.TriParTauxMarcheResilierData==0){
+        this.TriParTauxMarcheResilierData=1
+       return this.TrieParSourceFinacement.sort(function(a,b){return a.tauxMarcheResilier-b.tauxMarcheResilier});
+      }else{
+        this.TriParTauxMarcheResilierData=0;
+        return this.TrieParSourceFinacement.sort(function(a,b){return b.tauxMarcheResilier-a.tauxMarcheResilier});
+      }
+   },
 
     partition: partition,
 
@@ -1151,7 +1517,7 @@ resteAexcuterMarcheSouffranceSourceF(id){
 
     formatageSommeSansFCFA:formatageSommeSansFCFA , 
 
-     ShowMyUa(id){
+     showMySourceFinancement(id){
       if(this.recupereIDactivite==""){
          this.recupereIDactivite=id;
       }else if(this.recupereIDactivite!="" && this.recupereIDactivite !=id){
