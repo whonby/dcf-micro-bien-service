@@ -1159,7 +1159,8 @@ ImputationBudget(){
         exo_id: this.anneeBugetaire,
         sib: 1,
         imputation: this.ImputationBudget,
-        section_id:this.recupererIdSection(this.formData.unite_administrative_id)
+        section_id:this.recupererIdSection(this.formData.unite_administrative_id),
+        	regularisation:1,
       };
 
       this.ajouterMarcheHorSib(nouvelObjet);

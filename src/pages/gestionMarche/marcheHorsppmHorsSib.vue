@@ -1,7 +1,7 @@
 reference_marche
 <template>
   <div>
-    <div class="span8" style="margin-right: 25px; margin-bottom: 30px">
+    <!-- <div class="span8" style="margin-right: 25px; margin-bottom: 30px">
       <label style="color: #000; font-size: 14px; font-weight: bolder">
         CHOISIR LE TYPE DE MARCHE<a href="#" style="color: red"></a>
       </label>
@@ -15,7 +15,7 @@ reference_marche
 
       >
       </model-list-select>
-    </div>
+    </div> -->
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -329,8 +329,7 @@ reference_marche
                       >
                       <span v-else>Ligne à marché</span>
                     </td>
-                    <!-- <td @dblclick="ModalModifierMarcheHorsPPM(index)">
-                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                 
                     <td style="text-align: center">
                       {{
                         formatageSomme(parseFloat(marche.montant_marche)) ||
@@ -343,13 +342,13 @@ reference_marche
 
                       <button
                         v-if="marche.attribue == 2"
-                        class="btn btn-warning annimB"
+                        class="btn btn-warning"
                       >
                         <span title="MARCHE EN EXERCUTION" style="">EX</span>
                       </button>
                       <button
                         v-else-if="marche.attribue == 1"
-                        class="btn btn-success annimB"
+                        class="btn btn-success"
                       >
                         <span title=" MARCHE EN COURS DE CONTRACTUALISATION"
                           >CT</span
@@ -357,20 +356,20 @@ reference_marche
                       </button>
                       <button
                         v-else-if="marche.attribue == 3"
-                        class="btn btn-info annimB"
+                        class="btn btn-info"
                       >
                         <span title="MARCHE RESILIE">RE</span>
                       </button>
                       <button
                         v-else-if="marche.attribue == 5"
-                        class="btn btn-inverse annimB"
+                        class="btn btn-inverse"
                       >
                         <span title="MARCHE TERMINE">TE</span>
                       </button>
-                      <button v-else-if="marche.attribue == 7" class="btn btn annimB">
+                      <button v-else-if="marche.attribue == 7" class="btn btn">
                         <span title="MARCHE SUSPENDU">SU</span>
                       </button>
-                      <button v-else class="btn btn-danger annimB">
+                      <button v-else class="btn btn-danger">
                         <span title="MARCHE EN PLANIFICATION">PL</span>
                       </button>
 
@@ -438,38 +437,9 @@ reference_marche
                         <span class=""><i class="icon-folder-open"></i></span>
                       </router-link>
 
-                      <!-- <router-link :to="{ name: 'suivi_marhe', params: { id: marche.id }}"
-                class="btn btn-success " title="">
-                  <span class=""><i class="">Contractualisation</i></span>
-                    </router-link> -->
-
-                      <!-- <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
-                class="btn btn-default " title="historique execution Marche">
-                  <span class=""><i class="  icon-zoom-out"></i></span>
-                   </router-link>  -->
                     </td>
                     <td v-else style="background-color: lightblue"></td>
-                    <!-- </td>
-                   
-                       <td v-else>
-  <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
-                class="btn btn-default " title="Continué le processuce de contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link> 
-                       </td>
-                    <td v-if="marche.attribue == 2">
-                       <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
-        <span class=""><i class=" icon-calendar"></i></span>
-    </router-link>
-                    </td> -->
-                    <!-- <td v-else></td> -->
-                    <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
-                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                                    class="btn btn-inverse " title="Cycle de vie du marche">
-                           <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link></td> -->
-
+                 
                     <td>
                       <div class="btn-group">
                         <button
@@ -529,14 +499,14 @@ import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "../../../src/Repositories/Repository";
 import { admin, dcf, noDCfNoAdmin } from "../../../src/Repositories/Auth";
 import { partition } from "../../../src/Repositories/Repository";
-import { ModelListSelect } from "vue-search-select";
+// import { ModelListSelect } from "vue-search-select";
 //import {partition} from '../../../src/Repositories/partition'
 //import {partition} from '../../../src/Repositories/partition';
 //import {partition} from '../../../../'
 export default {
   name: "type facture",
   components: {
-    ModelListSelect,
+    //ModelListSelect,
   },
   data() {
     return {
@@ -788,7 +758,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -799,14 +769,14 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else {
             return this.marches.filter(
               (qtreel) =>
                 qtreel.unite_administrative_id == id &&
                 qtreel.parent_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           }
         }
@@ -825,7 +795,7 @@ export default {
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -1101,7 +1071,7 @@ export default {
             if (
               items.sib == 1 &&
               items.plan_passation_marche_id == null &&
-              items.parent_id == null
+              items.parent_id == null && items.regularisation==0
             ) {
               return items;
             }
@@ -1112,13 +1082,13 @@ export default {
             if (
               items.sib == 1 &&
               items.plan_passation_marche_id != null &&
-              items.parent_id == null
+              items.parent_id == null && items.regularisation==0
             ) {
               return items;
             }
           } else {
-            if (items.sib == 1 && items.parent_id == null) {
-              return items;
+            if (items.sib == 1 && items.parent_id == null && items.regularisation==0) {
+              return items; 
             }
           }
         });
@@ -1131,7 +1101,7 @@ export default {
             (items) =>
               items.sib == 1 &&
               items.plan_passation_marche_id == null &&
-              items.parent_id == null
+              items.parent_id == null && items.regularisation==0
           );
         } else if (
           this.libelle_typemarche == "PPM" &&
@@ -1141,11 +1111,11 @@ export default {
             (items) =>
               items.sib == 1 &&
               items.plan_passation_marche_id != null &&
-              items.parent_id == null
+              items.parent_id == null && items.regularisation==0
           );
         } else {
           return this.marcheHorSibFiltre1.filter(
-            (items) => items.sib == 1 && items.parent_id == null
+            (items) => items.sib == 1 && items.parent_id == null && items.regularisation==0
           );
         }
       }
@@ -2122,7 +2092,7 @@ export default {
 
 
 
-.annimB{
+.annimB {
     font-weight: bold;
     color:red;
     animation:blinkButton 1s infinite;

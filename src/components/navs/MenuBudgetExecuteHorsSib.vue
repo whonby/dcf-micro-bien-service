@@ -56,6 +56,11 @@
           SITUATION D'EXECUTION BUDGET RECAPByBailActivi
         </router-link>
       </li>
+       <li>
+        <router-link :to="{ name: 'suivi_des_entreprises' }" tag="a">
+          FICHE SUIVI DES ENTREPRISES
+        </router-link>
+      </li>
       <!-- <li>
          <router-link :to="{name:''}" tag="a">
            PERSONNEL

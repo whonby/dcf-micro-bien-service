@@ -68,7 +68,7 @@
               <thead style="background-color: #ff9c1a !important">
                   
                    
-                 <tr>
+                 <tr style="">
                    <th></th>
 
                    <th></th>
@@ -162,12 +162,12 @@
                   <button @click="triMarcheEnCours()">
                      <i class=" icon-filter"></i> 
                     </button>
-                    MARCHE EN COURS 
+                    NOMBRE DE MARCHE EN COURS 
                   </th>
                   
                 </tr>
               </thead>
-       <tbody v-for="GroupeSourceFinancement in partition(TriaffichageUniteAdminstrative, size)[page]" :key="GroupeSourceFinancement.id">
+            <tbody v-for="GroupeSourceFinancement in partition(TriaffichageUniteAdminstrative, size)[page]" :key="GroupeSourceFinancement.id">
                 <tr>
                   <td>
                     <button @click="ShowMyUa(GroupeSourceFinancement.id)">
@@ -292,7 +292,7 @@ export default {
   data() {
     return {
       page: 0,
-      size:5,
+      size:10,
       active_el: 0,
       fabActions: [
         {

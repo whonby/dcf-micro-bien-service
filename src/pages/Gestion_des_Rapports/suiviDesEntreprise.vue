@@ -288,6 +288,8 @@
                 </div>
               </table>
             </div>
+
+       
              <hr>
            
          </div>
@@ -554,6 +556,8 @@ afficherLibelleTypeMarche(){
    this.detailOp = this.mandats.find(
        idmarche => idmarche.id == this.$route.params.id
          )
+         console.log("helllooooo")
+         console.log(this.listeDesMarcheSuppendu)
   
 },
         methods: {
