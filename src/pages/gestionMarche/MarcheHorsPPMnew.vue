@@ -1667,15 +1667,14 @@ editMarche123:{},
     // },
     BasculerMarcheRegulation(id) {
        
-      if (confirm("Etes-vous sur de regularisé le marché ?")) {
+      if (this.$app.$dialog.confirm("Etes-vous sur de regularisé le marché ?")) {
+        
      this.editMarche123 = this.marcheHorSibFiltre.find(item=>item.id==id);
         let marcheObjet = this.marches.find(
           (marche) => marche.id == this.editMarche123.id
         );
-        marcheObjet.regularisation = 1;
+        marcheObjet.regularisation = 0;
        
-       
-        
         this.modifierMarcheBascule(marcheObjet);
       } else {
         // Code à éxécuter si l'utilisateur clique sur "Annuler"
