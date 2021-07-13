@@ -273,7 +273,7 @@ reference_marche
                     <th>Statut</th>
                     <th>Montant prévisionnel</th>
                     <th>Statut Marché</th>
-                    <th title="mouvement du marché">Mouvement du marché</th>
+                    <!-- <th title="mouvement du marché">Mouvement du marché</th> -->
                     <th style="">Suivi du marché</th>
                     <th>Action</th>
                   </tr>
@@ -413,12 +413,12 @@ reference_marche
 
                       </span>
                     </td>
-                    <td>
+                    <!-- <td>
                       <span v-if="marche.plan_passation_marche_id == null"
                         >Hors PPM</span
                       >
                       <span v-else>PPM</span>
-                    </td>
+                    </td> -->
                     <td
                       v-if="
                         marche.type_marche_id == 6 ||

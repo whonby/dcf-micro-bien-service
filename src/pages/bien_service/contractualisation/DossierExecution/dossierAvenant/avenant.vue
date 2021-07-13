@@ -6,7 +6,7 @@
 <div id="exampleModalAvenant" class="modal hide tailAvenant">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Avenant1</h3>
+        <h3>Ajouter Avenant</h3>
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
