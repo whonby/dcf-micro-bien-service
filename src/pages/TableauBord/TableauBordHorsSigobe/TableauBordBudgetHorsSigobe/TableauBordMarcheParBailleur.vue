@@ -241,7 +241,18 @@
                       font-weight: bold;
                       color: #000;
                       text-align: center;
-                      background-color: #fbb203 !important;" colspan="">Bailleur </th> 
+                      background-color: #fbb203 !important;" colspan="">
+                      
+                      Bailleur 
+                       <!-- <button @click="InputLibelleBailleur">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                      <money style="text-align:left;color:red" 
+                       v-model="libelle_bailleur" class="span"
+                        v-show="active_libelleBailleur == true"></money> -->
+                      
+                      </th> 
 
          
           <th style="width:10%;font-size: 14px;
@@ -263,6 +274,13 @@
                       
                     </button>
                       Nombre
+                       <button @click="InputNomreTest">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                      <money style="text-align:left;color:red" 
+                       v-model="InputNomre_Test" class="span"
+                        v-show="InputNomreTestdata == true"></money>
                        </th>
                       
          <th style="width:10%;font-size: 14px;
@@ -277,11 +295,13 @@
                     </button>
                       Montant (FCFA) 
 
-                      <button @click="InputMontantInitial">
+                      <button @click="InputMontantContratMarche">
                      <i class=" icon-search"></i> 
                       
                     </button>
-                      <money style="text-align:left;color:red"   v-model="montant_InitialAb" class="span" v-show="activeMontantInitial == true"></money>
+                      <money style="text-align:left;color:red" 
+                       v-model="montantContratMarche" class="span"
+                        v-show="activeMontantContratMarche == true"></money>
                       </th>
 
          <th style="width:10%;font-size: 14px;
@@ -294,6 +314,15 @@
                       
                     </button>
                       Nombre 
+
+                       <button @click="InputNombre">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="nombre_cont" class="span"
+                        v-show="activeNombre == true"></money>
                       </th>
           <th style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -306,6 +335,15 @@
                       
                     </button>
                       Montant (FCFA)
+
+                       <button @click="InputMontantContra">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montant_cont" class="span"
+                        v-show="activeMontantCont == true"></money>
                       </th>
 
            <th style="width:10%;font-size: 14px;
@@ -319,6 +357,15 @@
                       
                     </button>
                       Nombre 
+
+                        <button @click="InputNombreAttribue">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="nombreMarche_attribue" class="span"
+                        v-show="activenombreMarcheAttribue == true"></money>
                       </th>
           <th style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -331,6 +378,16 @@
                       
                     </button>
                       Montant (FCFA)
+
+                      
+                        <button @click="InputMontantmacheAttribue">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montantMarche_attribue" class="span"
+                        v-show="activemarcheMontantAttribue == true"></money>
                       </th>
 
 
@@ -345,6 +402,15 @@
                       
                     </button>
                       Nombre
+
+                       <button @click="InputNombreMarcheExcute">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="nombreMarche_excute" class="span"
+                        v-show="activeNombreMarcheExcute == true"></money>
                        </th>
 
                       <th style="width:10%;font-size: 14px;
@@ -358,6 +424,16 @@
                       
                     </button>
                       Montant total marchés (FCFA) 
+
+                      
+                       <button @click="InputMontantTotalMarcheExcute">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montantTotalMarcheExcute" class="span"
+                        v-show="activeMontantMarcheExcute == true"></money>
                       </th>
 
                        <th style="width:10%;font-size: 14px;
@@ -372,6 +448,15 @@
                     </button>
 
                       Montants exécutés (FCFA)
+
+                      <button @click="InputMotantExcute">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montant_Excute" class="span"
+                        v-show="activeMontant_Excute == true"></money>
                        </th>
 
                        <th style="width:10%;font-size: 14px;
@@ -385,6 +470,15 @@
                     </button>
 
                       Reste à exécuter
+
+                       <button @click="InputResteExecute">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montantReste_Excute" class="span"
+                        v-show="activeMontantReste_Excute == true"></money>
                        </th>
 
                       <th style="width:10%;font-size: 14px;
@@ -398,6 +492,15 @@
                       
                     </button>
                       Nombre
+
+                      <button @click="InputNombreMarcheSouffrance">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="nombreMarche_Souffrance" class="span"
+                        v-show="activeNombreMarcheSouffrance == true"></money>
                        </th>
 
                        <th style="width:10%;font-size: 14px;
@@ -410,7 +513,18 @@
                      <i class=" icon-filter"></i> 
                       
                     </button>
-                      Reste à exécuter </th>
+                      Reste à exécuter 
+                      
+                      
+                      <button @click="InputMontantResteExcuteSouffrance">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montant_reste_souffrance" class="span"
+                        v-show="activeMontantMarcheSouffrance == true"></money>
+                      </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -422,6 +536,15 @@
                       
                     </button>
                        Taux
+
+                       <button @click="InputTauxMarcheSouffrance">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="taux_marche" class="span"
+                        v-show="activeTauxMarcheSouffrance == true"></money>
                        </th>
 
                
@@ -434,7 +557,16 @@
                      <i class=" icon-filter"></i> 
                       
                     </button>
-                      Nombre </th>
+                      Nombre 
+                       <button @click="InputNombreMarcheResilier">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="nombreMarche_resilier" class="span"
+                        v-show="activeMarcheResilier == true"></money>
+                      </th>
 
                        <th style="width:10%;font-size: 14px;
                       font-weight: bold;
@@ -448,6 +580,14 @@
                     </button>
                       Reste à exécuter 
                       
+                         <button @click="InputMontantResteExecute">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="montantReste_execute" class="span"
+                        v-show="activemontantResilier == true"></money>
                       </th>
 
                        <th style="width:10%;font-size: 14px;
@@ -461,6 +601,15 @@
                       
                     </button>
                       Taux
+
+                     <button @click="InputTauxMarcheResilier">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+
+                       <money style="text-align:left;color:red" 
+                       v-model="TauxMarche_Resilier" class="span"
+                        v-show="activeMarcheTauxResilier == true"></money>
                       </th>
            
        </tr>
@@ -468,7 +617,7 @@
       
 
       
-       <tbody  v-for="type1 in  partition(TrieParSourceFinacement, size)[page]" :key="type1.id">
+       <tbody  v-for="type1 in  partition(Listenewdata, size)[page]" :key="type1.id">
            <tr>
 
               <td colspan="2">
@@ -658,7 +807,7 @@
           <a @click.prevent="precedent()" href="#">Précedent</a>
         </li>
         <li
-          v-for="(titre, index) in partition(TrieParSourceFinacement, size).length"
+          v-for="(titre, index) in partition(Listenewdata, size).length"
           :key="index"
           :class="{ active: active_el == index }"
         >
@@ -667,7 +816,7 @@
           }}</a>
         </li>
         <li
-          :class="{ disabled: page == partition(TrieParSourceFinacement, size).length - 1 }"
+          :class="{ disabled: page == partition(Listenewdata, size).length - 1 }"
         >
           <a @click.prevent="suivant()" href="#">Suivant</a>
         </li>
@@ -724,8 +873,40 @@ export default {
           triParNombreMarchePlanifData:0,
           triParnombreMarcheContratData:0,
           triParMontantContratualiData:0,
-          montant_InitialAb:0,
-          activeMontantInitial:false,
+          montantContratMarche:0,
+          InputNomreTestdata:false,
+          InputNomre_Test:0,
+          libelle_bailleur:0,
+          active_libelleBailleur:false,
+            activeNombre:false,
+            activeMontantCont:false,
+            activenombreMarcheAttribue:false,
+            activemarcheMontantAttribue:false,
+            activeNombreMarcheExcute:false,
+            activeMontantMarcheExcute:false,
+            activeMontant_Excute:false,
+            activeMontantReste_Excute:false,
+            activeNombreMarcheSouffrance:false,
+            activeMontantMarcheSouffrance:false,
+            activeTauxMarcheSouffrance:false,
+            activeMarcheResilier:false,
+            activemontantResilier:false,
+            activeMarcheTauxResilier:false,
+            TauxMarche_Resilier:0,
+            montantReste_execute:0,
+            nombreMarche_resilier:0,
+            taux_marche:0,
+            montant_reste_souffrance:0,
+            nombreMarche_Souffrance:0,
+            montantReste_Excute:0,
+            montant_Excute:0,
+            montantTotalMarcheExcute:0,
+            nombreMarche_excute:0,
+            montantMarche_attribue:0,
+            nombreMarche_attribue:0,
+            montant_cont:0,
+            nombre_cont:0,
+          activeMontantContratMarche:false,
           source_financement_id1:0,
            page: 0,
       size:10,
@@ -831,7 +1012,6 @@ export default {
       return this.liste.map(function (value) {
         let objet = {
           id:value[0].source_financement,
-          
           libelleBailleur:vm.afficherLibelleSourFinacement(value[0].source_financement),
           nombreMarchePlanif:vm.NombreMarcherPartSourceF(value[0].source_financement),
           montantMarchePlanif:vm.afficherNombreMarchePlanifierMontantDons(value[0].source_financement),
@@ -849,11 +1029,51 @@ export default {
           nombreMarcheResilier:vm.NombreMarcherResilier(value[0].source_financement),
           montantMarcheResilierResteExcute:vm.resteAexcuterMarcheResilier(value[0].source_financement),
           tauxMarcheResilier:vm.afficherTauxMarcheResilier(value[0].source_financement)
-          
         };
         return objet;
       });
     
+    },
+
+    Listenewdata(){
+        if(this.montantContratMarche!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.montantMarchePlanif ==this.montantContratMarche);
+        }else if(this.InputNomre_Test!=0){
+          return this.TrieParSourceFinacement.filter((item)=>item.nombreMarchePlanif ==this.InputNomre_Test);
+        }else if(this.libelle_bailleur!=0){
+         return this.TrieParSourceFinacement.filter((item) => item.libelleBailleur== this.libelle_bailleur);
+        }else if(this.nombre_cont!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.nombreMarcheContra ==this.nombre_cont);
+        } else if(this.montant_cont!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.montantMarcheContract ==this.montant_cont)
+        } else if(this.nombreMarche_attribue!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.nombreMarcheAtribue==this.nombreMarche_attribue)
+        } else if(this.montantMarche_attribue!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.montantMarcheAtribue == this.montantMarche_attribue)
+        } else if(this.nombreMarche_excute!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.nombreMarcheExcution==this.nombreMarche_excute)
+        } else if(this.montantTotalMarcheExcute!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.montantTotalMarcheExcution==this.montantTotalMarcheExcute)
+        } else if(this.montant_Excute!=0){     
+          return this.TrieParSourceFinacement.filter((item) => item.montantMarcheExcute==this.montant_Excute)
+        }else if(this.montantReste_Excute!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.montantResreExcute==this.montantReste_Excute)
+        } else if(this.nombreMarche_Souffrance!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.nombreMarcheSouffrance==this.nombreMarche_Souffrance)
+        }else if(this.montant_reste_souffrance!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.montantMarcheAExcuteSouffrance==this.montant_reste_souffrance)
+        }else if(this.taux_marche!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.tauxMarcheSouffrance==this.taux_marche)
+        }else if(this.nombreMarche_resilier!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.nombreMarcheResilier==this.nombreMarche_resilier)
+        }else if(this.montantReste_execute!=0){
+          return this.TrieParSourceFinacement.filter((item) =>item.montantMarcheResilierResteExcute==this.montantReste_execute)
+        } else if(this.TauxMarche_Resilier!=0){
+          return this.TrieParSourceFinacement.filter((item) => item.tauxMarcheResilier==this.TauxMarche_Resilier)
+        }
+        else{
+          return this.TrieParSourceFinacement;
+        }
     },
 
   // dataContrac(){
@@ -1265,12 +1485,154 @@ montantAvenantMarcheResilier(){
     methods:{
     ...mapActions("bienService",[""]),
 
- InputMontantInitial(){
-      if(this.activeMontantInitial == false){
-        this.activeMontantInitial = true
+ InputMontantContratMarche(){
+      if(this.activeMontantContratMarche == false){
+        this.activeMontantContratMarche = true
       }else{
-        this.activeMontantInitial = false;
-        this.montant_InitialAb = 0;
+        this.activeMontantContratMarche = false;
+        this.montantContratMarche = 0;
+      }
+ },
+
+ InputNombre(){
+   if(this.activeNombre == false){
+        this.activeNombre = true
+      }else{
+        this.activeNombre = false;
+        this.nombre_cont = 0;
+      }
+ },
+
+ InputMontantContra(){
+   if(this.activeMontantCont == false){
+        this.activeMontantCont = true
+      }else{
+        this.activeMontantCont = false;
+        this.montant_cont = 0;
+      }
+ },
+
+ InputNombreAttribue(){
+    if(this.activenombreMarcheAttribue == false){
+        this.activenombreMarcheAttribue = true
+      }else{
+        this.activenombreMarcheAttribue = false;
+        this.nombreMarche_attribue = 0;
+      }
+ },
+
+ InputMontantmacheAttribue(){
+   if(this.activemarcheMontantAttribue == false){
+        this.activemarcheMontantAttribue = true
+      }else{
+        this.activemarcheMontantAttribue = false;
+        this.montantMarche_attribue = 0;
+      }
+ },
+
+ InputNombreMarcheExcute(){
+    if(this.activeNombreMarcheExcute == false){
+        this.activeNombreMarcheExcute = true
+      }else{
+        this.activeNombreMarcheExcute = false;
+        this.nombreMarche_excute = 0;
+      }
+ },
+
+ InputMontantTotalMarcheExcute(){
+    if(this.activeMontantMarcheExcute == false){
+        this.activeMontantMarcheExcute = true
+      }else{
+        this.activeMontantMarcheExcute = false;
+        this.montantTotalMarcheExcute = 0;
+      }
+ },
+ InputNombreMarcheSouffrance(){
+   if(this.activeNombreMarcheSouffrance == false){
+        this.activeNombreMarcheSouffrance = true
+      }else{
+        this.activeNombreMarcheSouffrance = false;
+        this.nombreMarche_Souffrance = 0;
+      }
+ },
+
+ InputMontantResteExcuteSouffrance(){
+   if(this.activeMontantMarcheSouffrance == false){
+        this.activeMontantMarcheSouffrance = true
+      }else{
+        this.activeMontantMarcheSouffrance = false;
+        this.montant_reste_souffrance = 0;
+      }
+ },
+
+ InputTauxMarcheSouffrance(){
+   if(this.activeTauxMarcheSouffrance == false){
+        this.activeTauxMarcheSouffrance = true
+      }else{
+        this.activeTauxMarcheSouffrance = false;
+        this.taux_marche = 0;
+      }
+ },
+
+ InputNombreMarcheResilier(){
+   if(this.activeMarcheResilier == false){
+        this.activeMarcheResilier = true
+      }else{
+        this.activeMarcheResilier = false;
+        this.nombreMarche_resilier = 0;
+      }
+ },
+
+ InputMontantResteExecute(){
+   if(this.activemontantResilier == false){
+        this.activemontantResilier = true
+      }else{
+        this.activemontantResilier = false;
+        this.montantReste_execute = 0;
+      }
+ },
+
+ InputTauxMarcheResilier(){
+    if(this.activeMarcheTauxResilier == false){
+        this.activeMarcheTauxResilier = true
+      }else{
+        this.activeMarcheTauxResilier = false;
+        this.TauxMarche_Resilier = 0;
+      }
+ },
+ InputMotantExcute(){
+   if(this.activeMontant_Excute == false){
+        this.activeMontant_Excute = true
+      }else{
+        this.activeMontant_Excute = false;
+        this.montant_Excute = 0;
+      }
+ },
+
+ InputResteExecute(){
+   if(this.activeMontantReste_Excute == false){
+        this.activeMontantReste_Excute = true
+      }else{
+        this.activeMontantReste_Excute = false;
+        this.montantReste_Excute = 0;
+      }
+ },
+
+ InputLibelleBailleur(){
+    if(this.active_libelleBailleur == false){
+        this.active_libelleBailleur = true
+      }else{
+        this.active_libelleBailleur = false;
+        this.libelle_bailleur = 0;
+      }
+ },
+
+  InputNomreTest(){
+      if(this.InputNomreTestdata == false){
+        this.InputNomreTestdata = true
+      }else{
+        this.InputNomreTestdata = false;
+        this.InputNomre_Test = 0;
       }
  },
 TriMontantPlanif(){
