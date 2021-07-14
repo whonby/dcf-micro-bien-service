@@ -131,7 +131,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="odd gradeX" v-for="marche in marches" :key="marche.id">
+            <tr class="odd gradeX" v-for="marche in ListeDesMarches" :key="marche.id">
               <td style="font-size: 14px; font-weight: bold; text-align: center"
               > {{marche.reference_marche || 'Non renseigné'}}  </td>
 
@@ -175,13 +175,13 @@
                 </td>
             </tr>
             <tr>
-              <td  style="font-size: 14px; font-weight: bold !important; text-align: center">
+              <td  colspan="2" style="font-size: 14px; font-weight: bold !important; text-align: center">
                 MONTANT TOTAL :
               </td>
               <td
-                colspan="10"
+                colspan="2"
                 style="font-size: 14px; font-weight: bold !important; text-align: center"
-              >22</td>
+              >{{  formatageSomme( parseFloat(montant_total_marche) )}}</td>
             </tr>
           </tbody>
 
@@ -275,6 +275,13 @@ listeDesMarcheTerminer(){
 listeDesMarcheEnCoursExecution(){
   return this.mandats.filter(itme=>this.afficherEtatDuMarche(itme.marche_id) ==2)
 },
+ListeDesMarches(){
+    if(this.exercice_budgetaire_id !=0){
+      return this.marches.filter(tem => 
+      tem.exo_id == this.exercice_budgetaire_id)
+    }
+    return this.marches
+},
 regimeImpositions(){
       return id =>{
         if(id!=null && id!=""){
@@ -309,12 +316,10 @@ afficherDateapprobation(){
         }
       };
     },
-   montant_marche(){
-       return id =>{
-           if(id !='' && id !=""){
-               return this.marches.filter(tem =>tem.id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0).toFixed(0);
-           }
-       }
+   montant_total_marche(){
+            
+      return this.marches.filter(tem =>tem.montant_marche != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0).toFixed(0);
+           
    },
 MontantBaseMarche(){
       return id =>{
