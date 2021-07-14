@@ -216,7 +216,7 @@
                 
                
                 <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'" colspan="2">
-                    
+                    {{NombreAvenantParUa(GroupeSection.id)}}
                 </td>
                          
                 </tr>
@@ -923,6 +923,15 @@ ListeMarcheParTypeMarche() {
       return id => {
         if (id != null && id != "") {
            return this.avenants.filter(qtreel => qtreel.marche_id == id).length;
+
+      
+        }
+      };
+    },
+    NombreAvenantParUa() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.ua_id == id).length;
 
       
         }
