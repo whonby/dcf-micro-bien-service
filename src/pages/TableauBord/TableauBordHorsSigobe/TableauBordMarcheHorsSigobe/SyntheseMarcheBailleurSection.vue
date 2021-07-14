@@ -3098,6 +3098,15 @@ export default {
         this.Nombres_tri1 = 0;
       }
  },
+
+ InputMontantTri4(){
+      if(this.InputNombreTri4data == false){
+        this.InputNombreTri4data = true
+      }else{
+        this.InputNombreTri4data = false;
+        this.Nombre_tri4 = 0;
+      }
+ },
   InputMontantTri5(){
       if(this.InputNombreTri5data == false){
         this.InputNombreTri5data = true
