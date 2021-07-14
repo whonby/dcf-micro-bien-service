@@ -313,7 +313,7 @@ recupereIDactivite
               <button @click="Tri4()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+                     
                     <button @click="InputNombreTri4">
                      <i class=" icon-search"></i> 
                     </button>
@@ -335,7 +335,7 @@ recupereIDactivite
               <button @click="Tri5()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+                     
                     <button @click="InputNombreTri5">
                      <i class=" icon-search"></i> 
                     </button>
@@ -356,7 +356,7 @@ recupereIDactivite
               <button @click="Tri6()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+                  
                     <button @click="InputNombreTri6">
                      <i class=" icon-search"></i> 
                     </button>
@@ -377,7 +377,7 @@ recupereIDactivite
               <button @click="Tri7()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+                
                     <button @click="InputNombreTri7">
                      <i class=" icon-search"></i> 
                     </button>
@@ -398,7 +398,7 @@ recupereIDactivite
               <button @click="Tri8()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+           
                     <button @click="InputNombreTri8">
                      <i class=" icon-search"></i> 
                     </button>
@@ -419,7 +419,7 @@ recupereIDactivite
               <button @click="Tri9()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+             
                     <button @click="InputNombreTri9">
                      <i class=" icon-search"></i> 
                     </button>
@@ -440,7 +440,7 @@ recupereIDactivite
               <button @click="Tri10()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+            
                     <button @click="InputNombreTri10">
                      <i class=" icon-search"></i> 
                     </button>
@@ -461,7 +461,7 @@ recupereIDactivite
               <button @click="Tri11()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+          
                     <button @click="InputNombreTri11">
                      <i class=" icon-search"></i> 
                     </button>
@@ -482,7 +482,7 @@ recupereIDactivite
               <button @click="Tri12()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+              
                     <button @click="InputNombreTri12">
                      <i class=" icon-search"></i> 
                     </button>
@@ -503,7 +503,7 @@ recupereIDactivite
               <button @click="Tri13()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+              
                     <button @click="InputNombreTri13">
                      <i class=" icon-search"></i> 
                     </button>
@@ -524,7 +524,7 @@ recupereIDactivite
               <button @click="Tri14()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+                 
                     <button @click="InputNombreTri14">
                      <i class=" icon-search"></i> 
                     </button>
@@ -545,7 +545,7 @@ recupereIDactivite
               <button @click="Tri15()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+     
                     <button @click="InputNombreTri15">
                      <i class=" icon-search"></i> 
                     </button>
@@ -566,7 +566,7 @@ recupereIDactivite
               <button @click="Tri16()">
                      <i class=" icon-filter"></i> 
                     </button>
-                     &nbsp;
+
                     <button @click="InputNombreTri16">
                      <i class=" icon-search"></i> 
                     </button>
