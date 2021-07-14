@@ -211,6 +211,13 @@ recupereIDactivite
                 "
                 colspan="2"
               >
+
+               <button @click="InputLibelleBailleur">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Libelle_bailleur" class="span" 
+                     v-show="InputLibelleBailleurdata == true"></money>
                 BAILLEUR/SECTION
               </th>
 
@@ -227,6 +234,13 @@ recupereIDactivite
                <button @click="Tri1()">
                      <i class=" icon-filter"></i> 
                     </button>
+                  &nbsp;&nbsp;
+                     <button @click="InputNombreTri1" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri1" class="span" 
+                     v-show="InputNombreTri1data == true"></money>
                 Nombre
               </th>
               <th
@@ -240,7 +254,14 @@ recupereIDactivite
               >
               <button @click="Tri2()">
                      <i class=" icon-filter"></i> 
+              </button>
+              &nbsp;&nbsp;
+              <button @click="InputMontantTri1" > 
+                     <i class=" icon-search"></i> 
                     </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Montant_tri1" class="span" 
+                     v-show="InputMontantTri1data == true"></money>
                 Montant
               </th>
 
@@ -256,6 +277,14 @@ recupereIDactivite
               <button @click="Tri3()">
                      <i class=" icon-filter"></i> 
                     </button>
+                    
+              &nbsp;
+              <button @click="InputNombresTri1" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombres_tri1" class="span" 
+                     v-show="InputNombresTri1data == true"></money>
                 Nombres
               </th>
               <th
@@ -270,6 +299,13 @@ recupereIDactivite
               <button @click="Tri4()">
                      <i class=" icon-filter"></i> 
                     </button>
+                    &nbsp;
+              <button @click="InputMontantTri4" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri4" class="span" 
+                     v-show="InputNombreTri4data == true"></money>
                 Montant
               </th>
 
@@ -285,6 +321,13 @@ recupereIDactivite
               <button @click="Tri5()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                    <button @click="InputMontantTri5" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri5" class="span" 
+                     v-show="InputNombreTri5data == true"></money>
                 Nombre
               </th>
               <th
@@ -299,6 +342,13 @@ recupereIDactivite
               <button @click="Tri6()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                    <button @click="InputMontantTri6" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri6" class="span" 
+                     v-show="InputNombreTri6data == true"></money>
                 Montant
               </th>
               <th
@@ -313,6 +363,13 @@ recupereIDactivite
               <button @click="Tri7()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputMontantTri7" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri7" class="span" 
+                     v-show="InputNombreTri7data == true"></money>
                 Nombre
               </th>
               <th
@@ -327,7 +384,15 @@ recupereIDactivite
               <button @click="Tri8()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                    <button @click="InputMontantTri8" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri8" class="span" 
+                     v-show="InputNombreTri8data == true"></money>
                 Montant Total Marchés
+
               </th>
               <th
                 style="
@@ -341,6 +406,12 @@ recupereIDactivite
               <button @click="Tri9()">
                      <i class=" icon-filter"></i> 
                     </button>
+                    <button @click="InputMontantTri9" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri9" class="span" 
+                     v-show="InputNombreTri9data == true"></money>
                 Montants Exécutés
               </th>
               <th
@@ -355,6 +426,12 @@ recupereIDactivite
               <button @click="Tri10()">
                      <i class=" icon-filter"></i> 
                     </button>
+                   <button @click="InputMontantTri10" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri10" class="span" 
+                     v-show="InputNombreTri10data == true"></money>
                 Reste à Exécuter
               </th>
               <th
@@ -369,6 +446,12 @@ recupereIDactivite
               <button @click="Tri11()">
                      <i class=" icon-filter"></i> 
                     </button>
+                    <button @click="InputMontantTri11" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri11" class="span" 
+                     v-show="InputNombreTri11data == true"></money>
                 Nombre
               </th>
               <th
@@ -383,6 +466,12 @@ recupereIDactivite
               <button @click="Tri12()">
                      <i class=" icon-filter"></i> 
                     </button>
+                    <button @click="InputMontantTri12" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri12" class="span" 
+                     v-show="InputNombreTri12data == true"></money>
                 Reste à Exécuter
               </th>
               <th
@@ -397,6 +486,12 @@ recupereIDactivite
               <button @click="Tri13()">
                      <i class=" icon-filter"></i> 
                     </button>
+                    <button @click="InputMontantTri13" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri13" class="span" 
+                     v-show="InputNombreTri13data == true"></money>
                 Taux
               </th>
               <th
@@ -411,6 +506,13 @@ recupereIDactivite
               <button @click="Tri14()">
                      <i class=" icon-filter"></i> 
                     </button>
+
+                     <button @click="InputMontantTri14" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri14" class="span" 
+                     v-show="InputNombreTri14data == true"></money>
                 Nombre
               </th>
               <th
@@ -425,6 +527,12 @@ recupereIDactivite
               <button @click="Tri15()">
                      <i class=" icon-filter"></i> 
                     </button>
+                     <button @click="InputMontantTri15" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri15" class="span" 
+                     v-show="InputNombreTri15data == true"></money>
                 Reste à Exécuter
               </th>
               <th
@@ -439,6 +547,12 @@ recupereIDactivite
               <button @click="Tri16()">
                      <i class=" icon-filter"></i> 
                     </button>
+                     <button @click="InputMontantTri16" > 
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Nombre_tri16" class="span" 
+                     v-show="InputNombreTri16data == true"></money>
                 Taux
               </th>
             </tr>
@@ -886,6 +1000,41 @@ export default {
       Tri14data:0,
       Tri15data:0,
       Tri16data:0,
+
+      InputLibelleBailleurdata:false,
+      InputNombreTri1data:false,
+      InputMontantTri1data:false,
+      InputNombresTri1data:false,
+      InputNombreTri4data:false,
+      InputNombreTri5data:false,
+      InputNombreTri6data:false,
+      InputNombreTri7data:false,
+      InputNombreTri8data:false,
+      InputNombreTri9data:false,
+      InputNombreTri10data:false,
+      InputNombreTri11data:false,
+      InputNombreTri12data:false,
+      InputNombreTri13data:false,
+      InputNombreTri14data:false,
+      InputNombreTri15data:false,
+      InputNombreTri16data:false,
+      Libelle_bailleur:0,
+      Nombre_tri1:0,
+      Nombres_tri1:0,
+      Montant_tri1:0,
+      Nombre_tri4:0,
+      Nombre_tri5:0,
+      Nombre_tri6:0,
+      Nombre_tri7:0,
+      Nombre_tri8:0,
+      Nombre_tri9:0,
+      Nombre_tri10:0,
+      Nombre_tri11:0,
+      Nombre_tri12:0,
+      Nombre_tri13:0,
+      Nombre_tri14:0,
+      Nombre_tri15:0,
+      Nombre_tri16:0,
     };
   },
   // mounted(){
@@ -2914,6 +3063,137 @@ export default {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+    
+    InputLibelleBailleur(){
+      if(this.InputLibelleBailleurdata == false){
+        this.InputLibelleBailleurdata = true
+      }else{
+        this.InputLibelleBailleurdata = false;
+        this.Libelle_bailleur = 0;
+      }
+ },
+
+  InputNombreTri1(){
+      if(this.InputNombreTri1data == false){
+        this.InputNombreTri1data = true
+      }else{
+        this.InputNombreTri1data = false;
+        this.Nombre_tri1 = 0;
+      }
+ },
+  InputMontantTri1(){
+      if(this.InputMontantTri1data == false){
+        this.InputMontantTri1data = true
+      }else{
+        this.InputMontantTri1data = false;
+        this.Montant_tri1 = 0;
+      }
+ },
+  InputNombresTri1(){
+      if(this.InputNombresTri1data == false){
+        this.InputNombresTri1data = true
+      }else{
+        this.InputNombresTri1data = false;
+        this.Nombres_tri1 = 0;
+      }
+ },
+  InputMontantTri5(){
+      if(this.InputNombreTri5data == false){
+        this.InputNombreTri5data = true
+      }else{
+        this.InputNombreTri5data = false;
+        this.Nombre_tri5 = 0;
+      }
+ },
+  InputMontantTri6(){
+      if(this.InputNombreTri6data == false){
+        this.InputNombreTri6data = true
+      }else{
+        this.InputNombreTri6data = false;
+        this.Nombre_tri6 = 0;
+      }
+ },
+  InputMontantTri7(){
+      if(this.InputNombreTri7data == false){
+        this.InputNombreTri7data = true
+      }else{
+        this.InputNombreTri7data = false;
+        this.Nombre_tri7 = 0;
+      }
+ },
+  InputMontantTri8(){
+      if(this.InputNombreTri8data == false){
+        this.InputNombreTri8data = true
+      }else{
+        this.InputNombreTri8data = false;
+        this.Nombre_tri8 = 0;
+      }
+ },
+  InputMontantTri9(){
+      if(this.InputNombreTri9data == false){
+        this.InputNombreTri9data = true
+      }else{
+        this.InputNombreTri9data = false;
+        this.Nombre_tri9 = 0;
+      }
+ },
+  InputMontantTri10(){
+      if(this.InputNombreTri10data == false){
+        this.InputNombreTri10data = true
+      }else{
+        this.InputNombreTri10data = false;
+        this.Nombre_tri10 = 0;
+      }
+ },
+  InputMontantTri11(){
+      if(this.InputNombreTri11data == false){
+        this.InputNombreTri11data = true
+      }else{
+        this.InputNombreTri11data = false;
+        this.Nombre_tri11 = 0;
+      }
+ },
+  InputMontantTri12(){
+      if(this.InputNombreTri12data == false){
+        this.InputNombreTri12data = true
+      }else{
+        this.InputNombreTri12data = false;
+        this.Nombre_tri12 = 0;
+      }
+ },
+  InputMontantTri13(){
+      if(this.InputNombreTri13data == false){
+        this.InputNombreTri13data = true
+      }else{
+        this.InputNombreTri13data = false;
+        this.Nombre_tri13 = 0;
+      }
+ },
+  InputMontantTri14(){
+      if(this.InputNombreTri14data == false){
+        this.InputNombreTri14data = true
+      }else{
+        this.InputNombreTri14data = false;
+        this.Nombre_tri14 = 0;
+      }
+ },
+  InputMontantTri15(){
+      if(this.InputNombreTri15data == false){
+        this.InputNombreTri15data = true
+      }else{
+        this.InputNombreTri15data = false;
+        this.Nombre_tri15 = 0;
+      }
+ },
+  InputMontantTri16(){
+      if(this.InputNombreTri16data == false){
+        this.InputNombreTri16data = true
+      }else{
+        this.InputNombreTri16data = false;
+        this.Nombre_tri16 = 0;
+      }
+ },
 
     //
        Tri1(){
