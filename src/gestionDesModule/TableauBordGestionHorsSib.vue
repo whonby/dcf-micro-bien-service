@@ -193,7 +193,7 @@ en cours de traitement</h4>
 <div class="span4"  >
 <div class=" shadow1" >
  <div id="chart" style="border: 2px dotted #ffffff;">
-        <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="pie" width="380" :options="chartOptions" :series="dataPourcentageBienService1"></apexchart>
       </div>
   
 </div>
@@ -330,7 +330,7 @@ en cours de traitement</h4>
         </div>
       </div>
     </div>
-      
+      {{ datamois }}
     </div>
 
 </template>
@@ -359,6 +359,7 @@ export default {
       OpprovisoireHorsDelai:0,
       exercice_id:0,
       uniteAdministratives_id:0,
+      dataPourcentageBienService1: [],
       text1:[],
       budgetGeneralCharge:"",
        series: [44, 55, 13, 43],
@@ -438,6 +439,23 @@ created() {
                 "exercices_budgetaires",
                 "gestionModules"
             ]),
+
+
+    datamois() {
+          let vm = this;
+
+          if (vm.dataPourcentageBienService1.length > 0) {
+            vm.dataPourcentageBienService1 = [];
+          }
+
+          vm.dataPourcentageBienService1.push(parseFloat(this.sommeOpProvisoire));
+          vm.dataPourcentageBienService1.push(parseFloat(this.sommeOpRegularise));
+          vm.dataPourcentageBienService1.push(parseFloat(this.sommeOpNonRegularise));
+          vm.dataPourcentageBienService1.push(parseFloat(this.MontantOpHorsDelai));
+
+          return "";
+    },
+
             
         noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),

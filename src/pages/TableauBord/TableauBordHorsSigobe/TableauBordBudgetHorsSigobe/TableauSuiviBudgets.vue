@@ -715,7 +715,7 @@
         
               </tr> 
             </thead>
-            <tbody v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
+            <tbody style="overflow-y:auto" v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
               <tr>
                 <td>
                    <button @click="ShowMyLigne(unite.id)">

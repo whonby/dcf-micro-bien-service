@@ -181,7 +181,7 @@
       </p>
 
             <table class="table table-bordered">
-              <thead style="background-color: #ff9c1a !important">
+              <thead style="background-color: #ff9c1a !important;">
                 
 <tr>
                    <th
@@ -511,7 +511,7 @@
                   
                 </tr>
               </thead>
-         <tbody  v-for="ListeActivite in partition(FiltreLeTableauPrincipal, size)[page]"
+         <tbody style="" v-for="ListeActivite in partition(FiltreLeTableauPrincipal, size)[page]"
                 :key="ListeActivite.id">
                 <tr>
                   <td>

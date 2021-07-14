@@ -276,7 +276,7 @@ recupereIDactivite
               >
               <button @click="Tri3()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </button><br>
                     
               <button @click="InputNombresTri1" > 
                      <i class=" icon-search"></i> 
@@ -284,7 +284,7 @@ recupereIDactivite
                      <money style="text-align:left;color:red" 
                      v-model="Nombres_tri1" class="span" 
                      v-show="InputNombresTri1data == true"></money>
-                Nombres
+                Nombre
               </th>
               <th
                 style="
