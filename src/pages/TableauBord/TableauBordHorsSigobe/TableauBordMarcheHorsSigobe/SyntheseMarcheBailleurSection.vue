@@ -255,7 +255,7 @@ recupereIDactivite
               <button @click="Tri2()">
                      <i class=" icon-filter"></i> 
               </button>
-              &nbsp;&nbsp;
+              
               <button @click="InputMontantTri1" > 
                      <i class=" icon-search"></i> 
                     </button>
@@ -278,7 +278,6 @@ recupereIDactivite
                      <i class=" icon-filter"></i> 
                     </button>
                     
-              &nbsp;
               <button @click="InputNombresTri1" > 
                      <i class=" icon-search"></i> 
                     </button>
@@ -299,7 +298,7 @@ recupereIDactivite
               <button @click="Tri4()">
                      <i class=" icon-filter"></i> 
                     </button>
-                    &nbsp;
+                    
               <button @click="InputMontantTri4" > 
                      <i class=" icon-search"></i> 
                     </button>
@@ -560,7 +559,7 @@ recupereIDactivite
           <br />
           <tbody
             v-for="GroupeSourceFinancement in partition(
-              TriaffichageUniteSource,
+              FiltreLeTableauPrincipal,
               size
             )[page]"
             :key="GroupeSourceFinancement.id"
@@ -919,7 +918,7 @@ recupereIDactivite
             <a @click.prevent="precedent()" href="#">Précedent</a>
           </li>
           <li
-            v-for="(titre, index) in partition(TriaffichageUniteSource, size)
+            v-for="(titre, index) in partition(FiltreLeTableauPrincipal, size)
               .length"
             :key="index"
             :class="{ active: active_el == index }"
@@ -931,7 +930,7 @@ recupereIDactivite
           <li
             :class="{
               disabled:
-                page == partition(TriaffichageUniteSource, size).length - 1,
+                page == partition(FiltreLeTableauPrincipal, size).length - 1,
             }"
           >
             <a @click.prevent="suivant()" href="#">Suivant</a>
@@ -1200,72 +1199,71 @@ export default {
       return this.ListeDesSourceFinancement.map(function (value) {
         let objet = {
           id: value[0].source_financement_id,
-          libellebailleur: vm.LibelleSourceFinancement(
-            value[0].source_financement_id
-          ),
-          NombrePlani: vm.NombreMarchePlanifierGlobalParSection(
-            value[0].source_financement_id
-          ),
-          MontantPlani: vm.MontantMarchePlanifierGlobalParSourceFinancement(
-            value[0].source_financement_id
-          ),
-
-          NombreContract:
-            vm.NombreMarcheContratualisationGlobalParSourceFinancement(
-              value[0].source_financement_id
-            ),
-          MontantContract:
-            vm.MontantMarcheContratualisationGlobalParSourceFiancement(
-              value[0].source_financement_id
-            ),
-
-          NombreAttribue: vm.NombreMarcheAttribueGlobalParSourceFinancement(
-            value[0].source_financement_id
-          ),
-          MontantAttribue: vm.MontantMarcheAttribueGlobalParSourceFinancement(
-            value[0].source_financement_id
-          ),
-
-          NombreEnCoursExé: vm.NombreMarcheExecutionGlobalParSourceFinancement(
-            value[0].source_financement_id
-          ),
-          MontantEnCoursExé: vm.TotalMarcheGlobal(
-            value[0].source_financement_id
-          ),
-          MontantExécutéEnCoursExé: vm.MontantExecuteGlobalParSourceFinancement(
-            value[0].source_financement_id
-          ),
-          ResteAPayerEnCoursExé: vm.RestePayerEnCoursExé(
-            value[0].source_financement_id
-          ),
-
-          NombreSoufrance: vm.NombreMarcheSuppenduGlobalParSourceFinancement(
-            value[0].source_financement_id
-          ),
-          ResteAExécutéSoufrance:
-            vm.MontantExecuteParSourceFinancementMarcheEnSouffrance(
-              value[0].source_financement_id
-            ),
-          TauxSoufrance: vm.TauxMarcheSouffranceParSourceFinancement(
-            value[0].source_financement_id
-          ),
-
-          NombreResillié: vm.NombreMarcheResilierParSourceFinancement(
-            value[0].source_financement_id
-          ),
-          ResteAExécutéResillié:
-            vm.MontantExecuteParSourceFinancementMarcheResilier(
-              value[0].source_financement_id
-            ),
-          TauxResillié: vm.TauxMarcheResilierParSourceFinancement(
-            value[0].source_financement_id
-          ),
+          libellebailleur: vm.LibelleSourceFinancement(value[0].source_financement_id),
+          NombrePlani: vm.NombreMarchePlanifierGlobalParSection(value[0].source_financement_id),
+          MontantPlani: vm.MontantMarchePlanifierGlobalParSourceFinancement(value[0].source_financement_id),
+          NombreContract:vm.NombreMarcheContratualisationGlobalParSourceFinancement(value[0].source_financement_id),
+          MontantContract:vm.MontantMarcheContratualisationGlobalParSourceFiancement(value[0].source_financement_id),
+          NombreAttribue: vm.NombreMarcheAttribueGlobalParSourceFinancement(value[0].source_financement_id),
+          MontantAttribue: vm.MontantMarcheAttribueGlobalParSourceFinancement(value[0].source_financement_id),
+          NombreEnCoursExé: vm.NombreMarcheExecutionGlobalParSourceFinancement(value[0].source_financement_id),
+          MontantEnCoursExé: vm.TotalMarcheGlobal(value[0].source_financement_id),
+          MontantExécutéEnCoursExé: vm.MontantExecuteGlobalParSourceFinancement(value[0].source_financement_id),
+          ResteAPayerEnCoursExé: vm.RestePayerEnCoursExé(value[0].source_financement_id),
+          NombreSoufrance: vm.NombreMarcheSuppenduGlobalParSourceFinancement(value[0].source_financement_id),
+          ResteAExécutéSoufrance:vm.MontantExecuteParSourceFinancementMarcheEnSouffrance(value[0].source_financement_id),
+          TauxSoufrance: vm.TauxMarcheSouffranceParSourceFinancement(value[0].source_financement_id),
+          NombreResillié: vm.NombreMarcheResilierParSourceFinancement(value[0].source_financement_id),
+          ResteAExécutéResillié:vm.MontantExecuteParSourceFinancementMarcheResilier(value[0].source_financement_id),
+          TauxResillié: vm.TauxMarcheResilierParSourceFinancement(value[0].source_financement_id),
         };
         return objet;
       });
     },
-
     //fin new
+     FiltreLeTableauPrincipal(){
+    if(this.Libelle_bailleur!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.libellebailleur==this.Libelle_bailleur)
+    }else if(this.Nombre_tri1!=0){
+  return this.TriaffichageUniteSource.filter(item=>item.NombrePlani==this.Nombre_tri1)
+    }else if(this.Montant_tri1!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.MontantPlani==this.Montant_tri1)
+    }else if(this.Nombres_tri1!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.NombreContract==this.Nombres_tri1)
+    }else if(this.Nombre_tri4 !=0){
+      return this.TriaffichageUniteSource.filter(item=>item.MontantContract==this.Nombre_tri4)
+
+    }else if(this.Nombre_tri5!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.NombreAttribue==this.Nombre_tri5)
+    }else if(this.Nombre_tri6!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.MontantAttribue==this.Nombre_tri6)
+    }else if(this.Nombre_tri7!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.NombreEnCoursExé==this.Nombre_tri7)
+    }else if(this.Nombre_tri8!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.MontantEnCoursExé==this.Nombre_tri8)
+    }else if(this.Nombre_tri9!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.MontantExécutéEnCoursExé==this.Nombre_tri9)
+    }else if(this.Nombre_tri10!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.ResteAPayerEnCoursExé==this.Nombre_tri10)
+    }else if(this.Nombre_tri11!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.NombreSoufrance==this.Nombre_tri11)
+    }else if(this.Nombre_tri12!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.ResteAExécutéSoufrance==this.Nombre_tri12)
+    }else if(this.Nombre_tri13!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.TauxSoufrance==this.Nombre_tri13)
+    }else if(this.Nombre_tri14!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.NombreResillié==this.Nombre_tri14)
+    }else if(this.Nombre_tri15!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.ResteAExécutéResillié==this.Nombre_tri15)
+    }else if(this.Nombre_tri16!=0){
+      return this.TriaffichageUniteSource.filter(item=>item.TauxResillié==this.Nombre_tri16)
+    }
+    
+    else{
+      return this.TriaffichageUniteSource
+    }
+
+},
 
     NombreMarchePlanifierGlobalParSection() {
       return (id) => {
