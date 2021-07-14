@@ -1,6 +1,75 @@
 
 <template>
   <div>
+     <div id="testModal" class="modal hide tailgrand">
+      <div class="modal-header">
+         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+        <h3 style="font-size: 14px; font-weight: bold">
+        
+        </h3>
+      </div>
+      <div align="right">
+      <!-- <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+        Exporter en PDF
+      </button> -->
+    </div> 
+      <div class="modal-body" id="printpdf1">
+         <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Objet du marche</th>
+                    <th>Unite administrative</th>
+                    <th>Montant Réel du marche</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+                    <td>{{libelleMarche(test)}}</td>
+                    <td>{{libelleUniteAdministrative(Uaid(test))}}</td>
+                    <td>{{MontantReelMarche(test)}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+     <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Numero ordre</th>
+                    <th>Numéro Avenant</th>
+                    <th>Date</th>
+                    <th>Objet</th>
+                    <th>Titulaire</th>
+                    <th>Montant</th>
+                    <th>Taux</th>
+                    <th>Durée</th>
+                    <th>Source de financement</th>
+                     <th>Ligne budgétaire</th>
+                    <!-- <th>Bénéficiaires</th> -->
+                    <th>Livrables</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
+                    <td></td>
+                    <td>{{itemAvenant.numero_avenant}}</td>
+                    <td>{{itemAvenant.date_avenant}}</td>
+                     <td>{{itemAvenant.objet_avenant}}</td>
+                    <td>{{itemAvenant.marche_id}}</td>
+                    <td>{{itemAvenant.montant_avenant}}</td>
+                     <td>{{itemAvenant.taux_avenant}}</td>
+                    <td>{{itemAvenant.dure_avenant}}</td>
+                    <td>{{itemAvenant.marche_id}}</td>
+                    <td>{{itemAvenant.marche_id}}</td>
+                     <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+      </div>
+    </div>
  <table class="table table-bordered table-striped">
           <tr>
             <td>
@@ -55,23 +124,19 @@
         EXERCICE: {{ afficheAnnee }}
       </p>
 
-      <div v-for="GroupeSection in partition(afficheUa, size)[page]" :key="GroupeSection.id">
+      <div >
            <table class="table table-bordered">
               <thead style="background-color: #ff9c1a !important">
                   
                    
                  <tr>
                    <th></th>
+                 <th colspan="3">UNITE ADMINISTRATIVE</th>
 
-                   <th></th>
-<th></th>
-                 
-                 <th></th>
-                   <th>
-                   NUMERO D'AVENANT {{afficheAnnee}}
-                  </th>
+      
+                  
                    
-                  <th
+                  <th colspan="4"
                     style="
                       font-size: 14px;
                       font-weight: bold;
@@ -81,33 +146,11 @@
                       
                     "
                   >
-                OBJET AVENANT  {{afficheAnnee}}
+                OBJET DU MARCHE
                   </th>
-                  <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                      width :8%
-                    "
-                  >
-                  DATE AVENANT {{afficheAnnee}}
-                  </th>
-             
+                 
 
-                     <th
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TAUX AVENANT   {{afficheAnnee}}
-                  </th>
+                     
                   <th
                     style="
                       font-size: 14px;
@@ -117,25 +160,25 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT AVENANT  {{afficheAnnee}}
+                    NOMBRES D'AVENANT
                   </th>
                  
                 </tr>
               </thead>
-       <tbody>
-                <tr>
+       <tbody v-for="GroupeSection in partition(afficheUa, size)[page]" :key="GroupeSection.id">
+                <tr >
                   <td>
                     <button @click="ShowMyUa(GroupeSection.id)">
                      <i class="icon-eye-open"></i> </button>
                   </td>
                   
          
-                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"  colspan="5">{{libelleUniteAdministrative(GroupeSection.id)}}</td>
-                
-                
-               
-                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'" colspan="4">
-                    <model-list-select  v-show="recupereIDactivite==GroupeSection.id "
+                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"  colspan="3">{{libelleUniteAdministrative(GroupeSection.id)}}
+
+                  
+                </td>
+                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'"  colspan="4">
+<model-list-select  v-show="recupereIDactivite==GroupeSection.id "
               style="border: 1px solid #000"
               class="wide"
               :list="marches"
@@ -146,33 +189,29 @@
             >
             </model-list-select>
                 </td>
+                
+               
+                <td style="" v-bind:class="recupereIDactivite==GroupeSection.id ? 'graybg' : 'whitebg'" colspan="2">
+                    
+                </td>
                          
                 </tr>
-              </tbody>  
-              
-  <tbody v-show="recupereIDactivite==GroupeSection.id"
+                 <tr v-show="recupereIDactivite==GroupeSection.id"
                v-for="GroupeUa in GroupeTypeMarcheParUa(GroupeSection.id)" :key="GroupeUa">
-
-                <tr>
                   <td></td>
-                  <td></td>
+                  <td><button @click="apercuFacture(GroupeUa)">
+                     <i class="icon-eye-open"></i> </button></td>
             
-                  <td>
-                    <button @click="ShowMyLigne(GroupeUa)">
-                     <i class="icon-eye-open"></i> </button>
-                  </td>
+                 
                   
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="3">
+                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="6" >
                     {{ libelleMarche(GroupeUa) }}</td>
 
               
    
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombreAvenant(GroupeUa)}}</td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa "></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="9" >
-
-                   
-               </td>
+              
                <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
 <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
@@ -189,8 +228,13 @@
                 
                 </tr>
 
+              </tbody>  
+              
+  <tbody >
+
+               
                 
-                <tr v-show="recupereIDSection==GroupeUa"
+                <!-- <tr v-show="recupereIDSection==GroupeUa"
                 v-for="GroupeLigne in listeDesmARCHEpARaVENANT(GroupeUa)" :key="GroupeLigne.id">
                   <td></td>
                   
@@ -206,7 +250,7 @@
  <td style="text-align:right">{{TauxAvenant(GroupeLigne.id)}} %</td>
  
  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MonatntAvenant(GroupeLigne.id)))}}</td>
-                </tr>
+                </tr> -->
   </tbody>
               
             </table>
@@ -292,7 +336,8 @@ editMandat:{},
       verifShome:0,
       recupereIDactivite:0,
       recupereIDSection:0,
-      source_financement_id1:0
+      source_financement_id1:0,
+      test:0,
     };
   },
   mounted(){
@@ -400,6 +445,16 @@ editMandat:{},
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
 
+
+listeDesAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id== id);
+
+     
+        }
+      };
+    },
 
 NumeroAvenant() {
       return id => {
@@ -543,7 +598,7 @@ GroupeTypeMarcheParUa() {
         return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee && item.parent_id != null && item.attribue == 2 && item.id == this.marcheLot_id);
+          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee && item.parent_id != null && item.attribue == 2 && item.id == this.marcheLot_id && item.id==this.MarcheAvenent(item.id));
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -566,7 +621,7 @@ GroupeTypeMarcheParUa() {
          return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee && item.parent_id != null && item.attribue == 2);
+          let objet = this.marches.filter(item=>item.unite_administrative_id == id && item.exo_id==this.afficheAnnee && item.parent_id != null && item.attribue == 2 && item.id == this.MarcheAvenent(item.id));
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -641,6 +696,30 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+    Uaid() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id
+      }
+      return 0
+        }
+      };
+    },
+    MarcheAvenent() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.marche_id
+      }
+      return 0
+        }
+      };
+    },
     libelleUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -653,7 +732,7 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
- 
+
    idParentMarche() {
       return id => {
         if (id != null && id != "") {
@@ -873,7 +952,7 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
       "modifierHistoriqueDecisionOp",
     ]),
  percuFacture(id,id1) {
-      this.$("#validationOpDefinitif1").modal({
+      this.$("#testModal").modal({
         backdrop: "static",
         keyboard: false,
       });
@@ -881,7 +960,27 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
   
   },
 
+  apercuFacture(id) {
+if(this.test==0){
+  this.test=id
+   this.$("#testModal").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+     
+}else if(this.test!=0 && this.test !=id){
+        this.test=0;
+        this.test=id;
+         this.$("#testModal").modal({
+        backdrop: "static",
+        keyboard: false,
+      });
+       
+      }
+     
+     
 
+    },
 
 
 
@@ -1004,9 +1103,9 @@ width: 95%;
 
 
 .tailgrand {
-  width: 90%;
-  margin: 0 -45%;
-  height: 50%;
+  width: 100%;
+  margin: 0 -50%;
+  height: 70%;
 }
 
 .modal-body {
@@ -1018,5 +1117,8 @@ font-size: 13px !important;
                       color: #000 !important;
                       text-align: center !important;
                       background-color: #fbb203 !important;
+}
+td{
+  border:1px solid  #000 !important;
 }
 </style>
