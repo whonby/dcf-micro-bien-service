@@ -16,6 +16,36 @@
           >
             Total Marché Hors PPM
           </th>
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+           
+          >
+            Marché en Planification
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+           
+          >
+            Marché en contractualisation
+          </th>
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+           
+          >
+            Marché en Exécution
+          </th>
+
+          
+
+          <th
+            style="text-align: center; font-size: 20px; color: #000"
+           
+          >
+            Marché Terminé
+          </th>
+
          
 
         
@@ -43,11 +73,127 @@
               }}</span>
             </button>
           </td>
-         
+         <td>
+            <button
+              class="btn btn-danger tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaPlanifier(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaContratualisation(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-warning tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaExecute(marcheid)
+              }}</span>
+            </button>
+          </td>
+          <td>
+            <button
+              class="tailBtn"
+              style="
+                font-weight: bolder;
+                color: #fff;
+                font-size: 18px;
+                width: 100%;
+                background-color: black !important;
+              "
+            >
+              <span style="font-weight: bolder; color: #fff; font-size: 18px">{{
+                afficheMarcheParUaTermine(marcheid)
+              }}</span>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
+    <div>
+      <fieldset>
+        <legend>Légende:</legend>
+        <table>
+          <tr>
+             <td>
+              RESILIE:
+              <button class="btn btn-info">
+                <span title="" style="">RE</span>
+              </button>
+            </td>
 
+             <td>
+              PLANIFICATION:
+              <button class="btn btn-danger">
+                <span title="" style="">PL</span>
+              </button>
+            </td>
+            <td>
+              CONTRACTUALISATION:
+              <button class="btn btn-success">
+                <span title="" style="">CT</span>
+              </button>
+            </td>
+
+            <td>
+              EXECUTION:
+              <button class="btn btn-warning">
+                <span title="" style="">EX</span>
+              </button>
+            </td>
+
+             <td>
+              SUSPENDU:
+              <button class="btn btn">
+                <span title="" style="">SU</span>
+              </button>
+            </td>
+            
+            <td>
+              TERMINE:
+              <button class="btn btn-inverse">
+                <span title="" style="">TE</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+  <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
+                 MARCHE HORS PPM</h2>
+          </tr>
+
+           
+        </table>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">
@@ -639,7 +785,7 @@ editMarche123:{},
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -651,7 +797,7 @@ editMarche123:{},
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -659,7 +805,7 @@ editMarche123:{},
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           }
         }
@@ -678,7 +824,7 @@ editMarche123:{},
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -690,7 +836,7 @@ editMarche123:{},
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -698,7 +844,7 @@ editMarche123:{},
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           }
         }
@@ -718,7 +864,7 @@ editMarche123:{},
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -730,7 +876,7 @@ editMarche123:{},
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -738,7 +884,7 @@ editMarche123:{},
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==1
             ).length;
           }
         }

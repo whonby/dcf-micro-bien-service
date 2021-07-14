@@ -190,6 +190,21 @@
          </td>
          
          </tr>
+         <tr>
+           <td>
+            <div class="control-group">
+            <label class="control-label">Durée avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.dure_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+         </td>
+         </tr>
           </table>
         
       </div>
@@ -374,6 +389,21 @@
           </div>
          </td>
          </tr>
+          <tr>
+           <td>
+            <div class="control-group">
+            <label class="control-label">Durée avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAvenant.dure_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+         </td>
+         </tr>
           </table>
       </div>
       <div class="modal-footer">
@@ -417,7 +447,7 @@
                     <th>Montant Avenant</th>
                      <th>Taux Avenant</th>
                      <th>Date Avenant</th>
-                    
+                      <th>Durée Avenant</th>
                     <th>Action</th>
                   </tr>
                                     </thead>
@@ -445,7 +475,9 @@
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formaterDate(type.date_avenant) || 'Non renseigné'}}</td>
-                   
+                   <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.dure_avenant || 'Non renseigné'}}</td>
 
                     <td>
                       <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
@@ -463,6 +495,7 @@
                       <td style="font-weight:bold;">Total Avenant</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.macheid)))}}</td>
                      <td style="text-align: center;color:red;font-weight:bold;">{{parseFloat(TauxAvenantMarche(this.macheid))}} %</td>
+                    <td></td>
                     <td></td>
                     <td></td>
                   </tr>
