@@ -19,7 +19,7 @@
                   <tr>
                     <th>Objet du marche</th>
                     <th>Unite administrative</th>
-                    <th>Montant Réel du marche</th>
+                    <th>Montant Réel du marche (Fcfa)</th>
                     
                   </tr>
                 </thead>
@@ -28,15 +28,23 @@
                   <tr>
                     <td>{{libelleMarche(test)}}</td>
                     <td>{{libelleUniteAdministrative(Uaid(test))}}</td>
-                    <td>{{MontantReelMarche(test)}}</td>
+                    <td style="text-align:rigth">{{formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)))}}</td>
                   </tr>
                 </tbody>
               </table>
               <br>
+               <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
+                 AVENANT DES MARCHES</h2>
+          </tr>
+
+           
+        </table>
      <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Numero ordre</th>
+                    <!-- <th>Numero ordre</th> -->
                     <th>Numéro Avenant</th>
                     <th>Date</th>
                     <th>Objet</th>
@@ -53,17 +61,32 @@
                 <tbody>
 
                   <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
-                    <td></td>
+                    <!-- <td></td> -->
                     <td>{{itemAvenant.numero_avenant}}</td>
-                    <td>{{itemAvenant.date_avenant}}</td>
+                    <td>{{formaterDate(itemAvenant.date_avenant)}}</td>
                      <td>{{itemAvenant.objet_avenant}}</td>
-                    <td>{{itemAvenant.marche_id}}</td>
-                    <td>{{itemAvenant.montant_avenant}}</td>
+                    <td>{{afficherEntrepriseNom(recupereIdEntreprise(itemAvenant.marche_id))}}</td>
+                    <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(itemAvenant.montant_avenant))}}</td>
                      <td>{{itemAvenant.taux_avenant}}</td>
                     <td>{{itemAvenant.dure_avenant}}</td>
-                    <td>{{itemAvenant.marche_id}}</td>
-                    <td>{{itemAvenant.marche_id}}</td>
+                    <td>{{LibellesourceFinancement(idsourceFinancement(itemAvenant.marche_id))}}</td>
+                    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(itemAvenant.marche_id)))}}</td>
                      <td></td>
+                  </tr>
+                  <tr >
+                    <!-- <td></td> -->
+                    <td style="background-color: rgb(6, 184, 6);"></td>
+                    <td style="background-color: rgb(6, 184, 6);"></td>
+                    <td style="background-color: rgb(6, 184, 6);"></td>
+                    
+                   
+                    <td style="background-color: rgb(6, 184, 6);color:#000;text-align:center;font-size:14px">TOTAL</td>
+                    <td style="background-color: rgb(6, 184, 6);color:#000;text-align:right;font-size:14px;font-weight: bold;">{{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}</td>
+                    <td style="background-color: rgb(6, 184, 6);"></td>
+                     <td style="background-color: rgb(6, 184, 6);"></td>
+                    <td style="background-color: rgb(6, 184, 6);"></td>
+                    <td style="background-color: rgb(6, 184, 6);"></td>
+                    <td style="background-color: rgb(6, 184, 6);"></td>
                   </tr>
                 </tbody>
               </table>
@@ -160,6 +183,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                 
                     NOMBRES D'AVENANT
                   </th>
                  
@@ -209,23 +233,10 @@
 
               
    
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">{{NombreAvenant(GroupeUa)}}</td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" @click="apercuFacture(GroupeUa)">{{NombreAvenant(GroupeUa)}}</td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa "></td>
               
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-<td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-              <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-                
-                
-                
+               
                 </tr>
 
               </tbody>  
@@ -233,24 +244,7 @@
   <tbody >
 
                
-                
-                <!-- <tr v-show="recupereIDSection==GroupeUa"
-                v-for="GroupeLigne in listeDesmARCHEpARaVENANT(GroupeUa)" :key="GroupeLigne.id">
-                  <td></td>
-                  
-
-                  <td></td>
-                  
- <td></td>
- <td> <button >
-                     <i class="icon-arrow-right"></i> </button></td>
-<td style="text-align:left">{{NumeroAvenant(GroupeLigne.id)}}</td>
- <td style="text-align:left">{{ObjetAvenant(GroupeLigne.id)}}</td>
- <td style="text-align:right">{{formaterDate(DateAvenant(GroupeLigne.id))}}</td>
- <td style="text-align:right">{{TauxAvenant(GroupeLigne.id)}} %</td>
- 
- <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MonatntAvenant(GroupeLigne.id)))}}</td>
-                </tr> -->
+             
   </tbody>
               
             </table>
@@ -444,8 +438,97 @@ editMandat:{},
      admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
+       LibelleLigneBudgetaire(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.plans_budgetaires.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.code.concat(" " , ObjetId.libelle)
+          }
 
+        }
+      }
+    },
+       idLigneBudgetaire(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.marches.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.economique_id
+          }
 
+        }
+      }
+    },
+    idParent(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.marches.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.parent_id
+          }
+
+        }
+      }
+    },
+      idsourceFinancement(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.marches.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.source_financement
+          }
+
+        }
+      }
+    },
+     LibellesourceFinancement(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.sources_financements.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.libelle
+          }
+
+        }
+      }
+    },
+      afficherEntrepriseNom(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.entreprises.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.raison_sociale
+          }
+
+        }
+      }
+    },
+recupereIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id
+      }
+      return 0
+        }
+      };
+    },
+SommeAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id== id).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_avenant),
+              0
+            )
+            .toFixed(0);
+
+     
+        }
+      };
+    },
 listeDesAvenant() {
       return id => {
         if (id != null && id != "") {
@@ -939,7 +1022,18 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
       return this.filtrerUaParTypeProj;
     },
 
-
+TriaffichageUniteAdminstrative() {
+        let vm=this
+      return this.afficheUa.map(function (value) {
+        let objet = {
+          id:value.id,
+        
+          MontantVote:vm.MontantBudgetVote(value.id),
+         
+        };
+        return objet;
+      });
+    },
 
   },
 
@@ -951,6 +1045,17 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+    triModificationBudget(){
+      if(this.triModificationBudgetdata==0){
+        this.triModificationBudgetdata=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.Variation12-b.Variation12});
+        
+      }else{
+        this.triModificationBudgetdata=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.Variation12-a.Variation12});
+      }
+      
+    },
  percuFacture(id,id1) {
       this.$("#testModal").modal({
         backdrop: "static",
@@ -1105,7 +1210,7 @@ width: 95%;
 .tailgrand {
   width: 100%;
   margin: 0 -50%;
-  height: 70%;
+  height: 50%;
 }
 
 .modal-body {
