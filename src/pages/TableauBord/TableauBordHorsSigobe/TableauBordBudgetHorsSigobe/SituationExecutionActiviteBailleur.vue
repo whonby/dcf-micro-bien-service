@@ -189,7 +189,10 @@
                      <i class=" icon-search"></i> 
                       
                     </button>
-                     <money style="text-align:left;color:red"   v-model="montant_reamenagement" class="span" v-show="activeMontantReamenagement == true"></money>
+                     <money style="text-align:left;color:red"   
+                        v-model="montant_reamenagement" class="span" 
+                        v-show="activeMontantReamenagement == true">
+                     </money>
                  
               </th>
               <th
