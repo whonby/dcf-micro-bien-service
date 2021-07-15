@@ -272,11 +272,7 @@
               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantBudgetExecutéSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement.id,GroupeUa)))}}</td>
               <td style="text-align:right">
-                <button class="btn btn-danger taille">
-                        <span style="color:#000;font-size: 12px;font-weight: bold;">
-                          {{MarcheEnCoursParSection(GroupeSourceFinancement.id,GroupeUa)}}
-                        </span>
-                      </button>
+                {{MarcheEnCoursParSection(GroupeSourceFinancement.id,GroupeUa)}}
                 
                 </td>
               
@@ -1891,7 +1887,7 @@ width: 95%;
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 15px;

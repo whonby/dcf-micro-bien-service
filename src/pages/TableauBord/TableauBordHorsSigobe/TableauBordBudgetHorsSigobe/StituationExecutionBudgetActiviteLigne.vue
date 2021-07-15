@@ -732,6 +732,9 @@
 <td style="text-align: right;color:#000">{{ 0 }}</td>
 <td style="text-align: right;color:#000">{{ 0 }}</td>
                   <td style="text-align: right;color:#000">{{ 0 }}</td>
+                    <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
+                  </td>
                   <td style="text-align: right;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                    {{ TotalEviteNaN }}%
@@ -741,9 +744,7 @@
                 
                  </td> -->
                  
-                  <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
-                  </td>
+                
                 </tr>
               </tfoot>
             </table>
@@ -1538,8 +1539,8 @@ inputLigne:false,
         return 0.0;
       } else {
         return (
-          (parseFloat(this.TotalMontantBudgetExecuté) /
-            parseFloat(this.TotalMontantBudgetActuel)) *
+          (parseInt(this.TotalMontantBudgetExecuté) /
+            parseInt(this.TotalMontantBudgetActuel)) *
           100
         ).toFixed(2);
       }
