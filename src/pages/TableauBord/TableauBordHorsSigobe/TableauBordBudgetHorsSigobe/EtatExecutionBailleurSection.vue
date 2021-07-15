@@ -264,207 +264,91 @@
               >
                 <!-- <button v-if="recupereIDactivite==GroupeSourceFinancement.id" @click="triDisponible()">
                      <i class=" icon-filter"></i> </button> -->
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.MontantVote)
-                  )
-                }}
-              </td>
+                    {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.MontantVote)) }}
+                  </td>
+      
+                  
+                 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                    {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.Variation)) }}
+                 </td>
+                 
+                <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                     {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.Budgetactuel)) }}
+                </td>
+                <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                  {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.MontantExecute)) }}
+                </td>
+                <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                   {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.Disponible )) }}
+                </td> 
+                <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                   {{ GroupeSourceFinancement.MarcheEnCours }}
+                </td>
+                     
+                </tr>
 
-              <td
-                style="text-align: right"
-                v-bind:class="
-                  recupereIDactivite == GroupeSourceFinancement.id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-                colspan=""
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.Variation)
-                  )
-                }}
-              </td>
+               <tr v-show="recupereIDactivite==GroupeSourceFinancement.id"
+               v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement.id)" :key="GroupeUa">
 
-              <td
-                style="text-align: right"
-                v-bind:class="
-                  recupereIDactivite == GroupeSourceFinancement.id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-                colspan=""
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.Budgetactuel)
-                  )
-                }}
-              </td>
-              <td
-                style="text-align: right"
-                v-bind:class="
-                  recupereIDactivite == GroupeSourceFinancement.id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-                colspan=""
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.MontantExecute)
-                  )
-                }}
-              </td>
-              <td
-                style="text-align: right"
-                v-bind:class="
-                  recupereIDactivite == GroupeSourceFinancement.id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-              >
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.Disponible)
-                  )
-                }}
-              </td>
-              <td
-                style="text-align: right"
-                v-bind:class="
-                  recupereIDactivite == GroupeSourceFinancement.id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-              >
-                {{ GroupeSourceFinancement.MarcheEnCours }}
-              </td>
-            </tr>
+                
+                  <td></td>
+                  <td></td>
+                  <td></td>
 
-            <tr
-              v-show="recupereIDactivite == GroupeSourceFinancement.id"
-              v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement.id)"
-              :key="GroupeUa"
-            >
-              <td></td>
-              <td></td>
-              <td></td>
+                  <td>
+                    <button @click="ShowMyLigne(GroupeUa)">
+                     <i class="icon-arrow-right"></i> </button>
+                  </td>
+                  
+                  <td >
+                    {{Libellesection(GroupeUa)}}</td>
+                <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantInitialParSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(GroupeSourceFinancement.id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantActuelleParSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantBudgetExecutéSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
+              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement.id,GroupeUa)))}}</td>
+              <td style="text-align:right">
+                {{MarcheEnCoursParSection(GroupeSourceFinancement.id,GroupeUa)}}
+                
+                </td>
+              
+                
+                
+                </tr>
+              </tbody>  
 
-              <td>
-                <button @click="ShowMyLigne(GroupeUa)">
-                  <i class="icon-arrow-right"></i>
-                </button>
-              </td>
-
-              <td>
-                {{ Libellesection(GroupeUa) }}
-              </td>
-              <td style="text-align: right">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantInitialParSection(
-                        GroupeSourceFinancement.id,
-                        GroupeUa
-                      )
-                    )
-                  )
-                }}
-              </td>
-              <td style="text-align: right">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      AfficheVariationBudget(
-                        GroupeSourceFinancement.id,
-                        GroupeUa
-                      )
-                    )
-                  )
-                }}
-              </td>
-              <td style="text-align: right">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantActuelleParSection(
-                        GroupeSourceFinancement.id,
-                        GroupeUa
-                      )
-                    )
-                  )
-                }}
-              </td>
-              <td style="text-align: right">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantBudgetExecutéSection(
-                        GroupeSourceFinancement.id,
-                        GroupeUa
-                      )
-                    )
-                  )
-                }}
-              </td>
-              <td style="text-align: right">
-                {{
-                  formatageSommeSansFCFA(
-                    parseFloat(
-                      MontantDisponibleParSectionB(
-                        GroupeSourceFinancement.id,
-                        GroupeUa
-                      )
-                    )
-                  )
-                }}
-              </td>
-              <td style="text-align: right">
-                <button class="btn btn-danger taille">
-                  <span style="color: #000; font-size: 12px; font-weight: bold">
-                    {{
-                      MarcheEnCoursParSection(
-                        GroupeSourceFinancement.id,
-                        GroupeUa
-                      )
-                    }}
-                  </span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
+               
+            </table>
+<br>
+            
       </div>
-
-      <div class="pagination alternate">
-        <ul>
-          <li :class="{ disabled: page == 0 }">
-            <a @click.prevent="precedent()" href="#">Précedent</a>
-          </li>
-          <li
-            v-for="(titre, index) in partition(FiltreLeTableauPrincipal, size)
-              .length"
-            :key="index"
-            :class="{ active: active_el == index }"
-          >
-            <a @click.prevent="getDataPaginate(index)" href="#">{{
-              index + 1
-            }}</a>
-          </li>
-          <li
-            :class="{
-              disabled:
-                page == partition(FiltreLeTableauPrincipal, size).length - 1,
-            }"
-          >
-            <a @click.prevent="suivant()" href="#">Suivant</a>
-          </li>
-        </ul>
-      </div>
+       
+          <div class="pagination alternate">
+      <ul>
+        <li :class="{ disabled: page == 0 }">
+          <a @click.prevent="precedent()" href="#">Précedent</a>
+        </li>
+        <li
+          v-for="(titre, index) in partition(FiltreLeTableauPrincipal, size).length"
+          :key="index"
+          :class="{ active: active_el == index }"
+        >
+          <a @click.prevent="getDataPaginate(index)" href="#">{{
+            index + 1
+          }}</a>
+        </li>
+        <li
+          :class="{ disabled: page == partition(FiltreLeTableauPrincipal, size).length - 1 }"
+        >
+          <a @click.prevent="suivant()" href="#">Suivant</a>
+        </li>
+      </ul>
     </div>
+    </div>
+
+
+     
+    
   </div>
 </template>
   
@@ -2091,7 +1975,11 @@ export default {
 }
 
 .whitebg {
+<<<<<<< HEAD
   background: #98fb98 !important;
+=======
+  background: #fff !important;
+>>>>>>> 4726e82ac109e391dcf05033e1aaab2adeab2e81
   font-weight: bold;
   color: black;
   font-size: 15px;

@@ -518,9 +518,10 @@
                   </th>
 
 
-                <th style=" font-size: 14px;
+                <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
+                  
                   text-align: center;
                   background-color: #fbb203 !important;">
                   <button @click="tricode()">
@@ -539,7 +540,7 @@
               
                   </th>
 
-                <th style=" font-size: 14px;
+                <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -557,7 +558,7 @@
                  
                   </th>
 
-                <th style=" font-size: 14px;
+                <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -576,7 +577,7 @@
                  
                   </th>
 
-                <th style=" font-size: 14px;
+                <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -595,7 +596,7 @@
                   
                   </th>
 
- <th style=" font-size: 14px;
+ <th  style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -675,7 +676,7 @@
                   text-align: center;
                   background-color: #fbb203 !important;" title="TAUX D’OP PROVISOIRE NON REGULARISE HORS DELAI ">
                   TAUX OP NON REGULARISE HORS DELAI </th>
-                <th style=" font-size: 14px;
+                <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -744,14 +745,13 @@
                     )
                   }}
                 </td>
-                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant">
+                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                  @click="percuFacture(unite.id)"
+                 
+                >
                   
-
-                  <button class="taille"  @click="percuFacture(unite.id)">
-                        <span style="font-size: 15px;">
-                          {{ formatageSommeSansFCFA(parseFloat(unite.Variation12)) }}
-                        </span>
-                      </button>
+ {{ formatageSommeSansFCFA(parseFloat(unite.Variation12)) }}
+                  
                 </td>
                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant"
                 >
@@ -769,22 +769,14 @@
                 >
                   {{ unite.NombreOpProvisoire }}
                 </td>
-                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                 <td @click="ModalOpNonRegulirise(unite.id)"  style="text-align:right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" 
                 >
-                 <button class="taille"  @click="ModalOpNonRegulirise(unite.id)">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ unite.NombreOpNONRegu }}
-                        </span>
-                      </button>
+                 {{ unite.NombreOpNONRegu }}
                  
                 </td>
-                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                 <td  v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"  style="text-align:right"  @click="ModalOpRegulirise(unite.id)"
                 >
-                 <button class="taille" @click="ModalOpRegulirise(unite.id)">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ unite.NombreOpREgularise}}
-                        </span>
-                      </button>
+                 {{ unite.NombreOpREgularise}}
                  
                 </td>
                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
@@ -802,35 +794,18 @@
                 >
                   {{ formatageSommeSansFCFA(parseFloat(unite.Disponible)) }}
                 </td>
-
-                <!-- <td
-                 v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
-                >
-                  {{ EviteNaN(unite.id) }}%
-                </td> -->
-
-                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style=" text-align: right;color:#000" >
-                  <button class="taille" v-if="parseInt( unite.TauxExecution ) <= 25">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ unite.TauxExecution }}
-                        </span>
-                      </button>
-                      <button class="taille" v-else-if="parseInt( unite.TauxExecution ) <= 50">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ unite.TauxExecution }}
-                        </span>
-                      </button>
-                       <button class="taille" v-else-if=" parseInt( unite.TauxExecution ) <= 75">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ unite.TauxExecution }}
-                        </span>
-                      </button>
-                      <button class="taille" v-else-if="parseInt( unite.TauxExecution ) <= 100">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{ unite.TauxExecution }}
-                        </span>
-                      </button>
-                  </td>
+               <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( unite.TauxExecution ) <= 25">
+                  {{ unite.TauxExecution }}
+               </td>
+<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( unite.TauxExecution ) <= 50">
+                  {{ unite.TauxExecution }}
+               </td>
+               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( unite.TauxExecution ) <= 75">
+                  {{ unite.TauxExecution }}
+               </td>
+                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( unite.TauxExecution ) <= 100">
+                  {{ unite.TauxExecution }}
+               </td>
               </tr>
                <tr v-for="unite1 in AfficheTypeFinancement(unite.id)" :key="unite1.id" v-show="recupereIDactivite==unite.id" style="margin-left:50px">
             <td colspan="">
@@ -897,21 +872,13 @@
                 style="font-size: 15px; text-align: right;color:#000"
               >
               
-                 <button class="taille">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{  NombreOPNonReguTypeFinancement(unite.id, unite1)}}
-                        </span>
-                      </button>
+                 {{  NombreOPNonReguTypeFinancement(unite.id, unite1)}}
               </td>
                <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 
-                 <button class="taille">
-                        <span style="color:#000;font-size: 14px;font-weight: bold;">
-                          {{  NombreOPReguTypeFinancement(unite.id, unite1)}}
-                        </span>
-                      </button>
+                 {{  NombreOPReguTypeFinancement(unite.id, unite1)}}
               </td>
                <td
                 style="font-size: 15px; text-align: right;color:#000"
@@ -943,30 +910,18 @@
               >
                 {{ EviteNaNTypeFinancement(unite.id, unite1) }}%
               </td> -->
-
-              <td style=" text-align: right;color:#000" >
-                  <button class="taille" v-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.25">
-                        <span style="color:#000;font-size: 15px;">
-                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
-                        </span>
-                      </button>
-                      <button class="taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.50">
-                        <span style="color:#000;font-size: 15px;">
-                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
-                        </span>
-                      </button>
-                       <button class="taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.75">
-                        <span style="color:#000;font-size: 15px;">
-                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
-                        </span>
-                      </button>
-                      <button class="taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 1">
-                        <span style="color:#000;font-size: 15px;">
-                          {{EviteNaNTypeFinancement(unite.id, unite1)}}
-                        </span>
-                      </button>
-                  </td>
-              
+ <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( EviteNaNTypeFinancement(unite.id, unite1) ) <= 25">
+                  {{EviteNaNTypeFinancement(unite.id, unite1)}}
+               </td>
+<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( EviteNaNTypeFinancement(unite.id, unite1) ) <= 50">
+                  {{EviteNaNTypeFinancement(unite.id, unite1)}}
+               </td>
+               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNTypeFinancement(unite.id, unite1) ) <= 75">
+                  {{EviteNaNTypeFinancement(unite.id, unite1)}}
+               </td>
+                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNTypeFinancement(unite.id, unite1) ) <= 100">
+                  {{EviteNaNTypeFinancement(unite.id, unite1)}}
+               </td>
 
             </tr>
               
@@ -3701,7 +3656,20 @@ TauxOPProvisoireNonRegularis(id) {
       }
     },
 
-
+ EviteNaNTypeFinancement(id, id1) {
+      if (
+        this.MontantExecuteParTypeFinancement(id, id1) == 0 &&
+        this.MontantVoteParTypeFinancement(id, id1) == 0
+      ) {
+        return 0.0;
+      } else {
+        return (
+          (parseInt(this.MontantExecuteParTypeFinancement(id, id1)) /
+            parseInt(this.MontantVoteParTypeFinancement(id, id1) +
+                        this.AfficheVariationBudgetParTypeFinancement(id, id1))*100)
+        ).toFixed(2);
+      }
+    },
 
  genererEnPdfDetailReamenagement12() {
       this.$htmlToPaper("printpdf12");
@@ -3873,26 +3841,13 @@ genererEnPdf() {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.MontantBudgetExecuté(id))) /
-            (parseFloat(this.MontantBudgetActuel(id)))
+          ((parseInt(this.MontantBudgetExecuté(id))) /
+            (parseInt(this.MontantBudgetActuel(id))))*100
           
         ).toFixed(2);
       }
     },
-    EviteNaNTypeFinancement(id, id1) {
-      if (
-        this.MontantExecuteParTypeFinancement(id, id1) == 0 &&
-        this.MontantVoteParTypeFinancement(id, id1) == 0
-      ) {
-        return 0.0;
-      } else {
-        return (
-          (parseFloat(this.MontantExecuteParTypeFinancement(id, id1)) /
-            parseFloat(this.MontantVoteParTypeFinancement(id, id1) +
-                        this.AfficheVariationBudgetParTypeFinancement(id, id1)))
-        ).toFixed(2);
-      }
-    },
+   
 
     TotalMontantReamenagement(id,id1) {
       return  (parseFloat(this.MontantVoteParTypeFinancement(id,id1)) + parseFloat(this.AfficheVariationBudgetParTypeFinancement(id,id1))
@@ -4046,6 +4001,9 @@ width: 100%;
   margin: 0 -450px;
   height: 500px;
 }
+#taillecol{
+    width: 200px;
+}
 .sommecolor {
   background-color: red;
   color: red;
@@ -4091,4 +4049,5 @@ width: 100%;
   text-align:right;
    width:110px !important;
 }
+ 
 </style>

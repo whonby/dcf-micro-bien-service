@@ -125,7 +125,18 @@
                   background-color: #fbb203 !important;
                 "
               ></th>
-
+<th
+                    style="
+                      font-size: 12px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                    colspan=""
+                  >
+                    
+                  </th>
               <th
                 style="
                   font-size: 14px;
@@ -159,6 +170,7 @@
                   font-weight: bold;
                   background-color: #fbb203 !important;
                 "
+                id="taillecol"
               >
                <button @click="TriEnOrdreMontantInitial()">
                      <i class=" icon-filter"></i> 
@@ -179,6 +191,7 @@
                   font-weight: bold;
                   background-color: #fbb203 !important;
                 "
+                id="taillecol"
               >
             <button @click="TriEnOrdreMontantReamenagement()">
                      <i class=" icon-filter"></i> 
@@ -199,6 +212,7 @@
                   font-weight: bold;
                   background-color: #fbb203 !important;
                 "
+                id="taillecol"
               >
                <button @click="TriEnOrdreMontantActuelle()">
                      <i class=" icon-filter"></i> 
@@ -218,6 +232,7 @@
                   font-weight: bold;
                   background-color: #fbb203 !important;
                 "
+                id="taillecol"
               >
                 <button @click="TriEnOrdreMontantExecution()">
                      <i class=" icon-filter"></i> 
@@ -239,6 +254,7 @@
                   text-align: center;
                   background-color: #fbb203 !important;
                 "
+                id="taillecol"
               >
                <button @click="TriEnOrdreMontantOpNonRegularisen()">
                      <i class=" icon-filter"></i> 
@@ -301,6 +317,7 @@
                   color: #000;
                   background-color: #fbb203 !important;
                 "
+                id="taillecol"
               >
               <button @click="TriEnOrdreDisponible()">
                      <i class=" icon-filter"></i> 
@@ -331,7 +348,9 @@
                   <i class="icon-eye-open"></i>
                 </button>
               </td>
-
+<td>
+                   
+                </td>
               <td
                 v-bind:class="
                   recupereIDactivite ==
@@ -434,57 +453,20 @@
               >
                 {{ NbreOpProvisoireNonRegularisé(GroupeOrdrePaiementByActivit.id) }}
               </td>
-
+<td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( EviteNaN(GroupeOrdrePaiementByActivit.id) ) <= 25">
+                  {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
+               </td>
+<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( EviteNaN(GroupeOrdrePaiementByActivit.id) ) <= 50">
+                  {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
+               </td>
+               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaN(GroupeOrdrePaiementByActivit.id) ) <= 75">
+                  {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
+               </td>
+                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaN(GroupeOrdrePaiementByActivit.id) ) <= 100">
+                  {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
+               </td>
               
 
-              <td style=" text-align: right;color:#000; !important;">
-                <button
-                  class="btn btn-danger taille"
-                  v-if="
-                    EviteNaN(GroupeOrdrePaiementByActivit.id) <= 25
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
-                  </span>
-                </button>
-                <button
-                  class="btn btn-warning taille"
-                  v-else-if="
-                    25 <
-                    EviteNaN(GroupeOrdrePaiementByActivit.id) <=
-                    50
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
-                  </span>
-                </button>
-                <button
-                  class="btn btn-success taille"
-                  v-else-if="
-                    50 <
-                    EviteNaN(GroupeOrdrePaiementByActivit.id) <=
-                    75
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
-                  </span>
-                </button>
-                <button
-                  class="btn btn-success taille"
-                  v-else-if="
-                    75 <
-                    EviteNaN(GroupeOrdrePaiementByActivit.id) <=
-                    100
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold;">
-                    {{ EviteNaN(GroupeOrdrePaiementByActivit.id) }}
-                  </span>
-                </button>
-              </td>
 
               <td
                 v-bind:class=" recupereIDactivite ==
@@ -508,6 +490,12 @@
               :key="ListepaimentBailleur"
             >
               <td></td>
+              <td>
+                   <button>
+                     <i class=" icon-arrow-right"></i> 
+                      
+                    </button>
+                </td>
               <td style="font-size: 14px; color: #000">
                 {{
                   libelleLigneEconomique(ListepaimentBailleur) ||
@@ -580,89 +568,44 @@
                 {{ NbreBudgetExecutéProvisoireBailleur(ListepaimentBailleur,GroupeOrdrePaiementByActivit.id) }}
               </td>
 
-            
-              <td style="text-align: right; color: #000">
-                <button
-                  class="btn btn-danger taille"
-                  v-if="
-                    0 <
-                    EviteNaNBailleur(
+            <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( EviteNaNBailleur(
                       ListepaimentBailleur,
                       GroupeOrdrePaiementByActivit.id
-                    ) <
-                    25
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{
-                      EviteNaNBailleur(
-                        ListepaimentBailleur,
-                        GroupeOrdrePaiementByActivit.id
-                      )
-                    }}
-                  </span>
-                </button>
-                <button
-                  class="btn btn-warning taille"
-                  v-else-if="
-                    25 <
-                    EviteNaNBailleur(
+                    ) ) <= 25">
+                  {{ EviteNaNBailleur(
                       ListepaimentBailleur,
                       GroupeOrdrePaiementByActivit.id
-                    ) <
-                    50
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{
-                      EviteNaNBailleur(
-                        ListepaimentBailleur,
-                        GroupeOrdrePaiementByActivit.id
-                      )
-                    }}
-                  </span>
-                </button>
-                <button
-                  class="btn btn-success taille"
-                  v-else-if="
-                    50 <
-                    EviteNaNBailleur(
+                    ) }}
+               </td>
+<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( EviteNaNBailleur(
                       ListepaimentBailleur,
                       GroupeOrdrePaiementByActivit.id
-                    ) <
-                    75
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{
-                      EviteNaNBailleur(
-                        ListepaimentBailleur,
-                        GroupeOrdrePaiementByActivit.id
-                      )
-                    }}
-                  </span>
-                </button>
-                <button
-                  class="btn btn-success taille"
-                  v-else-if="
-                    75 <
-                    EviteNaNBailleur(
+                    ) ) <= 50">
+                  {{ EviteNaNBailleur(
                       ListepaimentBailleur,
                       GroupeOrdrePaiementByActivit.id
-                    ) <
-                    100
-                  "
-                >
-                  <span style="color: #fff; font-size: 14px; font-weight: bold">
-                    {{
-                      EviteNaNBailleur(
-                        ListepaimentBailleur,
-                        GroupeOrdrePaiementByActivit.id
-                      )
-                    }}
-                  </span>
-                </button>
-              </td>
+                    ) }}
+               </td>
+               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNBailleur(
+                      ListepaimentBailleur,
+                      GroupeOrdrePaiementByActivit.id
+                    ) ) <= 75">
+                  {{ EviteNaNBailleur(
+                      ListepaimentBailleur,
+                      GroupeOrdrePaiementByActivit.id
+                    ) }}
+               </td>
+                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNBailleur(
+                      ListepaimentBailleur,
+                      GroupeOrdrePaiementByActivit.id
+                    ) ) <= 100">
+                  {{ EviteNaNBailleur(
+                      ListepaimentBailleur,
+                      GroupeOrdrePaiementByActivit.id
+                    ) }}
+               </td>
+              
+             
               <td style="font-size: 14px; text-align: right; color: #000">
                 {{
                   formatageSommeSansFCFA(
@@ -684,6 +627,7 @@
                   font-weight: bold;
                   color: #000;
                 "
+                colspan="2"
               >
                 TOTAL ACTIVITE
               </td>
@@ -2131,7 +2075,7 @@ InputTauxExecution(){
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 13px;
@@ -2153,5 +2097,8 @@ InputTauxExecution(){
 }
 .modal-body {
   max-height: 85%;
+}
+#taillecol{
+    width: 200px;
 }
 </style>
