@@ -37,23 +37,6 @@
           </td>
 
 
-           <!-- <td>
-
-                <label style="color: #000; font-size: 12px; font-weight: bolder"
-                  >CODE ACTIVITE<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="plans_activites"
-                  v-model="inputLigne1"
-                  option-value="id"
-                  option-text="code"
-                  placeholder="CODE"
-                >
-                </model-list-select>
-              </td> -->
-
               <td>
 
                 <label style="color: #000; font-size: 12px; font-weight: bolder"
@@ -71,42 +54,7 @@
                 </model-list-select>
               </td>
 
-               <!-- <td>
-                <div class="control-group">
-                  <label
-                    class="control-label"
-                    style="color: #000; font-size: 12px; font-weight: bolder"
-                    >Date debut</label
-                  >
-                  <div class="controls">
-                    <input
-                      type="date"
-                      v-model="formData.date_debut"
-                      class="span"
-                      style="background-color: #fff; border: 2px solid #000"
-                    />
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                  <label
-                    class="control-label"
-                    style="color: #000; font-size: 12px; font-weight: bolder"
-                    >Date Fin</label
-                  >
-                  <div class="controls">
-                    <input
-                      type="date"
-                      v-model="formData.date_fin"
-                      class="span"
-                      style="background-color: #fff; border: 2px solid #000"
-                    />
-                  </div>
-                </div>
-              </td> -->
-
+             
             </tr>
           </tbody>
         </table>
@@ -142,33 +90,7 @@
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE</h2>
           </tr>
         </table>
-      <!-- <h2
-        style="
-          font-size: 25px;
-          font-weight: bold;
-          color: #000;
-          text-align: center;
-        "
-        v-if="formData.date_debut == '' && formData.date_fin == ''"
-      >
-        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE
-        {{ formData.date_debut }}
-        {{ formData.date_fin }}
-      </h2>
-
-      <h2
-        style="
-          font-size: 25px;
-          font-weight: bold;
-          color: #000;
-          text-align: center;
-        "
-        v-if="formData.date_debut != '' && formData.date_fin != ''"
-      >
-        SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET LIGNE DU
-        {{ formaterDate(formData.date_debut) }} AU
-        {{ formaterDate(formData.date_fin) }}
-      </h2> -->
+     
       <p
         style="
           margin-left: 30px;
@@ -235,7 +157,7 @@
                 </model-list-select>
                 
                   </th>
-                  <th
+                  <th id="taillecol"
                     style="
                       font-size: 12px;
                       color: #000;
@@ -264,7 +186,7 @@
                       font-weight: bold;
                       text-align: center;
                       background-color: #fbb203 !important;
-                    "
+                    " id="taillecol"
                   >
                   <button @click="trivariation()">
                      <i class=" icon-filter"></i>
@@ -289,6 +211,7 @@
                       background-color: #fbb203 !important;
                       width :8%
                     "
+                    id="taillecol"
                   >
                   <button @click="tribudgetactuel()">
                      <i class=" icon-filter"></i>
@@ -312,6 +235,7 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
+                    id="taillecol"
                   >
                   <button @click="trimontantexecute()">
                      <i class=" icon-filter"></i>
@@ -366,6 +290,7 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
+                    id="taillecol"
                   >
                   <button @click="triMontantOpProNonRegu()">
                      <i class=" icon-filter"></i>
@@ -389,6 +314,7 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
+                   
                   >
                   <button @click="triNombreOpPro()">
                      <i class=" icon-filter"></i>
@@ -458,6 +384,7 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
+                    id="taillecol"
                   >
                   <button @click="triDisponible()">
                      <i class=" icon-filter"></i> 
@@ -627,28 +554,19 @@
                     }}
                     </b>
                   </td> -->
-                  <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(ListeActivite.TauxExecution) <= 0.25">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ListeActivite.TauxExecution}}
-                        </span>
-                      </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(ListeActivite.TauxExecution) <= 0.50">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ListeActivite.TauxExecution}}
-                        </span>
-                      </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(ListeActivite.TauxExecution) <= 0.75">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ListeActivite.TauxExecution}}
-                        </span>
-                      </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(ListeActivite.TauxExecution) <= 1">
-                        <span style="color:#fff;font-size: 14px;font-weight: bold;">
-                          {{ListeActivite.TauxExecution}}
-                        </span>
-                      </button>
-                  </td>
+                   <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( ListeActivite.TauxExecution ) <= 25">
+                  {{ ListeActivite.TauxExecution }}
+               </td>
+<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( ListeActivite.TauxExecution ) <= 50">
+                  {{ ListeActivite.TauxExecution }}
+               </td>
+               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( ListeActivite.TauxExecution ) <= 75">
+                  {{ ListeActivite.TauxExecution }}
+               </td>
+                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( ListeActivite.TauxExecution ) <= 100">
+                  {{ ListeActivite.TauxExecution }}
+               </td>
+                  
                  
 
                   <!-- <td style="background-color:#009246 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
@@ -666,7 +584,10 @@
 
                   </td>
                    <td style="width:;color:#000" >
-                   
+                    <button>
+                     <i class=" icon-arrow-right"></i> 
+                      
+                    </button>
 
                   </td>
 
@@ -769,29 +690,20 @@
                   <!-- <td style="text-align: right;color:#000;">
                     {{ EviteNaNLigne(listeLigneeco, ListeActivite.id)|| "Non renseigné" }}
                   </td> -->
+  <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 25">
+                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
+               </td>
+<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 50">
+                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
+               </td>
+               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 75">
+                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
+               </td>
+                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 100">
+                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
+               </td>
 
-                  <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <=0.25">
-                        <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
-                        </span>
-                      </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <=0.50">
-                        <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
-                        </span>
-                      </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <= 0.75">
-                        <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
-                        </span>
-                      </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNLigne(listeLigneeco, ListeActivite.id)) <= 1">
-                        <span style="color:#fff;font-size: 14px;">
-                          {{EviteNaNLigne(listeLigneeco, ListeActivite.id)}}
-                        </span>
-                      </button>
-                  </td>
+                 
                  
                 
                 </tr>
@@ -2548,8 +2460,8 @@ TauxOPProvisoireNonRegularisActivite(id) {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.MontantBudgetExecuté(id)) /
-            parseFloat(this.MontantBudgetActuel(id)))
+          (parseInt(this.MontantBudgetExecuté(id)) /
+            parseInt(this.MontantBudgetActuel(id)))*100
         ).toFixed(2);
       }
     },
@@ -2563,8 +2475,8 @@ TauxOPProvisoireNonRegularisActivite(id) {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.MontantBudgetExecutéActivite(id,id1)) /
-            parseFloat(this.MontantBudgetActuelActivite(id,id1)))
+          (parseInt(this.MontantBudgetExecutéActivite(id,id1)) /
+            parseInt(this.MontantBudgetActuelActivite(id,id1)))*100
         ).toFixed(2);
       }
     },
@@ -2677,7 +2589,7 @@ width: 95%;
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 13px;
@@ -2698,5 +2610,8 @@ width: 95%;
 }
 .modal-body {
   max-height: 85%;
+}
+#taillecol{
+    width: 200px;
 }
 </style>
