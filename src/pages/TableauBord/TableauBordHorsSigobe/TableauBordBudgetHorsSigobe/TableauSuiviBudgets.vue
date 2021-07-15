@@ -705,17 +705,12 @@
                     </button>
                   TAUX D'EXECUTION </th>
                    
-                   <!-- <th style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" colspan="">
-                  EVOLUTION DU TAUX D’EXECUTION </th> -->
+                  
         
         
               </tr> 
             </thead>
-            <tbody style="overflow-y:auto" v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
+            <tbody v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
               <tr>
                 <td>
                    <button @click="ShowMyLigne(unite.id)">
@@ -742,32 +737,28 @@
                 </td>
 
                 <td
-                 v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
-                >
+                 v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant">
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(unite.MontantVote)
                     )
                   }}
                 </td>
-                <td
-                  
-                 
-                >
+                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant">
                   
 
-                  <button class="btn btn-success taille"  @click="percuFacture(unite.id)">
-                        <span style="color:#fff;font-size: 15px;">
+                  <button class="taille"  @click="percuFacture(unite.id)">
+                        <span style="font-size: 15px;">
                           {{ formatageSommeSansFCFA(parseFloat(unite.Variation12)) }}
                         </span>
                       </button>
                 </td>
-                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant"
                 >
                    {{ formatageSommeSansFCFA(parseFloat(unite.Budgetactuel)) }}
                 </td>
 
-                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant"
                 >
                   {{
                     formatageSommeSansFCFA(
@@ -778,18 +769,18 @@
                 >
                   {{ unite.NombreOpProvisoire }}
                 </td>
-                 <td  style="text-align:right"
+                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
-                 <button class="btn btn-info taille"  @click="ModalOpNonRegulirise(unite.id)">
+                 <button class="taille"  @click="ModalOpNonRegulirise(unite.id)">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.NombreOpNONRegu }}
                         </span>
                       </button>
                  
                 </td>
-                 <td  style="text-align:right"
+                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
-                 <button class="btn btn-primary taille" @click="ModalOpRegulirise(unite.id)">
+                 <button class="taille" @click="ModalOpRegulirise(unite.id)">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.NombreOpREgularise}}
                         </span>
@@ -807,33 +798,34 @@
                    
                   }} %
                 </td>
-                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" id="stypemontant"
                 >
                   {{ formatageSommeSansFCFA(parseFloat(unite.Disponible)) }}
                 </td>
+
                 <!-- <td
                  v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
                 >
                   {{ EviteNaN(unite.id) }}%
                 </td> -->
 
-                <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseInt( unite.TauxExecution ) <= 25">
+                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style=" text-align: right;color:#000" >
+                  <button class="taille" v-if="parseInt( unite.TauxExecution ) <= 25">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseInt( unite.TauxExecution ) <= 50">
+                      <button class="taille" v-else-if="parseInt( unite.TauxExecution ) <= 50">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if=" parseInt( unite.TauxExecution ) <= 75">
+                       <button class="taille" v-else-if=" parseInt( unite.TauxExecution ) <= 75">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseInt( unite.TauxExecution ) <= 100">
+                      <button class="taille" v-else-if="parseInt( unite.TauxExecution ) <= 100">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{ unite.TauxExecution }}
                         </span>
@@ -905,7 +897,7 @@
                 style="font-size: 15px; text-align: right;color:#000"
               >
               
-                 <button class="btn btn-info taille">
+                 <button class="taille">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{  NombreOPNonReguTypeFinancement(unite.id, unite1)}}
                         </span>
@@ -915,7 +907,7 @@
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 
-                 <button class="btn btn-primary taille">
+                 <button class="taille">
                         <span style="color:#000;font-size: 14px;font-weight: bold;">
                           {{  NombreOPReguTypeFinancement(unite.id, unite1)}}
                         </span>
@@ -953,22 +945,22 @@
               </td> -->
 
               <td style=" text-align: right;color:#000" >
-                  <button class="btn btn-danger taille" v-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.25">
+                  <button class="taille" v-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.25">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                      <button class="btn btn-warning taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.50">
+                      <button class="taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.50">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                       <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.75">
+                       <button class="taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 0.75">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
                       </button>
-                      <button class="btn btn-success taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 1">
+                      <button class="taille" v-else-if="parseFloat(EviteNaNTypeFinancement(unite.id, unite1)) <= 1">
                         <span style="color:#000;font-size: 15px;">
                           {{EviteNaNTypeFinancement(unite.id, unite1)}}
                         </span>
@@ -981,48 +973,48 @@
             </tbody>
              <tfoot>
                 <tr style="margin-left:25px">
-                  <td colspan="2"  style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
-                  <td colspan="2" style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL: </td>
+                  <td colspan="2"  style="text-align:center;color:#000;font-weight: bold;color:#000"> </td>
+                  <td colspan="2" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
                       
 
-                  <!-- <td style="text-left: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <!-- <td style="text-left: center;color:#000;font-weight: bold;color:#000">
                       ACTIVITE</td> -->
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetVote )) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetReamenager ))  }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel )) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{  formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté ))  }}</td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    
                  </td>
-                 <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                 <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    
                  </td>
- <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+ <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    
                  </td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    
                  </td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    
                  </td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantDisponible)) }}
                  </td>
 
-                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                 <td style="text-align: center;color:#000;font-weight: bold;color:#000">
                      {{ TotalEviteNaN }}
                  </td>
 
-                 <!-- <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                 <!-- <td style="text-align: center;color:#000;font-weight: bold;color:#000">
                      
                  </td> -->
 
@@ -4071,7 +4063,7 @@ width: 100%;
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  
   font-weight: bold;
   color: black;
   font-size: 13px;
@@ -4093,5 +4085,10 @@ width: 100%;
 .tabFormulaire {
   width: 1300px;
   margin: 80px -690px;
+}
+
+#stypemontant{
+  text-align:right;
+   width:110px !important;
 }
 </style>
