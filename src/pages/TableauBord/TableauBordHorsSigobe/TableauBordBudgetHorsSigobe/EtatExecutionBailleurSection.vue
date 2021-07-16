@@ -1975,11 +1975,7 @@ export default {
 }
 
 .whitebg {
-<<<<<<< HEAD
-  background: #98fb98 !important;
-=======
   background: #fff !important;
->>>>>>> 4726e82ac109e391dcf05033e1aaab2adeab2e81
   font-weight: bold;
   color: black;
   font-size: 15px;
