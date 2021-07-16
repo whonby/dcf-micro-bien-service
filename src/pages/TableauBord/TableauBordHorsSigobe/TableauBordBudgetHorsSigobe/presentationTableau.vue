@@ -90,9 +90,12 @@
 
                      <!-- <li class="" style="font-size:14px">
                       <a data-toggle="tab" href="#TABLEAUBORD7"
-                        >TB7</a
+                        >TABLEAU BORD 6</a
                       >
                     </li> -->
+
+
+
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -155,7 +158,7 @@
 
 
                   <div id="TABLEAUBORD7" class="tab-pane ">
-                     <SituationExecutionBudgetaireParProjet></SituationExecutionBudgetaireParProjet>
+                     <SituationExecutionBudgetaireParBailleurProjet></SituationExecutionBudgetaireParBailleurProjet>
                
                   </div>
 
@@ -198,7 +201,7 @@ import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBail
 
 import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
 import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
-import SituationExecutionBudgetaireParProjet from './SituationExecutionBudgetaireParProjet'
+import SituationExecutionBudgetaireParBailleurProjet from './SituationExecutionBudgetaireParBailleurProjet'
 export default {
      components: {
        EtatExecutionBailleurSection,
@@ -208,7 +211,7 @@ export default {
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
-    SituationExecutionBudgetaireParProjet,
+    SituationExecutionBudgetaireParBailleurProjet,
  
     // SituationExecuBudgetRecapActivite,
     

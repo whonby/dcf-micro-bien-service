@@ -215,7 +215,14 @@ reference_marche
         </table>
       </fieldset>
     </div>
+  <table class="table table-bordered table-striped">
+          <tr>
+             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
+                 MARCHE PPM</h2>
+          </tr>
 
+           
+        </table>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">
@@ -720,7 +727,7 @@ export default {
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -732,7 +739,7 @@ export default {
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else {
             return this.marches.filter(
@@ -740,7 +747,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 0 &&
                 qtreel.parent_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           }
         }
@@ -795,7 +802,7 @@ export default {
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1 
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -807,7 +814,7 @@ export default {
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -815,7 +822,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 1 &&
                 qtreel.parent_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           }
         }
@@ -834,7 +841,7 @@ export default {
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -846,7 +853,7 @@ export default {
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -854,7 +861,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 2 &&
                 qtreel.parent_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           }
         }
@@ -874,7 +881,7 @@ export default {
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id == null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else if (
             this.libelle_typemarche == "PPM" &&
@@ -886,7 +893,7 @@ export default {
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
                 qtreel.plan_passation_marche_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           } else {
             return this.printMarcheNonAttribue.filter(
@@ -894,7 +901,7 @@ export default {
                 qtreel.unite_administrative_id == id &&
                 qtreel.attribue == 5 &&
                 qtreel.parent_id != null &&
-                qtreel.sib == 1
+                qtreel.sib == 1 && qtreel.regularisation==0
             ).length;
           }
         }

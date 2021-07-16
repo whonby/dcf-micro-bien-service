@@ -16,20 +16,6 @@
         <input type="hidden" :value="TriParNombreMarcheResilierData" />
         <input type="hidden" :value="TriParMontantResteExcuteMarcheResilierData" />
         <input type="hidden" :value="TriParTauxMarcheResilierData" />
-        
-        
-       
-       
-       
-       
-       
-      
-      
-      
-      
-     
-   
-    
     <table>
       <tbody>
         <tr>
