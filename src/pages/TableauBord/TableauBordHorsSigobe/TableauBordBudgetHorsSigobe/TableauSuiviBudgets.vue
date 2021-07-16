@@ -5,8 +5,9 @@
 <input  type="hidden" :value="triBudgetActuelledata" />
 <input  type="hidden" :value="triBudgetExecutedata" />
 <input  type="hidden" :value="triBudgetDisponibledata" />
-<input  type="hidden" :value="triTotalProvisoiredata" />
+<input  type="hidden" :value="triMarcheEncourSdata" />
 <input  type="hidden" :value="triOpNonRegulirisedata" />
+<input  type="hidden" :value="triMontantOpNonRegulirisedata" />
 <input  type="hidden" :value="triOpRegulirisedata" />                
      <input  type="hidden" :value="triTauxOpRegulirisedata" /> 
      <input  type="hidden" :value="triTauxExecutiondata" />                
@@ -473,12 +474,11 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" class="">
-                  CODE UA
+                  CODE UA 
                   
-                   <button @click="ActiveInputLigne">
-                     <i class=" icon-search"></i> 
+                   
+                     <i @click="ActiveInputLigne" id="style1" class=" icon-search"></i> 
                       
-                    </button>
                      <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
                      <model-list-select v-show="inputLigneCode == true"
                   style="background-color: #fff; border: 2px solid #000"
@@ -499,12 +499,9 @@
                   background-color: #fbb203 !important;">
                  
                   LIBELLE
-                   
-                   <button @click="ActiveInputLigne1">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                    
+
+                     <i id="style1"  @click="ActiveInputLigne1" class=" icon-search"></i> 
+
                      <model-list-select v-show="inputLigneLibelle == true"
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
@@ -518,26 +515,30 @@
                   </th>
 
 
+                  <th v-if="recupereIDactivite!=0" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                 
+                  TYPE FINANCEMENT
+                  </th>
+
+
                 <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   
                   text-align: center;
                   background-color: #fbb203 !important;">
-                  <button @click="tricode()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
+                 
+                     <i id="style1" @click="tricode()" class=" icon-filter"></i> 
                   BUDGET INITIAL
-                 
-                  
-                   <button @click="ActiveInputMontantInitial">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                     <money style="text-align:left;color:red"   v-model="montant_Initial" class="span" v-show="inputMontantInitial == true"></money>
-                 
-              
+                   <i id="style1" @click="ActiveInputMontantInitial" class=" icon-search"></i> 
+                     <money style="text-align:left;color:red" 
+                     v-model="montant_Initial" class="span"
+                      v-show="inputMontantInitial == true"></money>
+ 
                   </th>
 
                 <th id="taillecol" style=" font-size: 14px;
@@ -545,15 +546,11 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                   <button @click="triModificationBudget()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
+                  
+                     <i id="style1"  @click="triModificationBudget()" class=" icon-filter"></i> 
                   MODIFICATION BUDGETAIRE
-                   <button @click="ActiveInputModificationBudgetaire">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
+
+                     <i id="style1"  @click="ActiveInputModificationBudgetaire" class=" icon-search"></i>
                     <money style="text-align:left;color:red"   v-model="montant_ModifierBudget" class="span" v-show="inputModificationBudgetaire == true"></money>
                  
                   </th>
@@ -563,15 +560,12 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                  <button @click="triBudgetActuelle()">
-                     <i class=" icon-filter"></i> 
+                     <i id="style1" @click="triBudgetActuelle()" class=" icon-filter"></i> 
                       
-                    </button>
                   BUDGET ACTUEL
-                   <button @click="ActiveInputMontantActuel">
-                     <i class=" icon-search"></i> 
+
+                     <i id="style1" @click="ActiveInputMontantActuel" class=" icon-search"></i> 
                       
-                    </button>
                     <money style="text-align:left;color:red"   v-model="montant_Actuel" class="span" v-show="inputMontantActuel == true"></money>
                  
                  
@@ -582,73 +576,48 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                    <button @click="triBudgetExecute()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
+                     <i id="style1" @click="triBudgetExecute()" class=" icon-filter"></i>
                   MONTANTS EXECUTES
-                   <button @click="ActiveInputMontant">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
+                     <i id="style1" @click="ActiveInputMontant" class=" icon-search"></i> 
                     <money style="text-align:left;color:red"   v-model="montant_execute" class="span" v-show="inputMontantExecute == true"></money>
                  
                   
                   </th>
 
- <th  style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" title="TOTAL OP PROVISOIRE">
-                   <button @click="triTotalOpProvisoire()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
-                  TOTAL OP PROVISOIRE
-                  <button @click="ActiveInputTotalOpProvisoire">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                    <money style="text-align:left;color:red"   v-model="Total_Op_Provisoire" class="span" v-show="inputTotalOpProvisoire == true"></money>
-                 
-                  </th>
                   <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE NON REGULARISE(S)">
-                   <button @click="triNombreOpNonRegulirise()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
+
+                     <i id="style1" @click="triNombreOpNonRegulirise()" class=" icon-filter"></i> 
                   NBRE OP NON REGULARISE(S)
-                  <button @click="ActiveInputNombreOpNonProvisoireRegulirise">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                    <money style="text-align:left;color:red"   v-model="Nombre_Op_Non_Regulirise" class="span" v-show="inputNombreOpNonRegulirise == true"></money>
+
+                     <i id="style1" @click="ActiveInputNombreOpNonProvisoireRegulirise" class=" icon-search"></i> 
+                    <money style="text-align:left;color:red" 
+                    v-model="Nombre_Op_Non_Regulirise" class="span"
+                     v-show="inputNombreOpNonRegulirise == true"></money>
                  
                   </th>
 
- <th style=" font-size: 14px;
+                <th  id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE REGULARISE(S)">
-                  <button @click="triNombreOpRegulirise()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
-                  NBRE OP REGULARISE(S)
-                   <button @click="ActiveInputnombreRegulirise">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                    <money style="text-align:left;color:red"   v-model="Nombre_Op_Regulirise" class="span" v-show="inputnombreOpRegulirise == true"></money>
+
+                     <i id="style1"  @click="triMontantOpNonRegulirise()" class=" icon-filter"></i> 
+
+                  MONTANT OP NON REGULARISE
+                     <i id="style1" @click="ActiveInputmONTANTOpNonProvisoireRegulirise" class=" icon-search"></i> 
+
+                    <money style="text-align:left;color:red"
+                     v-model="MONTANT_Op_NON_Regulirise" class="span"
+                      v-show="inputMontantOpNonRegulirise == true"></money>
                  
                   </th>
-                   <th style=" font-size: 14px;
+
+                   <!-- <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
@@ -657,7 +626,7 @@
                      <i class=" icon-filter"></i> 
                       
                     </button>
-                  TAUX OP NON REGULARISE(S)
+                  TAUX OP NON REGULARISE(S) -->
                   <!-- <button @click="ActiveInputTauxOpNonRegulirise">
                      <i class=" icon-search"></i> 
                       
@@ -669,29 +638,45 @@
                     class="span"
                     v-show="inputTauxOpNonRegulirise == true"
                   /> -->
-                  </th>
-                  <th style=" font-size: 14px;
+                  <!-- </th> -->
+                  <!-- <th style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;" title="TAUX D’OP PROVISOIRE NON REGULARISE HORS DELAI ">
-                  TAUX OP NON REGULARISE HORS DELAI </th>
+                  TAUX OP NON REGULARISE HORS DELAI </th> -->
                 <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
                   
-                  <button @click="triBudgetDispoble()">
-                     <i class=" icon-filter"></i> 
+                     <i id="style1" @click="triBudgetDispoble()" class=" icon-filter"></i> 
                       
-                    </button>
                  DISPONIBLE
-                   <button @click="ActiveInputMontantDisponble">
-                     <i class=" icon-search"></i> 
+                     <i id="style1" @click="ActiveInputMontantDisponble" class=" icon-search"></i> 
                       
-                    </button>
-                     <money style="text-align:left;color:red"   v-model="montant_disponible" class="span" v-show="inputMontantDisponible == true"></money>
+                     <money style="text-align:left;color:red" 
+                     v-model="montant_disponible" class="span" 
+                     v-show="inputMontantDisponible == true"></money>
+                 
+                  
+                  </th>
+
+                  <th id="taillecol" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+
+                     <i id="style1" @click="triMarcheEnCours()" class=" icon-filter"></i> 
+                      
+                 NOMBRE(S) MARCHE(S) EN EXECUTION
+                     <i  id="style1" @click="ActiveInputMarcheEnCours" class=" icon-search"></i> 
+                      
+                     <money style="text-align:left;color:red"
+                      v-model="MarcheEnCours" class="span"
+                       v-show="ActiveInputMarcheEnCoursdata == true"></money>
                  
                   
                   </th>
@@ -700,23 +685,17 @@
                   color: #000;
                   text-align: center;
                   background-color: #fbb203 !important;">
-                  <button @click="triTauxExecution()">
-                     <i class=" icon-filter"></i> 
+
+                     <i id="style1" @click="triTauxExecution()"  class=" icon-filter"></i> 
                       
-                    </button>
                   TAUX D'EXECUTION </th>
                    
-                   <!-- <th style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" colspan="">
-                  EVOLUTION DU TAUX D’EXECUTION </th> -->
+                  
         
         
               </tr> 
             </thead>
-            <tbody style="overflow-y:auto" v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
+            <tbody v-for="unite in partition(TriaffichageUniteAdminstrative, size)[page]" :key="unite.id">
               <tr>
                 <td>
                    <button @click="ShowMyLigne(unite.id)">
@@ -742,9 +721,11 @@
                   }} 
                 </td>
 
-                <td
-                 v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
-                >
+                 <td v-if="recupereIDactivite!=0" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'">
+                 {{ tailleAfficheTypeFinancement(unite.id)}}
+                </td>
+
+                <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" >
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(unite.MontantVote)
@@ -759,47 +740,54 @@
  {{ formatageSommeSansFCFA(parseFloat(unite.Variation12)) }}
                   
                 </td>
-                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" 
                 >
                    {{ formatageSommeSansFCFA(parseFloat(unite.Budgetactuel)) }}
                 </td>
 
-                <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" 
                 >
                   {{
                     formatageSommeSansFCFA(
                       parseFloat(unite.MontantExecute))
                   }}
                 </td>
- <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+ <!-- <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
                   {{ unite.NombreOpProvisoire }}
-                </td>
+                </td> -->
                  <td @click="ModalOpNonRegulirise(unite.id)"  style="text-align:right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" 
                 >
                  {{ unite.NombreOpNONRegu }}
                  
                 </td>
-                 <td  v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"  style="text-align:right"  @click="ModalOpRegulirise(unite.id)"
+                 <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" @click="ModalOpRegulirise(unite.id)"
                 >
-                 {{ unite.NombreOpREgularise}}
+                 {{ unite.MontantOpNONRegu}}
                  
                 </td>
-                 <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                 <!-- <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
                   {{ unite.TauxOpNonRegularise }} %
-                </td>
-                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                </td> -->
+                  <!-- <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
                 >
                   {{
                  0
                    
                   }} %
-                </td>
-                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'" style="text-align:right"
+                </td> -->
+                  <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
                 >
                   {{ formatageSommeSansFCFA(parseFloat(unite.Disponible)) }}
                 </td>
+
+               
+                  <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
+                >
+                  {{ unite.MARCHEenCours }}
+                </td>
+
                <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( unite.TauxExecution ) <= 25">
                   {{ unite.TauxExecution }}
                </td>
@@ -820,6 +808,7 @@
              <td>
                    
                 </td>
+                <td></td>
            <td>
                    <button>
                      <i class=" icon-arrow-right"></i> 
@@ -867,49 +856,47 @@
                   )
                 }}
               </td>
- <td
+ <!-- <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
                (parseFloat(NombreOPNonReguTypeFinancement(unite.id, unite1))+parseFloat(NombreOPReguTypeFinancement(unite.id, unite1)))
                 }}
-              </td>
+              </td> -->
                <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
               
                  {{  NombreOPNonReguTypeFinancement(unite.id, unite1)}}
               </td>
-               <td
+                <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 
-                 {{  NombreOPReguTypeFinancement(unite.id, unite1)}}
+                 {{  MontantOPNonReguTypeFinancement(unite.id, unite1)}}
               </td>
-               <td
+               <!-- <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
                 TauxOPProvisoireNonRegularisTypeFinancement(unite.id, unite1)
                 }} %
-              </td>
-              <td
+              </td> --> 
+              <!-- <td
                 style="font-size: 15px; text-align: right;color:#000"
               >
                 {{
                 TauxOPProvisoireNonRegularisTypeFinancement(unite.id, unite1)
                 }} %
-              </td>
- <td
-                style="font-size: 15px; text-align: right;color:#000"
-              >
-                {{
-                 formatageSommeSansFCFA(
-                    parseFloat(
+              </td> -->
+              <td style="font-size: 15px; text-align: right;color:#000">
+                {{formatageSommeSansFCFA(parseFloat(
                       TotalMontantReamenagement(unite.id, unite1) - MontantExecuteParTypeFinancement(unite.id, unite1)
-                    )
-                  )
-                }}
+                    ))}}
+              </td>
+
+               <td style="font-size: 15px; text-align: right;color:#000">
+                {{ MarcheEnCoursUaSource(unite.id, unite1)}}
               </td>
               <!-- <td
                 style="font-size: 15px; text-align: center;color:#000"
@@ -934,48 +921,47 @@
             </tbody>
              <tfoot>
                 <tr style="margin-left:25px">
-                  <td colspan="2"  style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
-                  <td colspan="2" style="text-align:center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL: </td>
+                  <td colspan="2"  style="text-align:center;color:#000;font-weight: bold;color:#000"> </td>
+                  <td colspan="2" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
                       
 
-                  <!-- <td style="text-left: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <!-- <td style="text-left: center;color:#000;font-weight: bold;color:#000">
                       ACTIVITE</td> -->
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetVote )) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetReamenager ))  }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel )) }}</td>
 
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                     {{  formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté ))  }}</td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                   
+                 
+                 <td style="text-align: right;color:#000;font-weight: bold;color:#000">
+                   {{ TotalNombreOPNonReguTypeFinancement }}
                  </td>
-                 <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                   
+
+                 <td style="text-align: right;color:#000;font-weight: bold;color:#000">
+                        {{ formatageSommeSansFCFA(parseFloat(TotalMontantOPNonReguTypeFinancement)) }}
                  </td>
- <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                   
-                 </td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                   
-                 </td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                   
-                 </td>
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+
+                  
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantDisponible)) }}
                  </td>
 
-                 <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                 <td>
+                   {{ TotalMarcheEnCoursUaSource }}
+                 </td>
+
+                 <td style="text-align: center;color:#000;font-weight: bold;color:#000">
                      {{ TotalEviteNaN }}
                  </td>
 
-                 <!-- <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
+                 <!-- <td style="text-align: center;color:#000;font-weight: bold;color:#000">
                      
                  </td> -->
 
@@ -1573,15 +1559,17 @@ montant_Actuel:0,
       inputLigneLibelle:false,
        inputMontantExecute:false,
        inputMontantDisponible:false,
+       ActiveInputMarcheEnCoursdata:false,
        inputMontantInitial:false,
        inputModificationBudgetaire:false,
        inputMontantActuel:false,
-       inputTotalOpProvisoire:false,
        inputNombreOpNonRegulirise:false,
+       inputMontantOpNonRegulirise:false,
        inputnombreOpRegulirise:false,
        inputTauxOpNonRegulirise:false,
-       Total_Op_Provisoire:0,
         Nombre_Op_Non_Regulirise:0,
+        MarcheEnCours:0,
+        MONTANT_Op_NON_Regulirise:0,
         Taux_Op_non_Regulirise:0,
       inputLigneLibelle1:0,
       Nombre_Op_Regulirise:0,
@@ -1593,11 +1581,13 @@ montant_Actuel:0,
       triBudgetActuelledata:0,
       triBudgetExecutedata:0,
       triBudgetDisponibledata:0,
-      triTotalProvisoiredata:0,
+      triMarcheEncourSdata:0,
       triOpNonRegulirisedata:0,
+      triMontantOpNonRegulirisedata:0,
       triOpRegulirisedata:0,
       triTauxOpRegulirisedata:0,
-      triTauxExecutiondata:0
+      triTauxExecutiondata:0,
+      verifdatatypefinancement:0,
     };
   },
   //  created() {
@@ -1619,6 +1609,7 @@ montant_Actuel:0,
       "getMandatPersonnaliserVise",
       "getMandatPersonnaliserPersonnel",
       "mandats",
+      "marches",
       "gettersgestionOrdrePaiement",
     ]),
 
@@ -1668,25 +1659,7 @@ montant_Actuel:0,
         (item2) => this.TauxOPProvisoireNonRegularis(item2.id) == this.Taux_Op_non_Regulirise
       );
 },
-FiltreTotalOpProvisoire(){
-   if (this.noDCfNoAdmin) {
-        let colect = [];
 
-        this.filtrerUaParTypeProj.filter((item) => {
-          let val = this.getterUniteAdministrativeByUser.find(
-            (row) => row.unite_administrative_id == item.id
-          );
-          if (val != undefined) {
-            colect.push(item);
-            return item;
-          }
-        });
-        return colect.filter((item2) => this.TotalOPProvisoire(item2.id) == this.Total_Op_Provisoire);
-      }
-      return this.filtrerUaParTypeProj.filter(
-        (item2) => this.TotalOPProvisoire(item2.id) == this.Total_Op_Provisoire
-      );
-},
 afficheMontantExecute(){
    return (id) => {
           if (id != null && id != "") {
@@ -1787,6 +1760,27 @@ filtre_NombreOpNonRegularise() {
     },
 
 
+    filtre_MontantOpNonRegularise() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => this.MontantOPNonRegu(item2.id) == this.MONTANT_Op_NON_Regulirise);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => this.MontantOPNonRegu(item2.id) == this.MONTANT_Op_NON_Regulirise
+      );
+    },
+
+
 
 
 
@@ -1829,6 +1823,8 @@ filtre_Montant_Initial() {
         (item2) => this.MontantBudgetVote(item2.id) == this.montant_Initial
       );
     },
+
+    
 filtre_Montant_Disponible() {
       if (this.noDCfNoAdmin) {
         let colect = [];
@@ -1848,6 +1844,28 @@ filtre_Montant_Disponible() {
         (item2) => this.CalculerMontantDisponible(item2.id) == this.montant_disponible
       );
     },
+
+    filtre_MarcheEnCours() {
+      if (this.noDCfNoAdmin) {
+        let colect = [];
+
+        this.filtrerUaParTypeProj.filter((item) => {
+          let val = this.getterUniteAdministrativeByUser.find(
+            (row) => row.unite_administrative_id == item.id
+          );
+          if (val != undefined) {
+            colect.push(item);
+            return item;
+          }
+        });
+        return colect.filter((item2) => this.MarcheEnCoursUa(item2.id) == this.MarcheEnCours);
+      }
+      return this.filtrerUaParTypeProj.filter(
+        (item2) => this.MarcheEnCoursUa(item2.id) == this.MarcheEnCours
+      );
+    },
+
+
 filtre_Montant_execute() {
       if (this.noDCfNoAdmin) {
         let colect = [];
@@ -1908,6 +1926,25 @@ ListeDesOpNonRegulirise() {
         }
       };
     },
+
+     MontantOPNonRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.diff_reg_op != 1 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);   
+        }
+      };
+    },
+
+
     NombreOPNonRegu() {
       return (id) => {
         if (id != null && id != "") {
@@ -1965,6 +2002,23 @@ ListeDesOpNonRegulirise() {
             
         } else {
           return 0;
+        }
+      };
+    },
+
+    MontantOPNonReguTypeFinancement(){
+         return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.unite_administrative_id == id && qtreel.type_financement_id == id1 && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);
         }
       };
     },
@@ -2097,26 +2151,7 @@ montantVoteToralParLigne(){
         }
       };
     },
-    montantActuelParLigne() {
-      return (id, id1) => {
-        if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.budgetEclate
-            .filter(
-              (qtreel) =>
-                qtreel.uniteadministrative_id == id &&
-                qtreel.ligneeconomique_id == id1 &&
-                qtreel.budget_active == 1
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-        } else {
-          return 0;
-        }
-      };
-    },
+
     MontantExecute() {
       return (id) => {
         if (id != null && id != "") {
@@ -2197,10 +2232,11 @@ montantVoteToralParLigne(){
       //  };
     },
     
-    arrayExerciceDecompteBienServiceTresor() {
+ 
+    tailleAfficheTypeFinancement() {
       return (id) => {
-        
-        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id && item.type_financement_id == 14);
+     
+        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id && item.type_financement_id == 14 || item.uniteadministrative_id==id && item.type_financement_id == 13 || item.uniteadministrative_id==id && item.type_financement_id == 15);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -2208,16 +2244,20 @@ montantVoteToralParLigne(){
             array_exercie.push(val.type_financement_id);
           });
           let unique = [...new Set(array_exercie)];
-         // console.log(unique);
+          //console.log(unique);
           if (unique.length == 0) {
-            return [];
+            return 0;
+          }else{
+            
+             return unique.length;
           }
-          return unique;
+          
         }
-        return [];
+        return 0;
      };
     },
-    
+
+
     AfficheTypeFinancement() {
       return (id) => {
         
@@ -2238,67 +2278,9 @@ montantVoteToralParLigne(){
         return [];
      };
     },
-    arrayExerciceDecompteBienServiceDon() {
-      return (id) => {
-        
-        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id && item.type_financement_id == 13);
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.type_financement_id);
-          });
-          let unique = [...new Set(array_exercie)];
-         // console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-     };
-    },
-    arrayExerciceDecompteBienServiceEmprunt() {
-      return (id) => {
-        
-        let objet = this.budgetEclate.filter(item=>item.uniteadministrative_id==id && item.type_financement_id == 15);
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.type_financement_id);
-          });
-          let unique = [...new Set(array_exercie)];
-         // console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-     };
-    },
-arrayExerciceDecompteBienService() {
-      return (id) => {
-        let objet = this.budgetEclate.filter(
-          (item) => item.uniteadministrative_id == id
-        );
-        //  let vm=this
-        let array_exercie = [];
-        if (objet.length > 0) {
-          objet.forEach(function (val) {
-            array_exercie.push(val.type_financement_id);
-          });
-          let unique = [...new Set(array_exercie)];
-         // console.log(unique);
-          if (unique.length == 0) {
-            return [];
-          }
-          return unique;
-        }
-        return [];
-      };
-    },
+   
+
+
     MontantExecuteParTypeFinancement() {
       return (id, id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
@@ -2420,6 +2402,70 @@ arrayExerciceDecompteBienService() {
     TotalMontantDisponible(){
         return (this.TotalMontantBudgetActuel - this.TotalMontantBudgetExecuté);
     },
+
+
+
+     TotalMontantOPNonReguTypeFinancement() {
+              if(this.inputLigneCode1 != 0 ){
+                  return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id ==this.inputLigneCode1 
+                   && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
+                    && qtreel.exercice==this.afficheAnnee)
+              ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+
+              }else if( this.inputLigneLibelle1!=0){
+                     return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id ==this.inputLigneLibelle1 
+                   && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
+                    && qtreel.exercice==this.afficheAnnee)
+              ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+              }
+              else{
+                return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id !=null 
+                   && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
+                    && qtreel.exercice==this.afficheAnnee)
+              ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+              }
+            },
+
+
+          
+     TotalNombreOPNonReguTypeFinancement() {
+              if(this.inputLigneCode1 != 0 ){
+                  return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id ==this.inputLigneCode1 
+                   && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
+                    && qtreel.exercice==this.afficheAnnee)
+              ).length
+
+              }else if( this.inputLigneLibelle1!=0){
+                     return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id ==this.inputLigneLibelle1 
+                   && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
+                    && qtreel.exercice==this.afficheAnnee)
+              ).length
+              }
+              else{
+                return this.gettersgestionOrdrePaiement
+              .filter(
+                (qtreel) =>
+                  (qtreel.unite_administrative_id !=null 
+                   && qtreel.diff_reg_op == 0 && qtreel.type_ordre_paiement==2
+                    && qtreel.exercice==this.afficheAnnee)
+              ).length
+              }
+            },
 
 
             TotalMontantBudgetVote() {
@@ -3017,29 +3063,65 @@ arrayExerciceDecompteBienService() {
       else if(this.montant_execute != 0 ){
         return this.filtre_Montant_execute;
       }
-      else if(this.montant_disponible != 0){
-        return this.filtre_Montant_Disponible
-      }else if(this.montant_Initial != 0 ){
-        return this.filtre_Montant_Initial
-      }
-      else if(this.montant_ModifierBudget!=0){
-          return this.filtre_MoodicationBudgetaire
-      }
-      else if(this.montant_Actuel != 0){
-        return this.filtre_Montant_Actuelle
-      }else if(this.Total_Op_Provisoire != 0){
-        return this.FiltreTotalOpProvisoire
-      }else if(this.Nombre_Op_Non_Regulirise){
-        return this.filtre_NombreOpNonRegularise
-      }else if(this.Nombre_Op_Regulirise !=0 ){
-        return this.filtre_NombreOpRegularise
-      }else if(this.Taux_Op_non_Regulirise!=0){
-        return this.FiltreTauxOpNonProvisoire
-      }
-      else {
-        return this.filtre_unite_admin;
-      }
+      else if(this.montant_disponible != 0){ return this.filtre_Montant_Disponible}
+      else if(this.MarcheEnCours!=0){return this.filtre_MarcheEnCours}
+      else if(this.montant_Initial != 0 ){return this.filtre_Montant_Initial}
+      else if(this.montant_ModifierBudget!=0){return this.filtre_MoodicationBudgetaire}
+      else if(this.montant_Actuel != 0){return this.filtre_Montant_Actuelle}
+      else if(this.Nombre_Op_Non_Regulirise!=0){return this.filtre_NombreOpNonRegularise}
+      else if(this.MONTANT_Op_NON_Regulirise!=0){return this.filtre_MontantOpNonRegularise}
+      else if(this.Nombre_Op_Regulirise !=0 ){return this.filtre_NombreOpRegularise}
+      else if(this.Taux_Op_non_Regulirise!=0){return this.FiltreTauxOpNonProvisoire}
+      else {return this.filtre_unite_admin;}
     },
+
+
+     MarcheEnCoursUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.marches.filter(
+            (qtreel) =>
+              qtreel.unite_administrative_id == id &&
+              qtreel.exo_id == this.afficheAnnee &&
+              qtreel.parent_id != null &&
+              qtreel.attribue == 2
+          ).length;
+        } else {
+          return 0;
+        }
+      };
+    },
+
+
+    MarcheEnCoursUaSource(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.marches.filter(
+            (qtreel) =>
+              qtreel.unite_administrative_id == id &&
+              qtreel.type_financement == id1 &&
+              qtreel.exo_id == this.afficheAnnee &&
+              qtreel.parent_id != null &&
+              qtreel.attribue == 2
+          ).length;
+        } else {
+          return 0;
+        }
+      };
+    },
+    
+
+
+
+    TotalMarcheEnCoursUaSource(){
+          return this.marches.filter(
+            (qtreel) =>
+              qtreel.exo_id == this.afficheAnnee &&
+              qtreel.parent_id != null &&
+              qtreel.attribue == 2
+          ).length;
+    },
+    
 
   
 
@@ -3056,11 +3138,12 @@ arrayExerciceDecompteBienService() {
           Variation12:vm.AfficheVariationBudget(value.id),
           Budgetactuel:vm.MontantBudgetActuel(value.id),
           MontantExecute:vm.MontantBudgetExecuté(value.id),
-          NombreOpProvisoire:vm.TotalOPProvisoire(value.id),
           NombreOpNONRegu:vm.NombreOPNonRegu(value.id),
+          MontantOpNONRegu:vm.MontantOPNonRegu(value.id),
           NombreOpREgularise:vm.NombreOPRegulirise(value.id),
           TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
           Disponible:vm.MontantBudgetActuel(value.id)- vm.MontantBudgetExecuté(value.id),
+          MARCHEenCours:vm.MarcheEnCoursUa(value.id),
           TauxExecution:vm.EviteNaN(value.id)
         };
         return objet;
@@ -3504,17 +3587,18 @@ CalculerMontantDisponible(id){
       }
       
     },
-    triTotalOpProvisoire(){
-      if(this.triTotalProvisoiredata==0){
-        this.triTotalProvisoiredata=1;
-        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return a.NombreOpProvisoire - b.NombreOpProvisoire});
+
+    triMarcheEnCours(){
+        if(this.triMarcheEncourSdata==0){
+        this.triMarcheEncourSdata=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return a.MARCHEenCours - b.MARCHEenCours});
         
       }else{
-        this.triTotalProvisoiredata=0;
-        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.NombreOpProvisoire - a.NombreOpProvisoire});
+        this.triMarcheEncourSdata=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b){return b.MARCHEenCours - a.MARCHEenCours});
       }
-      
     },
+   
       triNombreOpNonRegulirise(){
       if(this.triOpNonRegulirisedata==0){
         this.triOpNonRegulirisedata=1;
@@ -3526,6 +3610,22 @@ CalculerMontantDisponible(id){
       }
       
     },
+
+
+     triMontantOpNonRegulirise(){
+      if(this.triMontantOpNonRegulirisedata==0){
+        this.triMontantOpNonRegulirisedata=1;
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b) {return a.MontantOpNONRegu - b.MontantOpNONRegu});
+        
+      }else{
+        this.triMontantOpNonRegulirisedata=0;
+        return this.TriaffichageUniteAdminstrative.sort(function(a, b) {return b.MontantOpNONRegu - a.MontantOpNONRegu});
+      }
+      
+    },
+
+
+
     triNombreOpRegulirise(){
       if(this.triOpRegulirisedata==0){
         this.triOpRegulirisedata=1;
@@ -3713,15 +3813,18 @@ genererEnPdf() {
       }
 
  },
-    ActiveInputTotalOpProvisoire(){
-      if(this.inputTotalOpProvisoire == false){
-        this.inputTotalOpProvisoire = true
+
+ ActiveInputmONTANTOpNonProvisoireRegulirise(){
+     
+     if(this.inputMontantOpNonRegulirise == false){
+        this.inputMontantOpNonRegulirise = true
       }else{
-        this.inputTotalOpProvisoire = false
-        this.Total_Op_Provisoire = 0;
+        this.inputMontantOpNonRegulirise = false
+        this.MONTANT_Op_NON_Regulirise = 0;
       }
 
  },
+   
     ActiveInputMontantActuel(){
       if(this.inputMontantActuel == false){
         this.inputMontantActuel = true
@@ -3758,6 +3861,17 @@ genererEnPdf() {
       }
 
  },
+
+ ActiveInputMarcheEnCours(){
+    if(this.ActiveInputMarcheEnCoursdata == false){
+        this.ActiveInputMarcheEnCoursdata = true
+      }else{
+        this.ActiveInputMarcheEnCoursdata = false
+        this.MarcheEnCours = 0;
+      }
+ },
+
+
     ActiveInputMontant(){
       if(this.inputMontantExecute == false){
         this.inputMontantExecute = true
@@ -4008,7 +4122,8 @@ width: 100%;
   height: 500px;
 }
 #taillecol{
-    width: 200px;
+    width: 140px;
+    text-align:right
 }
 .sommecolor {
   background-color: red;
@@ -4027,7 +4142,7 @@ width: 100%;
 }
 
 .whitebg {
-  background: #fff !important;
+  
   font-weight: bold;
   color: black;
   font-size: 13px;
@@ -4050,5 +4165,7 @@ width: 100%;
   width: 1300px;
   margin: 80px -690px;
 }
- 
+#style1{
+  font-size: 20px;
+}
 </style>
