@@ -13,7 +13,18 @@
     <input  type="hidden" :value="triDisponibledata"/>
     <input  type="hidden" :value="triTauxExecutiondata"/>
     
-   
+    <input  type="hidden" :value="triNBMarcheEnExecutiondata"/>
+    <input  type="hidden" :value="b_initial"/>
+    <input  type="hidden" :value="b_Modifier"/>
+     <input  type="hidden" :value="b_Actuel"/>
+    <input  type="hidden" :value="b_Disponible"/>
+     <input  type="hidden" :value="b_Execute"/>
+    <input  type="hidden" :value="b_MarcheExecution"/>
+     <input  type="hidden" :value="b_MontantOpNonRegularise"/>
+    <input  type="hidden" :value="b_OpNonRegularise"/>
+     <input  type="hidden" :value="b_MontantOpNonRegularise"/>
+     <input  type="hidden" :value="b_TauxExecution"/>
+    <input  type="hidden" :value="b_Activite"/>
     <div class="row-fluid" style="margin-top: -20px">
       <div class="span1"></div>
       
@@ -127,23 +138,13 @@
                       background-color: #fbb203 !important;
                     "
                     colspan=""
+                     @click="AfficheIconeActivite()"
+                    class="curseurEntete"
                   >
-                    
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                   ACTIVITE/LIGNE BUDGETAIRE  
-                   <button @click="ActiveInputLigne">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
+                    ACTIVITE
+                    <i class="tailleIcone"    @click="ActiveInputLigne" v-show="b_Activite==1">
+                     <i class=" icon-search"></i>
+                    </i>
                      <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
                      <model-list-select v-show="inputLigne == true"
                   style="background-color: #fff; border: 2px solid #000"
@@ -155,6 +156,19 @@
                   placeholder="CODE ACTIVITE"
                 >
                 </model-list-select>
+                  </th>
+                   <th
+                    style="
+                      font-size: 12px;
+                      color: #000;
+                      font-weight: bold;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                   
+                  >
+                   LIGNE BUDGETAIRE  
+                  
                 
                   </th>
                   <th id="taillecol"
@@ -165,16 +179,19 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                       width :8%
+                      
                     "
+                    @click="AfficheIconeBudgetInitial()"
+                    class="curseurEntete"
                   >
-                  <button @click="tribudgetinitial()">
+                  <i class="tailleIcone" @click="tribudgetinitial()" v-show="b_initial==1">
                      <i class=" icon-filter"></i>
-                      </button>
+                      </i>
                     BUDGET INITIAL
-                     <button @click="InputMontantInitial">
+                     <i @click="InputMontantInitial" class="tailleIcone" v-show="b_initial==1">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="montant_Initial" class="span" v-show="montantInitialdata == true"></money>
                     
@@ -187,19 +204,21 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     " id="taillecol"
+                     @click="AfficheIconeBudgetModifier()"
+                    class="curseurEntete"
                   >
-                  <button @click="trivariation()">
+                  <i @click="trivariation()" class="tailleIcone" v-show="b_Modifier==1">
                      <i class=" icon-filter"></i>
-                      </button>
+                      </i>
 
-                        <button @click="InputMontantModif">
-                     <i class=" icon-search"></i> 
-                    </button>
+                       
                      <money style="text-align:left;color:red" 
                      v-model="montant_mofification" class="span" 
                      v-show="montantmodificationdata == true"></money>
                     MODIFICATION BUDGETAIRE
-                    
+                     <i @click="InputMontantModif" class="tailleIcone" v-show="b_Modifier==1">
+                     <i class=" icon-search"></i> 
+                    </i>
                   </th>
                    
                   <th
@@ -212,19 +231,21 @@
                       width :8%
                     "
                     id="taillecol"
+                     @click="AfficheIconeBudgetActuel()"
+                    class="curseurEntete"
                   >
-                  <button @click="tribudgetactuel()">
+                  <i @click="tribudgetactuel()" class="tailleIcone" v-show="b_Actuel==1">
                      <i class=" icon-filter"></i>
-                      </button>
+                      </i>
 
-                       <button @click="InputBudgetActuel">
-                     <i class=" icon-search"></i> 
-                    </button>
+                      
                      <money style="text-align:left;color:red" 
                      v-model="Budget_Actuel" class="span" 
                      v-show="InputBudgetActueldata == true"></money>
                  BUDGET ACTUEL
-
+ <i @click="InputBudgetActuel" class="tailleIcone"  v-show="b_Actuel==1">
+                     <i class=" icon-search"></i> 
+                    </i>
                 
                   </th>
                   <th
@@ -236,19 +257,72 @@
                       background-color: #fbb203 !important;
                     "
                     id="taillecol"
+                     @click="AfficheIconeBudgetExecuter()"
+                    class="curseurEntete"
                   >
-                  <button @click="trimontantexecute()">
+                  <i @click="trimontantexecute()" class="tailleIcone" v-show="b_Execute==1">
                      <i class=" icon-filter"></i>
-                      </button>
+                      </i>
 
-                      <button @click="InputMontantExecute">
-                     <i class=" icon-search"></i> 
-                    </button>
+                     
                      <money style="text-align:left;color:red" 
                      v-model="Montant_Execute" class="span" 
                      v-show="InputMontantExecutedata == true"></money>
                   MONTANT EXECUTE
-                  
+                   <i @click="InputMontantExecute" class="tailleIcone" v-show="b_Execute==1">
+                     <i class=" icon-search"></i> 
+                    </i>
+                  </th>
+                  <th
+                    style="
+                      font-size: 12px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                     @click="AfficheIconeOpNonRegularise()"
+                    class="curseurEntete"
+                  >
+                  <i @click="triNBOpProNonRegu()" class="tailleIcone" v-show="b_OpNonRegularise==1">
+                     <i class=" icon-filter"></i>
+                      </i> 
+
+                       
+                     <money style="text-align:left;color:red" 
+                     v-model="Nbre_OpProvNon_REgu" class="span" 
+                     v-show="InputNbreOpProvNonREgudata == true"></money>
+                    NB OP PROVISOIRE NON REGULARISE(S)
+
+                     <i @click="InputNbreOpProvNonREgu" class="tailleIcone" v-show="b_OpNonRegularise==1"> 
+                     <i class=" icon-search"></i> 
+                    </i>
+                  </th>
+                  <th
+                    style="
+                      font-size: 12px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                    id="taillecol"
+                     @click="AfficheIconeMontantOpNonRegularise()"
+                    class="curseurEntete"
+                  >
+                  <i @click="triMontantOpProNonRegu()" class="tailleIcone" v-show="b_MontantOpNonRegularise==1">
+                     <i class=" icon-filter"></i>
+                      </i>
+
+                      
+                     <money style="text-align:left;color:red" 
+                     v-model="Montant_Op_ProvNon_Reg" class="span" 
+                     v-show="InputMontantOpProvNonRegdata == true"></money>
+                    MONTANT OP PROVISOIRE NON REGULARISE
+ <i @click="InputMontantOpProvNonReg" class="tailleIcone" v-show="b_MontantOpNonRegularise==1">
+                     <i class=" icon-search"></i> 
+                    </i>
+                     
                   </th>
                    <th
                     style="
@@ -282,31 +356,10 @@
                     ">
                   STATUT DE LA LIGNE
                   </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    id="taillecol"
-                  >
-                  <button @click="triMontantOpProNonRegu()">
-                     <i class=" icon-filter"></i>
-                      </button>
-
-                       <button @click="InputMontantOpProvNonReg">
-                     <i class=" icon-search"></i> 
-                    </button>
-                     <money style="text-align:left;color:red" 
-                     v-model="Montant_Op_ProvNon_Reg" class="span" 
-                     v-show="InputMontantOpProvNonRegdata == true"></money>
-                    MONTANT OP PROVISOIRE NON REGULARISE
-
+                 
+ 
                      
-                  </th>
- <th
+                   <th
                     style="
                       font-size: 12px;
                       font-weight: bold;
@@ -314,67 +367,22 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
-                   
+                     @click="AfficheIconeMarcheExecution()"
+                    class="curseurEntete"
                   >
-                  <button @click="triNombreOpPro()">
+                  <i @click="triNBMarcheExecution()" class="tailleIcone" v-show="b_MarcheExecution==1">
                      <i class=" icon-filter"></i>
-                      </button>
-
-                      <button @click="InputTauxOpProvi">
-                     <i class=" icon-search"></i> 
-                    </button>
-                     <money style="text-align:left;color:red" 
-                     v-model="Taux_Op_Provi" class="span" 
-                     v-show="InputTauxOpProvidata == true"></money>
-                    TOTAL OP PROVISOIRE
+                      </i> 
 
                       
-                  </th>
-                     <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  <button @click="triNBOpProNonRegu()">
-                     <i class=" icon-filter"></i>
-                      </button> 
-
-                       <button @click="InputNbreOpProvNonREgu">
-                     <i class=" icon-search"></i> 
-                    </button>
                      <money style="text-align:left;color:red" 
-                     v-model="Nbre_OpProvNon_REgu" class="span" 
-                     v-show="InputNbreOpProvNonREgudata == true"></money>
-                    NB OP PROVISOIRE NON REGULARISE(S)
+                     v-model="NombreMarcheExecution" class="span" 
+                     v-show="InputNbreMarcheEnCoursExecutiondata == true"></money>
+                    NB MARCHE EN COURS EXECUTION
 
-                     
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  <button @click="triTauxOpProNonRegu()">
-                     <i class=" icon-filter"></i>
-                      </button>
-
-                       <button @click="InputTauxOpProNonREg">
+                      <i @click="InputNbreMarcheEnCoursExecution" class="tailleIcone" v-show="b_MarcheExecution==1">
                      <i class=" icon-search"></i> 
-                    </button>
-                     <money style="text-align:left;color:red" 
-                     v-model="Taux_OpProNon_REg" class="span" 
-                     v-show="InputTauxOpProNonREgdata == true"></money>
-                    TAUX OP PROVISOIRE NON REGULARISE(S)
-
-                     
+                    </i>
                   </th>
                    <th
                     style="
@@ -385,19 +393,21 @@
                       background-color: #fbb203 !important;
                     "
                     id="taillecol"
+                     @click="AfficheIconeDisponible()"
+                    class="curseurEntete"
                   >
-                  <button @click="triDisponible()">
+                  <i @click="triDisponible()" class="tailleIcone" v-show="b_Disponible==1">
                      <i class=" icon-filter"></i> 
-                      </button>
+                      </i>
 
-                       <button @click="InputDisponible">
-                     <i class=" icon-search"></i> 
-                    </button>
+                      
                      <money style="text-align:left;color:red" 
                      v-model="Input_Disponible" class="span" 
                      v-show="InputDisponibledata == true"></money>
                     DISPONIBLE
-
+ <i @click="InputDisponible" class="tailleIcone" v-show="b_Disponible==1">
+                     <i class=" icon-search"></i> 
+                    </i>
                      
 
                   <th
@@ -408,19 +418,21 @@
                       text-align: center;
                       background-color: #fbb203 !important;
                     "
+                     @click="AfficheIconeTauxExecution()"
+                    class="curseurEntete"
                   >
-                  <button @click="triTauxExecution()">
+                  <i @click="triTauxExecution()" class="tailleIcone" v-show="b_TauxExecution==1">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
 
-                     <button @click="InputTauxExecution">
-                     <i class=" icon-search"></i> 
-                    </button>
+                     
                      <money style="text-align:left;color:red" 
                      v-model="Taux_Execution" class="span" 
                      v-show="InputTauxExecutiondata == true"></money>
                     TAUX D'EXECUTION
-
+<i @click="InputTauxExecution" class="tailleIcone" v-show="b_TauxExecution==1">
+                     <i class=" icon-search"></i> 
+                    </i>
                      
                   </th>
                   <!-- <th
@@ -447,17 +459,16 @@
                       
                     </button>
                   </td>
-<td>
-                   <!-- <button >
-                     <i class=" icon-print"></i> 
-                      
-                    </button> -->
-                    
-                </td>
                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
                     <b>{{ ListeActivite.libelle }}</b>
                     
                   </td>
+                 
+<td >
+                  
+                    
+                </td>
+                  
 
                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                     style="text-align: right">
@@ -495,6 +506,23 @@
                      }}
                     </b>
                   </td>
+                                 <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
+                    <b>{{
+                      ListeActivite.NombreOpProvisoireNonRegu
+                    }}
+                    </b>
+                  </td>
+                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
+                  style="text-align: right" >
+                    <b>{{
+                      formatageSommeSansFCFA(
+                        parseFloat(ListeActivite.MontantOpProvisoireNonRegu
+                        )
+                      )
+                    }}
+                    </b>
+                  </td>
+              
                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                    <b> 
@@ -510,34 +538,15 @@
                    <b>
                     </b>
                   </td>
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
+   
+                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
                     <b>{{
-                      formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.MontantOpProvisoireNonRegu
-                        )
-                      )
+                      ListeActivite.nombreMarcheParActivite
                     }}
                     </b>
                   </td>
-               <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
-                    <b>{{
-                     ListeActivite.NombreOpProvisoire
-                    }}
-                    </b>
-                  </td>
-                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
-                    <b>{{
-                      ListeActivite.NombreOpProvisoireNonRegu
-                    }}
-                    </b>
-                  </td>
-                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
-                    <b>{{
-                      ListeActivite.TauxOpProvisoireNonRegu
-                    }} %
-                    </b>
-                  </td>
+                   
+                  
                    <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
                   style="text-align: right" >
                     <!-- <b> -->
@@ -547,13 +556,7 @@
                     }}
                    
                   </td> 
-                  <!-- <td v-bind:class="recupereIDactivite==GroupeOrdrePaiementByActivit[0].activite_id ? 'graybg' : 'whitebg'" >
-                    <b>{{
-
-                        EviteNaN(GroupeOrdrePaiementByActivit[0].activite_id) || "Non renseigné"
-                    }}
-                    </b>
-                  </td> -->
+                
                    <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( ListeActivite.TauxExecution ) <= 25">
                   {{ ListeActivite.TauxExecution }}
                </td>
@@ -648,6 +651,16 @@
                           MontantBudgetExecutéActivite(listeLigneeco,ListeActivite.id)))
                     }}
                   </td>
+                   <td style="text-align: right;color:#000;" >
+                    {{ afficheOpNonRegulirise(listeLigneeco,ListeActivite.id) }}
+                  </td>
+                   <td style="text-align: right;color:#000;" >
+                    {{
+                      formatageSommeSansFCFA(
+                        parseFloat(
+                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,ListeActivite.id)))
+                    }}
+                  </td>
 <td style="text-align: left;color:#000;">
                     {{
                      lielleGrandeNayure(GrandeNature(listeLigneeco))
@@ -660,25 +673,16 @@
                   </td>
                   <td style="text-align: left;color:#000;">
                       <span v-if="listeLigneeco == CodeExempte(listeLigneeco)">Exemptée procedure</span>
-                         <span v-else>Ligne à marché</span>
+                         <span v-else></span>
                    
                   </td>
+                  
                   <td style="text-align: right;color:#000;" >
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,ListeActivite.id)))
-                    }}
+                    {{ NbreMarcheEnCoursParLigne(ListeActivite.id,listeLigneeco) }}
                   </td>
- <td style="text-align: right;color:#000;" >
-                   {{ToTalOPNonReguLigne(listeLigneeco,ListeActivite.id)}}
-                  </td>
-                  <td style="text-align: right;color:#000;" >
-                    {{ afficheOpRegulirise(listeLigneeco,ListeActivite.id) }}
-                  </td>
-                   <td style="text-align: right;color:#000;" >
-              {{  TauxOPProvisoireNonRegularisLigne(listeLigneeco,ListeActivite.id)}}
-                  </td>
+ 
+                 
+                  
   <td style="text-align: right;color:#000;">
 
 
@@ -708,12 +712,28 @@
                 
                 </tr>
               
-              
+              <!-- <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr> -->
               </tbody>
               <tfoot>
                 <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                  <!-- <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td> -->
-                  <td colspan="2" style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
+                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000" > </td>
+                  <td colspan="" style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
                   
                   <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
                       
@@ -725,13 +745,15 @@
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
 
                   <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
-<td style="text-align: right;color:#000"></td>
-<td style="text-align: right;color:#000"></td>
-<td style="text-align: right;color:#000"></td>
-                  <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
-<td style="text-align: right;color:#000">{{ 0 }}</td>
-<td style="text-align: right;color:#000">{{ 0 }}</td>
                   <td style="text-align: right;color:#000">{{ 0 }}</td>
+                            <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
+<td style="text-align: right;color:#000"></td>
+<td style="text-align: right;color:#000"></td>
+<td style="text-align: right;color:#000"></td>
+        
+
+
+                <td style="text-align: right;color:#000">{{ 0 }}</td>
                     <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
@@ -781,184 +803,7 @@
       bg-color="green"
     ></fab> -->
 
-    <div id="validationOpDefinitif2" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3 style="font-size: 12px; font-weight: bold">
-          UNITE ADMINISTRATIVE : 
-        </h3>
-      </div>
-      <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
-    </div>  -->
-      <div class="modal-body" id="printpdf">
-          <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">Suivi du budget projet par UA et type Financement</h2>
-          </tr>
-        </table>
-        <table class="table table-bordered table-striped">
-          <thead style="background-color: #ff9c1a !important">
-                
-<tr>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    
-                  </th>
-<th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                   ACTIVITE/LIGNE BUDGETAIRE  
-                   
-                
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                      width :8%
-                    "
-                  >
-                    BUDGET INITIAL
-                    
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    REAMENAGEMENT BUDGETAIRE
-                  </th>
-                   
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #fbb203 !important;
-                      width :8%
-                    "
-                  >
-                 BUDGET ACTUEL
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  MONTANT EXECUTE
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    MONTANT OP PROVISOIRE NON REGULARISE
-                  </th>
-
-                     <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    NB OP PROVISOIRE NON REGULARISE(S)
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    TAUX D'EXECUTION
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    EVOLUTION DU TAUX D’EXECUTION
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    DISPONIBLE
-                  </th>
-
-                  
-                </tr>
-              </thead>
-            <br>
-          <tbody >
-            <tr>
-              {{editMandat1.activite_id}}
-            </tr>
-              
-          </tbody>
-        </table>
-        <!-- <div class="modal-footer">
-          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
-        </div> -->
-      </div>
-    </div>
+    
   </div>
 </template>
   
@@ -977,7 +822,7 @@ export default {
   data() {
     return {
       page: 0,
-      size:5,
+      size:10,
       active_el: 0,
       fabActions: [
         {
@@ -1010,6 +855,16 @@ inputLigne:false,
         date_fin: "",
       },
       EditDetache: {},
+      b_initial:0,
+      b_Modifier:0,
+      b_Actuel:0,
+      b_Execute:0,
+      b_OpNonRegularise:0,
+      b_MontantOpNonRegularise:0,
+      b_MarcheExecution:0,
+      b_TauxExecution:0,
+      b_Disponible:0,
+      b_Activite:0,
       typeop_id: 0,
       NumeroOp: 0,
       Activite_id: 0,
@@ -1023,6 +878,7 @@ inputLigne:false,
       triMontantOpProNonRegudata:0,
       triNombreOpProdata:0,
       triNBOpProNonRegudata:0,
+      triNBMarcheEnExecutiondata:0,
       triTauxOpProNonRegudata:0,
       triDisponibledata:0,
       triTauxExecutiondata:0,
@@ -1033,14 +889,16 @@ inputLigne:false,
       InputMontantOpProvNonRegdata:false,
       InputTauxOpProvidata:false,
       InputNbreOpProvNonREgudata:false,
+      InputNbreMarcheEnCoursExecutiondata:false,
       InputTauxOpProNonREgdata:false,
       InputDisponibledata:false,
       InputTauxExecutiondata:false,
-
+inputSelect:false,
       Taux_Execution:0,
       Input_Disponible:0,
       Taux_OpProNon_REg:0,
       Nbre_OpProvNon_REgu:0,
+      NombreMarcheExecution:0,
       Taux_Op_Provi:0,
       Montant_Op_ProvNon_Reg:0,
       Montant_Execute:0,
@@ -1208,6 +1066,36 @@ inputLigne:false,
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+    NbreMarcheParActivite(){
+        return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.activite_id == id &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.marche_id!=null)
+            ).length
+        } else {
+          return 0;
+        }
+      };
+    },
+     NbreMarcheEnCoursParLigne(){
+        return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                (qtreel.activite_id == id && qtreel.ligne_economique_id == id1 &&
+                qtreel.exercice == this.afficheAnnee &&
+                qtreel.marche_id!=null)
+            ).length
+        } else {
+          return 0;
+        }
+      };
+    },
     CodeExempte() {
       return id => {
         if (id != null && id != "") {
@@ -1220,7 +1108,7 @@ inputLigne:false,
         }
       };
     },
- afficheOpRegulirise() {
+ afficheOpNonRegulirise() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
           return this.gettersgestionOrdrePaiement
@@ -1377,7 +1265,8 @@ inputLigne:false,
            NombreOpProvisoireNonRegu:vm.NombreOPNonRegu(value[0].activite_id),
            TauxOpProvisoireNonRegu:vm.TauxOPProvisoireNonRegularisActivite(value[0].activite_id),
            Disponible:vm.MontantBudgetActuel(value[0].activite_id)- vm.MontantBudgetExecuté(value[0].activite_id),
-           TauxExecution:vm.EviteNaN(value[0].activite_id)
+           TauxExecution:vm.EviteNaN(value[0].activite_id),
+           nombreMarcheParActivite:vm.NbreMarcheParActivite(value[0].activite_id)
         };
         return objet;
       });
@@ -1408,6 +1297,8 @@ inputLigne:false,
     return this.TriaffichageUniteAdminstrative.filter(item=>item.Disponible==this.Input_Disponible)
   }else if(this.Taux_Execution!=0){
     return this.TriaffichageUniteAdminstrative.filter(item=>item.TauxExecution==this.Taux_Execution)
+  }else if(this.NombreMarcheExecution!=0){
+    return this.TriaffichageUniteAdminstrative.filter(item=>item.nombreMarcheParActivite==this.NombreMarcheExecution)
   }
   
   else{
@@ -2193,7 +2084,15 @@ GrandeNature() {
     ]),
 
     // les recherches
+ActiveSelect(){
+      if(this.inputSelect == false){
+        this.inputSelect = true
+      }else{
+        this.inputSelect = false
+        this.inputSelect1=0;
+      }
 
+ },
     InputMontantInitial(){
       if(this.montantInitialdata == false){
         this.montantInitialdata = true
@@ -2248,6 +2147,14 @@ GrandeNature() {
       }
  },
 
+ InputNbreMarcheEnCoursExecution(){
+      if(this.InputNbreMarcheEnCoursExecutiondata == false){
+        this.InputNbreMarcheEnCoursExecutiondata = true
+      }else{
+        this.InputNbreMarcheEnCoursExecutiondata = false;
+        this.NombreMarcheExecution = 0;
+      }
+ },
  InputNbreOpProvNonREgu(){
       if(this.InputNbreOpProvNonREgudata == false){
         this.InputNbreOpProvNonREgudata = true
@@ -2355,7 +2262,106 @@ GrandeNature() {
           return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.NombreOpProvisoire-a.NombreOpProvisoire});
         }
     },
-
+    AfficheIconeActivite(){
+        if(this.b_Activite==0){
+          this.b_Activite=1;
+          
+        }else{
+          this.b_Activite=0;
+         
+        }
+    },
+    AfficheIconeBudgetInitial(){
+        if(this.b_initial==0){
+          this.b_initial=1;
+          
+        }else{
+          this.b_initial=0;
+         
+        }
+    },
+    AfficheIconeBudgetModifier(){
+        if(this.b_Modifier==0){
+          this.b_Modifier=1;
+          
+        }else{
+          this.b_Modifier=0;
+         
+        }
+    },
+    AfficheIconeBudgetActuel(){
+        if(this.b_Actuel==0){
+          this.b_Actuel=1;
+          
+        }else{
+          this.b_Actuel=0;
+         
+        }
+    },
+    AfficheIconeBudgetExecuter(){
+        if(this.b_Execute==0){
+          this.b_Execute=1;
+          
+        }else{
+          this.b_Execute=0;
+         
+        }
+    },
+     AfficheIconeOpNonRegularise(){
+        if(this.b_OpNonRegularise==0){
+          this.b_OpNonRegularise=1;
+          
+        }else{
+          this.b_OpNonRegularise=0;
+         
+        }
+    },
+     AfficheIconeTauxExecution(){
+        if(this.b_TauxExecution==0){
+          this.b_TauxExecution=1;
+          
+        }else{
+          this.b_TauxExecution=0;
+         
+        }
+    },
+     AfficheIconeDisponible(){
+        if(this.b_Disponible==0){
+          this.b_Disponible=1;
+          
+        }else{
+          this.b_Disponible=0;
+         
+        }
+    },
+    AfficheIconeMarcheExecution(){
+        if(this.b_MarcheExecution==0){
+          this.b_MarcheExecution=1;
+          
+        }else{
+          this.b_MarcheExecution=0;
+         
+        }
+    },
+    AfficheIconeMontantOpNonRegularise(){
+        if(this.b_MontantOpNonRegularise==0){
+          this.b_MontantOpNonRegularise=1;
+          
+        }else{
+          this.b_MontantOpNonRegularise=0;
+         
+        }
+    },
+triNBMarcheExecution(){
+        if(this.triNBMarcheEnExecutiondata==0){
+          this.triNBMarcheEnExecutiondata=1;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return a.nombreMarcheParActivite-b.nombreMarcheParActivite});
+          
+        }else{
+          this.triNBMarcheEnExecutiondata=0;
+          return this.TriaffichageUniteAdminstrative.sort(function(a,b){return b.nombreMarcheParActivite-a.nombreMarcheParActivite});
+        }
+    },
     triNBOpProNonRegu(){
         if(this.triNBOpProNonRegudata==0){
           this.triNBOpProNonRegudata=1;
@@ -2512,19 +2518,19 @@ return (parseFloat(this.MontantBudgetActuelActivite(id,id1)) - parseFloat(this.M
     afficheLeNomDesProcedure(id,id1){
 
     if(this.budgetDisponibleParLigne(id,id1) < 10000000){
-        return "PSC-SC"
+        return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
     }
     else if( this.budgetDisponibleParLigne(id,id1) < 30000000 )
     {
-return "PSC-AC"
+return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
     }
     else if(this.budgetDisponibleParLigne(id,id1)<60000000)
     {
-return "PSL"
+return "Procédure Simplifiée à compétition Limitée(PSL)"
     }
     else if(this.budgetDisponibleParLigne(id,id1) < 100000000)
     {
-return "PSO"
+return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
 
     // else if(0 < this.budgetDisponibleParLigne(id,id1))
@@ -2533,7 +2539,7 @@ return "PSO"
     // }
      else if(100000000 < this.budgetDisponibleParLigne(id,id1))
     {
-return "AON ou AOI ou AOR"
+return "Appel d'Offre Ouvert"
     }
 
   return null
@@ -2614,5 +2620,14 @@ width: 95%;
 }
 #taillecol{
     width: 200px;
+}
+.curseurEntete{
+cursor: pointer;
+}
+.tailleIcone{
+cursor: pointer;
+
+   font-size: 20px;
+  font-weight: bold;
 }
 </style>
