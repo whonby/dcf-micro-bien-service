@@ -616,6 +616,7 @@
 
       
 
+
       
        <tbody  v-for="type1 in  partition(Listenewdata, size)[page]" :key="type1.id">
            <tr>
@@ -628,59 +629,59 @@
                   
                   <!-- <td> </td> -->
          
-                          <td v-bind:class="recupereIDactivite==type1.id? 'graybg' : 'whitebg'  " colspan="2" style="" >
+                          <td v-bind:class="recupereIDactivite==type1.id " colspan="2" style="" >
                             {{type1.libelleBailleur}}
                                     
                                       
                                       </td>
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
+                                      <td v-bind:class="recupereIDactivite==type1.id  "> 
                                         {{type1.nombreMarchePlanif}}</td>
 
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                      <td v-bind:class="recupereIDactivite==type1.id  ">
                                           {{formatageSommeSansFCFA(parseFloat(type1.montantMarchePlanif)) }}
                                       </td>
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                      <td v-bind:class="recupereIDactivite==type1.id  ">
                                         {{type1.nombreMarcheContra }}
                                       </td>
 
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                      <td v-bind:class="recupereIDactivite==type1.id  ">
                                         {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheContract))}}</td>
 
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        <td v-bind:class="recupereIDactivite==type1.id  ">
                                           {{type1.nombreMarcheAtribue}} </td>
 
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        <td v-bind:class="recupereIDactivite==type1.id  ">
                                           {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheAtribue))}} </td>
 
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        <td v-bind:class="recupereIDactivite==type1.id  ">
                                           {{type1.nombreMarcheExcution}} </td>
 
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        <td v-bind:class="recupereIDactivite==type1.id  ">
                                           {{type1.montantTotalMarcheExcution}}</td>
                                       
                                         
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                        <td v-bind:class="recupereIDactivite==type1.id  ">
                                           {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheExcute))}} </td>
 
-                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                          <td v-bind:class="recupereIDactivite==type1.id  ">
                                             {{ formatageSommeSansFCFA(parseFloat( type1.montantResreExcute))}}</td>
 
-                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
+                                            <td v-bind:class="recupereIDactivite==type1.id  "> 
                                               {{type1.nombreMarcheSouffrance}} </td>
 
-                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                            <td v-bind:class="recupereIDactivite==type1.id  ">
                                               {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheAExcuteSouffrance))}} </td>
 
-                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                              <td v-bind:class="recupereIDactivite==type1.id  ">
                                                 {{type1.tauxMarcheSouffrance}} %</td>
                                             
-                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                              <td v-bind:class="recupereIDactivite==type1.id  ">
                                                 {{type1.nombreMarcheResilier}} </td>
                                             
-                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                              <td v-bind:class="recupereIDactivite==type1.id  ">
                                                 {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheResilierResteExcute))}} </td>
                                               
-                                                <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                <td v-bind:class="recupereIDactivite==type1.id  ">
                                                   {{type1.tauxMarcheResilier}} %</td>
                         
                                   <!-- <td></td> -->

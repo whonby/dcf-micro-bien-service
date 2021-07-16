@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <input  type="hidden" :value="triPar_NumeroDordre"/>
     <table class="table table-bordered table-striped">
           <tr>
             <td>
@@ -197,6 +198,10 @@
                   </th>
                    <th>
                    NUMERO D'ORDRE 
+                     <button @click="TriParNumeroDordre()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
                   </th>
                    
                   <th
@@ -620,6 +625,7 @@ export default {
   name: "typetext",
   data() {
     return {
+      triPar_NumeroDordre:0,
       page: 0,
       size:10,
       active_el: 0,
@@ -755,12 +761,24 @@ editMandat:{},
       noDCfNoAdmin:noDCfNoAdmin,
 
 
+    //    TriParSyntheseMarche(){
+    //     let vm=this 
+    //   return this.ListeMarcheParTypeMarche.map(function (value) {
+    //     let objet = {
+    //       id:value[0].GroupeSection,
+    //       numeroOdre:vm.NumeroOrdreMarche(value[0].GroupeSection),
+    //       numero_Marche:vm.NumeroMarche(value[0].GroupeSection)
+    //     };
+    //     return objet;
+    //   });
+    
+    // },
+
+
 affichePartBailleur() {
       return id => {
         if (id != null && id != "") {
            return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id);
-
-     
         }
       };
     },
@@ -1144,7 +1162,17 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
 
 
 
-
+TriParNumeroDordre(){
+      if(this.triPar_NumeroDordre==0){
+        this.triPar_NumeroDordre=1;
+        return this.TriParSyntheseMarche.sort(function(a,b){return a.numeroOdre-b.numeroOdre});
+        
+      }else{
+        this.triPar_NumeroDordre=0;
+        return this.TriParSyntheseMarche.sort(function(a,b){return b.numeroOdre-a.numeroOdre});
+      }
+      
+    },
 
   
 TauxExecution(id) {
