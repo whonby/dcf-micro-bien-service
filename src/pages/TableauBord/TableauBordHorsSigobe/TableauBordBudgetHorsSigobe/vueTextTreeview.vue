@@ -1,807 +1,47 @@
 
 <template>
   <div>
+<table>
+  <tr >
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>   
 
-    <input  type="hidden" :value="tribudgetinitialdata"/>
-    <input  type="hidden" :value="trivariationdata"/>
-    <input  type="hidden" :value="tribudgetactueldata"/>
-    <input  type="hidden" :value="trimontantexecutedata"/>
-    <input  type="hidden" :value="triMontantOpProNonRegudata"/>
-    <input  type="hidden" :value="triNombreOpProdata"/>
-    <input  type="hidden" :value="triNBOpProNonRegudata"/>
-    <input  type="hidden" :value="triTauxOpProNonRegudata"/>
-    <input  type="hidden" :value="triDisponibledata"/>
-    <input  type="hidden" :value="triTauxExecutiondata"/>
-    
-    <input  type="hidden" :value="triNBMarcheEnExecutiondata"/>
-    <input  type="hidden" :value="b_initial"/>
-    <input  type="hidden" :value="b_Modifier"/>
-     <input  type="hidden" :value="b_Actuel"/>
-    <input  type="hidden" :value="b_Disponible"/>
-     <input  type="hidden" :value="b_Execute"/>
-    <input  type="hidden" :value="b_MarcheExecution"/>
-     <input  type="hidden" :value="b_MontantOpNonRegularise"/>
-    <input  type="hidden" :value="b_OpNonRegularise"/>
-     <input  type="hidden" :value="b_MontantOpNonRegularise"/>
-     <input  type="hidden" :value="b_TauxExecution"/>
-    <input  type="hidden" :value="b_Activite"/>
-    <div class="row-fluid" style="margin-top: -20px">
-      <div class="span1"></div>
-      
-          <br>
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-
-                 <td>
-            <label>EXERCICE </label>
-            <model-list-select
-              style="border: 1px solid #000"
-              class="wide"
-              :list="exercices_budgetaires"
-              v-model="exercices_budgetaires_id"
-              option-value="annee"
-              option-text="annee"
-              placeholder="2021"
-            >
-            </model-list-select>
-          </td>
+  </tr>
 
 
-              <td>
+  
+  
+ <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+		   
 
-                <label style="color: #000; font-size: 12px; font-weight: bolder"
-                  >LIBELLE ACTIVITE<a href="#" style="color: red"></a>
-                </label>
-                <model-list-select
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="plans_activites"
-                  v-model="Activite_id"
-                  option-value="id"
-                  option-text="libelle"
-                  placeholder="LIBELLE"
-                >
-                </model-list-select>
-              </td>
-
-             
-            </tr>
-          </tbody>
-        </table>
-        
-      
-    </div>
-
-
-
-    <div class="span4">
-       
-          Afficher
-          <select name="pets" id="pet-select" v-model="size" class="span3">
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="40">40</option>
-            <option value="80">80</option>
-            <option value="100">100</option>
-          </select>
-         
-        </div>
-
-    <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">
-        Exporter en PDF
-      </button>
-    </div> 
-    
-    <div class="widget-content nopadding" id="printpdf">
-       <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">SITUATION D'EXECUTION BUDGETAIRE PAR ACTIVITE ET PAR LIGNE</h2>
-          </tr>
-        </table>
-     
-      <p
-        style="
-          margin-left: 30px;
-          font-size: 12px;
-          font-weight: bold;
-          text-decoration: underline;
-        "
-      >
-        EXERCICE: {{ afficheAnnee }}
-      </p>
-
-            <table class="table table-bordered">
-              <thead style="background-color: #ff9c1a !important;">
-                
-<tr>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    colspan=""
-                  >
-                    
-                  </th>
- <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    colspan=""
-                    
-                  >
-                    <span  @click="AfficheIconeActivite()" class="curseurEntete">ACTIVITE</span>
-                    <i class="tailleIcone"    @click="ActiveInputLigne" v-show="b_Activite==1">
-                     <i class=" icon-search"></i>
-                    </i>
-                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
-                     <model-list-select v-show="inputLigne == true"
-                  style="background-color: #fff; border: 2px solid #000"
-                  class="wide"
-                  :list="plans_activites"
-                  v-model="inputLigne1"
-                  option-value="id"
-                  option-text="code"
-                  placeholder="CODE ACTIVITE"
-                >
-                </model-list-select>
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                   
-                  >
-                   LIGNE BUDGETAIRE  
-                  
-                
-                  </th>
-                  <th id="taillecol"
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                      width :8%
-                      
-                    "
-                   
-                    
-                  >
-                  <i class="tailleIcone" @click="tribudgetinitial()" v-show="b_initial==1">
-                     <i class=" icon-filter"></i>
-                      </i>
-                    <span  @click="AfficheIconeBudgetInitial()" class="curseurEntete">BUDGET INITIAL</span>
-                     <i @click="InputMontantInitial" class="tailleIcone" v-show="b_initial==1">
-                     <i class=" icon-search"></i> 
-                      
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="montant_Initial" class="span" v-show="montantInitialdata == true"></money>
-                    
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      color: #000;
-                      font-weight: bold;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    " id="taillecol"
-                     
-                   
-                  >
-                  <i @click="trivariation()" class="tailleIcone" v-show="b_Modifier==1">
-                     <i class=" icon-filter"></i>
-                      </i>
-
-                       
-                     <money style="text-align:left;color:red" 
-                     v-model="montant_mofification" class="span" 
-                     v-show="montantmodificationdata == true"></money>
-                   <span  @click="AfficheIconeBudgetModifier()" class="curseurEntete">  MODIFICATION BUDGETAIRE</span>
-                     <i @click="InputMontantModif" class="tailleIcone" v-show="b_Modifier==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                  </th>
-                   
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      text-align: center;
-                      color: #000;
-                      background-color: #fbb203 !important;
-                      width :8%
-                    "
-                    id="taillecol"
-                    
-                  >
-                  <i @click="tribudgetactuel()" class="tailleIcone" v-show="b_Actuel==1">
-                     <i class=" icon-filter"></i>
-                      </i>
-
-                      
-                     <money style="text-align:left;color:red" 
-                     v-model="Budget_Actuel" class="span" 
-                     v-show="InputBudgetActueldata == true"></money>
-                  <span  @click="AfficheIconeBudgetActuel()" class="curseurEntete">BUDGET ACTUEL</span>
- <i @click="InputBudgetActuel" class="tailleIcone"  v-show="b_Actuel==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    id="taillecol"
-                   
-                  >
-                  <i @click="trimontantexecute()" class="tailleIcone" v-show="b_Execute==1">
-                     <i class=" icon-filter"></i>
-                      </i>
-
-                     
-                     <money style="text-align:left;color:red" 
-                     v-model="Montant_Execute" class="span" 
-                     v-show="InputMontantExecutedata == true"></money>
-                <span  @click="AfficheIconeBudgetExecuter()" class="curseurEntete">  MONTANT EXECUTE</span>
-                   <i @click="InputMontantExecute" class="tailleIcone" v-show="b_Execute==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    
-                  >
-                  <i @click="triNBOpProNonRegu()" class="tailleIcone" v-show="b_OpNonRegularise==1">
-                     <i class=" icon-filter"></i>
-                      </i> 
-
-                       
-                     <money style="text-align:left;color:red" 
-                     v-model="Nbre_OpProvNon_REgu" class="span" 
-                     v-show="InputNbreOpProvNonREgudata == true"></money>
-                 <span  @click="AfficheIconeOpNonRegularise()" class="curseurEntete">   NB OP PROVISOIRE NON REGULARISE(S)</span>
-
-                     <i @click="InputNbreOpProvNonREgu" class="tailleIcone" v-show="b_OpNonRegularise==1"> 
-                     <i class=" icon-search"></i> 
-                    </i>
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    id="taillecol"
-                     
-                  >
-                  <i @click="triMontantOpProNonRegu()" class="tailleIcone" v-show="b_MontantOpNonRegularise==1">
-                     <i class=" icon-filter"></i>
-                      </i>
-
-                      
-                     <money style="text-align:left;color:red" 
-                     v-model="Montant_Op_ProvNon_Reg" class="span" 
-                     v-show="InputMontantOpProvNonRegdata == true"></money>
-                  <span  @click="AfficheIconeMontantOpNonRegularise()" class="curseurEntete">  MONTANT OP PROVISOIRE NON REGULARISE </span>
- <i @click="InputMontantOpProvNonReg" class="tailleIcone" v-show="b_MontantOpNonRegularise==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                     
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  NATURE DEPENSE
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  PROCEDURE DE MARCHE
-                  </th>
-                   <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    ">
-                  STATUT DE LA LIGNE
-                  </th>
-                 
- 
-                     
-                   <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    
-                  >
-                  <i @click="triNBMarcheExecution()" class="tailleIcone" v-show="b_MarcheExecution==1">
-                     <i class=" icon-filter"></i>
-                      </i> 
-
-                      
-                     <money style="text-align:left;color:red" 
-                     v-model="NombreMarcheExecution" class="span" 
-                     v-show="InputNbreMarcheEnCoursExecutiondata == true"></money>
-                      <span  @click="AfficheIconeMarcheExecution()" class="curseurEntete">       NB MARCHE EN COURS EXECUTION</span>
-
-                      <i @click="InputNbreMarcheEnCoursExecution" class="tailleIcone" v-show="b_MarcheExecution==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                  </th>
-                   
-
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                   
-                  >
-                  <i @click="triTauxExecution()" class="tailleIcone" v-show="b_TauxExecution==1">
-                     <i class=" icon-filter"></i> 
-                    </i>
-
-                     
-                     <money style="text-align:left;color:red" 
-                     v-model="Taux_Execution" class="span" 
-                     v-show="InputTauxExecutiondata == true"></money>
-                   <span  @click="AfficheIconeTauxExecution()" class="curseurEntete"> TAUX D'EXECUTION </span>
-<i @click="InputTauxExecution" class="tailleIcone" v-show="b_TauxExecution==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                     
-                  </th>
-                  <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                    id="taillecol"
-                    
-                  >
-                  <i @click="triDisponible()" class="tailleIcone" v-show="b_Disponible==1">
-                     <i class=" icon-filter"></i> 
-                      </i>
-
-                      
-                     <money style="text-align:left;color:red" 
-                     v-model="Input_Disponible" class="span" 
-                     v-show="InputDisponibledata == true"></money>
-                   <span  @click="AfficheIconeDisponible()" class="curseurEntete">  DISPONIBLE</span>
- <i @click="InputDisponible" class="tailleIcone" v-show="b_Disponible==1">
-                     <i class=" icon-search"></i> 
-                    </i>
-                     </th>
-                  <!-- <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    EVOLUTION DU TAUX D’EXECUTION
-                  </th> -->
-                 
-                  
-                </tr>
-              </thead>
-         <tbody style="" v-for="ListeActivite in partition(FiltreLeTableauPrincipal, size)[page]"
-                :key="ListeActivite.id">
+            <tbody>
                 <tr>
-                  <td>
-                    <button @click="ShowMyLigne(ListeActivite.id)">
-                     <i class="icon-eye-open"></i> 
-                      
-                    </button>
-                    <button @click="ShowMyLigne(ListeActivite.id)">
-                      <i class=" icon-print"></i> 
-                      
-                    </button>
-                  </td>
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
-                    <b>{{ ListeActivite.libelle }}</b>
-                    
-                  </td>
-                 
-<td >
-                  
-                    
-                </td>
-                  
+                    <td>Centro comercial Moctezuma</td>
 
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                    style="text-align: right">
-                   <b> {{
-                      formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.MontantVote ))
-                     }} 
-                    </b>
-                  </td>
-
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" 
-                    style="text-align: right">
-                   
-                    {{
-                     formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.Variation))
-                     }} 
-                 
-                  </td>
-
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.Budgetactuel))
-                     }} 
-
-                  </td>
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                   <b> {{
-                      formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.MontantExecute))
-                     }}
-                    </b>
-                  </td>
-                                 <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
-                    <b>{{
-                      ListeActivite.NombreOpProvisoireNonRegu
-                    }}
-                    </b>
-                  </td>
-                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    <b>{{
-                      formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.MontantOpProvisoireNonRegu
-                        )
-                      )
-                    }}
-                    </b>
-                  </td>
-              
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                   <b> 
-                    </b>
-                  </td>
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                   <b> 
-                    </b>
-                  </td>
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                   <b>
-                    </b>
-                  </td>
-   
-                  <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'" >
-                    <b>{{
-                      ListeActivite.nombreMarcheParActivite
-                    }}
-                    </b>
-                  </td>
-                   
-                  
-                  
-                
-                   <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( ListeActivite.TauxExecution ) <= 25">
-                  {{ ListeActivite.TauxExecution }}
-               </td>
-<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( ListeActivite.TauxExecution ) <= 50">
-                  {{ ListeActivite.TauxExecution }}
-               </td>
-               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( ListeActivite.TauxExecution ) <= 75">
-                  {{ ListeActivite.TauxExecution }}
-               </td>
-                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( ListeActivite.TauxExecution ) <= 100">
-                  {{ ListeActivite.TauxExecution }}
-               </td>
-                   <td v-bind:class="recupereIDactivite==ListeActivite.id ? 'graybg' : 'whitebg'"
-                  style="text-align: right" >
-                    <!-- <b> -->
-                      {{
-                      formatageSommeSansFCFA(
-                        parseFloat(ListeActivite.Disponible))
-                    }}
-                   
-                  </td> 
-                 
-
-                  <!-- <td style="background-color:#009246 !important;">{{ LibelleGrandeNature(GroupeOrdrePaiementByActivit[0].grand_nature_id)}}</td>
-               -->
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
                 </tr>
 
+                 <tr>
+                    <td>Centro comercial Moctezuma</td>
 
-                  
-                   <tr class="odd gradeX" v-show="recupereIDactivite==ListeActivite.id"
-                  v-for="listeLigneeco in arrayExerciceDecompte2(ListeActivite.id)"
-                  :key="listeLigneeco"
-                >
-                  <td style="width:;color:#000" >
-                   
-
-                  </td>
-                   <td style="width:;color:#000" >
-                    <button>
-                     <i class=" icon-arrow-right"></i> 
-                      
-                    </button>
-
-                  </td>
-
-                  <td style="width: 500px;color:#000;" >
-                   
-                    {{ libelleLigneEconomique(listeLigneeco) }}
-
-                  </td>
-                  <td style="text-align: right;color:#000;" >
-                  
-                  
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActiviteInitial(listeLigneeco,
-                            ListeActivite.id
-                          )
-                        )
-                      )
-                    }}
-
-
-                  </td>
-
-                  <td style="text-align: right;color:#000;" >
-                   
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActiviteReamenager(listeLigneeco,
-                            ListeActivite.id
-                          )
-                        )
-                      )
-                    }}
-                  </td>
-
-                  <td style="text-align: right;color:#000;" >
-
-
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetActuelActivite(listeLigneeco,
-                            ListeActivite.id
-                          )
-                        )
-                      )
-                    }}
-
-
-                  </td>
-
-                  <td style="text-align: right;color:#000;">
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetExecutéActivite(listeLigneeco,ListeActivite.id)))
-                    }}
-                  </td>
-                   <td style="text-align: right;color:#000;" >
-                    {{ afficheOpNonRegulirise(listeLigneeco,ListeActivite.id) }}
-                  </td>
-                   <td style="text-align: right;color:#000;" >
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(
-                          MontantBudgetExecutéProvisoireActivite(listeLigneeco,ListeActivite.id)))
-                    }}
-                  </td>
-<td style="text-align: left;color:#000;">
-                    {{
-                     lielleGrandeNayure(GrandeNature(listeLigneeco))
-                    }}
-                  </td>
-                  <td style="text-align: left;color:#000;">
-                    {{
-                      afficheLeNomDesProcedure(listeLigneeco,ListeActivite.id)
-                    }}
-                  </td>
-                  <td style="text-align: left;color:#000;">
-                      <span v-if="listeLigneeco == CodeExempte(listeLigneeco)">Exemptée procedure</span>
-                         <span v-else></span>
-                   
-                  </td>
-                  
-                  <td style="text-align: right;color:#000;" >
-                    {{ NbreMarcheEnCoursParLigne(ListeActivite.id,listeLigneeco) }}
-                  </td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                </tr>
+            </tbody>
+		
+   </tr>
  
-                 
-     
-                  <!-- <td style="text-align: right;color:#000;">
-                    {{ EviteNaNLigne(listeLigneeco, ListeActivite.id)|| "Non renseigné" }}
-                  </td> -->
-  <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 25">
-                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
-               </td>
-<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 50">
-                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
-               </td>
-               <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 75">
-                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
-               </td>
-                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNLigne(listeLigneeco, ListeActivite.id) ) <= 100">
-                  {{ EviteNaNLigne(listeLigneeco, ListeActivite.id) }}
-               </td>
-             
-  <td style="text-align: right;color:#000;">
-
-
-                    {{
-                      formatageSommeSansFCFA(
-                        parseFloat(budgetDisponibleParLigne(listeLigneeco,ListeActivite.id)))
-                    }}
-                  </td>
-                 
-                 
-                
-                </tr>
-              
-              <!-- <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr> -->
-              </tbody>
-              <tfoot>
-                <tr style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000" > </td>
-                  <td colspan="" style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000"> </td>
-                  
-                  <td style="margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000">TOTAL ACTIVITE </td>
-                      
-
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantbudgetVote)) }}</td>
-
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantReamenagement)) }}</td>
-
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel)) }}</td>
-
-                  <td style="text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecuté)) }}</td>
-                  <td style="text-align: right;color:#000">{{ 0 }}</td>
-                            <td style="text-align: right;color:#000">{{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetExecutéProvisoire)) }}</td>
-<td style="text-align: right;color:#000"></td>
-<td style="text-align: right;color:#000"></td>
-<td style="text-align: right;color:#000"></td>
-        
-
-
-                
-                  <td style="text-align: right;color:#000">
-                   <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
-                   {{ TotalEviteNaN }}%
-                 </td>
-                 <td style="text-align: right;color:#000">{{ 0 }}</td>
-                    <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                    {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
-                  </td>
-                 <!-- <td style="text-align: center;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
-                  
-                
-                 </td> -->
-                 
-                
-                </tr>
-              </tfoot>
-            </table>
-    </div>
-
-     <div class="pagination alternate">
-      <ul>
-        <li :class="{ disabled: page == 0 }">
-          <a @click.prevent="precedent()" href="#">Précedent</a>
-        </li>
-        <li
-          v-for="(titre, index) in partition(FiltreLeTableauPrincipal, size).length"
-          :key="index"
-          :class="{ active: active_el == index }"
-        >
-          <a @click.prevent="getDataPaginate(index)" href="#">{{
-            index + 1
-          }}</a>
-        </li>
-        <li
-          :class="{ disabled: page == partition(FiltreLeTableauPrincipal, size).length - 1 }"
-        >
-          <a @click.prevent="suivant()" href="#">Suivant</a>
-        </li>
-      </ul>
-    </div>
-
-
-        
-    <!-- <fab
-      :actions="fabActions"
-      @searchMe="filter"
-      main-icon="apps"
-      bg-color="green"
-    ></fab> -->
-
-    
+		   
+	
+            
+  
+  
+</table>
   </div>
 </template>
   
@@ -810,11 +50,11 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSommeSansFCFA,formatageSomme } from "@/Repositories/Repository";
 import { partition } from "@/Repositories/Repository";
-import { ModelListSelect } from "vue-search-select";
-import "vue-search-select/dist/VueSearchSelect.css";
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    ModelListSelect,
+    //ModelListSelect,
   },
   name: "typetext",
   data() {
@@ -880,6 +120,7 @@ inputLigne:false,
       triTauxOpProNonRegudata:0,
       triDisponibledata:0,
       triTauxExecutiondata:0,
+      test:0,
       montantInitialdata:false,
       montantmodificationdata:false,
       InputBudgetActueldata:false,
@@ -1064,6 +305,21 @@ inputSelect:false,
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
       "sources_financements",
     ]),
+
+libelleNatueeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
     NbreMarcheParActivite(){
         return (id) => {
         if (id != null && id != "") {
@@ -2019,7 +1275,7 @@ inputSelect:false,
         let array_exercie = [];
         if (objet.length > 0) {
           objet.forEach(function (val) {
-            array_exercie.push(val.ligneeconomique_id);
+            array_exercie.push(val.grandenature_id);
           });
           let unique = [...new Set(array_exercie)];
          // console.log(unique);
@@ -2035,7 +1291,40 @@ inputSelect:false,
       };
     },
 
-    
+     GpeParNatureDepenseEtActivite() {
+      return (id,id1) => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            (qtreel) => qtreel.activite_id == id && qtreel.grandenature_id == id1
+          );
+        }
+      };
+    },
+   
+    GroupeParActiviteEtNatureDepense() {
+      return (id,id1) => {
+        //console.log(id);
+        if(id!=null && id !=0 && id !="" && id1!=null && id1 !=0 && id1 !=""){
+          let objet = this.GpeParNatureDepenseEtActivite(id,id1);
+          //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+         // console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+        }
+        
+        
+      };
+    },
 GrandeNature() {
       return (id) => {
         if (id != null && id != "") {
@@ -2080,6 +1369,18 @@ GrandeNature() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+AfficheIdNatureDepense(id) {
+  
+if(this.test==0){
+  this.test=id
+  
+     
+}else if(this.test!=0 && this.test !=id){
+        this.test=0;
+        this.test=id;
+        
+      }
+},
 
     // les recherches
 ActiveSelect(){

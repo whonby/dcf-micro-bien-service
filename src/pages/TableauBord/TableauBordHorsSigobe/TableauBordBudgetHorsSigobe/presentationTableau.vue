@@ -89,8 +89,8 @@
                     </li>
 
                      <!-- <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD7"
-                        >TABLEAU BORD 6</a
+                      <a data-toggle="tab" href="#TABLEAUBORD612"
+                        >TESTvUE</a
                       >
                     </li> -->
 
@@ -110,6 +110,11 @@
                 </div>
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
+                  <div id="TABLEAUBORD612" class="tab-pane " >
+                    <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
+                <vueTextTreeview></vueTextTreeview>
+                         
+                  </div>
                   <div id="TABLEAUBORD6" class="tab-pane " >
                     <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
                 <EtatExecutionBailleurSection></EtatExecutionBailleurSection>
@@ -201,8 +206,10 @@ import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBail
 import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
 import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
 import SituationExecutionBudgetaireParBailleurProjet from './SituationExecutionBudgetaireParBailleurProjet'
+import vueTextTreeview from './vueTextTreeview'
 export default {
      components: {
+       vueTextTreeview,
        EtatExecutionBailleurSection,
        SituationExecutionBudgetaireParBailleur,
        SituationExecutionBudgetaireParSection,
