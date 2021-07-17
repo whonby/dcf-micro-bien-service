@@ -119,9 +119,10 @@ recupereIDactivite
                   text-align: center;
                   color: #000;
                   background-color: #ddebf7 !important;
-                  width: 8%;
+                  
                 "
                 colspan="2"
+                 class="taillecol1"
               >
                 Planification (Avant Contractualisation)
               </th>
@@ -209,18 +210,37 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                   width: 8%;
                 "
-                colspan="2"
+                colspan=""
               >
 
-               <button @click="InputLibelleBailleur">
+               <!-- <button @click="InputLibelleBailleur">
                      <i class=" icon-search"></i> 
                     </button>
                      <money style="text-align:left;color:red" 
                      v-model="Libelle_bailleur" class="span" 
-                     v-show="InputLibelleBailleurdata == true"></money>
-                BAILLEUR/SECTION
+                     v-show="InputLibelleBailleurdata == true"></money> -->
+                BAILLEUR
               </th>
+ <th
+                style="
+                  font-size: 12px;
+                  font-weight: bold;
+                  text-align: center;
+                  color: #000;
+                  background-color: #e6e6e6 !important;
+                  width: 8%;
+                "
+                colspan=""
+              >
 
+               <!-- <button @click="InputLibelleBailleur">
+                     <i class=" icon-search"></i> 
+                    </button>
+                     <money style="text-align:left;color:red" 
+                     v-model="Libelle_bailleur" class="span" 
+                     v-show="InputLibelleBailleurdata == true"></money> -->
+               SECTION
+              </th>
               <th
                 style="
                   font-size: 12px;
@@ -231,13 +251,13 @@ recupereIDactivite
                   width: 8%;
                 "
               >
-               <button @click="Tri1()">
+               <i @click="Tri1()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                   &nbsp;&nbsp;
-                     <button @click="InputNombreTri1" > 
+                     <i @click="InputNombreTri1" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri1" class="span" 
                      v-show="InputNombreTri1data == true"></money>
@@ -251,14 +271,15 @@ recupereIDactivite
                   text-align: center;
                   background-color: #ddebf7 !important;
                 "
+                class="taillecol1"
               >
-              <button @click="Tri2()">
+              <i @click="Tri2()">
                      <i class=" icon-filter"></i> 
-              </button>
+              </i>
               
-              <button @click="InputMontantTri1" > 
+              <i @click="InputMontantTri1" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Montant_tri1" class="span" 
                      v-show="InputMontantTri1data == true"></money>
@@ -274,13 +295,13 @@ recupereIDactivite
                   background-color: #fff2cc !important;
                 "
               >
-              <button @click="Tri3()">
+              <i @click="Tri3()">
                      <i class=" icon-filter"></i> 
-                    </button><br>
+                    </i><br>
                     
-              <button @click="InputNombresTri1" > 
+              <i @click="InputNombresTri1" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombres_tri1" class="span" 
                      v-show="InputNombresTri1data == true"></money>
@@ -295,13 +316,13 @@ recupereIDactivite
                   background-color: #fff2cc !important;
                 "
               >
-              <button @click="Tri4()">
+              <i @click="Tri4()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                     
-              <button @click="InputMontantTri4" > 
+              <i @click="InputMontantTri4" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri4" class="span" 
                      v-show="InputNombreTri4data == true"></money>
@@ -317,13 +338,13 @@ recupereIDactivite
                   background-color: #c6e0b4 !important;
                 "
               >
-              <button @click="Tri5()">
+              <i @click="Tri5()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
 
-                    <button @click="InputMontantTri5" > 
+                    <i @click="InputMontantTri5" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri5" class="span" 
                      v-show="InputNombreTri5data == true"></money>
@@ -338,13 +359,13 @@ recupereIDactivite
                   background-color: #c6e0b4 !important;
                 "
               >
-              <button @click="Tri6()">
+              <i @click="Tri6()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
 
-                    <button @click="InputMontantTri6" > 
+                    <i @click="InputMontantTri6" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri6" class="span" 
                      v-show="InputNombreTri6data == true"></money>
@@ -359,13 +380,13 @@ recupereIDactivite
                   background-color: #fce4d6 !important;
                 "
               >
-              <button @click="Tri7()">
+              <i @click="Tri7()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
 
-                     <button @click="InputMontantTri7" > 
+                     <i @click="InputMontantTri7" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri7" class="span" 
                      v-show="InputNombreTri7data == true"></money>
@@ -380,13 +401,13 @@ recupereIDactivite
                   background-color: #fce4d6 !important;
                 "
               >
-              <button @click="Tri8()">
+              <i @click="Tri8()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
 
-                    <button @click="InputMontantTri8" > 
+                    <i @click="InputMontantTri8" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri8" class="span" 
                      v-show="InputNombreTri8data == true"></money>
@@ -402,12 +423,12 @@ recupereIDactivite
                   background-color: #fce4d6 !important;
                 "
               >
-              <button @click="Tri9()">
+              <i @click="Tri9()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                    <button @click="InputMontantTri9" > 
+                    </i>
+                    <i @click="InputMontantTri9" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri9" class="span" 
                      v-show="InputNombreTri9data == true"></money>
@@ -422,12 +443,12 @@ recupereIDactivite
                   background-color: #fce4d6 !important;
                 "
               >
-              <button @click="Tri10()">
+              <i @click="Tri10()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                   <button @click="InputMontantTri10" > 
+                    </i>
+                   <i @click="InputMontantTri10" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri10" class="span" 
                      v-show="InputNombreTri10data == true"></money>
@@ -442,12 +463,12 @@ recupereIDactivite
                   background-color: #b4c6e7 !important;
                 "
               >
-              <button @click="Tri11()">
+              <i @click="Tri11()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                    <button @click="InputMontantTri11" > 
+                    </i>
+                    <i @click="InputMontantTri11" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri11" class="span" 
                      v-show="InputNombreTri11data == true"></money>
@@ -462,12 +483,12 @@ recupereIDactivite
                   background-color: #b4c6e7 !important;
                 "
               >
-              <button @click="Tri12()">
+              <i @click="Tri12()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                    <button @click="InputMontantTri12" > 
+                    </i>
+                    <i @click="InputMontantTri12" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri12" class="span" 
                      v-show="InputNombreTri12data == true"></money>
@@ -482,12 +503,12 @@ recupereIDactivite
                   background-color: #b4c6e7 !important;
                 "
               >
-              <button @click="Tri13()">
+              <i @click="Tri13()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                    <button @click="InputMontantTri13" > 
+                    </i>
+                    <i @click="InputMontantTri13" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri13" class="span" 
                      v-show="InputNombreTri13data == true"></money>
@@ -502,13 +523,13 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                 "
               >
-              <button @click="Tri14()">
+              <i @click="Tri14()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
 
-                     <button @click="InputMontantTri14" > 
+                     <i @click="InputMontantTri14" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri14" class="span" 
                      v-show="InputNombreTri14data == true"></money>
@@ -523,12 +544,12 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                 "
               >
-              <button @click="Tri15()">
+              <i @click="Tri15()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                     <button @click="InputMontantTri15" > 
+                    </i>
+                     <i @click="InputMontantTri15" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri15" class="span" 
                      v-show="InputNombreTri15data == true"></money>
@@ -543,12 +564,12 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                 "
               >
-              <button @click="Tri16()">
+              <i @click="Tri16()">
                      <i class=" icon-filter"></i> 
-                    </button>
-                     <button @click="InputMontantTri16" > 
+                    </i>
+                     <i @click="InputMontantTri16" > 
                      <i class=" icon-search"></i> 
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red" 
                      v-model="Nombre_tri16" class="span" 
                      v-show="InputNombreTri16data == true"></money>
@@ -577,7 +598,7 @@ recupereIDactivite
                     ? 'graybg'
                     : 'whitebg'
                 "
-                colspan="2"
+                colspan=""
               >
                 {{ GroupeSourceFinancement.libellebailleur }}
                 <span style="font-size: 15px"
@@ -586,13 +607,18 @@ recupereIDactivite
                   }})</span
                 >
               </td>
+              <td  v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "></td>
               <td style="text-align: right"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
               >
                 {{ GroupeSourceFinancement.NombrePlani }}
               </td>
 
-              <td style="text-align: right"
+              <td style="text-align: right"  class="taillecol1"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
               >
                 {{
@@ -3673,7 +3699,7 @@ export default {
 }
 
 .whitebg {
-  background: #98fb98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 15px;
@@ -3713,5 +3739,9 @@ th {
   color: #000 !important;
   text-align: center !important;
   background-color: #fbb203 !important;
+}
+#taillecol1{
+    width: 1000%;
+    text-align:right
 }
 </style>

@@ -145,10 +145,10 @@
                   background-color: #fbb203 !important;
                 "
               >
-                ACTIVITE/BAILLEUR 
-                <button @click="ActiveInputLigne">
+                ACTIVITE
+                <i @click="ActiveInputLigne">
                   <i class="icon-search"></i>
-                </button>
+                </i>
                 <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
                 <model-list-select
                   v-show="inputLigne == true"
@@ -162,7 +162,17 @@
                 >
                 </model-list-select>
               </th>
-
+<th
+                style="
+                  font-size: 14px;
+                  color: #000;
+                  font-weight: bold;
+                  background-color: #fbb203 !important;
+                "
+              >
+                BAILLEUR 
+               
+              </th>
               <th
                 style="
                   font-size: 14px;
@@ -172,15 +182,15 @@
                 "
                 id="taillecol"
               >
-               <button @click="TriEnOrdreMontantInitial()">
+               <i @click="TriEnOrdreMontantInitial()">
                      <i class=" icon-filter"></i> 
                       
-                    </button>
+                    </i>
                 BUDGET INITIAL 
-                <button @click="InputMontantInitial">
+                <i @click="InputMontantInitial">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="montant_InitialAb" class="span" v-show="activeMontantInitial == true"></money>
                  
               </th>
@@ -193,15 +203,15 @@
                 "
                 id="taillecol"
               >
-            <button @click="TriEnOrdreMontantReamenagement()">
+            <i @click="TriEnOrdreMontantReamenagement()">
                      <i class=" icon-filter"></i> 
                       
-                    </button>
+                    </i>
                 MODIFICATION BUDGETAIRE 
-                 <button @click="InputMontantReamenagement">
+                 <i @click="InputMontantReamenagement">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="montant_reamenagement" class="span" v-show="activeMontantReamenagement == true"></money>
                  
               </th>
@@ -214,14 +224,14 @@
                 "
                 id="taillecol"
               >
-               <button @click="TriEnOrdreMontantActuelle()">
+               <i @click="TriEnOrdreMontantActuelle()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                 BUDGET ACTUEL 
-                <button @click="InputMontantActuelle">
+                <i @click="InputMontantActuelle">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="montant_Actuel" class="span" v-show="activeMontantActuelle == true"></money>
                  
               </th>
@@ -234,14 +244,14 @@
                 "
                 id="taillecol"
               >
-                <button @click="TriEnOrdreMontantExecution()">
+                <i @click="TriEnOrdreMontantExecution()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                 MONTANT EXECUTE 
-                 <button @click="InputMontantExecution">
+                 <i @click="InputMontantExecution">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="montant_execute" class="span" v-show="activeMontantExecution == true"></money>
                  
               </th>
@@ -256,14 +266,14 @@
                 "
                 id="taillecol"
               >
-               <button @click="TriEnOrdreMontantOpNonRegularisen()">
+               <i @click="TriEnOrdreMontantOpNonRegularisen()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                 MONTANT OP PROVISOIRE NON REGULARISE 
-                <button @click="InputMontantOpNonRegularise">
+                <i @click="InputMontantOpNonRegularise">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="montant_op_non_regularise" class="span" v-show="activeMontantMontantOpNonRegularise == true"></money>
                  
               </th>
@@ -277,14 +287,14 @@
                   background-color: #fbb203 !important;
                 "
               >
-               <button @click="TriEnOrdreNbreOpNonRegularise()">
+               <i @click="TriEnOrdreNbreOpNonRegularise()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                 NB OP PROVISOIRE NON REGULARISE(S) 
-                <button @click="InputNbreOpNonRegularise">
+                <i @click="InputNbreOpNonRegularise">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="nombre_op_non_regularise" class="span" v-show="activeNbreOpNonRegularise == true"></money>
                  
               </th>
@@ -298,14 +308,14 @@
                   background-color: #fbb203 !important;
                 "
               >
-               <button @click="TriEnOrdreTauxExecution()">
+               <i @click="TriEnOrdreTauxExecution()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                 TAUX D'EXECUTION(%) 
-                 <button @click="InputTauxExecution">
+                 <i @click="InputTauxExecution">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                     
                  <input style="text-align:left;color:red" type="text" v-model="taux_execution" v-show="activeTauxExecution == true" class="span"/>
               </th>
@@ -319,14 +329,14 @@
                 "
                 id="taillecol"
               >
-              <button @click="TriEnOrdreDisponible()">
+              <i @click="TriEnOrdreDisponible()">
                      <i class=" icon-filter"></i> 
-                    </button>
+                    </i>
                 DISPONIBLE 
-                 <button @click="InputMontantDisponible">
+                 <i @click="InputMontantDisponible">
                      <i class=" icon-search"></i> 
                       
-                    </button>
+                    </i>
                      <money style="text-align:left;color:red"   v-model="montant_disponible" class="span" v-show="activeMontantDisponible == true"></money>
                  
               </th>
@@ -363,6 +373,7 @@
                   GroupeOrdrePaiementByActivit.libelle
                 }}
               </td>
+              <td></td>
               <td
                  v-bind:class=" recupereIDactivite ==
                   GroupeOrdrePaiementByActivit.id ? 'graybg': 'whitebg'"
@@ -490,6 +501,7 @@
               :key="ListepaimentBailleur"
             >
               <td></td>
+               <td></td>
               <td>
                    <button>
                      <i class=" icon-arrow-right"></i> 
@@ -631,7 +643,7 @@
               >
                 TOTAL ACTIVITE
               </td>
-
+ <td></td>
               <td
                 style="
                   text-align: center;
