@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <input  type="hidden" :value="triPar_NumeroDordre"/>
     <table class="table table-bordered table-striped">
           <tr>
             <td>
@@ -196,7 +197,19 @@
                    
                   </th>
                    <th>
-                   NUMERO D'ORDRE 
+                  
+                     <button @click="TriParNumeroDordre()">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                      <button @click="InputMontantContratMarche">
+                       <i class=" icon-search"></i> 
+                                          
+                       </button>
+                        <money style="text-align:left;color:red" 
+                        v-model="numeroMarcheOdre" class="span"
+                      v-show="activeNumeroOdreMarche == true"></money>
+                       NUMERO D'ORDRE 
                   </th>
                    
                   <th
@@ -620,6 +633,10 @@ export default {
   name: "typetext",
   data() {
     return {
+      activeNumeroOdreMarche:false,
+      numeroMarcheOdre:0,
+
+      triPar_NumeroDordre:0,
       page: 0,
       size:10,
       active_el: 0,
@@ -755,12 +772,40 @@ editMandat:{},
       noDCfNoAdmin:noDCfNoAdmin,
 
 
+    //    TriParSyntheseMarche(){
+    //     let vm=this 
+    //   return this.ListeMarcheParTypeMarche.map(function (value) {
+    //     let objet = {
+    //       id:value[0].GroupeSection,
+    //       numeroOdre:vm.NumeroOrdreMarche(value[0].GroupeSection),
+    //       numero_Marche:vm.NumeroMarche(value[0].GroupeSection),
+    //       libelle_marche:vm.LibelleMarche(value[0].GroupeSection),
+    //       libelle_entreprise:vm.LibelleEntreprise(EntrepriseMarche(value[0].GroupeSection)),
+    //       duree_marche:vm.DureMarche(value[0].GroupeSection),
+    //       nombre_bailleur:vm.NombreBailler(value[0].GroupeSection),
+    //       imputation_budgetaire:vm.ImputationMarche(value[0].GroupeSection),
+    //       montant_budget:vm.MontantBudgetaire(value[0].GroupeSection),
+    //       montant_reel_marche:vm.MontantReelMarche(value[0].GroupeSection),
+    //       taux_avenantMarche:vm.TauxAvenantParMarche(value[0].GroupeSection),
+    //       montant_avenantMarche:vm.montantAvenantParMarche(value[0].GroupeSection),
+    //       nombre_avenant:vm.NombreAvenant(value[0].GroupeSection),
+    //       montant_globalMarche:vm.AfficheMontantgbobalMarche(value[0].GroupeSection),
+    //       montant_executeMarche:vm.MontantExecuteMarche(value[0].GroupeSection),
+    //       monatnt_disponibleMarche:vm.DisponibleMarche(value[0].GroupeSection),
+    //       taux_excution:vm.TauxExecution(value[0].GroupeSection),
+          
+          
+    //     };
+    //     return objet;
+    //   });
+    
+    // },
+
+
 affichePartBailleur() {
       return id => {
         if (id != null && id != "") {
            return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id);
-
-     
         }
       };
     },
@@ -1144,7 +1189,26 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
 
 
 
+TriParNumeroDordre(){
+      if(this.triPar_NumeroDordre==0){
+        this.triPar_NumeroDordre=1;
+        return this.TriParSyntheseMarche.sort(function(a,b){return a.numeroOdre-b.numeroOdre});
+        
+      }else{
+        this.triPar_NumeroDordre=0;
+        return this.TriParSyntheseMarche.sort(function(a,b){return b.numeroOdre-a.numeroOdre});
+      }
+      
+    },
 
+     InputMontantContratMarche(){
+      if(this.activeNumeroOdreMarche == false){
+        this.activeNumeroOdreMarche = true
+      }else{
+        this.activeNumeroOdreMarche = false;
+        this.numeroMarcheOdre = 0;
+      }
+ },
 
   
 TauxExecution(id) {
