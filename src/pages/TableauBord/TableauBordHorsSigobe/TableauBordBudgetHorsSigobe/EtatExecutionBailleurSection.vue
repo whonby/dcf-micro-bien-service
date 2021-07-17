@@ -8,6 +8,9 @@
     <input type="hidden" :value="triMontantExecutiondata" />
     <input type="hidden" :value="triDisponibledata" />
     <input type="hidden" :value="triMarcheEnCoursdata" />
+    <input type="hidden" :value="triNombreOpNonRegulirisedata" />
+    <input type="hidden" :value="triMontantOpNonRegulirisedata" />
+    <input type="hidden" :value="triTauxExecutiondata" />
 
     <table class="table table-striped">
       <tbody>
@@ -75,9 +78,8 @@
               <th></th>
 
               <th>
-                <button @click="InputLibelleBailleur">
-                  <i class="icon-search"></i>
-                </button>
+
+                  <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
                 <money
                   style="text-align: left; color: red"
                   v-model="Libelle_bailleur"
@@ -87,32 +89,28 @@
                 BAILLEUR/SECTION
               </th>
 
-              <th
+              <th id="taillecol"
                 style="
                   font-size: 12px;
                   font-weight: bold;
                   text-align: center;
                   color: #000;
                   background-color: #fbb203 !important;
-                  width: 8%;
                 "
               >
-                <button @click="triBudgetInitial()">
-                  <i class="icon-filter"></i>
-                </button>
-
-                <button @click="InputBudgetInitial">
-                  <i class="icon-search"></i>
-                </button>
+              
+                  <i id="style1" @click="triBudgetInitial()" class="icon-filter"></i>
+                BUDGET INITIAL (FCFA)
+                  <i id="style1" @click="InputBudgetInitial" class="icon-search"></i>
+               
                 <money
                   style="text-align: left; color: red"
                   v-model="Budget_Initial"
                   class="span"
                   v-show="InputBudgetInitialdata == true"
                 ></money>
-                BUDGET INITIAL (FCFA)
               </th>
-              <th
+              <th id="taillecol"
                 style="
                   font-size: 12px;
                   font-weight: bold;
@@ -121,23 +119,21 @@
                   background-color: #fbb203 !important;
                 "
               >
-                <button @click="trivariation()">
-                  <i class="icon-filter"></i>
-                </button>
-
-                <button @click="InputVariation">
-                  <i class="icon-search"></i>
-                </button>
+              
+                  <i id="style1" @click="trivariation()" class="icon-filter"></i>
+               
+                MODIFICATION BUDGETAIRE (FCFA)
+                  <i id="style1" @click="InputVariation" class="icon-search"></i>
+            
                 <money
                   style="text-align: left; color: red"
                   v-model="Input_Variation"
                   class="span"
                   v-show="InputVariationdata == true"
                 ></money>
-                MODIFICATION BUDGETAIRE (FCFA)
               </th>
 
-              <th
+              <th id="taillecol"
                 style="
                   font-size: 12px;
                   font-weight: bold;
@@ -146,22 +142,19 @@
                   background-color: #fbb203 !important;
                 "
               >
-                <button @click="triBudgetActuel()">
-                  <i class="icon-filter"></i>
-                </button>
 
-                <button @click="InputBudgetActuel">
-                  <i class="icon-search"></i>
-                </button>
+                  <i id="style1" @click="triBudgetActuel()" class="icon-filter"></i>
+                
+                BUDGET ACTUEL (FCFA)
+                <i id="style1" @click="InputBudgetActuel" class="icon-search"></i>
                 <money
                   style="text-align: left; color: red"
                   v-model="Budget_Actuel"
                   class="span"
                   v-show="InputBudgetActueldata == true"
                 ></money>
-                BUDGET ACTUEL (FCFA)
               </th>
-              <th
+              <th id="taillecol"
                 style="
                   font-size: 12px;
                   font-weight: bold;
@@ -170,23 +163,81 @@
                   background-color: #fbb203 !important;
                 "
               >
-                <button @click="triMontantExecution()">
-                  <i class="icon-filter"></i>
-                </button>
+                  <i id="style1" @click="triMontantExecution()" class="icon-filter"></i>
 
-                <button @click="InputMontantExecute">
-                  <i class="icon-search"></i>
-                </button>
+                MONTANTS EXECUTES (FCFA)
+                <i id="style1" @click="InputMontantExecute" class="icon-search"></i>
+
                 <money
                   style="text-align: left; color: red"
                   v-model="Montant_Execute"
                   class="span"
                   v-show="InputMontantExecutedata == true"
                 ></money>
-                MONTANTS EXECUTES (FCFA)
               </th>
 
-              <th
+
+
+              <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE NON REGULARISE(S)">
+
+                     <i id="style1" @click="triNombreOpNonRegulirise()" class=" icon-filter"></i> 
+                  NBRE OP NON REGULARISE(S)
+
+                     <i id="style1" @click="ActiveInputNombreOpNonProvisoireRegulirise" class=" icon-search"></i> 
+                    <money style="text-align:left;color:red" 
+                    v-model="Nombre_Op_Non_Regulirise" class="span"
+                     v-show="inputNombreOpNonRegulirise == true"></money>
+                 
+                  </th>
+
+                <th  id="taillecol" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" title="NBRE OP PROVISOIRE REGULARISE(S)">
+
+                     <i id="style1"  @click="triMontantOpNonRegulirise()" class=" icon-filter"></i> 
+
+                  MONTANT OP NON REGULARISE
+                     <i id="style1" @click="ActiveInputmONTANTOpNonProvisoireRegulirise" class=" icon-search"></i> 
+
+                    <money style="text-align:left;color:red"
+                     v-model="MONTANT_Op_NON_Regulirise" class="span"
+                      v-show="inputMontantOpNonRegulirise == true"></money>
+                 
+                  </th>
+
+             
+              <th>
+
+                  <i  id="style1" @click="triMarcheEnCours()" class="icon-filter"></i>
+                NOMBRE DE MARCHE EN COURS
+                <i id="style1" @click="InputNbreMarche" class="icon-search"></i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nbre_Marche"
+                  class="span"
+                  v-show="InputNbreMarchedata == true"
+                ></money>
+              </th>
+
+
+               <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+
+                     <i id="style1" @click="triTauxExecution()"  class=" icon-filter"></i> 
+                      
+                  TAUX D'EXECUTION </th>
+
+
+               <th id="taillecol"
                 style="
                   font-size: 12px;
                   font-weight: bold;
@@ -195,36 +246,16 @@
                   background-color: #fbb203 !important;
                 "
               >
-                <button @click="triDisponible()">
-                  <i class="icon-filter"></i>
-                </button>
 
-                <button @click="InputDisponible">
-                  <i class="icon-search"></i>
-                </button>
+                  <i id="style1" @click="triDisponible()" class="icon-filter"></i>
+                DISPONIBLE (FCFA)
+                 <i id="style1" @click="InputDisponible" class="icon-search"></i>
                 <money
                   style="text-align: left; color: red"
                   v-model="Input_Disponible"
                   class="span"
                   v-show="InputDisponibledata == true"
                 ></money>
-                DISPONIBLE (FCFA)
-              </th>
-              <th>
-                <button @click="triMarcheEnCours()">
-                  <i class="icon-filter"></i>
-                </button>
-
-                <button @click="InputNbreMarche">
-                  <i class="icon-search"></i>
-                </button>
-                <money
-                  style="text-align: left; color: red"
-                  v-model="Nbre_Marche"
-                  class="span"
-                  v-show="InputNbreMarchedata == true"
-                ></money>
-                NOMBRE DE MARCHE EN COURS
               </th>
             </tr>
           </thead>
@@ -254,8 +285,7 @@
               >
                 {{ GroupeSourceFinancement.libelle }}
               </td>
-              <td
-                style="width: 100% !important"
+              <td style="text-align:right"
                 v-bind:class="
                   recupereIDactivite == GroupeSourceFinancement.id
                     ? 'graybg'
@@ -278,12 +308,27 @@
                 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
                   {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.MontantExecute)) }}
                 </td>
+
                 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
-                   {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.Disponible )) }}
-                </td> 
+                  {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.NomBreoPnonREgu)) }}
+                </td>
+
+                <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                  {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.MONTANToPnonREgu)) }}
+                </td>
+               
+                
                 <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
                    {{ GroupeSourceFinancement.MarcheEnCours }}
                 </td>
+                 <td style="text-align:center;background-color: red !important;color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{ GroupeSourceFinancement.TauxExecution }}%
+                </td>
+
+                <td style="text-align:right" v-bind:class="recupereIDactivite==GroupeSourceFinancement.id ? 'graybg' : 'whitebg'"  colspan="">
+                   {{ formatageSommeSansFCFA(parseFloat(GroupeSourceFinancement.Disponible )) }}
+                </td> 
                      
                 </tr>
 
@@ -306,11 +351,18 @@
               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(AfficheVariationBudget(GroupeSourceFinancement.id,GroupeUa)))}}</td>
               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantActuelleParSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantBudgetExecutéSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
-              <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement.id,GroupeUa)))}}</td>
+             
+              <td>{{ NombreOPNonReguSection(GroupeSourceFinancement.id,GroupeUa) }}</td>
+               <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantOPNonReguSection(GroupeSourceFinancement.id,GroupeUa)))}}</td>
               <td style="text-align:right">
                 {{MarcheEnCoursParSection(GroupeSourceFinancement.id,GroupeUa)}}
                 
                 </td>
+               <td style="text-align:center;background-color: red !important;color:#000;font-weight: bold; font-size: 12px"
+                >
+                  {{EviteNaNSection(GroupeSourceFinancement.id,GroupeUa)}}</td>
+
+                <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(MontantDisponibleParSectionB(GroupeSourceFinancement.id,GroupeUa)))}}</td>
               
                 
                 
@@ -399,7 +451,10 @@ export default {
       trivariationdata: 0,
       triBudgetActueldata: 0,
       triMontantExecutiondata: 0,
+      triNombreOpNonRegulirisedata:0,
+      triMontantOpNonRegulirisedata:0,
       triDisponibledata: 0,
+      triTauxExecutiondata:0,
       triMarcheEnCoursdata: 0,
 
       InputLibelleBailleurdata: false,
@@ -407,6 +462,8 @@ export default {
       InputVariationdata: false,
       InputBudgetActueldata: false,
       InputMontantExecutedata: false,
+      inputNombreOpNonRegulirise:false,
+      inputMontantOpNonRegulirise:false,
       InputDisponibledata: false,
       InputNbreMarchedata: false,
       Libelle_bailleur: 0,
@@ -414,6 +471,8 @@ export default {
       Input_Variation: 0,
       Budget_Actuel: 0,
       Montant_Execute: 0,
+      Nombre_Op_Non_Regulirise:0,
+      MONTANT_Op_NON_Regulirise:0,
       Input_Disponible: 0,
       Nbre_Marche: 0,
     };
@@ -541,6 +600,9 @@ export default {
           MontantExecute: vm.MontantBudgetExecuté1Bailleur(
             value[0].source_financement_id
           ),
+          MONTANToPnonREgu:vm.MontantOPNonRegu(value[0].source_financement_id),
+          NomBreoPnonREgu:vm.NombreOPNonRegu(value[0].source_financement_id),
+          TauxExecution:vm.EviteNaN(value[0].source_financement_id),
           Disponible: vm.DisponibleBailleur(value[0].source_financement_id),
           MarcheEnCours: vm.MarcheEnCoursbailleur(
             value[0].source_financement_id
@@ -565,12 +627,18 @@ export default {
         );
       } else if (this.Budget_Actuel != 0) {
         return this.TriaffichageUniteAdminstrative.filter(
-          (item) => item.Budgetactuel == this.Budget_Actuel
-        );
+          (item) => item.Budgetactuel == this.Budget_Actuel);
       } else if (this.Montant_Execute != 0) {
         return this.TriaffichageUniteAdminstrative.filter(
-          (item) => item.MontantExecute == this.Montant_Execute
-        );
+          (item) => item.MontantExecute == this.Montant_Execute);
+      }
+      else if (this.MONTANT_Op_NON_Regulirise != 0) {
+        return this.TriaffichageUniteAdminstrative.filter(
+          (item) => item.MONTANToPnonREgu == this.MONTANT_Op_NON_Regulirise);
+      }
+      else if (this.Nombre_Op_Non_Regulirise != 0) {
+        return this.TriaffichageUniteAdminstrative.filter(
+          (item) => item.NomBreoPnonREgu == this.Nombre_Op_Non_Regulirise);
       } else if (this.Input_Disponible != 0) {
         return this.TriaffichageUniteAdminstrative.filter(
           (item) => item.Disponible == this.Input_Disponible
@@ -582,6 +650,38 @@ export default {
       } else {
         return this.TriaffichageUniteAdminstrative;
       }
+    },
+
+
+    
+     MontantOPNonRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.	source_financement_id == id && qtreel.diff_reg_op != 1 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);   
+        }
+      };
+    },
+
+      NombreOPNonRegu() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.	source_financement_id == id && qtreel.diff_reg_op != 1 && qtreel.type_ordre_paiement==2 && qtreel.exercice==this.afficheAnnee
+            ).length  
+        }
+        return 0;
+      };
     },
 
     BudgetInitial() {
@@ -1502,6 +1602,45 @@ export default {
       };
     },
 
+
+
+     MontantOPNonReguSection() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                 qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                 qtreel.diff_reg_op != 1 && qtreel.type_ordre_paiement==2 &&
+                  qtreel.exercice==this.afficheAnnee
+            ).reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
+              0
+            )
+            .toFixed(0);   
+        }
+      };
+    },
+
+
+    
+     NombreOPNonReguSection() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+          return this.gettersgestionOrdrePaiement
+            .filter(
+              (qtreel) =>
+                qtreel.source_financement_id == id && qtreel.section_id == id1 &&
+                 qtreel.diff_reg_op != 1 && qtreel.type_ordre_paiement==2 &&
+                  qtreel.exercice==this.afficheAnnee
+            ).length
+        }
+      };
+    },
+
+
+
     MontantBudgetExecutéSection() {
       return (id1, id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
@@ -1665,6 +1804,24 @@ export default {
       }
     },
 
+    ActiveInputNombreOpNonProvisoireRegulirise(){
+      if (this.inputNombreOpNonRegulirise == false) {
+        this.inputNombreOpNonRegulirise = true;
+      } else {
+        this.inputNombreOpNonRegulirise = false;
+        this.Nombre_Op_Non_Regulirise = 0;
+      }
+    },
+
+    ActiveInputmONTANTOpNonProvisoireRegulirise(){
+      if (this.inputMontantOpNonRegulirise == false) {
+        this.inputMontantOpNonRegulirise = true;
+      } else {
+        this.inputMontantOpNonRegulirise = false;
+        this.MONTANT_Op_NON_Regulirise = 0;
+      }
+    },
+
     InputDisponible() {
       if (this.InputDisponibledata == false) {
         this.InputDisponibledata = true;
@@ -1753,7 +1910,49 @@ export default {
       }
     },
 
+    triMontantOpNonRegulirise(){
+         if (this.triMontantOpNonRegulirisedata == 0) {
+        this.triMontantOpNonRegulirisedata = 1;
+        return this.TriaffichageUniteAdminstrative.sort(function (a, b) {
+          return a.NomBreoPnonREgu - b.NomBreoPnonREgu;
+        });
+      } else {
+        this.triMontantOpNonRegulirisedata = 0;
+        return this.TriaffichageUniteAdminstrative.sort(function (a, b) {
+          return b.NomBreoPnonREgu - a.NomBreoPnonREgu;
+        });
+      }
+    },
+
+
+      triNombreOpNonRegulirise(){
+         if (this.triNombreOpNonRegulirisedata == 0) {
+        this.triNombreOpNonRegulirisedata = 1;
+        return this.TriaffichageUniteAdminstrative.sort(function (a, b) {
+          return a.MONTANToPnonREgu - b.MONTANToPnonREgu;
+        });
+      } else {
+        this.triNombreOpNonRegulirisedata = 0;
+        return this.TriaffichageUniteAdminstrative.sort(function (a, b) {
+          return b.MONTANToPnonREgu - a.MONTANToPnonREgu;
+        });
+      }
+    },
+
     //new
+    triTauxExecution(){
+         if (this.triTauxExecutiondata == 0) {
+        this.triTauxExecutiondata = 1;
+        return this.TriaffichageUniteAdminstrative.sort(function (a, b) {
+          return a.TauxExecution - b.TauxExecution;
+        });
+      } else {
+        this.triTauxExecutiondata = 0;
+        return this.TriaffichageUniteAdminstrative.sort(function (a, b) {
+          return b.TauxExecution - a.TauxExecution;
+        });
+      }
+    },
 
     triDisponible() {
       if (this.triDisponibledata == 0) {
@@ -1895,16 +2094,16 @@ export default {
       }
     },
 
-    EviteNaNLigne(id, id1) {
+    EviteNaNSection(id, id1) {
       if (
-        this.MontantBudgetExecutéActivite(id, id1) == 0 &&
-        this.MontantBudgetActuelActivite(id, id1) == 0
+        this.MontantBudgetExecutéSection(id, id1) == 0 &&
+        this.MontantActuelleParSection(id, id1) == 0
       ) {
         return 0.0;
       } else {
         return (
-          (parseFloat(this.MontantBudgetExecutéActivite(id, id1)) /
-            parseFloat(this.MontantBudgetActuelActivite(id, id1))) *
+          (parseFloat(this.MontantBudgetExecutéSection(id, id1)) /
+            parseFloat(this.MontantActuelleParSection(id, id1))) *
           100
         ).toFixed(2);
       }
@@ -2008,6 +2207,13 @@ export default {
 
 .modal-body {
   max-height: 85%;
+}
+#taillecol{
+    width: 140px !important;
+    text-align:right !important;
+}
+#style1{
+font-size: 20px !important;
 }
 th {
   font-size: 13px !important;

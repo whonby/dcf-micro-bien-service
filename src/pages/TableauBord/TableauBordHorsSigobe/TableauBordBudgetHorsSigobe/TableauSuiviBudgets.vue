@@ -645,23 +645,7 @@
                   text-align: center;
                   background-color: #fbb203 !important;" title="TAUX D’OP PROVISOIRE NON REGULARISE HORS DELAI ">
                   TAUX OP NON REGULARISE HORS DELAI </th> -->
-                <th id="taillecol" style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;">
-                  
-                     <i id="style1" @click="triBudgetDispoble()" class=" icon-filter"></i> 
-                      
-                 DISPONIBLE
-                     <i id="style1" @click="ActiveInputMontantDisponble" class=" icon-search"></i> 
-                      
-                     <money style="text-align:left;color:red" 
-                     v-model="montant_disponible" class="span" 
-                     v-show="inputMontantDisponible == true"></money>
-                 
-                  
-                  </th>
+              
 
                   <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
@@ -689,9 +673,25 @@
                      <i id="style1" @click="triTauxExecution()"  class=" icon-filter"></i> 
                       
                   TAUX D'EXECUTION </th>
-                   
+
+
+                    <th id="taillecol" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
                   
-        
+                     <i id="style1" @click="triBudgetDispoble()" class=" icon-filter"></i> 
+                      
+                 DISPONIBLE
+                     <i id="style1" @click="ActiveInputMontantDisponble" class=" icon-search"></i> 
+                      
+                     <money style="text-align:left;color:red" 
+                     v-model="montant_disponible" class="span" 
+                     v-show="inputMontantDisponible == true"></money>
+                 
+                  
+                  </th>
         
               </tr> 
             </thead>
@@ -777,10 +777,6 @@
                    
                   }} %
                 </td> -->
-                  <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
-                >
-                  {{ formatageSommeSansFCFA(parseFloat(unite.Disponible)) }}
-                </td>
 
                
                   <td v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
@@ -791,7 +787,7 @@
                <td style=" text-align: right;color:#000 ; background: red;font-size: 15px; font-weight: bold;" v-if="parseInt( unite.TauxExecution ) <= 25">
                   {{ unite.TauxExecution }}
                </td>
-<td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( unite.TauxExecution ) <= 50">
+            <td style=" text-align: right;color:#000 ; background: #ffff000;font-size: 15px; font-weight: bold;" v-else-if="parseInt( unite.TauxExecution ) <= 50">
                   {{ unite.TauxExecution }}
                </td>
                <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( unite.TauxExecution ) <= 75">
@@ -800,6 +796,11 @@
                 <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( unite.TauxExecution ) <= 100">
                   {{ unite.TauxExecution }}
                </td>
+
+                <td style="text-align: right" v-bind:class="recupereIDactivite==unite.id ? 'graybg' : 'whitebg'"
+                >
+                  {{ formatageSommeSansFCFA(parseFloat(unite.Disponible)) }}
+                </td>
               </tr>
                <tr v-for="unite1 in AfficheTypeFinancement(unite.id)" :key="unite1.id" v-show="recupereIDactivite==unite.id" style="margin-left:50px">
             <td colspan="">
@@ -889,11 +890,7 @@
                 TauxOPProvisoireNonRegularisTypeFinancement(unite.id, unite1)
                 }} %
               </td> -->
-              <td style="font-size: 15px; text-align: right;color:#000">
-                {{formatageSommeSansFCFA(parseFloat(
-                      TotalMontantReamenagement(unite.id, unite1) - MontantExecuteParTypeFinancement(unite.id, unite1)
-                    ))}}
-              </td>
+             
 
                <td style="font-size: 15px; text-align: right;color:#000">
                 {{ MarcheEnCoursUaSource(unite.id, unite1)}}
@@ -915,6 +912,12 @@
                 <td style=" text-align: right;color:#000 ; background: #22780f;font-size: 15px; font-weight: bold;" v-else-if=" parseInt( EviteNaNTypeFinancement(unite.id, unite1) ) <= 100">
                   {{EviteNaNTypeFinancement(unite.id, unite1)}}
                </td>
+
+                <td style="font-size: 15px; text-align: right;color:#000">
+                {{formatageSommeSansFCFA(parseFloat(
+                      TotalMontantReamenagement(unite.id, unite1) - MontantExecuteParTypeFinancement(unite.id, unite1)
+                    ))}}
+              </td>
 
             </tr>
               
@@ -948,17 +951,19 @@
                         {{ formatageSommeSansFCFA(parseFloat(TotalMontantOPNonReguTypeFinancement)) }}
                  </td>
 
-                  
-                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
-                   {{ formatageSommeSansFCFA(parseFloat(TotalMontantDisponible)) }}
-                 </td>
+                 
 
-                 <td>
+                 <td style="text-align: right;color:#000;font-weight: bold;color:#000">
                    {{ TotalMarcheEnCoursUaSource }}
                  </td>
 
                  <td style="text-align: center;color:#000;font-weight: bold;color:#000">
                      {{ TotalEviteNaN }}
+                 </td>
+
+                  
+                  <td style="text-align: right;color:#000;font-weight: bold;color:#000">
+                   {{ formatageSommeSansFCFA(parseFloat(TotalMontantDisponible)) }}
                  </td>
 
                  <!-- <td style="text-align: center;color:#000;font-weight: bold;color:#000">
