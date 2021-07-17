@@ -16,16 +16,6 @@
         <input type="hidden" :value="TriParNombreMarcheResilierData" />
         <input type="hidden" :value="TriParMontantResteExcuteMarcheResilierData" />
         <input type="hidden" :value="TriParTauxMarcheResilierData" />
-        
-        
-       
-       
-       
-       
-       
-      
-      
-      
       
      
    
@@ -168,551 +158,514 @@
         EXERCICE:{{anneeBugetaire}}
       </p> 
 
-              <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
-                
-                <!-- <thead>
-                  <tr>
-                    <th style="width:10%"></th> 
-                    <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                    <td> </td>
-                  </tr>
-                  <tr>
-
-                    <th style="width:10%"></th>
-                      <td> </td>
-                   </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                      <td>  </td>
-                   </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                      <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%"></th>
-                    <td> </td>
-                  </tr>
-                </thead>
-                 -->
-                 
-              
-
-              
-            <!-- <tr>
-                     <th style="width:10%">(1)AUTORISATION D'ENGAGEMENT AE  </th>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3" >  </td> 
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3"> </td>
-         <td style="color: #000;text-align:center;background-color: #ffbd3d !important;font-size:10px:width:15%" colspan="3">  </td>
-        </tr> -->
-       
-           <tr>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan=""> </th>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-             <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-           <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
-          <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="2">Planification (Avant contractualisation) </th> 
-         <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="2">Marchés en cours de contractualisation </th>
-         <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="2">Marchés attribués </th>
-          <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="4">Marchés en cours d'exécution </th> 
-         <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="3">Marchés en souffrance</th>
-         <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="3">Marchés résiliés </th>
-
-           
-       </tr>
-           <tr>
-             <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;"></th>
-
-             <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;"></th>
-              
-                       
-                        <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="">
-                      
-                      Bailleur 
-                       <!-- <button @click="InputLibelleBailleur">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                      <money style="text-align:left;color:red" 
-                       v-model="libelle_bailleur" class="span"
-                        v-show="active_libelleBailleur == true"></money> -->
-                      
-                      </th> 
-
-         
-          <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">Type de financement </th> 
-
-                       
-
-         <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                       <button @click="TriParOrdre()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
-                     
-                       <button @click="InputNomreTest">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                      <money style="text-align:left;color:red" 
-                       v-model="InputNomre_Test" class="span"
-                        v-show="InputNomreTestdata == true"></money>
-
-                         Nombre
-                       </th>
-                      
-         <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                      <button @click="TriMontantPlanif()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
-
-                      <button @click="InputMontantContratMarche">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                      <money style="text-align:left;color:red" 
-                       v-model="montantContratMarche" class="span"
-                        v-show="activeMontantContratMarche == true"></money>
-                          Montant (FCFA)
-                      </th>
-
-         <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                       <button @click="TriNombreParMarchecontrat()">
-                     <i class=" icon-filter" title="filtrer par nombre"></i> 
-                      
-                    </button>
-                       <button @click="InputNombre">
-                     <i class=" icon-search" title="rechercher par nombre"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="nombre_cont" class="span"
-                        v-show="activeNombre == true"></money>
-                         Nombre 
-                      </th>
-          <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                         <button @click="TriParMontantContractuali()">
-                     <i class=" icon-filter" title="trier par ordre croissante ou decroissante "></i> 
-                      
-                    </button>
-                       <button @click="InputMontantContra">
-                     <i class=" icon-search" title="rechercher par montant"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montant_cont" class="span"
-                        v-show="activeMontantCont == true"></money>
-
-                        Montant (FCFA)
-                      </th>
-
-           <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                         <button @click="TriParNombreMarcheAtribue()">
-                     <i class=" icon-filter" title="filter par ordre croissante ou decroissante"></i> 
-                      
-                    </button>
-                        <button @click="InputNombreAttribue">
-                     <i class=" icon-search" title="rechercher par nombre"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="nombreMarche_attribue" class="span"
-                        v-show="activenombreMarcheAttribue == true"></money>
-                          Nombre 
-                      </th>
-          <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                      
-                      <button @click="TriParMontantMarcheAttribue()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
-                      
-                    </button>
-                      
-                        <button @click="InputMontantmacheAttribue">
-                     <i class=" icon-search" title="rerchercher par montant"></i> 
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montantMarche_attribue" class="span"
-                        v-show="activemarcheMontantAttribue == true"></money>
-
-                        Montant (FCFA)
-                      </th>
-
-
-                      <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                        <button @click="TriParNombreMarcheExecution()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
-                      
-                    </button>
-                       <button @click="InputNombreMarcheExcute">
-                     <i class=" icon-search" title="rechercher par nombre"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="nombreMarche_excute" class="span"
-                        v-show="activeNombreMarcheExcute == true"></money>
-                         Nombre
-                       </th>
-
-                      <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                       
-                        <button @click="TriParMontantTotalMarche()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                      
-                    </button>
-                       <button @click="InputMontantTotalMarcheExcute">
-                     <i class=" icon-search" title="rechercher par montant"></i> 
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montantTotalMarcheExcute" class="span"
-                        v-show="activeMontantMarcheExcute == true"></money>
-                         Montant total marchés (FCFA) 
-                      </th>
-
-                       <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                       <button @click="TriParMontantMarcheExcute()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
-                    </button>
-
-                      <button @click="InputMotantExcute">
-                     <i class=" icon-search" title="rechercher par montant"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montant_Excute" class="span"
-                        v-show="activeMontant_Excute == true"></money>
-                         Montants exécutés (FCFA)
-                       </th>
-
-                       <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                        <button @click="TriParMontantMarcheResteExcute()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                      
-                    </button>
-                       <button @click="InputResteExecute">
-                     <i class=" icon-search" title="rechercher par montant"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montantReste_Excute" class="span"
-                        v-show="activeMontantReste_Excute == true"></money>
-                        Reste à exécuter
-                       </th>
-
-                      <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-
-                        <button @click="TriParNombreMarcheSouffrance()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                      
-                    </button>
-                      <button @click="InputNombreMarcheSouffrance">
-                     <i class=" icon-search" title="rechercher par nombre"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="nombreMarche_Souffrance" class="span"
-                        v-show="activeNombreMarcheSouffrance == true"></money>
-                         Nombre
-                       </th>
-
-                       <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                      
-                        <button @click="TriParMontantResteExcuteMarcheSouffrance()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                      
-                    </button>
-                      <button @click="InputMontantResteExcuteSouffrance">
-                     <i class=" icon-search" title="rechercher par montant"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montant_reste_souffrance" class="span"
-                        v-show="activeMontantMarcheSouffrance == true"></money>
-                        Reste à exécuter
-                      </th>
-
-                       <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1" class="posit-form">
-                       <button @click="TriParTauxMarcheSouffrance()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                    </button>
-                       <button @click="InputTauxMarcheSouffrance">
-                     <i class=" icon-search" title="rechercher par taux"></i> 
-                    </button>
-                       <money style="text-align:left;color:red" 
-                       v-model="taux_marche" class="span"
-                        v-show="activeTauxMarcheSouffrance == true"></money>
-                        
-                           Taux 
-                       </th>
-
-               
-                      <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                       <button @click="TriParNombreMarcheResilier()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                      
-                    </button>
-                       <button @click="InputNombreMarcheResilier">
-                     <i class=" icon-search" title="rechercher par nombre"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="nombreMarche_resilier" class="span"
-                        v-show="activeMarcheResilier == true"></money>
-                        Nombre 
-                      </th>
-
-                       <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1">
-                      
-                       <button @click="TriParMontantResteExcuteMarcheResilier()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                      
-                    </button>
-                         <button @click="InputMontantResteExecute">
-                     <i class=" icon-search" title="rechercher par montant"></i> 
-                      
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="montantReste_execute" class="span"
-                        v-show="activemontantResilier == true"></money>
-                         Reste à exécuter 
-                      </th>
-
-                       <th style="width:10%;font-size: 14px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;" colspan="1"> 
-
-                       <button @click="TriParTauxMarcheResilier()">
-                     <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                    </button>
-                     <button @click="InputTauxMarcheResilier">
-                     <i class=" icon-search" title="rechercher par taux"></i> 
-                    </button>
-
-                       <money style="text-align:left;color:red" 
-                       v-model="TauxMarche_Resilier" class="span"
-                        v-show="activeMarcheTauxResilier == true"></money>
-                        Taux
-                      </th>
-           
-       </tr>
-
-      
-
-
-      
-       <tbody  v-for="type1 in  partition(Listenewdata, size)[page]" :key="type1.id">
-           <tr>
-
-              <td colspan="2">
-                    <button @click="showMySourceFinancement(type1.id)">
-                     <i class="icon-eye-open"></i> 
-                     </button>
-                  </td>
-                  
-                  <!-- <td> </td> -->
-         
-                          <td v-bind:class="recupereIDactivite==type1.id? 'graybg' : 'whitebg'  " colspan="2" style="" >
-                            {{type1.libelleBailleur}}
+                                  <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                                     
-                                      
-                                      </td>
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
-                                        {{type1.nombreMarchePlanif}}</td>
-
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                          {{formatageSommeSansFCFA(parseFloat(type1.montantMarchePlanif)) }}
-                                      </td>
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                        {{type1.nombreMarcheContra }}
-                                      </td>
-
-                                      <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                        {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheContract))}}</td>
-
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                          {{type1.nombreMarcheAtribue}} </td>
-
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                          {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheAtribue))}} </td>
-
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                          {{type1.nombreMarcheExcution}} </td>
-
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                          {{type1.montantTotalMarcheExcution}}</td>
-                                      
-                                        
-                                        <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                          {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheExcute))}} </td>
-
-                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                            {{ formatageSommeSansFCFA(parseFloat( type1.montantResreExcute))}}</td>
-
-                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
-                                              {{type1.nombreMarcheSouffrance}} </td>
-
-                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                              {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheAExcuteSouffrance))}} </td>
-
-                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                                {{type1.tauxMarcheSouffrance}} %</td>
-                                            
-                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                                {{type1.nombreMarcheResilier}} </td>
-                                            
-                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                                {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheResilierResteExcute))}} </td>
-                                              
-                                                <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
-                                                  {{type1.tauxMarcheResilier}} %</td>
-                        
-                                  <!-- <td></td> -->
-                                  
                                 
-                        </tr> 
-           
-         <tr v-show="recupereIDactivite==type1.id"
-         v-for="TypeFinance in AfficheUaGroupe(type1.id)" :key="TypeFinance">
-          
-          <td></td>
-            <td>
-                    <button @click="showMySourceFinancement(TypeFinance)">
-                     <i class="icon-arrow-right"></i> </button>
-                  </td>
-            <!-- <td colspan="2">
-                    <button @click="showMySourceFinancement(type1[0].source_financement)">
-                     <i class="icon-eye-open"></i> </button>
-                  </td> -->
-          
-                <td></td>
+                          
+                              <tr>
+                                <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan=""> </th>
+                                <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
+                                <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
+                              <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="1"> </th>
+                              <th style="width:10%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="2">Planification (Avant contractualisation) </th> 
+                            <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="2">Marchés en cours de contractualisation </th>
+                            <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="2">Marchés attribués </th>
+                              <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px"  colspan="4">Marchés en cours d'exécution </th> 
+                            <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="3">Marchés en souffrance</th>
+                            <th style="width:15%;margin-left:25px;background-color: #f55e25 !important;font-weight: bold;color:#000;font-size: 14px" colspan="3">Marchés résiliés </th>
 
-           <td   style="">{{afficherLibelleTypeFinancement(TypeFinance)}}</td>
-         <td  style="">{{NombreMarcherPart(TypeFinance)}}</td>
-         <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarchePlanifierMontantDons(TypeFinance)))}}</td>
+                              
+                          </tr>
+                              <tr>
+                                <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;"></th>
 
-         <td  style="">{{NombreMarcherEncourDeContratualisation(TypeFinance)}}</td>
-         <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarcheEncourDeContratualisation(TypeFinance)))}}</td>
-         
-          <td  style="">{{NombreMarcherAttribuer(TypeFinance)}}</td>
-          <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherMontantMarcherAttribuer(TypeFinance)))}}</td>
-          <td  style="">{{NombreMarcherEncourExecution(TypeFinance)}}</td>
-           <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherMontantTotal(TypeFinance)))}}</td>
-           <td  style="">{{formatageSommeSansFCFA(parseFloat(marcheEncourExecutionMontantDons(TypeFinance)))}}</td>
-            <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuter(TypeFinance)))}}</td>
-           <td  style="">{{NombreMarcherEnSouffrance(TypeFinance)}}</td>
-           <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheSouffrance(TypeFinance)))}}</td>
-           <td  style="">{{afficherTauxMarcheSouffre(TypeFinance)}} %</td>
+                                <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;"></th>
+                                  
+                                          
+                                            <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="">
+                                          
+                                          Bailleur 
+                                          <!-- <button @click="InputLibelleBailleur">
+                                        <i class=" icon-search"></i> 
+                                          
+                                        </button>
+                                          <money style="text-align:left;color:red" 
+                                          v-model="libelle_bailleur" class="span"
+                                            v-show="active_libelleBailleur == true"></money> -->
+                                          
+                                          </th> 
 
-           <td  style="">{{NombreMarcherResilier(TypeFinance)}}</td>
-           <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheResilier(TypeFinance)))}}</td>
-           <td  style="">{{afficherTauxMarcheResilier(TypeFinance)}} %</td>
-          
+                            
+                              <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">Type de financement </th> 
 
-         </tr>
+                                          
 
-        </tbody>
-      
-      
-      </table>
+                            <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                          <button @click="TriParOrdre()">
+                                        <i class=" icon-filter"></i> 
+                                          
+                                        </button>
+                                        
+                                          <button @click="InputNomreTest">
+                                        <i class=" icon-search"></i> 
+                                          
+                                        </button>
+                                          <money style="text-align:left;color:red" 
+                                          v-model="InputNomre_Test" class="span"
+                                            v-show="InputNomreTestdata == true"></money>
+
+                                            Nombre
+                                          </th>
+                                          
+                            <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                          <button @click="TriMontantPlanif()">
+                                        <i class=" icon-filter"></i> 
+                                          
+                                        </button>
+
+                                          <button @click="InputMontantContratMarche">
+                                        <i class=" icon-search"></i> 
+                                          
+                                        </button>
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montantContratMarche" class="span"
+                                            v-show="activeMontantContratMarche == true"></money>
+                                              Montant (FCFA)
+                                          </th>
+
+                            <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                          <button @click="TriNombreParMarchecontrat()">
+                                        <i class=" icon-filter" title="filtrer par nombre"></i> 
+                                          
+                                        </button>
+                                          <button @click="InputNombre">
+                                        <i class=" icon-search" title="rechercher par nombre"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="nombre_cont" class="span"
+                                            v-show="activeNombre == true"></money>
+                                            Nombre 
+                                          </th>
+                              <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                            <button @click="TriParMontantContractuali()">
+                                        <i class=" icon-filter" title="trier par ordre croissante ou decroissante "></i> 
+                                          
+                                        </button>
+                                          <button @click="InputMontantContra">
+                                        <i class=" icon-search" title="rechercher par montant"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montant_cont" class="span"
+                                            v-show="activeMontantCont == true"></money>
+
+                                            Montant (FCFA)
+                                          </th>
+
+                              <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                            <button @click="TriParNombreMarcheAtribue()">
+                                        <i class=" icon-filter" title="filter par ordre croissante ou decroissante"></i> 
+                                          
+                                        </button>
+                                            <button @click="InputNombreAttribue">
+                                        <i class=" icon-search" title="rechercher par nombre"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="nombreMarche_attribue" class="span"
+                                            v-show="activenombreMarcheAttribue == true"></money>
+                                              Nombre 
+                                          </th>
+                              <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                          
+                                          <button @click="TriParMontantMarcheAttribue()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
+                                          
+                                        </button>
+                                          
+                                            <button @click="InputMontantmacheAttribue">
+                                        <i class=" icon-search" title="rerchercher par montant"></i> 
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montantMarche_attribue" class="span"
+                                            v-show="activemarcheMontantAttribue == true"></money>
+
+                                            Montant (FCFA)
+                                          </th>
+
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                            <button @click="TriParNombreMarcheExecution()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
+                                          
+                                        </button>
+                                          <button @click="InputNombreMarcheExcute">
+                                        <i class=" icon-search" title="rechercher par nombre"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="nombreMarche_excute" class="span"
+                                            v-show="activeNombreMarcheExcute == true"></money>
+                                            Nombre
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                          
+                                            <button @click="TriParMontantTotalMarche()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                          
+                                        </button>
+                                          <button @click="InputMontantTotalMarcheExcute">
+                                        <i class=" icon-search" title="rechercher par montant"></i> 
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montantTotalMarcheExcute" class="span"
+                                            v-show="activeMontantMarcheExcute == true"></money>
+                                            Montant total marchés (FCFA) 
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                          <button @click="TriParMontantMarcheExcute()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
+                                        </button>
+
+                                          <button @click="InputMotantExcute">
+                                        <i class=" icon-search" title="rechercher par montant"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montant_Excute" class="span"
+                                            v-show="activeMontant_Excute == true"></money>
+                                            Montants exécutés (FCFA)
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                            <button @click="TriParMontantMarcheResteExcute()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                          
+                                        </button>
+                                          <button @click="InputResteExecute">
+                                        <i class=" icon-search" title="rechercher par montant"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montantReste_Excute" class="span"
+                                            v-show="activeMontantReste_Excute == true"></money>
+                                            Reste à exécuter
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+
+                                            <button @click="TriParNombreMarcheSouffrance()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                          
+                                        </button>
+                                          <button @click="InputNombreMarcheSouffrance">
+                                        <i class=" icon-search" title="rechercher par nombre"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="nombreMarche_Souffrance" class="span"
+                                            v-show="activeNombreMarcheSouffrance == true"></money>
+                                            Nombre
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                          
+                                            <button @click="TriParMontantResteExcuteMarcheSouffrance()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                          
+                                        </button>
+                                          <button @click="InputMontantResteExcuteSouffrance">
+                                        <i class=" icon-search" title="rechercher par montant"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montant_reste_souffrance" class="span"
+                                            v-show="activeMontantMarcheSouffrance == true"></money>
+                                            Reste à exécuter
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1" class="posit-form">
+                                          <button @click="TriParTauxMarcheSouffrance()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                        </button>
+                                          <button @click="InputTauxMarcheSouffrance">
+                                        <i class=" icon-search" title="rechercher par taux"></i> 
+                                        </button>
+                                          <money style="text-align:left;color:red" 
+                                          v-model="taux_marche" class="span"
+                                            v-show="activeTauxMarcheSouffrance == true"></money>
+                                            
+                                              Taux 
+                                          </th>
+
+                                  
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                          <button @click="TriParNombreMarcheResilier()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                          
+                                        </button>
+                                          <button @click="InputNombreMarcheResilier">
+                                        <i class=" icon-search" title="rechercher par nombre"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="nombreMarche_resilier" class="span"
+                                            v-show="activeMarcheResilier == true"></money>
+                                            Nombre 
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1">
+                                          
+                                          <button @click="TriParMontantResteExcuteMarcheResilier()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                          
+                                        </button>
+                                            <button @click="InputMontantResteExecute">
+                                        <i class=" icon-search" title="rechercher par montant"></i> 
+                                          
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="montantReste_execute" class="span"
+                                            v-show="activemontantResilier == true"></money>
+                                            Reste à exécuter 
+                                          </th>
+
+                                          <th style="width:10%;font-size: 14px;
+                                          font-weight: bold;
+                                          color: #000;
+                                          text-align: center;
+                                          background-color: #fbb203 !important;" colspan="1"> 
+
+                                          <button @click="TriParTauxMarcheResilier()">
+                                        <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
+                                        </button>
+                                        <button @click="InputTauxMarcheResilier">
+                                        <i class=" icon-search" title="rechercher par taux"></i> 
+                                        </button>
+
+                                          <money style="text-align:left;color:red" 
+                                          v-model="TauxMarche_Resilier" class="span"
+                                            v-show="activeMarcheTauxResilier == true"></money>
+                                            Taux
+                                          </th>
+                              
+                          </tr>
+
+                          
+
+
+                          
+                          <tbody  v-for="type1 in  partition(Listenewdata, size)[page]" :key="type1.id">
+                              <tr>
+
+                                  <td colspan="2">
+                                        <button @click="showMySourceFinancement(type1.id)">
+                                        <i class="icon-eye-open"></i> 
+                                        </button>
+                                      </td>
+                                      
+                                      <!-- <td> </td> -->
+                            
+                                              <td v-bind:class="recupereIDactivite==type1.id? 'graybg' : 'whitebg'  " colspan="2" style="" >
+                                                {{type1.libelleBailleur}}
+                                                        
+                                                          
+                                                          </td>
+                                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
+                                                            {{type1.nombreMarchePlanif}}</td>
+
+                                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                              {{formatageSommeSansFCFA(parseFloat(type1.montantMarchePlanif)) }}
+                                                          </td>
+                                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                            {{type1.nombreMarcheContra }}
+                                                          </td>
+
+                                                          <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                            {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheContract))}}</td>
+
+                                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                              {{type1.nombreMarcheAtribue}} </td>
+
+                                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                              {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheAtribue))}} </td>
+
+                                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                              {{type1.nombreMarcheExcution}} </td>
+
+                                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                              {{type1.montantTotalMarcheExcution}}</td>
+                                                          
+                                                            
+                                                            <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                              {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheExcute))}} </td>
+
+                                                              <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                                {{ formatageSommeSansFCFA(parseFloat( type1.montantResreExcute))}}</td>
+
+                                                                <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  "> 
+                                                                  {{type1.nombreMarcheSouffrance}} </td>
+
+                                                                <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                                  {{ formatageSommeSansFCFA(parseFloat(type1.montantMarcheAExcuteSouffrance))}} </td>
+
+                                                                  <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                                    {{type1.tauxMarcheSouffrance}} %</td>
+                                                                
+                                                                  <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                                    {{type1.nombreMarcheResilier}} </td>
+                                                                
+                                                                  <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                                    {{formatageSommeSansFCFA(parseFloat(type1.montantMarcheResilierResteExcute))}} </td>
+                                                                  
+                                                                    <td v-bind:class="recupereIDactivite==type1.id ? 'graybg' : 'whitebg'  ">
+                                                                      {{type1.tauxMarcheResilier}} %</td>
+                                            
+                                                      <!-- <td></td> -->
+                                                      
+                                                    
+                                            </tr> 
+                              
+                            <tr v-show="recupereIDactivite==type1.id"
+                            v-for="TypeFinance in AfficheUaGroupe(type1.id)" :key="TypeFinance">
+                              
+                              <td></td>
+                                <td>
+                                        <button @click="showMySourceFinancement(TypeFinance)">
+                                        <i class="icon-arrow-right"></i> </button>
+                                      </td>
+                                <!-- <td colspan="2">
+                                        <button @click="showMySourceFinancement(type1[0].source_financement)">
+                                        <i class="icon-eye-open"></i> </button>
+                                      </td> -->
+                              
+                                    <td></td>
+
+                              <td   style="">{{afficherLibelleTypeFinancement(TypeFinance)}}</td>
+                            <td  style="">{{NombreMarcherPart(TypeFinance)}}</td>
+                            <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarchePlanifierMontantDons(TypeFinance)))}}</td>
+
+                            <td  style="">{{NombreMarcherEncourDeContratualisation(TypeFinance)}}</td>
+                            <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherNombreMarcheEncourDeContratualisation(TypeFinance)))}}</td>
+                            
+                              <td  style="">{{NombreMarcherAttribuer(TypeFinance)}}</td>
+                              <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherMontantMarcherAttribuer(TypeFinance)))}}</td>
+                              <td  style="">{{NombreMarcherEncourExecution(TypeFinance)}}</td>
+                              <td  style="">{{formatageSommeSansFCFA(parseFloat(afficherMontantTotal(TypeFinance)))}}</td>
+                              <td  style="">{{formatageSommeSansFCFA(parseFloat(marcheEncourExecutionMontantDons(TypeFinance)))}}</td>
+                                <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuter(TypeFinance)))}}</td>
+                              <td  style="">{{NombreMarcherEnSouffrance(TypeFinance)}}</td>
+                              <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheSouffrance(TypeFinance)))}}</td>
+                              <td  style="">{{afficherTauxMarcheSouffre(TypeFinance)}} %</td>
+
+                              <td  style="">{{NombreMarcherResilier(TypeFinance)}}</td>
+                              <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheResilier(TypeFinance)))}}</td>
+                              <td  style="">{{afficherTauxMarcheResilier(TypeFinance)}} %</td>
+                              
+
+                            </tr>
+
+                            </tbody>
+                          
+                          
+                          </table>
 
 
        <div class="pagination alternate">
