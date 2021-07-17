@@ -67,15 +67,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type[0].id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type[0].unite_zone) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type[0].unite_zone) || 'Non renseigné'}}</td>
                    
                    <td >
-                      <router-link :to="{ name: 'ListeMarcheSousBudget', params: { id: type.id }}"
+                      <router-link :to="{ name: 'ListeMarcheSousBudget', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
                     

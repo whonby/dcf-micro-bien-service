@@ -236,13 +236,13 @@
                   class="span"
                 >
                   <option
-                    v-for="plans in AfficheUniteZoneLigneEconnomique(formData.unite_zone)"
+                    v-for="plans in ligneBudgetaireSousBudget"
                     :key="plans.id"
-                    :value="plans.ligneeconomique_id"
+                    :value="plans"
                   >
                     {{
                      
-                        libelleLigneEconomique(plans.ligneeconomique_id)
+                        libelleLigneEconomique(plans)
                       
                     }}
                   </option>
@@ -835,6 +835,26 @@ ImputationBudget(){
         return [];
   //  };
     },
+     ligneBudgetaireSousBudget() {
+      //return (id) => {
+        
+        let objet = this.budgetEclate.filter(budget=>budget.sous_budget_id == this.formData.unite_zone && budget.activite_id == this.formData.activite_id && budget.sous_budget_id !=0 && budget.budget_active==1);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.ligneeconomique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+      }
+        return [];
+  //  };
+    },
     AfficheUniteZone() {
       return (id) => {
         if (id != null && id != "") {
@@ -1200,6 +1220,7 @@ ImputationBudget(){
   width: 1080px;
   margin: 0 -25%;
 }
+
 /* {
   width: 96%;
    margin: 0 -48%;

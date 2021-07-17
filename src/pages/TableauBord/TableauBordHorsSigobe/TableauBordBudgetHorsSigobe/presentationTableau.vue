@@ -89,10 +89,13 @@
                     </li>
 
                      <!-- <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD7"
-                        >TB7</a
+                      <a data-toggle="tab" href="#TABLEAUBORD612"
+                        >TESTvUE</a
                       >
                     </li> -->
+
+
+
                      <!-- <li class="" >
                       <a data-toggle="tab" href="#MANDAT"
                         >DOSSIER OP DIRECT</a
@@ -107,6 +110,11 @@
                 </div>
                 <div class="widget-content tab-content">
                   <!--ongle identification-->
+                  <div id="TABLEAUBORD612" class="tab-pane " >
+                    <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
+                <vueTextTreeview></vueTextTreeview>
+                         
+                  </div>
                   <div id="TABLEAUBORD6" class="tab-pane " >
                     <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
                 <EtatExecutionBailleurSection></EtatExecutionBailleurSection>
@@ -155,7 +163,7 @@
 
 
                   <div id="TABLEAUBORD7" class="tab-pane ">
-                     <SituationExecutionBudgetaireParProjet></SituationExecutionBudgetaireParProjet>
+                     <SituationExecutionBudgetaireParBailleurProjet></SituationExecutionBudgetaireParBailleurProjet>
                
                   </div>
 
@@ -195,11 +203,14 @@ import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetA
 // import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
 import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBailleur"
 
+
 import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
 import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
-import SituationExecutionBudgetaireParProjet from './SituationExecutionBudgetaireParProjet'
+import SituationExecutionBudgetaireParBailleurProjet from './SituationExecutionBudgetaireParBailleurProjet'
+import vueTextTreeview from './vueTextTreeview'
 export default {
      components: {
+       vueTextTreeview,
        EtatExecutionBailleurSection,
        SituationExecutionBudgetaireParBailleur,
        SituationExecutionBudgetaireParSection,
@@ -207,7 +218,7 @@ export default {
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
-    SituationExecutionBudgetaireParProjet,
+    SituationExecutionBudgetaireParBailleurProjet,
  
     // SituationExecuBudgetRecapActivite,
     
