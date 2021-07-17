@@ -141,7 +141,7 @@
                     
                   >
                     <span  @click="AfficheIconeActivite()" class="curseurEntete">ACTIVITE</span>
-                    <i class="tailleIcone"    @click="ActiveInputLigne" v-show="b_Activite==1">
+                    <i class="tailleIcone"    @click="ActiveInputLigne" >
                      <i class=" icon-search"></i>
                     </i>
                      <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
@@ -183,11 +183,11 @@
                    
                     
                   >
-                  <i class="tailleIcone" @click="tribudgetinitial()" v-show="b_initial==1">
+                  <i class="tailleIcone" @click="tribudgetinitial()" >
                      <i class=" icon-filter"></i>
                       </i>
                     <span  @click="AfficheIconeBudgetInitial()" class="curseurEntete">BUDGET INITIAL</span>
-                     <i @click="InputMontantInitial" class="tailleIcone" v-show="b_initial==1">
+                     <i @click="InputMontantInitial" class="tailleIcone" >
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -206,7 +206,7 @@
                      
                    
                   >
-                  <i @click="trivariation()" class="tailleIcone" v-show="b_Modifier==1">
+                  <i @click="trivariation()" class="tailleIcone" >
                      <i class=" icon-filter"></i>
                       </i>
 
@@ -215,7 +215,7 @@
                      v-model="montant_mofification" class="span" 
                      v-show="montantmodificationdata == true"></money>
                    <span  @click="AfficheIconeBudgetModifier()" class="curseurEntete">  MODIFICATION BUDGETAIRE</span>
-                     <i @click="InputMontantModif" class="tailleIcone" v-show="b_Modifier==1">
+                     <i @click="InputMontantModif" class="tailleIcone" >
                      <i class=" icon-search"></i> 
                     </i>
                   </th>
@@ -232,7 +232,7 @@
                     id="taillecol"
                     
                   >
-                  <i @click="tribudgetactuel()" class="tailleIcone" v-show="b_Actuel==1">
+                  <i @click="tribudgetactuel()" class="tailleIcone" >
                      <i class=" icon-filter"></i>
                       </i>
 
@@ -241,7 +241,7 @@
                      v-model="Budget_Actuel" class="span" 
                      v-show="InputBudgetActueldata == true"></money>
                   <span  @click="AfficheIconeBudgetActuel()" class="curseurEntete">BUDGET ACTUEL</span>
- <i @click="InputBudgetActuel" class="tailleIcone"  v-show="b_Actuel==1">
+ <i @click="InputBudgetActuel" class="tailleIcone"  >
                      <i class=" icon-search"></i> 
                     </i>
                 
@@ -257,7 +257,7 @@
                     id="taillecol"
                    
                   >
-                  <i @click="trimontantexecute()" class="tailleIcone" v-show="b_Execute==1">
+                  <i @click="trimontantexecute()" class="tailleIcone" >
                      <i class=" icon-filter"></i>
                       </i>
 
@@ -266,7 +266,7 @@
                      v-model="Montant_Execute" class="span" 
                      v-show="InputMontantExecutedata == true"></money>
                 <span  @click="AfficheIconeBudgetExecuter()" class="curseurEntete">  MONTANT EXECUTE</span>
-                   <i @click="InputMontantExecute" class="tailleIcone" v-show="b_Execute==1">
+                   <i @click="InputMontantExecute" class="tailleIcone" >
                      <i class=" icon-search"></i> 
                     </i>
                   </th>
@@ -280,7 +280,7 @@
                     "
                     
                   >
-                  <i @click="triNBOpProNonRegu()" class="tailleIcone" v-show="b_OpNonRegularise==1">
+                  <i @click="triNBOpProNonRegu()" class="tailleIcone" >
                      <i class=" icon-filter"></i>
                       </i> 
 
@@ -290,7 +290,7 @@
                      v-show="InputNbreOpProvNonREgudata == true"></money>
                  <span  @click="AfficheIconeOpNonRegularise()" class="curseurEntete">   NB OP PROVISOIRE NON REGULARISE(S)</span>
 
-                     <i @click="InputNbreOpProvNonREgu" class="tailleIcone" v-show="b_OpNonRegularise==1"> 
+                     <i @click="InputNbreOpProvNonREgu" class="tailleIcone" > 
                      <i class=" icon-search"></i> 
                     </i>
                   </th>
@@ -305,7 +305,7 @@
                     id="taillecol"
                      
                   >
-                  <i @click="triMontantOpProNonRegu()" class="tailleIcone" v-show="b_MontantOpNonRegularise==1">
+                  <i @click="triMontantOpProNonRegu()" class="tailleIcone" >
                      <i class=" icon-filter"></i>
                       </i>
 
@@ -314,7 +314,7 @@
                      v-model="Montant_Op_ProvNon_Reg" class="span" 
                      v-show="InputMontantOpProvNonRegdata == true"></money>
                   <span  @click="AfficheIconeMontantOpNonRegularise()" class="curseurEntete">  MONTANT OP PROVISOIRE NON REGULARISE </span>
- <i @click="InputMontantOpProvNonReg" class="tailleIcone" v-show="b_MontantOpNonRegularise==1">
+ <i @click="InputMontantOpProvNonReg" class="tailleIcone" >
                      <i class=" icon-search"></i> 
                     </i>
                      
@@ -364,7 +364,7 @@
                     "
                     
                   >
-                  <i @click="triNBMarcheExecution()" class="tailleIcone" v-show="b_MarcheExecution==1">
+                  <i @click="triNBMarcheExecution()" class="tailleIcone" >
                      <i class=" icon-filter"></i>
                       </i> 
 
@@ -374,7 +374,7 @@
                      v-show="InputNbreMarcheEnCoursExecutiondata == true"></money>
                       <span  @click="AfficheIconeMarcheExecution()" class="curseurEntete">       NB MARCHE EN COURS EXECUTION</span>
 
-                      <i @click="InputNbreMarcheEnCoursExecution" class="tailleIcone" v-show="b_MarcheExecution==1">
+                      <i @click="InputNbreMarcheEnCoursExecution" class="tailleIcone" >
                      <i class=" icon-search"></i> 
                     </i>
                   </th>
@@ -390,7 +390,7 @@
                     "
                    
                   >
-                  <i @click="triTauxExecution()" class="tailleIcone" v-show="b_TauxExecution==1">
+                  <i @click="triTauxExecution()" class="tailleIcone" >
                      <i class=" icon-filter"></i> 
                     </i>
 
@@ -399,7 +399,7 @@
                      v-model="Taux_Execution" class="span" 
                      v-show="InputTauxExecutiondata == true"></money>
                    <span  @click="AfficheIconeTauxExecution()" class="curseurEntete"> TAUX D'EXECUTION </span>
-<i @click="InputTauxExecution" class="tailleIcone" v-show="b_TauxExecution==1">
+<i @click="InputTauxExecution" class="tailleIcone" >
                      <i class=" icon-search"></i> 
                     </i>
                      
@@ -415,7 +415,7 @@
                     id="taillecol"
                     
                   >
-                  <i @click="triDisponible()" class="tailleIcone" v-show="b_Disponible==1">
+                  <i @click="triDisponible()" class="tailleIcone">
                      <i class=" icon-filter"></i> 
                       </i>
 
@@ -424,7 +424,7 @@
                      v-model="Input_Disponible" class="span" 
                      v-show="InputDisponibledata == true"></money>
                    <span  @click="AfficheIconeDisponible()" class="curseurEntete">  DISPONIBLE</span>
- <i @click="InputDisponible" class="tailleIcone" v-show="b_Disponible==1">
+ <i @click="InputDisponible" class="tailleIcone">
                      <i class=" icon-search"></i> 
                     </i>
                      </th>
