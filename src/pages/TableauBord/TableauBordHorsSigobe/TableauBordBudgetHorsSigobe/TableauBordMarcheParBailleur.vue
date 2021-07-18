@@ -653,11 +653,11 @@
                                 <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuter(TypeFinance)))}}</td>
                               <td  style="">{{NombreMarcherEnSouffrance(TypeFinance)}}</td>
                               <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheSouffrance(TypeFinance)))}}</td>
-                              <td  style="">{{afficherTauxMarcheSouffre(TypeFinance)}} %</td>
+                              <td  style="">{{afficherTauxMarcheSouffre(TypeFinance).toFixed(2)}} %</td>
 
                               <td  style="">{{NombreMarcherResilier(TypeFinance)}}</td>
                               <td  style="">{{formatageSommeSansFCFA(parseFloat(resteAexcuterMarcheResilier(TypeFinance)))}}</td>
-                              <td  style="">{{afficherTauxMarcheResilier(TypeFinance)}} %</td>
+                              <td  style="">{{afficherTauxMarcheResilier(TypeFinance).toFixed(2)}} %</td>
                               
 
                             </tr>
