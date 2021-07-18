@@ -1860,7 +1860,7 @@ width: 95%;
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 15px;
