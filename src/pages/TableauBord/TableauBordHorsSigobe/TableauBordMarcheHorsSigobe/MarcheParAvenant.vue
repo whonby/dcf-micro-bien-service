@@ -14,7 +14,7 @@
       </button> -->
     </div> 
       <div class="modal-body" id="printpdf1">
-         <table class="table table-bordered table-striped">
+         <!-- <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Objet du marche</th>
@@ -31,7 +31,7 @@
                     <td style="text-align:rigth">{{formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)))}}</td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
               <br>
                <table class="table table-bordered table-striped">
           <tr>
@@ -44,50 +44,173 @@
      <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <!-- <th>Numero ordre</th> -->
-                    <th>Numéro Avenant</th>
-                    <th>Date</th>
-                    <th>Objet</th>
-                    <th>Titulaire</th>
-                    <th>Montant</th>
-                    <th>Taux</th>
-                    <th>Durée</th>
-                    <th>Source de financement</th>
-                     <th>Ligne budgétaire</th>
-                    <!-- <th>Bénéficiaires</th> -->
-                    <th>Livrables</th>
+                    
+                    <th>Marché/Contrat initial</th>
+                    <th>Avenant 1</th>
+                    <th>Avenant 1</th>
+                    <th>Avenant 1</th>
+                    <th>Avenant 1</th>
+                    <th>Avenant 1</th>
+                    <th>Total Avenant</th>
+                    <th>Marché/Contrat actuel</th>
+                     
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+ <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                  <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+ <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Objet</th>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
 
-                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
-                    <!-- <td></td> -->
-                    <td>{{itemAvenant.numero_avenant}}</td>
-                    <td>{{formaterDate(itemAvenant.date_avenant)}}</td>
-                     <td>{{itemAvenant.objet_avenant}}</td>
-                    <td>{{afficherEntrepriseNom(recupereIdEntreprise(itemAvenant.marche_id))}}</td>
-                    <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(itemAvenant.montant_avenant))}}</td>
-                     <td>{{itemAvenant.taux_avenant}}</td>
-                    <td>{{itemAvenant.dure_avenant}}</td>
-                    <td>{{LibellesourceFinancement(idsourceFinancement(itemAvenant.marche_id))}}</td>
-                    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(itemAvenant.marche_id)))}}</td>
-                     <td></td>
-                  </tr>
-                  <tr >
-                    <!-- <td></td> -->
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    
-                   
-                    <td style="background-color: rgb(6, 184, 6);color:#000;text-align:center;font-size:14px">TOTAL</td>
-                    <td style="background-color: rgb(6, 184, 6);color:#000;text-align:right;font-size:14px;font-weight: bold;">{{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}</td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                     <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                  </tr>
                 </tbody>
               </table>
 

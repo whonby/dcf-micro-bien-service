@@ -75,7 +75,7 @@
                    <td >
                       <router-link :to="{ name: 'listeMarcheBienEtServiceExecutionHSParSousBudget', params: { id: type.unite_zone }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Voir Marche</i></span>
+                  <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
                     </td>
                     
@@ -205,7 +205,7 @@ created() {
    
    
 afficheGroupeUaParMarche(){
-    return this.marches.filter(item=>item.unite_administrative_id == this.detailOp.unite_administrative_id)
+    return this.marches.filter(item=>item.unite_administrative_id == this.detailOp.unite_administrative_id && item.unite_zone != 0)
 },
 
 libelleSOusBudget() {

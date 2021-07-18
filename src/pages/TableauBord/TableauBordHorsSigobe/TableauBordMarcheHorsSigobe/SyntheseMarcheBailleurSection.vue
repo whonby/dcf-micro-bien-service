@@ -122,7 +122,7 @@ recupereIDactivite
                   
                 "
                 colspan="2"
-                 class="taillecol1"
+              
               >
                 Planification (Avant Contractualisation)
               </th>
@@ -271,7 +271,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #ddebf7 !important;
                 "
-                class="taillecol1"
+                id="taillecol1"
               >
               <i @click="Tri2()">
                      <i class=" icon-filter"></i> 
@@ -315,6 +315,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #fff2cc !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri4()">
                      <i class=" icon-filter"></i> 
@@ -358,6 +359,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #c6e0b4 !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri6()">
                      <i class=" icon-filter"></i> 
@@ -400,6 +402,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #fce4d6 !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri8()">
                      <i class=" icon-filter"></i> 
@@ -422,6 +425,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #fce4d6 !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri9()">
                      <i class=" icon-filter"></i> 
@@ -442,6 +446,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #fce4d6 !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri10()">
                      <i class=" icon-filter"></i> 
@@ -482,6 +487,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #b4c6e7 !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri12()">
                      <i class=" icon-filter"></i> 
@@ -543,6 +549,7 @@ recupereIDactivite
                   text-align: center;
                   background-color: #e6e6e6 !important;
                 "
+                id="taillecol1"
               >
               <i @click="Tri15()">
                      <i class=" icon-filter"></i> 
@@ -612,13 +619,13 @@ recupereIDactivite
                     ? 'graybg'
                     : 'whitebg'
                 "></td>
-              <td style="text-align: right"
+              <td style="text-align: right" 
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
               >
                 {{ GroupeSourceFinancement.NombrePlani }}
               </td>
 
-              <td style="text-align: right"  class="taillecol1"
+              <td style="text-align: right"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
               >
                 {{
@@ -632,7 +639,7 @@ recupereIDactivite
               >
                 {{GroupeSourceFinancement.NombreContract }}
               </td>
-              <td style="text-align: right"
+              <td style="text-align: right" id="taillecol1"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
                 {{
                   formatageSommeSansFCFA(
@@ -646,7 +653,7 @@ recupereIDactivite
                 {{GroupeSourceFinancement.NombreAttribue
                 }}
               </td>
-             <td style="text-align: right"
+             <td style="text-align: right" id="taillecol1"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
                 {{
                   formatageSommeSansFCFA(
@@ -661,7 +668,7 @@ recupereIDactivite
                 {{GroupeSourceFinancement.NombreEnCoursExé
                 }}
               </td>
-             <td style="text-align: right"
+             <td style="text-align: right" id="taillecol1"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
                 {{
                   formatageSommeSansFCFA(
@@ -669,7 +676,7 @@ recupereIDactivite
                   )
                 }}
               </td>
-             <td style="text-align: right"
+             <td style="text-align: right" id="taillecol1"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
                 {{
                   formatageSommeSansFCFA(
@@ -3741,7 +3748,7 @@ th {
   background-color: #fbb203 !important;
 }
 #taillecol1{
-    width: 1000%;
+    width: 100% !important;
     text-align:right
 }
 </style>
