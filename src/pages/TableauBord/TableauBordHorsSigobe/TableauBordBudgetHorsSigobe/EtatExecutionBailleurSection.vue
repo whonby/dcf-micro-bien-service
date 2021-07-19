@@ -86,7 +86,25 @@
                   class="span"
                   v-show="InputLibelleBailleurdata == true"
                 ></money>
-                BAILLEUR/SECTION
+                BAILLEUR
+              </th>
+
+              <th v-if="recupereIDactivite!=0">
+
+                  <i @click="ActiveInputLigne" id="style1" class=" icon-search"></i> 
+                      
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                    <model-list-select v-show="inputLigneCode == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="inputLigneCode1"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="CODE UA"
+                >
+                </model-list-select>
+                SECTION
               </th>
 
               <th id="taillecol"
@@ -285,6 +303,12 @@
               >
                 {{ GroupeSourceFinancement.libelle }}
               </td>
+
+              <td v-if="recupereIDactivite!=0"
+                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+                {{ 0 }}
+              </td>
+
               <td style="text-align:right"
                 v-bind:class="
                   recupereIDactivite == GroupeSourceFinancement.id
@@ -336,6 +360,7 @@
                v-for="GroupeUa in AfficheUaGroupe(GroupeSourceFinancement.id)" :key="GroupeUa">
 
                 
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
