@@ -91,6 +91,131 @@
                 </tbody>
               </table>
 
+                  <table class="table table-bordered"  style="
+                  font-size: 14px;
+                  color:#000;
+                  font-weight: bold;
+                ">
+  <tbody >
+  <tr>
+    <td>&nbsp;</td>
+    <td>Marché/Contrat initial</td>
+    <td v-for="tem in test1" :key="tem">Avenant {{tem}} </td>
+    
+    <td> Total Avenant</td>
+    <td>Marché/Contrat Actuel</td>
+  </tr>
+  <tr>
+    <td>Objet</td>
+    <td> {{libelleMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.objet_avenant || 'Non renseigné'}}</td>
+    <td >
+      
+    </td>
+    <td></td>
+   
+  </tr>
+  <tr>
+    <td>Numero</td>
+    <td> {{NumeroMarche(test) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.numero_avenant || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Date</td>
+    <td> {{DateMarche(test) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formaterDate(tem.date_avenant) || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Titulaire</td>
+    <td>1</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{afficherEntrepriseNom(recupereIdEntreprise(tem.marche_id)) || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  <tr>
+    <td>Montant</td>
+    <td> {{formatageSommeSansFCFA(parseFloat((MontantMarche(test)))) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formatageSommeSansFCFA(parseFloat(tem.montant_avenant)) || 'Non renseigné'}}</td>
+    <td>
+      <span >
+      {{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}
+        </span>
+    </td>
+    <td >
+        {{ formatageSommeSansFCFA(  parseFloat(MontantReelMarche(test)) +  parseFloat(SommeAvenant(test)) ) }}
+    </td>
+    
+  </tr>
+  <tr>
+    <td>Taux</td>
+    <td> 100 %</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}</td>
+    <td>
+      <span >{{formatageSommeSansFCFA(parseFloat(TauxDesAvenant(test))) || 'Non renseigné'}}</span>
+    </td>
+    
+    
+  </tr>
+  <tr>
+    <td>Durée</td>
+    <td>{{DureMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}}</td>
+   
+   <td></td>
+   <td></td>
+  </tr>
+  <tr>
+    <td>Taux</td>
+    <td>100 %</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Sorce de financement</td>
+    <td> {{LibellesourceFinancement(test) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(idsourceFinancement(tem.marche_id)) || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Ligne Budgetaire</td>
+    <td>{{LibelleLigneBudgetaire(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(tem.marche_id))) || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Bénéficiaires</td>
+    <td>{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{beneficiaireMarche(tem.marche_id) || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Livrables</td>
+    <td>{{livrableMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{livrableMarche(tem.marche_id) || 'Non renseigné'}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Autres</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  </tbody>
+  </table>
+
       </div>
     </div>
  <table class="table table-bordered table-striped">
@@ -332,10 +457,17 @@ editMandat:{},
       recupereIDSection:0,
       source_financement_id1:0,
       test:0,
+      test1:0,
     };
   },
-  mounted(){
+  created(){
+    console.log("tranquille")
+  
+    console.log(this.apercuFacture(this.test))
+    this.test1 = this.listeDesAvenant(this.test)
+    console.log(this.test1)
    
+     
   },
 
   computed: {
@@ -529,10 +661,28 @@ SommeAvenant() {
         }
       };
     },
+    Total(){
+      return id =>{
+        if(id !='' && id != null){
+          return this.avenants.filter(tem => this.MontantMarche(tem.marche_id) && this.SommeAvenant(tem.marche_id))
+        }
+      }
+    },
 listeDesAvenant() {
       return id => {
         if (id != null && id != "") {
            return this.avenants.filter(qtreel => qtreel.marche_id== id);
+
+     
+        }
+      };
+    },
+
+TauxDesAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id== id
+           ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.taux_avenant), 0).toFixed(0); 
 
      
         }
@@ -779,6 +929,31 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+     beneficiaireMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.beneficiaire
+      }
+      return 0
+        }
+      };
+    },
+     livrableMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.livrable
+      }
+      return 0
+        }
+      };
+    },
+    
     Uaid() {
       return id => {
         if (id != null && id != "") {
@@ -887,6 +1062,18 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+    LivrableMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.duree
+      }
+      return 0
+        }
+      };
+    },
     MontantReelMarche() {
       return id => {
         if (id != null && id != "") {
@@ -973,6 +1160,43 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+     DateMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.date_approbation_marche_prevue
+      }
+      return 0
+        }
+      };
+    },
+     MontantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_marche
+      }
+      return 0
+        }
+      };
+    },
+     MontantMarches() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.filter(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_marche
+      }
+      return 0
+        }
+      };
+    },
+    
      NumeroOrdreMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1044,6 +1268,8 @@ TriaffichageUniteAdminstrative() {
       });
     },
 
+    
+
   },
 
   methods: {
@@ -1054,6 +1280,11 @@ TriaffichageUniteAdminstrative() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+
+    totalGeneral(id){
+        return (this.MontantReelMarche(id)+this.MontantReelMarche(id))
+    },
     triModificationBudget(){
       if(this.triModificationBudgetdata==0){
         this.triModificationBudgetdata=1;
@@ -1077,6 +1308,8 @@ TriaffichageUniteAdminstrative() {
   apercuFacture(id) {
 if(this.test==0){
   this.test=id
+
+  
    this.$("#testModal").modal({
         backdrop: "static",
         keyboard: false,
@@ -1091,14 +1324,8 @@ if(this.test==0){
       });
        
       }
-     
-     
-
     },
 
-
-
-  
 TauxExecution(id) {
       if (
         this.MontantExecuteMarche(id) == 0 &&

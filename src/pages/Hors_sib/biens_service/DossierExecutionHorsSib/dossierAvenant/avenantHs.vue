@@ -104,7 +104,7 @@
            
           <td>
            <div class="control-group">
-            <label class="control-label">Montant ht</label>
+            <label class="control-label">Montant HT</label>
             <div class="controls">
               <!-- <input
                 type="text"
