@@ -222,15 +222,15 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                          <button @click="TriParOrdre()">
+                                          <i style="font-size: 15px;"  @click="TriParOrdre()">
                                         <i class=" icon-filter"></i> 
                                           
-                                        </button>
+                                        </i>
                                         
-                                          <button @click="InputNomreTest">
+                                          <i style="font-size: 15px;" @click="InputNomreTest">
                                         <i class=" icon-search"></i> 
                                           
-                                        </button>
+                                        </i>
                                           <money style="text-align:left;color:red" 
                                           v-model="InputNomre_Test" class="span"
                                             v-show="InputNomreTestdata == true"></money>
@@ -244,15 +244,15 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                          <button @click="TriMontantPlanif()">
+                                          <i style="font-size: 15px;" @click="TriMontantPlanif()">
                                         <i class=" icon-filter"></i> 
                                           
-                                        </button>
+                                        </i>
 
-                                          <button @click="InputMontantContratMarche">
+                                          <i style="font-size: 15px;" @click="InputMontantContratMarche">
                                         <i class=" icon-search"></i> 
                                           
-                                        </button>
+                                        </i>
                                           <money style="text-align:left;color:red" 
                                           v-model="montantContratMarche" class="span"
                                             v-show="activeMontantContratMarche == true"></money>
@@ -264,14 +264,14 @@
                                           color: #000;
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
-                                          <button @click="TriNombreParMarchecontrat()">
+                                          <i @click="TriNombreParMarchecontrat()">
                                         <i class=" icon-filter" title="filtrer par nombre"></i> 
                                           
-                                        </button>
-                                          <button @click="InputNombre">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputNombre">
                                         <i class=" icon-search" title="rechercher par nombre"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="nombre_cont" class="span"
@@ -284,14 +284,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                            <button @click="TriParMontantContractuali()">
+                                            <i style="font-size: 15px;" @click="TriParMontantContractuali()">
                                         <i class=" icon-filter" title="trier par ordre croissante ou decroissante "></i> 
                                           
-                                        </button>
-                                          <button @click="InputMontantContra">
+                                        </i>
+                                          <i style="font-size: 14px;" @click="InputMontantContra">
                                         <i class=" icon-search" title="rechercher par montant"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montant_cont" class="span"
@@ -306,14 +306,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                            <button @click="TriParNombreMarcheAtribue()">
+                                            <i style="font-size: 15px;" @click="TriParNombreMarcheAtribue()">
                                         <i class=" icon-filter" title="filter par ordre croissante ou decroissante"></i> 
                                           
-                                        </button>
-                                            <button @click="InputNombreAttribue">
+                                        </i>
+                                            <i style="font-size: 15px;" @click="InputNombreAttribue">
                                         <i class=" icon-search" title="rechercher par nombre"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="nombreMarche_attribue" class="span"
@@ -326,14 +326,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
                                           
-                                          <button @click="TriParMontantMarcheAttribue()">
+                                          <i style="font-size: 15px;" @click="TriParMontantMarcheAttribue()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
                                           
-                                        </button>
+                                        </i>
                                           
-                                            <button @click="InputMontantmacheAttribue">
+                                            <i style="font-size: 15px;" @click="InputMontantmacheAttribue">
                                         <i class=" icon-search" title="rerchercher par montant"></i> 
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montantMarche_attribue" class="span"
@@ -349,14 +349,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                            <button @click="TriParNombreMarcheExecution()">
+                                            <i style="font-size: 15px;" @click="TriParNombreMarcheExecution()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
                                           
-                                        </button>
-                                          <button @click="InputNombreMarcheExcute">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputNombreMarcheExcute">
                                         <i class=" icon-search" title="rechercher par nombre"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="nombreMarche_excute" class="span"
@@ -370,13 +370,13 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
                                           
-                                            <button @click="TriParMontantTotalMarche()">
+                                            <i style="font-size: 15px;" @click="TriParMontantTotalMarche()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
                                           
-                                        </button>
-                                          <button @click="InputMontantTotalMarcheExcute">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputMontantTotalMarcheExcute">
                                         <i class=" icon-search" title="rechercher par montant"></i> 
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montantTotalMarcheExcute" class="span"
@@ -390,14 +390,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                          <button @click="TriParMontantMarcheExcute()">
+                                          <i style="font-size: 15px;" @click="TriParMontantMarcheExcute()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant "></i> 
-                                        </button>
+                                        </i>
 
-                                          <button @click="InputMotantExcute">
+                                          <i style="font-size: 15px;" @click="InputMotantExcute">
                                         <i class=" icon-search" title="rechercher par montant"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montant_Excute" class="span"
@@ -410,14 +410,14 @@
                                           color: #000;
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
-                                            <button @click="TriParMontantMarcheResteExcute()">
+                                            <i style="font-size: 15px;" @click="TriParMontantMarcheResteExcute()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
                                           
-                                        </button>
-                                          <button @click="InputResteExecute">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputResteExecute">
                                         <i class=" icon-search" title="rechercher par montant"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montantReste_Excute" class="span"
@@ -431,14 +431,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
 
-                                            <button @click="TriParNombreMarcheSouffrance()">
+                                            <i style="font-size: 15px;" @click="TriParNombreMarcheSouffrance()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
                                           
-                                        </button>
-                                          <button @click="InputNombreMarcheSouffrance">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputNombreMarcheSouffrance">
                                         <i class=" icon-search" title="rechercher par nombre"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="nombreMarche_Souffrance" class="span"
@@ -452,14 +452,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
                                           
-                                            <button @click="TriParMontantResteExcuteMarcheSouffrance()">
+                                            <i style="font-size: 15px;" @click="TriParMontantResteExcuteMarcheSouffrance()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
                                           
-                                        </button>
-                                          <button @click="InputMontantResteExcuteSouffrance">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputMontantResteExcuteSouffrance">
                                         <i class=" icon-search" title="rechercher par montant"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montant_reste_souffrance" class="span"
@@ -472,12 +472,12 @@
                                           color: #000;
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1" class="posit-form">
-                                          <button @click="TriParTauxMarcheSouffrance()">
+                                          <i style="font-size: 15px;" @click="TriParTauxMarcheSouffrance()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                                        </button>
-                                          <button @click="InputTauxMarcheSouffrance">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputTauxMarcheSouffrance">
                                         <i class=" icon-search" title="rechercher par taux"></i> 
-                                        </button>
+                                        </i>
                                           <money style="text-align:left;color:red" 
                                           v-model="taux_marche" class="span"
                                             v-show="activeTauxMarcheSouffrance == true"></money>
@@ -491,14 +491,14 @@
                                           color: #000;
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
-                                          <button @click="TriParNombreMarcheResilier()">
+                                          <i style="font-size: 15px;" @click="TriParNombreMarcheResilier()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
                                           
-                                        </button>
-                                          <button @click="InputNombreMarcheResilier">
+                                        </i>
+                                          <i style="font-size: 15px;" @click="InputNombreMarcheResilier">
                                         <i class=" icon-search" title="rechercher par nombre"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="nombreMarche_resilier" class="span"
@@ -512,14 +512,14 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1">
                                           
-                                          <button @click="TriParMontantResteExcuteMarcheResilier()">
+                                          <i style="font-size: 15px;" @click="TriParMontantResteExcuteMarcheResilier()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
                                           
-                                        </button>
-                                            <button @click="InputMontantResteExecute">
+                                        </i>
+                                            <i style="font-size: 15px;" @click="InputMontantResteExecute">
                                         <i class=" icon-search" title="rechercher par montant"></i> 
                                           
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="montantReste_execute" class="span"
@@ -533,12 +533,12 @@
                                           text-align: center;
                                           background-color: #fbb203 !important;" colspan="1"> 
 
-                                          <button @click="TriParTauxMarcheResilier()">
+                                          <i style="font-size: 15px;" @click="TriParTauxMarcheResilier()">
                                         <i class=" icon-filter" title="filtrer par ordre croissant ou décroissant"></i> 
-                                        </button>
-                                        <button @click="InputTauxMarcheResilier">
+                                        </i>
+                                        <i style="font-size: 15px;" @click="InputTauxMarcheResilier">
                                         <i class=" icon-search" title="rechercher par taux"></i> 
-                                        </button>
+                                        </i>
 
                                           <money style="text-align:left;color:red" 
                                           v-model="TauxMarche_Resilier" class="span"
