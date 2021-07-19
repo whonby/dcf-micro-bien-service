@@ -94,7 +94,7 @@
                   <i @click="ActiveInputLigne" id="style1" class=" icon-search"></i> 
                       
                      <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
-                    <model-list-select v-show="inputLigneCode == true"
+                     <model-list-select v-show="inputLigneCode == true"
                   style="background-color: #fff; border: 2px solid #000"
                   class="wide"
                   :list="uniteAdministratives"
