@@ -79,16 +79,26 @@
 
               <th>
 
-                  <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
+                  <!-- <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
                 <money
                   style="text-align: left; color: red"
                   v-model="Libelle_bailleur"
                   class="span"
                   v-show="InputLibelleBailleurdata == true"
-                ></money>
-                BAILLEUR/SECTION
+                ></money> -->
+                BAILLEUR
               </th>
+ <th>
 
+                  <!-- <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Libelle_bailleur"
+                  class="span"
+                  v-show="InputLibelleBailleurdata == true"
+                ></money> -->
+                SECTION
+              </th>
               <th id="taillecol"
                 style="
                   font-size: 12px;
@@ -285,6 +295,7 @@
               >
                 {{ GroupeSourceFinancement.libelle }}
               </td>
+              <td></td>
               <td style="text-align:right"
                 v-bind:class="
                   recupereIDactivite == GroupeSourceFinancement.id
@@ -339,7 +350,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
-
+  <td></td>
                   <td>
                     <button @click="ShowMyLigne(GroupeUa)">
                      <i class="icon-arrow-right"></i> </button>
