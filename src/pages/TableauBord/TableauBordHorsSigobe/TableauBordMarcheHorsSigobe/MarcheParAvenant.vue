@@ -14,7 +14,7 @@
       </button> -->
     </div> 
       <div class="modal-body" id="printpdf1">
-         <table class="table table-bordered table-striped">
+         <!-- <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Objet du marche</th>
@@ -31,7 +31,7 @@
                     <td style="text-align:rigth">{{formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)))}}</td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
               <br>
                <table class="table table-bordered table-striped">
           <tr>
@@ -43,51 +43,175 @@
         </table>
      <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
-                    <!-- <th>Numero ordre</th> -->
-                    <th>Numéro Avenant</th>
-                    <th>Date</th>
-                    <th>Objet</th>
-                    <th>Titulaire</th>
-                    <th>Montant</th>
-                    <th>Taux</th>
-                    <th>Durée</th>
-                    <th>Source de financement</th>
-                     <th>Ligne budgétaire</th>
-                    <!-- <th>Bénéficiaires</th> -->
-                    <th>Livrables</th>
+                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
+                    <th></th>
+                    <th>Marché/Contrat initial</th>
+                    <th>Avenant {{itemAvenant.numero_avenant}}</th>
+                    <!-- <th>Avenant 1</th>
+                    <th>Avenant 1</th>
+                    <th>Avenant 1</th>
+                    <th>Avenant 1</th> -->
+                    <th>Total Avenant</th>
+                    <th>Marché/Contrat actuel</th>
+                     
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                      <th>Objet</th>
+                      <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+ <tr>
+                      <th>Numéro </th>
+                      <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Date</th>
+                     <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Titulaire</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Montant</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Taux</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Durée</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                  <tr>
+                      <th>Taux</th>
+                      <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+ <tr>
+                      <th>Source de financement</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Ligne budgétaire</th>
+                      <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Bénéficiaires</th>
+                    <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Livrables</th>
+                      <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Taux</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>AUTRES</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
 
-                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
-                    <!-- <td></td> -->
-                    <td>{{itemAvenant.numero_avenant}}</td>
-                    <td>{{formaterDate(itemAvenant.date_avenant)}}</td>
-                     <td>{{itemAvenant.objet_avenant}}</td>
-                    <td>{{afficherEntrepriseNom(recupereIdEntreprise(itemAvenant.marche_id))}}</td>
-                    <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(itemAvenant.montant_avenant))}}</td>
-                     <td>{{itemAvenant.taux_avenant}}</td>
-                    <td>{{itemAvenant.dure_avenant}}</td>
-                    <td>{{LibellesourceFinancement(idsourceFinancement(itemAvenant.marche_id))}}</td>
-                    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(itemAvenant.marche_id)))}}</td>
-                     <td></td>
-                  </tr>
-                  <tr >
-                    <!-- <td></td> -->
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    
-                   
-                    <td style="background-color: rgb(6, 184, 6);color:#000;text-align:center;font-size:14px">TOTAL</td>
-                    <td style="background-color: rgb(6, 184, 6);color:#000;text-align:right;font-size:14px;font-weight: bold;">{{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}</td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                     <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                    <td style="background-color: rgb(6, 184, 6);"></td>
-                  </tr>
                 </tbody>
               </table>
 
@@ -1218,8 +1342,8 @@ width: 95%;
 
 .tailgrand {
   width: 100%;
-  margin: 0 -50%;
-  height: 50%;
+  margin: -5% -50%;
+  height: 100%;
 }
 
 .modal-body {
