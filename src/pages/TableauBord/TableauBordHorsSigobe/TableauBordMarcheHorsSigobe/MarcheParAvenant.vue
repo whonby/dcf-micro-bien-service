@@ -43,14 +43,14 @@
         </table>
      <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
-                    
+                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
+                    <th></th>
                     <th>Marché/Contrat initial</th>
+                    <th>Avenant {{itemAvenant.numero_avenant}}</th>
+                    <!-- <th>Avenant 1</th>
                     <th>Avenant 1</th>
                     <th>Avenant 1</th>
-                    <th>Avenant 1</th>
-                    <th>Avenant 1</th>
-                    <th>Avenant 1</th>
+                    <th>Avenant 1</th> -->
                     <th>Total Avenant</th>
                     <th>Marché/Contrat actuel</th>
                      
@@ -59,7 +59,7 @@
                 <tbody>
                   <tr>
                       <th>Objet</th>
-                      <td>6</td>
+                      <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -69,19 +69,8 @@
                       <td>6</td>
                   </tr>
  <tr>
-                      <th>Objet</th>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Objet</th>
-                      <td>6</td>
+                      <th>Numéro </th>
+                      <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -91,19 +80,8 @@
                       <td>6</td>
                   </tr>
                    <tr>
-                      <th>Objet</th>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Objet</th>
-                      <td>6</td>
+                      <th>Date</th>
+                     <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -113,7 +91,8 @@
                       <td>6</td>
                   </tr>
                    <tr>
-                      <th>Objet</th>
+                      <th>Titulaire</th>
+                       <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -123,8 +102,30 @@
                       <td>6</td>
                   </tr>
                    <tr>
-                      <th>Objet</th>
+                      <th>Montant</th>
+                       <td>{{test}}</td>
                       <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Taux</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Durée</th>
+                       <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -134,8 +135,8 @@
                       <td>6</td>
                   </tr>
                   <tr>
-                      <th>Objet</th>
-                      <td>6</td>
+                      <th>Taux</th>
+                      <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -145,19 +146,8 @@
                       <td>6</td>
                   </tr>
  <tr>
-                      <th>Objet</th>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Objet</th>
-                      <td>6</td>
+                      <th>Source de financement</th>
+                       <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -167,19 +157,8 @@
                       <td>6</td>
                   </tr>
                    <tr>
-                      <th>Objet</th>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Objet</th>
-                      <td>6</td>
+                      <th>Ligne budgétaire</th>
+                      <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -189,8 +168,8 @@
                       <td>6</td>
                   </tr>
                    <tr>
-                      <th>Objet</th>
-                      <td>6</td>
+                      <th>Bénéficiaires</th>
+                    <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -200,8 +179,30 @@
                       <td>6</td>
                   </tr>
                    <tr>
-                      <th>Objet</th>
+                      <th>Livrables</th>
+                      <td>{{test}}</td>
                       <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>Taux</th>
+                       <td>{{test}}</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                      <td>6</td>
+                  </tr>
+                   <tr>
+                      <th>AUTRES</th>
+                       <td>{{test}}</td>
                       <td>6</td>
                       <td>6</td>
                       <td>6</td>
@@ -1341,8 +1342,8 @@ width: 95%;
 
 .tailgrand {
   width: 100%;
-  margin: 0 -50%;
-  height: 50%;
+  margin: -5% -50%;
+  height: 100%;
 }
 
 .modal-body {
