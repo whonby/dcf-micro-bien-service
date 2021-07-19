@@ -306,7 +306,7 @@
 
               <td v-if="recupereIDactivite!=0"
                 v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{ 0 }}
+                {{ AfficheUaGroupeTaille(GroupeSourceFinancement.id) }}
               </td>
 
               <td style="text-align:right"
@@ -1155,13 +1155,35 @@ export default {
               array_exercie.push(val.section_id);
             });
             let unique = [...new Set(array_exercie)];
-            console.log(unique);
             if (unique.length == 0) {
               return [];
             }
             return unique;
           }
           return [];
+        }
+      };
+    },
+
+    AfficheUaGroupeTaille() {
+      return (id) => {
+        if (id != 0 && id != "") {
+          let objet = this.budgetEclate.filter(
+            (item) => item.source_financement_id == id
+          );
+          //  let vm=this
+          let array_exercie = [];
+          if (objet.length > 0) {
+            objet.forEach(function (val) {
+              array_exercie.push(val.section_id);
+            });
+            let unique = [...new Set(array_exercie)];
+            if (unique.length == 0) {
+              return 0;
+            }
+            return unique.length;
+          }
+          return 0;
         }
       };
     },
