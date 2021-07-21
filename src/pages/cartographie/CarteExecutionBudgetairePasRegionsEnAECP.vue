@@ -63,13 +63,13 @@
 
                                 </model-list-select>
 
-                                <h6>Type Budget</h6>
+                                <!-- <h6>Type Budget</h6>
                                 <label for="AE">
                                     <input type="radio" v-model="type_budget" value="AE" id="AE"> <span>(AE) Autorisation d'engagement <b></b></span>
                                 </label>
                                 <label for="CP">
                                     <input type="radio" v-model="type_budget" value="CP" id="CP"> <span>(CP) Credit de payement<b></b></span>
-                                </label>
+                                </label> -->
 
                             </div>
 
@@ -202,7 +202,7 @@
 
 
                                 >
-                                    <l-tooltip  >{{l.ville}}</l-tooltip>
+                                    <!-- <l-tooltip  >{{l.ville}}</l-tooltip>
                                     <l-popup>
                                         <b>{{l.ville}}</b> <br>
                                         <div >
@@ -210,6 +210,18 @@
                                             Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
                                             Budget restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
                                             Taux d'exécution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
+                                        </div>
+                                    </l-popup> -->
+
+
+                                     <l-tooltip  >{{0}}</l-tooltip>
+                                    <l-popup>
+                                        <b>{{0}}</b> <br>
+                                        <div >
+                                            Budget: <span style="color: #003900; "><b>{{formatageSomme(0)}}</b></span> <br>
+                                            Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(100)}}</b></span><br>
+                                            Budget restant:<span style="color: darkred; "><b>{{formatageSomme(0)}}</b></span><br>
+                                            Taux d'exécution:<span style="color: #e36706; "><b>{{0}} %</b></span>
                                         </div>
                                     </l-popup>
 
@@ -499,6 +511,7 @@ console.log(this.localisation)
                 "getterInformationCarteInfrastructure","getterFiltreCarteInfrastructure",
                 "supprmieMarcheFiltreCarteInfrastructure","supprmiInfoFiltreCarteInfrastructure","gettersDossierMandat",
                 "gettersDemandeEngagement",
+                "gettersgestionOrdrePaiement",
                 "gettersDossierLiquidation",]),
 
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
@@ -618,52 +631,39 @@ console.log(this.localisation)
                      if(objet_marches.length==0) return 0;
 
                       let vm =this
-                     let montant_ae=0;
-                      let montant_cp=0;
+                      let montant=0;
                      objet_marches.forEach(function (value) {
-                          montant_ae=parseFloat(montant_ae) + parseFloat(vm.montantExecuteAEPasMarche(value.id))
-
-                         montant_cp=parseFloat(montant_cp) + parseFloat(vm.montantExecuteCPPasMarche(value.id))
+                         montant=parseFloat(montant) + parseFloat(vm.montantExecutePasMarche(value.id))
 
                      })
 
-                     if(this.type_budget=="AE") return montant_ae
-
-                     return montant_cp
+                     return montant ;
                  }
             },
 
-            montantExecuteAEPasMarche(){
+            montantExecutePasMarche(){
               return marche_id=>{
-                  if(!marche_id) return 0;
-
-                return  this.gettersDemandeEngagement
-                      .filter(
-                          (item) =>
-                              this.liquidationid(item.id) == 8 && item.marche_id == marche_id
-                      )
-                      .reduce(
-                          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-                          0
-                      )
-                      .toFixed(0);
+                  if(!marche_id) {
+                         return  this.gettersgestionOrdrePaiement.filter(
+                          (item) =>item.marche_id == marche_id
+                      ).reduce(
+                          (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+                  }
+                  return 0;
               }
             },
 
             montantExecuteCPPasMarche(){
                 return marche_id=>{
-                    if(!marche_id) return 0;
+                    if(!marche_id) {
+                             return  this.gettersDemandeEngagement.filter(
+                            (item) =>this.liquidationidmandat(item.id) == 8 && item.marche_id == marche_id
+                        ).reduce(
+                            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),0).toFixed(0);
+                    }
+                    return 0;
 
-                    return  this.gettersDemandeEngagement
-                        .filter(
-                            (item) =>
-                                this.liquidationidmandat(item.id) == 8 && item.marche_id == marche_id
-                        )
-                        .reduce(
-                            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-                            0
-                        )
-                        .toFixed(0);
+                   
                 }
             },
 

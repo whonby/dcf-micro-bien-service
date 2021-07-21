@@ -60,8 +60,8 @@
             <div class="card-body">
               <table class="noborder" >
                 <tr>
-                  <th style="color:#000"> Nombre de dossiers :</th>
-                  <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>
+                  <th style="color:#000; width:190px;">Nombre de dossiers </th>
+                  <td style="color:#000; font-weight:bold; width:10px;"> : {{lenghtOpProvisoire}} </td>
                 </tr>
                 <tr>
                   <th style="color:#000">Taux :</th>
@@ -69,7 +69,7 @@
                 </tr>
                 <tr>
                   <th style="color:#000">Montant :</th>
-                  <td style="color:#000; font-weight:bold">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
+                  <td style="color:#000; font-weight:bold; width:170px;">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
                 </tr>
               </table>
               <br>
@@ -98,7 +98,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
+                  <td style="color:#000; font-weight:bold; width:100px;">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
                 </tr>
               </table>
               <br>
@@ -125,7 +125,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpRegularise))}}</td>
+                  <td style="color:#000; font-weight:bold; width:100px;"> {{formatageSommeSansFCFA(parseFloat(sommeOpRegularise))}}</td>
                 </tr>
               </table>
               <br>
@@ -150,7 +150,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpNonRegularise))}} </td>
+                  <td style="color:#000; font-weight:bold; width:100px;"> {{formatageSommeSansFCFA(parseFloat(sommeOpNonRegularise))}} </td>
                 </tr>
               </table>
               <br>
@@ -176,7 +176,7 @@ en cours de traitement</h4>
                 </tr> 
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold"> {{MontantOpHorsDelai}}</td>
+                  <td style="color:#000; font-weight:bold; width:100px;"> {{formatageSommeSansFCFA(parseFloat(MontantOpHorsDelai))}}</td>
                 </tr>
               </table>
               <br>
@@ -352,7 +352,7 @@ export default {
   },
   data(){
     return{
-      Opprovisoiredata:0,
+      Opprovisoiredata:1,
       OpprovisoireDataEnCours:0,
       OpprovisoireDataRegu:0,
       OpprovisoireDataNonRegu:0,

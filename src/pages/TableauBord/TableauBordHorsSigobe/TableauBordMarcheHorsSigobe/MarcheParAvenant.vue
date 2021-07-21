@@ -98,6 +98,7 @@
     <td>
       <span >{{TauxDesAvenant(test) || 'Non renseigné'}} %</span>
     </td>
+    <td></td>
     
     
   </tr>
