@@ -210,17 +210,12 @@
                 MODIFICATION BUDGETAIRE 
                  <i @click="InputMontantReamenagement">
                      <i class=" icon-search"></i> 
-                      
-<<<<<<< HEAD
-                    </button>
+                    </i>
+                    <!-- </button> -->
                      <money style="text-align:left;color:red"   
                         v-model="montant_reamenagement" class="span" 
                         v-show="activeMontantReamenagement == true">
                      </money>
-=======
-                    </i>
-                     <money style="text-align:left;color:red"   v-model="montant_reamenagement" class="span" v-show="activeMontantReamenagement == true"></money>
->>>>>>> c17e9e230715095aeb0299acb9a75ca50d39a2cb
                  
               </th>
               <th
