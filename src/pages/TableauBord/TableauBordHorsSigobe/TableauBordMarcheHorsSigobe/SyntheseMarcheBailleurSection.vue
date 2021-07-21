@@ -1,22 +1,22 @@
 recupereIDactivite
 <template>
   <div>
-    <input  type="hidden" :value="Tri1data"/>
-    <input  type="hidden" :value="Tri2data"/>
-    <input  type="hidden" :value="Tri3data"/>
-    <input  type="hidden" :value="Tri4data"/>
-    <input  type="hidden" :value="Tri5data"/>
-    <input  type="hidden" :value="Tri6data"/>
-    <input  type="hidden" :value="Tri7data"/>
-    <input  type="hidden" :value="Tri8data"/>
-    <input  type="hidden" :value="Tri9data"/>
-    <input  type="hidden" :value="Tri10data"/>
-    <input  type="hidden" :value="Tri11data"/>
-    <input  type="hidden" :value="Tri12data"/>
-    <input  type="hidden" :value="Tri13data"/>
-    <input  type="hidden" :value="Tri14data"/>
-    <input  type="hidden" :value="Tri15data"/>
-    <input  type="hidden" :value="Tri16data"/>
+    <input type="hidden" :value="Tri1data" />
+    <input type="hidden" :value="Tri2data" />
+    <input type="hidden" :value="Tri3data" />
+    <input type="hidden" :value="Tri4data" />
+    <input type="hidden" :value="Tri5data" />
+    <input type="hidden" :value="Tri6data" />
+    <input type="hidden" :value="Tri7data" />
+    <input type="hidden" :value="Tri8data" />
+    <input type="hidden" :value="Tri9data" />
+    <input type="hidden" :value="Tri10data" />
+    <input type="hidden" :value="Tri11data" />
+    <input type="hidden" :value="Tri12data" />
+    <input type="hidden" :value="Tri13data" />
+    <input type="hidden" :value="Tri14data" />
+    <input type="hidden" :value="Tri15data" />
+    <input type="hidden" :value="Tri16data" />
 
     <table class="table table-striped">
       <tbody>
@@ -110,6 +110,7 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                   width: 8%;
                 "
+                colspan=""
               ></th>
 
               <th
@@ -119,10 +120,8 @@ recupereIDactivite
                   text-align: center;
                   color: #000;
                   background-color: #ddebf7 !important;
-                  
                 "
                 colspan="2"
-              
               >
                 Planification (Avant Contractualisation)
               </th>
@@ -212,8 +211,7 @@ recupereIDactivite
                 "
                 colspan=""
               >
-
-               <!-- <button @click="InputLibelleBailleur">
+                <!-- <button @click="InputLibelleBailleur">
                      <i class=" icon-search"></i> 
                     </button>
                      <money style="text-align:left;color:red" 
@@ -221,7 +219,7 @@ recupereIDactivite
                      v-show="InputLibelleBailleurdata == true"></money> -->
                 BAILLEUR
               </th>
- <th
+              <th
                 style="
                   font-size: 12px;
                   font-weight: bold;
@@ -232,14 +230,13 @@ recupereIDactivite
                 "
                 colspan=""
               >
-
-               <!-- <button @click="InputLibelleBailleur">
+                <!-- <button @click="InputLibelleBailleur">
                      <i class=" icon-search"></i> 
                     </button>
                      <money style="text-align:left;color:red" 
                      v-model="Libelle_bailleur" class="span" 
                      v-show="InputLibelleBailleurdata == true"></money> -->
-               SECTION
+                SECTION
               </th>
               <th
                 style="
@@ -251,16 +248,19 @@ recupereIDactivite
                   width: 8%;
                 "
               >
-               <i @click="Tri1()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                  &nbsp;&nbsp;
-                     <i @click="InputNombreTri1" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri1" class="span" 
-                     v-show="InputNombreTri1data == true"></money>
+                <i @click="Tri1()">
+                  <i class="icon-filter"></i>
+                </i>
+                &nbsp;&nbsp;
+                <i @click="InputNombreTri1">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri1"
+                  class="span"
+                  v-show="InputNombreTri1data == true"
+                ></money>
                 Nombre
               </th>
               <th
@@ -273,16 +273,19 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri2()">
-                     <i class=" icon-filter"></i> 
-              </i>
-              
-              <i @click="InputMontantTri1" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Montant_tri1" class="span" 
-                     v-show="InputMontantTri1data == true"></money>
+                <i @click="Tri2()">
+                  <i class="icon-filter"></i>
+                </i>
+
+                <i @click="InputMontantTri1">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Montant_tri1"
+                  class="span"
+                  v-show="InputMontantTri1data == true"
+                ></money>
                 Montant
               </th>
 
@@ -295,16 +298,19 @@ recupereIDactivite
                   background-color: #fff2cc !important;
                 "
               >
-              <i @click="Tri3()">
-                     <i class=" icon-filter"></i> 
-                    </i><br>
-                    
-              <i @click="InputNombresTri1" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombres_tri1" class="span" 
-                     v-show="InputNombresTri1data == true"></money>
+                <i @click="Tri3()">
+                  <i class="icon-filter"></i> </i
+                ><br />
+
+                <i @click="InputNombresTri1">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombres_tri1"
+                  class="span"
+                  v-show="InputNombresTri1data == true"
+                ></money>
                 Nombre
               </th>
               <th
@@ -317,16 +323,19 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri4()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                    
-              <i @click="InputMontantTri4" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri4" class="span" 
-                     v-show="InputNombreTri4data == true"></money>
+                <i @click="Tri4()">
+                  <i class="icon-filter"></i>
+                </i>
+
+                <i @click="InputMontantTri4">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri4"
+                  class="span"
+                  v-show="InputNombreTri4data == true"
+                ></money>
                 Montant
               </th>
 
@@ -339,16 +348,19 @@ recupereIDactivite
                   background-color: #c6e0b4 !important;
                 "
               >
-              <i @click="Tri5()">
-                     <i class=" icon-filter"></i> 
-                    </i>
+                <i @click="Tri5()">
+                  <i class="icon-filter"></i>
+                </i>
 
-                    <i @click="InputMontantTri5" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri5" class="span" 
-                     v-show="InputNombreTri5data == true"></money>
+                <i @click="InputMontantTri5">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri5"
+                  class="span"
+                  v-show="InputNombreTri5data == true"
+                ></money>
                 Nombre
               </th>
               <th
@@ -361,16 +373,19 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri6()">
-                     <i class=" icon-filter"></i> 
-                    </i>
+                <i @click="Tri6()">
+                  <i class="icon-filter"></i>
+                </i>
 
-                    <i @click="InputMontantTri6" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri6" class="span" 
-                     v-show="InputNombreTri6data == true"></money>
+                <i @click="InputMontantTri6">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri6"
+                  class="span"
+                  v-show="InputNombreTri6data == true"
+                ></money>
                 Montant
               </th>
               <th
@@ -382,16 +397,19 @@ recupereIDactivite
                   background-color: #fce4d6 !important;
                 "
               >
-              <i @click="Tri7()">
-                     <i class=" icon-filter"></i> 
-                    </i>
+                <i @click="Tri7()">
+                  <i class="icon-filter"></i>
+                </i>
 
-                     <i @click="InputMontantTri7" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri7" class="span" 
-                     v-show="InputNombreTri7data == true"></money>
+                <i @click="InputMontantTri7">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri7"
+                  class="span"
+                  v-show="InputNombreTri7data == true"
+                ></money>
                 Nombre
               </th>
               <th
@@ -404,18 +422,20 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri8()">
-                     <i class=" icon-filter"></i> 
-                    </i>
+                <i @click="Tri8()">
+                  <i class="icon-filter"></i>
+                </i>
 
-                    <i @click="InputMontantTri8" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri8" class="span" 
-                     v-show="InputNombreTri8data == true"></money>
+                <i @click="InputMontantTri8">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri8"
+                  class="span"
+                  v-show="InputNombreTri8data == true"
+                ></money>
                 Montant Total Marchés
-
               </th>
               <th
                 style="
@@ -427,15 +447,18 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri9()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                    <i @click="InputMontantTri9" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri9" class="span" 
-                     v-show="InputNombreTri9data == true"></money>
+                <i @click="Tri9()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri9">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri9"
+                  class="span"
+                  v-show="InputNombreTri9data == true"
+                ></money>
                 Montants Exécutés
               </th>
               <th
@@ -448,15 +471,18 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri10()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                   <i @click="InputMontantTri10" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri10" class="span" 
-                     v-show="InputNombreTri10data == true"></money>
+                <i @click="Tri10()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri10">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri10"
+                  class="span"
+                  v-show="InputNombreTri10data == true"
+                ></money>
                 Reste à Exécuter
               </th>
               <th
@@ -468,15 +494,18 @@ recupereIDactivite
                   background-color: #b4c6e7 !important;
                 "
               >
-              <i @click="Tri11()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                    <i @click="InputMontantTri11" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri11" class="span" 
-                     v-show="InputNombreTri11data == true"></money>
+                <i @click="Tri11()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri11">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri11"
+                  class="span"
+                  v-show="InputNombreTri11data == true"
+                ></money>
                 Nombre
               </th>
               <th
@@ -489,15 +518,18 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri12()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                    <i @click="InputMontantTri12" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri12" class="span" 
-                     v-show="InputNombreTri12data == true"></money>
+                <i @click="Tri12()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri12">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri12"
+                  class="span"
+                  v-show="InputNombreTri12data == true"
+                ></money>
                 Reste à Exécuter
               </th>
               <th
@@ -509,15 +541,18 @@ recupereIDactivite
                   background-color: #b4c6e7 !important;
                 "
               >
-              <i @click="Tri13()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                    <i @click="InputMontantTri13" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri13" class="span" 
-                     v-show="InputNombreTri13data == true"></money>
+                <i @click="Tri13()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri13">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri13"
+                  class="span"
+                  v-show="InputNombreTri13data == true"
+                ></money>
                 Taux
               </th>
               <th
@@ -529,16 +564,19 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                 "
               >
-              <i @click="Tri14()">
-                     <i class=" icon-filter"></i> 
-                    </i>
+                <i @click="Tri14()">
+                  <i class="icon-filter"></i>
+                </i>
 
-                     <i @click="InputMontantTri14" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri14" class="span" 
-                     v-show="InputNombreTri14data == true"></money>
+                <i @click="InputMontantTri14">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri14"
+                  class="span"
+                  v-show="InputNombreTri14data == true"
+                ></money>
                 Nombre
               </th>
               <th
@@ -551,15 +589,18 @@ recupereIDactivite
                 "
                 id="taillecol1"
               >
-              <i @click="Tri15()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                     <i @click="InputMontantTri15" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri15" class="span" 
-                     v-show="InputNombreTri15data == true"></money>
+                <i @click="Tri15()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri15">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri15"
+                  class="span"
+                  v-show="InputNombreTri15data == true"
+                ></money>
                 Reste à Exécuter
               </th>
               <th
@@ -571,15 +612,18 @@ recupereIDactivite
                   background-color: #e6e6e6 !important;
                 "
               >
-              <i @click="Tri16()">
-                     <i class=" icon-filter"></i> 
-                    </i>
-                     <i @click="InputMontantTri16" > 
-                     <i class=" icon-search"></i> 
-                    </i>
-                     <money style="text-align:left;color:red" 
-                     v-model="Nombre_tri16" class="span" 
-                     v-show="InputNombreTri16data == true"></money>
+                <i @click="Tri16()">
+                  <i class="icon-filter"></i>
+                </i>
+                <i @click="InputMontantTri16">
+                  <i class="icon-search"></i>
+                </i>
+                <money
+                  style="text-align: left; color: red"
+                  v-model="Nombre_tri16"
+                  class="span"
+                  v-show="InputNombreTri16data == true"
+                ></money>
                 Taux
               </th>
             </tr>
@@ -614,19 +658,31 @@ recupereIDactivite
                   }})</span
                 >
               </td>
-              <td  v-bind:class="
+              <td
+                v-bind:class="
                   recupereIDactivite == GroupeSourceFinancement.id
                     ? 'graybg'
                     : 'whitebg'
-                "></td>
-              <td style="text-align: right" 
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
+                "
+              ></td>
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
               >
                 {{ GroupeSourceFinancement.NombrePlani }}
               </td>
 
-              <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
               >
                 {{
                   formatageSommeSansFCFA(
@@ -634,110 +690,177 @@ recupereIDactivite
                   )
                 }}
               </td>
-              <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'"
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
               >
-                {{GroupeSourceFinancement.NombreContract }}
+                {{ GroupeSourceFinancement.NombreContract }}
               </td>
-              <td style="text-align: right" id="taillecol1"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                id="taillecol1"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.MontantContract
-                    )
+                    parseFloat(GroupeSourceFinancement.MontantContract)
                   )
                 }}
               </td>
-             <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{GroupeSourceFinancement.NombreAttribue
-                }}
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
+                {{ GroupeSourceFinancement.NombreAttribue }}
               </td>
-             <td style="text-align: right" id="taillecol1"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                id="taillecol1"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                        GroupeSourceFinancement.MontantAttribue
-                    )
+                    parseFloat(GroupeSourceFinancement.MontantAttribue)
                   )
                 }}
               </td>
-             <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{GroupeSourceFinancement.NombreEnCoursExé
-                }}
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
+                {{ GroupeSourceFinancement.NombreEnCoursExé }}
               </td>
-             <td style="text-align: right" id="taillecol1"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                id="taillecol1"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
                     parseFloat(GroupeSourceFinancement.MontantEnCoursExé)
                   )
                 }}
               </td>
-             <td style="text-align: right" id="taillecol1"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                id="taillecol1"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                        GroupeSourceFinancement.MontantExécutéEnCoursExé
-                    )
+                    parseFloat(GroupeSourceFinancement.MontantExécutéEnCoursExé)
                   )
                 }}
               </td>
-             <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(GroupeSourceFinancement.ResteAPayerEnCoursExé
-                      )
+                    parseFloat(GroupeSourceFinancement.ResteAPayerEnCoursExé)
                   )
                 }}
               </td>
-              <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{
-                    GroupeSourceFinancement.NombreSoufrance }}
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
+                {{ GroupeSourceFinancement.NombreSoufrance }}
               </td>
-              <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                        GroupeSourceFinancement.ResteAExécutéSoufrance
-                    )
+                    parseFloat(GroupeSourceFinancement.ResteAExécutéSoufrance)
                   )
                 }}
               </td>
-              <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{
-                    GroupeSourceFinancement.TauxSoufrance
-                }}
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
+                {{ GroupeSourceFinancement.TauxSoufrance }}
               </td>
-            <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{
-                    GroupeSourceFinancement.NombreResillié
-                }}
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
+                {{ GroupeSourceFinancement.NombreResillié }}
               </td>
-              <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
                 {{
                   formatageSommeSansFCFA(
-                    parseFloat(
-                        GroupeSourceFinancement.ResteAExécutéResillié
-                    )
+                    parseFloat(GroupeSourceFinancement.ResteAExécutéResillié)
                   )
                 }}
               </td>
-            <td style="text-align: right"
-                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
-                {{
-                    GroupeSourceFinancement.TauxResillié
-                  
-                }}
+              <td
+                style="text-align: right"
+                v-bind:class="
+                  recupereIDactivite == GroupeSourceFinancement.id
+                    ? 'graybg'
+                    : 'whitebg'
+                "
+              >
+                {{ GroupeSourceFinancement.TauxResillié }}
               </td>
 
               <!-- <td>
@@ -1016,57 +1139,57 @@ export default {
       recupereIDactivite: "",
       recupereIDSection: "",
       source_financement_id1: 0,
-       Tri1data:0,
-      Tri2data:0,
-      Tri3data:0,
-      Tri4data:0,
-      Tri5data:0,
-      Tri6data:0,
-      Tri7data:0,
-      Tri8data:0,
-      Tri9data:0,
-      Tri10data:0,
-      Tri11data:0,
-      Tri12data:0,
-      Tri13data:0,
-      Tri14data:0,
-      Tri15data:0,
-      Tri16data:0,
+      Tri1data: 0,
+      Tri2data: 0,
+      Tri3data: 0,
+      Tri4data: 0,
+      Tri5data: 0,
+      Tri6data: 0,
+      Tri7data: 0,
+      Tri8data: 0,
+      Tri9data: 0,
+      Tri10data: 0,
+      Tri11data: 0,
+      Tri12data: 0,
+      Tri13data: 0,
+      Tri14data: 0,
+      Tri15data: 0,
+      Tri16data: 0,
 
-      InputLibelleBailleurdata:false,
-      InputNombreTri1data:false,
-      InputMontantTri1data:false,
-      InputNombresTri1data:false,
-      InputNombreTri4data:false,
-      InputNombreTri5data:false,
-      InputNombreTri6data:false,
-      InputNombreTri7data:false,
-      InputNombreTri8data:false,
-      InputNombreTri9data:false,
-      InputNombreTri10data:false,
-      InputNombreTri11data:false,
-      InputNombreTri12data:false,
-      InputNombreTri13data:false,
-      InputNombreTri14data:false,
-      InputNombreTri15data:false,
-      InputNombreTri16data:false,
-      Libelle_bailleur:0,
-      Nombre_tri1:0,
-      Nombres_tri1:0,
-      Montant_tri1:0,
-      Nombre_tri4:0,
-      Nombre_tri5:0,
-      Nombre_tri6:0,
-      Nombre_tri7:0,
-      Nombre_tri8:0,
-      Nombre_tri9:0,
-      Nombre_tri10:0,
-      Nombre_tri11:0,
-      Nombre_tri12:0,
-      Nombre_tri13:0,
-      Nombre_tri14:0,
-      Nombre_tri15:0,
-      Nombre_tri16:0,
+      InputLibelleBailleurdata: false,
+      InputNombreTri1data: false,
+      InputMontantTri1data: false,
+      InputNombresTri1data: false,
+      InputNombreTri4data: false,
+      InputNombreTri5data: false,
+      InputNombreTri6data: false,
+      InputNombreTri7data: false,
+      InputNombreTri8data: false,
+      InputNombreTri9data: false,
+      InputNombreTri10data: false,
+      InputNombreTri11data: false,
+      InputNombreTri12data: false,
+      InputNombreTri13data: false,
+      InputNombreTri14data: false,
+      InputNombreTri15data: false,
+      InputNombreTri16data: false,
+      Libelle_bailleur: 0,
+      Nombre_tri1: 0,
+      Nombres_tri1: 0,
+      Montant_tri1: 0,
+      Nombre_tri4: 0,
+      Nombre_tri5: 0,
+      Nombre_tri6: 0,
+      Nombre_tri7: 0,
+      Nombre_tri8: 0,
+      Nombre_tri9: 0,
+      Nombre_tri10: 0,
+      Nombre_tri11: 0,
+      Nombre_tri12: 0,
+      Nombre_tri13: 0,
+      Nombre_tri14: 0,
+      Nombre_tri15: 0,
+      Nombre_tri16: 0,
     };
   },
   // mounted(){
@@ -1232,71 +1355,139 @@ export default {
       return this.ListeDesSourceFinancement.map(function (value) {
         let objet = {
           id: value[0].source_financement_id,
-          libellebailleur: vm.LibelleSourceFinancement(value[0].source_financement_id),
-          NombrePlani: vm.NombreMarchePlanifierGlobalParSection(value[0].source_financement_id),
-          MontantPlani: vm.MontantMarchePlanifierGlobalParSourceFinancement(value[0].source_financement_id),
-          NombreContract:vm.NombreMarcheContratualisationGlobalParSourceFinancement(value[0].source_financement_id),
-          MontantContract:vm.MontantMarcheContratualisationGlobalParSourceFiancement(value[0].source_financement_id),
-          NombreAttribue: vm.NombreMarcheAttribueGlobalParSourceFinancement(value[0].source_financement_id),
-          MontantAttribue: vm.MontantMarcheAttribueGlobalParSourceFinancement(value[0].source_financement_id),
-          NombreEnCoursExé: vm.NombreMarcheExecutionGlobalParSourceFinancement(value[0].source_financement_id),
-          MontantEnCoursExé: vm.TotalMarcheGlobal(value[0].source_financement_id),
-          MontantExécutéEnCoursExé: vm.MontantExecuteGlobalParSourceFinancement(value[0].source_financement_id),
-          ResteAPayerEnCoursExé: vm.RestePayerEnCoursExé(value[0].source_financement_id),
-          NombreSoufrance: vm.NombreMarcheSuppenduGlobalParSourceFinancement(value[0].source_financement_id),
-          ResteAExécutéSoufrance:vm.MontantExecuteParSourceFinancementMarcheEnSouffrance(value[0].source_financement_id),
-          TauxSoufrance: vm.TauxMarcheSouffranceParSourceFinancement(value[0].source_financement_id),
-          NombreResillié: vm.NombreMarcheResilierParSourceFinancement(value[0].source_financement_id),
-          ResteAExécutéResillié:vm.MontantExecuteParSourceFinancementMarcheResilier(value[0].source_financement_id),
-          TauxResillié: vm.TauxMarcheResilierParSourceFinancement(value[0].source_financement_id),
+          libellebailleur: vm.LibelleSourceFinancement(
+            value[0].source_financement_id
+          ),
+          NombrePlani: vm.NombreMarchePlanifierGlobalParSection(
+            value[0].source_financement_id
+          ),
+          MontantPlani: vm.MontantMarchePlanifierGlobalParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          NombreContract:
+            vm.NombreMarcheContratualisationGlobalParSourceFinancement(
+              value[0].source_financement_id
+            ),
+          MontantContract:
+            vm.MontantMarcheContratualisationGlobalParSourceFiancement(
+              value[0].source_financement_id
+            ),
+          NombreAttribue: vm.NombreMarcheAttribueGlobalParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          MontantAttribue: vm.MontantMarcheAttribueGlobalParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          NombreEnCoursExé: vm.NombreMarcheExecutionGlobalParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          MontantEnCoursExé: vm.TotalMarcheGlobal(
+            value[0].source_financement_id
+          ),
+          MontantExécutéEnCoursExé: vm.MontantExecuteGlobalParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          ResteAPayerEnCoursExé: vm.RestePayerEnCoursExé(
+            value[0].source_financement_id
+          ),
+          NombreSoufrance: vm.NombreMarcheSuppenduGlobalParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          ResteAExécutéSoufrance:
+            vm.MontantExecuteParSourceFinancementMarcheEnSouffrance(
+              value[0].source_financement_id
+            ),
+          TauxSoufrance: vm.TauxMarcheSouffranceParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          NombreResillié: vm.NombreMarcheResilierParSourceFinancement(
+            value[0].source_financement_id
+          ),
+          ResteAExécutéResillié:
+            vm.MontantExecuteParSourceFinancementMarcheResilier(
+              value[0].source_financement_id
+            ),
+          TauxResillié: vm.TauxMarcheResilierParSourceFinancement(
+            value[0].source_financement_id
+          ),
         };
         return objet;
       });
     },
     //fin new
-     FiltreLeTableauPrincipal(){
-    if(this.Libelle_bailleur!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.libellebailleur==this.Libelle_bailleur)
-    }else if(this.Nombre_tri1!=0){
-  return this.TriaffichageUniteSource.filter(item=>item.NombrePlani==this.Nombre_tri1)
-    }else if(this.Montant_tri1!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.MontantPlani==this.Montant_tri1)
-    }else if(this.Nombres_tri1!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.NombreContract==this.Nombres_tri1)
-    }else if(this.Nombre_tri4 !=0){
-      return this.TriaffichageUniteSource.filter(item=>item.MontantContract==this.Nombre_tri4)
-
-    }else if(this.Nombre_tri5!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.NombreAttribue==this.Nombre_tri5)
-    }else if(this.Nombre_tri6!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.MontantAttribue==this.Nombre_tri6)
-    }else if(this.Nombre_tri7!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.NombreEnCoursExé==this.Nombre_tri7)
-    }else if(this.Nombre_tri8!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.MontantEnCoursExé==this.Nombre_tri8)
-    }else if(this.Nombre_tri9!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.MontantExécutéEnCoursExé==this.Nombre_tri9)
-    }else if(this.Nombre_tri10!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.ResteAPayerEnCoursExé==this.Nombre_tri10)
-    }else if(this.Nombre_tri11!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.NombreSoufrance==this.Nombre_tri11)
-    }else if(this.Nombre_tri12!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.ResteAExécutéSoufrance==this.Nombre_tri12)
-    }else if(this.Nombre_tri13!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.TauxSoufrance==this.Nombre_tri13)
-    }else if(this.Nombre_tri14!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.NombreResillié==this.Nombre_tri14)
-    }else if(this.Nombre_tri15!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.ResteAExécutéResillié==this.Nombre_tri15)
-    }else if(this.Nombre_tri16!=0){
-      return this.TriaffichageUniteSource.filter(item=>item.TauxResillié==this.Nombre_tri16)
-    }
-    
-    else{
-      return this.TriaffichageUniteSource
-    }
-
-},
+    FiltreLeTableauPrincipal() {
+      if (this.Libelle_bailleur != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.libellebailleur == this.Libelle_bailleur
+        );
+      } else if (this.Nombre_tri1 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.NombrePlani == this.Nombre_tri1
+        );
+      } else if (this.Montant_tri1 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.MontantPlani == this.Montant_tri1
+        );
+      } else if (this.Nombres_tri1 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.NombreContract == this.Nombres_tri1
+        );
+      } else if (this.Nombre_tri4 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.MontantContract == this.Nombre_tri4
+        );
+      } else if (this.Nombre_tri5 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.NombreAttribue == this.Nombre_tri5
+        );
+      } else if (this.Nombre_tri6 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.MontantAttribue == this.Nombre_tri6
+        );
+      } else if (this.Nombre_tri7 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.NombreEnCoursExé == this.Nombre_tri7
+        );
+      } else if (this.Nombre_tri8 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.MontantEnCoursExé == this.Nombre_tri8
+        );
+      } else if (this.Nombre_tri9 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.MontantExécutéEnCoursExé == this.Nombre_tri9
+        );
+      } else if (this.Nombre_tri10 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.ResteAPayerEnCoursExé == this.Nombre_tri10
+        );
+      } else if (this.Nombre_tri11 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.NombreSoufrance == this.Nombre_tri11
+        );
+      } else if (this.Nombre_tri12 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.ResteAExécutéSoufrance == this.Nombre_tri12
+        );
+      } else if (this.Nombre_tri13 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.TauxSoufrance == this.Nombre_tri13
+        );
+      } else if (this.Nombre_tri14 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.NombreResillié == this.Nombre_tri14
+        );
+      } else if (this.Nombre_tri15 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.ResteAExécutéResillié == this.Nombre_tri15
+        );
+      } else if (this.Nombre_tri16 != 0) {
+        return this.TriaffichageUniteSource.filter(
+          (item) => item.TauxResillié == this.Nombre_tri16
+        );
+      } else {
+        return this.TriaffichageUniteSource;
+      }
+    },
 
     NombreMarchePlanifierGlobalParSection() {
       return (id) => {
@@ -3095,326 +3286,368 @@ export default {
       "modifierHistoriqueDecisionOp",
     ]),
 
-    
-    InputLibelleBailleur(){
-      if(this.InputLibelleBailleurdata == false){
-        this.InputLibelleBailleurdata = true
-      }else{
+    InputLibelleBailleur() {
+      if (this.InputLibelleBailleurdata == false) {
+        this.InputLibelleBailleurdata = true;
+      } else {
         this.InputLibelleBailleurdata = false;
         this.Libelle_bailleur = 0;
       }
- },
+    },
 
-  InputNombreTri1(){
-      if(this.InputNombreTri1data == false){
-        this.InputNombreTri1data = true
-      }else{
+    InputNombreTri1() {
+      if (this.InputNombreTri1data == false) {
+        this.InputNombreTri1data = true;
+      } else {
         this.InputNombreTri1data = false;
         this.Nombre_tri1 = 0;
       }
- },
-  InputMontantTri1(){
-      if(this.InputMontantTri1data == false){
-        this.InputMontantTri1data = true
-      }else{
+    },
+    InputMontantTri1() {
+      if (this.InputMontantTri1data == false) {
+        this.InputMontantTri1data = true;
+      } else {
         this.InputMontantTri1data = false;
         this.Montant_tri1 = 0;
       }
- },
-  InputNombresTri1(){
-      if(this.InputNombresTri1data == false){
-        this.InputNombresTri1data = true
-      }else{
+    },
+    InputNombresTri1() {
+      if (this.InputNombresTri1data == false) {
+        this.InputNombresTri1data = true;
+      } else {
         this.InputNombresTri1data = false;
         this.Nombres_tri1 = 0;
       }
- },
+    },
 
- InputMontantTri4(){
-      if(this.InputNombreTri4data == false){
-        this.InputNombreTri4data = true
-      }else{
+    InputMontantTri4() {
+      if (this.InputNombreTri4data == false) {
+        this.InputNombreTri4data = true;
+      } else {
         this.InputNombreTri4data = false;
         this.Nombre_tri4 = 0;
       }
- },
-  InputMontantTri5(){
-      if(this.InputNombreTri5data == false){
-        this.InputNombreTri5data = true
-      }else{
+    },
+    InputMontantTri5() {
+      if (this.InputNombreTri5data == false) {
+        this.InputNombreTri5data = true;
+      } else {
         this.InputNombreTri5data = false;
         this.Nombre_tri5 = 0;
       }
- },
-  InputMontantTri6(){
-      if(this.InputNombreTri6data == false){
-        this.InputNombreTri6data = true
-      }else{
+    },
+    InputMontantTri6() {
+      if (this.InputNombreTri6data == false) {
+        this.InputNombreTri6data = true;
+      } else {
         this.InputNombreTri6data = false;
         this.Nombre_tri6 = 0;
       }
- },
-  InputMontantTri7(){
-      if(this.InputNombreTri7data == false){
-        this.InputNombreTri7data = true
-      }else{
+    },
+    InputMontantTri7() {
+      if (this.InputNombreTri7data == false) {
+        this.InputNombreTri7data = true;
+      } else {
         this.InputNombreTri7data = false;
         this.Nombre_tri7 = 0;
       }
- },
-  InputMontantTri8(){
-      if(this.InputNombreTri8data == false){
-        this.InputNombreTri8data = true
-      }else{
+    },
+    InputMontantTri8() {
+      if (this.InputNombreTri8data == false) {
+        this.InputNombreTri8data = true;
+      } else {
         this.InputNombreTri8data = false;
         this.Nombre_tri8 = 0;
       }
- },
-  InputMontantTri9(){
-      if(this.InputNombreTri9data == false){
-        this.InputNombreTri9data = true
-      }else{
+    },
+    InputMontantTri9() {
+      if (this.InputNombreTri9data == false) {
+        this.InputNombreTri9data = true;
+      } else {
         this.InputNombreTri9data = false;
         this.Nombre_tri9 = 0;
       }
- },
-  InputMontantTri10(){
-      if(this.InputNombreTri10data == false){
-        this.InputNombreTri10data = true
-      }else{
+    },
+    InputMontantTri10() {
+      if (this.InputNombreTri10data == false) {
+        this.InputNombreTri10data = true;
+      } else {
         this.InputNombreTri10data = false;
         this.Nombre_tri10 = 0;
       }
- },
-  InputMontantTri11(){
-      if(this.InputNombreTri11data == false){
-        this.InputNombreTri11data = true
-      }else{
+    },
+    InputMontantTri11() {
+      if (this.InputNombreTri11data == false) {
+        this.InputNombreTri11data = true;
+      } else {
         this.InputNombreTri11data = false;
         this.Nombre_tri11 = 0;
       }
- },
-  InputMontantTri12(){
-      if(this.InputNombreTri12data == false){
-        this.InputNombreTri12data = true
-      }else{
+    },
+    InputMontantTri12() {
+      if (this.InputNombreTri12data == false) {
+        this.InputNombreTri12data = true;
+      } else {
         this.InputNombreTri12data = false;
         this.Nombre_tri12 = 0;
       }
- },
-  InputMontantTri13(){
-      if(this.InputNombreTri13data == false){
-        this.InputNombreTri13data = true
-      }else{
+    },
+    InputMontantTri13() {
+      if (this.InputNombreTri13data == false) {
+        this.InputNombreTri13data = true;
+      } else {
         this.InputNombreTri13data = false;
         this.Nombre_tri13 = 0;
       }
- },
-  InputMontantTri14(){
-      if(this.InputNombreTri14data == false){
-        this.InputNombreTri14data = true
-      }else{
+    },
+    InputMontantTri14() {
+      if (this.InputNombreTri14data == false) {
+        this.InputNombreTri14data = true;
+      } else {
         this.InputNombreTri14data = false;
         this.Nombre_tri14 = 0;
       }
- },
-  InputMontantTri15(){
-      if(this.InputNombreTri15data == false){
-        this.InputNombreTri15data = true
-      }else{
+    },
+    InputMontantTri15() {
+      if (this.InputNombreTri15data == false) {
+        this.InputNombreTri15data = true;
+      } else {
         this.InputNombreTri15data = false;
         this.Nombre_tri15 = 0;
       }
- },
-  InputMontantTri16(){
-      if(this.InputNombreTri16data == false){
-        this.InputNombreTri16data = true
-      }else{
+    },
+    InputMontantTri16() {
+      if (this.InputNombreTri16data == false) {
+        this.InputNombreTri16data = true;
+      } else {
         this.InputNombreTri16data = false;
         this.Nombre_tri16 = 0;
       }
- },
+    },
 
     //
-       Tri1(){
-      if(this.Tri1data==0){
-        this.Tri1data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.NombrePlani-b.NombrePlani});
-        
-      }else{
-        this.Tri1data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.NombrePlani-a.NombrePlani});
-      }  
+    Tri1() {
+      if (this.Tri1data == 0) {
+        this.Tri1data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.NombrePlani - b.NombrePlani;
+        });
+      } else {
+        this.Tri1data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.NombrePlani - a.NombrePlani;
+        });
+      }
     },
 
-    Tri2(){
-      if(this.Tri2data==0){
-        this.Tri2data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.MontantPlani-b.MontantPlani});
-        
-      }else{
-        this.Tri2data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.MontantPlani-a.MontantPlani});
-      }  
+    Tri2() {
+      if (this.Tri2data == 0) {
+        this.Tri2data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.MontantPlani - b.MontantPlani;
+        });
+      } else {
+        this.Tri2data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.MontantPlani - a.MontantPlani;
+        });
+      }
     },
 
-     Tri3(){
-      if(this.Tri3data==0){
-        this.Tri3data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.NombreContract-b.NombreContract});
-        
-      }else{
-        this.Tri3data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.NombreContract-a.NombreContract});
-      }  
+    Tri3() {
+      if (this.Tri3data == 0) {
+        this.Tri3data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.NombreContract - b.NombreContract;
+        });
+      } else {
+        this.Tri3data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.NombreContract - a.NombreContract;
+        });
+      }
     },
 
-      Tri4(){
-      if(this.Tri4data==0){
-        this.Tri4data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.MontantContract-b.MontantContract});
-        
-      }else{
-        this.Tri4data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.MontantContract-a.MontantContract});
-      }  
+    Tri4() {
+      if (this.Tri4data == 0) {
+        this.Tri4data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.MontantContract - b.MontantContract;
+        });
+      } else {
+        this.Tri4data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.MontantContract - a.MontantContract;
+        });
+      }
     },
 
-     Tri5(){
-      if(this.Tri5data==0){
-        this.Tri5data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.NombreAttribue-b.NombreAttribue});
-        
-      }else{
-        this.Tri5data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.NombreAttribue-a.NombreAttribue});
-      }  
+    Tri5() {
+      if (this.Tri5data == 0) {
+        this.Tri5data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.NombreAttribue - b.NombreAttribue;
+        });
+      } else {
+        this.Tri5data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.NombreAttribue - a.NombreAttribue;
+        });
+      }
     },
 
-
-     Tri6(){
-      if(this.Tri6data==0){
-        this.Tri6data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.MontantAttribue-b.MontantAttribue});
-        
-      }else{
-        this.Tri6data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.MontantAttribue-a.MontantAttribue});
-      }  
+    Tri6() {
+      if (this.Tri6data == 0) {
+        this.Tri6data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.MontantAttribue - b.MontantAttribue;
+        });
+      } else {
+        this.Tri6data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.MontantAttribue - a.MontantAttribue;
+        });
+      }
     },
 
-    Tri7(){
-      if(this.Tri7data==0){
-        this.Tri7data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.NombreEnCoursExé-b.NombreEnCoursExé});
-        
-      }else{
-        this.Tri7data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.NombreEnCoursExé-a.NombreEnCoursExé});
-      }  
+    Tri7() {
+      if (this.Tri7data == 0) {
+        this.Tri7data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.NombreEnCoursExé - b.NombreEnCoursExé;
+        });
+      } else {
+        this.Tri7data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.NombreEnCoursExé - a.NombreEnCoursExé;
+        });
+      }
     },
 
-    Tri8(){
-      if(this.Tri8data==0){
-        this.Tri8data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.MontantEnCoursExé-b.MontantEnCoursExé});
-        
-      }else{
-        this.Tri8data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.MontantEnCoursExé-a.MontantEnCoursExé});
-      }  
+    Tri8() {
+      if (this.Tri8data == 0) {
+        this.Tri8data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.MontantEnCoursExé - b.MontantEnCoursExé;
+        });
+      } else {
+        this.Tri8data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.MontantEnCoursExé - a.MontantEnCoursExé;
+        });
+      }
     },
 
-    Tri9(){
-      if(this.Tri9data==0){
-        this.Tri9data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.MontantExécutéEnCoursExé-b.MontantExécutéEnCoursExé});
-        
-      }else{
-        this.Tri9data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.MontantExécutéEnCoursExé-a.MontantExécutéEnCoursExé});
-      }  
+    Tri9() {
+      if (this.Tri9data == 0) {
+        this.Tri9data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.MontantExécutéEnCoursExé - b.MontantExécutéEnCoursExé;
+        });
+      } else {
+        this.Tri9data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.MontantExécutéEnCoursExé - a.MontantExécutéEnCoursExé;
+        });
+      }
     },
 
-     Tri10(){
-      if(this.Tri10data==0){
-        this.Tri10data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.ResteAPayerEnCoursExé-b.ResteAPayerEnCoursExé});
-        
-      }else{
-        this.Tri10data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.ResteAPayerEnCoursExé-a.ResteAPayerEnCoursExé});
-      }  
+    Tri10() {
+      if (this.Tri10data == 0) {
+        this.Tri10data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.ResteAPayerEnCoursExé - b.ResteAPayerEnCoursExé;
+        });
+      } else {
+        this.Tri10data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.ResteAPayerEnCoursExé - a.ResteAPayerEnCoursExé;
+        });
+      }
     },
 
-
-    Tri11(){
-      if(this.Tri11data==0){
-        this.Tri11data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.NombreSoufrance-b.NombreSoufrance});
-        
-      }else{
-        this.Tri11data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.NombreSoufrance-a.NombreSoufrance});
-      }  
+    Tri11() {
+      if (this.Tri11data == 0) {
+        this.Tri11data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.NombreSoufrance - b.NombreSoufrance;
+        });
+      } else {
+        this.Tri11data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.NombreSoufrance - a.NombreSoufrance;
+        });
+      }
     },
 
-
-    Tri12(){
-      if(this.Tri12data==0){
-        this.Tri12data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.ResteAExécutéSoufrance-b.ResteAExécutéSoufrance});
-        
-      }else{
-        this.Tri12data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.ResteAExécutéSoufrance-a.ResteAExécutéSoufrance});
-      }  
+    Tri12() {
+      if (this.Tri12data == 0) {
+        this.Tri12data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.ResteAExécutéSoufrance - b.ResteAExécutéSoufrance;
+        });
+      } else {
+        this.Tri12data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.ResteAExécutéSoufrance - a.ResteAExécutéSoufrance;
+        });
+      }
     },
 
-
-    Tri13(){
-      if(this.Tri13data==0){
-        this.Tri13data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.TauxSoufrance-b.TauxSoufrance});
-        
-      }else{
-        this.Tri13data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.TauxSoufrance-a.TauxSoufrance});
-      }  
+    Tri13() {
+      if (this.Tri13data == 0) {
+        this.Tri13data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.TauxSoufrance - b.TauxSoufrance;
+        });
+      } else {
+        this.Tri13data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.TauxSoufrance - a.TauxSoufrance;
+        });
+      }
     },
 
-
-     Tri14(){
-      if(this.Tri14data==0){
-        this.Tri14data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.NombreResillié-b.NombreResillié});
-        
-      }else{
-        this.Tri14data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.NombreResillié-a.NombreResillié});
-      }  
+    Tri14() {
+      if (this.Tri14data == 0) {
+        this.Tri14data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.NombreResillié - b.NombreResillié;
+        });
+      } else {
+        this.Tri14data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.NombreResillié - a.NombreResillié;
+        });
+      }
     },
 
-     Tri15(){
-      if(this.Tri15data==0){
-        this.Tri15data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.ResteAExécutéResillié-b.ResteAExécutéResillié});
-        
-      }else{
-        this.Tri15data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.ResteAExécutéResillié-a.ResteAExécutéResillié});
-      }  
+    Tri15() {
+      if (this.Tri15data == 0) {
+        this.Tri15data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.ResteAExécutéResillié - b.ResteAExécutéResillié;
+        });
+      } else {
+        this.Tri15data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.ResteAExécutéResillié - a.ResteAExécutéResillié;
+        });
+      }
     },
 
-     Tri16(){
-      if(this.Tri16data==0){
-        this.Tri16data=1;
-        return this.TriaffichageUniteSource.sort(function(a,b){return a.TauxResillié-b.TauxResillié});
-        
-      }else{
-        this.Tri16data=0;
-        return this.TriaffichageUniteSource.sort(function(a,b){return b.TauxResillié-a.TauxResillié});
-      }  
+    Tri16() {
+      if (this.Tri16data == 0) {
+        this.Tri16data = 1;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return a.TauxResillié - b.TauxResillié;
+        });
+      } else {
+        this.Tri16data = 0;
+        return this.TriaffichageUniteSource.sort(function (a, b) {
+          return b.TauxResillié - a.TauxResillié;
+        });
+      }
     },
     //
 
@@ -3747,8 +3980,8 @@ th {
   text-align: center !important;
   background-color: #fbb203 !important;
 }
-#taillecol1{
-    width: 100% !important;
-    text-align:right
+#taillecol1 {
+  width: 100% !important;
+  text-align: right;
 }
 </style>
