@@ -25,8 +25,8 @@
                         </div>
 
      <div id="app">
-         <div  id="printpdf" ref="table" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
-             <div align="center"> <h2>({{detail.objet}})</h2> </div>
+         <div  id="printpdf" ref="table" summary="lorem ipsum si)t amet" rules="groups" frame="hsides" border="2">
+             <div align="center"> <h2>({{infoSplite(detail.objet)}}</h2> </div>
              <br>
              <table class="table" >
                  <thead>
@@ -49,6 +49,10 @@
                  <tr>
                      <th style="width:10%">OBJET</th>
                      <td>{{detail.objet}} </td>
+                 </tr>
+                 <tr>
+                     <th style="width:10%">LOT</th>
+                     <td>{{infoSplite(detail.objet)}} </td>
                  </tr>
                   <tr>
                      <th style="width:10%">OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS</th>
@@ -145,6 +149,7 @@
                      <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT FCFA(HT,TTC)</th>
 
                      <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
+                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontantTV(detail.id))) || 'Non renseigné'}}  TVA </td>
                      <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
                  </tr>
                 
@@ -280,26 +285,30 @@
                  </tr>
                  <tr>
                      <th>CAUTIONNEMENT(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" > 
+                          {{formatageSomme(delailCautionnementHT(detail.id))}} HT</td>
+                     <td style="width:15%" colspan="6" >
+                              {{formatageSomme(delailCautionnementTTC(detail.id))}} TTC
+                     </td>
                  </tr>
                  <tr>
                      <th>RETENUE DE GARANTIE(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" > </td>
+                       <td style="width:15%" colspan="6" > 
+                          {{formatageSomme(delailRetenueGarantieHT(detail.id))}} HT</td>
+                     <td style="width:15%" colspan="6" >
+                              {{formatageSomme(delailRetenueGarantieTTC(detail.id))}} TTC
+                     </td>
                  </tr>
                  <tr>
                      <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
-                         {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ht))}}  HT 
+                     <td style="width:15%" colspan="6">
+                         {{formatageSomme(delailAvanceDemarageHT(detail.id))}}
+                          HT 
                      </td>
-                      <td style="width:15%" colspan="6" v-else>
-                         NON APPLICABLE
+                      <td style="width:15%" colspan="6">
+                         {{formatageSomme(delailAvanceDemarageTTC(detail.id))}} TTC
                      </td>
-                      <td style="width:15%" colspan="6" v-if="detailActeEffet">
-                        {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ttc))}} TTC 
-                     </td>
-                     <td style="width:15%" colspan="6" v-else>
-                         NON APPLICABLE
-                     </td>
+                     
                  </tr>
                  <tr>
                      <th>DATE DE NOTIFICATION DE L'ORDRE DE SERVICE</th>
@@ -313,7 +322,8 @@
                  <tr>
                      <th>DATE PREVISIONELLE DE DEMARRAGE DES TRAVAUX</th>
                      <td style="width:15%" colspan="6" v-if="detail">
-                        {{detail.date_execution_marche_debut_prevue}}
+                        
+                          {{formaterDate(dateOrdreServiceDemarage(detail.id))}}
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -322,7 +332,8 @@
                  <tr>
                      <th>DELAI D'EXECUTION</th>
                      <td style="width:15%" colspan="6" v-if="detail">
-                         {{detail.durre_marche_prevue}}
+                        
+                              {{delaiExecution(detail.id)}} JOURS
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -331,7 +342,7 @@
                  <tr>
                      <th>DATE PREVISIONNELLE DE FIN DES TRAVAUX</th>
                      <td style="width:15%" colspan="6" v-if="detail">
-                         {{detail.date_execution_fin_prevue}}
+                         {{formaterDate(dateFinTraveauxPrevue(detail.id))}}
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -375,6 +386,7 @@
                  <tr>
                      <th>REMBOURSEMENT AVANCE DE DEMARRAGE(%,HT,TTC)</th>
                      <td style="width:15%" colspan="6" > </td>
+                      <td style="width:15%" colspan="6" > </td>
                  </tr>
                  <tr>
                      <th>NIVEAU D'ENGAGEMENT DU  CAUTIONNEMENT(%,HT,TTC)</th>
@@ -615,7 +627,8 @@
 </template>
 
 <script>
-    import moment from "moment";
+   // import TableauOpDirectVise from '../TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirectVise'
+import moment from "moment";
     import { mapGetters, mapActions } from "vuex";
     // import html2canvas from 'html2canvas'
     // import * as JsPDF from 'jspdf'
@@ -626,6 +639,9 @@
     import { formatageSomme } from "../../../src/Repositories/Repository";
 
     export default {
+  components: { 
+
+   },
         // components: {
         //   ModelListSelect
         // },
@@ -790,6 +806,22 @@
             afficherListeSalaireEnExecution(){
                 return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
             },
+            montantBaseMarcheTTC(){
+             return id => {
+                 if(id != null && id != ""){
+                    let montantTTC_marche= this.montantMarche(id,"TC")
+                  
+                    
+                        let montant_ttc=  this.avenants.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, 0);
+                        let montant=parseFloat(montantTTC_marche) + parseFloat(montant_ttc)
+                        return montant
+                 }
+                 return 0
+             }
+            },
+            
             totalDecompteMarche(){
          return marche_id=> {
              if(!marche_id) return 0;
@@ -798,7 +830,16 @@
              return objet.reduce(function (total, currentValue) {
                             return total + parseFloat(currentValue.netttc) ;
                         }, 0);
-         }
+            }
+            },
+            infoSplite(){
+              return objet => {
+                  if(objet != null && objet != ""){
+                     let ob=objet.split('/');
+                     return ob[1]
+                  }
+                  return null
+              }
             },
          
 isNanMontant(){
@@ -882,7 +923,21 @@ tachePasMarche(){
             },
             montantHtAvanant() {
                 return avenant => {
-                    console.log(avenant)
+        
+                    if (avenant != null && avenant != "") {
+                        let initialValue = 0;
+                        let montant_ht=  avenant.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_ht) ;
+                        }, initialValue);
+                        return montant_ht
+                    }
+                    return 0
+
+                };
+            },
+            montantTTCAvanant() {
+                return avenant => {
+        
                     if (avenant != null && avenant != "") {
                         let initialValue = 0;
                         let montant_ht=  avenant.reduce(function (total, currentValue) {
@@ -1047,7 +1102,7 @@ AfficheMontantHt() {
                         return 0
                     }
                 };
-            },
+            }, 
             AfficheMontant_act() {
                 return id => {
                     if (id != null && id != "") {
@@ -1055,6 +1110,126 @@ AfficheMontantHt() {
 
                         if (qtereel) {
                             return qtereel.montant_act;
+                        }
+                        return 0
+                    }
+                };
+            },
+             AfficheMontantTV() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_act_tva;
+                        }
+                        return 0
+                    }
+                };
+            },
+            dateOrdreServiceDemarage() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.date_odre_service;
+                        }
+                        return 0
+                    }
+                };
+            },
+            dateFinTraveauxPrevue() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.date_fin_exe;
+                        }
+                        return 0
+                    }
+                };
+            },
+             delaiExecution() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.duree;
+                        }
+                        return 0
+                    }
+                };
+            },
+             delailAvanceDemarageHT() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ht;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailAvanceDemarageTTC() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ttc;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailCautionnementHT() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ttc;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailCautionnementTTC() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ttc;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailRetenueGarantieHT() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_ht_retenu_garantie;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailRetenueGarantieTTC() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_ttc_retenue_garantie;
                         }
                         return 0
                     }
