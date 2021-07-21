@@ -63,13 +63,13 @@
 
                                 </model-list-select>
 
-                                <h6>Type Budget</h6>
+                                <!-- <h6>Type Budget</h6>
                                 <label for="AE">
                                     <input type="radio" v-model="type_budget" value="AE" id="AE"> <span>(AE) Autorisation d'engagement <b></b></span>
                                 </label>
                                 <label for="CP">
                                     <input type="radio" v-model="type_budget" value="CP" id="CP"> <span>(CP) Credit de payement<b></b></span>
-                                </label>
+                                </label> -->
 
                             </div>
 
@@ -202,7 +202,7 @@
 
 
                                 >
-                                    <l-tooltip  >{{l.ville}}</l-tooltip>
+                                    <!-- <l-tooltip  >{{l.ville}}</l-tooltip>
                                     <l-popup>
                                         <b>{{l.ville}}</b> <br>
                                         <div >
@@ -210,6 +210,18 @@
                                             Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
                                             Budget restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
                                             Taux d'exécution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
+                                        </div>
+                                    </l-popup> -->
+
+
+                                     <l-tooltip  >{{0}}</l-tooltip>
+                                    <l-popup>
+                                        <b>{{0}}</b> <br>
+                                        <div >
+                                            Budget: <span style="color: #003900; "><b>{{formatageSomme(0)}}</b></span> <br>
+                                            Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(100)}}</b></span><br>
+                                            Budget restant:<span style="color: darkred; "><b>{{formatageSomme(0)}}</b></span><br>
+                                            Taux d'exécution:<span style="color: #e36706; "><b>{{0}} %</b></span>
                                         </div>
                                     </l-popup>
 
