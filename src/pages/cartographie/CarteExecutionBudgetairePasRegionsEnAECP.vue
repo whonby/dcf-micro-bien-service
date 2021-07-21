@@ -708,7 +708,7 @@ console.log(this.localisation)
 
             regions(){
                 return this.localisations_geographiques.filter(item=>{
-                    if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+                    if(item.longitude!=null && item.structure_localisation_geographique_id==5){
                         return item
                     }
                 });
@@ -717,7 +717,7 @@ console.log(this.localisation)
                 return id=>{
 
                     return this.getterLocalisationGeoAll.filter(item=>{
-                        if(item.structure_localisation_geographique.niveau==3 && item.parent==id){
+                        if(item.structure_localisation_geographique_id==6 && item.parent==id){
                             return item
                         }
                     });
@@ -726,7 +726,7 @@ console.log(this.localisation)
             sousPrefecture(){
                 return id=>{
                     return this.getterLocalisationGeoAll.filter(item=>{
-                        if(item.structure_localisation_geographique.niveau==4 && item.parent==id){
+                        if(item.structure_localisation_geographique_id==6 && item.parent==id){
                             return item
                         }
                     });
