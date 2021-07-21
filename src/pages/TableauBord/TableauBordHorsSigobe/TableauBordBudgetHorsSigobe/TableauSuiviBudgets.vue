@@ -925,7 +925,7 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td colspan="2"  style="text-align:center;color:#000;font-weight: bold;color:#000"> </td>
-                  <td colspan="2" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
+                  <td colspan="3" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
                       
 
                   <!-- <td style="text-left: center;color:#000;font-weight: bold;color:#000">

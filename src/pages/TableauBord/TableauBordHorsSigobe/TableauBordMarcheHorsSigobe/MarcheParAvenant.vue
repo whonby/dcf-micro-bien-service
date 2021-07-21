@@ -9,228 +9,44 @@
         </h3>
       </div>
       <div align="right">
-      <!-- <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
         Exporter en PDF
-      </button> -->
+      </button>
     </div> 
-      <div class="modal-body" id="printpdf1">
-         <!-- <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Objet du marche</th>
-                    <th>Unite administrative</th>
-                    <th>Montant Réel du marche (Fcfa)</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-
-                  <tr>
-                    <td>{{libelleMarche(test)}}</td>
-                    <td>{{libelleUniteAdministrative(Uaid(test))}}</td>
-                    <td style="text-align:rigth">{{formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)))}}</td>
-                  </tr>
-                </tbody>
-              </table> -->
-              <br>
-               <table class="table table-bordered table-striped">
+      <div class="modal-body" id="printpdf12">
+   
+<table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
-                 AVENANT DES MARCHES</h2>
+                   TABLE DES AVENANTS</h2>
           </tr>
 
-           
         </table>
-     <table class="table table-bordered table-striped">
-                <thead>
-                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
-                    <th></th>
-                    <th>Marché/Contrat initial</th>
-                    <th>Avenant {{itemAvenant.numero_avenant}}</th>
-                    <!-- <th>Avenant 1</th>
-                    <th>Avenant 1</th>
-                    <th>Avenant 1</th>
-                    <th>Avenant 1</th> -->
-                    <th>Total Avenant</th>
-                    <th>Marché/Contrat actuel</th>
-                     
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      <th>Objet</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
- <tr>
-                      <th>Numéro </th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Date</th>
-                     <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Titulaire</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Montant</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Taux</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Durée</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                  <tr>
-                      <th>Taux</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
- <tr>
-                      <th>Source de financement</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Ligne budgétaire</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Bénéficiaires</th>
-                    <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Livrables</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Taux</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>AUTRES</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-
-                </tbody>
-              </table>
-
                   <table class="table table-bordered"  style="
                   font-size: 14px;
                   color:#000;
                   font-weight: bold;
-                ">
+                " >
   <tbody >
   <tr>
     <td>&nbsp;</td>
-    <td>Marché/Contrat initial</td>
-    <td v-for="tem in test1" :key="tem">Avenant {{tem}} </td>
+    <td style="background: rgb(6, 184, 6) !important;color:#fff !important">Marché/Contrat initial</td>
     
-    <td> Total Avenant</td>
-    <td>Marché/Contrat Actuel</td>
+    <td v-if="numeroOrderAvenant1(test)==1" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant1(test)}}</td>
+    <td v-if="numeroOrderAvenant2(test)==2" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant2(test)}}</td>
+    <td v-if="numeroOrderAvenant3(test)==3" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant3(test)}}</td>
+    <td v-if="numeroOrderAvenant4(test)==4" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant4(test)}}</td>
+    <td v-if="numeroOrderAvenant5(test)==5" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant5(test)}}</td>
+    <td v-if="numeroOrderAvenant6(test)==6" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant6(test)}}</td>
+    <td v-if="numeroOrderAvenant7(test)==7" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant7(test)}}</td>
+    <td v-if="numeroOrderAvenant8(test)==8" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant8(test)}}</td>
+    <td v-if="numeroOrderAvenant9(test)==9" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant9(test)}}</td>
+    <td v-if="numeroOrderAvenant10(test)==10" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant10(test)}}</td>
+    <td style="background: rgb(6, 184, 6) !important;text-align:center;width: 7%;;color:#fff !important"> Total Avenant</td>
+    <td style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important">Marché/Contrat Actuel</td>
   </tr>
   <tr>
-    <td>Objet</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Objet</th>
     <td> {{libelleMarche(test) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.objet_avenant || 'Non renseigné'}}</td>
     <td >
@@ -240,29 +56,29 @@
    
   </tr>
   <tr>
-    <td>Numero</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Numero</th>
     <td> {{NumeroMarche(test) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.numero_avenant || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Date</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Date</th>
     <td> {{DateMarche(test) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formaterDate(tem.date_avenant) || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Titulaire</td>
-    <td>1</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Titulaire</th>
+    <td>{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{afficherEntrepriseNom(recupereIdEntreprise(tem.marche_id)) || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
     
   </tr>
   <tr>
-    <td>Montant</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Montant</th>
     <td> {{formatageSommeSansFCFA(parseFloat((MontantMarche(test)))) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formatageSommeSansFCFA(parseFloat(tem.montant_avenant)) || 'Non renseigné'}}</td>
     <td>
@@ -270,23 +86,23 @@
       {{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}
         </span>
     </td>
-    <td >
-        {{ formatageSommeSansFCFA(  parseFloat(MontantReelMarche(test)) +  parseFloat(SommeAvenant(test)) ) }}
+    <td style="background: rgb(6, 184, 6) !important;text-align:left;color:#fff">
+        {{ formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)) +  parseFloat(SommeAvenant(test)) ) }}
     </td>
     
   </tr>
   <tr>
-    <td>Taux</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Taux</th>
     <td> 100 %</td>
-    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}%</td>
     <td>
-      <span >{{formatageSommeSansFCFA(parseFloat(TauxDesAvenant(test))) || 'Non renseigné'}}</span>
+      <span >{{TauxDesAvenant(test) || 'Non renseigné'}} %</span>
     </td>
     
     
   </tr>
   <tr>
-    <td>Durée</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Durée</th>
     <td>{{DureMarche(test) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}}</td>
    
@@ -294,48 +110,48 @@
    <td></td>
   </tr>
   <tr>
-    <td>Taux</td>
-    <td>100 %</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Taux</th>
+    <td >100 %</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Sorce de financement</td>
-    <td> {{LibellesourceFinancement(test) || 'Non renseigné'}} </td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Sorce de financement</th>
+    <td> {{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(idsourceFinancement(tem.marche_id)) || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Ligne Budgetaire</td>
-    <td>{{LibelleLigneBudgetaire(test) || 'Non renseigné'}}</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Ligne Budgetaire</th>
+    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(tem.marche_id))) || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Bénéficiaires</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Bénéficiaires</th>
     <td>{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{beneficiaireMarche(tem.marche_id) || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Livrables</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Livrables</th>
     <td>{{livrableMarche(test) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{livrableMarche(tem.marche_id) || 'Non renseigné'}}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Autres</td>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Autres</th>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
-    
+    <!-- <td></td>
+    <td></td> -->
   </tr>
   </tbody>
   </table>
@@ -694,6 +510,119 @@ editMandat:{},
      admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
+
+
+numeroOrderAvenant1(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==1)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+numeroOrderAvenant2(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==2)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant3(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==3)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant4(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==4)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant5(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==5)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant6(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==6)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant7(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==7)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+numeroOrderAvenant8(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==8)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant9(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==9)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+    numeroOrderAvenant10(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==10)
+          if(ObjetId){
+            return ObjetId.numero_ordre
+          }
+
+        }
+      }
+    },
+
        LibelleLigneBudgetaire(){
       return id =>{
         if(id != null && id !=""){
@@ -1498,7 +1427,9 @@ ShowMyUa(id){
     },
 
 
-
+genererEnPdfDetailReamenagement() {
+      this.$htmlToPaper("printpdf12");
+    },
    
     genererEnPdf() {
       this.$htmlToPaper("printpdf");
@@ -1540,7 +1471,7 @@ width: 95%;
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 15px;
