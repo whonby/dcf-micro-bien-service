@@ -79,26 +79,34 @@
 
               <th>
 
-                  <!-- <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
+                  <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
                 <money
                   style="text-align: left; color: red"
                   v-model="Libelle_bailleur"
                   class="span"
                   v-show="InputLibelleBailleurdata == true"
-                ></money> -->
+                ></money>
                 BAILLEUR
               </th>
- <th>
 
-                  <!-- <i id="style1" @click="InputLibelleBailleur" class="icon-search"></i>
-                <money
-                  style="text-align: left; color: red"
-                  v-model="Libelle_bailleur"
-                  class="span"
-                  v-show="InputLibelleBailleurdata == true"
-                ></money> -->
+              <th v-if="recupereIDactivite!=0">
+
+                  <i @click="ActiveInputLigne" id="style1" class=" icon-search"></i> 
+                      
+                     <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
+                     <model-list-select v-show="inputLigneCode == true"
+                  style="background-color: #fff; border: 2px solid #000"
+                  class="wide"
+                  :list="uniteAdministratives"
+                  v-model="inputLigneCode1"
+                  option-value="id"
+                  option-text="code"
+                  placeholder="CODE UA"
+                >
+                </model-list-select>
                 SECTION
               </th>
+
               <th id="taillecol"
                 style="
                   font-size: 12px;
@@ -295,7 +303,12 @@
               >
                 {{ GroupeSourceFinancement.libelle }}
               </td>
-              <td></td>
+
+              <td v-if="recupereIDactivite!=0"
+                v-bind:class="recupereIDactivite == GroupeSourceFinancement.id? 'graybg': 'whitebg'">
+                {{ AfficheUaGroupeTaille(GroupeSourceFinancement.id) }}
+              </td>
+
               <td style="text-align:right"
                 v-bind:class="
                   recupereIDactivite == GroupeSourceFinancement.id
@@ -350,7 +363,8 @@
                   <td></td>
                   <td></td>
                   <td></td>
-  <td></td>
+                  <td></td>
+
                   <td>
                     <button @click="ShowMyLigne(GroupeUa)">
                      <i class="icon-arrow-right"></i> </button>
@@ -1141,13 +1155,35 @@ export default {
               array_exercie.push(val.section_id);
             });
             let unique = [...new Set(array_exercie)];
-            console.log(unique);
             if (unique.length == 0) {
               return [];
             }
             return unique;
           }
           return [];
+        }
+      };
+    },
+
+    AfficheUaGroupeTaille() {
+      return (id) => {
+        if (id != 0 && id != "") {
+          let objet = this.budgetEclate.filter(
+            (item) => item.source_financement_id == id
+          );
+          //  let vm=this
+          let array_exercie = [];
+          if (objet.length > 0) {
+            objet.forEach(function (val) {
+              array_exercie.push(val.section_id);
+            });
+            let unique = [...new Set(array_exercie)];
+            if (unique.length == 0) {
+              return 0;
+            }
+            return unique.length;
+          }
+          return 0;
         }
       };
     },

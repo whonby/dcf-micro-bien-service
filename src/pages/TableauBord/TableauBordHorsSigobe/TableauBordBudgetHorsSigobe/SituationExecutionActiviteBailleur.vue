@@ -146,7 +146,7 @@
                 "
               >
                 ACTIVITE
-                <i @click="ActiveInputLigne">
+                <i id="style1"  @click="ActiveInputLigne">
                   <i class="icon-search"></i>
                 </i>
                 <!-- <input type="text" v-model="inputLigne1" class="span4" /> -->
@@ -162,7 +162,7 @@
                 >
                 </model-list-select>
               </th>
-<th
+              <th v-if="recupereIDactivite!=0"
                 style="
                   font-size: 14px;
                   color: #000;
@@ -182,12 +182,12 @@
                 "
                 id="taillecol"
               >
-               <i @click="TriEnOrdreMontantInitial()">
+               <i id="style1" @click="TriEnOrdreMontantInitial()">
                      <i class=" icon-filter"></i> 
                       
                     </i>
                 BUDGET INITIAL 
-                <i @click="InputMontantInitial">
+                <i id="style1" @click="InputMontantInitial">
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -203,12 +203,12 @@
                 "
                 id="taillecol"
               >
-            <i @click="TriEnOrdreMontantReamenagement()">
+            <i id="style1"  @click="TriEnOrdreMontantReamenagement()">
                      <i class=" icon-filter"></i> 
                       
                     </i>
                 MODIFICATION BUDGETAIRE 
-                 <i @click="InputMontantReamenagement">
+                 <i id="style1" @click="InputMontantReamenagement">
                      <i class=" icon-search"></i> 
                     </i>
                     <!-- </button> -->
@@ -228,10 +228,10 @@
                 id="taillecol"
               >
                <i @click="TriEnOrdreMontantActuelle()">
-                     <i class=" icon-filter"></i> 
+                     <i id="style1" class=" icon-filter"></i> 
                     </i>
                 BUDGET ACTUEL 
-                <i @click="InputMontantActuelle">
+                <i id="style1" @click="InputMontantActuelle">
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -247,11 +247,11 @@
                 "
                 id="taillecol"
               >
-                <i @click="TriEnOrdreMontantExecution()">
+                <i id="style1" @click="TriEnOrdreMontantExecution()">
                      <i class=" icon-filter"></i> 
                     </i>
                 MONTANT EXECUTE 
-                 <i @click="InputMontantExecution">
+                 <i id="style1" @click="InputMontantExecution">
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -269,12 +269,12 @@
                 "
                 id="taillecol"
               >
-               <i @click="TriEnOrdreMontantOpNonRegularisen()">
+               <i  id="style1" @click="TriEnOrdreMontantOpNonRegularisen()">
                      <i class=" icon-filter"></i> 
                     </i>
                 MONTANT OP PROVISOIRE NON REGULARISE 
-                <i @click="InputMontantOpNonRegularise">
-                     <i class=" icon-search"></i> 
+                <i id="style1"  @click="InputMontantOpNonRegularise">
+                     <i  class=" icon-search"></i> 
                       
                     </i>
                      <money style="text-align:left;color:red"   v-model="montant_op_non_regularise" class="span" v-show="activeMontantMontantOpNonRegularise == true"></money>
@@ -290,11 +290,11 @@
                   background-color: #fbb203 !important;
                 "
               >
-               <i @click="TriEnOrdreNbreOpNonRegularise()">
+               <i  id="style1" @click="TriEnOrdreNbreOpNonRegularise()">
                      <i class=" icon-filter"></i> 
                     </i>
                 NB OP PROVISOIRE NON REGULARISE(S) 
-                <i @click="InputNbreOpNonRegularise">
+                <i id="style1" @click="InputNbreOpNonRegularise">
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -311,11 +311,11 @@
                   background-color: #fbb203 !important;
                 "
               >
-               <i @click="TriEnOrdreTauxExecution()">
+               <i id="style1" @click="TriEnOrdreTauxExecution()">
                      <i class=" icon-filter"></i> 
                     </i>
                 TAUX D'EXECUTION(%) 
-                 <i @click="InputTauxExecution">
+                 <i id="style1" @click="InputTauxExecution">
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -332,11 +332,11 @@
                 "
                 id="taillecol"
               >
-              <i @click="TriEnOrdreDisponible()">
+              <i id="style1" @click="TriEnOrdreDisponible()">
                      <i class=" icon-filter"></i> 
                     </i>
                 DISPONIBLE 
-                 <i @click="InputMontantDisponible">
+                 <i id="style1" @click="InputMontantDisponible">
                      <i class=" icon-search"></i> 
                       
                     </i>
@@ -365,18 +365,17 @@
                    
                 </td>
               <td
-                v-bind:class="
-                  recupereIDactivite ==
-                  GroupeOrdrePaiementByActivit.id
-                    ? 'graybg'
-                    : 'whitebg'
-                "
-              >
+                v-bind:class="recupereIDactivite ==GroupeOrdrePaiementByActivit.id? 'graybg': 'whitebg'">
                 {{
                   GroupeOrdrePaiementByActivit.libelle
                 }}
               </td>
-              <td></td>
+              <td v-if="recupereIDactivite!=0"
+                v-bind:class="recupereIDactivite ==GroupeOrdrePaiementByActivit.id? 'graybg': 'whitebg'">
+                {{
+                  arrayExerciceDecompteTaille(GroupeOrdrePaiementByActivit.id)
+                }}
+              </td>
               <td
                  v-bind:class=" recupereIDactivite ==
                   GroupeOrdrePaiementByActivit.id ? 'graybg': 'whitebg'"
@@ -1756,6 +1755,31 @@ TriaffichageUniteAdminstrative() {
       };
     },
 
+
+    arrayExerciceDecompteTaille() {
+      return (idactivite) => {
+       // console.log(idactivite);
+
+        if (idactivite != null && idactivite != "") {
+          let objet = this.listeordrepaiementstest(idactivite);
+          //  let vm=this
+          let array_exercie = [];
+          if (objet.length > 0) {
+            objet.forEach(function (val) {
+              array_exercie.push(val.source_financement_id);
+            });
+            let unique = [...new Set(array_exercie)];
+           // console.log(unique);
+            if (unique.length == 0) {
+              return 0;
+            }
+            return unique.length;
+          }
+          return 0;
+        }
+      };
+    },
+
   
     anneeAmort() {
       const norme = this.exercices_budgetaires.find(
@@ -2100,6 +2124,9 @@ InputTauxExecution(){
   color: white;
   font-size: 13px;
   font-weight: bold;
+}
+#style1{
+  font-size: 20px;
 }
 
 .tailgrand {
