@@ -289,7 +289,13 @@
                  <tr>
                      <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
                      <td style="width:15%" colspan="6" v-if="detailActeEffet">
-                        ( {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ht))}}  HT, {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ttc))}} TTC )
+                         {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ht))}}  HT 
+                     </td>
+                      <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
+                      <td style="width:15%" colspan="6" v-if="detailActeEffet">
+                        {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ttc))}} TTC 
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -761,7 +767,6 @@
             ]),
  
             ...mapGetters('parametreGenerauxAdministratif',[
-
                 "sections",
                 "type_Unite_admins",
                 "plans_programmes",
@@ -772,7 +777,6 @@
             ]),
 
             ...mapGetters('parametreGenerauxFonctionnelle',[
-
                 "plans_fonctionnels",
                 "afficheNiveauPlanFonctionnel"
             ]),
@@ -895,12 +899,11 @@ tachePasMarche(){
                     if (objet != null && objet != "") {
                         let initialValue = 0;
                         let montant_ht=  objet.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.total_general) ;
+                            return total + parseFloat(currentValue.netttc) ;
                         }, initialValue);
                         return montant_ht
                     }
                     return 0
-
                 };
             },
             montantPartEtat() {
