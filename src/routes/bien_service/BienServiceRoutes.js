@@ -310,6 +310,7 @@ const BienServiceRoutes = [
         name: "GroupeOpParAnnee",
         component: GroupeOpParAnnee
     },
+    
     {
         path: "/NewOrdrePaiement/:id",
         name: "NewOrdrePaiement",
