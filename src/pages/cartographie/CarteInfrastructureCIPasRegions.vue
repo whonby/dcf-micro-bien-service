@@ -1881,7 +1881,7 @@ export default {
     console.log(ad1);
     console.log(moda);
 
-    console.log(this.getActeEffetFinancierPersonnaliser45);
+  
     //console.log()
     /**
  *  objet_map:"",
