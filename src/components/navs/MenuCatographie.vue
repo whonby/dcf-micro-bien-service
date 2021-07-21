@@ -22,7 +22,7 @@
           <i class="icon icon-users"></i>
           <span class="text">Indicateurs </span>
         </a>
-      </li>
+          </li>
 
        <li class="dropdown" id="tableau">
         <a
