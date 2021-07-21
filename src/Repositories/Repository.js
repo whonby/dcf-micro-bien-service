@@ -15,6 +15,19 @@ export const groupBy = (objectArray, ...properties) => {
 };
 
 
+export const formatageSomme = montant => {
+  var p = montant.toFixed(2).split(".");
+  return (
+    p[0]
+      .split("")
+      .reverse()
+      .reduce((acc, montant, i) => {
+        return montant == "-"
+          ? acc
+          : montant + (i && !(i % 3) ? "." : "") + acc;
+      }, "") + " F CFA"
+  );
+};
 export const partition=(items, size)=> {
     var result = items.reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index/size)
@@ -30,19 +43,6 @@ export const partition=(items, size)=> {
     return result
 };
 
-export const formatageSomme = montant => {
-  var p = montant.toFixed(2).split(".");
-  return (
-    p[0]
-      .split("")
-      .reverse()
-      .reduce((acc, montant, i) => {
-        return montant == "-"
-          ? acc
-          : montant + (i && !(i % 3) ? "." : "") + acc;
-      }, "") + " F CFA"
-  );
-};
 
 export const formatageSommeSansFCFA = montant => {
   var p = montant.toFixed(2).split(".");

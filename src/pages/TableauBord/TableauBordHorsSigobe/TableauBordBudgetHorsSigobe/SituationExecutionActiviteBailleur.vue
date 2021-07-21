@@ -643,7 +643,7 @@
                 "
                 colspan="2"
               >
-                TOTAL ACTIVITE
+                TOTAL 
               </td>
             <td v-if="recupereIDactivite!=0"
                 style="
@@ -655,7 +655,7 @@
                 "
                 colspan="3"
               >
-                TOTAL ACTIVITE
+                TOTAL 
               </td>
               <td
                 style="
