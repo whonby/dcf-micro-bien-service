@@ -13,7 +13,7 @@
         </a>
       </li> -->
 <li>
-            <router-link :to="{name: 'CartographieBudget'}" tag="a">
+            <router-link :to="{name: 'DetailCarteMarche'}" tag="a">
               CATOGRAPHIE BUDGETAIRE
             </router-link>
           </li>

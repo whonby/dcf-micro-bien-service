@@ -121,14 +121,26 @@
       <input type="radio" v-model="infrastructure" :value="item.id" :id="'IN'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
     </label>
 
-    <h6>Type Marches</h6>
+    <!--<h6>Type Marches</h6>
     <label for="all_type">
         <input type="radio" v-model="type_marche" value="" id="all_type"> <span>Affiché tous  <b></b></span>
     </label>
     <label  v-for="item in typeMarches" :key="item.id" :for="'TQ'+item.id">
         <input type="radio" v-model="type_marche" :value="item.id" :id="'TQ'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasTypeMarche(item.id)}})</b></span>
-    </label>
+    </label>-->
 
+
+ <label>Type Marches</label>
+    <model-list-select style="background-color: rgb(233,233,233);"
+                       class="wide"
+                       :list="typeMarches"
+                       v-model="type_marche"
+                       option-value="id"
+                       option-text="libelle"
+                       placeholder="Type de marche"
+    >
+
+    </model-list-select>
 </div>
 
 <div class="span6">
@@ -689,7 +701,7 @@ export default {
           name: 'Plan A',
           visible: true,
           attribution: '',
-          url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       },
         {
           name: 'Plan',
@@ -784,7 +796,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 //                this.status_marche="planifie"
 //            }
             if(this.getterInfoTableauBordFiltre.status_marche=="planifier"){
-                console.log("OK C'est la contratualisation")
+              
                 this.getterInfoTableauBordFiltre.status_marche=""
                 this.status_marche="planifie"
             }
@@ -863,7 +875,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
               let colect=[];
               let vM=this
               this.uniteAdministratives.filter(item=>{
-                  console.log("OK bonjour GUE")
+                  
                   if(vM.getterUniteAdministrativeByUser.length>0){
                       let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                       if (val!=undefined){
@@ -881,7 +893,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       listeMarcheUniteAdmin(){
           let colect=[]
           let vM=this;
-          this.filtre_unite_admin.forEach(function (value) {
+          this.filtre_unite_admin.map(function (value) {
               let objet=vM.marches.filter(item=>{
                       if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
                           return item
@@ -901,7 +913,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     regions(){
       // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
       return this.localisations_geographiques.filter(item=>{
-          if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+         /*&& item.structure_localisation_geographique.niveau==2*/
+          if(item.longitude!=null  && item.structure_localisation_geographique_id==5){
               return item
           }
       });
@@ -909,9 +922,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
     departements(){
       return id=>{
-
          return this.getterLocalisationGeoAll.filter(item=>{
-          if(item.structure_localisation_geographique.niveau==3 && item.parent==id){
+          if(item.structure_localisation_geographique_id==6 && item.parent==id){
             return item
           }
         });
@@ -920,7 +932,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     sousPrefecture(){
       return id=>{
         return this.getterLocalisationGeoAll.filter(item=>{
-          if(item.structure_localisation_geographique.niveau==4 && item.parent==id){
+          if(item.structure_localisation_geographique_id==8 && item.parent==id){
             return item
           }
         });
@@ -1097,7 +1109,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let localisation=[]
       let vM=this;
 //status_marche
-      vM.getMarcheStatus(vM.status_marche).forEach(function (value){
+      vM.getMarcheStatus(vM.status_marche).map(function (value){
         if(value.longitude!=null && value.latitude!=null){
           let coordonne=[]
           coordonne.push(value.latitude)
