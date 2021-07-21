@@ -630,7 +630,7 @@
           <tfoot>
             <tr style="margin-left: 25px">
               <td></td>
-              <td
+              <td v-if="recupereIDactivite==0"
                 style="
                   text-align: center;
                   color: #000;
@@ -642,7 +642,18 @@
               >
                 TOTAL ACTIVITE
               </td>
- <td></td>
+            <td v-if="recupereIDactivite!=0"
+                style="
+                  text-align: center;
+                  color: #000;
+                  background-color: #f55e25 !important;
+                  font-weight: bold;
+                  color: #000;
+                "
+                colspan="3"
+              >
+                TOTAL ACTIVITE
+              </td>
               <td
                 style="
                   text-align: center;

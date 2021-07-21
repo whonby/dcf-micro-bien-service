@@ -499,6 +499,7 @@ console.log(this.localisation)
                 "getterInformationCarteInfrastructure","getterFiltreCarteInfrastructure",
                 "supprmieMarcheFiltreCarteInfrastructure","supprmiInfoFiltreCarteInfrastructure","gettersDossierMandat",
                 "gettersDemandeEngagement",
+                "gettersgestionOrdrePaiement",
                 "gettersDossierLiquidation",]),
 
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
@@ -618,52 +619,39 @@ console.log(this.localisation)
                      if(objet_marches.length==0) return 0;
 
                       let vm =this
-                     let montant_ae=0;
-                      let montant_cp=0;
+                      let montant=0;
                      objet_marches.forEach(function (value) {
-                          montant_ae=parseFloat(montant_ae) + parseFloat(vm.montantExecuteAEPasMarche(value.id))
-
-                         montant_cp=parseFloat(montant_cp) + parseFloat(vm.montantExecuteCPPasMarche(value.id))
+                         montant=parseFloat(montant) + parseFloat(vm.montantExecutePasMarche(value.id))
 
                      })
 
-                     if(this.type_budget=="AE") return montant_ae
-
-                     return montant_cp
+                     return montant ;
                  }
             },
 
-            montantExecuteAEPasMarche(){
+            montantExecutePasMarche(){
               return marche_id=>{
-                  if(!marche_id) return 0;
-
-                return  this.gettersDemandeEngagement
-                      .filter(
-                          (item) =>
-                              this.liquidationid(item.id) == 8 && item.marche_id == marche_id
-                      )
-                      .reduce(
-                          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-                          0
-                      )
-                      .toFixed(0);
+                  if(!marche_id) {
+                         return  this.gettersgestionOrdrePaiement.filter(
+                          (item) =>item.marche_id == marche_id
+                      ).reduce(
+                          (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),0).toFixed(0);
+                  }
+                  return 0;
               }
             },
 
             montantExecuteCPPasMarche(){
                 return marche_id=>{
-                    if(!marche_id) return 0;
+                    if(!marche_id) {
+                             return  this.gettersDemandeEngagement.filter(
+                            (item) =>this.liquidationidmandat(item.id) == 8 && item.marche_id == marche_id
+                        ).reduce(
+                            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),0).toFixed(0);
+                    }
+                    return 0;
 
-                    return  this.gettersDemandeEngagement
-                        .filter(
-                            (item) =>
-                                this.liquidationidmandat(item.id) == 8 && item.marche_id == marche_id
-                        )
-                        .reduce(
-                            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-                            0
-                        )
-                        .toFixed(0);
+                   
                 }
             },
 
@@ -708,7 +696,7 @@ console.log(this.localisation)
 
             regions(){
                 return this.localisations_geographiques.filter(item=>{
-                    if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+                    if(item.longitude!=null  && item.structure_localisation_geographique_id==5) {
                         return item
                     }
                 });
@@ -717,7 +705,7 @@ console.log(this.localisation)
                 return id=>{
 
                     return this.getterLocalisationGeoAll.filter(item=>{
-                        if(item.structure_localisation_geographique.niveau==3 && item.parent==id){
+                        if( item.structure_localisation_geographique_id==6 && item.parent==id){
                             return item
                         }
                     });
@@ -726,7 +714,7 @@ console.log(this.localisation)
             sousPrefecture(){
                 return id=>{
                     return this.getterLocalisationGeoAll.filter(item=>{
-                        if(item.structure_localisation_geographique.niveau==4 && item.parent==id){
+                        if(item.structure_localisation_geographique_id==8 && item.parent==id){
                             return item
                         }
                     });
