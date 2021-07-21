@@ -38,10 +38,10 @@
           
             <div class="card-body">
               
-              <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
-              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Total: {{NbreMarcheNonExecuter}} </p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA: {{NbreUANonExecuter}} </p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total: {{ formatageSommeSansFCFA(parseFloat(MontantTotalMarche1NonExecuter))}} </p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux: {{TauxNonExecuter}} </p>
               <br>
               <br>
          
@@ -65,10 +65,10 @@
           
             <div class="card-body">
               
-              <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
-              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Total: {{NbreMarcheExecuter}} </p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA: {{NbreUAExecuter}} </p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total: {{ formatageSommeSansFCFA(parseFloat(MontantTotalMarche1Executer))}} </p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux: {{TauxExecuter}} % </p>
               <br>
               <br>
          
@@ -91,10 +91,10 @@
           
             <div class="card-body">
               
-              <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
-              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Total: {{ NbreMarcheacheve}} </p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA: {{NbreUAacheve}}</p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total: {{ formatageSommeSansFCFA(parseFloat(MontantTotalMarche1acheve))}} </p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux: {{Tauxacheve}} %</p>
               <br>
               <br>
          
@@ -135,10 +135,10 @@
           
             <div class="card-body">
               
-             <p style="color:black;font-size:18px;font-weight:bold;">-Total:0</p>
-              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:0</p>
-              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:0</p>
+             <p style="color:black;font-size:18px;font-weight:bold;">-Total:{{NbreMarcheresilie}}</p>
+              <p style="color:black;font-size:18px;font-weight:bold;">-Nombre des UA: {{NbreUAresilie}}</p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Montant Total:{{formatageSommeSansFCFA(parseFloat(MontantTotalMarche1resilie))}}</p>
+              <p  style="color:black;font-size:18px;font-weight:bold;">-Taux:{{TauxResilie}}</p>
               <br>
               <br>
          
@@ -271,7 +271,7 @@ export default {
             
     ...mapGetters("bienService", ["getMandatPersonnaliserVise",
     "getMandatPersonnaliserPersonnel","mandats","acteEffetFinanciers",
-    "GroupeUabyActe","marches"]),
+    "GroupeUabyActe","marches","gettersgestionOrdrePaiement"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
@@ -322,7 +322,238 @@ budgetConsommerPersonnel(){
       };
     },
 
+    //*******fin*******
 
+    // fonction lega marches Resilié
+
+    ReturnSibResilie(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.id == id && qtreel.exo_id==this.anneeAmort && qtreel.attribue==3
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+      ReturnSibuaResilie(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.exo_id==this.anneeAmort && qtreel.attribue==3
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+    //*******fin*******
+
+
+    // *********gestion des nombres des mrches resilié **********
+    NbreUAresilie(){
+             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibuaResilie(qtreel[0].ua_id) == 1)).length
+    },
+
+    NbreMarcheresilie(){
+        return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibResilie(qtreel.marche_id) == 1)).length
+    },
+
+
+    MontantTotalMarche1resilie(){
+      return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibResilie(qtreel.marche_id) == 1)).
+      reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
+        
+         
+    },
+  
+
+    TauxResilie(){
+        return (parseFloat(this.MontantTotalMarche1resilie/this.MontantTotalMarche1)*100)
+    },
+
+    //**************fin gestion des nombres des mrches resilié ********
+  
+  // fonction silva marches Achevés
+    ReturnSibAcheve(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.id == id && qtreel.exo_id==this.anneeAmort && qtreel.attribue==5
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+      ReturnSibuaAcheve(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.exo_id==this.anneeAmort && qtreel.attribue==5
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+    //*******fin*******
+
+    // *********gestion des nombres des mrches acheve **********
+    NbreUAacheve(){
+             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibuaAcheve(qtreel[0].ua_id) == 1)).length
+    },
+
+    NbreMarcheacheve(){
+        return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibAcheve(qtreel.marche_id) == 1)).length
+    },
+
+
+    MontantTotalMarche1acheve(){
+      return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibAcheve(qtreel.marche_id) == 1)).
+      reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
+        
+         
+    },
+  
+
+    Tauxacheve(){
+        return (parseFloat(this.MontantTotalMarche1acheve/this.MontantTotalMarche1)*100).toFixed(2);
+        
+    },
+    //**************fin gestion des nombres des mrches resilié ********
+
+    // fonction silva marches Executer
+    ReturnSibExecution(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.id == id && qtreel.exo_id==this.anneeAmort && qtreel.attribue==2);
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+      ReturnSibuaExecution(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.exo_id==this.anneeAmort && qtreel.attribue==2
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+    //*******fin*******
+
+    // *********gestion des nombres des mrches executer **********
+    NbreUAExecuter(){
+             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibuaExecution(qtreel[0].ua_id) == 1)).length
+    },
+
+    NbreMarcheExecuter(){
+        return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibExecution(qtreel.marche_id) == 1)).length
+    },
+    MontantTotalMarche1Executer(){
+      return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibExecution(qtreel.marche_id) == 1)).
+      reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
+                
+    },
+    TauxExecuter(){
+        return (parseFloat(this.MontantTotalMarche1Executer/this.MontantTotalMarche1)*100).toFixed(2);
+        
+    },
+    //**************fin gestion des nombres des mrches resilié ********
+
+ // fonction silva marches Non executer
+    ReturnSibHors(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.marche_id == id && qtreel.exo_id==this.anneeAmort);
+          if (qtereel) {
+            return 0;
+          }
+          return 1;
+        }
+      };
+    },
+
+    ReturnSibNonExecuter(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.id == id && qtreel.exo_id==this.anneeAmort);
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+      ReturnSibuaNonExecuter(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(
+            (qtreel) => qtreel.unite_administrative_id == id && qtreel.exo_id==this.anneeAmort
+          );
+
+          if (qtereel) {
+            return qtereel.sib;
+          }
+          return 0;
+        }
+      };
+    },
+
+    //*******fin*******
+
+    // *********gestion des nombres des mrches executer **********
+    NbreUANonExecuter(){
+             return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibuaNonExecuter(qtreel[0].ua_id) == 1 && this.ReturnSibHors(qtreel[0].marche_id) == 0)).length
+    },
+
+    NbreMarcheNonExecuter(){
+        return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibNonExecuter(qtreel.marche_id) == 1 && this.ReturnSibHors(qtreel.marche_id) == 0)).length
+    },
+    MontantTotalMarche1NonExecuter(){
+      return (this.acteEffetFinanciers.filter((qtreel) => this.ReturnSibNonExecuter(qtreel.marche_id) == 1 && this.ReturnSibHors(qtreel.marche_id) == 0)).
+      reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),0).toFixed(0);
+                
+    },
+    TauxNonExecuter(){
+        return (parseFloat(this.MontantTotalMarche1NonExecuter/this.MontantTotalMarche1)*100).toFixed(2);
+        
+    },
+    //**************fin gestion des nombres des mrches resilié ********
+
+// gestion des tautaux
     NbreUA(){
              return (this.GroupeUabyActe.filter((qtreel) => this.ReturnSibua(qtreel[0].ua_id) == 1)).length
     },
@@ -338,6 +569,8 @@ budgetConsommerPersonnel(){
         
          
     },
+
+    //fin des tautaux
 
 
      datamois() {
