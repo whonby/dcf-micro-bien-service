@@ -580,11 +580,11 @@ budgetConsommerPersonnel(){
         vm.dataPourcentageBienService1 = [];
       }
 
-      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1));
-      vm.dataPourcentageBienService1.push(10000000000);
-      vm.dataPourcentageBienService1.push(8000000);
-      vm.dataPourcentageBienService1.push(25000000000);
-      vm.dataPourcentageBienService1.push(800000000);
+      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1NonExecuter));
+      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1Executer));
+      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1acheve));
+      vm.dataPourcentageBienService1.push(parseFloat(this.MontantTotalMarche1resilie));
+      vm.dataPourcentageBienService1.push(parseFloat(0));
 
       return "";
     },
