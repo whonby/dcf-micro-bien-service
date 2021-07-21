@@ -191,7 +191,7 @@
                  <tr>
                      <th>MONTANT CONFIDENTIEL FCFA</th>
                      <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture_ht">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
-                     <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="3" v-else>Non Renseigné </td>
                      <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
                      <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
 
@@ -570,14 +570,12 @@
              <table class="table table-bordered table-striped" id="app14">
                  <thead>
                  <tr>
-                     <th>OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS </th>
                      <th>OBSERVATIONS</th>
                      <th>CONTROLEUR FINANCIER</th>
                  </tr>
                  <tr height="120px">
-                     <td v-if="detail">{{detail.objet}} / {{detail.livrable}} </td>
-                     <td v-else>OK</td>
-                     <td > </td>
+                    
+                     <td colspan="5"> </td>
                      <td v-if="detailCF"> {{detailCF.nom_mandat|| 'Non renseigné'}} {{detailCF.prenom_nom|| 'Non renseigné'}}
 
                      </td>
@@ -798,7 +796,7 @@
                         }, 0);
          }
             },
-
+         
 isNanMontant(){
     return montant => {
         if(montant=="NaN") return "Non Applicable"
