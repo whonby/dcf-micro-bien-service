@@ -109,11 +109,7 @@ Ajouter Facture
                                 style="border: 1px solid #000"
                                 :value="
                                   libelleSection(
-                                    idSection(
-                                      libelleLigneEconomiqueParent(
-                                        formData.activite_id
-                                      )
-                                    )
+                                    IdsectionParUa(formData.unite_administrative_id)
                                   )
                                 "
                                 class="span"
@@ -2777,7 +2773,7 @@ AfficheCompteEntreprise() {
 return parseFloat(this.MontantReelMarche(this.formData2.marche_id))+parseFloat(this.MontantAvenant(this.formData2.marche_id))
   },
   ResteAPayeSurMarche(){
-return (parseFloat(this.MontantDeBase)-parseFloat(this.MontantPayeMarche(this.formData2.marche_id))-parseFloat(this.formData2.montant_engage))
+return (parseFloat(this.MontantDeBase)-(parseFloat(this.MontantPayeMarche(this.formData2.marche_id))+parseFloat(this.formData2.montant_engage)))
   },
   MontantPayeMarche() {
       return id => {
@@ -3189,6 +3185,20 @@ arrayExerciceDecompteBienService() {
               qtreel.activite_id == id1 &&
               qtreel.sous_budget_id == 0
           );
+        }
+      };
+    },
+     IdsectionParUa() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.uniteAdministratives.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.section_id;
+          }
+          return 0;
         }
       };
     },
@@ -4403,11 +4413,7 @@ afficherModalModifierFacture(id) {
             type_ordre_paiement:1,
             numero_ordre_paiement: this.intitule,
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
+            section_id: this.IdsectionParUa(this.formData.unite_administrative_id),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
@@ -4506,11 +4512,7 @@ this.$notify({
             numero_op_prov_definitive:this.formData.numero_ordre_paiement,
             type_ordre_paiement: 1,
             numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
+            section_id: this.IdsectionParUa(this.formData.unite_administrative_id),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
@@ -4600,11 +4602,7 @@ this.$notify({
              mois_paiement: this.formData.mois_paiement,
             type_ordre_paiement: 1,
             numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
+            section_id: this.IdsectionParUa(this.formData.unite_administrative_id),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
@@ -4712,11 +4710,7 @@ this.$notify({
             exercice: this.anneeAmort,
             type_ordre_paiement: 1,
             numero_ordre_paiement: this.intitule,
-            section_id: this.idSection(
-              this.libelleLigneEconomiqueParent(
-                this.formData.activite_id
-              )
-            ),
+            section_id: this.IdsectionParUa(this.formData.unite_administrative_id),
             programme_id: this.idProgramme(
               this.libelleLigneEconomiqueParent(
                 this.formData.activite_id
