@@ -382,7 +382,7 @@
                         name: 'Plan A',
                         visible: true,
                         attribution: '',
-                        url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+                        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                     },
                     {
                         name: 'Plan',
@@ -1191,8 +1191,7 @@ console.log(this.localisation)
                     }
                 })
 
-                console.log(vM.montant_budget_restan)
-                console.log( vM.montant_budget_execute)
+               
                 return localisation;
             },
 

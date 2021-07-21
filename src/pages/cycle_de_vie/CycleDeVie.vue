@@ -899,12 +899,11 @@ tachePasMarche(){
                     if (objet != null && objet != "") {
                         let initialValue = 0;
                         let montant_ht=  objet.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.total_general) ;
+                            return total + parseFloat(currentValue.netttc) ;
                         }, initialValue);
                         return montant_ht
                     }
                     return 0
-
                 };
             },
             montantPartEtat() {
