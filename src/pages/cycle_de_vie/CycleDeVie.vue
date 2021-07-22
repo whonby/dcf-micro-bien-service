@@ -1,5 +1,6 @@
 <template>
     <div >
+        
 
 
         <div class="container-fluid" v-if="detail">
@@ -519,46 +520,61 @@
                  </tr>
                  <tr>
                      <th style="width:10%" >TOTAL PAIEMENT  EXECUTE</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteD))}}TTC</td>
+                     <td style="width:15%" colspan="2" >{{ montantDecompteNetTtcPourCent}}%</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantTvaHTGlobal))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ MontantTVAGlobal }} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteNetTtc))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     
                  </tr>
                  <tr>
                      <th style="width:10%" >PART ETAT</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantPartEtat(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" > {{ montantDecompteNetTtcPourCentEtat }}%</td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat(MontantHTEtat))}} HT</td>
+                    <td style="width:15%" colspan="2" >  {{MontantTvaTVAEtat}} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteParEtat))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >PART BAILLEUR</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantPartBailleur(detailDecompte)))}} TTC</td>
+                     <td style="width:15%" colspan="2" >{{montantDecompteNetTtcPourCentBailleur }}%</td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat(MontantTvaHTBailleur))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ MontantTvaTVABailleur }} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecomptePartBailleur))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >TOTAL RESTE A PAYER</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme((montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))-montantDecompte(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" > {{ PoucentageRestePayerGlobal }} %</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerGlobal))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ MontantTVARestePayerGlobal  }} TVA </td>
+                     <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme((montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))-montantDecompte(detailDecompte))}} TTC</td> -->
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(RecupMontantRestePayerTTC))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >PART ETAT</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(detailBailEtat.montant)-montantPartEtat(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" > {{ PoucentageRestePayerEtat }} %</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerEtat))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ MontantTVARestePayerEtat }} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(MontantRestePayerEtat))}} TTC</td>
+                     <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(detailBailEtat.montant)-montantPartEtat(detailDecompte))}} TTC</td> -->
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >PART BAILLEUR</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(montantActPartBailleurTTC(detailBailleur)-montantPartBailleur(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" > {{ PoucentageRestePayerBailleur }} %</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerBailleur))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ MontantTVARestePayerBailleur }} TVA </td>
+
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(MontantRestePayerBailleur))}} TTC</td>
+                     <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(montantActPartBailleurTTC(detailBailleur)-montantPartBailleur(detailDecompte))}} TTC</td> -->
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
 
                  <tr>
@@ -617,6 +633,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        
+        <div class="container-fluid" v-else>
+             <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
         </div>
 
         <!-- <fab :actions="fabActions" @cache="afficherModalAjouterpaiementPersonnel" main-icon="apps" bg-color="green"></fab>
@@ -713,6 +734,7 @@ import moment from "moment";
         },
         created() {
          this.detail=this.marches.find(item=>item.id== this.$route.params.id)
+
          
             this.detailBailEtat=this.personnaliseGetterMarcheBailleur.find(item=>{
                 if (item.typeFinnancement.code==1 && item.marche_id==this.$route.params.id ){
@@ -767,7 +789,8 @@ import moment from "moment";
                 "typeTextes",
                 "uniteAdministratives",
                 "getterBudgeCharge",
-                "decomptefactures"
+                "decomptefactures",
+                "budgetEclate",
             ]),
             ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
 
@@ -993,23 +1016,160 @@ tachePasMarche(){
       };
     },
 
-            //new data
+            //new data lega
 
-                 montantDecompteD() {
-
-                     return this.decomptefactures
-            .filter(
-              (prod) =>
-                prod.marche_id == this.detail.id
-            )
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montantmarche),
-              0
-            )
-            .toFixed(0);
+    montantDecompteNetTtc() {
+     return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.netttc),
+              0).toFixed(0);
                        
             },
+
+    montantDecompteNetTtcPourCent(){
+            return ( (parseFloat(this.montantDecompteNetTtc) / parseFloat(this.RecupMontantRestePayerGTTC))*100 ).toFixed(2);
+    },
+
+
+
+    montantDecompteNetTva() {
+         return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.nethtva),
+              0).toFixed(0);
+                       
+            },
+
+
+    montantDecomptePartBailleur() {
+            return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.parts_bailleur),
+              0).toFixed(0);
+                       
+            },
+
+     montantDecompteNetTtcPourCentBailleur(){
+            return ( (parseFloat(this.montantDecomptePartBailleur) / parseFloat(this.RecupMontantRestePayerGTTC))*100 ).toFixed(2);
+             },
+
+    montantDecompteParEtat() {
+            return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.parts_etat),
+              0).toFixed(0);
+                       
+            },
+
+            montantDecompteNetTtcPourCentEtat(){
+            return ( (parseFloat(this.montantDecompteParEtat) / parseFloat(this.RecupMontantRestePayerGTTC))*100 ).toFixed(2);
+             },
+
+
+
+    //*****************gestion des montants HT********************************
+            MontantTvaHTGlobal(){
+                    return (parseFloat(this.montantDecompteNetTtc/1.18))
+             },
+
+             MontantTvaHTBailleur(){
+                    return (parseFloat(this.montantDecomptePartBailleur/1.18))
+             },
+
+             MontantHTEtat(){
+                    return (parseFloat(this.montantDecompteParEtat/1.18))
+             },
+    //*********fin gestion des M HT********************* */
+
+
+
+    //*****************gestion des montants TVA********************************
+            MontantTVAGlobal(){
+                    return (parseFloat(this.montantDecompteNetTtc) - parseFloat(this.montantDecompteNetTtc/1.18)).toFixed(2)
+             },
+
+             MontantTvaTVABailleur(){
+                    return ( parseFloat(this.montantDecomptePartBailleur) - parseFloat(this.montantDecomptePartBailleur/1.18)).toFixed(2)
+             },
+
+             MontantTvaTVAEtat(){
+                    return (parseFloat(this.montantDecompteParEtat)- parseFloat(this.montantDecompteParEtat/1.18)).toFixed(2)
+             },
+    //*********fin gestion des M TVA********************* */
+
+             //recuperation des montant initiaux du marche
+             
+             MontangtMarcheActeF(){
+                 return this.acteEffetFinanciers.filter((item)=>item.marche_id==this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_act),
+              0).toFixed(0);
+             },
+
+             MontangtMarcheAVenant(){
+                 return this.avenants.filter((item)=>item.marche_id==this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_avenant),
+              0).toFixed(0);
+             },
+
+             //gestion du reste a payer
+
+             RecupMontantRestePayerGTTC(){
+               return (parseFloat(this.MontangtMarcheActeF )+ parseFloat(this.MontangtMarcheAVenant))
+             },
+
+             RecupMontantRestePayerTTC(){
+               return (parseFloat(this.RecupMontantRestePayerGTTC) - parseFloat(this.montantDecompteNetTtc))
+             },
+
+             MontantRestePayerEtat(){
+                 if(this.montantDecompteParEtat==0){
+                     return 0;
+                 }
+                 return (parseFloat(this.RecupMontantRestePayerGTTC ) - parseFloat(this.montantDecompteParEtat))
+             },
+
+             MontantRestePayerBailleur(){
+                 if(this.montantDecomptePartBailleur==0){
+                     return 0;
+                 }
+                 return (parseFloat(this.RecupMontantRestePayerGTTC ) - parseFloat(this.montantDecomptePartBailleur))
+             },
+             //*****gestion des poucentage Reste a Payer
+
+              PoucentageRestePayerGlobal(){
+                  return ( (parseFloat(this.RecupMontantRestePayerTTC) / parseFloat(this.montantDecompteNetTtc))*100 ).toFixed(2);
+             },
+
+            
+
+              PoucentageRestePayerEtat(){
+                 return ( (parseFloat(this.MontantRestePayerEtat) / parseFloat(this.montantDecompteNetTtc))*100 ).toFixed(2);
+             },
+
+              PoucentageRestePayerBailleur(){
+                 return ( (parseFloat(this.MontantRestePayerBailleur) / parseFloat(this.montantDecompteNetTtc))*100 ).toFixed(2);
+             },
+
+    //********gestion  des MHT du reste a payer */
+              MontantMTHRestePayerGlobal(){
+                    return (parseFloat(this.RecupMontantRestePayerTTC/1.18))
+             },
+
+             MontantMTHRestePayerEtat(){
+                    return (parseFloat(this.MontantRestePayerEtat/1.18))
+             },
+
+             MontantMTHRestePayerBailleur(){
+                    return (parseFloat(this.MontantRestePayerBailleur/1.18))
+             },
+    //********gestion  des MTVA du reste a payer */
+            MontantTVARestePayerGlobal(){
+                    return (parseFloat(this.RecupMontantRestePayerTTC) - parseFloat(this.RecupMontantRestePayerTTC/1.18)).toFixed(2)
+             },
+
+             MontantTVARestePayerEtat(){
+                    return (parseFloat(this.MontantRestePayerEtat) - parseFloat(this.MontantRestePayerEtat/1.18)).toFixed(2)
+             },
+
+             MontantTVARestePayerBailleur(){
+                    return (parseFloat(this.MontantRestePayerBailleur) - parseFloat(this.MontantRestePayerBailleur/1.18)).toFixed(2)
+             },
 
             //fin
 
