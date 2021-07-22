@@ -19,7 +19,7 @@
           <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
               <h1 class="sidebar-header">
-                Carte d'execution budgetaire en AE et CP
+                Carte EXECUTION
                 <div class="sidebar-close">
                   <i class="fa fa-caret-left"></i>
                 </div>
@@ -44,38 +44,16 @@
                   placeholder="Régions"
                 >
                 </model-list-select>
-                <h6>Grande Nature</h6>
-                <label for="tous">
-                  <input
-                    type="radio"
-                    v-model="grand_nature_depense"
-                    value=""
-                    id="tous"
-                  />
-                  <span>Affiché tous <b></b></span>
-                </label>
-                <label
-                  v-for="item in grandes_natures"
-                  :key="item.id"
-                  :for="item.id"
-                >
-                  <input
-                    type="radio"
-                    v-model="grand_nature_depense"
-                    :value="item.id"
-                    :id="item.id"
-                  />
-                  <span> {{ item.libelle }} <b></b></span>
-                </label>
+               
               </div>
               <div class="span6">
-                <!--  <label for="pet-select">Changer chart:</label>
-                                  <select v-model="type_minichart">
-                                      <option value="bar">bar</option>
-                                      <option value="pie">Pie charts</option>
-                                      <option value="polar-radius">Polar radius</option>
-                                      <option value="polar-area">Polar area</option>
-                                  </select>-->
+                 <label for="pet-select">Changer chart:</label>
+                    <select v-model="type_minichart">
+                        <option value="bar">bar</option>
+                        <option value="pie">Pie charts</option>
+                        <option value="polar-radius">Polar radius</option>
+                        <option value="polar-area">Polar area</option>
+                    </select>
                 <label
                   >Unite administrative
                   <a
@@ -96,13 +74,7 @@
                 >
                 </model-list-select>
 
-                <!-- <h6>Type Budget</h6>
-                                <label for="AE">
-                                    <input type="radio" v-model="type_budget" value="AE" id="AE"> <span>(AE) Autorisation d'engagement <b></b></span>
-                                </label>
-                                <label for="CP">
-                                    <input type="radio" v-model="type_budget" value="CP" id="CP"> <span>(CP) Credit de payement<b></b></span>
-                                </label> -->
+              
               </div>
 
               <table class="table table-striped">
@@ -114,21 +86,20 @@
                 </tbody>
               </table>
 
-              <div>
+              <div v-if="caseAffichageMessageGeneralSituationMarche">
                 <div class="span12" style="font-size: 15px; font-size: 15px">
-                  Situation du budget
+                  Situation Général des marchés
                 </div>
               </div>
 
               <hr />
-              <div id="chart">
-                <apexchart
-                  type="pie"
-                  width="350"
-                  :options="chartOptions3"
-                  :series="[montant_budget_restan, montant_budget_execute]"
-                ></apexchart>
-              </div>
+              <apexchart
+                type="bar"
+                width="350"
+                height="350"
+                :options="chartOptions"
+                :series="dataBar"
+              ></apexchart>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -243,17 +214,6 @@
                   :fillOpacity="2"
                   :name="l.ville"
                 >
-                  <!-- <l-tooltip  >{{l.ville}}</l-tooltip>
-                                    <l-popup>
-                                        <b>{{l.ville}}</b> <br>
-                                        <div >
-                                            Budget: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
-                                            Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
-                                            Budget restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
-                                            Taux d'exécution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
-                                        </div>
-                                    </l-popup> -->
-
                   <l-tooltip>{{ l.ville }}</l-tooltip>
                   <l-popup>
                     <b>{{ l.ville }}</b> <br />
@@ -276,12 +236,12 @@
                   </l-popup>
                 </l-circle-marker>
                 <!--  <l-marker v-for="l in localisation"
-                                            :key="l.id"
-                                            :lat-lng="l.latlng">
+                                          :key="l.id"
+                                          :lat-lng="l.latlng">
 
 
-                                      &lt;!&ndash;&ndash;&gt;
-                                  </l-marker>-->
+                                    &lt;!&ndash;&ndash;&gt;
+                                </l-marker>-->
                 <!--  </v-marker-cluster>-->
                 <v-geosearch :options="geosearchOptions"></v-geosearch>
               </l-map>
@@ -312,7 +272,7 @@ import {
 } from "vue2-leaflet";
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import shadowUrl from "leaflet/dist/images/marker-shadow.png";
-import { formatageSomme } from "../../Repositories/Repository";
+import { formatageSomme } from "../../../src/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
 import VueApexCharts from "vue-apexcharts";
 import L from "leaflet.minichart";
@@ -322,8 +282,7 @@ import moda from "leaflet-modal";
 import { noDCfNoAdmin } from "../../Repositories/Auth";
 //import ad2 from "leaflet-easyprint"
 export default {
-  name: "CarteExecutionAECP",
-  props: ["typeExecution"],
+  name: "Example",
   components: {
     LMap,
     LTileLayer,
@@ -343,21 +302,16 @@ export default {
       Object.assign({}, Icon.Default.prototype.options, { iconUrl, shadowUrl })
     );
     return {
-      montant_budget_restan: 0,
-      montant_budget_execute: 0,
-      type_budget: "AE",
       info_region: "",
       infortion_sidbar_filter: "",
       type_marche: "",
       slection_carte: 0,
-      choix_budget_etat: 3,
       objet_map: "",
       objet_leaflet: "",
       type_minichart: "pie",
       departement: "",
       sous_prefecture: "",
       region: "",
-      grand_nature_depense: "",
       infrastructure: "",
       unite_administrative_id: "",
       chartOptions: {
@@ -450,83 +404,59 @@ export default {
           name: "Plan",
           visible: false,
           attribution: "",
-          url: "https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png",
+          url:
+            "https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png",
         },
         {
           name: "Plan 2",
           visible: false,
-          url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png",
+          url:
+            "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png",
           attribution: "",
         },
         {
           name: "Satelite",
           visible: false,
-          url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          url:
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           attribution: "",
         },
 
         {
           name: "National Geo World Map",
           visible: false,
-          url: "https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
+          url:
+            "https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
           attribution: "",
         },
 
         {
           name: "Voyageur",
           visible: false,
-          url: "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+          url:
+            "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
           attribution: "",
         },
       ],
-
-      series2: [],
-      chartOptions3: {
-        chart: {
-          width: 320,
-          type: "pie",
-        },
-        labels: ["Budget Restant", "Budget Execute"],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: "bottom",
-              },
-            },
-          },
-        ],
-      },
     };
   },
   created() {
-    console.log("...........................");
-    console.log(this.localisation);
-    console.log("...............STRUCTURE GHE............");
     if (this.getterInformationCarteInfrastructure) {
       if (this.getterInformationCarteInfrastructure.infrastructure != "") {
-        this.infrastructure =
-          this.getterInformationCarteInfrastructure.infrastructure;
+        this.infrastructure = this.getterInformationCarteInfrastructure.infrastructure;
       }
       if (
         this.getterInformationCarteInfrastructure.region_select_vmodel != ""
       ) {
-        this.region =
-          this.getterInformationCarteInfrastructure.region_select_vmodel;
+        this.region = this.getterInformationCarteInfrastructure.region_select_vmodel;
       }
       if (this.getterInformationCarteInfrastructure.type_marche != "") {
-        this.type_marche =
-          this.getterInformationCarteInfrastructure.type_marche;
+        this.type_marche = this.getterInformationCarteInfrastructure.type_marche;
       }
       if (
         this.getterInformationCarteInfrastructure.unite_administrative != ""
       ) {
-        this.unite_administrative_id =
-          this.getterInformationCarteInfrastructure.unite_administrative;
+        this.unite_administrative_id = this.getterInformationCarteInfrastructure.unite_administrative;
       }
 
       this.getterInformationCarteInfrastructure.infrastructure = "";
@@ -556,16 +486,13 @@ export default {
       "localisations_geographiques",
       "getterLocalisationGeoAll",
       "getterInfrastrucure",
-      "grandes_natures",
-      "exercices_budgetaires",
     ]),
     ...mapGetters("uniteadministrative", [
       "acteCreations",
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
-      "budgetGeneral",
-      "budgetEclate",
+      "decomptefactures"
     ]),
     ...mapGetters("bienService", [
       "marches",
@@ -577,10 +504,8 @@ export default {
       "getterFiltreCarteInfrastructure",
       "supprmieMarcheFiltreCarteInfrastructure",
       "supprmiInfoFiltreCarteInfrastructure",
-      "gettersDossierMandat",
-      "gettersDemandeEngagement",
-      "gettersgestionOrdrePaiement",
-      "gettersDossierLiquidation",
+      "avenants",
+      "acteEffetFinanciers"
     ]),
 
     ...mapGetters("Utilisateurs", [
@@ -588,229 +513,16 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
-
-    /**Partie execution budgetaire
-     * */
-    listeActeEffectFinnancier: function () {
-      return (macheid) => {
-        if (macheid != "") {
-          return this.getActeEffetFinancierPersonnaliser.find(
-            (idmarche) => idmarche.marche_id == macheid
-          );
-        }
-      };
-    },
-
-    //Recuperation du budget pas zone geographique previsionnel en AE CP
-    totalBudgetGeneral() {
-      let montant_ae = this.budgetGeneral
-        .filter((item) => item.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        )
-        .toFixed(0);
-
-      let montant_cp = this.budgetGeneral
-        .filter((item) => item.actived == 1)
-        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
-        .toFixed(0);
-      if (this.type_budget == "AE") return parseFloat(montant_ae);
-
-      return parseFloat(montant_cp);
-    },
-    budgetPrevuesionnelPasRegion() {
-      return (region_id) => {
-        if (!region_id) return 0;
-        let vm = this;
-        let objetDepartement = this.localisations_geographiques.filter(
-          (item) => item.parent == region_id
-        );
-
-        let montant = 0;
-        if (objetDepartement == undefined) return 0;
-        objetDepartement.forEach(function (val) {
-          let objetSous = vm.localisations_geographiques.filter(
-            (item) => item.parent == val.id
-          );
-
-          if (objetSous == undefined) {
-            montant = parseFloat(montant) + 0;
-          } else {
-            objetSous.forEach(function (row) {
-              montant =
-                parseFloat(montant) +
-                parseFloat(vm.montantPasSousPresefcture(row.id));
-            });
-          }
-        });
-
-        return montant;
-      };
-    },
-    montantPasSousPresefcture() {
-      return (region_id) => {
-        if (region_id != "" && region_id != null) {
-          return this.budgetFiltre
-            .filter((item) => item.zone_id == region_id)
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.dotation),
-              0
-            )
-            .toFixed(0);
-          //   let montant_ae=this.budgetFiltre
-          //       .filter((item) => item.zone_id == region_id && item.actived == 1).reduce(
-          //           (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0).toFixed(0);
-
-          //        return parseFloat(montant_ae);
-        }
-        return 0;
-      };
-    },
-
-    marchePasRegions() {
-      return (region_id) => {
-        if (!region_id) return [];
-        let vm = this;
-        let objet_marche = this.objetMarchePasUniteOuRegion.filter((item) => {
-          if (item.region_id == region_id && item.attribue == 2) {
-            let objet = vm.listeActeEffectFinnancier(item.id);
-            if (objet != undefined) {
-              if (objet.date_reception_definitive) {
-                let ob = {
-                  ...item,
-                  ...objet,
-                };
-                return ob;
-              }
-            }
-          }
-        });
-        if (objet_marche != undefined) return objet_marche;
-        return [];
-      };
-    },
-
-    montantExecuterPasRegion() {
-      return (region_id) => {
-        if (!region_id) return 0;
-        let objet_marches = this.marchePasRegions(region_id);
-        if (objet_marches.length == 0) return 0;
-
-        let vm = this;
-        let montant = 0;
-        objet_marches.forEach(function (value) {
-          montant =
-            parseFloat(montant) +
-            parseFloat(vm.montantExecutePasMarche(value.id));
-        });
-
-        return montant;
-      };
-    },
-
-    montantExecutePasMarche() {
-      return (marche_id) => {
-        if (marche_id != null && marche_id != "") {
-          return this.gettersgestionOrdrePaiement
-            .filter((item) => item.marche_id == marche_id)
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_ordre_paiement),
-              0
-            )
-            .toFixed(0);
-        }
-        return 0;
-      };
-    },
-
-    montantExecuteCPPasMarche() {
-      return (marche_id) => {
-        if (!marche_id) {
-          return this.gettersDemandeEngagement
-            .filter(
-              (item) =>
-                this.liquidationidmandat(item.id) == 8 &&
-                item.marche_id == marche_id
-            )
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-              0
-            )
-            .toFixed(0);
-        }
-        return 0;
-      };
-    },
-
-    liquidationid() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.gettersDossierLiquidation.find(
-            (qtreel) => qtreel.dmd_engagement_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.decision_cf;
-          }
-          return 0;
-        }
-      };
-    },
-    liquidationidmandat() {
-      return (id) => {
-        if (id != null && id != "") {
-          const qtereel = this.gettersDossierMandat.find(
-            (qtreel) => qtreel.dmd_engagement_id == id
-          );
-
-          if (qtereel) {
-            return qtereel.decision_cf;
-          }
-          return 0;
-        }
-      };
-    },
-
-    /**Fin partier execution budgetaire
-     * **/
-
     regions() {
-      return this.localisations_geographiques.filter((item) => {
+      return this.getterLocalisationGeoAll.filter((item) => {
         if (
           item.longitude != null &&
-          item.structure_localisation_geographique_id == 5
+          item.structure_localisation_geographique_id==5
         ) {
           return item;
         }
       });
     },
-    departements() {
-      return (id) => {
-        return this.getterLocalisationGeoAll.filter((item) => {
-          if (
-            item.structure_localisation_geographique_id == 6 &&
-            item.parent == id
-          ) {
-            return item;
-          }
-        });
-      };
-    },
-    sousPrefecture() {
-      return (id) => {
-        return this.getterLocalisationGeoAll.filter((item) => {
-          if (
-            item.structure_localisation_geographique_id == 6 &&
-            item.parent == id
-          ) {
-            return item;
-          }
-        });
-      };
-    },
-
     noDCfNoAdmin: noDCfNoAdmin,
     filtre_unite_admin() {
       if (this.noDCfNoAdmin) {
@@ -896,6 +608,18 @@ export default {
      *
      * @returns {function(*)}
      */
+    departements() {
+      return (id) => {
+        return this.getterLocalisationGeoAll.filter((item) => {
+          if (
+            item.structure_localisation_geographique_id==6 &&
+            item.parent == id
+          ) {
+            return item;
+          }
+        });
+      };
+    },
 
     getMontantMarcheRegionInfrastructure() {
       return (region, infrastructure) => {
@@ -941,10 +665,22 @@ export default {
         });
 
         /*let initeVal = 0;
-               let montant=  marche.reduce(function (total, currentValue) {
-                 return total + parseFloat(currentValue.montant_marche) ;
-               }, initeVal);*/
+          let montant=  marche.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);*/
         return montant_reel_marche;
+      };
+    },
+    sousPrefecture() {
+      return (id) => {
+        return this.getterLocalisationGeoAll.filter((item) => {
+          if (
+            item.structure_localisation_geographique_id==8 &&
+            item.parent == id
+          ) {
+            return item;
+          }
+        });
       };
     },
 
@@ -1079,58 +815,12 @@ export default {
 
           let initeVal = 0;
           let montant = objet.reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche);
+                     return total + parseFloat(currentValue.montant_marche);
           }, initeVal);
           return montant;
         }
       };
     },
-
-    budgetFiltre() {
-      let vM = this;
-      let objet = this.budgetEclate.filter((item) => item.budget_active == 1);
-
-      //retourne les marches d'une unite administrative selectionner
-      if (vM.unite_administrative_id != "" && vM.grand_nature_depense == "") {
-        objet = objet.filter((item) => {
-          if (item.uniteadministrative_id == vM.unite_administrative_id) {
-            return item;
-          }
-        });
-      }
-
-      //retourne les marches d'une une infrastucture selectionner
-      if (vM.grand_nature_depense != "" && vM.unite_administrative_id == "") {
-        objet = objet.filter((item) => {
-          if (item.grandenature_id == vM.grand_nature_depense) {
-            return item;
-          }
-        });
-      }
-
-      //retourne les marches de region et unite adminstrative selectionner
-      if (vM.unite_administrative_id != "" && vM.grand_nature_depense == "") {
-        objet = objet.filter((item) => {
-          if (item.uniteadministrative_id == vM.unite_administrative_id) {
-            return item;
-          }
-        });
-      }
-
-      if (vM.unite_administrative_id != "" && vM.grand_nature_depense != "") {
-        objet = objet.filter((item) => {
-          if (
-            item.uniteadministrative_id == vM.unite_administrative_id &&
-            item.grandenature_id == vM.grand_nature_depense
-          ) {
-            return item;
-          }
-        });
-      }
-
-      return objet;
-    },
-
     objetMarchePasUniteOuRegion() {
       let vM = this;
       let objet = this.listeMarcheUniteAdmin.filter(
@@ -1140,8 +830,8 @@ export default {
       //retourne les marches d'une region selectionner
       if (
         vM.region != "" &&
-        vM.unite_administrative_id == "" &&
-        vM.grand_nature_depense == ""
+        vM.unite_administrative_id == "" 
+       
       ) {
         objet = objet.filter((item) => {
           if (
@@ -1156,8 +846,7 @@ export default {
       //retourne les marches d'une unite administrative selectionner
       if (
         vM.unite_administrative_id != "" &&
-        vM.region == "" &&
-        vM.grand_nature_depense == ""
+        vM.region == "" 
       ) {
         objet = objet.filter((item) => {
           if (
@@ -1170,26 +859,14 @@ export default {
       }
 
       //retourne les marches d'une une infrastucture selectionner
-      if (
-        vM.grand_nature_depense != "" &&
-        vM.unite_administrative_id == "" &&
-        vM.region == ""
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.gdenature_id == vM.grand_nature_depense &&
-            item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
+     
+
+     
 
       //retourne les marches de region et unite adminstrative selectionner
       if (
         vM.unite_administrative_id != "" &&
-        vM.region != "" &&
-        vM.grand_nature_depense == ""
+        vM.region != "" 
       ) {
         objet = objet.filter((item) => {
           if (
@@ -1202,56 +879,7 @@ export default {
         });
       }
 
-      if (
-        vM.unite_administrative_id != "" &&
-        vM.region == "" &&
-        vM.grand_nature_depense != ""
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.unite_administrative_id == vM.unite_administrative_id &&
-            item.gdenature_id == vM.grand_nature_depense &&
-            item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
-      if (
-        vM.unite_administrative_id == "" &&
-        vM.region != "" &&
-        vM.grand_nature_depense != ""
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.gdenature_id == vM.grand_nature_depense &&
-            item.localisation_geographie_id == vM.region &&
-            item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
-
-      //retourn les marches d'une UA, REGION et INFRASTRUCTURE
-
-      if (
-        vM.unite_administrative_id != "" &&
-        vM.region != "" &&
-        vM.grand_nature_depense != ""
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.gdenature_id == vM.grand_nature_depense &&
-            item.unite_administrative_id == vM.unite_administrative_id &&
-            item.localisation_geographie_id == vM.region &&
-            item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
-
+   
       return objet;
     },
 
@@ -1312,48 +940,140 @@ export default {
         );
       });
     },
+
+    //Recuperation des marche pas regions
+    marchePasRegions(){
+       return id => {
+         if(id != null && id != ""){
+      let objet= this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
+      if(objet!=undefined) return objet
+      return []
+         }
+         return []
+       }
+    },        
+     
+     montantTotalPrevissionel(){
+        let objet = this.listeMarcheUniteAdmin.filter(
+        (item) => item.parent_id != ""
+      );
+      let montantTotalPrevisionnel=0
+      let vm=this
+     
+      objet.forEach(row => {
+           montantTotalPrevisionnel=montantTotalPrevisionnel + vm.montantBaseMarche(row.id)
+         });
+      return montantTotalPrevisionnel;
+     },
+    //Fonction qui calcule le montant de base du marche plus avenant
+    montantBaseMarche(){
+       return id => {
+         if(id != null && id != ""){
+        let act=this.acteEffetFinanciers.find(item=> item.marche_id == id)
+        if(act==undefined) return 0
+
+        let ave=this.avenants.filter(item=> item.marche_id == id)
+       if(ave.length==0) return 0
+
+          let montant_ttc=  ave.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, 0);
+            let montant=parseFloat(act.montant_act) + parseFloat(montant_ttc)
+        
+        return montant
+
+         }
+         return 0
+       }
+    },
+
+ //Fonction qui calcule le montant execute du marché
+    montantMarcheExecuteDecompte(){
+       return id => {
+         if(id != null && id != ""){
+             let objet=this.decomptefactures.filter(item=> item.marche_id == id)
+             if(objet==undefined) return 0
+
+             return objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.netttc) ;
+                        }, 0);
+         }
+         return 0
+       }
+    },
+
+     //Fonction qui calcule le montant previssionel des marché pas regions
+    montantPrevissionnelMarchePasRegions(){
+         return id => {
+           if(id != null && id != ""){
+             let marches=this.marchePasRegions(id)
+             let motant_prevue=0;
+             let vm = this;
+                  marches.forEach(row => {
+                     motant_prevue=motant_prevue + vm.montantBaseMarche(row.id)
+                  });
+             return motant_prevue
+           }
+           return 0
+         }
+    },
+     //Fonction qui calcule le montant execute des marché pas regions
+     montantExecuteMarchePasRegions(){
+         return id => {
+           if(id != null && id != ""){
+             let marches=this.marchePasRegions(id)
+             let motant_execute=0;
+             let vm = this;
+                  marches.forEach(row => {
+                     motant_execute=motant_execute + vm.montantMarcheExecuteDecompte(row.id)
+                  });
+             return motant_execute
+           }
+           return 0
+         }
+    },
     localisation() {
       let localisation = [];
       // console.log(this.getMandatPersonnaliserVise)
       let vM = this;
-      vM.montant_budget_restan = 0;
-      vM.montant_budget_execute = 0;
       //    console.log(this.localisations_geographiques)
-      // vm.series2.push(vm.montant_budget_restant)
-      // vm.series2.push(vm.montant_budget_execute)
       vM.getLocalisation(vM.region).forEach(function (value) {
         if (value.structure_localisation_geographique_id == 5) {
           if (value.longitude != null && value.latitude != null) {
             let coordonne = [];
             coordonne.push(value.latitude);
             coordonne.push(value.longitude);
-            //let budgetRest=parseFloat(vM.budgetPrevuesionnelPasRegion(value.id)) - vM.montantExecuterPasRegion(value.id)
-            // let taux=(vM.montantExecuterPasRegion(value.id) * 100 )  / parseFloat(vM.budgetPrevuesionnelPasRegion(value.id))
-            //N'Da
-            let color = "#000000";
-            let colorFill = "#000000";
+            /**
+             * Recuperation des unite administrative de la zone geographique
+             * @type {*[]}
+             */
+            
+            let color = "";
+            let colorFill = "";
+           
+            let montant_previsionnel=vM.montantPrevissionnelMarchePasRegions(value.id)
+            let montant_execute=vM.montantExecuteMarchePasRegions(value.id)
+            let taux=(montant_execute * 100)/montant_previsionnel
+            let montant_reste=parseFloat(montant_previsionnel) - parseFloat(montant_execute)
+            let taux_montantPrevueRegion=(montant_previsionnel * 100)/vM.montantTotalPrevissionel
+            color = "#000000";
+            colorFill = "#000000";
             let objetAlocalise = {
               id: value.id,
               ville: value.libelle,
               latlng: coordonne,
-              budget: 100000000,
-              budgetReste: 2000000,
-              budgetExecute: 1000000,
-              tauxBudget: 2,
+              budget: montant_previsionnel,
+              budgetReste: montant_reste,
+              budgetExecute: montant_execute,
+              tauxBudget: taux.toFixed(2),
+              tauxMontantPrevue:taux_montantPrevueRegion,
               color: color,
               colorFill: colorFill,
             };
-            //vM.montant_budget_restan=parseFloat(vM.montant_budget_restan) + parseFloat(budgetRest)
-            vM.montant_budget_restan =
-              parseFloat(vM.montant_budget_restan) + parseFloat(10000);
-            vM.montant_budget_execute =
-              parseFloat(vM.montant_budget_execute) +
-              parseFloat(vM.montantExecuterPasRegion(value.id));
             localisation.push(objetAlocalise);
           }
         }
       });
-
       return localisation;
     },
 
@@ -1407,7 +1127,7 @@ export default {
       return false;
     },
 
-    budgetGeneral1() {
+    budgetGeneral() {
       let budget_general = 0;
       let montant_engagement = 0;
       let vM = this;
@@ -1703,60 +1423,55 @@ export default {
         if (this.localisation.length > 0) {
           this.localisation.forEach(function (value) {
             let taux = 0;
-            let width = 100;
-            let height = 100;
+            let width = 60;
+            let height = 60;
+           
 
-            let montant_restant = value.budgetReste;
-            let montant_execute = value.budgetExecute;
+            //console.log(taux)
+//tauxMontantPrevue
+            /***
+             * 
+             *  budget: montant_previsionnel,
+              budgetReste: montant_reste,
+              budgetExecute: montant_execute,
+              tauxBudget: taux.toFixed(2),
+              tauxMontantPrevue:taux_montantPrevueRegion,
+             */
+    arrayColor.push("#6C0277");
+    arrayColor.push("#22780F");
+    arrayLabele.push(value.tauxBudget.toFixed(2) + "%");
+      arrayBar.push(value.budgetReste);
+      arrayBar.push(value.budgetExecute);
+      let taux_region=value.tauxMontantPrevue
+      if (vm.type_minichart == "bar") {
+                  width = 20;
+                  height = taux_region + 30;
+                } else {
+                  if (taux_region < 5) {
+                    width = taux_region + 25;
+                  }
 
-            if (vm.choix_budget_etat == 1) {
-              montant_execute = 0;
-            }
-            if (vm.choix_budget_etat == 2) {
-              montant_restant = 0;
-            }
+                  if (5 < taux_region && taux_region < 10) {
+                    console.log(taux_region);
+                    width = taux + 30;
+                  }
 
-            let taux_region_budget =
-              (parseFloat(value.budget) * 100) /
-              parseFloat(vm.totalBudgetGeneral);
-            let taux_region_budget_restant =
-              (parseFloat(montant_restant) * 100) / parseFloat(value.budget);
+                  if (10 < taux_region && taux_region < 20) {
+                    width = taux_region + 35;
+                  }
 
-            let taux_region_budget_execute =
-              (parseFloat(montant_execute) * 100) / parseFloat(value.budget);
+                  if (20 < taux_region && taux_region < 50) {
+                    width = taux_region + 40;
+                  }
 
-            arrayColor.push("#266bff");
-            arrayBar.push(montant_restant);
-            arrayLabele.push(taux_region_budget_restant.toFixed(2) + "%");
+                  if (50 < taux_region && taux_region < 101) {
+                    width = taux_region + 45;
+                  }
+                }
+          
+          
 
-            arrayColor.push("#53ef4d");
-            arrayBar.push(montant_execute);
-            arrayLabele.push(taux_region_budget_execute.toFixed(2) + "%");
-
-            if (vm.type_minichart == "bar") {
-              height = taux_region_budget + 100;
-            } else {
-              if (taux < 5) {
-                width = taux_region_budget + 100;
-              }
-
-              if (5 < taux_region_budget && taux_region_budget < 10) {
-                width = taux_region_budget + 100;
-              }
-
-              if (10 < taux_region_budget && taux_region_budget < 20) {
-                width = taux_region_budget + 100;
-              }
-
-              if (20 < taux_region_budget && taux_region_budget < 50) {
-                width = taux_region_budget + 100;
-              }
-
-              if (50 < taux_region_budget && taux_region_budget < 101) {
-                width = taux_region_budget + 100;
-              }
-            }
-            
+              
             var myBarChart = vm.objet_leaflet
               .minichart(value.latlng, {
                 data: arrayBar,
@@ -1768,9 +1483,9 @@ export default {
               })
               .on("click", function (event) {
                 console.log(event);
-                // vm.selctionRegion(value.id)
+                vm.selctionRegion(value.id);
               });
-           
+
             vm.objet_map.addLayer(myBarChart);
 
             //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
@@ -1807,22 +1522,22 @@ export default {
       }
     },
     getInfoLegende(id) {
-      this.choix_budget_etat = id;
+      let objet = this.getterInfrastrucure.find((item) => item.code == id);
+      if (objet != undefined) {
+        this.infrastructure = objet.id;
+      }
     },
   },
 
   watch: {
-    type_budget: function (value) {
+    type_marche: function (value) {
       console.log(value);
 
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
-    },
-    choix_budget_etat: function (value) {
-      console.log(value);
-
-      this.deleteLeafleMiniCharts(this.objet_map);
-      this.integrationChartPasRegisonSurCarte();
+      //                this.infortion_sidbar_filter.close();
+      //                this.infortion_sidbar_filter.disablePanel('infoRegion');
+      //                this.infortion_sidbar_filter.open("home")
     },
     slection_carte: function (value) {
       console.log(value);
@@ -1840,7 +1555,7 @@ export default {
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
     },
-    grand_nature_depense: function (value) {
+    infrastructure: function (value) {
       console.log(value);
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
@@ -1869,21 +1584,22 @@ export default {
   },
   mounted() {
     /*   setTimeout(() => {
-                   console.log('done')
-                   this.$nextTick(() =>{
-                       this.clusterOptions = { disableClusteringAtZoom: 11 }
-                   });
-               }, 5000);*/
+                console.log('done')
+                this.$nextTick(() =>{
+                    this.clusterOptions = { disableClusteringAtZoom: 11 }
+                });
+            }, 5000);*/
     console.log(L);
     console.log(ad);
     console.log(ad1);
     console.log(moda);
 
+  
     //console.log()
     /**
-             *  objet_map:"",
-             objet_leaflet:"",
-             */
+ *  objet_map:"",
+              objet_leaflet:"",
+ */
     const mapComponent = this.$refs.map;
 
     const map = mapComponent.mapObject;
@@ -1899,7 +1615,6 @@ export default {
     console.log(sid);
     console.log("..interne...");
 
-    this.integrationChartPasRegisonSurCarte();
     var sidebar = sid.control.sidebar("map10", panel_options).addTo(map);
     sidebar.open("home");
     this.infortion_sidbar_filter = sidebar;
@@ -1961,16 +1676,20 @@ export default {
           name: "Legende",
           elements: [
             {
-              label: '<div id="sanitaire">Budget Restatant</div>',
-              html: "<div class='sante'></div>",
+              label: '<div id="sanitaire">Sanitaires</div>',
+              html: "<div class='sante1'></div>",
             },
             {
-              label: '<div id="scolaires">Budget Execute</div>',
-              html: "<div class='scolaire'></div>",
+              label: '<div id="scolaires">Scolaires</div>',
+              html: "<div class='scolaire1'></div>",
             },
             {
-              label: '<div id="communautaires">Affichez tous</div>',
-              html: "<div class='communautaire'></div>",
+              label: '<div id="communautaires">Communautaires</div>',
+              html: "<div class='communautaire1'></div>",
+            },
+            {
+              label: '<div id="routiere">Routière</div>',
+              html: "<div class='routier1'></div>",
             },
           ],
         },
@@ -1991,6 +1710,14 @@ export default {
       // console.log("Guei est dans la place....... ")
     });
 
+    //click legende routiere
+    const routiere = document.querySelector("#routiere");
+    routiere.addEventListener("click", function (event) {
+      console.log(event);
+      vMm.getInfoLegende(4);
+      // console.log("Guei est dans la place....... ")
+    });
+
     //click legende scolaires
     const scolaires = document.querySelector("#scolaires");
     scolaires.addEventListener("click", function (event) {
@@ -2005,26 +1732,28 @@ export default {
       vMm.getInfoLegende(3);
       // console.log("Guei est dans la place....... ")
     });
+
+    this.integrationChartPasRegisonSurCarte();
   },
 };
 </script>
 <style>
-.sante {
+.sante1 {
   width: 20px;
   height: 20px;
-  background: #266bff;
+  background: #6c0277 !important;
 }
-.scolaire {
+.scolaire1 {
   width: 20px;
   height: 20px;
-  background: #53ef4d;
+  background: #f0c300 !important;
 }
-.communautaire {
+.communautaire1 {
   width: 20px;
   height: 20px;
-  background: #ffffff;
+  background: #e73e01;
 }
-.routier {
+.routier1 {
   width: 20px;
   height: 20px;
   background: #22780f;
@@ -2359,24 +2088,24 @@ export default {
 }
 
 /*Marker content instances
-    .map-marker.exclamation div.icon:before{
-      content: '!';
-    }
-    .map-marker.A div.icon:before{
-      content: 'A';
-    }
+.map-marker.exclamation div.icon:before{
+  content: '!';
+}
+.map-marker.A div.icon:before{
+  content: 'A';
+}
 
-    Marker color instances
-    .map-marker.red div.icon{background: #ff2222;}
+Marker color instances
+.map-marker.red div.icon{background: #ff2222;}
 
-    .map-marker.green div.icon{background: #008800;color: #fff;}
-    .map-marker.green {background: #000;}
-    .map-marker.green div.arrow{border-top-color: #000;}
+.map-marker.green div.icon{background: #008800;color: #fff;}
+.map-marker.green {background: #000;}
+.map-marker.green div.arrow{border-top-color: #000;}
 
-    Marker states
-    .map-marker.inactive {
-      opacity: 0.6;
-    }*/
+Marker states
+.map-marker.inactive {
+  opacity: 0.6;
+}*/
 .red {
   color: #fff;
   background-color: red !important;
@@ -2426,18 +2155,18 @@ export default {
 
 .leaflet-tooltip {
   /*position: absolute !important;
-        padding: 6px !important;
-        background-color: #000 !important;
-        border: 1px solid #fff !important;
-        border-radius: 3px !important;
-        color: #222 !important;
-        white-space: nowrap !important;
-        -webkit-user-select: none !important;
-        -moz-user-select: none !important;
-        -ms-user-select: none !important;
-        user-select: none !important;
-        pointer-events: none !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;*/
+    padding: 6px !important;
+    background-color: #000 !important;
+    border: 1px solid #fff !important;
+    border-radius: 3px !important;
+    color: #222 !important;
+    white-space: nowrap !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;*/
   position: absolute !important;
   padding: 4px !important;
   background-color: rgba(0, 0, 0, 0.4) !important;

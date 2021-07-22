@@ -821,6 +821,16 @@ import moment from "moment";
                  return 0
              }
             },
+
+            montantExecuteMarche(){
+             return id => {
+                 if(id != null && id != ""){
+                    let montant=this.montantBaseMarcheTTC(id) + this.totalDecompteMarche(id)
+                    return montant
+                 }
+                 return 0
+             }
+            },
             
             totalDecompteMarche(){
          return marche_id=> {
