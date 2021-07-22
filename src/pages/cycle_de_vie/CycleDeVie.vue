@@ -522,7 +522,7 @@
                      <th style="width:10%" >TOTAL PAIEMENT  EXECUTE</th>
                      <td style="width:15%" colspan="2" >{{ montantDecompteNetTtcPourCent}}%</td>
                      <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantTvaHTGlobal))}} HT</td>
-                     <td style="width:15%" colspan="2" > {{ MontantTVAGlobal }} TVA </td>
+                     <td style="width:15%" colspan="2" > {{ formatageSomme(parseFloat(MontantTVAGlobal))}} TVA </td>
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteNetTtc))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                      
@@ -531,7 +531,7 @@
                      <th style="width:10%" >PART ETAT</th>
                      <td style="width:15%" colspan="2" > {{ montantDecompteNetTtcPourCentEtat }}%</td>
                      <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat(MontantHTEtat))}} HT</td>
-                    <td style="width:15%" colspan="2" >  {{MontantTvaTVAEtat}} TVA </td>
+                    <td style="width:15%" colspan="2" >  {{formatageSomme(parseFloat(MontantTvaTVAEtat))}} TVA </td>
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteParEtat))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                       
@@ -540,7 +540,7 @@
                      <th style="width:10%" >PART BAILLEUR</th>
                      <td style="width:15%" colspan="2" >{{montantDecompteNetTtcPourCentBailleur }}%</td>
                      <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat(MontantTvaHTBailleur))}} HT</td>
-                     <td style="width:15%" colspan="2" > {{ MontantTvaTVABailleur }} TVA </td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat( MontantTvaTVABailleur)) }} TVA </td>
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecomptePartBailleur))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                       
@@ -549,7 +549,7 @@
                      <th style="width:10%" >TOTAL RESTE A PAYER</th>
                      <td style="width:15%" colspan="2" > {{ PoucentageRestePayerGlobal }} %</td>
                      <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerGlobal))}} HT</td>
-                     <td style="width:15%" colspan="2" > {{ MontantTVARestePayerGlobal  }} TVA </td>
+                     <td style="width:15%" colspan="2" > {{ formatageSomme(parseFloat(MontantTVARestePayerGlobal))  }} TVA </td>
                      <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme((montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))-montantDecompte(detailDecompte))}} TTC</td> -->
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(RecupMontantRestePayerTTC))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
@@ -559,7 +559,7 @@
                      <th style="width:10%" >PART ETAT</th>
                      <td style="width:15%" colspan="2" > {{ PoucentageRestePayerEtat }} %</td>
                      <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerEtat))}} HT</td>
-                     <td style="width:15%" colspan="2" > {{ MontantTVARestePayerEtat }} TVA </td>
+                     <td style="width:15%" colspan="2" > {{ formatageSomme(parseFloat(MontantTVARestePayerEtat)) }} TVA </td>
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(MontantRestePayerEtat))}} TTC</td>
                      <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(detailBailEtat.montant)-montantPartEtat(detailDecompte))}} TTC</td> -->
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
@@ -569,7 +569,7 @@
                      <th style="width:10%" >PART BAILLEUR</th>
                      <td style="width:15%" colspan="2" > {{ PoucentageRestePayerBailleur }} %</td>
                      <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerBailleur))}} HT</td>
-                     <td style="width:15%" colspan="2" > {{ MontantTVARestePayerBailleur }} TVA </td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat( MontantTVARestePayerBailleur)) }} TVA </td>
 
                      <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(MontantRestePayerBailleur))}} TTC</td>
                      <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(montantActPartBailleurTTC(detailBailleur)-montantPartBailleur(detailDecompte))}} TTC</td> -->
