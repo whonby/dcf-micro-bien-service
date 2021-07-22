@@ -3,7 +3,7 @@
   <div>
      <div id="testModal" class="modal hide tailgrand">
       <div class="modal-header">
-         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
+         <a data-dismiss="modal" class="btn btn-danger" href="#">{{MontantReelMarche(test)}}Fermer{{montantAvenantParMarche(test)}}</a>
         <h3 style="font-size: 14px; font-weight: bold">
         
         </h3>
@@ -32,16 +32,9 @@
     <td>&nbsp;</td>
     <td style="background: rgb(6, 184, 6) !important;color:#fff !important">Marché/Contrat initial</td>
     
-    <td v-if="numeroOrderAvenant1(test)==1" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant1(test)}}</td>
-    <td v-if="numeroOrderAvenant2(test)==2" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant2(test)}}</td>
-    <td v-if="numeroOrderAvenant3(test)==3" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant3(test)}}</td>
-    <td v-if="numeroOrderAvenant4(test)==4" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant4(test)}}</td>
-    <td v-if="numeroOrderAvenant5(test)==5" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant5(test)}}</td>
-    <td v-if="numeroOrderAvenant6(test)==6" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant6(test)}}</td>
-    <td v-if="numeroOrderAvenant7(test)==7" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant7(test)}}</td>
-    <td v-if="numeroOrderAvenant8(test)==8" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant8(test)}}</td>
-    <td v-if="numeroOrderAvenant9(test)==9" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant9(test)}}</td>
-    <td v-if="numeroOrderAvenant10(test)==10" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{numeroOrderAvenant10(test)}}</td>
+    
+    <td v-for="item in taillerAvenantParMarche(test)" :key="item" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{item}}</td>
+   
     <td style="background: rgb(6, 184, 6) !important;text-align:center;width: 7%;;color:#fff !important"> Total Avenant</td>
     <td style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important">Marché/Contrat Actuel</td>
   </tr>
@@ -79,7 +72,7 @@
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Montant</th>
-    <td> {{formatageSommeSansFCFA(parseFloat((MontantMarche(test)))) || 'Non renseigné'}} </td>
+    <td> {{formatageSommeSansFCFA(parseFloat((MontantReelMarche(test)))) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formatageSommeSansFCFA(parseFloat(tem.montant_avenant)) || 'Non renseigné'}}</td>
     <td>
       <span >
@@ -87,7 +80,7 @@
         </span>
     </td>
     <td style="background: rgb(6, 184, 6) !important;text-align:left;color:#fff">
-        {{ formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)) +  parseFloat(SommeAvenant(test)) ) }}
+        {{formatageSommeSansFCFA(parseFloat(parseFloat(MontantReelMarche(test)) +  parseFloat(SommeAvenant(test))))}}
     </td>
     
   </tr>
@@ -98,6 +91,7 @@
     <td>
       <span >{{TauxDesAvenant(test) || 'Non renseigné'}} %</span>
     </td>
+    <td></td>
     
     
   </tr>
@@ -512,6 +506,15 @@ editMandat:{},
       noDCfNoAdmin:noDCfNoAdmin,
 
 
+taillerAvenantParMarche(){
+      return id =>{
+        if(id != null && id !=""){
+          return this.avenants.filter(element => element.marche_id== id).length
+         
+
+        }
+      }
+    },
 numeroOrderAvenant1(){
       return id =>{
         if(id != null && id !=""){

@@ -331,28 +331,7 @@
                      </money>
                     NBRE D’OP PROVISOIRE NON REGULARISES 
                   </th>
-                <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
-                     <i class=" icon-filter"></i>                      
-                    </button>
-                    <button @click="budgetInitial8()" v-show="recupereIDactivite==GroupeSection[0].section_id">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                    <money style="text-align:left;color:red"   
-                        v-model="budget8" class="span" 
-                        v-show="budgetInitial8data == true">
-                     </money>
-                    DISPONIBLE 
-                  </th>
+                
                     <th
                     style="
                       font-size: 12px;
@@ -435,7 +414,28 @@
                      </money>
                     TAUX D’EXECUTION 
                   </th>
-                  
+                  <th
+                    style="
+                      font-size: 12px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial8()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget8" class="span" 
+                        v-show="budgetInitial8data == true">
+                     </money>
+                    DISPONIBLE 
+                  </th>
                 </tr>
               </thead>
        <tbody>
@@ -479,9 +479,7 @@
                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'">
                     {{ NbreExecuteSection(GroupeSection[0].section_id) }} </td>
                   
-                 <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleSection(GroupeSection[0].section_id))) }}
-                  </td>
+                
 <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
                     
                   </td>
@@ -513,7 +511,9 @@
                         </span>
                       </button>
                   </td>
-                  
+                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleSection(GroupeSection[0].section_id))) }}
+                  </td>
                   
                 </tr>
               </tbody>  
@@ -554,8 +554,7 @@
                   <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
                     {{ NbreExecuteUa(GroupeUa) }} </td>
 
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleUa(GroupeUa))) }} </td>
+                 
                 <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
                     
                   </td>
@@ -584,11 +583,12 @@
                       </button>
                       <button class="btn btn-success taille" v-else-if="75 <  EviteNaNUa(GroupeUa) <= 100">
                         <span style="color:#fff;font-size: 12px;font-weight: bold;">
-                          {{ EviteNaNUa(GroupeUa) }}
+                          {{EviteNaNUa(GroupeUa)}}
                         </span>
                       </button>
                   </td>
-                   
+                    <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
+                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleUa(GroupeUa))) }} </td>
         
                 </tr>
                   

@@ -210,9 +210,12 @@
                 MODIFICATION BUDGETAIRE 
                  <i id="style1" @click="InputMontantReamenagement">
                      <i class=" icon-search"></i> 
-                      
                     </i>
-                     <money style="text-align:left;color:red"   v-model="montant_reamenagement" class="span" v-show="activeMontantReamenagement == true"></money>
+                    <!-- </button> -->
+                     <money style="text-align:left;color:red"   
+                        v-model="montant_reamenagement" class="span" 
+                        v-show="activeMontantReamenagement == true">
+                     </money>
                  
               </th>
               <th
@@ -640,7 +643,7 @@
                 "
                 colspan="2"
               >
-                TOTAL ACTIVITE
+                TOTAL 
               </td>
             <td v-if="recupereIDactivite!=0"
                 style="
@@ -652,7 +655,7 @@
                 "
                 colspan="3"
               >
-                TOTAL ACTIVITE
+                TOTAL 
               </td>
               <td
                 style="
