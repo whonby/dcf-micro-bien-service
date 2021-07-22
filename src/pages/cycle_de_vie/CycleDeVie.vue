@@ -286,27 +286,27 @@
                  <tr>
                      <th>CAUTIONNEMENT(%,HT,TTC)</th>
                      <td style="width:15%" colspan="6" > 
-                          {{formatageSomme(delailCautionnementHT(detail.id))}} HT</td>
+                          {{formatageSomme(parseFloat(delailCautionnementHT(detail.id)))}} HT</td>
                      <td style="width:15%" colspan="6" >
-                              {{formatageSomme(delailCautionnementTTC(detail.id))}} TTC
+                              {{formatageSomme(parseFloat(delailCautionnementTTC(detail.id)))}} TTC
                      </td>
                  </tr>
                  <tr>
                      <th>RETENUE DE GARANTIE(%,HT,TTC)</th>
                        <td style="width:15%" colspan="6" > 
-                          {{formatageSomme(delailRetenueGarantieHT(detail.id))}} HT</td>
+                          {{formatageSomme(parseFloat(delailRetenueGarantieHT(detail.id)))}} HT</td>
                      <td style="width:15%" colspan="6" >
-                              {{formatageSomme(delailRetenueGarantieTTC(detail.id))}} TTC
+                              {{formatageSomme(parseFloat(delailRetenueGarantieTTC(detail.id)))}} TTC
                      </td>
                  </tr>
                  <tr>
                      <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
                      <td style="width:15%" colspan="6">
-                         {{formatageSomme(delailAvanceDemarageHT(detail.id))}}
+                         {{formatageSomme(parseFloat(delailAvanceDemarageHT(detail.id)))}}
                           HT 
                      </td>
                       <td style="width:15%" colspan="6">
-                         {{formatageSomme(delailAvanceDemarageTTC(detail.id))}} TTC
+                         {{formatageSomme(parseFloat(delailAvanceDemarageTTC(detail.id)))}} TTC
                      </td>
                      
                  </tr>
@@ -521,7 +521,7 @@
                      <th style="width:10%" >TOTAL PAIEMENT  EXECUTE</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompte(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteD))}}TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
@@ -634,7 +634,7 @@ import moment from "moment";
     // import * as JsPDF from 'jspdf'
     //import html2pdf from 'html2pdf.js'
     // import moment from "moment";
-    // import { ModelListSelect } from "vue-search-select";
+    // import { ModelListSelect } from "vue-search-select"
     // import "vue-search-select/dist/VueSearchSelect.css";
     import { formatageSomme } from "../../../src/Repositories/Repository";
 
@@ -961,6 +961,51 @@ tachePasMarche(){
                     return 0
                 };
             },
+
+            AfficheVariationBudget() {
+      return (id, id2) => {
+        if (id != null && id != "" && id2 != null && id2 != "") {
+          return this.budgetEclate
+            .filter(
+              (prod) =>
+                prod.source_financement_id == id &&
+                prod.section_id == id2 &&
+                prod.annebudgetaire == this.anneeAmort &&
+                prod.budget_active == 1
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+
+            //new data
+
+                 montantDecompteD() {
+
+                     return this.decomptefactures
+            .filter(
+              (prod) =>
+                prod.marche_id == this.detail.id
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montantmarche),
+              0
+            )
+            .toFixed(0);
+                       
+            },
+
+            //fin
+
+
+
+
             montantPartEtat() {
                 return objet => {
                     if (objet != null && objet != "") {

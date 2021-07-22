@@ -1756,7 +1756,7 @@ export default {
                 width = taux_region_budget + 100;
               }
             }
-            
+
             var myBarChart = vm.objet_leaflet
               .minichart(value.latlng, {
                 data: arrayBar,
@@ -1770,7 +1770,7 @@ export default {
                 console.log(event);
                 // vm.selctionRegion(value.id)
               });
-           
+
             vm.objet_map.addLayer(myBarChart);
 
             //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
