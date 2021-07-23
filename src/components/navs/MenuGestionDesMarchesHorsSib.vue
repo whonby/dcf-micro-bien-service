@@ -87,11 +87,11 @@
           IMPORTATION PPM
         </router-link>
       </li>
-     <li>
+     <!-- <li>
             <router-link :to="{name: 'avenant'}" tag ="a">
                 Tableau avenant
             </router-link>
-          </li>
+          </li> -->
        <!-- <li class="dropdown" id="planification">
             <a  href="#" data-toggle="dropdown" data-target="#planification" class="dropdown-toggle">
                 <span class="text">EXECUTION DES MARCHES </span>
