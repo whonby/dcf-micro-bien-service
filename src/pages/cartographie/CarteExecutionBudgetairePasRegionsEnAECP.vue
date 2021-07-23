@@ -47,13 +47,7 @@
                
               </div>
               <div class="span6">
-                 <label for="pet-select">Changer chart:</label>
-                    <select v-model="type_minichart">
-                        <option value="bar">bar</option>
-                        <option value="pie">Pie charts</option>
-                        <option value="polar-radius">Polar radius</option>
-                        <option value="polar-area">Polar area</option>
-                    </select>
+                 
                 <label
                   >Unite administrative
                   <a
@@ -88,18 +82,12 @@
 
               <div v-if="caseAffichageMessageGeneralSituationMarche">
                 <div class="span12" style="font-size: 15px; font-size: 15px">
-                  Situation Général des marchés
+                  Situation du budget
                 </div>
               </div>
 
               <hr />
-              <apexchart
-                type="bar"
-                width="350"
-                height="350"
-                :options="chartOptions"
-                :series="dataBar"
-              ></apexchart>
+              
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -274,7 +262,7 @@ import iconUrl from "leaflet/dist/images/marker-icon.png";
 import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 import { formatageSomme } from "../../../src/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
-import VueApexCharts from "vue-apexcharts";
+//import VueApexCharts from "vue-apexcharts";
 import L from "leaflet.minichart";
 import ad from "leaflet-html-legend";
 import ad1 from "leaflet-easyprint";
@@ -294,7 +282,7 @@ export default {
     LCircleMarker,
     // LIcon
     ModelListSelect,
-    apexchart: VueApexCharts,
+    //apexchart: VueApexCharts,
     LControlFullscreen,
   },
   data() {
@@ -514,7 +502,7 @@ export default {
       "getterUniteAdministrativeByUser",
     ]),
     regions() {
-      return this.getterLocalisationGeoAll.filter((item) => {
+      return this.localisations_geographiques.filter((item) => {
         if (
           item.longitude != null &&
           item.structure_localisation_geographique_id==5
@@ -945,9 +933,8 @@ export default {
     marchePasRegions(){
        return id => {
          if(id != null && id != ""){
-      let objet= this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
-      if(objet!=undefined) return objet
-      return []
+      
+      return this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
          }
          return []
        }
@@ -973,7 +960,7 @@ export default {
         if(act==undefined) return 0
 
         let ave=this.avenants.filter(item=> item.marche_id == id)
-       if(ave.length==0) return 0
+       
 
           let montant_ttc=  ave.reduce(function (total, currentValue) {
                             return total + parseFloat(currentValue.montant_avenant) ;
@@ -1043,6 +1030,7 @@ export default {
             let coordonne = [];
             coordonne.push(value.latitude);
             coordonne.push(value.longitude);
+            console.log(value)
             /**
              * Recuperation des unite administrative de la zone geographique
              * @type {*[]}
@@ -1056,7 +1044,8 @@ export default {
             let taux=(montant_execute * 100)/montant_previsionnel
             let montant_reste=parseFloat(montant_previsionnel) - parseFloat(montant_execute)
             let taux_montantPrevueRegion=(montant_previsionnel * 100)/vM.montantTotalPrevissionel
-            color = "#000000";
+           
+           color = "#000000";
             colorFill = "#000000";
             let objetAlocalise = {
               id: value.id,
@@ -1090,11 +1079,11 @@ export default {
       return (id) => {
         if (id != "") {
           //   this.removeMapChart
-          return this.localisations_geographiques.filter(
+          return this.regions.filter(
             (item) => item.id == id
           );
         }
-        return this.localisations_geographiques;
+        return this.regions;
       };
     },
     caseAffichageMessageRegionsSituationMarche() {
@@ -1127,173 +1116,6 @@ export default {
       return false;
     },
 
-    budgetGeneral() {
-      let budget_general = 0;
-      let montant_engagement = 0;
-      let vM = this;
-      this.uniteAdministratives.forEach(function (row) {
-        let montant_engagement_unite_admin = 0;
-        let budgetActive = row.ua_budget_general.filter(
-          (item) => item.actived == 1
-        );
-
-        if (budgetActive != "") {
-          let initialValue = 0;
-          let budgetByUnite = budgetActive.reduce(function (
-            total,
-            currentValue
-          ) {
-            return total + parseFloat(currentValue.Dotation_Initiale);
-          },
-          initialValue);
-          budget_general = budget_general + budgetByUnite;
-        }
-
-        let objetMarche = vM.marches.filter((item) => {
-          if (item.unite_administrative_id == row.id) {
-            return item;
-          }
-        });
-        if (objetMarche != "") {
-          objetMarche.forEach(function (val) {
-            let initeVal = 0;
-            let montantEngament = vM.getMandatPersonnaliserVise
-              .filter((item) => item.marche_id == val.id)
-              .reduce(function (total, currentValue) {
-                return total + parseFloat(currentValue.total_general);
-              }, initeVal);
-            montant_engagement_unite_admin =
-              montant_engagement_unite_admin + montantEngament;
-          });
-        }
-        montant_engagement =
-          montant_engagement + montant_engagement_unite_admin;
-      });
-
-      vM.budgetGeneralExcecute = montant_engagement;
-      let tauxEx = (montant_engagement / budget_general) * 100;
-      //console.log(tauxEx)
-      vM.tauxExecutionBudgetGeneral = tauxEx.toFixed(2);
-      vM.bugdetGeneralRestant = budget_general - montant_engagement;
-      return budget_general;
-    },
-    budgetByZone() {
-      return (zone_id) => {
-        if (zone_id != "") {
-          let vM = this;
-          let budgetZone = 0;
-          let montant_engagement_zone = 0;
-          let uniteByZoneGeo = vM.uniteAdministratives.filter(
-            (item) => item.localisationgeo_id == zone_id
-          );
-          if (uniteByZoneGeo != undefined) {
-            uniteByZoneGeo.forEach(function (row) {
-              let montant_engagement_unite_admin = 0;
-              let budgetActive = row.ua_budget_general.filter(
-                (item) => item.actived == 1
-              );
-              if (budgetActive != "") {
-                let initialValue = 0;
-                let budgetByUnite = budgetActive.reduce(function (
-                  total,
-                  currentValue
-                ) {
-                  return total + parseFloat(currentValue.Dotation_Initiale);
-                },
-                initialValue);
-
-                budgetZone = budgetZone + budgetByUnite;
-
-                //Recuperation des marche
-                let objetMarche = vM.marches.filter((item) => {
-                  if (item.unite_administrative_id == row.id) {
-                    return item;
-                  }
-                });
-
-                if (objetMarche != "") {
-                  objetMarche.forEach(function (val) {
-                    let initeVal = 0;
-                    let montantEngament = vM.getMandatPersonnaliserVise
-                      .filter((item) => item.marche_id == val.id)
-                      .reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.total_general);
-                      }, initeVal);
-                    montant_engagement_unite_admin =
-                      montant_engagement_unite_admin + montantEngament;
-                  });
-                }
-                montant_engagement_zone =
-                  montant_engagement_zone + montant_engagement_unite_admin;
-              }
-            });
-            if (montant_engagement_zone != 0) {
-              let taux = (montant_engagement_zone / budgetZone) * 100;
-              vM.tauxExecutionBudgetZone = taux.toFixed(2);
-            }
-            vM.budgetZoneExcecute = montant_engagement_zone;
-
-            vM.bugdetZoneRestant = budgetZone - montant_engagement_zone;
-          }
-
-          return budgetZone;
-        }
-      };
-    },
-    budgetByUniteAdmin() {
-      return (uniteId) => {
-        let vM = this;
-        let budgetUniteAdmin = 0;
-        let uniteByZoneGeo = vM.uniteAdministratives.find(
-          (item) => item.id == uniteId
-        );
-        let montant_engagement_unite_admin = 0;
-        let budgetActive = uniteByZoneGeo.ua_budget_general.filter(
-          (item) => item.actived == 1
-        );
-        if (budgetActive != "") {
-          let initialValue = 0;
-          let budgetByUnite = budgetActive.reduce(function (
-            total,
-            currentValue
-          ) {
-            return total + parseFloat(currentValue.Dotation_Initiale);
-          },
-          initialValue);
-
-          budgetUniteAdmin = budgetByUnite;
-
-          //Recuperation des marche
-          let objetMarche = vM.marches.filter((item) => {
-            if (item.unite_administrative_id == uniteId) {
-              return item;
-            }
-          });
-
-          if (objetMarche != "") {
-            objetMarche.forEach(function (val) {
-              let initeVal = 0;
-              let montantEngament = vM.getMandatPersonnaliserVise
-                .filter((item) => item.marche_id == val.id)
-                .reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.total_general);
-                }, initeVal);
-              montant_engagement_unite_admin =
-                montant_engagement_unite_admin + montantEngament;
-            });
-          }
-        }
-        if (montant_engagement_unite_admin != 0) {
-          let taux = (montant_engagement_unite_admin / budgetUniteAdmin) * 100;
-          vM.tauxExecutionUniteAdmin = taux.toFixed(2);
-        }
-        vM.budgetUniteAdmin = budgetUniteAdmin;
-        vM.budgetRestUniteAdmin =
-          budgetUniteAdmin - montant_engagement_unite_admin;
-        vM.budgetExecuteUniteAdmin = montant_engagement_unite_admin;
-        return budgetUniteAdmin;
-      };
-    },
     exoEnCours() {
       return this.exercices_budgetaires.filter(
         (element) => element.encours == 1
@@ -1421,7 +1243,7 @@ export default {
       if (vm.objet_map != "" && vm.objet_leaflet != "") {
         //  let tail=this.localisation.length
         if (this.localisation.length > 0) {
-          this.localisation.forEach(function (value) {
+          vm.localisation.forEach(function (value) {
             let taux = 0;
             let width = 60;
             let height = 60;
@@ -1437,9 +1259,10 @@ export default {
               tauxBudget: taux.toFixed(2),
               tauxMontantPrevue:taux_montantPrevueRegion,
              */
+            console.log(value.tauxBudget)
     arrayColor.push("#6C0277");
-    arrayColor.push("#22780F");
-    arrayLabele.push(value.tauxBudget.toFixed(2) + "%");
+    arrayColor.push("#edb007");
+    arrayLabele.push(value.tauxBudget + "%");
       arrayBar.push(value.budgetReste);
       arrayBar.push(value.budgetExecute);
       let taux_region=value.tauxMontantPrevue
@@ -1483,7 +1306,7 @@ export default {
               })
               .on("click", function (event) {
                 console.log(event);
-                vm.selctionRegion(value.id);
+              //  vm.selctionRegion(value.id);
               });
 
             vm.objet_map.addLayer(myBarChart);
@@ -1676,21 +1499,14 @@ export default {
           name: "Legende",
           elements: [
             {
-              label: '<div id="sanitaire">Sanitaires</div>',
+              label: '<div id="sanitaire">Bugdet Restant</div>',
               html: "<div class='sante1'></div>",
             },
             {
-              label: '<div id="scolaires">Scolaires</div>',
+              label: '<div id="scolaires">Budget Execute</div>',
               html: "<div class='scolaire1'></div>",
             },
-            {
-              label: '<div id="communautaires">Communautaires</div>',
-              html: "<div class='communautaire1'></div>",
-            },
-            {
-              label: '<div id="routiere">Routière</div>',
-              html: "<div class='routier1'></div>",
-            },
+            
           ],
         },
       ],
@@ -1710,14 +1526,7 @@ export default {
       // console.log("Guei est dans la place....... ")
     });
 
-    //click legende routiere
-    const routiere = document.querySelector("#routiere");
-    routiere.addEventListener("click", function (event) {
-      console.log(event);
-      vMm.getInfoLegende(4);
-      // console.log("Guei est dans la place....... ")
-    });
-
+   
     //click legende scolaires
     const scolaires = document.querySelector("#scolaires");
     scolaires.addEventListener("click", function (event) {
@@ -1725,14 +1534,7 @@ export default {
       vMm.getInfoLegende(2);
       // console.log("Guei est dans la place....... ")
     });
-    //click legende communautaire
-    const communautaires = document.querySelector("#communautaires");
-    communautaires.addEventListener("click", function (event) {
-      console.log(event);
-      vMm.getInfoLegende(3);
-      // console.log("Guei est dans la place....... ")
-    });
-
+   
     this.integrationChartPasRegisonSurCarte();
   },
 };
@@ -1746,7 +1548,7 @@ export default {
 .scolaire1 {
   width: 20px;
   height: 20px;
-  background: #f0c300 !important;
+  background: #edb007 !important;
 }
 .communautaire1 {
   width: 20px;
