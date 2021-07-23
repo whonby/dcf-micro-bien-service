@@ -1083,12 +1083,12 @@ inputSelect:false,
      NbreMarcheEnCoursParLigne(){
         return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.gettersgestionOrdrePaiement
+          return this.marches
             .filter(
               (qtreel) =>
-                (qtreel.activite_id == id && qtreel.ligne_economique_id == id1 &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.marche_id!=null)
+                (qtreel.activite_id == id && qtreel.economique_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee &&
+                qtreel.attribue==2)
             ).length
         } else {
           return 0;
