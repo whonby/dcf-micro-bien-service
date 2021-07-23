@@ -3,7 +3,7 @@
   <div>
      <div id="testModal" class="modal hide tailgrand">
       <div class="modal-header">
-         <a data-dismiss="modal" class="btn btn-danger" href="#">{{MontantReelMarche(test)}}Fermer{{montantAvenantParMarche(test)}}</a>
+         <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
         <h3 style="font-size: 14px; font-weight: bold">
         
         </h3>
@@ -45,7 +45,7 @@
     <td >
       
     </td>
-    <td></td>
+    <td>{{libelleMarche(test) || 'Non renseigné'}}</td>
    
   </tr>
   <tr>
@@ -53,21 +53,21 @@
     <td> {{NumeroMarche(test) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.numero_avenant || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+   <td> {{NumeroMarche(test) || 'Non renseigné'}} </td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Date</th>
     <td> {{DateMarche(test) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formaterDate(tem.date_avenant) || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+   <td> {{DateMarche(test) || 'Non renseigné'}} </td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Titulaire</th>
     <td>{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{afficherEntrepriseNom(recupereIdEntreprise(tem.marche_id)) || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+  <td>{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
     
   </tr>
   <tr>
@@ -91,52 +91,52 @@
     <td>
       <span >{{TauxDesAvenant(test) || 'Non renseigné'}} %</span>
     </td>
-    <td></td>
+    <td> 100 %</td>
     
     
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Durée</th>
-    <td>{{DureMarche(test) || 'Non renseigné'}}</td>
+    <td>{{DureMarche(test) || 'Non renseigné'}} Jours</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}}</td>
    
    <td></td>
-   <td></td>
+  <td>{{DureMarche(test) || 'Non renseigné'}} Jours</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Taux</th>
     <td >100 %</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+    <td >100 %</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Sorce de financement</th>
     <td> {{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}} </td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(idsourceFinancement(tem.marche_id)) || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+  <td> {{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}} </td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Ligne Budgetaire</th>
     <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(tem.marche_id))) || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Bénéficiaires</th>
     <td>{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{beneficiaireMarche(tem.marche_id) || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+   <td>{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Livrables</th>
     <td>{{livrableMarche(test) || 'Non renseigné'}}</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{livrableMarche(tem.marche_id) || 'Non renseigné'}}</td>
     <td></td>
-    <td></td>
+    <td>{{livrableMarche(test) || 'Non renseigné'}}</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Autres</th>
