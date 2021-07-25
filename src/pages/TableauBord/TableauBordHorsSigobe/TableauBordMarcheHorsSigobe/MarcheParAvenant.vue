@@ -14,8 +14,218 @@
       </button>
     </div> 
       <div class="modal-body" id="printpdf12">
-   
-<table class="table table-bordered table-striped">
+  <!-- <div class="tableauentier table table-bordered">
+	<div>
+	 <table border="1">
+		<tr>
+      
+			<th  style="font-size: 14px;color:#000; font-weight: bold; width:150px;"></th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; width:580px; padding:15px;">Marche Contat / Initial</th>
+			<th v-for="item in taillerAvenantParMarche(test)" :key="item"   style="font-size: 14px;color:#000; font-weight: bold; padding:15px;width:275px;">Avenant {{item}}</th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; padding:15px; width:200px;">Toyal des Avenants</th>			
+			<th style="font-size: 14px;color:#000; font-weight: bold; padding:15px;width:200px;">Marche / Contrat Initial</th>
+ 
+		</tr>
+	</table>
+	</div>
+	<div class="colonne">
+			<table border="1">
+				<tr>
+					<td style="height:80px; width:30px;">objet</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">numero</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Date</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Titulaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Montant</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Durée</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Source de financement</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Ligne Budgetaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">beneficiaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Livrables</td>
+				</tr>			
+			</table>
+	</div>
+	<div class="colonne">
+			<table >
+				<tr>
+					<td style="height:80px; width:500px!important;">
+
+						{{libelleMarche(test) || 'Non renseigné'}}
+						
+						</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{NumeroMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;"> {{DateMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{formatageSommeSansFCFA(parseFloat((MontantReelMarche(test)))) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">100%</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{DureMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">100 %</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{livrableMarche(test) || 'Non renseigné'}}</td>
+				</tr>			
+			</table>
+	</div>
+	<div class="colon">
+			<table border="1">
+				<tr>
+					<td  style="height:80px;">objet</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">numero</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Date</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Titulaire</td>
+				</tr>
+				<tr>
+					<td  style="height:60px;">
+            {{formatageSommeSansFCFA(parseFloat(parseFloat(MontantReelMarche(test)) + parseFloat(SommeAvenant(test))))}}
+            </td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Durée</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Source de financement</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Ligne Budgetaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">beneficiaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Livrables</td>
+				</tr>			
+			</table>
+	</div>
+	
+	
+	
+		<div class="tableauscroll">
+			<table border = "1">
+				<tr>
+					<td style="height:80px; " v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{tem.objet_avenant.substring(0,90)+"...." || 'Non renseigné'}}
+            </td>
+					<td style="height:60px; padding:15px; width:150px;">TA</td>
+				</tr>
+				<tr>
+					 <td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+             {{tem.numero_avenant || 'Non renseigné'}}
+            </td>
+					<td style="height:60px;">L obget du marche</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+				
+ 				<tr>				
+				<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+          {{formaterDate(tem.date_avenant) || 'Non renseigné'}}
+        </td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{afficherEntrepriseNom(recupereIdEntreprise(tem.marche_id)) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{formatageSommeSansFCFA(parseFloat(tem.montant_avenant)) || 'Non renseigné'}}</td>
+					<td >
+            <span style="height:60px;" >{{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}</span>
+          </td>
+					
+				</tr>
+ 				<tr>				
+					<td  style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}%</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{tem.taux_avenant || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(idsourceFinancement(tem.marche_id)) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(tem.marche_id))) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					 <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{beneficiaireMarche(tem.marche_id) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{livrableMarche(tem.marche_id) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 
+			</table>
+		</div>
+	</div> -->
+        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
                    TABLE DES AVENANTS</h2>
@@ -1290,7 +1500,6 @@ TriaffichageUniteAdminstrative() {
 if(this.test==0){
   this.test=id
 
-  
    this.$("#testModal").modal({
         backdrop: "static",
         keyboard: false,
@@ -1445,4 +1654,28 @@ font-size: 13px !important;
 td{
   border:1px solid  #000 !important;
 }
+
+
+.tableauentier{
+	width:1500px;
+	/* height:150px;	 */
+  /* margin: 1em; */
+  margin-top: 20px;
+  margin-left: 150px;
+}
+
+.colonne{
+   float:left;
+   width:auto;
+}
+.colon{
+   float:right;
+   width:auto;
+}
+.tableauscroll{
+	width:35%;
+	float:auto;
+	overflow:auto;
+}
+
 </style>

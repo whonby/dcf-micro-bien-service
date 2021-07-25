@@ -1214,12 +1214,12 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
             let prevue_montant=parseFloat(vM.montantInitial(value.id));
             let objet_act=vM.montantBaseMarche(value.id)
-            console.log(prevue_montant)
+            //console.log(prevue_montant)
             let montantExecuteObjetAct=vM.montantMarcheExecuteDecompte(value.id)
 
             let montant_restantObjet=vM.montantRestantMarche(value.id)
             let tauxObjetMontant=vM.tauxExecutionMarche(value.id)
-            console.log(montantExecuteObjetAct)
+           // console.log(montantExecuteObjetAct)
           let budgetExecute={
             label: 'Montant Excecute',
             value:montantExecuteObjetAct
@@ -1843,7 +1843,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     uniteAdmin(objet){
       this.value3=true
       /*this.activeUa=false*/
-      console.log(objet)
+     // console.log(objet)
 this.objetUnite=objet
       // this.unite_administrative_id=objet.unite_administrative_id
       // this.region=objet.region_id
