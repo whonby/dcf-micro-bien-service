@@ -14,8 +14,8 @@
 
                         <div class="widget-title">
                             <div align="right">
-                                <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-                                <button class="btn btn-default" @click="tableToExcel('table', 'Cycle de vie')">
+                                <button class="btn btn-info" @click="genererEnPdf()">Exporter en PDF</button>
+                                <button class="btn btn-default"   @click="tableToExcel('table', 'Cycle de vie')">
                                     Exporte en excel
                                 </button>
                             </div>
@@ -26,10 +26,10 @@
                         </div>
 
      <div id="app">
-         <div  id="printpdf" ref="table" summary="lorem ipsum si)t amet" rules="groups" frame="hsides" border="2">
+         <div  id="printContent" ref="table" summary="lorem ipsum si)t amet" rules="groups" frame="hsides" border="2">
              <div align="center"> <h2>({{infoSplite(detail.objet)}}</h2> </div>
              <br>
-             <table class="table" >
+             <table class="table table-striped table-hover">
                  <thead>
                  <tr>
                      <th style="width:10%">EXERCICE</th>
@@ -51,10 +51,10 @@
                      <th style="width:10%">OBJET</th>
                      <td>{{detail.objet}} </td>
                  </tr>
-                 <tr>
+                 <!--<tr>
                      <th style="width:10%">LOT</th>
                      <td>{{infoSplite(detail.objet)}} </td>
-                 </tr>
+                 </tr>-->
                   <tr>
                      <th style="width:10%">OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS</th>
                      <td>
@@ -83,7 +83,7 @@
                  <tr>
                      <th style="width:10%">NOM DU BAILLEUR</th>
                      <td style="width:15%" v-if="detailBailEtat"> {{detailBailEtat.typeFinnancement.souce_financement.libelle}} </td>
-                     <td style="width:15%" v-for="(baill, index) in detailBailleur" :key="baill.id">
+                     <td colspan="6"  v-for="(baill, index) in detailBailleur" :key="baill.id">
                          B{{index + 1}}: {{baill.bailleur.libelle}} </td>
                     <!-- <td style="width:15%">B2: </td>
                      <td style="width:15%">B3: </td>
@@ -102,7 +102,7 @@
                  <tr>
                      <th  style="width:10%">DON / EMPRUNT / N-A</th>
                      <td style="width:15%" v-if="detailBailEtat"> {{detailBailEtat.typeFinnancement.libelle}} </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                     <td colspan="6"  v-for="baill in detailBailleur" :key="baill.id">
                          {{baill.typeFinnancement.libelle}}
                      </td>
                      <!--<td style="width:15%"> </td>
@@ -113,7 +113,7 @@
                  <tr>
                      <th  style="width:10%">POURCENTAGE (%)</th>
                      <td style="width:15%" v-if="detailBailEtat">{{detailBailEtat.tauxbailleur}} % </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">{{baill.tauxbailleur}} %</td>
+                     <td colspan="6"  v-for="baill in detailBailleur" :key="baill.id">{{baill.tauxbailleur}} %</td>
                      <!--<td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -125,7 +125,7 @@
 
                          {{formatageSomme(parseFloat(detailBailEtat.montant)) || 'Non renseigné'}}
                      </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                     <td colspan="6"  v-for="baill in detailBailleur" :key="baill.id">
                        
                          {{formatageSomme(parseFloat(baill.montant)) || 'Non renseigné'}}
                      </td>
@@ -138,7 +138,7 @@
                      <th  style="width:10%">MONTANT TTC FCFA</th>
                      <td style="width:15%" v-if="detailBailEtat">
                          {{formatageSomme(parseFloat(detailBailEtat.montant)) || 'Non renseigné'}}</td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                     <td colspan="6" v-for="baill in detailBailleur" :key="baill.id">
                          {{formatageSomme(parseFloat(baill.montant)) || 'Non renseigné'}}
                      </td>
                      <!--<td style="width:15%"> </td>
@@ -147,11 +147,11 @@
                      <td style="width:15%"> </td>-->
                  </tr>
                  <tr>
-                     <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT FCFA(HT,TTC)</th>
+                     <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT </th>
 
-                     <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
-                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontantTV(detail.id))) || 'Non renseigné'}}  TVA </td>
-                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
+                     <td colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
+                     <td  colspan="1" >{{formatageSomme(parseFloat(AfficheMontantTV(detail.id))) || 'Non renseigné'}}  TVA </td>
+                     <td  colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
                  </tr>
                 
 
@@ -195,7 +195,7 @@
                  </tr>
 
                  <tr>
-                     <th>MONTANT CONFIDENTIEL FCFA</th>
+                     <th>MONTANT CONFIDENTIEL </th>
                      <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture_ht">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
                      <td style="width:15%" colspan="3" v-else>Non Renseigné </td>
                      <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
@@ -285,7 +285,7 @@
                      </td>
                  </tr>
                  <tr>
-                     <th>CAUTIONNEMENT(%,HT,TTC)</th>
+                     <th>CAUTIONNEMENT</th>
                      <td style="width:15%" colspan="6" > 
                           {{formatageSomme(parseFloat(delailCautionnementHT(detail.id)))}} HT</td>
                      <td style="width:15%" colspan="6" >
@@ -293,7 +293,7 @@
                      </td>
                  </tr>
                  <tr>
-                     <th>RETENUE DE GARANTIE(%,HT,TTC)</th>
+                     <th>RETENUE DE GARANTIE</th>
                        <td style="width:15%" colspan="6" > 
                           {{formatageSomme(parseFloat(delailRetenueGarantieHT(detail.id)))}} HT</td>
                      <td style="width:15%" colspan="6" >
@@ -301,7 +301,7 @@
                      </td>
                  </tr>
                  <tr>
-                     <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
+                     <th>AVANCE DE DEMARRAGE</th>
                      <td style="width:15%" colspan="6">
                          {{formatageSomme(parseFloat(delailAvanceDemarageHT(detail.id)))}}
                           HT 
@@ -385,16 +385,16 @@
                      </td>
                  </tr>
                  <tr>
-                     <th>REMBOURSEMENT AVANCE DE DEMARRAGE(%,HT,TTC)</th>
+                     <th>REMBOURSEMENT AVANCE DE DEMARRAGE</th>
                      <td style="width:15%" colspan="6" > </td>
                       <td style="width:15%" colspan="6" > </td>
                  </tr>
                  <tr>
-                     <th>NIVEAU D'ENGAGEMENT DU  CAUTIONNEMENT(%,HT,TTC)</th>
+                     <th>NIVEAU D'ENGAGEMENT DU  CAUTIONNEMENT</th>
                      <td style="width:15%" colspan="6" > </td>
                  </tr>
                  <tr>
-                     <th>NIVEAU D'ENGAGEMENT DE LA RETENUE DE GARANTIE(%,HT,TTC)</th>
+                     <th>NIVEAU D'ENGAGEMENT DE LA RETENUE DE GARANTIE</th>
                      <td style="width:15%" colspan="6" > </td>
                  </tr>
                  </thead>
@@ -427,7 +427,7 @@
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
-                     <th>MONTANT TOTAL DU MARCHE APRES AVENANT (S) FCFA</th>
+                     <th>MONTANT TOTAL DU MARCHE APRES AVENANT (S) </th>
                      <td style="width:15%" colspan="4" v-if="nbrAvenant"> {{formatageSomme(parseFloat(montantHtAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act_ht)))}} HT </td>
                      <td style="width:15%" colspan="4" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="4" v-if="nbrAvenant">
@@ -1542,7 +1542,7 @@ AfficheMontantHt() {
             genererEnPdf(){
 
 
-                this.$htmlToPaper("printpdf");
+                this.$htmlToPaper("printContent");
               /*  var doc = new JsPDF('landscape')
 
                 doc.text(98,10,"CYCLE DE VIE")*/

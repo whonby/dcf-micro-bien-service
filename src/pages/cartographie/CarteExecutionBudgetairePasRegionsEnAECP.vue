@@ -19,12 +19,31 @@
           <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
               <h1 class="sidebar-header">
-                Carte EXECUTION
+                CARTE D'EXECUTION HORS SIGOBE
                 <div class="sidebar-close">
                   <i class="fa fa-caret-left"></i>
                 </div>
               </h1>
+             
+<!--<p class="labelish">Mode Affichage:</p>
+           <div class="span2">
+             <button :class="{active: choixAffichageInformationCarte == 1 }" 
+             @click.prevent="activedOptionMenu(1)" class="btn">Regions</button>
+           </div>
+            <div class="span3">
+              <button class="btn" :class="{active: choixAffichageInformationCarte == 2 }" 
+             @click.prevent="activedOptionMenu(2)">Departement</button>
+            </div>
+             <div class="span5">
+               <button class="btn" :class="{active: choixAffichageInformationCarte == 3 }" 
+             @click.prevent="activedOptionMenu(3)">Sous préfecture</button>
+             </div>-->
+  
+  
+  
               <div class="span5">
+
+       
                 <label
                   >Régions
                   <a
@@ -37,11 +56,51 @@
                 <model-list-select
                   style="background-color: rgb(233, 233, 233)"
                   class="wide"
-                  :list="regions"
+                  :list="listeRegion"
                   v-model="region"
                   option-value="id"
                   option-text="libelle"
                   placeholder="Régions"
+                >
+                </model-list-select>
+
+
+                <label
+                  >Départements
+                  <a
+                    href="#"
+                    @click.prevent="videDep()"
+                    v-if="departement"
+                    style="color: red"
+                    ><i class="fa fa-trash-o"></i></a
+                ></label>
+                <model-list-select
+                  style="background-color: rgb(233, 233, 233)"
+                  class="wide"
+                  :list="departementPasRegions"
+                  v-model="departement"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="Départements"
+                >
+                </model-list-select>
+                <label
+                  >Sous-Préfecture
+                  <a
+                    href="#"
+                    @click.prevent="videSous()"
+                    v-if="sous_prefecture"
+                    style="color: red"
+                    ><i class="fa fa-trash-o"></i></a
+                ></label>
+                <model-list-select
+                  style="background-color: rgb(233, 233, 233)"
+                  class="wide"
+                  :list="SousPrefecturePasDepartement"
+                  v-model="sous_prefecture"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="Sous-Prefecture"
                 >
                 </model-list-select>
                
@@ -67,23 +126,27 @@
                   placeholder="Unité administrative"
                 >
                 </model-list-select>
-
-              
               </div>
 
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <div v-if="caseAffichageMessageGeneralSituationMarche">
+             
+              <div>
                 <div class="span12" style="font-size: 15px; font-size: 15px">
                   Situation du budget
                 </div>
+                 <div class="span12">
+                       <div>
+                    Budget Initial: <span style="color: #003900; "><b>{{formatageSomme(montantBudgetInitiale(region))}}</b></span> <br>
+                    Budget actuelle:<span style="color: #00d700; "><b>{{formatageSomme(montantBudgetActuelle(region))}}</b></span><br>
+                    Budget disponible:<span style="color: #00d700; "><b>{{formatageSomme(montantDisponibleBudget(region))}}</b></span><br>
+                    Budget executé:<span style="color: darkred; "><b>{{formatageSomme(montantExecute(region))}}</b></span><br>
+                     Taux d'exécution:<span style="color: #e36706; "><b>{{tauxExecutionBugetaire}} %</b></span>
+                       </div>
+                    </div>
+                  <div class="span12">
+                     
+                        <apexchart type="pie" width="275" :options="chartOptions" :series="[montantDisponibleBudget(region),montantExecute(region)]"></apexchart>
+                    </div>
+                   
               </div>
 
               <hr />
@@ -101,72 +164,12 @@
 
             <div class="sidebar-pane" id="infoRegion">
               <h1 class="sidebar-header">
-                {{ nomUniteAdministrativeSelectionner }} -
-                {{ info_region.libelle }}
+                
                 <div class="sidebar-close">
                   <i class="fa fa-caret-left"></i>
                 </div>
               </h1>
-              <div class="quick-actions_homepage">
-                <table class="table table-striped">
-                  <tbody>
-                    <tr>
-                      <td style="background: #00008b; color: #fff">
-                        Montant Prevue
-                      </td>
-                      <td style="background: #733b8b; color: #fff">
-                        Montant Approuve
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background: #00008b; color: #fff">
-                        {{
-                          formatageSomme(montantPrevuePasRegion(info_region.id))
-                        }}
-                      </td>
-                      <td style="background: #733b8b; color: #fff">
-                        {{ formatageSomme(4740000000) }}
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td style="background: #fc4d93; color: #fff">
-                        Montant Execute
-                      </td>
-                      <td style="background: orangered; color: #fff">
-                        Taux Execution
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background: #fc4d93; color: #fff">
-                        {{ formatageSomme(4110000000) }}
-                      </td>
-                      <td style="background: orangered; color: #fff">
-                        {{ formatageSomme(4740000000) }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <!--<ul class="quick-actions" >-->
-                <!--<li class="bg_lb"> <a style="font-size: 10px" href="#">-->
-                <!--{{formatageSomme(4110000000)}}<br> Montant Prevue</a> </li>-->
-                <!--<li class="bg_lg " > <a href="#" style="font-size: 20px">-->
-                <!--{{formatageSomme(54788885)}}<br> Montant Approuve </a> </li>-->
-                <!--<li class="bg_ly" style="font-size: 10px"> <a href="#" style="font-size: 10px">  {{formatageSomme(54255411)}}<br> Montant Execute </a> </li>-->
-                <!--<li class="bg_lo" > <a href="#" style="font-size: 10px">{{10}} %<br> Taux d'exécution</a> </li>-->
-                <!--</ul>-->
-              </div>
-              <h6>Infrasctures</h6>
-              <hr />
-              <h6>Type de Marche</h6>
-              <hr />
-
-              <h6>
-                Liste des marches ({{
-                  getListeMarcheRegionsSelectionner(info_region.id).length
-                }})
-              </h6>
+              
               <hr />
             </div>
           </div>
@@ -262,7 +265,7 @@ import iconUrl from "leaflet/dist/images/marker-icon.png";
 import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 import { formatageSomme } from "../../../src/Repositories/Repository";
 import { ModelListSelect } from "vue-search-select";
-//import VueApexCharts from "vue-apexcharts";
+import VueApexCharts from "vue-apexcharts";
 import L from "leaflet.minichart";
 import ad from "leaflet-html-legend";
 import ad1 from "leaflet-easyprint";
@@ -270,7 +273,7 @@ import moda from "leaflet-modal";
 import { noDCfNoAdmin } from "../../Repositories/Auth";
 //import ad2 from "leaflet-easyprint"
 export default {
-  name: "Example",
+ 
   components: {
     LMap,
     LTileLayer,
@@ -282,7 +285,7 @@ export default {
     LCircleMarker,
     // LIcon
     ModelListSelect,
-    //apexchart: VueApexCharts,
+    apexchart: VueApexCharts,
     LControlFullscreen,
   },
   data() {
@@ -290,6 +293,7 @@ export default {
       Object.assign({}, Icon.Default.prototype.options, { iconUrl, shadowUrl })
     );
     return {
+      choixAffichageInformationCarte:1,
       info_region: "",
       infortion_sidbar_filter: "",
       type_marche: "",
@@ -302,46 +306,27 @@ export default {
       region: "",
       infrastructure: "",
       unite_administrative_id: "",
+      tableGenerale:[],
+      table_memoire_ua:[],
       chartOptions: {
-        chart: {
-          type: "bar",
-          height: 350,
-          width: 200,
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: "55%",
-            endingShape: "rounded",
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ["transparent"],
-        },
-        xaxis: {
-          categories: [],
-        },
-        yaxis: {
-          title: {
-            text: "$ (Infrastructure)",
-          },
-        },
-        fill: {
-          opacity: 1,
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return "F " + val + " Infrastructure";
+            chart: {
+              width: 275,
+              type: 'pie',
             },
+            labels: ['Buget Disponible', 'Budget Execute'],
+            colors:['#6C0277', '#edb007'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
           },
-        },
-      },
       geosearchOptions: {
         // Important part Here
         provider: new OpenStreetMapProvider(),
@@ -398,8 +383,7 @@ export default {
         {
           name: "Plan 2",
           visible: false,
-          url:
-            "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png",
+          url:"https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png",
           attribution: "",
         },
         {
@@ -429,42 +413,8 @@ export default {
     };
   },
   created() {
-    if (this.getterInformationCarteInfrastructure) {
-      if (this.getterInformationCarteInfrastructure.infrastructure != "") {
-        this.infrastructure = this.getterInformationCarteInfrastructure.infrastructure;
-      }
-      if (
-        this.getterInformationCarteInfrastructure.region_select_vmodel != ""
-      ) {
-        this.region = this.getterInformationCarteInfrastructure.region_select_vmodel;
-      }
-      if (this.getterInformationCarteInfrastructure.type_marche != "") {
-        this.type_marche = this.getterInformationCarteInfrastructure.type_marche;
-      }
-      if (
-        this.getterInformationCarteInfrastructure.unite_administrative != ""
-      ) {
-        this.unite_administrative_id = this.getterInformationCarteInfrastructure.unite_administrative;
-      }
 
-      this.getterInformationCarteInfrastructure.infrastructure = "";
-      this.getterInformationCarteInfrastructure.region_select_vmodel = "";
-      this.getterInformationCarteInfrastructure.type_marche = "";
-      this.getterInformationCarteInfrastructure.unite_administrative = "";
-      //                let objet={
-      //                    region:"",
-      //                    infrastructure:"",
-      //                    unite_administrative:"",
-      //                    type_marche:"",
-      //                    region_select_vmodel:""
-      //                }
-      //                let objet2=""
-      //
-      //                this.supprmieMarcheFiltreCarteInfrastructure(objet2)
-      //                this.supprmiInfoFiltreCarteInfrastructure(objet)
-    }
-
-    //console.log(this.listeMarcheUniteAdmin)
+ this.listeUAPasRegionDepartementSP(this.region)
   },
 
   computed: {
@@ -474,13 +424,15 @@ export default {
       "localisations_geographiques",
       "getterLocalisationGeoAll",
       "getterInfrastrucure",
+      "exercices_budgetaires"
     ]),
     ...mapGetters("uniteadministrative", [
       "acteCreations",
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
-      "decomptefactures"
+      "decomptefactures",
+      "budgetEclate"
     ]),
     ...mapGetters("bienService", [
       "marches",
@@ -493,7 +445,8 @@ export default {
       "supprmieMarcheFiltreCarteInfrastructure",
       "supprmiInfoFiltreCarteInfrastructure",
       "avenants",
-      "acteEffetFinanciers"
+      "acteEffetFinanciers",
+      "gettersgestionOrdrePaiement"
     ]),
 
     ...mapGetters("Utilisateurs", [
@@ -501,8 +454,291 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
+
+   listeRegion(){
+      let arrParent=[1]
+            return this.getterLocalisationGeoAll.filter(item=>{
+                if(item.structure_localisation_geographique_id==5 && !this.inArray(item.parent,arrParent)){
+                    return item
+                }
+            })
+        },
+        listeDepartement(){
+          let arrParent=[2,50,47,795,48,49]
+            return this.getterLocalisationGeoAll.filter(item=>{
+                if(item.structure_localisation_geographique_id==6 && !this.inArray(item.parent,arrParent)){
+                    return item
+                }
+            })
+        },
+        listeSouprefecture(){
+         
+            return this.getterLocalisationGeoAll.filter(item=>{
+                let arrayName=item.libelle.split(" ")
+                if(item.structure_localisation_geographique_id==8 && arrayName[0]=="Sous-préfecture"){
+                    return item
+                }
+            })
+        },
+//departement: "",
+     // sous_prefecture: "",
+ departementPasRegions(){
+   let objet=this.listeDepartement
+    if(this.region!=""){
+  objet=this.listeDepartement.filter(item=>{
+                        if(item.parent==this.region){
+                            return item
+                        }
+                    })
+    }
+
+    
+     return objet
+  
+        },
+        SousPrefecturePasDepartement(){
+          let objet=this.listeSouprefecture
+                if(this.departement!="" && this.sous_prefecture==""){
+                    objet=this.listeSouprefecture.filter(item=>{
+                        if(item.parent==this.departement){
+                            return item
+                        }
+                    })
+                }
+                if(this.sous_prefecture!=""){
+                  objet=this.listeSouprefecture.filter(item=>{
+                        if(item.parent==this.sous_prefecture){
+                            return item
+                        }
+                    })
+                }
+                return objet
+            
+        },
+    
+
+     
+/**Cette fonction retour la liste des unite administrative pas regions. Cette fonction n'est pas optimise elle doit etre reecrire*/
+      
+
+//Retour exercice budget en cours
+    exerciceBudgetaireEnCours() {
+      let exercice=this.exercices_budgetaires.find(item=>item.encours==1)
+      if(exercice==undefined) return ""
+        return exercice.annee
+    },
+
+//Retour tous les budget eclate des exercices
+    budgetEclateExeciceEncours(){
+      let budgetEclateExercice=this.budgetEclate.filter(item=>{
+        if(item.annebudgetaire==this.exerciceBudgetaireEnCours && item.budget_actif_def==1){
+          return item
+        }
+      })
+      if(budgetEclateExercice==undefined) return []
+        return budgetEclateExercice
+    },
+
+     budgetEclateExeciceEncoursActuelle(){
+      let budgetEclateExercice=this.budgetEclate.filter(item=>{
+        if(item.annebudgetaire==this.exerciceBudgetaireEnCours && item.budget_active==1){
+          return item
+        }
+      })
+      if(budgetEclateExercice==undefined) return []
+        return budgetEclateExercice
+    },
+
+
+montantBudgetInitiale(){
+    return id=>{
+      let vm=this
+        let info=vm.tableGenerale
+        if (id!="") {
+          info=vm.tableGenerale.filter(item=>item.region_id==id)
+        }
+         let montant=0;
+      
+
+      info.forEach(function(value){
+       let budget=vm.budgetEclateExeciceEncours.filter(item=>item.uniteadministrative_id==value.id)
+       let initeVal = 0;
+        let montBudgetInit = budget.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.dotation);
+        }, initeVal);
+       montant=parseFloat(montant) +montBudgetInit
+      })
+    return montant
+    }
+   
+   },
+
+   montantBudgetInitialePasRegion(){
+    return id=>{
+       
+        if (id=="") return 0
+
+         let montant=0;
+      let vm=this
+      let objet=vm.tableGenerale.filter(item=>item.region_id==id)
+      objet.forEach(function(value){
+       let budget=vm.budgetEclateExeciceEncours.filter(item=>item.uniteadministrative_id==value.id)
+       let initeVal = 0;
+        let montBudgetInit = budget.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.dotation);
+        }, initeVal);
+       montant=parseFloat(montant) +montBudgetInit
+      })
+    return montant
+    }
+   
+   },
+
+
+montantBudgetActuelle(){
+  return id=>{
+    let vm=this
+        let info=vm.tableGenerale
+        if (id!="") {
+          info=vm.tableGenerale.filter(item=>item.region_id==id)
+        }
+      let montant=0;
+     
+      info.forEach(function(value){
+       let budget=vm.budgetEclateExeciceEncoursActuelle.filter(item=>item.uniteadministrative_id==value.id)
+       let initeVal = 0;
+        let montBudgetInit = budget.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.dotation);
+        }, initeVal);
+       montant=parseFloat(montant) +montBudgetInit
+      })
+    return montant
+  }
+  
+   },
+
+
+montantBudgetActuellePasRegion(){
+  return id=>{
+   
+        if (id=="") return 0
+
+         let montant=0;
+      let vm=this
+      let objet=vm.tableGenerale.filter(item=>item.region_id==id)
+   
+      
+    objet.forEach(function(value){
+       let budget=vm.budgetEclateExeciceEncoursActuelle.filter(item=>item.uniteadministrative_id==value.id)
+       let initeVal = 0;
+        let montBudgetInit = budget.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.dotation);
+        }, initeVal);
+       montant=parseFloat(montant) +montBudgetInit
+      })
+    return montant
+  }
+  
+   },
+
+opValider(){
+  let tableau_type_op=[1,4]
+     let tableau_decision=[9,8]
+return this.gettersgestionOrdrePaiement.filter(item=>{
+  if(item.exercice ==this.exerciceBudgetaireEnCours && this.inArray(item.type_ordre_paiement,tableau_type_op) && this.inArray(item.decision_cf,tableau_decision) ){
+     return item
+  }
+})        
+},
+//calcul de montant exute op pas
+
+montantExecute(){
+  return id=>{
+    let vm=this
+        let info=vm.tableGenerale
+        if (id!="") {
+          info=vm.tableGenerale.filter(item=>item.region_id==id)
+        }
+     let montant=0;
+  
+      
+     info.forEach(function(value){
+       let listeOp=vm.opValider.filter(item=>item.unite_administrative_id==value.id)
+       let initeVal = 0;
+        let montantExcute = listeOp.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.montant_ordre_paiement);
+        }, initeVal);
+       montant=parseFloat(montant) +montantExcute
+      })
+    return montant
+  }
+   
+}
+,
+montantExecutePasRegions(){
+  return id=>{
+     if (id=="") return 0
+
+         let montant=0;
+      let vm=this
+      let objet=vm.tableGenerale.filter(item=>item.region_id==id)
+   
+      
+      
+      objet.forEach(function(value){
+       let listeOp=vm.opValider.filter(item=>item.unite_administrative_id==value.id)
+       let initeVal = 0;
+        let montantExcute = listeOp.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.montant_ordre_paiement);
+        }, initeVal);
+       montant=parseFloat(montant) +montantExcute
+      })
+    return montant
+  }
+   
+},
+montantDisponibleBudget(){
+   return id=>{
+    let info=id
+    if(id!=""){
+      info=id
+    }
+     return parseFloat(this.montantBudgetActuelle(info)) - parseFloat(this.montantExecute(info))
+   }
+
+},
+
+
+montantDisponibleBudgetPasRegions(){
+   return id=>{
+    
+    if(id=="") return 0
+
+      return parseFloat(this.montantBudgetActuellePasRegion(id)) - parseFloat(this.montantExecutePasRegions(id))
+     
+   }
+
+},
+    tauxExecutionBugetaire(){
+        let taux=(parseFloat(this.montantExecute(this.region)) * 100)/parseFloat(this.montantBudgetActuelle(this.region))
+        if (taux!="NaN") {
+         return taux.toFixed(2)
+        }
+        return 0
+    },
+    //inArray
+    inArray() {
+      return (valeur, tableau)=>{
+         let length = tableau.length;
+        for(let i = 0; i < length; i++) {
+            if(tableau[i] == valeur) return true;
+        }
+    return false;
+      }
+   
+},
     regions() {
-      return this.localisations_geographiques.filter((item) => {
+      return this.listeRegion.filter((item) => {
         if (
           item.longitude != null &&
           item.structure_localisation_geographique_id==5
@@ -511,6 +747,7 @@ export default {
         }
       });
     },
+
     noDCfNoAdmin: noDCfNoAdmin,
     filtre_unite_admin() {
       if (this.noDCfNoAdmin) {
@@ -558,257 +795,8 @@ export default {
      *
      * @returns {function(*)}
      */
-    getListeMarcheRegionsSelectionner() {
-      return (region) => {
-        if (region != "") {
-          return this.objetMarchePasUniteOuRegion.filter(
-            (item) => item.localisation_geographie_id == region
-          );
-        }
-      };
-    },
+   
 
-    montantPrevuePasRegion() {
-      return (region) => {
-        if (region != "") {
-          let initialValue = 0;
-          let objet = this.getListeMarcheRegionsSelectionner(region);
-
-          let montantPrevue = objet.reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche);
-          }, initialValue);
-          return montantPrevue;
-        }
-      };
-    },
-
-    nomUniteAdministrativeSelectionner() {
-      let vM = this;
-      if (vM.unite_administrative_id != "") {
-        let objet = this.uniteAdministratives.find(
-          (item) => item.id == vM.unite_administrative_id
-        );
-        return objet.libelle;
-      }
-      return null;
-    },
-    /**
-     *
-     * @returns {function(*)}
-     */
-    departements() {
-      return (id) => {
-        return this.getterLocalisationGeoAll.filter((item) => {
-          if (
-            item.structure_localisation_geographique_id==6 &&
-            item.parent == id
-          ) {
-            return item;
-          }
-        });
-      };
-    },
-
-    getMontantMarcheRegionInfrastructure() {
-      return (region, infrastructure) => {
-        let marche = this.objetMarchePasUniteOuRegion.filter((item) => {
-          if (
-            item.localisation_geographie_id == region &&
-            item.infrastructure_id == infrastructure &&
-            item.parent_id != ""
-          )
-            return item;
-        });
-
-        let initeVal = 0;
-        let montant = marche.reduce(function (total, currentValue) {
-          return total + parseFloat(currentValue.montant_marche);
-        }, initeVal);
-        return montant;
-      };
-    },
-    getTotaleMontantMarcheParUnite() {
-      return (region, infrastructure) => {
-        let vm = this;
-        let marche = this.objetMarchePasUniteOuRegion.filter((item) => {
-          if (
-            item.localisation_geographie_id == region &&
-            item.infrastructure_id == infrastructure &&
-            item.attribue == 2
-          )
-            return item;
-        });
-        let montant_reel_marche = 0;
-        marche.forEach(function (value) {
-          let objet_act = vm.getActeEffetFinancierPersonnaliser45.find(
-            (item) => item.marche_id == value.id
-          );
-          if (objet_act != undefined) {
-            montant_reel_marche =
-              parseFloat(montant_reel_marche) +
-              parseFloat(objet_act.montant_act);
-          } else {
-            montant_reel_marche = montant_reel_marche + 0;
-          }
-        });
-
-        /*let initeVal = 0;
-          let montant=  marche.reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche) ;
-          }, initeVal);*/
-        return montant_reel_marche;
-      };
-    },
-    sousPrefecture() {
-      return (id) => {
-        return this.getterLocalisationGeoAll.filter((item) => {
-          if (
-            item.structure_localisation_geographique_id==8 &&
-            item.parent == id
-          ) {
-            return item;
-          }
-        });
-      };
-    },
-
-    ListeMarchePasUA() {
-      let vM = this;
-      let objet = this.listeMarcheUniteAdmin.filter(
-        (item) => item.parent_id != ""
-      );
-
-      if (
-        vM.unite_administrative_id != "" &&
-        vM.region == "" &&
-        vM.infrastructure == ""
-      ) {
-        objet = this.listeMarcheUniteAdmin.filter(
-          (item) =>
-            item.unite_administrative_id == vM.unite_administrative_id &&
-            item.parent_id != ""
-        );
-      }
-
-      return objet;
-    },
-
-    totalMontantPrevisionnelPasMarche() {
-      let vM = this;
-      let objet = this.listeMarcheUniteAdmin.filter(
-        (item) => item.parent_id != ""
-      );
-
-      if (vM.unite_administrative_id != "") {
-        objet = this.listeMarcheUniteAdmin.filter(
-          (item) =>
-            item.unite_administrative_id == vM.unite_administrative_id &&
-            item.parent_id != ""
-        );
-      }
-
-      let initeVal = 0;
-      let montant = objet.reduce(function (total, currentValue) {
-        return total + parseFloat(currentValue.montant_marche);
-      }, initeVal);
-      return montant;
-    },
-
-    totalMontantPrevisionnelPasRegion() {
-      return (regions) => {
-        let vM = this;
-        if (regions != "") {
-          let objet;
-
-          if (vM.unite_administrative_id != "") {
-            objet = this.listeMarcheUniteAdmin.filter((item) => {
-              if (
-                item.unite_administrative_id == vM.unite_administrative_id &&
-                item.localisation_geographie_id == regions &&
-                item.parent_id != ""
-              ) {
-                return item;
-              }
-            });
-          } else {
-            objet = this.listeMarcheUniteAdmin.filter(
-              (item) =>
-                item.localisation_geographie_id == regions &&
-                item.parent_id != ""
-            );
-          }
-
-          let initeVal = 0;
-          let montant = objet.reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche);
-          }, initeVal);
-          return montant;
-        }
-      };
-    },
-
-    totalMontantInfrastructure() {
-      return (unite_administrative_id) => {
-        let vM = this;
-        let objet;
-        if (unite_administrative_id != "") {
-          objet = this.listeMarcheUniteAdmin.filter((item) => {
-            if (
-              item.unite_administrative_id == unite_administrative_id &&
-              item.infrastructure_id == vM.infrastructure &&
-              item.parent_id != ""
-            ) {
-              return item;
-            }
-          });
-
-          let initeVal = 0;
-          let montant = objet.reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche);
-          }, initeVal);
-          return montant;
-        }
-
-        if (vM.infrastructure != "") {
-          objet = this.listeMarcheUniteAdmin.filter(
-            (item) =>
-              item.infrastructure_id == vM.infrastructure &&
-              item.parent_id != ""
-          );
-
-          let initeVal = 0;
-          let montant = objet.reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.montant_marche);
-          }, initeVal);
-          return montant;
-        }
-      };
-    },
-
-    totalMontantInfrastructurePasRegion() {
-      return (regions) => {
-        let vM = this;
-        if (regions != "") {
-          let objet;
-
-          objet = this.listeMarcheUniteAdmin.filter((item) => {
-            if (
-              item.infrastructure_id == vM.infrastructure &&
-              item.localisation_geographie_id == regions &&
-              item.parent_id != ""
-            ) {
-              return item;
-            }
-          });
-
-          let initeVal = 0;
-          let montant = objet.reduce(function (total, currentValue) {
-                     return total + parseFloat(currentValue.montant_marche);
-          }, initeVal);
-          return montant;
-        }
-      };
-    },
     objetMarchePasUniteOuRegion() {
       let vM = this;
       let objet = this.listeMarcheUniteAdmin.filter(
@@ -839,7 +827,7 @@ export default {
         objet = objet.filter((item) => {
           if (
             item.unite_administrative_id == vM.unite_administrative_id &&
-            item.parent_id != ""
+          item.parent_id != ""
           ) {
             return item;
           }
@@ -866,74 +854,27 @@ export default {
           }
         });
       }
-
-   
       return objet;
     },
 
-    dataBar() {
-      let vM = this;
-      let ObjetMontantPrevue = {
-        name: "Montant prevue",
-        data: [],
-      };
-
-      let ObjetMontantRealise = {
-        name: "Montant réalisé",
-        data: [],
-      };
-      let dataArray = [];
-      let tailleInfrastructure = vM.getterInfrastrucure.length;
-      vM.getterInfrastrucure.forEach(function (value) {
-        let marche = vM.objetMarchePasUniteOuRegion.filter(
-          (item) => item.infrastructure_id == value.id
-        );
-        // let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
-        //   return total + parseFloat(currentValue.total_general) ;
-        // }, initeVal);
-        let taille_categorie = vM.chartOptions.xaxis.categories.length;
-        let initeVal = 0;
-        let montant_prevue = marche.reduce(function (total, currentValue) {
-          return total + parseFloat(currentValue.montant_marche);
-        }, initeVal);
-        if (taille_categorie <= tailleInfrastructure - 1) {
-          vM.chartOptions.xaxis.categories.push(value.libelle);
-        }
-
-        ObjetMontantPrevue.data.push(montant_prevue);
-        if (montant_prevue == 0) {
-          ObjetMontantRealise.data.push(0);
-        } else {
-          ObjetMontantRealise.data.push(vM.getRandomInt(1000000000));
-        }
-      });
-      dataArray.push(ObjetMontantPrevue);
-      dataArray.push(ObjetMontantRealise);
-      return dataArray;
-    },
     getRandomInt() {
       return (max) => {
         return Math.floor(Math.random() * Math.floor(max));
       };
     },
-    localisationsFiltre() {
-      const searchTerm = this.search.toLowerCase();
-      console.log(
-        this.localisations_geographiques.filter((item) => item.parent !== null)
-      );
-      return this.localisations_geographiques.filter((item) => {
-        return (
-          item.code.toLowerCase().includes(searchTerm) ||
-          item.libelle.toLowerCase().includes(searchTerm)
-        );
-      });
-    },
+   
 
     //Recuperation des marche pas regions
     marchePasRegions(){
        return id => {
          if(id != null && id != ""){
-      
+            
+            if(this.departement!="" && this.sous_prefecture==""){
+              return  this.objetMarchePasUniteOuRegion.filter(item=>item.departement_id==id)
+            }
+            if(this.sous_prefecture!=""){
+              return  this.objetMarchePasUniteOuRegion.filter(item=>item.sous_prefecture_id==id)
+            }
       return this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
          }
          return []
@@ -1004,6 +945,7 @@ export default {
            return 0
          }
     },
+
      //Fonction qui calcule le montant execute des marché pas regions
      montantExecuteMarchePasRegions(){
          return id => {
@@ -1019,18 +961,19 @@ export default {
            return 0
          }
     },
+
     localisation() {
       let localisation = [];
       // console.log(this.getMandatPersonnaliserVise)
       let vM = this;
       //    console.log(this.localisations_geographiques)
       vM.getLocalisation(vM.region).forEach(function (value) {
-        if (value.structure_localisation_geographique_id == 5) {
+       
           if (value.longitude != null && value.latitude != null) {
             let coordonne = [];
             coordonne.push(value.latitude);
             coordonne.push(value.longitude);
-            console.log(value)
+           // console.log(value)
             /**
              * Recuperation des unite administrative de la zone geographique
              * @type {*[]}
@@ -1039,11 +982,11 @@ export default {
             let color = "";
             let colorFill = "";
            
-            let montant_previsionnel=vM.montantPrevissionnelMarchePasRegions(value.id)
-            let montant_execute=vM.montantExecuteMarchePasRegions(value.id)
+             let montant_previsionnel=vM.montantBudgetActuellePasRegion(value.id)
+            let montant_execute=vM.montantExecutePasRegions(value.id)
             let taux=(montant_execute * 100)/montant_previsionnel
             let montant_reste=parseFloat(montant_previsionnel) - parseFloat(montant_execute)
-            let taux_montantPrevueRegion=(montant_previsionnel * 100)/vM.montantTotalPrevissionel
+            let taux_montantPrevueRegion=(montant_previsionnel * 100)/vM.montantBudgetActuelle("")
            
            color = "#000000";
             colorFill = "#000000";
@@ -1051,6 +994,8 @@ export default {
               id: value.id,
               ville: value.libelle,
               latlng: coordonne,
+              latitude:value.latitude,
+              longitude:value.longitude,
               budget: montant_previsionnel,
               budgetReste: montant_reste,
               budgetExecute: montant_execute,
@@ -1061,89 +1006,138 @@ export default {
             };
             localisation.push(objetAlocalise);
           }
-        }
+        
       });
       return localisation;
     },
 
-    getInfrastructure() {
-      return (id) => {
-        if (id != "") {
-          return this.getterInfrastrucure.filter((item) => item.id == id);
-        }
-        return this.getterInfrastrucure;
-      };
-    },
 
+//Retours les regions, departement,sous-prefecture
     getLocalisation() {
-      return (id) => {
-        if (id != "") {
-          //   this.removeMapChart
-          return this.regions.filter(
-            (item) => item.id == id
+      return (reg) => {
+        if (reg != "") {
+           return this.listeRegion.filter(
+            (item) => item.id == reg
           );
+         
         }
-        return this.regions;
+
+        return this.listeRegion;
       };
     },
-    caseAffichageMessageRegionsSituationMarche() {
-      let vM = this;
-      if (vM.region != "" && vM.unite_administrative_id == "") {
-        return true;
-      }
-      return false;
-    },
-
-    caseAffichageMessageUniteAdminSituationMarche() {
-      let vM = this;
-      if (vM.region == "" && vM.unite_administrative_id != "") {
-        return true;
-      }
-      return false;
-    },
-    caseAffichageMessageUniteAdminRegionSituationMarche() {
-      let vM = this;
-      if (vM.region != "" && vM.unite_administrative_id != "") {
-        return true;
-      }
-      return false;
-    },
-    caseAffichageMessageGeneralSituationMarche() {
-      let vM = this;
-      if (vM.region == "" && vM.unite_administrative_id == "") {
-        return true;
-      }
-      return false;
-    },
-
-    exoEnCours() {
-      return this.exercices_budgetaires.filter(
-        (element) => element.encours == 1
-      );
-    },
-    administratif() {
-      return (uniteAdmin) => {
-        if (uniteAdmin != "") {
-          return this.uniteAdministratives.filter(
-            (item) => item.localisationgeo_id == uniteAdmin
-          );
-        } else {
-          return this.uniteAdministratives;
-        }
-      };
-    },
+  
   },
   methods: {
     ...mapActions("bienService", [
       "ajouterListeMarcheFiltreCarteInfrastructure",
       "ajouterInfoFiltreCarteInfrastructure",
     ]),
+    filterBudgetRegionsMemoire(){
+    let vm=this
+    this.tableGenerale=this.table_memoire_ua
+      if(vm.region){
+        this.tableGenerale=this.tableGenerale.filter(item=>item.region_id=this.region)
+      }
+   
+   },
+   filterBudgetUniteAdmiMemoire(){
+    let vm=this
+    this.tableGenerale=this.table_memoire_ua
+      if(vm.unite_administrative_id){
+        this.tableGenerale=this.tableGenerale.filter(item=>item.id=this.unite_administrative_id)
+      }
+   
+   },
+   filterBudgetDepartementMemoire(){
+    let vm=this
+    this.tableGenerale=this.table_memoire_ua
+      if(vm.departement){
+        this.tableGenerale=this.tableGenerale.filter(item=>item.departement_id=this.departement)
+      }
+   
+   },
+    filterBudgetSousPrefectureMemoire(){
+    let vm=this
+    this.tableGenerale=this.table_memoire_ua
+      if(vm.sous_prefecture){
+        this.tableGenerale=this.tableGenerale.filter(item=>item.sous_prefecture_id=this.sous_prefecture)
+      }
+   
+   },
+    sousPrefectureMutation(id){
+      let vm=this
+             let info=""
+             if(id){
+              info=id
+             }
+             let colect=[]
+             console.log(info)
+              this.listeSouprefecture.forEach(item => {
+             // console.log(item)
+                 
+              let departement=vm.listeDepartement.find(val=>val.id==item.parent)
+               
+                let unite=vm.filtre_unite_admin.filter(v=>v.localisationgeo_id==item.id)
+
+        let container = {
+                  ...item,
+                   region_id:departement.parent,
+                   departement:departement.id,
+                   ua:unite
+               }
+             colect.push(container)
+             // return container;
+          })
+       return colect
+     },
+       listeUAPasRegionDepartementSP(id){
+          
+            let info=''
+            let vm=this
+            if(id!=""){
+                info=id
+              }
+             vm.table_memoire_ua=[]
+             vm.tableGenerale=[]
+         //  
+            let objet=this.sousPrefectureMutation(info)
+             objet.filter(item=>{
+                 if(item.ua.length){
+                  item.ua.forEach(val=>{
+                    let obj={
+                      ...val,
+                      region_id:item.region_id,
+                      departement_id:item.departement,
+                      sous_prefecture_id:item.id
+                    }
+                    vm.tableGenerale.push(obj)
+                    vm.table_memoire_ua.push(obj)
+                   // colect.push(obj)
+                  })
+                  
+                 }
+                 return item
+             })
+              /**/
+       
+        //  localStorage.setItem('ua_information', JSON.stringify(colect))
+        },
+      activedOptionMenu(value){
+      this.choixAffichageInformationCarte= value
+      
+     },
     videUniteAdmin() {
       this.unite_administrative_id = "";
       // this.zoom=5
       // this.objetUnite=""
       // this.info_sidebar_marche.close()
       // this.info_sidebar_marche.disablePanel('infomarche');
+    },
+    videDep(){
+this.departement=''
+    },
+      videSous(){
+this.sous_prefecture=''
     },
     videRegions() {
       this.region = "";
@@ -1187,7 +1181,7 @@ export default {
       this.libelle_unite_admin = "";
       this.idzone = id;
       this.zone_geographique = ville;
-      console.log(id);
+     // console.log(id);
     },
     uniteAdministrativeSelect(id, libelle, $event) {
       this.active_el = id;
@@ -1210,30 +1204,7 @@ export default {
      * Fonction qui navigue ver la vue *
      * */
     selctionRegion(id) {
-      let objet = {
-        region: id,
-        infrastructure: this.infrastructure,
-        unite_administrative: this.unite_administrative_id,
-        type_marche: this.type_marche,
-        region_select_vmodel: this.region,
-      };
-      // console.log(this.objetMarchePasUniteOuRegion)
-
-      let objetMarche = this.objetMarchePasUniteOuRegion.filter(
-        (item) => item.localisation_geographie_id == id
-      );
-      this.ajouterListeMarcheFiltreCarteInfrastructure(objetMarche);
-      this.ajouterInfoFiltreCarteInfrastructure(objet);
-
-      this.$router.push({
-        name: "DetailCarteMarche",
-        params: { id: id },
-      });
-      //vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""
-      //      this.info_region= this.localisations_geographiques.find(item=>item.id==id)
-      //      // info_region console.log(this.infortion_sidbar_filter)
-      //      this.infortion_sidbar_filter.enablePanel('infoRegion');
-      //      this.infortion_sidbar_filter.open('infoRegion');
+      this.region=id
     },
     integrationChartPasRegisonSurCarte() {
       let vm = this;
@@ -1249,17 +1220,8 @@ export default {
             let height = 60;
            
 
-            //console.log(taux)
-//tauxMontantPrevue
-            /***
-             * 
-             *  budget: montant_previsionnel,
-              budgetReste: montant_reste,
-              budgetExecute: montant_execute,
-              tauxBudget: taux.toFixed(2),
-              tauxMontantPrevue:taux_montantPrevueRegion,
-             */
-            console.log(value.tauxBudget)
+          
+           // console.log(value.tauxBudget)
     arrayColor.push("#6C0277");
     arrayColor.push("#edb007");
     arrayLabele.push(value.tauxBudget + "%");
@@ -1271,24 +1233,24 @@ export default {
                   height = taux_region + 30;
                 } else {
                   if (taux_region < 5) {
-                    width = taux_region + 25;
+                    width = taux_region + 5;
                   }
 
                   if (5 < taux_region && taux_region < 10) {
-                    console.log(taux_region);
-                    width = taux + 30;
+                    //console.log(taux_region);
+                    width = taux + 15;
                   }
 
                   if (10 < taux_region && taux_region < 20) {
-                    width = taux_region + 35;
+                    width = taux_region + 25;
                   }
 
                   if (20 < taux_region && taux_region < 50) {
-                    width = taux_region + 40;
+                    width = taux_region + 30;
                   }
 
                   if (50 < taux_region && taux_region < 101) {
-                    width = taux_region + 45;
+                    width = taux_region + 35;
                   }
                 }
           
@@ -1306,7 +1268,7 @@ export default {
               })
               .on("click", function (event) {
                 console.log(event);
-              //  vm.selctionRegion(value.id);
+              vm.selctionRegion(value.id);
               });
 
             vm.objet_map.addLayer(myBarChart);
@@ -1314,7 +1276,11 @@ export default {
             //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
             //vm.objet_leaflet.marker(value.latlng).bindLabel(value.ville).addTo(vm.objet_map);
 
-            vm.objet_leaflet
+/*let labelLocation = new this.objet_leaflet.LatLng(value.latitude, value.longitude);
+    let labelTitle = new window.L.LabelOverlay(labelLocation, '<b>'+value.ville +'</b>');
+    vm.objet_map.addLayer(labelTitle);*/
+
+         vm.objet_leaflet
               .circleMarker(value.latlng, {
                 radius: 1,
                 fillColor: "#ff7800",
@@ -1353,6 +1319,21 @@ export default {
   },
 
   watch: {
+    sous_prefecture: function (value) {
+      console.log(value);
+ this.filterBudgetSousPrefectureMemoire()
+      this.deleteLeafleMiniCharts(this.objet_map);
+      this.integrationChartPasRegisonSurCarte();
+     
+    },
+    departement: function (value) {
+      console.log(value);
+      this.filterBudgetDepartementMemoire()
+ this.listeUAPasRegionDepartementSP(this.region)
+      this.deleteLeafleMiniCharts(this.objet_map);
+      this.integrationChartPasRegisonSurCarte();
+     
+    },
     type_marche: function (value) {
       console.log(value);
 
@@ -1364,6 +1345,7 @@ export default {
     },
     slection_carte: function (value) {
       console.log(value);
+       this.listeUAPasRegionDepartementSP(this.region)
       if (value == 0) {
         this.deleteLeafleMiniCharts(this.objet_map);
         this.integrationChartPasRegisonSurCarte();
@@ -1388,6 +1370,7 @@ export default {
     },
     region: function (value) {
       console.log(value);
+this.filterBudgetRegionsMemoire()
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
       //                this.infortion_sidbar_filter.close();
@@ -1397,6 +1380,7 @@ export default {
     unite_administrative_id: function (value) {
       console.log(value);
       //  this.objet_map.layers;
+        this.listeUAPasRegionDepartementSP(this.region)
       this.deleteLeafleMiniCharts(this.objet_map);
       //  this.objet_map.on('overlayremove', this.hide_charts())
       this.integrationChartPasRegisonSurCarte();
@@ -1406,6 +1390,7 @@ export default {
     },
   },
   mounted() {
+     
     /*   setTimeout(() => {
                 console.log('done')
                 this.$nextTick(() =>{
@@ -1428,15 +1413,20 @@ export default {
     const map = mapComponent.mapObject;
     this.objet_map = mapComponent.mapObject;
     this.objet_leaflet = window.L;
+
+  
+
+
+
     let sid = window.L;
     let panel_options = {
       closeButton: true,
       position: "left",
       autoPan: false,
     };
-    console.log("interne");
+   // console.log("interne");
     console.log(sid);
-    console.log("..interne...");
+   // console.log("..interne...");
 
     var sidebar = sid.control.sidebar("map10", panel_options).addTo(map);
     sidebar.open("home");
@@ -1499,11 +1489,11 @@ export default {
           name: "Legende",
           elements: [
             {
-              label: '<div id="sanitaire">Bugdet Restant</div>',
+              label: '<div id="sanitaire">Bugdet Disponible</div>',
               html: "<div class='sante1'></div>",
             },
             {
-              label: '<div id="scolaires">Budget Execute</div>',
+              label: '<div id="scolaires">Budget Executé</div>',
               html: "<div class='scolaire1'></div>",
             },
             
@@ -2093,4 +2083,34 @@ Marker states
   cursor: pointer;
   visibility: hidden;
 }
+
+       label {
+  display: block;
+  color: #7d7d7d;
+}
+
+.floatBlock {
+  margin: 0 1.81em 0 0;
+}
+
+.labelish {
+  color:#7d7d7d;
+  margin: 0;
+}
+
+.paymentOptions {
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  break-before: always;
+  margin: 0 0 3em 0;
+}
+
+#purchaseOrder {
+  margin: 0 0 2em 0;
+}
+
+
+
 </style>
