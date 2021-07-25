@@ -196,9 +196,9 @@
 
                  <tr>
                      <th>MONTANT CONFIDENTIEL FCFA</th>
-                     <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture_ht">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
                      <td style="width:15%" colspan="3" v-else>Non Renseigné </td>
-                     <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
                      <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
 
                  </tr>

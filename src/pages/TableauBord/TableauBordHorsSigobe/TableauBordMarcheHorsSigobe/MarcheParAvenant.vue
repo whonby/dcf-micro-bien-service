@@ -85,44 +85,46 @@
     
   </tr>
   <tr>
-    <th style="background-color: #fbb203 !important;text-align:left !important">Taux</th>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Taux Montant</th>
     <td> 100 %</td>
     <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}%</td>
     <td>
       <span >{{TauxDesAvenant(test) || 'Non renseigné'}} %</span>
     </td>
-    <td> 100 %</td>
+    <td> 100 % + {{TauxAvenantParMarche(test)}}%</td>
     
     
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Durée</th>
     <td>{{DureMarche(test) || 'Non renseigné'}} Jours</td>
-    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}} Jours</td>
    
-   <td></td>
-  <td>{{DureMarche(test) || 'Non renseigné'}} Jours</td>
+   <td>{{SommeDureeAvenantParMarche(test)}} Jours</td>
+  <td>{{(parseFloat(DureMarche(test)) + parseFloat(SommeDureeAvenantParMarche(test))) || 'Non renseigné'}} Jours</td>
   </tr>
   <tr>
-    <th style="background-color: #fbb203 !important;text-align:left !important">Taux</th>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Taux Durée</th>
     <td >100 %</td>
-    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{((parseFloat(tem.dure_avenant)/parseFloat(DureMarche(test)))*100).toFixed(2) || 'Non renseigné'}} %</td>
     <td></td>
-    <td >100 %</td>
+   <td> 100 % + {{((SommeDureeAvenantParMarche(test)/parseFloat(DureMarche(test)))*100).toFixed(2)}}%</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Sorce de financement</th>
     <td> {{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}} </td>
-    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(idsourceFinancement(tem.marche_id)) || 'Non renseigné'}}</td>
-    <td></td>
-  <td> {{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(tem.source_financement_id) || 'Non renseigné'}}</td>
+    
+   <td></td>
+   <td>{{LibellesourceFinancement(idsourceFinancementAvenant(test))}}</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Ligne Budgetaire</th>
     <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
-    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(tem.marche_id))) || 'Non renseigné'}}</td>
-    <td></td>
-    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(tem.ligne_budgetaire_id) || 'Non renseigné'}}</td>
+    
+  <td></td>
+   <td>{{LibelleLigneBudgetaire(idLigneEconomiqueAvenant(test))}}</td>
   </tr>
   <tr>
     <th style="background-color: #fbb203 !important;text-align:left !important">Bénéficiaires</th>
@@ -515,116 +517,7 @@ taillerAvenantParMarche(){
         }
       }
     },
-numeroOrderAvenant1(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==1)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
 
-        }
-      }
-    },
-numeroOrderAvenant2(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==2)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant3(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==3)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant4(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==4)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant5(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==5)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant6(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==6)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant7(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==7)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-numeroOrderAvenant8(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==8)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant9(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==9)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
-    numeroOrderAvenant10(){
-      return id =>{
-        if(id != null && id !=""){
-          let ObjetId =this.avenants.find(element => element.marche_id== id && element.numero_ordre==10)
-          if(ObjetId){
-            return ObjetId.numero_ordre
-          }
-
-        }
-      }
-    },
 
        LibelleLigneBudgetaire(){
       return id =>{
@@ -676,6 +569,28 @@ numeroOrderAvenant8(){
           let ObjetId =this.sources_financements.find(element => element.id== id)
           if(ObjetId){
             return ObjetId.libelle
+          }
+
+        }
+      }
+    },
+    idsourceFinancementAvenant(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id)
+          if(ObjetId){
+            return ObjetId.source_financement_id
+          }
+
+        }
+      }
+    },
+    idLigneEconomiqueAvenant(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id)
+          if(ObjetId){
+            return ObjetId.ligne_budgetaire_id
           }
 
         }
@@ -1152,12 +1067,22 @@ ListeMarcheParTypeMarche() {
                     }
                 }
             },
+             SommeDureeAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.dure_avenant)
+                        },valInite);
+                    }
+                }
+            },
            TauxAvenantParMarche: function () {
                 return id => {
                     if (id != "") {
                       let valInite=0;
                         return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.taux)
+                           return total + parseFloat(currentVal.taux_avenant)
                         },valInite);
                     }
                 }

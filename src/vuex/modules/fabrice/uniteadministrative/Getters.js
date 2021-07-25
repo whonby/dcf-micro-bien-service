@@ -909,3 +909,29 @@ export const groupeParSectionBudgetEclate = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "section_id");
 };
+
+
+
+
+
+export const GettersPersonnaliseUaDepartement = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  state.uniteAdministratives.map(element => {
+    if (
+      element.localisationgeo_id !== null 
+     
+    ) {
+      element = {
+        ...element,
+        afficheDepartement: rootGetters["parametreGenerauxAdministratif/localisations_geographiques"].find(
+          AfficheDepart => AfficheDepart.id == element.localisationgeo_id && AfficheDepart.structure_localisation_geographique_id == 6),
+        AfficheSousPrefecture: rootGetters["parametreGenerauxAdministratif/localisations_geographiques"].find( AfficheSousP => AfficheSousP.id == element.localisationgeo_id && AfficheSousP.structure_localisation_geographique_id == 8)
+      };
+     
+    }
+    return element;
+  });
