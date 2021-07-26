@@ -722,7 +722,8 @@ created() {
         computed: {
             ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
-                ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+                ...mapGetters("gestionMarche", [ 'groupeVille','entreprises',
+                'banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
                 ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
