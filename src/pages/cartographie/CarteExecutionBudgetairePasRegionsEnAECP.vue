@@ -555,31 +555,31 @@ listeUniteAdministrativeCartographie(){
   //let objet=this.GettersPersonnaliseUaDepartement
   //recherche les unite administrative pas regions
   let vm=this
-  console.log(".........................")
+ 
   if(vm.region=="" && vm.departement=="" && vm.sous_prefecture=="" && vm.unite_administrative_id==""){
     return vm.GettersPersonnaliseUaDepartement
   }
-   console.log("78585555555")
+  
   if(vm.region!="" && vm.departement=="" && vm.sous_prefecture=="" && vm.unite_administrative_id==""){
     return vm.GettersPersonnaliseUaDepartement.filter(item=>item.region_id==vm.region)
    }
-   console.log("1010101")
+   
 //recherche les unite administrative pas département
    if(vm.region=="" && vm.departement!="" && vm.sous_prefecture=="" && vm.unite_administrative_id==""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>item.afficheDepartement==vm.departement)
    }
-   console.log("87878585")
+ 
    //recherche les unite administrative pas sous prefecture
    if(vm.region=="" && vm.departement=="" && vm.sous_prefecture!="" && vm.unite_administrative_id==""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>item.localisationgeo_id==vm.sous_prefecture)
    }
-   console.log("369852025")
+   
    //recherche les unite administrative pas ua
    if(vm.region=="" && vm.departement=="" && vm.sous_prefecture=="" && vm.unite_administrative_id!=""){
     return vm.GettersPersonnaliseUaDepartement.filter(item=>item.id==vm.unite_administrative_id)
    }
 
-      console.log("98778989")
+      
 
    //Liste des unite administrative pas regions et departement
    if(vm.region=="" && vm.departement!="" && vm.sous_prefecture=="" && vm.unite_administrative_id==""){
@@ -589,7 +589,7 @@ listeUniteAdministrativeCartographie(){
       }
     })
    }
-   console.log("TYGYJ665")
+ 
 //liste des unite administrative pas regions,departement et sous prefecture
  if(vm.region=="" && vm.departement!="" && vm.sous_prefecture!="" && vm.unite_administrative_id==""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>{
@@ -599,11 +599,11 @@ listeUniteAdministrativeCartographie(){
     })
    }
 
-   
 
- /*if(vm.region!="" && vm.departement=="" && vm.sous_prefecture=="" && vm.unite_administrative_id!=""){
+
+if(vm.region!="" && vm.departement=="" && vm.sous_prefecture=="" && vm.unite_administrative_id!=""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>{
-      if(item.id==vm.unite_administrative_id && item.afficheDepartement.parent==vm.region){
+      if(item.id==vm.unite_administrative_id && item.region_id==vm.region){
         return item
       }
     })
@@ -612,7 +612,7 @@ listeUniteAdministrativeCartographie(){
 
    if(vm.region!="" && vm.departement!="" && vm.sous_prefecture=="" && vm.unite_administrative_id!=""){
     return vm.GettersPersonnaliseUaDepartement.filter(item=>{
-      if(item.id==vm.unite_administrative_id && item.afficheDepartement.parent==vm.region && item.afficheDepartement.id==vm.departement){
+      if(item.id==vm.unite_administrative_id && item.region_id==vm.region && item.afficheDepartement==vm.departement){
         return item
       }
     })
@@ -620,7 +620,7 @@ listeUniteAdministrativeCartographie(){
 
 if(vm.region!="" && vm.departement!="" && vm.sous_prefecture!="" && vm.unite_administrative_id!=""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>{
-      if(item.id==vm.unite_administrative_id && item.afficheDepartement.parent==vm.region && item.afficheDepartement.id==vm.departement && item.localisationgeo_id==vm.sous_prefecture){
+      if(item.id==vm.unite_administrative_id && item.region_id==vm.region && item.afficheDepartement==vm.departement && item.localisationgeo_id==vm.sous_prefecture){
         return item
       }
     })
@@ -629,7 +629,7 @@ if(vm.region!="" && vm.departement!="" && vm.sous_prefecture!="" && vm.unite_adm
 
    if(vm.region=="" && vm.departement!="" && vm.sous_prefecture!="" && vm.unite_administrative_id!=""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>{
-      if(item.id==vm.unite_administrative_id && item.afficheDepartement.id==vm.departement && item.localisationgeo_id==vm.sous_prefecture){
+      if(item.id==vm.unite_administrative_id && item.afficheDepartement==vm.departement && item.localisationgeo_id==vm.sous_prefecture){
         return item
       }
     })
@@ -637,7 +637,7 @@ if(vm.region!="" && vm.departement!="" && vm.sous_prefecture!="" && vm.unite_adm
 
    if(vm.region=="" && vm.departement!="" && vm.sous_prefecture=="" && vm.unite_administrative_id!=""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>{
-      if(item.id==vm.unite_administrative_id && item.afficheDepartement.id==vm.departement){
+      if(item.id==vm.unite_administrative_id && item.afficheDepartement==vm.departement){
         return item
       }
     })
@@ -653,13 +653,13 @@ if(vm.region=="" && vm.departement=="" && vm.sous_prefecture!="" && vm.unite_adm
 
    if(vm.region!="" && vm.departement=="" && vm.sous_prefecture!="" && vm.unite_administrative_id!=""){
      return vm.GettersPersonnaliseUaDepartement.filter(item=>{
-      if(item.id==vm.unite_administrative_id && item.localisationgeo_id==vm.sous_prefecture && item.afficheDepartement.parent==vm.region){
+      if(item.id==vm.unite_administrative_id && item.localisationgeo_id==vm.sous_prefecture && item.region_id==vm.region){
         return item
       }
     })
    }
-*/
-console.log("GUEI ROLAND EST ARRIVE")
+
+
    return vm.GettersPersonnaliseUaDepartement
 },
 
