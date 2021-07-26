@@ -135,16 +135,16 @@
                 </div>
                  <div class="span12">
                        <div>
-                    Budget Initial: <span style="color: #003900; "><b>{{formatageSomme(montantBudgetInitiale(region))}}</b></span> <br>
-                    Budget actuelle:<span style="color: #00d700; "><b>{{formatageSomme(montantBudgetActuelle(region))}}</b></span><br>
-                    Budget disponible:<span style="color: #00d700; "><b>{{formatageSomme(montantDisponibleBudget(region))}}</b></span><br>
-                    Budget executé:<span style="color: darkred; "><b>{{formatageSomme(montantExecute(region))}}</b></span><br>
+                    Budget Initial: <span style="color: #003900; "><b>{{formatageSomme(montantBudgetInitiale)}}</b></span> <br>
+                    Budget actuelle:<span style="color: #00d700; "><b>{{formatageSomme(montantBudgetActuelle)}}</b></span><br>
+                    Budget disponible:<span style="color: #00d700; "><b>{{formatageSomme(montantDisponibleBudget)}}</b></span><br>
+                    Budget executé:<span style="color: darkred; "><b>{{formatageSomme(montantExecute)}}</b></span><br>
                      Taux d'exécution:<span style="color: #e36706; "><b>{{tauxExecutionBugetaire}} %</b></span>
                        </div>
                     </div>
                   <div class="span12">
                      
-                        <apexchart type="pie" width="275" :options="chartOptions" :series="[montantDisponibleBudget(region),montantExecute(region)]"></apexchart>
+                        <apexchart type="pie" width="275" :options="chartOptions" :series="[montantDisponibleBudget,montantExecute]"></apexchart>
                     </div>
                    
               </div>
@@ -413,8 +413,8 @@ export default {
     };
   },
   created() {
-
- this.listeUAPasRegionDepartementSP(this.region)
+//console.log(this.listeUniteAdministrativeCartographie)
+ //this.listeUAPasRegionDepartementSP(this.region)
   },
 
   computed: {
@@ -432,7 +432,8 @@ export default {
       "uniteAdministratives",
       "getterBudgeCharge",
       "decomptefactures",
-      "budgetEclate"
+      "budgetEclate",
+      "GettersPersonnaliseUaDepartement"
     ]),
     ...mapGetters("bienService", [
       "marches",
@@ -520,7 +521,7 @@ export default {
      
 /**Cette fonction retour la liste des unite administrative pas regions. Cette fonction n'est pas optimise elle doit etre reecrire*/
       
-
+  
 //Retour exercice budget en cours
     exerciceBudgetaireEnCours() {
       let exercice=this.exercices_budgetaires.find(item=>item.encours==1)
@@ -550,61 +551,161 @@ export default {
     },
 
 
+listeUniteAdministrativeCartographie(){
+  //let objet=this.GettersPersonnaliseUaDepartement
+  //recherche les unite administrative pas regions
+  if(this.region!="" && this.departement=="" && this.sous_prefecture=="" && this.uniteAdministrative_id==""){
+    return this.GettersPersonnaliseUaDepartement.filter(item=>item.region_id==this.region)
+   }
+
+//recherche les unite administrative pas département
+   if(this.region=="" && this.departement!="" && this.sous_prefecture=="" && this.uniteAdministrative_id==""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>item.afficheDepartement==this.departement)
+   }
+
+   //recherche les unite administrative pas sous prefecture
+   if(this.region=="" && this.departement=="" && this.sous_prefecture!="" && this.uniteAdministrative_id==""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>item.localisationgeo_id==this.sous_prefecture)
+   }
+
+   //recherche les unite administrative pas ua
+   if(this.region=="" && this.departement=="" && this.sous_prefecture=="" && this.uniteAdministrative_id!=""){
+    return this.GettersPersonnaliseUaDepartement.filter(item=>item.id==this.uniteAdministrative_id)
+   }
+
+   //Liste des unite administrative pas regions et departement
+   if(this.region=="" && this.departement!="" && this.sous_prefecture=="" && this.uniteAdministrative_id==""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.afficheDepartement==this.departement && item.region_id==this.region){
+        return item
+      }
+    })
+   }
+
+//liste des unite administrative pas regions,departement et sous prefecture
+ if(this.region=="" && this.departement!="" && this.sous_prefecture!="" && this.uniteAdministrative_id==""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.afficheDepartement==this.departement && item.region_id==this.region && item.localisationgeo_id==this.sous_prefecture){
+        return item
+      }
+    })
+   }
+
+
+ /*if(this.region!="" && this.departement=="" && this.sous_prefecture=="" && this.uniteAdministrative_id!=""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.afficheDepartement.parent==this.region){
+        return item
+      }
+    })
+   }
+
+
+   if(this.region!="" && this.departement!="" && this.sous_prefecture=="" && this.uniteAdministrative_id!=""){
+    return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.afficheDepartement.parent==this.region && item.afficheDepartement.id==this.departement){
+        return item
+      }
+    })
+   }
+
+if(this.region!="" && this.departement!="" && this.sous_prefecture!="" && this.uniteAdministrative_id!=""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.afficheDepartement.parent==this.region && item.afficheDepartement.id==this.departement && item.localisationgeo_id==this.sous_prefecture){
+        return item
+      }
+    })
+   }
+
+
+   if(this.region=="" && this.departement!="" && this.sous_prefecture!="" && this.uniteAdministrative_id!=""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.afficheDepartement.id==this.departement && item.localisationgeo_id==this.sous_prefecture){
+        return item
+      }
+    })
+   }
+
+   if(this.region=="" && this.departement!="" && this.sous_prefecture=="" && this.uniteAdministrative_id!=""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.afficheDepartement.id==this.departement){
+        return item
+      }
+    })
+   }
+
+if(this.region=="" && this.departement=="" && this.sous_prefecture!="" && this.uniteAdministrative_id!=""){
+    return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.localisationgeo_id==this.sous_prefecture){
+        return item
+      }
+    })
+   }
+
+   if(this.region!="" && this.departement=="" && this.sous_prefecture!="" && this.uniteAdministrative_id!=""){
+     return this.GettersPersonnaliseUaDepartement.filter(item=>{
+      if(item.id==this.uniteAdministrative_id && item.localisationgeo_id==this.sous_prefecture && item.afficheDepartement.parent==this.region){
+        return item
+      }
+    })
+   }
+*/
+   return this.GettersPersonnaliseUaDepartement
+},
+
+
 montantBudgetInitiale(){
-    return id=>{
-      let vm=this
-        let info=vm.tableGenerale
-        if (id!="") {
-          info=vm.tableGenerale.filter(item=>item.region_id==id)
-        }
+    let vm=this
+       
          let montant=0;
       
 
-      info.forEach(function(value){
+      vm.listeUniteAdministrativeCartographie.forEach(function(value){
        let budget=vm.budgetEclateExeciceEncours.filter(item=>item.uniteadministrative_id==value.id)
        let initeVal = 0;
         let montBudgetInit = budget.reduce(function (total, currentValue) {
           return total + parseFloat(currentValue.dotation);
         }, initeVal);
        montant=parseFloat(montant) +montBudgetInit
+       
       })
     return montant
-    }
    
    },
 
    montantBudgetInitialePasRegion(){
     return id=>{
-       
-        if (id=="") return 0
+           if(id != null && id != ""){
+             let montant=0;
+           let vm=this
+             let objet=this.listeUniteAdministrativeCartographie.filter(item=>{
+              if(item.region_id==id){
+             return item
+              }
+             })
+              objet.forEach(function(value){
+               let budget=vm.budgetEclateExeciceEncours.filter(item=>item.uniteadministrative_id==value.id)
+               let initeVal = 0;
+                let montBudgetInit = budget.reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.dotation);
+                }, initeVal);
+               montant=parseFloat(montant) +montBudgetInit
+              })
+               return montant
+            }
 
-         let montant=0;
-      let vm=this
-      let objet=vm.tableGenerale.filter(item=>item.region_id==id)
-      objet.forEach(function(value){
-       let budget=vm.budgetEclateExeciceEncours.filter(item=>item.uniteadministrative_id==value.id)
-       let initeVal = 0;
-        let montBudgetInit = budget.reduce(function (total, currentValue) {
-          return total + parseFloat(currentValue.dotation);
-        }, initeVal);
-       montant=parseFloat(montant) +montBudgetInit
-      })
-    return montant
+        return 0
     }
    
    },
 
 
 montantBudgetActuelle(){
-  return id=>{
-    let vm=this
-        let info=vm.tableGenerale
-        if (id!="") {
-          info=vm.tableGenerale.filter(item=>item.region_id==id)
-        }
+   let vm=this
+      
       let montant=0;
      
-      info.forEach(function(value){
+      vm.listeUniteAdministrativeCartographie.forEach(function(value){
        let budget=vm.budgetEclateExeciceEncoursActuelle.filter(item=>item.uniteadministrative_id==value.id)
        let initeVal = 0;
         let montBudgetInit = budget.reduce(function (total, currentValue) {
@@ -613,33 +714,34 @@ montantBudgetActuelle(){
        montant=parseFloat(montant) +montBudgetInit
       })
     return montant
-  }
-  
    },
 
 
 montantBudgetActuellePasRegion(){
-  return id=>{
-   
-        if (id=="") return 0
+     return id=>{
+           if(id != null && id != ""){
+             let montant=0;
+           let vm=this
+             let objet=this.listeUniteAdministrativeCartographie.filter(item=>{
+              if(item.region_id==id){
+             return item
+              }
+             })
+              objet.forEach(function(value){
+             let budget=vm.budgetEclateExeciceEncoursActuelle.filter(item=>item.uniteadministrative_id==value.id)
+               let initeVal = 0;
+                let montBudgetInit = budget.reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.dotation);
+                }, initeVal);
+               montant=parseFloat(montant) +montBudgetInit
+              })
+               return montant
+            }
 
-         let montant=0;
-      let vm=this
-      let objet=vm.tableGenerale.filter(item=>item.region_id==id)
-   
-      
-    objet.forEach(function(value){
-       let budget=vm.budgetEclateExeciceEncoursActuelle.filter(item=>item.uniteadministrative_id==value.id)
-       let initeVal = 0;
-        let montBudgetInit = budget.reduce(function (total, currentValue) {
-          return total + parseFloat(currentValue.dotation);
-        }, initeVal);
-       montant=parseFloat(montant) +montBudgetInit
-      })
-    return montant
-  }
-  
-   },
+        return 0
+    }
+  },
+ 
 
 opValider(){
   let tableau_type_op=[1,4]
@@ -653,16 +755,11 @@ return this.gettersgestionOrdrePaiement.filter(item=>{
 //calcul de montant exute op pas
 
 montantExecute(){
-  return id=>{
-    let vm=this
-        let info=vm.tableGenerale
-        if (id!="") {
-          info=vm.tableGenerale.filter(item=>item.region_id==id)
-        }
-     let montant=0;
-  
+  let vm=this
       
-     info.forEach(function(value){
+      let montant=0;
+      
+      vm.listeUniteAdministrativeCartographie.forEach(function(value){
        let listeOp=vm.opValider.filter(item=>item.unite_administrative_id==value.id)
        let initeVal = 0;
         let montantExcute = listeOp.reduce(function (total, currentValue) {
@@ -671,21 +768,21 @@ montantExecute(){
        montant=parseFloat(montant) +montantExcute
       })
     return montant
-  }
    
 }
 ,
 montantExecutePasRegions(){
   return id=>{
-     if (id=="") return 0
+     if(id != null && id != ""){
+      let montant=0;
+           let vm=this
+             let objet=this.listeUniteAdministrativeCartographie.filter(item=>{
+              if(item.region_id==id){
+             return item
+              }
+             })
 
-         let montant=0;
-      let vm=this
-      let objet=vm.tableGenerale.filter(item=>item.region_id==id)
-   
-      
-      
-      objet.forEach(function(value){
+             objet.forEach(function(value){
        let listeOp=vm.opValider.filter(item=>item.unite_administrative_id==value.id)
        let initeVal = 0;
         let montantExcute = listeOp.reduce(function (total, currentValue) {
@@ -694,33 +791,32 @@ montantExecutePasRegions(){
        montant=parseFloat(montant) +montantExcute
       })
     return montant
+     }
+      return 0
+      
   }
    
 },
 montantDisponibleBudget(){
-   return id=>{
-    let info=id
-    if(id!=""){
-      info=id
-    }
-     return parseFloat(this.montantBudgetActuelle(info)) - parseFloat(this.montantExecute(info))
-   }
-
+   return parseFloat(this.montantBudgetActuelle) - parseFloat(this.montantExecute)
 },
 
 
 montantDisponibleBudgetPasRegions(){
    return id=>{
     
-    if(id=="") return 0
+     if(id != null && id != ""){
+return parseFloat(this.montantBudgetActuellePasRegion(id)) - parseFloat(this.montantExecutePasRegions(id))
+     }
+     return 0
 
-      return parseFloat(this.montantBudgetActuellePasRegion(id)) - parseFloat(this.montantExecutePasRegions(id))
+      
      
    }
 
 },
     tauxExecutionBugetaire(){
-        let taux=(parseFloat(this.montantExecute(this.region)) * 100)/parseFloat(this.montantBudgetActuelle(this.region))
+        let taux=(parseFloat(this.montantExecute) * 100)/parseFloat(this.montantBudgetActuelle)
         if (taux!="NaN") {
          return taux.toFixed(2)
         }
@@ -753,7 +849,7 @@ montantDisponibleBudgetPasRegions(){
       if (this.noDCfNoAdmin) {
         let colect = [];
         if (this.getterUniteAdministrativeByUser.length > 0) {
-          this.uniteAdministratives.filter((item) => {
+          this.GettersPersonnaliseUaDepartement.filter((item) => {
             let val = this.getterUniteAdministrativeByUser.find(
               (row) => row.unite_administrative_id == item.id
             );
@@ -766,7 +862,7 @@ montantDisponibleBudgetPasRegions(){
 
         return colect;
       }
-      return this.uniteAdministratives;
+      return this.GettersPersonnaliseUaDepartement;
     },
 
     listeMarcheUniteAdmin() {
@@ -986,7 +1082,7 @@ montantDisponibleBudgetPasRegions(){
             let montant_execute=vM.montantExecutePasRegions(value.id)
             let taux=(montant_execute * 100)/montant_previsionnel
             let montant_reste=parseFloat(montant_previsionnel) - parseFloat(montant_execute)
-            let taux_montantPrevueRegion=(montant_previsionnel * 100)/vM.montantBudgetActuelle("")
+            let taux_montantPrevueRegion=(montant_previsionnel * 100)/vM.montantBudgetActuelle
            
            color = "#000000";
             colorFill = "#000000";
@@ -1321,15 +1417,15 @@ this.sous_prefecture=''
   watch: {
     sous_prefecture: function (value) {
       console.log(value);
- this.filterBudgetSousPrefectureMemoire()
+ //this.filterBudgetSousPrefectureMemoire()
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
      
     },
     departement: function (value) {
       console.log(value);
-      this.filterBudgetDepartementMemoire()
- this.listeUAPasRegionDepartementSP(this.region)
+     // this.filterBudgetDepartementMemoire()
+ //this.listeUAPasRegionDepartementSP(this.region)
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
      
@@ -1370,7 +1466,7 @@ this.sous_prefecture=''
     },
     region: function (value) {
       console.log(value);
-this.filterBudgetRegionsMemoire()
+//this.filterBudgetRegionsMemoire()
       this.deleteLeafleMiniCharts(this.objet_map);
       this.integrationChartPasRegisonSurCarte();
       //                this.infortion_sidbar_filter.close();
@@ -1380,7 +1476,7 @@ this.filterBudgetRegionsMemoire()
     unite_administrative_id: function (value) {
       console.log(value);
       //  this.objet_map.layers;
-        this.listeUAPasRegionDepartementSP(this.region)
+      //  this.listeUAPasRegionDepartementSP(this.region)
       this.deleteLeafleMiniCharts(this.objet_map);
       //  this.objet_map.on('overlayremove', this.hide_charts())
       this.integrationChartPasRegisonSurCarte();

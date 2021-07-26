@@ -925,13 +925,23 @@ export const GettersPersonnaliseUaDepartement = (
       element.localisationgeo_id !== null 
      
     ) {
-      element = {
+      let objet_sp=rootGetters["parametreGenerauxAdministratif/getterLocalisationGeoAll"].find( item => item.id == element.localisationgeo_id && item.structure_localisation_geographique_id == 8 )
+     if(objet_sp!=undefined){
+      let depepart=rootGetters["parametreGenerauxAdministratif/getterLocalisationGeoAll"].find(
+          dep => dep.id == objet_sp.parent && dep.structure_localisation_geographique_id == 6)
+      //let parent_id=depepart.parent
+          if (depepart!=undefined) {
+            element = {
         ...element,
-        afficheDepartement: rootGetters["parametreGenerauxAdministratif/localisations_geographiques"].find(
-          AfficheDepart => AfficheDepart.id == element.localisationgeo_id && AfficheDepart.structure_localisation_geographique_id == 6),
-        AfficheSousPrefecture: rootGetters["parametreGenerauxAdministratif/localisations_geographiques"].find( AfficheSousP => AfficheSousP.id == element.localisationgeo_id && AfficheSousP.structure_localisation_geographique_id == 8)
-      };
+        afficheDepartement:depepart.id,
+         region_id:depepart.parent
+       };
+          }
+      
+     }
+     
      
     }
     return element;
   });
+
