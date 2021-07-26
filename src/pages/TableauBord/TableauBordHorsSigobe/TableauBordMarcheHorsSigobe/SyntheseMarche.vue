@@ -31,19 +31,16 @@
           
         </h3>
       </div>
-      <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement1()">
         Exporter en PDF
       </button>
-    </div>  -->
-      <div class="modal-body" id="printpdf1">
-      
- <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">DETAIL PART BAILLEURS</h2>
-          </tr>
-        </table>
+    </div> 
+      <div class="modal-body" id="printpdf1785">
+       <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">DETAIL PART BAILLEURS</h2>
       <table class="table table-bordered table-striped">
+        
+            
             <thead >
            
               <tr >
@@ -169,6 +166,16 @@
             </tr> 
              
             </tbody>
+            <tr>
+               
+                <td colspan="3">TOTAL TRESOR</td>
+                <td>{{afficheSommeTauxDon}}%</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
+                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
+              </tr>
            <tr>
                
                 <td colspan="3">TOTAL DON</td>
@@ -370,7 +377,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT TOTAL AVENANT 
+                    DUREE AVENANT 
                   </th>
                   <th
                     style="
@@ -601,7 +608,7 @@
                         </span>
                       </button>
                      </td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(montantAvenantParMarche(GroupeLigne.id)))}}</td>
+                 <td style="text-align:right">{{DureeAvenantParMarche(GroupeLigne.id)}}</td>
                             <td style="text-align:right">{{0}}</td>
                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(AfficheMontantgbobalMarche(GroupeLigne.id)))}}</td>
                  <td style="text-align:right">{{0}}</td>
@@ -859,7 +866,7 @@ libelleBailleur() {
 affichePartBailleur() {
       return id => {
         if (id != null && id != "") {
-           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.bailleur_id != 6);
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id);
         }
       };
     },
@@ -1234,6 +1241,16 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+    DureeAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.dure_avenant)
+                        },valInite);
+                    }
+                }
+            },
      montantAvenantParMarche: function () {
                 return id => {
                     if (id != "") {
@@ -1369,6 +1386,9 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+    genererEnPdfDetailReamenagement1() {
+      this.$htmlToPaper("printpdf1785");
+    },
  percuFacture(id) {
       this.$("#validationOpDefinitif1").modal({
         backdrop: "static",

@@ -1197,8 +1197,6 @@ ListeDEsEntreprise_transfert() {
       return objet;
     },
 
-
-
     // ************pour Investissement***************//
 
     test_Investissement(){
@@ -1289,12 +1287,6 @@ return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_
         return this.afficherMarcheInvestissementParDroitAccess.filter(item => item.unite_zone == this.marcheid)
            }
   
-      
-      //const st = this.search.toLowerCase();
-     
-       // return type.objet.toLowerCase().includes(st)  ;
-            //  type.afficherTypeMarcheLibelle(type.type_marche_id) ;
-   
     },
 
     loading() {
@@ -1303,52 +1295,6 @@ return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_
       }
       return true;
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // pour tous les marches en investissement
-    // afficherMarcheInvestissementParDroitAccess() {
-    //   // const st = this.search.toLowerCase();
-    //   if (this.noDCfNoAdmin) {
-    //     let colect = [];
-    //     this.marches.filter((item) => {
-    //       let val = this.getterUniteAdministrativeByUser.find(
-    //         (row) => row.unite_zone == item.ua_id
-    //       );
-    //       if (val != undefined) {
-    //         colect.push(item);
-    //         return item;
-    //       }
-    //     });
-
-    //     return colect.filter(
-          
-    //       (element) =>
-    //         (element.unite_zone == this.marcheid &&
-    //           element.parent_id == null &&
-    //           element.sib == 1 &&
-    //           element.attribue == 2 ) 
-    //     );
-    //   }
-    //   return this.printMarcheNonAttribue.filter(
-    //     (element) =>
-    //       (element.unite_zone == this.marcheid &&
-    //         element.parent_id == null &&
-    //         element.sib == 1 &&
-    //         element.attribue == 2  ) 
-         
-    //   );
-    // },
 
     afficherMontantImputation() {
       return (id) => {
@@ -1409,42 +1355,6 @@ return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_
         }
       };
     },
-
-    //  affichierNomEntreprise() {
-    //       return id => {
-    //         if (id != null && id != "") {
-    //            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-    //       if (qtereel) {
-    //         return qtereel.raison_sociale;
-    //       }
-    //       return 0
-    //         }
-    //       };
-    //     },
-
-    // afficherEntrepriseRecep () {
-    //             return id => {
-    //                 if (id != "") {
-    //                     // console.log("Marche lettre inviation marche")
-    //                     return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == id)
-    //                  }
-    //          }
-    //         },
-
-    //   typePrestationFiltre()  {
-
-    //    const searchTerm = this.search.toLowerCase();
-
-    // return this.printMarcheNonAttribue.filter((item) => {
-
-    //   return item.objet.toLowerCase().includes(searchTerm)
-
-    //    }
-    // )
-    //     },
-
-    // afficher la liste des marche
 
     afficherLaListeDesMarcheDinvestissement() {
       return this.printMarcheNonAttribue.filter(
@@ -1667,43 +1577,7 @@ return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_
         }
       };
     },
-    //  afficherObjetMarche() {
-    //       return id => {
-    //         if (id != null && id != "") {
-    //            const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-    //       if (qtereel) {
-    //         return qtereel.objet;
-    //       }
-    //       return 0
-    //         }
-    //       };
-    //     },
-    // afficherNumeroMarche() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-    //   if (qtereel) {
-    //     return qtereel.numero_marche;
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
-    // afficherEntreprise() {
-    //       return id => {
-    //         if (id != null && id != "") {
-    //            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-    //       if (qtereel) {
-    //         return qtereel.raison_sociale;
-    //       }
-    //       return 0
-    //         }
-    //       };
-    //     },
-
+  
     afficherIdUniteAdministrative() {
       return (id) => {
         if (id != null && id != "") {
@@ -1717,18 +1591,6 @@ return this.afficherMarcheInvestissementParDroitAccess.filter(item =>item.unite_
       };
     },
 
-    //  afficherLibelleUniteZone() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
-
-    //   if (qtereel) {
-    //     return qtereel.libelle;
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
     afficherIdactivite() {
       console.log("afficherIdactivite");
       return (id) => {
