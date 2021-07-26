@@ -617,36 +617,6 @@
                  
                   </th>
 
-                   <!-- <th style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" title="TAUX OP PROVISOIRE NON REGULARISE(S)">
-                  <button @click="triTauxOpNonRegulirise()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
-                  TAUX OP NON REGULARISE(S) -->
-                  <!-- <button @click="ActiveInputTauxOpNonRegulirise">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                   
-                 <input
-                    type="text"
-                    v-model="Taux_Op_non_Regulirise"
-                    class="span"
-                    v-show="inputTauxOpNonRegulirise == true"
-                  /> -->
-                  <!-- </th> -->
-                  <!-- <th style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" title="TAUX D’OP PROVISOIRE NON REGULARISE HORS DELAI ">
-                  TAUX OP NON REGULARISE HORS DELAI </th> -->
-              
-
                   <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;

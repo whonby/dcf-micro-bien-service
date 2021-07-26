@@ -1,21 +1,18 @@
 <template>
     <div>
-         <div class="container-fluid text-center">
+         <div >
         <div class="widget-content nopadding" style="margin: 25px">
            <h1>Tableau des Avenant</h1>
-   <div class="tableauentier table table-bordered container-fluid">
+   <div class="tableauentier table table-bordered">
 	<div>
 	 <table border="1">
 		<tr>
       
-			<th  style="font-size: 14px;color:#000; font-weight: bold; width:100px;"></th>
-			<th  style="font-size: 14px;color:#000; font-weight: bold; padding:15px;">Marche Contat / Initial</th>
-			<th  style="font-size: 14px;color:#000; font-weight: bold; padding:15px;">Avenant 1</th>
-			<th  style="font-size: 14px;color:#000; font-weight: bold; padding:15px;">Avenant 2</th>
-			<th  style="font-size: 14px;color:#000; font-weight: bold; padding:15px;">Avenant 2</th>
-			
-			
-			<th style="font-size: 14px;color:#000; font-weight: bold; padding:15px;">Marche / Contrat Initial</th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; width:150px;"></th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; ">Marche Contat / Initial</th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold;">Avenant 1</th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; ">Toyal des Avenants</th>			
+			<th style="font-size: 14px;color:#000; font-weight: bold; ">Marche / Contrat Initial</th>
  
 		</tr>
 	</table>
@@ -23,40 +20,84 @@
 	<div class="colonne">
 			<table border="1">
 				<tr>
-					<td>objet</td>
+					<td >objet</td>
 				</tr>
 				<tr>
-					<td>numero</td>
+					<td >numero</td>
 				</tr>
 				<tr>
-					<td>Date</td>
+					<td >Date</td>
 				</tr>
 				<tr>
-					<td>Titulaire</td>
+					<td >Titulaire</td>
 				</tr>
 				<tr>
-					<td>Montant</td>
+					<td >Montant</td>
 				</tr>
 				<tr>
-					<td>Taux</td>
+					<td >Taux</td>
 				</tr>
 				<tr>
-					<td>Durée</td>
+					<td >Durée</td>
 				</tr>
 				<tr>
-					<td>Taux</td>
+					<td >Taux</td>
 				</tr>
 				<tr>
-					<td>Source de financement</td>
+					<td >Source de financement</td>
 				</tr>
 				<tr>
-					<td>Ligne Budgetaire</td>
+					<td >Ligne Budgetaire</td>
 				</tr>
 				<tr>
-					<td>beneficiaire</td>
+					<td >beneficiaire</td>
 				</tr>
 				<tr>
-					<td>Livrables</td>
+					<td >Livrables</td>
+				</tr>			
+			</table>
+	</div>
+	<div class="colonne">
+			<table >
+				<tr>
+					<td  >
+
+						 azdade afaefa je suis la pour le moment quand la pirhr  efklehkefe ezfe
+						
+						</td>
+				</tr>
+				<tr>
+					<td >Marche</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
+				</tr>
+				<tr>
+					<td >Marche1</td>
 				</tr>			
 			</table>
 	</div>
@@ -69,10 +110,10 @@
 					<td>numero</td>
 				</tr>
 				<tr>
-					<td>Date</td>
+					<td>Date1</td>
 				</tr>
 				<tr>
-					<td>Titulaire</td>
+					<td>Titulaire1</td>
 				</tr>
 				<tr>
 					<td>Montant</td>
@@ -81,7 +122,7 @@
 					<td>Taux</td>
 				</tr>
 				<tr>
-					<td>Durée</td>
+					<td>Durée1</td>
 				</tr>
 				<tr>
 					<td>Taux</td>
@@ -101,118 +142,97 @@
 			</table>
 	</div>
 	
+	
+	
 		<div class="tableauscroll">
 			<table border = "1">
 				<tr>
-					<td>L obget du marche</td>
-					<td>234.56</td>
-					<td>234.56</td>
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td>TA</td>
+					<td>TA</td>
+					<td>AM</td>
+					<td>AM</td>
+					<td>AM</td>
+					<td>AM</td>
 				</tr>
 				<tr>
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche1 quand je suis aller avec le test </td>
+					<td > marche</td>
+					<td > marche1</td>
+					<td > marche1</td>
+					<td > marche1</td>
 				</tr>
 				
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  				<tr>				
-					<td>234.56</td>
-					<td>345.67</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>456.78</td>
-					<td>234.56</td>
-					<td>345.67</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+				</tr>
+ 				<tr>				
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+				</tr>
+ 				<tr>				
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
+					<td > marche</td>
 				</tr>
  
 			</table>
@@ -486,7 +506,7 @@
       </table> -->
 <br> <br>
 
-           <table class="table table-bordered"  style="
+           <!-- <table class="table table-bordered"  style="
                   font-size: 14px;
                   color:#000;
                   font-weight: bold;
@@ -620,7 +640,7 @@
     <td></td>
   </tr>
   </tbody>
-  </table>
+  			</table> -->
       </div>
     </div>
     </div>
@@ -702,10 +722,13 @@ export default {
 <style scoped>
 
 .tableauentier{
-	width:36%;
-	/* height:150px;	 */
-  margin: 0px auto;
+	width:1300px;
+	/* height:150px;*/
+  /* margin: 1em; */
+  margin-top: 20px;
+  margin-left: 120px;
 }
+
 .colonne{
    float:left;
    width:auto;
@@ -715,12 +738,9 @@ export default {
    width:auto;
 }
 .tableauscroll{
-	width:50%;
+	width:35%;
 	float:left;
 	overflow:auto;
 }
 
-td{
-  width: auto;
-}
 </style>

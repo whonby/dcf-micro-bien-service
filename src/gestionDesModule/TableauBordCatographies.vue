@@ -893,7 +893,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       listeMarcheUniteAdmin(){
           let colect=[]
           let vM=this;
-          this.filtre_unite_admin.map(function (value) {
+          this.filtre_unite_admin.forEach(function (value) {
               let objet=vM.marches.filter(item=>{
                       if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
                           return item
@@ -1090,21 +1090,68 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       },
       montantRestantMarche(){
           return id=>{
-              return this.montantApprouve(id) - this.montantExecutParMarche(id)
+              
+              return this.montantBaseMarche(id) - this.montantMarcheExecuteDecompte(id)
           }
       },
       tauxExecutionMarche(){
           return id=>{
               //   let reste=this.montantApprouve(id) - this.montantExecutParMarche(id)
 
-
-              if(this.montantApprouve(id)>0){
-                  let taux=  (this.montantExecutParMarche(id) * 100)/this.montantApprouve(id)
+              if(this.montantBaseMarche(id)>0){
+                  let taux=  (this.montantMarcheExecuteDecompte(id) * 100)/this.montantBaseMarche(id)
                   return taux.toFixed(2)
               }
               return 0
           }
       },
+      montantInitial(){
+ return id => {
+         if(id != null && id != ""){
+        let act=this.acteEffetFinanciers.find(item=> item.marche_id == id)
+        if(act==undefined) return 0
+
+        return act.montant_act
+
+         }
+         return 0
+       }
+      },
+       montantBaseMarche(){
+       return id => {
+         if(id != null && id != ""){
+        let act=this.acteEffetFinanciers.find(item=> item.marche_id == id)
+        if(act==undefined) return 0
+
+        let ave=this.avenants.filter(item=> item.marche_id == id)
+       
+
+          let montant_ttc=  ave.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, 0);
+            let montant=parseFloat(act.montant_act) + parseFloat(montant_ttc)
+        
+        return montant
+
+         }
+         return 0
+       }
+    },
+
+ //Fonction qui calcule le montant execute du marché
+    montantMarcheExecuteDecompte(){
+       return id => {
+         if(id != null && id != ""){
+             let objet=this.decomptefactures.filter(item=> item.marche_id == id)
+             if(objet==undefined) return 0
+
+             return objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.netttc) ;
+                        }, 0);
+         }
+         return 0
+       }
+    },
     localisation(){
       let localisation=[]
       let vM=this;
@@ -1165,14 +1212,14 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             color="#ff0000"
             colorFill="#ff0000"
           }
-            let prevue_montant=parseFloat(value.montant_marche);
-            let objet_act=vM.montantApprouve(value.id)
-            console.log(prevue_montant)
-            let montantExecuteObjetAct=vM.montantExecutParMarche(value.id)
+            let prevue_montant=parseFloat(vM.montantInitial(value.id));
+            let objet_act=vM.montantBaseMarche(value.id)
+            //console.log(prevue_montant)
+            let montantExecuteObjetAct=vM.montantMarcheExecuteDecompte(value.id)
 
             let montant_restantObjet=vM.montantRestantMarche(value.id)
             let tauxObjetMontant=vM.tauxExecutionMarche(value.id)
-            console.log(montantExecuteObjetAct)
+           // console.log(montantExecuteObjetAct)
           let budgetExecute={
             label: 'Montant Excecute',
             value:montantExecuteObjetAct
@@ -1796,7 +1843,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     uniteAdmin(objet){
       this.value3=true
       /*this.activeUa=false*/
-      console.log(objet)
+     // console.log(objet)
 this.objetUnite=objet
       // this.unite_administrative_id=objet.unite_administrative_id
       // this.region=objet.region_id

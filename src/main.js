@@ -71,6 +71,17 @@ Vue.use(VueSweetalert2, options2);
 
 import VueHtml2pdf from 'vue-html2pdf'
 Vue.use(VueHtml2pdf)
+
+
+import Print from 'vue-print-nb'
+
+Vue.use(Print,{
+        Printable:'printContent', // ID of the content to be printed
+        type: 'html',
+        style: '@page {margin: 0} @media print {}',
+        scanStyles: false
+      }); //Register
+
 // ...
 Vue.component('l-draw-toolbar', LDrawToolbar);
 Vue.use(VueTelInput)
@@ -84,7 +95,7 @@ const options = {
     styles: [
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
         'https://unpkg.com/kidlat-css/css/kidlat.css',
-        "print.css"
+        "http://sidcf.agosoftprojet.com/lien/css/matrix-style.css"
     ]
 }
 Vue.use(VueHtmlToPaper, options);

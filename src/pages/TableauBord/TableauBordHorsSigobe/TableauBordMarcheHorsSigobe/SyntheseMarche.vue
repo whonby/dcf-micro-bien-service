@@ -28,121 +28,175 @@
       <div class="modal-header">
          <a data-dismiss="modal" class="btn btn-danger" href="#">Fermer</a>
         <h3 style="font-size: 12px; font-weight: bold">
-          UNITE ADMINISTRATIVE : {{editMandat.id}}
+          
         </h3>
       </div>
-      <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement1()">
         Exporter en PDF
       </button>
-    </div>  -->
-      <div class="modal-body" id="printpdf1">
-      
- <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">Part Des Bailleurs</h2>
-          </tr>
-        </table>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr style="">
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                TYPE FINANCEMENT
-              </th>
-
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                 
-                "
-              >
-                BAILLEUR
-              </th>
-
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                MONTANT MARCHE HT
-              </th>
-
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                TAUX
-              </th>
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                MONTANT TVA
-              </th>
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                TAUX BAILLEUR
-              </th>
-              <th
-                style="
-                  font-size: 12px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;
-                "
-              >
-                PART BAILLEUR
-              </th>
-            </tr>
-          </thead>
-          
+    </div> 
+      <div class="modal-body" id="printpdf1785">
+       <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">DETAIL PART BAILLEURS</h2>
+      <table class="table table-bordered table-striped">
+        
             
-            <tbody>
-            <tr v-for="item in affichePartBailleur(editMandat.id)" :key="item.id">
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.bailleur_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-                <td>{{item.type_finnancement_id}}</td>
-            </tr>
-          </tbody>
-        </table>
+            <thead >
+           
+              <tr >
+                 <th style=" font-size: 14px; 
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" colspan="">
+
+                 </th>
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;" class="">
+                  Bailleur
+                  
+                   
+                     
+                     
+                  </th>
+
+                <th style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                 
+                  Source de financement
+
+                     
+                     
+                  </th>
+
+
+                  <th  style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                 
+                  Taux
+                  </th>
+
+
+                <th id="taillecol" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                 
+                    
+                  Montant Ht
+                   
+                  </th>
+
+                <th id="taillecol" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                  
+                      
+                  Montant Tva
+
+                    
+                  </th>
+
+                <th id="taillecol" style=" font-size: 14px;
+                  font-weight: bold;
+                  color: #000;
+                  text-align: center;
+                  background-color: #fbb203 !important;">
+                    
+                      
+                  Montant Ttc
+
+                    
+                 
+                  </th>
+
+               
+             
+        
+              </tr> 
+            </thead>
+            <tbody v-for="item in affichePartBailleur(editMandat.marche_id)" :key="item.id">
+              <tr>
+                <td>
+                   <button >
+                      <i class=" icon-arrow-right"></i> 
+                      
+                    </button>
+                    
+                </td>
+               
+                
+                 <td colspan="7" style=" background: #98FB98 !important;color:#000">
+                  
+                  {{libelleBailleur(item.bailleur_id)}}
+                </td>
+                
+              </tr>
+               <tr v-for="unite1 in affichePartTypeFinancement(editMandat.marche_id,item.bailleur_id)" :key="unite1.id"  style="margin-left:50px">
+            <td colspan="">
+               
+            </td>
+            
+           <td>
+                   <button>
+                     <i class=" icon-arrow-right"></i> 
+                      
+                    </button>
+              </td>
+<td style=" font-size: 15px; color:#000">{{ libelleTypeFinancement(unite1.type_finnancement_id) }}</td>
+              <td style=" font-size: 15px; color:#000">{{ afficheTauxBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id) }} %</td>
+               <td style=" font-size: 15px; color:#000;text-align:left">{{ formatageSommeSansFCFA(parseFloat(afficheMontantHtBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id))) }}</td>
+                <td style=" font-size: 15px; color:#000;text-align:left">{{ formatageSommeSansFCFA(parseFloat(afficheMontantTVABailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id))) }}</td>
+                 <td style=" font-size: 15px; color:#000;text-align:left">{{ formatageSommeSansFCFA(parseFloat(parseFloat(afficheMontantHtBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id)) + parseFloat(afficheMontantTVABailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id)))) }}</td>
+           
+
+            </tr> 
+             
+            </tbody>
+            <tr>
+               
+                <td colspan="3">TOTAL TRESOR</td>
+                <td>{{afficheSommeTauxDon}}%</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
+                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
+              </tr>
+           <tr>
+               
+                <td colspan="3">TOTAL DON</td>
+                <td>{{afficheSommeTauxDon}}%</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
+                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
+              </tr>
+               <tr>
+               
+                <td colspan="3">TOTAL EMPRUNT</td>
+                <td>{{afficheSommeTauxEmprunt}}%</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtEmprunt))}}</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaEmprunt))}}</td>
+                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCEmprunt))}}</td>
+              </tr>
+          </table>
 
 
         <!-- <div class="modal-footer">
@@ -298,6 +352,7 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
+                      
                     "
                   >
                     MONTANT DE BASE DU MARCHE 
@@ -322,7 +377,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT TOTAL AVENANT 
+                    DUREE AVENANT 
                   </th>
                   <th
                     style="
@@ -364,6 +419,7 @@
                       color: #000;
                       text-align: center;
                       background-color: #fbb203 !important;
+                      width: 20%;
                     "
                   >
                     MONTANT GLOBAL MARCHE 
@@ -473,10 +529,10 @@
               
    
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa ">Recherche</td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="12" >
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"  v-show="recupereIDSection==GroupeUa "></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'" colspan="" >
 
-                   <model-list-select  v-show="recupereIDSection==GroupeUa "
+                   <!-- <model-list-select  v-show="recupereIDSection==GroupeUa "
               style="border: 1px solid #000"
               class="wide"
               :list="marches"
@@ -485,8 +541,19 @@
               option-text="objet"
               placeholder=""
             >
-            </model-list-select>
+            </model-list-select> -->
                </td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
+               
                <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
 <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
@@ -523,7 +590,7 @@
                  <td style="text-align:right">{{DureMarche(GroupeLigne.id)}} Jours</td>
                  <td style="text-align:right">
 
-                     <button class="btn btn-success taille"   @click="percuFacture(GroupeSection.id,GroupeUa)">
+                     <button class="btn btn-success taille"   @click="percuFacture(GroupeLigne.id)">
                         <span style="color:#000;font-size: 15px;">
                          {{NombreBailler(GroupeLigne.id)}}
                         </span>
@@ -541,7 +608,7 @@
                         </span>
                       </button>
                      </td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(montantAvenantParMarche(GroupeLigne.id)))}}</td>
+                 <td style="text-align:right">{{DureeAvenantParMarche(GroupeLigne.id)}}</td>
                             <td style="text-align:right">{{0}}</td>
                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(AfficheMontantgbobalMarche(GroupeLigne.id)))}}</td>
                  <td style="text-align:right">{{0}}</td>
@@ -765,43 +832,37 @@ editMandat:{},
       "derniereNivoPlanBudgetaire",
     ]),
     ...mapGetters("parametreGenerauxSourceDeFinancement", [
-      "sources_financements",
+      "sources_financements","types_financements"
     ]),
      admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
 
 
-    //    TriParSyntheseMarche(){
-    //     let vm=this 
-    //   return this.ListeMarcheParTypeMarche.map(function (value) {
-    //     let objet = {
-    //       id:value[0].GroupeSection,
-    //       numeroOdre:vm.NumeroOrdreMarche(value[0].GroupeSection),
-    //       numero_Marche:vm.NumeroMarche(value[0].GroupeSection),
-    //       libelle_marche:vm.LibelleMarche(value[0].GroupeSection),
-    //       libelle_entreprise:vm.LibelleEntreprise(EntrepriseMarche(value[0].GroupeSection)),
-    //       duree_marche:vm.DureMarche(value[0].GroupeSection),
-    //       nombre_bailleur:vm.NombreBailler(value[0].GroupeSection),
-    //       imputation_budgetaire:vm.ImputationMarche(value[0].GroupeSection),
-    //       montant_budget:vm.MontantBudgetaire(value[0].GroupeSection),
-    //       montant_reel_marche:vm.MontantReelMarche(value[0].GroupeSection),
-    //       taux_avenantMarche:vm.TauxAvenantParMarche(value[0].GroupeSection),
-    //       montant_avenantMarche:vm.montantAvenantParMarche(value[0].GroupeSection),
-    //       nombre_avenant:vm.NombreAvenant(value[0].GroupeSection),
-    //       montant_globalMarche:vm.AfficheMontantgbobalMarche(value[0].GroupeSection),
-    //       montant_executeMarche:vm.MontantExecuteMarche(value[0].GroupeSection),
-    //       monatnt_disponibleMarche:vm.DisponibleMarche(value[0].GroupeSection),
-    //       taux_excution:vm.TauxExecution(value[0].GroupeSection),
-          
-          
-    //     };
-    //     return objet;
-    //   });
-    
-    // },
+libelleTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+libelleBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
 affichePartBailleur() {
       return id => {
         if (id != null && id != "") {
@@ -809,8 +870,145 @@ affichePartBailleur() {
         }
       };
     },
+affichePartTypeFinancement() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.bailleur_id==id1);
+        }
+      };
+    },
+afficheSommeTauxDon() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 13).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantHtDon() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 13).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+     afficheSommeMontantTvaDon() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 13).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_tva),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantTTCDon() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 13).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
 
 
+afficheSommeTauxEmprunt() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 15).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantHtEmprunt() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 15).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+     afficheSommeMontantTvaEmprunt() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 15).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_tva),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantTTCEmprunt() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id && qtreel.type_finnancement_id == 15).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+
+
+     afficheTauxBailleur() {
+      return (id,id1,id2) => {
+         if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id==id1 && qtreel.type_finnancement_id==id2);
+
+      if (qtereel) {
+        return qtereel.tauxbailleur
+      }
+      return 0
+        }
+      };
+    },
+     afficheMontantHtBailleur() {
+      return (id,id1,id2) => {
+         if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id==id1 && qtreel.type_finnancement_id==id2);
+
+      if (qtereel) {
+        return qtereel.montant_ht
+      }
+      return 0
+        }
+      };
+    },
+     afficheMontantTTCBailleur() {
+      return (id,id1,id2) => {
+         if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id==id1 && qtreel.type_finnancement_id==id2);
+
+      if (qtereel) {
+        return qtereel.montant
+      }
+      return 0
+        }
+      };
+    },
+     afficheMontantTVABailleur() {
+      return (id,id1,id2) => {
+         if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id==id1 && qtreel.type_finnancement_id==id2);
+
+      if (qtereel) {
+        return qtereel.montant_tva
+      }
+      return 0
+        }
+      };
+    },
 MontantExecuteMarche(){
         return (id) => {
         if (id != null && id != "") {
@@ -838,7 +1036,7 @@ BailleurParMarche() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.personnaliseGetterMarcheBailleur.filter(item=>item.marche_id == id);
+          let objet = this.personnaliseGetterMarcheBailleur.filter(item=>item.marche_id == id && item.type_finnancement_id!=14);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -1043,6 +1241,16 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+    DureeAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.dure_avenant)
+                        },valInite);
+                    }
+                }
+            },
      montantAvenantParMarche: function () {
                 return id => {
                     if (id != "") {
@@ -1178,12 +1386,15 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
- percuFacture(id,id1) {
+    genererEnPdfDetailReamenagement1() {
+      this.$htmlToPaper("printpdf1785");
+    },
+ percuFacture(id) {
       this.$("#validationOpDefinitif1").modal({
         backdrop: "static",
         keyboard: false,
       });
-      this.editMandat = this.ListeMarcheParTypeMarche(id,id1).find((item) => item.type_marche_id == (id,id1));
+      this.editMandat = this.affichePartBailleur(id).find((item) => item.marche_id == id);
   
   },
 

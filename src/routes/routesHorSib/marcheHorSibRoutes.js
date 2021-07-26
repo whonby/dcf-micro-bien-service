@@ -7,7 +7,7 @@ import groupeMarcheParUaSIgobe from "../../pages/Hors_sib/marche_hors_sib/groupe
 import TableauAvenant from "../../pages/Hors_sib/marche_hors_sib/TableauAvenant.vue";
 import groupeToutMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeToutMarcheParUa.vue";
 // import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
-
+listeMarcheBienEtServiceHS
  import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
 import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarcheHorsSib.vue";

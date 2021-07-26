@@ -909,3 +909,39 @@ export const groupeParSectionBudgetEclate = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "section_id");
 };
+
+
+
+
+
+export const GettersPersonnaliseUaDepartement = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  state.uniteAdministratives.map(element => {
+    if (
+      element.localisationgeo_id !== null 
+     
+    ) {
+      let objet_sp=rootGetters["parametreGenerauxAdministratif/getterLocalisationGeoAll"].find( item => item.id == element.localisationgeo_id && item.structure_localisation_geographique_id == 8 )
+     if(objet_sp!=undefined){
+      let depepart=rootGetters["parametreGenerauxAdministratif/getterLocalisationGeoAll"].find(
+          dep => dep.id == objet_sp.parent && dep.structure_localisation_geographique_id == 6)
+      //let parent_id=depepart.parent
+          if (depepart!=undefined) {
+            element = {
+        ...element,
+        afficheDepartement:depepart.id,
+         region_id:depepart.parent
+       };
+          }
+      
+     }
+     
+     
+    }
+    return element;
+  });
+
