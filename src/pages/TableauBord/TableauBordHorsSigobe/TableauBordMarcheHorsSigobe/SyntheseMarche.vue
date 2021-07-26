@@ -160,7 +160,7 @@
                     </button>
               </td>
 <td style=" font-size: 15px; color:#000">{{ libelleTypeFinancement(unite1.type_finnancement_id) }}</td>
-              <td style=" font-size: 15px; color:#000">{{ afficheTauxBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id) }}</td>
+              <td style=" font-size: 15px; color:#000">{{ afficheTauxBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id) }} %</td>
                <td style=" font-size: 15px; color:#000;text-align:left">{{ formatageSommeSansFCFA(parseFloat(afficheMontantHtBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id))) }}</td>
                 <td style=" font-size: 15px; color:#000;text-align:left">{{ formatageSommeSansFCFA(parseFloat(afficheMontantTVABailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id))) }}</td>
                  <td style=" font-size: 15px; color:#000;text-align:left">{{ formatageSommeSansFCFA(parseFloat(parseFloat(afficheMontantHtBailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id)) + parseFloat(afficheMontantTVABailleur(editMandat.marche_id,item.bailleur_id,unite1.type_finnancement_id)))) }}</td>
@@ -173,20 +173,20 @@
                
                 <td colspan="3">TOTAL DON</td>
                 <td>{{afficheSommeTauxDon}}%</td>
-                <td></td>
-                <!-- <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td> -->
-                <td></td>
-                <!-- <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td> -->
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
                  <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
               </tr>
                <tr>
                
                 <td colspan="3">TOTAL EMPRUNT</td>
                 <td>{{afficheSommeTauxEmprunt}}%</td>
-                <td></td>
-                <!-- <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtEmprunt))}}</td> -->
-                <td></td>
-                <!-- <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaEmprunt))}}</td> -->
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtEmprunt))}}</td>
+                <!-- <td></td> -->
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaEmprunt))}}</td>
                  <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCEmprunt))}}</td>
               </tr>
           </table>
