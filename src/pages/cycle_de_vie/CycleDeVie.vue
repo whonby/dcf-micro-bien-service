@@ -1,3 +1,4 @@
+date_decompte
 <template>
     <div >
         
@@ -472,7 +473,7 @@
 
                  <tr>
                      <th style="width:5%">DATE DU DERNIER DECOMPTE</th>
-                     <td style="width:15%" colspan="8" v-if="dernierDecompte.date_decompte">{{dernierDecompte.date_decompte}} </td>
+                     <td style="width:15%" colspan="8" v-if="dernierDecompte">{{dernierDecompte.date_decompte}} </td>
                        <td style="width:15%" colspan="8" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>

@@ -205,7 +205,7 @@ created() {
    
    
 afficheGroupeUaParMarche(){
-    return this.marches.filter(item=>item.unite_administrative_id == this.detailOp.unite_administrative_id && item.unite_zone != 0)
+    return this.marches.filter(item=>item.unite_administrative_id == this.marcheid && item.unite_zone != 0)
 },
 
 libelleSOusBudget() {
