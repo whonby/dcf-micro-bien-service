@@ -3119,7 +3119,7 @@ montantVoteToralParLigne(){
           MontantOpNONRegu:vm.MontantOPNonRegu(value.id),
           NombreOpREgularise:vm.NombreOPRegulirise(value.id),
           TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
-          Disponible:vm.MontantBudgetActuel(value.id)- vm.MontantBudgetExecuté(value.id),
+          Disponible:vm.MontantBudgetActuel(value.id) - vm.MontantBudgetExecuté(value.id),
           MARCHEenCours:vm.MarcheEnCoursUa(value.id),
           TauxExecution:vm.EviteNaN(value.id)
         };

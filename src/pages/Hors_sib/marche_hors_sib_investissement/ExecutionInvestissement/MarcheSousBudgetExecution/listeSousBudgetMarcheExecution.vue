@@ -69,11 +69,11 @@
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in afficheGroupeUaParMarche" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type.unite_zone) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{CodeSOusBudget(type) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{libelleSOusBudget(type) || 'Non renseigné'}}</td>
                    
                    <td >
-                      <router-link :to="{ name: 'listeMarcheBienEtServiceExecutionHSParSousBudget', params: { id: type.unite_zone }}"
+                      <router-link :to="{ name: 'listeMarcheBienEtServiceExecutionHSParSousBudget', params: { id: type }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="icon-eye-open" style="font-weight: bold;"> Voir Marche</i></span>
                    </router-link> 
@@ -204,10 +204,29 @@ created() {
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
    
-afficheGroupeUaParMarche(){
-    return this.marches.filter(item=>item.unite_administrative_id == this.marcheid && item.unite_zone != 0)
-},
-
+// afficheGroupeUaParMarche(){
+//     return this.marches.filter(item=>item.unite_administrative_id == this.marcheid && item.unite_zone != 0)
+// },
+afficheGroupeUaParMarche() {
+      //return (id) => {
+        
+        let objet = this.marches.filter(item=>item.unite_administrative_id == this.marcheid && item.unite_zone != 0);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.unite_zone);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
+        }
+        return [];
+    // };
+    },
 libelleSOusBudget() {
       return id => {
         if (id != null && id != "") {

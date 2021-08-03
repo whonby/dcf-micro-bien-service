@@ -1,4 +1,4 @@
-ajouterDecisionBudgetEclate
+
 <template>
 
 <div class="container-fluid">
@@ -55,41 +55,9 @@ ajouterDecisionBudgetEclate
                     </ul>
                   </div>
                  <table class="table table-bordered table-striped" style="border:1px solid #000">
-                     
- <!-- <td>
-                       <div class="control-group">
-                <label class="control-label">Exercice</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                  :value="this.anneeAmort"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-                  </td>    -->
-                  
+
                      <tr>
  
-                    <!-- <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Exercice Budgetaire</label>
-                <div class="controls">
-                  <select v-model="anneeAmort" class="span" style="border:1px solid #000">
-                    
-                     <option
-                        v-for="typeFact in exercices_budgetaires"
-                        :key="typeFact.id"
-                        :value="typeFact.annee"
-                      >{{typeFact.annee}}</option>
-                  </select>
-                </div>
-              </div>
-              
-                     </td> -->
-                  
                   <td colspan="2">
                        <div class="control-group">
                 <label class="control-label">Section</label>
@@ -137,35 +105,7 @@ ajouterDecisionBudgetEclate
                      </tr>
                      <tr>
  
-                    <!-- <td>
-                       <div class="control-group">
-                <label class="control-label">Type Financement</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                 :value="LibelleTypeFinancement(idTypeFinancement(formData.ligne_budgetaire_parent_id))"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-                  </td>   
-                  
-                  <td colspan="2">
-                       <div class="control-group">
-                <label class="control-label">Bailleur</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                   :value="LibelleSourceFinancement(idSourceFinancement(formData.ligne_budgetaire_parent_id))"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-                  </td> -->
+                   
               <td>
               <div class="control-group">
                 <label class="control-label">Grande Nature</label>
@@ -321,8 +261,8 @@ ajouterDecisionBudgetEclate
                      <option
                         v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
                         :key="typeFact.id"
-                        :value="typeFact.economique_id"
-                      >{{libelleLigneEconomique(typeFact.economique_id)}}</option>
+                        :value="typeFact"
+                      >{{libelleLigneEconomique(typeFact)}}</option>
                   </select>
 
 
@@ -1415,14 +1355,35 @@ LibelleActivite() {
       };
     },
 
-      RecupererlibelleLigneEconomique() {
-      return (id) => {
-        if (id != null && id != "") {
-           return this.budgetGeneral.filter(qtreel => qtreel.activite_id == id);
+
+    //   RecupererlibelleLigneEconomique() {
+    //   return (id) => {
+    //     if (id != null && id != "") {
+    //        return this.budgetGeneral.filter(qtreel => qtreel.activite_id == id);
 
       
+    //     }
+    //   };
+    // },
+    RecupererlibelleLigneEconomique() {
+      return (id) => {
+        
+        let objet = this.budgetGeneral.filter(item=>item.activite_id == id);
+        //  let vm=this
+        let array_exercie = [];
+        if (objet.length > 0) {
+          objet.forEach(function (val) {
+            array_exercie.push(val.economique_id);
+          });
+          let unique = [...new Set(array_exercie)];
+          console.log(unique);
+          if (unique.length == 0) {
+            return [];
+          }
+          return unique;
         }
-      };
+        return [];
+    };
     },
      lignePrecedent() {
       return (id) => {
