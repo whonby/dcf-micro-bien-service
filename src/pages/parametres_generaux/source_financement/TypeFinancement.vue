@@ -269,7 +269,7 @@ export default {
   computed: {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
-  'types_financements']) ,
+  'types_financements']),
   
             localisationsFiltre(){
 
