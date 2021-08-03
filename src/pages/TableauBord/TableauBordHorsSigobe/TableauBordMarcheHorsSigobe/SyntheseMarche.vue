@@ -535,18 +535,6 @@
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-<td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-              <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-                
                 
                 
                 </tr>
