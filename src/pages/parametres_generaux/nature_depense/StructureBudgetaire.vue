@@ -54,7 +54,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libellé</th>
+                  <th style="width:90%">Libellé</th>
                    <th width="5%">Action</th>
                 </tr>
               </thead>
@@ -322,11 +322,8 @@ return 0
 },
 getColumns() {
     return [
-        
         {title: "NIVEAU", dataKey: "niveau"},
         {title: "LIBELLE", dataKey: "libelle"},
-     
-        
     ];
 },
    
@@ -345,7 +342,7 @@ getColumns() {
       this.ajouterStructureBudgetaire(nouvelObjet)
 
         this.formData = {
-              code:"",
+              // code:"",
                 niveau: "",
              libelle: "",
             

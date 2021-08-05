@@ -55,7 +55,7 @@
               <thead>
                 <tr>
                     <th>Niveau</th>
-                  <th>Libellé</th>
+                  <th style="width:90%">Libellé</th>
                    <th style="width:5%">Action</th>
                 </tr>
               </thead>

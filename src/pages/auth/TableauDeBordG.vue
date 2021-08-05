@@ -2,15 +2,15 @@
   <div>
      
 
-    <TableauBordParametre v-if="detail_marche.code == 1"></TableauBordParametre>
-    <TableauBordUa v-else-if="detail_marche.code == 2"></TableauBordUa>
-    <TableauBordGestionSib v-else-if="detail_marche.code == 3"></TableauBordGestionSib>
-     <TableauBordGestionHorsSib v-else-if="detail_marche.code == 4"></TableauBordGestionHorsSib>
-    <TableauBordMonEquipe v-else-if="detail_marche.code == 6"></TableauBordMonEquipe>
-    <TableauBordRapport v-else-if="detail_marche.code == 7"></TableauBordRapport>
-<!--    <TableauBordEquipeCF v-else-if="detail_marche.code == 16"></TableauBordEquipeCF>-->
-    <TableauBordCatographies  v-else-if="detail_marche.code == 5"></TableauBordCatographies>
-       <TableauBordGeneral  v-else-if="detail_marche.code == 9"></TableauBordGeneral>
+    <TableauBordParametre v-if="detail_marche == 1"></TableauBordParametre>
+    <TableauBordUa v-else-if="detail_marche == 2"></TableauBordUa>
+    <TableauBordGestionSib v-else-if="detail_marche == 3"></TableauBordGestionSib>
+     <TableauBordGestionHorsSib v-else-if="detail_marche == 4"></TableauBordGestionHorsSib>
+    <TableauBordMonEquipe v-else-if="detail_marche == 6"></TableauBordMonEquipe>
+    <TableauBordRapport v-else-if="detail_marche == 7"></TableauBordRapport>
+<!--    <TableauBordEquipeCF v-else-if="detail_marche == 16"></TableauBordEquipeCF>-->
+    <TableauBordCatographies  v-else-if="detail_marche == 5"></TableauBordCatographies>
+       <TableauBordGeneral  v-else-if="detail_marche == 9"></TableauBordGeneral>
     <TableauBordGestionVehicule v-else></TableauBordGestionVehicule>
 
     <!-- </template> -->
@@ -37,7 +37,9 @@ import TableauBordRapport from "../../../src/pages/Gestion_des_Rapports/suiviDes
 export default {
   data(){
     return{
-      detail_marche:"",
+      detail_marche:[{
+
+      }],
       budgetGeneralCharge:""
 
     }
@@ -56,16 +58,22 @@ components: {
   },
 
   created() {
-      console.log(this.getterUniteAdministrativeByUser)
-            this.marcheid=this.$route.params.id
-    if(this.$route.params.id==16){
+   // localStorage.removeItem('module_app');
+    this.detail_marche=localStorage.getItem('module_app');
+    console.log("TABLEAU BORD")
+    console.log(this.detail_marche)
+      console.log("........................")
+  
+   //   console.log(this.getterUniteAdministrativeByUser)
+           // this.marcheid=this.$route.params.id
+  /*  if(this.$route.params.id==16){
       this.detail_marche.code=16
      // console.log(this.$route.params.id)
     }else{
       this.detail_marche = this.gestionModules.find(
               idmarche => idmarche.id == this.$route.params.id
       )
-    }
+    }*/
 
   
 },
