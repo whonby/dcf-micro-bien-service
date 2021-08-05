@@ -421,7 +421,8 @@ created(){
             "typeTextes",
             "uniteAdministratives",
             "getterBudgeCharge",
-            "transferts"
+            "transferts",
+            "GettersPersonnaliseUaDepartement"
         ]),
         listeZone(){
         return this.localisations_geographiques.filter(item=>{
@@ -566,10 +567,6 @@ created(){
                         let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id)
                         if (uniteByZoneGeo!=undefined) {
 
-                            /**
-                             *
-                             */
-
                             uniteByZoneGeo.forEach(function (row) {
                                 let initialV=0;
                                 let objetTransfere=vM.transferts.filter(item=>item.ua_id==row.id)
@@ -577,7 +574,7 @@ created(){
                                     return total + parseFloat(currentValue.montant_transfert) ;
                                 }, initialV);
                                  montant_engagetransfere= parseFloat(montant_engagetransfere) + parseFloat(montantTransfere)
-
+                                console.log(row.ua_budget_general)
                                 let montant_engagement_unite_admin=0;
                                 let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
                                 if (budgetActive!="") {
