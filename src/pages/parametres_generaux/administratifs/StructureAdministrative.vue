@@ -27,6 +27,11 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>
                                      </div> 
+                                      <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures administratives</h5>
+                                       </tr>
+                                     </table> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures administratives</h5>
