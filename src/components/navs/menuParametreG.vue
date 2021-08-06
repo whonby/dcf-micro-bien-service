@@ -535,7 +535,7 @@
           </li>
         </ul>
       </li>
-      <!-- <li class="dropdown" id="personnelPara">
+      <li class="dropdown" id="personnelPara">
         <a
           title="PERSONNELS"
           href="#"
@@ -741,9 +741,9 @@
           <li class="divider"></li>
           
         </ul>
-      </li>  -->
+      </li>  
 
-      <!-- <li class="dropdown" id="mission">
+       <li class="dropdown" id="mission">
         <a
           title="Suivi des missions"
           href="#"
@@ -769,7 +769,7 @@
             </router-link>
           </li>
         </ul>
-      </li> -->
+      </li>
 
       <li class="dropdown" id="mission">
         <a

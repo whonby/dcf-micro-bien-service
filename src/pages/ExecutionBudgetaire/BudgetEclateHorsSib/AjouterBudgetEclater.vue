@@ -1316,10 +1316,10 @@ recupererStructure() {
     idProgramme() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
+           const qtereel = this.plans_activites.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.program_id
+        return qtereel.programme_id
       }
       return 0
         }
@@ -1328,10 +1328,10 @@ recupererStructure() {
 idAction() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id);
+           const qtereel = this.plans_activites.find(qtreel => qtreel.programme_id == id);
 
       if (qtereel) {
-        return qtereel.action_id
+        return qtereel.id
       }
       return 0
         }
