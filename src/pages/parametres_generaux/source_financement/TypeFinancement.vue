@@ -28,13 +28,18 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>
                                      </div> <br>
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des types de financements</h5>
+                                       </tr>
+                                     </table> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des types de financements</h5>
-             <div align="right">
+            <!-- <h5>Liste des types de financements</h5> -->
+             <!-- <div align="right">
         Recherche: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
 
@@ -55,9 +60,9 @@
               <thead>
                 <tr>
                  <th>Code</th>
-                  <th>Libellé</th>
+                  <th style="width:90%">Libellé</th>
                 
-                   <th>Action</th>
+                   <th style="width:5%">Action</th>
                 </tr>
                 
               </thead>
@@ -113,23 +118,15 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
-                   <!-- <div class="control-group">
-              <label class="control-label">Source de financement:</label>
-              <div class="controls">
-                <select  v-model="formData.source_financement_id">
-            <option v-for="resultat in sources_financements" :key="resultat.id" 
-            :value="resultat.id">{{resultat.libelle}}</option>
-                </select>
-              </div>
-            </div> -->
+                  
             <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Code</label>
               <div class="controls">
                 <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libellé:</label>
+              <label class="control-label">Libellé</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
@@ -137,7 +134,32 @@
            
             
 
-          </form>              
+          </form>    
+
+           <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="control-group">
+              <label class="control-label">Niveau:</label>
+              <div class="controls">
+                <input type="number" v-model="formData.code" class="span5" placeholder="Saisir le niveau" readonly/>
+              </div>
+            </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
+              <label class="control-label">Libelle:</label>
+              <div class="controls">
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
+              </div>
+            </div>
+              </td>
+            </tr>
+            
+
+          </table>                    
           </div>
            <div class="modal-footer"> 
 

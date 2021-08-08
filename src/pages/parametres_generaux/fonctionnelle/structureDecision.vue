@@ -36,7 +36,7 @@
                                      </table>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures décisionnelles</h5>
+            <!-- <h5>Liste des structures décisionnelles</h5> -->
              <div align="right">
         Recherche: <input type="text" v-model="search"  placeholder=" ">
 
