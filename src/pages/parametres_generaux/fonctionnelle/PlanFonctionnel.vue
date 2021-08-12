@@ -99,12 +99,16 @@
                 <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
+            <div style="color: red" v-bind:class="verificationcode == true ? afficheNotificationCode() : ''">
+                
+                
+              </div>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Libellé:</label>
+              <label class="control-label">Libellé</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
@@ -171,6 +175,10 @@
                  <input type="text" :value="codeplanfonctionnelle" class="span4"  readonly />
               </div>
             </div>
+            <div style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''">
+                
+                
+              </div>
                     </td>
                   </tr>
                   
@@ -334,8 +342,61 @@ export default {
   ...mapGetters('parametreGenerauxFonctionnelle', ['structures_fonctionnelles', 
   'plans_fonctionnels']),
 
+afficheNotificationCode(){
+  if(this.verificationcode == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+afficheNotification(){
+  if(this.verificationcodeEnfant == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
 
 
+verificationcodeEnfant() {
+      if (this.nouvelElement.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_fonctionnels.filter(
+          (element) => element.code == this.codeplanfonctionnelle
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
+verificationcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_fonctionnels.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
 codeplanfonctionnelle() {
     return  this.parentDossier.code + this.nouvelElement.code
     
