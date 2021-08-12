@@ -205,20 +205,6 @@
                           </td>
                     </tr>
             
-           
-            <!-- <div class="control-group">
-              <label class="control-label">Encours:</label>
-              <div class="controls">
-                <input type="checkbox" v-model="formData.encours" checked="checked"
-                 class="span" placeholder="" />
-              </div>
-            </div> -->
-             <!-- <div class="control-group">
-              <label class="control-label">Date cloture:</label>
-              <div class="controls">
-                <input type="date" v-model="formData.date_cloture" class="span" placeholder="" />
-              </div>
-            </div> -->
           </table>              
           </div>
            <div class="modal-footer"> 
@@ -268,19 +254,7 @@
                  class="span" placeholder="" />
               </div>
             </div>
-            <!-- <div class="control-group">
-              <label class="control-label">Encours:</label>
-              <div class="controls">
-                <input type="checkbox" v-model="editExerciceBudgetaire.encours" 
-                checked="checked" class="span" placeholder="" />
-              </div>
-            </div> -->
-             <!-- <div class="control-group">
-              <label class="control-label">Date cloture:</label>
-              <div class="controls">
-                <input type="date" v-model="editExerciceBudgetaire.date_cloture" class="span" placeholder="" />
-              </div>
-            </div> -->
+           
           </form>              
           </div>
            <div class="modal-footer"> 
@@ -296,7 +270,7 @@
 
 <!----- fin modifier modal  ---->
 
-  <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+  <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalExerciceBudgetaire()">Open</button>
 
  <fab :actions="fabActions"
@@ -304,7 +278,7 @@
           @cache="afficherModalExerciceBudgetaire"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
