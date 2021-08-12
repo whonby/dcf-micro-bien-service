@@ -126,6 +126,46 @@
                   placeholder="Unité administrative"
                 >
                 </model-list-select>
+
+                  <label
+                  >Type de financément ({{types_financement_id}})
+                  <a
+                    href="#"
+                    @click.prevent="videTypeFinancement()"
+                    v-if="types_financement_id"
+                    style="color: red"
+                    ><i class="fa fa-trash-o"></i></a
+                ></label>
+                <model-list-select
+                  style="background-color: rgb(233, 233, 233)"
+                  class="wide"
+                  :list="types_financements"
+                  v-model="types_financement_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="Type de financement"
+                >
+                </model-list-select>
+
+                 <label
+                  >Bailleur
+                  <a
+                    href="#"
+                    @click.prevent="videSousFinancement()"
+                    v-if="sources_financement_id"
+                    style="color: red"
+                    ><i class="fa fa-trash-o"></i></a
+                ></label>
+                <model-list-select
+                  style="background-color: rgb(233, 233, 233)"
+                  class="wide"
+                  :list="sources_financements"
+                  v-model="sources_financement_id"
+                  option-value="id"
+                  option-text="libelle"
+                  placeholder="Source financement"
+                >
+                </model-list-select>
               </div>
 
              
@@ -308,6 +348,8 @@ export default {
       unite_administrative_id: "",
       tableGenerale:[],
       table_memoire_ua:[],
+      sources_financement_id:'',
+      types_financement_id:'',
       chartOptions: {
             chart: {
               width: 275,
@@ -413,12 +455,14 @@ export default {
     };
   },
   created() {
-console.log(this.listeUniteAdministrativeCartographie)
+//console.log(this.listeUniteAdministrativeCartographie)
  //this.listeUAPasRegionDepartementSP(this.region)
   },
 
   computed: {
     // methode pour maper notre guetter
+      ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
+  'types_financements']),
     ...mapGetters("parametreGenerauxAdministratif", [
       "structures_geographiques",
       "localisations_geographiques",
@@ -493,7 +537,6 @@ console.log(this.listeUniteAdministrativeCartographie)
                     })
     }
 
-    
      return objet
   
         },
@@ -537,6 +580,25 @@ console.log(this.listeUniteAdministrativeCartographie)
         }
       })
       if(budgetEclateExercice==undefined) return []
+
+        if(this.types_financement_id!="" && this.sources_financement_id==""){
+
+          return this.budgetEclateExercice.filter(item=>item.type_financement_id==this.types_financement_id)
+        }
+
+        if(this.types_financement_id=="" && this.sources_financement_id!=""){
+          console.log(this.types_financement_id)
+          return this.budgetEclateExercice.filter(item=>item.source_financement_id==this.sources_financement_id)
+        }
+
+        if(this.types_financement_id!="" && this.sources_financement_id!=""){
+          return this.budgetEclateExercice.filter(item=>{
+            if(item.source_financement_id==this.sources_financement_id && item.type_financement_id==this.types_financement_id){
+              return item
+            }
+          })
+        }
+
         return budgetEclateExercice
     },
 
@@ -547,6 +609,23 @@ console.log(this.listeUniteAdministrativeCartographie)
         }
       })
       if(budgetEclateExercice==undefined) return []
+
+        if(this.types_financement_id!="" && this.sources_financement_id==""){
+          return this.budgetEclateExercice.filter(item=>item.type_financement_id==this.types_financement_id)
+        }
+
+        if(this.types_financement_id=="" && this.sources_financement_id!=""){
+          return this.budgetEclateExercice.filter(item=>item.source_financement_id==this.sources_financement_id)
+        }
+
+        if(this.types_financement_id!="" && this.sources_financement_id!=""){
+          return this.budgetEclateExercice.filter(item=>{
+            if(item.source_financement_id==this.sources_financement_id && item.type_financement_id==this.types_financement_id){
+              return item
+            }
+          })
+        }
+
         return budgetEclateExercice
     },
 
@@ -643,6 +722,7 @@ if(vm.region!="" && vm.departement!="" && vm.sous_prefecture!="" && vm.unite_adm
     })
    }
 
+ 
 if(vm.region=="" && vm.departement=="" && vm.sous_prefecture!="" && vm.unite_administrative_id!=""){
     return vm.GettersPersonnaliseUaDepartement.filter(item=>{
       if(item.id==vm.unite_administrative_id && item.localisationgeo_id==vm.sous_prefecture){
@@ -668,8 +748,7 @@ montantBudgetInitiale(){
     let vm=this
        
          let montant=0;
-      
-
+    
       vm.listeUniteAdministrativeCartographie.forEach(function(value){
        let budget=vm.budgetEclateExeciceEncours.filter(item=>item.uniteadministrative_id==value.id)
        let initeVal = 0;
@@ -875,93 +954,6 @@ return parseFloat(this.montantBudgetActuellePasRegion(id)) - parseFloat(this.mon
       return this.GettersPersonnaliseUaDepartement;
     },
 
-    listeMarcheUniteAdmin() {
-      let colect = [];
-      let vM = this;
-      this.filtre_unite_admin.forEach(function (value) {
-        let objet = vM.marches.filter((item) => {
-          if (
-            item.parent_id != null &&
-            item.unite_administrative_id == value.id
-          ) {
-            //  console.log(item.parent_id)
-            return item;
-          }
-        });
-        if (objet != undefined) {
-          objet.forEach(function (val) {
-            colect.push(val);
-          });
-        }
-      });
-      return colect;
-    },
-    /**Traitement afficharche et statique marche en fonction des region
-     *
-     *
-     * @returns {function(*)}
-     */
-   
-
-    objetMarchePasUniteOuRegion() {
-      let vM = this;
-      let objet = this.listeMarcheUniteAdmin.filter(
-        (item) => item.parent_id != ""
-      );
-
-      //retourne les marches d'une region selectionner
-      if (
-        vM.region != "" &&
-        vM.unite_administrative_id == "" 
-       
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.localisation_geographie_id == vM.region &&
-            item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
-
-      //retourne les marches d'une unite administrative selectionner
-      if (
-        vM.unite_administrative_id != "" &&
-        vM.region == "" 
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.unite_administrative_id == vM.unite_administrative_id &&
-          item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
-
-      //retourne les marches d'une une infrastucture selectionner
-     
-
-     
-
-      //retourne les marches de region et unite adminstrative selectionner
-      if (
-        vM.unite_administrative_id != "" &&
-        vM.region != "" 
-      ) {
-        objet = objet.filter((item) => {
-          if (
-            item.unite_administrative_id == vM.unite_administrative_id &&
-            item.localisation_geographie_id == vM.region &&
-            item.parent_id != ""
-          ) {
-            return item;
-          }
-        });
-      }
-      return objet;
-    },
 
     getRandomInt() {
       return (max) => {
@@ -970,103 +962,7 @@ return parseFloat(this.montantBudgetActuellePasRegion(id)) - parseFloat(this.mon
     },
    
 
-    //Recuperation des marche pas regions
-    marchePasRegions(){
-       return id => {
-         if(id != null && id != ""){
-            
-            if(this.departement!="" && this.sous_prefecture==""){
-              return  this.objetMarchePasUniteOuRegion.filter(item=>item.departement_id==id)
-            }
-            if(this.sous_prefecture!=""){
-              return  this.objetMarchePasUniteOuRegion.filter(item=>item.sous_prefecture_id==id)
-            }
-      return this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
-         }
-         return []
-       }
-    },        
-     
-     montantTotalPrevissionel(){
-        let objet = this.listeMarcheUniteAdmin.filter(
-        (item) => item.parent_id != ""
-      );
-      let montantTotalPrevisionnel=0
-      let vm=this
-     
-      objet.forEach(row => {
-           montantTotalPrevisionnel=montantTotalPrevisionnel + vm.montantBaseMarche(row.id)
-         });
-      return montantTotalPrevisionnel;
-     },
-    //Fonction qui calcule le montant de base du marche plus avenant
-    montantBaseMarche(){
-       return id => {
-         if(id != null && id != ""){
-        let act=this.acteEffetFinanciers.find(item=> item.marche_id == id)
-        if(act==undefined) return 0
-
-        let ave=this.avenants.filter(item=> item.marche_id == id)
-       
-
-          let montant_ttc=  ave.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montant_avenant) ;
-                        }, 0);
-            let montant=parseFloat(act.montant_act) + parseFloat(montant_ttc)
-        
-        return montant
-
-         }
-         return 0
-       }
-    },
-
- //Fonction qui calcule le montant execute du marché
-    montantMarcheExecuteDecompte(){
-       return id => {
-         if(id != null && id != ""){
-             let objet=this.decomptefactures.filter(item=> item.marche_id == id)
-             if(objet==undefined) return 0
-
-             return objet.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.netttc) ;
-                        }, 0);
-         }
-         return 0
-       }
-    },
-
-     //Fonction qui calcule le montant previssionel des marché pas regions
-    montantPrevissionnelMarchePasRegions(){
-         return id => {
-           if(id != null && id != ""){
-             let marches=this.marchePasRegions(id)
-             let motant_prevue=0;
-             let vm = this;
-                  marches.forEach(row => {
-                     motant_prevue=motant_prevue + vm.montantBaseMarche(row.id)
-                  });
-             return motant_prevue
-           }
-           return 0
-         }
-    },
-
-     //Fonction qui calcule le montant execute des marché pas regions
-     montantExecuteMarchePasRegions(){
-         return id => {
-           if(id != null && id != ""){
-             let marches=this.marchePasRegions(id)
-             let motant_execute=0;
-             let vm = this;
-                  marches.forEach(row => {
-                     motant_execute=motant_execute + vm.montantMarcheExecuteDecompte(row.id)
-                  });
-             return motant_execute
-           }
-           return 0
-         }
-    },
+   
 
     localisation() {
       let localisation = [];
@@ -1232,6 +1128,13 @@ return parseFloat(this.montantBudgetActuellePasRegion(id)) - parseFloat(this.mon
       this.choixAffichageInformationCarte= value
       
      },
+     videTypeFinancement(){
+       this.types_financement_id=""
+     },
+     videSousFinancement(){
+        this.sources_financement_id=""
+     },
+
     videUniteAdmin() {
       this.unite_administrative_id = "";
       // this.zoom=5
@@ -1328,12 +1231,12 @@ this.sous_prefecture=''
 
           
            // console.log(value.tauxBudget)
-    arrayColor.push("#6C0277");
-    arrayColor.push("#edb007");
-    arrayLabele.push(value.tauxBudget + "%");
-      arrayBar.push(value.budgetReste);
-      arrayBar.push(value.budgetExecute);
-      let taux_region=value.tauxMontantPrevue
+            arrayColor.push("#6C0277");
+            arrayColor.push("#edb007");
+            arrayLabele.push(value.tauxBudget + "%");
+            arrayBar.push(value.budgetReste);
+            arrayBar.push(value.budgetExecute);
+            let taux_region=value.tauxMontantPrevue
       if (vm.type_minichart == "bar") {
                   width = 20;
                   height = taux_region + 30;
@@ -1485,14 +1388,27 @@ this.sous_prefecture=''
     },
     unite_administrative_id: function (value) {
       console.log(value);
-      //  this.objet_map.layers;
-      //  this.listeUAPasRegionDepartementSP(this.region)
+     
       this.deleteLeafleMiniCharts(this.objet_map);
-      //  this.objet_map.on('overlayremove', this.hide_charts())
+     
       this.integrationChartPasRegisonSurCarte();
-      //                this.infortion_sidbar_filter.close();
-      //                this.infortion_sidbar_filter.disablePanel('infoRegion');
-      //                this.infortion_sidbar_filter.open("home")
+   
+    },
+    sources_financement_id: function (value) {
+      console.log(value);
+     
+      this.deleteLeafleMiniCharts(this.objet_map);
+     
+      this.integrationChartPasRegisonSurCarte();
+   
+    },
+      types_financement_id: function (value) {
+      console.log(value);
+     
+      this.deleteLeafleMiniCharts(this.objet_map);
+     
+      this.integrationChartPasRegisonSurCarte();
+   
     },
   },
   mounted() {

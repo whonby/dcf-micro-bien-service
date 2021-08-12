@@ -28,9 +28,14 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>
                                      </div>
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures fonctionnelles</h5>
+                                       </tr>
+                                     </table>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures fonctionnelles</h5>
+            <!-- <h5>Liste des structures fonctionnelles</h5> -->
              <div align="right">
         Recherche: <input type="text" v-model="search"  placeholder=" ">
 
@@ -53,9 +58,9 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Niveau</th>
-                  <th>Libellé</th>
-                   <th width="5%">Action</th>
+                  <th style="font-size:14px">Niveau</th>
+                  <th style="width:90%;font-size:14px">Libellé</th>
+                   <th width="5%;font-size:14px">Action</th>
                 </tr>     
               </thead>
               <tbody>
@@ -118,7 +123,7 @@
                   <tr>
                     <td>
 <div class="control-group">
-              <label class="control-label">Niveau:</label>
+              <label class="control-label" style="font-align:14px">Niveau</label>
               <div class="controls">
                 <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" readonly />
               </div>
@@ -128,7 +133,7 @@
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label" style="font-align:14px">Libelle</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
@@ -161,7 +166,7 @@
             <tr>
               <td>
                 <div class="control-group">
-              <label class="control-label">Niveau:</label>
+              <label class="control-label" style="font-align:14px">Niveau</label>
               <div class="controls">
                 <input type="number" v-model="editFonctionnelle.niveau" class="span5" placeholder="" readonly/>
               </div>
@@ -171,7 +176,7 @@
             <tr>
               <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label" style="font-align:14px">Libelle</label>
               <div class="controls">
                 <input type="text" v-model="editFonctionnelle.libelle" class="span5" placeholder="" />
               </div>

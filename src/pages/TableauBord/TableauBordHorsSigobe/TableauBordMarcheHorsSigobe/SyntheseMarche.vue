@@ -168,34 +168,15 @@
             </tbody>
             <tr>
                
-                <td colspan="3">TOTAL TRESOR</td>
-                <td>{{afficheSommeTauxDon}}%</td>
+                <td colspan="3">TOTAL </td>
+                <td>{{afficheSommeTauxTresor}}%</td>
                 <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtTresor))}}</td>
                 <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
-                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaTresor))}}</td>
+                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCTresor))}}</td>
               </tr>
-           <tr>
-               
-                <td colspan="3">TOTAL DON</td>
-                <td>{{afficheSommeTauxDon}}%</td>
-                <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
-                <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
-                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
-              </tr>
-               <tr>
-               
-                <td colspan="3">TOTAL EMPRUNT</td>
-                <td>{{afficheSommeTauxEmprunt}}%</td>
-                <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtEmprunt))}}</td>
-                <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaEmprunt))}}</td>
-                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCEmprunt))}}</td>
-              </tr>
+          
           </table>
 
 
@@ -554,18 +535,6 @@
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-<td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-              <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-                
                 
                 
                 </tr>
@@ -839,6 +808,51 @@ editMandat:{},
       noDCfNoAdmin:noDCfNoAdmin,
 
 
+afficheSommeTauxTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantHtTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+     afficheSommeMontantTvaTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_tva),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantTTTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+
+
+
+
+
 libelleTypeFinancement() {
       return id => {
         if (id != null && id != "") {
@@ -1036,7 +1050,7 @@ BailleurParMarche() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.personnaliseGetterMarcheBailleur.filter(item=>item.marche_id == id && item.type_finnancement_id!=14);
+          let objet = this.personnaliseGetterMarcheBailleur.filter(item=>item.marche_id == id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -1542,7 +1556,7 @@ width: 95%;
 .tailgrand {
   width: 90%;
   margin: 0 -45%;
-  height: 50%;
+  height: 59%;
 }
 
 .modal-body {

@@ -905,6 +905,7 @@ activeMenuModuleTableauBord(){
     },
 
       goToModule(id){
+            localStorage.setItem('module_app', id);
      console.log(id)
      if (id==6){
          this.$router.push({

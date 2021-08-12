@@ -198,32 +198,6 @@ export function getAllUniteAdministrative({ commit }) {
       .catch(error => console.log(error));
   });
 }
-// ajouter Unite administrative
-// export function ajouterUniteAdministrative({ commit, dispatch}, nouveau) {
-//   asyncLoading(axios
-//     .post("/ajouter_unite_administrative", {
-//       type_ua_id: nouveau.type_ua_id,
-//       section_id: nouveau.section_id,
-//       nature_section_id: nouveau.nature_section_id,
-//       servicegest_id: nouveau.servicegest_id,
-//       localisationgeo_id: nouveau.localisationgeo_id,
-//       code: nouveau.code,
-//       libelle: nouveau.libelle,
-//       date_creation: nouveau.date_creation,
-//       code_ua: nouveau.code_ua
-//     }))
-//     .then(response => {
-//       if (response.status == 201) {
-//         commit("AJOUTER_UNITE_ADMINISTRATIVE", response.data);
-//         dispatch('getAllUniteAdministrative')
-//         this.$app.$notify({
-//           title: 'Success',
-//           text: 'Enregistrement Effectué avec Succès!',
-//           type: "success"
-//         })
-//       }
-//     });
-// }
 
 export function ajouterUniteAdministrative({ commit, dispatch }, nouveauObjet) {
   this.$app.$loading(true)
@@ -1101,91 +1075,6 @@ export function supprimerRealiteServiceFait({ commit }, id) {
 
 
 
-export function getAllLiquidation({ commit }) {
-  queue.push(() => {
-    axios
-      .get("/listeLiquidation")
-      .then(response => {
-        commit("GET_ALL_LIQUIDATION", response.data);
-      })
-      .catch(error => console.log(error));
-  });
-}
-
-// ajouter type texte
-export function ajouterLiquidation({ commit }, nouveau) {
-  asyncLoading(axios
-    .post("/ajouterLiquidation", nouveau)).then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_LIQUIDATION", response.data);
-
-      }
-    }).catch(error => console.log(error))
-}
-
-// modifier
-export function modifierLiquidation({ commit, dispatch }, nouveau) {
-  asyncLoading(axios
-    .put("/modifierLiquidation/" + nouveau.id, {
-
-      numero_bon_manuel: nouveau.numero_bon_manuel,
-      numero_demande: nouveau.numero_demande,
-      exo_id: nouveau.exo_id,
-      imputation_budgetaire: nouveau.imputation_budgetaire,
-      section_id: nouveau.section_id,
-      programme_id: nouveau.programme_id,
-      action_id: nouveau.action_id,
-      activite_id: nouveau.activite_id,
-      ua_id: nouveau.ua_id,
-      nature_depense_id: nouveau.nature_depense_id,
-      plan_budgetaire_id: nouveau.plan_budgetaire_id,
-      marche_id: nouveau.marche_id,
-      mode_paiement_id: nouveau.mode_paiement_id,
-      fournisseur_id: nouveau.fournisseur_id,
-      egagement_id: nouveau.egagement_id,
-      decision_emetteur: nouveau.decision_emetteur,
-      nom_emetteur: nouveau.nom_emetteur,
-      date_emetteur: nouveau.date_emetteur,
-
-      observation_emetteur: nouveau.observation_emetteur,
-      decision_ordonnateur: nouveau.decision_ordonnateur,
-      observation_ordonnateur: nouveau.observation_ordonnateur,
-      nom_ordonnateur: nouveau.nom_ordonnateur,
-      date_ordonnateur: nouveau.date_ordonnateur,
-
-      decision_controleur_financier: nouveau.decision_controleur_financier,
-      nom_controleur_financier: nouveau.nom_controleur_financier,
-      date_controleur_financier: nouveau.date_controleur_financier,
-      observation_controleur_financier: nouveau.observation_controleur_financier,
-      marchetype: nouveau.marchetype,
-      facture_id: nouveau.facture_id,
-      motif_controleur_f: nouveau.motif_controleur_f
-    })).then(response => {
-      commit("MODIFIER_LIQUIDATION", response.data);
-      dispatch('getAllLiquidation')
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
-
-//supprimer
-export function supprimerLiquidation({ commit }, id) {
-  this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
-    .then(dialog => {
-      commit("SUPPRIMER_LIQUIDATION", id);
-
-      // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete("/supprimerLiquidation/" + id).then(() => dialog.close());
-    });
-}
-
-
-
-
 
 export function getStructureOrganigrammeUa({ commit }) {
   queue.push(() => axios.get('/listeStructureOrganigramme').then(tony => {
@@ -1193,22 +1082,6 @@ export function getStructureOrganigrammeUa({ commit }) {
   }).catch(error => console.log(error)))
 
 }
-
-// ajouter plan fonctionnelle
-// export function ajouterStructureOrganigrammeUa({ commit, dispatch }, objetAjout) {
-//   asyncLoading(axios.post('/ajouterStructureOrganigramme', objetAjout)).then(res => {
-//     commit('AJOUTER_STRUCTURE_ORGANIGRAMME_UA', res.data)
-//     dispatch('getStructureOrganigrammeUa')
-//     dispatch('getStructureOrganigrammeUa')
-//     dispatch('getStructureOrganigrammeUa')
-//     dispatch('getStructureOrganigrammeUa')
-//     this.$app.$notify({
-//       title: 'success ',
-//       text: 'Enregistrement effectué avec success !',
-//       type: "success"
-//     })
-//   }).catch(error => console.log(error))
-// }
 
 
 export function ajouterStructureOrganigrammeUa({ commit, dispatch }, nouveau) {

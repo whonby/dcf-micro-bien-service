@@ -27,14 +27,20 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>        
                                      </div> 
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans fonctionnels</h5>
+                                       </tr>
+                                     </table>
         <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans fonctionnels</h5>
+             <div class="widget-title"> <span class="icon">  </span>
+            <!-- <h5>Liste des plans fonctionnels</h5> -->
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
           </div> -->
              
+
           </div>
          
            <div class="widget-content ">
@@ -72,9 +78,9 @@
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
                   <tr>
-                    <td>
+                    <!-- <td>
 <div class="control-group">
-              <label class="control-label">Structure fonctionnelle:</label>
+              <label class="control-label">Structure fonctionnelle</label>
               <div class="controls">
                 <select  v-model="formData.structure_fonctionnelle_id" class="span5">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
@@ -82,12 +88,20 @@
                 </select>
               </div>
             </div>
+                    </td> -->
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Structure fonctionnelle</label>
+              <div class="controls">
+                <input type="text" :value="AfficheNiveau1" class="span5" placeholder="Saisir le code" readonly />
+              </div>
+            </div>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Code</label>
               <div class="controls">
                 <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
@@ -107,7 +121,7 @@
                 </table>            
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.structure_fonctionnelle_id && 
+             <button v-show=" 
              formData.code.length && 
              formData.libelle.length"
               @click.prevent="ajouterTitreLocal" class="btn btn-primary"
@@ -130,7 +144,7 @@
                   <tr>
                     <td>
                         <div class="control-group">
-              <label class="control-label">Code parent:</label>
+              <label class="control-label">Code parent</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.code" class="span5"  />
               </div>
@@ -138,7 +152,7 @@
                     </td>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Libellé parent:</label>
+              <label class="control-label">Libellé parent</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
               </div>
@@ -147,7 +161,7 @@
                   </tr>
                   
                   <tr>
-                    <td>
+                    <!-- <td>
                       <div class="control-group">
               <label class="control-label">Structure fonctionnelle:</label>
               
@@ -157,6 +171,14 @@
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
+            </div>
+                    </td> -->
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Structure fonctionnelle</label>
+              <div class="controls">
+                <input type="text" :value="AfficheNiveau2" class="span5" placeholder="Saisir le code" readonly />
+              </div>
             </div>
                     </td>
                     <td>
@@ -183,8 +205,7 @@
                             
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_fonctionnelle_id"
+             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -326,9 +347,82 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxFonctionnelle', ['structures_fonctionnelles', 
   'plans_fonctionnels']),
+afficheLeLibelleStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_fonctionnelles.find(qtreel => qtreel.niveau == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  afficheLeNiveauStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_fonctionnelles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau + 1;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLeIdStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_fonctionnels.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.structure_fonctionnelle_id;
+      }
+      return 0
+        }
+      };
+    },
 
 
-  
+AfficheNiveau2(){
+
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 2) {
+
+  return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}
+else if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 3)
+
+{
+
+return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}
+return ""
+   },
+
+
+
+
+AfficheNiveau1(){
+     const codeprog = this.structures_fonctionnelles.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.libelle
+     }
+
+     return null
+   },
+  AfficheNiveauid(){
+     const codeprog = this.structures_fonctionnelles.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.id
+     }
+
+     return null
+   },
   
    lesPlansParents(){
      return this.plans_fonctionnels.filter(plan => plan.parent == null)
@@ -372,13 +466,18 @@ getColumns() {
 },
 
          ajouterProgrammeLocalEnfant () {
+           var nouveauObjet = {
+             ... this.nouvelElementEnfant,
+structure_fonctionnelle_id:this.afficheLeIdStructure(this.parentDossier.code)
+
+           }
       // console.log(this.nouvelElementEnfant)
-      this.ajouterPlanFonctionnel(this.nouvelElementEnfant)
+      this.ajouterPlanFonctionnel(nouveauObjet)
 
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",
-          structure_fonctionnelle_id:""
+         
         }
     },
 
@@ -418,12 +517,16 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterTitreLocal () {
-      this.ajouterPlanFonctionnel(this.formData)
+      var nouveauO = {
+        ... this.formData,
+        structure_fonctionnelle_id:this.AfficheNiveauid
+      }
+      this.ajouterPlanFonctionnel(nouveauO)
 
         this.formData = {
                 code: "",
              libelle: "",
-              structure_fonctionnelle_id:""
+             
         }
     },
 // afficher modal

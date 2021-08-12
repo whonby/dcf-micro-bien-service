@@ -736,7 +736,9 @@ export default {
               (item) => item.id == val.activite_id
             );
             let ob = collection.find((item) => item.id == val.activite_id);
+          
             if (ob == undefined) {
+                console.log(ob)
               let act = {
                 ...activite,
                 lib: activite.code + " " + activite.libelle,
