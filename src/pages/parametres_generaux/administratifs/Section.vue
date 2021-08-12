@@ -9,60 +9,78 @@
         <h3>Ajouter section</h3>
       </div>
       <div class="modal-body">
-        <table>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Nature de section:</label>
+                <div class="controls">
+                  <select class="span5" v-model="formData.naturesection_id">
+                    <option
+                      v-for="resultat in natures_sections"
+                      :key="resultat.id"
+                      :value="resultat.id"
+                    >
+                      {{ resultat.code }}-{{ resultat.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </td>
+          </tr>
 
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Numéro d'ordre de section:</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="formData.code"
+                    class="span5"
+                    placeholder="Saisir le code"
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Code Section:</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    disabled
+                    :value="codeAjoutSection"
+                    class="span5"
+                    placeholder="Saisir le code section"
+                  />
+                </div>
+              </div>
+              <div style="color: red" v-if="verifcode == true">
+                Ce code existe déjà!
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Nom section:</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="formData.nom_section"
+                    class="span5"
+                    placeholder="Saisir le nom de section"
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
         </table>
-        <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">Nature de section:</label>
-            <div class="controls">
-              <select v-model="formData.naturesection_id">
-                <option
-                  v-for="resultat in natures_sections"
-                  :key="resultat.id"
-                  :value="resultat.id"
-                >
-                  {{ resultat.code }}-{{ resultat.libelle }}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <label class="control-label">Numéro d'ordre de section:</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.code"
-                class="span"
-                placeholder="Saisir le code"
-              />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Code Section:</label>
-            <div class="controls">
-              <input
-                type="text"
-                disabled
-                :value="codeAjoutSection"
-                class="span"
-                placeholder="Saisir le code section"
-              />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Nom section:</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.nom_section"
-                class="span"
-                placeholder="Saisir le nom de section"
-              />
-            </div>
-          </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button
@@ -341,13 +359,12 @@ export default {
       return null;
     },
 
-    
     verifcode() {
       if (this.codeAjoutSection == "") {
         return false;
       } else {
         let Objet = this.sections.filter(
-          (element) => element.code == this.codeAjoutSection
+          (element) => element.code_section == this.codeAjoutSection
         );
         if (Objet.length != 0 && Objet != undefined) {
           return Objet.length;
@@ -356,7 +373,6 @@ export default {
         }
       }
     },
-
   },
 
   methods: {

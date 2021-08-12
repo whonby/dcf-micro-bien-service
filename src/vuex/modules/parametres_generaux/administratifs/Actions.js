@@ -190,7 +190,7 @@ export function modifierNatureSection({ commit }, objetModifie) {
         libelle: objetModifie.libelle
     })).then(res => {
         commit('MODIFIER_NATURE_SECTION', res.data)
-      //  dispatch('getNatureSection')
+        //  dispatch('getNatureSection')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -225,15 +225,17 @@ export function getSection({ commit }) {
 
 }
 
-
-
-// ajouter  section
 export function ajouterSection({ commit }, objetAjout) {
-    asyncLoading(axios.post('/ajouter_section', objetAjout)).then(response => {
+    asyncLoading(axios.post('/ajouter_section', {
+        code: objetAjout.code,
+        nom_section: objetAjout.nom_section,
+        code_section: objetAjout.code_section,
+        naturesection_id: objetAjout.naturesection_id
+
+    })).then(response => {
         if (response.status == 201) {
             commit('AJOUTER_SECTION', response.data)
-           /* dispatch('getSection')
-            dispatch('getNatureSection')*/
+            dispatch('getSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -244,6 +246,23 @@ export function ajouterSection({ commit }, objetAjout) {
 
 }
 
+// ajouter  section
+// export function ajouterSection({ commit }, objetAjout) {
+//     asyncLoading(axios.post('/ajouter_section', objetAjout)).then(response => {
+//         if (response.status == 201) {
+//             commit('AJOUTER_SECTION', response.data)
+//            /* dispatch('getSection')
+//             dispatch('getNatureSection')*/
+//             this.$app.$notify({
+//                 title: 'success ',
+//                 text: 'Enregistrement effectué avec success !',
+//                 type: "success"
+//             })
+//         }
+//     }).catch(error => console.log(error))
+
+// }
+
 export function modifierSection({ commit }, objetModifie) {
     asyncLoading(axios.put('/modifier_section/' + objetModifie.id, {
 
@@ -253,7 +272,7 @@ export function modifierSection({ commit }, objetModifie) {
         naturesection_id: objetModifie.naturesection_id
     })).then(res => {
         commit('MODIFIER_SECTION', res.data)
-     
+
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -374,30 +393,30 @@ export function ajouterPlanProgramme({ commit, dispatch }, nouveauObjet) {
 export function importPlanProgramme({ commit }, nouveauObjet) {
 
     asyncLoading(axios.post('/importProgramme', nouveauObjet)).then(res => {
-      if (res.status === 201) {
-        this.$app.$notify({
-          title: 'success',
-          text: 'importaion Effectuée',
-          type: "success"
-        });
-        commit('IMPORT_PLAN_PROGRAMME', res.data)
-      }else{
-        this.$app.$notify({
-          title: 'Erreur',
-          text: 'Importaion Echouée ces données existe déjà !',
-          type: "Erreur"
-        });
-      }
+        if (res.status === 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'importaion Effectuée',
+                type: "success"
+            });
+            commit('IMPORT_PLAN_PROGRAMME', res.data)
+        } else {
+            this.$app.$notify({
+                title: 'Erreur',
+                text: 'Importaion Echouée ces données existe déjà !',
+                type: "Erreur"
+            });
+        }
     })
-      .catch(error => {
-        console.log(error)
-        this.$app.$notify({
-          title: 'Erreur',
-          text: "Importaion Echouée ces données existe déjà !",
-          type: "error"
-        });
-      })
-  }
+        .catch(error => {
+            console.log(error)
+            this.$app.$notify({
+                title: 'Erreur',
+                text: "Importaion Echouée ces données existe déjà !",
+                type: "error"
+            });
+        })
+}
 
 // export function importPlanProgramme({ commit }, nouveauObjet) {
 //     asyncLoading(axios.post('/importProgramme', nouveauObjet)).then(response => {
@@ -537,7 +556,7 @@ export function ajouterServiceGestionnaire({ commit, dispatch }, nouveauObjet) {
         });
         commit('AJOUTER_SERVICE_GESTIONNAIRE', res.data)
         dispatch('getServiceGestionnaire')
-       // dispatch('getServiceGestionnaire')
+        // dispatch('getServiceGestionnaire')
 
         this.$app.$loading(false)
     }).catch(error => {
@@ -562,9 +581,9 @@ export function modifierServiceGestionnaire({ commit, dispatch }, nouveauObjet) 
     })).then(resultat => {
         commit('MODIFIER_SERVICE_GESTIONNAIRE', resultat.data)
         dispatch('getServiceGestionnaire')
-       /* dispatch('getServiceGestionnaire')
-        dispatch('getServiceGestionnaire')
-        dispatch('getServiceGestionnaire')*/
+        /* dispatch('getServiceGestionnaire')
+         dispatch('getServiceGestionnaire')
+         dispatch('getServiceGestionnaire')*/
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -580,9 +599,9 @@ export function supprimerServiceGestionnaire({ commit, dispatch }, id) {
         .then(dialog => {
             commit('SUPPRIMER_SERVICE_GESTIONNAIRE', id)
             dispatch('getServiceGestionnaire')
-           /* dispatch('getServiceGestionnaire')
-            dispatch('getServiceGestionnaire')
-            dispatch('getServiceGestionnaire')*/
+            /* dispatch('getServiceGestionnaire')
+             dispatch('getServiceGestionnaire')
+             dispatch('getServiceGestionnaire')*/
 
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/supprimer_service_gestionnaire/' + id).then(() => dialog.close())
@@ -1350,8 +1369,8 @@ export function supprimerPlanOrganigrammeUa({ commit, dispatch }, id) {
         .then(dialog => {
             commit('SUPPRIMER_PLAN_ORGANIGRAMME_UA', id)
             dispatch('getPlanOrganigrammeUa')
-           /* dispatch('getPlanOrganigrammeUa')
-            dispatch('getPlanOrganigrammeUa')*/
+            /* dispatch('getPlanOrganigrammeUa')
+             dispatch('getPlanOrganigrammeUa')*/
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/supprimer_Plan_OrganigrammeUa/' + id).then(() => dialog.close())
 
