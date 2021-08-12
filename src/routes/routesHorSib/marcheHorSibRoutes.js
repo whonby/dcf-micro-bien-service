@@ -4,9 +4,10 @@ import ListeDesSousBudgetMarche from "../../pages/Hors_sib/marche_hors_sib/Liste
 import ListeMarcheSousBudget from "../../pages/Hors_sib/marche_hors_sib/ListeDesSousBudgetMarche/ListeMarcheSousBudget.vue";
 import groupeMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUa.vue";
 import groupeMarcheParUaSIgobe from "../../pages/Hors_sib/marche_hors_sib/groupeMarcheParUaSIgobe.vue";
+import TableauAvenant from "../../pages/Hors_sib/marche_hors_sib/TableauAvenant.vue";
 import groupeToutMarcheParUa from "../../pages/Hors_sib/marche_hors_sib/groupeToutMarcheParUa.vue";
 // import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
-
+listeMarcheBienEtServiceHS
  import ajouterMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/ajouterMarcheHorSib.vue";
 import modifierMarcheHorSib from "../../pages/Hors_sib/marche_hors_sib/modifierMarcheHorSib.vue"
 import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarcheHorsSib.vue";
@@ -65,6 +66,11 @@ import DetailDemandeP from "../../pages/Hors_sib/marche_hors_sib/DetailDP/Detail
 const marcheHorSibRoutes =[
 
 
+    {
+        path:"tableau_avenant",
+        name:"avenant",
+        component:TableauAvenant
+    },
     {
         path:"/detail-dp/:id",
         name:"DetailDemandeP",

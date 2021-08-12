@@ -1,6 +1,6 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
-ListeOpParUa
+
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -310,6 +310,7 @@ const BienServiceRoutes = [
         name: "GroupeOpParAnnee",
         component: GroupeOpParAnnee
     },
+    
     {
         path: "/NewOrdrePaiement/:id",
         name: "NewOrdrePaiement",

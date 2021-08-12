@@ -751,11 +751,12 @@
 
 
                 
-                  <td style="text-align: right;color:#000">
+                  
+                 <td style="text-align: left;color:#000">{{ 0 }}</td>
+                 <td style="text-align: right;color:#000">
                    <!-- {{ ((TotalMontantBudgetExecuté /TotalMontantBudgetActuel) *100).toFixed(2) }} -->
                    {{ TotalEviteNaN }}%
                  </td>
-                 <td style="text-align: right;color:#000">{{ 0 }}</td>
                     <td style="width :9%;text-align: right;color:#000;background-color: #f55e25 !important;font-weight: bold;color:#000">
                     {{ formatageSommeSansFCFA(parseFloat(TotalMontantBudgetActuel - TotalMontantBudgetExecuté)) }}
                   </td>
@@ -1082,12 +1083,12 @@ inputSelect:false,
      NbreMarcheEnCoursParLigne(){
         return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.gettersgestionOrdrePaiement
+          return this.marches
             .filter(
               (qtreel) =>
-                (qtreel.activite_id == id && qtreel.ligne_economique_id == id1 &&
-                qtreel.exercice == this.afficheAnnee &&
-                qtreel.marche_id!=null)
+                (qtreel.activite_id == id && qtreel.economique_id == id1 &&
+                qtreel.exo_id == this.afficheAnnee &&
+                qtreel.attribue==2)
             ).length
         } else {
           return 0;

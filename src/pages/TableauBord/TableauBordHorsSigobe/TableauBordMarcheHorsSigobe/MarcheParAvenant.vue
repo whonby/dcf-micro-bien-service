@@ -9,211 +9,358 @@
         </h3>
       </div>
       <div align="right">
-      <!-- <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
         Exporter en PDF
-      </button> -->
+      </button>
     </div> 
-      <div class="modal-body" id="printpdf1">
-         <!-- <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Objet du marche</th>
-                    <th>Unite administrative</th>
-                    <th>Montant Réel du marche (Fcfa)</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
+      <div class="modal-body" id="printpdf12">
+  <!-- <div class="tableauentier table table-bordered">
+	<div>
+	 <table border="1">
+		<tr>
+      
+			<th  style="font-size: 14px;color:#000; font-weight: bold; width:150px;"></th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; width:580px; padding:15px;">Marche Contat / Initial</th>
+			<th v-for="item in taillerAvenantParMarche(test)" :key="item"   style="font-size: 14px;color:#000; font-weight: bold; padding:15px;width:275px;">Avenant {{item}}</th>
+			<th  style="font-size: 14px;color:#000; font-weight: bold; padding:15px; width:200px;">Toyal des Avenants</th>			
+			<th style="font-size: 14px;color:#000; font-weight: bold; padding:15px;width:200px;">Marche / Contrat Initial</th>
+ 
+		</tr>
+	</table>
+	</div>
+	<div class="colonne">
+			<table border="1">
+				<tr>
+					<td style="height:80px; width:30px;">objet</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">numero</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Date</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Titulaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Montant</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Durée</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Source de financement</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Ligne Budgetaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">beneficiaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Livrables</td>
+				</tr>			
+			</table>
+	</div>
+	<div class="colonne">
+			<table >
+				<tr>
+					<td style="height:80px; width:500px!important;">
 
-                  <tr>
-                    <td>{{libelleMarche(test)}}</td>
-                    <td>{{libelleUniteAdministrative(Uaid(test))}}</td>
-                    <td style="text-align:rigth">{{formatageSommeSansFCFA(parseFloat(MontantReelMarche(test)))}}</td>
-                  </tr>
-                </tbody>
-              </table> -->
-              <br>
-               <table class="table table-bordered table-striped">
+						{{libelleMarche(test) || 'Non renseigné'}}
+						
+						</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{NumeroMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;"> {{DateMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{formatageSommeSansFCFA(parseFloat((MontantReelMarche(test)))) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">100%</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{DureMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">100 %</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
+				</tr>
+				<tr>
+					<td style="height:60px; width:500px!important;">{{livrableMarche(test) || 'Non renseigné'}}</td>
+				</tr>			
+			</table>
+	</div>
+	<div class="colon">
+			<table border="1">
+				<tr>
+					<td  style="height:80px;">objet</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">numero</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Date</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Titulaire</td>
+				</tr>
+				<tr>
+					<td  style="height:60px;">
+            {{formatageSommeSansFCFA(parseFloat(parseFloat(MontantReelMarche(test)) + parseFloat(SommeAvenant(test))))}}
+            </td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Durée</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Taux</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Source de financement</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Ligne Budgetaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">beneficiaire</td>
+				</tr>
+				<tr>
+					<td style="height:60px;">Livrables</td>
+				</tr>			
+			</table>
+	</div>
+	
+	
+	
+		<div class="tableauscroll">
+			<table border = "1">
+				<tr>
+					<td style="height:80px; " v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{tem.objet_avenant.substring(0,90)+"...." || 'Non renseigné'}}
+            </td>
+					<td style="height:60px; padding:15px; width:150px;">TA</td>
+				</tr>
+				<tr>
+					 <td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+             {{tem.numero_avenant || 'Non renseigné'}}
+            </td>
+					<td style="height:60px;">L obget du marche</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+				
+ 				<tr>				
+				<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+          {{formaterDate(tem.date_avenant) || 'Non renseigné'}}
+        </td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{afficherEntrepriseNom(recupereIdEntreprise(tem.marche_id)) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{formatageSommeSansFCFA(parseFloat(tem.montant_avenant)) || 'Non renseigné'}}</td>
+					<td >
+            <span style="height:60px;" >{{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}</span>
+          </td>
+					
+				</tr>
+ 				<tr>				
+					<td  style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}%</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">
+            {{tem.taux_avenant || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(idsourceFinancement(tem.marche_id)) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td style="height:60px;" v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(tem.marche_id))) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					 <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{beneficiaireMarche(tem.marche_id) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 				<tr>				
+					<td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{livrableMarche(tem.marche_id) || 'Non renseigné'}}</td>
+					<td style="height:60px;">L obget du marche</td>
+				</tr>
+ 
+			</table>
+		</div>
+	</div> -->
+        <table class="table table-bordered table-striped">
           <tr>
              <h2 style="text-align: center; font-size: 25px;text-decoration: underline ;text-transform: uppercase;">
-                 AVENANT DES MARCHES</h2>
+                   TABLE DES AVENANTS</h2>
           </tr>
 
-           
         </table>
-     <table class="table table-bordered table-striped">
-                <thead>
-                  <tr v-for="itemAvenant in listeDesAvenant(test)" :key="itemAvenant.id">
-                    <th></th>
-                    <th>Marché/Contrat initial</th>
-                    <th>Avenant {{itemAvenant.numero_avenant}}</th>
-                    <!-- <th>Avenant 1</th>
-                    <th>Avenant 1</th>
-                    <th>Avenant 1</th>
-                    <th>Avenant 1</th> -->
-                    <th>Total Avenant</th>
-                    <th>Marché/Contrat actuel</th>
-                     
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      <th>Objet</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
- <tr>
-                      <th>Numéro </th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Date</th>
-                     <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Titulaire</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Montant</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Taux</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Durée</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                  <tr>
-                      <th>Taux</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
- <tr>
-                      <th>Source de financement</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Ligne budgétaire</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Bénéficiaires</th>
-                    <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Livrables</th>
-                      <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>Taux</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-                   <tr>
-                      <th>AUTRES</th>
-                       <td>{{test}}</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                      <td>6</td>
-                  </tr>
-
-                </tbody>
-              </table>
+                  <table class="table table-bordered"  style="
+                  font-size: 14px;
+                  color:#000;
+                  font-weight: bold;
+                " >
+  <tbody >
+  <tr>
+    <td>&nbsp;</td>
+    <td style="background: rgb(6, 184, 6) !important;color:#fff !important">Marché/Contrat initial</td>
+    
+    
+    <td v-for="item in taillerAvenantParMarche(test)" :key="item" style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important"> Avenant {{item}}</td>
+   
+    <td style="background: rgb(6, 184, 6) !important;text-align:center;width: 7%;;color:#fff !important"> Total Avenant</td>
+    <td style="background: rgb(6, 184, 6) !important;text-align:center;color:#fff !important">Marché/Contrat Actuel</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Objet</th>
+    <td> {{libelleMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.objet_avenant || 'Non renseigné'}}</td>
+    <td >
+      
+    </td>
+    <td>{{libelleMarche(test) || 'Non renseigné'}}</td>
+   
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Numero</th>
+    <td> {{NumeroMarche(test) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.numero_avenant || 'Non renseigné'}}</td>
+    <td></td>
+   <td> {{NumeroMarche(test) || 'Non renseigné'}} </td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Date</th>
+    <td> {{DateMarche(test) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formaterDate(tem.date_avenant) || 'Non renseigné'}}</td>
+    <td></td>
+   <td> {{DateMarche(test) || 'Non renseigné'}} </td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Titulaire</th>
+    <td>{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{afficherEntrepriseNom(recupereIdEntreprise(tem.marche_id)) || 'Non renseigné'}}</td>
+    <td></td>
+  <td>{{LibelleEntreprise(EntrepriseMarche(test))}}</td>
+    
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Montant</th>
+    <td> {{formatageSommeSansFCFA(parseFloat((MontantReelMarche(test)))) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{formatageSommeSansFCFA(parseFloat(tem.montant_avenant)) || 'Non renseigné'}}</td>
+    <td>
+      <span >
+      {{formatageSommeSansFCFA(parseFloat(SommeAvenant(test)))}}
+        </span>
+    </td>
+    <td style="background: rgb(6, 184, 6) !important;text-align:left;color:#fff">
+        {{formatageSommeSansFCFA(parseFloat(parseFloat(MontantReelMarche(test)) +  parseFloat(SommeAvenant(test))))}}
+    </td>
+    
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Taux Montant</th>
+    <td> 100 %</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.taux_avenant || 'Non renseigné'}}%</td>
+    <td>
+      <span >{{TauxDesAvenant(test) || 'Non renseigné'}} %</span>
+    </td>
+    <td> 100 % + {{TauxAvenantParMarche(test)}}%</td>
+    
+    
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Durée</th>
+    <td>{{DureMarche(test) || 'Non renseigné'}} Jours</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{tem.dure_avenant || 'Non renseigné'}} Jours</td>
+   
+   <td>{{SommeDureeAvenantParMarche(test)}} Jours</td>
+  <td>{{(parseFloat(DureMarche(test)) + parseFloat(SommeDureeAvenantParMarche(test))) || 'Non renseigné'}} Jours</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Taux Durée</th>
+    <td >100 %</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{((parseFloat(tem.dure_avenant)/parseFloat(DureMarche(test)))*100).toFixed(2) || 'Non renseigné'}} %</td>
+    <td></td>
+   <td> 100 % + {{((SommeDureeAvenantParMarche(test)/parseFloat(DureMarche(test)))*100).toFixed(2)}}%</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Sorce de financement</th>
+    <td> {{LibellesourceFinancement(idsourceFinancement(test)) || 'Non renseigné'}} </td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibellesourceFinancement(tem.source_financement_id) || 'Non renseigné'}}</td>
+    
+   <td></td>
+   <td>{{LibellesourceFinancement(idsourceFinancementAvenant(test))}}</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Ligne Budgetaire</th>
+    <td>{{LibelleLigneBudgetaire(idLigneBudgetaire(idParent(test))) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{LibelleLigneBudgetaire(tem.ligne_budgetaire_id) || 'Non renseigné'}}</td>
+    
+  <td></td>
+   <td>{{LibelleLigneBudgetaire(idLigneEconomiqueAvenant(test))}}</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Bénéficiaires</th>
+    <td>{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{beneficiaireMarche(tem.marche_id) || 'Non renseigné'}}</td>
+    <td></td>
+   <td>{{beneficiaireMarche(test) || 'Non renseigné'}}</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Livrables</th>
+    <td>{{livrableMarche(test) || 'Non renseigné'}}</td>
+    <td v-for="tem in listeDesAvenant(test)" :key="tem.id">{{livrableMarche(tem.marche_id) || 'Non renseigné'}}</td>
+    <td></td>
+    <td>{{livrableMarche(test) || 'Non renseigné'}}</td>
+  </tr>
+  <tr>
+    <th style="background-color: #fbb203 !important;text-align:left !important">Autres</th>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <!-- <td></td>
+    <td></td> -->
+  </tr>
+  </tbody>
+  </table>
 
       </div>
     </div>
@@ -456,10 +603,17 @@ editMandat:{},
       recupereIDSection:0,
       source_financement_id1:0,
       test:0,
+      test1:0,
     };
   },
-  mounted(){
+  created(){
+    console.log("tranquille")
+  
+    console.log(this.apercuFacture(this.test))
+    this.test1 = this.listeDesAvenant(this.test)
+    console.log(this.test1)
    
+     
   },
 
   computed: {
@@ -562,6 +716,19 @@ editMandat:{},
      admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
+
+
+taillerAvenantParMarche(){
+      return id =>{
+        if(id != null && id !=""){
+          return this.avenants.filter(element => element.marche_id== id).length
+         
+
+        }
+      }
+    },
+
+
        LibelleLigneBudgetaire(){
       return id =>{
         if(id != null && id !=""){
@@ -617,6 +784,28 @@ editMandat:{},
         }
       }
     },
+    idsourceFinancementAvenant(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id)
+          if(ObjetId){
+            return ObjetId.source_financement_id
+          }
+
+        }
+      }
+    },
+    idLigneEconomiqueAvenant(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.avenants.find(element => element.marche_id== id)
+          if(ObjetId){
+            return ObjetId.ligne_budgetaire_id
+          }
+
+        }
+      }
+    },
       afficherEntrepriseNom(){
       return id =>{
         if(id != null && id !=""){
@@ -653,10 +842,28 @@ SommeAvenant() {
         }
       };
     },
+    Total(){
+      return id =>{
+        if(id !='' && id != null){
+          return this.avenants.filter(tem => this.MontantMarche(tem.marche_id) && this.SommeAvenant(tem.marche_id))
+        }
+      }
+    },
 listeDesAvenant() {
       return id => {
         if (id != null && id != "") {
            return this.avenants.filter(qtreel => qtreel.marche_id== id);
+
+     
+        }
+      };
+    },
+
+TauxDesAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id== id
+           ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.taux_avenant), 0).toFixed(0); 
 
      
         }
@@ -903,6 +1110,31 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+     beneficiaireMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.beneficiaire
+      }
+      return 0
+        }
+      };
+    },
+     livrableMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.livrable
+      }
+      return 0
+        }
+      };
+    },
+    
     Uaid() {
       return id => {
         if (id != null && id != "") {
@@ -1011,6 +1243,18 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+    LivrableMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.duree
+      }
+      return 0
+        }
+      };
+    },
     MontantReelMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1033,12 +1277,22 @@ ListeMarcheParTypeMarche() {
                     }
                 }
             },
+             SommeDureeAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.dure_avenant)
+                        },valInite);
+                    }
+                }
+            },
            TauxAvenantParMarche: function () {
                 return id => {
                     if (id != "") {
                       let valInite=0;
                         return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.taux)
+                           return total + parseFloat(currentVal.taux_avenant)
                         },valInite);
                     }
                 }
@@ -1097,6 +1351,43 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+     DateMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.date_approbation_marche_prevue
+      }
+      return 0
+        }
+      };
+    },
+     MontantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_marche
+      }
+      return 0
+        }
+      };
+    },
+     MontantMarches() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.filter(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_marche
+      }
+      return 0
+        }
+      };
+    },
+    
      NumeroOrdreMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1168,6 +1459,8 @@ TriaffichageUniteAdminstrative() {
       });
     },
 
+    
+
   },
 
   methods: {
@@ -1178,6 +1471,11 @@ TriaffichageUniteAdminstrative() {
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+
+
+    totalGeneral(id){
+        return (this.MontantReelMarche(id)+this.MontantReelMarche(id))
+    },
     triModificationBudget(){
       if(this.triModificationBudgetdata==0){
         this.triModificationBudgetdata=1;
@@ -1201,6 +1499,7 @@ TriaffichageUniteAdminstrative() {
   apercuFacture(id) {
 if(this.test==0){
   this.test=id
+
    this.$("#testModal").modal({
         backdrop: "static",
         keyboard: false,
@@ -1215,14 +1514,8 @@ if(this.test==0){
       });
        
       }
-     
-     
-
     },
 
-
-
-  
 TauxExecution(id) {
       if (
         this.MontantExecuteMarche(id) == 0 &&
@@ -1271,7 +1564,9 @@ ShowMyUa(id){
     },
 
 
-
+genererEnPdfDetailReamenagement() {
+      this.$htmlToPaper("printpdf12");
+    },
    
     genererEnPdf() {
       this.$htmlToPaper("printpdf");
@@ -1313,7 +1608,7 @@ width: 95%;
 }
 
 .whitebg {
-  background: #98FB98 !important;
+  background: #fff !important;
   font-weight: bold;
   color: black;
   font-size: 15px;
@@ -1359,4 +1654,28 @@ font-size: 13px !important;
 td{
   border:1px solid  #000 !important;
 }
+
+
+.tableauentier{
+	width:1500px;
+	/* height:150px;	 */
+  /* margin: 1em; */
+  margin-top: 20px;
+  margin-left: 150px;
+}
+
+.colonne{
+   float:left;
+   width:auto;
+}
+.colon{
+   float:right;
+   width:auto;
+}
+.tableauscroll{
+	width:35%;
+	float:auto;
+	overflow:auto;
+}
+
 </style>

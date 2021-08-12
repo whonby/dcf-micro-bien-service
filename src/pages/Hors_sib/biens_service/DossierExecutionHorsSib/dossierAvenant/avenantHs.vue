@@ -104,7 +104,7 @@
            
           <td>
            <div class="control-group">
-            <label class="control-label">Montant ht</label>
+            <label class="control-label">Montant HT</label>
             <div class="controls">
               <!-- <input
                 type="text"
@@ -702,8 +702,19 @@ quinzePourcentDuMarche() {
       
       return 0
     },
+NombreAvenantAuDemarage(){
+  return this.nombreAvenant(this.macheid) + 1
+  
+},
+nombreAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           return this.avenants.filter(qtreel => qtreel.marche_id == id).length;
 
-
+     
+        }
+      };
+    },
 
 affichierLibelleTypeActeFinancier() {
       return id => {
@@ -961,8 +972,8 @@ else
    type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
    montant_avenant:this.affichierMontantAvenantTTC,
    taux:this.afficherEnorere2,
-   taux_avenant:this.tauxAvenant
-   
+   taux_avenant:this.tauxAvenant,
+   	numero_ordre:this.NombreAvenantAuDemarage
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
@@ -1005,7 +1016,8 @@ else
    montant_avenant:this.affichierMontantAvenantTTCModifier,
      taux:this.afficherEnorere3,
       	exonere:this.editAvenant.exonere,
-        taux_avenant:this.tauxAvenantModifier
+        taux_avenant:this.tauxAvenantModifier,
+       
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');

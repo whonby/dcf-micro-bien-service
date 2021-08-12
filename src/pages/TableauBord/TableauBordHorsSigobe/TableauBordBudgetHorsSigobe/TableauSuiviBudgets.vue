@@ -617,36 +617,6 @@
                  
                   </th>
 
-                   <!-- <th style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" title="TAUX OP PROVISOIRE NON REGULARISE(S)">
-                  <button @click="triTauxOpNonRegulirise()">
-                     <i class=" icon-filter"></i> 
-                      
-                    </button>
-                  TAUX OP NON REGULARISE(S) -->
-                  <!-- <button @click="ActiveInputTauxOpNonRegulirise">
-                     <i class=" icon-search"></i> 
-                      
-                    </button>
-                   
-                 <input
-                    type="text"
-                    v-model="Taux_Op_non_Regulirise"
-                    class="span"
-                    v-show="inputTauxOpNonRegulirise == true"
-                  /> -->
-                  <!-- </th> -->
-                  <!-- <th style=" font-size: 14px;
-                  font-weight: bold;
-                  color: #000;
-                  text-align: center;
-                  background-color: #fbb203 !important;" title="TAUX D’OP PROVISOIRE NON REGULARISE HORS DELAI ">
-                  TAUX OP NON REGULARISE HORS DELAI </th> -->
-              
-
                   <th id="taillecol" style=" font-size: 14px;
                   font-weight: bold;
                   color: #000;
@@ -925,7 +895,9 @@
              <tfoot>
                 <tr style="margin-left:25px">
                   <td colspan="2"  style="text-align:center;color:#000;font-weight: bold;color:#000"> </td>
-                  <td colspan="2" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
+                  <td v-if="recupereIDactivite==0" colspan="2" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
+                 
+                  <td v-if="recupereIDactivite!=0" colspan="3" style="text-align:center;color:#000;font-weight: bold;color:#000">TOTAL: </td>
                       
 
                   <!-- <td style="text-left: center;color:#000;font-weight: bold;color:#000">
@@ -3147,7 +3119,7 @@ montantVoteToralParLigne(){
           MontantOpNONRegu:vm.MontantOPNonRegu(value.id),
           NombreOpREgularise:vm.NombreOPRegulirise(value.id),
           TauxOpNonRegularise:vm.TauxOPProvisoireNonRegularis(value.id),
-          Disponible:vm.MontantBudgetActuel(value.id)- vm.MontantBudgetExecuté(value.id),
+          Disponible:vm.MontantBudgetActuel(value.id) - vm.MontantBudgetExecuté(value.id),
           MARCHEenCours:vm.MarcheEnCoursUa(value.id),
           TauxExecution:vm.EviteNaN(value.id)
         };

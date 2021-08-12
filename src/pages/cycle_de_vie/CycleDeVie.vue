@@ -1,5 +1,7 @@
+date_decompte
 <template>
     <div >
+        
 
 
         <div class="container-fluid" v-if="detail">
@@ -13,8 +15,8 @@
 
                         <div class="widget-title">
                             <div align="right">
-                                <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-                                <button class="btn btn-default" @click="tableToExcel('table', 'Cycle de vie')">
+                                <button class="btn btn-info" @click="genererEnPdf()">Exporter en PDF</button>
+                                <button class="btn btn-default"   @click="tableToExcel('table', 'Cycle de vie')">
                                     Exporte en excel
                                 </button>
                             </div>
@@ -25,10 +27,10 @@
                         </div>
 
      <div id="app">
-         <div  id="printpdf" ref="table" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
-             <div align="center"> <h2>({{detail.objet}})</h2> </div>
+         <div  id="printContent" ref="table" summary="lorem ipsum si)t amet" rules="groups" frame="hsides" border="2">
+             <div align="center"> <h2>({{infoSplite(detail.objet)}}</h2> </div>
              <br>
-             <table class="table" >
+             <table class="table table-striped table-hover">
                  <thead>
                  <tr>
                      <th style="width:10%">EXERCICE</th>
@@ -50,6 +52,10 @@
                      <th style="width:10%">OBJET</th>
                      <td>{{detail.objet}} </td>
                  </tr>
+                 <!--<tr>
+                     <th style="width:10%">LOT</th>
+                     <td>{{infoSplite(detail.objet)}} </td>
+                 </tr>-->
                   <tr>
                      <th style="width:10%">OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS</th>
                      <td>
@@ -78,7 +84,7 @@
                  <tr>
                      <th style="width:10%">NOM DU BAILLEUR</th>
                      <td style="width:15%" v-if="detailBailEtat"> {{detailBailEtat.typeFinnancement.souce_financement.libelle}} </td>
-                     <td style="width:15%" v-for="(baill, index) in detailBailleur" :key="baill.id">
+                     <td colspan="6"  v-for="(baill, index) in detailBailleur" :key="baill.id">
                          B{{index + 1}}: {{baill.bailleur.libelle}} </td>
                     <!-- <td style="width:15%">B2: </td>
                      <td style="width:15%">B3: </td>
@@ -97,7 +103,7 @@
                  <tr>
                      <th  style="width:10%">DON / EMPRUNT / N-A</th>
                      <td style="width:15%" v-if="detailBailEtat"> {{detailBailEtat.typeFinnancement.libelle}} </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                     <td colspan="6"  v-for="baill in detailBailleur" :key="baill.id">
                          {{baill.typeFinnancement.libelle}}
                      </td>
                      <!--<td style="width:15%"> </td>
@@ -108,7 +114,7 @@
                  <tr>
                      <th  style="width:10%">POURCENTAGE (%)</th>
                      <td style="width:15%" v-if="detailBailEtat">{{detailBailEtat.tauxbailleur}} % </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">{{baill.tauxbailleur}} %</td>
+                     <td colspan="6"  v-for="baill in detailBailleur" :key="baill.id">{{baill.tauxbailleur}} %</td>
                      <!--<td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -120,7 +126,7 @@
 
                          {{formatageSomme(parseFloat(detailBailEtat.montant)) || 'Non renseigné'}}
                      </td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                     <td colspan="6"  v-for="baill in detailBailleur" :key="baill.id">
                        
                          {{formatageSomme(parseFloat(baill.montant)) || 'Non renseigné'}}
                      </td>
@@ -133,7 +139,7 @@
                      <th  style="width:10%">MONTANT TTC FCFA</th>
                      <td style="width:15%" v-if="detailBailEtat">
                          {{formatageSomme(parseFloat(detailBailEtat.montant)) || 'Non renseigné'}}</td>
-                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                     <td colspan="6" v-for="baill in detailBailleur" :key="baill.id">
                          {{formatageSomme(parseFloat(baill.montant)) || 'Non renseigné'}}
                      </td>
                      <!--<td style="width:15%"> </td>
@@ -142,10 +148,11 @@
                      <td style="width:15%"> </td>-->
                  </tr>
                  <tr>
-                     <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT FCFA(HT,TTC)</th>
+                     <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT </th>
 
-                     <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
-                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
+                     <td colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
+                     <td  colspan="1" >{{formatageSomme(parseFloat(AfficheMontantTV(detail.id))) || 'Non renseigné'}}  TVA </td>
+                     <td  colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
                  </tr>
                 
 
@@ -190,9 +197,9 @@
 
                  <tr>
                      <th>MONTANT CONFIDENTIEL FCFA</th>
-                     <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture_ht">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
-                     <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
-                     <td style="width:15%" colspan="3" v-if="detailCojo.montant_ouverture">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
+                     <td style="width:15%" colspan="3" v-else>Non Renseigné </td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
                      <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
 
                  </tr>
@@ -279,21 +286,31 @@
                      </td>
                  </tr>
                  <tr>
-                     <th>CAUTIONNEMENT(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <th>CAUTIONNEMENT</th>
+                     <td style="width:15%" colspan="6" > 
+                          {{formatageSomme(parseFloat(delailCautionnementHT(detail.id)))}} HT</td>
+                     <td style="width:15%" colspan="6" >
+                              {{formatageSomme(parseFloat(delailCautionnementTTC(detail.id)))}} TTC
+                     </td>
                  </tr>
                  <tr>
-                     <th>RETENUE DE GARANTIE(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <th>RETENUE DE GARANTIE</th>
+                       <td style="width:15%" colspan="6" > 
+                          {{formatageSomme(parseFloat(delailRetenueGarantieHT(detail.id)))}} HT</td>
+                     <td style="width:15%" colspan="6" >
+                              {{formatageSomme(parseFloat(delailRetenueGarantieTTC(detail.id)))}} TTC
+                     </td>
                  </tr>
                  <tr>
-                     <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
-                        ( {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ht))}}  HT, {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ttc))}} TTC )
+                     <th>AVANCE DE DEMARRAGE</th>
+                     <td style="width:15%" colspan="6">
+                         {{formatageSomme(parseFloat(delailAvanceDemarageHT(detail.id)))}}
+                          HT 
                      </td>
-                     <td style="width:15%" colspan="6" v-else>
-                         NON APPLICABLE
+                      <td style="width:15%" colspan="6">
+                         {{formatageSomme(parseFloat(delailAvanceDemarageTTC(detail.id)))}} TTC
                      </td>
+                     
                  </tr>
                  <tr>
                      <th>DATE DE NOTIFICATION DE L'ORDRE DE SERVICE</th>
@@ -307,7 +324,8 @@
                  <tr>
                      <th>DATE PREVISIONELLE DE DEMARRAGE DES TRAVAUX</th>
                      <td style="width:15%" colspan="6" v-if="detail">
-                        {{detail.date_execution_marche_debut_prevue}}
+                        
+                          {{formaterDate(dateOrdreServiceDemarage(detail.id))}}
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -316,7 +334,8 @@
                  <tr>
                      <th>DELAI D'EXECUTION</th>
                      <td style="width:15%" colspan="6" v-if="detail">
-                         {{detail.durre_marche_prevue}}
+                        
+                              {{delaiExecution(detail.id)}} JOURS
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -325,7 +344,7 @@
                  <tr>
                      <th>DATE PREVISIONNELLE DE FIN DES TRAVAUX</th>
                      <td style="width:15%" colspan="6" v-if="detail">
-                         {{detail.date_execution_fin_prevue}}
+                         {{formaterDate(dateFinTraveauxPrevue(detail.id))}}
                      </td>
                      <td style="width:15%" colspan="6" v-else>
                          NON APPLICABLE
@@ -367,15 +386,16 @@
                      </td>
                  </tr>
                  <tr>
-                     <th>REMBOURSEMENT AVANCE DE DEMARRAGE(%,HT,TTC)</th>
+                     <th>REMBOURSEMENT AVANCE DE DEMARRAGE</th>
+                     <td style="width:15%" colspan="6" > </td>
+                      <td style="width:15%" colspan="6" > </td>
+                 </tr>
+                 <tr>
+                     <th>NIVEAU D'ENGAGEMENT DU  CAUTIONNEMENT</th>
                      <td style="width:15%" colspan="6" > </td>
                  </tr>
                  <tr>
-                     <th>NIVEAU D'ENGAGEMENT DU  CAUTIONNEMENT(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" > </td>
-                 </tr>
-                 <tr>
-                     <th>NIVEAU D'ENGAGEMENT DE LA RETENUE DE GARANTIE(%,HT,TTC)</th>
+                     <th>NIVEAU D'ENGAGEMENT DE LA RETENUE DE GARANTIE</th>
                      <td style="width:15%" colspan="6" > </td>
                  </tr>
                  </thead>
@@ -408,7 +428,7 @@
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
-                     <th>MONTANT TOTAL DU MARCHE APRES AVENANT (S) FCFA</th>
+                     <th>MONTANT TOTAL DU MARCHE APRES AVENANT (S) </th>
                      <td style="width:15%" colspan="4" v-if="nbrAvenant"> {{formatageSomme(parseFloat(montantHtAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act_ht)))}} HT </td>
                      <td style="width:15%" colspan="4" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="4" v-if="nbrAvenant">
@@ -453,7 +473,7 @@
 
                  <tr>
                      <th style="width:5%">DATE DU DERNIER DECOMPTE</th>
-                     <td style="width:15%" colspan="8" v-if="dernierDecompte.date_decompte">{{dernierDecompte.date_decompte}} </td>
+                     <td style="width:15%" colspan="8" v-if="dernierDecompte">{{dernierDecompte.date_decompte}} </td>
                        <td style="width:15%" colspan="8" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
@@ -501,46 +521,61 @@
                  </tr>
                  <tr>
                      <th style="width:10%" >TOTAL PAIEMENT  EXECUTE</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompte(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" >{{ montantDecompteNetTtcPourCent}}%</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantTvaHTGlobal))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ formatageSomme(parseFloat(MontantTVAGlobal))}} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteNetTtc))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     
                  </tr>
                  <tr>
                      <th style="width:10%" >PART ETAT</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantPartEtat(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" > {{ montantDecompteNetTtcPourCentEtat }}%</td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat(MontantHTEtat))}} HT</td>
+                    <td style="width:15%" colspan="2" >  {{formatageSomme(parseFloat(MontantTvaTVAEtat))}} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompteParEtat))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >PART BAILLEUR</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantPartBailleur(detailDecompte)))}} TTC</td>
+                     <td style="width:15%" colspan="2" >{{montantDecompteNetTtcPourCentBailleur }}%</td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat(MontantTvaHTBailleur))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat( MontantTvaTVABailleur)) }} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecomptePartBailleur))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >TOTAL RESTE A PAYER</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme((montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))-montantDecompte(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" > {{ PoucentageRestePayerGlobal }} %</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerGlobal))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ formatageSomme(parseFloat(MontantTVARestePayerGlobal))  }} TVA </td>
+                     <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme((montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))-montantDecompte(detailDecompte))}} TTC</td> -->
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(RecupMontantRestePayerTTC))}} TTC</td>
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >PART ETAT</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(detailBailEtat.montant)-montantPartEtat(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" > {{ PoucentageRestePayerEtat }} %</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerEtat))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{ formatageSomme(parseFloat(MontantTVARestePayerEtat)) }} TVA </td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(MontantRestePayerEtat))}} TTC</td>
+                     <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(detailBailEtat.montant)-montantPartEtat(detailDecompte))}} TTC</td> -->
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
                  <tr>
                      <th style="width:10%" >PART BAILLEUR</th>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(montantActPartBailleurTTC(detailBailleur)-montantPartBailleur(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" > {{ PoucentageRestePayerBailleur }} %</td>
+                     <td style="width:15%" colspan="2" >{{formatageSomme(parseFloat(MontantMTHRestePayerBailleur))}} HT</td>
+                     <td style="width:15%" colspan="2" > {{formatageSomme(parseFloat( MontantTVARestePayerBailleur)) }} TVA </td>
+
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(MontantRestePayerBailleur))}} TTC</td>
+                     <!-- <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(montantActPartBailleurTTC(detailBailleur)-montantPartBailleur(detailDecompte))}} TTC</td> -->
                      <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                      
                  </tr>
 
                  <tr>
@@ -570,14 +605,12 @@
              <table class="table table-bordered table-striped" id="app14">
                  <thead>
                  <tr>
-                     <th>OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS </th>
                      <th>OBSERVATIONS</th>
                      <th>CONTROLEUR FINANCIER</th>
                  </tr>
                  <tr height="120px">
-                     <td v-if="detail">{{detail.objet}} / {{detail.livrable}} </td>
-                     <td v-else>OK</td>
-                     <td > </td>
+                    
+                     <td colspan="5"> </td>
                      <td v-if="detailCF"> {{detailCF.nom_mandat|| 'Non renseigné'}} {{detailCF.prenom_nom|| 'Non renseigné'}}
 
                      </td>
@@ -603,6 +636,11 @@
             </div>
         </div>
 
+        
+        <div class="container-fluid" v-else>
+             <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
+        </div>
+
         <!-- <fab :actions="fabActions" @cache="afficherModalAjouterpaiementPersonnel" main-icon="apps" bg-color="green"></fab>
             <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterpaiementPersonnel()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
@@ -611,17 +649,21 @@
 </template>
 
 <script>
-    import moment from "moment";
+   // import TableauOpDirectVise from '../TableauBord/TableauBordHorsSigobe/AncienTableauDeBordHS/DossierOpDirect/TableauOpDirectVise'
+import moment from "moment";
     import { mapGetters, mapActions } from "vuex";
     // import html2canvas from 'html2canvas'
     // import * as JsPDF from 'jspdf'
     //import html2pdf from 'html2pdf.js'
     // import moment from "moment";
-    // import { ModelListSelect } from "vue-search-select";
+    // import { ModelListSelect } from "vue-search-select"
     // import "vue-search-select/dist/VueSearchSelect.css";
     import { formatageSomme } from "../../../src/Repositories/Repository";
 
     export default {
+  components: { 
+
+   },
         // components: {
         //   ModelListSelect
         // },
@@ -693,6 +735,7 @@
         },
         created() {
          this.detail=this.marches.find(item=>item.id== this.$route.params.id)
+
          
             this.detailBailEtat=this.personnaliseGetterMarcheBailleur.find(item=>{
                 if (item.typeFinnancement.code==1 && item.marche_id==this.$route.params.id ){
@@ -747,7 +790,8 @@
                 "typeTextes",
                 "uniteAdministratives",
                 "getterBudgeCharge",
-                "decomptefactures"
+                "decomptefactures",
+                "budgetEclate",
             ]),
             ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
 
@@ -763,7 +807,6 @@
             ]),
  
             ...mapGetters('parametreGenerauxAdministratif',[
-
                 "sections",
                 "type_Unite_admins",
                 "plans_programmes",
@@ -774,7 +817,6 @@
             ]),
 
             ...mapGetters('parametreGenerauxFonctionnelle',[
-
                 "plans_fonctionnels",
                 "afficheNiveauPlanFonctionnel"
             ]),
@@ -788,6 +830,32 @@
             afficherListeSalaireEnExecution(){
                 return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
             },
+            montantBaseMarcheTTC(){
+             return id => {
+                 if(id != null && id != ""){
+                    let montantTTC_marche= this.montantMarche(id,"TC")
+                  
+                    
+                        let montant_ttc=  this.avenants.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, 0);
+                        let montant=parseFloat(montantTTC_marche) + parseFloat(montant_ttc)
+                        return montant
+                 }
+                 return 0
+             }
+            },
+
+            montantExecuteMarche(){
+             return id => {
+                 if(id != null && id != ""){
+                    let montant=this.montantBaseMarcheTTC(id) + this.totalDecompteMarche(id)
+                    return montant
+                 }
+                 return 0
+             }
+            },
+            
             totalDecompteMarche(){
          return marche_id=> {
              if(!marche_id) return 0;
@@ -796,9 +864,18 @@
              return objet.reduce(function (total, currentValue) {
                             return total + parseFloat(currentValue.netttc) ;
                         }, 0);
-         }
+            }
             },
-
+            infoSplite(){
+              return objet => {
+                  if(objet != null && objet != ""){
+                     let ob=objet.split('/');
+                     return ob[1]
+                  }
+                  return null
+              }
+            },
+         
 isNanMontant(){
     return montant => {
         if(montant=="NaN") return "Non Applicable"
@@ -880,7 +957,21 @@ tachePasMarche(){
             },
             montantHtAvanant() {
                 return avenant => {
-                    console.log(avenant)
+        
+                    if (avenant != null && avenant != "") {
+                        let initialValue = 0;
+                        let montant_ht=  avenant.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_ht) ;
+                        }, initialValue);
+                        return montant_ht
+                    }
+                    return 0
+
+                };
+            },
+            montantTTCAvanant() {
+                return avenant => {
+        
                     if (avenant != null && avenant != "") {
                         let initialValue = 0;
                         let montant_ht=  avenant.reduce(function (total, currentValue) {
@@ -897,14 +988,195 @@ tachePasMarche(){
                     if (objet != null && objet != "") {
                         let initialValue = 0;
                         let montant_ht=  objet.reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.total_general) ;
+                            return total + parseFloat(currentValue.netttc) ;
                         }, initialValue);
                         return montant_ht
                     }
                     return 0
-
                 };
             },
+
+            AfficheVariationBudget() {
+      return (id, id2) => {
+        if (id != null && id != "" && id2 != null && id2 != "") {
+          return this.budgetEclate
+            .filter(
+              (prod) =>
+                prod.source_financement_id == id &&
+                prod.section_id == id2 &&
+                prod.annebudgetaire == this.anneeAmort &&
+                prod.budget_active == 1
+            )
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.variation_budget),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+
+            //new data lega
+
+    montantDecompteNetTtc() {
+     return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.netttc),
+              0).toFixed(0);
+                       
+            },
+
+    montantDecompteNetTtcPourCent(){
+            return ( (parseFloat(this.montantDecompteNetTtc) / parseFloat(this.RecupMontantRestePayerGTTC))*100 ).toFixed(2);
+    },
+
+
+
+    montantDecompteNetTva() {
+         return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.nethtva),
+              0).toFixed(0);
+                       
+            },
+
+
+    montantDecomptePartBailleur() {
+            return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.parts_bailleur),
+              0).toFixed(0);
+                       
+            },
+
+     montantDecompteNetTtcPourCentBailleur(){
+            return ( (parseFloat(this.montantDecomptePartBailleur) / parseFloat(this.RecupMontantRestePayerGTTC))*100 ).toFixed(2);
+             },
+
+    montantDecompteParEtat() {
+            return this.decomptefactures.filter((prod) =>prod.marche_id == this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.parts_etat),
+              0).toFixed(0);
+                       
+            },
+
+            montantDecompteNetTtcPourCentEtat(){
+            return ( (parseFloat(this.montantDecompteParEtat) / parseFloat(this.RecupMontantRestePayerGTTC))*100 ).toFixed(2);
+             },
+
+
+
+    //*****************gestion des montants HT********************************
+            MontantTvaHTGlobal(){
+                    return (parseFloat(this.montantDecompteNetTtc/1.18))
+             },
+
+             MontantTvaHTBailleur(){
+                    return (parseFloat(this.montantDecomptePartBailleur/1.18))
+             },
+
+             MontantHTEtat(){
+                    return (parseFloat(this.montantDecompteParEtat/1.18))
+             },
+    //*********fin gestion des M HT********************* */
+
+
+
+    //*****************gestion des montants TVA********************************
+            MontantTVAGlobal(){
+                    return (parseFloat(this.montantDecompteNetTtc) - parseFloat(this.montantDecompteNetTtc/1.18)).toFixed(2)
+             },
+
+             MontantTvaTVABailleur(){
+                    return ( parseFloat(this.montantDecomptePartBailleur) - parseFloat(this.montantDecomptePartBailleur/1.18)).toFixed(2)
+             },
+
+             MontantTvaTVAEtat(){
+                    return (parseFloat(this.montantDecompteParEtat)- parseFloat(this.montantDecompteParEtat/1.18)).toFixed(2)
+             },
+    //*********fin gestion des M TVA********************* */
+
+             //recuperation des montant initiaux du marche
+             
+             MontangtMarcheActeF(){
+                 return this.acteEffetFinanciers.filter((item)=>item.marche_id==this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_act),
+              0).toFixed(0);
+             },
+
+             MontangtMarcheAVenant(){
+                 return this.avenants.filter((item)=>item.marche_id==this.detail.id).reduce(
+              (prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_avenant),
+              0).toFixed(0);
+             },
+
+             //gestion du reste a payer
+
+             RecupMontantRestePayerGTTC(){
+               return (parseFloat(this.MontangtMarcheActeF )+ parseFloat(this.MontangtMarcheAVenant))
+             },
+
+             RecupMontantRestePayerTTC(){
+               return (parseFloat(this.RecupMontantRestePayerGTTC) - parseFloat(this.montantDecompteNetTtc))
+             },
+
+             MontantRestePayerEtat(){
+                 if(this.montantDecompteParEtat==0){
+                     return 0;
+                 }
+                 return (parseFloat(this.RecupMontantRestePayerGTTC ) - parseFloat(this.montantDecompteParEtat))
+             },
+
+             MontantRestePayerBailleur(){
+                 if(this.montantDecomptePartBailleur==0){
+                     return 0;
+                 }
+                 return (parseFloat(this.RecupMontantRestePayerGTTC ) - parseFloat(this.montantDecomptePartBailleur))
+             },
+             //*****gestion des poucentage Reste a Payer
+
+              PoucentageRestePayerGlobal(){
+                  return ( (parseFloat(this.RecupMontantRestePayerTTC) / parseFloat(this.montantDecompteNetTtc))*100 ).toFixed(2);
+             },
+
+            
+
+              PoucentageRestePayerEtat(){
+                 return ( (parseFloat(this.MontantRestePayerEtat) / parseFloat(this.montantDecompteNetTtc))*100 ).toFixed(2);
+             },
+
+              PoucentageRestePayerBailleur(){
+                 return ( (parseFloat(this.MontantRestePayerBailleur) / parseFloat(this.montantDecompteNetTtc))*100 ).toFixed(2);
+             },
+
+    //********gestion  des MHT du reste a payer */
+              MontantMTHRestePayerGlobal(){
+                    return (parseFloat(this.RecupMontantRestePayerTTC/1.18))
+             },
+
+             MontantMTHRestePayerEtat(){
+                    return (parseFloat(this.MontantRestePayerEtat/1.18))
+             },
+
+             MontantMTHRestePayerBailleur(){
+                    return (parseFloat(this.MontantRestePayerBailleur/1.18))
+             },
+    //********gestion  des MTVA du reste a payer */
+            MontantTVARestePayerGlobal(){
+                    return (parseFloat(this.RecupMontantRestePayerTTC) - parseFloat(this.RecupMontantRestePayerTTC/1.18)).toFixed(2)
+             },
+
+             MontantTVARestePayerEtat(){
+                    return (parseFloat(this.MontantRestePayerEtat) - parseFloat(this.MontantRestePayerEtat/1.18)).toFixed(2)
+             },
+
+             MontantTVARestePayerBailleur(){
+                    return (parseFloat(this.MontantRestePayerBailleur) - parseFloat(this.MontantRestePayerBailleur/1.18)).toFixed(2)
+             },
+
+            //fin
+
+
+
+
             montantPartEtat() {
                 return objet => {
                     if (objet != null && objet != "") {
@@ -1046,7 +1318,7 @@ AfficheMontantHt() {
                         return 0
                     }
                 };
-            },
+            }, 
             AfficheMontant_act() {
                 return id => {
                     if (id != null && id != "") {
@@ -1054,6 +1326,126 @@ AfficheMontantHt() {
 
                         if (qtereel) {
                             return qtereel.montant_act;
+                        }
+                        return 0
+                    }
+                };
+            },
+             AfficheMontantTV() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_act_tva;
+                        }
+                        return 0
+                    }
+                };
+            },
+            dateOrdreServiceDemarage() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.date_odre_service;
+                        }
+                        return 0
+                    }
+                };
+            },
+            dateFinTraveauxPrevue() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.date_fin_exe;
+                        }
+                        return 0
+                    }
+                };
+            },
+             delaiExecution() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.duree;
+                        }
+                        return 0
+                    }
+                };
+            },
+             delailAvanceDemarageHT() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ht;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailAvanceDemarageTTC() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ttc;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailCautionnementHT() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ttc;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailCautionnementTTC() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.avance_demarrage_ttc;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailRetenueGarantieHT() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_ht_retenu_garantie;
+                        }
+                        return 0
+                    }
+                };
+            },
+            delailRetenueGarantieTTC() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_ttc_retenue_garantie;
                         }
                         return 0
                     }
@@ -1151,7 +1543,7 @@ AfficheMontantHt() {
             genererEnPdf(){
 
 
-                this.$htmlToPaper("printpdf");
+                this.$htmlToPaper("printContent");
               /*  var doc = new JsPDF('landscape')
 
                 doc.text(98,10,"CYCLE DE VIE")*/

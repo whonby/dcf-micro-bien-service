@@ -3,7 +3,15 @@ import TableauBordCartographie from "@/gestionDesModule/TableauBordCatographies"
 import CarteInfrastructureCIPasRegions from "@/pages/cartographie/CarteInfrastructureCIPasRegions";
 import CarteExecutionBugetaire from "../../pages/cartographie/CarteExecutionBudgetairePasRegionsEnAECP"
 import DetailCarteMarche from "../../pages/cartographie/CarteMarcheDetail"
+
+import CarteauGraphieBudgetaire from "../../pages/cartographie/CarteInfrastructureCIPasRegions"
+
 const CartographieRoutes = [
+    {
+        path:"/cartographie-bugetaire",
+        name:"CarteauGraphieBudgetaire",
+        component:CarteauGraphieBudgetaire  
+    },
     {
         path:"/detail-carte-marche",
         name:"DetailCarteMarche",

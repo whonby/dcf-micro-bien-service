@@ -164,7 +164,7 @@ export function getNatureSection({ commit }) {
 
 
 // ajouter nature de section
-export function ajouterNatureSection({ commit, dispatch }, objetAjout) {
+export function ajouterNatureSection({ commit }, objetAjout) {
     asyncLoading(axios.post('/ajouter_nature_section', {
         code: objetAjout.code,
         libelle: objetAjout.libelle
@@ -172,7 +172,7 @@ export function ajouterNatureSection({ commit, dispatch }, objetAjout) {
     })).then(response => {
         if (response.status == 201) {
             commit('AJOUTER_NATURE_SECTION', response.data)
-            dispatch('getNatureSection')
+            //dispatch('getNatureSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -183,14 +183,14 @@ export function ajouterNatureSection({ commit, dispatch }, objetAjout) {
 
 }
 // modififer nature de section
-export function modifierNatureSection({ commit, dispatch }, objetModifie) {
+export function modifierNatureSection({ commit }, objetModifie) {
     asyncLoading(axios.put('/modifier_nature_section/' + objetModifie.id, {
 
         code: objetModifie.code,
         libelle: objetModifie.libelle
     })).then(res => {
         commit('MODIFIER_NATURE_SECTION', res.data)
-        dispatch('getNatureSection')
+      //  dispatch('getNatureSection')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -228,17 +228,12 @@ export function getSection({ commit }) {
 
 
 // ajouter  section
-export function ajouterSection({ commit, dispatch }, objetAjout) {
-    asyncLoading(axios.post('/ajouter_section', {
-        code: objetAjout.code,
-        nom_section: objetAjout.nom_section,
-        code_section: objetAjout.code_section,
-        naturesection_id: objetAjout.naturesection_id
-    })).then(response => {
+export function ajouterSection({ commit }, objetAjout) {
+    asyncLoading(axios.post('/ajouter_section', objetAjout)).then(response => {
         if (response.status == 201) {
             commit('AJOUTER_SECTION', response.data)
-            dispatch('getSection')
-            dispatch('getNatureSection')
+           /* dispatch('getSection')
+            dispatch('getNatureSection')*/
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -249,7 +244,7 @@ export function ajouterSection({ commit, dispatch }, objetAjout) {
 
 }
 
-export function modifierSection({ commit, dispatch }, objetModifie) {
+export function modifierSection({ commit }, objetModifie) {
     asyncLoading(axios.put('/modifier_section/' + objetModifie.id, {
 
         code: objetModifie.code,
@@ -258,8 +253,7 @@ export function modifierSection({ commit, dispatch }, objetModifie) {
         naturesection_id: objetModifie.naturesection_id
     })).then(res => {
         commit('MODIFIER_SECTION', res.data)
-        dispatch('getSection')
-        dispatch('getNatureSection')
+     
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -543,7 +537,7 @@ export function ajouterServiceGestionnaire({ commit, dispatch }, nouveauObjet) {
         });
         commit('AJOUTER_SERVICE_GESTIONNAIRE', res.data)
         dispatch('getServiceGestionnaire')
-        dispatch('getServiceGestionnaire')
+       // dispatch('getServiceGestionnaire')
 
         this.$app.$loading(false)
     }).catch(error => {
@@ -568,9 +562,9 @@ export function modifierServiceGestionnaire({ commit, dispatch }, nouveauObjet) 
     })).then(resultat => {
         commit('MODIFIER_SERVICE_GESTIONNAIRE', resultat.data)
         dispatch('getServiceGestionnaire')
+       /* dispatch('getServiceGestionnaire')
         dispatch('getServiceGestionnaire')
-        dispatch('getServiceGestionnaire')
-        dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')*/
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -586,9 +580,9 @@ export function supprimerServiceGestionnaire({ commit, dispatch }, id) {
         .then(dialog => {
             commit('SUPPRIMER_SERVICE_GESTIONNAIRE', id)
             dispatch('getServiceGestionnaire')
+           /* dispatch('getServiceGestionnaire')
             dispatch('getServiceGestionnaire')
-            dispatch('getServiceGestionnaire')
-            dispatch('getServiceGestionnaire')
+            dispatch('getServiceGestionnaire')*/
 
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/supprimer_service_gestionnaire/' + id).then(() => dialog.close())
@@ -1356,8 +1350,8 @@ export function supprimerPlanOrganigrammeUa({ commit, dispatch }, id) {
         .then(dialog => {
             commit('SUPPRIMER_PLAN_ORGANIGRAMME_UA', id)
             dispatch('getPlanOrganigrammeUa')
-            dispatch('getPlanOrganigrammeUa')
-            dispatch('getPlanOrganigrammeUa')
+           /* dispatch('getPlanOrganigrammeUa')
+            dispatch('getPlanOrganigrammeUa')*/
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/supprimer_Plan_OrganigrammeUa/' + id).then(() => dialog.close())
 

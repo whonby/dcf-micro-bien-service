@@ -9,6 +9,7 @@ import ViewUI from 'view-design';
 import Default from '../src/layouts/Default.vue'
 import NoSidebar from '../src/layouts/NoSidebar.vue'
 import VuejsDialog from 'vuejs-dialog';
+import Vuelidate from 'vuelidate'
 // include the default style
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 import VueLoading from 'vuejs-loading-plugin'
@@ -28,6 +29,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 // import jsPDF from 'jspdf'
 //  vue.component('')
 import VueGoogleCharts from 'vue-google-charts'
+Vue.use(Vuelidate)
  
 Vue.use(VueGoogleCharts)
 import FullCalendar from 'vue-full-calendar'
@@ -71,6 +73,17 @@ Vue.use(VueSweetalert2, options2);
 
 import VueHtml2pdf from 'vue-html2pdf'
 Vue.use(VueHtml2pdf)
+
+
+import Print from 'vue-print-nb'
+
+Vue.use(Print,{
+        Printable:'printContent', // ID of the content to be printed
+        type: 'html',
+        style: '@page {margin: 0} @media print {}',
+        scanStyles: false
+      }); //Register
+
 // ...
 Vue.component('l-draw-toolbar', LDrawToolbar);
 Vue.use(VueTelInput)
@@ -84,7 +97,7 @@ const options = {
     styles: [
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
         'https://unpkg.com/kidlat-css/css/kidlat.css',
-        "print.css"
+        "http://sidcf.agosoftprojet.com/lien/css/matrix-style.css"
     ]
 }
 Vue.use(VueHtmlToPaper, options);

@@ -185,6 +185,14 @@
                      <i class=" icon-filter"></i> 
                       
                     </button>
+                    <button @click="budgetInitial1()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget1" class="span" 
+                        v-show="budgetInitial1data == true">
+                     </money>
                 BUDGET INITIAL 
                   </th>
                   <th
@@ -197,6 +205,18 @@
                       width :20%
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i> 
+                      
+                    </button>
+                     <button @click="budgetInitial2()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget2" class="span" 
+                        v-show="budgetInitial2data == true">
+                     </money>
                   MODIFICATION BUDGETAIRE 
                   </th>
                   <th
@@ -209,6 +229,17 @@
                       width :20%
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial3()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget3" class="span" 
+                        v-show="budgetInitial3data == true">
+                     </money>
                     NBRE DE REAMENAGEMENT 
                   </th>
 
@@ -221,6 +252,17 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial4()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget4" class="span" 
+                        v-show="budgetInitial4data == true">
+                     </money>
                     NBRE DE MARCHES EN EXECUTION  
                   </th>
                   <th
@@ -232,6 +274,17 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial5()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget5" class="span" 
+                        v-show="budgetInitial5data == true">
+                     </money>
                     BUDGET ACTUEL  
                   </th>
                   <th
@@ -243,6 +296,17 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial6()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget6" class="span" 
+                        v-show="budgetInitial6data == true">
+                     </money>
                     MONTANTS EXECUTES 
                   </th>
                   <th
@@ -254,19 +318,20 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial7()" v-show="recupereIDactivite==GroupeSection[0].section_id" >
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget7" class="span" 
+                        v-show="budgetInitial7data == true">
+                     </money>
                     NBRE D’OP PROVISOIRE NON REGULARISES 
                   </th>
-                <th
-                    style="
-                      font-size: 12px;
-                      font-weight: bold;
-                      color: #000;
-                      text-align: center;
-                      background-color: #fbb203 !important;
-                    "
-                  >
-                    DISPONIBLE 
-                  </th>
+                
                     <th
                     style="
                       font-size: 12px;
@@ -276,6 +341,17 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial9()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget9" class="span" 
+                        v-show="budgetInitial9data == true">
+                     </money>
                   NATURE DEPENSE 
                   </th>
                    <th
@@ -287,6 +363,17 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial10()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget10" class="span" 
+                        v-show="budgetInitial10data == true">
+                     </money>
                   PROCEDURE DE MARCHE 
                   </th>
                    <th
@@ -298,14 +385,57 @@
                       background-color: #fbb203 !important;
                     "
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial11()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget11" class="span" 
+                        v-show="budgetInitial11data == true">
+                     </money>
                   STATUT DE LA LIGNE 
                   </th>
                   <th
                     
                   >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial12()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget12" class="span" 
+                        v-show="budgetInitial12data == true">
+                     </money>
                     TAUX D’EXECUTION 
                   </th>
-                  
+                  <th
+                    style="
+                      font-size: 12px;
+                      font-weight: bold;
+                      color: #000;
+                      text-align: center;
+                      background-color: #fbb203 !important;
+                    "
+                  >
+                  <button @click="tricode()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-filter"></i>                      
+                    </button>
+                    <button @click="budgetInitial8()" v-show="recupereIDactivite==GroupeSection[0].section_id">
+                     <i class=" icon-search"></i> 
+                      
+                    </button>
+                    <money style="text-align:left;color:red"   
+                        v-model="budget8" class="span" 
+                        v-show="budgetInitial8data == true">
+                     </money>
+                    DISPONIBLE 
+                  </th>
                 </tr>
               </thead>
        <tbody>
@@ -349,9 +479,7 @@
                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'">
                     {{ NbreExecuteSection(GroupeSection[0].section_id) }} </td>
                   
-                 <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
-                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleSection(GroupeSection[0].section_id))) }}
-                  </td>
+                
 <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
                     
                   </td>
@@ -383,7 +511,9 @@
                         </span>
                       </button>
                   </td>
-                  
+                   <td v-bind:class="recupereIDactivite==GroupeSection[0].section_id ? 'graybg' : 'whitebg'" >
+                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleSection(GroupeSection[0].section_id))) }}
+                  </td>
                   
                 </tr>
               </tbody>  
@@ -424,8 +554,7 @@
                   <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
                     {{ NbreExecuteUa(GroupeUa) }} </td>
 
-                  <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
-                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleUa(GroupeUa))) }} </td>
+                 
                 <td style="text-align: left;color:#000;" v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
                     
                   </td>
@@ -454,11 +583,12 @@
                       </button>
                       <button class="btn btn-success taille" v-else-if="75 <  EviteNaNUa(GroupeUa) <= 100">
                         <span style="color:#fff;font-size: 12px;font-weight: bold;">
-                          {{ EviteNaNUa(GroupeUa) }}
+                          {{EviteNaNUa(GroupeUa)}}
                         </span>
                       </button>
                   </td>
-                   
+                    <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'">
+                    {{ formatageSommeSansFCFA(parseFloat(MontantDisponibleUa(GroupeUa))) }} </td>
         
                 </tr>
                   
@@ -597,10 +727,33 @@ export default {
 
 
     inputLigne:false,
-
+    budgetInitial1data:false,
+    budgetInitial2data:false,
+    budgetInitial3data:false,
+    budgetInitial4data:false,
+    budgetInitial5data:false,
+    budgetInitial6data:false,
+    budgetInitial7data:false,
+    budgetInitial8data:false,
+    budgetInitial9data:false,
+    budgetInitial10data:false,
+    budgetInitial11data:false,
+    budgetInitial12data:false,
  
       exercices_budgetaires_id:0,
       inputLigne1:0,
+      budget1:0,
+      budget2:0,
+      budget3:0,
+      budget4:0,
+      budget5:0,
+      budget6:0,
+      budget7:0,
+      budget8:0,
+      budget9:0,
+      budget10:0,
+      budget11:0,
+      budget12:0,
     
       search: "",
       verifShome:0,
@@ -1726,6 +1879,105 @@ return "AON ou AOI ou AOR"
     this.inputLigne1=0;
   }
 
+},
+    budgetInitial1(){
+  if(this.budgetInitial1data == false){
+    this.budgetInitial1data = true
+  }else{
+    this.budgetInitial1data = false;
+    this.budget1=0;
+  }
+
+},
+    budgetInitial2(){
+  if(this.budgetInitial2data == false){
+    this.budgetInitial2data = true
+  }else{
+    this.budgetInitial2data = false;
+    this.budget2=0;
+  }
+
+},
+    budgetInitial3(){
+  if(this.budgetInitial3data == false){
+    this.budgetInitial3data = true
+  }else{
+    this.budgetInitial3data = false;
+    this.budget3=0;
+  }
+},
+  
+    budgetInitial4(){
+  if(this.budgetInitial4data == false){
+    this.budgetInitial4data = true
+  }else{
+    this.budgetInitial4data = false;
+    this.budget4=0;
+  }
+},
+  budgetInitial5(){
+  if(this.budgetInitial5data == false){
+    this.budgetInitial5data = true
+  }else{
+    this.budgetInitial5data = false;
+    this.budget5=0;
+  }
+},
+  budgetInitial6(){
+  if(this.budgetInitial6data == false){
+    this.budgetInitial6data = true
+  }else{
+    this.budgetInitial6data = false;
+    this.budget6=0;
+  }
+},
+  budgetInitial7(){
+  if(this.budgetInitial7data == false){
+    this.budgetInitial7data = true
+  }else{
+    this.budgetInitial7data = false;
+    this.budget7=0;
+  }
+},
+  budgetInitial8(){
+  if(this.budgetInitial8data == false){
+    this.budgetInitial8data = true
+  }else{
+    this.budgetInitial8data = false;
+    this.budget8=0;
+  }
+},
+  budgetInitial9(){
+  if(this.budgetInitial9data == false){
+    this.budgetInitial9data = true
+  }else{
+    this.budgetInitial9data = false;
+    this.budget9=0;
+  }
+},
+  budgetInitial10(){
+  if(this.budgetInitial10data == false){
+    this.budgetInitial10data = true
+  }else{
+    this.budgetInitial10data = false;
+    this.budget10=0;
+  }
+},
+  budgetInitial11(){
+  if(this.budgetInitial11data == false){
+    this.budgetInitial11data = true
+  }else{
+    this.budgetInitial11data = false;
+    this.budget11=0;
+  }
+},
+  budgetInitial12(){
+  if(this.budgetInitial12data == false){
+    this.budgetInitial12data = true
+  }else{
+    this.budgetInitial12data = false;
+    this.budget12=0;
+  }
 },
     ShowMyUa(id){
       if(this.recupereIDactivite==""){

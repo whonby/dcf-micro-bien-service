@@ -60,16 +60,16 @@
             <div class="card-body">
               <table class="noborder" >
                 <tr>
-                  <th style="color:#000"> Nombre de dossiers :</th>
-                  <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>
+                  <th style="color:#000; width:190px;">Nombre de dossiers </th>
+                  <td style="color:#000; font-weight:bold; width:10px;"> : {{NombreOpProvisoire(uniteAdministratives_id)}} </td>
                 </tr>
                 <tr>
                   <th style="color:#000">Taux :</th>
-                  <td style="color:#000; font-weight:bold"> {{tauxOpProvisoire}} %</td>
+                  <td style="color:#000; font-weight:bold"> 100 %</td>
                 </tr>
                 <tr>
                   <th style="color:#000">Montant :</th>
-                  <td style="color:#000; font-weight:bold">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
+                  <td style="color:#000; font-weight:bold; width:170px;">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
                 </tr>
               </table>
               <br>
@@ -90,15 +90,15 @@ en cours de traitement</h4>
               <table class="noborder" >
                 <tr>
                   <th style="color:#000; font-weight:bold">Nombre de dossiers :</th>
-                  <td style="color:#000; font-weight:bold"> {{lenghtOpProvisoire}} </td>
+                  <td style="color:#000; font-weight:bold"> {{NombreOpProvisoire(uniteAdministratives_id)}} </td>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Taux :</th>
-                  <td style="color:#000; font-weight:bold">{{tauxOpProvisoire}} %</td>
+                  <td style="color:#000; font-weight:bold">100 %</td>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
+                  <td style="color:#000; font-weight:bold; width:100px;">{{formatageSommeSansFCFA(parseFloat(sommeOpProvisoire))}}</td>
                 </tr>
               </table>
               <br>
@@ -125,7 +125,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpRegularise))}}</td>
+                  <td style="color:#000; font-weight:bold; width:100px;"> {{formatageSommeSansFCFA(parseFloat(sommeOpRegularise))}}</td>
                 </tr>
               </table>
               <br>
@@ -150,7 +150,7 @@ en cours de traitement</h4>
                 </tr>
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold"> {{formatageSommeSansFCFA(parseFloat(sommeOpNonRegularise))}} </td>
+                  <td style="color:#000; font-weight:bold; width:100px;"> {{formatageSommeSansFCFA(parseFloat(sommeOpNonRegularise))}} </td>
                 </tr>
               </table>
               <br>
@@ -176,7 +176,7 @@ en cours de traitement</h4>
                 </tr> 
                 <tr>
                   <th style="color:#000; font-weight:bold">Montant :</th>
-                  <td style="color:#000; font-weight:bold"> {{MontantOpHorsDelai}}</td>
+                  <td style="color:#000; font-weight:bold; width:100px;"> {{formatageSommeSansFCFA(parseFloat(MontantOpHorsDelai))}}</td>
                 </tr>
               </table>
               <br>
@@ -218,10 +218,10 @@ en cours de traitement</h4>
   </thead>
   <tbody>
     <tr v-for="tem in NbreDossierOpProvisoire" :key="tem.id">
-      <td>  </td>
+      <td> {{LibelleUa(tem.unite_administrative_id)}} </td>
       <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
-      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
-      <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
+      <td style="color:#000;">{{LibelleEntreprise(tem.entreprise_id)}}</td>
+      <td style="color:#000;" > {{libelleLigneEconomique(tem.id)}} </td>
       <td style="color:#000;"> {{tem.date_interim}} </td>
       <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
     </tr>   
@@ -240,9 +240,9 @@ en cours de traitement</h4>
   </thead>
   <tbody>
     <tr v-for="tem in NbreOpRegularise" :key="tem.id">
-      <td>  </td>
+      <td> {{LibelleUa(tem.unite_administrative_id)}} </td>
       <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
-      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;">{{LibelleEntreprise(tem.entreprise_id)}}</td>
       <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
       <td style="color:#000;"> {{tem.date_interim}} </td>
       <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
@@ -262,9 +262,9 @@ en cours de traitement</h4>
   </thead>
   <tbody>
     <tr v-for="tem in NbreDossierOpProvisoire" :key="tem.id">
-      <td>  </td>
+      <td> {{LibelleUa(tem.unite_administrative_id)}} </td>
       <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
-      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;">{{LibelleEntreprise(tem.entreprise_id)}}</td>
       <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
       <td style="color:#000;"> {{tem.date_interim}} </td>
       <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
@@ -284,9 +284,9 @@ en cours de traitement</h4>
   </thead>
   <tbody>
     <tr v-for="tem in NbreOpNonRegularise" :key="tem.id">
-      <td>  </td>
+      <td> {{LibelleUa(tem.unite_administrative_id)}} </td>
       <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
-      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;">{{LibelleEntreprise(tem.entreprise_id)}}</td>
       <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
       <td style="color:#000;"> {{tem.date_interim}} </td>
       <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
@@ -306,9 +306,9 @@ en cours de traitement</h4>
   </thead>
   <tbody>
     <tr v-for="tem in DonneHorsDelai" :key="tem.id">
-      <td>  </td>
+      <td> {{LibelleUa(tem.unite_administrative_id)}} </td>
       <td style="color:#000;">{{tem.montant_ordre_paiement}}</td>
-      <td style="color:#000;">{{LibelleUa(tem.unite_administrative_id)}}</td>
+      <td style="color:#000;">{{LibelleEntreprise(tem.entreprise_id)}}</td>
       <td style="color:#000;"> {{libelleLigneEconomique(tem.id)}} </td>
       <td style="color:#000;"> {{tem.date_interim}} </td>
       <td style="color:#000;"> {{tem.numero_ordre_paiement}} </td>
@@ -352,7 +352,7 @@ export default {
   },
   data(){
     return{
-      Opprovisoiredata:0,
+      Opprovisoiredata:1,
       OpprovisoireDataEnCours:0,
       OpprovisoireDataRegu:0,
       OpprovisoireDataNonRegu:0,
@@ -422,6 +422,8 @@ created() {
             "plans_budgetaires",
             "derniereNivoPlanBudgetaire",
           ]),
+           ...mapGetters("gestionMarche", [ 'groupeVille','entreprises',
+                'banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
     ...mapGetters("bienService", [
       "getMandatPersonnaliserVise",
       "getMandatPersonnaliserPersonnel",
@@ -560,9 +562,17 @@ NbreDossierOpProvisoire(){
     return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement == 1)
   }
 },
-lenghtOpProvisoire(){
-  return this.NbreDossierOpProvisoire.length
-},
+NombreOpProvisoire() {
+      return (id) => {
+        if (id != null && id != "") {
+         return this.gettersgestionOrdrePaiement.filter(
+            (qtreel) => qtreel.unite_administrative_id == id  && qtreel.exercice==this.anneeAmort && qtreel.type_ordre_paiement==2  && qtreel.diff_op == null).length;
+        }
+        return this.gettersgestionOrdrePaiement.filter(qtreel =>  qtreel.type_ordre_paiement==2  && qtreel.exercice==this.anneeAmort && qtreel.diff_op == null).length;
+  
+      };
+    },
+
 NbreOpRegularise(){
   if(this.OpprovisoireDataRegu == 1){
      return this.gettersgestionOrdrePaiement.filter(tem => tem.diff_reg_op == 1)
@@ -621,7 +631,7 @@ TauxOpRegularise(){
 
 },
 tauxOpProvisoire(){
-  return (this.lenghtOpProvisoire / this.lenghtOpProvisoire * 100)
+  return (this.NombreOpProvisoire / this.NombreOpProvisoire * 100)
 },
 OpNonRegularisePaDef(){
   return this.gettersgestionOrdrePaiement.filter(tem => tem.type_ordre_paiement != 4 && tem.diff_reg_op == 0)
@@ -719,7 +729,7 @@ afficherBudgetInitialTranferst() {
  libelleLigneEconomique() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.plans_budgetaires.find((qtreel) => qtreel.id == id);
+          const qtereel = this.plans_budgetaires.find((qtreel) => qtreel.id == id && qtreel.code.length >= 8);
           if (qtereel) {
             return qtereel.code.concat("    ", qtereel.libelle);
           }
@@ -733,6 +743,17 @@ afficherBudgetInitialTranferst() {
           const qtereel = this.uniteAdministratives.find((qtreel) => qtreel.id == id);
           if (qtereel) {
             return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+ LibelleEntreprise() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find((qtreel) => qtreel.id == id);
+          if (qtereel) {
+            return qtereel.raison_sociale;
           }
           return 0;
         }
@@ -965,7 +986,7 @@ affichierTauxExecutionInvestissement() {
                 }
             },
   TauxOpProvisHorsDelai(){
-      return ((this.opHorsDelaiLength / this.lenghtOpProvisoire) * 100).toFixed(2)
+      return ((this.opHorsDelaiLength / this.NombreOpProvisoire) * 100).toFixed(2)
   },
   DonneHorsDelai(){
      if(this.OpprovisoireHorsDelai == 1){

@@ -3,16 +3,16 @@
     
 
 
-    <SiderbarParametre v-if="detail_marche.code == 1"></SiderbarParametre>
-    <!-- <SideBarGestionAccess v-if="detail_marche.code == 21"></SideBarGestionAccess> -->
-    <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
-    <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
-     <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
-    <SidebarMonEquipe v-else-if="detail_marche.code == 16"></SidebarMonEquipe>
-    <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
+    <SiderbarParametre v-if="detail_marche == 1"></SiderbarParametre>
+    <!-- <SideBarGestionAccess v-if="detail_marche == 21"></SideBarGestionAccess> -->
+    <SiderbarUniteAdministrative v-else-if="detail_marche == 2"></SiderbarUniteAdministrative>
+    <SideBarGestionSib v-else-if="detail_marche == 3"></SideBarGestionSib>
+     <SiderbarGestionHorsSib v-else-if="detail_marche == 4"></SiderbarGestionHorsSib>
+    <SidebarMonEquipe v-else-if="detail_marche == 16"></SidebarMonEquipe>
+    <SiderbarRapport v-else-if="detail_marche == 7"></SiderbarRapport>
     
-    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
-    <SiderbarTableauBord v-else-if="detail_marche.code == 9"></SiderbarTableauBord>
+    <SiderbarGestionVehicule v-else-if="detail_marche == 8"></SiderbarGestionVehicule>
+    <SiderbarTableauBord v-else-if="detail_marche == 9"></SiderbarTableauBord>
     <SiderbarCatographie  v-else></SiderbarCatographie>
      
    
@@ -87,12 +87,15 @@ components: {
 
   },
 created() {
-            this.marcheid=this.$route.params.id
-  console.log("Guei est dans la place")
-   this.detail_marche = this.gestionModules.find(
+           this.detail_marche=localStorage.getItem('module_app');
+             console.log("SIDEBAR")
+    console.log(this.detail_marche)
+      console.log(".........SIDEBAR...............")
+ // console.log("Guei est dans la place")
+  /* this.detail_marche = this.gestionModules.find(
        idmarche => idmarche.id == this.$route.params.id
    )
-   console.log(this.detail_marche)
+   console.log(this.detail_marche)*/
   
 },
   methods:{

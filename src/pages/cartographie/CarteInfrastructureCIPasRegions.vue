@@ -442,7 +442,7 @@ export default {
           name: "Plan A",
           visible: true,
           attribution: "",
-          url: "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+          url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         },
         {
           name: "Plan",
@@ -555,10 +555,10 @@ export default {
       "getterUniteAdministrativeByUser",
     ]),
     regions() {
-      return this.localisations_geographiques.filter((item) => {
+      return this.getterLocalisationGeoAll.filter((item) => {
         if (
           item.longitude != null &&
-          item.structure_localisation_geographique.niveau == 2
+          item.structure_localisation_geographique_id==5
         ) {
           return item;
         }
@@ -653,7 +653,7 @@ export default {
       return (id) => {
         return this.getterLocalisationGeoAll.filter((item) => {
           if (
-            item.structure_localisation_geographique.niveau == 3 &&
+            item.structure_localisation_geographique_id==6 &&
             item.parent == id
           ) {
             return item;
@@ -716,7 +716,7 @@ export default {
       return (id) => {
         return this.getterLocalisationGeoAll.filter((item) => {
           if (
-            item.structure_localisation_geographique.niveau == 4 &&
+            item.structure_localisation_geographique_id==8 &&
             item.parent == id
           ) {
             return item;
@@ -1881,7 +1881,7 @@ export default {
     console.log(ad1);
     console.log(moda);
 
-    console.log(this.getActeEffetFinancierPersonnaliser45);
+  
     //console.log()
     /**
  *  objet_map:"",

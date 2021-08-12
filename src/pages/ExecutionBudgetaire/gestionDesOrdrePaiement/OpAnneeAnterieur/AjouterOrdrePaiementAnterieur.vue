@@ -1,4 +1,4 @@
-CreditAutorise
+
 <template>
   <div class="container-fluid">
     {{RechercheNumeroOP}}
@@ -318,7 +318,7 @@ CreditAutorise
                                 >
                                   <option></option>
                                   <option
-                                    v-for="typeFact in arrayExerciceDecompteBienService"
+                                    v-for="typeFact in arrayExerciceDecompteBienService1"
                                     :key="typeFact"
                                     :value="typeFact"
                                   >
@@ -2589,7 +2589,7 @@ export default {
       formData: {
         unite_administrative_id: "",
         signataire:"",
-        activite_id: "",
+        activite_id: 0,
         ligne_economique_id: "",
         typedepense: "Marche",
         numero_ordre_paiement: "",
@@ -3184,10 +3184,10 @@ affichePersoUA() {
         }
       };
     },
-arrayExerciceDecompteBienService() {
+arrayExerciceDecompteBienService1() {
       //return (id) => {
         
-        let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id && budget.activite_id == this.formData.activite_id && budget.sous_budget_id == 0 && budget.budget_active==1);
+                let objet = this.budgetEclate.filter(budget=>budget.uniteadministrative_id == this.formData.unite_administrative_id  && budget.sous_budget_id == 0 && budget.budget_active==1 && budget.annebudgetaire==this.formData.exercice);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -3207,7 +3207,7 @@ arrayExerciceDecompteBienService() {
     LigneEconomiqueSousBudget() {
       //return (id) => {
         
-        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id  && budget.budget_active==1);
+        let objet = this.budgetEclate.filter(budget=>budget.activite_id == this.formData.activite_id && budget.sous_budget_id ==this.formData.sous_budget_id  && budget.budget_active==1 && budget.annebudgetaire==this.formData.exercice);
         //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {

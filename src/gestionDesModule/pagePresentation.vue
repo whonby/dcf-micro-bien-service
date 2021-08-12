@@ -401,6 +401,7 @@ this.getRegimeImpositions()
    this.getServiceGestionnaire()
    this.getStructureGeographique()
    this.getLocalisationGeographique()
+   this.getLocalisationGeographiqueAll()
    this.getChapitre()
    this.getStructureFonctionnelle()
    this.getPlanFonctionnelle()
@@ -750,7 +751,7 @@ return objJson.id
      ['getGestionModules',"getInfrastructure",'getExercicesBudgetaires', 'getTitres', 'getTaux',
     'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
-    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
+    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions",'getLocalisationGeographiqueAll']),
 
  ...mapActions("uniteadministrative", [
    "getUniteAdministrativeBailleur", 
@@ -904,6 +905,7 @@ activeMenuModuleTableauBord(){
     },
 
       goToModule(id){
+            localStorage.setItem('module_app', id);
      console.log(id)
      if (id==6){
          this.$router.push({

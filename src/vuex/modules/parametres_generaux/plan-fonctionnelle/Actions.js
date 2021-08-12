@@ -171,6 +171,7 @@ dure:elementModifie.dure
 
 
 
+
 // liste structure fonctionnelle
 
 export  function getStructureFonctionnelle({commit}){
@@ -195,7 +196,20 @@ export function ajouterStructureFonctionnelle({commit}, objetAjout){
             type:"success"
           })
      }
- }).catch(error => console.log(error))
+ })
+ 
+  .catch(error =>{
+      console.log(error)
+      this.$app.$loading(false)
+      this.$app.$notify({
+          title: 'Erreur',
+          text: "Ce code existe déja",
+          type:"error"
+      });
+  })
+ 
+ 
+//  .catch(error => console.log(error))
 }
 // supprimer structure fonctionnelle
 export function supprimerStructureFonctionnelle({commit}, id){
