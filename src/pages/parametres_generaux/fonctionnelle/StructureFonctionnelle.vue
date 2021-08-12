@@ -14,7 +14,7 @@
                                               <div>
 
                                         <download-excel
-                                            class="btn btn-success pull-right"
+                                            class="btn btn-success pull-left"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste structure fonctionnelle "
@@ -24,20 +24,28 @@
                        <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                        <div  align="right" style="cursor:pointer;">
+                        <div  align="left" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>
                                      </div>
+                                     <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterStructureFonctionnelle()">AJOUTER STRUCTURE</button>
+          </div>       
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures fonctionnelles</h5>
+                                       </tr>
+                                     </table>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures fonctionnelles</h5>
+            <!-- <h5>Liste des structures fonctionnelles</h5> -->
              <div align="right">
         Recherche: <input type="text" v-model="search"  placeholder=" ">
 
           </div>  
           </div>
 
-          <div class="span4">
+          <!-- <div class="span4">
                     <br>
                     Afficher
                     <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -47,15 +55,15 @@
                         <option value="100">100</option>
                     </select>
                     Entrer
-                </div>
+                </div> -->
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Niveau</th>
-                  <th>Libellé</th>
-                   <th width="5%">Action</th>
+                  <th style="font-size:14px">Niveau</th>
+                  <th style="width:80%;font-size:14px">Libellé</th>
+                   <th width="17%;font-size:14px" colspan="2">Action</th>
                 </tr>     
               </thead>
               <tbody>
@@ -66,7 +74,16 @@
                     {{structure_fonctionnelle.niveau || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierType(structure_fonctionnelle.id)">
                     {{structure_fonctionnelle.libelle || 'Non renseigné'}}</td>
-                 
+                 <td >
+                   
+                    
+                    
+              
+              <button  @click.prevent="afficherModalModifierType(structure_fonctionnelle.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+
+                  </td>
                   <td>
 
 
@@ -118,7 +135,7 @@
                   <tr>
                     <td>
 <div class="control-group">
-              <label class="control-label">Niveau:</label>
+              <label class="control-label" style="font-align:14px">Niveau</label>
               <div class="controls">
                 <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" readonly />
               </div>
@@ -128,7 +145,7 @@
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label" style="font-align:14px">Libelle</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
@@ -161,7 +178,7 @@
             <tr>
               <td>
                 <div class="control-group">
-              <label class="control-label">Niveau:</label>
+              <label class="control-label" style="font-align:14px">Niveau</label>
               <div class="controls">
                 <input type="number" v-model="editFonctionnelle.niveau" class="span5" placeholder="" readonly/>
               </div>
@@ -171,7 +188,7 @@
             <tr>
               <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label" style="font-align:14px">Libelle</label>
               <div class="controls">
                 <input type="text" v-model="editFonctionnelle.libelle" class="span5" placeholder="" />
               </div>
@@ -194,7 +211,7 @@
 
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterStructureFonctionnelle()">Open</button>
 
  <fab :actions="fabActions"
@@ -202,7 +219,7 @@
           @cache="afficherModalAjouterStructureFonctionnelle"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
 
 

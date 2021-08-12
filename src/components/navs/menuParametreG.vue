@@ -368,19 +368,7 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: 'motifDecision'}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Motifs de décision
-            </router-link>
-          </li> -->
-          <!-- <li>
-            <router-link :to="{name: 'typeActeEffetFinancier'}" tag="a">
-             
-              <i class="icon-bar-chart"></i>
-           Type acte effet financier
-            </router-link>
-          </li> -->
+         
           <li>
             <router-link :to="{ name: 'typeAnalyse' }" tag="a">
               <i class="icon-bar-chart"></i>
@@ -413,45 +401,7 @@
           Type de depense
             </router-link>
           </li>
-           <!-- <li>
-
-            <router-link :to="{name: ''}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Réferentiel des prix
-            </router-link>
-          </li> -->
-          <!-- <li>
-            <router-link :to="{name: 'typeActeDepense'}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Type d'acte de depense
-            </router-link>
-          </li> -->
-          <!-- <li>
-            <router-link :to="{name: 'condition'}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Condition
-            </router-link>
-          </li> -->
-          <!-- <li>
-            <router-link :to="{name: 'bailleur'}" tag="a">
-              <i class="icon-bar-chart"></i>
-               Bailleur
-            </router-link>
-          </li> -->
-
-          <!-- <li>
-            <router-link :to="{name: 'documentProcedure'}" tag="a">
-              <i class="icon-bar-chart"></i>
-               Document procedure
-            </router-link>
-          </li> -->
-
-          <!-- <li>
-            <router-link :to="{name: 'type_prestation'}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Type prestation
-            </router-link>
-          </li> -->
+         
         </ul>
       </li>
       <!-- Activite
@@ -743,13 +693,7 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: 'TypeBienCorporel'}" tag="a">
-              <i class="icon-check"></i>
-            Type de Bien
-            </router-link>
-          </li> -->
-          <!-- <li class="divider"></li> -->
+         
           <li>
             <router-link :to="{ name: 'listeEquipement' }" tag="a">
               <i class="icon-check"></i>
@@ -777,17 +721,11 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name:'StockArticles'}" tag="a">
-              <i class="icon-home"></i> 
-               <i class="icon-user"></i> Gestion des stocks
-             
-            </router-link>
-          </li> -->
+         
           <li>
             <router-link :to="{ name: 'NormeImmo' }" tag="a">
-              <!-- <i class="icon-home"></i> -->
-              <i class="icon-user"></i> Equipement Type(Norme)
+               <i class="icon-home"></i> 
+               <i class="icon-user"></i> Equipement Type(Norme)
             </router-link>
           </li>
           <li class="divider"></li>
@@ -797,62 +735,15 @@
               Paramétrage Véhicule
             </router-link>
           </li>
-          <!-- <li>
-            <router-link :to="{name: 'marqueVehicules'}" tag="a">
-              <i class="icon-check"></i>
-             Marques 
-            </router-link>
-          </li>
-            <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'ModeleVehicules'}" tag="a">
-              <i class="icon-check"></i>
-             Modèles
-            </router-link>
-          </li> -->
+         
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: 'TypeEntretien'}" tag="a">
-              <i class="icon-check"></i>
-            Type d'entretien
-            </router-link>
-          </li> -->
+         
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: 'TypeVehicule'}" tag="a">
-              <i class="icon-check"></i>
-            Type de véhicule
-            </router-link>
-          </li> -->
-          <!-- <li class="divider"></li> -->
-          <!-- <li>
-            <router-link :to="{name: 'TypeEnergie'}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Type d'énergie
-            </router-link>
-          </li> -->
-          <!-- <li class="divider"></li> -->
-          <!-- <li>
-            <router-link :to="{name: 'TypeReparation'}" tag="a">
-              <i class="icon-user"></i> Type de réparation
-            </router-link>
-          </li> -->
-          <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Transmission'}" tag="a">
-              <i class="icon-user"></i> Transmission
-            </router-link>
-          </li>
-          <li class="divider"></li>
-           <li>
-            <router-link :to="{name: 'Appreciation'}" tag="a">
-              <i class="icon-user"></i> Appreciation
-            </router-link>
-          </li> -->
+          
         </ul>
-      </li>
+      </li>  
 
-      <li class="dropdown" id="mission">
+       <li class="dropdown" id="mission">
         <a
           title="Suivi des missions"
           href="#"

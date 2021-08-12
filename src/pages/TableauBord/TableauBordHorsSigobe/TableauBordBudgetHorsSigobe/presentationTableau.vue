@@ -1,195 +1,105 @@
 
 <template>
   <div>
-      <h3 style="text-align:center">TABLEAU DE BORD DU BUDGET HORS SIGOBE</h3>
-    
-  
-        <!-- <div style="text-align:center;border:4px solid blue;font-weight:bold"> <h3 style="text-align:center">TABLEAU DE BORD UA PROJETS (ANNEE EN COURS)</h3></div>
+    <h3 style="text-align: center">TABLEAU DE BORD DU BUDGET HORS SIGOBE</h3>
+
+    <!-- <div style="text-align:center;border:4px solid blue;font-weight:bold"> <h3 style="text-align:center">TABLEAU DE BORD UA PROJETS (ANNEE EN COURS)</h3></div>
           <h3 style="text-align:center">{{AffichLibelle(formData.unite_administrative_id)}}</h3> -->
-         <br>
-     
-  
+    <br />
 
-  <div class="table-responsive text-nowrap" >
-            <table class="table table-bordered table-striped">
-              <div class="widget-box">
-                <div class="widget-title">
-                  <ul class="nav nav-tabs">
-                   
-                     <!-- <li class="active" style="font-size:20px">
-                      <a data-toggle="tab" href="#DEMANDE"
-                        >TABLEAU DE BORD GENERAL </a
-                      >
-                    </li> -->
-                     <!-- <li class=""  >
-                      <a data-toggle="tab" href="#COMMANDE"
-                        >CONSULTATION DE L'EXECUTION BUDGETAIRE</a
-                      >
-                    </li> -->
+    <div class="table-responsive text-nowrap">
+      <table class="table table-bordered table-striped">
+        <div class="widget-box">
+          <div class="widget-title">
+            <ul class="nav nav-tabs">
+              <li
+                @click="activedOptionMenu(1)"
+                class="active"
+                style="font-size: 14px"
+              >
+                <a data-toggle="tab" href="#TABLEAUBORD1">TABLEAU BORD 1 </a>
+              </li>
 
-                      <li class="active"  style="font-size:14px">
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD1"
-                        >TB1 : SUIVI DU BUDGET </a
-                      > -->
-                      <a data-toggle="tab" href="#TABLEAUBORD1"
-                        >TABLEAU BORD 1 </a
-                      >
-                    </li>
+              <li
+                @click="activedOptionMenu(2)"
+                class=""
+                style="font-size: 14px"
+              >
+                <a data-toggle="tab" href="#TABLEAUBORD2">TABLEAU BORD 2 </a>
+              </li>
 
-                    <li class="" style="font-size:14px">
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD2"
-                        >TB2 : EXECUTION DU BUDGET</a
-                      > -->
-                       <a data-toggle="tab" href="#TABLEAUBORD2"
-                        >TABLEAU BORD 2 </a
-                      >
-                    </li>
-                    
+              <li
+                @click="activedOptionMenu(3)"
+                class=""
+                style="font-size: 14px"
+              >
+                <a data-toggle="tab" href="#TABLEAUBORD4">TABLEAU BORD 3</a>
+              </li>
 
-                    <!-- <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD3"
-                        >TB3 : EXECUTION PAR ACTIVITE</a
-                      >
-                    </li> -->
-                     <li class="" style="font-size:14px">
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD4"
-                        >TB3 : D'EXECUTION PAR ACTIVITE ET BAILLEUR</a
-                      > -->
-                       <a data-toggle="tab" href="#TABLEAUBORD4"
-                        >TABLEAU BORD 3</a
-                      >
-                    </li>
-
-                     
-
-                     
-<!-- <li class="" style="font-size:14px"> -->
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD3"
-                        >TB4 : SITUATION D'EXECUTION BUDGETAIRE PAR BAILLEUR</a
-                      > -->
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD3"
-                        >TABLEAU BORD 4</a
-                      >
-                    </li> -->
-                     <li class="" style="font-size:14px">
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD5"
-                        >TB5 : SITUATION D'EXECUTION BUDGETAIRE PAR SECTION</a
-                      > -->
-                       <a data-toggle="tab" href="#TABLEAUBORD5"
-                        >TABLEAU BORD 4</a
-                      >
-                    </li>
-                    <li class="" style="font-size:14px">
-                      <!-- <a data-toggle="tab" href="#TABLEAUBORD6"
-                        >TB6 : ETAT EXECUTION PAR BAILLEUR ET SECTION</a
-                      > -->
-                      <a data-toggle="tab" href="#TABLEAUBORD6"
-                        >TABLEAU BORD 5</a
-                      >
-                    </li>
-
-                     <!-- <li class="" style="font-size:14px">
-                      <a data-toggle="tab" href="#TABLEAUBORD612"
-                        >TESTvUE</a
-                      >
-                    </li> -->
-
-
-
-                     <!-- <li class="" >
-                      <a data-toggle="tab" href="#MANDAT"
-                        >DOSSIER OP DIRECT</a
-                      >
-                    </li> -->
-                    <!-- <li class="">
-                      <a data-toggle="tab" href="#SYSTEME"
-                        >DOSSIER OP SYSTEME</a
-                      >
-                    </li> -->
-                  </ul>
-                </div>
-                <div class="widget-content tab-content">
-                  <!--ongle identification-->
-                  <div id="TABLEAUBORD612" class="tab-pane " >
-                    <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
-                <vueTextTreeview></vueTextTreeview>
-                         
-                  </div>
-                  <div id="TABLEAUBORD6" class="tab-pane " >
-                    <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
+              <li
+                @click="activedOptionMenu(4)"
+                class=""
+                style="font-size: 14px"
+              >
+                <a data-toggle="tab" href="#TABLEAUBORD5">TABLEAU BORD 4</a>
+              </li>
+              <li
+                @click="activedOptionMenu(5)"
+                class=""
+                style="font-size: 14px"
+              >
+                <a data-toggle="tab" href="#TABLEAUBORD6">TABLEAU BORD 5</a>
+              </li>
+            </ul>
+          </div>
+          <div class="widget-content tab-content">
+            <li v-if="state == 5">
+              <div id="TABLEAUBORD6" class="tab-pane">
+                <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
                 <EtatExecutionBailleurSection></EtatExecutionBailleurSection>
-                         
-                  </div>
-                  <div id="DEMANDE" class="tab-pane " >
-                    <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
-                <TableauBordBudgetEclate></TableauBordBudgetEclate>
-                         
-                  </div>
-                  <!-- <div id="COMMANDE" class="tab-pane "  >
-                   <RechercheExecutionBudgetaire></RechercheExecutionBudgetaire>
-                  
-                  </div> -->
-                   <div id="TABLEAUBORD1" class="tab-pane active">
-                     <TableausuiviBudgets></TableausuiviBudgets>
-                  </div>
+              </div>
+            </li>
 
-                  <div id="TABLEAUBORD2" class="tab-pane ">
-                     <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
-                  </div>
+            <div id="DEMANDE" class="tab-pane">
+              <!-- <h3 style="text-align:center">DETAIL OP PROVISOIRE</h3> -->
+              <TableauBordBudgetEclate></TableauBordBudgetEclate>
+            </div>
 
-                  <!-- <div id="TABLEAUBORD3" class="tab-pane ">
-                     <SituationExecuBudgetRecapActivite></SituationExecuBudgetRecapActivite>
-                  </div>
+            <div v-if="state == 1" id="TABLEAUBORD1" class="tab-pane active">
+              <TableausuiviBudgets></TableausuiviBudgets>
+            </div>
 
-                  <div id="TABLEAUBORD4" class="tab-pane ">
-                     <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
-                  </div>
+            <div v-if="state == 2" id="TABLEAUBORD2" class="tab-pane">
+              <StituationExecutionBudgetActiviteLigne></StituationExecutionBudgetActiviteLigne>
+            </div>
 
-                  <div id="test1" class="tab-pane ">
-                     <testLega></testLega>
-                  </div> -->
-                 <div id="TABLEAUBORD4" class="tab-pane ">
-                     <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
-                  </div>
-                  <div id="TABLEAUBORD3" class="tab-pane ">
-                     <SituationExecutionBudgetaireParBailleur></SituationExecutionBudgetaireParBailleur>
-               
-                  </div>
+            <div v-if="state == 3" id="TABLEAUBORD4" class="tab-pane">
+              <SituationExecutionActiviteBailleur></SituationExecutionActiviteBailleur>
+            </div>
+            <div id="TABLEAUBORD3" class="tab-pane">
+              <SituationExecutionBudgetaireParBailleur></SituationExecutionBudgetaireParBailleur>
+            </div>
 
-                   <div id="TABLEAUBORD5" class="tab-pane ">
-                     <SituationExecutionBudgetaireParSection></SituationExecutionBudgetaireParSection>
-               
-                  </div>
+            <div v-if="state == 4" id="TABLEAUBORD5" class="tab-pane">
+              <SituationExecutionBudgetaireParSection></SituationExecutionBudgetaireParSection>
+            </div>
 
+            <div id="TABLEAUBORD7" class="tab-pane">
+              <SituationExecutionBudgetaireParBailleurProjet></SituationExecutionBudgetaireParBailleurProjet>
+            </div>
 
-                  <div id="TABLEAUBORD7" class="tab-pane ">
-                     <SituationExecutionBudgetaireParBailleurProjet></SituationExecutionBudgetaireParBailleurProjet>
-               
-                  </div>
-
-                  
-
-
-                   <div id="MANDAT" class="tab-pane ">
-                       <h3 style="text-align:center">DETAIL OP DIRECT</h3>
-     
-                              
-                  </div>
-                   <!-- <div id="SYSTEME" class="tab-pane" >
+            <div id="MANDAT" class="tab-pane">
+              <h3 style="text-align: center">DETAIL OP DIRECT</h3>
+            </div>
+            <!-- <div id="SYSTEME" class="tab-pane" >
              45
                   </div> -->
-                </div>
-            
-                
-               
-
-                <br />
-              </div>
-            </table>
           </div>
-               
-                             
-          
+
+          <br />
+        </div>
+      </table>
+    </div>
   </div>
 </template>
   
@@ -197,54 +107,56 @@
 import { mapGetters, mapActions } from "vuex";
 // import { admin, dcf, noDCfNoAdmin } from "@/Repositories/Auth";
 import { formatageSomme } from "@/Repositories/Repository";
-import EtatExecutionBailleurSection from "./EtatExecutionBailleurSection"
-import TableausuiviBudgets from "./TableauSuiviBudgets"
-import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne"
+import EtatExecutionBailleurSection from "./EtatExecutionBailleurSection";
+import TableausuiviBudgets from "./TableauSuiviBudgets";
+import StituationExecutionBudgetActiviteLigne from "./StituationExecutionBudgetActiviteLigne";
 // import SituationExecuBudgetRecapActivite from "./SituationExecuBudgetRecapActivite"
-import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBailleur"
+import SituationExecutionActiviteBailleur from "./SituationExecutionActiviteBailleur";
 
-
-import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur"
-import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection"
-import SituationExecutionBudgetaireParBailleurProjet from './SituationExecutionBudgetaireParBailleurProjet'
-import vueTextTreeview from './vueTextTreeview'
+import SituationExecutionBudgetaireParBailleur from "./SituationExecutionBudgetaireParBailleur";
+import SituationExecutionBudgetaireParSection from "./SituationExecutionBudgetaireParSection";
+import SituationExecutionBudgetaireParBailleurProjet from "./SituationExecutionBudgetaireParBailleurProjet";
+//import vueTextTreeview from "./vueTextTreeview";
 export default {
-     components: {
-       vueTextTreeview,
-       EtatExecutionBailleurSection,
-       SituationExecutionBudgetaireParBailleur,
-       SituationExecutionBudgetaireParSection,
-   // ModelListSelect,
+  components: {
+   // vueTextTreeview,
+    EtatExecutionBailleurSection,
+    SituationExecutionBudgetaireParBailleur,
+    SituationExecutionBudgetaireParSection,
+    // ModelListSelect,
     // TableauBordBudgetEclate,
     TableausuiviBudgets,
     StituationExecutionBudgetActiviteLigne,
     SituationExecutionBudgetaireParBailleurProjet,
- 
+
     // SituationExecuBudgetRecapActivite,
-    
+
     // RechercheExecutionBudgetaire,
     // recapitulatifBudgetHorsSigobe,
-     SituationExecutionActiviteBailleur
+    SituationExecutionActiviteBailleur,
   },
-  name:'',
+  name: "",
   data() {
     return {
+      state: 1,
       fabActions: [
         {
           name: "cache",
-          icon: "add"
-        }
-        
+          icon: "add",
+        },
       ],
-      formData:{
-        unite_administrative_id:0
+      formData: {
+        unite_administrative_id: 0,
       },
-      editMandat:{
-        test:0,
-        
-      }
+      editMandat: {
+        test: 0,
+      },
     };
   },
+
+  // created() {
+  //   this.state1=TableausuiviBudgets;
+  // },
 
   computed: {
     //    admin: admin,
@@ -256,50 +168,36 @@ export default {
       "getterAffectation",
       "getterUniteAdministrativeByUser",
     ]),
-     ...mapGetters("parametreGenerauxAdministratif", [
-      "taux",
-      "sections",
-      "type_Unite_admins",
-      "plans_programmes",
-      "natures_sections",
-      "grandes_natures",
-      "afficheNiveauPlanProg",
-      "exercices_budgetaires",
-      "afficheLocalisationGeoNiveau5",
-    ]),
-     ...mapGetters("uniteadministrative", [
+
+    ...mapGetters("uniteadministrative", [
       "budgetEclate",
-      
+
       "getSousBudget",
       "BudgetEclateRegie",
       "uniteAdministratives",
-     
     ]),
-    ...mapGetters("bienService", [
-     "gettersgestionOrdrePaiement"
-    ]),
-   
-    
-// FIN code op Definitif
+    ...mapGetters("bienService", ["gettersgestionOrdrePaiement"]),
+
+    // FIN code op Definitif
   },
   methods: {
-    ...mapActions("uniteadministrative", [
-      
-    ]),
-       
- formatageSomme:formatageSomme,
+    ...mapActions("uniteadministrative", []),
+
+    activedOptionMenu(id) {
+      return (this.state = id);
+    },
+
+    formatageSomme: formatageSomme,
     alert() {
       console.log("ok");
     },
-    
-ExporterEnExel(){
-      this.$refs.excel.click()
-    }
-  }
+
+    ExporterEnExel() {
+      this.$refs.excel.click();
+    },
+  },
 };
 </script>
 <style scoped>
-
-
 </style>
 

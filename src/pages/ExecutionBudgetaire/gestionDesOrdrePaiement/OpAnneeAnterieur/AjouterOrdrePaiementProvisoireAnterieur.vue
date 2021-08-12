@@ -45,6 +45,7 @@ Ajouter Facture
                                   {{ typeFact.annee - 1 }}
                                 </option>
                               </select>
+                              
                   </div>
                 </div>
               </td>
@@ -2664,7 +2665,7 @@ export default {
       formData: {
         unite_administrative_id: "",
         signataire:"",
-        activite_id: "",
+        activite_id: 0,
         ligne_economique_id: "",
         typedepense: "Marche",
         numero_ordre_paiement: "",

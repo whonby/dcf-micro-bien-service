@@ -13,7 +13,7 @@
           <div>
 
                                         <download-excel
-                                            class="btn btn-success pull-right"
+                                            class="btn btn-success pull-left"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste exercice budgetaire "
@@ -25,20 +25,28 @@
                                         </download-excel> 
                                      </div> 
 
-               <div align="right" style="cursor:pointer;">
+               <div align="left" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-          </div>           
+          </div>     
+          <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des exercices des budgétaires</h5>
+                                       </tr>
+                                     </table> 
+                                     <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalExerciceBudgetaire()">AJOUTER EXERCICE</button>
+          </div>       
         <div class="widget-box">
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des exercices des budgétaires</h5>
-              <div align="right">
+              <!-- <div align="right">
         Recherche: <input type="text" >
 
-          </div> 
+          </div>  -->
              
           </div>
-           <div class="span4">
+           <!-- <div class="span4">
                     <br>
                     Afficher
                     <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -48,19 +56,19 @@
                         <option value="100">100</option>
                     </select>
                     Entrer
-                </div>
+                </div> -->
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped" id="exercice_budgetaire">
               <thead>
                 <tr>
-                  <th>Année</th>
-                  <th>Date début</th>
-                  <th>Date fin</th>
+                  <th style="width:5%">Année</th>
+                  <th style="width:40%">Date début</th>
+                  <th style="width:30%">Date fin</th>
                   <!-- <th>Encours</th> -->
-                  <th>En cours</th>
+                  <th style="width:6%">En cours</th>
                   <!-- <th>Date cloture </th> -->
-                   <th>Action</th>
+                   <th style="width:16%" colspan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,16 +87,16 @@
 
 
                     <template v-else>
-                         <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)" v-bind:class="exercice_budgetaire.encours==1 ? 'graybg' : 'whitebg'">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)" v-bind:class="exercice_budgetaire.encours==1 ? 'graybg' : 'whitebg'">
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)" v-bind:class="exercice_budgetaire.encours==1 ? 'graybg' : 'whitebg'">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
                   <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                   
                   </template>
-                   <td>
+                   <td >
                      <button  @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)"
                       v-if="exercice_budgetaire.encours == 1"  class="btn  btn-success">
                 <span >Oui</span>
@@ -99,7 +107,17 @@
                 <span >Non</span>
                 </button>
                    </td>
-                  <td>
+                   <td >
+                   
+                    
+                    
+              
+              <button  @click.prevent="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+
+                  </td>
+                  <td >
                    
                     
                     
@@ -147,40 +165,40 @@
                 <h3>Ajouter un exrcice budgétaire</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
-              <label class="control-label">Année:</label>
-              <div class="controls">
-                <input type="number" v-model="formData.annee" class="span" placeholder="" />
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Date début:</label>
-              <div class="controls">
-                <input type="date" v-model="formData.date_debut" class="span" placeholder="" />
-              </div>
-            </div>
+                <!-- <form class="form-horizontal"> -->
+                  <table class="table table-bordered table-striped">
+                    <tr>
+                          <td>
+                                <div class="control-group">
+                                      <label class="control-label">Année</label>
+                                  <div class="controls">
+                                      <input type="number" v-model="formData.annee" class="span5" placeholder="" :max='4'/>
+                                  </div>
+                                </div>
+                          </td>
+                    </tr>
+                    <tr>
+                          <td>
+                                <div class="control-group">
+                                        <label class="control-label">Date début</label>
+                                    <div class="controls">
+                                      <input type="date" v-model="formData.date_debut" class="span5" placeholder="" />
+                                    </div>
+                              </div>
+                          </td>
+                    </tr>
+                    <tr>
+                          <td>
+                             <div class="control-group">
+                                <label class="control-label">Date fin:</label>
+                                <div class="controls">
+                                  <input type="date" v-model="formData.date_fin" class="span5" placeholder="" />
+                                </div>
+                              </div>
+                          </td>
+                    </tr>
             
-            <div class="control-group">
-              <label class="control-label">Date fin:</label>
-              <div class="controls">
-                <input type="date" v-model="formData.date_fin" class="span" placeholder="" />
-              </div>
-            </div>
-            <!-- <div class="control-group">
-              <label class="control-label">Encours:</label>
-              <div class="controls">
-                <input type="checkbox" v-model="formData.encours" checked="checked"
-                 class="span" placeholder="" />
-              </div>
-            </div> -->
-             <!-- <div class="control-group">
-              <label class="control-label">Date cloture:</label>
-              <div class="controls">
-                <input type="date" v-model="formData.date_cloture" class="span" placeholder="" />
-              </div>
-            </div> -->
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
              <button 
@@ -229,19 +247,7 @@
                  class="span" placeholder="" />
               </div>
             </div>
-            <!-- <div class="control-group">
-              <label class="control-label">Encours:</label>
-              <div class="controls">
-                <input type="checkbox" v-model="editExerciceBudgetaire.encours" 
-                checked="checked" class="span" placeholder="" />
-              </div>
-            </div> -->
-             <!-- <div class="control-group">
-              <label class="control-label">Date cloture:</label>
-              <div class="controls">
-                <input type="date" v-model="editExerciceBudgetaire.date_cloture" class="span" placeholder="" />
-              </div>
-            </div> -->
+           
           </form>              
           </div>
            <div class="modal-footer"> 
@@ -257,7 +263,7 @@
 
 <!----- fin modifier modal  ---->
 
-  <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+  <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalExerciceBudgetaire()">Open</button>
 
  <fab :actions="fabActions"
@@ -265,7 +271,7 @@
           @cache="afficherModalExerciceBudgetaire"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
@@ -475,5 +481,29 @@ formaterDate(date) {
 <style>
 .container-fluid{
   height: 1000px;
+}
+th{
+  font-size:14px !important;
+
+}
+td{
+font-size:14px !important;
+font-weight: bold;
+}
+.whitebg {
+  background: #fff !important;
+  font-weight: bold;
+  color: black;
+  font-size: 13px;
+}
+.graybg {
+  background: rgb(6, 184, 6) !important;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+label{
+  font-weight: bold !important;
+  font-size: 13px !important;
 }
 </style>

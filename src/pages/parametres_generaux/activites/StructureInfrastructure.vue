@@ -27,6 +27,11 @@ this.modifierStructureInfrastructure
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>
                                          </div> 
+                                          <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures des infrastructures</h5>
+                                       </tr>
+                                     </table>
                                 <div class="widget-box">
 
                                     
@@ -55,7 +60,7 @@ this.modifierStructureInfrastructure
               <thead>
                 <tr>
                     <th>Niveau</th>
-                  <th>Libellé</th>
+                  <th style="width:90%">Libellé</th>
                    <th style="width:5%">Action</th>
                 </tr>
               </thead>

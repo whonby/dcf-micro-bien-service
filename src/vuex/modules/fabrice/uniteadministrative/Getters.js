@@ -10,7 +10,7 @@ export const ReparationVehicules =state =>state.ReparationVehicules;
 export const GestionStockageArticles = state => state.stockageArticles;
 export const uaperso = state => state.uniteAdministratives;
 export const getterUniteAdministrativeBailleur = state => state.UniteAdministrativeBailleur.sort((a, b) => (a.numero_ordre > b.numero_ordre ? 1 : -1));
-
+groupUa
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const StructureOrganigrammeUa = state => state.StructureOrganigrammeUa;
@@ -150,7 +150,7 @@ export const getPersonnaliseBudgetGeneral = (
     }
     return element;
   });
-
+  groupeUaPourMarheHorSib
   
 export const afficheBienEtService = state =>
   state.budgetGeneral.filter(

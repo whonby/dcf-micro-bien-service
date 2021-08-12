@@ -26,7 +26,12 @@
                        <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>
-                                     </div> 
+                                     </div>
+                                      <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures économiques</h5>
+                                       </tr>
+                                     </table> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures économiques</h5>
@@ -54,7 +59,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libellé</th>
+                  <th style="width:90%">Libellé</th>
                    <th width="5%">Action</th>
                 </tr>
               </thead>
@@ -322,11 +327,8 @@ return 0
 },
 getColumns() {
     return [
-        
         {title: "NIVEAU", dataKey: "niveau"},
         {title: "LIBELLE", dataKey: "libelle"},
-     
-        
     ];
 },
    
@@ -345,7 +347,7 @@ getColumns() {
       this.ajouterStructureBudgetaire(nouvelObjet)
 
         this.formData = {
-              code:"",
+              // code:"",
                 niveau: "",
              libelle: "",
             

@@ -31,19 +31,16 @@
           
         </h3>
       </div>
-      <!-- <div align="right">
-      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement()">
+      <div align="right">
+      <button class="btn btn-info" @click.prevent="genererEnPdfDetailReamenagement1()">
         Exporter en PDF
       </button>
-    </div>  -->
-      <div class="modal-body" id="printpdf1">
-      
- <table class="table table-bordered table-striped">
-          <tr>
-             <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">DETAIL PART BAILLEURS</h2>
-          </tr>
-        </table>
+    </div> 
+      <div class="modal-body" id="printpdf1785">
+       <h2 style="text-align: center; font-size: 12px;text-decoration: underline ;text-transform: uppercase;">DETAIL PART BAILLEURS</h2>
       <table class="table table-bordered table-striped">
+        
+            
             <thead >
            
               <tr >
@@ -169,26 +166,17 @@
             </tr> 
              
             </tbody>
-           <tr>
+            <tr>
                
-                <td colspan="3">TOTAL DON</td>
-                <td>{{afficheSommeTauxDon}}%</td>
+                <td colspan="3">TOTAL </td>
+                <td>{{afficheSommeTauxTresor}}%</td>
                 <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtDon))}}</td>
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtTresor))}}</td>
                 <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaDon))}}</td>
-                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCDon))}}</td>
+                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaTresor))}}</td>
+                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCTresor))}}</td>
               </tr>
-               <tr>
-               
-                <td colspan="3">TOTAL EMPRUNT</td>
-                <td>{{afficheSommeTauxEmprunt}}%</td>
-                <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantHtEmprunt))}}</td>
-                <!-- <td></td> -->
-                <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTvaEmprunt))}}</td>
-                 <td>{{formatageSommeSansFCFA(parseFloat(afficheSommeMontantTTCEmprunt))}}</td>
-              </tr>
+          
           </table>
 
 
@@ -370,7 +358,7 @@
                       background-color: #fbb203 !important;
                     "
                   >
-                    MONTANT TOTAL AVENANT 
+                    DUREE AVENANT 
                   </th>
                   <th
                     style="
@@ -547,18 +535,6 @@
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
                
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-<td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-              <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-               <!-- <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td>
-               <td v-bind:class="recupereIDSection==GroupeUa ? 'graybg1' : 'whitebg1'"></td> -->
-                
                 
                 
                 </tr>
@@ -601,7 +577,7 @@
                         </span>
                       </button>
                      </td>
-                 <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(montantAvenantParMarche(GroupeLigne.id)))}}</td>
+                 <td style="text-align:right">{{DureeAvenantParMarche(GroupeLigne.id)}}</td>
                             <td style="text-align:right">{{0}}</td>
                  <td style="text-align:right">{{formatageSommeSansFCFA(parseFloat(AfficheMontantgbobalMarche(GroupeLigne.id)))}}</td>
                  <td style="text-align:right">{{0}}</td>
@@ -832,6 +808,51 @@ editMandat:{},
       noDCfNoAdmin:noDCfNoAdmin,
 
 
+afficheSommeTauxTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantHtTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_ht),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+     afficheSommeMontantTvaTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_tva),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+    afficheSommeMontantTTTresor() {
+  
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == this.editMandat.marche_id ).reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant),
+              0
+            )
+            .toFixed(0)
+        
+     
+    },
+
+
+
+
+
 libelleTypeFinancement() {
       return id => {
         if (id != null && id != "") {
@@ -859,7 +880,7 @@ libelleBailleur() {
 affichePartBailleur() {
       return id => {
         if (id != null && id != "") {
-           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.bailleur_id != 6);
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id);
         }
       };
     },
@@ -1029,7 +1050,7 @@ BailleurParMarche() {
       return (id) => {
       
         if(id !=0 && id !=""){
-          let objet = this.personnaliseGetterMarcheBailleur.filter(item=>item.marche_id == id && item.type_finnancement_id!=14);
+          let objet = this.personnaliseGetterMarcheBailleur.filter(item=>item.marche_id == id);
           //  let vm=this
         let array_exercie = [];
         if (objet.length > 0) {
@@ -1234,6 +1255,16 @@ ListeMarcheParTypeMarche() {
         }
       };
     },
+    DureeAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.dure_avenant)
+                        },valInite);
+                    }
+                }
+            },
      montantAvenantParMarche: function () {
                 return id => {
                     if (id != "") {
@@ -1369,6 +1400,9 @@ return this.uniteAdministratives.filter(item=>item.type_ua_id == 7)
       "ajouterHistoriqueDecisionOp",
       "modifierHistoriqueDecisionOp",
     ]),
+    genererEnPdfDetailReamenagement1() {
+      this.$htmlToPaper("printpdf1785");
+    },
  percuFacture(id) {
       this.$("#validationOpDefinitif1").modal({
         backdrop: "static",
@@ -1522,7 +1556,7 @@ width: 95%;
 .tailgrand {
   width: 90%;
   margin: 0 -45%;
-  height: 50%;
+  height: 59%;
 }
 
 .modal-body {

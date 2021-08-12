@@ -192,42 +192,7 @@ export default {
     admin: admin,
     dcf: dcf,
     noDCfNoAdmin: noDCfNoAdmin,
-   
-
-
-    // afficherMarcheInvestissementParDroitAccess() {
-    //   // const st = this.search.toLowerCase();
-    //   if (this.noDCfNoAdmin) {
-    //     let colect = [];
-    //     this.GroupeUniteAdministrativeMarche.filter((item) => {
-    //       let val = this.getterUniteAdministrativeByUser.find(
-    //         (row) => row.unite_administrative_id == item.ua_id
-    //       );
-    //       if (val != undefined) {
-    //         colect.push(item);
-    //         return item;
-    //       }
-    //     });
-
-    //     return colect.filter(
-          
-    //       (element) =>
-    //         (element.unite_administrative_id == this.marcheid &&
-    //           element.parent_id == null &&
-    //           element.sib == 1 &&
-    //           element.attribue == 2 ) 
-    //     );
-    //   }
-    //   return this.printMarcheNonAttribue.filter(
-    //     (element) =>
-    //       (element.unite_administrative_id == this.marcheid &&
-    //         element.parent_id == null &&
-    //         element.sib == 1 &&
-    //         element.attribue == 2  ) 
-         
-    //   );
-    // },
-
+ 
   afficheNomUtilisateur(){
       let objLinea = localStorage.getItem("Users");
       let objJson = JSON.parse(objLinea);
