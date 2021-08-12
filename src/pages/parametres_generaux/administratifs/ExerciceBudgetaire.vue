@@ -13,7 +13,7 @@
           <div>
 
                                         <download-excel
-                                            class="btn btn-success pull-left"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste exercice budgetaire "
@@ -25,7 +25,7 @@
                                         </download-excel> 
                                      </div> 
 
-               <div align="left" style="cursor:pointer;">
+               <div align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>     
           <table>

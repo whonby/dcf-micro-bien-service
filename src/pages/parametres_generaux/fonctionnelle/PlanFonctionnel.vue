@@ -32,6 +32,9 @@
                                          <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans fonctionnels</h5>
                                        </tr>
                                      </table>
+                                      <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterplanFonctionnel()">AJOUTER</button>
+          </div>       
         <div class="widget-box">
              <div class="widget-title"> <span class="icon">  </span>
             <!-- <h5>Liste des plans fonctionnels</h5> -->
@@ -78,17 +81,7 @@
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
                   <tr>
-                    <!-- <td>
-<div class="control-group">
-              <label class="control-label">Structure fonctionnelle</label>
-              <div class="controls">
-                <select  v-model="formData.structure_fonctionnelle_id" class="span5">
-            <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
-            :value="plan.id">{{plan.libelle}}</option>
-                </select>
-              </div>
-            </div>
-                    </td> -->
+                   
                     <td>
                       <div class="control-group">
               <label class="control-label">Structure fonctionnelle</label>
@@ -161,18 +154,7 @@
                   </tr>
                   
                   <tr>
-                    <!-- <td>
-                      <div class="control-group">
-              <label class="control-label">Structure fonctionnelle:</label>
-              
-              <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" class="span5">
-                <option v-for="structure in structures_fonctionnelles " :key="structure.id" 
-                 :value="structure.id">{{structure.libelle}} </option>
-              </select>
-            </div>
-            </div>
-                    </td> -->
+                   
                     <td>
                       <div class="control-group">
               <label class="control-label">Structure fonctionnelle</label>
@@ -183,9 +165,10 @@
                     </td>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Code </label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElement.code" class="span1"  />
+                 <input type="text" :value="codeplanfonctionnelle" class="span4"  readonly />
               </div>
             </div>
                     </td>
@@ -205,7 +188,7 @@
                             
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length"
+             <button v-show="nouvelElement.code.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -272,7 +255,7 @@
 <!----- fin modifier modal  ---->
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterplanFonctionnel()">Open</button>
 
  <fab :actions="fabActions"
@@ -280,7 +263,7 @@
           @cache="afficherModalAjouterplanFonctionnel"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
@@ -309,6 +292,9 @@ export default {
       },
 
          parentDossier: {},
+         nouvelElement:{
+           code:""
+         },
       nouvelElementEnfant: {
          code: "",
              libelle: "",
@@ -347,6 +333,15 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxFonctionnelle', ['structures_fonctionnelles', 
   'plans_fonctionnels']),
+
+
+
+codeplanfonctionnelle() {
+    return  this.parentDossier.code + this.nouvelElement.code
+    
+    },
+
+
 afficheLeLibelleStructure() {
       return id => {
         if (id != null && id != "") {
@@ -468,16 +463,20 @@ getColumns() {
          ajouterProgrammeLocalEnfant () {
            var nouveauObjet = {
              ... this.nouvelElementEnfant,
-structure_fonctionnelle_id:this.afficheLeIdStructure(this.parentDossier.code)
-
+structure_fonctionnelle_id:this.afficheLeIdStructure(this.parentDossier.code),
+code:this.codeplanfonctionnelle,
+	parent:this.parentDossier.id
            }
       // console.log(this.nouvelElementEnfant)
       this.ajouterPlanFonctionnel(nouveauObjet)
 
         this.nouvelElementEnfant = {
-                code: "",
+              
              libelle: "",
          
+        }
+        this.nouvelElement = {
+code: "",
         }
     },
 

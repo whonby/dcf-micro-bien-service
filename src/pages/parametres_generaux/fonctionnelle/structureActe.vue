@@ -33,6 +33,9 @@
                                          <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures des Actes</h5>
                                        </tr>
                                      </table>
+                                      <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterStructureFonctionnelle()">AJOUTER STRUCTURE</button>
+          </div>  
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <!-- <h5>Liste des structures des Actes</h5> -->
@@ -42,7 +45,7 @@
           </div> 
           </div>
           
-           <div class="span4">
+           <!-- <div class="span4">
                     <br>
                     Afficher
                     <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -52,15 +55,15 @@
                         <option value="100">100</option>
                     </select>
                     Entrer
-                </div>
+                </div> -->
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th style="width:90%">Libellé</th>
-                   <th style="width:5%">Action</th>
+                  <th style="width:80%">Libellé</th>
+                   <th style="width:17%;font-size:14px" colspan="2">Action</th>
                 </tr>     
               </thead>
               <tbody>
@@ -71,7 +74,16 @@
                     {{structure_fonctionnelle.niveau || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierType(structure_fonctionnelle.id)">
                     {{structure_fonctionnelle.libelle || 'Non renseigné'}}</td>
-                 
+                 <td >
+                   
+                    
+                    
+              
+              <button  @click.prevent="afficherModalModifierType(structure_fonctionnelle.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+
+                  </td> 
                   <td>
 
 
@@ -191,7 +203,7 @@
 
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterStructureFonctionnelle()">Open</button>
 
  <fab :actions="fabActions"
@@ -199,7 +211,7 @@
           @cache="afficherModalAjouterStructureFonctionnelle"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
 
 
