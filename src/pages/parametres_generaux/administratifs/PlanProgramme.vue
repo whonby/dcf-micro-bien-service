@@ -26,7 +26,15 @@
                                                         <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div> 
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans programmes</h5>
+                                       </tr>
+                                     </table>
+                                                               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER</button>
+          </div>  
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des plans programmes</h5>
@@ -67,7 +75,13 @@
                 <table class="table table-bordered table-striped">
                   <tr>
                     <td>
-                      <div class="control-group">
+                       <div class="control-group">
+              <label class="control-label">Structure programme</label>
+              <div class="controls">
+                <input type="text" :value="AfficheNiveau1" class="span5" placeholder="Saisir le code" readonly />
+              </div>
+            </div>
+                      <!-- <div class="control-group">
               <label class="control-label">Structure programme:</label>
               <div class="controls">
               <select v-model="formData.structure_programme_id" class="span5" >
@@ -75,7 +89,7 @@
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
-            </div>
+            </div> -->
                     </td>
                   </tr>
                   <tr><td>
@@ -100,8 +114,7 @@
                 </table>             
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.code.length && formData.libelle.length && 
-             formData.structure_programme_id"
+             <button v-show=" formData.libelle.length "
               @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -139,7 +152,8 @@
                   </tr>
                   
                   <tr>
-                    <td>
+                    <!-- <td>
+                      
                    <div class="control-group">
               <label class="control-label">Structure programme</label>
               
@@ -150,12 +164,21 @@
               </select>
             </div>
             </div>
+                    </td> -->
+                     <td>
+                      <div class="control-group">
+              <label class="control-label">Structure programme</label>
+              <div class="controls">
+                <input type="text" :value="AfficheNiveau2" class="span5" placeholder="Saisir le code" readonly />
+              </div>
+            </div>
                     </td>
                     <td>
                    <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElement.code" class="span1" placeholder="Saisir le code" />
+                <input type="text" :value="codeplanfonctionnelle" class="span4"  readonly />
               </div>
             </div>
                     </td>
@@ -164,7 +187,7 @@
                   <tr>
                     <td colspan="2">
                         <div class="control-group">
-              <label class="control-label">Libellé:</label>
+              <label class="control-label">Libellé</label>
               <div class="controls">
                  <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libelle" />
               </div>
@@ -197,7 +220,7 @@
                   <tr>
                     <td>
                          <div class="control-group">
-              <label class="control-label">Structure programme:</label>
+              <label class="control-label">Structure programme</label>
               <div class="controls">
               <select v-model="editPlanProgramme.structure_programme_id" class="span5">
                 <option v-for="structure in structures_programmes " :key="structure.id" 
@@ -210,7 +233,7 @@
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Code</label>
               <div class="controls">
                 <input type="text" v-model="editPlanProgramme.code" class="span5" placeholder="" />
               </div>
@@ -242,7 +265,7 @@
 <!----- fin modifier modal  ---->
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterPlanProgramme()">Open</button>
 
  <fab :actions="fabActions"
@@ -250,7 +273,7 @@
           @cache="afficherModalAjouterPlanProgramme"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
@@ -321,6 +344,82 @@ export default {
    ...mapGetters('parametreGenerauxAdministratif', [ 'structures_programmes',
     'plans_programmes']) ,
 
+AfficheNiveau2(){
+
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 2) {
+
+  return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}
+else if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 3)
+
+{
+
+return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+ 
+}
+return ""
+   },
+   codeplanfonctionnelle() {
+    return  this.parentDossier.code + this.nouvelElement.code
+    
+    },
+
+
+afficheLeLibelleStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_programmes.find(qtreel => qtreel.niveau == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  afficheLeNiveauStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau + 1;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLeIdStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.structure_programme_id;
+      }
+      return 0
+        }
+      };
+    },
+AfficheNiveauid(){
+     const codeprog = this.structures_programmes.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.id
+     }
+
+     return null
+   },
+AfficheNiveau1(){
+     const codeprog = this.structures_programmes.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.libelle
+     }
+
+     return null
+   },
        localisationsFiltre(){
 
      const searchTerm = this.search.toLowerCase();
@@ -375,7 +474,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouetProgrammeLocal () {
-      this.ajouterPlanProgramme(this.formData)
+       var nouveauO = {
+        ... this.formData,
+        structure_programme_id:this.AfficheNiveauid
+      }
+      this.ajouterPlanProgramme(nouveauO)
 
         this.formData = {
                 code: "",
