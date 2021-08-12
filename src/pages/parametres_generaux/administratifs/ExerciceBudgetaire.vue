@@ -169,12 +169,16 @@
                   <table class="table table-bordered table-striped">
                     <tr>
                           <td>
-                                <div class="control-group">
+                                <div class="control-group" :class="{ 'form-group--error': $v.formData.annee.$error }">
                                       <label class="control-label">Année</label>
                                   <div class="controls">
-                                      <input type="number" v-model="formData.annee" class="span5" placeholder="" :max='4'/>
+                                      <input type="number" v-model.trim="$v.formData.annee.$model"  class="span5" placeholder="" />
                                   </div>
+                                 
                                 </div>
+                                 <div style="color:red;" v-if="!$v.formData.annee.required">Ce champs est réquis !</div>
+  <div style="color:red;" v-if="!$v.formData.annee.minLength">Minimum {{$v.formData.annee.$params.minLength.min}} letters.</div>
+  <div style="color:red;" v-if="!$v.formData.annee.maxLength">Maximum {{$v.formData.annee.$params.maxLength.max}} letters.</div>
                           </td>
                     </tr>
                     <tr>
@@ -194,6 +198,9 @@
                                 <div class="controls">
                                   <input type="date" v-model="formData.date_fin" class="span5" placeholder="" />
                                 </div>
+                              </div>
+                              <div style="color:red;" v-if="comparedate==false">
+                                 La date de fin doit être superieur a la date de debut !
                               </div>
                           </td>
                     </tr>
@@ -216,7 +223,7 @@
           </div>
            <div class="modal-footer"> 
              <button 
-             v-show="formData.annee.length && formData.date_debut.length 
+             v-show="formData.annee.length==4 && formData.date_debut.length 
              && formData.date_fin.length
              "
               @click.prevent="ajouterExerciceLocal" class="btn btn-primary"
@@ -310,6 +317,7 @@
    
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
+import {minLength,maxLength,required} from 'vuelidate/lib/validators'
 import {mapGetters, mapActions} from 'vuex'
 import {partition} from '../../../../src/Repositories/Repository'
 import {admin,dcf} from '../../../../src/Repositories/Auth';
@@ -346,11 +354,7 @@ export default {
         formData : {
                 annee: "",
                 date_debut:"",
-                date_fin:"",
-      
-                   
-          
-             
+                date_fin:"",   
         },
 
         editExerciceBudgetaire: {
@@ -366,6 +370,14 @@ export default {
  
     };
   },
+
+   validations:{
+     formData : {
+                annee: {required, minLength:minLength(4), maxLength:maxLength(4)},
+                date_debut:{required},
+                date_fin:{required},
+        },
+    },
  
   created() {
    // this.getExercicesBudgetaires()
@@ -396,6 +408,22 @@ export default {
   //     },
 
 
+
+  comparedate(){
+    if(this.formData.date_debut!="" && this.formData.date_fin ){
+        var date1 = moment(this.formData.date_debut).format("dd-mm-yyyy");
+      var date2 = moment(this.formData.date_fin).format("dd-mm-yyyy");
+      if(date1 >date2){
+        return false
+      }else if(date1==date2){
+        return false
+      }
+      return true
+    }return true
+    
+},
+
+
   },
   methods: {
     // methode pour notre action
@@ -406,6 +434,10 @@ export default {
      dcf:dcf,
 
 partition:partition,
+
+validationStatus:function(validation){
+            return  typeof validation !="undefined" ? validation.$error:false;
+        },
 
 getDataPaginate(index){
           this.active_el = index;
@@ -497,6 +529,8 @@ modifierExerciceBudgetaireLocal(){
                
   }
 },
+
+
 formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },

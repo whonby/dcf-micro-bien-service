@@ -14,6 +14,14 @@
                     > {{article.nom_section || 'Non renseigné'}}</td>
 
                     <td>
+                      <button class="btn btn-info" @click.prevent="$emit('modification', article)">
+                        <span>
+                          <i class="icon icon-edit"> Modifier</i>
+                        </span>
+                      </button>
+                    </td>
+
+                     <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
