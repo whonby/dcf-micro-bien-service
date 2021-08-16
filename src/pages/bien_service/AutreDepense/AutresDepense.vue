@@ -15,6 +15,7 @@
               <label class="control-label">Objet de la Depense</label>
               <div class="controls">
                 <textarea
+                required
                 style="border:1px solid #000"
                   v-model="formData.objet"
                   class="span12"
@@ -31,13 +32,13 @@
        </table>
       </div>
       <div class="modal-footer">
-        <a
+        <button
           @click.prevent="ajouterTypeTexteLocal()"
           class="btn btn-primary"
           href="#"
-        
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+        v-if="formData.objet.length !=0"
+        >Valider</button>
+        <button data-dismiss="modal" class="btn" href="#">Fermer</button>
       </div>
     </div>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
@@ -89,6 +90,21 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
+             <div>
+           <!-- <download-excel
+            class="btn btn-success pull-right"
+            style="cursor:pointer;"
+            :fields="json_fields"
+            title="Liste autre depense"
+            :data=" filtre_type_teste"
+            name="Liste autre depense"
+          >
+            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
+          </download-excel>  -->
+       <div align="right" style="cursor:pointer;">
+         <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+       </div> 
+          </div>
           <!-- <download-excel
             class="btn btn-default pull-right"
             style="cursor:pointer;"
@@ -100,12 +116,24 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
+             <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                        Listes des autres depenses
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()" >
+                 AJOUTER UNE AUTRE DEPENSE
+                </button>
+            </div> 
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Autres Depense</h5>
+              <h5> Listes des autres depenses</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -118,14 +146,14 @@
                   <tr>
                     <!-- <th>Année</th>
                     <th>Référence</th> -->
-                    <th style="width:90%">Objet</th>
+                    <th style="width:85%">Objet</th>
                      
                     <!-- <th>Bénéficiaire</th>
                     <th>Compte</th>
                      <th>Montant</th>
                     
                     <th>Date</th> -->
-                    <th>Action</th>
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -153,10 +181,13 @@
                     >{{type.date || 'Non renseigné'}}</td>-->
 
                     <td> 
+                      <button class="btn btn-info" @click="afficherModalModifierTypeTexte(type.id)">
+                        <span class=""><i class=" icon-edit"></i>   Modifier</span>
+                      </button>
+                    </td>
+                    <td> 
                       <button class="btn btn-danger" @click="supprimerDossierAutreDepense(type.id)">
-                        <span class="">
-                          <i class=" icon-trash"></i>   Supprimer
-                        </span>
+                        <span class=""><i class=" icon-trash"></i>   Supprimer</span>
                       </button>
                     </td>
                   </tr>
@@ -169,9 +200,9 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
-<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <notifications  />
     <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
   </div>
@@ -180,6 +211,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'typetext',
   data() {
@@ -303,7 +336,25 @@ this.$("#modificationModal").modal('hide');
     
 ExporterEnExel(){
       this.$refs.excel.click()
-    }
+    },
+    genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.gettersDossierAutreDepense;
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES AUTRES DEPENSES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('Autres depenses.pdf')
+doc.output('save','Autres depenses.pdf');
+doc.output('dataurlnewwindow');
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "OBJET", dataKey: "objet"}, 
+    ];
+},
   }
 };
 </script>

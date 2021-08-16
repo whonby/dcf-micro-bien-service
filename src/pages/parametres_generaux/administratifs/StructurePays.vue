@@ -28,11 +28,18 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>
                                      </div> 
-                                       <table>
-                                       <tr>
-                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des structures des pays</h5>
-                                       </tr>
-                                     </table> 
+              <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                        Liste des structures des pays
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalajouterStructurePays()" >
+                 AJOUTER UNE STRUCTURE
+                </button>
+            </div>       
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures des pays</h5>
@@ -61,7 +68,7 @@
                 <tr>
                   <th>Niveau</th>
                   <th>Libellé</th>
-                   <th style="width:10%">Action</th>
+                   <th style="width:16%" colspan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,14 +80,15 @@
                     {{structure_pays.libelle || 'Non renseigné'}}</td>
                   <td>
 
-
-
-              <div class="btn-group">
+              <button   class="btn btn-info ">
+                <span class=""><i class="icon-edit" @click.prevent="afficherModalModifierStructure(structure_pays.id)"> Modifier</i></span>
+                </button>
+                  </td>
+                  <td>
               <button @click.prevent="supprimerStructurePays(structure_pays.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
-            </div>
-
+           
                   </td>
                 </tr>
               </tbody>
@@ -117,11 +125,11 @@
                 <h3>Ajouter structure pays</h3>
               </div>
               <div class="modal-body">
-                        <table class="table table-bordered table-striped">
-                          <tr>
-                            <td>
+              <table class="table table-bordered table-striped">
+                <tr>
+                  <td>
                               
-<div class="control-group">
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
                 <input type="number" :value="tailleTableauStructureTache" class="span4" placeholder="Saisir le niveau" readonly/>
@@ -162,7 +170,7 @@
                 <h3>Modifier structure pays</h3>
               </div>
               <div class="modal-body">
-                <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped">
            <tr>
              <td>
                 <div class="control-group">
@@ -200,7 +208,7 @@
 
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalajouterStructurePays()">Open</button>
 
  <fab :actions="fabActions"
@@ -208,7 +216,7 @@
           @cache="afficherModalajouterStructurePays"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 

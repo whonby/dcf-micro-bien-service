@@ -27,7 +27,16 @@
                                                         <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div> 
+                                      <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans des pays</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalajouterPlanPays()">AJOUTER UN PLAN PAYS</button>
+      </div>  
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des plans des pays</h5>
@@ -252,7 +261,7 @@
 <!----- fin modifier modal  ---->
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalajouterPlanPays()">Open</button>
 
  <fab :actions="fabActions"
@@ -260,7 +269,7 @@
           @cache="afficherModalajouterPlanPays"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
