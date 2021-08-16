@@ -26,6 +26,20 @@
                                                         <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
+<<<<<<< HEAD
+                                     </div> <br> <br>
+
+          <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans programmes</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER UN PLAN PROGRAMME</button>
+      </div>       
+        
+=======
                                      </div> 
                                      <table>
                                        <tr>
@@ -35,11 +49,13 @@
                                                                <div align="right" style="cursor:pointer;">
            <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER</button>
           </div>  
+>>>>>>> d48cae6f827e30a9f0c31b87c47d98789976eaf2
         <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span> 
             <h5>Liste des plans programmes</h5>
              </div>
-<div class="widget-content ">
+
+        <div class="widget-content ">
             
                  <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"

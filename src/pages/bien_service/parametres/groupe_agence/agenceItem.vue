@@ -27,6 +27,13 @@
                     
                     > {{article.situation_geo || 'Non renseigné'}}</td>
                     <td>
+                      <button class="btn btn-info" @click.prevent="$emit('modification', article)">
+                        <span>
+                          <i class="icon icon-edit"></i>Modifier
+                        </span>
+                      </button>
+                    </td>
+                    <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
                         <span>
                           <i class="icon icon-trash"></i>Supprimer

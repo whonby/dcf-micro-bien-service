@@ -15,10 +15,10 @@
                 <model-list-select
                   style="background-color: #fff; border: 2px solid #000; font-weight:bold"
                   class="wide"
-                  :list="gettersgestionOrdrePaiement"
+                  :list="exercices_budgetaires"
                   v-model="exercice_id"
                   option-value="id"
-                  option-text="exercice"
+                  option-text="annee"
                   placeholder="TOUTES LES ANNEES"
                 >
                 </model-list-select>
@@ -420,6 +420,7 @@ created() {
             ]),
              ...mapGetters("parametreGenerauxBudgetaire", [
             "plans_budgetaires",
+           
             "derniereNivoPlanBudgetaire",
           ]),
            ...mapGetters("gestionMarche", [ 'groupeVille','entreprises',
@@ -517,7 +518,7 @@ NbreDossierOpProvisoire(){
     return this.gettersgestionOrdrePaiement.filter(
       (tem) => 
       tem.type_ordre_paiement == 1 &&
-      tem.exercice == this.anneeAmort)
+      tem.exercice == this.exercice_id)
   } else if(this.uniteAdministratives_id != 0){
     return this.gettersgestionOrdrePaiement.filter(
       (tem) => 

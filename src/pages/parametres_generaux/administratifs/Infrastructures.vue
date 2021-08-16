@@ -64,7 +64,7 @@
                 
                 <tr>
                   <th>Code</th>
-                  <th >Libellé</th>
+                  <th style="width:1000px;">Libellé</th>
                    <th >Action</th>
                 </tr>
               </thead>
@@ -77,7 +77,7 @@
 
 
 
-              <div class="btn-group" style="width:50px;">
+              <div class="btn-group" >
                    <td>
                <button  @click.prevent="afficherModalModifierTitre(nature_section.id)"  class="btn btn-info " >
                 <span class=""><i class="icon-edit"> Modifier</i></span></button>

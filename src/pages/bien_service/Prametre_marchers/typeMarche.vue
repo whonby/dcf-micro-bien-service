@@ -107,7 +107,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types de marchés </h5>
+              <h5>Liste des types de marchés  </h5>
               
               <div align="right">
                 Recherche:
@@ -130,7 +130,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libellé</th>
+                    <th style="width:1000px;">Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -144,7 +144,7 @@
                   
 
 
-                     <div class="btn-group" style="width:100px;">
+                     <div class="btn-group" >
                          <td>
               
               <button  @click.prevent="afficherModalModifiertextJuridique(typeProcedure.id)"  class="btn btn-info " >

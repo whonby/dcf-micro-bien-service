@@ -32,7 +32,7 @@
                 <div class="control-group">
                   <label class="control-label">Code de l'agence</label>
                   <div class="controls">
-                     <input type="text" v-model="formData.code_agence" class="span4" />
+                     <input type="text" v-model="formData.code_agence" class="span4" required />
                   </div>
                 </div>
               </td>
@@ -65,12 +65,12 @@
                   <div class="controls">
                     
                     <select v-model="formData.pays_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
+                        
+                        <option v-for="item in affichePays" :key="item.id" :value="item.id">
+                            {{item.libelle}}
+                        </option>
 
-                                                        </select>
+                    </select>
                   </div>
                 </div>
               </td>
@@ -78,7 +78,7 @@
                   <div class="control-group">
                   <label class="control-label">Ville</label>
                   <div class="controls">
-                    <select v-model="formData.ville_id" :readOnly="verroPays" class="span4">
+                    <select v-model="formData.ville_id"  class="span4">
                      <option></option>
                                                             <option v-for="item in villeDynamiques(formData.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -92,7 +92,7 @@
                   <label class="control-label">Commune</label>
                 
                   <div class="controls">
-                   <select v-model="formData.commune_id" :readOnly="verroVille" class="span4">
+                   <select v-model="formData.commune_id" class="span4">
                       <option
                         v-for="localgeo in CommuneDynamiques(formData.ville_id)"
                         :key="localgeo.id"
@@ -285,7 +285,16 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
                                      </div>
-                                     
+          
+          <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Listes des Agences bancaires</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalAjouterSection()">AJOUTER UNE AGENCE</button>
+      </div>       
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -322,7 +331,7 @@
     </div>
 
     
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterSection()">Open</button>
 
  <fab :actions="fabActions"
@@ -330,7 +339,7 @@
           @cache="afficherModalAjouterSection"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
   </div>
 
@@ -398,6 +407,10 @@ export default {
        search:""
     };
   },
+created(){
+  console.log("heeee")
+  console.log(this.affichePays)
+},
 
   computed: {
       ...mapGetters("bienService", ['villes','pays','communes']),

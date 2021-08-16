@@ -8,7 +8,19 @@
         <h3>Ajouter Type d'analyse</h3>
       </div>
       <div class="modal-body">
-       <form class="form-horizontal">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
+              <label class="control-label">Libellé </label>
+              <div class="controls">
+                <input type="text" v-model="formData.libelle" class="span4" placeholder="Saisir le type d'analyse" required>
+              </div>
+            </div>
+             </td>
+           </tr>
+              </table> 
+       <!-- <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Libellé</label>
             <div class="controls">
@@ -20,17 +32,14 @@
               />
             </div>
           </div>
-         
-          
-         
-         </form>
+         </form> -->
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
           href="#"
-         
+         v-if="formData.libelle !=0"
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -91,9 +100,19 @@
        <div align="right" style="cursor:pointer;">
          <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
        </div> 
-
-
           </div>
+             <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                        Liste des types d'analyses
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalAjouTypeAnalyse()" >
+                 AJOUTER UN TYPE D'ANALYSE
+                </button>
+            </div> 
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -123,8 +142,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libellé</th>
-                    <th>Action</th>
+                    <th width="85%">Libellé</th>
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,11 +154,17 @@
                   
 
 
-                     <div class="btn-group">
-              <button @click.prevent="supprimertypeAnalyse(typeAnalyse.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> </i>Supprimer</span></button>
+                    <td>
+                      <button @click.prevent="afficherModalModifierTypeAnalyse(typeAnalyse.id)"  class="btn btn-info ">
+                        <span class=""><i class="icon-edit"> </i> Modifier</span></button>
+                    </td>
+
+                    <td>
+                      <button @click.prevent="supprimertypeAnalyse(typeAnalyse.id)"  class="btn btn-danger ">
+                        <span class=""><i class="icon-trash"> </i> Supprimer</span></button>
+                    </td>
              
-            </div>
+            
 
                        </tr>
                 </tbody>
@@ -162,10 +187,10 @@
         </div>
       </div>
     </div>
-
+<!-- 
     <fab :actions="fabActions" @cache="afficherModalAjouTypeAnalyse" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouTypeAnalyse()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
   </div>
@@ -174,7 +199,7 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
  import {partition} from '../../../../src/Repositories/Repository'
-   import jsPDF from 'jspdf'
+ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name:'type facture',

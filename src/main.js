@@ -1,6 +1,5 @@
 //require('./bootstrap');
 import Vue from 'vue'
-
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -74,7 +73,8 @@ const options2 = {
   confirmButtonColor: '#41b882',
   cancelButtonColor: '#ff7674',
 };
-
+// import Vuelidate from 'vuelidate';
+// Vue.use(Vuelidate);
 Vue.use(VueSweetalert2, options2);
 
 import VueHtml2pdf from 'vue-html2pdf'

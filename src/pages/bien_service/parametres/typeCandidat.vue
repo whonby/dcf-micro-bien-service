@@ -8,7 +8,19 @@
         <h3>Ajouter type candidat</h3>
       </div>
       <div class="modal-body">
-       <form class="form-horizontal">
+         <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
+              <label class="control-label">Niveau:</label>
+              <div class="controls">
+                <input type="text" v-model="formData.libelle" class="span4" placeholder="Saisissez le niveau" required >
+              </div>
+            </div>
+             </td>
+           </tr>
+              </table> 
+       <!-- <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Libellé</label>
             <div class="controls">
@@ -22,14 +34,14 @@
           </div>
           
          
-         </form>
+         </form> -->
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterTypeAppelLocal(formData)"
           class="btn btn-primary"
           href="#"
-         
+         v-if="formData.libelle !=0"
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -44,8 +56,21 @@
         <h3>Modifier type candidat</h3>
       </div>
       <div class="modal-body">
-         <form class="form-horizontal">
+           <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
+              <label class="control-label">Niveau:</label>
+              <div class="controls">
+                <input type="text" v-model="editTypeAppel.libelle" class="span4" placeholder="" >
+              </div>
+            </div>
+             </td>
+           </tr>
+              </table> 
+         <!-- <form class="form-horizontal">
           <div class="control-group">
+            
             <label class="control-label">Libellé</label>
             <div class="controls">
               <input
@@ -57,7 +82,7 @@
             </div>
           </div>
          
-         </form>
+         </form> -->
       </div>
       <div class="modal-footer">
         <a
@@ -93,6 +118,15 @@
           </div> 
 
           </div>
+           <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des types de candidats</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()">AJOUTER TYPE CANDIDAT</button>
+      </div>  
 
           <div class="widget-box">
             <div class="widget-title">
@@ -128,9 +162,9 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">Libellé</th>
+                    <th width="85%">Libellé</th>
                    
-                    <th>Action</th>
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,17 +174,19 @@
                       {{typeappel.libelle || 'Non renseigné'}}</td>
                  
                    
-                  <td>
+                  
+                <td>
 
+              <button @click.prevent="afficherModalAjoutertypecandiadt(typeappel.id)"  class="btn btn-info ">
+                <span class=""><i class="icon-edit"> </i> Modifier</span></button>
+                </td>
+                <td>
 
-
-              <div class="btn-group">
               <button @click.prevent="supprimerTypeCandidat(typeappel.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> </i>Supprimer</span></button>
+                <span class=""><i class="icon-trash"> </i> Supprimer</span></button>
+                </td>
              
-            </div>
-
-                  </td>
+            
                 </tr>
                 </tbody>
               </table>
@@ -171,9 +207,9 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab> -->
+ <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button> -->
+      <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
   </div>
@@ -307,8 +343,8 @@ partition:partition,
     //   console.log("ok");
     // },
     modifierTypeAppelLocal(){
-  this.modifierTypeCandidat(this.editTypeAppel)
-  this.$('#modificationModal').modal('hide');
+      this.$('#modificationModal').modal('hide');
+  this.modifierTypeCandidat(this.editTypeAppel);
   // this.editPrestation = {
   //   libelle_prestation:"",
   //   libelle:"",
