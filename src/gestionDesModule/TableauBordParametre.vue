@@ -37,7 +37,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="exercice_budgetaire in exercices_budgetaires" :key="exercice_budgetaire.id">
+                <tr class="odd gradeX" v-for="exercice_budgetaire in afficheExeciceenCour" :key="exercice_budgetaire.id">
                   <template v-if="!exercice_budgetaire.encours">
                          <td>
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
@@ -172,6 +172,9 @@ export default {
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 ...mapGetters('gestionMarche', ['entreprises',"secteur_activites","sanctions"]),
 
+afficheExeciceenCour(){
+return this.exercices_budgetaires.filter(normeEquipe => normeEquipe.encours == 1);
+},
 ExerciceEnCours() {
       
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);

@@ -29,11 +29,17 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div> 
                                      </div> <br>
+
+                           <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterRolemembreCojo()">AJOUTER MEMBRE COJO</button>
+          </div>
+
+             <h3 align="center">Liste des rôles des membres de la Cojo</h3>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des rôles des membres de la Cojo</h5>
+            
              <div align="right">
-        Recherche: <input type="text" v-model="search"  placeholder=" ">
+        Recherche: <input type="text" v-model="search" placeholder=" ">
 
           </div>
              
@@ -55,9 +61,9 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Code</th>
-                  <th>Libellé</th>
-                   <th>Action</th>
+                  <th  style="width:20px;">Code</th>
+                  <th >Libellé</th>
+                   <th style="width:20px;">Action</th>
                 </tr>     
               </thead>
               <tbody>
@@ -69,17 +75,25 @@
                   <td @dblclick="afficherModalModifierType(role.id)">
                     {{role.libelle || 'Non renseigné'}}</td>
                  
+                 
+
+
+
+                 <div class="btn-group" style="width:-100px;">
+                             <td >
+              
+              <button  @click.prevent="afficherModalModifierType(role.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
                   <td>
 
-
-
-              <div class="btn-group">
               <button @click.prevent="supprimerRolemembreCojo(role.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i> Supprimer</span></button>
-             
+               </td>
             </div>
 
-                  </td>
+                  
                 </tr>
               </tbody>
             </table>
@@ -110,21 +124,37 @@
                 <h3>Ajouter le rôle du membre de la Cojo</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <!-- <form class="form-horizontal"> -->
+                   <table class="table table-bordered table-striped">
+                     <tr>
+                       <td>
+                    <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="number" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="number" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+
+                <!-- <code style="color:red">{{MessageErreur}}</code> -->
               </div>
             </div>
-            <div class="control-group">
+            <div style="color: red" v-if="verifcode == true">
+                Ce code existe déjà!
+              </div>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                     <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
+                       </td>
+                     </tr>
+            
+                   </table>
               
-          </form>              
+          <!-- </form>               -->
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.code.length && formData.libelle.length" 
@@ -145,22 +175,33 @@
                 <h3>Modifier role membrecojo</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                 <table class="table table-bordered table-striped">
+                   <tr>
+                     <td>
+                  <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="number" v-model="editRole.code" class="span" placeholder="" />
+                <input type="number" v-model="editRole.code" class="span5" placeholder="" />
+                
               </div>
             </div>
-            <div class="control-group">
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                    <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editRole.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editRole.libelle" class="span5" placeholder="" />
               </div>
             </div>
+                     </td>
+                   </tr>
+           
             
             
-          </form>              
+            
+                 </table>              
           </div>
            <div class="modal-footer"> 
              <button 
@@ -177,12 +218,12 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterRolemembreCojo()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalAjouterRolemembreCojo"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
 
 
@@ -208,6 +249,7 @@ export default {
         'Code':'code',
         'Libelle':'libelle'
       },
+     // MessageErreur:"le code existe",
         fabActions: [
               {
                   name: 'cache',
@@ -254,7 +296,22 @@ return this.role_membrecojo.filter((item) => {
 
    }
 )
-   }
+   },
+     verifcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.role_membrecojo.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
                                     
   },
   methods: {
@@ -309,6 +366,13 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterTypeLocal () {
+      // let code=0;
+      // if(code==""){
+      // return ''
+      // } else if(this.formData.code==this.formData.code){
+      //   return this.MessageErreur
+      // }
+      
      this.ajouterRolemembreCojo(this.formData)
         this.formData = {
                 code: "",

@@ -38,13 +38,18 @@ localisationsFiltre
              <div  align="right" style="cursor:pointer;">
  <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
      </div>
-                           </div> 
+                           </div> <br>
+
+             <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalExerciceBudgetaire()">AJOUTER</button>
+          </div>
+          <h3 align="center">Liste Taux TVA</h3>
                                                  <!-- <input type="button" @click.prevent="imprimerBPdf"/> -->
                                      <!-- </div> <br> -->
         <div class="widget-box">
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste Taux TVA</h5>
+            
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -62,10 +67,10 @@ localisationsFiltre
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(tau, index) 
+                <tr class="odd gradeX" v-for="tau 
                 in taux" :key="tau.id">
                   <template v-if="!tau.encours">
-                         <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(tau.id)">
                     {{tau.libelle || 'Non renseigné'}}%</td>
                     
                                  
@@ -73,7 +78,7 @@ localisationsFiltre
 
 
                     <template v-else>
-                         <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(tau.id)">
                     {{tau.libelle || 'Non renseigné'}}%</td>
                 
                   
@@ -89,15 +94,25 @@ localisationsFiltre
                 <span >Non</span>
                 </button>
                    </td>
-                  <td>
-                    
-                    
+                      <div class="btn-group">
+                         <td>
               
+              <button  @click.prevent="afficherModalModifierExerciceBudgetaire(tau.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerExerciceBudgetaire(tau.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
+            </div>
+
+                  <!-- <td>
               <button v-if="tau.encours!=1" @click.prevent="supprimerExerciceBudgetaire(tau.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
 
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
@@ -186,12 +201,12 @@ localisationsFiltre
   <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalExerciceBudgetaire()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalExerciceBudgetaire"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
@@ -340,14 +355,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierExerciceBudgetaire(index){
+afficherModalModifierExerciceBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.edittaux = this.taux[index];
+        this.edittaux = this.taux.find(item =>item.id==id);
 
 
         

@@ -29,7 +29,7 @@
         <a
           @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
-          href="#"
+          href="#" v-show="formData.libelle.length"
          
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>

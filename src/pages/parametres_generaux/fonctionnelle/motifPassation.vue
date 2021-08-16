@@ -28,9 +28,15 @@
                         </div> 
 
                                      </div> <br>
+
+              <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjoutOrganeDecision()">AJOUTER NATURE DES PRIX</button>
+          </div>
+
+          <h3 align="center">liste des motifs de dérogation </h3>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>liste des motifs de dérogation </h5>
+            
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -54,29 +60,39 @@
               <thead>
                 <tr>
                     <th>Code</th>
-                  <th>Libellé</th>
+                  <th  style="width:1000px;">Libellé</th>
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="activites  in partition (organeDecisionFiltre,size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierOrganeDecision(activites.id)">
+                  <td >
                       {{activites.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierOrganeDecision(activites.id)">
+                  <td >
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
-                  <td>
-
-
-
-              <div class="btn-group">
+              
+              <!-- <div class="btn-group">
               <button @click.prevent="supprimerMotifPassation(activites.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
+            </div> -->
+
+              <div class="btn-group">
+                         <td>
+              
+              <button  @click.prevent="afficherModalModifierOrganeDecision(activites.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerMotifPassation(activites.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
             </div>
 
-                  </td>
+                
                 </tr>
               </tbody>
               
@@ -130,22 +146,31 @@
                 <h3>Ajouter motif de passations</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+               <table class="table table-bordered table-striped">
+                 <tr>
+                   <td>
+                    <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-
-            <div class="control-group">
+              <div style="color: red" v-if="verifcode == true">
+                Ce code existe déjà!
+              </div>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>
+                     <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
-             
-          </form>              
+                   </td>
+                 </tr>
+               </table>              
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.code.length  && formData.libelle.length"
@@ -166,23 +191,29 @@
                 <h3>Modifier motif de passations</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+                 <tr>
+                   <td>
+                     <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="editOrgane.code" class="span" placeholder="" />
+                <input type="text" v-model="editOrgane.code" class="span5" placeholder="" />
               </div>
             </div>
-          
-            <div class="control-group">
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>
+                      <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="editOrgane.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editOrgane.libelle" class="span5" placeholder="" />
               </div>
             </div>
-        
-          </form>              
+                   </td>
+                 </tr>
+           
+                </table>              
           </div>
            <div class="modal-footer"> 
              <button v-show="editOrgane.code.length  && editOrgane.libelle.length" 
@@ -199,12 +230,12 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjoutOrganeDecision()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalAjoutOrganeDecision"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications />
 
@@ -285,7 +316,21 @@ return this.motif_passation.filter((item) => {
 
    }
 )
-   }
+   },
+    verifcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.motif_passation.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
   },
 
   methods: {

@@ -97,14 +97,18 @@
          <div align="right" style="cursor:pointer;">
           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
         </div> 
-           </div>
+           </div><br>
 
+            <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterService()">AJOUTER</button>
+          </div>
+           <h3 align="center">Liste des Causes d'inactivités</h3>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Causes d'inactivités</h5>
+              
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -137,21 +141,34 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(service, index) in partition (filtre_service,size)[page]"
+                    v-for="service in partition (filtre_service,size)[page]"
                     :key="service.id"
                   >
                    
                     <td
-                      @dblclick="afficherModalModifierService(index)"
+                      @dblclick="afficherModalModifierService(service.id)"
                     >{{service.libelle || 'Non renseigné'}}</td>
 
-                    <td>
+                         <div class="btn-group">
+                         <td>
+              
+              <button  @click.prevent="afficherModalModifierService(service.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerCauseInactivite(service.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
+            </div>
+
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerCauseInactivite(service.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -175,7 +192,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab> -->
      <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterService()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
@@ -300,13 +317,13 @@ partition:partition,
       };
     },
     // afficher modal de modification
-    afficherModalModifierService(index) {
+    afficherModalModifierService(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editService = this.causeInactivite[index];
+      this.editService = this.causeInactivite.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     modifierServiceLocal() {

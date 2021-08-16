@@ -27,10 +27,17 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>
                                      </div>
+                                     <br>
+
+            <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalajouterInfrastructure()">AJOUTER INFRASTRUCTURES</button>
+          </div>
+
+            <h3 align="center">Listes des Infrastructures </h3>
                   
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-             <h5>Listes des Infrastructures</h5>
+           
              <!-- <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -57,26 +64,30 @@
                 
                 <tr>
                   <th>Code</th>
-                  <th>Libellé</th>
-                   <th>Action</th>
+                  <th >Libellé</th>
+                   <th >Action</th>
                 </tr>
               </thead>
               
               <tbody>
                 <tr class="odd gradeX" v-for="nature_section in partition (getterInfrastrucure,size)[page]" :key="nature_section.id">
-                  <td @dblclick="afficherModalModifierTitre(nature_section.id)">{{nature_section.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTitre(nature_section.id)">{{nature_section.libelle || 'Non renseigné'}}</td>
-                  <td>
+                  <td >{{nature_section.code || 'Non renseigné'}}</td>
+                  <td >{{nature_section.libelle || 'Non renseigné'}}</td>
+                
 
 
 
-              <div class="btn-group">
+              <div class="btn-group" style="width:50px;">
+                   <td>
+               <button  @click.prevent="afficherModalModifierTitre(nature_section.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+                 </td>
+
+                 <td>
               <button @click.prevent="supprimerInfrastructure(nature_section.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"> Supprimer</i></span></button>
-             
-            </div>
-
-                  </td>
+             </td>
+            </div>   
                 </tr>
               </tbody>
             </table>
@@ -84,7 +95,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune nature de section enregistrée</h6>
+                <h6 style="color:red;">Aucune infrastructure enregistrée</h6>
               </div>
             </div>
           </div>
@@ -118,6 +129,10 @@
               <label class="control-label">Code:</label>
               <div class="controls">
                 <input type="text" :value="TailleTableau" class="span" readonly placeholder="Saisir le code" />
+              </div>
+
+               <div style="color: red" v-if="verifcode == true">
+                Ce code existe déjà!
               </div>
             </div>
             <div class="control-group">
@@ -180,12 +195,12 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalajouterInfrastructure()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalajouterInfrastructure"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
@@ -247,7 +262,22 @@ export default {
     
    TailleTableau(){
        return this.getterInfrastrucure.length + 1;
-   }
+   },
+
+     verifcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.getterInfrastrucure.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
 
   },
   methods: {
