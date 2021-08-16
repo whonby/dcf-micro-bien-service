@@ -22,12 +22,14 @@ import VueHtmlToPaper from 'vue-html-to-paper';
 
 import JsonExcel from 'vue-json-excel'
 import Datatable from 'vue2-datatable-component'
+import Vuelidate from 'vuelidate'
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // import jsPDF from 'jspdf'
 //  vue.component('')
 import VueGoogleCharts from 'vue-google-charts'
- 
+
 Vue.use(VueGoogleCharts)
 import FullCalendar from 'vue-full-calendar'
 import "fullcalendar-scheduler";
@@ -40,17 +42,17 @@ import PrettyCheckbox from 'pretty-checkbox-vue'
 import vueScrollto from 'vue-scrollto'
 
 Vue.use(vueScrollto, {
-    container: "body",
-    duration: 500,
-    easing: "ease",
-    offset: 0,
-    force: true,
-    cancelable: true,
-    onStart: false,
-    onDone: false,
-    onCancel: false,
-    x: false,
-    y: true
+  container: "body",
+  duration: 500,
+  easing: "ease",
+  offset: 0,
+  force: true,
+  cancelable: true,
+  onStart: false,
+  onDone: false,
+  onCancel: false,
+  x: false,
+  y: true
 })
 import VueTelInput from 'vue-tel-input'
 import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
@@ -62,8 +64,8 @@ import VueSweetalert2 from 'vue-sweetalert2';
 // If you don't need the styles, do not connect
 import 'sweetalert2/dist/sweetalert2.min.css';
 const options2 = {
-    confirmButtonColor: '#41b882',
-    cancelButtonColor: '#ff7674',
+  confirmButtonColor: '#41b882',
+  cancelButtonColor: '#ff7674',
 };
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
@@ -75,39 +77,39 @@ Vue.use(VueHtml2pdf)
 
 import Print from 'vue-print-nb'
 
-Vue.use(Print,{
-        Printable:'printContent', // ID of the content to be printed
-        type: 'html',
-        style: '@page {margin: 0} @media print {}',
-        scanStyles: false
-      }); //Register
+Vue.use(Print, {
+  Printable: 'printContent', // ID of the content to be printed
+  type: 'html',
+  style: '@page {margin: 0} @media print {}',
+  scanStyles: false
+}); //Register
 
 // ...
 Vue.component('l-draw-toolbar', LDrawToolbar);
 Vue.use(VueTelInput)
 const options = {
-    name: '_blank',
-    specs: [
-        'fullscreen=yes',
-        'titlebar=yes',
-        'scrollbars=yes'
-    ],
-    styles: [
-        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-        'https://unpkg.com/kidlat-css/css/kidlat.css',
-        "http://sidcf.agosoftprojet.com/lien/css/matrix-style.css"
-    ]
+  name: '_blank',
+  specs: [
+    'fullscreen=yes',
+    'titlebar=yes',
+    'scrollbars=yes'
+  ],
+  styles: [
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+    'https://unpkg.com/kidlat-css/css/kidlat.css',
+    "http://sidcf.agosoftprojet.com/lien/css/matrix-style.css"
+  ]
 }
 Vue.use(VueHtmlToPaper, options);
 
 import money from 'v-money'
-const money_option= {
-        decimal: ',',
-        thousands: ' ',
-        prefix: ' ',
-        suffix: ' ',
-        precision: 0,
-        masked: false
+const money_option = {
+  decimal: ',',
+  thousands: ' ',
+  prefix: ' ',
+  suffix: ' ',
+  precision: 0,
+  masked: false
 }
 
 Vue.use(money, money_option)
@@ -125,6 +127,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 Vue.use(Loading);
 Vue.use(ViewUI);
 Vue.use(VueFormWizard)
+Vue.use(Vuelidate);
 Vue.component('v-marker-cluster', Vue2LeafletMarkerCluster)
 Vue.component('downloadExcel', JsonExcel)
 //Vue.component(Balloon)
@@ -136,8 +139,8 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.prototype.$ = Jquery
 
- Vue.component('default-layout', Default)
- Vue.component('no-sidebar-layout', NoSidebar)
+Vue.component('default-layout', Default)
+Vue.component('no-sidebar-layout', NoSidebar)
 Vue.use(ElementUI);
 
 Vue.use(FullCalendar)
@@ -149,7 +152,7 @@ Vue.use(VueLoading, {
   dark: true, // default false
   text: 'Patientez ...', // default 'Loading'
   //loading: true, // default false
- // background: 'rgb(255,255,255)', // set custom background
+  // background: 'rgb(255,255,255)', // set custom background
 })
 // Tell Vue to install the plugin.
 // Vue.use(VuejsDialog);
@@ -186,7 +189,7 @@ Vue.component('jw-pagination', JwPagination);
 // }).$mount("#app");
 
 const app = new Vue({
- // el: '#app',
+  // el: '#app',
   router,
   store,
   render: h => h(App)
