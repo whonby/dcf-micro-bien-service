@@ -264,7 +264,7 @@ created(){
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
-          this.getTypeOrdrePaiement()
+        //   this.getTypeOrdrePaiement()
           this.getTacheMarche()
 this.getReception()
 this.getDemandeEngagement()
@@ -748,7 +748,7 @@ return objJson.id
     // 	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     // 'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ['getBonCommande',"getProcedureTypeDepense","getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ['getBonCommande',"getProcedureTypeDepense","getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense','getProblemeMarche', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches','getBailleurDmdEngagement',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
@@ -761,7 +761,9 @@ return objJson.id
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
           "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",
-          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel','getEntreprisePreselectionner']),
+          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel','getEntreprisePreselectionner'
+        //   ,"getTypeOrdrePaiement"
+          ]),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)
