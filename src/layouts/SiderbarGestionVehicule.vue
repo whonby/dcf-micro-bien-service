@@ -163,6 +163,7 @@ export default {
 
 
 
+
   AffichePhoto() {
       return id => {
         if (id != null && id != "") {
