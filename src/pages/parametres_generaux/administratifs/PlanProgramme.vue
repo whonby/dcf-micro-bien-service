@@ -29,16 +29,16 @@
                                      </div> 
                                      <table>
                                        <tr>
-                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans programmes</h5>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Plans programmes</h5>
                                        </tr>
                                      </table>
                                                                <div align="right" style="cursor:pointer;">
            <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER</button>
           </div>  
         <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans programmes</h5>
-             </div>
+             <!-- <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>plans programmes</h5>
+             </div> -->
 <div class="widget-content ">
             
                  <ul id="demo">
@@ -90,6 +90,10 @@
               </select>
             </div>
             </div> -->
+            
+                
+                
+              
                     </td>
                   </tr>
                   <tr><td>
@@ -97,6 +101,7 @@
               <label class="control-label">Code:</label>
               <div class="controls">
                 <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+                <span style="color: red" v-bind:class="verificationcode == true ? afficheNotificationCode() : ''"></span>
               </div>
             </div>
                     </td>
@@ -177,10 +182,14 @@
                    <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElement.code" class="span1" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElement.code" class="span1" placeholder="" />
                 <input type="text" :value="codeplanfonctionnelle" class="span4"  readonly />
               </div>
             </div>
+             <div style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''">
+                
+                
+              </div>
                     </td>
                   </tr>
                   
@@ -197,8 +206,7 @@
                 </table>     
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_programme_id"
+             <button v-show="nouvelElement.code.length && nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -317,7 +325,9 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     
+     nouvelElement:{
+       code:""
+     },
         formData : {
                 code: "",
              libelle: "",
@@ -344,21 +354,75 @@ export default {
    ...mapGetters('parametreGenerauxAdministratif', [ 'structures_programmes',
     'plans_programmes']) ,
 
+afficheNotification(){
+  if(this.verificationcodeEnfant == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+
+verificationcodeEnfant() {
+      if (this.nouvelElement.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_programmes.filter(
+          (element) => element.code == this.codeplanfonctionnelle
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+afficheNotificationCode(){
+  if(this.verificationcode == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+verificationcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_programmes.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
 AfficheNiveau2(){
 
-if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 2) {
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code))) {
 
   return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
 
 }
-else if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 3)
+else 
 
 {
 
-return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+return "pas de niveau"
  
 }
-return ""
+
    },
    codeplanfonctionnelle() {
     return  this.parentDossier.code + this.nouvelElement.code
@@ -489,8 +553,17 @@ getColumns() {
 
      ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
-      this.ajouterPlanProgramme(this.nouvelElementEnfant)
-
+       var nouveauObjet = {
+             ... this.nouvelElementEnfant,
+structure_programme_id:this.afficheLeIdStructure(this.parentDossier.code),
+code:this.codeplanfonctionnelle,
+	parent:this.parentDossier.id
+           }
+      this.ajouterPlanProgramme(nouveauObjet)
+this.nouvelElement = {
+                code: "",
+             
+        }
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",

@@ -6,7 +6,7 @@
       @dblclick="$emit('modifier', item)">
     <span v-if="isFolder" @click="toggle"> <i :class="iconClasses"></i></span>
 
-     <span style="font-size: 1.5em;" :title="item.libelle"> <code > {{item.code}}</code>    {{ item.libelle |subStr(100) }}          <code style="color:red;font-weight:bold;"> {{item.longitude}}</code> <code style="color:blue;font-weight:bold;">{{item.latitude}}</code></span>
+     <span style="font-size: 1.5em;" :title="item.libelle"> <code > {{item.code}}</code>    {{ item.libelle |subStr(100) }}          <code style="color:red;font-weight:bold;" v-if="item.longitude != null || item.longitude != 0"> {{item.longitude}}</code> <code style="color:blue;font-weight:bold;" v-if="item.latitude != null || item.latitude != 0">{{item.latitude}}</code></span>
      <span style="cursor: pointer;"  class="add" @click="$emit('ajouterElementEnfant', item)"><i class="icon-plus-sign"></i></span>
      <span style="cursor: pointer;"  class="add" @click="$emit('modifier', item)"><i class="icon-pencil"></i></span>
      <span style="cursor: pointer;" class="add" @click="$emit('supprimer', item)"><i class="icon-trash"></i></span>

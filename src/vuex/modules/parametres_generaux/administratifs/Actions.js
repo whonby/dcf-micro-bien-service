@@ -225,7 +225,7 @@ export function getSection({ commit }) {
 
 }
 
-export function ajouterSection({ commit }, objetAjout) {
+export function ajouterSection({ commit ,dispatch}, objetAjout) {
     asyncLoading(axios.post('/ajouter_section', {
         code: objetAjout.code,
         nom_section: objetAjout.nom_section,

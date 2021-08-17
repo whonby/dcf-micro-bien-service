@@ -29,7 +29,7 @@
                                      </div> 
                                      <table>
                                        <tr>
-                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans fonctionnels</h5>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Plans fonctionnels</h5>
                                        </tr>
                                      </table>
                                       <div align="right" style="cursor:pointer;">
@@ -196,7 +196,7 @@
                             
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElement.code.length"
+             <button v-show="nouvelElement.code.length && nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -443,19 +443,20 @@ afficheLeLibelleStructure() {
 
 AfficheNiveau2(){
 
-if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 2) {
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code))) {
 
   return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
 
 }
-else if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == 3)
+
+else
 
 {
 
-return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+return "pas de niveau"
 
 }
-return ""
+
    },
 
 
