@@ -2,19 +2,33 @@
   
 
   
-                  <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
+                  <tr class="odd gradeX">
                  
                     <td style="width:90%;font-size:14px"
                     
                     > {{article.libelle || 'Non renseigné'}}</td>
 
-                    <td>
+                          <div class="btn-group">
+                         <td>
+              
+               <button class="btn btn-info" @click.prevent="$emit('modification', article)">
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+               <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
+            </div>
+
+
+                    <!-- <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
 
 

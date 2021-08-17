@@ -8,7 +8,19 @@
         <h3>Ajouter Type Facture</h3>
       </div>
       <div class="modal-body">
-       <form class="form-horizontal">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
+              <label class="control-label">type facture</label>
+              <div class="controls">
+                <input type="text" v-model="formData.libelle" class="span4" placeholder="" required="required" >
+              </div>
+            </div>
+             </td>
+           </tr>
+              </table> 
+       <!-- <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Type de facture</label>
             <div class="controls">
@@ -23,14 +35,14 @@
          
           
          
-         </form>
+         </form> -->
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterModalTypeFactureLocal"
           class="btn btn-primary"
           href="#"
-         
+         v-if="formData.libelle !=0"
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -45,7 +57,19 @@
         <h3>Modifier Type Facture</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
+              <label class="control-label">type facture</label>
+              <div class="controls">
+                <input type="text" v-model="editTypefacture.libelle" class="span4" placeholder="" >
+              </div>
+            </div>
+             </td>
+           </tr>
+              </table> 
+        <!-- <form class="form-horizontal">
             <div class="control-group">
             <label class="control-label">type facture</label>
             <div class="controls">
@@ -58,7 +82,7 @@
             </div>
           </div>
          
-        </form>
+        </form> -->
       </div>
       <div class="modal-footer">
         <a
@@ -92,6 +116,16 @@
             <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div> 
           </div>
+          
+          <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des types de factures</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalAjouterTypeFacture()">AJOUTER UN TYPE DE FACTURE</button>
+      </div>  
 
           <div class="widget-box">
             <div class="widget-title">
@@ -125,8 +159,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">Libellé</th>
-                    <th>Action</th>
+                    <th width="85%">Libellé</th>
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,13 +169,17 @@
                  <td @dblclick="afficherModalModifierTypefactiure(typeFacture.id)">
                    {{typeFacture.libelle || 'Non renseigné'}}</td>
                   
+  <td>
 
+              <button @click.prevent="afficherModalModifierTypefactiure(typeFacture.id)"  class="btn btn-info ">
+                <span class=""><i class="icon-edit"> </i>Modifier</span></button>
+  </td>
 <td>
-  <div class="btn-group">
+  <!-- <div class="btn-group"> -->
               <button @click.prevent="supprimerTypeFacture(typeFacture.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"> </i>Supprimer</span></button>
              
-            </div>
+            <!-- </div> -->
 </td>
 
                      
@@ -164,10 +202,10 @@
         </div>
       </div>
     </div>
-
+<!-- 
     <fab :actions="fabActions" @cache="afficherModalAjouterTypeFacture" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTypeFacture()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
   </div>

@@ -25,9 +25,13 @@
 
                                                  <!-- </download-excel>  -->
                                      </div> <br>
+                     <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterNaturePrix()">AJOUTER NATURE DES PRIX</button>
+          </div>
+           <h3 align="center">Nature des prix </h3>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Nature des prix</h5>
+           
              <div align="right">
         Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
 
@@ -40,7 +44,7 @@
               <thead>
                 <tr>
                   <th>code</th>
-                  <th>libelle</th>
+                  <th style="width:1000px;">libelle</th>
                    <th>Action</th>
                 </tr>     
               </thead>
@@ -48,22 +52,32 @@
                 <tr class="odd gradeX" v-for="type in
                  typeFiltre"
                  :key="type.id">
-                  <td @dblclick="afficherModalModifierNature(type.id)">
-                 {{type.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierNature(type.id)">
-                    {{type.libelle || 'Non renseigné'}}</td>
-                 
                   <td>
+                 {{type.code || 'Non renseigné'}}</td>
+                  <td>
+                    {{type.libelle || 'Non renseigné'}}</td>
+               
 
 
-
-              <div class="btn-group">
+                  <div class="btn-group" >
+                         <td>
+              
+              <button  @click.prevent="afficherModalModifierNature(type.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerNaturePrix(type.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
+            </div>
+              <!-- <div class="btn-group">
               <button @click.prevent="supprimerNaturePrix(type.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"> </i> Supprimer</span></button>
              
-            </div>
+            </div> -->
 
-                  </td>
+               
                 </tr>
               </tbody>
             </table>
@@ -91,21 +105,35 @@
                 <h3>Ajouter Nature des Prix</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <!-- <form class="form-horizontal"> -->
+            <table class="table table-bordered table-striped">
+              <tr>
+                   <td>
+                      <div class="control-group">
                  <label class="control-label">Code:</label>
                  <div class="controls">
-                   <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                   <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
                 </div>
             </div>
-            <div class="control-group">
+             <div style="color: red" v-if="verifcode == true">
+                Ce code existe déjà!
+              </div>
+                   </td>
+              </tr>
+             
+              <tr>
+                <td>
+                  <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
             </div>
+                </td>
+              </tr>
+           
               
-          </form>              
+            </table>              
           </div>
            <div class="modal-footer"> 
              <button v-show=" formData.code.length&&formData.libelle.length" 
@@ -126,23 +154,32 @@
                 <h3>Modifier Nature des Prix</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                     <div class="control-group">
              <label class="control-label">Code:</label>
               <div class="controls">
-               <input type="text" v-model="editNature.code" class="span" placeholder="" />
+               <input type="text" v-model="editNature.code" class="span5" placeholder="" />
               </div>
            </div>
+                    </td>
+                  </tr>
             
-            <div class="control-group">
+               <tr>
+                 <td>
+                    <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editNature.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editNature.libelle" class="span5" placeholder="" />
               </div>
             </div>
+                 </td>
+               </tr>
             
             
-          </form>              
+            
+                </table>              
           </div>
            <div class="modal-footer"> 
              <button 
@@ -159,12 +196,12 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterNaturePrix()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalAjouterNaturePrix"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
 
 
@@ -229,7 +266,21 @@ return this.Nature_des_prix.filter((item) => {
 
    }
 )
-   }
+   },
+     verifcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.Nature_des_prix.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
                                     
   },
   methods: {

@@ -27,6 +27,17 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> -->
                                          </div> 
+       <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                Liste Procedures de dépenses
+                </h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalajouterProcedureDroitCommun()">AJOUTER UNE PROCEDURE </button>
+      </div>  
                                 <div class="widget-box">
 
                                     
@@ -55,8 +66,8 @@
               <thead>
                 <tr>
                    
-                  <th>Libellé</th>
-                   <th style="width:5%">Action</th>
+                  <th style="width:85%">Libellé</th>
+                   <th colspan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,16 +77,13 @@
                   <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
-                  <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerProcedureDroitCommun(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
-             
-            </div>
-
+                  <td>          
+                    <button @click.prevent="afficherModalModifierBudgetaire(activites.id)"  class="btn btn-info ">
+                      <span class=""><i class="icon-edit"> Modifier</i></span></button>           
+                  </td>
+                  <td>          
+                    <button @click.prevent="supprimerProcedureDroitCommun(activites.id)"  class="btn btn-danger ">
+                      <span class=""><i class="icon-trash"> Supprimer</i></span></button>           
                   </td>
                 </tr>
               </tbody>
@@ -120,7 +128,7 @@
                 <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" required/>
               </div>
             </div>
               </td>
@@ -131,6 +139,7 @@
            <div class="modal-footer"> 
              <button 
               @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
+              v-if="formData.libelle !=0"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
             </div>
@@ -175,7 +184,7 @@
 <!----- fin modifier modal  ---->
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalajouterProcedureDroitCommun()">Open</button>
 
          <fab :actions="fabActions"
@@ -183,7 +192,7 @@
        @cache="afficherModalajouterProcedureDroitCommun"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications />
 

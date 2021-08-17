@@ -154,7 +154,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Banques</h5>
+              <h5>Liste des Banque</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />

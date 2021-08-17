@@ -26,15 +26,18 @@
                                                         <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> 
-                                     <table>
-                                       <tr>
-                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Plans programmes</h5>
-                                       </tr>
-                                     </table>
-                                                               <div align="right" style="cursor:pointer;">
-           <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER</button>
-          </div>  
+                                     </div> <br> <br>
+
+          <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des plans programmes</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER UN PLAN PROGRAMME</button>
+      </div>       
+        
         <div class="widget-box">
              <!-- <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>plans programmes</h5>

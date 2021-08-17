@@ -8,6 +8,19 @@
         <h3>Ajouter un mode paiement</h3>
       </div>
       <div class="modal-body">
+         <!-- <table class="table table-bordered table-striped">
+          
+            <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Libelle:</label>
+                  <div class="controls">
+                    <input type="text" v-model="formData.libelle" class="span5" required placeholder="Saisir le libelle"/>
+                  </div>
+                </div>
+              </td>
+            </tr>
+           </table> -->
        <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Libellé</label>
@@ -29,7 +42,7 @@
           @click.prevent="ajouterTypeAppelLocal(formData)"
           class="btn btn-primary"
           href="#"
-         
+        
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -93,6 +106,18 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
                                      </div>
+           <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                        Liste des modes de paiements
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()" >
+                 AJOUTER UN MODE DE PAIEMENT
+                </button>
+            </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -120,9 +145,9 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">Libellé</th>
+                    <th width="85%">Libellé</th>
                    
-                    <th>Action</th>
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,15 +160,13 @@
                  
                    
                   <td>
+                    <button @click.prevent="afficherModalModifierFamille(typeappel.id)"  class="btn btn-info ">
+                      <span class=""><i class="icon-edit"> </i> Modifier</span></button>             
+                  </td>
 
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerModePaiement(typeappel.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> </i> Supprimer</span></button>
-             
-            </div>
-
+                  <td>
+                    <button @click.prevent="supprimerModePaiement(typeappel.id)"  class="btn btn-danger ">
+                      <span class=""><i class="icon-trash"> </i> Supprimer</span></button>             
                   </td>
                 </tr>
                 </tbody>
@@ -164,9 +187,9 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
   </div>
@@ -211,16 +234,16 @@ export default {
       search: ""
     };
   },
-
+created(){
+  console.log(this.modepaiements)
+},
   computed: {
      ...mapGetters("bienService", ['modepaiements']),
     filtre_equipement() {
       const st = this.search.toLowerCase();
-      return this.modepaiements.filter(type => {
-        return (
-          
-          type.libelle.toLowerCase().includes(st)
-        );
+      return this.modepaiements.filter((item) => {
+
+        return (item.libelle.toLowerCase().includes(st))
       });
     }
   },
@@ -285,8 +308,7 @@ getColumns() {
 
         this.formData = {
              
-            libelle: ""
-            
+            libelle: ""           
          }
      },
     //fonction pour vider l'input ajouter

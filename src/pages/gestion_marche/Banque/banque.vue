@@ -27,9 +27,18 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
                                      </div> <br>
+           <table>
+            <tr>
+              <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des banque</h5>
+            </tr>
+          </table> 
+          <br>
+        <div align="right" style="cursor:pointer;">
+            <button class="btn btn-success" @click.prevent="afficherModalAjouterPrestation()">AJOUTER UNE BANQUE</button>
+      </div>   
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des banques</h5>
+            <h5>Liste des banque</h5>
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -58,7 +67,7 @@
                     <th>Libellé</th>
                   <th>Téléphone</th>
                   <th>Situation géographique</th>
-                   <th>Action</th>
+                   <th colspan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,15 +87,12 @@
                       {{banque.situation_geographique || 'Non renseigné'}}</td>
                    
                   <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerBanque(banque.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
-             
-            </div>
-
+                  <button @click.prevent="afficherModalModifierBanque(banque.id)"  class="btn btn-info ">
+                    <span class=""><i class="icon-edit"></i>Modifier</span></button>
+                  </td>
+                  <td>
+                  <button @click.prevent="supprimerBanque(banque.id)"  class="btn btn-danger ">
+                    <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                   </td>
                 </tr>
               </tbody>
@@ -124,14 +130,59 @@
                 <h3>Ajouter banque</h3>
               </div>
               <div class="modal-body">
+                              <table class="table table-bordered table-striped">
+                <tr>
+                  <td>
+                              
+                <div class="control-group">
+              <label class="control-label">Code banque:</label>
+              <div class="controls">
+                <input required type="number" v-model="formData.code_banque" class="span4" placeholder="Saisir le niveau">
+              </div>
+            </div>
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <td>
+            <div class="control-group">
+              <label class="control-label">Libellé:</label>
+              <div class="controls">
+                <input  type="text" v-model="formData.libelle" class="span4" placeholder="Saisir le libellé" required>
+              </div>
+            </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+            <div class="control-group">
+              <label class="control-label">Téléphone:</label>
+              <div class="controls">
+                <input type="number" v-model="formData.telephone" class="span4" placeholder="Saisir le libellé" required>
+              </div>
+            </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+            <div class="control-group">
+              <label class="control-label">Situation géographique:</label>
+              <div class="controls">
+                <input type="text" v-model="formData.situation_geographique" class="span4" placeholder="Saisir le libellé" required>
+              </div>
+            </div>
+                            </td>
+                          </tr>
+                        </table>
+<!-- 
                 <form class="form-horizontal">
 
                   <div class="control-group">
-              <label class="control-label">Code banque:</label>
+              <label class="control-label">Code :</label>
               <div class="controls">
-                <input type="text" v-model="formData.code_banque	" class="span" placeholder="Saisir le numéro " />
+                <input type="text" v-model="formData.code_banque" class="span" placeholder="Saisir le numéro " />
               </div>
-            </div>
+            </div> -->
 
             <!-- <div class="control-group">
               <label class="control-label">Numero banque:</label>
@@ -140,7 +191,7 @@
               </div>
             </div> -->
 
-            <div class="control-group">
+            <!-- <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
                   <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir la banque">
@@ -163,11 +214,12 @@
               </div>
             </div>
              
-          </form>              
+          </form>               -->
           </div>
            <div class="modal-footer"> 
              <button 
-              @click.prevent="ajouterPrestationLocal" class="btn btn-primary"
+              @click.prevent="ajouterPrestationLocal" class="btn btn-primary" 
+              v-if="formData.code_banque!=''&& formData.libelle!='' && formData.telephone!='' && formData.situation_geographique!=''"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
             </div>
@@ -239,7 +291,7 @@
 
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterPrestation()">Open</button>
 
  <fab :actions="fabActions"
@@ -247,7 +299,7 @@
           @cache="afficherModalAjouterPrestation"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications />
 

@@ -27,6 +27,18 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
                                      </div>
+                 <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                       Liste des secteurs d'activité
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()" >
+                 AJOUTER UNE ACTIVITE 
+                </button>
+            </div> 
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des secteurs d'activité</h5>
@@ -54,21 +66,24 @@
                                 <tr>
                                     <th>Code </th>
                                     <th>Libellé</th>
-                                    <th>Action</th>
+                                    <th width="20%" colspan="2">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="odd gradeX" v-for="item in partition(titreFiltres,size)[page]" :key="item.id">
                                     <td @dblclick="afficherModalModifierTitre(item.id)">{{item.code || 'Non renseigné'}}</td>
                                     <td @dblclick="afficherModalModifierTitre(item.id)">{{item.libelle || 'Non renseigné'}}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button @click.prevent="supprimerSecteurActivite(item.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
-
-                                        </div>
-
-                                    </td>
+                                    
+                                <td>
+                                    <button @click.prevent="afficherModalModifierTitre(item.id)"  class="btn btn-info ">
+                                       <span class=""><i class="icon-edit"> Modifier</i></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button @click.prevent="supprimerSecteurActivite(item.id)"  class="btn btn-danger ">
+                                       <span class=""><i class="icon-trash"> Supprimer</i></span>
+                                    </button>
+                                </td>
                                 </tr>
                                 <tr v-if="titreFiltres.length==0" align="right">
                                     <h6>Pas de donnée disponible</h6>
@@ -90,12 +105,12 @@
             </div>
         </div>
 
-        <fab :actions="fabActions"
+        <!-- <fab :actions="fabActions"
              main-icon="apps"
              @cache="afficherModalAjouterTitre"
              bg-color="green"
 
-        ></fab>
+        ></fab> -->
 
         <!----- ajouter modal   ---->
 
@@ -110,7 +125,7 @@
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">
-                            <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                            <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" required />
                         </div>
                     </div>
                     <div class="control-group">

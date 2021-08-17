@@ -131,14 +131,18 @@
          <div align="right" style="cursor:pointer;">
           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
         </div> 
+          </div> <br>
 
+            <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()">AJOUTER</button>
           </div>
+             <h3 align="center">Liste des types de groupe d'équipement </h3>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types de groupe d'équipement </h5>
+            
                <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -162,7 +166,7 @@
                 <thead>
                   <tr>
                     <th>Classe</th>
-                    <th>Libellé</th>
+                    <th style="width:1000px;">Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -181,13 +185,26 @@
                       @dblclick="afficherModalModifierFamille(index)"
                     >{{equipement.libelle || 'Non renseigné'}}</td>
 
-                    <td>
+                           <div class="btn-group">
+                         <td>
+              
+              <button  @click.prevent="afficherModalModifierFamille(equipement.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerEquipement(equipement.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
+            </div>
+
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerEquipement(equipement.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -213,7 +230,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab> -->
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
@@ -413,13 +430,13 @@ alert("veuillez remplir le libelle")
      
     },
     // afficher modal de modification
-    afficherModalModifierFamille(index) {
+    afficherModalModifierFamille(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editEquipement = this.equipements[index];
+      this.editEquipement = this.equipements.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
