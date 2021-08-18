@@ -11,38 +11,53 @@
                 <h3>Ajouter Procédure</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
+                 <table class="table table-bordered table-striped">
                   
+                <!-- <form class="form-horizontal"> -->
+                  <tr>
+                  <td>
              <div class="control-group">
            <label class="control-label">Type procédure</label>
               <div class="controls">
-                <select  v-model="formData.type_procedure_id">
+                <select  v-model="formData.type_procedure_id" class="span5">
             <option v-for="resultat in typeTypeProcedures" :key="resultat.id" 
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
             </div>
+            </td>
+            </tr>
+
+            <tr>
+            <td>
 <div class="control-group">
             <label class="control-label">Code</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.code"
-                class="span"
+                class="span5"
                 
               />
             </div>
           </div>
+          </td>
+          </tr>
+
+          <tr>
+          <td>
            
             <div class="control-group">
              <label class="control-label">Procédure passation</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span"  />
+                <input type="text" v-model="formData.libelle" class="span5"  />
               </div>
             </div>
+            </td>
             
-               
-          </form>              
+               </tr>
+                 </table>
+          <!-- </form>               -->
           </div>
            <div class="modal-footer"> 
              <button  v-show="formData.type_procedure_id && formData.libelle.length"
@@ -63,39 +78,49 @@
                 <h3>Modifier Procédure</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
+                <table class="table table-bordered table-striped">
+              <tr>
+                <td>
                <div class="control-group">
               <label class="control-label">Type procédure</label>
               <div class="controls">
-                <select  v-model="editprocedure.type_procedure_id">
+                <select  v-model="editprocedure.type_procedure_id" class="span5">
             <option v-for="resultat in  typeTypeProcedures" :key="resultat.id" 
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
             </div>
-
+            </td>
+            </tr>
+            <tr>
+             <td>
             <div class="control-group">
             <label class="control-label">Code</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editprocedure.code"
-                class="span"
+                class="span5"
                 
               />
             </div>
           </div>
+          </td>
+          </tr>
+          <tr>
+            <td>
             
             <div class="control-group">
               <label class="control-label">Procedure passation</label>
               <div class="controls">
-                <input type="text" v-model="editprocedure.libelle" class="span"/>
+                <input type="text" v-model="editprocedure.libelle" class="span5"/>
               </div>
             </div>
+            </td>
+            </tr>
             
 
-          </form>              
+                </table>              
           </div>
            <div class="modal-footer"> 
              <button v-show="editprocedure.type_procedure_id && editprocedure.libelle.length" 
@@ -127,13 +152,20 @@
 
                                                  </download-excel> 
                                      </div>
+
                                      
+       <br><br>
+              <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterSection()">AJOUTER PROCEDURE DE PASSATION</button>
+          </div> 
+
+         <h2 align="center">Liste des Procédures de passation </h2>                        
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5 width="90%">Procédure de passation </h5>
+             
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -167,12 +199,12 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterSection()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalAjouterSection"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
   </div>
 

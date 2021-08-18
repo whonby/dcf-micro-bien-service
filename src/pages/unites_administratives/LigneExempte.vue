@@ -22,8 +22,15 @@
                 </div> 
 
                     </div>
-
-
+                    
+                     <table>
+                    <tr>
+                        <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Liste des lignes exemptées</h5>
+                    </tr>
+                    </table> 
+                   <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()" >AJOUTER UNE lIGNE EXEMPTEE</button>
+          </div>       
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des lignes exemptées</h5>
@@ -49,19 +56,22 @@
                                 <tr>
                                     <th>Code </th>
                                     <th>Libellé</th>
-                                    <th>Action</th>
+                                    <th colspan="2">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="odd gradeX" v-for="(item)  in partition (getterligneExempter,size)[page]" :key="item.id">
                                     <td >{{codeLigneExemptee(item.economique_id) || 'Non renseigné'}}</td>
                                     <td >{{LibelleLigneExemptee(item.economique_id) || 'Non renseigné'}}</td>
-                                    <td>
-                                        <div class="btn-group">
+
+                                    <td>                                       
+                                        <button @click.prevent="afficherModalModifierTitre(item.id)"  class="btn btn-info ">
+                                            <span class=""><i class="icon-edit"> Modifier</i></span>
+                                        </button>                                     
+                                    </td>
+                                    <td>                                       
                                             <button @click.prevent="supprimerLigneExempter(item.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"> Supprimer</i></span></button>
-                                        </div>
-
                                     </td>
                                 </tr>
                                 <tr v-if="getterligneExempter.length==0" align="right">
@@ -85,12 +95,12 @@
                 </div>
             </div>
         </div>
-        <fab :actions="fabActions"
+        <!-- <fab :actions="fabActions"
              main-icon="apps"
              @cache="afficherModalAjouterTitre"
              bg-color="green"
 
-        ></fab>
+        ></fab> -->
 
         <!----- ajouter modal   ---->
         <div id="exampleModal" class="modal hide">
@@ -111,7 +121,7 @@
                         v-for="Bgeneral in derniereNivoPlanBudgetaire"
                         :key="Bgeneral.id"
                         :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                      >{{Bgeneral.id}}--  {{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -135,6 +145,7 @@
             </div>
             <div class="modal-footer">
                 <a @click.prevent="ajouterTitreLocal" class="btn btn-primary"
+                v-if="formData.economique_id !=0"
                    href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
@@ -240,7 +251,7 @@
         created() {
             //  this.getTypeContrat()
             //  console.log(this.fonctions)
-            // console.log(this.getFonction)
+            console.log(this.getterligneExempter)
         },
         computed: {
 // methode pour maper notre guetter
@@ -369,18 +380,18 @@ partition:partition,
                 }
             },
 // afficher modal
-            afficherModalModifierTitre(index){
+            afficherModalModifierTitre(id){
 
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.getterligneExempter[index];
+                this.editTitre = this.getterligneExempter.find(item =>item.id == id);
 
             },
             modifier(){
                  var nouvelObjet1 = {
-        ...this.editTitre,
+        // ...this.editTitre,
          code: this.codeLigneExemptee(this.editTitre.economique_id),
          libelle: this.LibelleLigneExemptee(this.editTitre.economique_id)
        

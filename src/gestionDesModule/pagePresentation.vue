@@ -27,60 +27,10 @@
                     <P>(SID-CF)</P>
                 </td>
 
-                <!-- <td style="border: 2px solid;">
-                   <center>
-             <router-link tag="a" :to="{ name: 'photoProfil' }">
-               <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
-               </router-link>
-             <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
-
-               </center>
-
-              <router-link :to="{ name: 'Login'}" tag="a" style="color:green;width:20%;text-align:center;">
-                     <h5 >Se déconnecter</h5>
-
-                   </router-link>
-                 </td> -->
             </tr>
         </table>
 
-<!--        <table class="table " style="background-color: black;">-->
-<!--            <tr style="background-color: black;">-->
-<!--                <td style="border: 3px solid #ffffff;">-->
-<!--                    <center>-->
-<!--                        <router-link tag="a" :to="{ name: 'photoProfil' }">-->
-<!--                            <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">-->
-<!--                        </router-link>-->
-<!--                        <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>-->
 
-<!--                    </center>-->
-
-<!--                    <router-link :to="{ name: 'Login'}" tag="a" style="color:#fff;width:20%;text-align:center;">-->
-<!--                        <h5 >Se déconnecter</h5>-->
-
-<!--                    </router-link>-->
-<!--                </td>-->
-<!--                <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">-->
-<!--                    <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÔLEUR FINANCIER  </P>-->
-<!--                    <P>(SID-CF)</P>-->
-<!--                </td>-->
-
-<!--                &lt;!&ndash; <td style="border: 2px solid;">-->
-<!--                   <center>-->
-<!--             <router-link tag="a" :to="{ name: 'photoProfil' }">-->
-<!--               <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">-->
-<!--               </router-link>-->
-<!--             <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>-->
-
-<!--               </center>-->
-
-<!--              <router-link :to="{ name: 'Login'}" tag="a" style="color:green;width:20%;text-align:center;">-->
-<!--                     <h5 >Se déconnecter</h5>-->
-
-<!--                   </router-link>-->
-<!--                 </td> &ndash;&gt;-->
-<!--            </tr>-->
-<!--        </table>-->
       <div id="loginbox"  >
 
 
@@ -88,46 +38,7 @@
         <div class="row-fluid form " >
       <div class="span12">
 
-<!--        <div class="quick-actions_homepage">-->
 
-
-
-
-<!--          <div >-->
-<!--            <ul class="quick-actions" >-->
-<!--                <li class="bg_lg span3" v-if="admin() || dcf()">-->
-<!--                     <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">-->
-<!--                <h4>PARAMETRES</h4> <i class="icon-cogs"></i><h4> GENERAUX</h4>-->
-
-<!--                </router-link>-->
-<!--                </li>-->
-
-<!--   <li class="bg_lg span3" >-->
-<!--     <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">-->
-<!--      <h4>UNITES </h4> <i class="icon-home"></i> <h4> ADMINISTRATIVES</h4>      </router-link> </li>-->
-<!--       <li class="bg_lg span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>-->
-
-<!--            </ul>-->
-
-
-<!--            <ul class="quick-actions" >-->
-<!--               <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>-->
-
-<!--  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>-->
-<!--           <li class="bg_lo span3"> <router-link :to="{ name: 'liste_ua_compta'}" tag="a"  style="color:black;"><h4>COMPTABILITE </h4> <i class="icon-book"></i><h4> DES MATIERES</h4></router-link> </li>-->
-<!--           &lt;!&ndash; <listeUaDeComptabiliteMatiere></listeUaDeComptabiliteMatiere> &ndash;&gt;-->
-
-<!--            </ul>-->
-<!--            <br>-->
-<!--<br>-->
-
-<!--            <ul class="quick-actions" >-->
-<!--               <li class="bg_lo span3">-->
-<!--                 <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li>-->
-<!--           &lt;!&ndash; <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li> &ndash;&gt;-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
           <section class="timeline_area section_padding_130">
               <div class="">
                   <div class="row-fluid">
@@ -353,7 +264,7 @@ created(){
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
-          this.getTypeOrdrePaiement()
+        //   this.getTypeOrdrePaiement()
           this.getTacheMarche()
 this.getReception()
 this.getDemandeEngagement()
@@ -424,9 +335,9 @@ this.getRegimeImpositions()
     this.getGrandeNature()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
-    this.getAllUniteZone()
+    // this.getAllUniteZone()
 
-    this.getAllHistoriqueTransfert()
+    // this.getAllHistoriqueTransfert()
     this.getUnite()
     this.getZone()
     this.getBanque()
@@ -440,8 +351,8 @@ this.getTransmission()
 this.getCotation()
 this.getOuverture()
 this.getSanction()
-this.getAllRealiteServiceFait()
-     this.getAllLiquidation()
+// this.getAllRealiteServiceFait()
+//      this.getAllLiquidation()
 // this.getTypeProcedure()
 
 
@@ -464,10 +375,10 @@ this.getTypeAppel()
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
 
-     this.getAllBanqueUa()
+    //  this.getAllBanqueUa()
      this.getAllDecompteFacture()
      this.getAllHistoriqueDecompteFacture()
-       this.getStructureOrganigrammeUa()
+     //  this.getStructureOrganigrammeUa()
        this.getSousBudget()
        this.getBudgetEclateRegie()
  this.getAllBudgetEclate()
@@ -478,10 +389,10 @@ this.getTypeAppel()
  this.getReparationVehicule()
  this.getStockArticleUa()
     // this.getAllArchivageDocument();
-this.getAllDirection()
-this.getAllServiceua()
+// this.getAllDirection()
+// this.getAllServiceua()
 this.getAllFonction()
-this.getAllBanqueUa()
+// this.getAllBanqueUa()
 this.getFonctionBudgetaire()
 this.getDossierCandidatPersonnel()
       this.getListeSalaireActuelAll()
@@ -570,13 +481,13 @@ this.getAllHistoriqueBudgetGeneral()
       /**
        * missions
        */
-       this.getCategorieMission()
-     this.getNormeMission()
+    //    this.getCategorieMission()
+    //  this.getNormeMission()
 
-      this.getMission()
-       this.getHistoriqueMission()
+    //   this.getMission()
+    //    this.getHistoriqueMission()
 this.getAllBudgetGeneral()
-this.getAllTransfert()
+//this.getAllTransfert()
  // debut du module de bien && service
 this.getTousPlanBudgetaire()
 this.getBailleur()
@@ -592,7 +503,7 @@ this.getTypeTextJuridique()
 this.getMotifDecision()
 this.getDocumentProcedure()
  this.getReserveCf()
-this.getUniteAdministrativeBailleur()
+//this.getUniteAdministrativeBailleur()
 // this.getDecisionMarche()
 this.getActeEffetFinancier()
  this.getFacture()
@@ -754,25 +665,25 @@ return objJson.id
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions",'getLocalisationGeographiqueAll']),
 
  ...mapActions("uniteadministrative", [
-   "getUniteAdministrativeBailleur", 
+   //"getUniteAdministrativeBailleur", 
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
-      "getAllDirection",
-      "getAllServiceua",
-      "getAllBanqueUa",
+    //   "getAllDirection",
+    //   "getAllServiceua",
+    //   "getAllBanqueUa",
       "getAllFonction",
       "getAllBudgetGeneral",
       "getAllHistoriqueBudgetGeneral",
-      "getAllUniteZone",
-      "getAllTransfert",
-      "getAllHistoriqueTransfert",
+    //   "getAllUniteZone",
+    //   "getAllTransfert",
+    //   "getAllHistoriqueTransfert",
      "getLigneExempter",
      "getBudgeChager",
-     "getAllRealiteServiceFait",
-     "getAllLiquidation",
-     "getStructureOrganigrammeUa",
-     "getAllBanqueUa",
+    //  "getAllRealiteServiceFait",
+    //  "getAllLiquidation",
+    //  "getStructureOrganigrammeUa",
+    //  "getAllBanqueUa",
      "getSousBudget",
      "getBudgetEclateRegie",
      "getAllDecompteFacture",
@@ -834,10 +745,10 @@ return objJson.id
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
  
-    	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
-    'getMission']),
+    // 	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
+    // 'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ['getBonCommande',"getProcedureTypeDepense","getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ['getBonCommande',"getProcedureTypeDepense","getProcedureDerogatoire","getProcedureDroitCommun","getBudgetEclateImporter","getHistoriqueDecisionOp","getServiceRealiteFaitOp","getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense','getProblemeMarche', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches','getBailleurDmdEngagement',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
@@ -850,7 +761,9 @@ return objJson.id
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
           "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",
-          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel','getEntreprisePreselectionner']),
+          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel','getEntreprisePreselectionner'
+        //   ,"getTypeOrdrePaiement"
+          ]),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

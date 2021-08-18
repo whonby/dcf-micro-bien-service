@@ -175,13 +175,26 @@
                       @dblclick="afficherModalModifierService(service.id)"
                     >{{service.libelle || 'Non renseigné'}}</td>
 
-                    <td>
+                       <div class="btn-group">
+                         <td>
+              
+              <button  @click.prevent="afficherModalModifierService(service.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerMarqueVehicule(service.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
+            </div>
+
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerMarqueVehicule(service.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>

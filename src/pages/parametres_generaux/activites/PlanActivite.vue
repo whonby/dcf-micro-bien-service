@@ -27,17 +27,17 @@
                             <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div> 
+                                      <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Plan programmatique</h5>
+                                       </tr>
+                                     </table>
+                                                               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterplanFonctionnel()">AJOUTER</button>
+          </div>  
         <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Plan programmatique</h5>
-             <div align="right">
-        Recherche: <input type="text" v-model="search">
-
-          </div>
-             
-          </div>
-         
+            
            <div class="widget-content ">
             
 
@@ -74,15 +74,14 @@
              <table class="table table-bordered table-striped">
                   <tr>
                     <td>
-                    <div class="control-group">
-              <label class="control-label">Structure Programmatique:</label>
+                    
+             <div class="control-group">
+              <label class="control-label">Structure Programmatique</label>
               <div class="controls">
-                <select  v-model="formData.structure_activites_id" class="span5">
-            <option v-for="plan in structures_activites" :key="plan.id" 
-            :value="plan.id">{{plan.libelle}}</option>
-                </select>
+                <input type="text" :value="AfficheNiveau1" class="span5" placeholder="Saisir le code" readonly />
               </div>
             </div>
+            
                     </td>
                     <td>
                      <div class="control-group">
@@ -93,11 +92,12 @@
                         v-for="natsection in afficheNiveauPlanProg"
                         :key="natsection.id"
                         :value="natsection.id"
-                      >{{natsection.code}}-{{natsection.libelle}}</option>
+                      >{{natsection.code}}    {{natsection.libelle}}</option>
                     </select>
                   </div>
                 </div>
                     </td>
+                    
                   </tr>
                   
                   <tr>
@@ -113,7 +113,8 @@
                   <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" :value="codeAction" class="span5" placeholder="Saisir le code" />
+                <input type="text" :value="codeplanfonctionnelle" class="span5" placeholder="Saisir le code" readonly/>
+              <span style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''"></span>
               </div>
             </div>
                     </td>
@@ -132,7 +133,7 @@
                 </table>                 
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.structure_activites_id && 
+             <button v-show="formData.numero_ordre.length && 
              
              formData.libelle.length"
               @click.prevent="ajouterTitreLocal" class="btn btn-primary"
@@ -176,20 +177,24 @@
               <label class="control-label">Structure Programmatique</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_activites_id" class="span5">
-                <option v-for="structure in structures_activites " :key="structure.id" 
-                 :value="structure.id">{{structure.libelle}} </option>
-              </select>
+             
+              <input type="text" :value="AfficheNiveau2" class="span5" placeholder="Saisir le code" readonly />
             </div>
             </div>
                     </td>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElement.code" class="span1" placeholder="" />
+                <input type="text" :value="codeplanActivite" class="span4" placeholder="" readonly/>
+                <span style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''"></span>
               </div>
             </div>
+            
+                
+                
+              
                     </td>
                   </tr>
                   <tr>
@@ -206,8 +211,7 @@
                            
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_activites_id"
+             <button v-show="nouvelElement.code && nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -271,18 +275,6 @@
             </div>
 
 
-<!----- fin modifier modal  ---->
-
-
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
-  @shortkey="afficherModalAjouterplanFonctionnel()">Open</button>
-
- <fab :actions="fabActions"
-                main-icon="apps"
-          @cache="afficherModalAjouterplanFonctionnel"
-        bg-color="green"
-
-  ></fab>
 
 <notifications  />
 
@@ -297,9 +289,12 @@ import {mapGetters, mapActions} from 'vuex'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import Tree from '../administratifs/Tree'
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
 export default {
    components: {
-    Tree
+    Tree,
+    //ModelListSelect,
   },
   data() {
     return {
@@ -326,11 +321,15 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     
+     nouvelElement: {
+code:""
+     },
         formData : {
                 code: "",
              libelle: "",
-             structure_activites_id:""
+             structure_activites_id:"",
+             
+             numero_ordre:""
         },
 
         editTitre: {
@@ -358,6 +357,124 @@ export default {
       "afficheNiveauPlanProg",
      
     ]),
+ codeplanActivite() {
+    return  this.parentDossier.code + this.nouvelElement.code
+    
+    },
+AfficheNiveau2(){
+
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code))) {
+
+  return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}else{
+  return "pas de niveau"
+}
+
+
+   },
+afficheLeLibelleStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.niveau == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  afficheLeNiveauStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau + 1;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLeIdStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_activites.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.structure_activites_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheNotification(){
+  if(this.verificationcodeEnfant == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+
+verificationcodeEnfant() {
+      if (this.nouvelElement.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_activites.filter(
+          (element) => element.code == this.codeplanActivite
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
+
+affichecodePlanProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+codeplanfonctionnelle() {
+    return  this.affichecodePlanProgramme(this.formData.programme_id) + this.formData.numero_ordre
+    
+    },
+
+AfficheNiveauid(){
+     const codeprog = this.structures_activites.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.id
+     }
+
+     return null
+   },
+
+    
+    AfficheNiveau1(){
+     const codeprog = this.structures_activites.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.libelle;
+     }
+
+     return null
+   },
    lesPlansParents(){
      return this.plans_activites.filter(plan => plan.parent == null)
    },
@@ -414,12 +531,21 @@ getColumns() {
 },
          ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
-      this.ajouterPlanActivite(this.nouvelElementEnfant)
-
+ var nouveauObjet = {
+             ... this.nouvelElementEnfant,
+structure_activites_id:this.afficheLeIdStructure(this.parentDossier.code),
+code:this.codeplanActivite,
+	parent:this.parentDossier.id
+           }
+      
+      this.ajouterPlanActivite(nouveauObjet)
+this.nouvelElement={
+  code:""
+}
         this.nouvelElementEnfant = {
-                code: "",
+                
              libelle: "",
-          structure_activites_id:""
+
         }
     },
 
@@ -461,17 +587,15 @@ getColumns() {
     ajouterTitreLocal () {
         var nouvelObjet = {
         ...this.formData,
-        code: this.codeAction
-        
-
+        code: this.codeplanfonctionnelle,
+structure_activites_id:this.AfficheNiveauid
       };
       this.ajouterPlanActivite(nouvelObjet)
 
         this.formData = {
-                code: "",
+              
              libelle: "",
-              structure_activites_id:"",
-               	programme_id:"",
+             
                 numero_ordre:""
         }
     },

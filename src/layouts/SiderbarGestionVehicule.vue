@@ -163,6 +163,7 @@ export default {
 
 
 
+
   AffichePhoto() {
       return id => {
         if (id != null && id != "") {
@@ -171,7 +172,7 @@ export default {
       if (qtereel) {
         return qtereel.fichier;
       }
-      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+      return "http://localhost:8002/apiv4/savephotoprofil/1_!1595119277.jpg "
         }
       };
     },

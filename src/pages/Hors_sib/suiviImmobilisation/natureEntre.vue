@@ -104,7 +104,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Natures des entrées</h5>
+              <h5>Liste des Natures des entrées </h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

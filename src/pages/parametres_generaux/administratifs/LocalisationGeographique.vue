@@ -25,47 +25,27 @@
                              <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div> 
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">plan géographiques</h5>
+                                       </tr>
+                                     </table>
+                                                               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterLocalisationGeographie()">AJOUTER</button>
+          </div>  
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des localisations géographiques</h5>
-             <div align="right">
+            <!-- <h5>localisations géographiques</h5> -->
+             <!-- <div align="right">
         Recherche: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
          
            <div class="widget-content">
-            <!-- <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                 <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure geographique</th>
-                   <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd gradeX" v-for="(geographique, index) 
-                in localisationsFiltre" :key="geographique.id">
-                  <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                    {{geographique.code || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                    {{geographique.libelle || 'Non renseigné'}}</td>
-                    
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                      {{geographique.structure_localisation_geographique.libelle || 'Non renseigné'}}</td>
-                  <td>
-              <div class="btn-group">
-              <button @click.prevent="supprimerLocalisationGeographique(geographique.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
+      
                 <ul id="demo">
             <TreeLocalisation class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
@@ -91,54 +71,66 @@
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide">
+ <div id="exampleModal" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter la localisation géographique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                         <div class="control-group">
-              <label class="control-label">Structure géographique:</label>
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                       <div class="control-group">
+              <label class="control-label">Structure géographique</label>
               <div class="controls">
-                <select  v-model="formData.structure_localisation_geographique_id">
-            <option v-for="localisation in structures_geographiques" :key="localisation.id" 
-            :value="localisation.id">{{localisation.libelle}}</option>
-                </select>
+                 <input type="text" :value="AfficheNiveau1" class="span5" placeholder="Saisir le code" readonly />
+               
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Code:</label>
+                    </td>
+                    <td>
+                       <div class="control-group">
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+                 <span style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''"></span>
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libellé:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+ <div class="control-group">
+              <label class="control-label">Libellé</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span10" placeholder="Saisir le libellé" />
               </div>
             </div>
-     
-             
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
 <div class="control-group">
               <label class="control-label">Longitude</label>
               <div class="controls">
-                <input type="number" v-model="formData.longitude" class="span" placeholder="Saisir la longitude" />
+                <input type="number" v-model="formData.longitude" class="span5" placeholder="Saisir la longitude" />
               </div>
             </div>
-              <div class="control-group">
+                    </td>
+                    <td>
+ <div class="control-group">
               <label class="control-label">Latitude</label>
               <div class="controls">
-                <input type="number" v-model="formData.latitude" class="span" placeholder="Saisir la Latitude" />
+                <input type="number" v-model="formData.latitude" class="span5" placeholder="Saisir la Latitude" />
               </div>
             </div>
-
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                           
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.structure_localisation_geographique_id && formData.code.length &&
+             <button v-show="formData.code.length &&
              formData.libelle.length" 
              @click.prevent="ajouterTitreLocal" class="btn btn-primary"
               >Valider</button>
@@ -151,7 +143,7 @@
 
 <!----- modifier modal debut  ---->
 
- <div id="modifierModal" class="modal hide">
+ <div id="modifierModal" class="modal hide ">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier la localisation géographique</h3>
@@ -208,69 +200,86 @@
 <!----- ajouter modal ajouter element enfant   ---->
 
 
- <div id="modalAjouterElementEnfant" class="modal hide">
+ <div id="modalAjouterElementEnfant" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter localisation geographique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <div class="control-group">
-              <label class="control-label">Code parent:</label>
+                 <table class="table table-bordered table-striped">
+                   <tr>
+                     <td>
+                       <div class="control-group">
+              <label class="control-label">Code parent</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.code" class="span"  />
+                <input type="text" readonly :value="parentDossier.code" class="span5"  />
               </div>
             </div>
-
-             <div class="control-group">
-              <label class="control-label">Libellé parent:</label>
+                     </td>
+                     <td>
+                        <div class="control-group">
+              <label class="control-label">Libellé parent</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
+                <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
               </div>
             </div>
-
-               <div class="control-group">
-              <label class="control-label">Structure localisation géographique:</label>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                        <div class="control-group">
+              <label class="control-label">Structure localisation géographique</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_localisation_geographique_id" >
-                <option v-for="structure in structures_geographiques " :key="structure.id" 
-                 :value="structure.id">{{structure.libelle}} </option>
-              </select>
+                 <input type="text" :value="AfficheNiveau2" class="span5" placeholder="Saisir le code" readonly />
+              
             </div>
             </div>
-
-
-            <div class="control-group">
-              <label class="control-label">Code:</label>
+                     </td>
+                     <td>
+                       <div class="control-group">
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElement.code" class="span1" placeholder="" />
+                 <input type="text" :value="codeplanActivite" class="span4" placeholder="" readonly/>
+                  <span style="color: red" v-bind:class="verificationcodeEnfant2 == true ? afficheNotification2() : ''"></span>
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libellé:</label>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td colspan="2">
+<div class="control-group">
+              <label class="control-label">Libellé</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libelle" />
               </div>
             </div>
-            <div class="control-group">
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+ <div class="control-group">
               <label class="control-label">Longitude</label>
               <div class="controls">
-                <input type="number" v-model="nouvelElementEnfant.longitude" class="span" placeholder="Saisir le longitude" />
+                <input type="number" v-model="nouvelElementEnfant.longitude" class="span5" placeholder="Saisir le longitude" />
               </div>
             </div>
-              <div class="control-group">
+                     </td>
+                     <td>
+<div class="control-group">
               <label class="control-label">Latitude</label>
               <div class="controls">
-                <input type="number" v-model="nouvelElementEnfant.latitude" class="span" placeholder="Saisir le Latitude" />
+                <input type="number" v-model="nouvelElementEnfant.latitude" class="span5" placeholder="Saisir le Latitude" />
               </div>
             </div>
-          </form>              
+                     </td>
+                   </tr>
+                 </table>
+                          
           </div>
            <div class="modal-footer"> 
-             <button v-show=" nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_localisation_geographique_id"
+             <button v-show=" nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -280,7 +289,7 @@
 
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterLocalisationGeographie()">Open</button>
 
  <fab :actions="fabActions"
@@ -288,7 +297,7 @@
           @cache="afficherModalAjouterLocalisationGeographie"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications/>
 
 
@@ -333,7 +342,9 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     
+     nouvelElement : {
+       code:""
+     },
         formData : {
                 code: "",
              libelle: "",
@@ -360,6 +371,134 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques', 
   'localisations_geographiques']),
+
+codeplanActivite() {
+    return  this.parentDossier.code + this.nouvelElement.code
+    
+    },
+AfficheNiveau2(){
+
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code))) {
+
+  return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}else{
+  return "pas de niveau"
+}
+
+
+   },
+afficheLeLibelleStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_geographiques.find(qtreel => qtreel.niveau == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  afficheLeNiveauStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_geographiques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau + 1;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLeIdStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.localisations_geographiques.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.structure_localisation_geographique_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficheNotification2(){
+  if(this.verificationcodeEnfant2 == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+ afficheNotification(){
+  if(this.verificationcodeEnfant == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+verificationcodeEnfant() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.localisations_geographiques.filter(
+          (element) => element.code == this.formData.code && element.structure_localisation_geographique_id == this.AfficheNiveauid
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+    verificationcodeEnfant2() {
+      if (this.nouvelElement.code == "") {
+        return false;
+      } else {
+        let Objet = this.localisations_geographiques.filter(
+          (element) => element.code == this.codeplanActivite
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+AfficheNiveauid(){
+     const codeprog = this.structures_geographiques.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.id
+     }
+
+     return null
+   },
+AfficheNiveau1(){
+     const codeprog = this.structures_geographiques.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.libelle;
+     }
+
+     return null
+   },
+
+
+
    localisationsFiltre(){
      const searchTerm = this.search.toLowerCase();
 return this.localisations_geographiques.filter((item) => {
@@ -400,15 +539,23 @@ getColumns() {
     ];
 },
         ajouterProgrammeLocalEnfant () {
-      // console.log(this.nouvelElementEnfant)
-      this.ajouterLocalisationGeographique(this.nouvelElementEnfant)
+      var nouveauObjet = {
+             ... this.nouvelElementEnfant,
+structure_localisation_geographique_id:this.afficheLeIdStructure(this.parentDossier.code),
+code:this.codeplanActivite,
+	parent:this.parentDossier.id
+           }
+      this.ajouterLocalisationGeographique(nouveauObjet)
+      this.nouvelElement={
+  code:""
+}
         this.nouvelElementEnfant = {
-                code: "",
+                
              libelle: "",
-          structure_localisation_geographique_id:"",
-          latitude:"",
+latitude:"",
           longitude:""
         }
+       
     },
     supprimerPlanProgrammeLocal(item){
       this.supprimerLocalisationGeographique(item.id)
@@ -440,11 +587,16 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterTitreLocal () {
-      this.ajouterLocalisationGeographique(this.formData)
+       var nouveauObjet = {
+             ... this.formData,
+structure_localisation_geographique_id:this.AfficheNiveauid,
+
+           }
+      this.ajouterLocalisationGeographique(nouveauObjet)
         this.formData = {
                 code: "",
              libelle: "",
-              structure_localisation_geographique_id:"",
+             
               latitude:"",
           longitude:""
         }
@@ -473,3 +625,10 @@ modifierLocalisationLocal(){
   }
 };
 </script>
+<style scoped>
+.tailgrand{
+  width: 60%;
+  margin: 0 -30%;
+  
+}
+</style>

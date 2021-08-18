@@ -26,10 +26,18 @@
                                   <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div> 
+                                     <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">Services gestionnaires</h5>
+                                       </tr>
+                                     </table>
+                                                               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER</button>
+          </div>  
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des services gestionnaires</h5>
+            <h5>Services gestionnaires</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -75,12 +83,11 @@
                   <tr>
                     <td>
                        <div class="control-group">
-              <label class="control-label">structure administrative:</label>
+              <label class="control-label">structure administrative</label>
               <div class="controls">
-                <select  v-model="formData.structure_administrative_id" class="span5">
-            <option v-for="administrative in structures_administratives" :key="administrative.id" 
-            :value="administrative.id">{{administrative.libelle}}</option>
-                </select>
+               
+                <input type="text" :value="AfficheNiveau1" class="span5" placeholder="Saisir le code" readonly />
+              
               </div>
             </div>
                     </td>
@@ -92,6 +99,7 @@
               <label class="control-label">Code</label>
               <div class="controls">
                 <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+                <span style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''"></span>
               </div>
             </div>
                     </td>
@@ -110,8 +118,7 @@
                             
           </div>
            <div class="modal-footer"> 
-             <button  v-show="formData.code.length && formData.libelle.length && 
-            formData.structure_administrative_id" 
+             <button  v-show="formData.code.length && formData.libelle.length"
              @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -150,13 +157,14 @@
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">structure administrative:</label>
+              <label class="control-label">structure administrative</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_administrative_id" class="span5">
+              <!-- <select v-model="nouvelElementEnfant.structure_administrative_id" class="span5">
                 <option v-for="structure in structures_administratives " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
-              </select>
+              </select> -->
+              <input type="text" :value="AfficheNiveau2" class="span5" placeholder="Saisir le code" readonly />
             </div>
             </div>
                     </td>
@@ -164,7 +172,9 @@
                       <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElement.code" class="span1" placeholder="" />
+                <input type="text" :value="codeplanActivite" class="span4" placeholder="" readonly/>
+                 <span style="color: red" v-bind:class="verificationcodeEnfant2 == true ? afficheNotification2() : ''"></span>
               </div>
             </div>
                     </td>
@@ -183,8 +193,7 @@
                             
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_administrative_id"
+             <button v-show="nouvelElement.code.length && nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -251,15 +260,7 @@
 <!----- fin modifier modal  ---->
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
-  @shortkey="afficherModalAjouterPlanProgramme()">Open</button>
 
- <fab :actions="fabActions"
-                main-icon="apps"
-          @cache="afficherModalAjouterPlanProgramme"
-        bg-color="green"
-
-  ></fab>
 
 <notifications  />
 
@@ -287,10 +288,13 @@ export default {
       },
 
       parentDossier: {},
+      nouvelElement:{
+        code:""
+      },
       nouvelElementEnfant: {
-         code: "",
+       
              libelle: "",
-          structure_administrative_id:""
+         
       },
 
         fabActions: [
@@ -330,6 +334,134 @@ export default {
   ...mapGetters('parametreGenerauxAdministratif', ['structures_administratives',
     'services_gestionnaires'])  ,
 
+ codeplanActivite() {
+    return  this.parentDossier.code + this.nouvelElement.code
+    
+    },
+
+AfficheNiveau2(){
+
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code))) {
+
+  return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}else{
+  return "pas de niveau"
+}
+
+
+   },
+afficheLeLibelleStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_administratives.find(qtreel => qtreel.niveau == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  afficheLeNiveauStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_administratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau + 1;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLeIdStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services_gestionnaires.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.structure_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
+
+    afficheNotification(){
+  if(this.verificationcodeEnfant == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+afficheNotification2(){
+  if(this.verificationcodeEnfant2 == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+verificationcodeEnfant() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.services_gestionnaires.filter(
+          (element) => element.code == this.formData.code && element.structure_administrative_id == this.AfficheNiveauid
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
+
+
+verificationcodeEnfant2() {
+      if (this.nouvelElement.code == "") {
+        return false;
+      } else {
+        let Objet = this.services_gestionnaires.filter(
+          (element) => element.code == this.codeplanActivite);
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
+
+    AfficheNiveauid(){
+     const codeprog = this.structures_administratives.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.id
+     }
+
+     return null
+   },
+AfficheNiveau1(){
+     const codeprog = this.structures_administratives.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.libelle;
+     }
+
+     return null
+   },
        localisationsFiltre(){
 
      const searchTerm = this.search.toLowerCase();
@@ -383,7 +515,12 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouetProgrammeLocal () {
-      this.ajouterServiceGestionnaire(this.formData)
+       var nouveauObjet = {
+             ... this.formData,
+structure_administrative_id:this.AfficheNiveauid,
+
+           }
+      this.ajouterServiceGestionnaire(nouveauObjet)
 
         this.formData = {
                 code: "",
@@ -394,12 +531,19 @@ getColumns() {
 
      ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
-      this.ajouterServiceGestionnaire(this.nouvelElementEnfant)
-
+        var nouveauObjet = {
+             ... this.nouvelElementEnfant,
+structure_administrative_id:this.afficheLeIdStructure(this.parentDossier.code),
+code:this.codeplanActivite,
+	parent:this.parentDossier.id
+           }
+      this.ajouterServiceGestionnaire(nouveauObjet)
+this.nouvelElement= {
+  code: "",
+}
         this.nouvelElementEnfant = {
-                code: "",
-             libelle: "",
-          structure_administrative_id:""
+                libelle: "",
+           
         }
     },
 
@@ -456,8 +600,8 @@ this.editGestionnaire = {
 
 <style scoped>
 .tailgrand{
-  width: 60%;
-  margin: 0 -30%;
+  width: 59%;
+  margin: 0 -25%;
   
 }
 </style>

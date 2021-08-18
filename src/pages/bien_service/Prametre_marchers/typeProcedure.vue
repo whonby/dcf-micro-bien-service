@@ -20,17 +20,13 @@
               />
             </div>
           </div>
-         
-      
-
-         
          </form>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
-          href="#"
+          href="#" v-show="formData.libelle.length"
          
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
@@ -96,18 +92,25 @@
              <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
 
+       <br><br>
+              <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalTypeProcedure()">AJOUTER FAMILLE DE PROCEDURE</button>
+          </div> 
+
            <!-- <div>
          <button v-on:click='saveAsDocx' >Save</button>
         
         <ejs-documenteditor ref="documenteditor" :enableSfdtExport='true' :enableWordExport='true' :enableSelection='true' :enableEditor='true' :isReadOnly='false' style="width: 100%;height: 100%;"></ejs-documenteditor>
     </div> -->
                </div>
+
+               <h2 align="center">Famille de procédure </h2>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Famille de procédure </h5>
+              
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -136,16 +139,23 @@
                   <tr class="odd gradeX" v-for="typeProcedure in 
                 partition (typeProcedureFiltre,size)[page]"
                  :key="typeProcedure.id">
-                 <td @dblclick="afficherModalModifiertextJuridique(typeProcedure.id)">
+                 <td >
                    {{typeProcedure.libelle || 'Non renseigné'}}</td>
                   
                   
 
 
-                     <div class="btn-group">
+                     <div class="btn-group" style="width:-100px;">
+                             <td >
+              
+              <button  @click.prevent="afficherModalModifiertextJuridique(typeProcedure.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+             
+                  </td>
+                  <td>
               <button @click.prevent="supprimerTypeProcedure(typeProcedure.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i> Supprimer</span></button>
-             
+                </td>
             </div>
 
                        </tr>
@@ -167,7 +177,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalTypeProcedure" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalTypeProcedure" main-icon="apps" bg-color="green"></fab> -->
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalTypeProcedure()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->

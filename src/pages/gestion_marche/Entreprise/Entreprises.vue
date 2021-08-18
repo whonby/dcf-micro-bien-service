@@ -2,15 +2,11 @@ getSecteurActivite
 <template>
     <div>
 
-            <div align="right" style="cursor: pointer">
-          <button
-            class="btn btn-success"
-            
-            style="font-weight: bolder; color: #fff"
-          >
+            <!-- <div align="right" style="cursor: pointer">
+          <button class="btn btn-success" style="font-weight: bolder; color: #fff">
             <i class="icon icon-plus"> AJOUTER </i>
           </button>
-        </div>
+        </div> -->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -122,6 +118,18 @@ getSecteurActivite
                        <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
+                <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                        Liste de Toutes les entreprises
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()" >
+                 AJOUTER UNE ENTRPRISE
+                </button>
+            </div>
                                 </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -236,6 +244,13 @@ getSecteurActivite
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
                                      </div>
+                 <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                       Toutes les entreprises non sanctionnées
+                      </h5>
+                </tr>
+            </table> 
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toutes les entreprises non sanctionnées</h5>
@@ -335,6 +350,13 @@ getSecteurActivite
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
                                      </div>
+            <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                       Toutes les entreprises sanctionnées
+                      </h5>
+                </tr>
+            </table>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toutes les entreprises sanctionnées</h5>
@@ -426,11 +448,11 @@ getSecteurActivite
             </div>
         </div>
 
-       <fab :actions="fabActions"
+       <!-- <fab :actions="fabActions"
              main-icon="apps"
              @cache="afficherModalAjouterTitre"
              bg-color="green"
-        ></fab>
+        ></fab> -->
 
         <!----- ajouter modal de sanction d'une entreprise   ---->
         <div id="myModal2" class="modal hide" aria-hidden="true" style="display: none;">

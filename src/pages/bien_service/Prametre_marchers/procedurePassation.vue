@@ -8,7 +8,10 @@
         <h3>Ajouter la procédure de passation</h3>
       </div>
       <div class="modal-body">
-       <form class="form-horizontal">
+         <table class="table table-bordered table-striped">
+                    <tr>
+       <!-- <form class="form-horizontal"> -->
+         <td>
              <div class="control-group">
             <label class="control-label">Type de procédure</label>
             <div class="controls">
@@ -18,6 +21,8 @@
            </select>
             </div>     
           </div>
+          </td>
+          <td>
  <div class="control-group">
             <label class="control-label">Code</label>
             <div class="controls">
@@ -29,6 +34,8 @@
               />
             </div>
           </div>
+          </td>
+          <td>
           <div class="control-group">
             <label class="control-label">Libellé</label>
             <div class="controls">
@@ -40,12 +47,15 @@
               />
             </div>
           </div>
+          </td>
          
          
       
 
          
-         </form>
+         <!-- </form> -->
+                    </tr>
+         </table>
       </div>
       <div class="modal-footer">
         <a
@@ -187,7 +197,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalProcedurePassation" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalProcedurePassation" main-icon="apps" bg-color="green"></fab> -->
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalProcedurePassation()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->

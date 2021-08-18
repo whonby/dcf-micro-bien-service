@@ -26,10 +26,18 @@
                               <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div>
+                                      <table>
+                                       <tr>
+                                         <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">plans économiques</h5>
+                                       </tr>
+                                     </table>
+                                                               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjouterPlanProgramme()">AJOUTER</button>
+          </div>  
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans économiques </h5>
+            <h5> </h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -38,39 +46,7 @@
           </div>
          
           <div class="widget-content"> 
-            <!-- <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-
-                  <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure programme</th>
-                   <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd gradeX" v-for="(plan_programme, index) in localisationsFiltre" 
-                :key="plan_programme.id">
-                  <td @dblclick="afficherModalModifierPlanProgramme(index)">
-                    {{plan_programme.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierPlanProgramme(index)">
-                    {{plan_programme.libelle || 'Non renseigné'}}</td>
-                  <td>
-                       {{plan_programme.structure_programme.libelle || 'Non renseigné'}}</td>
-                  <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerPlanProgramme(plan_programme.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
+            
                  <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
@@ -102,37 +78,46 @@
                 <h3>Ajouter plan économique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-               <div class="control-group">
-              <label class="control-label">Structure économique:</label>
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+<div class="control-group">
+              <label class="control-label">Structure économique</label>
               <div class="controls">
-                <select  v-model="formData.structure_budgetaire_id">
-            <option v-for="budget in structures_budgetaires" :key="budget.id" 
-            :value="budget.id">{{budget.libelle}}</option>
-                </select>
+               
+                 <input type="text" :value="AfficheNiveau1" class="span5" placeholder="Saisir le code" readonly />
+               
               </div>
             </div>
-
-
-            <div class="control-group">
-              <label class="control-label">Code:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+ <div class="control-group">
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+                <span style="color: red" v-bind:class="verificationcodeEnfant == true ? afficheNotification() : ''"></span>
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+ <div class="control-group">
+              <label class="control-label">Libelle</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span3" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
+                
               </div>
             </div>
-           
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                           
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.code.length && formData.libelle.length && 
-             formData.structure_budgetaire_id"
+             <button v-show=" formData.libelle.length && verificationcodeEnfant == false && formData.code!=''"
               @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -143,59 +128,64 @@
 <!----- ajouter modal ajouter element enfant   ---->
 
 
- <div id="modalAjouterElementEnfant" class="modal hide">
+ <div id="modalAjouterElementEnfant" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter plan économique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <div class="control-group">
-              <label class="control-label">Code parent:</label>
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td colspan="2">
+                      <div class="control-group">
+              <label class="control-label">Code parent</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.code" class="span"  />
+                <input type="text" readonly :value="parentDossier.code" class="span1"  />
+                <input type="text" readonly :value="parentDossier.libelle" class="span9"  />
               </div>
             </div>
-
-             <div class="control-group">
-              <label class="control-label">Libellé parent:</label>
-              <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
-              </div>
-            </div>
-
-               <div class="control-group">
-              <label class="control-label">Structure économique:</label>
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td>
+<div class="control-group">
+              <label class="control-label">Structure économique</label>
               
 
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_budgetaire_id" >
-                <option v-for="structure in structures_budgetaires " :key="structure.id" 
-                 :value="structure.id">{{structure.libelle}} </option>
-              </select>
+            
+              <input type="text" :value="AfficheNiveau2" class="span5" placeholder="Saisir le code" readonly />
             </div>
             </div>
-
-
-            <div class="control-group">
-              <label class="control-label">Code:</label>
+                    </td>
+                    <td>
+ <div class="control-group">
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span" placeholder="Saisir le code" />
+                
+                 <input type="text" v-model="nouvelElement.code" class="span2" placeholder="" />
+                 <input type="text" :value="codeplanActivite" class="span3" placeholder="" readonly/>
+                  <span style="color: red" v-bind:class="verificationcodeEnfant2 == true ? afficheNotification2() : ''"></span>
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libellé:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+<div class="control-group">
+              <label class="control-label">Libellé</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span3" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libelle" />
               </div>
             </div>
-           
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                         
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_budgetaire_id"
+             <button v-show="nouvelElementEnfant.libelle.length && verificationcodeEnfant2 == false && nouvelElement.code !='' "
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -252,7 +242,7 @@
 <!--- fin modifier modal  -->
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterPlanProgramme()">Open</button>
 
  <fab :actions="fabActions"
@@ -260,7 +250,7 @@
           @cache="afficherModalAjouterPlanProgramme"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications  />
 
@@ -310,7 +300,9 @@ export default {
              libelle: "",
              structure_budgetaire_id:""
         },
-
+nouvelElement:{
+  code:""
+},
         editTitre: {
             code: "",
              libelle: "",
@@ -329,7 +321,130 @@ export default {
 // methode pour maper notre guetter
    ...mapGetters('parametreGenerauxBudgetaire', ['structures_budgetaires', 
   'plans_budgetaires']),
+ verificationcodeEnfant2() {
+      if (this.nouvelElement.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_budgetaires.filter(
+          (element) => element.code == this.codeplanActivite
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+  codeplanActivite() {
+    return  this.parentDossier.code + this.nouvelElement.code
+    
+    },
+ afficheNotification2(){
+  if(this.verificationcodeEnfant2 == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+AfficheNiveau2(){
 
+if (this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)) == this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code))) {
+
+  return this.afficheLeLibelleStructure(this.afficheLeNiveauStructure(this.afficheLeIdStructure(this.parentDossier.code)))
+
+}else{
+  return "pas de niveau"
+}
+
+
+   },
+afficheLeLibelleStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.niveau == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  afficheLeNiveauStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau + 1;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLeIdStructure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.structure_budgetaire_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheNotification(){
+  if(this.verificationcodeEnfant == true){
+this.$notify({
+                 title: 'ERROR',
+                 text: "Ce code existe déjà!",
+                 type:"error"
+             })
+  }else{
+  return ""
+  }
+  return ""
+},
+verificationcodeEnfant() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.plans_budgetaires.filter(
+          (element) => element.code == this.formData.code && element.structure_budgetaire_id == this.AfficheNiveauid
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+
+AfficheNiveauid(){
+     const codeprog = this.structures_budgetaires.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.id
+     }
+
+     return null
+   },
+AfficheNiveau1(){
+     const codeprog = this.structures_budgetaires.find(sect => sect.niveau == 1)
+   
+     if(codeprog){
+       return codeprog.libelle;
+     }
+
+     return null
+   },
        localisationsFiltre(){
 
     const searchTerm = this.search.toLowerCase();
@@ -394,12 +509,20 @@ getColumns() {
 
      ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
-      this.ajouterPlanBudgetaire(this.nouvelElementEnfant)
-
+       var nouveauObjet = {
+             ... this.nouvelElementEnfant,
+structure_budgetaire_id:this.afficheLeIdStructure(this.parentDossier.code),
+code:this.codeplanActivite,
+	parent:this.parentDossier.id
+           }
+      this.ajouterPlanBudgetaire(nouveauObjet)
+ this.nouvelElement={
+  code:""
+}
         this.nouvelElementEnfant = {
-                code: "",
+              
              libelle: "",
-          structure_budgetaire_id:""
+          
         }
     },
 
@@ -454,3 +577,10 @@ this.editTitre = {
 };
 </script>
 
+<style scoped>
+.tailgrand{
+  width: 53%;
+  margin: 0 -30%;
+  
+}
+</style>

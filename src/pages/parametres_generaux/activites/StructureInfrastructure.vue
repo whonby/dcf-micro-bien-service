@@ -39,7 +39,7 @@ this.modifierStructureInfrastructure
 
                                     
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures des infrastructures</h5>
+            <h5>Liste des structures des infrastructures 58</h5>
              <div align="right">
         Recherche: <input type="text" v-model="search">
 

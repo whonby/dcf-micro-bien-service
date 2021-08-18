@@ -26,11 +26,17 @@
                             <div align="right" style="cursor:pointer;">
                     <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                         </div> 
+                        <br>
+             <div align="right" style="cursor:pointer;">
+           <button class="btn btn-success" @click.prevent="afficherModalAjoutOrganeDecision()">AJOUTER ORGANES DECISIONS</button>
+          </div>
 
                                      </div> <br>
+
+          <h3 align="center">Liste des organes de résolutions </h3>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des organes de résolutions</h5>
+            
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -61,22 +67,39 @@
               <tbody>
                 <tr class="odd gradeX" v-for="activites  in partition (organeDecisionFiltre,size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierOrganeDecision(activites.id)">
+                  <td >
                       {{activites.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierOrganeDecision(activites.id)">
+                  <td >
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
-                  <td>
+                 
 
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerOrganeDecision(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> </i>Supprimer</span></button>
+                <div class="btn-group" style="width:100px;">
+                         <td>
+              
+              <button  @click.prevent="afficherModalModifierOrganeDecision(activites.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
              
+                  </td>
+                  <td>
+              <button @click.prevent="supprimerOrganeDecision(activites.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                </td>
             </div>
 
-                  </td>
+              <!-- <div class="btn-group" style="width:-800px;"> 
+              <td> 
+             <button  @click.prevent="afficherModalModifierOrganeDecision(activites.id)"  class="btn btn-info " >
+                <span class=""><i class="icon-edit"> Modifier</i></span></button>
+                </td>
+
+                  <td>
+              <button @click.prevent="supprimerOrganeDecision(activites.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"> </i>Supprimer</span></button>
+                </td>
+            </div> -->
+
+                 
                 </tr>
               </tbody>
               
@@ -130,22 +153,36 @@
                 <h3>Ajouter organe de résolution</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                 <table class="table table-bordered table-striped">
+                 <tr>
+                 <td>
+                 <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-              </div>
+                <input type="number" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+              </div> 
             </div>
+            <div style="color: red" v-if="verifcode == true">
+                Ce code existe déjà!
+              </div>
+                 </td>
 
-            <div class="control-group">
+                 </tr>
+                 <tr>
+                 <td>
+                  <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
+                 </td>
+                 </tr>
+            
+
+           
              
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.code.length  && formData.libelle.length"
@@ -166,23 +203,29 @@
                 <h3>Modifier organe de résolutions</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-            <div class="control-group">
+               <table class="table table-bordered table-striped">
+                 <tr>
+                   <td>
+                     <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="editOrgane.code" class="span" placeholder="" />
+                <input type="text" v-model="editOrgane.code" class="span5" placeholder="" />
               </div>
             </div>
-          
-            <div class="control-group">
+                   </td>
+                 </tr>
+
+                 <tr>
+                   <td>
+                     <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="editOrgane.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editOrgane.libelle" class="span5" placeholder="" />
               </div>
             </div>
-        
-          </form>              
+                   </td>
+                 </tr>
+               </table>              
           </div>
            <div class="modal-footer"> 
              <button v-show="editOrgane.code.length  && editOrgane.libelle.length" 
@@ -199,12 +242,12 @@
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjoutOrganeDecision()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalAjoutOrganeDecision"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
 <notifications />
 
@@ -279,14 +322,28 @@ return this.gettersOrganeDecision.filter((item) => {
   
      return item.libelle.toLowerCase().includes(searchTerm) 
     
-
-  
-  
-
    }
 )
-   }
+   },
+
+   verifcode() {
+      if (this.formData.code == "") {
+        return false;
+      } else {
+        let Objet = this.gettersOrganeDecision.filter(
+          (element) => element.code == this.formData.code
+        );
+        if (Objet.length != 0 && Objet != undefined) {
+          return Objet.length;
+        } else {
+          return false;
+        }
+      }
+    },
+    
   },
+
+   
 
   methods: {
     // methode pour notre action

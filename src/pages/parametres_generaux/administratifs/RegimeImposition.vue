@@ -25,6 +25,18 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>
                                      </div> <br>
+             <table>
+                <tr>
+                    <h5 style="font-size:20px;text-transform: uppercase; text-align:center;text-decoration: underline;">
+                       Liste des impôts synthétiques
+                      </h5>
+                </tr>
+            </table> 
+            <div align="right" style="cursor:pointer;">
+              <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre()" >
+                 AJOUTER UN IMPOT SYNTHETIQUE
+                </button>
+            </div> 
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -53,7 +65,7 @@
                 <thead>
                   <tr>
                     <th>Libellé</th>
-                     <th style="width:10%">Action</th>
+                     <th colspan="2" style="width:20%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,17 +77,16 @@
                     <td
                       @dblclick="afficherModalModifierTitre(titre.id)"
                     >{{titre.libelle || 'Non renseigné'}}</td>
+
                     <td>
-                      <div class="btn-group">
-                        <button
-                          @click.prevent="supprimerRegimeImpositions(titre.id)"
-                          class="btn btn-danger"
-                        >
-                          <span class>
-                            <i class="icon-trash"> Supprimer</i>
-                          </span>
+                        <button @click.prevent="afficherModalModifierTitre(titre.id)" class="btn btn-info">
+                          <span class> <i class="icon-edit"> Modifier</i> </span>
                         </button>
-                      </div>
+                    </td>
+                    <td>
+                        <button @click.prevent="supprimerRegimeImpositions(titre.id)" class="btn btn-danger">
+                          <span class> <i class="icon-trash"> Supprimer</i> </span>
+                        </button>
                     </td>
                   </tr>
                 </tbody>
@@ -95,7 +106,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab> -->
 <notifications  />
     <!----- ajouter modal   ---->
 

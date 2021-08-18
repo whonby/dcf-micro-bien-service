@@ -1,6 +1,5 @@
 //require('./bootstrap');
 import Vue from 'vue'
-
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -9,6 +8,7 @@ import ViewUI from 'view-design';
 import Default from '../src/layouts/Default.vue'
 import NoSidebar from '../src/layouts/NoSidebar.vue'
 import VuejsDialog from 'vuejs-dialog';
+//import Vuelidate from 'vuelidate'
 // include the default style
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 import VueLoading from 'vuejs-loading-plugin'
@@ -30,6 +30,11 @@ import 'element-ui/lib/theme-chalk/index.css';
 // import jsPDF from 'jspdf'
 //  vue.component('')
 import VueGoogleCharts from 'vue-google-charts'
+
+Vue.use(Vuelidate)
+ 
+
+
 
 Vue.use(VueGoogleCharts)
 import FullCalendar from 'vue-full-calendar'
@@ -68,7 +73,8 @@ const options2 = {
   confirmButtonColor: '#41b882',
   cancelButtonColor: '#ff7674',
 };
-
+// import Vuelidate from 'vuelidate';
+// Vue.use(Vuelidate);
 Vue.use(VueSweetalert2, options2);
 
 import VueHtml2pdf from 'vue-html2pdf'
